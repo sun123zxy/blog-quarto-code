@@ -34,9 +34,9 @@ categories:
 
 ~~给国家省点子弹吧（~~
 
-## 细节
+## 杂谈
 
-写写搭建过程中的一些小细节。
+聊聊搭建过程中的一点心得。
 
 [博客源码](https://github.com/sun123zxy/blog-jekyll-code)
 
