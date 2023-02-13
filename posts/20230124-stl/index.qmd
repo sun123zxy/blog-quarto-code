@@ -2,6 +2,7 @@
 title: "算法竞赛向 C++ Standard Library 使用速查"
 author: "sun123zxy"
 date: "2023/01/24"
+date-modified: "2023/02/13"
 categories:
   - OI
   - C++
@@ -9,7 +10,7 @@ categories:
 number-sections: true
 ---
 
-因网络上 STL 教程大多零散且缺乏严谨性，本文对算法竞赛所需 C++ Standard Library 做了一个较为全面的总结。
+本文旨在对算法竞赛所需 C++ Standard Library 做一个全面而相对严谨的总结。
 
 全文主要参考以下文档：
 
@@ -195,13 +196,44 @@ Size:
 
 #### priority_queue
 
-`std::priority_queue<TypeName, Container, Compare>`：类型名，底层容器，比较类型。
+- `std::priority_queue<TypeName>`                     ：`Compare` 默认使用 `std::less<T>`，即以 `operator <` 作为大根堆的比较依据。
+- `std::priority_queue<TypeName, Container, Compare>` ：亦可自行指定底层容器和比较函数对象。
 
-大根堆，默认用 `<` 比较大小，即 `Compare` 传入 `std::less<T>`。亦可选择传入 `std::greater<T>` 使用 `>` 作为比较符号，进而构造出小根堆。
+例如，传入 `std::greater<T>` 将使用 `>` 作为比较符号，进而构造出小根堆。
 
-函数同 `queue`，但 `push() / pop()` 为对数时间复杂度。
+::: {.callout-tip appearance="simple"}
 
-参照 `std::less<T>` 的实现，自定义比较方式，需传入一个重载了 `operator()` 的结构体。
+自定义比较函数对象，可仿照以下代码：
+
+```c++
+#include<iostream>
+#include<queue>
+#include<vector>
+typedef long long ll;
+struct Vec{
+  	ll x,y;
+	Vec(){}
+	Vec(ll x,ll y){
+		this->x=x;this->y=y;
+	}
+};
+struct vecCompare{
+	bool operator () (const Vec& a,const Vec& b) const {
+		return a.x<b.x||(a.x==b.x&&a.y<b.y);
+	}
+};
+int main(){
+	std::priority_queue< Vec, std::vector<Vec>, vecCompare > H;
+	H.push(Vec(1,2));
+	H.push(Vec(2,1));
+	Vec t=H.top();
+	std::cout<<t.x<<","<<t.y;
+}
+```
+
+:::
+
+用法基本同 `queue`，但 `push() / pop()` 为对数时间复杂度。
 
 ### list
 
@@ -220,7 +252,8 @@ Size:
 
 ### set / multiset
 
-`set<Key, Compare>`：类似 `priority_queue`，可自定义比较方式。
+- `set<Key>`：默认使用 `operator <` 比较（升序）。
+- `set<Key, Compare>`：也可使用类似 `priority_queue` 的方法自定义比较函数对象 `Compare`。
 
 Find：
 
@@ -229,7 +262,7 @@ Find：
 - `lower_bound(x)` / `upper_bound(x)` ：为 `set` 特殊定制的对数时间复杂度 `lower_bound` 和 `upper_bound`。
 
 ::: {.callout-note appearance="simple"}
-没有 `nth_element()`，对数时间复杂度查询第 k 大需手写或使用 pbds 库。
+没有 `nth_element()`，对数时间复杂度查询第 k 大需自行手写平衡树或使用 pbds 库。
 :::
 
 Modify:
@@ -270,10 +303,40 @@ s.erase(it);
 
 只有单向迭代器，其余特性与有序版本类似。
 
-此外，可按如下方法自定义相等判定方式和 Hash 函数。
+此外，还可自行指定相等判定方式和 Hash 函数。
 
 - `unordered_set<Key, Hash, KeyEqual>`
 - `unordered_map<Key, T, Hash, KeyEqual>`
 
-如上，可自定义 Hash 函数。
+::: {.callout-tip appearance="simple"}
 
+Hash 函数的自定义方法也与 `priority_queue` 中的方法类似：
+
+```c++
+#include<iostream>
+#include<unordered_set>
+typedef long long ll;
+struct Vec{
+  ll x,y;
+	Vec(){}
+	Vec(ll x,ll y){
+		this->x=x;this->y=y;
+	}
+};
+bool operator == (const Vec& a,const Vec& b){
+	return a.x==b.x&&a.y==b.y;
+}
+struct vecHash{
+	size_t operator () (const Vec& v) const {
+		return (v.x*ll(1E9)+v.y)%107897;
+	}
+};
+int main(){
+	std::unordered_set<Vec,vecHash> S;
+	S.insert(Vec(1,2));
+	S.insert(Vec(2,3));
+	std::cout<<S.count(Vec(1,2));
+}
+```
+
+:::
