@@ -19,7 +19,7 @@
 
 
 
-<p>因网络上 STL 教程大多零散且缺乏严谨性，本文对算法竞赛所需 C++ Standard Library 做了较为全面的总结。</p>
+<p>本文旨在对算法竞赛所需 C++ Standard Library 做一个全面而相对严谨的总结。</p>
 <p>全文主要参考以下文档：</p>
 <ul>
 <li><a href="https://en.cppreference.com/w/cpp/container">Containers library - cppreference.com</a></li>
@@ -205,10 +205,45 @@
 </section>
 <section id="priority_queue" class="level4">
 <h4 class="anchored" data-anchor-id="priority_queue">priority_queue</h4>
-<p><code>std::priority_queue&lt;TypeName, Container, Compare&gt;</code>：类型名，底层容器，比较类型。</p>
-<p>大根堆，默认用 <code>&lt;</code> 比较大小，即 <code>Compare</code> 传入 <code>std::less&lt;T&gt;</code>。亦可选择传入 <code>std::greater&lt;T&gt;</code> 使用 <code>&gt;</code> 作为比较符号，进而构造出小根堆。</p>
-<p>函数同 <code>queue</code>，但 <code>push() / pop()</code> 为对数时间复杂度。</p>
-<p>参照 <code>std::less&lt;T&gt;</code> 的实现，自定义比较方式，需传入一个重载了 <code>operator()</code> 的结构体。</p>
+<ul>
+<li><code>std::priority_queue&lt;TypeName&gt;</code> ：<code>Compare</code> 默认使用 <code>std::less&lt;T&gt;</code>，即以 <code>operator &lt;</code> 作为大根堆的比较依据。</li>
+<li><code>std::priority_queue&lt;TypeName, Container, Compare&gt;</code> ：亦可自行指定底层容器和比较函数对象。</li>
+</ul>
+<p>例如，传入 <code>std::greater&lt;T&gt;</code> 将使用 <code>&gt;</code> 作为比较符号，进而构造出小根堆。</p>
+<div class="callout-tip callout callout-style-simple">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>自定义比较函数对象，可仿照以下代码：</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><span class="pp" style="color: #AD0000;">#include</span><span class="im" style="color: #00769E;">&lt;iostream&gt;</span></span>
+<span id="cb1-2"><span class="pp" style="color: #AD0000;">#include</span><span class="im" style="color: #00769E;">&lt;queue&gt;</span></span>
+<span id="cb1-3"><span class="pp" style="color: #AD0000;">#include</span><span class="im" style="color: #00769E;">&lt;vector&gt;</span></span>
+<span id="cb1-4"><span class="kw" style="color: #003B4F;">typedef</span> <span class="dt" style="color: #AD0000;">long</span> <span class="dt" style="color: #AD0000;">long</span> ll<span class="op" style="color: #5E5E5E;">;</span></span>
+<span id="cb1-5"><span class="kw" style="color: #003B4F;">struct</span> Vec<span class="op" style="color: #5E5E5E;">{</span></span>
+<span id="cb1-6">    ll x<span class="op" style="color: #5E5E5E;">,</span>y<span class="op" style="color: #5E5E5E;">;</span></span>
+<span id="cb1-7">    Vec<span class="op" style="color: #5E5E5E;">(){}</span></span>
+<span id="cb1-8">    Vec<span class="op" style="color: #5E5E5E;">(</span>ll x<span class="op" style="color: #5E5E5E;">,</span>ll y<span class="op" style="color: #5E5E5E;">){</span></span>
+<span id="cb1-9">        <span class="kw" style="color: #003B4F;">this</span><span class="op" style="color: #5E5E5E;">-&gt;</span>x<span class="op" style="color: #5E5E5E;">=</span>x<span class="op" style="color: #5E5E5E;">;</span><span class="kw" style="color: #003B4F;">this</span><span class="op" style="color: #5E5E5E;">-&gt;</span>y<span class="op" style="color: #5E5E5E;">=</span>y<span class="op" style="color: #5E5E5E;">;</span></span>
+<span id="cb1-10">    <span class="op" style="color: #5E5E5E;">}</span></span>
+<span id="cb1-11"><span class="op" style="color: #5E5E5E;">};</span></span>
+<span id="cb1-12"><span class="kw" style="color: #003B4F;">struct</span> vecCompare<span class="op" style="color: #5E5E5E;">{</span></span>
+<span id="cb1-13">    <span class="dt" style="color: #AD0000;">bool</span> <span class="kw" style="color: #003B4F;">operator</span> <span class="op" style="color: #5E5E5E;">()</span> <span class="op" style="color: #5E5E5E;">(</span><span class="at" style="color: #657422;">const</span> Vec<span class="op" style="color: #5E5E5E;">&amp;</span> a<span class="op" style="color: #5E5E5E;">,</span><span class="at" style="color: #657422;">const</span> Vec<span class="op" style="color: #5E5E5E;">&amp;</span> b<span class="op" style="color: #5E5E5E;">)</span> <span class="at" style="color: #657422;">const</span> <span class="op" style="color: #5E5E5E;">{</span></span>
+<span id="cb1-14">        <span class="cf" style="color: #003B4F;">return</span> a<span class="op" style="color: #5E5E5E;">.</span>x<span class="op" style="color: #5E5E5E;">&lt;</span>b<span class="op" style="color: #5E5E5E;">.</span>x<span class="op" style="color: #5E5E5E;">||(</span>a<span class="op" style="color: #5E5E5E;">.</span>x<span class="op" style="color: #5E5E5E;">==</span>b<span class="op" style="color: #5E5E5E;">.</span>x<span class="op" style="color: #5E5E5E;">&amp;&amp;</span>a<span class="op" style="color: #5E5E5E;">.</span>y<span class="op" style="color: #5E5E5E;">&lt;</span>b<span class="op" style="color: #5E5E5E;">.</span>y<span class="op" style="color: #5E5E5E;">);</span></span>
+<span id="cb1-15">    <span class="op" style="color: #5E5E5E;">}</span></span>
+<span id="cb1-16"><span class="op" style="color: #5E5E5E;">};</span></span>
+<span id="cb1-17"><span class="dt" style="color: #AD0000;">int</span> main<span class="op" style="color: #5E5E5E;">(){</span></span>
+<span id="cb1-18">    <span class="bu" style="color: null;">std::</span>priority_queue<span class="op" style="color: #5E5E5E;">&lt;</span> Vec<span class="op" style="color: #5E5E5E;">,</span> <span class="bu" style="color: null;">std::</span>vector<span class="op" style="color: #5E5E5E;">&lt;</span>Vec<span class="op" style="color: #5E5E5E;">&gt;,</span> vecCompare <span class="op" style="color: #5E5E5E;">&gt;</span> H<span class="op" style="color: #5E5E5E;">;</span></span>
+<span id="cb1-19">    H<span class="op" style="color: #5E5E5E;">.</span>push<span class="op" style="color: #5E5E5E;">(</span>Vec<span class="op" style="color: #5E5E5E;">(</span><span class="dv" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">,</span><span class="dv" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">));</span></span>
+<span id="cb1-20">    H<span class="op" style="color: #5E5E5E;">.</span>push<span class="op" style="color: #5E5E5E;">(</span>Vec<span class="op" style="color: #5E5E5E;">(</span><span class="dv" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">,</span><span class="dv" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">));</span></span>
+<span id="cb1-21">    Vec t<span class="op" style="color: #5E5E5E;">=</span>H<span class="op" style="color: #5E5E5E;">.</span>top<span class="op" style="color: #5E5E5E;">();</span></span>
+<span id="cb1-22">    <span class="bu" style="color: null;">std::</span>cout<span class="op" style="color: #5E5E5E;">&lt;&lt;</span>t<span class="op" style="color: #5E5E5E;">.</span>x<span class="op" style="color: #5E5E5E;">&lt;&lt;</span><span class="st" style="color: #20794D;">","</span><span class="op" style="color: #5E5E5E;">&lt;&lt;</span>t<span class="op" style="color: #5E5E5E;">.</span>y<span class="op" style="color: #5E5E5E;">;</span></span>
+<span id="cb1-23"><span class="op" style="color: #5E5E5E;">}</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<p>用法基本同 <code>queue</code>，但 <code>push() / pop()</code> 为对数时间复杂度。</p>
 </section>
 </section>
 <section id="list" class="level3" data-number="4.3">
@@ -230,7 +265,10 @@
 </ul>
 <section id="set-multiset" class="level3" data-number="5.1">
 <h3 data-number="5.1" class="anchored" data-anchor-id="set-multiset"><span class="header-section-number">5.1</span> set / multiset</h3>
-<p><code>set&lt;Key, Compare&gt;</code>：类似 <code>priority_queue</code>，可自定义比较方式。</p>
+<ul>
+<li><code>set&lt;Key&gt;</code>：默认使用 <code>operator &lt;</code> 比较（升序）。</li>
+<li><code>set&lt;Key, Compare&gt;</code>：也可使用类似 <code>priority_queue</code> 的方法自定义比较函数对象 <code>Compare</code>。</li>
+</ul>
 <p>Find：</p>
 <ul>
 <li><code>crbegin()</code></li>
@@ -243,7 +281,7 @@
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>没有 <code>nth_element()</code>，对数时间复杂度查询第 k 大需手写或使用 pbds 库。</p>
+<p>没有 <code>nth_element()</code>，对数时间复杂度查询第 k 大需自行手写平衡树或使用 pbds 库。</p>
 </div>
 </div>
 </div>
@@ -259,8 +297,8 @@
 </div>
 <div class="callout-body-container">
 <p>删除单个值为 x 的元素，可按如下方法进行：</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><span class="kw" style="color: #003B4F;">auto</span> it <span class="op" style="color: #5E5E5E;">=</span> s<span class="op" style="color: #5E5E5E;">.</span>find<span class="op" style="color: #5E5E5E;">(</span>x<span class="op" style="color: #5E5E5E;">);</span></span>
-<span id="cb1-2">s<span class="op" style="color: #5E5E5E;">.</span>erase<span class="op" style="color: #5E5E5E;">(</span>it<span class="op" style="color: #5E5E5E;">);</span></span></code></pre></div>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><span class="kw" style="color: #003B4F;">auto</span> it <span class="op" style="color: #5E5E5E;">=</span> s<span class="op" style="color: #5E5E5E;">.</span>find<span class="op" style="color: #5E5E5E;">(</span>x<span class="op" style="color: #5E5E5E;">);</span></span>
+<span id="cb2-2">s<span class="op" style="color: #5E5E5E;">.</span>erase<span class="op" style="color: #5E5E5E;">(</span>it<span class="op" style="color: #5E5E5E;">);</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -285,12 +323,45 @@
 <li><code>unorderep_map</code> / <code>unordered_multimap</code> <code>#include&lt;unordered_map&gt;</code>：键无序。</li>
 </ul>
 <p>只有单向迭代器，其余特性与有序版本类似。</p>
-<p>此外，可按如下方法自定义相等判定方式和 Hash 函数。</p>
+<p>此外，还可自行指定相等判定方式和 Hash 函数。</p>
 <ul>
 <li><code>unordered_set&lt;Key, Hash, KeyEqual&gt;</code></li>
 <li><code>unordered_map&lt;Key, T, Hash, KeyEqual&gt;</code></li>
 </ul>
-<p>如上，可自定义 Hash 函数。</p>
+<div class="callout-tip callout callout-style-simple">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Hash 函数的自定义方法也与 <code>priority_queue</code> 中的方法类似：</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><span class="pp" style="color: #AD0000;">#include</span><span class="im" style="color: #00769E;">&lt;iostream&gt;</span></span>
+<span id="cb3-2"><span class="pp" style="color: #AD0000;">#include</span><span class="im" style="color: #00769E;">&lt;unordered_set&gt;</span></span>
+<span id="cb3-3"><span class="kw" style="color: #003B4F;">typedef</span> <span class="dt" style="color: #AD0000;">long</span> <span class="dt" style="color: #AD0000;">long</span> ll<span class="op" style="color: #5E5E5E;">;</span></span>
+<span id="cb3-4"><span class="kw" style="color: #003B4F;">struct</span> Vec<span class="op" style="color: #5E5E5E;">{</span></span>
+<span id="cb3-5">  ll x<span class="op" style="color: #5E5E5E;">,</span>y<span class="op" style="color: #5E5E5E;">;</span></span>
+<span id="cb3-6">    Vec<span class="op" style="color: #5E5E5E;">(){}</span></span>
+<span id="cb3-7">    Vec<span class="op" style="color: #5E5E5E;">(</span>ll x<span class="op" style="color: #5E5E5E;">,</span>ll y<span class="op" style="color: #5E5E5E;">){</span></span>
+<span id="cb3-8">        <span class="kw" style="color: #003B4F;">this</span><span class="op" style="color: #5E5E5E;">-&gt;</span>x<span class="op" style="color: #5E5E5E;">=</span>x<span class="op" style="color: #5E5E5E;">;</span><span class="kw" style="color: #003B4F;">this</span><span class="op" style="color: #5E5E5E;">-&gt;</span>y<span class="op" style="color: #5E5E5E;">=</span>y<span class="op" style="color: #5E5E5E;">;</span></span>
+<span id="cb3-9">    <span class="op" style="color: #5E5E5E;">}</span></span>
+<span id="cb3-10"><span class="op" style="color: #5E5E5E;">};</span></span>
+<span id="cb3-11"><span class="dt" style="color: #AD0000;">bool</span> <span class="kw" style="color: #003B4F;">operator</span> <span class="op" style="color: #5E5E5E;">==</span> <span class="op" style="color: #5E5E5E;">(</span><span class="at" style="color: #657422;">const</span> Vec<span class="op" style="color: #5E5E5E;">&amp;</span> a<span class="op" style="color: #5E5E5E;">,</span><span class="at" style="color: #657422;">const</span> Vec<span class="op" style="color: #5E5E5E;">&amp;</span> b<span class="op" style="color: #5E5E5E;">){</span></span>
+<span id="cb3-12">    <span class="cf" style="color: #003B4F;">return</span> a<span class="op" style="color: #5E5E5E;">.</span>x<span class="op" style="color: #5E5E5E;">==</span>b<span class="op" style="color: #5E5E5E;">.</span>x<span class="op" style="color: #5E5E5E;">&amp;&amp;</span>a<span class="op" style="color: #5E5E5E;">.</span>y<span class="op" style="color: #5E5E5E;">==</span>b<span class="op" style="color: #5E5E5E;">.</span>y<span class="op" style="color: #5E5E5E;">;</span></span>
+<span id="cb3-13"><span class="op" style="color: #5E5E5E;">}</span></span>
+<span id="cb3-14"><span class="kw" style="color: #003B4F;">struct</span> vecHash<span class="op" style="color: #5E5E5E;">{</span></span>
+<span id="cb3-15">    <span class="dt" style="color: #AD0000;">size_t</span> <span class="kw" style="color: #003B4F;">operator</span> <span class="op" style="color: #5E5E5E;">()</span> <span class="op" style="color: #5E5E5E;">(</span><span class="at" style="color: #657422;">const</span> Vec<span class="op" style="color: #5E5E5E;">&amp;</span> v<span class="op" style="color: #5E5E5E;">)</span> <span class="at" style="color: #657422;">const</span> <span class="op" style="color: #5E5E5E;">{</span></span>
+<span id="cb3-16">        <span class="cf" style="color: #003B4F;">return</span> <span class="op" style="color: #5E5E5E;">(</span>v<span class="op" style="color: #5E5E5E;">.</span>x<span class="op" style="color: #5E5E5E;">*</span>ll<span class="op" style="color: #5E5E5E;">(</span><span class="fl" style="color: #AD0000;">1E9</span><span class="op" style="color: #5E5E5E;">)+</span>v<span class="op" style="color: #5E5E5E;">.</span>y<span class="op" style="color: #5E5E5E;">)%</span><span class="dv" style="color: #AD0000;">107897</span><span class="op" style="color: #5E5E5E;">;</span></span>
+<span id="cb3-17">    <span class="op" style="color: #5E5E5E;">}</span></span>
+<span id="cb3-18"><span class="op" style="color: #5E5E5E;">};</span></span>
+<span id="cb3-19"><span class="dt" style="color: #AD0000;">int</span> main<span class="op" style="color: #5E5E5E;">(){</span></span>
+<span id="cb3-20">    <span class="bu" style="color: null;">std::</span>unordered_set<span class="op" style="color: #5E5E5E;">&lt;</span>Vec<span class="op" style="color: #5E5E5E;">,</span>vecHash<span class="op" style="color: #5E5E5E;">&gt;</span> S<span class="op" style="color: #5E5E5E;">;</span></span>
+<span id="cb3-21">    S<span class="op" style="color: #5E5E5E;">.</span>insert<span class="op" style="color: #5E5E5E;">(</span>Vec<span class="op" style="color: #5E5E5E;">(</span><span class="dv" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">,</span><span class="dv" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">));</span></span>
+<span id="cb3-22">    S<span class="op" style="color: #5E5E5E;">.</span>insert<span class="op" style="color: #5E5E5E;">(</span>Vec<span class="op" style="color: #5E5E5E;">(</span><span class="dv" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">,</span><span class="dv" style="color: #AD0000;">3</span><span class="op" style="color: #5E5E5E;">));</span></span>
+<span id="cb3-23">    <span class="bu" style="color: null;">std::</span>cout<span class="op" style="color: #5E5E5E;">&lt;&lt;</span>S<span class="op" style="color: #5E5E5E;">.</span>count<span class="op" style="color: #5E5E5E;">(</span>Vec<span class="op" style="color: #5E5E5E;">(</span><span class="dv" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">,</span><span class="dv" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">));</span></span>
+<span id="cb3-24"><span class="op" style="color: #5E5E5E;">}</span></span></code></pre></div>
+</div>
+</div>
+</div>
 
 
 </section>
