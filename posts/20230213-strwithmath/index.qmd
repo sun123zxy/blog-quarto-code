@@ -1,0 +1,139 @@
+---
+title: "str 学数学 题解"
+author: "sun123zxy"
+abstract: "挺有意思的一道数学题。"
+date: 2023/02/13
+categories:
+  - OI
+  - 数学
+  - 题解
+---
+
+::: {#exm-problem}
+
+## str 学数学
+
+str 同学因为名字里含有一个 str，所以觉得字符串对于他来说太简单了，于是他开始了他的数学之旅。
+
+在旅途中str遇到了刚抽到胡桃的 lyl，而 lyl 同学正沉浸在出货的喜悦之中，为了能收获双倍喜悦，他便询问 str，他选的区间内有多少个幸运数字，str觉得这个问题和字符串一样简单，于是把这个问题交给了你。
+
+共有 $T$ 组询问，每次给出两个正整数 $L,R$，你需要判断有多少 $n$，$L \leq n \leq R$ 使得方程
+$$
+\sum_{i=1}^n \sum_{j=1}^n \left \lfloor \frac {ij} {n+1} \right \rfloor = \frac {n^2 (n-1)}{4}
+$$
+成立。
+
+请输出你得到的答案。
+
+数据范围：$1 \leq T \leq 10000$，$1 \leq L \leq R \leq 10^7$
+
+样例输入：
+
+```default
+4
+1 4
+2 8
+1 10
+1 100
+```
+
+样例输出：
+
+```default
+3
+3
+5
+26
+```
+
+来源：2023 年寒假集训 B 组总结赛
+
+:::
+
+考场上当然是打表找规律了，但非常愚钝地没看出来……
+
+结论是，$n$ 是一个幸运数字，当且仅当 $n+1$ 是一个质数。下面提供两种证明方法。
+
+## Official Solution
+
+出题人提供的非常有技巧性的解法。
+
+$$
+\sum_{i=1}^n \sum_{j=1}^n \left \lfloor \frac {ij} {n+1} \right \rfloor = \frac {n^2 (n-1)}{4}
+$$
+
+考虑为 $\lfloor \frac {ij} {n+1} \rfloor$ 配对，
+
+$$
+\begin{aligned}
+\sum_{i=1}^n \sum_{j=1}^n \left \lfloor \frac {ij} {n+1} \right \rfloor + \left \lfloor \frac {i(n-j+1)} {n+1} \right \rfloor &= \frac {n^2 (n-1)}{2} \\
+\sum_{i=1}^n \sum_{j=1}^n \left \lfloor \frac {ij} {n+1} \right \rfloor + \left \lfloor i - \frac {ij} {n+1} \right \rfloor &= \frac {n^2 (n-1)}{2} \\
+\sum_{i=1}^n \sum_{j=1}^n i - [ n+1 \nmid ij ] &= \frac {n^2 (n-1)}{2} \\
+\frac{n^2 (n+1)}{2} - \sum_{i=1}^n \sum_{j=1}^n [ n+1 \nmid ij ] &= \frac {n^2 (n-1)}{2} \\
+\sum_{i=1}^n \sum_{j=1}^n [ n+1 \nmid ij ] &= n^2
+\end{aligned}
+$$
+
+即要求 $n+1 \nmid ij$ 对任意 $1 \leq i,j \leq n$ 成立。因此根据质数定义，$n+1$ 就是且只能是质数了。
+
+## Alternative Solution
+
+考场上推了一半的想法。
+
+$$
+\sum_{i=1}^n \sum_{j=1}^n \left \lfloor \frac {ij} {n+1} \right \rfloor = \frac {n^2 (n-1)}{4}
+$$
+
+注意到 $a \bmod b = a - b \lfloor \frac a b \rfloor$，考虑构造取模
+
+$$
+\begin{aligned}
+\sum_{i=1}^n \sum_{j=1}^n (n+1) \left \lfloor \frac {ij} {n+1} \right \rfloor = \frac {n^2 (n-1)(n+1)}{4} \\
+\sum_{i=1}^n \sum_{j=1}^n ij - ij \bmod (n+1) = \frac {n^2 (n-1)(n+1)}{4} \\
+\left( \frac {n(n+1)}{2} \right)^2 - \sum_{i=1}^n \sum_{j=1}^n ij \bmod (n+1) = \frac {n^2 (n-1)(n+1)}{4} \\
+\sum_{i=1}^n \sum_{j=1}^n ij \bmod (n+1) = \frac {n^2 (n+1)} {2}
+\end{aligned}
+$$
+
+考虑固定 $i$，研究 $j$ 变化下左式的情况。方便起见，我们将上式左侧 $j$ 的取值范围扩展至 $0$ 到 $n$：
+$$
+\sum_{i=1}^n \sum_{j=0}^n ij \bmod (n+1) = \frac {n^2 (n+1)} {2}
+$$
+细心的读者或许已经发现，当 $\gcd(i,n+1) = 1$ 恒成立，即 $n+1$ 为质数时，$ij \bmod (n+1)$ 将取遍 $0$ 到 $n$，此时左右两式相等。下面我们证明这是上式相等的充分必要条件。
+
+仍从 $ij \bmod (n+1)$ 的取值下手，我们研究如下以 $j$ 和 $t$ 为变量的不定方程的解
+$$
+ij + (n+1) t = m \pod{0 \leq m < n+1}
+$$
+由裴蜀定理（Bézout's identity），方程有解的充分必要条件为 $\gcd(i,n+1) \mid m$。不妨记 $d = \gcd(i,n+1)$，$m = k d$，方程变为
+$$
+ij + (n+1) t = kd \pod{0 \leq k < \frac {n+1} d}
+$$
+写出该不定方程的通解
+$$
+\left \{
+\begin{aligned}
+j &= j_0 + s \cdot \frac{n+1}{d}\\
+t &= t_0 - s \cdot \frac{i}{d}
+\end{aligned}
+\right . \pod{s \in \mathbb Z}
+$$
+不难发现，对 $0 \le k < \frac n d$，上述不定方程在 $0 \leq j \leq n$ 的范围内总有 $d$ 个解，这意味着 $ij \bmod (n+1)$ 将有 $d$ 次取到 $kd$。故我们有
+$$
+\begin{aligned}
+\sum_{i=1}^n \sum_{j=1}^n ij \bmod (n+1)
+&= \sum_{i=1}^n d \sum_{k=0}^{\frac {n+1}{d} -1} kd \\
+&= \sum_{i=1}^n d^2 \sum_{k=0}^{\frac {n+1}{d} -1} k \\
+&= \frac 1 2 \sum_{i=1}^n d^2 \left( \frac {n+1} d - 1 \right) \frac {n+1} d \\
+&= \frac {n+1} 2 \sum_{i=1}^n (n+1-d) = \frac{n^2 (n+1)}{2}
+\end{aligned}
+$$
+化简即得
+$$
+\begin{aligned}
+\sum_{i=1}^n (n+1-d) &= n^2 \\
+\sum_{i=1}^n d &= n \\
+\sum_{i=1}^n \gcd(i, n+1) &= n
+\end{aligned} 
+$$
+显然上式等价于对任意 $1 \leq i \leq n$，$\gcd(i, n+1) = 1$ 恒成立。因此我们证明了 $n+1$ 是质数是原方程成立的充分必要条件。
