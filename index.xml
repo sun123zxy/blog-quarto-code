@@ -10,7 +10,63 @@
 <atom:link href="https://blog.sun123zxy.top/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.2.269</generator>
-<lastBuildDate>Mon, 23 Jan 2023 16:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 12 Feb 2023 16:00:00 GMT</lastBuildDate>
+<item>
+  <title>str 学数学 题解</title>
+  <dc:creator>sun123zxy</dc:creator>
+  <link>https://blog.sun123zxy.top/posts/20230213-strwithmath/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<div id="exm-problem" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1 (str 学数学) </strong></span>str 同学因为名字里含有一个 str，所以觉得字符串对于他来说太简单了，于是他开始了他的数学之旅。</p>
+<p>在旅途中str遇到了刚抽到胡桃的 lyl，而 lyl 同学正沉浸在出货的喜悦之中，为了能收获双倍喜悦，他便询问 str，他选的区间内有多少个幸运数字，str觉得这个问题和字符串一样简单，于是把这个问题交给了你。</p>
+<p>共有 <img src="https://latex.codecogs.com/png.latex?T"> 组询问，每次给出两个正整数 <img src="https://latex.codecogs.com/png.latex?L,R">，你需要判断有多少 <img src="https://latex.codecogs.com/png.latex?n">，<img src="https://latex.codecogs.com/png.latex?L%20%5Cleq%20n%20%5Cleq%20R"> 使得方程 <img src="https://latex.codecogs.com/png.latex?%0A%5Csum_%7Bi=1%7D%5En%20%5Csum_%7Bj=1%7D%5En%20%5Cleft%20%5Clfloor%20%5Cfrac%20%7Bij%7D%20%7Bn+1%7D%20%5Cright%20%5Crfloor%20=%20%5Cfrac%20%7Bn%5E2%20(n-1)%7D%7B4%7D%0A"> 成立。</p>
+<p>请输出你得到的答案。</p>
+<p>数据范围：<img src="https://latex.codecogs.com/png.latex?1%20%5Cleq%20T%20%5Cleq%2010000">，<img src="https://latex.codecogs.com/png.latex?1%20%5Cleq%20L%20%5Cleq%20R%20%5Cleq%2010%5E7"></p>
+<p>样例输入：</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1">4</span>
+<span id="cb1-2">1 4</span>
+<span id="cb1-3">2 8</span>
+<span id="cb1-4">1 10</span>
+<span id="cb1-5">1 100</span></code></pre></div>
+<p>样例输出：</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1">3</span>
+<span id="cb2-2">3</span>
+<span id="cb2-3">5</span>
+<span id="cb2-4">26</span></code></pre></div>
+<p>来源：2023 年寒假集训 B 组总结赛</p>
+</div>
+<p>考场上当然是打表找规律了，但非常愚钝地没看出来……</p>
+<p>结论是，<img src="https://latex.codecogs.com/png.latex?n"> 是一个幸运数字，当且仅当 <img src="https://latex.codecogs.com/png.latex?n+1"> 是一个质数。下面提供两种证明方法。</p>
+<section id="official-solution" class="level2">
+<h2 class="anchored" data-anchor-id="official-solution">Official Solution</h2>
+<p>出题人提供的非常有技巧性的解法。</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Csum_%7Bi=1%7D%5En%20%5Csum_%7Bj=1%7D%5En%20%5Cleft%20%5Clfloor%20%5Cfrac%20%7Bij%7D%20%7Bn+1%7D%20%5Cright%20%5Crfloor%20=%20%5Cfrac%20%7Bn%5E2%20(n-1)%7D%7B4%7D%0A"></p>
+<p>考虑为 <img src="https://latex.codecogs.com/png.latex?%5Clfloor%20%5Cfrac%20%7Bij%7D%20%7Bn+1%7D%20%5Crfloor"> 配对，</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%5Csum_%7Bi=1%7D%5En%20%5Csum_%7Bj=1%7D%5En%20%5Cleft%20%5Clfloor%20%5Cfrac%20%7Bij%7D%20%7Bn+1%7D%20%5Cright%20%5Crfloor%20+%20%5Cleft%20%5Clfloor%20%5Cfrac%20%7Bi(n-j+1)%7D%20%7Bn+1%7D%20%5Cright%20%5Crfloor%20&amp;=%20%5Cfrac%20%7Bn%5E2%20(n-1)%7D%7B2%7D%20%5C%5C%0A%5Csum_%7Bi=1%7D%5En%20%5Csum_%7Bj=1%7D%5En%20%5Cleft%20%5Clfloor%20%5Cfrac%20%7Bij%7D%20%7Bn+1%7D%20%5Cright%20%5Crfloor%20+%20%5Cleft%20%5Clfloor%20i%20-%20%5Cfrac%20%7Bij%7D%20%7Bn+1%7D%20%5Cright%20%5Crfloor%20&amp;=%20%5Cfrac%20%7Bn%5E2%20(n-1)%7D%7B2%7D%20%5C%5C%0A%5Csum_%7Bi=1%7D%5En%20%5Csum_%7Bj=1%7D%5En%20i%20-%20%5B%20n+1%20%5Cnmid%20ij%20%5D%20&amp;=%20%5Cfrac%20%7Bn%5E2%20(n-1)%7D%7B2%7D%20%5C%5C%0A%5Cfrac%7Bn%5E2%20(n+1)%7D%7B2%7D%20-%20%5Csum_%7Bi=1%7D%5En%20%5Csum_%7Bj=1%7D%5En%20%5B%20n+1%20%5Cnmid%20ij%20%5D%20&amp;=%20%5Cfrac%20%7Bn%5E2%20(n-1)%7D%7B2%7D%20%5C%5C%0A%5Csum_%7Bi=1%7D%5En%20%5Csum_%7Bj=1%7D%5En%20%5B%20n+1%20%5Cnmid%20ij%20%5D%20&amp;=%20n%5E2%0A%5Cend%7Baligned%7D%0A"></p>
+<p>即要求 <img src="https://latex.codecogs.com/png.latex?n+1%20%5Cnmid%20ij"> 对任意 <img src="https://latex.codecogs.com/png.latex?1%20%5Cleq%20i,j%20%5Cleq%20n"> 成立。因此根据质数定义，<img src="https://latex.codecogs.com/png.latex?n+1"> 就是且只能是质数了。</p>
+</section>
+<section id="alternative-solution" class="level2">
+<h2 class="anchored" data-anchor-id="alternative-solution">Alternative Solution</h2>
+<p>考场上推了一半的想法。</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Csum_%7Bi=1%7D%5En%20%5Csum_%7Bj=1%7D%5En%20%5Cleft%20%5Clfloor%20%5Cfrac%20%7Bij%7D%20%7Bn+1%7D%20%5Cright%20%5Crfloor%20=%20%5Cfrac%20%7Bn%5E2%20(n-1)%7D%7B4%7D%0A"></p>
+<p>注意到 <img src="https://latex.codecogs.com/png.latex?a%20%5Cbmod%20b%20=%20a%20-%20b%20%5Clfloor%20%5Cfrac%20a%20b%20%5Crfloor">，考虑构造取模</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%5Csum_%7Bi=1%7D%5En%20%5Csum_%7Bj=1%7D%5En%20(n+1)%20%5Cleft%20%5Clfloor%20%5Cfrac%20%7Bij%7D%20%7Bn+1%7D%20%5Cright%20%5Crfloor%20=%20%5Cfrac%20%7Bn%5E2%20(n-1)(n+1)%7D%7B4%7D%20%5C%5C%0A%5Csum_%7Bi=1%7D%5En%20%5Csum_%7Bj=1%7D%5En%20ij%20-%20ij%20%5Cbmod%20(n+1)%20=%20%5Cfrac%20%7Bn%5E2%20(n-1)(n+1)%7D%7B4%7D%20%5C%5C%0A%5Cleft(%20%5Cfrac%20%7Bn(n+1)%7D%7B2%7D%20%5Cright)%5E2%20-%20%5Csum_%7Bi=1%7D%5En%20%5Csum_%7Bj=1%7D%5En%20ij%20%5Cbmod%20(n+1)%20=%20%5Cfrac%20%7Bn%5E2%20(n-1)(n+1)%7D%7B4%7D%20%5C%5C%0A%5Csum_%7Bi=1%7D%5En%20%5Csum_%7Bj=1%7D%5En%20ij%20%5Cbmod%20(n+1)%20=%20%5Cfrac%20%7Bn%5E2%20(n+1)%7D%20%7B2%7D%0A%5Cend%7Baligned%7D%0A"></p>
+<p>考虑固定 <img src="https://latex.codecogs.com/png.latex?i">，研究 <img src="https://latex.codecogs.com/png.latex?j"> 变化下左式的情况。方便起见，我们将上式左侧 <img src="https://latex.codecogs.com/png.latex?j"> 的取值范围扩展至 <img src="https://latex.codecogs.com/png.latex?0"> 到 <img src="https://latex.codecogs.com/png.latex?n">： <img src="https://latex.codecogs.com/png.latex?%0A%5Csum_%7Bi=1%7D%5En%20%5Csum_%7Bj=0%7D%5En%20ij%20%5Cbmod%20(n+1)%20=%20%5Cfrac%20%7Bn%5E2%20(n+1)%7D%20%7B2%7D%0A"> 细心的读者或许已经发现，当 <img src="https://latex.codecogs.com/png.latex?%5Cgcd(i,n+1)%20=%201"> 恒成立，即 <img src="https://latex.codecogs.com/png.latex?n+1"> 为质数时，<img src="https://latex.codecogs.com/png.latex?ij%20%5Cbmod%20(n+1)"> 将取遍 <img src="https://latex.codecogs.com/png.latex?0"> 到 <img src="https://latex.codecogs.com/png.latex?n">，此时左右两式相等。下面我们证明这是上式相等的充分必要条件。</p>
+<p>仍从 <img src="https://latex.codecogs.com/png.latex?ij%20%5Cbmod%20(n+1)"> 的取值下手，我们研究如下以 <img src="https://latex.codecogs.com/png.latex?j"> 和 <img src="https://latex.codecogs.com/png.latex?t"> 为变量的不定方程的解 <img src="https://latex.codecogs.com/png.latex?%0Aij%20+%20(n+1)%20t%20=%20m%20%5Cpod%7B0%20%5Cleq%20m%20%3C%20n+1%7D%0A"> 由裴蜀定理（Bézout’s identity），方程有解的充分必要条件为 <img src="https://latex.codecogs.com/png.latex?%5Cgcd(i,n+1)%20%5Cmid%20m">。不妨记 <img src="https://latex.codecogs.com/png.latex?d%20=%20%5Cgcd(i,n+1)">，<img src="https://latex.codecogs.com/png.latex?m%20=%20k%20d">，方程变为 <img src="https://latex.codecogs.com/png.latex?%0Aij%20+%20(n+1)%20t%20=%20kd%20%5Cpod%7B0%20%5Cleq%20k%20%3C%20%5Cfrac%20%7Bn+1%7D%20d%7D%0A"> 写出该不定方程的通解 <img src="https://latex.codecogs.com/png.latex?%0A%5Cleft%20%5C%7B%0A%5Cbegin%7Baligned%7D%0Aj%20&amp;=%20j_0%20+%20s%20%5Ccdot%20%5Cfrac%7Bn+1%7D%7Bd%7D%5C%5C%0At%20&amp;=%20t_0%20-%20s%20%5Ccdot%20%5Cfrac%7Bi%7D%7Bd%7D%0A%5Cend%7Baligned%7D%0A%5Cright%20.%20%5Cpod%7Bs%20%5Cin%20%5Cmathbb%20Z%7D%0A"> 不难发现，对 <img src="https://latex.codecogs.com/png.latex?0%20%5Cle%20k%20%3C%20%5Cfrac%20n%20d">，上述不定方程在 <img src="https://latex.codecogs.com/png.latex?0%20%5Cleq%20j%20%5Cleq%20n"> 的范围内总有 <img src="https://latex.codecogs.com/png.latex?d"> 个解，这意味着 <img src="https://latex.codecogs.com/png.latex?ij%20%5Cbmod%20(n+1)"> 将有 <img src="https://latex.codecogs.com/png.latex?d"> 次取到 <img src="https://latex.codecogs.com/png.latex?kd">。故我们有 <img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%5Csum_%7Bi=1%7D%5En%20%5Csum_%7Bj=1%7D%5En%20ij%20%5Cbmod%20(n+1)%0A&amp;=%20%5Csum_%7Bi=1%7D%5En%20d%20%5Csum_%7Bk=0%7D%5E%7B%5Cfrac%20%7Bn+1%7D%7Bd%7D%20-1%7D%20kd%20%5C%5C%0A&amp;=%20%5Csum_%7Bi=1%7D%5En%20d%5E2%20%5Csum_%7Bk=0%7D%5E%7B%5Cfrac%20%7Bn+1%7D%7Bd%7D%20-1%7D%20k%20%5C%5C%0A&amp;=%20%5Cfrac%201%202%20%5Csum_%7Bi=1%7D%5En%20d%5E2%20%5Cleft(%20%5Cfrac%20%7Bn+1%7D%20d%20-%201%20%5Cright)%20%5Cfrac%20%7Bn+1%7D%20d%20%5C%5C%0A&amp;=%20%5Cfrac%20%7Bn+1%7D%202%20%5Csum_%7Bi=1%7D%5En%20(n+1-d)%20=%20%5Cfrac%7Bn%5E2%20(n+1)%7D%7B2%7D%0A%5Cend%7Baligned%7D%0A"> 化简即得 <img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%5Csum_%7Bi=1%7D%5En%20(n+1-d)%20&amp;=%20n%5E2%20%5C%5C%0A%5Csum_%7Bi=1%7D%5En%20d%20&amp;=%20n%20%5C%5C%0A%5Csum_%7Bi=1%7D%5En%20%5Cgcd(i,%20n+1)%20&amp;=%20n%0A%5Cend%7Baligned%7D%0A"> 显然上式等价于对任意 <img src="https://latex.codecogs.com/png.latex?1%20%5Cleq%20i%20%5Cleq%20n">，<img src="https://latex.codecogs.com/png.latex?%5Cgcd(i,%20n+1)%20=%201"> 恒成立。因此我们证明了 <img src="https://latex.codecogs.com/png.latex?n+1"> 是质数是原方程成立的充分必要条件。</p>
+
+
+</section>
+
+ ]]></description>
+  <category>OI</category>
+  <category>数学</category>
+  <category>题解</category>
+  <guid>https://blog.sun123zxy.top/posts/20230213-strwithmath/index.html</guid>
+  <pubDate>Sun, 12 Feb 2023 16:00:00 GMT</pubDate>
+</item>
 <item>
   <title>算法竞赛向 C++ Standard Library 使用速查</title>
   <dc:creator>sun123zxy</dc:creator>
@@ -426,7 +482,7 @@
 <li>希望用相对不易损坏且可读性较高的代码式文档替代 <code>.docx</code> 式的黑箱存储。</li>
 <li>需要使用章节标号、定理系统等交叉引用功能。</li>
 <li>想用简洁的代码生成严谨美观的数学公式。</li>
-<li><del>就是感觉 LaTeX 排出来的东西看上去很牛逼</del></li>
+<li><del>就是感觉 LaTeX 排出来的东西很牛逼</del></li>
 </ul>
 <p>学习 LaTeX 需要了解它的历史，理解它的开发理念，理清 TeX/LaTeX 的历史进程，弄清 pdfLaTeX、XeLaTeX、LuaLaTeX 各自的特点，在 MikeTeX、TeXLive 两个发行版中做出选择，学习 BibTeX 引用管理格式，还有对排版知识的初步了解——知识体系可谓庞大。此外，不少 LaTeX 教学文档、各种宏包的手册本身就是由 LaTeX 生成的，这意味它们都是 PDF 格式，无法在互联网上得到很好的传播。但请不要忘记，它们是学习 LaTeX 的第一手资料。例如，<a href="https://www.ctan.org/">CTAN</a> 上的手册是学习各类宏包的第一途径，<a href="https://www.latex-project.org/help/documentation/">LaTeX 官网</a>也提供了不少相对系统的 PDF 教程。当然，近年来网页渲染工具 <a href="https://www.overleaf.com/">Overleaf</a> 的出现降低了环境配置的难度，<a href="https://www.overleaf.com/learn">Overleaf 的 LaTeX 教学文档</a>也非常优秀。我还强烈推荐 <a href="https://liam.page/2014/09/08/latex-introduction/">一份其实很短的 LaTeX 入门文档 | 始终</a> 这篇文章作为入门，作者是一位参与维护 CTeX 宏集的大佬，之前提到的 markdown 宏包他也写过一篇详细的介绍，详见上文引用中的链接。</p>
 <p>在互联网上碎片化的学习 LaTeX，一定要经常问自己——这功能是哪个宏包定义的？例如，关于交叉引用，<code>\label</code>、<code>\ref</code>、<code>\pageref</code> 均为原生自带，<code>\eqref</code> 是 <code>amsmath</code> 宏包定义的，而 <code>\autoref</code> <code>\href</code> <code>\url</code> 均为 <code>hyperref</code> 宏包的命令，引入 <code>hyperref</code> 的目的主要是让文章里的交叉引用都变成 PDF 里可点击跳转的超链接；再例如，定理系统是 LaTeX 原生支持的，但 <code>amsthm</code> 提供了无标号版本的定理、设置 <code>\theoremstyle</code> 的方式和自动添加 QED symbol 的 <code>proof</code> 环境。再次强调，不要错过宏包的 PDF 手册！阅读手册是整合碎片知识、查漏补缺的最佳途径。</p>
@@ -3116,89 +3172,6 @@ Nov.&nbsp;2020 最后更新
   <category>题解</category>
   <guid>https://blog.sun123zxy.top/posts/20201127-deconstruct/index.html</guid>
   <pubDate>Thu, 26 Nov 2020 16:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>CodeChef-LECOINS Little Elephant and Colored Coins 题解</title>
-  <link>https://blog.sun123zxy.top/posts/20201118-coin/index.html</link>
-  <description><![CDATA[ 
-
-
-
-<p><a href="https://www.codechef.com/problems/LECOINS">CodeChef-LECOINS Little Elephant and Colored Coins</a></p>
-<blockquote class="blockquote">
-<p><strong>Little Elephant and Colored Coins</strong></p>
-<p>The Little Elephant from the Zoo of Lviv very likes coins. But most of all he likes colored coins.</p>
-<p>He has <strong>N</strong> types of coins, numbered from <strong>1</strong> to <strong>N</strong>, inclusive. The coin of the <strong>i</strong>-th type has the value <strong>Vi</strong> dollars and the color <strong>Ci</strong>. Note that he has infinite supply of each type of coins.</p>
-<p>The Little Elephant wants to make exactly <strong>S</strong> dollars using the coins. What is the maximal number of different colors he can use to make exactly <strong>S</strong> dollars using some of the coins he has? If it’s impossible, output <strong>-1</strong>. Also note that the Little Elephant wants to know this for many values of <strong>S</strong>.</p>
-<p><strong>Input</strong></p>
-<p>The first line of the input contains a single integer <strong>N</strong>, denoting the number of types of coins. Each of the following <strong>N</strong> lines contains two space-separated integers <strong>Vi</strong> and <strong>Ci</strong>, denoting the value and the color of the coin of the <strong>i</strong>-th type. The next line contains a single integer <strong>Q</strong>, denoting the number of values of <strong>S</strong> to process. Each of the following <strong>Q</strong> lines contains a single integer <strong>S</strong>, denoting the coinage you should represent via given coins using maximum number of colors.</p>
-<p><strong>Output</strong></p>
-<p>For each value of <strong>S</strong> in the input, output the maximum number of different colors in the representation of <strong>S</strong> or <strong>-1</strong> if it is impossible to represent <strong>S</strong> via given coins.</p>
-<p><strong>Constraints</strong></p>
-<ul>
-<li><strong>1</strong> ≤ <strong>N</strong> ≤ <strong>30</strong></li>
-<li><strong>1</strong> ≤ <strong>Vi</strong> ≤ <strong>200000</strong> (<strong>2 * 10^5</strong>)</li>
-<li><strong>1</strong> ≤ <strong>Ci</strong> ≤ <strong>10^9</strong></li>
-<li><strong>1</strong> ≤ <strong>Q</strong> ≤ <strong>200000</strong> (<strong>2 * 10^5</strong>)</li>
-<li><strong>1</strong> ≤ <strong>S</strong> ≤ <strong>10^18</strong></li>
-</ul>
-<p><strong>Example</strong></p>
-<pre><code>Input:
-3
-2 1
-3 4
-4 4
-4
-1
-3
-5
-7
-Output:
--1
-1
-2
-2</code></pre>
-<p><strong>Explanation</strong></p>
-<ul>
-<li>It is not possible to represent <strong>S = 1</strong> since every coin has value more than 1.</li>
-<li><strong>S = 3</strong> can only be represented using one coin of the second type, hence only one color is used in the representation.</li>
-<li><strong>S = 5</strong> can only be represented as <strong>2 + 3</strong>, which leads to two colors used.</li>
-<li>For <strong>S = 7</strong> we have two representations as <strong>2 + 2 + 3</strong> (with two colors used) and <strong>3 + 4</strong> (with one color used). Hence, the answer is 2.</li>
-</ul>
-</blockquote>
-<p>妙题啊。</p>
-<section id="可达性" class="level2">
-<h2 class="anchored" data-anchor-id="可达性">可达性</h2>
-<p>如果有个 <img src="https://latex.codecogs.com/png.latex?C_i%20%5Cle%201"> 的SubTask的话会更容易想到正解。</p>
-<p>我们先不考虑颜色，只考虑是否能找到一种方案把硬币总面值凑成 <img src="https://latex.codecogs.com/png.latex?S"> 。</p>
-<p>有一种非常朴素的想法是从 <img src="https://latex.codecogs.com/png.latex?0"> 到 <img src="https://latex.codecogs.com/png.latex?S"> 做可达性dp： <img src="https://latex.codecogs.com/png.latex?f_%7Bx+V_i%7D%20=%20f_%7Bx+V_i%7D%20%7C%20f_x"> ，不过因为 <img src="https://latex.codecogs.com/png.latex?S%20%5Cle%2010%5E%7B18%7D"> ，显然这是天方夜谭。</p>
-<p>可达性dp只有 <img src="https://latex.codecogs.com/png.latex?0/1"> 两种状态，非常浪费；发现 <img src="https://latex.codecogs.com/png.latex?V_i"> 的值域很小，这启示我们将 <img src="https://latex.codecogs.com/png.latex?V_i"> 作为状态减少有效状态数。但究竟如何设置呢？</p>
-<p>这里是最巧妙的地方。不失一般性，设 <img src="https://latex.codecogs.com/png.latex?V_1%20=%20%5Cmin%20V_i"> 。我们尝试把 <img src="https://latex.codecogs.com/png.latex?V_1"> 孤立出来考虑。 <strong>假设</strong>保证过程中最终选择的总面额永远不会比 <img src="https://latex.codecogs.com/png.latex?S"> 大（换句话说，允许选择负数个硬币），那么只需知道硬币集合 <img src="https://latex.codecogs.com/png.latex?V%20-%20%5C%7B%20V_1%20%5C%7D"> 中是否存在一种方案其总面值模 <img src="https://latex.codecogs.com/png.latex?V_i"> 与 <img src="https://latex.codecogs.com/png.latex?S"> 同余即可。这样就只需对去掉 <img src="https://latex.codecogs.com/png.latex?V_1"> 的硬币集合做 <img src="https://latex.codecogs.com/png.latex?1"> 到 <img src="https://latex.codecogs.com/png.latex?V_1-%201"> 的可达性dp就好了。</p>
-<p>考虑把前面那个假设干掉。之前提到 <img src="https://latex.codecogs.com/png.latex?f"> 只有 <img src="https://latex.codecogs.com/png.latex?0/1"> 两种状态，明显可以再塞点东西进去。于是令 <img src="https://latex.codecogs.com/png.latex?f_x"> 为硬币集合 <img src="https://latex.codecogs.com/png.latex?V%20-%20%5C%7B%20V_1%20%5C%7D"> 中所有总面值模 <img src="https://latex.codecogs.com/png.latex?V_1"> 等于 <img src="https://latex.codecogs.com/png.latex?x"> 的选择方案中最小的总面值。容易写出状态转移</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathrm%7Brelax%7D%20%5C%20f_%7B(x+V_i)%5C%25%20V_1%7D%20%5C%20%5Cmathrm%7Bby%7D%20%5C%20f_x%20+%20V_i%0A"></p>
-<p>（ <img src="https://latex.codecogs.com/png.latex?%5C%25"> 代表取模， <img src="https://latex.codecogs.com/png.latex?%5Cmathrm%7Brelax%7D%20%5C%20A%20%5C%20%5Cmathrm%7Bby%7D%20%5C%20B"> 即 <img src="https://latex.codecogs.com/png.latex?A%20=%20%5Cmin(A,B)"> ）</p>
-<p>这样一来，若 <img src="https://latex.codecogs.com/png.latex?f_%7BS%20%5C%25%20V_1%7D%20%5Cle%20S"> ，那么 <img src="https://latex.codecogs.com/png.latex?S"> 就是可以被组成的。</p>
-<p>发现这个dp就是个最短路，形成了一个 <img src="https://latex.codecogs.com/png.latex?%7CV%7C%20=%20V_1,%20%7CE%7C%20=%20(n-1)%20V_1"> 的图。于是 Dijkstra 一下就可以了。不过这个图还有更好的性质。</p>
-<p>首先，路径中边的顺序可以任意调换而不影响可达性和最短路，所以我们可以分开考虑每一种边的松弛。而一分开看就非常明朗了，根据数论常识，所有 <img src="https://latex.codecogs.com/png.latex?x"> 到 <img src="https://latex.codecogs.com/png.latex?(x%20+%20V_i)%20%5C%25%20m"> 的边会在图上形成 <img src="https://latex.codecogs.com/png.latex?%5Cgcd(V_i,%20m)"> 个大小为 <img src="https://latex.codecogs.com/png.latex?%5Cfrac%7BV_1%7D%7B%5Cgcd(%7BV_i,%20m%7D)%7D"> 的环，于是现在我们又可以分别考虑每一个环。只需从环上当前距离值最小的点绕环一圈就可以做到松弛了。于是现在预处理的时间复杂度是 <img src="https://latex.codecogs.com/png.latex?O(%7CE%7C)%20=%20O(nV_1)"> ，比直接 Dijkstra 少了个 <img src="https://latex.codecogs.com/png.latex?%5Clog"> 。询问当然是 <img src="https://latex.codecogs.com/png.latex?O(1)"> 的。</p>
-</section>
-<section id="考虑颜色" class="level2">
-<h2 class="anchored" data-anchor-id="考虑颜色">考虑颜色</h2>
-<p>把颜色放到dp状态里面去就好了。设 <img src="https://latex.codecogs.com/png.latex?f_%7Bx,%20c%7D"> ，<img src="https://latex.codecogs.com/png.latex?c"> 记录了选取的颜色种类数，其余与前述相同。</p>
-<p>比较懒，不写代码了。实在需要可以看官方题解。</p>
-</section>
-<section id="参考" class="level2">
-<h2 class="anchored" data-anchor-id="参考">参考</h2>
-<p><a href="https://discuss.codechef.com/t/lecoins-editorial/1723">官方题解</a></p>
-<p><del>这篇题解基本上是官方题解的简化翻译版本</del></p>
-
-
-</section>
-
- ]]></description>
-  <category>OI</category>
-  <category>题解</category>
-  <guid>https://blog.sun123zxy.top/posts/20201118-coin/index.html</guid>
-  <pubDate>Tue, 17 Nov 2020 16:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
