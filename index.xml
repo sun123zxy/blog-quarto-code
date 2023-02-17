@@ -10,7 +10,226 @@
 <atom:link href="https://blog.sun123zxy.top/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.2.269</generator>
-<lastBuildDate>Sun, 12 Feb 2023 16:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 16 Feb 2023 16:00:00 GMT</lastBuildDate>
+<item>
+  <title>聊聊红石音乐</title>
+  <dc:creator>sun123zxy</dc:creator>
+  <link>https://blog.sun123zxy.top/posts/20230217-rmg/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>咕极必肝，肝极必咕。</p>
+<p>本来是打算做完 Ancient Temple 和视频一起发出的，但现在看到这篇文章，说明下文随想里立下的 flag 已经被打脸了（</p>
+<p>咕的原因，一方面是因为现实生活太过充实有趣，即使红乐般的激昂也有黯淡之时；但更重要的，还是对第二次迭代的表现效果不满意。模子是 Foxtail Grass Studio 的专辑封面和《妖妖剑戟梦想》的白玉楼阶梯，但始终没能做出想要的效果。更好的想法？暂时也没有。</p>
+<p>半途而废很可惜，但糟蹋更可惜。或许暂时搁置、静待花开，会有更好的结果。</p>
+<p>写下随想与技术细节，封存于冷清的博客，是纪念，还是重启的依托？</p>
+<blockquote class="blockquote">
+<p>东方的天空微微露出青白色的天光，幻想乡迎来了又一个清晨。</p>
+<p>很快，太阳就会出现，将光芒洒满这片遗忘之地。</p>
+<p>尽管，那片原野已然如幻梦般消失不见——</p>
+<p>但，在看不见的隐秘角落，无数的原野正在悄然生长——</p>
+<p>这里也是，那里也是</p>
+<p>——如同小小的光芒。</p>
+<p>——<a href="https://www.bilibili.com/read/cv11907285">东方莳梦原～Champaign of Unfinished Dreams</a> by 秋ノ宮飛鳥</p>
+</blockquote>
+<section id="一点随想" class="level2">
+<h2 class="anchored" data-anchor-id="一点随想">一点随想</h2>
+<p>2022 年 8 月 17 日夜，Ancient Temple 完成过半，月色入户，欣然开摆。</p>
+<p>对，今天又是 8 月 17 日，是妖妖梦、风神录的发售日，<del>也是某个枪毙节</del>，还是某个新博客启用的周年纪念日——我又来写随想了。</p>
+<p>18 年华灯宴 1U_s 大佬一曲<a href="https://b23.tv/FwrlLWL">十七岁</a>把我拉入红石音乐的大坑，到现在也有 4 年多了。随便聊聊感想，谈谈技术和非技术的各种话题。</p>
+<p>我玩红乐，或许“科技靠考古的自闭造轮手”是个不错的形容。不加红石群、不更新版本，没人带没人陪，Google + Minecraft Wiki 在手，自己瞎倒腾，其他看造化。风格是 18 年的远古遗风——realpiano + 命令方块 + WorldEdit 的前进式、贪吃蛇式、下落式红石音乐大行其道的年头。到后来，特效红石音乐开始流行，但我心中的红乐早已定型。</p>
+<p>我喜欢那个年代红石音乐特有的那种风格，那种朴素，但红石音乐完美融入场景的感觉。当年东方各作红石音乐全曲中就可见一斑——跟随红石信号一步步向前，如同听着 BGM 驾驶自机飞翔于道中，看版面缓缓向前伸展——STG 原作与 Minecraft 的奇妙融合让我着迷。我想做这样的红石音乐，我想做这样能化出心中幻想的红石音乐。</p>
+<p>想做？音乐你懂吗？建筑你会吗？</p>
+<p>不会，但可以学！</p>
+<p>那你还会什么？</p>
+<p>我是 OIer！我会编程！</p>
+<p>这就是后来近三年红乐自动化尝试的开端。倒也开始稍微认真点的学习 MIDI、乐理以及其他各种各样的东西。</p>
+<p>时间来到 20 年暑假。当时正好在玩 Python，偶然一搜，找到了 Raspberry Jam Mod 和 <a href="https://github.com/mido/mido">mido</a>——前者把 <a href="https://www.minecraft.net/en-us/edition/pi" class="uri">https://www.minecraft.net/en-us/edition/pi</a> 的 Python API 移植到 Java 版，后者提供在 Python 中处理 MIDI 文件的方法。</p>
+<p>诶，这就不可以开工了吗！</p>
+<p>肝能量发动，写了第一个能跑起来的脚本，随便丢了个正在做的第三版 Ancient Temple 进去听听——哎哟挺不错啊！</p>
+<p>生产力工具上线，整活得以开始。要说最想做的，那一定是妖妖梦五面道中。对，就是 《东方妖妖梦 ~ Ancient Temple》。如 ZUN 所说，那是使古老寺院的空气突然升温的曲子。樱花上飘，楼观斩下……那是原作带来的难以忘怀的幻想。</p>
+<p>但当时的我，没打算做，或者说有点不敢做。一方面，当然是 1U_s 大大的<a href="https://www.bilibili.com/video/BV1Gs411i7K9">妖妖梦红乐曲集</a>实在精彩，随手制作的五面道中已足以满足我自娱自乐的需求；二来也是对自己实力不太自信，怕做出自己也不太喜欢的作品。但 1U 的曲集毕竟是手工打造，两条音轨虽然意境极佳，但与原曲相比确也是捉襟见肘，而我手中的自动化可以极大程度地减轻工作量（虽然造轮子的过程没少花时间 (lll￢ω￢)）</p>
+<p>所以到头来还是想做——或者下次一定？</p>
+<p>那这次造啥呢？</p>
+<p>余光瞄到刚退坑不久的 Dancing Line——说是舞线，其实脑子里全是 Through the Fog 的场景。回去重打 TTF 风暴的时候，听着 90% 后疯狂的雷声，突然想到 Minecraft 可以 <code>/weather rain</code> 可以 <code>/summon lightning_bolt</code>，加之场景想要偷懒的话搞个单层水世界就行，倒是试水的不错选择。</p>
+<p>于是就开始试着扒谱。暑假结束，MIDI 是写好了，人却咕起来了。一咕就咕到了后一年的四月，忍不住了，爆肝三个周末整出来了。这个明显还是有很多问题的，首先曲子扒得就不太好，而且灯光一直到最后一小段才加上，另外前面下雨那段也太黑了。Sildur’s Vibrant Shader 的黑雷电问题也没解决，加上当时电脑太菜，Replaymod 录制还是挺难受的（不过预览模式倒是意外的贡献了个封面 XD），当然凑合能看。</p>
+<p>后来就又到暑假了，打算一口气把 RMG 这个烂摊子写好，于是大刀阔斧的重构了，命名为 <a href="https://github.com/sun123zxy/redstone-music-generator">redstone-music-generator</a>，甚至还写了文档发了 Github，收获人生首 star &amp; issue（</p>
+<p>或许是为了尝试 observer 的设计模式，亦或是太重视轮子的易用性，代码比较臃肿，过了几个月发现自己也很难看懂了。</p>
+<p>其实写脚本主要还是给自己创作使用啊，没必要考虑太多“别人的需求”。</p>
+<p>反思的结果就是新版的 redstone-music-generator 了，现暂存于原版本的 <code>develop</code> 分支下。这个版本再次重构，学习了某些命令行软件的做法，配置参数从之前在各个组件上的零散分布变为了单一配置文件的集中分布，显然提高了效率。</p>
+<p>Ancient Temple 的 MIDI 也已经做到第五版了，这次以红乐的标准，大幅参考原曲 MIDI，期望能尽力还原出原作的表现。</p>
+<p>鼓起勇气脱离咕海的动力来源，还是喜欢这曲子吧。说到底还是想把它做了再养老。</p>
+<p>说起来，红石音乐到底应该怎样定义呢？之前 WorldEdit 的使用就已经引发过争议，那自动化搭建到底是红是黑？而在发声方面，是坚持音符盒的原教旨主义，还是命令方块的改良革新，甚至是更激进的 Midiout？</p>
+<blockquote class="blockquote">
+<p>up辛苦了，工作量能看出来。</p>
+<p>但是原谅我还是很难接受这种从mc映射到外部midi播放器的格式。我觉得这并不能称作红石音乐，因为不是在mc内部完成播放的。</p>
+<p>不过，用资源包和用接口，也不过只是内部调用和外部调用的区别罢了，也说不清…这是个哲学层次的问题。</p>
+<p>红石音乐最后到底会变成什么样我也不知道，而且这种发展的方向和趋势我也没办法也没有理由去阻止。</p>
+<p>我大概是，跟不上时代了吧…</p>
+<p>——<a href="https://www.bilibili.com/video/BV1oW411a7eJ">【黑石音乐】aLIEz【接近完美的还原】_哔哩哔哩_bilibili</a> 下 <a href="https://space.bilibili.com/32262433">NJune六月</a> 的评论</p>
+</blockquote>
+<p>或许每个人心中的红乐标准都有所不同……或许我们只能求同存异，力求百花齐放，不要走火入魔。但最近粒子特效红石音乐的发展又让我感到困惑——一点红石、音符盒甚至命令方块都不出现，真的算红乐吗？那些炫酷的粒子特效，真的属于 Minecraft 吗？</p>
+<p>只能交给时间回答了。我想，我能保证的，只是一颗全心投入、宁缺毋滥的创作心态；而我应该做的，是继续完成手头的作品。</p>
+</section>
+<section id="mc-指令相关" class="level2">
+<h2 class="anchored" data-anchor-id="mc-指令相关">MC 指令相关</h2>
+<section id="setblock-datavalue-block-state-and-data-tag-nbt" class="level3">
+<h3 class="anchored" data-anchor-id="setblock-datavalue-block-state-and-data-tag-nbt">setblock, dataValue, block state and data tag (nbt)</h3>
+<section id="扁平化前1.12-及以前" class="level4">
+<h4 class="anchored" data-anchor-id="扁平化前1.12-及以前">扁平化前（1.12 及以前）</h4>
+<p><code>setblock &lt;x&gt; &lt;y&gt; &lt;z&gt; &lt;block&gt; [dataValue|state] [oldBlockHandling] [dataTag]</code></p>
+<p><code>dataValue</code> 和 <code>blockstate</code> 在扁平化之前是方块状态的两种不同描述方式，<code>dataValue</code> 是实际存储时使用的 4 bit 数据。通常，<code>blockstate</code> 或 <code>dataValue</code> 用来描述方块的一些基本性质，比如朝向 <code>facing</code>、羊毛的颜色 <code>color</code>、中继器的延迟刻数 <code>delay</code>。</p>
+<p>具体写法例如：<code>/setblock ~ ~ ~1 minecraft:unpowered_repeater delay=4,facing=east</code> 设置一个延迟为 4 rt，面朝“东方”的红石中继器。（这里打上了引号，因为事实上<strong>红石中继器的 facing 代表的方向与信号传导的方向是相反的</strong>）</p>
+<p>又，其效果等同于 <code>/setblock ~ ~ ~1 minecraft:unpowered_repeater 15</code>。（<code>dataValue = (delay - 1) * 4 + facing</code>，<code>facing=south|west|north|east</code> 分别对应 <code>0|1|2|3</code> 。默认值是 <code>north</code>）</p>
+<p>再例如，<code>/setblock ~ ~ ~1 minecraft:command_block facing=down 0 {Command:"/time set 6000"}</code> 设置一个修改时间为正午的，面朝下方的命令方块。</p>
+<p>中间的 <code>0</code> 是用来占位的。</p>
+<p>查找某方块的 <code>dataValue</code> 和 <code>blockstate</code> 时可以翻阅 Minecraft Wiki 1.13 以前的历史版本（1.13 于 2018 年 6 月 18 日发布）</p>
+</section>
+<section id="扁平化后1.13-及以后" class="level4">
+<h4 class="anchored" data-anchor-id="扁平化后1.13-及以后">扁平化后（1.13 及以后）</h4>
+<p><code>setblock &lt;pos&gt; &lt;block&gt; [destroy|keep|replace]</code></p>
+<p>其中 <code>&lt;block&gt;</code> 是 <code>block_state</code>， 具体的写法是 <code>namespaced_ID[block_states=value]{data_tags:value}</code></p>
+<p>也就是说，原先的 <code>block</code>、<code>block_state</code> 和 <code>dataTag</code> 现在被统一整合入 <code>block_state</code> 里面，显然这更方便使用了。（然而作为考古学家，这好像也没法用上…）</p>
+</section>
+</section>
+<section id="fallingsand-or-falling_block" class="level3">
+<h3 class="anchored" data-anchor-id="fallingsand-or-falling_block">FallingSand or falling_block</h3>
+<p>掉落方块实体。1.11 前它叫 <code>FallingSand</code>，1.11 及以后它叫 <code>falling_block</code>。</p>
+<p>1.12 及以前可用 <code>/summon falling_block ~ ~ ~ {Block:minecraft:redstone_block,Time: 1}</code> 召唤掉落的红石块。Time 参数设置最长掉落时间，实际上会与 30 秒取最大值，但如果留空则会马上消失。</p>
+<p>而 <code>/summon falling_block ~ ~ ~ {Block:"minecraft:wool", Data: 14, Time:1}</code> 可召唤掉落的红色羊毛。<code>Data</code> 标签自然与颜色对应了。</p>
+<p>1.13 后由于扁平化更新了 <code>block_state</code> 的概念，指令格式变为 <code>/summon falling_block &lt;x&gt; &lt;y&gt; &lt;z&gt; {BlockState:{Name:&lt;Namespaced block ID&gt;,Properties:{&lt;blockstate_name&gt;:&lt;value&gt;}}}</code>。</p>
+<p>参见：</p>
+<ul>
+<li><p><a href="https://minecraft.fandom.com/wiki/Falling_Block">Falling Block – Minecraft Wiki</a></p></li>
+<li><p><a href="https://minecraft.fandom.com/wiki/Tutorials/Falling_blocks">Tutorials/Falling blocks – Minecraft Wiki</a></p></li>
+<li><p><a href="https://minecraft.fandom.com/wiki/Tutorials/Command_NBT_tags#Entities">Tutorials/Command NBT tags – Minecraft Wiki</a></p></li>
+</ul>
+</section>
+<section id="解决指令引号嵌套无法识别问题" class="level3">
+<h3 class="anchored" data-anchor-id="解决指令引号嵌套无法识别问题">解决指令引号嵌套无法识别问题</h3>
+<p>见 <a href="https://gaming.stackexchange.com/questions/246064/why-are-my-quotation-marks-causing-an-unexpected-token-error-with-this-command">minecraft java edition - Why are my quotation marks causing an “unexpected token” error with this command? - Arqade</a>，用 <code>\</code> 转义即可。</p>
+</section>
+</section>
+<section id="mod资源包" class="level2">
+<h2 class="anchored" data-anchor-id="mod资源包">mod、资源包</h2>
+<p>注意此处提到的 mod 和资源包均只在其 1.12.2 对应版本下测试，不少功能在新版已经不需要 mod 了。</p>
+<section id="worldedit" class="level3">
+<h3 class="anchored" data-anchor-id="worldedit">WorldEdit</h3>
+<p>建筑党老相识了，不细讲了，Google 一下你就知道。</p>
+<ul>
+<li><a href="https://worldedit.enginehub.org/en/latest/">WorldEdit Documentation</a></li>
+</ul>
+<p>用的多的命令 <code>copy</code>、<code>flip</code>、<code>rotate</code>、<code>paste</code>、<code>stack</code>、<code>set</code>、<code>replace</code>。当然还有最要命的 <code>undo</code> 啦（</p>
+<p><code>schematic</code> 系列指令也很好用（用来偷建筑）（逃）</p>
+</section>
+<section id="voxelmap" class="level3">
+<h3 class="anchored" data-anchor-id="voxelmap">VoxelMap</h3>
+<p>常见的小地图，用来传送挺方便的。也不细讲了。</p>
+</section>
+<section id="tickratechanger" class="level3">
+<h3 class="anchored" data-anchor-id="tickratechanger">TickrateChanger</h3>
+<p><a href="https://www.curseforge.com/minecraft/mc-mods/tickratechanger">TickrateChanger - Mods - Minecraft - CurseForge</a></p>
+<p>tickrate changer，就是字面意思嘛。改 tickrate 可以使游戏变快或变慢，从而实现精确调节 BPM。正常值 20。</p>
+<p>但是有个挺烦的问题是调了过后声音的频率也随之改变了，这样音高就发生变化了…有大佬知道怎么办吗？</p>
+</section>
+<section id="colored-redstone" class="level3">
+<h3 class="anchored" data-anchor-id="colored-redstone">Colored Redstone</h3>
+<p><a href="https://www.curseforge.com/minecraft/mc-mods/colored-redstone">Colored Redstone - Mods - Minecraft - CurseForge</a></p>
+<p>材质包编辑红石颜色失败后的替代品。具体细节有点忘了，只记得生成时 namespace 好像是 <code>coloredredstone:colored_redstone_block</code>，用 datavalue 来调颜色。（也忘了自己是怎么知道的了……好像是拆 jar 看的？）</p>
+<p>顺序大概是这样：</p>
+<p><img src="https://blog.sun123zxy.top/posts/20230217-rmg/colorful-redstone.jpg" class="img-fluid"></p>
+</section>
+<section id="invisiblights" class="level3">
+<h3 class="anchored" data-anchor-id="invisiblights">InvisibLights</h3>
+<p><a href="https://www.curseforge.com/minecraft/mc-mods/invisiblights">InvisibLights - Mods - Minecraft - CurseForge</a></p>
+<p>材质包编辑发光材质失败后的替代品。字面义，作为隐形光源使用。</p>
+</section>
+<section id="realpiano-资源包" class="level3">
+<h3 class="anchored" data-anchor-id="realpiano-资源包">realpiano 资源包</h3>
+<p><a href="http://lkrb.net/blog/54.html">原出处</a>已挂，有个<a href="https://www.cr173.com/soft/277354.html">下载站</a>还有资源。</p>
+<p>发声命令 <code>/execute @p ~ ~ ~ playsound lkrb.piano.p60fff voice @p ~ ~ ~"</code>，<code>C5 = 60</code>，音高 21 至 108，力度可选 <code>ppp,pp,p,mp,mf,f,ff,fff</code>。</p>
+</section>
+<section id="soma-资源包" class="level3">
+<h3 class="anchored" data-anchor-id="soma-资源包">soma 资源包</h3>
+<p>这个老强了，按 MIDI 音源标准制作的全套音色，长短音都有。</p>
+<p>因为没怎么用就不细讲了。</p>
+</section>
+<section id="材质包编辑" class="level3">
+<h3 class="anchored" data-anchor-id="材质包编辑">材质包编辑</h3>
+<p>一开始是因为 SEUS v11.0 太黑看不清红石块，想找个方法让红石块自发光 。找了半天没找到的现成的，只好现学现做。</p>
+<p>关于如何获取作为参考的 Default 材质包，参考 <a href="https://www.reddit.com/r/Minecraft/comments/47sycp/where_can_i_find_the_default_texture_pack_to_edit/">Where can I find the default texture pack to edit? : Minecraft</a>，直接把 <code>1.12.2.jar</code> 解压后里面的 <code>assets</code> 文件夹提到资源包里就可以用了，意外的方便啊（</p>
+<p>（其实 mod 的 jar 里面也有这个文件夹！）</p>
+<p>参考 <a href="https://optifine.readthedocs.io/emissive_textures.html">Emissive Textures - OptiFine documentation</a>，只需在材质包放置 <code>/assets/minecraft/optifine/emissive.properties</code> 和 <code>/assets/minecraft/textures/blocks/redstone_block_e.png</code>，<code>emissive.properties</code> 里写上 <code>suffix.emissive=_e</code> 就可以了。</p>
+<p>1.12 差不多也算是古董版本了，参考网上教程时还需注意版本差异。</p>
+<p>于是兴高采烈的准备用到掉落式红石钢琴上，发现——欸？光呢？？？</p>
+<p>于是发现了 <a href="https://github.com/sp614x/optifine/issues/1342">Emissive textures not working for certain entities and items · Issue #1342 · sp614x/optifine · GitHub</a>——woc，这不是 xwj 大佬吗？？？</p>
+<p>所以人家 18 年就把这些东西玩透了……<del>只有红石音乐作者才能发现的 bug</del></p>
+<p>这个 Issue 至今 open，一下不知道怎么办了…只能暂时搁置。后来使用上文提到的 Colored Redstone 和 invisiblights 解决问题。</p>
+<p>此外，发现同一地点方块贴图始终一致，这说明随机种子由位置决定。但作为 Falling_block 生成时，全都只会用第一个贴图。</p>
+</section>
+</section>
+<section id="mcpi-和-raspberryjammod-相关" class="level2">
+<h2 class="anchored" data-anchor-id="mcpi-和-raspberryjammod-相关">MCPI 和 RaspberryJamMod 相关</h2>
+<p>RaspberryJamMod：把 <a href="https://www.minecraft.net/en-us/edition/pi">Minecraft: Pi Edition</a> 的 Python API 移植到 Java 版的一款 mod。</p>
+<ul>
+<li>Github 库：<a href="https://github.com/arpruss/raspberryjammod">GitHub - arpruss/raspberryjammod: Raspberry Jam Mod - a Mod Forge Minecraft mod implementing most of Raspberry Juice/Pi API</a></li>
+<li>官方指南：<a href="https://www.instructables.com/Python-coding-for-Minecraft/">Python Coding for Minecraft : 18 Steps (with Pictures) - Instructables</a></li>
+<li>Minecraft: Pi Edition 的 API：<a href="https://www.stuffaboutcode.com/p/minecraft-api-reference.html">Minecraft: Pi Edition API</a></li>
+</ul>
+<section id="mcpi-block-类在-setblock-setblockwithnbt-中的使用" class="level3">
+<h3 class="anchored" data-anchor-id="mcpi-block-类在-setblock-setblockwithnbt-中的使用">MCPI Block 类在 setBlock &amp; setBlockWithNBT 中的使用</h3>
+<p><code>Block</code> 类被封装成了包含三个元素 <code>id:int</code>, <code>data:int</code>, <code>nbt:str</code> 的“数组”，在 <code>setBlock</code> 和 <code>setBlockWithNBT</code> 中直接使用 <code>Block</code> 类会被 <code>flatten()</code> 或 <code>floorFlatten()</code> 函数“拍扁”成分散的参数。一个 <code>Block</code> 对象只可能被拍扁成 <code>data, id</code> 或 <code>id, data, nbt</code>，取决于该对象是否设置了 <code>nbt</code> （用 <code>None</code> 判断）。</p>
+<p>因此，需要自定义 <code>data</code> 时，不能使用 <code>block</code> 模块的预设方块。</p>
+<p><code>Vec3</code> 类也可被拍扁。</p>
+<p>例如：</p>
+<ul>
+<li><code>setBlock(Vec3(0,0,0), 137, 2)</code> 等同于 <code>mc.setBlock(Vec3(0,0,0), Block(137, 2))</code></li>
+<li><code>setBlockWithNBT(Vec3(0,0,0), 137, 2, '{Command:"your command"}')</code> 等同于 <code>setBlockWithNBT(Vec3(0,0,0), Block(137, 2), '{Command:"your command"}')</code> 等同于 <code>setBlockWithNBT(Vec3(0,0,0), Block(137, 2, '{Command:"your command"}'))</code></li>
+</ul>
+<p>需要注意的是， <code>setBlock()</code> 不能接受 <code>nbt</code> 参数或带 <code>nbt</code> 的 <code>Block</code> 对象，否则会报错。而 <code>setBlockWithNBT()</code> 则有无 <code>nbt</code> 皆可。</p>
+</section>
+<section id="关于-mcpi-与游戏内的坐标差" class="level3">
+<h3 class="anchored" data-anchor-id="关于-mcpi-与游戏内的坐标差">关于 MCPI 与游戏内的坐标差</h3>
+<p>见 <a href="https://stackoverflow.com/questions/70747581/python-minecraft-coordinates-trouble">Python + Minecraft Coordinates Trouble - Stack Overflow</a>：</p>
+<blockquote class="blockquote">
+<p>getPos, getTilePos, setPos and setTilePos all appear to be relative to the player’s spawn point at least in a single player world. I am going through trying to teleport my character but the coordinates I end up on are not the world’s coordinates but a coordinate relative to where my character would spawn.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>So, either fix an offset of 66 blocks into the y-axis values, or manually set the world spawn to <code>(0, 0, 0)</code> with <code>/setworldspawn</code>.</p>
+</blockquote>
+</section>
+</section>
+<section id="自制轮子" class="level2">
+<h2 class="anchored" data-anchor-id="自制轮子">自制轮子</h2>
+<section id="redstone-music-generator旧版" class="level3">
+<h3 class="anchored" data-anchor-id="redstone-music-generator旧版">redstone-music-generator（旧版）</h3>
+<p>（这是重构旧版前再次阅读代码后的小报告）</p>
+<p>大概使用了 observer 的设计模式，写了类似 C# 中的 Event，Delegate 暂时还没有封装，稍微有点混乱。</p>
+<p>自己写了一些工具类，然后弄了个 <code>MIDIHandler</code> 预处理 MIDI 文件。</p>
+<p>整个生成在最上层由 <code>RMG</code> 类管，<code>RMG</code> 读取 <code>MIDIHandler</code> 的信息然后触发绑定在 <code>RMG</code> 上的各种 <code>onNote()</code>、<code>onBeat()</code> 函数（触发过程由封装的 <code>Event</code> 类实现）。通过设置 <code>RMG</code> 的成员变量可以设置例如要生成的音轨、起始终止拍等参数。</p>
+<p>然后各种插件都丢在了 <code>observer.py</code> 里。这些插件接受各种需要的信息（当前音符编号、音高等），一些是用于生成 <code>Vec3</code> 或 <code>Block</code> 的 <code>XXXPosGen</code> 和 <code>XXXBlockGen</code>（还没有给他们写基类，主要是现在还没封装 Delegate），另一些是包含 <code>onNote()</code>、<code>onBeat()</code>，用来绑在 <code>RMG</code> 上的插件。（注意绑在 <code>RMG</code> 上的是函数而不是插件本身！）每个插件都有自己的参数，插件之间也可以相互嵌套（例如 <code>GroundedAdvancing</code> 里面就套了个 <code>SingleBlock</code>）。插件存在的目的是为各个输出函数 <code>onNote()</code>、<code>onBeat()</code> 统一设置参数。（这里是否可以再改的函数式编程一点？）</p>
+<p>现在有一个问题就是 PosGen 和 BlockGen 分开了，有 Issue 提到想要自定义每个 Note 下放的 partBlock，像这样搞就很麻烦。</p>
+<p>应该有一个把 PosGen 和 BlockGen 合起来的方案，最好是能独立表示多个方块及其位置信息的一个整体。</p>
+</section>
+<section id="redstone-music-generator新版" class="level3">
+<h3 class="anchored" data-anchor-id="redstone-music-generator新版">redstone-music-generator（新版）</h3>
+<p>TODO（咕咕咕）</p>
+<p>temp: <code>/execute @p ~ ~ ~ playsound block.note.guitar voice @p ~ ~ ~</code></p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>回忆</category>
+  <category>Minecraft</category>
+  <category>音乐</category>
+  <category>Python</category>
+  <guid>https://blog.sun123zxy.top/posts/20230217-rmg/index.html</guid>
+  <pubDate>Thu, 16 Feb 2023 16:00:00 GMT</pubDate>
+  <media:content url="https://blog.sun123zxy.top/posts/20230217-rmg/colorful-redstone.jpg" medium="image" type="image/jpeg"/>
+</item>
 <item>
   <title>str 学数学 题解</title>
   <dc:creator>sun123zxy</dc:creator>
@@ -3081,97 +3300,6 @@ Nov.&nbsp;2020 最后更新
   <category>题解</category>
   <guid>https://blog.sun123zxy.top/posts/20201204-catalan/index.html</guid>
   <pubDate>Thu, 03 Dec 2020 16:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>树的解构 题解</title>
-  <link>https://blog.sun123zxy.top/posts/20201127-deconstruct/index.html</link>
-  <description><![CDATA[ 
-
-
-
-<p><a href="https://oj.bashu.com.cn/code/problempage.php?problem_id=7076">bsoj7076</a>，没找到出处…</p>
-<blockquote class="blockquote">
-<p>树的解构</p>
-<p>Mivik 喜欢 Eprom 的解构俱乐部，于是他想解构一棵树。</p>
-<p>Mivik 找到了一棵以 <img src="https://latex.codecogs.com/png.latex?1"> 为根的有 <img src="https://latex.codecogs.com/png.latex?n"> 个结点的有根外向树。Mivik 会进行 <img src="https://latex.codecogs.com/png.latex?(n%E2%88%921)"> 次操作，每次 Mivik 都会从未删掉的边中等概率选择一条边将其删去。记这条边为 <img src="https://latex.codecogs.com/png.latex?a%20%5Cto%20b"> ，则删去这条边的代价是删边时 <img src="https://latex.codecogs.com/png.latex?b"> 的子树大小（包括 <img src="https://latex.codecogs.com/png.latex?b"> 自己）；删去这条边后 <img src="https://latex.codecogs.com/png.latex?b"> 为根的子树会形成一棵新的以 <img src="https://latex.codecogs.com/png.latex?b"> 为根的有根树。</p>
-<p>Mivik 想知道，他进行这 <img src="https://latex.codecogs.com/png.latex?(n%E2%88%921)"> 次操作后期望的代价总和是多少。由于 Mivik 不喜欢太大的数，你只需要输出期望的值对 <img src="https://latex.codecogs.com/png.latex?10%5E9%20+%207"> 取模的结果。</p>
-<p>对于所有测试点，满足 <img src="https://latex.codecogs.com/png.latex?1%20%5Cle%20n%20%5Cle%202%20%5Ctimes%2010%5E6"> 。保证给出的有根树合法。</p>
-</blockquote>
-<p>一道并不是特别难但没有切掉的期望题。</p>
-<p>考场写了链过后就一直在想怎么拆树，无果而终。然后想到解决排列问题的一个常见的思路是考虑所有排列方案的贡献和，最后乘个 <img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B1%7D%7B(n-1)!%7D"> 就可以了。尝试在树形dp边的排列顺序，同样无果而终。</p>
-<p>对整体dp不好做，那就转而思考每个点对答案的贡献。</p>
-<p>考虑从树上某个深度（到根需经过的边数）为 <img src="https://latex.codecogs.com/png.latex?d_u"> 的点 <img src="https://latex.codecogs.com/png.latex?u"> ，其向上到根的路径上各边的相对删除顺序可以用一个阶为 <img src="https://latex.codecogs.com/png.latex?d_u"> 的排列 <img src="https://latex.codecogs.com/png.latex?P"> 表示。若只考虑该路径，设此时对答案的贡献为 <img src="https://latex.codecogs.com/png.latex?f_u(P)"> ，我们尝试化简 <img src="https://latex.codecogs.com/png.latex?%5Csum_%7BP%20%5Cin%20%5Cmathrm%7Bperm(d_u)%7D%7D%20f_u(P)"> 。（其中 <img src="https://latex.codecogs.com/png.latex?%5Cmathrm%7Bperm(n)%7D"> 表示所有 <img src="https://latex.codecogs.com/png.latex?n"> 阶排列的集合）</p>
-<p>对于其中某条位置为 <img src="https://latex.codecogs.com/png.latex?i"> 的边，若其被删除时点 <img src="https://latex.codecogs.com/png.latex?u"> 可对答案产生贡献，则必须保证删除该边时该边与 <img src="https://latex.codecogs.com/png.latex?u"> 仍然连通，也就是对于任意位置为 <img src="https://latex.codecogs.com/png.latex?j"> 且 <img src="https://latex.codecogs.com/png.latex?j%20%3C%20i"> 的的边，有 <img src="https://latex.codecogs.com/png.latex?P_j%20%3E%20P_i"> 。换句话说，若从后往前 （从上至下）决定边的删除时间，那么一条删除时间为 <img src="https://latex.codecogs.com/png.latex?x"> 的边必须在 <img src="https://latex.codecogs.com/png.latex?%5B1,x%5D"> 中最后被选中才能满足上述条件。显然其发生概率为 <img src="https://latex.codecogs.com/png.latex?%5Cfrac%7B1%7D%7Bx%7D"> ，故在所有排列中 <img src="https://latex.codecogs.com/png.latex?x"> 产生贡献的次数为 <img src="https://latex.codecogs.com/png.latex?%5Cfrac%7Bd_u%20!%7D%7Bx%7D"> 。因此 <img src="https://latex.codecogs.com/png.latex?%0A%5Csum_%7BP%20%5Cin%20%5Cmathrm%7Bperm(d_u)%7D%7D%20f_u(P)%20=%20%5Csum_%7Bx=1%7D%5E%7Bd_u%7D%20%5Cfrac%7Bd_u!%7D%7Bx%7D%0A"> <img src="https://latex.codecogs.com/png.latex?P"> 的相对顺序已经确定，而在整棵树中还有其他边的相对顺序未被决定，因此点 <img src="https://latex.codecogs.com/png.latex?u"> 的总贡献还要再乘上对 <img src="https://latex.codecogs.com/png.latex?P"> 消序后的全部排列方案数 <img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%7B(n-1)!%7D%7Bd_u!%7D%20%5Csum_%7Bx=1%7D%5E%7Bd_u%7D%20%5Cfrac%7Bd_u!%7D%7Bx%7D%20=%20(n-1)!%20%5Csum_%7Bx=1%7D%5E%7Bd_u%7D%20%5Cfrac%7B1%7D%7Bx%7D%0A"> 整合所有点的贡献并乘上概率就是最终的期望 <img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%20%5Cmathrm%7Bans%7D%20&amp;=%20%5Cfrac%7B1%7D%7B(n-1)!%7D%20%5Csum_%7Bu=1%7D%5En%20(n-1)!%20%5Csum_%7Bx=1%7D%5E%7Bd_u%7D%20%5Cfrac%7B1%7D%7Bx%7D%20%5C%5C%20&amp;=%20%5Csum_%7Bu=1%7D%5En%20%5Csum_%7Bx=1%7D%5E%7Bd_u%7D%20%5Cfrac%7B1%7D%7Bx%7D%20%5Cend%7Baligned%7D%0A"> <del>意外的约掉了好多玩意儿呢</del></p>
-<p>线性求逆元并前缀和即可 <img src="https://latex.codecogs.com/png.latex?O(n)"> 解决。</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><span class="pp" style="color: #AD0000;">#include</span><span class="im" style="color: #00769E;">&lt;iostream&gt;</span></span>
-<span id="cb1-2"><span class="pp" style="color: #AD0000;">#include</span><span class="im" style="color: #00769E;">&lt;cstdio&gt;</span></span>
-<span id="cb1-3"><span class="pp" style="color: #AD0000;">#include</span><span class="im" style="color: #00769E;">&lt;cmath&gt;</span></span>
-<span id="cb1-4"><span class="pp" style="color: #AD0000;">#include</span><span class="im" style="color: #00769E;">&lt;cstring&gt;</span></span>
-<span id="cb1-5"><span class="pp" style="color: #AD0000;">#include</span><span class="im" style="color: #00769E;">&lt;ctime&gt;</span></span>
-<span id="cb1-6"><span class="pp" style="color: #AD0000;">#include</span><span class="im" style="color: #00769E;">&lt;cstdlib&gt;</span></span>
-<span id="cb1-7"><span class="pp" style="color: #AD0000;">#include</span><span class="im" style="color: #00769E;">&lt;queue&gt;</span></span>
-<span id="cb1-8"><span class="pp" style="color: #AD0000;">#include</span><span class="im" style="color: #00769E;">&lt;algorithm&gt;</span></span>
-<span id="cb1-9"><span class="pp" style="color: #AD0000;">#include</span><span class="im" style="color: #00769E;">&lt;map&gt;</span></span>
-<span id="cb1-10"><span class="pp" style="color: #AD0000;">#include</span><span class="im" style="color: #00769E;">&lt;set&gt;</span></span>
-<span id="cb1-11"><span class="pp" style="color: #AD0000;">#include</span><span class="im" style="color: #00769E;">&lt;vector&gt;</span></span>
-<span id="cb1-12"><span class="kw" style="color: #003B4F;">using</span> <span class="kw" style="color: #003B4F;">namespace</span> std<span class="op" style="color: #5E5E5E;">;</span></span>
-<span id="cb1-13"><span class="kw" style="color: #003B4F;">typedef</span> <span class="dt" style="color: #AD0000;">long</span> <span class="dt" style="color: #AD0000;">long</span> ll<span class="op" style="color: #5E5E5E;">;</span></span>
-<span id="cb1-14">ll Rd<span class="op" style="color: #5E5E5E;">(){</span></span>
-<span id="cb1-15">    <span class="dt" style="color: #AD0000;">int</span> ans<span class="op" style="color: #5E5E5E;">=</span><span class="dv" style="color: #AD0000;">0</span><span class="op" style="color: #5E5E5E;">;</span><span class="dt" style="color: #AD0000;">bool</span> fh<span class="op" style="color: #5E5E5E;">=</span><span class="dv" style="color: #AD0000;">0</span><span class="op" style="color: #5E5E5E;">;</span><span class="dt" style="color: #AD0000;">char</span> c<span class="op" style="color: #5E5E5E;">=</span>getchar<span class="op" style="color: #5E5E5E;">();</span></span>
-<span id="cb1-16">    <span class="cf" style="color: #003B4F;">while</span><span class="op" style="color: #5E5E5E;">(</span>c<span class="op" style="color: #5E5E5E;">&lt;</span><span class="ch" style="color: #20794D;">'0'</span><span class="op" style="color: #5E5E5E;">||</span>c<span class="op" style="color: #5E5E5E;">&gt;</span><span class="ch" style="color: #20794D;">'9'</span><span class="op" style="color: #5E5E5E;">){</span><span class="cf" style="color: #003B4F;">if</span><span class="op" style="color: #5E5E5E;">(</span>c<span class="op" style="color: #5E5E5E;">==</span><span class="ch" style="color: #20794D;">'-'</span><span class="op" style="color: #5E5E5E;">)</span> fh<span class="op" style="color: #5E5E5E;">=</span><span class="dv" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">;</span> c<span class="op" style="color: #5E5E5E;">=</span>getchar<span class="op" style="color: #5E5E5E;">();}</span></span>
-<span id="cb1-17">    <span class="cf" style="color: #003B4F;">while</span><span class="op" style="color: #5E5E5E;">(</span>c<span class="op" style="color: #5E5E5E;">&gt;=</span><span class="ch" style="color: #20794D;">'0'</span><span class="op" style="color: #5E5E5E;">&amp;&amp;</span>c<span class="op" style="color: #5E5E5E;">&lt;=</span><span class="ch" style="color: #20794D;">'9'</span><span class="op" style="color: #5E5E5E;">)</span> ans<span class="op" style="color: #5E5E5E;">=</span>ans<span class="op" style="color: #5E5E5E;">*</span><span class="dv" style="color: #AD0000;">10</span><span class="op" style="color: #5E5E5E;">+</span>c<span class="op" style="color: #5E5E5E;">-</span><span class="ch" style="color: #20794D;">'0'</span><span class="op" style="color: #5E5E5E;">,</span>c<span class="op" style="color: #5E5E5E;">=</span>getchar<span class="op" style="color: #5E5E5E;">();</span></span>
-<span id="cb1-18">    <span class="cf" style="color: #003B4F;">if</span><span class="op" style="color: #5E5E5E;">(</span>fh<span class="op" style="color: #5E5E5E;">)</span> ans<span class="op" style="color: #5E5E5E;">=-</span>ans<span class="op" style="color: #5E5E5E;">;</span></span>
-<span id="cb1-19">    <span class="cf" style="color: #003B4F;">return</span> ans<span class="op" style="color: #5E5E5E;">;</span></span>
-<span id="cb1-20"><span class="op" style="color: #5E5E5E;">}</span></span>
-<span id="cb1-21"><span class="kw" style="color: #003B4F;">typedef</span> vector<span class="op" style="color: #5E5E5E;">&lt;</span>ll<span class="op" style="color: #5E5E5E;">&gt;</span> Vec<span class="op" style="color: #5E5E5E;">;</span></span>
-<span id="cb1-22"><span class="kw" style="color: #003B4F;">typedef</span> vector<span class="op" style="color: #5E5E5E;">&lt;</span>ll<span class="op" style="color: #5E5E5E;">&gt;::</span>iterator IVec<span class="op" style="color: #5E5E5E;">;</span></span>
-<span id="cb1-23"><span class="pp" style="color: #AD0000;">#define foreach</span><span class="op" style="color: #5E5E5E;">(</span>it<span class="op" style="color: #5E5E5E;">,</span>v<span class="op" style="color: #5E5E5E;">)</span><span class="pp" style="color: #AD0000;"> </span><span class="cf" style="color: #003B4F;">for</span><span class="op" style="color: #5E5E5E;">(</span>IVec<span class="pp" style="color: #AD0000;"> </span>it<span class="op" style="color: #5E5E5E;">=</span>v<span class="op" style="color: #5E5E5E;">.</span>begin<span class="op" style="color: #5E5E5E;">();</span>it<span class="op" style="color: #5E5E5E;">!=</span>v<span class="op" style="color: #5E5E5E;">.</span>end<span class="op" style="color: #5E5E5E;">();</span>it<span class="op" style="color: #5E5E5E;">++)</span></span>
-<span id="cb1-24"><span class="at" style="color: #657422;">const</span> ll MOD<span class="op" style="color: #5E5E5E;">=</span><span class="fl" style="color: #AD0000;">1E9</span><span class="op" style="color: #5E5E5E;">+</span><span class="dv" style="color: #AD0000;">7</span><span class="op" style="color: #5E5E5E;">;</span></span>
-<span id="cb1-25"><span class="pp" style="color: #AD0000;">#define _ </span><span class="op" style="color: #5E5E5E;">%</span>MOD</span>
-<span id="cb1-26">ll PMod<span class="op" style="color: #5E5E5E;">(</span>ll x<span class="op" style="color: #5E5E5E;">){</span></span>
-<span id="cb1-27">    <span class="cf" style="color: #003B4F;">if</span><span class="op" style="color: #5E5E5E;">(</span>x<span class="op" style="color: #5E5E5E;">&lt;</span><span class="dv" style="color: #AD0000;">0</span><span class="op" style="color: #5E5E5E;">)</span> <span class="cf" style="color: #003B4F;">return</span> x<span class="op" style="color: #5E5E5E;">+</span>MOD<span class="op" style="color: #5E5E5E;">;</span></span>
-<span id="cb1-28">    <span class="cf" style="color: #003B4F;">else</span> <span class="cf" style="color: #003B4F;">if</span><span class="op" style="color: #5E5E5E;">(</span>x<span class="op" style="color: #5E5E5E;">&gt;=</span>MOD<span class="op" style="color: #5E5E5E;">)</span> <span class="cf" style="color: #003B4F;">return</span> x<span class="op" style="color: #5E5E5E;">-=</span>MOD<span class="op" style="color: #5E5E5E;">;</span></span>
-<span id="cb1-29">    <span class="cf" style="color: #003B4F;">else</span> <span class="cf" style="color: #003B4F;">return</span> x<span class="op" style="color: #5E5E5E;">;</span></span>
-<span id="cb1-30"><span class="op" style="color: #5E5E5E;">}</span></span>
-<span id="cb1-31"></span>
-<span id="cb1-32"><span class="at" style="color: #657422;">const</span> ll MXN<span class="op" style="color: #5E5E5E;">=</span><span class="fl" style="color: #AD0000;">2E6</span><span class="op" style="color: #5E5E5E;">+</span><span class="dv" style="color: #AD0000;">5</span><span class="op" style="color: #5E5E5E;">;</span></span>
-<span id="cb1-33">ll N<span class="op" style="color: #5E5E5E;">;</span>Vec chd<span class="op" style="color: #5E5E5E;">[</span>MXN<span class="op" style="color: #5E5E5E;">];</span></span>
-<span id="cb1-34"></span>
-<span id="cb1-35">ll dep<span class="op" style="color: #5E5E5E;">[</span>MXN<span class="op" style="color: #5E5E5E;">];</span></span>
-<span id="cb1-36"><span class="dt" style="color: #AD0000;">void</span> InfoDFS<span class="op" style="color: #5E5E5E;">(</span>ll u<span class="op" style="color: #5E5E5E;">,</span>ll depth<span class="op" style="color: #5E5E5E;">){</span></span>
-<span id="cb1-37">    dep<span class="op" style="color: #5E5E5E;">[</span>u<span class="op" style="color: #5E5E5E;">]=</span>depth<span class="op" style="color: #5E5E5E;">;</span></span>
-<span id="cb1-38">    <span class="ex" style="color: null;">foreach</span><span class="op" style="color: #5E5E5E;">(</span>it<span class="op" style="color: #5E5E5E;">,</span>chd<span class="op" style="color: #5E5E5E;">[</span>u<span class="op" style="color: #5E5E5E;">])</span> InfoDFS<span class="op" style="color: #5E5E5E;">((*</span>it<span class="op" style="color: #5E5E5E;">),</span>depth<span class="op" style="color: #5E5E5E;">+</span><span class="dv" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">);</span> </span>
-<span id="cb1-39"><span class="op" style="color: #5E5E5E;">}</span></span>
-<span id="cb1-40"></span>
-<span id="cb1-41">ll inv<span class="op" style="color: #5E5E5E;">[</span>MXN<span class="op" style="color: #5E5E5E;">],</span>sInv<span class="op" style="color: #5E5E5E;">[</span>MXN<span class="op" style="color: #5E5E5E;">];</span></span>
-<span id="cb1-42"><span class="dt" style="color: #AD0000;">void</span> SpawnInv<span class="op" style="color: #5E5E5E;">(){</span></span>
-<span id="cb1-43">    inv<span class="op" style="color: #5E5E5E;">[</span><span class="dv" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]=</span><span class="dv" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">;</span><span class="cf" style="color: #003B4F;">for</span><span class="op" style="color: #5E5E5E;">(</span>ll i<span class="op" style="color: #5E5E5E;">=</span><span class="dv" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">;</span>i<span class="op" style="color: #5E5E5E;">&lt;=</span>N<span class="op" style="color: #5E5E5E;">;</span>i<span class="op" style="color: #5E5E5E;">++)</span> inv<span class="op" style="color: #5E5E5E;">[</span>i<span class="op" style="color: #5E5E5E;">]=</span>PMod<span class="op" style="color: #5E5E5E;">(-(</span>MOD<span class="op" style="color: #5E5E5E;">/</span>i<span class="op" style="color: #5E5E5E;">)*</span>inv<span class="op" style="color: #5E5E5E;">[</span>MOD<span class="op" style="color: #5E5E5E;">%</span>i<span class="op" style="color: #5E5E5E;">]</span>_<span class="op" style="color: #5E5E5E;">);</span> </span>
-<span id="cb1-44">    sInv<span class="op" style="color: #5E5E5E;">[</span><span class="dv" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]=</span>inv<span class="op" style="color: #5E5E5E;">[</span><span class="dv" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">];</span><span class="cf" style="color: #003B4F;">for</span><span class="op" style="color: #5E5E5E;">(</span>ll i<span class="op" style="color: #5E5E5E;">=</span><span class="dv" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">;</span>i<span class="op" style="color: #5E5E5E;">&lt;=</span>N<span class="op" style="color: #5E5E5E;">;</span>i<span class="op" style="color: #5E5E5E;">++)</span> sInv<span class="op" style="color: #5E5E5E;">[</span>i<span class="op" style="color: #5E5E5E;">]=</span>PMod<span class="op" style="color: #5E5E5E;">(</span>sInv<span class="op" style="color: #5E5E5E;">[</span>i<span class="op" style="color: #5E5E5E;">-</span><span class="dv" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">]+</span>inv<span class="op" style="color: #5E5E5E;">[</span>i<span class="op" style="color: #5E5E5E;">]);</span></span>
-<span id="cb1-45"><span class="op" style="color: #5E5E5E;">}</span></span>
-<span id="cb1-46"><span class="dt" style="color: #AD0000;">void</span> Solve<span class="op" style="color: #5E5E5E;">(){</span></span>
-<span id="cb1-47">    SpawnInv<span class="op" style="color: #5E5E5E;">();</span> </span>
-<span id="cb1-48">    InfoDFS<span class="op" style="color: #5E5E5E;">(</span><span class="dv" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">,</span><span class="dv" style="color: #AD0000;">0</span><span class="op" style="color: #5E5E5E;">);</span></span>
-<span id="cb1-49">    ll ans<span class="op" style="color: #5E5E5E;">=</span><span class="dv" style="color: #AD0000;">0</span><span class="op" style="color: #5E5E5E;">;</span></span>
-<span id="cb1-50">    <span class="cf" style="color: #003B4F;">for</span><span class="op" style="color: #5E5E5E;">(</span>ll u<span class="op" style="color: #5E5E5E;">=</span><span class="dv" style="color: #AD0000;">1</span><span class="op" style="color: #5E5E5E;">;</span>u<span class="op" style="color: #5E5E5E;">&lt;=</span>N<span class="op" style="color: #5E5E5E;">;</span>u<span class="op" style="color: #5E5E5E;">++)</span> ans<span class="op" style="color: #5E5E5E;">=</span>PMod<span class="op" style="color: #5E5E5E;">(</span>ans<span class="op" style="color: #5E5E5E;">+</span>sInv<span class="op" style="color: #5E5E5E;">[</span>dep<span class="op" style="color: #5E5E5E;">[</span>u<span class="op" style="color: #5E5E5E;">]]);</span></span>
-<span id="cb1-51">    printf<span class="op" style="color: #5E5E5E;">(</span><span class="st" style="color: #20794D;">"</span><span class="sc" style="color: #5E5E5E;">%lld</span><span class="st" style="color: #20794D;">"</span><span class="op" style="color: #5E5E5E;">,</span>ans<span class="op" style="color: #5E5E5E;">);</span> </span>
-<span id="cb1-52"><span class="op" style="color: #5E5E5E;">}</span></span>
-<span id="cb1-53"><span class="dt" style="color: #AD0000;">int</span> main<span class="op" style="color: #5E5E5E;">(){</span></span>
-<span id="cb1-54">    <span class="co" style="color: #5E5E5E;">//freopen("deconstruct.in","r",stdin);</span></span>
-<span id="cb1-55">    <span class="co" style="color: #5E5E5E;">//freopen("deconstruct.out","w",stdout);</span></span>
-<span id="cb1-56">    N<span class="op" style="color: #5E5E5E;">=</span>Rd<span class="op" style="color: #5E5E5E;">();</span></span>
-<span id="cb1-57">    <span class="cf" style="color: #003B4F;">for</span><span class="op" style="color: #5E5E5E;">(</span>ll i<span class="op" style="color: #5E5E5E;">=</span><span class="dv" style="color: #AD0000;">2</span><span class="op" style="color: #5E5E5E;">;</span>i<span class="op" style="color: #5E5E5E;">&lt;=</span>N<span class="op" style="color: #5E5E5E;">;</span>i<span class="op" style="color: #5E5E5E;">++)</span> chd<span class="op" style="color: #5E5E5E;">[</span>Rd<span class="op" style="color: #5E5E5E;">()].</span>push_back<span class="op" style="color: #5E5E5E;">(</span>i<span class="op" style="color: #5E5E5E;">);</span></span>
-<span id="cb1-58">    Solve<span class="op" style="color: #5E5E5E;">();</span></span>
-<span id="cb1-59">    <span class="cf" style="color: #003B4F;">return</span> <span class="dv" style="color: #AD0000;">0</span><span class="op" style="color: #5E5E5E;">;</span></span>
-<span id="cb1-60"><span class="op" style="color: #5E5E5E;">}</span></span></code></pre></div>
-
-
-
- ]]></description>
-  <category>OI</category>
-  <category>数学</category>
-  <category>题解</category>
-  <guid>https://blog.sun123zxy.top/posts/20201127-deconstruct/index.html</guid>
-  <pubDate>Thu, 26 Nov 2020 16:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
