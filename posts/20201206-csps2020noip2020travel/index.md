@@ -4,6 +4,7 @@ date: 2020/12/06
 date-modified: 2021/08/14
 categories:
   - OI
+  - 游记
   - 回忆
 ---
 
