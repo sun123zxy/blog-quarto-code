@@ -4,6 +4,7 @@ author: "sun123zxy"
 date: "2023/03/06"
 abstract: "或许是第一篇正常的游记（"
 
+image: "img/wangfujing.jpg"
 categories:
   - "游记"
 ---
