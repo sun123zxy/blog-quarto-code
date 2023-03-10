@@ -2372,42 +2372,37 @@ include /etc/nginx/sites-available/{[YOUR_DOMAIN]}.conf; # 引用刚刚新建的
 
 
 
-<section id="序" class="level2">
-<h2 class="anchored" data-anchor-id="序">序</h2>
-<blockquote class="blockquote">
-<p>求将 <img src="https://latex.codecogs.com/png.latex?n"> 个无标号元素用 <img src="https://latex.codecogs.com/png.latex?m-1"> 个隔板分入 <img src="https://latex.codecogs.com/png.latex?m"> 个有标号可空集合的方案数。</p>
-</blockquote>
-<p>或</p>
-<blockquote class="blockquote">
-<p>求不定方程</p>
-<p><img src="https://latex.codecogs.com/png.latex?%0Ax_1%20+%20x_2%20+%20%5Cdots%20+%20x_m%20=%20n%20%5Cquad%20(m,n%20%5Cin%20N_+,%20m%20%5Cle%20n)%0A"></p>
-<p>的非负整数解的个数。</p>
-</blockquote>
+<section id="序" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="序"><span class="header-section-number">1</span> 序</h2>
+<div id="exm-diophantine" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1 </strong></span>求将 <img src="https://latex.codecogs.com/png.latex?n"> 个无标号元素用 <img src="https://latex.codecogs.com/png.latex?m-1"> 个隔板分入 <img src="https://latex.codecogs.com/png.latex?m"> 个有标号可空集合的方案数。</p>
+<p>此问题的另一个等价表述是，求不定方程 <img src="https://latex.codecogs.com/png.latex?%0Ax_1%20+%20x_2%20+%20%5Cdots%20+%20x_m%20=%20n%20%5Cquad%20(m,n%20%5Cin%20N_+,%20m%20%5Cle%20n)%0A"> 的非负整数解的个数。</p>
+</div>
 <p>是一个非常经典的组合问题，众所周知其答案为组合数 <img src="https://latex.codecogs.com/png.latex?%7Bn+m-1%20%5Cchoose%20m-1%7D"> ，这可以根据其组合意义结合隔板法容易的得到。</p>
 <p>然而，笔者发现还有很多有趣的方法可以得到上式，值得探讨一番。</p>
 </section>
-<section id="组合意义" class="level2">
-<h2 class="anchored" data-anchor-id="组合意义">组合意义</h2>
+<section id="组合意义" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="组合意义"><span class="header-section-number">2</span> 组合意义</h2>
 <p>如上所述，组合意义可以结合隔板法容易的得到。考虑将 <img src="https://latex.codecogs.com/png.latex?n"> 个无标号元素用 <img src="https://latex.codecogs.com/png.latex?m-1"> 个隔板分入 <img src="https://latex.codecogs.com/png.latex?m"> 个有标号非空集合，其方案数为 <img src="https://latex.codecogs.com/png.latex?%7Bn-1%20%5Cchoose%20m-1%7D"> 。然而我们需要的是各集合可空情况下的方案数。考虑新增 <img src="https://latex.codecogs.com/png.latex?m"> 个元素，先给每个集合放一个元素垫底，再做各组可空的分配。这个小Trick让我们将问题转化为求 <img src="https://latex.codecogs.com/png.latex?n+m"> 个无标号元素分入 <img src="https://latex.codecogs.com/png.latex?m"> 个非空有标号集合的方案数。再用隔板法，得到答案 <img src="https://latex.codecogs.com/png.latex?%7Bn+m-1%20%5Cchoose%20m-1%7D"> 。</p>
 <p>形式化的，我们令 <img src="https://latex.codecogs.com/png.latex?y_i%20=%20x_i%20+%201"> ，则我们现在只需求 <img src="https://latex.codecogs.com/png.latex?y_1%20+%20y_2%20+%20%5Cdots%20+%20y_m%20=%20n%20+%20m"> 的正整数解，隔板法得到答案 <img src="https://latex.codecogs.com/png.latex?%7Bn+m-1%20%5Cchoose%20m-1%7D"> 。</p>
 </section>
-<section id="枚举空位范德蒙德卷积公式" class="level2">
-<h2 class="anchored" data-anchor-id="枚举空位范德蒙德卷积公式">枚举空位——范德蒙德卷积公式</h2>
+<section id="枚举空位vandermonde-卷积公式" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="枚举空位vandermonde-卷积公式"><span class="header-section-number">3</span> 枚举空位——Vandermonde 卷积公式</h2>
 <p>我们使用另一种方法将隔板法应用到可空集合上。</p>
 <p>枚举 <img src="https://latex.codecogs.com/png.latex?m"> 个集合中有几个是空集，可以得到下式</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathrm%7Bans%7D%20=%20%5Csum_%7Bk=0%7D%5E%7Bm-1%7D%20%7Bm%20%5Cchoose%20k%7D%20%7Bn-1%20%5Cchoose%20m-k-1%7D%0A"></p>
-<p>又由范德蒙德卷积公式</p>
-<blockquote class="blockquote">
-<p><img src="https://latex.codecogs.com/png.latex?%0A%7Bn+m%20%5Cchoose%20k%7D%20=%20%5Csum_%7Bi=%5Cmax(0,k-m)%7D%5E%7B%5Cmin(n,k)%7D%20%7Bn%20%5Cchoose%20i%7D%20%7Bm%20%5Cchoose%20k-i%7D%0A"></p>
-<p>（范德蒙德卷积公式易由 <img src="https://latex.codecogs.com/png.latex?(1+x)%5E%7Bn+m%7D%20=%20(1+x)%5En%20(1+%20x)%5Em"> 的二项式展开说明）</p>
-</blockquote>
+<p>又由</p>
+<div id="thm-vandermonde" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Vandermonde 卷积公式) </strong></span><img src="https://latex.codecogs.com/png.latex?%0A%7Bn+m%20%5Cchoose%20k%7D%20=%20%5Csum_%7Bi=%5Cmax(0,k-m)%7D%5E%7B%5Cmin(n,k)%7D%20%7Bn%20%5Cchoose%20i%7D%20%7Bm%20%5Cchoose%20k-i%7D%0A"></p>
+</div>
+<p>（该定理易由 <img src="https://latex.codecogs.com/png.latex?(1+x)%5E%7Bn+m%7D%20=%20(1+x)%5En%20(1+%20x)%5Em"> 的二项式展开说明）</p>
 <p>可直接得到（ <img src="https://latex.codecogs.com/png.latex?k'%20=%20m-1"> ， <img src="https://latex.codecogs.com/png.latex?n'%20=%20m"> ， <img src="https://latex.codecogs.com/png.latex?m'%20=%20n-1"> ）</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathrm%7Bans%7D%20=%20%5Csum_%7Bk=%5Cmax(0,(m-1)-(n-1))%7D%5E%7B%5Cmin(m,m-1)%7D%20%7Bm%20%5Cchoose%20k%7D%20%7Bn-1%20%5Cchoose%20m-k-1%7D%20=%20%7Bn+m-1%20%5Cchoose%20m-1%7D%0A"></p>
 </section>
-<section id="递推杨辉三角" class="level2">
-<h2 class="anchored" data-anchor-id="递推杨辉三角">递推——杨辉三角</h2>
+<section id="递推杨辉三角" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="递推杨辉三角"><span class="header-section-number">4</span> 递推——杨辉三角</h2>
 <p>这固然很妙，但要是我想不到这些Trick怎么办？</p>
-<p>不会通项就设状态dp呗（<del>反正是OIer有电脑帮我算</del></p>
+<p>作为完全不虚递推的 OIer，我们考虑 dp。</p>
 <p>设状态 <img src="https://latex.codecogs.com/png.latex?f(n,m)"> 表示将 <img src="https://latex.codecogs.com/png.latex?n"> 个无标号元素放入 <img src="https://latex.codecogs.com/png.latex?m"> 个有标号可空集合的方案数。</p>
 <p>考虑当前正在为第 <img src="https://latex.codecogs.com/png.latex?n"> 个元素确定所属集合。既然元素是无标号的，不妨按升序排列集合。于是放入新的元素时，只需决定要先跳过多少个集合再放入。易得下面的递推式</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0Af(n,m)%20=%20%5Csum_%7Bk=1%7D%5Em%20f(n-1,k)%0A"></p>
@@ -2425,8 +2420,8 @@ n3  0    1    4    10   20</code></pre>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0Af(n,m)%20&amp;=%20f(n-1,%20m)%20+%20%5Csum_%7Bk=1%7D%5E%7Bm-1%7D%20f(n-1,k)%20%5C%5C%0A&amp;=%20f(n-1,%20m)%20+%20f(n,%20m-1)%0A%5Cend%7Baligned%7D%0A"></p>
 <p>那么，只需观察并将表格的每一项映射到杨辉三角，我们就能得到 <img src="https://latex.codecogs.com/png.latex?f(n,m)%20=%20%7Bn+m+1%20%5Cchoose%20m-1%7D"> 。</p>
 </section>
-<section id="生成函数广义二项式定理" class="level2">
-<h2 class="anchored" data-anchor-id="生成函数广义二项式定理">生成函数——广义二项式定理</h2>
+<section id="生成函数广义二项式定理" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="生成函数广义二项式定理"><span class="header-section-number">5</span> 生成函数——广义二项式定理</h2>
 <p><del>要是我连杨辉三角都没看出来怎么办</del></p>
 <p>方便起见，此处我们不研究 <img src="https://latex.codecogs.com/png.latex?m=0"> 的情况。不妨设</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0Ag(n,m)%20=%20f(n,m+1)%0A"></p>
@@ -2438,12 +2433,12 @@ n3  0    1    4    10   20</code></pre>
 <p><img src="https://latex.codecogs.com/png.latex?%0Ag_n(x)%20=%20g_%7Bn+1%7D(x)%20-%20x%20g_%7Bn+1%7D(x)%20%5Ciff%20g_%7Bn+1%7D(x)%20=%20%5Cfrac%7B1%7D%7B1-x%7D%20g_n(x)%0A"></p>
 <p>得</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0Ag_n(x)%20=%20(1-x)%5E%7B-(n+1)%7D%0A"></p>
-<p>又由广义二项式定理</p>
-<blockquote class="blockquote">
-<p><img src="https://latex.codecogs.com/png.latex?%0A(x+y)%5E%5Calpha%20=%20%5Csum_%7Bk=0%7D%5E%7B%5Cinfty%7D%20%7B%5Calpha%20%5Cchoose%20k%7D%20x%5Ek%20y%5E%7B%5Calpha%20-%20k%7D%0A"></p>
+<p>又由</p>
+<div id="thm-binomial" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (广义二项式定理) </strong></span><img src="https://latex.codecogs.com/png.latex?%0A(x+y)%5E%5Calpha%20=%20%5Csum_%7Bk=0%7D%5E%7B%5Cinfty%7D%20%7B%5Calpha%20%5Cchoose%20k%7D%20x%5Ek%20y%5E%7B%5Calpha%20-%20k%7D%0A"></p>
 <p>其中</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%7B%5Calpha%20%5Cchoose%20k%7D%20=%20%5Cfrac%7B%5Calpha(%5Calpha-1)%5Cdots(%5Calpha-k+1)%7D%7Bk!%7D%0A"></p>
-</blockquote>
+</div>
 <p>展开，得到</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0Ag_n(x)%20=%20%5Csum_%7Bk=0%7D%5E%7B%5Cinfty%7D%20%7B-n-1%20%5Cchoose%20k%7D%20(-x)%5Ek%0A"></p>
 <p>故</p>
@@ -2452,9 +2447,15 @@ n3  0    1    4    10   20</code></pre>
 <p><img src="https://latex.codecogs.com/png.latex?%0Ag(n,k)%20=%20%7Bn+k%20%5Cchoose%20k%7D%0A"></p>
 <p>换回 <img src="https://latex.codecogs.com/png.latex?f"> 表示就得到答案</p>
 <p><img src="https://latex.codecogs.com/png.latex?%0Af(n,m)%20=%20g(n,m-1)%20=%20%7Bn+m-1%20%5Cchoose%20m-1%7D%0A"></p>
+<section id="update" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="update"><span class="header-section-number">5.1</span> 2023/03/10 update</h3>
+<p>事实上，直接从组合意义思考就能直接得到该计数问题的生成函数形式</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A(1%20+%20x%20+%20x%5E2%20+%20%5Cdots)%5Em%20=%20%5Cleft(%20%5Cfrac%201%20%7B1-x%7D%20%5Cright)%5Em%20=%20(1-x)%5E%7B-m%7D%0A"></p>
+<p>按前述方法展开即可得到相同的结果。</p>
 </section>
-<section id="burnsidepolya第一类斯特林数" class="level2">
-<h2 class="anchored" data-anchor-id="burnsidepolya第一类斯特林数">Burnside(Polya)——第一类斯特林数</h2>
+</section>
+<section id="burnsidepolya第一类斯特林数" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="burnsidepolya第一类斯特林数"><span class="header-section-number">6</span> Burnside(Polya)——第一类斯特林数</h2>
 <p>如果要分组的 <img src="https://latex.codecogs.com/png.latex?n"> 个元素是有标号的，问题将会简单很多——直接枚举每个元素的所属集合即可，显然方案数为 <img src="https://latex.codecogs.com/png.latex?m%5En"> 。</p>
 <p>但关键是它们没有标号。</p>
 <p>无标号的本质是认为任意置换标号前后是同构的。这启发我们将所有 <img src="https://latex.codecogs.com/png.latex?n"> 元置换（即置换群）作为变换集，使用等价类计数Burnside来解决该问题。</p>
@@ -2486,8 +2487,8 @@ n3  0    1    4    10   20</code></pre>
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathrm%7Bans%7D%20=%20%5Cfrac%7Bm(m+1)%5Cdots(n+m-1)%7D%7Bn!%7D%20=%20%7Bn+m-1%20%5Cchoose%20m-1%7D%0A"></p>
 <p>用Burnside解决无标号问题的思路极具启发性，例如<a href="https://loj.ac/p/6538">烷基计数</a>问题的Burnside解法。</p>
 </section>
-<section id="后记致谢" class="level2">
-<h2 class="anchored" data-anchor-id="后记致谢">后记&amp;致谢</h2>
+<section id="后记致谢" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="后记致谢"><span class="header-section-number">7</span> 后记&amp;致谢</h2>
 <p><del>同分异构体计数带我重回OI</del></p>
 <p>感谢TbYangZ菊苣全程提供技术支持。</p>
 <p>感谢神仙化学老师提供组合意义解释。</p>

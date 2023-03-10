@@ -109,13 +109,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#序" id="toc-序" class="nav-link active" data-scroll-target="#序">序</a></li>
-  <li><a href="#组合意义" id="toc-组合意义" class="nav-link" data-scroll-target="#组合意义">组合意义</a></li>
-  <li><a href="#枚举空位范德蒙德卷积公式" id="toc-枚举空位范德蒙德卷积公式" class="nav-link" data-scroll-target="#枚举空位范德蒙德卷积公式">枚举空位——范德蒙德卷积公式</a></li>
-  <li><a href="#递推杨辉三角" id="toc-递推杨辉三角" class="nav-link" data-scroll-target="#递推杨辉三角">递推——杨辉三角</a></li>
-  <li><a href="#生成函数广义二项式定理" id="toc-生成函数广义二项式定理" class="nav-link" data-scroll-target="#生成函数广义二项式定理">生成函数——广义二项式定理</a></li>
-  <li><a href="#burnsidepolya第一类斯特林数" id="toc-burnsidepolya第一类斯特林数" class="nav-link" data-scroll-target="#burnsidepolya第一类斯特林数">Burnside(Polya)——第一类斯特林数</a></li>
-  <li><a href="#后记致谢" id="toc-后记致谢" class="nav-link" data-scroll-target="#后记致谢">后记&amp;致谢</a></li>
+  <li><a href="#序" id="toc-序" class="nav-link active" data-scroll-target="#序"><span class="toc-section-number">1</span>  序</a></li>
+  <li><a href="#组合意义" id="toc-组合意义" class="nav-link" data-scroll-target="#组合意义"><span class="toc-section-number">2</span>  组合意义</a></li>
+  <li><a href="#枚举空位vandermonde-卷积公式" id="toc-枚举空位vandermonde-卷积公式" class="nav-link" data-scroll-target="#枚举空位vandermonde-卷积公式"><span class="toc-section-number">3</span>  枚举空位——Vandermonde 卷积公式</a></li>
+  <li><a href="#递推杨辉三角" id="toc-递推杨辉三角" class="nav-link" data-scroll-target="#递推杨辉三角"><span class="toc-section-number">4</span>  递推——杨辉三角</a></li>
+  <li><a href="#生成函数广义二项式定理" id="toc-生成函数广义二项式定理" class="nav-link" data-scroll-target="#生成函数广义二项式定理"><span class="toc-section-number">5</span>  生成函数——广义二项式定理</a>
+  <ul class="collapse">
+  <li><a href="#update" id="toc-update" class="nav-link" data-scroll-target="#update"><span class="toc-section-number">5.1</span>  2023/03/10 update</a></li>
+  </ul></li>
+  <li><a href="#burnsidepolya第一类斯特林数" id="toc-burnsidepolya第一类斯特林数" class="nav-link" data-scroll-target="#burnsidepolya第一类斯特林数"><span class="toc-section-number">6</span>  Burnside(Polya)——第一类斯特林数</a></li>
+  <li><a href="#后记致谢" id="toc-后记致谢" class="nav-link" data-scroll-target="#后记致谢"><span class="toc-section-number">7</span>  后记&amp;致谢</a></li>
   </ul>
 </nav>
     </div>
@@ -147,7 +150,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">May 1, 2021</p>
+      <p class="date-modified">March 10, 2023</p>
     </div>
   </div>
     
@@ -156,56 +159,51 @@ ul.task-list li input[type="checkbox"] {
 <div>
   <div class="abstract">
     <div class="abstract-title">Abstract</div>
-    组合意义、范德蒙德卷积、杨辉三角、生成函数、广义二项式定理、Burnside(Polya) 以及第一类斯特林数，你从未见过的全新解法。
+    组合意义、Vandermonde 卷积、杨辉三角、生成函数、广义二项式定理、Burnside(Polya) 以及第一类斯特林数，你从未见过的全新解法。
   </div>
 </div>
 
 </header>
 
-<section id="序" class="level2">
-<h2 class="anchored" data-anchor-id="序">序</h2>
-<blockquote class="blockquote">
-<p>求将 <span class="math inline">\(n\)</span> 个无标号元素用 <span class="math inline">\(m-1\)</span> 个隔板分入 <span class="math inline">\(m\)</span> 个有标号可空集合的方案数。</p>
-</blockquote>
-<p>或</p>
-<blockquote class="blockquote">
-<p>求不定方程</p>
-<p><span class="math display">\[
+<section id="序" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="序"><span class="header-section-number">1</span> 序</h2>
+<div id="exm-diophantine" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1 </strong></span>求将 <span class="math inline">\(n\)</span> 个无标号元素用 <span class="math inline">\(m-1\)</span> 个隔板分入 <span class="math inline">\(m\)</span> 个有标号可空集合的方案数。</p>
+<p>此问题的另一个等价表述是，求不定方程 <span class="math display">\[
 x_1 + x_2 + \dots + x_m = n \quad (m,n \in N_+, m \le n)
-\]</span></p>
-<p>的非负整数解的个数。</p>
-</blockquote>
+\]</span> 的非负整数解的个数。</p>
+</div>
 <p>是一个非常经典的组合问题，众所周知其答案为组合数 <span class="math inline">\({n+m-1 \choose m-1}\)</span> ，这可以根据其组合意义结合隔板法容易的得到。</p>
 <p>然而，笔者发现还有很多有趣的方法可以得到上式，值得探讨一番。</p>
 </section>
-<section id="组合意义" class="level2">
-<h2 class="anchored" data-anchor-id="组合意义">组合意义</h2>
+<section id="组合意义" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="组合意义"><span class="header-section-number">2</span> 组合意义</h2>
 <p>如上所述，组合意义可以结合隔板法容易的得到。考虑将 <span class="math inline">\(n\)</span> 个无标号元素用 <span class="math inline">\(m-1\)</span> 个隔板分入 <span class="math inline">\(m\)</span> 个有标号非空集合，其方案数为 <span class="math inline">\({n-1 \choose m-1}\)</span> 。然而我们需要的是各集合可空情况下的方案数。考虑新增 <span class="math inline">\(m\)</span> 个元素，先给每个集合放一个元素垫底，再做各组可空的分配。这个小Trick让我们将问题转化为求 <span class="math inline">\(n+m\)</span> 个无标号元素分入 <span class="math inline">\(m\)</span> 个非空有标号集合的方案数。再用隔板法，得到答案 <span class="math inline">\({n+m-1 \choose m-1}\)</span> 。</p>
 <p>形式化的，我们令 <span class="math inline">\(y_i = x_i + 1\)</span> ，则我们现在只需求 <span class="math inline">\(y_1 + y_2 + \dots + y_m = n + m\)</span> 的正整数解，隔板法得到答案 <span class="math inline">\({n+m-1 \choose m-1}\)</span> 。</p>
 </section>
-<section id="枚举空位范德蒙德卷积公式" class="level2">
-<h2 class="anchored" data-anchor-id="枚举空位范德蒙德卷积公式">枚举空位——范德蒙德卷积公式</h2>
+<section id="枚举空位vandermonde-卷积公式" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="枚举空位vandermonde-卷积公式"><span class="header-section-number">3</span> 枚举空位——Vandermonde 卷积公式</h2>
 <p>我们使用另一种方法将隔板法应用到可空集合上。</p>
 <p>枚举 <span class="math inline">\(m\)</span> 个集合中有几个是空集，可以得到下式</p>
 <p><span class="math display">\[
 \mathrm{ans} = \sum_{k=0}^{m-1} {m \choose k} {n-1 \choose m-k-1}
 \]</span></p>
-<p>又由范德蒙德卷积公式</p>
-<blockquote class="blockquote">
-<p><span class="math display">\[
+<p>又由</p>
+<div id="thm-vandermonde" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Vandermonde 卷积公式) </strong></span><span class="math display">\[
 {n+m \choose k} = \sum_{i=\max(0,k-m)}^{\min(n,k)} {n \choose i} {m \choose k-i}
 \]</span></p>
-<p>（范德蒙德卷积公式易由 <span class="math inline">\((1+x)^{n+m} = (1+x)^n (1+ x)^m\)</span> 的二项式展开说明）</p>
-</blockquote>
+</div>
+<p>（该定理易由 <span class="math inline">\((1+x)^{n+m} = (1+x)^n (1+ x)^m\)</span> 的二项式展开说明）</p>
 <p>可直接得到（ <span class="math inline">\(k' = m-1\)</span> ， <span class="math inline">\(n' = m\)</span> ， <span class="math inline">\(m' = n-1\)</span> ）</p>
 <p><span class="math display">\[
 \mathrm{ans} = \sum_{k=\max(0,(m-1)-(n-1))}^{\min(m,m-1)} {m \choose k} {n-1 \choose m-k-1} = {n+m-1 \choose m-1}
 \]</span></p>
 </section>
-<section id="递推杨辉三角" class="level2">
-<h2 class="anchored" data-anchor-id="递推杨辉三角">递推——杨辉三角</h2>
+<section id="递推杨辉三角" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="递推杨辉三角"><span class="header-section-number">4</span> 递推——杨辉三角</h2>
 <p>这固然很妙，但要是我想不到这些Trick怎么办？</p>
-<p>不会通项就设状态dp呗（<del>反正是OIer有电脑帮我算</del></p>
+<p>作为完全不虚递推的 OIer，我们考虑 dp。</p>
 <p>设状态 <span class="math inline">\(f(n,m)\)</span> 表示将 <span class="math inline">\(n\)</span> 个无标号元素放入 <span class="math inline">\(m\)</span> 个有标号可空集合的方案数。</p>
 <p>考虑当前正在为第 <span class="math inline">\(n\)</span> 个元素确定所属集合。既然元素是无标号的，不妨按升序排列集合。于是放入新的元素时，只需决定要先跳过多少个集合再放入。易得下面的递推式</p>
 <p><span class="math display">\[
@@ -236,8 +234,8 @@ f(n,m) &amp;= f(n-1, m) + \sum_{k=1}^{m-1} f(n-1,k) \\
 \]</span></p>
 <p>那么，只需观察并将表格的每一项映射到杨辉三角，我们就能得到 <span class="math inline">\(f(n,m) = {n+m+1 \choose m-1}\)</span> 。</p>
 </section>
-<section id="生成函数广义二项式定理" class="level2">
-<h2 class="anchored" data-anchor-id="生成函数广义二项式定理">生成函数——广义二项式定理</h2>
+<section id="生成函数广义二项式定理" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="生成函数广义二项式定理"><span class="header-section-number">5</span> 生成函数——广义二项式定理</h2>
 <p><del>要是我连杨辉三角都没看出来怎么办</del></p>
 <p>方便起见，此处我们不研究 <span class="math inline">\(m=0\)</span> 的情况。不妨设</p>
 <p><span class="math display">\[
@@ -259,16 +257,16 @@ g_n(x) = g_{n+1}(x) - x g_{n+1}(x) \iff g_{n+1}(x) = \frac{1}{1-x} g_n(x)
 <p><span class="math display">\[
 g_n(x) = (1-x)^{-(n+1)}
 \]</span></p>
-<p>又由广义二项式定理</p>
-<blockquote class="blockquote">
-<p><span class="math display">\[
+<p>又由</p>
+<div id="thm-binomial" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (广义二项式定理) </strong></span><span class="math display">\[
 (x+y)^\alpha = \sum_{k=0}^{\infty} {\alpha \choose k} x^k y^{\alpha - k}
 \]</span></p>
 <p>其中</p>
 <p><span class="math display">\[
 {\alpha \choose k} = \frac{\alpha(\alpha-1)\dots(\alpha-k+1)}{k!}
 \]</span></p>
-</blockquote>
+</div>
 <p>展开，得到</p>
 <p><span class="math display">\[
 g_n(x) = \sum_{k=0}^{\infty} {-n-1 \choose k} (-x)^k
@@ -290,9 +288,17 @@ g(n,k) = {n+k \choose k}
 <p><span class="math display">\[
 f(n,m) = g(n,m-1) = {n+m-1 \choose m-1}
 \]</span></p>
+<section id="update" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="update"><span class="header-section-number">5.1</span> 2023/03/10 update</h3>
+<p>事实上，直接从组合意义思考就能直接得到该计数问题的生成函数形式</p>
+<p><span class="math display">\[
+(1 + x + x^2 + \dots)^m = \left( \frac 1 {1-x} \right)^m = (1-x)^{-m}
+\]</span></p>
+<p>按前述方法展开即可得到相同的结果。</p>
 </section>
-<section id="burnsidepolya第一类斯特林数" class="level2">
-<h2 class="anchored" data-anchor-id="burnsidepolya第一类斯特林数">Burnside(Polya)——第一类斯特林数</h2>
+</section>
+<section id="burnsidepolya第一类斯特林数" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="burnsidepolya第一类斯特林数"><span class="header-section-number">6</span> Burnside(Polya)——第一类斯特林数</h2>
 <p>如果要分组的 <span class="math inline">\(n\)</span> 个元素是有标号的，问题将会简单很多——直接枚举每个元素的所属集合即可，显然方案数为 <span class="math inline">\(m^n\)</span> 。</p>
 <p>但关键是它们没有标号。</p>
 <p>无标号的本质是认为任意置换标号前后是同构的。这启发我们将所有 <span class="math inline">\(n\)</span> 元置换（即置换群）作为变换集，使用等价类计数Burnside来解决该问题。</p>
@@ -338,8 +344,8 @@ f(n,m) = g(n,m-1) = {n+m-1 \choose m-1}
 \]</span></p>
 <p>用Burnside解决无标号问题的思路极具启发性，例如<a href="https://loj.ac/p/6538">烷基计数</a>问题的Burnside解法。</p>
 </section>
-<section id="后记致谢" class="level2">
-<h2 class="anchored" data-anchor-id="后记致谢">后记&amp;致谢</h2>
+<section id="后记致谢" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="后记致谢"><span class="header-section-number">7</span> 后记&amp;致谢</h2>
 <p><del>同分异构体计数带我重回OI</del></p>
 <p>感谢TbYangZ菊苣全程提供技术支持。</p>
 <p>感谢神仙化学老师提供组合意义解释。</p>
