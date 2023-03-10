@@ -1,27 +1,29 @@
 ---
 title: "从不定方程的非负整数解个数谈起"
-abstract: "组合意义、范德蒙德卷积、杨辉三角、生成函数、广义二项式定理、Burnside(Polya) 以及第一类斯特林数，你从未见过的全新解法。"
+abstract: "组合意义、Vandermonde 卷积、杨辉三角、生成函数、广义二项式定理、Burnside(Polya) 以及第一类斯特林数，你从未见过的全新解法。"
 date: 2021/05/01
-date-modified: 2021/05/01
+date-modified: 2023/03/10
 categories:
   - OI
   - 数学
   - 意识流
+
+number-sections: true
 ---
 
 ## 序
 
-> 求将 $n$ 个无标号元素用 $m-1$ 个隔板分入 $m$ 个有标号可空集合的方案数。
+::: {#exm-diophantine}
 
-或
+求将 $n$ 个无标号元素用 $m-1$ 个隔板分入 $m$ 个有标号可空集合的方案数。
 
-> 求不定方程
-> 
-> $$
-> x_1 + x_2 + \dots + x_m = n \quad (m,n \in N_+, m \le n)
-> $$
-> 
-> 的非负整数解的个数。
+此问题的另一个等价表述是，求不定方程
+$$
+x_1 + x_2 + \dots + x_m = n \quad (m,n \in N_+, m \le n)
+$$
+的非负整数解的个数。
+
+:::
 
 是一个非常经典的组合问题，众所周知其答案为组合数 ${n+m-1 \choose m-1}$ ，这可以根据其组合意义结合隔板法容易的得到。
 
@@ -33,7 +35,7 @@ categories:
 
 形式化的，我们令 $y_i = x_i + 1$ ，则我们现在只需求 $y_1 + y_2 + \dots + y_m = n + m$ 的正整数解，隔板法得到答案 ${n+m-1 \choose m-1}$ 。
 
-## 枚举空位——范德蒙德卷积公式
+## 枚举空位——Vandermonde 卷积公式
 
 我们使用另一种方法将隔板法应用到可空集合上。
 
@@ -43,13 +45,17 @@ $$
 \mathrm{ans} = \sum_{k=0}^{m-1} {m \choose k} {n-1 \choose m-k-1}
 $$
 
-又由范德蒙德卷积公式
+又由
 
-> $$
-> {n+m \choose k} = \sum_{i=\max(0,k-m)}^{\min(n,k)} {n \choose i} {m \choose k-i}
-> $$
-> 
-> （范德蒙德卷积公式易由 $(1+x)^{n+m} = (1+x)^n (1+ x)^m$ 的二项式展开说明）
+::: {#thm-vandermonde}
+
+## Vandermonde 卷积公式
+$$
+{n+m \choose k} = \sum_{i=\max(0,k-m)}^{\min(n,k)} {n \choose i} {m \choose k-i}
+$$
+:::
+
+（该定理易由 $(1+x)^{n+m} = (1+x)^n (1+ x)^m$ 的二项式展开说明）
 
 可直接得到（ $k' = m-1$ ， $n' = m$ ， $m' = n-1$ ）
 
@@ -61,7 +67,7 @@ $$
 
 这固然很妙，但要是我想不到这些Trick怎么办？
 
-不会通项就设状态dp呗（~~反正是OIer有电脑帮我算~~
+作为完全不虚递推的 OIer，我们考虑 dp。
 
 设状态 $f(n,m)$ 表示将 $n$ 个无标号元素放入 $m$ 个有标号可空集合的方案数。
 
@@ -140,17 +146,22 @@ $$
 g_n(x) = (1-x)^{-(n+1)}
 $$
 
-又由广义二项式定理
+又由
 
-> $$
-> (x+y)^\alpha = \sum_{k=0}^{\infty} {\alpha \choose k} x^k y^{\alpha - k}
-> $$
-> 
-> 其中
-> 
-> $$
-> {\alpha \choose k} = \frac{\alpha(\alpha-1)\dots(\alpha-k+1)}{k!}
-> $$
+::: {#thm-binomial}
+
+## 广义二项式定理
+
+$$
+(x+y)^\alpha = \sum_{k=0}^{\infty} {\alpha \choose k} x^k y^{\alpha - k}
+$$
+
+其中
+
+$$
+{\alpha \choose k} = \frac{\alpha(\alpha-1)\dots(\alpha-k+1)}{k!}
+$$
+:::
 
 展开，得到
 
@@ -180,6 +191,16 @@ $$
 $$
 f(n,m) = g(n,m-1) = {n+m-1 \choose m-1}
 $$
+
+### 2023/03/10 update
+
+事实上，直接从组合意义思考就能直接得到该计数问题的生成函数形式
+
+$$
+(1 + x + x^2 + \dots)^m = \left( \frac 1 {1-x} \right)^m = (1-x)^{-m}
+$$
+
+按前述方法展开即可得到相同的结果。
 
 ## Burnside(Polya)——第一类斯特林数
 
