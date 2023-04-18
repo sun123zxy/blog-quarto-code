@@ -1,6 +1,7 @@
 ---
 title: "OI 数论中的上界估计与时间复杂度证明"
 author: "sun123zxy"
+date: 2023/04/18
 abstract: "渐进符号、约数函数、整除分块嵌套与杜教筛."
 categories:
   - OI
@@ -10,8 +11,6 @@ bibliography: index.bib
 
 number-sections: true
 number-offset: [0, -1]
-
-draft: true
 ---
 
 ::::: {.hidden}
@@ -97,7 +96,7 @@ P_p(n) \in \begin{cases}
 \end{cases}
 $$
 
-## 约数函数
+## 约数函数 $\sigma_z(n)$
 
 约数函数（Divisor Function，也可称为除数函数、因数函数）是与 $n$ 的因子有关的一类函数，定义如下：
 
@@ -188,6 +187,8 @@ $$
 = \sum_{d \mid n} d \leq \sum_{i=1}^n \floor{\frac n i} \leq n H(n) \in O(n \log n)
 $$
 
+可以证明用 @prp-trick1ex 不会得到更优的结果.
+
 我们发现了一个有趣的事实：$\sigma_1 (n)$ 和 $\hat{\sigma_0}(n)$ 的渐进上界均为 $O(n \log n)$.
 
 ::: {#exm-sigmazub}
@@ -242,10 +243,12 @@ $$
 $$
 \sum_{d} g(d) \sum_{\floor{\frac n i} = d} f(i)
 $$
-可以证明，对一指定的 $d$，满足 $d = \floor{\frac n i}$ 的 $i$ 取遍一连续区间，故若 $f$ 的前缀和能 $O(1)$ 求出，块数量 $\#\{ \floor{\frac n i} \}_{i=1}^n$ 即该算法的时间复杂度. 注意到当 $i \leq \sqrt n$ 时，$\floor{\frac n i}$ 最多只有 $\floor{\sqrt n}$ 种取值，而 $i \geq \sqrt n$ 时，$1 \leq \floor{\frac n i} \leq \sqrt n$ 表明其也最多只有 $\floor{\sqrt n}$ 种取值. 因此整除分块的时间复杂度
+可以证明，对一指定的 $d$，满足 $d = \floor{\frac n i}$ 的 $i$ 取遍一连续区间，故若 $f$ 的前缀和能 $O(1)$ 求出，块数量 $\# \left\{ \floor{\frac n i} \right\}_{i=1}^n$ 即该算法的时间复杂度. 注意到当 $i \leq \sqrt n$ 时，$\floor{\frac n i}$ 最多只有 $\floor{\sqrt n}$ 种取值，而 $i \geq \sqrt n$ 时，$1 \leq \floor{\frac n i} \leq \sqrt n$ 表明其也最多只有 $\floor{\sqrt n}$ 种取值. 因此整除分块的时间复杂度
 $$
-T_1(n) = \#\{ \floor{\frac n i} \}_{i=1}^n \leq 2 \sqrt n \in O(\sqrt n)
+T_1(n) = \# \left\{ \floor{\frac n i} \right\}_{i=1}^n \leq 2 \sqrt n \in O(\sqrt n)
 $$
+
+方便起见，后文记 $D(n) = \left\{ \floor{\frac n i} \right\}_{i=1}^n$.
 
 ### 整除分块嵌套
 
@@ -253,19 +256,19 @@ $$
 
 ::: {#prp-trick2ex}
 $$
-\sum_{d|n} f(d) \leq \sum_{\exists i\left(d=\floor{\frac n i}\right)} f(d) \leq \sum_{i=1}^{\sqrt n} f(i) + f(\floor{\frac n i})
+\sum_{d \mid n} f(d) \leq \sum_{d \in D(n)} f(d) \leq \sum_{i=1}^{\sqrt n} f(i) + f(\floor{\frac n i})
 $$
 :::
 
-LHS 成立的关键在于 $d|n \implies \exists i\left(d=\floor{\frac n i}\right)$；而 RHS 的本质就是上述对整除分块块数量上界的估计. 
+LHS 成立的关键在于 $\{d: d \mid n\} \subset D(n)$；而 RHS 的本质就是上述对整除分块块数量上界的估计. 
 
-作为 @prp-trick1ex 的加强版，与 @exm-sigmazub 中的证明同理，应用 @prp-trick2ex ，我们有
+注意到 @prp-trick1ex 是 @exm-sigmazub 证明的核心，而 @prp-trick2ex 是 @prp-trick1ex 的加强版，故仿造 @exm-sigmazub 的证明，我们有
 
 ::: {#exm-divissigma}
 
 令
 $$
-S_z(n) = \sum_{\exists i\left(d=\floor{\frac n i}\right)} d^z
+S_z(n) = \sum_{d \in D(n)} d^z
 $$
 则前述 @exm-sigmazub 中 $\sigma_z(n)$ 的上界与渐进上界也同样适用于 $S_z(n)$.
 :::
@@ -276,32 +279,32 @@ $$
 $$
 的时间复杂度 $T_2$ 做出估计了. 对 @exm-divissigma 取 $z=\frac 1 2$，立刻有
 $$
-T_2(n) = \sum_{\exists i\left(d=\floor{\frac n i}\right)} T_1(d) \leq 2 \sum_{\exists i\left(d=\floor{\frac n i}\right)} \sqrt d = 2 S_{\frac 1 2}(n) \leq 4 \sqrt n P_{\frac 1 2}(\sqrt n) \in O(n^{\frac 3 4})
+T_2(n) = \sum_{d \in D(n)} T_1(d) \leq 2 \sum_{d \in D(n)} \sqrt d = 2 S_{\frac 1 2}(n) \leq 4 \sqrt n P_{\frac 1 2}(\sqrt n) \in O(n^{\frac 3 4})
 $$
 
 我们还可以进一步归纳. 假定 $\forall m \geq 0, \quad \exists z_m : 0 \leq z_m < 1, \quad T_m(n) = O(n^{z_m})$，我们有
 
 $$
-T_{m+1}(n) = \sum_{\exists i\left(d=\floor{\frac n i}\right)} T_m(d) \leq C \sum_{\exists i\left(d=\floor{\frac n i}\right)} n^{z_m} = C S_{z_m}(n) \in O(n^{\frac {1+z_m} 2})
+T_{m+1}(n) = \sum_{d \in D(n)} T_m(d) \leq C \sum_{d \in D(n)} n^{z_m} = C S_{z_m}(n) \in O(n^{\frac {1+z_m} 2})
 $$
 
 因此 $z_{m+1} = \frac {1+z_m} 2$. 边界条件 $z_0 = 0$，数列递推求得 $z_m = 1-2^{-m}$，检验满足条件. 因此 $m$ 重嵌套整除分块的时间复杂度
 $$
-T_m(n) = O(n^{1- 2^{-m}})
+T_m(n) \in O(n^{1- 2^{-m}})
 $$
 
 ## 杜教筛
 
 杜教筛可以以低于线性的时间复杂度求解某些数论函数的前缀和. 其思路并不复杂. 设 $f$ 为一数论函数，我们希望快速求得其前缀和 $\hat f (n) = \sum_{i=1}^n f(i)$. 考虑数论函数 $g$ 和 $h = g * f$，
 $$
-h(n) = \sum_{d|n} g(d) f(\frac n d)
+h(n) = \sum_{d \mid n} g(d) f(\frac n d)
 $$
 两端做前缀和得
 $$
 \begin{aligned}
 \hat h (n)
 &= \sum_{i=1}^n h(i) \\
-&= \sum_{i=1}^n \sum_{d|i} g(d) f(\frac i d) \\
+&= \sum_{i=1}^n \sum_{d \mid i} g(d) f(\frac i d) \\
 &= \sum_{d=1}^n g(d) \sum_{i=1}^{\floor{\frac n d}} f(i) \\
 &= \sum_{d=1}^n g(d) \hat f (\floor{\frac n d}) \\
 &= g(1) \hat f (n) + \sum_{d=2}^n g(d) \hat f (\floor{\frac n d})
@@ -320,13 +323,42 @@ $$
 $$
 故单轮递归涉及到的自变量均可表示为 $d = \floor{\frac n i}$ 的形式. 一个 $\hat f (d)$ 做整除分块耗时 $T_1(d)$，若采用记忆化递归，由上节分析，算法总时间复杂度为
 $$
-\sum_{\exists i\left(d=\floor{\frac n i}\right)} T_1(d) = T_2(n) \in O(n^{\frac 3 4})
+\sum_{d \in D(n)} T_1(d) = T_2(n) \in O(n^{\frac 3 4})
 $$
 
-但我们还可以做得更好. 考虑预处理
+但我们还可以做得更好——考虑先用 $O(K)$ 的时间复杂度线性筛出前 $K$ 个 $f(n)$ 并求前缀和，则递归求解时，$d \leq K$ 的 $\hat f(d)$ 就无需再向下递归了. 为分析此类时间复杂度，对 @prp-trick2ex 做最后一点扩展：
 
-数论分块复杂度不变.
+::: {#prp-trick3ex}
+$$
+\sum_{\begin{gathered} d \mid n \\ d > K \end{gathered}} f(d) \leq \sum_{\begin{gathered} d \in D(n) \\ d > K \end{gathered}} f(d) \leq \sum_{K < i \leq \sqrt n} f(i) + \sum_{1 \leq i \leq \min{\{ \floor{\frac n K},\sqrt n \} }} f(\floor{\frac n i})
+$$
 
-## 其它
+特别的，当 $K > \sqrt n$ 时，有
 
-$\floor{\frac n {i^2}}$ 估计（无平方因子数）
+$$
+\sum_{\begin{gathered} d \mid n \\ d > K \end{gathered}} f(d) \leq \sum_{\begin{gathered} d \in D(n) \\ d > K \end{gathered}} f(d) \leq \sum_{1 \leq i \leq \floor{\frac n K}} f(\floor{\frac n i})
+$$
+:::
+
+故用 @prp-trick3ex ，当 $K > \sqrt n$ 时，算法在递归部分的时间复杂度降低为
+
+$$
+\begin{aligned}
+\sum_{\begin{gathered} d \in D(n) \\ d > K \end{gathered}} T_1(d)
+&= \sum_{1 \leq i \leq \floor{\frac n K}} T_1(\floor{\frac n i}) \\
+&\leq \sum_{1 \leq i \leq \floor{\frac n K}} C \sqrt{\frac n i} \\
+&= C \sqrt n \sum_{1 \leq i \leq \floor{\frac n K}} i^{-\frac 1 2} \\
+&=  C \sqrt n P_{\frac 1 2}\left(\floor{\frac n K}\right) \\
+&\in \sqrt n O\left( \left(\frac n K\right)^{\frac 1 2} \right) \\
+&\subset O(n K^{-\frac 1 2})
+\end{aligned}
+$$
+
+总时间复杂度为
+$$
+O(K) + O(n K^{-\frac 1 2})
+$$
+
+为最小化时间复杂度，取 $K = n^{\frac 2 3}$，得到最优时间复杂度 $O(n^{\frac 2 3})$.
+
+这部分的时间复杂度证明主要参考了文章 @zhihu_dusieve.
