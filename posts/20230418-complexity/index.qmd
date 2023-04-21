@@ -30,7 +30,7 @@ $$
 
 ### 渐进符号
 
-其实不少高等数学 / 数学分析教材在讲解无穷小的比较时已经相当严谨地介绍过大 O、小 O 记号，然而各种历史习惯记法的符号滥用（abuse of notation）@wikipedia_abuse 直到现在都让笔者头疼. These notations seem to be innocent, but can be catastrophic without careful manipulation. For example,
+其实不少高等数学 / 数学分析教材在讲解无穷小的比较时已经相当严谨地介绍过大 O、小 O 记号，然而各种历史习惯记法的符号滥用（abuse of notation）[@wikipedia_abuse] 直到现在都让笔者头疼. These notations seem to be innocent, but can be catastrophic without careful manipulation. For example,
 
 - $$
   n = O(n^2) \land n^2 = O(n^2) \implies n = n^2
@@ -48,7 +48,7 @@ $$
   
   没看出有啥问题，对吧？笔者在写作此文时犯了同样的错误. 请注意，大 O 记号的作用对象是函数，$f(i)$ 是什么？它只是个函数值，是确定的数——这是因为 $i$ 也是求和枚举中确定的数，而不是 $n$ 这种真正代表变元的记号. 所以 $O(f(i))$ 是什么？它什么也不是.
 
-  这种错误的出现是在所难免的，我们太习惯用 $x$、$x^3 + 5 x^2 + x$ 这种变元都不明确的记号来表示函数了 @wikipedia_abuse . 写成 $f(x)$ 也不严谨，因为只有 $f$ 才应代表函数本身，$f(x)$ 只能是函数值. 这样我们就可以放心地写下 $O(f)$，不用担心把变元与确定值弄混了.
+  这种错误的出现是在所难免的，我们太习惯用 $x$、$x^3 + 5 x^2 + x$ 这种变元都不明确的记号来表示函数了[@wikipedia_abuse]. 写成 $f(x)$ 也不严谨，因为只有 $f$ 才应代表函数本身，$f(x)$ 只能是函数值. 这样我们就可以放心地写下 $O(f)$，不用担心把变元与确定值弄混了.
 
   然而大家还是喜欢写 $O(n^2)$ 和 $O(e^{n^2})$，而不是奇怪的 $O(\mathrm{id}^2)$ 和 $O(\mathrm{exp} \circ {\mathrm{id}^2})$. 所以，我们大概只能沿用这种不太严谨的记号，并时刻提醒自己加倍小心了. （形如 $x \mapsto e^{x^2}$ 的 $\lambda$ 风格“匿名函数”记号可能更好？）
 
@@ -59,7 +59,7 @@ $$
 
   第一步是直接由大 O 记号的定义得到的结果.
 
-Wikipedia @asymptotic_wikipedia 中有一张详尽的表格介绍了各种渐进符号的定义，OI Wiki @asymptotic_oiwiki 上也有极好的讲解，尚不熟练的读者可以参考. 有兴趣仔细研究的读者可以参考《具体数学》第九章 @concretemath_onotation 、Wikipedia 及其 reference（个人推荐 Knuth 关于 $O$、$\Omega$、$\Theta$ 的短文 @knuth_omicron ）. 本文除用 “$\in$” 和“$\subset$”替代 “$=$” 外，完全使用 Knuth 提议的记号体系.
+Wikipedia[@asymptotic_wikipedia] 中有一张详尽的表格介绍了各种渐进符号的定义，OI Wiki[@asymptotic_oiwiki] 上也有极好的讲解，尚不熟练的读者可以参考. 有兴趣仔细研究的读者可以参考《具体数学》第九章[@concretemath_onotation]、Wikipedia 及其 reference（个人推荐 Knuth 关于 $O$、$\Omega$、$\Theta$ 的短文[@knuth_omicron]）. 本文除用 “$\in$” 和“$\subset$”替代 “$=$” 外，完全使用 Knuth 提议的记号体系.
 
 ### 调和数 $H(n)$ / 调和级数
 
@@ -87,7 +87,7 @@ $p$ - 级数具有如下性质：
   P_p(n) \sim \frac{1}{1-p} n^{1-p} \in \Theta(n^{1-p})
   $$
 
-$-\infty < p < 1$ 时 $p$ - 级数的渐进估计可以从连续幂函数积分的角度理解. 证明这渐进性，离散情况下，可对 $n^p$ 差分后前缀和 + 二项式定理得到高次项系数，或可用离散微积分理论得到精确表示（参见《具体数学》@concretemath_calculus ）；连续情况下，Lagrange 中值定理应为较简单的估计方法. 这里从略. 总之，我们得到：
+$-\infty < p < 1$ 时 $p$ - 级数的渐进估计可以从连续幂函数积分的角度理解. 证明这渐进性，离散情况下，可对 $n^p$ 差分后前缀和 + 二项式定理得到高次项系数，或可用离散微积分理论得到精确表示（参见《具体数学》[@concretemath_calculus]）；连续情况下，Lagrange 中值定理应为较简单的估计方法. 这里从略. 总之，我们得到：
 $$
 P_p(n) \in \begin{cases}
 \Theta(n^{1-p}) & p < 1 \\
@@ -117,7 +117,7 @@ $$
 
 也就是估计 $n$ 的因子的数量. 一个广为人知的上界是 $2 \sqrt n$，因为 $n$ 的所有小于 $\sqrt n$ 的因子 $d$ 均与另一因子 $\frac n d$ 一一对应.
 
-事实上进一步可以证明 $\sigma_0(n) \in o(n^\epsilon) \quad \forall \epsilon > 0$ @wikipedia_divisor ，虽然这在 OI 中并不实用.
+事实上进一步可以证明 $\sigma_0(n) \in o(n^\epsilon) \quad \forall \epsilon > 0$[@wikipedia_divisor]，虽然这在 OI 中并不实用.
 
 ::: {#exm-sumsigma0ub}
 估计 $\hat{\sigma_0}(n) = \sum_{i=1}^n \sigma_0 (i)$ 的渐进上界.
@@ -133,7 +133,7 @@ $$
 = n H(n) \in O(n \log n)
 $$
 
-显然，这比 $O(n \sqrt n)$ 的平凡估计好上不少. 本例的思路不仅是埃氏筛（Sieve of Eratosthenes）的理论基础，也在杜教筛、快速 Mobius 变换、$\gcd$ 卷积 @gcdconv 等处出现.
+显然，这比 $O(n \sqrt n)$ 的平凡估计好上不少. 本例的思路不仅是埃氏筛（Sieve of Eratosthenes）的理论基础，也在杜教筛、快速 Mobius 变换、$\gcd$ 卷积[@gcdconv]等处出现.
 
 进一步利用此技巧和 $p$ - 级数的估计，我们甚至能在仔细研究 $\sigma_z(n)$ 前就得到其前缀和的渐进估计：
 
@@ -227,11 +227,11 @@ $$
 我们得到了一个相当优秀的渐进上界. 值得关注的是：
 
 - 当 $z=0$ 时，$\sigma_0(n) \in O(n^{\frac 1 2})$. 这与 @exm-sigma0ub 的结果一致.
-- 当 $z=\frac 1 2$ 时，$\sigma_{\frac 1 2}(n) \in O(n^{\frac 3 4})$，即 $\sum_{d \mid n} \sqrt d \in O(n^{\frac 3 4})$. 洛谷 P4980 Polya 定理模板题 @polya_luogu 的一种比较 trivial 的解法 @polya_my 的时间复杂度证明就来源于此. 我们之后还会在整除分块与杜教筛中见到它.
+- 当 $z=\frac 1 2$ 时，$\sigma_{\frac 1 2}(n) \in O(n^{\frac 3 4})$，即 $\sum_{d \mid n} \sqrt d \in O(n^{\frac 3 4})$. 洛谷 P4980 Polya 定理模板题[@polya_luogu]的一种比较 trivial 的解法[@polya_my]的时间复杂度证明就来源于此. 我们之后还会在整除分块与杜教筛中见到它.
 
 另外，如果只使用 @prp-trick1 ，$-1<z<1$ 部分的渐进上界将只能估计至 $O(n)$. 因此 @prp-trick1ex 是更为优越的.
 
-约数函数更复杂的上限与渐进估计可参考 Wikipedia @wikipedia_divisor.
+约数函数更复杂的上限与渐进估计可参考 Wikipedia[@wikipedia_divisor].
 
 ## 整除分块
 
@@ -361,4 +361,4 @@ $$
 
 为最小化时间复杂度，取 $K = n^{\frac 2 3}$，得到最优时间复杂度 $O(n^{\frac 2 3})$.
 
-这部分的时间复杂度证明主要参考了文章 @zhihu_dusieve.
+这部分的时间复杂度证明主要参考了文章[@zhihu_dusieve].
