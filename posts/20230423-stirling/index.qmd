@@ -386,33 +386,43 @@ $$
 这正是我们想要的．
 
 :::{.remark}
-细心的同学可能会对式子前边的系数仍是 $n \to \infty$ 时的无穷小产生疑问．事实上，在将 $X_n$ 归一化为 $\bar X_n$ 的过程中，我们将整个变量“压缩”至原来的 $\frac{1}{\sqrt{npq}}$，因此前面的系数可以理解为一种类似 $\diff x$ 的存在．关于归一化的直观理解，3Blue1Brown 的中心极限定理视频[@3b1b]提供了很好的讲解．
+细心的同学可能会对式子前边的系数仍是 $n \to \infty$ 时的无穷小产生疑问．事实上，在将 $X_n$ 归一化为 $\bar X_n$ 的过程中，我们将整个变量“压缩”至原来的 $\frac{1}{\sqrt{npq}}$，因此前面的系数可以理解为一种类似 $\diff x$ 的存在．关于归一化的直观理解，3Blue1Brown 的中心极限定理视频[@3b1b-clt]提供了很好的讲解．
 
 更形式化的，由于归一化得到的离散型随机变量 $\bar X_n$ 在 $n \to \infty$ 的过程中已经变成连续型随机变量 $X$，我们研究的对象也应从单点转向区间．因此，对 $X_n$ 与 $\bar X_n$ 概率分布的叙述做一点变动
 $$
 P\left(x \leq \bar X_n < x + \frac 1 {\sqrt{npq}}\right)
 = P\left(k \leq X_n < k + 1 \right)
-= P(X_n=k)
+= P(X_n=k) \sim \frac 1 {\sqrt{2 \pi npq}} \exp \left( -{\frac 1 2 x^2} \right)
 $$
-这样就有
+令区间大小趋于 $0$ 就得到
 $$
 \begin{aligned}
-P(a \leq X < b) &= \lim_{n \to \infty} \sum_{0 \leq t < (b-a)\sqrt{npq}} P\left( \left(a + \frac t {\sqrt{npq}}\right) < \bar X_n < \left(a + \frac {t+1}{\sqrt{npq}}\right) \right) \\
-&= \lim_{n \to \infty} \sum_{0 \leq t < (b-a)\sqrt{npq}} \frac 1 {\sqrt{2 \pi npq}} \exp \left( -{\frac 1 2 \left(a + \frac t {\sqrt{npq}}\right)^2} \right) \\
-&= \frac 1 {\sqrt{2 \pi}} \lim_{n \to \infty} \sum_{0 \leq t < (b-a)\sqrt{npq}} \frac 1 {\sqrt{npq}} \exp \left( -{\frac 1 2 \left(a + \frac t {\sqrt{npq}}\right)^2} \right) \\
-&= \frac 1 {\sqrt{2 \pi}} \int_a^b \exp \left( - \frac 1 2 x^2 \right) \diff x
+f(x) &= \lim_{h \to 0}{\frac{P(x \leq X < x+h)}{h}} \\
+&=  \lim_{n \to \infty} \sqrt{npq} \cdot P\left(x \leq \bar X_n < x + \frac 1 {\sqrt{npq}}\right) \\
+&= \lim_{n \to \infty} \sqrt{npq} \cdot \frac 1 {\sqrt{2 \pi npq}} \exp \left( -{\frac 1 2 x^2} \right) & \dots \text{这里 $\sim$ 表现为等价无穷小替换} \\
+&= \frac 1 {\sqrt{2 \pi}} \exp \left( -{\frac 1 2 x^2} \right)
 \end{aligned}
 $$
-这才是我们真正想要的——由二项分布归一化后取极限形成的连续的正态分布曲线的区间积分形式．
+这才是我们真正想要的，由二项分布归一化后取极限得到的，标准正态分布的概率密度函数．
 :::
 
 ## Challenge
 
 选讲或留作课后讨论．
 
-### 正态分布的归一性验证
+### 正态分布的归一性验证、Maxwell 速率分布与高维球体的表面积
 
-对正态分布曲线的积分．这涉及到多元积分学的内容．
+Guass 积分：
+$$
+\int_{-\infty}^{+\infty} e^{-x^2} \diff x = \sqrt \pi
+$$
+
+Maxwell 速率分布：
+$$
+f(v) = 4 \pi v^2 \left( \frac{m}{2 \pi kT} \right)^{\frac 3 2} \exp \left( - \frac{m}{2kT}v^2 \right)
+$$
+
+以及它们与高维球体表面积的联系涉及多元积分学的内容．参考 3Blue1Brown 有关 $\pi$ 与正态分布的视频[@3b1b-pi]． 
 
 ### Wallis 公式视角下三阶乘与中心三项式系数的渐进估计
 
