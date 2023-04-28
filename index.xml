@@ -1747,11 +1747,11 @@ font-style: inherit;">}</span></span></code></pre></div>
 <h2 data-number="4" class="anchored" data-anchor-id="数学公式定理系统测试"><span class="header-section-number">4</span> 数学公式、定理系统测试</h2>
 <p>Quarto 的一大卖点。</p>
 <p>这一节我们测试数学相关内容. HTML 中的定理标号方式目前没有方法更改，但 LaTeX 中的定理标号可通过自行修改模板中 <code>amsthm</code> 宏包的定义实现.</p>
-<p>此外，根据 <a href="https://quarto.org/docs/authoring/markdown-basics.html#equations">Quarto - Markdown Basics # Equations</a> 和 <a href="https://github.com/quarto-dev/quarto-cli/discussions/1793">Defining LaTeX commands for HTML and PDF rendering - Discussion #1793</a>，可按如下面方式自定义 macro 并确保其在 HTML 和 LaTeX/PDF 中都得到正确渲染。值得注意的是，由于 <code>\DeclareMathOperator</code> 只能在 LaTeX 的导言区使用，这里我们用 <code>\newcommand</code> + <code>\operatorname</code> 的方式替代。</p>
+<p>此外，根据 <a href="https://quarto.org/docs/authoring/markdown-basics.html#equations">Quarto - Markdown Basics # Equations</a> 和 <a href="https://github.com/quarto-dev/quarto-cli/discussions/1793">Defining LaTeX commands for HTML and PDF rendering - Discussion #1793</a> 和 <a href="https://quarto.org/docs/authoring/conditional.html">Quarto - Conditional Content</a>，按如下面方式自定义 macro 可确保其在 HTML、 LaTeX/PDF 和 MS Word 中都得到正确渲染。值得注意的是，由于 <code>\DeclareMathOperator</code> 只能在 LaTeX 的导言区使用，这里我们用 <code>\newcommand</code> + <code>\operatorname</code> 的方式替代。</p>
 <div class="hidden">
 <p><img src="https://latex.codecogs.com/png.latex?%0A%5Cnewcommand%7B%5Cran%7D%7B%5Coperatorname%7Bran%7D%7D%0A"></p>
 </div>
-<p>下面的公式使用了上面定义的 macro。 <img src="https://latex.codecogs.com/png.latex?%0A%5Cran%20A%20:=%20%5C%7B%20y%20%5Cmid%20(x,y)%20%5Cin%20A%20%5C%7D%0A"></p>
+<p>下面的公式使用了上面定义的 macro。 <img src="https://latex.codecogs.com/png.latex?%0A%5Coperatorname%7Bran%7DA%20:=%20%5C%7B%20y%20%5Cmid%20(x,y)%20%5Cin%20A%20%5C%7D%0A"></p>
 <p>两个集合 <img src="https://latex.codecogs.com/png.latex?A,%20B"> 的笛卡尔积定义为 <img src="https://latex.codecogs.com/png.latex?%0AA%20%5Ctimes%20B%20=%20%5C%7B%5Clangle%20x,y%20%5Crangle%20%5Cmid%20x%20%5Cin%20A%20%5Cland%20y%20%5Cin%20B%20%5C%7D%0A"></p>
 <p>显然，笛卡尔积不满足交换律和结合律. 在势的视角下，它的表现如何呢？</p>
 <div id="thm-cartesian-preserve" class="theorem">
@@ -1945,7 +1945,7 @@ lebesgue-&gt;finite
 </section>
 <section id="html-专用测试" class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="html-专用测试"><span class="header-section-number">6</span> HTML 专用测试</h2>
-<p>目前暂未处理 LaTeX/PDF 格式的代码高亮和 callout，本节测试内容只会在 HTML 输出中被渲染。（参见：<a href="https://quarto.org/docs/authoring/conditional.html">Quarto - Conditional Content</a>）</p>
+<p>目前暂未处理 LaTeX/PDF 格式的代码高亮和 callout，MS Word 格式可兼容但效果不佳。本节测试内容不会在 LaTeX/PDF 格式下被渲染。</p>
 <section id="代码块引用" class="level3" data-number="6.1">
 <h3 data-number="6.1" class="anchored" data-anchor-id="代码块引用"><span class="header-section-number">6.1</span> 代码块、引用</h3>
 <p>本节测试代码块和引用。</p>
