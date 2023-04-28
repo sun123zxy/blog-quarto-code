@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.333">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-03-21">
+
+<title>sun123zxy’s blog - 等价类计数：Burnside引理 &amp; Polya定理</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">sun123zxy’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts/about" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#s-0" id="toc-s-0" class="nav-link active" data-scroll-target="#s-0">0. 引子 (update 2020/12/21)</a>
+  <ul class="collapse">
+  <li><a href="#s-0.1" id="toc-s-0.1" class="nav-link" data-scroll-target="#s-0.1">0.1 倒序同构序列计数</a></li>
+  </ul></li>
+  <li><a href="#s-1" id="toc-s-1" class="nav-link" data-scroll-target="#s-1">1. 群</a>
+  <ul class="collapse">
+  <li><a href="#s-1.1" id="toc-s-1.1" class="nav-link" data-scroll-target="#s-1.1">1.1 群的概念</a></li>
+  <li><a href="#s-1.2" id="toc-s-1.2" class="nav-link" data-scroll-target="#s-1.2">1.2 更抽象的群</a></li>
+  <li><a href="#s-1.3" id="toc-s-1.3" class="nav-link" data-scroll-target="#s-1.3">1.3 提示</a></li>
+  </ul></li>
+  <li><a href="#s-2" id="toc-s-2" class="nav-link" data-scroll-target="#s-2">2. Burnside</a>
+  <ul class="collapse">
+  <li><a href="#s-2.1" id="toc-s-2.1" class="nav-link" data-scroll-target="#s-2.1">2.1 等价</a></li>
+  <li><a href="#s-2.2" id="toc-s-2.2" class="nav-link" data-scroll-target="#s-2.2">2.2 等价类及等价类计数</a></li>
+  <li><a href="#s-2.3" id="toc-s-2.3" class="nav-link" data-scroll-target="#s-2.3">2.3 弱化版</a></li>
+  <li><a href="#s-2.4" id="toc-s-2.4" class="nav-link" data-scroll-target="#s-2.4">2.4 标准版</a></li>
+  <li><a href="#s-2.5" id="toc-s-2.5" class="nav-link" data-scroll-target="#s-2.5">2.5 Burnside的本质</a></li>
+  </ul></li>
+  <li><a href="#s-3" id="toc-s-3" class="nav-link" data-scroll-target="#s-3">3. 置换群</a>
+  <ul class="collapse">
+  <li><a href="#s-3.1" id="toc-s-3.1" class="nav-link" data-scroll-target="#s-3.1">3.1 置换</a></li>
+  <li><a href="#s-3.2" id="toc-s-3.2" class="nav-link" data-scroll-target="#s-3.2">3.2 移位置换</a></li>
+  <li><a href="#s-3.3" id="toc-s-3.3" class="nav-link" data-scroll-target="#s-3.3">3.3 移位置换图</a></li>
+  <li><a href="#s-3.4" id="toc-s-3.4" class="nav-link" data-scroll-target="#s-3.4">3.4 移位置换环个数定理</a></li>
+  </ul></li>
+  <li><a href="#s-4" id="toc-s-4" class="nav-link" data-scroll-target="#s-4">4. Polya</a>
+  <ul class="collapse">
+  <li><a href="#s-4.1" id="toc-s-4.1" class="nav-link" data-scroll-target="#s-4.1">4.1 概念</a></li>
+  <li><a href="#s-4.2" id="toc-s-4.2" class="nav-link" data-scroll-target="#s-4.2">4.2 推导</a></li>
+  <li><a href="#s-4.3" id="toc-s-4.3" class="nav-link" data-scroll-target="#s-4.3">4.3 实现</a></li>
+  </ul></li>
+  <li><a href="#s-5" id="toc-s-5" class="nav-link" data-scroll-target="#s-5">5. 总结</a></li>
+  <li><a href="#s-6" id="toc-s-6" class="nav-link" data-scroll-target="#s-6">6. 参考及后记</a>
+  <ul class="collapse">
+  <li><a href="#zkx-keke_046-彳亍-学长的-polya计数.pptx" id="toc-zkx-keke_046-彳亍-学长的-polya计数.pptx" class="nav-link" data-scroll-target="#zkx-keke_046-彳亍-学长的-polya计数.pptx">zkx / keke_046 / 彳亍 学长的 《Polya计数.pptx》</a></li>
+  <li><a href="#算法导论第三版-31章-数论算法" id="toc-算法导论第三版-31章-数论算法" class="nav-link" data-scroll-target="#算法导论第三版-31章-数论算法">《算法导论》第三版 31章 数论算法</a></li>
+  <li><a href="#后记" id="toc-后记" class="nav-link" data-scroll-target="#后记">后记</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">等价类计数：Burnside引理 &amp; Polya定理</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">OI</div>
+    <div class="quarto-category">数学</div>
+    <div class="quarto-category">学习笔记</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 21, 2020</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">April 6, 2023</p>
+    </div>
+  </div>
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    《同分异构体计数从入门到精通》（不是）
+  </div>
+</div>
+
+</header>
+
+<p>PS: 写的时候博主比较naive，所有的变换都是向右结合的，还请谅解（</p>
+<section id="s-0" class="level2">
+<h2 class="anchored" data-anchor-id="s-0">0. 引子 (update 2020/12/21)</h2>
+<p>直接上理论会有点难受，不妨先来点简单的计数题找找感觉？</p>
+<section id="s-0.1" class="level3">
+<h3 class="anchored" data-anchor-id="s-0.1">0.1 倒序同构序列计数</h3>
+<blockquote class="blockquote">
+<p>长度为 <span class="math inline">\(n\)</span> 的序列 <span class="math inline">\(A\)</span> 满足 <span class="math inline">\(\forall 1 \le i \le n, \ 1 \le a_i \le m\)</span> ，问有多少种不同的序列 <span class="math inline">\(A\)</span> ？</p>
+<p>序列是无标号的，即正序和倒序记为一种方案。</p>
+</blockquote>
+<p>容易想到一种计数方式——若不考虑同构，显然有 <span class="math inline">\(m^n\)</span> 种选择方案。对其中的非回文序列，可以直接计数然后除以 <span class="math inline">\(2\)</span> 去重。而回文序列正反都相同，不能直接除掉，因此对每个回文序列补上“倒序”的情况再除以 <span class="math inline">\(2\)</span> 即可。回文序列有 <span class="math inline">\(m^{\lceil \frac n 2 \rceil}\)</span> 种，故最终答案为 <span class="math inline">\(\frac 1 2 (m^n + m^{\lceil \frac n 2 \rceil})\)</span> 。</p>
+<p>PS：现在我们可以对直链卤代烷进行计数了，答案为 <span class="math inline">\(\frac 1 2 (4^2 \times 3^{n-2} + 4 \times 3^{\lceil \frac n 2 \rceil -1})\)</span> 。</p>
+<p>PPS：你也许马上想到了环卤代烷计数，它正是后面<a href="#s-4">Polya</a>所解决的问题。</p>
+<p>在这个小问题中，我们“补”上的回文序列正是Burnside思想的精髓。<strong>Burnside的目标便是为此类等价类计数问题找到一种通用的解决方案</strong>。欲知后事如何，请看下文分解。</p>
+</section>
+</section>
+<section id="s-1" class="level2">
+<h2 class="anchored" data-anchor-id="s-1">1. 群</h2>
+<section id="s-1.1" class="level3">
+<h3 class="anchored" data-anchor-id="s-1.1">1.1 群的概念</h3>
+<p>群 <span class="math inline">\((S,\circ)\)</span> 是一个元素集合 <span class="math inline">\(S\)</span> 和一种二元运算 <span class="math inline">\(\circ\)</span> 的合称，其满足以下性质。</p>
+<section id="封闭性" class="level4">
+<h4 class="anchored" data-anchor-id="封闭性">封闭性</h4>
+<blockquote class="blockquote">
+<p>对于 <span class="math inline">\(\forall a,b \in S\)</span> ， <span class="math inline">\(\exists c \in S\)</span> 使得 <span class="math inline">\(c = a \circ b\)</span></p>
+</blockquote>
+</section>
+<section id="结合律" class="level4">
+<h4 class="anchored" data-anchor-id="结合律">结合律</h4>
+<blockquote class="blockquote">
+<p>对于 <span class="math inline">\(\forall a,b,c \in S\)</span> ， <span class="math inline">\(a \circ (b \circ c) = (a \circ b) \circ c\)</span></p>
+</blockquote>
+</section>
+<section id="单位元" class="level4">
+<h4 class="anchored" data-anchor-id="单位元">单位元</h4>
+<blockquote class="blockquote">
+<p><span class="math inline">\(\exists I \in S\)</span> ，使得对于 <span class="math inline">\(\forall a \in S\)</span> ， <span class="math inline">\(a \circ I = I \circ a = a\)</span></p>
+</blockquote>
+<p>根据定义，单位元具有唯一性，即一个群只有一个单位元。</p>
+<p>证明：设 <span class="math inline">\(a,b\)</span> 都是 <span class="math inline">\(S\)</span> 的单位元，则 <span class="math inline">\(a = a \circ b = b\)</span> ，两者实质上相同。</p>
+</section>
+<section id="逆元" class="level4">
+<h4 class="anchored" data-anchor-id="逆元">逆元</h4>
+<blockquote class="blockquote">
+<p>对于 <span class="math inline">\(\forall a \in S\)</span> ， <span class="math inline">\(\exists a^{-1} \in S\)</span> ，使得 <span class="math inline">\(a \circ a^{-1} = a^{-1} \circ a = I\)</span></p>
+</blockquote>
+<p>根据定义，逆元具有唯一性，即每个元素有且仅有一个逆元。</p>
+<p>证明：设 <span class="math inline">\(a\)</span> 有两个逆元 <span class="math inline">\(b,c\)</span> ，则 <span class="math inline">\(b = b \circ I = b \circ (a \circ c) = (b \circ a) \circ c = I \circ c = c\)</span> ，两者实质相同。</p>
+<p>这也同时说明了不存在两个元素 <span class="math inline">\(a, b\)</span> 的逆元是同一个元素 <span class="math inline">\(c\)</span>，因为 <span class="math inline">\(c\)</span> 只有唯一一个逆元。</p>
+<p>即逆元是一一对应的。</p>
+</section>
+</section>
+<section id="s-1.2" class="level3">
+<h3 class="anchored" data-anchor-id="s-1.2">1.2 更抽象的群</h3>
+<p>我们更进一步，将 <span class="math inline">\(S\)</span> 中的每一个元素视为一个函数， 默认 <span class="math inline">\(\circ\)</span> 代表函数的复合，即 <span class="math inline">\((f \circ g) (x) = f(g(x))\)</span>。所以现在一个群可以只用一个函数集合 <span class="math inline">\(S\)</span> 来表示。</p>
+<p>例如，记 <span class="math inline">\(r_\theta (x)\)</span> 表示将 <span class="math inline">\(x\)</span> 旋转 <span class="math inline">\(\theta\)</span> 度，那么 <span class="math inline">\(S = \{ r_{0^\circ}, r_{90^\circ},r_{180^\circ},r_{270^\circ}\}\)</span> 就是一个群。</p>
+<p>证明一下，显然有封闭性和结合律。</p>
+<p>单位元是 <span class="math inline">\(r_{0^\circ}\)</span> ，因为 <span class="math inline">\(r_{0^\circ} (r_\theta(x)) = r_{\theta^\circ} (r_0 (x)) = r_\theta(x)\)</span></p>
+<p><span class="math inline">\(S\)</span> 中元素 <span class="math inline">\(r_\theta\)</span> 的逆元便是 <span class="math inline">\(r_{360^\circ - \theta}\)</span> ，因为他们两个卷起来就是 <span class="math inline">\(I = r_{0^{\circ}}\)</span></p>
+</section>
+<section id="s-1.3" class="level3">
+<h3 class="anchored" data-anchor-id="s-1.3">1.3 提示</h3>
+<p>由于群满足封闭性，所以我们在寻找群的时候一定要“找完”所有可能的状态，例如 <span class="math inline">\(\{ r_{0^\circ}, r_{90^\circ}\}\)</span> 就不是一个群。</p>
+</section>
+</section>
+<section id="s-2" class="level2">
+<h2 class="anchored" data-anchor-id="s-2">2. Burnside</h2>
+<p>记号说明：通常使用 <span class="math inline">\(a,b,c,d \in C\)</span> 表示计数对象，而 <span class="math inline">\(f,g,h \in G\)</span> 表示变换。</p>
+<section id="s-2.1" class="level3">
+<h3 class="anchored" data-anchor-id="s-2.1">2.1 等价</h3>
+<blockquote class="blockquote">
+<p>给定一个作用在计数集合 <span class="math inline">\(C\)</span> 上的变换集合 <span class="math inline">\(G\)</span>，若 <span class="math inline">\(C\)</span> 中计数对象 <span class="math inline">\(d\)</span> 可以由计数对象 <span class="math inline">\(c\)</span> 通过 <span class="math inline">\(G\)</span> 中变换得到，即 <span class="math inline">\(\exists f \in G\)</span> 使得 <span class="math inline">\(d = c \circ f\)</span>，我们便称 <span class="math inline">\(c\)</span> 与 <span class="math inline">\(d\)</span> 等价，记作 <span class="math inline">\(c \sim d\)</span> 。</p>
+</blockquote>
+<p><span class="math inline">\(G\)</span> 其实就是个函数集合，其中的函数都接受 <span class="math inline">\(C\)</span> 中元素作为参数，输出也是 <span class="math inline">\(C\)</span> 中元素。</p>
+<p>类似的我们记 <span class="math inline">\(f(c)\)</span> 为 <span class="math inline">\(c \circ f\)</span> ，表示对计数对象 <span class="math inline">\(c\)</span> 做变换 <span class="math inline">\(f\)</span> 。</p>
+<p>我们同样可以对一个函数做变换，即 <span class="math inline">\(f \circ g\)</span> 是允许的。请参考上文<a href="#s-1.2">更抽象的群</a> 。</p>
+<p>在Burnside中，<strong>我们要求 <span class="math inline">\(G\)</span> 是一个群</strong>。这样我们可以导出一些关于等价的性质。</p>
+<section id="自反性" class="level4">
+<h4 class="anchored" data-anchor-id="自反性">自反性</h4>
+<blockquote class="blockquote">
+<p><span class="math inline">\(a \sim a\)</span></p>
+</blockquote>
+<p>因为 <span class="math inline">\(G\)</span> 是群，故有单位元 <span class="math inline">\(I \in G\)</span> ， <span class="math inline">\(a \circ I = a\)</span> ，满足等价定义。</p>
+</section>
+<section id="对称性" class="level4">
+<h4 class="anchored" data-anchor-id="对称性">对称性</h4>
+<blockquote class="blockquote">
+<p><span class="math inline">\(a \sim b \iff b \sim a\)</span></p>
+</blockquote>
+<p>设 <span class="math inline">\(a \circ f = b\)</span> ，因为 <span class="math inline">\(G\)</span> 是群，故存在 <span class="math inline">\(f^{-1}\)</span> 使得 <span class="math inline">\(b \circ f^{-1} = a\)</span> ，满足等价定义。同理反向再证一次即可得出充分完全性。</p>
+</section>
+<section id="传递性" class="level4">
+<h4 class="anchored" data-anchor-id="传递性">传递性</h4>
+<blockquote class="blockquote">
+<p><span class="math inline">\(a \sim b , b \sim c \Rightarrow a \sim c\)</span></p>
+</blockquote>
+<p>设 <span class="math inline">\(a \circ f = b, b \circ g = c\)</span>，因为 <span class="math inline">\(G\)</span> 是群，所以 <span class="math inline">\(f \circ g \in G\)</span>（封闭性），<span class="math inline">\(a \circ (f \circ g) = (a \circ f) \circ g = b \circ g = c\)</span>，满足等价定义。</p>
+</section>
+</section>
+<section id="s-2.2" class="level3">
+<h3 class="anchored" data-anchor-id="s-2.2">2.2 等价类及等价类计数</h3>
+<p>等价类即所有等价的计数元素的集合。计数集合 <span class="math inline">\(C\)</span> 由许多个等价类构成，好比连通块。 统计 <span class="math inline">\(C\)</span> 中有多少个等价类，就是等价类计数。</p>
+<p>如何快速的等价类计数，便是我们接下来所研究的。</p>
+</section>
+<section id="s-2.3" class="level3">
+<h3 class="anchored" data-anchor-id="s-2.3">2.3 弱化版</h3>
+<p>不妨先来研究一个弱化版本，这可以帮助我们捋清思路。</p>
+<section id="s-2.3.1" class="level4">
+<h4 class="anchored" data-anchor-id="s-2.3.1">2.3.1 引理</h4>
+<blockquote class="blockquote">
+<p>若对于 <span class="math inline">\(\forall c \in C,f \in G \quad (f \not= I)\)</span> ， <span class="math inline">\(c \circ f \not= c\)</span> 都成立，那么对于 <span class="math inline">\(\forall c \in C, f \in G,g \in G \quad (f \not= g)\)</span> ，都有 <span class="math inline">\(c \circ f \not= c \circ g\)</span> ，即与 <span class="math inline">\(\forall c\)</span> 等价的元素有且仅有 <span class="math inline">\(|G|\)</span> 个。</p>
+</blockquote>
+<p>利用反证法。假设 <span class="math inline">\(\exists c,f,g\)</span> 使得 <span class="math inline">\(c \circ f = c \circ g\)</span> ，那么有 <span class="math inline">\(c \circ f \circ g^{-1} = c\)</span> ，即 <span class="math inline">\(c \circ (f \circ g^{-1}) = c\)</span> （同时因为 <span class="math inline">\(f \not= g\)</span> ，所以 <span class="math inline">\(f \circ g^{-1} \not= I\)</span> ），于是与假设产生矛盾，故引理成立。</p>
+<p>对 <span class="math inline">\(c\)</span> 做变换得到的元素两两不同，共有 <span class="math inline">\(|G|\)</span> 种变换，故有且仅有 <span class="math inline">\(|G|\)</span> 个元素与 <span class="math inline">\(c\)</span> 等价。</p>
+</section>
+<section id="s-2.3.2" class="level4">
+<h4 class="anchored" data-anchor-id="s-2.3.2">2.3.2 弱化版Burnside</h4>
+<blockquote class="blockquote">
+<p>若对于 <span class="math inline">\(\forall c \in C,f \in G \quad (f \not= I)\)</span> ， <span class="math inline">\(c \circ f \not= c\)</span> 都成立，那么 <span class="math display">\[
+等价类计数 = \frac{|C|}{|G|}
+\]</span></p>
+</blockquote>
+<p>这是肉眼可得的结论。由引理，对于 <span class="math inline">\(\forall c\)</span> ，都有且仅有 <span class="math inline">\(|G|\)</span> 个互不相同的元素与其等价。由于等价的传递性，这 <span class="math inline">\(|G|\)</span> 个元素是封闭的，实质上形成了许多个大小为 <span class="math inline">\(|G|\)</span> 的等价类。那么等价类个数自然就是总计数元素个数 <span class="math inline">\(|C|\)</span> 除以每个等价类的大小 <span class="math inline">\(|G|\)</span> 了。</p>
+</section>
+</section>
+<section id="s-2.4" class="level3">
+<h3 class="anchored" data-anchor-id="s-2.4">2.4 标准版</h3>
+<p>弱化版的关键之处在于引理， <span class="math inline">\(c \circ f \not= c\)</span> 让我们知道每个 <span class="math inline">\(c\)</span> 有 <span class="math inline">\(|G|\)</span> 个互不相同的元素与其等价。我们将这个条件和这个引理做一些“推广”。</p>
+<section id="s-2.4.1" class="level4">
+<h4 class="anchored" data-anchor-id="s-2.4.1">2.4.1 稳定核 &amp; 不动点</h4>
+<blockquote class="blockquote">
+<p>稳定核 <span class="math inline">\(G(c)\)</span> ：对于计数对象 <span class="math inline">\(c\)</span> ，使得 <span class="math inline">\(c \circ f = c\)</span> 的所有变换 <span class="math inline">\(f\)</span> 的集合，即 <span class="math inline">\(\{ f \in G | c \circ f = c \}\)</span></p>
+<p>不动点 <span class="math inline">\(C(f)\)</span> ：对于变换 <span class="math inline">\(f\)</span> ，使得 <span class="math inline">\(c \circ f = c\)</span> 的所有计数对象 <span class="math inline">\(c\)</span> 的集合，即 <span class="math inline">\(\{ c \in C | c \circ f = c \}\)</span></p>
+</blockquote>
+<p>注意单个字母 <span class="math inline">\(G\)</span> 代表整个变换集合；而 <span class="math inline">\(G(c)\)</span> 是根据计数元素 <span class="math inline">\(c\)</span> 生成的一个被 <span class="math inline">\(G\)</span> 包含的变换集合；</p>
+<p>注意单个字母 <span class="math inline">\(C\)</span> 代表整个计数集合；而 <span class="math inline">\(C(f)\)</span> 是根据变换 <span class="math inline">\(f\)</span> 生成的一个被 <span class="math inline">\(C\)</span> 包含的计数集合。</p>
+</section>
+<section id="s-2.4.2" class="level4">
+<h4 class="anchored" data-anchor-id="s-2.4.2">2.4.2 引理1</h4>
+<blockquote class="blockquote">
+<p><span class="math display">\[
+\sum_{c \in C} |G(c)| = \sum_{f \in G} |C(f)|
+\]</span></p>
+</blockquote>
+<p>证明： <span class="math display">\[
+\begin{aligned}
+\sum_{c \in C} |G(c)| &amp;= \sum_{c \in C} \sum_{f \in G} [c \circ f = c] \\
+&amp;= \sum_{f \in G} \sum_{c \in C} [c \circ f = c] \\
+&amp;= \sum_{f \in G} |C(f)|
+\end{aligned}
+\]</span></p>
+<p>其实质是更换枚举方式。</p>
+</section>
+<section id="s-2.4.3" class="level4">
+<h4 class="anchored" data-anchor-id="s-2.4.3">2.4.3 引理2</h4>
+<blockquote class="blockquote">
+<p>对于 <span class="math inline">\(\forall c\)</span> ， <span class="math inline">\(G(c)\)</span> 是个群。</p>
+</blockquote>
+<p>分别证明群的四个性质即可。</p>
+<section id="封闭性-1" class="level5">
+<h5 class="anchored" data-anchor-id="封闭性-1">封闭性</h5>
+<p>对于 <span class="math inline">\(\forall f,g \in G(c)\)</span> ， <span class="math inline">\(c \circ (f \circ g) = (c \circ f) \circ g = c \circ g = c\)</span> ，所以 <span class="math inline">\(f \circ g \in G(c)\)</span> 。封闭性得证。</p>
+</section>
+<section id="结合律-1" class="level5">
+<h5 class="anchored" data-anchor-id="结合律-1">结合律</h5>
+<p><span class="math inline">\(G(c) \subseteq G\)</span> ，结合律直接由 <span class="math inline">\(G\)</span> 给出。</p>
+</section>
+<section id="单位元-1" class="level5">
+<h5 class="anchored" data-anchor-id="单位元-1">单位元</h5>
+<p><span class="math inline">\(c \circ I = c\)</span> ，所以 <span class="math inline">\(I \in G(c)\)</span> 。（这里的 <span class="math inline">\(I\)</span> 代指 <span class="math inline">\(G\)</span> 的单位元）</p>
+</section>
+<section id="逆元-1" class="level5">
+<h5 class="anchored" data-anchor-id="逆元-1">逆元</h5>
+<p>对于 <span class="math inline">\(\forall f \in G(c)\)</span> ， <span class="math inline">\(c \circ f^{-1} = (c \circ f) \circ f^{-1} = c \circ (f \circ f^{-1}) = c\)</span> ，所以 <span class="math inline">\(f^{-1} \in G(c)\)</span> 。</p>
+</section>
+<section id="extra-update-20200328" class="level5">
+<h5 class="anchored" data-anchor-id="extra-update-20200328">Extra (update 2020/03/28)</h5>
+<p>有个群论定理可以直接证明上述结论：</p>
+<blockquote class="blockquote">
+<p>有限群的非空封闭子集都是子群。</p>
+</blockquote>
+<p>另外，在后面我们将会发现 <span class="math inline">\(|G(c)|\)</span> 实际上是 <span class="math inline">\(|G|\)</span> 的约数，这反应了拉格朗日定理：</p>
+<blockquote class="blockquote">
+<p>一个有限群 <span class="math inline">\(S\)</span> 的子群的大小是 <span class="math inline">\(|S|\)</span> 的约数。</p>
+</blockquote>
+<p>有趣的是，拉格朗日定理的证明实际上和下文引理3的证明几乎一模一样。</p>
+<p>这两个定理在这里不做详细讨论，有兴趣的同学可以左转算法导论和<a href="https://blog.csdn.net/qq_25847123/article/details/100318620">这里</a>（拉格朗日定理证明）</p>
+</section>
+</section>
+<section id="s-2.4.4" class="level4">
+<h4 class="anchored" data-anchor-id="s-2.4.4">2.4.4 引理3</h4>
+<blockquote class="blockquote">
+<p>对于 <span class="math inline">\(\forall c\)</span> ，记 <span class="math inline">\(S(c)\)</span> 为与 <span class="math inline">\(c\)</span> 等价的计数元素的集合，有 <span class="math display">\[
+|S(c)| = \frac{|G|}{|G(c)|}
+\]</span></p>
+</blockquote>
+<p>这个引理与<a href="#s-2.3.1">弱化版引理</a>是对应关系。请对比起来理解。</p>
+<p>我们的证明思路是：对于某个计数元素 <span class="math inline">\(c\)</span> ，求出 对于某个确定的变换 <span class="math inline">\(f\)</span> ，有多少个变换 <span class="math inline">\(g\)</span> 与其作用效果相同，即 <span class="math inline">\(c \circ f = c \circ g\)</span> 。</p>
+<p><span class="math display">\[
+c \circ f = c \circ g \iff c \circ f \circ g^{-1} = c \iff (f \circ g^{-1}) \in G(c)
+\]</span></p>
+<p>即 <span class="math inline">\(f ,g\)</span> 对 <span class="math inline">\(c\)</span> 的作用效果相同 等价于 <span class="math inline">\(f \circ g^{-1}\)</span> 在 <span class="math inline">\(c\)</span> 的稳定核内。</p>
+<p>于是对于一个变换 <span class="math inline">\(h \in G(c)\)</span> ，根据群的基本性质，存在唯一的 <span class="math inline">\(g^{-1} = f^{-1} \circ h\)</span> ，使得 <span class="math inline">\(f \circ g^{-1} = h\)</span> 。变换 <span class="math inline">\(h \in G(c)\)</span> ，所以有 <span class="math inline">\(|G(c)|\)</span> 种取值； <span class="math inline">\(f\)</span> 是确定的，根据逆元唯一性， <span class="math inline">\(f^{-1}\)</span> 也是确定的；故 <span class="math inline">\(g^{-1}\)</span> 有 <span class="math inline">\(|G(c)|\)</span> 种取值。又由于逆元的一一对应性， <span class="math inline">\(g\)</span> 有 <span class="math inline">\(|G(c)|\)</span> 种取值。</p>
+<p>即对于 <span class="math inline">\(\forall f\)</span> ，都有且仅有 <span class="math inline">\(|G(c)|\)</span> 个 <span class="math inline">\(g\)</span> 与其作用效果相同。</p>
+<p>这说明了什么？“作用效果相同”也是一种类似等价的关系，容易证明其具有传递性，于是他们是封闭的。作用效果相同的变换实质上形成 <span class="math inline">\(\frac{|G|}{|G(c)|}\)</span> 个大小为 <span class="math inline">\(|G(c)|\)</span> 的两两相连的连通块或者说“作用效果相同等价类”，合起来构成了整个 <span class="math inline">\(G\)</span> 。我们便知道了 <span class="math inline">\(c\)</span> 通过变换可以变出 <span class="math inline">\(\frac{|G|}{|G(c)|}\)</span> 个不同的计数元素，即与 <span class="math inline">\(c\)</span> 等价的元素有 <span class="math inline">\(\frac{|G|}{|G(c)|}\)</span> 个，引理3证毕。</p>
+</section>
+<section id="s-2.4.5" class="level4">
+<h4 class="anchored" data-anchor-id="s-2.4.5">2.4.5 Burnside</h4>
+<blockquote class="blockquote">
+<p><span class="math display">\[
+等价类计数 = \frac{1}{|G|}\sum_{f \in G} |C(f)|
+\]</span></p>
+</blockquote>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{1}{|G|}\sum_{f \in G} |C(f)| &amp;= \frac{1}{|G|}\sum_{c \in C} |G(c)|    \quad &amp;\text{...引理1} \\
+&amp;= \frac{1}{|G|}\sum_{c \in C} \frac{|G|}{|S(c)|} \quad &amp;\text{...引理3} \\
+&amp;= \sum_{c \in C} \frac{1}{S(c)} \\
+&amp;= 等价类计数
+\end{aligned}
+\]</span></p>
+<p>倒数第二个式子，每个元素贡献 <span class="math inline">\(\frac{1}{S(c)}\)</span> ，合起来便是等价类计数。这便是等价类计数的本质。</p>
+</section>
+</section>
+<section id="s-2.5" class="level3">
+<h3 class="anchored" data-anchor-id="s-2.5">2.5 Burnside的本质</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="burnside.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">来自zkx学长的课件《Polya计数.pptx》</figcaption>
+</figure>
+</div>
+<blockquote class="blockquote">
+<p>直接除以4不行，因为前四种找不到4个等价的情况</p>
+<p>所以强行把它们补成4个就行了。。。</p>
+<p>Burnside就是“强行补”的过程</p>
+<p>——zkx</p>
+</blockquote>
+<p>Burnside的精髓就在于此。</p>
+<p>Burnside弱化版，实际上是省掉了强行补的部分，使所有有效部分都在 <span class="math inline">\(C(I)\)</span> 。</p>
+<blockquote class="blockquote">
+<p>可以发现“群”是Burnside的唯一约束</p>
+<p>这个约束几乎就是没有约束。。。</p>
+<p>所以Burnside是非常通用的等价类计数法</p>
+<p>——zkx</p>
+</blockquote>
+</section>
+</section>
+<section id="s-3" class="level2">
+<h2 class="anchored" data-anchor-id="s-3">3. 置换群</h2>
+<p>（Burnside的内容已经结束，这里开始是Polya了）</p>
+<section id="s-3.1" class="level3">
+<h3 class="anchored" data-anchor-id="s-3.1">3.1 置换</h3>
+<p>一个置换长这样： <span class="math display">\[
+(\begin{aligned}
+1&amp;,2,3,...,n \\
+a_1&amp;,a_2,a_3,...,a_n
+\end{aligned})
+\]</span></p>
+<p>其中 <span class="math inline">\(a_1,a_2,a_3,...,a_n\)</span> 是一个 <span class="math inline">\(n\)</span> 排列。置换是一个接受序列，输出序列的函数，它表示对每一个 <span class="math inline">\(i\)</span> ，将原序列第 <span class="math inline">\(i\)</span> 个数放到第 <span class="math inline">\(a_i\)</span> 个位置上。这种括号是置换的表示方式，表示多个映射关系。</p>
+</section>
+<section id="s-3.2" class="level3">
+<h3 class="anchored" data-anchor-id="s-3.2">3.2 移位置换</h3>
+<p>一个普通的移位置换长这样： <span class="math display">\[
+\tau_n =
+(\begin{aligned}
+1,2,3,...,n&amp;-1,n \\
+2,3,4,...,&amp;n,1
+\end{aligned})
+\]</span></p>
+<p>即全员右移 <span class="math inline">\(1\)</span> 位。很自然的可以拓展到 <span class="math inline">\(k\)</span> 位移位置换： <span class="math display">\[
+\tau_n^k =
+(\begin{aligned}
+1,2,3,...&amp;,n-1,n \\
+k,k+1,...,n&amp;,1,...,k-1
+\end{aligned})
+\]</span></p>
+<p>容易发现 <span class="math inline">\(\tau_n^k\)</span> 是 <span class="math inline">\(k\)</span> 个 <span class="math inline">\(\tau_n\)</span> 的复合，所以我们写成乘方的形式。</p>
+</section>
+<section id="s-3.3" class="level3">
+<h3 class="anchored" data-anchor-id="s-3.3">3.3 移位置换图</h3>
+<p>移位置换 <span class="math inline">\(\tau_n^k\)</span> 所形成的图：考虑将 <span class="math inline">\(n\)</span> 个点排成一个圆圈， <span class="math inline">\(1\)</span> 连 <span class="math inline">\(k\)</span> ， <span class="math inline">\(2\)</span> 连 <span class="math inline">\(k+1\)</span> ，…，<span class="math inline">\(n\)</span> 连 <span class="math inline">\(k-1\)</span> 。</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="tau62.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption"><span class="math inline">\(tau_6^2\)</span>移位置换图</figcaption>
+</figure>
+</div>
+<p>如图便是 <span class="math inline">\(\tau_6^2\)</span> 形成的移位置换图，共有两个环。</p>
+</section>
+<section id="s-3.4" class="level3">
+<h3 class="anchored" data-anchor-id="s-3.4">3.4 移位置换环个数定理</h3>
+<blockquote class="blockquote">
+<p><span class="math inline">\(\tau_n^k\)</span> 移位置换图中环的个数为 <span class="math inline">\(\gcd(k,n)\)</span> 。</p>
+</blockquote>
+<p>证明的思路同样是已经使用多次的：求出对于一个数 <span class="math inline">\(a\)</span> ，有多少个数 <span class="math inline">\(b\)</span> 与它在同一个环内。</p>
+<p>对于 <span class="math inline">\(\forall a,b\)</span> ， <span class="math inline">\(a,b\)</span> 在同一个环内的条件为 <span class="math display">\[
+\begin{aligned}
+a \equiv b + ik \pmod n &amp;\iff \exists i,j \quad s.t. \quad a = b + ik + jn \\
+&amp;\iff \exists i,j \quad s.t. \quad ik + jn = a - b \\
+&amp;\iff \gcd(k,n) | (a-b) \quad \text{...裴蜀定理}
+\end{aligned}
+\]</span></p>
+<p>最后两个式子之间的转化运用了二元整数解不定方程的有解条件，即裴蜀定理。</p>
+<p>那么这样一来，对于 <span class="math inline">\(\forall a\)</span> ，显然有且仅有 <span class="math inline">\(\frac{n}{\gcd(k,n)}\)</span> 个数与它在同一环内，故共有 <span class="math inline">\(\gcd(k,n)\)</span> 个环。（“在同一环内”传递性导出的封闭性，这个方法在上文已经多次使用到）</p>
+</section>
+</section>
+<section id="s-4" class="level2">
+<h2 class="anchored" data-anchor-id="s-4">4. Polya</h2>
+<section id="s-4.1" class="level3">
+<h3 class="anchored" data-anchor-id="s-4.1">4.1 概念</h3>
+<p>Polya是Burnside在环同构计数问题上的一个导出结论，比朴素的Burnside更加优秀。环同构的变换群 <span class="math inline">\(G\)</span> 是一个移位置换群，即 <span class="math display">\[
+G = \{ \tau_n^k \ | \ k \in [0,n), k \in Z \}
+\]</span></p>
+<p>即在平面内旋转环能够变得相同的方案算作一种。</p>
+<p>显然移位置换群是一个群 <del>废话</del>，证明很简单，同样是证明群的四个性质，这里不再赘述。</p>
+<p>最简单的一类问题便是——<a href="https://www.luogu.com.cn/problem/P4980">洛谷P4980 Polya定理</a></p>
+<blockquote class="blockquote">
+<p>给定一个 <span class="math inline">\(n\)</span> 个点， <span class="math inline">\(n\)</span> 条边的环，有 <span class="math inline">\(m\)</span> 种颜色，给每个顶点染色，问有多少种本质不同的染色方案，答案对 <span class="math inline">\(10^9+7\)</span> 取模。</p>
+<p>本质不同定义为：只需要不能通过旋转与别的染色方案相同。</p>
+</blockquote>
+</section>
+<section id="s-4.2" class="level3">
+<h3 class="anchored" data-anchor-id="s-4.2">4.2 推导</h3>
+<p>有了前面那么多的铺垫，大名鼎鼎的Polya定理现在已经可以自己动手推出来了！</p>
+<p>先写出<a href="#s-2.4.5">Burnside引理</a>，并套入移位置换 <span class="math display">\[
+\begin{aligned}
+等价类计数 &amp;= \frac{1}{|G|}\sum_{f \in G} |C(f)| \\
+&amp;= \frac{1}{n}\sum_{i=1}^n |C(\tau_n^i)|
+\end{aligned}
+\]</span></p>
+<p>注： <span class="math inline">\(\tau_n^n = \tau_n^0\)</span> ，上面从 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 的枚举是对的</p>
+<p><span class="math inline">\(|C(\tau_n^i)|\)</span> 是什么？</p>
+<p><span class="math inline">\(\tau_n^i\)</span> 的不动点的个数，即要求 <span class="math inline">\(\tau_n^i\)</span> 移位置换图里同一环上点颜色相同的方案数。（为了做置换后看上去和原来一样）</p>
+<p>根据<a href="#s-3.4">移位置换环个数定理</a>， <span class="math inline">\(\tau_n^i\)</span> 有 <span class="math inline">\(\gcd(n,i)\)</span> 个环。有 <span class="math inline">\(m\)</span> 种颜色给 <span class="math inline">\(\gcd(n,i)\)</span> 个环去染，显然方案数为 <span class="math inline">\(m^{\gcd(n,i)}\)</span> 。我们不局限于本题推而广之，方案数是一个关于环个数 <span class="math inline">\(\gcd(n,i)\)</span> 的函数 <span class="math inline">\(f(\gcd(n,i))\)</span> 。（也可以是关于环大小 <span class="math inline">\(\frac{n}{\gcd(n,i)}\)</span> 的函数，反正最重要的参数是 <span class="math inline">\(\gcd(n,i)\)</span> ）</p>
+<p>带入原式 <span class="math display">\[
+\frac{1}{n}\sum_{i=1}^n f(\gcd(n,i))
+\]</span></p>
+<p>诶！这个式子里面有 <span class="math inline">\(\gcd\)</span> ！</p>
+<p>不用抑制住冲动，我们按照常见的莫反题目套路来。 <span class="math display">\[
+\begin{aligned}
+等价类计数 &amp;= \frac{1}{n}\sum_{i=1}^n f(\gcd(n,i)) \\
+&amp;= \frac{1}{n} \sum_{d|n} f(d) \sum_{i=1}^n [\gcd(n,i)=d] \quad &amp;\text{...把gcd提出来枚举} \\
+&amp;= \frac{1}{n} \sum_{d|n} f(d) \sum_{i=1}^{\frac{n}{d}} [\gcd(\frac{n}{d},i)=1] \\
+&amp;= \frac{1}{n} \sum_{d|n} f(d) \varphi(\frac{n}{d}) \quad &amp;\text{...欧拉函数定义}
+\end{aligned}
+\]</span></p>
+<p>好恭喜你可以在 <span class="math inline">\(O(\sqrt n)\)</span> 的优秀时间复杂度里求得答案了！</p>
+<p>2022/06/25 update: 需要指出的是，Polya 定理并不只适用于移位置换群。请读者自行思考，Polya 定理是否适用于任意置换群。（提示：任意置换都可以表示为若干个轮换的复合）</p>
+</section>
+<section id="s-4.3" class="level3">
+<h3 class="anchored" data-anchor-id="s-4.3">4.3 实现</h3>
+<p>提示一下实现上的一些细节。</p>
+<p>快速幂作为基本技巧就不提了；</p>
+<p>欧拉函数直接质因数分解求即可。这里会遇到一个小问题：外面一层枚举因数，里面一层分解质因数，这不 <span class="math inline">\(O(\sum_{d|n} \sqrt d)\)</span> 了吗？</p>
+<p>用一些<a href="../../posts/20230418-complexity/#exm-sigmazub">黑科技</a>可以证明一个比 <span class="math inline">\(O(n)\)</span> 更紧的上界是 <span class="math inline">\(O(n^{\frac 3 4})\)</span> ，实际上则有香港记者的速度（洛谷 <span class="math inline">\(n=10^9\)</span> ， <span class="math inline">\(10^3\)</span> 组数据可以随便跑过）</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">洛谷P4980 Polya定理</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">sun123zxy</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">朴素写法</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">洛谷共2.08s</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">2019/12/24</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;cstdio&gt;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;cstring&gt;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;cmath&gt;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;ctime&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;cstdlib&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;algorithm&gt;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;queue&gt;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;vector&gt;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;map&gt;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;set&gt;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll<span class="op">;</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>ll Rd<span class="op">(){</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    ll ans<span class="op">=</span><span class="dv">0</span><span class="op">;</span><span class="dt">char</span> c<span class="op">=</span>getchar<span class="op">();</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>c<span class="op">&lt;</span><span class="ch">'0'</span><span class="op">||</span>c<span class="op">&gt;</span><span class="ch">'9'</span><span class="op">)</span> c<span class="op">=</span>getchar<span class="op">();</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>c<span class="op">&gt;=</span><span class="ch">'0'</span><span class="op">&amp;&amp;</span>c<span class="op">&lt;=</span><span class="ch">'9'</span><span class="op">)</span> ans<span class="op">=</span>ans<span class="op">*</span><span class="dv">10</span><span class="op">+</span>c<span class="op">-</span><span class="ch">'0'</span><span class="op">,</span>c<span class="op">=</span>getchar<span class="op">();</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ans<span class="op">;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> ll MOD<span class="op">=</span><span class="fl">1E9</span><span class="op">+</span><span class="dv">7</span><span class="op">;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>ll QPow<span class="op">(</span>ll x<span class="op">,</span>ll up<span class="op">){</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    x<span class="op">%=</span>MOD<span class="op">;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    ll ans<span class="op">=</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>up<span class="op">)</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>up<span class="op">%</span><span class="dv">2</span><span class="op">==</span><span class="dv">0</span><span class="op">)</span> x<span class="op">=</span>x<span class="op">*</span>x<span class="op">%</span>MOD<span class="op">,</span>up<span class="op">/=</span><span class="dv">2</span><span class="op">;</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> ans<span class="op">=</span>ans<span class="op">*</span>x<span class="op">%</span>MOD<span class="op">,</span>up<span class="op">--;</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ans<span class="op">;</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>ll Inv<span class="op">(</span>ll x<span class="op">){</span><span class="cf">return</span> QPow<span class="op">(</span>x<span class="op">,</span>MOD<span class="op">-</span><span class="dv">2</span><span class="op">);}</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>ll Phi<span class="op">(</span>ll n<span class="op">){</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    ll t<span class="op">=</span>n<span class="op">;</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    ll ans<span class="op">=</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">2</span><span class="op">;</span>i<span class="op">*</span>i<span class="op">&lt;=</span>t<span class="op">;</span>i<span class="op">++){</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>        ll c<span class="op">=</span><span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(</span>t<span class="op">%</span>i<span class="op">==</span><span class="dv">0</span><span class="op">)</span> t<span class="op">/=</span>i<span class="op">,</span>c<span class="op">++;</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>c<span class="op">)</span> ans<span class="op">=</span>ans<span class="op">*(</span>QPow<span class="op">(</span>i<span class="op">,</span>c<span class="op">)-</span>QPow<span class="op">(</span>i<span class="op">,</span>c<span class="op">-</span><span class="dv">1</span><span class="op">)+</span>MOD<span class="op">)%</span>MOD<span class="op">;</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>t<span class="op">&gt;</span><span class="dv">1</span><span class="op">)</span> ans<span class="op">=</span>ans<span class="op">*(</span>t<span class="op">-</span><span class="dv">1</span><span class="op">)%</span>MOD<span class="op">;</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ans<span class="op">;</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>ll N<span class="op">;</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>ll Polya<span class="op">(</span>ll d<span class="op">){</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> QPow<span class="op">(</span>N<span class="op">,</span>d<span class="op">)*</span>Phi<span class="op">(</span>N<span class="op">/</span>d<span class="op">)%</span>MOD<span class="op">;</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Solve<span class="op">(){</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    ll Ans<span class="op">=</span><span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">1</span><span class="op">;</span>i<span class="op">*</span>i<span class="op">&lt;=</span>N<span class="op">;</span>i<span class="op">++){</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>N<span class="op">%</span>i<span class="op">==</span><span class="dv">0</span><span class="op">){</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>            Ans<span class="op">+=</span>Polya<span class="op">(</span>i<span class="op">);</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>i<span class="op">!=</span>N<span class="op">/</span>i<span class="op">)</span> Ans<span class="op">+=</span>Polya<span class="op">(</span>N<span class="op">/</span>i<span class="op">);</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>            Ans<span class="op">%=</span>MOD<span class="op">;</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    Ans<span class="op">=</span>Ans<span class="op">*</span>Inv<span class="op">(</span>N<span class="op">)%</span>MOD<span class="op">;</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%lld\n</span><span class="st">"</span><span class="op">,</span>Ans<span class="op">);</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>    ll T<span class="op">=</span>Rd<span class="op">();</span><span class="cf">while</span><span class="op">(</span>T<span class="op">--){</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>        scanf<span class="op">(</span><span class="st">"</span><span class="sc">%lld</span><span class="st">"</span><span class="op">,&amp;</span>N<span class="op">);</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>        Solve<span class="op">();</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>不过当然有真正 <span class="math inline">\(O(\sqrt n)\)</span> 的写法。只需在最外层分解质因数，然后DFS的去枚举因数，这样就不用每次去分解 <span class="math inline">\(\frac{n}{d}\)</span> 啦！于是这种写法就快更多了。</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">洛谷P4980 Polya定理</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">sun123zxy</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">更优写法</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">洛谷共125ms</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">2019/12/24</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">*/</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;cstdio&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;cstring&gt;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;cmath&gt;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;ctime&gt;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;cstdlib&gt;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;algorithm&gt;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;queue&gt;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;vector&gt;</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;map&gt;</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;set&gt;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll<span class="op">;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> Rd<span class="op">(){</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> ans<span class="op">=</span><span class="dv">0</span><span class="op">;</span><span class="dt">char</span> c<span class="op">=</span>getchar<span class="op">();</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>c<span class="op">&lt;</span><span class="ch">'0'</span><span class="op">||</span>c<span class="op">&gt;</span><span class="ch">'9'</span><span class="op">)</span> c<span class="op">=</span>getchar<span class="op">();</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>c<span class="op">&gt;=</span><span class="ch">'0'</span><span class="op">&amp;&amp;</span>c<span class="op">&lt;=</span><span class="ch">'9'</span><span class="op">)</span> ans<span class="op">=</span>ans<span class="op">*</span><span class="dv">10</span><span class="op">+</span>c<span class="op">-</span><span class="ch">'0'</span><span class="op">,</span>c<span class="op">=</span>getchar<span class="op">();</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ans<span class="op">;</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> ll MOD<span class="op">=</span><span class="fl">1E9</span><span class="op">+</span><span class="dv">7</span><span class="op">;</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>ll QPow<span class="op">(</span>ll x<span class="op">,</span>ll up<span class="op">,</span><span class="dt">bool</span> isM<span class="op">=</span><span class="dv">1</span><span class="op">){</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    x<span class="op">%=</span>MOD<span class="op">;</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    ll ans<span class="op">=</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>up<span class="op">){</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>up<span class="op">%</span><span class="dv">2</span><span class="op">==</span><span class="dv">0</span><span class="op">)</span> x<span class="op">=</span>x<span class="op">*</span>x<span class="op">,</span>up<span class="op">/=</span><span class="dv">2</span><span class="op">;</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> ans<span class="op">=</span>ans<span class="op">*</span>x<span class="op">,</span>up<span class="op">--;</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>isM<span class="op">)</span> x<span class="op">%=</span>MOD<span class="op">,</span>ans<span class="op">%=</span>MOD<span class="op">;</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ans<span class="op">;</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>ll Inv<span class="op">(</span>ll x<span class="op">){</span><span class="cf">return</span> QPow<span class="op">(</span>x<span class="op">,</span>MOD<span class="op">-</span><span class="dv">2</span><span class="op">);}</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="kw">namespace</span> Div<span class="op">{</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> p<span class="op">[</span><span class="dv">30</span><span class="op">],</span>c<span class="op">[</span><span class="dv">30</span><span class="op">];</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> pN<span class="op">;</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> Div<span class="op">(</span><span class="dt">int</span> nb<span class="op">){</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>        pN<span class="op">=</span><span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> t<span class="op">=</span>nb<span class="op">;</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">=</span><span class="dv">2</span><span class="op">;</span><span class="dv">1</span><span class="bu">LL</span><span class="op">*</span>i<span class="op">*</span>i<span class="op">&lt;=</span>t<span class="op">;</span>i<span class="op">++){</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>t<span class="op">%</span>i<span class="op">==</span><span class="dv">0</span><span class="op">){</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>                p<span class="op">[++</span>pN<span class="op">]=</span>i<span class="op">,</span>c<span class="op">[</span>pN<span class="op">]=</span><span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>                <span class="cf">while</span><span class="op">(</span>t<span class="op">%</span>i<span class="op">==</span><span class="dv">0</span><span class="op">)</span> t<span class="op">/=</span>i<span class="op">,</span>c<span class="op">[</span>pN<span class="op">]++;</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span><span class="cf">if</span><span class="op">(</span>t<span class="op">&gt;</span><span class="dv">1</span><span class="op">)</span> p<span class="op">[++</span>pN<span class="op">]=</span>t<span class="op">,</span>c<span class="op">[</span>pN<span class="op">]=</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> N<span class="op">;</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>ll Ans<span class="op">;</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> DFS<span class="op">(</span><span class="dt">int</span> pos<span class="op">,</span>ll d<span class="op">,</span>ll phi<span class="op">){</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    <span class="kw">using</span> <span class="kw">namespace</span> Div<span class="op">;</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>pos<span class="op">==</span>pN<span class="op">+</span><span class="dv">1</span><span class="op">){</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>        Ans<span class="op">=(</span>Ans<span class="op">+</span>QPow<span class="op">(</span>N<span class="op">,</span>d<span class="op">)*</span>phi<span class="op">)%</span>MOD<span class="op">;</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">;</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    ll tpow<span class="op">=</span><span class="dv">1</span><span class="op">,</span>tphi<span class="op">=</span>QPow<span class="op">(</span>p<span class="op">[</span>pos<span class="op">],</span>c<span class="op">[</span>pos<span class="op">],</span><span class="dv">0</span><span class="op">)-</span>QPow<span class="op">(</span>p<span class="op">[</span>pos<span class="op">],</span>c<span class="op">[</span>pos<span class="op">]-</span><span class="dv">1</span><span class="op">,</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;=</span>c<span class="op">[</span>pos<span class="op">];</span>i<span class="op">++){</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>        DFS<span class="op">(</span>pos<span class="op">+</span><span class="dv">1</span><span class="op">,</span>d<span class="op">*</span>tpow<span class="op">,</span>phi<span class="op">*</span>tphi<span class="op">);</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>        tpow<span class="op">*=</span>p<span class="op">[</span>pos<span class="op">];</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>i<span class="op">==</span>c<span class="op">[</span>pos<span class="op">]-</span><span class="dv">1</span><span class="op">)</span> tphi<span class="op">=</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> tphi<span class="op">/=</span>p<span class="op">[</span>pos<span class="op">];</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Solve<span class="op">(){</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    Div<span class="op">::</span>Div<span class="op">(</span>N<span class="op">);</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    Ans<span class="op">=</span><span class="dv">0</span><span class="op">;</span>DFS<span class="op">(</span><span class="dv">1</span><span class="op">,</span><span class="dv">1</span><span class="op">,</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    Ans<span class="op">=</span>Ans<span class="op">*</span>Inv<span class="op">(</span>N<span class="op">)%</span>MOD<span class="op">;</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%lld\n</span><span class="st">"</span><span class="op">,</span>Ans<span class="op">);</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> T<span class="op">=</span>Rd<span class="op">();</span><span class="cf">while</span><span class="op">(</span>T<span class="op">--){</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>        scanf<span class="op">(</span><span class="st">"</span><span class="sc">%d</span><span class="st">"</span><span class="op">,&amp;</span>N<span class="op">);</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>        Solve<span class="op">();</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="s-5" class="level2">
+<h2 class="anchored" data-anchor-id="s-5">5. 总结</h2>
+<p>对于大多数题目，Burnside &amp; Polya通常是套在最表面的那一层皮，难点一般在求 <span class="math inline">\(|C(f)|\)</span> 或者 <span class="math inline">\(f(\gcd(n,i))\)</span> 的部分。</p>
+</section>
+<section id="s-6" class="level2">
+<h2 class="anchored" data-anchor-id="s-6">6. 参考及后记</h2>
+<section id="zkx-keke_046-彳亍-学长的-polya计数.pptx" class="level3">
+<h3 class="anchored" data-anchor-id="zkx-keke_046-彳亍-学长的-polya计数.pptx">zkx / keke_046 / 彳亍 学长的 《Polya计数.pptx》</h3>
+<p>整个PPT思路非常清晰，可以看出keke学长对Polya有极其深入的理解。我学Burnside完全是照着这个PPT一点一点的看懂的。</p>
+<p>彳亍来讲课的那个暑假可以说是真正让我在OI数学这一块有很多新的收获，orz orz orz</p>
+<p>2020/10/23 update: keke学长的PPT应该参考了《组合数学》，回头对照一下。</p>
+</section>
+<section id="算法导论第三版-31章-数论算法" class="level3">
+<h3 class="anchored" data-anchor-id="算法导论第三版-31章-数论算法">《算法导论》第三版 31章 数论算法</h3>
+<p>初稿写成后，在学习数论时偶然翻到这一节有对群的一些讨论，发现自己之前的理解不够优秀，做了一些订正。</p>
+<p><del>之前把交换群认成群了然后瞎yy了一套理论xD</del></p>
+</section>
+<section id="后记" class="level3">
+<h3 class="anchored" data-anchor-id="后记">后记</h3>
+<p>Burnside &amp; Polya 最开始是去年暑假keke学长为我们讲授。当时云里雾里，半懂不懂。12月的时候因为PKUWC/THUWC成为机房留守儿童（雾），就花了一两天把keke的PPT慢慢看懂了，做了最初的笔记，在接下来的几个月里修订完善。</p>
+<p>概念多，证明绕，很容易掉进思维的陷阱。要是能一步一步把证明过程捋清楚的话，对思维能力的提升还是很大的。</p>
+<p>任何推导的目的都是由已知得到未知。把性质与推论构成的“有向无环图”搞清楚了，才算真正弄清楚了来龙去脉。</p>
+<p>Burnside弱化版是整理笔记时灵光一闪生造出来的一个中间步骤，希望对大家的理解有所帮助。</p>
+<p>多次用到了“将等价类计数问题转换为有多少个元素与某个确定的元素等价，并利用等价传递性导出封闭性说明形成连通块”这一思想，很具有推广性；另外遇到一些不太好证的命题可以试试反证法。</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="sun123zxy/blog-quarto-code" data-repo-id="R_kgDOIrPs5w" data-category="General" data-category-id="DIC_kwDOIrPs584CV4gd" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark_dimmed" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">sun123zxy’s blog | Powered by Quarto</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

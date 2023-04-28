@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.333">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2021-05-01">
+
+<title>sun123zxy’s blog - 从不定方程的非负整数解个数谈起</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">sun123zxy’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts/about" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#序" id="toc-序" class="nav-link active" data-scroll-target="#序"><span class="header-section-number">1</span> 序</a></li>
+  <li><a href="#组合意义" id="toc-组合意义" class="nav-link" data-scroll-target="#组合意义"><span class="header-section-number">2</span> 组合意义</a></li>
+  <li><a href="#枚举空位vandermonde-卷积公式" id="toc-枚举空位vandermonde-卷积公式" class="nav-link" data-scroll-target="#枚举空位vandermonde-卷积公式"><span class="header-section-number">3</span> 枚举空位——Vandermonde 卷积公式</a></li>
+  <li><a href="#递推杨辉三角" id="toc-递推杨辉三角" class="nav-link" data-scroll-target="#递推杨辉三角"><span class="header-section-number">4</span> 递推——杨辉三角</a></li>
+  <li><a href="#生成函数广义二项式定理" id="toc-生成函数广义二项式定理" class="nav-link" data-scroll-target="#生成函数广义二项式定理"><span class="header-section-number">5</span> 生成函数——广义二项式定理</a>
+  <ul class="collapse">
+  <li><a href="#update" id="toc-update" class="nav-link" data-scroll-target="#update"><span class="header-section-number">5.1</span> 2023/03/10 update</a></li>
+  </ul></li>
+  <li><a href="#burnsidepolya第一类斯特林数" id="toc-burnsidepolya第一类斯特林数" class="nav-link" data-scroll-target="#burnsidepolya第一类斯特林数"><span class="header-section-number">6</span> Burnside(Polya)——第一类斯特林数</a></li>
+  <li><a href="#后记致谢" id="toc-后记致谢" class="nav-link" data-scroll-target="#后记致谢"><span class="header-section-number">7</span> 后记&amp;致谢</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">从不定方程的非负整数解个数谈起</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">OI</div>
+    <div class="quarto-category">数学</div>
+    <div class="quarto-category">意识流</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 1, 2021</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">March 10, 2023</p>
+    </div>
+  </div>
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    组合意义、Vandermonde 卷积、杨辉三角、生成函数、广义二项式定理、Burnside(Polya) 以及第一类斯特林数，你从未见过的全新解法。
+  </div>
+</div>
+
+</header>
+
+<section id="序" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="序"><span class="header-section-number">1</span> 序</h2>
+<div id="exm-diophantine" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1 </strong></span>求将 <span class="math inline">\(n\)</span> 个无标号元素用 <span class="math inline">\(m-1\)</span> 个隔板分入 <span class="math inline">\(m\)</span> 个有标号可空集合的方案数。</p>
+<p>此问题的另一个等价表述是，求不定方程 <span class="math display">\[
+x_1 + x_2 + \dots + x_m = n \quad (m,n \in N_+, m \le n)
+\]</span> 的非负整数解的个数。</p>
+</div>
+<p>是一个非常经典的组合问题，众所周知其答案为组合数 <span class="math inline">\({n+m-1 \choose m-1}\)</span> ，这可以根据其组合意义结合隔板法容易的得到。</p>
+<p>然而，笔者发现还有很多有趣的方法可以得到上式，值得探讨一番。</p>
+</section>
+<section id="组合意义" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="组合意义"><span class="header-section-number">2</span> 组合意义</h2>
+<p>如上所述，组合意义可以结合隔板法容易的得到。考虑将 <span class="math inline">\(n\)</span> 个无标号元素用 <span class="math inline">\(m-1\)</span> 个隔板分入 <span class="math inline">\(m\)</span> 个有标号非空集合，其方案数为 <span class="math inline">\({n-1 \choose m-1}\)</span> 。然而我们需要的是各集合可空情况下的方案数。考虑新增 <span class="math inline">\(m\)</span> 个元素，先给每个集合放一个元素垫底，再做各组可空的分配。这个小Trick让我们将问题转化为求 <span class="math inline">\(n+m\)</span> 个无标号元素分入 <span class="math inline">\(m\)</span> 个非空有标号集合的方案数。再用隔板法，得到答案 <span class="math inline">\({n+m-1 \choose m-1}\)</span> 。</p>
+<p>形式化的，我们令 <span class="math inline">\(y_i = x_i + 1\)</span> ，则我们现在只需求 <span class="math inline">\(y_1 + y_2 + \dots + y_m = n + m\)</span> 的正整数解，隔板法得到答案 <span class="math inline">\({n+m-1 \choose m-1}\)</span> 。</p>
+</section>
+<section id="枚举空位vandermonde-卷积公式" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="枚举空位vandermonde-卷积公式"><span class="header-section-number">3</span> 枚举空位——Vandermonde 卷积公式</h2>
+<p>我们使用另一种方法将隔板法应用到可空集合上。</p>
+<p>枚举 <span class="math inline">\(m\)</span> 个集合中有几个是空集，可以得到下式</p>
+<p><span class="math display">\[
+\mathrm{ans} = \sum_{k=0}^{m-1} {m \choose k} {n-1 \choose m-k-1}
+\]</span></p>
+<p>又由</p>
+<div id="thm-vandermonde" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Vandermonde 卷积公式) </strong></span><span class="math display">\[
+{n+m \choose k} = \sum_{i=\max(0,k-m)}^{\min(n,k)} {n \choose i} {m \choose k-i}
+\]</span></p>
+</div>
+<p>（该定理易由 <span class="math inline">\((1+x)^{n+m} = (1+x)^n (1+ x)^m\)</span> 的二项式展开说明）</p>
+<p>可直接得到（ <span class="math inline">\(k' = m-1\)</span> ， <span class="math inline">\(n' = m\)</span> ， <span class="math inline">\(m' = n-1\)</span> ）</p>
+<p><span class="math display">\[
+\mathrm{ans} = \sum_{k=\max(0,(m-1)-(n-1))}^{\min(m,m-1)} {m \choose k} {n-1 \choose m-k-1} = {n+m-1 \choose m-1}
+\]</span></p>
+</section>
+<section id="递推杨辉三角" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="递推杨辉三角"><span class="header-section-number">4</span> 递推——杨辉三角</h2>
+<p>这固然很妙，但要是我想不到这些Trick怎么办？</p>
+<p>作为完全不虚递推的 OIer，我们考虑 dp。</p>
+<p>设状态 <span class="math inline">\(f(n,m)\)</span> 表示将 <span class="math inline">\(n\)</span> 个无标号元素放入 <span class="math inline">\(m\)</span> 个有标号可空集合的方案数。</p>
+<p>考虑当前正在为第 <span class="math inline">\(n\)</span> 个元素确定所属集合。既然元素是无标号的，不妨按升序排列集合。于是放入新的元素时，只需决定要先跳过多少个集合再放入。易得下面的递推式</p>
+<p><span class="math display">\[
+f(n,m) = \sum_{k=1}^m f(n-1,k)
+\]</span></p>
+<p>初始状态满足</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;f(0,m)=1 \\
+&amp;f(n,0)=[n=0]
+\end{aligned}
+\quad (n,m \in N)
+\]</span></p>
+<p>（中括号是艾弗森括号）</p>
+<p>不妨列出 <span class="math inline">\(f\)</span> 的前几项——</p>
+<pre><code>    m0   m1   m2   m3   m4
+n0  1    1    1    1    1
+n1  0    1    2    3    4
+n2  0    1    3    6    10
+n3  0    1    4    10   20</code></pre>
+<p>很熟悉…这是杨辉三角！</p>
+<p>可以由递推式得到杨辉三角的特征——</p>
+<p><span class="math display">\[
+\begin{aligned}
+f(n,m) &amp;= f(n-1, m) + \sum_{k=1}^{m-1} f(n-1,k) \\
+&amp;= f(n-1, m) + f(n, m-1)
+\end{aligned}
+\]</span></p>
+<p>那么，只需观察并将表格的每一项映射到杨辉三角，我们就能得到 <span class="math inline">\(f(n,m) = {n+m+1 \choose m-1}\)</span> 。</p>
+</section>
+<section id="生成函数广义二项式定理" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="生成函数广义二项式定理"><span class="header-section-number">5</span> 生成函数——广义二项式定理</h2>
+<p><del>要是我连杨辉三角都没看出来怎么办</del></p>
+<p>方便起见，此处我们不研究 <span class="math inline">\(m=0\)</span> 的情况。不妨设</p>
+<p><span class="math display">\[
+g(n,m) = f(n,m+1)
+\]</span></p>
+<p>显然， <span class="math inline">\(g\)</span> 的递推式为</p>
+<p><span class="math display">\[
+g(n,m) = \sum_{k=0}^m g(n-1,k)
+\]</span></p>
+<p>据此我们发现，每一排是其前一排的前缀和数组，或者换句话说，每一排是其后一排的向前差分数组。我们先拿出 <span class="math inline">\(n=0\)</span> 一排的OGF</p>
+<p><span class="math display">\[
+g_0(x) = \frac{1}{1-x}
+\]</span></p>
+<p>又根据差分</p>
+<p><span class="math display">\[
+g_n(x) = g_{n+1}(x) - x g_{n+1}(x) \iff g_{n+1}(x) = \frac{1}{1-x} g_n(x)
+\]</span></p>
+<p>得</p>
+<p><span class="math display">\[
+g_n(x) = (1-x)^{-(n+1)}
+\]</span></p>
+<p>又由</p>
+<div id="thm-binomial" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (广义二项式定理) </strong></span><span class="math display">\[
+(x+y)^\alpha = \sum_{k=0}^{\infty} {\alpha \choose k} x^k y^{\alpha - k}
+\]</span></p>
+<p>其中</p>
+<p><span class="math display">\[
+{\alpha \choose k} = \frac{\alpha(\alpha-1)\dots(\alpha-k+1)}{k!}
+\]</span></p>
+</div>
+<p>展开，得到</p>
+<p><span class="math display">\[
+g_n(x) = \sum_{k=0}^{\infty} {-n-1 \choose k} (-x)^k
+\]</span></p>
+<p>故</p>
+<p><span class="math display">\[
+\begin{aligned}
+g_n(x)[x^k] &amp;= (-1)^k {-n-1 \choose k} \\
+&amp;= (-1)^k \frac{(-n-1)(-n-2)\dots(-n-k)}{k!} \\
+&amp;= \frac{(n+1)(n+2)\dots(n+k)}{k!} \\
+&amp;= {n+k \choose k}
+\end{aligned}
+\]</span></p>
+<p>即</p>
+<p><span class="math display">\[
+g(n,k) = {n+k \choose k}
+\]</span></p>
+<p>换回 <span class="math inline">\(f\)</span> 表示就得到答案</p>
+<p><span class="math display">\[
+f(n,m) = g(n,m-1) = {n+m-1 \choose m-1}
+\]</span></p>
+<section id="update" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="update"><span class="header-section-number">5.1</span> 2023/03/10 update</h3>
+<p>事实上，直接从组合意义思考就能直接得到该计数问题的生成函数形式</p>
+<p><span class="math display">\[
+(1 + x + x^2 + \dots)^m = \left( \frac 1 {1-x} \right)^m = (1-x)^{-m}
+\]</span></p>
+<p>按前述方法展开即可得到相同的结果。</p>
+</section>
+</section>
+<section id="burnsidepolya第一类斯特林数" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="burnsidepolya第一类斯特林数"><span class="header-section-number">6</span> Burnside(Polya)——第一类斯特林数</h2>
+<p>如果要分组的 <span class="math inline">\(n\)</span> 个元素是有标号的，问题将会简单很多——直接枚举每个元素的所属集合即可，显然方案数为 <span class="math inline">\(m^n\)</span> 。</p>
+<p>但关键是它们没有标号。</p>
+<p>无标号的本质是认为任意置换标号前后是同构的。这启发我们将所有 <span class="math inline">\(n\)</span> 元置换（即置换群）作为变换集，使用等价类计数Burnside来解决该问题。</p>
+<p>根据Burnside引理（或Polya定理）</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[
+\mathrm{ans} = \frac{1}{|G|} \sum_{f \in G} C(f)
+\]</span></p>
+<p>其中 <span class="math inline">\(G\)</span> 是变换集， <span class="math inline">\(C(f)\)</span> 是变换 <span class="math inline">\(f\)</span> 的不动点。</p>
+</blockquote>
+<p>可以写出</p>
+<p><span class="math display">\[
+\mathrm{ans} = \frac{1}{n!} \sum_{p \in \mathrm{perm}(n)} m^{\mathrm{cyc}(p)}
+\]</span></p>
+<p>其中 <span class="math inline">\(\mathrm{perm}(n)\)</span> 表示所有 <span class="math inline">\(n\)</span> 元置换的集合，而 <span class="math inline">\(\mathrm{cyc}(p)\)</span> 指置换 <span class="math inline">\(p\)</span> 的形成的置换图中环的个数。</p>
+<p>在外层枚举 <span class="math inline">\(\mathrm{cyc}(p)\)</span> ，得</p>
+<p><span class="math display">\[
+\mathrm{ans} = \frac{1}{n!} \sum_{k=1}^n m^k \sum_{p \in \mathrm{perm}(n)} [\mathrm{cyc}(p) = k]
+\]</span></p>
+<p><span class="math inline">\(\sum_{p \in \mathrm{perm}(n)} [\mathrm{cyc}(p) = k]\)</span> 是什么？</p>
+<blockquote class="blockquote">
+<p>第一类斯特林数 <span class="math inline">\({n \brack k}\)</span> 表示将 <span class="math inline">\(n\)</span> 个有标号元素分成 <span class="math inline">\(k\)</span> 个无标号圆排列的方案数。</p>
+</blockquote>
+<p>在置换图中， <span class="math inline">\(p_i\)</span> 表示节点 <span class="math inline">\(i\)</span> 的下一个节点是 <span class="math inline">\(p_i\)</span> 。而枚举置换的过程，正是枚举置换图的过程，也正是枚举圆排列的过程！而 <span class="math inline">\([\mathrm{cyc}(p) = k]\)</span> 则为我们确定了环，或者说圆排列的个数。</p>
+<p>惊讶的，我们发现</p>
+<p><span class="math display">\[
+{n \brack k} = \sum_{p \in \mathrm{perm}(n)} [\mathrm{cyc}(p) = k]
+\]</span></p>
+<p>带入其中，答案式变为</p>
+<p><span class="math display">\[
+\mathrm{ans} = \frac{1}{n!} \sum_{k=1}^n {n \brack k} m^k
+\]</span></p>
+<p>于是，根据第一类斯特林数性质之一</p>
+<blockquote class="blockquote">
+<p><span class="math display">\[
+\sum_{k=1}^n {n \brack k} m^k  = m(m+1)\dots(n+m-1)
+\]</span></p>
+<p>（该性质可以结合第一类斯特林数的递推式做数学归纳得出）</p>
+</blockquote>
+<p>我们愉快的得到了答案</p>
+<p><span class="math display">\[
+\mathrm{ans} = \frac{m(m+1)\dots(n+m-1)}{n!} = {n+m-1 \choose m-1}
+\]</span></p>
+<p>用Burnside解决无标号问题的思路极具启发性，例如<a href="https://loj.ac/p/6538">烷基计数</a>问题的Burnside解法。</p>
+</section>
+<section id="后记致谢" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="后记致谢"><span class="header-section-number">7</span> 后记&amp;致谢</h2>
+<p><del>同分异构体计数带我重回OI</del></p>
+<p>感谢TbYangZ菊苣全程提供技术支持。</p>
+<p>感谢神仙化学老师提供组合意义解释。</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="sun123zxy/blog-quarto-code" data-repo-id="R_kgDOIrPs5w" data-category="General" data-category-id="DIC_kwDOIrPs584CV4gd" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark_dimmed" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">sun123zxy’s blog | Powered by Quarto</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.333">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="sun123zxy">
+<meta name="dcterms.date" content="2023-04-23">
+
+<title>sun123zxy’s blog - Wallis 公式、Stirling 公式与正态分布</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">sun123zxy’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts/about" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#warm-up" id="toc-warm-up" class="nav-link active" data-scroll-target="#warm-up"><span class="header-section-number">1</span> Warm up</a></li>
+  <li><a href="#wallis-公式" id="toc-wallis-公式" class="nav-link" data-scroll-target="#wallis-公式"><span class="header-section-number">2</span> Wallis 公式</a></li>
+  <li><a href="#stirling-公式" id="toc-stirling-公式" class="nav-link" data-scroll-target="#stirling-公式"><span class="header-section-number">3</span> Stirling 公式</a></li>
+  <li><a href="#poisson-分布" id="toc-poisson-分布" class="nav-link" data-scroll-target="#poisson-分布"><span class="header-section-number">4</span> Poisson 分布</a>
+  <ul class="collapse">
+  <li><a href="#从二项分布的推导" id="toc-从二项分布的推导" class="nav-link" data-scroll-target="#从二项分布的推导"><span class="header-section-number">4.1</span> 从二项分布的推导</a></li>
+  <li><a href="#归一性验证" id="toc-归一性验证" class="nav-link" data-scroll-target="#归一性验证"><span class="header-section-number">4.2</span> 归一性验证</a></li>
+  </ul></li>
+  <li><a href="#正态分布" id="toc-正态分布" class="nav-link" data-scroll-target="#正态分布"><span class="header-section-number">5</span> 正态分布</a>
+  <ul class="collapse">
+  <li><a href="#从二项分布的推导de-moivre-laplace-定理" id="toc-从二项分布的推导de-moivre-laplace-定理" class="nav-link" data-scroll-target="#从二项分布的推导de-moivre-laplace-定理"><span class="header-section-number">5.1</span> 从二项分布的推导（de Moivre-Laplace 定理）</a></li>
+  </ul></li>
+  <li><a href="#challenge" id="toc-challenge" class="nav-link" data-scroll-target="#challenge"><span class="header-section-number">6</span> Challenge</a>
+  <ul class="collapse">
+  <li><a href="#正态分布的归一性验证maxwell-速率分布与高维球体的表面积" id="toc-正态分布的归一性验证maxwell-速率分布与高维球体的表面积" class="nav-link" data-scroll-target="#正态分布的归一性验证maxwell-速率分布与高维球体的表面积"><span class="header-section-number">6.1</span> 正态分布的归一性验证、Maxwell 速率分布与高维球体的表面积</a></li>
+  <li><a href="#n-的其它估计" id="toc-n-的其它估计" class="nav-link" data-scroll-target="#n-的其它估计"><span class="header-section-number">6.2</span> <span class="math inline">\(n!\)</span> 的其它估计</a></li>
+  <li><a href="#wallis-公式视角下三阶乘与中心三项式系数的渐进估计" id="toc-wallis-公式视角下三阶乘与中心三项式系数的渐进估计" class="nav-link" data-scroll-target="#wallis-公式视角下三阶乘与中心三项式系数的渐进估计"><span class="header-section-number">6.3</span> Wallis 公式视角下三阶乘与中心三项式系数的渐进估计</a></li>
+  </ul></li>
+  
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Wallis 公式、Stirling 公式与正态分布</h1>
+<p class="subtitle lead">数学分析 II 第十周研讨课讲稿 EX</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">数学</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>sun123zxy </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 23, 2023</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">April 26, 2023</p>
+    </div>
+  </div>
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    以及双阶乘、中心二项式系数、Catalan 数的渐进估计和 Poisson 分布．
+  </div>
+</div>
+
+</header>
+
+<div class="hidden">
+<p><span class="math display">\[
+\newcommand{\diff}{\operatorname{d}\!}
+\]</span></p>
+</div>
+<p>参考：</p>
+<ul>
+<li>张筑生《数学分析新讲》第二册<span class="citation" data-cites="analysis"><sup>[<a href="#ref-analysis" role="doc-biblioref">1</a>]</sup></span></li>
+<li>张颢《概率论》<span class="citation" data-cites="prob"><sup>[<a href="#ref-prob" role="doc-biblioref">2</a>]</sup></span></li>
+<li>Wikipedia, Math StackExchange, etc.</li>
+</ul>
+<section id="warm-up" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="warm-up"><span class="header-section-number">1</span> Warm up</h2>
+<div id="exm-double-factorial" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1 </strong></span>求 <span class="math display">\[
+\lim_{n \to \infty} \frac{(2n-1)!!}{(2n)!!} = \lim_{n \to \infty} \frac{1 \times 3 \times 5 \times \dots \times (2n-1)}{2 \times 4 \times 6 \times \dots \times 2n}
+\]</span></p>
+</div>
+<div class="solution proof">
+<p><span class="proof-title"><em>Solution</em>. </span>用放缩 <span class="math display">\[
+2k &gt; \sqrt{(2k-1)(2k+1)}
+\]</span> 拆分母即得 <span class="math display">\[
+\frac{(2n-1)!!}{(2n)!!} &lt; \frac 1 {\sqrt{2n+1}} \sim 0
+\]</span></p>
+</div>
+<div id="exm-binomial" class="theorem example">
+<p><span class="theorem-title"><strong>Example 2 (中心二项式系数) </strong></span>求 <span class="math display">\[
+\lim_{n \to \infty} \frac{\binom{2n}{n}}{2^{2n}}
+\]</span></p>
+</div>
+<div class="solution proof">
+<p><span class="proof-title"><em>Solution</em>. </span><span class="math display">\[
+\frac{\binom{2n}{n}}{2^{2n}} = \frac{(2n)!}{2^{2n} (n!)^2} = \frac{(2n)!}{(2^n n!)^2} = \frac{(2n)!}{(2n!!)^2} = \frac{(2n-1)!!}{2n!!} &lt; \frac 1 {\sqrt{2n+1}} \sim 0
+\]</span></p>
+</div>
+<p>上两例有没有更精确的渐进估计？这便是我们马上要研究的问题．</p>
+</section>
+<section id="wallis-公式" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="wallis-公式"><span class="header-section-number">2</span> Wallis 公式</h2>
+<div id="lem-wallis-integral" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 1 (Wallis 积分公式) </strong></span>定积分系列 <span class="math display">\[
+J_n = \int_0^{\frac \pi 2} \sin^n x \diff x
+\]</span> 满足 <span class="math display">\[
+\begin{aligned}
+J_{2n} &amp;= \frac{(2n-1)!!}{(2n)!!} \cdot \frac \pi 2 \\
+J_{2n+1} &amp;= \frac{(2n)!!}{(2n+1)!!} \cdot 1
+\end{aligned}
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>我们的思路是：先把一个 <span class="math inline">\(\sin x\)</span> 放进微分中，然后分部积分得到递推式．</p>
+<p><span class="math display">\[
+\begin{aligned}
+J_n &amp;= \int_0^{\frac \pi 2} \sin^n x \diff x \\
+&amp;= - \int_0^{\frac \pi 2} \sin^{n-1} x \diff \cos x \\
+&amp;= \left[ - \sin^{n-1} x \cos x \right]_{0}^{\frac \pi 2} + \int_0^{\frac \pi 2} \cos x \diff \sin^{n-1} x \\
+&amp;= (n-1) \int_0^{\frac \pi 2} \cos^2 x \sin^{n-2} x \diff x \\
+&amp;= (n-1) \int_0^{\frac \pi 2} (1 - \sin^2 x) \sin^{n-2} x \diff x \\
+&amp;= (n-1) \int_0^{\frac \pi 2} \sin^{n-2} x \diff x - (n-1) \int_0^{\frac \pi 2} \sin^n x \diff x \\
+&amp;= (n-1) J_{n-2} - (n-1) J_n
+\end{aligned}
+\]</span></p>
+<p>故 <span class="math display">\[
+J_n = \frac{n-1}{n} J_{n-2}
+\]</span> 边界条件 <span class="math display">\[
+\begin{aligned}
+J_0 &amp;= \frac \pi 2 \\
+J_1 &amp;= \int_0^{\frac \pi 2} \sin x \diff x = 1
+\end{aligned}
+\]</span> 代入递推式求解就得到了要证的结论．</p>
+</div>
+<div id="thm-wallis" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Wallis 公式) </strong></span><span class="math display">\[
+\frac \pi 2 = \lim_{n \to \infty} \frac 1 {2n+1} \left( \frac{(2n)!!}{(2n-1)!!} \right)^2
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>注意到在积分区间上，<span class="math inline">\(\sin^n x \geq \sin^{n+1} x\)</span>，由积分的单调性，<span class="math inline">\(J_n\)</span> 随 <span class="math inline">\(n\)</span> 单调递减，故 <span class="math inline">\(J_{2n+1} \leq J_{2n} \leq J_{2n-1}\)</span> 成立．代入 <a href="#lem-wallis-integral">Lemma&nbsp;1</a> 中得到的结果 <span class="math display">\[
+\frac{(2n)!!}{(2n+1)!!} \leq \frac{(2n-1)!!}{(2n)!!} \cdot \frac \pi 2 \leq \frac{(2n-2)!!}{(2n-1)!!}
+\]</span> 移项得 <span class="math display">\[
+\left( \frac{(2n)!!}{(2n-1)!!} \right)^2 \frac{1}{2n+1} \leq \frac \pi 2 \leq \left( \frac{(2n)!!}{(2n-1)!!} \right)^2 \frac 1 {2n}
+\]</span></p>
+<p>现在只需说明 RHS 与 LHS 的差是一个无穷小． <span class="math display">\[
+\begin{aligned}
+\left( \frac{(2n)!!}{(2n-1)!!} \right)^2 \left( \frac 1 {2n} - \frac 1 {2n+1}  \right)
+&amp;= \left( \frac{(2n)!!}{(2n-1)!!} \right)^2 \left( \frac 1 {2n(2n+1)} \right) \\
+&amp;= \left( \frac{(2n-2)!!}{(2n-1)!!} \right)^2 \frac {2n}{(2n+1)}
+\end{aligned}
+\]</span> 由 <a href="#exm-double-factorial">Example&nbsp;1</a> ，<span class="math inline">\(\lim_{n \to \infty} \frac{(2n-2)!!}{(2n-1)!!} = 0\)</span>，故上式确为一个无穷小，定理得证．</p>
+</div>
+<p>Wallis 公式还有其它表现形式： <span class="math display">\[
+\frac{2^{2n}}{\binom{2n}{n}} = \frac{(2n)!!}{(2n-1)!!} \sim \sqrt{\pi n} \pod{n \to \infty}
+\]</span> 这里 Wallis 公式反映为对 <a href="#exm-double-factorial">Example&nbsp;1</a> 和 <a href="#exm-binomial">Example&nbsp;2</a> 的渐进估计．</p>
+<div id="exr-catalan" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1 </strong></span>对 Catalan 数 <span class="math display">\[
+C_n = \binom{2n}{n} - \binom{2n}{n+1}
+\]</span> 做出渐进估计．</p>
+</div>
+<div class="solution proof">
+<p><span class="proof-title"><em>Solution</em>. </span>注意到 <span class="math display">\[
+C_n = \binom{2n}{n} - \binom{2n}{n+1} = \binom{2n}{n} - \frac n {n+1} \binom{2n}{n} = \frac 1 {n+1} \binom{2n}{n}
+\]</span> 用 Wallis 公式计算即得 <span class="math display">\[
+C_n \sim \frac {2^{2n}}{\sqrt{\pi} n^{\frac 3 2}}
+\]</span></p>
+</div>
+<p>Wallis 公式的另一种表现形式是 <span class="math display">\[
+\frac \pi 2 = \prod_{k=1}^\infty \frac{4 n^2}{4 n^2-1} = \prod_{k=1}^\infty \left( \frac{2n}{2n-1} \cdot \frac{2n}{2n+1} \right)
+\]</span> 这表达式也被称为 Wallis product，用于近似计算 <span class="math inline">\(\pi\)</span>．</p>
+<div class="remark proof">
+<p><span class="proof-title"><em>Remark</em>. </span>这和我们在 <a href="#exm-double-factorial">Example&nbsp;1</a> 中使用的放缩技巧……</p>
+</div>
+</section>
+<section id="stirling-公式" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="stirling-公式"><span class="header-section-number">3</span> Stirling 公式</h2>
+<div id="lem-e" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 2 </strong></span><span class="math display">\[
+\left( 1+\frac 1 n \right)^n &lt; e &lt; \left( 1 + \frac 1 n \right)^{n+1}
+\]</span></p>
+</div>
+<p>这是《数学分析 I》中大家所熟知的．</p>
+<div id="thm-stirling-weak" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 </strong></span><span class="math display">\[
+\left(\frac n e \right)^n &lt; \frac {n!} e
+&lt; n \left( \frac n e \right)^n
+\]</span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>将 <a href="#lem-e">Lemma&nbsp;2</a> 写成 <span class="math display">\[
+\frac{(n+1)^n}{n^n} &lt; e &lt; \frac{(n+1)^{n+1}}{n^{n+1}}
+\]</span> 对 <span class="math inline">\(k = 1,2, \dots, n-1\)</span> 做连乘 <span class="math display">\[
+\prod_{k=1}^{n-1} \frac{(k+1)^k}{k^k} &lt; e^{n-1} &lt; \prod_{k=1}^{n-1} \frac{(k+1)^{k+1}}{k^{k+1}}
+\]</span> 注意到乘积的相邻两项中，前一项的分子与后一项的分母可以约分，中间每项只余下 <span class="math inline">\(\frac 1 k\)</span>，故上式可化为 <span class="math display">\[
+\frac{n^{n-1}}{(n-1)!} &lt; e^{n-1} &lt; \frac{n^n}{(n-1)!}
+\]</span> 两端再同乘 <span class="math inline">\(\frac{n!}{e^{n}}\)</span> 就得到 <span class="math display">\[
+\left(\frac n e \right)^n &lt; \frac {n!} e
+&lt; n \left( \frac n e \right)^n
+\]</span></p>
+</div>
+<div id="thm-stirling" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3 (Stirling 公式) </strong></span><span class="math display">\[
+n! \sim \sqrt{2 \pi n} \left( \frac n e \right)^n \pod{n \to \infty}
+\]</span></p>
+</div>
+<p>完整证明较复杂，这里介绍证明最后一步：已知 <span class="math inline">\(n! \sim a \sqrt n \left( \frac n e \right)^n\)</span>，用 Wallis 公式对 <span class="math inline">\(2^{2n} / \binom{2n}{n}\)</span> 的渐进估计确定系数 <span class="math inline">\(a\)</span>．</p>
+<p><span class="math display">\[
+\sqrt{\pi n} \sim \frac {2^{2n}}{\binom{2n}{n}} = \frac{2^{2n} (n!)^2}{(2n)!} \sim \frac{2^{2n} (a \sqrt n n^n e^{-n})^2}{a \sqrt{2n} 2^{2n} n^{2n} e^{-2n}} = \sqrt{\frac n 2} a
+\]</span></p>
+<p>因此 <span class="math inline">\(a=\sqrt{2 \pi}\)</span>．</p>
+<div id="exm-stirling-binomial" class="theorem example">
+<p><span class="theorem-title"><strong>Example 3 </strong></span>当 <span class="math inline">\(n \to \infty\)</span>，<span class="math inline">\(k \to \infty\)</span> 时，用 Stirling 公式渐进估计 <span class="math inline">\(\binom n k\)</span>．</p>
+</div>
+<div class="solution proof">
+<p><span class="proof-title"><em>Solution</em>. </span><span class="math display">\[
+\binom n k \sim \sqrt{\frac{n}{2 \pi k (n-k)}} \frac{n^n}{k^k (n-k)^{n-k}}
+\]</span></p>
+</div>
+</section>
+<section id="poisson-分布" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="poisson-分布"><span class="header-section-number">4</span> Poisson 分布</h2>
+<p>描述单位时间平均发生次数恒定的随机事件的概率分布．</p>
+<div id="def-poission" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (Poisson 分布) </strong></span>若离散随机变量 <span class="math inline">\(X\)</span> 满足 <span class="math display">\[
+P(X = k) = \frac{\lambda^k}{k!}e^{-\lambda}
+\]</span> 其中 <span class="math inline">\(\lambda &gt; 0\)</span> 是确定的常数，则随机变量 <span class="math inline">\(X\)</span> 服从 Poisson 分布．</p>
+</div>
+<section id="从二项分布的推导" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="从二项分布的推导"><span class="header-section-number">4.1</span> 从二项分布的推导</h3>
+<p>在 <span class="math inline">\(np = \lambda\)</span> 的条件下，取 <span class="math inline">\(P(X_n = k) = \binom n k p^k (1-p)^{n-k}\)</span> 在 <span class="math inline">\(n \to \infty\)</span> 在 <span class="math inline">\(n \to \infty\)</span> 上的逐点极限．</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(X_n = k)
+&amp;= \binom{n}{k} p^k (1-p)^{n-k} \\
+&amp;= \binom{n}{k} \frac{\lambda^k}{n^k} \left( 1-\frac \lambda n \right)^{n-k} \\
+&amp;= \lambda^k \left( 1-\frac \lambda n \right)^n \left( 1-\frac \lambda n \right)^{-k} \binom{n}{k} \frac{1}{n^k} \\
+&amp;\sim \lambda^k e^{-\lambda}\binom{n}{k} \frac 1 {n^k} \\
+&amp;= \lambda^k e^{-\lambda} \frac {n (n-1) \dots (n-k+1)}{k! n^k} \\
+&amp;= \frac{\lambda^k}{k!} e^{-\lambda} \cdot 1 \cdot (1-\frac 1 n) \dots (1 - \frac{k-1}{n}) \\
+&amp;\sim \frac{\lambda^k}{k!} e^{-\lambda}
+\end{aligned}
+\]</span></p>
+</section>
+<section id="归一性验证" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="归一性验证"><span class="header-section-number">4.2</span> 归一性验证</h3>
+<p><span class="math display">\[
+\sum_{k=0}^{+\infty} P(X = k) = \sum_{k=0}^{+\infty} \frac{\lambda^k}{k!}e^{-\lambda} =  e^{-\lambda} \sum_{k=0}^{+\infty} \frac{\lambda^k}{k!} = e^{-\lambda} e^{\lambda} = 1
+\]</span></p>
+</section>
+</section>
+<section id="正态分布" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="正态分布"><span class="header-section-number">5</span> 正态分布</h2>
+<p>与 Poisson 分布不同，（标准）正态分布是在 <span class="math inline">\(n \to \infty\)</span> 的过程中假定 <span class="math inline">\(p\)</span> 不变的情况下，对归一化（即假定期望和方差不变）后的 <span class="math inline">\(X_n\)</span> 取逐点极限得到的．</p>
+<div id="def-poission" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 2 (正态分布) </strong></span>若连续随机变量 <span class="math inline">\(X\)</span> 的期望 <span class="math inline">\(E(X) = \mu\)</span>，方差 <span class="math inline">\(D(X) = \sigma\)</span>，且其概率分布函数为 <span class="math display">\[
+f(x) = \frac 1 {\sqrt{2 \pi} \sigma} \exp \left(-\frac{(x-\mu)^2}{2 \sigma^2}\right)
+\]</span> 则变量 <span class="math inline">\(X\)</span> 服从正态分布，记为 <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>．</p>
+<p>特别的，当 <span class="math inline">\(\mu = 0\)</span>，<span class="math inline">\(\sigma = 1\)</span> 时，变量 <span class="math inline">\(X\)</span> 服从标准正态分布 <span class="math display">\[
+f(x) = \frac 1 {\sqrt{2 \pi}} \exp \left(-\frac{1}{2} x^2\right)
+\]</span></p>
+</div>
+<section id="从二项分布的推导de-moivre-laplace-定理" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="从二项分布的推导de-moivre-laplace-定理"><span class="header-section-number">5.1</span> 从二项分布的推导（de Moivre-Laplace 定理）</h3>
+<p>设随机变量 <span class="math inline">\(X_n \sim B(n,p)\)</span>．方便起见，令 <span class="math inline">\(q = 1-p\)</span>．众所周知，二项分布的期望与方差满足 <span class="math inline">\(E(X_n) = np\)</span>，<span class="math inline">\(D(X_n) = npq\)</span>．</p>
+<p>对随机变量 <span class="math inline">\(X_n\)</span> 做归一化： <span class="math display">\[
+\bar X_n = \frac{X_n - E(X_n)}{\sqrt{D(X_n)}} = \frac{X_n - np}{\sqrt{npq}}
+\]</span> 考虑到 <span class="math display">\[
+P(\bar X_n = x) = P(X_n = np + x \sqrt{npq})
+\]</span> 令 <span class="math inline">\(k = np + x \sqrt{npq}\)</span>，则 <span class="math display">\[
+P(\bar X_n = x) = P(X_n = k) = \binom{n}{k} p^k q^{n-k}
+\]</span> 此时 <span class="math inline">\(n,k\)</span> 均趋于无穷大，故可应用 <a href="#exm-stirling-binomial">Example&nbsp;3</a> 对二项式系数做出估计 <span class="math display">\[
+\begin{aligned}
+\binom{n}{k} p^k q^{n-k}
+&amp;\sim \sqrt{\frac{n}{2 \pi k (n-k)}} \frac{n^n}{k^k (n-k)^{n-k}} p^k q^{n-k} \\
+&amp;= \sqrt{\frac{n}{2 \pi k (n-k)}} \left( \frac{np}{k} \right)^{k} \left( \frac{nq}{n-k} \right)^{n-k} \\
+&amp;= \sqrt{\frac{n}{2 \pi k (n-k)}} \exp{\left( k \ln{\frac{np}{k}} + (n-k) \ln{\frac{nq}{n-k}} \right)}
+\end{aligned}
+\]</span></p>
+<p>下面分别处理 <span class="math inline">\(k \ln{\frac{np}{k}}\)</span> 和 <span class="math inline">\((n-k) \ln{\frac{nq}{n-k}}\)</span>．</p>
+<p><span class="math display">\[
+\begin{aligned}
+k \ln{\frac{np}{k}}
+&amp;= -(np + x \sqrt{npq}) \ln{\frac{np + x \sqrt{npq}}{np}} \\
+&amp;= -(np + x \sqrt{npq}) \ln{\left( 1 + x \sqrt{\frac q {np}} \right)} \\
+&amp;= -(np + x \sqrt{npq}) \left( x \sqrt{\frac q {np}} - \frac{x^2 q}{2np} + o\left( \frac 1 n \right) \right) \\
+&amp;= -x \sqrt{npq} + \frac{1}{2} x^2 q - x^2 q + o(1)
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+(n-k) \ln{\frac{nq}{n-k}}
+&amp;= -(nq - x \sqrt{npq}) \ln{\frac{nq - x \sqrt{npq}}{nq}} \\
+&amp;= -(nq - x \sqrt{npq}) \ln{\left( 1 - x \sqrt{\frac p {nq}} \right)} \\
+&amp;= (nq - x \sqrt{npq}) \left( x \sqrt{\frac p {nq}} + \frac{x^2 p}{2nq} + o\left( \frac 1 n \right) \right) \\
+&amp;= x \sqrt{npq} + \frac{1}{2} x^2 p - x^2 p + o(1)
+\end{aligned}
+\]</span></p>
+<p>因此 <span class="math display">\[
+k \ln{\frac{np}{k}} + (n-k) \ln{\frac{nq}{n-k}} = - \frac{1}{2} x^2 (p+q) + o(1) = - \frac 1 2 x^2 + o(1)
+\]</span></p>
+<p>下面处理 <span class="math inline">\(\sqrt{\frac{n}{2 \pi k (n-k)}}\)</span>．</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sqrt{\frac{n}{2 \pi k (n-k)}}
+&amp;= \sqrt{\frac{n}{2 \pi (np + x \sqrt{npq}) (nq - x \sqrt{npq})}} \\
+&amp;= \sqrt{\frac{1}{2 \pi (p + x \sqrt{\frac{pq}{n}}) (q - x \sqrt{\frac{pq}{n}})}} \\
+&amp;= \sqrt{\frac{1}{2 \pi n p q + o(1)}}
+\end{aligned}
+\]</span></p>
+<p>将上述结果代回，我们就得到 <span class="math display">\[
+\begin{aligned}
+\binom{n}{k} p^k q^{n-k}
+&amp;\sim \sqrt{\frac{1}{2 \pi n p q + o(1)}} \exp{\left( - \frac 1 2 x^2 + o(1) \right)} \\
+&amp;\sim \frac{1}{\sqrt{2 \pi n p q}} \exp{\left( - \frac 1 2 x^2 \right)}
+\end{aligned}
+\]</span> 即 <span class="math display">\[
+P(\bar X_n = x) = P(X_n = k) \sim \frac 1 {\sqrt{2 \pi npq}} \exp \left( -{\frac 1 2 x^2} \right) = \frac 1 {\sqrt{2 \pi npq}} \exp \left( -\frac{(k-np)^2}{2npq} \right)
+\]</span> 这正是我们想要的．</p>
+<div class="remark proof">
+<p><span class="proof-title"><em>Remark</em>. </span>细心的同学可能会对式子前边的系数仍是 <span class="math inline">\(n \to \infty\)</span> 时的无穷小产生疑问．事实上，在将 <span class="math inline">\(X_n\)</span> 归一化为 <span class="math inline">\(\bar X_n\)</span> 的过程中，我们将整个变量“压缩”至原来的 <span class="math inline">\(\frac{1}{\sqrt{npq}}\)</span>，因此前面的系数可以理解为一种类似 <span class="math inline">\(\diff x\)</span> 的存在．关于归一化的直观理解，3Blue1Brown 的中心极限定理视频<span class="citation" data-cites="3b1b-clt"><sup>[<a href="#ref-3b1b-clt" role="doc-biblioref">3</a>]</sup></span>提供了很好的讲解．</p>
+<p>更形式化的，由于归一化得到的离散型随机变量 <span class="math inline">\(\bar X_n\)</span> 在 <span class="math inline">\(n \to \infty\)</span> 的过程中已经变成连续型随机变量 <span class="math inline">\(X\)</span>，我们研究的对象也应从单点转向区间．因此，对 <span class="math inline">\(X_n\)</span> 与 <span class="math inline">\(\bar X_n\)</span> 概率分布的叙述做一点变动 <span class="math display">\[
+P\left(x \leq \bar X_n &lt; x + \frac 1 {\sqrt{npq}}\right)
+= P\left(k \leq X_n &lt; k + 1 \right)
+= P(X_n=k) \sim \frac 1 {\sqrt{2 \pi npq}} \exp \left( -{\frac 1 2 x^2} \right)
+\]</span> 令区间大小趋于 <span class="math inline">\(0\)</span> 就得到 <span class="math display">\[
+\begin{aligned}
+f(x) &amp;= \lim_{h \to 0}{\frac{P(x \leq X &lt; x+h)}{h}} \\
+&amp;=  \lim_{n \to \infty} \sqrt{npq} \cdot P\left(x \leq \bar X_n &lt; x + \frac 1 {\sqrt{npq}}\right) \\
+&amp;= \lim_{n \to \infty} \sqrt{npq} \cdot \frac 1 {\sqrt{2 \pi npq}} \exp \left( -{\frac 1 2 x^2} \right) &amp; \dots \text{这里 $\sim$ 表现为等价无穷小替换} \\
+&amp;= \frac 1 {\sqrt{2 \pi}} \exp \left( -{\frac 1 2 x^2} \right)
+\end{aligned}
+\]</span> 这才是我们真正想要的，由二项分布归一化后取极限得到的，标准正态分布的概率密度函数．</p>
+</div>
+</section>
+</section>
+<section id="challenge" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="challenge"><span class="header-section-number">6</span> Challenge</h2>
+<p>选讲或留作课后讨论．</p>
+<section id="正态分布的归一性验证maxwell-速率分布与高维球体的表面积" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="正态分布的归一性验证maxwell-速率分布与高维球体的表面积"><span class="header-section-number">6.1</span> 正态分布的归一性验证、Maxwell 速率分布与高维球体的表面积</h3>
+<p>Guass 积分： <span class="math display">\[
+\int_{-\infty}^{+\infty} e^{-x^2} \diff x = \sqrt \pi
+\]</span></p>
+<p>Maxwell 速率分布： <span class="math display">\[
+f(v) = 4 \pi v^2 \left( \frac{m}{2 \pi kT} \right)^{\frac 3 2} \exp \left( - \frac{m}{2kT}v^2 \right)
+\]</span></p>
+<p>以及它们与高维球体表面积的联系涉及多元积分学的内容．参考 3Blue1Brown 有关 <span class="math inline">\(\pi\)</span> 与正态分布的视频<span class="citation" data-cites="3b1b-pi"><sup>[<a href="#ref-3b1b-pi" role="doc-biblioref">4</a>]</sup></span>．</p>
+</section>
+<section id="n-的其它估计" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="n-的其它估计"><span class="header-section-number">6.2</span> <span class="math inline">\(n!\)</span> 的其它估计</h3>
+<p>一种更容易想到的做法是 <span class="math display">\[
+n \ln n - n - 1 = \int_1^n \ln x \diff x \leq
+\ln n! = \sum_{k=1}^n \ln k
+\leq \int_1^{n+1} \ln x \diff x = (n+1) \ln (n+1) - n - 2
+\]</span> 从而 <span class="math display">\[
+\left( \frac n e \right)^n \leq e \cdot n! \leq \left(\frac{n+1}{e}\right)^{n+1}
+\]</span> 当然这比 <a href="#thm-stirling-weak">Theorem&nbsp;2</a> 的估计稍差．</p>
+<p>更多估计可参考这篇文章<span class="citation" data-cites="hijjjjq"><sup>[<a href="#ref-hijjjjq" role="doc-biblioref">5</a>]</sup></span>．</p>
+</section>
+<section id="wallis-公式视角下三阶乘与中心三项式系数的渐进估计" class="level3" data-number="6.3">
+<h3 data-number="6.3" class="anchored" data-anchor-id="wallis-公式视角下三阶乘与中心三项式系数的渐进估计"><span class="header-section-number">6.3</span> Wallis 公式视角下三阶乘与中心三项式系数的渐进估计</h3>
+<div id="exr-triple-factorial-1" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2 </strong></span>求 <span class="math display">\[
+\lim_{n \to \infty} \frac{(3n-2)!!!}{(3n)!!!} = \lim_{n \to \infty} \frac{1 \times 4 \times 7 \times \dots \times (3n-2)}{3 \times 6 \times 9 \times \dots \times 3n}
+\]</span> 并对其做出渐进估计．</p>
+</div>
+<div id="exr-triple-factorial-2" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3 </strong></span>求 <span class="math display">\[
+\lim_{n \to \infty} \frac{(3n-1)!!!}{(3n)!!!} = \lim_{n \to \infty} \frac{2 \times 5 \times 8 \times \dots \times (3n-1)}{3 \times 6 \times 9 \times \dots \times 3n}
+\]</span> 并对其做出渐进估计．</p>
+</div>
+<div id="exr-trinomial" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4 </strong></span>求 <span class="math display">\[
+\lim_{n \to \infty} \frac{(3n)! / (n!)^3}{3^{3n}}
+\]</span> 并对其做出渐进估计．</p>
+</div>
+<p>用 Stirling 公式计算得到的结果是 <span class="math display">\[
+\frac{\sqrt 3}{2 \pi n}
+\]</span> 但在 Wallis 公式的视角下如何获得？</p>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="acknowledgments" class="level2 appendix" data-number="7"><h2 class="anchored quarto-appendix-heading"><span class="header-section-number">7</span> Acknowledgments</h2><div class="quarto-appendix-contents">
+
+<p>感谢吕导组织<del>我最喜欢的</del>研讨课环节．此外，<a href="#exm-double-factorial">Example&nbsp;1</a> 的放缩技巧由吸取教训同学提供，Poisson 分布的二项分布推导是与张同学讨论的结果，在此表示感谢．</p>
+
+
+
+</div></section><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-analysis" class="csl-entry" role="listitem">
+1. 张筑生. (2021). <em>数学分析新讲（重排本）（第二册）</em> (2nd ed.). 北京大学出版社.
+</div>
+<div id="ref-prob" class="csl-entry" role="listitem">
+2. 张颢. (2018). <em>概率论</em>. 高等教育出版社.
+</div>
+<div id="ref-3b1b-clt" class="csl-entry" role="listitem">
+3. 3Blue1Brown. (2023). <em>But what is the central limit theorem?</em> <a href="https://www.youtube.com/watch?v=zeJD6dqJ5lo" class="uri">https://www.youtube.com/watch?v=zeJD6dqJ5lo</a>.
+</div>
+<div id="ref-3b1b-pi" class="csl-entry" role="listitem">
+4. 3Blue1Brown. (2023). <em>Why π is in the normal distribution (beyond integral tricks)</em>. <a href="https://www.youtube.com/watch?v=cy8r7WSuT1I" class="uri">https://www.youtube.com/watch?v=cy8r7WSuT1I</a>.
+</div>
+<div id="ref-hijjjjq" class="csl-entry" role="listitem">
+5. hijjjjq. (2022). <em>对n的阶乘（n!）进行估计</em>. <a href="https://zhuanlan.zhihu.com/p/552658420" class="uri">https://zhuanlan.zhihu.com/p/552658420</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="sun123zxy/blog-quarto-code" data-repo-id="R_kgDOIrPs5w" data-category="General" data-category-id="DIC_kwDOIrPs584CV4gd" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark_dimmed" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">sun123zxy’s blog | Powered by Quarto</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

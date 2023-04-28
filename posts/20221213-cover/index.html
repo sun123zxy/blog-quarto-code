@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.333">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="sun123zxy">
+<meta name="dcterms.date" content="2022-12-13">
+
+<title>sun123zxy’s blog - 有限覆盖定理与实数理论</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">sun123zxy’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts/about" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#example-1" id="toc-example-1" class="nav-link active" data-scroll-target="#example-1">Example 1</a></li>
+  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example 2</a></li>
+  <li><a href="#example-3" id="toc-example-3" class="nav-link" data-scroll-target="#example-3">Example 3</a></li>
+  
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">有限覆盖定理与实数理论</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">数学</div>
+    <div class="quarto-category">题解</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>sun123zxy </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 13, 2022</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">March 22, 2023</p>
+    </div>
+  </div>
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    《数学分析 I》第四次研讨课第三部分讲稿
+  </div>
+</div>
+
+</header>
+
+<section id="example-1" class="level2">
+<h2 class="anchored" data-anchor-id="example-1">Example 1</h2>
+<p>为更好的证明本题，先引入 Bolzano-Weierstrass 定理的一种等价表述.</p>
+<div id="def-accu" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (数列聚点) </strong></span>对任意实数列 <span class="math inline">\(\{ x_n \}\)</span>，若实数 <span class="math inline">\(a\)</span> 满足：对 <span class="math inline">\(a\)</span> 的任意小邻域 <span class="math inline">\(U(a, \varepsilon) = (a - \varepsilon, a + \varepsilon)\)</span>，都有无穷个 <span class="math inline">\(x_n\)</span> 满足 <span class="math inline">\(x_n \in U(a, \varepsilon)\)</span>，则称 <span class="math inline">\(a\)</span> 是数列 <span class="math inline">\(\{ x_n \}\)</span> 的一个聚点.</p>
+</div>
+<p>请注意，这里我们没有使用建立在集合之上的标准的聚点定义. 对数列单独定义聚点，是考虑到数列允许重复的元素出现，如此定义更容易展开后面的讨论.</p>
+<div id="thm-accuequiv" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 </strong></span>实数 <span class="math inline">\(a\)</span> 是数列 <span class="math inline">\(\{ x_n \} \subset \mathbb R\)</span> 的聚点的充要条件是：存在 <span class="math inline">\(\{ x_n \}\)</span> 的一个收敛子列 <span class="math inline">\(\{ x_{n_k} \}\)</span>，其极限为 <span class="math inline">\(a\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>先证充分性. 用定义写开 <span class="math inline">\(\lim_{k \to \infty} \{ x_{n_k} \} = a\)</span>，就有 <span class="math display">\[
+(\forall \varepsilon &gt; 0)(\exists K \in \mathbb N_+)(\forall k &gt; K)(|x_{n_k} - a| &lt; \varepsilon)
+\]</span> 故确有无穷项 <span class="math inline">\(x_n\)</span> 落在任意小的 <span class="math inline">\(U(a, \varepsilon)\)</span> 中，即 <span class="math inline">\(a\)</span> 是 <span class="math inline">\(\{ x_n \}\)</span> 的一个聚点，该方向得证.</p>
+<p>下证必要性. 已知 <span class="math inline">\(\{ x_n \}\)</span> 有一聚点 <span class="math inline">\(a\)</span>. 我们按如下方法构造子列 <span class="math inline">\(\{ x_{n_k} \}\)</span>：</p>
+<ol type="1">
+<li>当 <span class="math inline">\(k=1\)</span>，取 <span class="math inline">\(\varepsilon_1 = 1\)</span>，因为 <span class="math inline">\(a\)</span> 是 <span class="math inline">\(E\)</span> 的一个聚点，<span class="math inline">\(\exists n_1 \in \mathbb N_+\)</span>，<span class="math inline">\(|x_{n_1} - a| &lt; \varepsilon\)</span>.</li>
+<li>当 <span class="math inline">\(k \geqslant 2\)</span>，取 <span class="math inline">\(\varepsilon_k = \frac 1 k\)</span>，因为 <span class="math inline">\(a\)</span> 是 <span class="math inline">\(E\)</span> 的一个聚点， <span class="math inline">\(\exists n_k &gt; n_{k-1}\)</span>，<span class="math inline">\(|x_{n_k} - a| &lt; \varepsilon\)</span>.</li>
+</ol>
+<p>这样，我们构造出 <span class="math inline">\(\{ x_n \}\)</span> 的一个子列 <span class="math inline">\(\{ x_{n_k} \}\)</span> 满足 <span class="math inline">\(|x_{n_k} - a| &lt; \varepsilon_k = \frac 1 k\)</span>. 因此其收敛于 <span class="math inline">\(a\)</span>，该方向得证.</p>
+</div>
+<p>上述定理立刻证明了下定理与 Bolzano-Weierstrass 定理的等价性.</p>
+<div id="thm-bwequiv" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (数列聚点定理) </strong></span>任意有界实数列 <span class="math inline">\(\{ x_n \}\)</span> 至少有一个聚点.</p>
+</div>
+<div id="exm-finite2bw" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1 </strong></span>利用有限覆盖定理证明 Bolzano-Weierstrass 定理.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>命题等价于用有限覆盖定理证明数列聚点定理. 用反证法. 假设一有界实数列 <span class="math inline">\(\{ x_n \}\)</span> 不存在聚点，设其有上界 <span class="math inline">\(L\)</span> 和下界 <span class="math inline">\(l\)</span>. 对任意 <span class="math inline">\(a \in [l,L]\)</span>，它都不是 <span class="math inline">\(\{ x_n \}\)</span> 的聚点，因此总存在一个 <span class="math inline">\(\varepsilon(a) &gt; 0\)</span>，使得只有有限个 <span class="math inline">\(x_n\)</span> 落入 <span class="math inline">\(U(a, \varepsilon(x_0))\)</span>. 这样，构造开区间族 <span class="math display">\[
+\mathscr{F} = \{ U(a, \varepsilon(a)) \mid a \in [l,L] \}
+\]</span> 它显然是闭区间 <span class="math inline">\([l,L]\)</span> 的一个开覆盖. 由有限覆盖定理，只需取其中有限个开区间就可以覆盖住 <span class="math inline">\([l,L]\)</span>，因此覆盖 <span class="math inline">\(\{ x_n \}\)</span> 也只需要有限个开区间. 然而由前述构造，每一个开区间中也只包含有限个 <span class="math inline">\(x_n\)</span>，因此数列 <span class="math inline">\(\{ x_n \}\)</span> 只有有限项——这显然是荒谬的. 故 <span class="math inline">\(\{ x_n \}\)</span> 必有聚点，原命题得证.</p>
+</div>
+</section>
+<section id="example-2" class="level2">
+<h2 class="anchored" data-anchor-id="example-2">Example 2</h2>
+<div id="thm-lebesgue" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3 (Lebesgue 覆盖定理) </strong></span>设开区间族 <span class="math inline">\(\mathscr F\)</span> 是闭区间 <span class="math inline">\([a, b]\)</span> 的一个开覆盖，则必存在 <span class="math inline">\(\sigma &gt; 0\)</span>，使得只要区间 <span class="math inline">\(\Omega \subset [a, b]\)</span> 且 <span class="math inline">\(\Omega\)</span> 的长度 <span class="math inline">\(|\Omega| &lt; \sigma\)</span>，就必有 <span class="math inline">\(\mathscr F\)</span> 中的一个开区间包含 <span class="math inline">\(\Omega\)</span>. 其中 <span class="math inline">\(\sigma\)</span> 称为 Lebesgue 数.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>不妨只证 <span class="math inline">\(\Omega\)</span> 是闭区间这种最强的情况.</p>
+<p>用反证法. 假设命题不成立，则对任意 <span class="math inline">\(\sigma &gt; 0\)</span>，都存在一个长度小于 <span class="math inline">\(\sigma\)</span> 的闭区间 <span class="math inline">\(\Omega \subset [a,b]\)</span>，它不被任何 <span class="math inline">\(\mathscr F\)</span> 中的开区间包含. 因此，对所有自然数 <span class="math inline">\(n\)</span>，可取 <span class="math inline">\(\sigma_n = \frac 1 n\)</span>，按上述方法就可构造出一列闭区间 <span class="math display">\[\{ \Omega_n \} = \{ [a_n, b_n] \} \subset [a,b]\]</span> 其中每一个闭区间都不被任何 <span class="math inline">\(\mathscr F\)</span> 中的开区间包含，且区间长度 <span class="math inline">\(|\Omega_n| &lt; \sigma_n = \frac 1 n\)</span>，即 <span class="math inline">\(\lim_{n \to \infty} |\Omega_n| = 0\)</span>.</p>
+<p>因为 <span class="math inline">\(\Omega_n \subset [a,b]\)</span>，<span class="math inline">\(\{ a_n \}\)</span> 有界，由 Bolzano-Weierstrass 定理，其存在一收敛子列 <span class="math inline">\(\{ a_{n_k} \}\)</span>，设其极限为 <span class="math inline">\(x_0\)</span>，极限保序性表明 <span class="math inline">\(x_0 \in [a,b]\)</span>. 注意到 <span class="math inline">\(b_{n_k} = a_{n_k} + |\Omega_{n_k}|\)</span>，两端取 <span class="math inline">\(k \to \infty\)</span> 即得 <span class="math inline">\(\lim_{k \to \infty} b_{n_k} = x_0\)</span>. 综上，我们说明了 <span class="math inline">\(\{ \Omega_{n_k} \}\)</span> 收缩于 <span class="math inline">\(x_0\)</span>.</p>
+<p>但，因为 <span class="math inline">\(\mathscr F\)</span> 是闭区间 <span class="math inline">\([a,b]\)</span> 的一个开覆盖，故总存在一个开区间 <span class="math inline">\(I_{x_0} = (a_0, b_0) \in \mathscr F\)</span> 使得 <span class="math inline">\(x_0 \in I_{x_0}\)</span>，而 <span class="math inline">\(\{ \Omega_{n_k} \}\)</span> 又收缩于 <span class="math inline">\(x_0\)</span>，故存在 <span class="math inline">\(k \in \mathbb N\)</span>，<span class="math inline">\(\Omega_{n_k} \subset I_{x_0} \in \mathscr F\)</span>，这与我们构造 <span class="math inline">\(\{ \Omega_{n_k} \}\)</span> 的方法矛盾. 故原命题成立.</p>
+</div>
+<div class="remark proof">
+<p><span class="proof-title"><em>Remark</em>. </span>证明过程与用 Bolzano-Weierstrass 定理证明闭区间一致连续性定理类似.</p>
+</div>
+<div id="exm-lebesgue2bw" class="theorem example">
+<p><span class="theorem-title"><strong>Example 2 </strong></span>用 Lebesgue 覆盖定理证明有限覆盖定理.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>若 <span class="math inline">\(\sigma\)</span> 是覆盖 <span class="math inline">\([a,b]\)</span> 的开覆盖 <span class="math inline">\(\mathscr F\)</span> 的勒贝格数，令 <span class="math inline">\(N = \lceil \frac{2(b-a)}{\sigma} \rceil\)</span>，<span class="math inline">\(L = \frac {b-a}{N} \leqslant \frac \sigma 2 &lt; \sigma\)</span>. 由 Lebesgue 覆盖定理，任意长度为 <span class="math inline">\(L\)</span> 的 <span class="math inline">\([a,b]\)</span> 内闭区间都包含于某个 <span class="math inline">\(\mathscr F\)</span> 中的开区间. 因此对 <span class="math inline">\(n = 1,2,\dots,N\)</span>，令 <span class="math inline">\(\Omega_n = \left[ a + (n-1)L, a + nL \right]\)</span>，总存在一个 <span class="math inline">\(\mathscr F\)</span> 中开区间 <span class="math inline">\(I_n\)</span> 满足 <span class="math inline">\(\Omega_n \subset I_n\)</span>. 因为显然 <span class="math inline">\(\{ \Omega_n \}_{n=1}^N\)</span> 是 <span class="math inline">\([a,b]\)</span> 的一个覆盖，故 <span class="math inline">\(\{ I_n \}_{n=1}^N \subset \mathscr F\)</span> 也是 <span class="math inline">\([a,b]\)</span> 的覆盖. 这样，我们就成功构造出了一个 <span class="math inline">\(\mathscr F\)</span> 的有限子覆盖 <span class="math inline">\(\{ I_n \}_{n=1}^N\)</span>，命题得证.</p>
+</div>
+<div class="remark proof">
+<p><span class="proof-title"><em>Remark</em>. </span>在处理区间问题时，Lebsegue 覆盖定理很多时候比有限覆盖定理更好用. 例如处理闭区间一致连续性定理时，“落入两个有交点的相邻的这样的区间”<span class="citation" data-cites="lizhong"><sup>[<a href="#ref-lizhong" role="doc-biblioref">1</a>]</sup></span>这种神乎其技的操作就可以省去了. （这种操作的严格叙述是：把单点连续性要求的区间半径改成 <span class="math inline">\(2 \delta_x\)</span>，但构造开覆盖还是用半径为 <span class="math inline">\(\delta_x\)</span> 的区间，这样可以有 <span class="math inline">\(|x_2 - x| \leqslant |x_2 - x_1| + |x_1 - x| \leqslant \delta_{m} + \delta_{x} \leqslant 2 \delta_{x}\)</span>，能把两个点放在同一个区间内了. 详细可参考 <a href="https://www.zhihu.com/question/56393706/answer/298562084" class="uri">https://www.zhihu.com/question/56393706/answer/298562084</a>. 事实上，Lebesgue 覆盖定理也可以用类似的方法证明.）</p>
+</div>
+<p>作为小结，下图展现了刚刚介绍的几个定理在整个实数完备性等价定理体系中的地位.</p>
+<div class="cell" data-fig-width="6.25" data-fig-height="2.5">
+<div class="cell-output-display">
+<div id="fig-real" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div>
+<svg width="600" height="240" viewbox="0.00 0.00 808.39 310.40" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 306.4)">
+<title>
+G
+</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-306.4 804.39,-306.4 804.39,4 -4,4"></polygon> <!-- sup --> <g id="node1" class="node">
+<title>
+sup
+</title>
+<ellipse fill="none" stroke="black" cx="40.01" cy="-106.8" rx="40.01" ry="18"></ellipse> <text text-anchor="middle" x="40.01" y="-102.6" font-family="Times,serif" font-size="14.00">确界原理</text> </g> <!-- mono --> <g id="node2" class="node">
+<title>
+mono
+</title>
+<ellipse fill="none" stroke="black" cx="170.01" cy="-106.8" rx="54.49" ry="18"></ellipse> <text text-anchor="middle" x="170.01" y="-102.6" font-family="Times,serif" font-size="14.00">单调有界定理</text> </g> <!-- sup&#45;&gt;mono --> <g id="edge1" class="edge">
+<title>
+sup-&gt;mono
+</title>
+<path fill="none" stroke="black" d="M80.12,-106.8C88.44,-106.8 96.77,-106.8 105.09,-106.8"></path> <polygon fill="black" stroke="black" points="105.24,-110.3 115.24,-106.8 105.23,-103.3 105.24,-110.3"></polygon> </g> <!-- nested --> <g id="node3" class="node">
+<title>
+nested
+</title>
+<ellipse fill="none" stroke="black" cx="314.01" cy="-106.8" rx="54.49" ry="18"></ellipse> <text text-anchor="middle" x="314.01" y="-102.6" font-family="Times,serif" font-size="14.00">闭区间套定理</text> </g> <!-- mono&#45;&gt;nested --> <g id="edge2" class="edge">
+<title>
+mono-&gt;nested
+</title>
+<path fill="none" stroke="black" d="M224.57,-106.8C232.85,-106.8 241.13,-106.8 249.41,-106.8"></path> <polygon fill="black" stroke="black" points="249.51,-110.3 259.51,-106.8 249.51,-103.3 249.51,-110.3"></polygon> </g> <!-- nested&#45;&gt;sup --> <g id="edge6" class="edge">
+<title>
+nested-&gt;sup
+</title>
+<path fill="none" stroke="black" d="M288.13,-90.8C259.06,-74.72 210.22,-53.33 166.51,-61 135.43,-66.45 101.93,-78.9 77.22,-89.45"></path> <polygon fill="black" stroke="black" points="75.64,-86.32 67.87,-93.52 78.43,-92.73 75.64,-86.32"></polygon> <text text-anchor="middle" x="177.01" y="-58.2" font-family="Times,serif" font-size="14.00">构造</text> </g> <!-- bw --> <g id="node4" class="node">
+<title>
+bw
+</title>
+<ellipse fill="none" stroke="black" cx="692.01" cy="-106.8" rx="108.26" ry="18"></ellipse> <text text-anchor="middle" x="692.01" y="-102.6" font-family="Times,serif" font-size="14.00">Bolzano-Weierstrass 定理</text> </g> <!-- nested&#45;&gt;bw --> <!-- accu --> <g id="node6" class="node">
+<title>
+accu
+</title>
+<ellipse fill="none" stroke="black" cx="476.01" cy="-106.8" rx="68.96" ry="18"></ellipse> <text text-anchor="middle" x="476.01" y="-102.6" font-family="Times,serif" font-size="14.00">（数列）聚点定理</text> </g> <!-- nested&#45;&gt;accu --> <g id="edge8" class="edge">
+<title>
+nested-&gt;accu
+</title>
+<path fill="none" stroke="black" d="M368.85,-106.8C377.82,-106.8 387.26,-106.8 396.68,-106.8"></path> <polygon fill="black" stroke="black" points="396.86,-110.3 406.86,-106.8 396.86,-103.3 396.86,-110.3"></polygon> <text text-anchor="middle" x="387.76" y="-91.2" font-family="Times,serif" font-size="14.00">构造</text> </g> <!-- finite --> <g id="node7" class="node">
+<title>
+finite
+</title>
+<ellipse fill="none" stroke="black" cx="314.01" cy="-284.4" rx="54.49" ry="18"></ellipse> <text text-anchor="middle" x="314.01" y="-280.2" font-family="Times,serif" font-size="14.00">有限覆盖定理</text> </g> <!-- nested&#45;&gt;finite --> <g id="edge7" class="edge">
+<title>
+nested-&gt;finite
+</title>
+<path fill="none" stroke="black" d="M314.01,-135.4C314.01,-168.33 314.01,-223.05 314.01,-255.92"></path> <polygon fill="black" stroke="black" points="317.51,-134.96 314.01,-124.96 310.51,-134.96 317.51,-134.96"></polygon> <polygon fill="black" stroke="black" points="310.51,-256.17 314.01,-266.17 317.51,-256.17 310.51,-256.17"></polygon> <text text-anchor="middle" x="324.51" y="-191.4" font-family="Times,serif" font-size="14.00">反证</text> </g> <!-- cauchy --> <g id="node5" class="node">
+<title>
+cauchy
+</title>
+<ellipse fill="none" stroke="black" cx="364.01" cy="-18" rx="71.84" ry="18"></ellipse> <text text-anchor="middle" x="364.01" y="-13.8" font-family="Times,serif" font-size="14.00">Cauchy 收敛原理</text> </g> <!-- bw&#45;&gt;cauchy --> <g id="edge4" class="edge">
+<title>
+bw-&gt;cauchy
+</title>
+<path fill="none" stroke="black" d="M636.86,-91.21C577.09,-75.39 482.17,-50.27 421.5,-34.22"></path> <polygon fill="black" stroke="black" points="422.26,-30.8 411.7,-31.62 420.47,-37.56 422.26,-30.8"></polygon> </g> <!-- lebesgue --> <g id="node8" class="node">
+<title>
+lebesgue
+</title>
+<ellipse fill="none" stroke="black" cx="616.01" cy="-195.6" rx="79.35" ry="18"></ellipse> <text text-anchor="middle" x="616.01" y="-191.4" font-family="Times,serif" font-size="14.00">Lebesgue 覆盖定理</text> </g> <!-- bw&#45;&gt;lebesgue --> <g id="edge12" class="edge">
+<title>
+bw-&gt;lebesgue
+</title>
+<path fill="none" stroke="black" d="M676.99,-124.95C665.68,-137.87 650.01,-155.77 637.38,-170.18"></path> <polygon fill="black" stroke="black" points="634.69,-167.95 630.73,-177.78 639.95,-172.56 634.69,-167.95"></polygon> <text text-anchor="middle" x="670.51" y="-147" font-family="Times,serif" font-size="14.00">反证</text> </g> <!-- cauchy&#45;&gt;mono --> <g id="edge5" class="edge">
+<title>
+cauchy-&gt;mono
+</title>
+<path fill="none" stroke="black" d="M330.22,-34.12C296.97,-48.99 246.19,-71.71 210.74,-87.58"></path> <polygon fill="black" stroke="black" points="208.87,-84.58 201.17,-91.86 211.73,-90.97 208.87,-84.58"></polygon> <text text-anchor="middle" x="295.51" y="-58.2" font-family="Times,serif" font-size="14.00">反证</text> </g> <!-- accu&#45;&gt;bw --> <g id="edge11" class="edge">
+<title>
+accu-&gt;bw
+</title>
+<path fill="none" stroke="black" d="M555.42,-106.8C561.27,-106.8 567.25,-106.8 573.27,-106.8"></path> <polygon fill="black" stroke="black" points="555.24,-103.3 545.24,-106.8 555.24,-110.3 555.24,-103.3"></polygon> <polygon fill="black" stroke="black" points="573.43,-110.3 583.43,-106.8 573.43,-103.3 573.43,-110.3"></polygon> <text text-anchor="middle" x="564.31" y="-91.2" font-family="Times,serif" font-size="14.00">构造</text> </g> <!-- finite&#45;&gt;sup --> <g id="edge14" class="edge">
+<title>
+finite-&gt;sup
+</title>
+<path fill="none" stroke="black" d="M289.69,-268.25C267.16,-254.18 232.74,-232.6 203.01,-213.6 156.62,-183.96 103.15,-149.13 70.47,-127.76"></path> <polygon fill="black" stroke="black" points="72.11,-124.65 61.83,-122.1 68.28,-130.51 72.11,-124.65"></polygon> <text text-anchor="middle" x="213.51" y="-191.4" font-family="Times,serif" font-size="14.00">反证</text> </g> <!-- finite&#45;&gt;mono --> <g id="edge10" class="edge">
+<title>
+finite-&gt;mono
+</title>
+<path fill="none" stroke="black" d="M300.39,-266.8C274.93,-235.75 220,-168.76 190.21,-132.43"></path> <polygon fill="black" stroke="black" points="192.6,-129.83 183.55,-124.32 187.19,-134.27 192.6,-129.83"></polygon> <text text-anchor="middle" x="267.51" y="-191.4" font-family="Times,serif" font-size="14.00">反证</text> </g> <!-- finite&#45;&gt;accu --> <g id="edge9" class="edge">
+<title>
+finite-&gt;accu
+</title>
+<path fill="none" stroke="black" d="M329.26,-266.87C357.9,-235.82 419.87,-168.65 453.38,-132.32"></path> <polygon fill="black" stroke="black" points="456.27,-134.36 460.47,-124.64 451.12,-129.61 456.27,-134.36"></polygon> <text text-anchor="middle" x="421.51" y="-191.4" font-family="Times,serif" font-size="14.00">反证</text> </g> <!-- lebesgue&#45;&gt;finite --> <g id="edge13" class="edge">
+<title>
+lebesgue-&gt;finite
+</title>
+<path fill="none" stroke="black" d="M569.29,-210.18C533.18,-220.66 481.94,-235.51 437.01,-248.4 412.84,-255.34 385.99,-262.98 363.55,-269.36"></path> <polygon fill="black" stroke="black" points="362.57,-266 353.9,-272.1 364.48,-272.73 362.57,-266"></polygon> <text text-anchor="middle" x="501.51" y="-235.8" font-family="Times,serif" font-size="14.00">构造</text> </g> </g>
+</svg>
+</div>
+<figcaption class="figure-caption">Figure&nbsp;1: 实数完备性等价定理关系图</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="example-3" class="level2">
+<h2 class="anchored" data-anchor-id="example-3">Example 3</h2>
+<div id="thm-ulaccu" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4 </strong></span>设数列 <span class="math inline">\(\{ x_n \}\)</span> 有界，其上极限 <span class="math inline">\(\varlimsup_{n \to \infty} x_n = L\)</span>，下极限 <span class="math inline">\(\varliminf_{n \to \infty} x_n = l\)</span>，则 <span class="math inline">\(L\)</span> 是 <span class="math inline">\(\{ x_n \}\)</span> 的最大聚点，<span class="math inline">\(l\)</span> 是 <span class="math inline">\(\{ x_n \}\)</span> 的最小聚点.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span><a href="#thm-accuequiv">Theorem&nbsp;1</a> 中，我们已经知道，一个数列的收敛子列的极限也是该数列的一个聚点. 结合上下极限的子列式定义即可证明上述定理.</p>
+</div>
+<div id="exm-ullim" class="theorem example">
+<p><span class="theorem-title"><strong>Example 3 </strong></span>设数列 <span class="math inline">\(\{ x_n \}\)</span> 有界且 <span class="math inline">\(\lim_{n \to \infty}(x_{n+1} − x_n) = 0\)</span>，分别记 <span class="math inline">\(\{ x_n \}\)</span> 的上下极限为 <span class="math inline">\(L\)</span> 和 <span class="math inline">\(l\)</span>. 证明 <span class="math inline">\([l, L]\)</span> 上的任意点可作为 <span class="math inline">\(\{ x_n \}\)</span> 某个子列的极限.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>反证. 假设 <span class="math inline">\([l, L]\)</span> 上有一点 <span class="math inline">\(a\)</span> 不是任何 <span class="math inline">\(\{ x_n \}\)</span> 的收敛子列的极限，则根据 <a href="#thm-accuequiv">Theorem&nbsp;1</a>，<span class="math inline">\(a\)</span> 不是 <span class="math inline">\(\{ x_n \}\)</span> 的聚点，即存在 <span class="math inline">\(a\)</span> 的一个邻域 <span class="math inline">\(U(a,\varepsilon)\)</span>，使得只有有限个 <span class="math inline">\(x_n\)</span> 落入该邻域，换句话说，存在某个 <span class="math inline">\(N \in \mathbb N_+\)</span>，当 <span class="math inline">\(n&gt;N\)</span> 时，就有 <span class="math inline">\(x_n \notin U(a,\varepsilon)\)</span>.</p>
+<p>又，考虑到 <a href="#thm-ulaccu">Theorem&nbsp;4</a> 表明上下极限 <span class="math inline">\(L\)</span> 和 <span class="math inline">\(l\)</span> 都是 <span class="math inline">\(\{ x_n \}\)</span> 的聚点，<span class="math inline">\(L,l \notin U(a,\varepsilon)\)</span> 显然成立，且第 <span class="math inline">\(N\)</span> 项后的 <span class="math inline">\(\{ x_n \}\)</span> 完全由满足 <span class="math inline">\(x_n &gt; a+\varepsilon\)</span> 和 <span class="math inline">\(x_n &lt; a-\varepsilon\)</span> 的两种 <span class="math inline">\(x_n\)</span> 构成，且它们均有无穷多项. 这样，对于任意的 <span class="math inline">\(M&gt;N\)</span>，总可以找到一个 <span class="math inline">\(m &gt; M\)</span> 使得 <span class="math inline">\(x_m\)</span> 和 <span class="math inline">\(x_{m+1}\)</span> 分属 <span class="math inline">\(U(a, \varepsilon)\)</span> 的两侧，故 <span class="math inline">\(|x_m - x_{m+1}| \geqslant 2 \varepsilon\)</span>，这就与条件 <span class="math inline">\(\lim_{n \to \infty}(x_{n+1} − x_n) = 0\)</span> 产生矛盾. 故不存在这样的 <span class="math inline">\(a\)</span>，定理得证.</p>
+</div>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="acknowledgments" class="level2 appendix"><h2 class="anchored quarto-appendix-heading">Acknowledgments</h2><div class="quarto-appendix-contents">
+
+<p>感谢史老师主持研讨课并指出讲稿的多处错误，特别是原来聚点定理的证明中数列元素可重的 bug. 史老师还提供了标准聚点定义的另一种叙述.</p>
+
+
+
+</div></section><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-lizhong" class="csl-entry" role="listitem">
+1. 李忠, &amp; 方丽萍. (2008). <em>数学分析教程</em> (pp. 257–258). 高等教育出版社.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="sun123zxy/blog-quarto-code" data-repo-id="R_kgDOIrPs5w" data-category="General" data-category-id="DIC_kwDOIrPs584CV4gd" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark_dimmed" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">sun123zxy’s blog | Powered by Quarto</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
