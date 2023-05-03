@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -142,6 +176,7 @@ div.csl-indent {
   <li><a href="#整除分块嵌套" id="toc-整除分块嵌套" class="nav-link" data-scroll-target="#整除分块嵌套"><span class="header-section-number">2.1</span> 整除分块嵌套</a></li>
   </ul></li>
   <li><a href="#杜教筛" id="toc-杜教筛" class="nav-link" data-scroll-target="#杜教筛"><span class="header-section-number">3</span> 杜教筛</a></li>
+  <li><a href="#challenge" id="toc-challenge" class="nav-link" data-scroll-target="#challenge"><span class="header-section-number">4</span> Challenge</a></li>
   </ul>
 </nav>
     </div>
@@ -175,6 +210,12 @@ div.csl-indent {
     </div>
   </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">May 3, 2023</p>
+    </div>
+  </div>
     
   </div>
   
@@ -439,6 +480,46 @@ O(K) + O(n K^{-\frac 1 2})
 \]</span></p>
 <p>为最小化时间复杂度，取 <span class="math inline">\(K = n^{\frac 2 3}\)</span>，得到最优时间复杂度 <span class="math inline">\(O(n^{\frac 2 3})\)</span>.</p>
 <p>这部分的时间复杂度证明主要参考了文章<span class="citation" data-cites="zhihu_dusieve"><sup>[<a href="#ref-zhihu_dusieve" role="doc-biblioref">11</a>]</sup></span>.</p>
+</section>
+<section id="challenge" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="challenge"><span class="header-section-number">4</span> Challenge</h2>
+<div id="exm-nonsquare" class="theorem example">
+<p><span class="theorem-title"><strong>Example 7 </strong></span>对 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 间的无平方因子数计数. <span class="math inline">\(n \leq 10^{18}\)</span>.</p>
+<p>参见蓝桥杯 2023 省赛 A 组 J 题《翻转硬币》<span class="citation" data-cites="nonsquare1_luogu"><sup>[<a href="#ref-nonsquare1_luogu" role="doc-biblioref">12</a>]</sup></span>或《完全平方数》<span class="citation" data-cites="nonsquare2_luogu"><sup>[<a href="#ref-nonsquare2_luogu" role="doc-biblioref">13</a>]</sup></span>.</p>
+</div>
+<p>我们指出，无平方因子数有如下计数公式 <span class="math display">\[
+f(n) = \sum_{i=1}^n \mu^2 (i) = \sum_{i=1}^{\floor{\sqrt n}} \mu(i) \floor{\frac n {i^2}}
+\]</span></p>
+<p>朴素实现复杂度为 <span class="math inline">\(O(\sqrt n)\)</span>，考虑对 <span class="math inline">\(\floor{\frac n {i^2}}\)</span> 开发一种新的整除分块算法. 现在问题有三. 一是估计 <span class="math display">\[
+\# D_2(n) = \# \left\{ \floor{\frac n {i^2}} \right\}_{i=1}^{\sqrt n}
+\]</span> 这并不困难，按 <span class="math inline">\(i \leq n^{\frac 1 3}\)</span> 和 <span class="math inline">\(i \geq n^{\frac 1 3}\)</span> 讨论即知其上界为 <span class="math inline">\(O(n^{\frac 1 3})\)</span>.</p>
+<p>二是实现方案. 这里也直接给出：</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ll sqrtN<span class="op">=</span>sqrt<span class="op">(</span>N<span class="op">);</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>ll ans<span class="op">=</span><span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span>ll l<span class="op">=</span><span class="dv">1</span><span class="op">,</span>r<span class="op">,</span>d<span class="op">;</span>l<span class="op">&lt;=</span>sqrtN<span class="op">;</span>l<span class="op">=</span>r<span class="op">+</span><span class="dv">1</span><span class="op">){</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    d<span class="op">=</span>N<span class="op">/(</span>l<span class="op">*</span>l<span class="op">),</span>r<span class="op">=</span>sqrt<span class="op">(</span>N<span class="op">/</span>d<span class="op">);</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    ans<span class="op">+=(</span>S_mu<span class="op">(</span>r<span class="op">)-</span>S_mu<span class="op">(</span>l<span class="op">-</span><span class="dv">1</span><span class="op">))*</span>d<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>最后是算法时间复杂度分析. 普通的 <span class="math inline">\(\floor{ \frac n i}\)</span> 整除分块不会因杜教筛增加时间复杂度，但 <span class="math inline">\(\floor{ \frac n {i^2}}\)</span> 则需要额外的讨论. 注意到该整除分块枚举中，需做杜教筛的数的集合为 <span class="math display">\[
+\left\{ \floor{ \left( \floor{\frac n d} \right)^{\frac 1 2} }\right\}_{d \in D_2 (n)}
+\]</span> 同样类似 <a href="#prp-trick2ex">Proposition&nbsp;3</a> ，我们有</p>
+<div id="prp-trick4ex" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 5 </strong></span><span class="math display">\[
+\sum_{d^2 \mid n} f(\frac n {d^2}) \leq \sum_{d \in D_2(n)} f(d) \leq \sum_{i=1}^{n^{\frac 1 3}} f(i) + f(\floor{\frac n {i^2}})
+\]</span></p>
+</div>
+<p>因此算法递归部分时间复杂度可估计为 <span class="math display">\[
+\begin{aligned}
+\sum_{d \in D_2 (n)} \left( \floor{\frac n d} \right)^{\frac 1 2} K^{-\frac 1 2}
+&amp;\leq K^{-\frac 1 2} \left( \sum_{i=1}^{n^{\frac 1 3}} \left( \frac n {\frac n {i^2}} \right)^{\frac 1 2} + \sum_{i=1}^{n^{\frac 1 3}} \left( \frac n i \right)^{\frac 1 2} \right) \\
+&amp;= K^{-\frac 1 2} \left( \sum_{i=1}^{n^{\frac 1 3}} i + n^{\frac 1 2} \sum_{i=1}^{n^{\frac 1 3}} i^{-\frac 1 2} \right) \\
+&amp;\in K^{-\frac 1 2} \left( O(n^{\frac 2 3}) + n^{\frac 1 2} O(n^{\frac 1 6}) \right) \\
+&amp;\subset O(n^{\frac 2 3} K^{-\frac 1 2})
+\end{aligned}
+\]</span> 总时间复杂度为 <span class="math display">\[
+O(K) + O(n^{\frac 2 3} K^{-\frac 1 2})
+\]</span> 取 <span class="math inline">\(K=n^{\frac 4 9}\)</span>，得到最优时间复杂度 <span class="math inline">\(O(n^{\frac 4 9})\)</span>. 代入 <span class="math inline">\(n = 10^{18}\)</span>，量级约为 <span class="math inline">\(10^8\)</span>.</p>
+<p>这估计并不算优秀. 传言存在 <span class="math inline">\(O(n^{\frac 2 5})\)</span> 的估计，猜测大概优化了 <span class="math inline">\(\left\{ \floor{\frac n i} \right\}_{i=1}^n\)</span> 和 <span class="math inline">\(\left\{ \floor{ \left( \floor{\frac n d} \right)^{\frac 1 2} }\right\}_{d \in D_2 (n)}\)</span> 的重叠部分。笔者尚未找出其推导方式.</p>
 
 
 
@@ -477,6 +558,12 @@ O(K) + O(n K^{-\frac 1 2})
 </div>
 <div id="ref-zhihu_dusieve" class="csl-entry" role="listitem">
 11. Ander. (2022). <em>杜教筛</em>. <a href="https://zhuanlan.zhihu.com/p/521699400" class="uri">https://zhuanlan.zhihu.com/p/521699400</a>.
+</div>
+<div id="ref-nonsquare1_luogu" class="csl-entry" role="listitem">
+12. <em>P9238 [蓝桥杯 2023 省 a] 翻转硬币 - 洛谷 | 计算机科学教育新生态</em>. (n.d.). <a href="https://www.luogu.com.cn/problem/P9238" class="uri">https://www.luogu.com.cn/problem/P9238</a>.
+</div>
+<div id="ref-nonsquare2_luogu" class="csl-entry" role="listitem">
+13. <em>P4318 完全平方数 - 洛谷 | 计算机科学教育新生态</em>. (n.d.). <a href="https://www.luogu.com.cn/problem/P4318" class="uri">https://www.luogu.com.cn/problem/P4318</a>.
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
