@@ -2,6 +2,7 @@
 title: "OI 数论中的上界估计与时间复杂度证明"
 author: "sun123zxy"
 date: 2023/04/18
+date-modified: 2023/05/03
 abstract: "渐进符号、约数函数、整除分块嵌套与杜教筛."
 categories:
   - OI
@@ -344,7 +345,8 @@ $$
 
 $$
 \begin{aligned}
-\sum_{\begin{gathered} d \in D(n) \\ d > K \end{gathered}} T_1(d)
+\mathrm{Du}_K(n) &= 
+\sum_{\begin{gathered} d \in D(n) \\ d > K \end{gathered}} T_1(d) \\
 &= \sum_{1 \leq i \leq \floor{\frac n K}} T_1(\floor{\frac n i}) \\
 &\leq \sum_{1 \leq i \leq \floor{\frac n K}} C \sqrt{\frac n i} \\
 &= C \sqrt n \sum_{1 \leq i \leq \floor{\frac n K}} i^{-\frac 1 2} \\
@@ -354,7 +356,7 @@ $$
 \end{aligned}
 $$
 
-总时间复杂度为
+总时间复杂度
 $$
 O(K) + O(n K^{-\frac 1 2})
 $$
@@ -362,3 +364,64 @@ $$
 为最小化时间复杂度，取 $K = n^{\frac 2 3}$，得到最优时间复杂度 $O(n^{\frac 2 3})$.
 
 这部分的时间复杂度证明主要参考了文章[@zhihu_dusieve].
+
+## Challenge
+
+::: {#exm-nonsquare}
+对 $1$ 到 $n$ 间的无平方因子数计数. $n \leq 10^{18}$.
+
+参见蓝桥杯 2023 省赛 A 组 J 题《翻转硬币》[@nonsquare1_luogu]或《完全平方数》[@nonsquare2_luogu].
+:::
+
+我们指出，无平方因子数有如下计数公式
+$$
+f(n) = \sum_{i=1}^n \mu^2 (i) = \sum_{i=1}^{\floor{\sqrt n}} \mu(i) \floor{\frac n {i^2}}
+$$
+
+朴素实现复杂度为 $O(\sqrt n)$，考虑对 $\floor{\frac n {i^2}}$ 开发一种新的整除分块算法. 现在问题有三. 一是估计
+$$
+\# D_2(n) = \# \left\{ \floor{\frac n {i^2}} \right\}_{i=1}^{\sqrt n}
+$$
+这并不困难，按 $i \leq n^{\frac 1 3}$ 和 $i \geq n^{\frac 1 3}$ 讨论即知其上界为 $O(n^{\frac 1 3})$.
+
+二是实现方案. 这里也直接给出：
+
+```c++
+ll sqrtN=sqrt(N);
+ll ans=0;
+for(ll l=1,r,d;l<=sqrtN;l=r+1){
+	d=N/(l*l),r=sqrt(N/d);
+	ans+=(S_mu(r)-S_mu(l-1))*d;
+}
+```
+
+最后是算法时间复杂度分析. 普通的 $\floor{ \frac n i}$ 整除分块不会因杜教筛增加时间复杂度，但 $\floor{ \frac n {i^2}}$ 则需要额外的讨论. 注意到该整除分块枚举中，需做杜教筛的数的集合为
+$$
+\left\{ \floor{ \left( \floor{\frac n d} \right)^{\frac 1 2} }\right\}_{d \in D_2 (n)}
+$$
+同样类似 @prp-trick2ex ，我们有
+
+::: {#prp-trick4ex}
+$$
+\sum_{d^2 \mid n} f(\frac n {d^2}) \leq \sum_{d \in D_2(n)} f(d) \leq \sum_{i=1}^{n^{\frac 1 3}} f(i) + f(\floor{\frac n {i^2}})
+$$
+:::
+
+因此算法递归部分时间复杂度可估计为
+$$
+\begin{aligned}
+\sum_{d \in D_2 (n)} \mathrm{Du}_K \left(\floor{\left( \floor{\frac n d} \right)^{\frac 1 2}}\right)
+&\leq \sum_{d \in D_2 (n)} C \floor{\left( \floor{\frac n d} \right)^{\frac 1 2}} K^{-\frac 1 2} \\ 
+&\leq C K^{-\frac 1 2} \left( \sum_{i=1}^{n^{\frac 1 3}} \left( \frac n {\frac n {i^2}} \right)^{\frac 1 2} + \sum_{i=1}^{n^{\frac 1 3}} \left( \frac n i \right)^{\frac 1 2} \right) \\
+&= C K^{-\frac 1 2} \left( \sum_{i=1}^{n^{\frac 1 3}} i + n^{\frac 1 2} \sum_{i=1}^{n^{\frac 1 3}} i^{-\frac 1 2} \right) \\
+&\in K^{-\frac 1 2} \left( O(n^{\frac 2 3}) + n^{\frac 1 2} O(n^{\frac 1 6}) \right) \\
+&\subset O(n^{\frac 2 3} K^{-\frac 1 2})
+\end{aligned}
+$$
+总时间复杂度为
+$$
+O(K) + O(n^{\frac 2 3} K^{-\frac 1 2})
+$$
+取 $K=n^{\frac 4 9}$，得到最优时间复杂度 $O(n^{\frac 4 9})$. 代入 $n = 10^{18}$，量级约为 $10^8$.
+
+这估计并不算优秀. 传言存在 $O(n^{\frac 2 5})$ 的估计，猜测大概优化了 $\left\{ \floor{\frac n i} \right\}_{i=1}^n$ 和 $\left\{ \floor{ \left( \floor{\frac n d} \right)^{\frac 1 2} }\right\}_{d \in D_2 (n)}$ 的重叠部分。笔者尚未找出其推导方式.
