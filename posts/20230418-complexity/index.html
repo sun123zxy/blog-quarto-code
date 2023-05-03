@@ -466,7 +466,8 @@ h(n) = \sum_{d \mid n} g(d) f(\frac n d)
 <p>故用 <a href="#prp-trick3ex">Proposition&nbsp;4</a> ，当 <span class="math inline">\(K &gt; \sqrt n\)</span> 时，算法在递归部分的时间复杂度降低为</p>
 <p><span class="math display">\[
 \begin{aligned}
-\sum_{\begin{gathered} d \in D(n) \\ d &gt; K \end{gathered}} T_1(d)
+\mathrm{Du}_K(n) &amp;=
+\sum_{\begin{gathered} d \in D(n) \\ d &gt; K \end{gathered}} T_1(d) \\
 &amp;= \sum_{1 \leq i \leq \floor{\frac n K}} T_1(\floor{\frac n i}) \\
 &amp;\leq \sum_{1 \leq i \leq \floor{\frac n K}} C \sqrt{\frac n i} \\
 &amp;= C \sqrt n \sum_{1 \leq i \leq \floor{\frac n K}} i^{-\frac 1 2} \\
@@ -475,7 +476,7 @@ h(n) = \sum_{d \mid n} g(d) f(\frac n d)
 &amp;\subset O(n K^{-\frac 1 2})
 \end{aligned}
 \]</span></p>
-<p>总时间复杂度为 <span class="math display">\[
+<p>总时间复杂度 <span class="math display">\[
 O(K) + O(n K^{-\frac 1 2})
 \]</span></p>
 <p>为最小化时间复杂度，取 <span class="math inline">\(K = n^{\frac 2 3}\)</span>，得到最优时间复杂度 <span class="math inline">\(O(n^{\frac 2 3})\)</span>.</p>
@@ -510,9 +511,10 @@ f(n) = \sum_{i=1}^n \mu^2 (i) = \sum_{i=1}^{\floor{\sqrt n}} \mu(i) \floor{\frac
 </div>
 <p>因此算法递归部分时间复杂度可估计为 <span class="math display">\[
 \begin{aligned}
-\sum_{d \in D_2 (n)} \left( \floor{\frac n d} \right)^{\frac 1 2} K^{-\frac 1 2}
-&amp;\leq K^{-\frac 1 2} \left( \sum_{i=1}^{n^{\frac 1 3}} \left( \frac n {\frac n {i^2}} \right)^{\frac 1 2} + \sum_{i=1}^{n^{\frac 1 3}} \left( \frac n i \right)^{\frac 1 2} \right) \\
-&amp;= K^{-\frac 1 2} \left( \sum_{i=1}^{n^{\frac 1 3}} i + n^{\frac 1 2} \sum_{i=1}^{n^{\frac 1 3}} i^{-\frac 1 2} \right) \\
+\sum_{d \in D_2 (n)} \mathrm{Du}_K \left(\floor{\left( \floor{\frac n d} \right)^{\frac 1 2}}\right)
+&amp;\leq \sum_{d \in D_2 (n)} C \floor{\left( \floor{\frac n d} \right)^{\frac 1 2}} K^{-\frac 1 2} \\
+&amp;\leq C K^{-\frac 1 2} \left( \sum_{i=1}^{n^{\frac 1 3}} \left( \frac n {\frac n {i^2}} \right)^{\frac 1 2} + \sum_{i=1}^{n^{\frac 1 3}} \left( \frac n i \right)^{\frac 1 2} \right) \\
+&amp;= C K^{-\frac 1 2} \left( \sum_{i=1}^{n^{\frac 1 3}} i + n^{\frac 1 2} \sum_{i=1}^{n^{\frac 1 3}} i^{-\frac 1 2} \right) \\
 &amp;\in K^{-\frac 1 2} \left( O(n^{\frac 2 3}) + n^{\frac 1 2} O(n^{\frac 1 6}) \right) \\
 &amp;\subset O(n^{\frac 2 3} K^{-\frac 1 2})
 \end{aligned}
