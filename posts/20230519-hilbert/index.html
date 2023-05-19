@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="sun123zxy">
+<meta name="author" content="宁同学">
+<meta name="dcterms.date" content="2023-05-18">
+
+<title>sun123zxy’s blog - Hilbert 曲线与集合势理论</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">sun123zxy’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts/about" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#空间填充曲线" id="toc-空间填充曲线" class="nav-link active" data-scroll-target="#空间填充曲线"><span class="header-section-number">1</span> 空间填充曲线</a>
+  <ul class="collapse">
+  <li><a href="#曲线" id="toc-曲线" class="nav-link" data-scroll-target="#曲线"><span class="header-section-number">1.1</span> 曲线</a></li>
+  <li><a href="#空间填充曲线-1" id="toc-空间填充曲线-1" class="nav-link" data-scroll-target="#空间填充曲线-1"><span class="header-section-number">1.2</span> 空间填充曲线</a></li>
+  </ul></li>
+  <li><a href="#hilbert-曲线" id="toc-hilbert-曲线" class="nav-link" data-scroll-target="#hilbert-曲线"><span class="header-section-number">2</span> Hilbert 曲线</a>
+  <ul class="collapse">
+  <li><a href="#n-阶伪-hilbert-曲线-h_nt" id="toc-n-阶伪-hilbert-曲线-h_nt" class="nav-link" data-scroll-target="#n-阶伪-hilbert-曲线-h_nt"><span class="header-section-number">2.1</span> <span class="math inline">\(n\)</span> 阶伪 Hilbert 曲线 <span class="math inline">\(H_n(t)\)</span></a></li>
+  <li><a href="#hilbert-曲线-ht" id="toc-hilbert-曲线-ht" class="nav-link" data-scroll-target="#hilbert-曲线-ht"><span class="header-section-number">2.2</span> Hilbert 曲线 <span class="math inline">\(H(t)\)</span></a></li>
+  <li><a href="#全平面填充" id="toc-全平面填充" class="nav-link" data-scroll-target="#全平面填充"><span class="header-section-number">2.3</span> 全平面填充</a></li>
+  <li><a href="#四进制小数表示" id="toc-四进制小数表示" class="nav-link" data-scroll-target="#四进制小数表示"><span class="header-section-number">2.4</span> 四进制小数表示</a></li>
+  <li><a href="#小结" id="toc-小结" class="nav-link" data-scroll-target="#小结"><span class="header-section-number">2.5</span> 小结</a></li>
+  </ul></li>
+  <li><a href="#集合势理论" id="toc-集合势理论" class="nav-link" data-scroll-target="#集合势理论"><span class="header-section-number">3</span> 集合势理论</a>
+  <ul class="collapse">
+  <li><a href="#集合的势" id="toc-集合的势" class="nav-link" data-scroll-target="#集合的势"><span class="header-section-number">3.1</span> 集合的势</a></li>
+  <li><a href="#有限集可列集与无限集" id="toc-有限集可列集与无限集" class="nav-link" data-scroll-target="#有限集可列集与无限集"><span class="header-section-number">3.2</span> 有限集、可列集与无限集</a></li>
+  <li><a href="#从可列到不可列" id="toc-从可列到不可列" class="nav-link" data-scroll-target="#从可列到不可列"><span class="header-section-number">3.3</span> 从可列到不可列</a></li>
+  <li><a href="#小结-1" id="toc-小结-1" class="nav-link" data-scroll-target="#小结-1"><span class="header-section-number">3.4</span> 小结</a></li>
+  </ul></li>
+  
+  
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Hilbert 曲线与集合势理论</h1>
+<p class="subtitle lead">《数学分析 II》第十三周研讨课讲稿 EX</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">数学</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>sun123zxy </p>
+             <p>宁同学 </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 18, 2023</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">May 19, 2023</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<div class="hidden">
+<p><span class="math display">\[
+\newcommand{\len}{\operatorname{len}}
+\]</span></p>
+</div>
+<section id="空间填充曲线" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="空间填充曲线"><span class="header-section-number">1</span> 空间填充曲线</h2>
+<section id="曲线" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="曲线"><span class="header-section-number">1.1</span> 曲线</h3>
+<p>（我们所讨论的）曲线：定义域为 <span class="math inline">\([0,1]\)</span> 的连续映射．</p>
+</section>
+<section id="空间填充曲线-1" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="空间填充曲线-1"><span class="header-section-number">1.2</span> 空间填充曲线</h3>
+<p>（我们所讨论的）空间填充曲线的定义：连续满射 <span class="math inline">\(f: [0,1] \to [0,1]^2\)</span>．</p>
+</section>
+</section>
+<section id="hilbert-曲线" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="hilbert-曲线"><span class="header-section-number">2</span> Hilbert 曲线</h2>
+<section id="n-阶伪-hilbert-曲线-h_nt" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="n-阶伪-hilbert-曲线-h_nt"><span class="header-section-number">2.1</span> <span class="math inline">\(n\)</span> 阶伪 Hilbert 曲线 <span class="math inline">\(H_n(t)\)</span></h3>
+<p>理解一：将 <span class="math inline">\([0,1]^2\)</span> 等分成 <span class="math inline">\(2^n \times 2^n\)</span> 个小方块，按特定顺序将每个小方块的中心点用直线连接起来．这顺序是递归构造的．</p>
+<p>理解二：构造 <span class="math inline">\(n\)</span> 阶伪 Hilbert 曲线时，将所研究的方块区域四等分．左下角填入左上-右下翻转的 <span class="math inline">\(n-1\)</span> 阶伪 Hilbert 曲线；左上、右上角填入未翻转的 <span class="math inline">\(n-1\)</span> 阶伪 Hilbert 曲线；右下角填入左下-右上翻转的 <span class="math inline">\(n-1\)</span> 阶伪 Hilbert 曲线．最后用三条直线连接各小方块内曲线的起止点．</p>
+<div id="exr-fakehil-len" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1 </strong></span><span class="math inline">\(n\)</span> 阶伪 Hilbert 曲线的长度 <span class="math inline">\(\operatorname{len}H_n = 2^n - 2^{-n}\)</span>．</p>
+</div>
+<div class="solution proof">
+<p><span class="proof-title"><em>Solution</em> (递推). </span>由伪 Hilbert 曲线的递归定义得 <span class="math display">\[
+\operatorname{len}H_n = 2 \operatorname{len}H_{n-1} + \frac 3 {2^n}
+\]</span> 边界为 <span class="math inline">\(\operatorname{len}H_0 = 0\)</span>．求解该递推式即可．</p>
+</div>
+<div class="solution proof">
+<p><span class="proof-title"><em>Solution</em> (直观). </span>注意到 <span class="math inline">\(n\)</span> 阶伪 Hilbert 曲线将区间分为 <span class="math inline">\(2^n \times 2^n = 4^n\)</span> 个小方块，除首尾方块，其余小方块内的曲线长度均为小方块边长 <span class="math inline">\(2^n\)</span>．因此 <span class="math display">\[
+\operatorname{len}H_n = 4^{-n} \cdot 2^{-n} - 2 \cdot \frac {2^{-n}}{2} = 2^n - 2^{-n}
+\]</span></p>
+</div>
+<p>式中 “<span class="math inline">\(- 2^{-n}\)</span>” 部分并不讨人喜爱．我们考虑水平或垂直地延长首尾方块曲线至任意边界，这样曲线长度 <span class="math inline">\(\operatorname{len}H_n = 2^n\)</span> 就恒成立了．我们在后文的讨论中使用这一改进．</p>
+</section>
+<section id="hilbert-曲线-ht" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="hilbert-曲线-ht"><span class="header-section-number">2.2</span> Hilbert 曲线 <span class="math inline">\(H(t)\)</span></h3>
+<p>真正的 Hilbert 曲线是由 <span class="math inline">\(n\)</span> 阶伪 Hilbert 曲线取逐点极限得到的．</p>
+<p><span class="math display">\[
+H(t) = \lim_{n \to \infty} H_n(t)
+\]</span></p>
+<div id="thm-converge" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (良定义性) </strong></span>伪 Hilbert 曲线一致收敛（因此也是逐点收敛的）．</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>对一给定的 <span class="math inline">\(t \in [0,1]\)</span>，设其落在区间 <span class="math inline">\(\left[ k 4^{-n_0}, (k+1) 4^{-n_0} \right]\)</span>，则对任意 <span class="math inline">\(n \geq n_0\)</span>，<span class="math inline">\(H_n(t)\)</span> 均落在 <span class="math inline">\(H_{n_0}(t)\)</span> 所确定的边长为 <span class="math inline">\(2^{-n}\)</span> 的小闭方块内，即 <span class="math inline">\(\| H_{n}(t) - H_{n_0}(t) \|_\infty \leq 2^{-n}\)</span>．由 Cauchy 收敛原理即得其一致收敛性．</p>
+</div>
+<div id="thm-surjective" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (满射性) </strong></span>Hilbert 曲线是 <span class="math inline">\([0,1] \to [0,1]^2\)</span> 的满射．</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>对一给定的 <span class="math inline">\((x,y) \in [0,1]^2\)</span>，将所研究的闭方块区域四等分，任取一 <span class="math inline">\((x,y)\)</span> 所在小闭方块作为下一个研究的闭方块．如此进行下去，构造出一列框住 <span class="math inline">\((x,y)\)</span> 的收缩的闭方块套．闭方块套里的每一个半径为 <span class="math inline">\(2^{-n}\)</span> 的闭方块都对应着 <span class="math inline">\([0,1]\)</span> 上长 <span class="math inline">\(4^{-n}\)</span> 的一个闭区间，这些区间同样构成了 <span class="math inline">\([0,1]\)</span> 上的一个闭区间套．由闭区间套原理，这列闭区间套确定了一个实数 <span class="math inline">\(t \in [0,1]\)</span>，它就是使得 <span class="math inline">\(f(t) = (x,y)\)</span> 的一个解．</p>
+</div>
+<div class="remark proof">
+<p><span class="proof-title"><em>Remark</em>. </span>需要注意的是，当 <span class="math inline">\((x,y)\)</span> 落在某两个闭方块的公共边界上时，证明中我们任取其中一个闭方块继续讨论．因此，选择不同闭方块将可能使我们得到不同的 <span class="math inline">\(t\)</span> 值，这是 Hilbert 曲线不是单射的原因之一．</p>
+</div>
+<div id="thm-surjective" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3 (连续性) </strong></span>Hilbert 曲线在其定义域内连续．</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>对一给定的 <span class="math inline">\(t \in [0,1]\)</span>，考虑 <span class="math inline">\(H(t)\)</span> 任意取定的 <span class="math inline">\(\varepsilon\)</span> 邻域 <span class="math inline">\(U_{\varepsilon}(H(t)) = \{ (x,y) : \| H(t) - (x,y) \|_{\infty} &lt; \varepsilon \}\)</span>，取 <span class="math inline">\(n_0 = \log_2 \varepsilon - 2\)</span>，即可使第 <span class="math inline">\(n_0\)</span> 阶伪 Hillbert 曲线划分出的各闭方块边长为<span class="math inline">\(2^{-n_0} &lt; \frac \varepsilon 2\)</span>．设此时 <span class="math inline">\(t\)</span> 落在闭区间 <span class="math inline">\(I = \left[ k 4^{-n_0}, (k+1) 4^{-n_0} \right]\)</span>（如在边界，则任取），其对应闭方块 <span class="math inline">\(J = H(I)\)</span>．由于 <span class="math inline">\(I\)</span> 已经是 <span class="math inline">\(t\)</span> 的一个（单侧）邻域，为证明 <span class="math inline">\(H(t)\)</span> 在点 <span class="math inline">\(t\)</span> 的连续性，下面只需证 <span class="math inline">\(J \subset U_\varepsilon(H(t))\)</span>．由于我们构造的 <span class="math inline">\(n_0\)</span> 使闭方块 <span class="math inline">\(J\)</span> 的边长为 <span class="math inline">\(2^{-n_0} &lt; \frac \varepsilon 2\)</span>，<span class="math inline">\(H(t)\)</span> 与这闭方块中任意点 <span class="math inline">\((x,y)\)</span> 的距离 <span class="math display">\[
+\| H(t) - (x,y) \|_{\infty} \leq \frac \varepsilon 2 &lt; \varepsilon
+\]</span> 故 <span class="math inline">\(J \subset U_\varepsilon(H(t))\)</span>．</p>
+</div>
+<div id="exr-hil-len" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2 </strong></span>Hilbert 曲线是不可求长的．</p>
+</div>
+<p>对一般的曲线而言，逐点收敛于曲线 <span class="math inline">\(f\)</span> 的曲线族 <span class="math inline">\(f_n\)</span> 的长度的极限 <span class="math inline">\(\lim_{n \to \infty} \operatorname{len}f_n\)</span> 与 <span class="math inline">\(f\)</span> 的长度 <span class="math inline">\(\operatorname{len}f\)</span> 并不一定相同．这一事实有一简单有力的实例验证：用锯齿状曲线逼近圆．</p>
+<p>因此，直接取 <a href="#exr-fakehil-len">Exercise&nbsp;1</a> 的极限并不可行．根据曲线长度的定义，只有构造出一族直接由 <span class="math inline">\(H(t)\)</span> 上点构成的近似曲线，我们才能从这族曲线长度的极限中得到 Hilbert 曲线的正确长度．</p>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>考虑划分 <span class="math inline">\(P_{n} : t_k = k 4^{-{n}} \pod{k = 0, 1, \dots, 4^{n}}\)</span>，将 <span class="math inline">\(H(t_k)\)</span> 依次用折线连接，就得到了《Space-filling curves》2.6 节<span class="citation" data-cites="sagan"><sup>[<a href="#ref-sagan" role="doc-biblioref">1</a>]</sup></span>讨论的 Hilbert 曲线的 <span class="math inline">\(n\)</span> 阶近似多边形曲线 <span class="math inline">\(P_n(t)\)</span>（Approximating polygon for the Hilbert curve）．我们指出，与 <span class="math inline">\(n\)</span> 阶伪 Hilbert 曲线相同，<span class="math inline">\(n\)</span> 阶 Hilbert 近似多边形曲线仍然可以类似的由递归方法得到，遍历 <span class="math inline">\(2^n \times 2^n\)</span> 个小方块，且平均每个小方块内的曲线长度为 <span class="math inline">\(2^{-n}\)</span>．因此，<span class="math inline">\(n\)</span> 阶 Hilbert 近似多边形曲线的长度 <span class="math inline">\(\operatorname{len}P_n(t) = (2^n \times 2^n) \cdot 2^{-n} = 2^n\)</span>．由于该数列没有上界，故我们说明了 Hilbert 曲线的不可求长性．</p>
+</div>
+</section>
+<section id="全平面填充" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="全平面填充"><span class="header-section-number">2.3</span> 全平面填充</h3>
+<p>环绕填充并连接相邻曲线即可．</p>
+</section>
+<section id="四进制小数表示" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="四进制小数表示"><span class="header-section-number">2.4</span> 四进制小数表示</h3>
+<p><span class="math inline">\(n\)</span> 阶伪 Hilbert 曲线对 <span class="math inline">\([0,1]\)</span> 区间的划分操作可被一一对应地记为 <span class="math inline">\(n\)</span> 位四进制小数，从而为 <span class="math inline">\([0,1]\)</span> 上被划分出的区间和对应的 <span class="math inline">\([0,1]^2\)</span> 上的方块赋予了一种简洁的表示方法．但由于递归构造时左下、右下角涉及翻转操作，为每个实数 <span class="math inline">\(t\)</span>（无限位规范四进制小数）写出其平面对应点 <span class="math inline">\(H(t)\)</span> 的非递归封闭形式表达稍显复杂．《Space-filling curves》<span class="citation" data-cites="sagan"><sup>[<a href="#ref-sagan" role="doc-biblioref">1</a>]</sup></span>的 2.3 节给出了基于复数和四进制小数的精确表示．</p>
+</section>
+<section id="小结" class="level3" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="小结"><span class="header-section-number">2.5</span> 小结</h3>
+<ul>
+<li>Hilbert 曲线确实遍历了 <span class="math inline">\([0,1]^2\)</span> 区域的所有点.</li>
+<li>Hilbert 曲线是满射, 但不是单射，所以不是从线段到正方形区域的双射．</li>
+<li><span class="math inline">\([0,1]^2 \to [0,1]\)</span> 的单射（甚至双射）？集合势理论．</li>
+<li>（补充）空间填充曲线必自交，即不能是单射．（Pf：否则与 <span class="math inline">\([0,1]^2\)</span> 同胚，这显然荒谬．）（证明同胚逆映射连续需用拓扑定理：any continuous bijection from a compact space onto a Hausdorff space is a homeomorphism）</li>
+<li>（补充）不自交但有面积的曲线：Osgood 曲线．但它不是空间填充曲线．</li>
+</ul>
+</section>
+</section>
+<section id="集合势理论" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="集合势理论"><span class="header-section-number">3</span> 集合势理论</h2>
+<section id="集合的势" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="集合的势"><span class="header-section-number">3.1</span> 集合的势</h3>
+<ul>
+<li><p>等势，劣势于，优势于．</p></li>
+<li><p>“劣势于”是集合上的序关系：自反性、反对称性（Bernstein 定理）、传递性．</p>
+<p>事实上更是全序关系，证明需用到选择公理．</p></li>
+</ul>
+</section>
+<section id="有限集可列集与无限集" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="有限集可列集与无限集"><span class="header-section-number">3.2</span> 有限集、可列集与无限集</h3>
+<ul>
+<li><p>有限集，可列集，无限集．</p></li>
+<li><p>无限集的充要条件：与某一真子集等势（Dedekind 定义）．</p>
+<p>充分性：归纳取出可列集，该部分映射到后继形成双射．</p>
+<p>必要性：即有限集不与任何其真子集等势．冗长，证明略．</p></li>
+<li><p>无限集并有限或可列集仍与原无限集等势．</p></li>
+</ul>
+<p><span class="math display">\[
+\mathbb N^2 \approx \mathbb N
+\]</span></p>
+<p>本质：可列个可列集的并还是可列集；可列集的有限次笛卡尔积仍是可列集．</p>
+</section>
+<section id="从可列到不可列" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="从可列到不可列"><span class="header-section-number">3.3</span> 从可列到不可列</h3>
+<p><span class="math display">\[
+\mathbb R \not \approx \mathbb N
+\]</span></p>
+<p>写成小数，对角线法．</p>
+<p>规范小数（规定其均为无限小数），规范二进制小数．</p>
+<p><span class="math display">\[
+2^{\mathbb N} \approx \mathbb R
+\]</span></p>
+<p>核心在于不规范小数是可列集．</p>
+<p><span class="math display">\[
+{\mathbb R}^2 \approx \mathbb R
+\]</span></p>
+<p>小数穿插构造法．需要注意的是，构造的 <span class="math inline">\((0,1)^2 \to (0,1)\)</span> 的单射不是满射 <span class="math display">\[
+c = 0.303030\dots \implies a = 0.333\dots, b= 0.000\dots
+\]</span> 此外，它也不是连续映射 <span class="math display">\[
+\begin{aligned}
+a=0.3333\dots, b=0.4999\dots &amp;\implies c=0.343939\dots \\
+a=0.3333\dots, b=0.5000\dots &amp;\implies c=0.353030\dots
+\end{aligned}
+\]</span> 其对应的 <span class="math inline">\([0,1] \to [0,1]^2\)</span> 的非单的满射（如构造出的小数不规范，则将其规范化）亦不连续． <span class="math display">\[
+\begin{aligned}
+c = 0.4999\dots &amp;\implies a = 0.4999\dots, b=0.9999
+\dots \\
+c = 0.5000\dots &amp;\implies a = 0.5000\dots, b=0.0000\dots
+\end{aligned}
+\]</span></p>
+<p>Fun fact: <span class="math inline">\({\mathbb R}^2 \approx \left(2^{\mathbb N}\right)^{2} \approx 2^{\left({\mathbb N \times 2} \right)} \approx 2^{\mathbb N} \approx \mathbb R\)</span>（基数理论）</p>
+</section>
+<section id="小结-1" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="小结-1"><span class="header-section-number">3.4</span> 小结</h3>
+<ul>
+<li>Hilbert 曲线：<span class="math inline">\(\mathbb R \to {\mathbb R}^2\)</span> 的连续满射．</li>
+<li>集合势理论：<span class="math inline">\({\mathbb R}^2 \to {\mathbb R}\)</span> 的不连续单（双）射．</li>
+</ul>
+</section>
+</section>
+
+
+
+<div id="quarto-appendix" class="default"><section id="comments" class="level2 appendix unnumbered"><h2 class="anchored quarto-appendix-heading">Comments</h2><div class="quarto-appendix-contents">
+
+<ul>
+<li><p>希尔伯特曲线及性质的形式化理解 - zzdyyy<span class="citation" data-cites="zzdyyy"><sup>[<a href="#ref-zzdyyy" role="doc-biblioref">2</a>]</sup></span></p>
+<p>本文脉络的主要参考．</p></li>
+<li><p>Why does the Hilbert curve fill the whole square? - Math StackExchange<span class="citation" data-cites="mathex_fill"><sup>[<a href="#ref-mathex_fill" role="doc-biblioref">3</a>]</sup></span></p>
+<p>提供了收敛性的较严谨证明．</p></li>
+<li><p>希尔伯特曲线：无限数学怎样应用于有限世界 - 3Blue1Brown<span class="citation" data-cites="3b1b"><sup>[<a href="#ref-3b1b" role="doc-biblioref">4</a>]</sup></span></p>
+<p>优秀的可视化．</p></li>
+<li><p>Space-filling curve - Wikipedia<span class="citation" data-cites="wikipedia_spacefilling"><sup>[<a href="#ref-wikipedia_spacefilling" role="doc-biblioref">5</a>]</sup></span></p></li>
+<li><p>《集合论基础教程》张峰、陶然<span class="citation" data-cites="zhangfeng"><sup>[<a href="#ref-zhangfeng" role="doc-biblioref">6</a>]</sup></span></p></li>
+</ul>
+<p>扩展阅读：</p>
+<ul>
+<li><p>《Space-filling curves》Hans Sagan<span class="citation" data-cites="sagan"><sup>[<a href="#ref-sagan" role="doc-biblioref">1</a>]</sup></span></p>
+<p>回顾了空间填充曲线发展历史；用形式化的语言刻画了 Hilbert 曲线，见文内引用．</p></li>
+</ul>
+</div></section><section id="acknowledgements" class="level2 appendix unnumbered"><h2 class="anchored quarto-appendix-heading">Acknowledgements</h2><div class="quarto-appendix-contents">
+
+<p>（例行）感谢吕导组织研讨课．本次研讨课与宁同学一同准备并主要由后者主讲，在讨论和展示过程中收获颇丰．</p>
+
+
+
+</div></section><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
+<div id="ref-sagan" class="csl-entry" role="listitem">
+1. Sagan, H. (1994). <em>Space-filling curves</em>. Springer Science &amp; Business Media.
+</div>
+<div id="ref-zzdyyy" class="csl-entry" role="listitem">
+2. zzdyyy. (2017). <em>希尔伯特曲线及性质的形式化理解</em>. <a href="https://www.cnblogs.com/zzdyyy/p/7636474.html" class="uri">https://www.cnblogs.com/zzdyyy/p/7636474.html</a>.
+</div>
+<div id="ref-mathex_fill" class="csl-entry" role="listitem">
+3. (https://math.stackexchange.com/users/22857/martin-argerami), M. A. (n.d.). <em>Why does the hilbert curve fill the whole square?</em> Mathematics Stack Exchange. <a href="https://math.stackexchange.com/q/142029">https://math.stackexchange.com/q/142029</a>
+</div>
+<div id="ref-3b1b" class="csl-entry" role="listitem">
+4. 3Blue1Brown. (2016). <em>希尔伯特曲线：无限数学怎样应用于有限世界</em>. <a href="https://www.bilibili.com/video/av4201747" class="uri">https://www.bilibili.com/video/av4201747</a>.
+</div>
+<div id="ref-wikipedia_spacefilling" class="csl-entry" role="listitem">
+5. Wikipedia. (n.d.). <em>Space-filling curve - wikipedia</em>. <a href="https://en.wikipedia.org/wiki/Space-filling_curve" class="uri">https://en.wikipedia.org/wiki/Space-filling_curve</a>.
+</div>
+<div id="ref-zhangfeng" class="csl-entry" role="listitem">
+6. 张峰, &amp; 陶然. (2021). <em>集合论基础教程</em>. 清华大学出版社.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="sun123zxy/blog-quarto-code" data-repo-id="R_kgDOIrPs5w" data-category="General" data-category-id="DIC_kwDOIrPs584CV4gd" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark_dimmed" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">sun123zxy’s blog | Powered by Quarto</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
