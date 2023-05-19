@@ -1,0 +1,251 @@
+---
+title: "Hilbert 曲线与集合势理论"
+subtitle: "《数学分析 II》第十三周研讨课讲稿 EX"
+author:
+  - "sun123zxy"
+  - "宁同学"
+date: "2023/05/18"
+date-modified: "2023/05/19"
+bibliography: index.bib
+
+categories:
+  - 数学
+
+number-sections: true
+---
+
+::::: {.hidden}
+::: {.content-hidden unless-format="html"}
+$$
+\newcommand{\len}{\operatorname{len}}
+$$
+:::
+::: {.content-hidden when-format="html"}
+\newcommand{\len}{\operatorname{len}}
+:::
+:::::
+
+## 空间填充曲线
+
+### 曲线
+
+（我们所讨论的）曲线：定义域为 $[0,1]$ 的连续映射．
+
+### 空间填充曲线
+
+（我们所讨论的）空间填充曲线的定义：连续满射 $f: [0,1] \to [0,1]^2$．
+
+## Hilbert 曲线
+
+### $n$ 阶伪 Hilbert 曲线 $H_n(t)$
+
+理解一：将 $[0,1]^2$ 等分成 $2^n \times 2^n$ 个小方块，按特定顺序将每个小方块的中心点用直线连接起来．这顺序是递归构造的．
+
+理解二：构造 $n$ 阶伪 Hilbert 曲线时，将所研究的方块区域四等分．左下角填入左上-右下翻转的 $n-1$ 阶伪 Hilbert 曲线；左上、右上角填入未翻转的 $n-1$ 阶伪 Hilbert 曲线；右下角填入左下-右上翻转的 $n-1$ 阶伪 Hilbert 曲线．最后用三条直线连接各小方块内曲线的起止点．
+
+::: {#exr-fakehil-len}
+$n$ 阶伪 Hilbert 曲线的长度 $\len H_n = 2^n - 2^{-n}$．
+:::
+
+::: {.solution}
+
+## 递推
+
+由伪 Hilbert 曲线的递归定义得
+$$
+\len H_n = 2 \len H_{n-1} + \frac 3 {2^n}
+$$
+边界为 $\len H_0 = 0$．求解该递推式即可．
+:::
+
+::: {.solution}
+
+## 直观
+
+注意到 $n$ 阶伪 Hilbert 曲线将区间分为 $2^n \times 2^n = 4^n$ 个小方块，除首尾方块，其余小方块内的曲线长度均为小方块边长 $2^n$．因此
+$$
+\len H_n = 4^{-n} \cdot 2^{-n} - 2 \cdot \frac {2^{-n}}{2} = 2^n - 2^{-n}
+$$
+:::
+
+式中 “$- 2^{-n}$” 部分并不讨人喜爱．我们考虑水平或垂直地延长首尾方块曲线至任意边界，这样曲线长度 $\len H_n = 2^n$ 就恒成立了．我们在后文的讨论中使用这一改进．
+
+### Hilbert 曲线 $H(t)$
+
+真正的 Hilbert 曲线是由 $n$ 阶伪 Hilbert 曲线取逐点极限得到的．
+
+$$
+H(t) = \lim_{n \to \infty} H_n(t)
+$$
+
+::: {#thm-converge}
+
+## 良定义性
+
+伪 Hilbert 曲线一致收敛（因此也是逐点收敛的）．
+:::
+
+::: {.proof}
+对一给定的 $t \in [0,1]$，设其落在区间 $\left[ k 4^{-n_0}, (k+1) 4^{-n_0} \right]$，则对任意 $n \geq n_0$，$H_n(t)$ 均落在 $H_{n_0}(t)$ 所确定的边长为 $2^{-n}$ 的小闭方块内，即 $\| H_{n}(t) - H_{n_0}(t) \|_\infty \leq 2^{-n}$．由 Cauchy 收敛原理即得其一致收敛性．
+:::
+
+::: {#thm-surjective}
+
+## 满射性
+
+Hilbert 曲线是 $[0,1] \to [0,1]^2$ 的满射．
+:::
+
+::: {.proof}
+对一给定的 $(x,y) \in [0,1]^2$，将所研究的闭方块区域四等分，任取一 $(x,y)$ 所在小闭方块作为下一个研究的闭方块．如此进行下去，构造出一列框住 $(x,y)$ 的收缩的闭方块套．闭方块套里的每一个半径为 $2^{-n}$ 的闭方块都对应着 $[0,1]$ 上长 $4^{-n}$ 的一个闭区间，这些区间同样构成了 $[0,1]$ 上的一个闭区间套．由闭区间套原理，这列闭区间套确定了一个实数 $t \in [0,1]$，它就是使得 $f(t) = (x,y)$ 的一个解．
+:::
+
+::: {.remark}
+需要注意的是，当 $(x,y)$ 落在某两个闭方块的公共边界上时，证明中我们任取其中一个闭方块继续讨论．因此，选择不同闭方块将可能使我们得到不同的 $t$ 值，这是 Hilbert 曲线不是单射的原因之一．
+:::
+
+::: {#thm-surjective}
+
+## 连续性
+
+Hilbert 曲线在其定义域内连续．
+:::
+
+::: {.proof}
+对一给定的 $t \in [0,1]$，考虑 $H(t)$ 任意取定的 $\varepsilon$ 邻域 $U_{\varepsilon}(H(t)) = \{ (x,y) : \| H(t) - (x,y) \|_{\infty} < \varepsilon \}$，取 $n_0 = \log_2 \varepsilon - 2$，即可使第 $n_0$ 阶伪 Hillbert 曲线划分出的各闭方块边长为$2^{-n_0} < \frac \varepsilon 2$．设此时 $t$ 落在闭区间 $I = \left[ k 4^{-n_0}, (k+1) 4^{-n_0} \right]$（如在边界，则任取），其对应闭方块 $J = H(I)$．由于 $I$ 已经是 $t$ 的一个（单侧）邻域，为证明 $H(t)$ 在点 $t$ 的连续性，下面只需证 $J \subset U_\varepsilon(H(t))$．由于我们构造的 $n_0$ 使闭方块 $J$ 的边长为 $2^{-n_0} < \frac \varepsilon 2$，$H(t)$ 与这闭方块中任意点 $(x,y)$ 的距离
+$$
+\| H(t) - (x,y) \|_{\infty} \leq \frac \varepsilon 2 < \varepsilon
+$$
+故 $J \subset U_\varepsilon(H(t))$．
+:::
+
+::: {#exr-hil-len}
+Hilbert 曲线是不可求长的．
+:::
+
+对一般的曲线而言，逐点收敛于曲线 $f$ 的曲线族 $f_n$ 的长度的极限 $\lim_{n \to \infty} \len f_n$ 与 $f$ 的长度 $\len f$ 并不一定相同．这一事实有一简单有力的实例验证：用锯齿状曲线逼近圆．
+
+因此，直接取 @exr-fakehil-len 的极限并不可行．根据曲线长度的定义，只有构造出一族直接由 $H(t)$ 上点构成的近似曲线，我们才能从这族曲线长度的极限中得到 Hilbert 曲线的正确长度．
+
+::: {.proof}
+考虑划分 $P_{n} : t_k = k 4^{-{n}} \pod{k = 0, 1, \dots, 4^{n}}$，将 $H(t_k)$ 依次用折线连接，就得到了《Space-filling curves》2.6 节[@sagan]讨论的 Hilbert 曲线的 $n$ 阶近似多边形曲线 $P_n(t)$（Approximating polygon for the Hilbert curve）．我们指出，与 $n$ 阶伪 Hilbert 曲线相同，$n$ 阶 Hilbert 近似多边形曲线仍然可以类似的由递归方法得到，遍历 $2^n \times 2^n$ 个小方块，且平均每个小方块内的曲线长度为 $2^{-n}$．因此，$n$ 阶 Hilbert 近似多边形曲线的长度 $\len P_n(t) = (2^n \times 2^n) \cdot 2^{-n} = 2^n$．由于该数列没有上界，故我们说明了 Hilbert 曲线的不可求长性．
+:::
+
+### 全平面填充
+
+环绕填充并连接相邻曲线即可．
+
+### 四进制小数表示
+
+$n$ 阶伪 Hilbert 曲线对 $[0,1]$ 区间的划分操作可被一一对应地记为 $n$ 位四进制小数，从而为 $[0,1]$ 上被划分出的区间和对应的 $[0,1]^2$ 上的方块赋予了一种简洁的表示方法．但由于递归构造时左下、右下角涉及翻转操作，为每个实数 $t$（无限位规范四进制小数）写出其平面对应点 $H(t)$ 的非递归封闭形式表达稍显复杂．《Space-filling curves》[@sagan]的 2.3 节给出了基于复数和四进制小数的精确表示．
+
+### 小结
+
+- Hilbert 曲线确实遍历了 $[0,1]^2$ 区域的所有点.
+- Hilbert 曲线是满射, 但不是单射，所以不是从线段到正方形区域的双射．
+- $[0,1]^2 \to [0,1]$ 的单射（甚至双射）？集合势理论．
+- （补充）空间填充曲线必自交，即不能是单射．（Pf：否则与 $[0,1]^2$ 同胚，这显然荒谬．）（证明同胚逆映射连续需用拓扑定理：any continuous bijection from a compact space onto a Hausdorff space is a homeomorphism）
+- （补充）不自交但有面积的曲线：Osgood 曲线．但它不是空间填充曲线．
+
+## 集合势理论
+
+### 集合的势
+
+- 等势，劣势于，优势于．
+
+- “劣势于”是集合上的序关系：自反性、反对称性（Bernstein 定理）、传递性．
+
+  事实上更是全序关系，证明需用到选择公理．
+
+### 有限集、可列集与无限集
+
+- 有限集，可列集，无限集．
+
+- 无限集的充要条件：与某一真子集等势（Dedekind 定义）．
+
+  充分性：归纳取出可列集，该部分映射到后继形成双射．
+
+  必要性：即有限集不与任何其真子集等势．冗长，证明略．
+
+- 无限集并有限或可列集仍与原无限集等势．
+
+$$
+\mathbb N^2 \approx \mathbb N
+$$
+
+本质：可列个可列集的并还是可列集；可列集的有限次笛卡尔积仍是可列集．
+
+### 从可列到不可列
+
+$$
+\mathbb R \not \approx \mathbb N
+$$
+
+写成小数，对角线法．
+
+规范小数（规定其均为无限小数），规范二进制小数．
+
+$$
+2^{\mathbb N} \approx \mathbb R
+$$
+
+核心在于不规范小数是可列集．
+
+$$
+{\mathbb R}^2 \approx \mathbb R
+$$
+
+小数穿插构造法．需要注意的是，构造的 $(0,1)^2 \to (0,1)$ 的单射不是满射
+$$
+c = 0.303030\dots \implies a = 0.333\dots, b= 0.000\dots
+$$
+此外，它也不是连续映射
+$$
+\begin{aligned}
+a=0.3333\dots, b=0.4999\dots &\implies c=0.343939\dots \\
+a=0.3333\dots, b=0.5000\dots &\implies c=0.353030\dots
+\end{aligned}
+$$
+其对应的 $[0,1] \to [0,1]^2$ 的非单的满射（如构造出的小数不规范，则将其规范化）亦不连续．
+$$
+\begin{aligned}
+c = 0.4999\dots &\implies a = 0.4999\dots, b=0.9999
+\dots \\
+c = 0.5000\dots &\implies a = 0.5000\dots, b=0.0000\dots
+\end{aligned}
+$$
+
+Fun fact: ${\mathbb R}^2 \approx \left(2^{\mathbb N}\right)^{2} \approx 2^{\left({\mathbb N \times 2} \right)} \approx 2^{\mathbb N} \approx \mathbb R$（基数理论）
+
+### 小结
+
+- Hilbert 曲线：$\mathbb R \to {\mathbb R}^2$ 的连续满射．
+- 集合势理论：${\mathbb R}^2 \to {\mathbb R}$ 的不连续单（双）射．
+
+## Comments {.appendix .unnumbered}
+
+- 希尔伯特曲线及性质的形式化理解 - zzdyyy[@zzdyyy]
+  
+  本文脉络的主要参考．
+
+- Why does the Hilbert curve fill the whole square? - Math StackExchange[@mathex_fill]
+
+  提供了收敛性的较严谨证明．
+
+- 希尔伯特曲线：无限数学怎样应用于有限世界 - 3Blue1Brown[@3b1b]
+
+  优秀的可视化．
+
+- Space-filling curve - Wikipedia[@wikipedia_spacefilling]
+
+- 《集合论基础教程》张峰、陶然[@zhangfeng]
+
+扩展阅读：
+
+- 《Space-filling curves》Hans Sagan[@sagan]
+   
+  回顾了空间填充曲线发展历史；用形式化的语言刻画了 Hilbert 曲线，见文内引用．
+
+## Acknowledgements {.appendix .unnumbered}
+
+（例行）感谢吕导组织研讨课．本次研讨课与宁同学一同准备并主要由后者主讲，在讨论和展示过程中收获颇丰．
