@@ -606,6 +606,7 @@ font-style: inherit;">}</span></span></code></pre></div>
 </div>
 <p>因此算法递归部分时间复杂度可估计为 <img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%5Csum_%7Bd%20%5Cin%20D_2%20(n)%7D%20%5Cmathrm%7BDu%7D_K%20%5Cleft(%5Cfloor%7B%5Cleft(%20%5Cfloor%7B%5Cfrac%20n%20d%7D%20%5Cright)%5E%7B%5Cfrac%201%202%7D%7D%5Cright)%0A&amp;%5Cleq%20%5Csum_%7Bd%20%5Cin%20D_2%20(n)%7D%20C%20%5Cfloor%7B%5Cleft(%20%5Cfloor%7B%5Cfrac%20n%20d%7D%20%5Cright)%5E%7B%5Cfrac%201%202%7D%7D%20K%5E%7B-%5Cfrac%201%202%7D%20%5C%5C%0A&amp;%5Cleq%20C%20K%5E%7B-%5Cfrac%201%202%7D%20%5Cleft(%20%5Csum_%7Bi=1%7D%5E%7Bn%5E%7B%5Cfrac%201%203%7D%7D%20%5Cleft(%20%5Cfrac%20n%20%7B%5Cfrac%20n%20%7Bi%5E2%7D%7D%20%5Cright)%5E%7B%5Cfrac%201%202%7D%20+%20%5Csum_%7Bi=1%7D%5E%7Bn%5E%7B%5Cfrac%201%203%7D%7D%20%5Cleft(%20%5Cfrac%20n%20i%20%5Cright)%5E%7B%5Cfrac%201%202%7D%20%5Cright)%20%5C%5C%0A&amp;=%20C%20K%5E%7B-%5Cfrac%201%202%7D%20%5Cleft(%20%5Csum_%7Bi=1%7D%5E%7Bn%5E%7B%5Cfrac%201%203%7D%7D%20i%20+%20n%5E%7B%5Cfrac%201%202%7D%20%5Csum_%7Bi=1%7D%5E%7Bn%5E%7B%5Cfrac%201%203%7D%7D%20i%5E%7B-%5Cfrac%201%202%7D%20%5Cright)%20%5C%5C%0A&amp;%5Cin%20K%5E%7B-%5Cfrac%201%202%7D%20%5Cleft(%20O(n%5E%7B%5Cfrac%202%203%7D)%20+%20n%5E%7B%5Cfrac%201%202%7D%20O(n%5E%7B%5Cfrac%201%206%7D)%20%5Cright)%20%5C%5C%0A&amp;%5Csubset%20O(n%5E%7B%5Cfrac%202%203%7D%20K%5E%7B-%5Cfrac%201%202%7D)%0A%5Cend%7Baligned%7D%0A"> 总时间复杂度为 <img src="https://latex.codecogs.com/png.latex?%0AO(K)%20+%20O(n%5E%7B%5Cfrac%202%203%7D%20K%5E%7B-%5Cfrac%201%202%7D)%0A"> 取 <img src="https://latex.codecogs.com/png.latex?K=n%5E%7B%5Cfrac%204%209%7D">，得到最优时间复杂度 <img src="https://latex.codecogs.com/png.latex?O(n%5E%7B%5Cfrac%204%209%7D)">. 代入 <img src="https://latex.codecogs.com/png.latex?n%20=%2010%5E%7B18%7D">，量级约为 <img src="https://latex.codecogs.com/png.latex?10%5E8">.</p>
 <p>这估计并不算优秀. 传言存在 <img src="https://latex.codecogs.com/png.latex?O(n%5E%7B%5Cfrac%202%205%7D)"> 的估计，猜测大概优化了 <img src="https://latex.codecogs.com/png.latex?%5Cleft%5C%7B%20%5Cfloor%7B%5Cfrac%20n%20i%7D%20%5Cright%5C%7D_%7Bi=1%7D%5En"> 和 <img src="https://latex.codecogs.com/png.latex?%5Cleft%5C%7B%20%5Cfloor%7B%20%5Cleft(%20%5Cfloor%7B%5Cfrac%20n%20d%7D%20%5Cright)%5E%7B%5Cfrac%201%202%7D%20%7D%5Cright%5C%7D_%7Bd%20%5Cin%20D_2%20(n)%7D"> 的重叠部分。笔者尚未找出其推导方式.</p>
+<p>upd: 关于 <img src="https://latex.codecogs.com/png.latex?O(n%5E%7B%5Cfrac%202%205%7D)"> 的估计，请参阅博客<span class="citation" data-cites="nonsquare_blog"><sup>[14]</sup></span>和论文<span class="citation" data-cites="nonsquare_paper"><sup>[15]</sup></span>．</p>
 
 
 
@@ -650,6 +651,12 @@ font-style: inherit;">}</span></span></code></pre></div>
 </div>
 <div id="ref-nonsquare2_luogu" class="csl-entry">
 13. <em>P4318 完全平方数 - 洛谷 | 计算机科学教育新生态</em>. (n.d.). <a href="https://www.luogu.com.cn/problem/P4318" class="uri">https://www.luogu.com.cn/problem/P4318</a>.
+</div>
+<div id="ref-nonsquare_blog" class="csl-entry">
+14. smsxgz. (2019). <em>Counting square free numbers</em>. <a href="https://smsxgz.github.io/post/pe/counting_square_free_numbers/" class="uri">https://smsxgz.github.io/post/pe/counting_square_free_numbers/</a>.
+</div>
+<div id="ref-nonsquare_paper" class="csl-entry">
+15. Pawlewicz, J. (2011). <em>Counting square-free numbers</em>. <a href="https://arxiv.org/abs/1107.4890">https://arxiv.org/abs/1107.4890</a>
 </div>
 </div></section></div> ]]></description>
   <category>OI</category>
