@@ -1,0 +1,437 @@
+---
+title: "Models for Competitive Programming"
+subtitle: "兼算法 & 数学碎碎念"
+author: "sun123zxy"
+date-modified: "2023/06/21"
+draft: true
+
+categories:
+  - OI
+  - 数学
+
+number-sections: true
+---
+
+## 通用
+
+### 基础模板
+
+```c++
+//general model 2023/06/12
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+namespace safe{
+	ll rd(){
+		ll ans=0; bool sgn=0; char c=getchar();
+		while(c<'0'||c>'9'){if(c=='-') sgn=1; c=getchar();}
+		while(c>='0'&&c<='9'){ans=ans*10+c-'0';c=getchar();}
+		if(sgn) ans=-ans; return ans;
+	}
+	const ll MOD=;
+	#define _ %MOD
+	ll lmodv(ll x){
+		if(x<0) x+=MOD;
+		else if(x>=MOD) x-=MOD;
+		return x;
+	}void lmodp(ll& x){x=lmodv(x);}
+	ll mmodv(ll x){
+		return x%MOD;
+	}void mmodp(ll& x){x=mmodv(x);}
+	ll hmodv(ll x){
+		return (x%MOD+MOD)%MOD;
+	}void hmodp(ll& x){x=hmodv(x);}
+	ll qpow(ll x,ll up){
+		hmodp(x); ll ans=1;
+		while(up){
+			if(up&1) ans=ans*x _;
+			x=x*x _; up>>=1;
+		}return ans;
+	}
+	ll inv(ll x){return qpow(x,MOD-2);}
+	
+	void entry(){}
+}
+int main(){
+	//freopen("t1.in","r",stdin);
+	//freopen("t1.out","w",stdout);
+	//ll T=safe::rd(); while(T--){
+	safe::entry();
+	//}
+	return 0;
+}
+```
+
+### 对拍
+
+```batch
+:loop
+    make.exe>data.in
+    my.exe<data.in>my.out
+    std.exe<data.in>std.out
+    fc my.out std.out
+    if not errorlevel 1 goto loop
+pause
+```
+
+## 数论
+
+::::: {.hidden}
+::: {.content-hidden unless-format="html"}
+$$
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\inv}{\operatorname{inv}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\Id}{\operatorname{Id}}
+$$
+:::
+::: {.content-hidden when-format="html"}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\inv}{\operatorname{inv}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\Id}{\operatorname{Id}}
+:::
+:::::
+
+### ExGCD
+
+:::{#thm-exgcd}
+
+## ExGCD
+
+给定线性方程组 $ax+by=\gcd(a,b)$，其解可递归地由下式求得
+$$
+a y_1 + b \left( x_1 - \floor{\frac a b} y_1 \right) = \gcd(b, a \bmod b)
+$$
+其中 $x_1, y_1$ 是 $b x + (a \bmod b) y = \gcd(b, a \bmod b)$ 的一组解．
+:::
+
+### CRT
+
+:::{#thm-crt}
+
+## CRT
+
+给定 $n$ 个同余方程
+$$
+x \equiv a_i \pmod{m_i} \pod{i = 1, \dots, n}
+$$
+
+其中各 $m_i$ 两两互质，则上式等价于
+$$
+x \equiv \sum_{i=1}^n a_i M_i \inv_{m_i}(M_i) \pmod M
+$$
+其中 $M = \sum_{i=1}^n m_i$，$M_i = \frac{M}{m_i}$．
+:::
+
+::: {.remark}
+$$
+M_i \inv_{m_i}(M_i) \mod m_j = [i = j]
+$$
+:::
+
+#### ExCRT
+
+对一般的情况，考虑合并两个同余方程．给定 $2$ 个同余方程
+$$
+\left\{
+\begin{aligned}
+  x &\equiv a_1 \pmod{m_1} \\
+  x &\equiv a_2 \pmod{m_2}
+\end{aligned}
+\right.
+$$
+考虑化为不定方程形式
+$$
+\begin{aligned}
+  x = k_1 m_1 + a_1 \\
+  x = k_2 m_2 + a_2
+\end{aligned}
+$$
+合并得到
+$$
+k_1 m_1 + a_1 = k_2 m_2 + a_2
+$$
+即
+$$
+k_1 m_1 + k_2 m_2 = a_2 - a_1
+$$
+此即关于 $k_1, k_2$ 的不定方程．若 $\gcd(m_1, m_2) \mid a_2 - a_1$，则可应用 ExGCD 求得方程的一组解，带回即得
+$$
+x \equiv k_1 m_1 + a_1 \pmod{\lcm(m_1, m_2)}
+$$
+否则同余方程组无解．
+
+:::{.remark}
+若一组同余方程两两可合并，则全部均可合并．当判断大规模同余方程组是否有解时可能用到．
+:::
+
+### BSGS
+
+求 $a^x \equiv b \pmod{p}$ 的一个特解，其中 $\gcd(a,p) = 1$．
+
+实质是非常暴力的根号分治．时间复杂度 $O(\sqrt p)$．
+
+```c++
+ll BSGS(ll a,ll b){
+    map<ll,bool> mp;
+	ll cur=1,sqrtM=ceil(sqrt(MOD));
+	for(ll bi=1;bi<=sqrtM;bi++){
+		cur=cur*a%MOD;
+		mp[b*cur%MOD]=bi;
+	}
+	ll nw=cur;
+	for(ll ai=1;ai<=sqrtM;ai++){
+		if(mp[nw]) return ai*sqrtM-mp[nw];
+		nw=nw*cur%MOD;
+	}
+	return -1;
+}
+```
+
+## 积性函数
+
+### 整除分块
+
+```c++
+ll ans=0;
+for(ll l=1,r,d;l<=N;l=r+1){
+    d=N/l, r=N/d;
+    ans+=(S_mu(r)-S_mu(l-1))*d;
+}
+```
+
+#### 上取整整除分块
+
+```c++
+ll cdiv(ll a,ll b){ //ceil(a/b)
+	return (a<0||a%b==0)?a/b:a/b+1;
+}
+ll ans=0;
+for(ll l,r=N,d;r>=1;r=l-1){
+    d=cdiv(N,r), l=cdiv(N,d);
+    ans+=(S_mu(r)-S_mu(l-1))*d;
+}
+```
+
+### 杜教筛
+
+设 $f$ 为一数论函数，我们希望快速求得其前缀和 $\hat f (n) = \sum_{i=1}^n f(i)$. 考虑数论函数 $g$ 和 $h = g * f$，
+$$
+h(n) = \sum_{d \mid n} g(d) f(\frac n d)
+$$
+两端做前缀和得
+$$
+\begin{aligned}
+\hat h (n)
+&= \sum_{i=1}^n h(i) \\
+&= \sum_{i=1}^n \sum_{d \mid i} g(d) f(\frac i d) \\
+&= \sum_{d=1}^n g(d) \sum_{i=1}^{\floor{\frac n d}} f(i) \\
+&= \sum_{d=1}^n g(d) \hat f (\floor{\frac n d}) \\
+&= g(1) \hat f (n) + \sum_{d=2}^n g(d) \hat f (\floor{\frac n d})
+\end{aligned}
+$$
+因此
+$$
+\hat f (n) = \frac 1 {g(1)} \left( \hat h (n) - \sum_{d=2}^n g(d) \hat f (\floor{\frac n d}) \right)
+$$
+
+故若 $g$、$h$ 的前缀和可 $O(1)$ 算得，根据上式整除分块即可递归地计算出 $f$ 的前缀和．预处理前 $O(n^{2/3})$ 项并记忆化得到的时间复杂度为 $O(n^{2/3})$．外层整除分块不会增加时间复杂度．
+
+关于时间复杂度证明可参考 [sun123zxy’s blog - OI 数论中的上界估计与时间复杂度证明 # 杜教筛](https://blog.sun123zxy.top/posts/20230418-complexity/#%E6%9D%9C%E6%95%99%E7%AD%9B)．
+
+$$
+\begin{aligned}
+&f = \mu, g = I, h = \varepsilon \\
+&f = \varphi, g = I, h = \Id
+\end{aligned}
+$$
+
+```c++
+unordered_map<ll,ll> s_mu;
+ll S_mu(ll n){
+	if(n<=MXG){
+		return mu[n]; // already accumulated
+	}else if(s_mu.count(n)){
+		return s_mu[n];
+	}
+	ll ans=0;
+	for(ll l=2,r,d;l<=n;l=r+1){
+		d=n/l,r=n/d;
+		ans+=S_mu(d)*(r-l+1);
+	}
+	return s_mu[n]=1-ans;
+}
+```
+
+## 组合
+
+### Lucas 定理
+
+::: {#thm-lucas}
+
+## Lucas 定理
+
+$$
+\binom{n}{m} \equiv \prod_{i} \binom{n_i}{m_i} \equiv \binom{\floor{n/p}}{\floor{m/p}} \binom{n \bmod p}{n \bmod p} \pmod p
+$$
+
+其中 $p$ 是质数，$n_i$ 和 $m_i$ 是 $n$ 和 $m$ 的 $p$ 进制表示各数位．
+:::
+
+证明的要点在于 $\binom {p^i} m \bmod {p} = [m = 0 \land m = p^i]$ 和 Vandermonde 卷积，生成函数食用风味更佳．
+
+参考：
+
+- [卢卡斯定理 - OI Wiki](https://oi-wiki.org/math/number-theory/lucas/)
+- [Lucas's theorem - Wikipedia](https://en.wikipedia.org/wiki/Lucas%27s_theorem)
+
+### 矩阵树定理
+
+#### 无向图的情形
+
+对无向图，度数矩阵 $D = \operatorname{diag} \{ \operatorname{deg}(i) \}$，邻接矩阵 $A$ 定义为
+$$
+A_{i,j} = \begin{cases}
+0 & i=j \\
+e(i,j) & i \neq j
+\end{cases}
+$$
+其中 $e(i,j)$ 表示点 $i$ 到点 $j$ 的边的数量（对无向图，$e(i,j) = e(j,i)$）．
+
+定义 Laplace 矩阵（Kirchhoff 矩阵）$L=D-A$．
+
+Laplace 矩阵有性质 $L= B B^T$，其中关联矩阵 $B$ 按如下方式定义
+$$
+B_{i,j} = \begin{cases}
+1 & \text{node $i$ is the ID-smaller endpoint of edge $j$} \\
+-1 & \text{node $i$ is the ID-larger endpoint of edge $j$} \\
+0 & \text{otherwise}
+\end{cases}
+$$
+
+这里 $1$ 与 $-1$ 的引入完成了一种对边的“手动定向”，其用途将在后文介绍．
+
+:::{#thm-mattree-nondirected}
+
+## 矩阵树定理 - 无向图
+
+$n$ 点无向图的生成树的个数与该图的 Laplace 矩阵 $L$ 的任意主子式的值相等．其也与 $L$ 所有 $n-1$ 个非零特征值乘积的 $\frac 1 n$ 倍相等．
+:::
+
+Laplace 矩阵同行的代数余子式均相等（这性质由行和为 $0$ 得到），因此去掉任意一行一列均可得到正确的无向图生成树计数．此外，由于 $L = B B^T$ 至少半正定，$L$ 的所有特征值非负．
+
+证明的要点在于对 $L = B B^T$ 的某个主子式（一般选择去掉第一行第一列）应用 Cauchy-Binet 公式，随后说明行列式的组合意义中，环的情况一定相互抵消．关于特征值的结论可从特征多项式、各 $n-1$ 阶主子式与韦达定理的关系中得到（依此方法能进一步得到有关 $k$ - 生成森林的一些结论）．
+
+事实上，去掉第 $i$ 行第 $i$ 列，即是统计以 $i$ 为根的根向生成树的数量．先前定义关联矩阵 $B$ 时“手动定向”，是为了使换向过程中环的情况相互抵消，只留下树的唯一一种情况．当然，因为是无向图，这里树的朝向和根的具体位置并不重要．
+
+#### 有向图的情形
+
+对有向图，我们明确统计的对象为根向（或叶向）生成树的数量．根向树形图与出度 Laplace 矩阵相关，$L^{out} = D^{out} - A$，其中 $D^{out}$ 是出度矩阵．
+
+为体现有向图的要求，出度 Laplace 矩阵对应的关联矩阵需要一些修改．令矩阵 $B$ 满足
+$$
+B_{i,j} = \begin{cases}
+1 & \text{node $i$ is the head of edge $j$} \\
+0 & \text{otherwise}
+\end{cases}
+$$
+矩阵 $C$ 满足
+$$
+C_{i,j} = \begin{cases}
+1 & \text{node $i$ is the head of edge $j$} \\
+-1 & \text{node $i$ is the tail of edge $j$} \\
+0 & \text{otherwise}
+\end{cases}
+$$
+则出度 Laplace 矩阵满足性质 $L^{out} = B C^T$．我们构造的矩阵 $B$ 体现了对出边方向的要求，在此基础上矩阵 $C$ 进一步完成了“手动定向”的工作．
+
+:::{#thm-mattree-rootwise}
+
+## 矩阵树定理 - 根向树形图
+
+$n$ 点有向图以 $i$ 为根的生成根向树形图的数量与该图出度 Laplace 矩阵 $L^{out}$ 去掉第 $i$ 行第 $i$ 列的 $n-1$ 阶主子式的值相等．该有向图的所有生成根向树形图的数量也与 $L^{out}$ 的所有 $n-1$ 个非零特征值的乘积相等．
+:::
+
+由于 $L^{out}$ 的行和仍为 $0$，其同行代数余子式仍然相等．
+
+关于叶向树形图，我们有类似的结论：
+
+:::{#thm-mattree-leafwise}
+
+## 矩阵树定理 - 叶向树形图
+
+$n$ 点有向图以 $i$ 为根的生成叶向树形图的数量与该图入度 Laplace 矩阵 $L^{in}$ 去掉第 $i$ 行第 $i$ 列的 $n-1$ 阶主子式的值相等．该有向图的所有生成根向树形图的数量也与 $L^{in}$ 的所有 $n-1$ 个非零特征值的乘积相等．
+:::
+
+由于 $L^{in}$ 的列和（而非行和）为 $0$，其同列（而非同行）代数余子式均相等．
+
+更多内容，参考
+
+- [Laplacian matrix - Wikipedia](https://en.wikipedia.org/wiki/Laplacian_matrix)
+- [矩阵树定理 - OI Wiki](https://oi-wiki.org/graph/matrix-tree/)
+- [Kirchhoff's theorem - Wikipedia](https://en.wikipedia.org/wiki/Kirchhoff's_theorem)
+
+## 多项式
+
+### NTT
+
+```c++
+//NTT iteration style 2020/06/18
+class Poly{public:
+	ll& operator [] (ll idx){return cof[idx];}
+	ll n;vector<ll> cof;
+	Poly(){}
+	Poly(ll n){Resize(n);}
+	void Resize(ll n){this->n = n;cof.resize(n,0);}
+};
+namespace PC{
+	vector<ll> rev;
+	void DFT(Poly& A,ll typ){
+		ll n=A.n;
+		for(ll i=0;i<n;i++) if(i<rev[i]) swap(A[i],A[rev[i]]);
+		for(ll hf=1;hf<n;hf*=2){
+			ll w1=QPow(PR,(MOD-1)/(2*hf));
+			if(typ==-1) w1=Inv(w1);
+			for(ll i=0;i<n;i+=2*hf){
+				ll wk=1;
+				for(ll k=0;k<hf;k++){
+					ll x=A[i+k],y=wk*A[i+hf+k]_;
+					MD(A[i+   k]=x+y);
+					MD(A[i+hf+k]=x-y);
+					wk=wk*w1 _;
+				}
+			}
+		}
+		ll invN=Inv(n);
+		if(typ==-1) for(ll i=0;i<n;i++) A[i]=A[i]*invN _;
+	}
+	void SpawnRev(ll n){//n(log2)
+		rev.resize(1<<n);rev[0]=0;
+		for(ll i=1;i<(1<<n);i++) rev[i]=(rev[i>>1]>>1)+((i&1)<<(n-1));
+	}
+}
+Poly operator * (Poly A,Poly B){
+	using namespace PC;
+	ll orgN=A.n+B.n-1;
+	ll n=ceil(log2(orgN));SpawnRev(n);
+	n=1LL<<n;
+	A.Resize(n);B.Resize(n);
+	Poly C(n);
+	DFT(A,1);DFT(B,1);
+	for(ll i=0;i<n;i++) C[i]=A[i]*B[i]_;
+	DFT(C,-1);
+	C.Resize(orgN);
+	return C;
+}
+int main(){
+	ll n=Rd()+1,m=Rd()+1;
+	Poly A(n),B(m);
+	for(ll i=0;i<n;i++) A[i]=Rd();
+	for(ll i=0;i<m;i++) B[i]=Rd();
+	Poly C=A*B;
+	for(ll i=0;i<C.n;i++) printf("%lld ",C[i]);
+	return 0;
+}
+```
