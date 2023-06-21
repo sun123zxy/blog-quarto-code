@@ -307,7 +307,7 @@ P_p(n) \in \begin{cases}
 <p><span class="math display">\[
 \hat{\sigma_0}(n) = \sum_{i=1}^n \sigma_0 (i)
 = \sum_{i=1}^n \sum_{d \mid i} 1
-= \sum_{d=1}^n \floor{\frac n d}
+= \sum_{d=1}^n \left\lfloor \frac n d \right\rfloor
 \leq \sum_{d=1}^n \frac n d
 = n H(n) \in O(n \log n)
 \]</span></p>
@@ -321,7 +321,7 @@ P_p(n) \in \begin{cases}
 \hat{\sigma_z}(n)
 &amp;= \sum_{i=1}^n \sigma_z (i)
 = \sum_{i=1}^n \sum_{d \mid i} d^z
-= \sum_{d=1}^n d^z \floor{\frac n d} \\
+= \sum_{d=1}^n d^z \left\lfloor \frac n d \right\rfloor \\
 &amp;\leq n \sum_{d=1}^n d^{z-1}
 = n P_{1-z}(n)
 \in \begin{cases}
@@ -335,13 +335,13 @@ O(n) &amp; z &lt; 0
 <p>现在引入一个重要放缩技巧，其在后续估计中屡试不爽.</p>
 <div id="prp-trick1" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 1 </strong></span><span class="math display">\[
-\sum_{d \mid n} f(d) \leq \sum_{i=1}^n f (\floor{\frac n i})
+\sum_{d \mid n} f(d) \leq \sum_{i=1}^n f (\left\lfloor \frac n i \right\rfloor)
 \]</span></p>
 </div>
 <p>显然，右式比左式多算了 <span class="math inline">\(i \nmid n\)</span> 的项，因此命题是正确的. 但我们还可以做得更好：</p>
 <div id="prp-trick1ex" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 2 </strong></span><span class="math display">\[
-\sum_{d \mid n} f(d) \leq \sum_{i=1}^{\sqrt n} f(i) + f(\floor{\frac n i})
+\sum_{d \mid n} f(d) \leq \sum_{i=1}^{\sqrt n} f(i) + f(\left\lfloor \frac n i \right\rfloor)
 \]</span></p>
 </div>
 <p><span class="math inline">\(\sqrt n\)</span> 分治. 我们其实已经在 <a href="#exm-sigma0ub">Example&nbsp;1</a> 估计 <span class="math inline">\(\sigma_0(n)\)</span> 时用过此技巧了.</p>
@@ -350,7 +350,7 @@ O(n) &amp; z &lt; 0
 </div>
 <p>用 <a href="#prp-trick1">Proposition&nbsp;1</a>： <span class="math display">\[
 \sigma_1 (n)
-= \sum_{d \mid n} d \leq \sum_{i=1}^n \floor{\frac n i} \leq n H(n) \in O(n \log n)
+= \sum_{d \mid n} d \leq \sum_{i=1}^n \left\lfloor \frac n i \right\rfloor \leq n H(n) \in O(n \log n)
 \]</span></p>
 <p>可以证明用 <a href="#prp-trick1ex">Proposition&nbsp;2</a> 不会得到更优的结果.</p>
 <p>我们发现了一个有趣的事实：<span class="math inline">\(\sigma_1 (n)\)</span> 和 <span class="math inline">\(\hat{\sigma_0}(n)\)</span> 的渐进上界均为 <span class="math inline">\(O(n \log n)\)</span>.</p>
@@ -362,9 +362,9 @@ O(n) &amp; z &lt; 0
 \begin{aligned}
 \sigma_z (n)
 &amp;= \sum_{d \mid n} d^z
-\leq \sum_{i=1}^{\sqrt n} i^z + \floor{\frac n i}^z \\
+\leq \sum_{i=1}^{\sqrt n} i^z + \left\lfloor \frac n i \right\rfloor^z \\
 &amp;\leq \begin{cases}
-\displaystyle 2 \sum_{i=1}^{\sqrt n} \floor{\frac n i}^z \leq 2 n^z \sum_{i=1}^{\sqrt n} i^{-z} &amp; = 2 n^z P_z(\sqrt n) &amp; z \geq 0\\
+\displaystyle 2 \sum_{i=1}^{\sqrt n} \left\lfloor \frac n i \right\rfloor^z \leq 2 n^z \sum_{i=1}^{\sqrt n} i^{-z} &amp; = 2 n^z P_z(\sqrt n) &amp; z \geq 0\\
 \displaystyle 2 \sum_{i=1}^{\sqrt n} i^z &amp; = 2 P_{-z}(\sqrt n)  &amp; z &lt; 0
 \end{cases} \\
 \in &amp; \begin{cases}
@@ -395,19 +395,19 @@ O(1) &amp; z &lt; -1
 <section id="整除分块" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="整除分块"><span class="header-section-number">2</span> 整除分块</h2>
 <p>也被称为数论分块. 求 <span class="math display">\[
-\sum_{i=1}^n f(i) g(\floor{\frac n i})
-\]</span> 我们按 <span class="math inline">\(d = \floor{\frac n i}\)</span> 分块求和： <span class="math display">\[
-\sum_{d} g(d) \sum_{\floor{\frac n i} = d} f(i)
-\]</span> 可以证明，对一指定的 <span class="math inline">\(d\)</span>，满足 <span class="math inline">\(d = \floor{\frac n i}\)</span> 的 <span class="math inline">\(i\)</span> 取遍一连续区间，故若 <span class="math inline">\(f\)</span> 的前缀和能 <span class="math inline">\(O(1)\)</span> 求出，块数量 <span class="math inline">\(\# \left\{ \floor{\frac n i} \right\}_{i=1}^n\)</span> 即该算法的时间复杂度. 注意到当 <span class="math inline">\(i \leq \sqrt n\)</span> 时，<span class="math inline">\(\floor{\frac n i}\)</span> 最多只有 <span class="math inline">\(\floor{\sqrt n}\)</span> 种取值，而 <span class="math inline">\(i \geq \sqrt n\)</span> 时，<span class="math inline">\(1 \leq \floor{\frac n i} \leq \sqrt n\)</span> 表明其也最多只有 <span class="math inline">\(\floor{\sqrt n}\)</span> 种取值. 因此整除分块的时间复杂度 <span class="math display">\[
-T_1(n) = \# \left\{ \floor{\frac n i} \right\}_{i=1}^n \leq 2 \sqrt n \in O(\sqrt n)
+\sum_{i=1}^n f(i) g(\left\lfloor \frac n i \right\rfloor)
+\]</span> 我们按 <span class="math inline">\(d = \left\lfloor \frac n i \right\rfloor\)</span> 分块求和： <span class="math display">\[
+\sum_{d} g(d) \sum_{\left\lfloor \frac n i \right\rfloor = d} f(i)
+\]</span> 可以证明，对一指定的 <span class="math inline">\(d\)</span>，满足 <span class="math inline">\(d = \left\lfloor \frac n i \right\rfloor\)</span> 的 <span class="math inline">\(i\)</span> 取遍一连续区间，故若 <span class="math inline">\(f\)</span> 的前缀和能 <span class="math inline">\(O(1)\)</span> 求出，块数量 <span class="math inline">\(\# \left\{ \left\lfloor \frac n i \right\rfloor \right\}_{i=1}^n\)</span> 即该算法的时间复杂度. 注意到当 <span class="math inline">\(i \leq \sqrt n\)</span> 时，<span class="math inline">\(\left\lfloor \frac n i \right\rfloor\)</span> 最多只有 <span class="math inline">\(\left\lfloor \sqrt n \right\rfloor\)</span> 种取值，而 <span class="math inline">\(i \geq \sqrt n\)</span> 时，<span class="math inline">\(1 \leq \left\lfloor \frac n i \right\rfloor \leq \sqrt n\)</span> 表明其也最多只有 <span class="math inline">\(\left\lfloor \sqrt n \right\rfloor\)</span> 种取值. 因此整除分块的时间复杂度 <span class="math display">\[
+T_1(n) = \# \left\{ \left\lfloor \frac n i \right\rfloor \right\}_{i=1}^n \leq 2 \sqrt n \in O(\sqrt n)
 \]</span></p>
-<p>方便起见，后文记 <span class="math inline">\(D(n) = \left\{ \floor{\frac n i} \right\}_{i=1}^n\)</span>.</p>
+<p>方便起见，后文记 <span class="math inline">\(D(n) = \left\{ \left\lfloor \frac n i \right\rfloor \right\}_{i=1}^n\)</span>.</p>
 <section id="整除分块嵌套" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="整除分块嵌套"><span class="header-section-number">2.1</span> 整除分块嵌套</h3>
 <p>将 <a href="#prp-trick1ex">Proposition&nbsp;2</a> 加强，我们有如下通用放缩：</p>
 <div id="prp-trick2ex" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 3 </strong></span><span class="math display">\[
-\sum_{d \mid n} f(d) \leq \sum_{d \in D(n)} f(d) \leq \sum_{i=1}^{\sqrt n} f(i) + f(\floor{\frac n i})
+\sum_{d \mid n} f(d) \leq \sum_{d \in D(n)} f(d) \leq \sum_{i=1}^{\sqrt n} f(i) + f(\left\lfloor \frac n i \right\rfloor)
 \]</span></p>
 </div>
 <p>LHS 成立的关键在于 <span class="math inline">\(\{d: d \mid n\} \subset D(n)\)</span>；而 RHS 的本质就是上述对整除分块块数量上界的估计.</p>
@@ -418,7 +418,7 @@ S_z(n) = \sum_{d \in D(n)} d^z
 \]</span> 则前述 <a href="#exm-sigmazub">Example&nbsp;5</a> 中 <span class="math inline">\(\sigma_z(n)\)</span> 的上界与渐进上界也同样适用于 <span class="math inline">\(S_z(n)\)</span>.</p>
 </div>
 <p>现在可以对嵌套整除分块 <span class="math display">\[
-\sum_{i=1}^n f(i) \sum_{j=1}^{\floor{\frac n i}} g(j) h(\floor{\frac n {ij}})
+\sum_{i=1}^n f(i) \sum_{j=1}^{\left\lfloor \frac n i \right\rfloor} g(j) h(\left\lfloor \frac n {ij} \right\rfloor)
 \]</span> 的时间复杂度 <span class="math inline">\(T_2\)</span> 做出估计了. 对 <a href="#exm-divissigma">Example&nbsp;6</a> 取 <span class="math inline">\(z=\frac 1 2\)</span>，立刻有 <span class="math display">\[
 T_2(n) = \sum_{d \in D(n)} T_1(d) \leq 2 \sum_{d \in D(n)} \sqrt d = 2 S_{\frac 1 2}(n) \leq 4 \sqrt n P_{\frac 1 2}(\sqrt n) \in O(n^{\frac 3 4})
 \]</span></p>
@@ -440,27 +440,27 @@ h(n) = \sum_{d \mid n} g(d) f(\frac n d)
 \hat h (n)
 &amp;= \sum_{i=1}^n h(i) \\
 &amp;= \sum_{i=1}^n \sum_{d \mid i} g(d) f(\frac i d) \\
-&amp;= \sum_{d=1}^n g(d) \sum_{i=1}^{\floor{\frac n d}} f(i) \\
-&amp;= \sum_{d=1}^n g(d) \hat f (\floor{\frac n d}) \\
-&amp;= g(1) \hat f (n) + \sum_{d=2}^n g(d) \hat f (\floor{\frac n d})
+&amp;= \sum_{d=1}^n g(d) \sum_{i=1}^{\left\lfloor \frac n d \right\rfloor} f(i) \\
+&amp;= \sum_{d=1}^n g(d) \hat f (\left\lfloor \frac n d \right\rfloor) \\
+&amp;= g(1) \hat f (n) + \sum_{d=2}^n g(d) \hat f (\left\lfloor \frac n d \right\rfloor)
 \end{aligned}
 \]</span> 因此 <span class="math display">\[
-\hat f (n) = \frac 1 {g(1)} \left( \hat h (n) - \sum_{d=2}^n g(d) \hat f (\floor{\frac n d}) \right)
+\hat f (n) = \frac 1 {g(1)} \left( \hat h (n) - \sum_{d=2}^n g(d) \hat f (\left\lfloor \frac n d \right\rfloor) \right)
 \]</span></p>
 <p>故若 <span class="math inline">\(g\)</span>、<span class="math inline">\(h\)</span> 的前缀和可 <span class="math inline">\(O(1)\)</span> 算得，根据上式整除分块即可递归地计算出 <span class="math inline">\(f\)</span> 的前缀和.</p>
 <p>下面分析算法的复杂度. 注意到 <span class="math display">\[
-\floor{\frac{\floor{\frac n i}}{j}} = \floor{\frac{n}{ij}}
-\]</span> 故单轮递归涉及到的自变量均可表示为 <span class="math inline">\(d = \floor{\frac n i}\)</span> 的形式. 一个 <span class="math inline">\(\hat f (d)\)</span> 做整除分块耗时 <span class="math inline">\(T_1(d)\)</span>，若采用记忆化递归，由上节分析，算法总时间复杂度为 <span class="math display">\[
+\left\lfloor \frac{\left\lfloor \frac n i \right\rfloor}{j} \right\rfloor = \left\lfloor \frac{n}{ij} \right\rfloor
+\]</span> 故单轮递归涉及到的自变量均可表示为 <span class="math inline">\(d = \left\lfloor \frac n i \right\rfloor\)</span> 的形式. 一个 <span class="math inline">\(\hat f (d)\)</span> 做整除分块耗时 <span class="math inline">\(T_1(d)\)</span>，若采用记忆化递归，由上节分析，算法总时间复杂度为 <span class="math display">\[
 \sum_{d \in D(n)} T_1(d) = T_2(n) \in O(n^{\frac 3 4})
 \]</span></p>
 <p>但我们还可以做得更好——考虑先用 <span class="math inline">\(O(K)\)</span> 的时间复杂度线性筛出前 <span class="math inline">\(K\)</span> 个 <span class="math inline">\(f(n)\)</span> 并求前缀和，则递归求解时，<span class="math inline">\(d \leq K\)</span> 的 <span class="math inline">\(\hat f(d)\)</span> 就无需再向下递归了. 为分析此类时间复杂度，对 <a href="#prp-trick2ex">Proposition&nbsp;3</a> 做最后一点扩展：</p>
 <div id="prp-trick3ex" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 4 </strong></span><span class="math display">\[
-\sum_{\begin{gathered} d \mid n \\ d &gt; K \end{gathered}} f(d) \leq \sum_{\begin{gathered} d \in D(n) \\ d &gt; K \end{gathered}} f(d) \leq \sum_{K &lt; i \leq \sqrt n} f(i) + \sum_{1 \leq i \leq \min{\{ \floor{\frac n K},\sqrt n \} }} f(\floor{\frac n i})
+\sum_{\begin{gathered} d \mid n \\ d &gt; K \end{gathered}} f(d) \leq \sum_{\begin{gathered} d \in D(n) \\ d &gt; K \end{gathered}} f(d) \leq \sum_{K &lt; i \leq \sqrt n} f(i) + \sum_{1 \leq i \leq \min{\{ \left\lfloor \frac n K \right\rfloor,\sqrt n \} }} f(\left\lfloor \frac n i \right\rfloor)
 \]</span></p>
 <p>特别的，当 <span class="math inline">\(K &gt; \sqrt n\)</span> 时，有</p>
 <p><span class="math display">\[
-\sum_{\begin{gathered} d \mid n \\ d &gt; K \end{gathered}} f(d) \leq \sum_{\begin{gathered} d \in D(n) \\ d &gt; K \end{gathered}} f(d) \leq \sum_{1 \leq i \leq \floor{\frac n K}} f(\floor{\frac n i})
+\sum_{\begin{gathered} d \mid n \\ d &gt; K \end{gathered}} f(d) \leq \sum_{\begin{gathered} d \in D(n) \\ d &gt; K \end{gathered}} f(d) \leq \sum_{1 \leq i \leq \left\lfloor \frac n K \right\rfloor} f(\left\lfloor \frac n i \right\rfloor)
 \]</span></p>
 </div>
 <p>故用 <a href="#prp-trick3ex">Proposition&nbsp;4</a> ，当 <span class="math inline">\(K &gt; \sqrt n\)</span> 时，算法在递归部分的时间复杂度降低为</p>
@@ -468,10 +468,10 @@ h(n) = \sum_{d \mid n} g(d) f(\frac n d)
 \begin{aligned}
 \mathrm{Du}_K(n) &amp;=
 \sum_{\begin{gathered} d \in D(n) \\ d &gt; K \end{gathered}} T_1(d) \\
-&amp;= \sum_{1 \leq i \leq \floor{\frac n K}} T_1(\floor{\frac n i}) \\
-&amp;\leq \sum_{1 \leq i \leq \floor{\frac n K}} C \sqrt{\frac n i} \\
-&amp;= C \sqrt n \sum_{1 \leq i \leq \floor{\frac n K}} i^{-\frac 1 2} \\
-&amp;=  C \sqrt n P_{\frac 1 2}\left(\floor{\frac n K}\right) \\
+&amp;= \sum_{1 \leq i \leq \left\lfloor \frac n K \right\rfloor} T_1(\left\lfloor \frac n i \right\rfloor) \\
+&amp;\leq \sum_{1 \leq i \leq \left\lfloor \frac n K \right\rfloor} C \sqrt{\frac n i} \\
+&amp;= C \sqrt n \sum_{1 \leq i \leq \left\lfloor \frac n K \right\rfloor} i^{-\frac 1 2} \\
+&amp;=  C \sqrt n P_{\frac 1 2}\left(\left\lfloor \frac n K \right\rfloor\right) \\
 &amp;\in \sqrt n O\left( \left(\frac n K\right)^{\frac 1 2} \right) \\
 &amp;\subset O(n K^{-\frac 1 2})
 \end{aligned}
@@ -489,10 +489,10 @@ O(K) + O(n K^{-\frac 1 2})
 <p>参见蓝桥杯 2023 省赛 A 组 J 题《翻转硬币》<span class="citation" data-cites="nonsquare1_luogu"><sup>[<a href="#ref-nonsquare1_luogu" role="doc-biblioref">12</a>]</sup></span>或《完全平方数》<span class="citation" data-cites="nonsquare2_luogu"><sup>[<a href="#ref-nonsquare2_luogu" role="doc-biblioref">13</a>]</sup></span>.</p>
 </div>
 <p>我们指出，无平方因子数有如下计数公式 <span class="math display">\[
-f(n) = \sum_{i=1}^n \mu^2 (i) = \sum_{i=1}^{\floor{\sqrt n}} \mu(i) \floor{\frac n {i^2}}
+f(n) = \sum_{i=1}^n \mu^2 (i) = \sum_{i=1}^{\left\lfloor \sqrt n \right\rfloor} \mu(i) \left\lfloor \frac n {i^2} \right\rfloor
 \]</span></p>
-<p>朴素实现复杂度为 <span class="math inline">\(O(\sqrt n)\)</span>，考虑对 <span class="math inline">\(\floor{\frac n {i^2}}\)</span> 开发一种新的整除分块算法. 现在问题有三. 一是估计 <span class="math display">\[
-\# D_2(n) = \# \left\{ \floor{\frac n {i^2}} \right\}_{i=1}^{\sqrt n}
+<p>朴素实现复杂度为 <span class="math inline">\(O(\sqrt n)\)</span>，考虑对 <span class="math inline">\(\left\lfloor \frac n {i^2} \right\rfloor\)</span> 开发一种新的整除分块算法. 现在问题有三. 一是估计 <span class="math display">\[
+\# D_2(n) = \# \left\{ \left\lfloor \frac n {i^2} \right\rfloor \right\}_{i=1}^{\sqrt n}
 \]</span> 这并不困难，按 <span class="math inline">\(i \leq n^{\frac 1 3}\)</span> 和 <span class="math inline">\(i \geq n^{\frac 1 3}\)</span> 讨论即知其上界为 <span class="math inline">\(O(n^{\frac 1 3})\)</span>.</p>
 <p>二是实现方案. 这里也直接给出：</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ll sqrtN<span class="op">=</span>sqrt<span class="op">(</span>N<span class="op">);</span></span>
@@ -501,18 +501,18 @@ f(n) = \sum_{i=1}^n \mu^2 (i) = \sum_{i=1}^{\floor{\sqrt n}} \mu(i) \floor{\frac
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    d<span class="op">=</span>N<span class="op">/(</span>l<span class="op">*</span>l<span class="op">),</span>r<span class="op">=</span>sqrt<span class="op">(</span>N<span class="op">/</span>d<span class="op">);</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    ans<span class="op">+=(</span>S_mu<span class="op">(</span>r<span class="op">)-</span>S_mu<span class="op">(</span>l<span class="op">-</span><span class="dv">1</span><span class="op">))*</span>d<span class="op">;</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>最后是算法时间复杂度分析. 普通的 <span class="math inline">\(\floor{ \frac n i}\)</span> 整除分块不会因杜教筛增加时间复杂度，但 <span class="math inline">\(\floor{ \frac n {i^2}}\)</span> 则需要额外的讨论. 注意到该整除分块枚举中，需做杜教筛的数的集合为 <span class="math display">\[
-\left\{ \floor{ \left( \floor{\frac n d} \right)^{\frac 1 2} }\right\}_{d \in D_2 (n)}
+<p>最后是算法时间复杂度分析. 普通的 <span class="math inline">\(\left\lfloor  \frac n i \right\rfloor\)</span> 整除分块不会因杜教筛增加时间复杂度，但 <span class="math inline">\(\left\lfloor  \frac n {i^2} \right\rfloor\)</span> 则需要额外的讨论. 注意到该整除分块枚举中，需做杜教筛的数的集合为 <span class="math display">\[
+\left\{ \left\lfloor  \left( \left\lfloor \frac n d \right\rfloor \right)^{\frac 1 2}  \right\rfloor\right\}_{d \in D_2 (n)}
 \]</span> 同样类似 <a href="#prp-trick2ex">Proposition&nbsp;3</a> ，我们有</p>
 <div id="prp-trick4ex" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 5 </strong></span><span class="math display">\[
-\sum_{d^2 \mid n} f(\frac n {d^2}) \leq \sum_{d \in D_2(n)} f(d) \leq \sum_{i=1}^{n^{\frac 1 3}} f(i) + f(\floor{\frac n {i^2}})
+\sum_{d^2 \mid n} f(\frac n {d^2}) \leq \sum_{d \in D_2(n)} f(d) \leq \sum_{i=1}^{n^{\frac 1 3}} f(i) + f(\left\lfloor \frac n {i^2} \right\rfloor)
 \]</span></p>
 </div>
 <p>因此算法递归部分时间复杂度可估计为 <span class="math display">\[
 \begin{aligned}
-\sum_{d \in D_2 (n)} \mathrm{Du}_K \left(\floor{\left( \floor{\frac n d} \right)^{\frac 1 2}}\right)
-&amp;\leq \sum_{d \in D_2 (n)} C \floor{\left( \floor{\frac n d} \right)^{\frac 1 2}} K^{-\frac 1 2} \\
+\sum_{d \in D_2 (n)} \mathrm{Du}_K \left(\left\lfloor \left( \left\lfloor \frac n d \right\rfloor \right)^{\frac 1 2} \right\rfloor\right)
+&amp;\leq \sum_{d \in D_2 (n)} C \left\lfloor \left( \left\lfloor \frac n d \right\rfloor \right)^{\frac 1 2} \right\rfloor K^{-\frac 1 2} \\
 &amp;\leq C K^{-\frac 1 2} \left( \sum_{i=1}^{n^{\frac 1 3}} \left( \frac n {\frac n {i^2}} \right)^{\frac 1 2} + \sum_{i=1}^{n^{\frac 1 3}} \left( \frac n i \right)^{\frac 1 2} \right) \\
 &amp;= C K^{-\frac 1 2} \left( \sum_{i=1}^{n^{\frac 1 3}} i + n^{\frac 1 2} \sum_{i=1}^{n^{\frac 1 3}} i^{-\frac 1 2} \right) \\
 &amp;\in K^{-\frac 1 2} \left( O(n^{\frac 2 3}) + n^{\frac 1 2} O(n^{\frac 1 6}) \right) \\
@@ -521,7 +521,7 @@ f(n) = \sum_{i=1}^n \mu^2 (i) = \sum_{i=1}^{\floor{\sqrt n}} \mu(i) \floor{\frac
 \]</span> 总时间复杂度为 <span class="math display">\[
 O(K) + O(n^{\frac 2 3} K^{-\frac 1 2})
 \]</span> 取 <span class="math inline">\(K=n^{\frac 4 9}\)</span>，得到最优时间复杂度 <span class="math inline">\(O(n^{\frac 4 9})\)</span>. 代入 <span class="math inline">\(n = 10^{18}\)</span>，量级约为 <span class="math inline">\(10^8\)</span>.</p>
-<p>这估计并不算优秀. 传言存在 <span class="math inline">\(O(n^{\frac 2 5})\)</span> 的估计，猜测大概优化了 <span class="math inline">\(\left\{ \floor{\frac n i} \right\}_{i=1}^n\)</span> 和 <span class="math inline">\(\left\{ \floor{ \left( \floor{\frac n d} \right)^{\frac 1 2} }\right\}_{d \in D_2 (n)}\)</span> 的重叠部分。笔者尚未找出其推导方式.</p>
+<p>这估计并不算优秀. 传言存在 <span class="math inline">\(O(n^{\frac 2 5})\)</span> 的估计，猜测大概优化了 <span class="math inline">\(\left\{ \left\lfloor \frac n i \right\rfloor \right\}_{i=1}^n\)</span> 和 <span class="math inline">\(\left\{ \left\lfloor  \left( \left\lfloor \frac n d \right\rfloor \right)^{\frac 1 2}  \right\rfloor\right\}_{d \in D_2 (n)}\)</span> 的重叠部分。笔者尚未找出其推导方式.</p>
 <p>upd: 关于 <span class="math inline">\(O(n^{\frac 2 5})\)</span> 的估计，请参阅博客<span class="citation" data-cites="nonsquare_blog"><sup>[<a href="#ref-nonsquare_blog" role="doc-biblioref">14</a>]</sup></span>和论文<span class="citation" data-cites="nonsquare_paper"><sup>[<a href="#ref-nonsquare_paper" role="doc-biblioref">15</a>]</sup></span>．</p>
 
 

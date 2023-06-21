@@ -241,7 +241,7 @@ div.csl-indent {
 <h2 data-number="2" class="anchored" data-anchor-id="wallis-公式"><span class="header-section-number">2</span> Wallis 公式</h2>
 <div id="lem-wallis-integral" class="theorem lemma">
 <p><span class="theorem-title"><strong>Lemma 1 (Wallis 积分公式) </strong></span>定积分系列 <span class="math display">\[
-J_n = \int_0^{\frac \pi 2} \sin^n x \diff x
+J_n = \int_0^{\frac \pi 2} \sin^n x \operatorname{d}\!x
 \]</span> 满足 <span class="math display">\[
 \begin{aligned}
 J_{2n} &amp;= \frac{(2n-1)!!}{(2n)!!} \cdot \frac \pi 2 \\
@@ -253,12 +253,12 @@ J_{2n+1} &amp;= \frac{(2n)!!}{(2n+1)!!} \cdot 1
 <p><span class="proof-title"><em>Proof</em>. </span>我们的思路是：先把一个 <span class="math inline">\(\sin x\)</span> 放进微分中，然后分部积分得到递推式．</p>
 <p><span class="math display">\[
 \begin{aligned}
-J_n &amp;= \int_0^{\frac \pi 2} \sin^n x \diff x \\
-&amp;= - \int_0^{\frac \pi 2} \sin^{n-1} x \diff \cos x \\
-&amp;= \left[ - \sin^{n-1} x \cos x \right]_{0}^{\frac \pi 2} + \int_0^{\frac \pi 2} \cos x \diff \sin^{n-1} x \\
-&amp;= (n-1) \int_0^{\frac \pi 2} \cos^2 x \sin^{n-2} x \diff x \\
-&amp;= (n-1) \int_0^{\frac \pi 2} (1 - \sin^2 x) \sin^{n-2} x \diff x \\
-&amp;= (n-1) \int_0^{\frac \pi 2} \sin^{n-2} x \diff x - (n-1) \int_0^{\frac \pi 2} \sin^n x \diff x \\
+J_n &amp;= \int_0^{\frac \pi 2} \sin^n x \operatorname{d}\!x \\
+&amp;= - \int_0^{\frac \pi 2} \sin^{n-1} x \operatorname{d}\!\cos x \\
+&amp;= \left[ - \sin^{n-1} x \cos x \right]_{0}^{\frac \pi 2} + \int_0^{\frac \pi 2} \cos x \operatorname{d}\!\sin^{n-1} x \\
+&amp;= (n-1) \int_0^{\frac \pi 2} \cos^2 x \sin^{n-2} x \operatorname{d}\!x \\
+&amp;= (n-1) \int_0^{\frac \pi 2} (1 - \sin^2 x) \sin^{n-2} x \operatorname{d}\!x \\
+&amp;= (n-1) \int_0^{\frac \pi 2} \sin^{n-2} x \operatorname{d}\!x - (n-1) \int_0^{\frac \pi 2} \sin^n x \operatorname{d}\!x \\
 &amp;= (n-1) J_{n-2} - (n-1) J_n
 \end{aligned}
 \]</span></p>
@@ -267,7 +267,7 @@ J_n = \frac{n-1}{n} J_{n-2}
 \]</span> 边界条件 <span class="math display">\[
 \begin{aligned}
 J_0 &amp;= \frac \pi 2 \\
-J_1 &amp;= \int_0^{\frac \pi 2} \sin x \diff x = 1
+J_1 &amp;= \int_0^{\frac \pi 2} \sin x \operatorname{d}\!x = 1
 \end{aligned}
 \]</span> 代入递推式求解就得到了要证的结论．</p>
 </div>
@@ -457,7 +457,7 @@ k \ln{\frac{np}{k}} + (n-k) \ln{\frac{nq}{n-k}} = - \frac{1}{2} x^2 (p+q) + o(1)
 P(\bar X_n = x) = P(X_n = k) \sim \frac 1 {\sqrt{2 \pi npq}} \exp \left( -{\frac 1 2 x^2} \right) = \frac 1 {\sqrt{2 \pi npq}} \exp \left( -\frac{(k-np)^2}{2npq} \right)
 \]</span> 这正是我们想要的．</p>
 <div class="remark proof">
-<p><span class="proof-title"><em>Remark</em>. </span>细心的同学可能会对式子前边的系数仍是 <span class="math inline">\(n \to \infty\)</span> 时的无穷小产生疑问．事实上，在将 <span class="math inline">\(X_n\)</span> 归一化为 <span class="math inline">\(\bar X_n\)</span> 的过程中，我们将整个变量“压缩”至原来的 <span class="math inline">\(\frac{1}{\sqrt{npq}}\)</span>，因此前面的系数可以理解为一种类似 <span class="math inline">\(\diff x\)</span> 的存在．关于归一化的直观理解，3Blue1Brown 的中心极限定理视频<span class="citation" data-cites="3b1b-clt"><sup>[<a href="#ref-3b1b-clt" role="doc-biblioref">3</a>]</sup></span>提供了很好的讲解．</p>
+<p><span class="proof-title"><em>Remark</em>. </span>细心的同学可能会对式子前边的系数仍是 <span class="math inline">\(n \to \infty\)</span> 时的无穷小产生疑问．事实上，在将 <span class="math inline">\(X_n\)</span> 归一化为 <span class="math inline">\(\bar X_n\)</span> 的过程中，我们将整个变量“压缩”至原来的 <span class="math inline">\(\frac{1}{\sqrt{npq}}\)</span>，因此前面的系数可以理解为一种类似 <span class="math inline">\(\operatorname{d}\!x\)</span> 的存在．关于归一化的直观理解，3Blue1Brown 的中心极限定理视频<span class="citation" data-cites="3b1b-clt"><sup>[<a href="#ref-3b1b-clt" role="doc-biblioref">3</a>]</sup></span>提供了很好的讲解．</p>
 <p>更形式化的，由于归一化得到的离散型随机变量 <span class="math inline">\(\bar X_n\)</span> 在 <span class="math inline">\(n \to \infty\)</span> 的过程中已经变成连续型随机变量 <span class="math inline">\(X\)</span>，我们研究的对象也应从单点转向区间．因此，对 <span class="math inline">\(X_n\)</span> 与 <span class="math inline">\(\bar X_n\)</span> 概率分布的叙述做一点变动 <span class="math display">\[
 P\left(x \leq \bar X_n &lt; x + \frac 1 {\sqrt{npq}}\right)
 = P\left(k \leq X_n &lt; k + 1 \right)
@@ -479,7 +479,7 @@ f(x) &amp;= \lim_{h \to 0}{\frac{P(x \leq X &lt; x+h)}{h}} \\
 <section id="正态分布的归一性验证maxwell-速率分布与高维球体的表面积" class="level3" data-number="6.1">
 <h3 data-number="6.1" class="anchored" data-anchor-id="正态分布的归一性验证maxwell-速率分布与高维球体的表面积"><span class="header-section-number">6.1</span> 正态分布的归一性验证、Maxwell 速率分布与高维球体的表面积</h3>
 <p>Guass 积分： <span class="math display">\[
-\int_{-\infty}^{+\infty} e^{-x^2} \diff x = \sqrt \pi
+\int_{-\infty}^{+\infty} e^{-x^2} \operatorname{d}\!x = \sqrt \pi
 \]</span></p>
 <p>Maxwell 速率分布： <span class="math display">\[
 f(v) = 4 \pi v^2 \left( \frac{m}{2 \pi kT} \right)^{\frac 3 2} \exp \left( - \frac{m}{2kT}v^2 \right)
@@ -489,9 +489,9 @@ f(v) = 4 \pi v^2 \left( \frac{m}{2 \pi kT} \right)^{\frac 3 2} \exp \left( - \fr
 <section id="n-的其它估计" class="level3" data-number="6.2">
 <h3 data-number="6.2" class="anchored" data-anchor-id="n-的其它估计"><span class="header-section-number">6.2</span> <span class="math inline">\(n!\)</span> 的其它估计</h3>
 <p>一种更容易想到的做法是 <span class="math display">\[
-n \ln n - n - 1 = \int_1^n \ln x \diff x \leq
+n \ln n - n - 1 = \int_1^n \ln x \operatorname{d}\!x \leq
 \ln n! = \sum_{k=1}^n \ln k
-\leq \int_1^{n+1} \ln x \diff x = (n+1) \ln (n+1) - n - 2
+\leq \int_1^{n+1} \ln x \operatorname{d}\!x = (n+1) \ln (n+1) - n - 2
 \]</span> 从而 <span class="math display">\[
 \left( \frac n e \right)^n \leq e \cdot n! \leq \left(\frac{n+1}{e}\right)^{n+1}
 \]</span> 当然这比 <a href="#thm-stirling-weak">Theorem&nbsp;2</a> 的估计稍差．</p>
