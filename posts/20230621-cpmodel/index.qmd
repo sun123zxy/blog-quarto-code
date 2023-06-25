@@ -1,9 +1,9 @@
 ---
-title: "Models for Competitive Programming"
-subtitle: "兼算法 & 数学碎碎念"
+title: "算法 & 数学碎碎念"
+abstract: "现场赛公式模板库，亦可作为小而精的总结性学习材料参考．无需单独成文或暂不完善的内容会放在这里．"
 author: "sun123zxy"
-date-modified: "2023/06/21"
-draft: true
+date: "2023/06/21"
+date-modified: "2023/06/25"
 
 categories:
   - OI
@@ -12,71 +12,6 @@ categories:
 number-sections: true
 ---
 
-## 通用
-
-### 基础模板
-
-```c++
-//general model 2023/06/12
-#include<bits/stdc++.h>
-using namespace std;
-typedef long long ll;
-
-namespace safe{
-	ll rd(){
-		ll ans=0; bool sgn=0; char c=getchar();
-		while(c<'0'||c>'9'){if(c=='-') sgn=1; c=getchar();}
-		while(c>='0'&&c<='9'){ans=ans*10+c-'0';c=getchar();}
-		if(sgn) ans=-ans; return ans;
-	}
-	const ll MOD=;
-	#define _ %MOD
-	ll lmodv(ll x){
-		if(x<0) x+=MOD;
-		else if(x>=MOD) x-=MOD;
-		return x;
-	}void lmodp(ll& x){x=lmodv(x);}
-	ll mmodv(ll x){
-		return x%MOD;
-	}void mmodp(ll& x){x=mmodv(x);}
-	ll hmodv(ll x){
-		return (x%MOD+MOD)%MOD;
-	}void hmodp(ll& x){x=hmodv(x);}
-	ll qpow(ll x,ll up){
-		hmodp(x); ll ans=1;
-		while(up){
-			if(up&1) ans=ans*x _;
-			x=x*x _; up>>=1;
-		}return ans;
-	}
-	ll inv(ll x){return qpow(x,MOD-2);}
-	
-	void entry(){}
-}
-int main(){
-	//freopen("t1.in","r",stdin);
-	//freopen("t1.out","w",stdout);
-	//ll T=safe::rd(); while(T--){
-	safe::entry();
-	//}
-	return 0;
-}
-```
-
-### 对拍
-
-```batch
-:loop
-    make.exe>data.in
-    my.exe<data.in>my.out
-    std.exe<data.in>std.out
-    fc my.out std.out
-    if not errorlevel 1 goto loop
-pause
-```
-
-## 数论
-
 ::::: {.hidden}
 ::: {.content-hidden unless-format="html"}
 $$
@@ -84,6 +19,7 @@ $$
 \newcommand{\inv}{\operatorname{inv}}
 \newcommand{\lcm}{\operatorname{lcm}}
 \newcommand{\Id}{\operatorname{Id}}
+\newcommand{\card}{\operatorname{card}}
 $$
 :::
 ::: {.content-hidden when-format="html"}
@@ -91,8 +27,11 @@ $$
 \newcommand{\inv}{\operatorname{inv}}
 \newcommand{\lcm}{\operatorname{lcm}}
 \newcommand{\Id}{\operatorname{Id}}
+\newcommand{\card}{\operatorname{card}}
 :::
 :::::
+
+## 数论
 
 ### ExGCD
 
@@ -267,6 +206,84 @@ ll S_mu(ll n){
 
 ## 组合
 
+### 容斥 / 二项式反演
+
+#### 形式一
+
+容斥原理的第一种形式给出了“子集和变换”的逆变换．
+
+::: {#thm-inex-first-set}
+
+## 容斥原理，形式一，集合
+
+$$
+g(S) = \sum_{T \subset S} f(T) \iff f(S) = \sum_{T \subset S} (-1)^{|S| - |T|} g(T)
+$$
+:::
+
+证明的关键是 $\sum_{k=0}^n \binom n k (-1)^k = (1-1)^n = [n=0]$．
+
+::: {#thm-inex-first-binomial}
+
+## 容斥原理，形式一，二项式
+
+$$
+g(n) = \sum_{k=0}^n \binom n k f(k) \iff f(n) = \sum_{k=0}^n (-1)^{n-k} \binom n k g(k)
+$$
+
+若设 $F(x)$ 和 $G(x)$ 分别为 $f(n)$ 和 $g(n)$ 的指数型生成函数（EGF），则结论可等价地表示为
+
+$$
+G(x) = e^x F(x) \iff F(x) = e^{-x} G(x)
+$$
+:::
+
+#### 形式二
+
+形式一的补集形式，给出了全集 $U$ 下“超集和变换”的逆变换．通常在“至少选若干个指定元素的方案数”易求的情况下使用．
+
+::: {#thm-inex-second-set}
+
+## 容斥原理，形式二，集合
+
+$$
+g(S) = \sum_{S \subset T \subset U} f(T) \iff f(S) = \sum_{S \subset T \subset U} (-1)^{|T| - |S|} g(T)
+$$
+:::
+
+我们最常见到的“容斥原理”
+$$
+\card \left( \bigcup_{i \in U} A_i \right) = \sum_{k=1}^{|U|} (-1)^{k-1} \sum_{i_1 < \dots < i_k} \card \left( A_{i_1} \cap \dots \cap A_{i_k} \right)
+$$
+就是该形式的一个应用．只需令
+$$
+\begin{gathered}
+f(S) = \card \left( \left( \bigcap_{i \in S} A_i \right) - \left( \bigcup_{i \notin S} A_i \right) \right) \\
+g(S) = \card \left( \left( \bigcup_{i \in U} A_i \right) \cap \left( \bigcap_{i \in S} A_i \right)\right)
+= \begin{cases}
+\card \left( \bigcup_{i \in U} A_i \right) & S = \varnothing \\
+\card \left( \bigcap_{i \in S} A_i \right) & \text{otherwise}
+\end{cases}
+\end{gathered}
+$$
+容易验证 @thm-inex-second-set 的 LHS 成立，故 RHS 亦成立．取 RHS 中 $S=\varnothing$，就有
+$$
+\begin{aligned}
+0 = f(\varnothing) &= \sum_{T \subset U} (-1)^{|T|} g(T) \\
+&= g(\varnothing) + \sum_{k=1}^{|U|} (-1)^k \sum_{|T|=k} g(T) \\
+&= \card \left( \bigcup_{i \in U} A_i \right) + \sum_{k=1}^{|U|} (-1)^k \sum_{i_1 < \dots < i_k} \card \left( A_{i_1} \cap \dots \cap A_{i_k} \right)
+\end{aligned}
+$$
+移项即得到常见的“容斥原理”．
+
+::: {#thm-inex-second-binomal}
+
+## 容斥原理，形式二，二项式
+$$
+g(n) = \sum_{k=0}^{N-n} \binom {N-n} k f(n+k) \iff f(n) = \sum_{k=0}^{N-n} (-1)^k \binom {N-n} k g(n+k)
+$$
+:::
+
 ### Lucas 定理
 
 ::: {#thm-lucas}
@@ -315,7 +332,7 @@ $$
 
 :::{#thm-mattree-nondirected}
 
-## 矩阵树定理 - 无向图
+## 矩阵树定理，无向图
 
 $n$ 点无向图的生成树的个数与该图的 Laplace 矩阵 $L$ 的任意主子式的值相等．其也与 $L$ 所有 $n-1$ 个非零特征值乘积的 $\frac 1 n$ 倍相等．
 :::
@@ -349,7 +366,7 @@ $$
 
 :::{#thm-mattree-rootwise}
 
-## 矩阵树定理 - 根向树形图
+## 矩阵树定理，根向树形图
 
 $n$ 点有向图以 $i$ 为根的生成根向树形图的数量与该图出度 Laplace 矩阵 $L^{out}$ 去掉第 $i$ 行第 $i$ 列的 $n-1$ 阶主子式的值相等．该有向图的所有生成根向树形图的数量也与 $L^{out}$ 的所有 $n-1$ 个非零特征值的乘积相等．
 :::
@@ -360,7 +377,7 @@ $n$ 点有向图以 $i$ 为根的生成根向树形图的数量与该图出度 L
 
 :::{#thm-mattree-leafwise}
 
-## 矩阵树定理 - 叶向树形图
+## 矩阵树定理，叶向树形图
 
 $n$ 点有向图以 $i$ 为根的生成叶向树形图的数量与该图入度 Laplace 矩阵 $L^{in}$ 去掉第 $i$ 行第 $i$ 列的 $n-1$ 阶主子式的值相等．该有向图的所有生成根向树形图的数量也与 $L^{in}$ 的所有 $n-1$ 个非零特征值的乘积相等．
 :::
@@ -434,4 +451,71 @@ int main(){
 	for(ll i=0;i<C.n;i++) printf("%lld ",C[i]);
 	return 0;
 }
+```
+
+### 集合幂级数
+
+pass
+
+## 通用
+
+### 基础模板
+
+```c++
+//general model 2023/06/12
+#include<bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+namespace safe{
+	ll rd(){
+		ll ans=0; bool sgn=0; char c=getchar();
+		while(c<'0'||c>'9'){if(c=='-') sgn=1; c=getchar();}
+		while(c>='0'&&c<='9'){ans=ans*10+c-'0';c=getchar();}
+		if(sgn) ans=-ans; return ans;
+	}
+	const ll MOD=;
+	#define _ %MOD
+	ll lmodv(ll x){
+		if(x<0) x+=MOD;
+		else if(x>=MOD) x-=MOD;
+		return x;
+	}void lmodp(ll& x){x=lmodv(x);}
+	ll mmodv(ll x){
+		return x%MOD;
+	}void mmodp(ll& x){x=mmodv(x);}
+	ll hmodv(ll x){
+		return (x%MOD+MOD)%MOD;
+	}void hmodp(ll& x){x=hmodv(x);}
+	ll qpow(ll x,ll up){
+		hmodp(x); ll ans=1;
+		while(up){
+			if(up&1) ans=ans*x _;
+			x=x*x _; up>>=1;
+		}return ans;
+	}
+	ll inv(ll x){return qpow(x,MOD-2);}
+	
+	void entry(){}
+}
+int main(){
+	//freopen("t1.in","r",stdin);
+	//freopen("t1.out","w",stdout);
+	//ll T=safe::rd(); while(T--){
+	safe::entry();
+	//}
+	return 0;
+}
+```
+
+### 对拍
+
+```batch
+:loop
+    make.exe>data.in
+    my.exe<data.in>my.out
+    std.exe<data.in>std.out
+    fc my.out std.out
+    if not errorlevel 1 goto loop
+pause
 ```
