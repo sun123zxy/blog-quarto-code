@@ -392,68 +392,220 @@ $n$ 点有向图以 $i$ 为根的生成叶向树形图的数量与该图入度 L
 
 ## 多项式
 
-### NTT
+### 通用
 
 ```c++
-//NTT iteration style 2020/06/18
-class Poly{public:
-	ll& operator [] (ll idx){return cof[idx];}
-	ll n;vector<ll> cof;
-	Poly(){}
-	Poly(ll n){Resize(n);}
-	void Resize(ll n){this->n = n;cof.resize(n,0);}
+// polynomial universal, 2023/06/26
+const ll MOD=998244353,PR=3;
+#define _ %MOD
+// ... (MOD, qpow, inv, etc.)
+vector<ll> rev;
+void spawn_rev(ll n){ // n=log2(N)
+	rev.resize(1<<n);
+	rev[0]=0; for(ll i=1;i<(1<<n);i++) rev[i]=(rev[i>>1]>>1)+((i&1)<<(n-1));
+}
+class Poly : public vector<ll>{ public:
+    using vector<ll>::vector; // constructor
+    ll len() const {return size();} // to avoid strange glitches caused by size_t
+	ll get(ll idx) const {return *(cbegin()+idx);} // const version of operator []
+	Poly subpoly(ll pos = 0,ll count = -1) const { // imitate std::string::substr with resize
+		if(count==-1) return Poly(begin()+pos,end());
+		Poly B(begin()+min(pos,len()),begin()+min(pos+count,len()));
+		B.resize(pos+count); return B;
+	}
+	void debug() const {cout<<len()<<": "; for(ll i=0;i<len();i++) cout<<at(i)<<","; cout<<endl;}
 };
-namespace PC{
-	vector<ll> rev;
-	void DFT(Poly& A,ll typ){
-		ll n=A.n;
-		for(ll i=0;i<n;i++) if(i<rev[i]) swap(A[i],A[rev[i]]);
-		for(ll hf=1;hf<n;hf*=2){
-			ll w1=QPow(PR,(MOD-1)/(2*hf));
-			if(typ==-1) w1=Inv(w1);
-			for(ll i=0;i<n;i+=2*hf){
-				ll wk=1;
-				for(ll k=0;k<hf;k++){
-					ll x=A[i+k],y=wk*A[i+hf+k]_;
-					MD(A[i+   k]=x+y);
-					MD(A[i+hf+k]=x-y);
-					wk=wk*w1 _;
-				}
-			}
-		}
-		ll invN=Inv(n);
-		if(typ==-1) for(ll i=0;i<n;i++) A[i]=A[i]*invN _;
-	}
-	void SpawnRev(ll n){//n(log2)
-		rev.resize(1<<n);rev[0]=0;
-		for(ll i=1;i<(1<<n);i++) rev[i]=(rev[i>>1]>>1)+((i&1)<<(n-1));
-	}
+Poly operator + (Poly A,const Poly &B){
+	ll n=max(A.len(),B.len()); A.resize(n);
+	for(ll i=0;i<n;i++) lmodp(A[i]+=B.get(i));
+	return A;
 }
-Poly operator * (Poly A,Poly B){
-	using namespace PC;
-	ll orgN=A.n+B.n-1;
-	ll n=ceil(log2(orgN));SpawnRev(n);
-	n=1LL<<n;
-	A.Resize(n);B.Resize(n);
-	Poly C(n);
-	DFT(A,1);DFT(B,1);
-	for(ll i=0;i<n;i++) C[i]=A[i]*B[i]_;
-	DFT(C,-1);
-	C.Resize(orgN);
-	return C;
+Poly operator - (Poly A){
+	for(ll i=0;i<A.len();i++) A[i]=lmodv(-A[i]);
+	return A;
 }
-int main(){
-	ll n=Rd()+1,m=Rd()+1;
-	Poly A(n),B(m);
-	for(ll i=0;i<n;i++) A[i]=Rd();
-	for(ll i=0;i<m;i++) B[i]=Rd();
-	Poly C=A*B;
-	for(ll i=0;i<C.n;i++) printf("%lld ",C[i]);
-	return 0;
+Poly operator - (Poly A,const Poly &B){
+	ll n=max(A.len(),B.len()); A.resize(n);
+	return A+(-B);
+}
+Poly operator * (Poly A,ll c){
+	for(ll i=0;i<A.len();i++) A[i]=A[i]*c _;
+	return A;
 }
 ```
 
-### 集合幂级数
+### FFT / FNTT / 卷积
+
+- DFT：（本原）单位根构造 $\omega_n = e^{\frac {2 \pi}{n}i}$．
+
+- NTT：$P=998244353 = 7 \times 17 \times 2^{23} + 1$，$\mathrm{PR} = 3$ 是它的一个原根．（本原）单位根构造 $\omega_{n} = \mathrm{PR}^{\frac{P-1}{n}} \bmod P$．
+
+考虑将待变换多项式
+$$
+A(x) = \sum_{k=0}^{2n} a_k x^k
+$$
+奇偶分项为两个多项式
+$$
+A(x) = A_0 (x^2) + x A_1(x^2)
+$$
+其中
+$$
+\begin{aligned}
+A_0 (x) &= \sum_{k=0}^n a_{2k} x^k \\
+A_1 (x) &= \sum_{k=0}^n a_{2k+1} x^k
+\end{aligned}
+$$
+代入 $x = \omega_{2n}^k \pod{k = 0,\dots, 2n-1}$，用单位根折半性质（$\omega_{2n}^{2k} = \omega_n^k$）
+$$
+A(\omega_{2n}^k) = A_0 (\omega_{n}^k) + \omega_{2n}^k A_1 (\omega_{n}^k)
+$$
+再用单位根消去性质（$\omega_{2n}^{n+k} = - \omega_{2n}^k$）
+$$
+\begin{aligned}
+A(\omega_{2n}^k) &= A_0 (\omega_n^k) + \omega_{2n}^k A_1 (\omega_n^k) \\
+A(\omega_{2n}^{n+k}) &= A_0 (\omega_n^k) - \omega_{2n}^k A_1(\omega_n^k) 
+\end{aligned}
+\pod{k = 0, \dots, n-1}
+$$
+即得 FFT/FNTT 递归算法．用单位根求和性质
+$$
+\frac 1 n \sum_{k=0}^{n-1} \omega^{ik} = [i \mid n]
+$$
+可知 DFT/NTT 变换矩阵 $F = \begin{pmatrix}\omega_{n}^{ij}\end{pmatrix}_{(i,j) \in n \times n}$ 满足 $F F^H = F^H F = n I_n$，故 $F^{-1} = \frac 1 n F^H = \begin{pmatrix} \frac 1 n \omega_{n}^{-ij}\end{pmatrix}_{(i,j) \in n \times n}$，此即 DFT/NTT 逆变换矩阵．
+
+#### 蝶形运算与迭代算法
+
+为使用迭代算法，需要快速得到递归算法向下深入过程中 $\{ a_n \}$ 置换后的最终结果．观察知该置换是位逆序置换，可线性求出．故可实现如下迭代算法（连带实现卷积运算）
+
+```c++
+// FNTT & convolution, iteration style, 2023/06/26
+vector<ll> rev;
+void spawn_rev(ll n){ // n=log2(N)
+	rev.resize(1<<n);
+	rev[0]=0; for(ll i=1;i<(1<<n);i++) rev[i]=(rev[i>>1]>>1)+((i&1)<<(n-1));
+}
+class Poly : public vector<ll>{ public:
+	// ... (Poly defaults)
+	void DFT(ll typ){ // to be called by operator * only (with proper length and rev array)
+		ll n=len();
+		for(ll i=0;i<n;i++) if(i<rev[i]) std::swap(at(i),at(rev[i]));
+		for(ll hf=1;hf<n;hf*=2){
+			ll w=qpow(PR,(MOD-1)/(hf*2));
+			if(typ==-1) w=inv(w);
+			for(ll i=0;i<n;i+=hf*2){
+				ll wk=1;
+				for(ll k=0;k<hf;k++){
+					ll x=at(i+k),y=wk*at(i+hf+k)_;
+					at(i+k)=lmodv(x+y);
+					at(i+hf+k)=lmodv(x-y);
+					wk=wk*w _;
+				}
+			}
+		}
+		if(typ==-1){
+			ll inv_n=inv(n); for(ll i=0;i<n;i++) at(i)=at(i)*inv_n _;
+		}
+	}
+};
+Poly operator * (Poly A,Poly B){
+	ll c_len=A.len()+B.len()-1;
+	ll n=ceil(log2(c_len)); spawn_rev(n); n=1<<n;
+	Poly C(n); A.resize(n); B.resize(n);
+	A.DFT(1); B.DFT(1);
+	for(ll i=0;i<n;i++) C[i]=A[i]*B[i]_;
+	C.DFT(-1); C.resize(c_len);
+	return C;
+}
+```
+
+### 多项式求逆
+
+给定 $n-1$ 次多项式 $A(x)$，求解满足 $A(x) B(x) = 1 \pmod{x^{n}}$ 的多项式 $B(x)$．
+
+多项式逆元存在的充分必要条件是其常数项非零，若存在则一定唯一．这结论可直接由下述求解方法得到．不失一般性，我们只研究 $A(x)$ 的次数为奇数 $2n-1$ 的情况．设
+$$
+\begin{aligned}
+A(x) &= A_0(x) + x^n A_1(x) \\
+B(x) &= B_0(x) + x^n B_1(x)
+\end{aligned}
+$$
+下述两种方法均递归地在已知
+$$
+A(x) B_0(x) = A_0(x) B_0(x) = 1 \pmod{x^n}
+$$
+的基础上求解 $A(x)$ 的逆元．边界条件 $b_0 = \frac 1 {a_0}$．时间复杂度均为
+$$
+T(n) = T(\frac n 2) + O(n \log n) = O(n \log n)
+$$
+
+以下简记 $A(x)$ 为 $A$，其它多项式同理．
+
+#### 倍增法一（原创）
+
+$$
+\begin{aligned}
+& A B = 1 \pmod{x^{2n}} \\
+\iff& (A_0 + x^n A_1)(B_0 + x^n B_1) = 1 \pmod{x^{2n}} \\
+\iff& x^n(A_1 B_0 + A_0 B_1) + A_0 B_0 = 1 \pmod{x^{2n}} \\
+\iff& A_1 B_0 + A_0 B_1 + \floor{\frac{A_0 B_0}{x^n}} = 0 \pmod{x^{n}} \\
+\iff&  A_0 B_1 = -\floor{\frac{A_0 B_0}{x^n}} - A_1 B_0 \pmod{x^{n}} \\
+\iff&  B_1 = - B_0 \left( \floor{\frac{A_0 B_0}{x^n}} + A_1 B_0 \right) \pmod{x^{n}}
+\end{aligned}
+$$
+
+常数偏大．
+
+```c++
+Poly inv(const Poly &A){
+	ll n=A.len(); Poly B(1); B[0]=inv(A[0]);
+	for(ll hf=1;hf<n;hf<<=1){
+		const Poly &A0=A.subpoly(0,hf),&A1=A.subpoly(hf,hf);
+		const Poly &B0=B; Poly B1=-B0*((A1*B0).subpoly(0,hf)+(A0*B0).subpoly(hf,hf));
+		B.insert(B.end(),B1.begin(),B1.begin()+hf);
+	} B.resize(n);
+	return B;
+}
+```
+
+#### 倍增法二
+
+注意到
+$$
+\begin{cases}
+A B_0 = 1 \pmod{x^n} \\
+A B = 1 \pmod{x^n}
+\end{cases} \implies A (B-B_0) = 0 \pmod{x^n}
+$$
+由于 $A \bmod{x^n}$ 非零，故
+$$
+B-B_0 = 0 \pmod{x^n}
+$$
+（这证明了逆元在不同模数下的前缀保持一致）
+
+两边平方得
+$$
+B^2 - 2 B B_0 + B_0^2 = 0 \pmod{x^{2n}}
+$$
+两侧同乘 $A$ 并移项得
+$$
+B = 2 B_0 - A B_0^2 \pmod{x^{2n}}
+$$
+
+```c++
+Poly inv(const Poly &A){
+	ll n=A.len(); Poly B(1); B[0]=inv(A[0]);
+	for(ll hf=1;hf<n;hf<<=1){
+		B=B*2-B*B*A.subpoly(0,hf*2); B.resize(hf*2);
+	} B.resize(n);
+	return B;
+}
+```
+
+## 集合幂级数
+
+pass
+
+## 矩阵
 
 pass
 
@@ -462,49 +614,49 @@ pass
 ### 基础模板
 
 ```c++
-//general model 2023/06/12
+//general model 2023/06/26
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
 
 namespace safe{
-	ll rd(){
-		ll ans=0; bool sgn=0; char c=getchar();
-		while(c<'0'||c>'9'){if(c=='-') sgn=1; c=getchar();}
-		while(c>='0'&&c<='9'){ans=ans*10+c-'0';c=getchar();}
-		if(sgn) ans=-ans; return ans;
-	}
-	const ll MOD=;
-	#define _ %MOD
-	ll lmodv(ll x){
-		if(x<0) x+=MOD;
-		else if(x>=MOD) x-=MOD;
-		return x;
-	}void lmodp(ll& x){x=lmodv(x);}
-	ll mmodv(ll x){
-		return x%MOD;
-	}void mmodp(ll& x){x=mmodv(x);}
-	ll hmodv(ll x){
-		return (x%MOD+MOD)%MOD;
-	}void hmodp(ll& x){x=hmodv(x);}
-	ll qpow(ll x,ll up){
-		hmodp(x); ll ans=1;
-		while(up){
-			if(up&1) ans=ans*x _;
-			x=x*x _; up>>=1;
-		}return ans;
-	}
-	ll inv(ll x){return qpow(x,MOD-2);}
-	
-	void entry(){}
+    ll rd(){
+        ll ans=0; bool sgn=0; char c=getchar();
+        while(c<'0'||c>'9'){if(c=='-') sgn=1; c=getchar();}
+        while(c>='0'&&c<='9'){ans=ans*10+c-'0';c=getchar();}
+        if(sgn) ans=-ans; return ans;
+    }
+    const ll MOD=;
+    #define _ %MOD
+    ll lmodv(ll x){
+        if(x<0) x+=MOD;
+        else if(x>=MOD) x-=MOD;
+        return x;
+    }void lmodp(ll &x){x=lmodv(x);}
+    ll mmodv(ll x){
+        return x%MOD;
+    }void mmodp(ll &x){x=mmodv(x);}
+    ll hmodv(ll x){
+        return (x%MOD+MOD)%MOD;
+    }void hmodp(ll &x){x=hmodv(x);}
+    ll qpow(ll x,ll up){
+        hmodp(x); ll ans=1;
+        while(up){
+            if(up&1) ans=ans*x _;
+            x=x*x _; up>>=1;
+        }return ans;
+    }
+    ll inv(ll x){return qpow(x,MOD-2);}
+    
+    void entry(){}
 }
 int main(){
-	//freopen("t1.in","r",stdin);
-	//freopen("t1.out","w",stdout);
-	//ll T=safe::rd(); while(T--){
-	safe::entry();
-	//}
-	return 0;
+    //freopen("t1.in","r",stdin);
+    //freopen("t1.out","w",stdout);
+    //ll T=safe::rd(); while(T--){
+    safe::entry();
+    //}
+    return 0;
 }
 ```
 

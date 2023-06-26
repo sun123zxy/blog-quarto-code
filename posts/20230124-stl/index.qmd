@@ -151,7 +151,7 @@ number-sections: true
 
 ### vector
 
-Find:
+Access:
 
 - `crbegin()`
 - `at(idx)` / `operator[idx]` ：前者会做越界检查，抛出异常。
@@ -160,7 +160,7 @@ Find:
 Modify:
 
 - `push_back(x)` / `pop_back()` ：均摊常数复杂度。
-- `insert(iter, val)`           ：于迭代器 `iter` 处插入，返回指向被插入元素的迭代器。
+- `insert(iter, val)`           ：于迭代器 `iter` 前插入，返回指向被插入元素的迭代器。
   `insert(iter, first, last)`   ：左闭右开区间插入，返回指向首个被插入元素的迭代器。
   注意，此操作**非常数时间复杂度**。
 - `erase(iter)`                 ：于迭代器 `iter` 处删除，返回指向被删除元素的后一个元素的迭代器。
@@ -255,7 +255,7 @@ int main(){
 - `set<Key>`：默认使用 `operator <` 比较（升序）。
 - `set<Key, Compare>`：也可使用类似 `priority_queue` 的方法自定义比较函数对象 `Compare`。
 
-Find：
+Access：
 
 - `crbegin()`
 - `count(x)`                          ：返回值为 `x` 的元素数量。
