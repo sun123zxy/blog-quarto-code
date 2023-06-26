@@ -164,13 +164,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#多项式" id="toc-多项式" class="nav-link" data-scroll-target="#多项式"><span class="header-section-number">4</span> 多项式</a>
   <ul class="collapse">
-  <li><a href="#ntt" id="toc-ntt" class="nav-link" data-scroll-target="#ntt"><span class="header-section-number">4.1</span> NTT</a></li>
-  <li><a href="#集合幂级数" id="toc-集合幂级数" class="nav-link" data-scroll-target="#集合幂级数"><span class="header-section-number">4.2</span> 集合幂级数</a></li>
+  <li><a href="#通用" id="toc-通用" class="nav-link" data-scroll-target="#通用"><span class="header-section-number">4.1</span> 通用</a></li>
+  <li><a href="#fft-fntt-卷积" id="toc-fft-fntt-卷积" class="nav-link" data-scroll-target="#fft-fntt-卷积"><span class="header-section-number">4.2</span> FFT / FNTT / 卷积</a></li>
+  <li><a href="#多项式求逆" id="toc-多项式求逆" class="nav-link" data-scroll-target="#多项式求逆"><span class="header-section-number">4.3</span> 多项式求逆</a></li>
   </ul></li>
-  <li><a href="#通用" id="toc-通用" class="nav-link" data-scroll-target="#通用"><span class="header-section-number">5</span> 通用</a>
+  <li><a href="#集合幂级数" id="toc-集合幂级数" class="nav-link" data-scroll-target="#集合幂级数"><span class="header-section-number">5</span> 集合幂级数</a></li>
+  <li><a href="#矩阵" id="toc-矩阵" class="nav-link" data-scroll-target="#矩阵"><span class="header-section-number">6</span> 矩阵</a></li>
+  <li><a href="#通用-1" id="toc-通用-1" class="nav-link" data-scroll-target="#通用-1"><span class="header-section-number">7</span> 通用</a>
   <ul class="collapse">
-  <li><a href="#基础模板" id="toc-基础模板" class="nav-link" data-scroll-target="#基础模板"><span class="header-section-number">5.1</span> 基础模板</a></li>
-  <li><a href="#对拍" id="toc-对拍" class="nav-link" data-scroll-target="#对拍"><span class="header-section-number">5.2</span> 对拍</a></li>
+  <li><a href="#基础模板" id="toc-基础模板" class="nav-link" data-scroll-target="#基础模板"><span class="header-section-number">7.1</span> 基础模板</a></li>
+  <li><a href="#对拍" id="toc-对拍" class="nav-link" data-scroll-target="#对拍"><span class="header-section-number">7.2</span> 对拍</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -496,121 +499,236 @@ C_{i,j} = \begin{cases}
 </section>
 <section id="多项式" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="多项式"><span class="header-section-number">4</span> 多项式</h2>
-<section id="ntt" class="level3" data-number="4.1">
-<h3 data-number="4.1" class="anchored" data-anchor-id="ntt"><span class="header-section-number">4.1</span> NTT</h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">//NTT iteration style 2020/06/18</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Poly<span class="op">{</span><span class="kw">public</span><span class="op">:</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    ll<span class="op">&amp;</span> <span class="kw">operator</span> <span class="op">[]</span> <span class="op">(</span>ll idx<span class="op">){</span><span class="cf">return</span> cof<span class="op">[</span>idx<span class="op">];}</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    ll n<span class="op">;</span>vector<span class="op">&lt;</span>ll<span class="op">&gt;</span> cof<span class="op">;</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    Poly<span class="op">(){}</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    Poly<span class="op">(</span>ll n<span class="op">){</span>Resize<span class="op">(</span>n<span class="op">);}</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> Resize<span class="op">(</span>ll n<span class="op">){</span><span class="kw">this</span><span class="op">-&gt;</span>n <span class="op">=</span> n<span class="op">;</span>cof<span class="op">.</span>resize<span class="op">(</span>n<span class="op">,</span><span class="dv">0</span><span class="op">);}</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">namespace</span> PC<span class="op">{</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    vector<span class="op">&lt;</span>ll<span class="op">&gt;</span> rev<span class="op">;</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> DFT<span class="op">(</span>Poly<span class="op">&amp;</span> A<span class="op">,</span>ll typ<span class="op">){</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        ll n<span class="op">=</span>A<span class="op">.</span>n<span class="op">;</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>n<span class="op">;</span>i<span class="op">++)</span> <span class="cf">if</span><span class="op">(</span>i<span class="op">&lt;</span>rev<span class="op">[</span>i<span class="op">])</span> swap<span class="op">(</span>A<span class="op">[</span>i<span class="op">],</span>A<span class="op">[</span>rev<span class="op">[</span>i<span class="op">]]);</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span>ll hf<span class="op">=</span><span class="dv">1</span><span class="op">;</span>hf<span class="op">&lt;</span>n<span class="op">;</span>hf<span class="op">*=</span><span class="dv">2</span><span class="op">){</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>            ll w1<span class="op">=</span>QPow<span class="op">(</span>PR<span class="op">,(</span>MOD<span class="op">-</span><span class="dv">1</span><span class="op">)/(</span><span class="dv">2</span><span class="op">*</span>hf<span class="op">));</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>typ<span class="op">==-</span><span class="dv">1</span><span class="op">)</span> w1<span class="op">=</span>Inv<span class="op">(</span>w1<span class="op">);</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>n<span class="op">;</span>i<span class="op">+=</span><span class="dv">2</span><span class="op">*</span>hf<span class="op">){</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>                ll wk<span class="op">=</span><span class="dv">1</span><span class="op">;</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span><span class="op">(</span>ll k<span class="op">=</span><span class="dv">0</span><span class="op">;</span>k<span class="op">&lt;</span>hf<span class="op">;</span>k<span class="op">++){</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                    ll x<span class="op">=</span>A<span class="op">[</span>i<span class="op">+</span>k<span class="op">],</span>y<span class="op">=</span>wk<span class="op">*</span>A<span class="op">[</span>i<span class="op">+</span>hf<span class="op">+</span>k<span class="op">]</span>_<span class="op">;</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>                    MD<span class="op">(</span>A<span class="op">[</span>i<span class="op">+</span>   k<span class="op">]=</span>x<span class="op">+</span>y<span class="op">);</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>                    MD<span class="op">(</span>A<span class="op">[</span>i<span class="op">+</span>hf<span class="op">+</span>k<span class="op">]=</span>x<span class="op">-</span>y<span class="op">);</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>                    wk<span class="op">=</span>wk<span class="op">*</span>w1 _<span class="op">;</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>                <span class="op">}</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        ll invN<span class="op">=</span>Inv<span class="op">(</span>n<span class="op">);</span></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>typ<span class="op">==-</span><span class="dv">1</span><span class="op">)</span> <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>n<span class="op">;</span>i<span class="op">++)</span> A<span class="op">[</span>i<span class="op">]=</span>A<span class="op">[</span>i<span class="op">]*</span>invN _<span class="op">;</span></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> SpawnRev<span class="op">(</span>ll n<span class="op">){</span><span class="co">//n(log2)</span></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        rev<span class="op">.</span>resize<span class="op">(</span><span class="dv">1</span><span class="op">&lt;&lt;</span>n<span class="op">);</span>rev<span class="op">[</span><span class="dv">0</span><span class="op">]=</span><span class="dv">0</span><span class="op">;</span></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">1</span><span class="op">;</span>i<span class="op">&lt;(</span><span class="dv">1</span><span class="op">&lt;&lt;</span>n<span class="op">);</span>i<span class="op">++)</span> rev<span class="op">[</span>i<span class="op">]=(</span>rev<span class="op">[</span>i<span class="op">&gt;&gt;</span><span class="dv">1</span><span class="op">]&gt;&gt;</span><span class="dv">1</span><span class="op">)+((</span>i<span class="op">&amp;</span><span class="dv">1</span><span class="op">)&lt;&lt;(</span>n<span class="op">-</span><span class="dv">1</span><span class="op">));</span></span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>Poly <span class="kw">operator</span> <span class="op">*</span> <span class="op">(</span>Poly A<span class="op">,</span>Poly B<span class="op">){</span></span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">using</span> <span class="kw">namespace</span> PC<span class="op">;</span></span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    ll orgN<span class="op">=</span>A<span class="op">.</span>n<span class="op">+</span>B<span class="op">.</span>n<span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>    ll n<span class="op">=</span>ceil<span class="op">(</span>log2<span class="op">(</span>orgN<span class="op">));</span>SpawnRev<span class="op">(</span>n<span class="op">);</span></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>    n<span class="op">=</span><span class="dv">1</span><span class="bu">LL</span><span class="op">&lt;&lt;</span>n<span class="op">;</span></span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>    A<span class="op">.</span>Resize<span class="op">(</span>n<span class="op">);</span>B<span class="op">.</span>Resize<span class="op">(</span>n<span class="op">);</span></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    Poly C<span class="op">(</span>n<span class="op">);</span></span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>    DFT<span class="op">(</span>A<span class="op">,</span><span class="dv">1</span><span class="op">);</span>DFT<span class="op">(</span>B<span class="op">,</span><span class="dv">1</span><span class="op">);</span></span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>n<span class="op">;</span>i<span class="op">++)</span> C<span class="op">[</span>i<span class="op">]=</span>A<span class="op">[</span>i<span class="op">]*</span>B<span class="op">[</span>i<span class="op">]</span>_<span class="op">;</span></span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>    DFT<span class="op">(</span>C<span class="op">,-</span><span class="dv">1</span><span class="op">);</span></span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>    C<span class="op">.</span>Resize<span class="op">(</span>orgN<span class="op">);</span></span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> C<span class="op">;</span></span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>    ll n<span class="op">=</span>Rd<span class="op">()+</span><span class="dv">1</span><span class="op">,</span>m<span class="op">=</span>Rd<span class="op">()+</span><span class="dv">1</span><span class="op">;</span></span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>    Poly A<span class="op">(</span>n<span class="op">),</span>B<span class="op">(</span>m<span class="op">);</span></span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>n<span class="op">;</span>i<span class="op">++)</span> A<span class="op">[</span>i<span class="op">]=</span>Rd<span class="op">();</span></span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>m<span class="op">;</span>i<span class="op">++)</span> B<span class="op">[</span>i<span class="op">]=</span>Rd<span class="op">();</span></span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>    Poly C<span class="op">=</span>A<span class="op">*</span>B<span class="op">;</span></span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>C<span class="op">.</span>n<span class="op">;</span>i<span class="op">++)</span> printf<span class="op">(</span><span class="st">"</span><span class="sc">%lld</span><span class="st"> "</span><span class="op">,</span>C<span class="op">[</span>i<span class="op">]);</span></span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="通用" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="通用"><span class="header-section-number">4.1</span> 通用</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">// polynomial universal, 2023/06/26</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> ll MOD<span class="op">=</span><span class="dv">998244353</span><span class="op">,</span>PR<span class="op">=</span><span class="dv">3</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define _ </span><span class="op">%</span>MOD</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">// ... (MOD, qpow, inv, etc.)</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>vector<span class="op">&lt;</span>ll<span class="op">&gt;</span> rev<span class="op">;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> spawn_rev<span class="op">(</span>ll n<span class="op">){</span> <span class="co">// n=log2(N)</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    rev<span class="op">.</span>resize<span class="op">(</span><span class="dv">1</span><span class="op">&lt;&lt;</span>n<span class="op">);</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    rev<span class="op">[</span><span class="dv">0</span><span class="op">]=</span><span class="dv">0</span><span class="op">;</span> <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">1</span><span class="op">;</span>i<span class="op">&lt;(</span><span class="dv">1</span><span class="op">&lt;&lt;</span>n<span class="op">);</span>i<span class="op">++)</span> rev<span class="op">[</span>i<span class="op">]=(</span>rev<span class="op">[</span>i<span class="op">&gt;&gt;</span><span class="dv">1</span><span class="op">]&gt;&gt;</span><span class="dv">1</span><span class="op">)+((</span>i<span class="op">&amp;</span><span class="dv">1</span><span class="op">)&lt;&lt;(</span>n<span class="op">-</span><span class="dv">1</span><span class="op">));</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Poly <span class="op">:</span> <span class="kw">public</span> vector<span class="op">&lt;</span>ll<span class="op">&gt;{</span> <span class="kw">public</span><span class="op">:</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">using</span> vector<span class="op">&lt;</span>ll<span class="op">&gt;::</span>vector<span class="op">;</span> <span class="co">// constructor</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    ll len<span class="op">()</span> <span class="at">const</span> <span class="op">{</span><span class="cf">return</span> size<span class="op">();}</span> <span class="co">// to avoid strange glitches caused by size_t</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    ll get<span class="op">(</span>ll idx<span class="op">)</span> <span class="at">const</span> <span class="op">{</span><span class="cf">return</span> <span class="op">*(</span>cbegin<span class="op">()+</span>idx<span class="op">);}</span> <span class="co">// const version of operator []</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    Poly subpoly<span class="op">(</span>ll pos <span class="op">=</span> <span class="dv">0</span><span class="op">,</span>ll count <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">)</span> <span class="at">const</span> <span class="op">{</span> <span class="co">// imitate std::string::substr with resize</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>count<span class="op">==-</span><span class="dv">1</span><span class="op">)</span> <span class="cf">return</span> Poly<span class="op">(</span>begin<span class="op">()+</span>pos<span class="op">,</span>end<span class="op">());</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        Poly B<span class="op">(</span>begin<span class="op">()+</span>min<span class="op">(</span>pos<span class="op">,</span>len<span class="op">()),</span>begin<span class="op">()+</span>min<span class="op">(</span>pos<span class="op">+</span>count<span class="op">,</span>len<span class="op">()));</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        B<span class="op">.</span>resize<span class="op">(</span>pos<span class="op">+</span>count<span class="op">);</span> <span class="cf">return</span> B<span class="op">;</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> debug<span class="op">()</span> <span class="at">const</span> <span class="op">{</span>cout<span class="op">&lt;&lt;</span>len<span class="op">()&lt;&lt;</span><span class="st">": "</span><span class="op">;</span> <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>len<span class="op">();</span>i<span class="op">++)</span> cout<span class="op">&lt;&lt;</span>at<span class="op">(</span>i<span class="op">)&lt;&lt;</span><span class="st">","</span><span class="op">;</span> cout<span class="op">&lt;&lt;</span>endl<span class="op">;}</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>Poly <span class="kw">operator</span> <span class="op">+</span> <span class="op">(</span>Poly A<span class="op">,</span><span class="at">const</span> Poly <span class="op">&amp;</span>B<span class="op">){</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    ll n<span class="op">=</span>max<span class="op">(</span>A<span class="op">.</span>len<span class="op">(),</span>B<span class="op">.</span>len<span class="op">());</span> A<span class="op">.</span>resize<span class="op">(</span>n<span class="op">);</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>n<span class="op">;</span>i<span class="op">++)</span> lmodp<span class="op">(</span>A<span class="op">[</span>i<span class="op">]+=</span>B<span class="op">.</span>get<span class="op">(</span>i<span class="op">));</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> A<span class="op">;</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>Poly <span class="kw">operator</span> <span class="op">-</span> <span class="op">(</span>Poly A<span class="op">){</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>A<span class="op">.</span>len<span class="op">();</span>i<span class="op">++)</span> A<span class="op">[</span>i<span class="op">]=</span>lmodv<span class="op">(-</span>A<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> A<span class="op">;</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>Poly <span class="kw">operator</span> <span class="op">-</span> <span class="op">(</span>Poly A<span class="op">,</span><span class="at">const</span> Poly <span class="op">&amp;</span>B<span class="op">){</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    ll n<span class="op">=</span>max<span class="op">(</span>A<span class="op">.</span>len<span class="op">(),</span>B<span class="op">.</span>len<span class="op">());</span> A<span class="op">.</span>resize<span class="op">(</span>n<span class="op">);</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> A<span class="op">+(-</span>B<span class="op">);</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>Poly <span class="kw">operator</span> <span class="op">*</span> <span class="op">(</span>Poly A<span class="op">,</span>ll c<span class="op">){</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>A<span class="op">.</span>len<span class="op">();</span>i<span class="op">++)</span> A<span class="op">[</span>i<span class="op">]=</span>A<span class="op">[</span>i<span class="op">]*</span>c _<span class="op">;</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> A<span class="op">;</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="集合幂级数" class="level3" data-number="4.2">
-<h3 data-number="4.2" class="anchored" data-anchor-id="集合幂级数"><span class="header-section-number">4.2</span> 集合幂级数</h3>
+<section id="fft-fntt-卷积" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="fft-fntt-卷积"><span class="header-section-number">4.2</span> FFT / FNTT / 卷积</h3>
+<ul>
+<li><p>DFT：（本原）单位根构造 <span class="math inline">\(\omega_n = e^{\frac {2 \pi}{n}i}\)</span>．</p></li>
+<li><p>NTT：<span class="math inline">\(P=998244353 = 7 \times 17 \times 2^{23} + 1\)</span>，<span class="math inline">\(\mathrm{PR} = 3\)</span> 是它的一个原根．（本原）单位根构造 <span class="math inline">\(\omega_{n} = \mathrm{PR}^{\frac{P-1}{n}} \bmod P\)</span>．</p></li>
+</ul>
+<p>考虑将待变换多项式 <span class="math display">\[
+A(x) = \sum_{k=0}^{2n} a_k x^k
+\]</span> 奇偶分项为两个多项式 <span class="math display">\[
+A(x) = A_0 (x^2) + x A_1(x^2)
+\]</span> 其中 <span class="math display">\[
+\begin{aligned}
+A_0 (x) &amp;= \sum_{k=0}^n a_{2k} x^k \\
+A_1 (x) &amp;= \sum_{k=0}^n a_{2k+1} x^k
+\end{aligned}
+\]</span> 代入 <span class="math inline">\(x = \omega_{2n}^k \pod{k = 0,\dots, 2n-1}\)</span>，用单位根折半性质（<span class="math inline">\(\omega_{2n}^{2k} = \omega_n^k\)</span>） <span class="math display">\[
+A(\omega_{2n}^k) = A_0 (\omega_{n}^k) + \omega_{2n}^k A_1 (\omega_{n}^k)
+\]</span> 再用单位根消去性质（<span class="math inline">\(\omega_{2n}^{n+k} = - \omega_{2n}^k\)</span>） <span class="math display">\[
+\begin{aligned}
+A(\omega_{2n}^k) &amp;= A_0 (\omega_n^k) + \omega_{2n}^k A_1 (\omega_n^k) \\
+A(\omega_{2n}^{n+k}) &amp;= A_0 (\omega_n^k) - \omega_{2n}^k A_1(\omega_n^k)
+\end{aligned}
+\pod{k = 0, \dots, n-1}
+\]</span> 即得 FFT/FNTT 递归算法．用单位根求和性质 <span class="math display">\[
+\frac 1 n \sum_{k=0}^{n-1} \omega^{ik} = [i \mid n]
+\]</span> 可知 DFT/NTT 变换矩阵 <span class="math inline">\(F = \begin{pmatrix}\omega_{n}^{ij}\end{pmatrix}_{(i,j) \in n \times n}\)</span> 满足 <span class="math inline">\(F F^H = F^H F = n I_n\)</span>，故 <span class="math inline">\(F^{-1} = \frac 1 n F^H = \begin{pmatrix} \frac 1 n \omega_{n}^{-ij}\end{pmatrix}_{(i,j) \in n \times n}\)</span>，此即 DFT/NTT 逆变换矩阵．</p>
+<section id="蝶形运算与迭代算法" class="level4">
+<h4 class="anchored" data-anchor-id="蝶形运算与迭代算法">蝶形运算与迭代算法</h4>
+<p>为使用迭代算法，需要快速得到递归算法向下深入过程中 <span class="math inline">\(\{ a_n \}\)</span> 置换后的最终结果．观察知该置换是位逆序置换，可线性求出．故可实现如下迭代算法（连带实现卷积运算）</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// FNTT &amp; convolution, iteration style, 2023/06/26</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>vector<span class="op">&lt;</span>ll<span class="op">&gt;</span> rev<span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> spawn_rev<span class="op">(</span>ll n<span class="op">){</span> <span class="co">// n=log2(N)</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    rev<span class="op">.</span>resize<span class="op">(</span><span class="dv">1</span><span class="op">&lt;&lt;</span>n<span class="op">);</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    rev<span class="op">[</span><span class="dv">0</span><span class="op">]=</span><span class="dv">0</span><span class="op">;</span> <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">1</span><span class="op">;</span>i<span class="op">&lt;(</span><span class="dv">1</span><span class="op">&lt;&lt;</span>n<span class="op">);</span>i<span class="op">++)</span> rev<span class="op">[</span>i<span class="op">]=(</span>rev<span class="op">[</span>i<span class="op">&gt;&gt;</span><span class="dv">1</span><span class="op">]&gt;&gt;</span><span class="dv">1</span><span class="op">)+((</span>i<span class="op">&amp;</span><span class="dv">1</span><span class="op">)&lt;&lt;(</span>n<span class="op">-</span><span class="dv">1</span><span class="op">));</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Poly <span class="op">:</span> <span class="kw">public</span> vector<span class="op">&lt;</span>ll<span class="op">&gt;{</span> <span class="kw">public</span><span class="op">:</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ... (Poly defaults)</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> DFT<span class="op">(</span>ll typ<span class="op">){</span> <span class="co">// to be called by operator * only (with proper length and rev array)</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        ll n<span class="op">=</span>len<span class="op">();</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>n<span class="op">;</span>i<span class="op">++)</span> <span class="cf">if</span><span class="op">(</span>i<span class="op">&lt;</span>rev<span class="op">[</span>i<span class="op">])</span> <span class="bu">std::</span>swap<span class="op">(</span>at<span class="op">(</span>i<span class="op">),</span>at<span class="op">(</span>rev<span class="op">[</span>i<span class="op">]));</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span>ll hf<span class="op">=</span><span class="dv">1</span><span class="op">;</span>hf<span class="op">&lt;</span>n<span class="op">;</span>hf<span class="op">*=</span><span class="dv">2</span><span class="op">){</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>            ll w<span class="op">=</span>qpow<span class="op">(</span>PR<span class="op">,(</span>MOD<span class="op">-</span><span class="dv">1</span><span class="op">)/(</span>hf<span class="op">*</span><span class="dv">2</span><span class="op">));</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>typ<span class="op">==-</span><span class="dv">1</span><span class="op">)</span> w<span class="op">=</span>inv<span class="op">(</span>w<span class="op">);</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>n<span class="op">;</span>i<span class="op">+=</span>hf<span class="op">*</span><span class="dv">2</span><span class="op">){</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>                ll wk<span class="op">=</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span><span class="op">(</span>ll k<span class="op">=</span><span class="dv">0</span><span class="op">;</span>k<span class="op">&lt;</span>hf<span class="op">;</span>k<span class="op">++){</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>                    ll x<span class="op">=</span>at<span class="op">(</span>i<span class="op">+</span>k<span class="op">),</span>y<span class="op">=</span>wk<span class="op">*</span>at<span class="op">(</span>i<span class="op">+</span>hf<span class="op">+</span>k<span class="op">)</span>_<span class="op">;</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>                    at<span class="op">(</span>i<span class="op">+</span>k<span class="op">)=</span>lmodv<span class="op">(</span>x<span class="op">+</span>y<span class="op">);</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>                    at<span class="op">(</span>i<span class="op">+</span>hf<span class="op">+</span>k<span class="op">)=</span>lmodv<span class="op">(</span>x<span class="op">-</span>y<span class="op">);</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>                    wk<span class="op">=</span>wk<span class="op">*</span>w _<span class="op">;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>                <span class="op">}</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>typ<span class="op">==-</span><span class="dv">1</span><span class="op">){</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>            ll inv_n<span class="op">=</span>inv<span class="op">(</span>n<span class="op">);</span> <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>n<span class="op">;</span>i<span class="op">++)</span> at<span class="op">(</span>i<span class="op">)=</span>at<span class="op">(</span>i<span class="op">)*</span>inv_n _<span class="op">;</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>Poly <span class="kw">operator</span> <span class="op">*</span> <span class="op">(</span>Poly A<span class="op">,</span>Poly B<span class="op">){</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    ll c_len<span class="op">=</span>A<span class="op">.</span>len<span class="op">()+</span>B<span class="op">.</span>len<span class="op">()-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    ll n<span class="op">=</span>ceil<span class="op">(</span>log2<span class="op">(</span>c_len<span class="op">));</span> spawn_rev<span class="op">(</span>n<span class="op">);</span> n<span class="op">=</span><span class="dv">1</span><span class="op">&lt;&lt;</span>n<span class="op">;</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    Poly C<span class="op">(</span>n<span class="op">);</span> A<span class="op">.</span>resize<span class="op">(</span>n<span class="op">);</span> B<span class="op">.</span>resize<span class="op">(</span>n<span class="op">);</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    A<span class="op">.</span>DFT<span class="op">(</span><span class="dv">1</span><span class="op">);</span> B<span class="op">.</span>DFT<span class="op">(</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>n<span class="op">;</span>i<span class="op">++)</span> C<span class="op">[</span>i<span class="op">]=</span>A<span class="op">[</span>i<span class="op">]*</span>B<span class="op">[</span>i<span class="op">]</span>_<span class="op">;</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    C<span class="op">.</span>DFT<span class="op">(-</span><span class="dv">1</span><span class="op">);</span> C<span class="op">.</span>resize<span class="op">(</span>c_len<span class="op">);</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> C<span class="op">;</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="多项式求逆" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="多项式求逆"><span class="header-section-number">4.3</span> 多项式求逆</h3>
+<p>给定 <span class="math inline">\(n-1\)</span> 次多项式 <span class="math inline">\(A(x)\)</span>，求解满足 <span class="math inline">\(A(x) B(x) = 1 \pmod{x^{n}}\)</span> 的多项式 <span class="math inline">\(B(x)\)</span>．</p>
+<p>多项式逆元存在的充分必要条件是其常数项非零，若存在则一定唯一．这结论可直接由下述求解方法得到．不失一般性，我们只研究 <span class="math inline">\(A(x)\)</span> 的次数为奇数 <span class="math inline">\(2n-1\)</span> 的情况．设 <span class="math display">\[
+\begin{aligned}
+A(x) &amp;= A_0(x) + x^n A_1(x) \\
+B(x) &amp;= B_0(x) + x^n B_1(x)
+\end{aligned}
+\]</span> 下述两种方法均递归地在已知 <span class="math display">\[
+A(x) B_0(x) = A_0(x) B_0(x) = 1 \pmod{x^n}
+\]</span> 的基础上求解 <span class="math inline">\(A(x)\)</span> 的逆元．边界条件 <span class="math inline">\(b_0 = \frac 1 {a_0}\)</span>．时间复杂度均为 <span class="math display">\[
+T(n) = T(\frac n 2) + O(n \log n) = O(n \log n)
+\]</span></p>
+<p>以下简记 <span class="math inline">\(A(x)\)</span> 为 <span class="math inline">\(A\)</span>，其它多项式同理．</p>
+<section id="倍增法一原创" class="level4">
+<h4 class="anchored" data-anchor-id="倍增法一原创">倍增法一（原创）</h4>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; A B = 1 \pmod{x^{2n}} \\
+\iff&amp; (A_0 + x^n A_1)(B_0 + x^n B_1) = 1 \pmod{x^{2n}} \\
+\iff&amp; x^n(A_1 B_0 + A_0 B_1) + A_0 B_0 = 1 \pmod{x^{2n}} \\
+\iff&amp; A_1 B_0 + A_0 B_1 + \left\lfloor \frac{A_0 B_0}{x^n} \right\rfloor = 0 \pmod{x^{n}} \\
+\iff&amp;  A_0 B_1 = -\left\lfloor \frac{A_0 B_0}{x^n} \right\rfloor - A_1 B_0 \pmod{x^{n}} \\
+\iff&amp;  B_1 = - B_0 \left( \left\lfloor \frac{A_0 B_0}{x^n} \right\rfloor + A_1 B_0 \right) \pmod{x^{n}}
+\end{aligned}
+\]</span></p>
+<p>常数偏大．</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Poly inv<span class="op">(</span><span class="at">const</span> Poly <span class="op">&amp;</span>A<span class="op">){</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    ll n<span class="op">=</span>A<span class="op">.</span>len<span class="op">();</span> Poly B<span class="op">(</span><span class="dv">1</span><span class="op">);</span> B<span class="op">[</span><span class="dv">0</span><span class="op">]=</span>inv<span class="op">(</span>A<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll hf<span class="op">=</span><span class="dv">1</span><span class="op">;</span>hf<span class="op">&lt;</span>n<span class="op">;</span>hf<span class="op">&lt;&lt;=</span><span class="dv">1</span><span class="op">){</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">const</span> Poly <span class="op">&amp;</span>A0<span class="op">=</span>A<span class="op">.</span>subpoly<span class="op">(</span><span class="dv">0</span><span class="op">,</span>hf<span class="op">),&amp;</span>A1<span class="op">=</span>A<span class="op">.</span>subpoly<span class="op">(</span>hf<span class="op">,</span>hf<span class="op">);</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">const</span> Poly <span class="op">&amp;</span>B0<span class="op">=</span>B<span class="op">;</span> Poly B1<span class="op">=-</span>B0<span class="op">*((</span>A1<span class="op">*</span>B0<span class="op">).</span>subpoly<span class="op">(</span><span class="dv">0</span><span class="op">,</span>hf<span class="op">)+(</span>A0<span class="op">*</span>B0<span class="op">).</span>subpoly<span class="op">(</span>hf<span class="op">,</span>hf<span class="op">));</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        B<span class="op">.</span>insert<span class="op">(</span>B<span class="op">.</span>end<span class="op">(),</span>B1<span class="op">.</span>begin<span class="op">(),</span>B1<span class="op">.</span>begin<span class="op">()+</span>hf<span class="op">);</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> B<span class="op">.</span>resize<span class="op">(</span>n<span class="op">);</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> B<span class="op">;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="倍增法二" class="level4">
+<h4 class="anchored" data-anchor-id="倍增法二">倍增法二</h4>
+<p>注意到 <span class="math display">\[
+\begin{cases}
+A B_0 = 1 \pmod{x^n} \\
+A B = 1 \pmod{x^n}
+\end{cases} \implies A (B-B_0) = 0 \pmod{x^n}
+\]</span> 由于 <span class="math inline">\(A \bmod{x^n}\)</span> 非零，故 <span class="math display">\[
+B-B_0 = 0 \pmod{x^n}
+\]</span> （这证明了逆元在不同模数下的前缀保持一致）</p>
+<p>两边平方得 <span class="math display">\[
+B^2 - 2 B B_0 + B_0^2 = 0 \pmod{x^{2n}}
+\]</span> 两侧同乘 <span class="math inline">\(A\)</span> 并移项得 <span class="math display">\[
+B = 2 B_0 - A B_0^2
+\]</span></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Poly inv<span class="op">(</span><span class="at">const</span> Poly <span class="op">&amp;</span>A<span class="op">){</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    ll n<span class="op">=</span>A<span class="op">.</span>len<span class="op">();</span> Poly B<span class="op">(</span><span class="dv">1</span><span class="op">);</span> B<span class="op">[</span><span class="dv">0</span><span class="op">]=</span>inv<span class="op">(</span>A<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll hf<span class="op">=</span><span class="dv">1</span><span class="op">;</span>hf<span class="op">&lt;</span>n<span class="op">;</span>hf<span class="op">&lt;&lt;=</span><span class="dv">1</span><span class="op">){</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        B<span class="op">=</span>B<span class="op">*</span><span class="dv">2</span><span class="op">-</span>B<span class="op">*</span>B<span class="op">*</span>A<span class="op">.</span>subpoly<span class="op">(</span><span class="dv">0</span><span class="op">,</span>hf<span class="op">*</span><span class="dv">2</span><span class="op">);</span> B<span class="op">.</span>resize<span class="op">(</span>hf<span class="op">*</span><span class="dv">2</span><span class="op">);</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> B<span class="op">.</span>resize<span class="op">(</span>n<span class="op">);</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> B<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+</section>
+<section id="集合幂级数" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="集合幂级数"><span class="header-section-number">5</span> 集合幂级数</h2>
 <p>pass</p>
 </section>
+<section id="矩阵" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="矩阵"><span class="header-section-number">6</span> 矩阵</h2>
+<p>pass</p>
 </section>
-<section id="通用" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="通用"><span class="header-section-number">5</span> 通用</h2>
-<section id="基础模板" class="level3" data-number="5.1">
-<h3 data-number="5.1" class="anchored" data-anchor-id="基础模板"><span class="header-section-number">5.1</span> 基础模板</h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">//general model 2023/06/12</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll<span class="op">;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">namespace</span> safe<span class="op">{</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    ll rd<span class="op">(){</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        ll ans<span class="op">=</span><span class="dv">0</span><span class="op">;</span> <span class="dt">bool</span> sgn<span class="op">=</span><span class="dv">0</span><span class="op">;</span> <span class="dt">char</span> c<span class="op">=</span>getchar<span class="op">();</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(</span>c<span class="op">&lt;</span><span class="ch">'0'</span><span class="op">||</span>c<span class="op">&gt;</span><span class="ch">'9'</span><span class="op">){</span><span class="cf">if</span><span class="op">(</span>c<span class="op">==</span><span class="ch">'-'</span><span class="op">)</span> sgn<span class="op">=</span><span class="dv">1</span><span class="op">;</span> c<span class="op">=</span>getchar<span class="op">();}</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(</span>c<span class="op">&gt;=</span><span class="ch">'0'</span><span class="op">&amp;&amp;</span>c<span class="op">&lt;=</span><span class="ch">'9'</span><span class="op">){</span>ans<span class="op">=</span>ans<span class="op">*</span><span class="dv">10</span><span class="op">+</span>c<span class="op">-</span><span class="ch">'0'</span><span class="op">;</span>c<span class="op">=</span>getchar<span class="op">();}</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>sgn<span class="op">)</span> ans<span class="op">=-</span>ans<span class="op">;</span> <span class="cf">return</span> ans<span class="op">;</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">const</span> ll MOD<span class="op">=;</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="pp">#define _ </span><span class="op">%</span>MOD</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    ll lmodv<span class="op">(</span>ll x<span class="op">){</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>x<span class="op">&lt;</span><span class="dv">0</span><span class="op">)</span> x<span class="op">+=</span>MOD<span class="op">;</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span><span class="op">(</span>x<span class="op">&gt;=</span>MOD<span class="op">)</span> x<span class="op">-=</span>MOD<span class="op">;</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x<span class="op">;</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span><span class="dt">void</span> lmodp<span class="op">(</span>ll<span class="op">&amp;</span> x<span class="op">){</span>x<span class="op">=</span>lmodv<span class="op">(</span>x<span class="op">);}</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    ll mmodv<span class="op">(</span>ll x<span class="op">){</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x<span class="op">%</span>MOD<span class="op">;</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span><span class="dt">void</span> mmodp<span class="op">(</span>ll<span class="op">&amp;</span> x<span class="op">){</span>x<span class="op">=</span>mmodv<span class="op">(</span>x<span class="op">);}</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    ll hmodv<span class="op">(</span>ll x<span class="op">){</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">(</span>x<span class="op">%</span>MOD<span class="op">+</span>MOD<span class="op">)%</span>MOD<span class="op">;</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span><span class="dt">void</span> hmodp<span class="op">(</span>ll<span class="op">&amp;</span> x<span class="op">){</span>x<span class="op">=</span>hmodv<span class="op">(</span>x<span class="op">);}</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    ll qpow<span class="op">(</span>ll x<span class="op">,</span>ll up<span class="op">){</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        hmodp<span class="op">(</span>x<span class="op">);</span> ll ans<span class="op">=</span><span class="dv">1</span><span class="op">;</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(</span>up<span class="op">){</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>up<span class="op">&amp;</span><span class="dv">1</span><span class="op">)</span> ans<span class="op">=</span>ans<span class="op">*</span>x _<span class="op">;</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span>x<span class="op">*</span>x _<span class="op">;</span> up<span class="op">&gt;&gt;=</span><span class="dv">1</span><span class="op">;</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span><span class="cf">return</span> ans<span class="op">;</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    ll inv<span class="op">(</span>ll x<span class="op">){</span><span class="cf">return</span> qpow<span class="op">(</span>x<span class="op">,</span>MOD<span class="op">-</span><span class="dv">2</span><span class="op">);}</span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> entry<span class="op">(){}</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">//freopen("t1.in","r",stdin);</span></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">//freopen("t1.out","w",stdout);</span></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    <span class="co">//ll T=safe::rd(); while(T--){</span></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    safe<span class="op">::</span>entry<span class="op">();</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    <span class="co">//}</span></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="通用-1" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="通用-1"><span class="header-section-number">7</span> 通用</h2>
+<section id="基础模板" class="level3" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="基础模板"><span class="header-section-number">7.1</span> 基础模板</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">//general model 2023/06/26</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll<span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="kw">namespace</span> safe<span class="op">{</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    ll rd<span class="op">(){</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        ll ans<span class="op">=</span><span class="dv">0</span><span class="op">;</span> <span class="dt">bool</span> sgn<span class="op">=</span><span class="dv">0</span><span class="op">;</span> <span class="dt">char</span> c<span class="op">=</span>getchar<span class="op">();</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(</span>c<span class="op">&lt;</span><span class="ch">'0'</span><span class="op">||</span>c<span class="op">&gt;</span><span class="ch">'9'</span><span class="op">){</span><span class="cf">if</span><span class="op">(</span>c<span class="op">==</span><span class="ch">'-'</span><span class="op">)</span> sgn<span class="op">=</span><span class="dv">1</span><span class="op">;</span> c<span class="op">=</span>getchar<span class="op">();}</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(</span>c<span class="op">&gt;=</span><span class="ch">'0'</span><span class="op">&amp;&amp;</span>c<span class="op">&lt;=</span><span class="ch">'9'</span><span class="op">){</span>ans<span class="op">=</span>ans<span class="op">*</span><span class="dv">10</span><span class="op">+</span>c<span class="op">-</span><span class="ch">'0'</span><span class="op">;</span>c<span class="op">=</span>getchar<span class="op">();}</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>sgn<span class="op">)</span> ans<span class="op">=-</span>ans<span class="op">;</span> <span class="cf">return</span> ans<span class="op">;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">const</span> ll MOD<span class="op">=;</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="pp">#define _ </span><span class="op">%</span>MOD</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    ll lmodv<span class="op">(</span>ll x<span class="op">){</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>x<span class="op">&lt;</span><span class="dv">0</span><span class="op">)</span> x<span class="op">+=</span>MOD<span class="op">;</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span><span class="op">(</span>x<span class="op">&gt;=</span>MOD<span class="op">)</span> x<span class="op">-=</span>MOD<span class="op">;</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x<span class="op">;</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span><span class="dt">void</span> lmodp<span class="op">(</span>ll <span class="op">&amp;</span>x<span class="op">){</span>x<span class="op">=</span>lmodv<span class="op">(</span>x<span class="op">);}</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    ll mmodv<span class="op">(</span>ll x<span class="op">){</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x<span class="op">%</span>MOD<span class="op">;</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span><span class="dt">void</span> mmodp<span class="op">(</span>ll <span class="op">&amp;</span>x<span class="op">){</span>x<span class="op">=</span>mmodv<span class="op">(</span>x<span class="op">);}</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    ll hmodv<span class="op">(</span>ll x<span class="op">){</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">(</span>x<span class="op">%</span>MOD<span class="op">+</span>MOD<span class="op">)%</span>MOD<span class="op">;</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span><span class="dt">void</span> hmodp<span class="op">(</span>ll <span class="op">&amp;</span>x<span class="op">){</span>x<span class="op">=</span>hmodv<span class="op">(</span>x<span class="op">);}</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    ll qpow<span class="op">(</span>ll x<span class="op">,</span>ll up<span class="op">){</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>        hmodp<span class="op">(</span>x<span class="op">);</span> ll ans<span class="op">=</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(</span>up<span class="op">){</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>up<span class="op">&amp;</span><span class="dv">1</span><span class="op">)</span> ans<span class="op">=</span>ans<span class="op">*</span>x _<span class="op">;</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>            x<span class="op">=</span>x<span class="op">*</span>x _<span class="op">;</span> up<span class="op">&gt;&gt;=</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span><span class="cf">return</span> ans<span class="op">;</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    ll inv<span class="op">(</span>ll x<span class="op">){</span><span class="cf">return</span> qpow<span class="op">(</span>x<span class="op">,</span>MOD<span class="op">-</span><span class="dv">2</span><span class="op">);}</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> entry<span class="op">(){}</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">//freopen("t1.in","r",stdin);</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">//freopen("t1.out","w",stdout);</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>    <span class="co">//ll T=safe::rd(); while(T--){</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>    safe<span class="op">::</span>entry<span class="op">();</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>    <span class="co">//}</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="对拍" class="level3" data-number="5.2">
-<h3 data-number="5.2" class="anchored" data-anchor-id="对拍"><span class="header-section-number">5.2</span> 对拍</h3>
+<section id="对拍" class="level3" data-number="7.2">
+<h3 data-number="7.2" class="anchored" data-anchor-id="对拍"><span class="header-section-number">7.2</span> 对拍</h3>
 <pre class="batch"><code>:loop
     make.exe&gt;data.in
     my.exe&lt;data.in&gt;my.out
