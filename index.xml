@@ -20,7 +20,7 @@
 
 
 <div class="hidden">
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cnewcommand%7B%5Cfloor%7D%5B1%5D%7B%5Cleft%5Clfloor%20#1%20%5Cright%5Crfloor%7D%0A%5Cnewcommand%7B%5Cinv%7D%7B%5Coperatorname%7Binv%7D%7D%0A%5Cnewcommand%7B%5Clcm%7D%7B%5Coperatorname%7Blcm%7D%7D%0A%5Cnewcommand%7B%5CId%7D%7B%5Coperatorname%7BId%7D%7D%0A%5Cnewcommand%7B%5Ccard%7D%7B%5Coperatorname%7Bcard%7D%7D%0A"></p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cnewcommand%7B%5Cfloor%7D%5B1%5D%7B%5Cleft%5Clfloor%20#1%20%5Cright%5Crfloor%7D%0A%5Cnewcommand%7B%5Cinv%7D%7B%5Coperatorname%7Binv%7D%7D%0A%5Cnewcommand%7B%5Clcm%7D%7B%5Coperatorname%7Blcm%7D%7D%0A%5Cnewcommand%7B%5CId%7D%7B%5Coperatorname%7BId%7D%7D%0A%5Cnewcommand%7B%5Ccard%7D%7B%5Coperatorname%7Bcard%7D%7D%0A%5Cnewcommand%7B%5Cdiff%7D%7B%5Coperatorname%7Bd%7D%5C!%7D%0A"></p>
 </div>
 <section id="数论" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="数论"><span class="header-section-number">1</span> 数论</h2>
@@ -619,7 +619,7 @@ font-style: inherit;">}</span></span></code></pre></div>
 <h3 data-number="4.1" class="anchored" data-anchor-id="通用"><span class="header-section-number">4.1</span> 通用</h3>
 <div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">// polynomial universal, 2023/06/26</span></span>
+font-style: inherit;">// polynomial universal, 2023/06/27</span></span>
 <span id="cb5-2"><span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">const</span> ll MOD<span class="op" style="color: #5E5E5E;
@@ -929,11 +929,7 @@ font-style: inherit;">+</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>Poly A<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">,</span><span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">const</span> Poly <span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">&amp;</span>B<span class="op" style="color: #5E5E5E;
+font-style: inherit;">,</span>Poly B<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">){</span></span>
 <span id="cb5-22">    ll n<span class="op" style="color: #5E5E5E;
@@ -949,6 +945,12 @@ background-color: null;
 font-style: inherit;">.</span>len<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">());</span> A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>resize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>n<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">);</span> B<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">.</span>resize<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1037,14 +1039,17 @@ background-color: null;
 font-style: inherit;">;</span></span>
 <span id="cb5-29"><span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">}</span></span>
-<span id="cb5-30">Poly <span class="kw" style="color: #003B4F;
+font-style: inherit;">}</span>Poly <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">operator</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">-</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">(</span>Poly A<span class="op" style="color: #5E5E5E;
+font-style: inherit;">(</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">const</span> Poly<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> A<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">,</span><span class="at" style="color: #657422;
 background-color: null;
@@ -1052,37 +1057,14 @@ font-style: inherit;">const</span> Poly <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&amp;</span>B<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">){</span></span>
-<span id="cb5-31">    ll n<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">=</span>max<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span>A<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span>len<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(),</span>B<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span>len<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">());</span> A<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">.</span>resize<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">(</span>n<span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">);</span></span>
-<span id="cb5-32">    <span class="cf" style="color: #003B4F;
+font-style: inherit;">){</span><span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">return</span> A<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+(-</span>B<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">);</span></span>
-<span id="cb5-33"><span class="op" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">}</span></span>
-<span id="cb5-34">Poly <span class="kw" style="color: #003B4F;
+font-style: inherit;">);}</span></span>
+<span id="cb5-30">Poly <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">operator</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1093,7 +1075,7 @@ background-color: null;
 font-style: inherit;">,</span>ll c<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">){</span></span>
-<span id="cb5-35">    <span class="cf" style="color: #003B4F;
+<span id="cb5-31">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1122,12 +1104,318 @@ background-color: null;
 font-style: inherit;">]*</span>c _<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb5-36">    <span class="cf" style="color: #003B4F;
+<span id="cb5-32">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">return</span> A<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb5-37"><span class="op" style="color: #5E5E5E;
+<span id="cb5-33"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb5-34">Poly <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">operator</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;&lt;</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>Poly A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span>ll shift<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">){</span></span>
+<span id="cb5-35">    ll n<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>len<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">();</span> A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>resize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>n<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span>shift<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">);</span></span>
+<span id="cb5-36">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>ll i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>n<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">--)</span> A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span>shift<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]=</span>A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">];</span></span>
+<span id="cb5-37">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>ll i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>shift<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">--)</span> A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb5-38">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb5-39"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb5-40">Poly <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">operator</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;&gt;</span> <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>Poly A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span>ll shift<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">){</span></span>
+<span id="cb5-41">    ll n<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>len<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">()-</span>shift<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>n<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> Poly<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">);</span></span>
+<span id="cb5-42">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>ll i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span>n<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">++)</span> A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]=</span>A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span>shift<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">];</span></span>
+<span id="cb5-43">    A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>resize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>n<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">);</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb5-44"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb5-45">Poly drv<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>Poly A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">){</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">// derivative</span></span>
+<span id="cb5-46">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>ll i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span>A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>len<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">();</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">++)</span> A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]=(</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)*</span>A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]</span>_<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb5-47">    A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>pop_back<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">();</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb5-48"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span></span>
+<span id="cb5-49">Poly itg<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>Poly A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span>ll c<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">){</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">// integral</span></span>
+<span id="cb5-50">    A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>push_back<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">);</span></span>
+<span id="cb5-51">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>ll i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>len<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">();</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">--)</span> A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]=</span>A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]*</span>inv<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>i<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)</span>_<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb5-52">    A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]=</span>c<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb5-53"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span></code></pre></div>
 </section>
@@ -1141,17 +1429,14 @@ font-style: inherit;">}</span></span></code></pre></div>
 <section id="蝶形运算与迭代算法" class="level4">
 <h4 class="anchored" data-anchor-id="蝶形运算与迭代算法">蝶形运算与迭代算法</h4>
 <p>为使用迭代算法，需要快速得到递归算法向下深入过程中 <img src="https://latex.codecogs.com/png.latex?%5C%7B%20a_n%20%5C%7D"> 置换后的最终结果．观察知该置换是位逆序置换，可线性求出．故可实现如下迭代算法（连带实现卷积运算）</p>
-<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">// FNTT &amp; convolution, iteration style, 2023/06/26</span></span>
-<span id="cb6-2">vector<span class="op" style="color: #5E5E5E;
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb6-1">vector<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;</span>ll<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span> rev<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb6-3"><span class="dt" style="color: #AD0000;
+<span id="cb6-2"><span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">void</span> spawn_rev<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1160,7 +1445,7 @@ background-color: null;
 font-style: inherit;">){</span> <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">// n=log2(N)</span></span>
-<span id="cb6-4">    rev<span class="op" style="color: #5E5E5E;
+<span id="cb6-3">    rev<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">.</span>resize<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1171,7 +1456,7 @@ background-color: null;
 font-style: inherit;">&lt;&lt;</span>n<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">);</span></span>
-<span id="cb6-5">    rev<span class="op" style="color: #5E5E5E;
+<span id="cb6-4">    rev<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">[</span><span class="dv" style="color: #AD0000;
 background-color: null;
@@ -1230,10 +1515,10 @@ background-color: null;
 font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">));</span></span>
-<span id="cb6-6"><span class="op" style="color: #5E5E5E;
+<span id="cb6-5"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span>
-<span id="cb6-7"><span class="kw" style="color: #003B4F;
+<span id="cb6-6"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">class</span> Poly <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1248,10 +1533,10 @@ background-color: null;
 font-style: inherit;">public</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">:</span></span>
-<span id="cb6-8">    <span class="co" style="color: #5E5E5E;
+<span id="cb6-7">    <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">// ... (Poly defaults)</span></span>
-<span id="cb6-9">    <span class="dt" style="color: #AD0000;
+<span id="cb6-8">    <span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">void</span> DFT<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1260,12 +1545,12 @@ background-color: null;
 font-style: inherit;">){</span> <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">// to be called by operator * only (with proper length and rev array)</span></span>
-<span id="cb6-10">        ll n<span class="op" style="color: #5E5E5E;
+<span id="cb6-9">        ll n<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>len<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">();</span></span>
-<span id="cb6-11">        <span class="cf" style="color: #003B4F;
+<span id="cb6-10">        <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1306,7 +1591,7 @@ background-color: null;
 font-style: inherit;">[</span>i<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">]));</span></span>
-<span id="cb6-12">        <span class="cf" style="color: #003B4F;
+<span id="cb6-11">        <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1327,7 +1612,7 @@ background-color: null;
 font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">){</span></span>
-<span id="cb6-13">            ll w<span class="op" style="color: #5E5E5E;
+<span id="cb6-12">            ll w<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>qpow<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1346,7 +1631,7 @@ background-color: null;
 font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">));</span></span>
-<span id="cb6-14">            <span class="cf" style="color: #003B4F;
+<span id="cb6-13">            <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1363,7 +1648,7 @@ background-color: null;
 font-style: inherit;">(</span>w<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">);</span></span>
-<span id="cb6-15">            <span class="cf" style="color: #003B4F;
+<span id="cb6-14">            <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1386,14 +1671,14 @@ background-color: null;
 font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">){</span></span>
-<span id="cb6-16">                ll wk<span class="op" style="color: #5E5E5E;
+<span id="cb6-15">                ll wk<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb6-17">                <span class="cf" style="color: #003B4F;
+<span id="cb6-16">                <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1410,7 +1695,7 @@ background-color: null;
 font-style: inherit;">;</span>k<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">++){</span></span>
-<span id="cb6-18">                    ll x<span class="op" style="color: #5E5E5E;
+<span id="cb6-17">                    ll x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>at<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1433,7 +1718,7 @@ background-color: null;
 font-style: inherit;">)</span>_<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb6-19">                    at<span class="op" style="color: #5E5E5E;
+<span id="cb6-18">                    at<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>i<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1446,7 +1731,7 @@ background-color: null;
 font-style: inherit;">+</span>y<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">);</span></span>
-<span id="cb6-20">                    at<span class="op" style="color: #5E5E5E;
+<span id="cb6-19">                    at<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>i<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1461,23 +1746,23 @@ background-color: null;
 font-style: inherit;">-</span>y<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">);</span></span>
-<span id="cb6-21">                    wk<span class="op" style="color: #5E5E5E;
+<span id="cb6-20">                    wk<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>wk<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">*</span>w _<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb6-22">                <span class="op" style="color: #5E5E5E;
+<span id="cb6-21">                <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span>
-<span id="cb6-23">            <span class="op" style="color: #5E5E5E;
+<span id="cb6-22">            <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span>
-<span id="cb6-24">        <span class="op" style="color: #5E5E5E;
+<span id="cb6-23">        <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span>
-<span id="cb6-25">        <span class="cf" style="color: #003B4F;
+<span id="cb6-24">        <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1488,7 +1773,7 @@ background-color: null;
 font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">){</span></span>
-<span id="cb6-26">            ll inv_n<span class="op" style="color: #5E5E5E;
+<span id="cb6-25">            ll inv_n<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>inv<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1521,16 +1806,16 @@ background-color: null;
 font-style: inherit;">)*</span>inv_n _<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb6-27">        <span class="op" style="color: #5E5E5E;
+<span id="cb6-26">        <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span>
-<span id="cb6-28">    <span class="op" style="color: #5E5E5E;
+<span id="cb6-27">    <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span>
-<span id="cb6-29"><span class="op" style="color: #5E5E5E;
+<span id="cb6-28"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">};</span></span>
-<span id="cb6-30">Poly <span class="kw" style="color: #003B4F;
+<span id="cb6-29">Poly <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">operator</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1541,7 +1826,7 @@ background-color: null;
 font-style: inherit;">,</span>Poly B<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">){</span></span>
-<span id="cb6-31">    ll c_len<span class="op" style="color: #5E5E5E;
+<span id="cb6-30">    ll c_len<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>A<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1556,7 +1841,7 @@ background-color: null;
 font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb6-32">    ll n<span class="op" style="color: #5E5E5E;
+<span id="cb6-31">    ll n<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>ceil<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1577,7 +1862,7 @@ background-color: null;
 font-style: inherit;">&lt;&lt;</span>n<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb6-33">    Poly C<span class="op" style="color: #5E5E5E;
+<span id="cb6-32">    Poly C<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>n<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1594,7 +1879,7 @@ background-color: null;
 font-style: inherit;">(</span>n<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">);</span></span>
-<span id="cb6-34">    A<span class="op" style="color: #5E5E5E;
+<span id="cb6-33">    A<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">.</span>DFT<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1611,7 +1896,7 @@ background-color: null;
 font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">);</span></span>
-<span id="cb6-35">    <span class="cf" style="color: #003B4F;
+<span id="cb6-34">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1642,7 +1927,7 @@ background-color: null;
 font-style: inherit;">]</span>_<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb6-36">    C<span class="op" style="color: #5E5E5E;
+<span id="cb6-35">    C<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">.</span>DFT<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -1657,20 +1942,27 @@ background-color: null;
 font-style: inherit;">(</span>c_len<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">);</span></span>
-<span id="cb6-37">    <span class="cf" style="color: #003B4F;
+<span id="cb6-36">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">return</span> C<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb6-38"><span class="op" style="color: #5E5E5E;
+<span id="cb6-37"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span></code></pre></div>
 </section>
 </section>
-<section id="多项式求逆" class="level3" data-number="4.3">
-<h3 data-number="4.3" class="anchored" data-anchor-id="多项式求逆"><span class="header-section-number">4.3</span> 多项式求逆</h3>
-<p>给定 <img src="https://latex.codecogs.com/png.latex?n-1"> 次多项式 <img src="https://latex.codecogs.com/png.latex?A(x)">，求解满足 <img src="https://latex.codecogs.com/png.latex?A(x)%20B(x)%20=%201%20%5Cpmod%7Bx%5E%7Bn%7D%7D"> 的多项式 <img src="https://latex.codecogs.com/png.latex?B(x)">．</p>
-<p>多项式逆元存在的充分必要条件是其常数项非零，若存在则一定唯一．这结论可直接由下述求解方法得到．不失一般性，我们只研究 <img src="https://latex.codecogs.com/png.latex?A(x)"> 的次数为奇数 <img src="https://latex.codecogs.com/png.latex?2n-1"> 的情况．设 <img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0AA(x)%20&amp;=%20A_0(x)%20+%20x%5En%20A_1(x)%20%5C%5C%0AB(x)%20&amp;=%20B_0(x)%20+%20x%5En%20B_1(x)%0A%5Cend%7Baligned%7D%0A"> 下述两种方法均递归地在已知 <img src="https://latex.codecogs.com/png.latex?%0AA(x)%20B_0(x)%20=%20A_0(x)%20B_0(x)%20=%201%20%5Cpmod%7Bx%5En%7D%0A"> 的基础上求解 <img src="https://latex.codecogs.com/png.latex?A(x)"> 的逆元．边界条件 <img src="https://latex.codecogs.com/png.latex?b_0%20=%20%5Cfrac%201%20%7Ba_0%7D">．时间复杂度均为 <img src="https://latex.codecogs.com/png.latex?%0AT(n)%20=%20T(%5Cfrac%20n%202)%20+%20O(n%20%5Clog%20n)%20=%20O(n%20%5Clog%20n)%0A"></p>
+<section id="多项式方程求解newton-迭代法todo" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="多项式方程求解newton-迭代法todo"><span class="header-section-number">4.3</span> 多项式方程求解（Newton 迭代法）【TODO】</h3>
+<p>给定一多项式 <img src="https://latex.codecogs.com/png.latex?A(x)">，求解满足 <img src="https://latex.codecogs.com/png.latex?A(B(x))%20=%200%20%5Cpmod%7Bx%5En%7D"> 的多项式 <img src="https://latex.codecogs.com/png.latex?B(x)">．</p>
+<p>显然 <img src="https://latex.codecogs.com/png.latex?B(x)"> 只有前 <img src="https://latex.codecogs.com/png.latex?n"> 项有效．目前我们尚不清楚解的存在性、唯一性等性质，但注意到 <img src="https://latex.codecogs.com/png.latex?%0AA(B(x))%20=%200%20%5Cpmod%7Bx%5E%7B2n%7D%7D%20%5Cimplies%20A(B(x))%20=%200%20%5Cpmod%7Bx%5En%7D%0A"> 故考虑递推求解．首先，边界条件 <img src="https://latex.codecogs.com/png.latex?A(b_0)%20=%200"> 需要单独求解．在这些解的基础上，我们开始递推．考虑已经获得 <img src="https://latex.codecogs.com/png.latex?A(B(x))%20=%200%20%5Cpmod%7Bx%5En%7D"> 的一个解 <img src="https://latex.codecogs.com/png.latex?B(x)%20=%20B_0(x)">，我们尝试得到方程 <img src="https://latex.codecogs.com/png.latex?A(B(x))%20=%200%20%5Cpmod%7Bx%5E%7B2n%7D%7D"> 的解．</p>
+<p>将待求解方程 <img src="https://latex.codecogs.com/png.latex?A(B(x))%20=%200%20%5Cpmod%7Bx%5E%7B2n%7D%7D"> 左式多项式 <img src="https://latex.codecogs.com/png.latex?A"> 在 <img src="https://latex.codecogs.com/png.latex?B_0"> 处 Taylor 展开 <img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Bmultline%7D%0AA(B(x))%20=%20A(B_0(x))%20+%20A'(B_0(x))%20(B(x)-B_0(x))%20%5C%5C%20+%20%5Cfrac%7BA''(B_0(x))%7D%7B2!%7D%20(B(x)-B_0(x))%5E2%20+%20%5Cdots%0A=%200%20%5Cpmod%7Bx%5E%7B2n%7D%7D%0A%5Cend%7Bmultline%7D%0A"> 注意到 <img src="https://latex.codecogs.com/png.latex?B(x)-B_0(x)"> 任意项的次数都不低于 <img src="https://latex.codecogs.com/png.latex?x%5En">，故模 <img src="https://latex.codecogs.com/png.latex?x%5E%7B2n%7D"> 意义下二次方以上的项可以舍去，故上式化为 <img src="https://latex.codecogs.com/png.latex?%0AA(B_0(x))%20+%20A'(B_0(x))%20(B(x)-B_0(x))%20=%200%20%5Cpmod%7Bx%5E%7B2n%7D%7D%0A"> 移项即可解出待求 <img src="https://latex.codecogs.com/png.latex?B(x)"> <img src="https://latex.codecogs.com/png.latex?%0AB(x)%20=%20%20B_0(x)%20-%20%5Cfrac%7BA(B_0(x))%7D%7BA'(B_0(x))%7D%20%5Cpmod%7Bx%5E%7B2n%7D%7D%0A"> 这里要求 <img src="https://latex.codecogs.com/png.latex?A'(B_0(x))"> 需在 <img src="https://latex.codecogs.com/png.latex?x%5E%7B2n%7D"> 意义下可逆，即 <img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Bmultline%7D%0A%5Bx%5E0%5D%20A'(B_0(x))%20=%20%5Bx%5E0%5D%20A'(b_0)%20=%20%5C%5C%20%5Csum_%7Bk=0%7D%5E%5Cinfty%20%5Cleft(%20%5Bx%5Ek%5D%20A'%20%5Cright)%20b_0%5Ek%20=%20%5Csum_%7Bk=0%7D%5E%5Cinfty%20(k+1)%20a_%7Bk+1%7D%20b_0%5Ek%20%5Cneq%200%20%5Cpmod%7Bx%5E%7B2n%7D%7D%0A%5Cend%7Bmultline%7D%0A"> 若上述要求得到满足，根据递推过程，在边界条件 <img src="https://latex.codecogs.com/png.latex?b_0"> 确定的情况下，满足方程的 <img src="https://latex.codecogs.com/png.latex?B(x)"> 在模意义下唯一．【TODO：详细讨论边界条件不友好的情况】</p>
+<p>Newton 迭代法作为通用求解框架，可涵盖几乎所有多项式初等运算．【TODO】</p>
+</section>
+<section id="多项式求逆" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="多项式求逆"><span class="header-section-number">4.4</span> 多项式求逆</h3>
+<p>给定一多项式 <img src="https://latex.codecogs.com/png.latex?A(x)">，求解满足 <img src="https://latex.codecogs.com/png.latex?A(x)%20B(x)%20=%201%20%5Cpmod%7Bx%5E%7Bn%7D%7D"> 的多项式 <img src="https://latex.codecogs.com/png.latex?B(x)">．</p>
+<p>多项式逆元存在的充分必要条件是其常数项非零（这是因为边界条件 <img src="https://latex.codecogs.com/png.latex?b_0%20=%20%5Cfrac%201%20%7Ba_0%7D">），若存在则在模意义下一定唯一．这结论可直接由下述求解方法得到．不失一般性，我们只研究 <img src="https://latex.codecogs.com/png.latex?A(x)"> 的次数为奇数 <img src="https://latex.codecogs.com/png.latex?2n-1"> 的情况．设 <img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0AA(x)%20&amp;=%20A_0(x)%20+%20x%5En%20A_1(x)%20%5C%5C%0AB(x)%20&amp;=%20B_0(x)%20+%20x%5En%20B_1(x)%0A%5Cend%7Baligned%7D%0A"> 下述两种方法均递归地在已知 <img src="https://latex.codecogs.com/png.latex?%0AA(x)%20B_0(x)%20=%20A_0(x)%20B_0(x)%20=%201%20%5Cpmod%7Bx%5En%7D%0A"> 的基础上求解 <img src="https://latex.codecogs.com/png.latex?A(x)"> 的逆元．时间复杂度均为 <img src="https://latex.codecogs.com/png.latex?%0AT(n)%20=%20T(%5Cfrac%20n%202)%20+%20O(n%20%5Clog%20n)%20=%20O(n%20%5Clog%20n)%0A"></p>
 <p>以下简记 <img src="https://latex.codecogs.com/png.latex?A(x)"> 为 <img src="https://latex.codecogs.com/png.latex?A">，其它多项式同理．</p>
 <section id="倍增法一原创" class="level4">
 <h4 class="anchored" data-anchor-id="倍增法一原创">倍增法一（原创）</h4>
@@ -1835,7 +2127,7 @@ font-style: inherit;">}</span></span></code></pre></div>
 <section id="倍增法二" class="level4">
 <h4 class="anchored" data-anchor-id="倍增法二">倍增法二</h4>
 <p>注意到 <img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Bcases%7D%0AA%20B_0%20=%201%20%5Cpmod%7Bx%5En%7D%20%5C%5C%0AA%20B%20=%201%20%5Cpmod%7Bx%5En%7D%0A%5Cend%7Bcases%7D%20%5Cimplies%20A%20(B-B_0)%20=%200%20%5Cpmod%7Bx%5En%7D%0A"> 由于 <img src="https://latex.codecogs.com/png.latex?A%20%5Cbmod%7Bx%5En%7D"> 非零，故 <img src="https://latex.codecogs.com/png.latex?%0AB-B_0%20=%200%20%5Cpmod%7Bx%5En%7D%0A"> （这证明了逆元在不同模数下的前缀保持一致）</p>
-<p>两边平方得 <img src="https://latex.codecogs.com/png.latex?%0AB%5E2%20-%202%20B%20B_0%20+%20B_0%5E2%20=%200%20%5Cpmod%7Bx%5E%7B2n%7D%7D%0A"> 两侧同乘 <img src="https://latex.codecogs.com/png.latex?A"> 并移项得 <img src="https://latex.codecogs.com/png.latex?%0AB%20=%202%20B_0%20-%20A%20B_0%5E2%0A"></p>
+<p>两边平方得 <img src="https://latex.codecogs.com/png.latex?%0AB%5E2%20-%202%20B%20B_0%20+%20B_0%5E2%20=%200%20%5Cpmod%7Bx%5E%7B2n%7D%7D%0A"> 两侧同乘 <img src="https://latex.codecogs.com/png.latex?A"> 并移项得 <img src="https://latex.codecogs.com/png.latex?%0AB%20=%202%20B_0%20-%20A%20B_0%5E2%20%5Cpmod%7Bx%5E%7B2n%7D%7D%0A"></p>
 <div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb8-1">Poly inv<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="at" style="color: #657422;
@@ -1949,35 +2241,343 @@ background-color: null;
 font-style: inherit;">}</span></span></code></pre></div>
 </section>
 </section>
+<section id="多项式开方todo" class="level3" data-number="4.5">
+<h3 data-number="4.5" class="anchored" data-anchor-id="多项式开方todo"><span class="header-section-number">4.5</span> 多项式开方【TODO】</h3>
+<p>和多项式求逆类似的推导可得递推方程 <img src="https://latex.codecogs.com/png.latex?%0AB%20=%20%5Cfrac%20A%20%7B2%20B_0%7D%20+%20B_0%20%5Cpmod%7Bx%5E%7B2n%7D%7D%0A"> 有一些和 Newton 法一样麻烦的边界条件讨论，也会出现复杂的多解情况．<img src="https://latex.codecogs.com/png.latex?a_0%20=%201"> 时 <img src="https://latex.codecogs.com/png.latex?b_0%20=%20%5Cpm%201">，按 <img src="https://latex.codecogs.com/png.latex?b_0%20=%201"> 的实现如下．</p>
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb9-1">Poly sqrt<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">const</span> Poly <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span>A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">){</span></span>
+<span id="cb9-2">    ll n<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>len<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">();</span> Poly B<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">);</span> B<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">// assume a_0 = 1 and b_0 positive</span></span>
+<span id="cb9-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>ll hf<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>hf<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span>n<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>hf<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;&lt;=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">){</span></span>
+<span id="cb9-4">        B<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=(</span>A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>subpoly<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>hf<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)*</span>inv<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>B<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>subpoly<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>hf<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">))+</span>B<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)*</span>inv<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">);</span> B<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>resize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>hf<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">);</span></span>
+<span id="cb9-5">    <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span> B<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>resize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>n<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">);</span></span>
+<span id="cb9-6">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> B<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb9-7"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span></span></code></pre></div>
+<p>亦可 <img src="https://latex.codecogs.com/png.latex?%5Csqrt%20A%20=%20%5Cexp%20%5Cleft(%20%5Cfrac%201%202%20%5Cln%20A%20%5Cright)">，此法可处理多项式任意幂指数运算．</p>
 </section>
-<section id="集合幂级数" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="集合幂级数"><span class="header-section-number">5</span> 集合幂级数</h2>
-<p>pass</p>
+<section id="多项式-ln" class="level3" data-number="4.6">
+<h3 data-number="4.6" class="anchored" data-anchor-id="多项式-ln"><span class="header-section-number">4.6</span> 多项式 <img src="https://latex.codecogs.com/png.latex?%5Cln"></h3>
+<p>给定一多项式 <img src="https://latex.codecogs.com/png.latex?A(x)">，求解满足 <img src="https://latex.codecogs.com/png.latex?B(x)%20=%20%5Cln%20A(x)%20%5Cpmod%7Bx%5E%7Bn%7D%7D"> 的多项式 <img src="https://latex.codecogs.com/png.latex?B(x)">．</p>
+<p>次数为 <img src="https://latex.codecogs.com/png.latex?+%5Cinfty"> 的多项式 <img src="https://latex.codecogs.com/png.latex?%5Cln"> 存在的充分必要条件为其常数项非零（这是因为边界条件 <img src="https://latex.codecogs.com/png.latex?b_0%20=%20%5Cln%20a_0">），同样一旦存在则唯一．注意到仅整数 <img src="https://latex.codecogs.com/png.latex?a_0=1"> 时，<img src="https://latex.codecogs.com/png.latex?%5Cln%20a_0"> 可取得整数，故合理的 <img src="https://latex.codecogs.com/png.latex?a_0"> 只能是 <img src="https://latex.codecogs.com/png.latex?1">．另一种解释参见<a href="https://oi-wiki.org/math/poly/elementary-func/#%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%AF%B9%E6%95%B0%E5%87%BD%E6%95%B0--%E6%8C%87%E6%95%B0%E5%87%BD%E6%95%B0">多项式初等函数 - OI Wiki # 多项式对数函数 &amp; 指数函数</a>．</p>
+<p>推导是容易的．方程两侧同时求导得 <img src="https://latex.codecogs.com/png.latex?%0AB'(x)%20=%20%5Cfrac%7BA'(x)%7D%7BA(x)%7D%20%5Cpmod%7Bx%5E%7Bn-1%7D%7D%0A"> 两侧再积分得 <img src="https://latex.codecogs.com/png.latex?%0AB(x)%20=%20%5Cint%20%5Cfrac%7BA'(x)%7D%7BA(x)%7D%20%5Coperatorname%7Bd%7D%5C!x%20+%20C%20%5Cpmod%7Bx%5E%7Bn%7D%7D%0A"> 其中 <img src="https://latex.codecogs.com/png.latex?C=%20%5Cln%20a_0">．多项式求逆、求导、积分即可．时间复杂度 <img src="https://latex.codecogs.com/png.latex?O(n%20%5Clog%20n)">．</p>
+<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb10-1">Poly ln<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">const</span> Poly <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span>A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">){</span></span>
+<span id="cb10-2">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> itg<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">((</span>drv<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)*</span>inv<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)).</span>subpoly<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span>A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>len<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">()-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">),</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/*log(A[0])*/</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">);</span></span>
+<span id="cb10-3"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span></span></code></pre></div>
 </section>
-<section id="矩阵" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="矩阵"><span class="header-section-number">6</span> 矩阵</h2>
-<p>pass</p>
+<section id="多项式-exp-todo" class="level3" data-number="4.7">
+<h3 data-number="4.7" class="anchored" data-anchor-id="多项式-exp-todo"><span class="header-section-number">4.7</span> 多项式 <img src="https://latex.codecogs.com/png.latex?%5Cexp"> 【TODO】</h3>
+<p>Newton 迭代法可推出 <img src="https://latex.codecogs.com/png.latex?%0AB%20=%20B(1%20-%20%5Cln%20B_0%20+%20A)%20%5Cpmod%7Bx%5E%7B2n%7D%7D%0A"> 时间复杂度 <img src="https://latex.codecogs.com/png.latex?%0AT(n)%20=%20T(%5Cfrac%20n%202)%20+%20O(n%20%5Clog%20n)%20=%20O(n%20%5Clog%20n)%0A"></p>
+<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb11-1">Poly exp<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">const</span> Poly <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span>A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">){</span></span>
+<span id="cb11-2">    ll n<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>len<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">();</span> Poly B<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">);</span> B<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">[</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">]=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/*exp(A[0])*/</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb11-3">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>ll hf<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>hf<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span>n<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>hf<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;&lt;=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">){</span></span>
+<span id="cb11-4">        B<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>B<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*(</span>Poly<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)-</span>ln<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>B<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>subpoly<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span>hf<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">))+</span>A<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>subpoly<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span>hf<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">));</span> B<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>resize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>hf<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">);</span></span>
+<span id="cb11-5">    <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span> B<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">.</span>resize<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>n<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">);</span></span>
+<span id="cb11-6">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">return</span> B<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb11-7"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span></span></code></pre></div>
+</section>
+</section>
+<section id="集合幂级数todo" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="集合幂级数todo"><span class="header-section-number">5</span> 集合幂级数【TODO】</h2>
+</section>
+<section id="矩阵todo" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="矩阵todo"><span class="header-section-number">6</span> 矩阵【TODO】</h2>
 </section>
 <section id="通用-1" class="level2" data-number="7">
 <h2 data-number="7" class="anchored" data-anchor-id="通用-1"><span class="header-section-number">7</span> 通用</h2>
 <section id="基础模板" class="level3" data-number="7.1">
 <h3 data-number="7.1" class="anchored" data-anchor-id="基础模板"><span class="header-section-number">7.1</span> 基础模板</h3>
-<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><span class="co" style="color: #5E5E5E;
+<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">//general model 2023/06/26</span></span>
-<span id="cb9-2"><span class="pp" style="color: #AD0000;
+<span id="cb12-2"><span class="pp" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">#include</span><span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb9-3"><span class="kw" style="color: #003B4F;
+<span id="cb12-3"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">using</span> <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">namespace</span> std<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb9-4"><span class="kw" style="color: #003B4F;
+<span id="cb12-4"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">typedef</span> <span class="dt" style="color: #AD0000;
 background-color: null;
@@ -1986,16 +2586,16 @@ background-color: null;
 font-style: inherit;">long</span> ll<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb9-5"></span>
-<span id="cb9-6"><span class="kw" style="color: #003B4F;
+<span id="cb12-5"></span>
+<span id="cb12-6"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">namespace</span> safe<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">{</span></span>
-<span id="cb9-7">    ll rd<span class="op" style="color: #5E5E5E;
+<span id="cb12-7">    ll rd<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(){</span></span>
-<span id="cb9-8">        ll ans<span class="op" style="color: #5E5E5E;
+<span id="cb12-8">        ll ans<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
@@ -2016,7 +2616,7 @@ background-color: null;
 font-style: inherit;">=</span>getchar<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">();</span></span>
-<span id="cb9-9">        <span class="cf" style="color: #003B4F;
+<span id="cb12-9">        <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">while</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2053,7 +2653,7 @@ background-color: null;
 font-style: inherit;">=</span>getchar<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">();}</span></span>
-<span id="cb9-10">        <span class="cf" style="color: #003B4F;
+<span id="cb12-10">        <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">while</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2088,7 +2688,7 @@ background-color: null;
 font-style: inherit;">=</span>getchar<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">();}</span></span>
-<span id="cb9-11">        <span class="cf" style="color: #003B4F;
+<span id="cb12-11">        <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2103,25 +2703,25 @@ background-color: null;
 font-style: inherit;">return</span> ans<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb9-12">    <span class="op" style="color: #5E5E5E;
+<span id="cb12-12">    <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span>
-<span id="cb9-13">    <span class="at" style="color: #657422;
+<span id="cb12-13">    <span class="at" style="color: #657422;
 background-color: null;
 font-style: inherit;">const</span> ll MOD<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=;</span></span>
-<span id="cb9-14">    <span class="pp" style="color: #AD0000;
+<span id="cb12-14">    <span class="pp" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">#define _ </span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%</span>MOD</span>
-<span id="cb9-15">    ll lmodv<span class="op" style="color: #5E5E5E;
+<span id="cb12-15">    ll lmodv<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>ll x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">){</span></span>
-<span id="cb9-16">        <span class="cf" style="color: #003B4F;
+<span id="cb12-16">        <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2136,7 +2736,7 @@ background-color: null;
 font-style: inherit;">+=</span>MOD<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb9-17">        <span class="cf" style="color: #003B4F;
+<span id="cb12-17">        <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">else</span> <span class="cf" style="color: #003B4F;
 background-color: null;
@@ -2151,12 +2751,12 @@ background-color: null;
 font-style: inherit;">-=</span>MOD<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb9-18">        <span class="cf" style="color: #003B4F;
+<span id="cb12-18">        <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">return</span> x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb9-19">    <span class="op" style="color: #5E5E5E;
+<span id="cb12-19">    <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span><span class="dt" style="color: #AD0000;
 background-color: null;
@@ -2173,19 +2773,19 @@ background-color: null;
 font-style: inherit;">(</span>x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">);}</span></span>
-<span id="cb9-20">    ll mmodv<span class="op" style="color: #5E5E5E;
+<span id="cb12-20">    ll mmodv<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>ll x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">){</span></span>
-<span id="cb9-21">        <span class="cf" style="color: #003B4F;
+<span id="cb12-21">        <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">return</span> x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">%</span>MOD<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb9-22">    <span class="op" style="color: #5E5E5E;
+<span id="cb12-22">    <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span><span class="dt" style="color: #AD0000;
 background-color: null;
@@ -2202,12 +2802,12 @@ background-color: null;
 font-style: inherit;">(</span>x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">);}</span></span>
-<span id="cb9-23">    ll hmodv<span class="op" style="color: #5E5E5E;
+<span id="cb12-23">    ll hmodv<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>ll x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">){</span></span>
-<span id="cb9-24">        <span class="cf" style="color: #003B4F;
+<span id="cb12-24">        <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">return</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2220,7 +2820,7 @@ background-color: null;
 font-style: inherit;">)%</span>MOD<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb9-25">    <span class="op" style="color: #5E5E5E;
+<span id="cb12-25">    <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span><span class="dt" style="color: #AD0000;
 background-color: null;
@@ -2237,14 +2837,14 @@ background-color: null;
 font-style: inherit;">(</span>x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">);}</span></span>
-<span id="cb9-26">    ll qpow<span class="op" style="color: #5E5E5E;
+<span id="cb12-26">    ll qpow<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>ll x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">,</span>ll up<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">){</span></span>
-<span id="cb9-27">        hmodp<span class="op" style="color: #5E5E5E;
+<span id="cb12-27">        hmodp<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>x<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2255,14 +2855,14 @@ background-color: null;
 font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb9-28">        <span class="cf" style="color: #003B4F;
+<span id="cb12-28">        <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">while</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>up<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">){</span></span>
-<span id="cb9-29">            <span class="cf" style="color: #003B4F;
+<span id="cb12-29">            <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2279,7 +2879,7 @@ background-color: null;
 font-style: inherit;">*</span>x _<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb9-30">            x<span class="op" style="color: #5E5E5E;
+<span id="cb12-30">            x<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>x<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2292,17 +2892,17 @@ background-color: null;
 font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb9-31">        <span class="op" style="color: #5E5E5E;
+<span id="cb12-31">        <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span><span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">return</span> ans<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb9-32">    <span class="op" style="color: #5E5E5E;
+<span id="cb12-32">    <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span>
-<span id="cb9-33">    ll inv<span class="op" style="color: #5E5E5E;
+<span id="cb12-33">    ll inv<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>ll x<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2319,45 +2919,45 @@ background-color: null;
 font-style: inherit;">2</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">);}</span></span>
-<span id="cb9-34">    </span>
-<span id="cb9-35">    <span class="dt" style="color: #AD0000;
+<span id="cb12-34">    </span>
+<span id="cb12-35">    <span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">void</span> entry<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(){}</span></span>
-<span id="cb9-36"><span class="op" style="color: #5E5E5E;
+<span id="cb12-36"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span>
-<span id="cb9-37"><span class="dt" style="color: #AD0000;
+<span id="cb12-37"><span class="dt" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">int</span> main<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(){</span></span>
-<span id="cb9-38">    <span class="co" style="color: #5E5E5E;
+<span id="cb12-38">    <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">//freopen("t1.in","r",stdin);</span></span>
-<span id="cb9-39">    <span class="co" style="color: #5E5E5E;
+<span id="cb12-39">    <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">//freopen("t1.out","w",stdout);</span></span>
-<span id="cb9-40">    <span class="co" style="color: #5E5E5E;
+<span id="cb12-40">    <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">//ll T=safe::rd(); while(T--){</span></span>
-<span id="cb9-41">    safe<span class="op" style="color: #5E5E5E;
+<span id="cb12-41">    safe<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">::</span>entry<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">();</span></span>
-<span id="cb9-42">    <span class="co" style="color: #5E5E5E;
+<span id="cb12-42">    <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">//}</span></span>
-<span id="cb9-43">    <span class="cf" style="color: #003B4F;
+<span id="cb12-43">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">return</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb9-44"><span class="op" style="color: #5E5E5E;
+<span id="cb12-44"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span></code></pre></div>
 </section>
@@ -2721,7 +3321,7 @@ pause</code></pre>
 </ul>
 </div></section><section id="acknowledgements" class="level2 appendix unnumbered"><h2 class="anchored quarto-appendix-heading">Acknowledgements</h2><div class="quarto-appendix-contents">
 
-<p>（例行）感谢吕导组织研讨课．本次研讨课与宁同学一同准备并主要由后者主讲，在讨论和展示过程中收获颇丰．</p>
+<p>感谢吕老师组织研讨课．本次研讨课与宁同学一同准备并主要由后者主讲，在讨论和展示过程中收获颇丰．</p>
 
 
 
@@ -2908,7 +3508,7 @@ pause</code></pre>
 
 <div id="quarto-appendix" class="default"><section id="acknowledgments" class="level2 appendix" data-number="7"><h2 class="anchored quarto-appendix-heading"><span class="header-section-number">7</span> Acknowledgments</h2><div class="quarto-appendix-contents">
 
-<p>感谢吕导组织<del>我最喜欢的</del>研讨课环节．此外，Example&nbsp;1 的放缩技巧由“吸取教训”同学提供，Poisson 分布的二项分布推导是与“抱头蹲防”同学讨论的结果，在此表示感谢．</p>
+<p>感谢吕老师组织<del>我最喜欢的</del>研讨课环节．此外，Example&nbsp;1 的放缩技巧由“吸取教训”同学提供，Poisson 分布的二项分布推导是与“抱头蹲防”同学讨论的结果，在此表示感谢．</p>
 
 
 
