@@ -714,7 +714,7 @@ B = 2 B_0 - A B_0^2 \pmod{x^{2n}}
 <section id="多项式开方todo" class="level3" data-number="4.5">
 <h3 data-number="4.5" class="anchored" data-anchor-id="多项式开方todo"><span class="header-section-number">4.5</span> 多项式开方【TODO】</h3>
 <p>和多项式求逆类似的推导可得递推方程 <span class="math display">\[
-B = \frac A {2 B_0} + B_0 \pmod{x^{2n}}
+B = \frac 1 2 \left(\frac A {B_0} + B_0 \right) \pmod{x^{2n}}
 \]</span> 有一些和 Newton 法一样麻烦的边界条件讨论，也会出现复杂的多解情况．<span class="math inline">\(a_0 = 1\)</span> 时 <span class="math inline">\(b_0 = \pm 1\)</span>，按 <span class="math inline">\(b_0 = 1\)</span> 的实现如下．</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Poly sqrt<span class="op">(</span><span class="at">const</span> Poly <span class="op">&amp;</span>A<span class="op">){</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    ll n<span class="op">=</span>A<span class="op">.</span>len<span class="op">();</span> Poly B<span class="op">(</span><span class="dv">1</span><span class="op">);</span> B<span class="op">[</span><span class="dv">0</span><span class="op">]=</span><span class="dv">1</span><span class="op">;</span> <span class="co">// assume a_0 = 1 and b_0 positive</span></span>
