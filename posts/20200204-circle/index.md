@@ -5,7 +5,6 @@ date: 2020/02/04
 date-modified: 2020/02/04
 categories:
   - OI
-  - 学习笔记
   - 题解
 ---
 

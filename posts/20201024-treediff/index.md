@@ -4,7 +4,6 @@ date: 2020/10/24
 date-modified: 2020/10/24
 categories:
   - OI
-  - 学习笔记
   - 题解
 ---
 

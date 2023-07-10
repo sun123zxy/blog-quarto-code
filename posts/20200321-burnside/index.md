@@ -6,7 +6,6 @@ date-modified: 2023/04/06
 categories:
   - OI
   - 数学
-  - 学习笔记
 ---
 
 PS: 写的时候博主比较naive，所有的变换都是向右结合的，还请谅解（

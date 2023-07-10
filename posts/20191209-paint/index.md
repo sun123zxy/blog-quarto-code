@@ -6,7 +6,6 @@ date-modified: 2019/12/09
 categories:
   - OI
   - 数学
-  - 学习笔记
   - 题解
 ---
 

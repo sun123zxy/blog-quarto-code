@@ -5,7 +5,6 @@ date-modified: 2021/08/13
 categories:
   - OI
   - 数学
-  - 学习笔记
 ---
 
 upd 2021/08/13:
