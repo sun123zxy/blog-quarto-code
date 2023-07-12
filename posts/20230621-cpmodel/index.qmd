@@ -210,6 +210,34 @@ ll S_mu(ll n){
 
 ## 组合
 
+### 球盒问题
+
+:::{.column-body-outset}
+
+| $n$ 个球 | $r$ 个盒 | 空盒 | 递推或封闭形式 | 生成函数 | 备注 |
+|:-:|:-:|:-:|:--:|:--:|:-:|
+| 有标号 | 有标号 	| 允许	 | $$r^n$$ | | |
+| 有标号 | 有标号 	| 不允许 | $$r! {n \brace k}$$ | $$\mathrm{EGF}(x)=(e^x - 1)^r$$ | |
+| 有标号 | 无标号 	| 允许	 | $$\sum_{k=0}^r {n \brace k}$$ | $$\mathrm{EGF}(x)=\sum_{k=0}^r \frac {(e^x - 1)^k}{k!}$$ | |
+| 有标号 | 无标号 	| 不允许 | $${n \brace r} = r {n-1 \brace r} + {n-1 \brace r-1}$$ | $$\mathrm{EGF}(x)=\frac {(e^x - 1)^r}{r!}$$ | 第二类 Stirling 数 |
+| 有标号 | 不限制 	|       | $$\sum_{k=0}^n {n \brace k}$$ | $$\mathrm{EGF}(x)=e^{e^x - 1}$$ | Bell 数 |
+| 无标号 | 有标号 	| 允许	 | $$\binom{n+r-1}{r-1}$$ | | $r$ 元不定方程非负整数解 |
+| 无标号 | 有标号 	| 不允许 | $$\binom{n-1}{r-1}$$ | | $r$ 元不定方程正整数解 |
+| 无标号 | 无标号 	| 允许	 | $$\sum_{k=0}^r p(n,k)$$ | | |
+| 无标号 | 无标号 	| 不允许 | $$p(n,r)$$ | | $r$ 部分拆数 |
+| 无标号 | 不限制	|       | $$p(n)$$ | $$\begin{aligned} \mathrm{OGF}(x)&=\prod_{k=1}^{+\infty} \frac 1 {1-x^k} \\ &= \sum_{k=-\infty}^{+\infty} (-1)^k x^{k(3k-1)/2} \end{aligned}$$ | 分拆数 |
+:::
+
+关于 Stirling 数：
+
+- [Stirling number - Wikipedia](https://en.wikipedia.org/wiki/Stirling_number)
+- [斯特林数 - OI Wiki](https://oi-wiki.org/math/combinatorics/stirling/)
+
+关于分拆数：
+
+- [Partition (number theory) - Wikipedia](https://en.wikipedia.org/wiki/Partition_(number_theory))
+- [分拆数 - OI Wiki](https://oi-wiki.org/math/combinatorics/partition/)
+
 ### 容斥 / 二项式反演
 
 #### 形式一
