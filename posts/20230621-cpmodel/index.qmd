@@ -3,7 +3,7 @@ title: "算法 & 数学碎碎念"
 abstract: "现场赛公式模板库，亦可作为小而精的总结性学习材料参考．无需单独成文或暂不完善的内容会放在这里．"
 author: "sun123zxy"
 date: "2023/06/21"
-date-modified: "2023/06/27"
+date-modified: "2023/07/13"
 
 categories:
   - OI
@@ -18,7 +18,7 @@ $$
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\inv}{\operatorname{inv}}
 \newcommand{\lcm}{\operatorname{lcm}}
-\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\id}{\operatorname{id}}
 \newcommand{\card}{\operatorname{card}}
 \newcommand{\diff}{\operatorname{d}\!}
 $$
@@ -27,7 +27,7 @@ $$
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\inv}{\operatorname{inv}}
 \newcommand{\lcm}{\operatorname{lcm}}
-\newcommand{\Id}{\operatorname{Id}}
+\newcommand{\id}{\operatorname{id}}
 \newcommand{\card}{\operatorname{card}}
 \newcommand{\diff}{\operatorname{d}\!}
 :::
@@ -185,10 +185,12 @@ $$
 关于时间复杂度证明可参考 [sun123zxy’s blog - OI 数论中的上界估计与时间复杂度证明 # 杜教筛](https://blog.sun123zxy.top/posts/20230418-complexity/#%E6%9D%9C%E6%95%99%E7%AD%9B)．
 
 $$
-\begin{aligned}
-&f = \mu, g = I, h = \varepsilon \\
-&f = \varphi, g = I, h = \Id
-\end{aligned}
+\begin{gathered}
+f = \mu, g = I, h = \varepsilon \\
+f = \varphi, g = I, h = \id \\
+f = \id^k \mu, g = \id^k, h = \varepsilon \\
+f = \id^k \varphi, g = \id^k, h = \id^{k+1}
+\end{gathered}
 $$
 
 ```c++
@@ -212,10 +214,10 @@ ll S_mu(ll n){
 
 ### 球盒问题
 
-:::{.column-body-outset}
+:::{.column-page}
 
 | $n$ 个球 | $r$ 个盒 | 空盒 | 递推或封闭形式 | 生成函数 | 备注 |
-|:-:|:-:|:-:|:--:|:--:|:-:|
+|:-:|:-:|:-:|:--:|:--:|:--:|
 | 有标号 | 有标号 	| 允许	 | $$r^n$$ | | |
 | 有标号 | 有标号 	| 不允许 | $$r! {n \brace k}$$ | $$\mathrm{EGF}(x)=(e^x - 1)^r$$ | |
 | 有标号 | 无标号 	| 允许	 | $$\sum_{k=0}^r {n \brace k}$$ | $$\mathrm{EGF}(x)=\sum_{k=0}^r \frac {(e^x - 1)^k}{k!}$$ | |
@@ -224,8 +226,8 @@ ll S_mu(ll n){
 | 无标号 | 有标号 	| 允许	 | $$\binom{n+r-1}{r-1}$$ | | $r$ 元不定方程非负整数解 |
 | 无标号 | 有标号 	| 不允许 | $$\binom{n-1}{r-1}$$ | | $r$ 元不定方程正整数解 |
 | 无标号 | 无标号 	| 允许	 | $$\sum_{k=0}^r p(n,k)$$ | | |
-| 无标号 | 无标号 	| 不允许 | $$p(n,r)$$ | | $r$ 部分拆数 |
-| 无标号 | 不限制	|       | $$p(n)$$ | $$\begin{aligned} \mathrm{OGF}(x)&=\prod_{k=1}^{+\infty} \frac 1 {1-x^k} \\ &= \sum_{k=-\infty}^{+\infty} (-1)^k x^{k(3k-1)/2} \end{aligned}$$ | 分拆数 |
+| 无标号 | 无标号 	| 不允许 | $$p(n,r)=p(n-1,r-1)+p(n-r,r)$$ | | $r$ 部分拆数 |
+| 无标号 | 不限制	|       | $$\begin{aligned} p(n) &= \sum_{\substack{k \in \mathbb Z}} (-1)^k p_{n-k(3k-1)/2} \\ &= p_{n-1} + p_{n-2} - p_{n-5} - p_{n-7} + \dots \end{aligned}$$ | $$\begin{aligned} \mathrm{OGF}(x)&=\prod_{k=1}^{+\infty} \frac 1 {1-x^k} \\ &= \left( \sum_{k \in \mathbb Z} (-1)^k x^{k(3k-1)/2} \right)^{-1} \end{aligned}$$ | 分拆数 |
 :::
 
 关于 Stirling 数：
@@ -237,6 +239,7 @@ ll S_mu(ll n){
 
 - [Partition (number theory) - Wikipedia](https://en.wikipedia.org/wiki/Partition_(number_theory))
 - [分拆数 - OI Wiki](https://oi-wiki.org/math/combinatorics/partition/)
+- [组合数学（2）分拆数 - 知乎](https://zhuanlan.zhihu.com/p/530925142)
 
 ### 容斥 / 二项式反演
 
