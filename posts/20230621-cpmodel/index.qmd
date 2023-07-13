@@ -48,6 +48,15 @@ $$
 其中 $x_1, y_1$ 是 $b x + (a \bmod b) y = \gcd(b, a \bmod b)$ 的一组解．
 :::
 
+```c++
+typedef tuple<ll,ll,ll> Tuple;
+Tuple exgcd(ll a,ll b){
+	if(b==0) return {1,0,a};
+	ll x1,y1,d; tie(x1,y1,d)=exgcd(b,a%b);
+	return {y1,x1-(a/b)*y1,d};
+}
+```
+
 ### CRT
 
 :::{#thm-crt}
@@ -193,6 +202,14 @@ f = \id^k \varphi, g = \id^k, h = \id^{k+1}
 \end{gathered}
 $$
 
+:::{.remark}
+
+杜教筛的这种化法事实上也是 Eratosthenes 筛法的应用．一般的我们有
+$$
+\sum_{d=1}^n f(d) \hat g( \floor{\frac n d} ) = \sum_{i=1}^n \sum_{d \mid i} f(d) g(\frac i d) = \sum_{i=1}^n \sum_{d \mid i} f(\frac i d) g(d)   = \sum_{d=1}^n g(d) \hat f( \floor{\frac n d} )
+$$
+:::
+
 ```c++
 unordered_map<ll,ll> s_mu;
 ll S_mu(ll n){
@@ -218,13 +235,13 @@ ll S_mu(ll n){
 
 | $n$ 个球 | $r$ 个盒 | 空盒 | 递推或封闭形式 | 生成函数 | 备注 |
 |:-:|:-:|:-:|:--:|:--:|:--:|
-| 有标号 | 有标号 	| 允许	 | $$r^n$$ | | |
-| 有标号 | 有标号 	| 不允许 | $$r! {n \brace k}$$ | $$\mathrm{EGF}(x)=(e^x - 1)^r$$ | |
+| 有标号 | 有标号 	| 允许	 | $$r^n$$ | | $[n] \to [r]$ 映射个数 |
+| 有标号 | 有标号 	| 不允许 | $$r! {n \brace r}$$ | $$\mathrm{EGF}(x)=(e^x - 1)^r$$ | $[n] \to [r]$ 满射个数 |
 | 有标号 | 无标号 	| 允许	 | $$\sum_{k=0}^r {n \brace k}$$ | $$\mathrm{EGF}(x)=\sum_{k=0}^r \frac {(e^x - 1)^k}{k!}$$ | |
 | 有标号 | 无标号 	| 不允许 | $${n \brace r} = r {n-1 \brace r} + {n-1 \brace r-1}$$ | $$\mathrm{EGF}(x)=\frac {(e^x - 1)^r}{r!}$$ | 第二类 Stirling 数 |
-| 有标号 | 不限制 	|       | $$\sum_{k=0}^n {n \brace k}$$ | $$\mathrm{EGF}(x)=e^{e^x - 1}$$ | Bell 数 |
-| 无标号 | 有标号 	| 允许	 | $$\binom{n+r-1}{r-1}$$ | | $r$ 元不定方程非负整数解 |
-| 无标号 | 有标号 	| 不允许 | $$\binom{n-1}{r-1}$$ | | $r$ 元不定方程正整数解 |
+| 有标号 | 不限制 	|       | $$\sum_{k=0}^n {n \brace k}$$ | $$\mathrm{EGF}(x)=e^{e^x - 1}$$ | Bell 数；$[n]$ 上等价关系（划分）个数 |
+| 无标号 | 有标号 	| 允许	 | $$\binom{n+r-1}{r-1}$$ | | $r$ 元不定方程非负整数解个数 |
+| 无标号 | 有标号 	| 不允许 | $$\binom{n-1}{r-1}$$ | | $r$ 元 $n$ 次单项式构型数 |
 | 无标号 | 无标号 	| 允许	 | $$\sum_{k=0}^r p(n,k)$$ | | |
 | 无标号 | 无标号 	| 不允许 | $$p(n,r)=p(n-1,r-1)+p(n-r,r)$$ | | $r$ 部分拆数 |
 | 无标号 | 不限制	|       | $$\begin{aligned} p(n) &= \sum_{\substack{k \in \mathbb Z}} (-1)^k p_{n-k(3k-1)/2} \\ &= p_{n-1} + p_{n-2} - p_{n-5} - p_{n-7} + \dots \end{aligned}$$ | $$\begin{aligned} \mathrm{OGF}(x)&=\prod_{k=1}^{+\infty} \frac 1 {1-x^k} \\ &= \left( \sum_{k \in \mathbb Z} (-1)^k x^{k(3k-1)/2} \right)^{-1} \end{aligned}$$ | 分拆数 |
@@ -432,7 +449,7 @@ $n$ 点有向图以 $i$ 为根的生成叶向树形图的数量与该图入度 L
 ### 通用
 
 ```c++
-// polynomial universal, 2023/06/27
+// polynomial universal, 2023/07/13
 const ll MOD=998244353,PR=3;
 #define _ %MOD
 // ... (MOD, qpow, inv, etc.)
@@ -444,17 +461,16 @@ void spawn_rev(ll n){ // n=log2(N)
 class Poly : public vector<ll>{ public:
     using vector<ll>::vector; // constructor
     ll len() const {return size();} // to avoid strange glitches caused by size_t
-	ll get(ll idx) const {return *(cbegin()+idx);} // const version of operator []
-	Poly subpoly(ll pos = 0,ll count = -1) const { // imitate std::string::substr with resize
-		if(count==-1) return Poly(begin()+pos,end());
+	Poly subpoly(ll pos,ll count) const { // imitate std::string::substr with resizing
 		Poly B(begin()+min(pos,len()),begin()+min(pos+count,len()));
-		B.resize(pos+count); return B;
+		B.resize(count); return B;
 	}
-	void debug() const {cout<<len()<<": "; for(ll i=0;i<len();i++) cout<<at(i)<<","; cout<<endl;}
+	// ll cat(ll idx) const {return *(cbegin()+idx);} // const version of at()
+	// void debug() const {cout<<len()<<": "; for(ll i=0;i<len();i++) cout<<at(i)<<","; cout<<endl;}
 };
 Poly operator + (Poly A,Poly B){
 	ll n=max(A.len(),B.len()); A.resize(n); B.resize(n);
-	for(ll i=0;i<n;i++) lmodp(A[i]+=B.get(i));
+	for(ll i=0;i<n;i++) lmodp(A[i]+=B[i]);
 	return A;
 }
 Poly operator - (Poly A){
@@ -465,14 +481,14 @@ Poly operator * (Poly A,ll c){
 	for(ll i=0;i<A.len();i++) A[i]=A[i]*c _;
 	return A;
 }
-Poly operator << (Poly A,ll shift){
+Poly operator << (Poly A,ll shift){ // optional
 	ll n=A.len(); A.resize(n+shift);
 	for(ll i=n-1;i>=0;i--) A[i+shift]=A[i];
 	for(ll i=shift-1;i>=0;i--) A[i]=0;
 	return A;
 }
-Poly operator >> (Poly A,ll shift){
-	ll n=A.len()-shift; if(n<=0) return Poly(1,0);
+Poly operator >> (Poly A,ll shift){ // optional
+	ll n=A.len()-shift; if(n<=0) return {0};
 	for(ll i=0;i<n;i++) A[i]=A[i+shift];
 	A.resize(n); return A;
 }
@@ -481,8 +497,7 @@ Poly drv(Poly A){ // derivative
 	A.pop_back(); return A;
 }
 Poly itg(Poly A,ll c){ // integral
-	A.push_back(0);
-	for(ll i=A.len();i>=1;i--) A[i]=A[i-1]*inv(i)_;
+	A.push_back(0); for(ll i=A.len();i>=1;i--) A[i]=A[i-1]*inv(i)_;
 	A[0]=c; return A;
 }
 ```
@@ -538,18 +553,16 @@ void spawn_rev(ll n){ // n=log2(N)
 }
 class Poly : public vector<ll>{ public:
 	// ... (Poly defaults)
-	void DFT(ll typ){ // to be called by operator * only (with proper length and rev array)
+	void DFT(ll typ){ // to be called by opt() only (with proper length and rev array)
 		ll n=len();
 		for(ll i=0;i<n;i++) if(i<rev[i]) std::swap(at(i),at(rev[i]));
 		for(ll hf=1;hf<n;hf*=2){
-			ll w=qpow(PR,(MOD-1)/(hf*2));
-			if(typ==-1) w=inv(w);
+			ll w=qpow(PR,(MOD-1)/(hf*2)); if(typ==-1) w=inv(w);
 			for(ll i=0;i<n;i+=hf*2){
 				ll wk=1;
 				for(ll k=0;k<hf;k++){
 					ll x=at(i+k),y=wk*at(i+hf+k)_;
-					at(i+k)=lmodv(x+y);
-					at(i+hf+k)=lmodv(x-y);
+					at(i+k)=lmodv(x+y); at(i+hf+k)=lmodv(x-y);
 					wk=wk*w _;
 				}
 			}
@@ -559,14 +572,20 @@ class Poly : public vector<ll>{ public:
 		}
 	}
 };
-Poly operator * (Poly A,Poly B){
-	ll c_len=A.len()+B.len()-1;
-	ll n=ceil(log2(c_len)); spawn_rev(n); n=1<<n;
-	Poly C(n); A.resize(n); B.resize(n);
-	A.DFT(1); B.DFT(1);
-	for(ll i=0;i<n;i++) C[i]=A[i]*B[i]_;
-	C.DFT(-1); C.resize(c_len);
+Poly opt(vector<Poly> pv,ll len,std::function<ll(const vector<ll>&)> func){
+	ll n=ceil(log2(len)); spawn_rev(n); n=1<<n;
+	for(auto &P : pv) P.resize(n),P.DFT(1);
+	Poly C(n); for(ll i=0;i<n;i++){
+		vector<ll> lv; for(auto &P : pv) lv.push_back(P[i]);
+		C[i]=func(lv);
+	}
+	C.DFT(-1); C.resize(len);
 	return C;
+}
+Poly operator * (Poly A,Poly B){
+	return opt({A,B},A.len()+B.len()-1,
+		[](const vector<ll> &lv)->ll{return lv[0]*lv[1]_;}
+	);
 }
 ```
 
@@ -640,19 +659,7 @@ $$
 \end{aligned}
 $$
 
-常数偏大．
-
-```c++
-Poly inv(const Poly &A){
-	ll n=A.len(); Poly B(1); B[0]=inv(A[0]);
-	for(ll hf=1;hf<n;hf<<=1){
-		const Poly &A0=A.subpoly(0,hf),&A1=A.subpoly(hf,hf);
-		const Poly &B0=B; Poly B1=-B0*((A1*B0).subpoly(0,hf)+(A0*B0).subpoly(hf,hf));
-		B.insert(B.end(),B1.begin(),B1.begin()+hf);
-	} B.resize(n);
-	return B;
-}
-```
+常数偏大，这里就不放代码了．
 
 #### 倍增法二
 
@@ -680,11 +687,12 @@ $$
 
 ```c++
 Poly inv(const Poly &A){
-	ll n=A.len(); Poly B(1); B[0]=inv(A[0]);
+	ll n=A.len(); Poly B={inv(A[0])};
 	for(ll hf=1;hf<n;hf<<=1){
-		B=B*2-B*B*A.subpoly(0,hf*2); B.resize(hf*2);
-	} B.resize(n);
-	return B;
+		B=opt({A.subpoly(0,hf*2),B},hf*4,[](const vector<ll> &lv)->ll{
+			ll a=lv[0],b=lv[1]; return hmodv((2-a*b)_*b);
+		}); B.resize(hf*2);
+	} B.resize(n); return B;
 }
 ```
 
@@ -698,11 +706,10 @@ $$
 
 ```c++
 Poly sqrt(const Poly &A){
-	ll n=A.len(); Poly B(1); B[0]=1; // assume a_0 = 1 and b_0 positive
+	ll n=A.len(); Poly B={1}; // assume a_0 = 1 and b_0 positive
 	for(ll hf=1;hf<n;hf<<=1){
 		B=(A.subpoly(0,2*hf)*inv(B.subpoly(0,2*hf))+B)*inv(2); B.resize(hf*2);
-	} B.resize(n);
-	return B;
+	} B.resize(n); return B;
 }
 ```
 
@@ -726,11 +733,11 @@ $$
 
 ```c++
 Poly ln(const Poly &A){
-	return itg((drv(A)*inv(A)).subpoly(0,A.len()-1),1/*log(A[0])*/);
+	return itg((drv(A)*inv(A)).subpoly(0,A.len()-1),0/*log(A[0])*/);
 }
 ```
 
-### 多项式 $\exp$ 【TODO】
+### 多项式 $\exp$【TODO】
 
 Newton 迭代法可推出
 $$
@@ -743,12 +750,18 @@ $$
 
 ```c++
 Poly exp(const Poly &A){
-	ll n=A.len(); Poly B(1); B[0]=1/*exp(A[0])*/;
+	ll n=A.len(); Poly B={1/*exp(A[0])*/};
 	for(ll hf=1;hf<n;hf<<=1){
-		B=B*(Poly(1,1)-ln(B.subpoly(0,hf*2))+A.subpoly(0,hf*2)); B.resize(hf*2);
+		B=B*(Poly{1}-ln(B.subpoly(0,hf*2))+A.subpoly(0,hf*2)); B.resize(hf*2);
 	} B.resize(n);
 	return B;
 }
+```
+
+### 多项式快速幂【TODO】
+
+```c++
+Poly qpow(const Poly &A,ll up){return exp(ln(A)*up);}
 ```
 
 更代数的内容参考 [Formal power series - Wikipedia](https://en.wikipedia.org/wiki/Formal_power_series)
@@ -785,7 +798,7 @@ namespace safe{
         return x%MOD;
     }void mmodp(ll &x){x=mmodv(x);}
     ll hmodv(ll x){
-        return (x%MOD+MOD)%MOD;
+        return lmodv(x%MOD);
     }void hmodp(ll &x){x=hmodv(x);}
     ll qpow(ll x,ll up){
         hmodp(x); ll ans=1;

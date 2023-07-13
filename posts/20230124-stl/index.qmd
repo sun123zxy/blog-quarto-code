@@ -2,7 +2,7 @@
 title: "算法竞赛向 C++ Standard Library 使用速查"
 author: "sun123zxy"
 date: "2023/01/24"
-date-modified: "2023/02/13"
+date-modified: "2023/07/13"
 categories:
   - OI
   - C++
@@ -76,9 +76,22 @@ number-sections: true
 - `operator=`                 ：重载了赋值运算符用于拷贝。
 - `std::get<i>(tp)`           ：获取元组的第 i 项。
 - `std::get<T>(tp)`           ：获取元组中类型为 T 的项。
+- `std::tie(a,b,...)`	 	  ：构造一个变量引用构成的元组．用于在赋值时将等号右侧的元组解包到左侧的 `a,b,...` 等变量中。
 - `std::make_tuple(a,b,c,...)`：新建元组，自动检测类型。
 - `operator<=>`               ：重载比较运算符，同样是顺序关键字比较。
-...
+
+:::{.callout-tip appearance="simple"}
+下面是一个应用 C++11 新引入的元组和列表初始化的 ExGCD 实现。
+
+```c++
+typedef tuple<ll,ll,ll> Tuple;
+Tuple exgcd(ll a,ll b){
+	if(b==0) return {1,0,a};
+	ll x1,y1,d; tie(x1,y1,d)=exgcd(b,a%b);
+	return {y1,x1-(a/b)*y1,d};
+}
+```
+:::
 
 ### string
 
@@ -128,6 +141,7 @@ number-sections: true
 
 ### 公共性质
 
+- `[first, last)` 式迭代器构造，拷贝构造等。
 - `operator=` ：重载了赋值运算符用于拷贝。
 - `empty()`   ：返回容器是否为空，即 `v.begin() == v.end()`。
 - `size()`    ：返回容器内元素个数。
@@ -150,6 +164,10 @@ number-sections: true
 - `priority_queue`  `#include<queue>`：大根堆。适配随机访问变长序列式容器，即 `vector`（默认）或 `deque`。
 
 ### vector
+
+Construct:
+
+- `vector<T>(count,value)`	  ：初始化时放 `count` 个 `value` 的拷贝在里面。
 
 Access:
 
