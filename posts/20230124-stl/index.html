@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">February 13, 2023</p>
+      <p class="date-modified">July 13, 2023</p>
     </div>
   </div>
     
@@ -268,9 +268,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>operator=</code> ：重载了赋值运算符用于拷贝。</li>
 <li><code>std::get&lt;i&gt;(tp)</code> ：获取元组的第 i 项。</li>
 <li><code>std::get&lt;T&gt;(tp)</code> ：获取元组中类型为 T 的项。</li>
+<li><code>std::tie(a,b,...)</code> ：构造一个变量引用构成的元组．用于在赋值时将等号右侧的元组解包到左侧的 <code>a,b,...</code> 等变量中。</li>
 <li><code>std::make_tuple(a,b,c,...)</code>：新建元组，自动检测类型。</li>
-<li><code>operator&lt;=&gt;</code> ：重载比较运算符，同样是顺序关键字比较。 …</li>
+<li><code>operator&lt;=&gt;</code> ：重载比较运算符，同样是顺序关键字比较。</li>
 </ul>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>下面是一个应用 C++11 新引入的元组和列表初始化的 ExGCD 实现。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> tuple<span class="op">&lt;</span>ll<span class="op">,</span>ll<span class="op">,</span>ll<span class="op">&gt;</span> Tuple<span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Tuple exgcd<span class="op">(</span>ll a<span class="op">,</span>ll b<span class="op">){</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>b<span class="op">==</span><span class="dv">0</span><span class="op">)</span> <span class="cf">return</span> <span class="op">{</span><span class="dv">1</span><span class="op">,</span><span class="dv">0</span><span class="op">,</span>a<span class="op">};</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    ll x1<span class="op">,</span>y1<span class="op">,</span>d<span class="op">;</span> tie<span class="op">(</span>x1<span class="op">,</span>y1<span class="op">,</span>d<span class="op">)=</span>exgcd<span class="op">(</span>b<span class="op">,</span>a<span class="op">%</span>b<span class="op">);</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">{</span>y1<span class="op">,</span>x1<span class="op">-(</span>a<span class="op">/</span>b<span class="op">)*</span>y1<span class="op">,</span>d<span class="op">};</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="string" class="level3" data-number="2.3">
 <h3 data-number="2.3" class="anchored" data-anchor-id="string"><span class="header-section-number">2.3</span> string</h3>
@@ -322,6 +339,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="公共性质" class="level3" data-number="3.2">
 <h3 data-number="3.2" class="anchored" data-anchor-id="公共性质"><span class="header-section-number">3.2</span> 公共性质</h3>
 <ul>
+<li><code>[first, last)</code> 式迭代器构造，拷贝构造等。</li>
 <li><code>operator=</code> ：重载了赋值运算符用于拷贝。</li>
 <li><code>empty()</code> ：返回容器是否为空，即 <code>v.begin() == v.end()</code>。</li>
 <li><code>size()</code> ：返回容器内元素个数。</li>
@@ -349,6 +367,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <section id="vector" class="level3" data-number="4.1">
 <h3 data-number="4.1" class="anchored" data-anchor-id="vector"><span class="header-section-number">4.1</span> vector</h3>
+<p>Construct:</p>
+<ul>
+<li><code>vector&lt;T&gt;(count,value)</code> ：初始化时放 <code>count</code> 个 <code>value</code> 的拷贝在里面。</li>
+</ul>
 <p>Access:</p>
 <ul>
 <li><code>crbegin()</code></li>
@@ -413,29 +435,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container">
 <p>自定义比较函数对象，可仿照以下代码：</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;queue&gt;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;vector&gt;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll<span class="op">;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Vec<span class="op">{</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    ll x<span class="op">,</span>y<span class="op">;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    Vec<span class="op">(){}</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    Vec<span class="op">(</span>ll x<span class="op">,</span>ll y<span class="op">){</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">-&gt;</span>x<span class="op">=</span>x<span class="op">;</span><span class="kw">this</span><span class="op">-&gt;</span>y<span class="op">=</span>y<span class="op">;</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> vecCompare<span class="op">{</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> <span class="kw">operator</span> <span class="op">()</span> <span class="op">(</span><span class="at">const</span> Vec<span class="op">&amp;</span> a<span class="op">,</span><span class="at">const</span> Vec<span class="op">&amp;</span> b<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> a<span class="op">.</span>x<span class="op">&lt;</span>b<span class="op">.</span>x<span class="op">||(</span>a<span class="op">.</span>x<span class="op">==</span>b<span class="op">.</span>x<span class="op">&amp;&amp;</span>a<span class="op">.</span>y<span class="op">&lt;</span>b<span class="op">.</span>y<span class="op">);</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>priority_queue<span class="op">&lt;</span> Vec<span class="op">,</span> <span class="bu">std::</span>vector<span class="op">&lt;</span>Vec<span class="op">&gt;,</span> vecCompare <span class="op">&gt;</span> H<span class="op">;</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    H<span class="op">.</span>push<span class="op">(</span>Vec<span class="op">(</span><span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">));</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    H<span class="op">.</span>push<span class="op">(</span>Vec<span class="op">(</span><span class="dv">2</span><span class="op">,</span><span class="dv">1</span><span class="op">));</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    Vec t<span class="op">=</span>H<span class="op">.</span>top<span class="op">();</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op">&lt;&lt;</span>t<span class="op">.</span>x<span class="op">&lt;&lt;</span><span class="st">","</span><span class="op">&lt;&lt;</span>t<span class="op">.</span>y<span class="op">;</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;queue&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;vector&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Vec<span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    ll x<span class="op">,</span>y<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    Vec<span class="op">(){}</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    Vec<span class="op">(</span>ll x<span class="op">,</span>ll y<span class="op">){</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">-&gt;</span>x<span class="op">=</span>x<span class="op">;</span><span class="kw">this</span><span class="op">-&gt;</span>y<span class="op">=</span>y<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> vecCompare<span class="op">{</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> <span class="kw">operator</span> <span class="op">()</span> <span class="op">(</span><span class="at">const</span> Vec<span class="op">&amp;</span> a<span class="op">,</span><span class="at">const</span> Vec<span class="op">&amp;</span> b<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> a<span class="op">.</span>x<span class="op">&lt;</span>b<span class="op">.</span>x<span class="op">||(</span>a<span class="op">.</span>x<span class="op">==</span>b<span class="op">.</span>x<span class="op">&amp;&amp;</span>a<span class="op">.</span>y<span class="op">&lt;</span>b<span class="op">.</span>y<span class="op">);</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>priority_queue<span class="op">&lt;</span> Vec<span class="op">,</span> <span class="bu">std::</span>vector<span class="op">&lt;</span>Vec<span class="op">&gt;,</span> vecCompare <span class="op">&gt;</span> H<span class="op">;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    H<span class="op">.</span>push<span class="op">(</span>Vec<span class="op">(</span><span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">));</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    H<span class="op">.</span>push<span class="op">(</span>Vec<span class="op">(</span><span class="dv">2</span><span class="op">,</span><span class="dv">1</span><span class="op">));</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    Vec t<span class="op">=</span>H<span class="op">.</span>top<span class="op">();</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op">&lt;&lt;</span>t<span class="op">.</span>x<span class="op">&lt;&lt;</span><span class="st">","</span><span class="op">&lt;&lt;</span>t<span class="op">.</span>y<span class="op">;</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -493,8 +515,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container">
 <p>删除单个值为 x 的元素，可按如下方法进行：</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> it <span class="op">=</span> s<span class="op">.</span>find<span class="op">(</span>x<span class="op">);</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>s<span class="op">.</span>erase<span class="op">(</span>it<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> it <span class="op">=</span> s<span class="op">.</span>find<span class="op">(</span>x<span class="op">);</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>s<span class="op">.</span>erase<span class="op">(</span>it<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -531,30 +553,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container">
 <p>Hash 函数的自定义方法也与 <code>priority_queue</code> 中的方法类似：</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;unordered_set&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll<span class="op">;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Vec<span class="op">{</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  ll x<span class="op">,</span>y<span class="op">;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    Vec<span class="op">(){}</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    Vec<span class="op">(</span>ll x<span class="op">,</span>ll y<span class="op">){</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">-&gt;</span>x<span class="op">=</span>x<span class="op">;</span><span class="kw">this</span><span class="op">-&gt;</span>y<span class="op">=</span>y<span class="op">;</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> <span class="kw">operator</span> <span class="op">==</span> <span class="op">(</span><span class="at">const</span> Vec<span class="op">&amp;</span> a<span class="op">,</span><span class="at">const</span> Vec<span class="op">&amp;</span> b<span class="op">){</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a<span class="op">.</span>x<span class="op">==</span>b<span class="op">.</span>x<span class="op">&amp;&amp;</span>a<span class="op">.</span>y<span class="op">==</span>b<span class="op">.</span>y<span class="op">;</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> vecHash<span class="op">{</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> <span class="kw">operator</span> <span class="op">()</span> <span class="op">(</span><span class="at">const</span> Vec<span class="op">&amp;</span> v<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">(</span>v<span class="op">.</span>x<span class="op">*</span>ll<span class="op">(</span><span class="fl">1E9</span><span class="op">)+</span>v<span class="op">.</span>y<span class="op">)%</span><span class="dv">107897</span><span class="op">;</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>unordered_set<span class="op">&lt;</span>Vec<span class="op">,</span>vecHash<span class="op">&gt;</span> S<span class="op">;</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    S<span class="op">.</span>insert<span class="op">(</span>Vec<span class="op">(</span><span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">));</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    S<span class="op">.</span>insert<span class="op">(</span>Vec<span class="op">(</span><span class="dv">2</span><span class="op">,</span><span class="dv">3</span><span class="op">));</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op">&lt;&lt;</span>S<span class="op">.</span>count<span class="op">(</span>Vec<span class="op">(</span><span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">));</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;unordered_set&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> Vec<span class="op">{</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  ll x<span class="op">,</span>y<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    Vec<span class="op">(){}</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    Vec<span class="op">(</span>ll x<span class="op">,</span>ll y<span class="op">){</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="kw">this</span><span class="op">-&gt;</span>x<span class="op">=</span>x<span class="op">;</span><span class="kw">this</span><span class="op">-&gt;</span>y<span class="op">=</span>y<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> <span class="kw">operator</span> <span class="op">==</span> <span class="op">(</span><span class="at">const</span> Vec<span class="op">&amp;</span> a<span class="op">,</span><span class="at">const</span> Vec<span class="op">&amp;</span> b<span class="op">){</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a<span class="op">.</span>x<span class="op">==</span>b<span class="op">.</span>x<span class="op">&amp;&amp;</span>a<span class="op">.</span>y<span class="op">==</span>b<span class="op">.</span>y<span class="op">;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> vecHash<span class="op">{</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">size_t</span> <span class="kw">operator</span> <span class="op">()</span> <span class="op">(</span><span class="at">const</span> Vec<span class="op">&amp;</span> v<span class="op">)</span> <span class="at">const</span> <span class="op">{</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">(</span>v<span class="op">.</span>x<span class="op">*</span>ll<span class="op">(</span><span class="fl">1E9</span><span class="op">)+</span>v<span class="op">.</span>y<span class="op">)%</span><span class="dv">107897</span><span class="op">;</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>unordered_set<span class="op">&lt;</span>Vec<span class="op">,</span>vecHash<span class="op">&gt;</span> S<span class="op">;</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    S<span class="op">.</span>insert<span class="op">(</span>Vec<span class="op">(</span><span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">));</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    S<span class="op">.</span>insert<span class="op">(</span>Vec<span class="op">(</span><span class="dv">2</span><span class="op">,</span><span class="dv">3</span><span class="op">));</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout<span class="op">&lt;&lt;</span>S<span class="op">.</span>count<span class="op">(</span>Vec<span class="op">(</span><span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">));</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
