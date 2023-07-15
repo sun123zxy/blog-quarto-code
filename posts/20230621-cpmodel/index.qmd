@@ -758,13 +758,40 @@ Poly exp(const Poly &A){
 }
 ```
 
-### 多项式快速幂【TODO】
+### 多项式快速幂
+
+普通的多项式快速幂实现当然是 $O(n \log n \log k)$ 的．下面介绍基于指对数性质的 $O(n \log n)$ 求法．
+
+对常数项 $a_0=1$ 的 $n-1$ 次多项式 $A(x)$，
+$$
+A^k(x) = e^{k \ln A(x)}
+$$
 
 ```c++
-Poly qpow(const Poly &A,ll up){return exp(ln(A)*up);}
+Poly qpow(const Poly &A,ll up){return exp(ln(A)*up);} // assume a_0 = 1
 ```
 
-更代数的内容参考 [Formal power series - Wikipedia](https://en.wikipedia.org/wiki/Formal_power_series)
+我们指出，在系数对质数 $p$ 取模的意义下，当我们关心的多项式长度 $n \leq p$ 时，有
+$$
+A^p(x) \equiv a_0 \equiv 1 \pmod p
+$$
+这是因为
+$$
+(a+b)^p \equiv a^p + b^p \pmod p
+$$
+故
+$$
+A^p(x) = (a_0 + x A_1 (x))^p \equiv a_0^p + x^p A_1^p(x) \pmod p
+$$
+由费马小定理，$a_0^p = a_0$，而 $n \leq p$ 表明 $x^p A_1^p(x)$ 一项可被忽略，故上述结论得到证明．这些讨论可用于处理幂指数 $k \geq p$ 的情况．
+
+一般的，当常数项非 $1$ 时，为满足多项式 $\ln$ 的要求，设多项式 $A(x)$ 的最低次项为 $a_t x^t$，则
+$$
+A^k(x) = (a_t x^t)^k \left( \frac{A(x)}{a_t x^t} \right)^k
+$$
+右侧的多项式常数项归一，故可再应用上述方法计算．
+
+关于多项式，更代数的内容参考 [Formal power series - Wikipedia](https://en.wikipedia.org/wiki/Formal_power_series)
 
 ## 集合幂级数【TODO】
 
