@@ -2615,8 +2615,10 @@ font-style: inherit;">;</span></span>
 background-color: null;
 font-style: inherit;">}</span></span></code></pre></div>
 </section>
-<section id="多项式快速幂todo" class="level3" data-number="4.8">
-<h3 data-number="4.8" class="anchored" data-anchor-id="多项式快速幂todo"><span class="header-section-number">4.8</span> 多项式快速幂【TODO】</h3>
+<section id="多项式快速幂" class="level3" data-number="4.8">
+<h3 data-number="4.8" class="anchored" data-anchor-id="多项式快速幂"><span class="header-section-number">4.8</span> 多项式快速幂</h3>
+<p>普通的多项式快速幂实现当然是 <img src="https://latex.codecogs.com/png.latex?O(n%20%5Clog%20n%20%5Clog%20k)"> 的．下面介绍基于指对数性质的 <img src="https://latex.codecogs.com/png.latex?O(n%20%5Clog%20n)"> 求法．</p>
+<p>对常数项 <img src="https://latex.codecogs.com/png.latex?a_0=1"> 的 <img src="https://latex.codecogs.com/png.latex?n-1"> 次多项式 <img src="https://latex.codecogs.com/png.latex?A(x)">， <img src="https://latex.codecogs.com/png.latex?%0AA%5Ek(x)%20=%20e%5E%7Bk%20%5Cln%20A(x)%7D%0A"></p>
 <div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb12-1">Poly qpow<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span><span class="at" style="color: #657422;
@@ -2637,8 +2639,12 @@ font-style: inherit;">(</span>A<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)*</span>up<span class="op" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">);}</span></span></code></pre></div>
-<p>更代数的内容参考 <a href="https://en.wikipedia.org/wiki/Formal_power_series">Formal power series - Wikipedia</a></p>
+font-style: inherit;">);}</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">// assume a_0 = 1</span></span></code></pre></div>
+<p>我们指出，在系数对质数 <img src="https://latex.codecogs.com/png.latex?p"> 取模的意义下，当我们关心的多项式长度 <img src="https://latex.codecogs.com/png.latex?n%20%5Cleq%20p"> 时，有 <img src="https://latex.codecogs.com/png.latex?%0AA%5Ep(x)%20%5Cequiv%20a_0%20%5Cequiv%201%20%5Cpmod%20p%0A"> 这是因为 <img src="https://latex.codecogs.com/png.latex?%0A(a+b)%5Ep%20%5Cequiv%20a%5Ep%20+%20b%5Ep%20%5Cpmod%20p%0A"> 故 <img src="https://latex.codecogs.com/png.latex?%0AA%5Ep(x)%20=%20(a_0%20+%20x%20A_1%20(x))%5Ep%20%5Cequiv%20a_0%5Ep%20+%20x%5Ep%20A_1%5Ep(x)%20%5Cpmod%20p%0A"> 由费马小定理，<img src="https://latex.codecogs.com/png.latex?a_0%5Ep%20=%20a_0">，而 <img src="https://latex.codecogs.com/png.latex?n%20%5Cleq%20p"> 表明 <img src="https://latex.codecogs.com/png.latex?x%5Ep%20A_1%5Ep(x)"> 一项可被忽略，故上述结论得到证明．这些讨论可用于处理幂指数 <img src="https://latex.codecogs.com/png.latex?k%20%5Cgeq%20p"> 的情况．</p>
+<p>一般的，当常数项非 <img src="https://latex.codecogs.com/png.latex?1"> 时，为满足多项式 <img src="https://latex.codecogs.com/png.latex?%5Cln"> 的要求，设多项式 <img src="https://latex.codecogs.com/png.latex?A(x)"> 的最低次项为 <img src="https://latex.codecogs.com/png.latex?a_t%20x%5Et">，则 <img src="https://latex.codecogs.com/png.latex?%0AA%5Ek(x)%20=%20(a_t%20x%5Et)%5Ek%20%5Cleft(%20%5Cfrac%7BA(x)%7D%7Ba_t%20x%5Et%7D%20%5Cright)%5Ek%0A"> 右侧的多项式常数项归一，故可再应用上述方法计算．</p>
+<p>关于多项式，更代数的内容参考 <a href="https://en.wikipedia.org/wiki/Formal_power_series">Formal power series - Wikipedia</a></p>
 </section>
 </section>
 <section id="集合幂级数todo" class="level2" data-number="5">

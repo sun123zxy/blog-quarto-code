@@ -174,7 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#多项式开方todo" id="toc-多项式开方todo" class="nav-link" data-scroll-target="#多项式开方todo"><span class="header-section-number">4.5</span> 多项式开方【TODO】</a></li>
   <li><a href="#多项式-ln" id="toc-多项式-ln" class="nav-link" data-scroll-target="#多项式-ln"><span class="header-section-number">4.6</span> 多项式 <span class="math inline">\(\ln\)</span></a></li>
   <li><a href="#多项式-exptodo" id="toc-多项式-exptodo" class="nav-link" data-scroll-target="#多项式-exptodo"><span class="header-section-number">4.7</span> 多项式 <span class="math inline">\(\exp\)</span>【TODO】</a></li>
-  <li><a href="#多项式快速幂todo" id="toc-多项式快速幂todo" class="nav-link" data-scroll-target="#多项式快速幂todo"><span class="header-section-number">4.8</span> 多项式快速幂【TODO】</a></li>
+  <li><a href="#多项式快速幂" id="toc-多项式快速幂" class="nav-link" data-scroll-target="#多项式快速幂"><span class="header-section-number">4.8</span> 多项式快速幂</a></li>
   </ul></li>
   <li><a href="#集合幂级数todo" id="toc-集合幂级数todo" class="nav-link" data-scroll-target="#集合幂级数todo"><span class="header-section-number">5</span> 集合幂级数【TODO】</a></li>
   <li><a href="#矩阵todo" id="toc-矩阵todo" class="nav-link" data-scroll-target="#矩阵todo"><span class="header-section-number">6</span> 矩阵【TODO】</a></li>
@@ -887,10 +887,24 @@ T(n) = T(\frac n 2) + O(n \log n) = O(n \log n)
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> B<span class="op">;</span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="多项式快速幂todo" class="level3" data-number="4.8">
-<h3 data-number="4.8" class="anchored" data-anchor-id="多项式快速幂todo"><span class="header-section-number">4.8</span> 多项式快速幂【TODO】</h3>
-<div class="sourceCode" id="cb12"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Poly qpow<span class="op">(</span><span class="at">const</span> Poly <span class="op">&amp;</span>A<span class="op">,</span>ll up<span class="op">){</span><span class="cf">return</span> exp<span class="op">(</span>ln<span class="op">(</span>A<span class="op">)*</span>up<span class="op">);}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>更代数的内容参考 <a href="https://en.wikipedia.org/wiki/Formal_power_series">Formal power series - Wikipedia</a></p>
+<section id="多项式快速幂" class="level3" data-number="4.8">
+<h3 data-number="4.8" class="anchored" data-anchor-id="多项式快速幂"><span class="header-section-number">4.8</span> 多项式快速幂</h3>
+<p>普通的多项式快速幂实现当然是 <span class="math inline">\(O(n \log n \log k)\)</span> 的．下面介绍基于指对数性质的 <span class="math inline">\(O(n \log n)\)</span> 求法．</p>
+<p>对常数项 <span class="math inline">\(a_0=1\)</span> 的 <span class="math inline">\(n-1\)</span> 次多项式 <span class="math inline">\(A(x)\)</span>， <span class="math display">\[
+A^k(x) = e^{k \ln A(x)}
+\]</span></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Poly qpow<span class="op">(</span><span class="at">const</span> Poly <span class="op">&amp;</span>A<span class="op">,</span>ll up<span class="op">){</span><span class="cf">return</span> exp<span class="op">(</span>ln<span class="op">(</span>A<span class="op">)*</span>up<span class="op">);}</span> <span class="co">// assume a_0 = 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>我们指出，在系数对质数 <span class="math inline">\(p\)</span> 取模的意义下，当我们关心的多项式长度 <span class="math inline">\(n \leq p\)</span> 时，有 <span class="math display">\[
+A^p(x) \equiv a_0 \equiv 1 \pmod p
+\]</span> 这是因为 <span class="math display">\[
+(a+b)^p \equiv a^p + b^p \pmod p
+\]</span> 故 <span class="math display">\[
+A^p(x) = (a_0 + x A_1 (x))^p \equiv a_0^p + x^p A_1^p(x) \pmod p
+\]</span> 由费马小定理，<span class="math inline">\(a_0^p = a_0\)</span>，而 <span class="math inline">\(n \leq p\)</span> 表明 <span class="math inline">\(x^p A_1^p(x)\)</span> 一项可被忽略，故上述结论得到证明．这些讨论可用于处理幂指数 <span class="math inline">\(k \geq p\)</span> 的情况．</p>
+<p>一般的，当常数项非 <span class="math inline">\(1\)</span> 时，为满足多项式 <span class="math inline">\(\ln\)</span> 的要求，设多项式 <span class="math inline">\(A(x)\)</span> 的最低次项为 <span class="math inline">\(a_t x^t\)</span>，则 <span class="math display">\[
+A^k(x) = (a_t x^t)^k \left( \frac{A(x)}{a_t x^t} \right)^k
+\]</span> 右侧的多项式常数项归一，故可再应用上述方法计算．</p>
+<p>关于多项式，更代数的内容参考 <a href="https://en.wikipedia.org/wiki/Formal_power_series">Formal power series - Wikipedia</a></p>
 </section>
 </section>
 <section id="集合幂级数todo" class="level2" data-number="5">
