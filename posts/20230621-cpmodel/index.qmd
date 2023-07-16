@@ -229,35 +229,6 @@ ll S_mu(ll n){
 
 ## 组合
 
-### 球盒问题
-
-:::{.column-page}
-
-| $n$ 个球 | $r$ 个盒 | 空盒 | 递推或封闭形式 | 生成函数 | 备注 |
-|:-:|:-:|:-:|:--:|:--:|:--:|
-| 有标号 | 有标号 	| 允许	 | $$r^n$$ | | $[n] \to [r]$ 映射个数 |
-| 有标号 | 有标号 	| 不允许 | $$r! {n \brace r}$$ | $$\mathrm{EGF}(x)=(e^x - 1)^r$$ | $[n] \to [r]$ 满射个数 |
-| 有标号 | 无标号 	| 允许	 | $$\sum_{k=0}^r {n \brace k}$$ | $$\mathrm{EGF}(x)=\sum_{k=0}^r \frac {(e^x - 1)^k}{k!}$$ | |
-| 有标号 | 无标号 	| 不允许 | $${n \brace r} = r {n-1 \brace r} + {n-1 \brace r-1}$$ | $$\mathrm{EGF}(x)=\frac {(e^x - 1)^r}{r!}$$ | 第二类 Stirling 数 |
-| 有标号 | 不限制 	|       | $$\sum_{k=0}^n {n \brace k}$$ | $$\mathrm{EGF}(x)=e^{e^x - 1}$$ | Bell 数；$[n]$ 上等价关系（划分）个数 |
-| 无标号 | 有标号 	| 允许	 | $$\binom{n+r-1}{r-1}$$ | | $r$ 元不定方程非负整数解个数 |
-| 无标号 | 有标号 	| 不允许 | $$\binom{n-1}{r-1}$$ | | $r$ 元 $n$ 次单项式构型数 |
-| 无标号 | 无标号 	| 允许	 | $$\sum_{k=0}^r p(n,k)$$ | | |
-| 无标号 | 无标号 	| 不允许 | $$p(n,r)=p(n-1,r-1)+p(n-r,r)$$ | | $r$ 部分拆数 |
-| 无标号 | 不限制	|       | $$\begin{aligned} p(n) &= \sum_{\substack{k \in \mathbb Z}} (-1)^k p_{n-k(3k-1)/2} \\ &= p_{n-1} + p_{n-2} - p_{n-5} - p_{n-7} + \dots \end{aligned}$$ | $$\begin{aligned} \mathrm{OGF}(x)&=\prod_{k=1}^{+\infty} \frac 1 {1-x^k} \\ &= \left( \sum_{k \in \mathbb Z} (-1)^k x^{k(3k-1)/2} \right)^{-1} \end{aligned}$$ | 分拆数 |
-:::
-
-关于 Stirling 数：
-
-- [Stirling number - Wikipedia](https://en.wikipedia.org/wiki/Stirling_number)
-- [斯特林数 - OI Wiki](https://oi-wiki.org/math/combinatorics/stirling/)
-
-关于分拆数：
-
-- [Partition (number theory) - Wikipedia](https://en.wikipedia.org/wiki/Partition_(number_theory))
-- [分拆数 - OI Wiki](https://oi-wiki.org/math/combinatorics/partition/)
-- [组合数学（2）分拆数 - 知乎](https://zhuanlan.zhihu.com/p/530925142)
-
 ### 容斥 / 二项式反演
 
 #### 形式一
@@ -289,6 +260,8 @@ $$
 G(x) = e^x F(x) \iff F(x) = e^{-x} G(x)
 $$
 :::
+
+生成函数的形式使我们可在 $O(n \log n)$ 的优秀时间复杂度之内在 $f(n)$ 和 $g(n)$ 间做出变换．
 
 #### 形式二
 
@@ -335,6 +308,53 @@ $$
 g(n) = \sum_{k=0}^{N-n} \binom {N-n} k f(n+k) \iff f(n) = \sum_{k=0}^{N-n} (-1)^k \binom {N-n} k g(n+k)
 $$
 :::
+
+### 球盒问题
+
+:::{.column-page}
+
+| $n$ 个球 | $r$ 个盒 | 空盒 | 递推或封闭形式 | 生成函数 | 备注 |
+|:-:|:-:|:-:|:--:|:--:|:--:|
+| 有标号 | 有标号 	| 允许	 | $$r^n$$ | | $[n] \to [r]$ 映射个数 |
+| 有标号 | 有标号 	| 不允许 | $$r! {n \brace r}$$ | $$\mathrm{EGF}_n(x)=(e^x - 1)^r$$ | $[n] \to [r]$ 满射个数 |
+| 有标号 | 无标号 	| 允许	 | $$\sum_{k=0}^r {n \brace k}$$ | $$\mathrm{EGF}_n(x)=\sum_{k=0}^r \frac {(e^x - 1)^k}{k!}$$ | |
+| 有标号 | 无标号 	| 不允许 | $${n \brace r} = r {n-1 \brace r} + {n-1 \brace r-1}$$ | $$\begin{aligned} \mathrm{EGF}_n(x) &= \frac{(e^x - 1)^r}{r!} \\ \mathrm{EGF}_r(x) &= e^{-x} \sum_{k=0}^{+\infty} k^n \frac{x^k}{k!} \end{aligned}$$ | 第二类 Stirling 数 |
+| 有标号 | 不限制 	|       | $$\sum_{k=0}^n {n \brace k}$$ | $$\mathrm{EGF}_n(x)=e^{e^x - 1}$$ | Bell 数；$[n]$ 上等价关系（划分）个数 |
+| 无标号 | 有标号 	| 允许	 | $$\binom{n+r-1}{r-1}$$ | | $r$ 元不定方程非负整数解个数 |
+| 无标号 | 有标号 	| 不允许 | $$\binom{n-1}{r-1}$$ | | $r$ 元 $n$ 次单项式构型数 |
+| 无标号 | 无标号 	| 允许	 | $$\sum_{k=0}^r p(n,k)$$ | | |
+| 无标号 | 无标号 	| 不允许 | $$p(n,r)=p(n-1,r-1)+p(n-r,r)$$ | | $r$ 部分拆数 |
+| 无标号 | 不限制	|       | $$\begin{aligned} p(n) &= \sum_{\substack{k \in \mathbb Z}} (-1)^k p_{n-k(3k-1)/2} \\ &= p_{n-1} + p_{n-2} - p_{n-5} - p_{n-7} + \dots \end{aligned}$$ | $$\begin{aligned} \mathrm{OGF}_n(x)&=\prod_{k=1}^{+\infty} \frac 1 {1-x^k} \\ &= \left( \sum_{k \in \mathbb Z} (-1)^k x^{k(3k-1)/2} \right)^{-1} \end{aligned}$$ | 分拆数 |
+:::
+
+### Stirling 数
+
+考虑用容斥非空盒的方法得到球有标号、盒无标号、不允许空盒的球盒问题的解．我们有
+$$
+r^n = \sum_{k=0}^r \binom r k k! {n \brace k}
+$$
+二项式反演即得
+$$
+r! {n \brace r} = \sum_{k=0}^r (-1)^{r-k} \binom r k k^n
+$$
+即
+$$
+{n \brace r} = \sum_{k=0}^r \frac{(-1)^{r-k} k^n}{k! (r-k)!} = \sum_{k=0}^r \frac{k^n}{k!} \cdot \frac{(-1)^{r-k}}{(r-k)!}
+$$
+这就是第二类 Stirling 数的通项公式．注意到其具有卷积的形式（即上文 $\mathrm{EGF}_r(x)$），由此可快速计算出同一行的第二类 Stirling 数．
+
+快速计算同一列，考虑将大小为 $n$ 的有标号集合划分为 $r$ 个无标号等价类．这相当于对有序拼接 $r$ 个非零集合后除掉 $r!$ 消序，写成生成函数的形式就得到上文所述 $\mathrm{EGF}_n(x)$．进一步注意到其具有指数函数幂级数的形式，无穷求和就得到 Bell 数的 $\mathrm{EGF}_n(x)$．
+
+更多参考：
+
+- [Stirling number - Wikipedia](https://en.wikipedia.org/wiki/Stirling_number)
+- [斯特林数 - OI Wiki](https://oi-wiki.org/math/combinatorics/stirling/)
+
+### 分拆数
+
+- [Partition (number theory) - Wikipedia](https://en.wikipedia.org/wiki/Partition_(number_theory))
+- [分拆数 - OI Wiki](https://oi-wiki.org/math/combinatorics/partition/)
+- [组合数学（2）分拆数 - 知乎](https://zhuanlan.zhihu.com/p/530925142)
 
 ### Lucas 定理
 
