@@ -159,11 +159,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#组合" id="toc-组合" class="nav-link" data-scroll-target="#组合"><span class="header-section-number">3</span> 组合</a>
   <ul class="collapse">
-  <li><a href="#球盒问题" id="toc-球盒问题" class="nav-link" data-scroll-target="#球盒问题"><span class="header-section-number">3.1</span> 球盒问题</a></li>
-  <li><a href="#容斥-二项式反演" id="toc-容斥-二项式反演" class="nav-link" data-scroll-target="#容斥-二项式反演"><span class="header-section-number">3.2</span> 容斥 / 二项式反演</a></li>
-  <li><a href="#lucas-定理" id="toc-lucas-定理" class="nav-link" data-scroll-target="#lucas-定理"><span class="header-section-number">3.3</span> Lucas 定理</a></li>
-  <li><a href="#矩阵树定理" id="toc-矩阵树定理" class="nav-link" data-scroll-target="#矩阵树定理"><span class="header-section-number">3.4</span> 矩阵树定理</a></li>
-  <li><a href="#polya-计数todo" id="toc-polya-计数todo" class="nav-link" data-scroll-target="#polya-计数todo"><span class="header-section-number">3.5</span> Polya 计数【TODO】</a></li>
+  <li><a href="#容斥-二项式反演" id="toc-容斥-二项式反演" class="nav-link" data-scroll-target="#容斥-二项式反演"><span class="header-section-number">3.1</span> 容斥 / 二项式反演</a></li>
+  <li><a href="#球盒问题" id="toc-球盒问题" class="nav-link" data-scroll-target="#球盒问题"><span class="header-section-number">3.2</span> 球盒问题</a></li>
+  <li><a href="#stirling-数" id="toc-stirling-数" class="nav-link" data-scroll-target="#stirling-数"><span class="header-section-number">3.3</span> Stirling 数</a></li>
+  <li><a href="#分拆数" id="toc-分拆数" class="nav-link" data-scroll-target="#分拆数"><span class="header-section-number">3.4</span> 分拆数</a></li>
+  <li><a href="#lucas-定理" id="toc-lucas-定理" class="nav-link" data-scroll-target="#lucas-定理"><span class="header-section-number">3.5</span> Lucas 定理</a></li>
+  <li><a href="#矩阵树定理" id="toc-矩阵树定理" class="nav-link" data-scroll-target="#矩阵树定理"><span class="header-section-number">3.6</span> 矩阵树定理</a></li>
+  <li><a href="#polya-计数todo" id="toc-polya-计数todo" class="nav-link" data-scroll-target="#polya-计数todo"><span class="header-section-number">3.7</span> Polya 计数【TODO】</a></li>
   </ul></li>
   <li><a href="#多项式" id="toc-多项式" class="nav-link" data-scroll-target="#多项式"><span class="header-section-number">4</span> 多项式</a>
   <ul class="collapse">
@@ -400,8 +402,63 @@ f = \operatorname{id}^k \varphi, g = \operatorname{id}^k, h = \operatorname{id}^
 </section>
 <section id="组合" class="level2 page-columns page-full" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="组合"><span class="header-section-number">3</span> 组合</h2>
-<section id="球盒问题" class="level3 page-columns page-full" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="球盒问题"><span class="header-section-number">3.1</span> 球盒问题</h3>
+<section id="容斥-二项式反演" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="容斥-二项式反演"><span class="header-section-number">3.1</span> 容斥 / 二项式反演</h3>
+<section id="形式一" class="level4">
+<h4 class="anchored" data-anchor-id="形式一">形式一</h4>
+<p>容斥原理的第一种形式给出了“子集和变换”的逆变换．</p>
+<div id="thm-inex-first-set" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3 (容斥原理，形式一，集合) </strong></span><span class="math display">\[
+g(S) = \sum_{T \subset S} f(T) \iff f(S) = \sum_{T \subset S} (-1)^{|S| - |T|} g(T)
+\]</span></p>
+</div>
+<p>证明的关键是 <span class="math inline">\(\sum_{k=0}^n \binom n k (-1)^k = (1-1)^n = [n=0]\)</span>．</p>
+<div id="thm-inex-first-binomial" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4 (容斥原理，形式一，二项式) </strong></span><span class="math display">\[
+g(n) = \sum_{k=0}^n \binom n k f(k) \iff f(n) = \sum_{k=0}^n (-1)^{n-k} \binom n k g(k)
+\]</span></p>
+<p>若设 <span class="math inline">\(F(x)\)</span> 和 <span class="math inline">\(G(x)\)</span> 分别为 <span class="math inline">\(f(n)\)</span> 和 <span class="math inline">\(g(n)\)</span> 的指数型生成函数（EGF），则结论可等价地表示为</p>
+<p><span class="math display">\[
+G(x) = e^x F(x) \iff F(x) = e^{-x} G(x)
+\]</span></p>
+</div>
+<p>生成函数的形式使我们可在 <span class="math inline">\(O(n \log n)\)</span> 的优秀时间复杂度之内在 <span class="math inline">\(f(n)\)</span> 和 <span class="math inline">\(g(n)\)</span> 间做出变换．</p>
+</section>
+<section id="形式二" class="level4">
+<h4 class="anchored" data-anchor-id="形式二">形式二</h4>
+<p>形式一的补集形式，给出了全集 <span class="math inline">\(U\)</span> 下“超集和变换”的逆变换．通常在“至少选若干个指定元素的方案数”易求的情况下使用．</p>
+<div id="thm-inex-second-set" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 5 (容斥原理，形式二，集合) </strong></span><span class="math display">\[
+g(S) = \sum_{S \subset T \subset U} f(T) \iff f(S) = \sum_{S \subset T \subset U} (-1)^{|T| - |S|} g(T)
+\]</span></p>
+</div>
+<p>我们最常见到的“容斥原理” <span class="math display">\[
+\operatorname{card}\left( \bigcup_{i \in U} A_i \right) = \sum_{k=1}^{|U|} (-1)^{k-1} \sum_{i_1 &lt; \dots &lt; i_k} \operatorname{card}\left( A_{i_1} \cap \dots \cap A_{i_k} \right)
+\]</span> 就是该形式的一个应用．只需令 <span class="math display">\[
+\begin{gathered}
+f(S) = \operatorname{card}\left( \left( \bigcap_{i \in S} A_i \right) - \left( \bigcup_{i \notin S} A_i \right) \right) \\
+g(S) = \operatorname{card}\left( \left( \bigcup_{i \in U} A_i \right) \cap \left( \bigcap_{i \in S} A_i \right)\right)
+= \begin{cases}
+\operatorname{card}\left( \bigcup_{i \in U} A_i \right) &amp; S = \varnothing \\
+\operatorname{card}\left( \bigcap_{i \in S} A_i \right) &amp; \text{otherwise}
+\end{cases}
+\end{gathered}
+\]</span> 容易验证 <a href="#thm-inex-second-set">Theorem&nbsp;5</a> 的 LHS 成立，故 RHS 亦成立．取 RHS 中 <span class="math inline">\(S=\varnothing\)</span>，就有 <span class="math display">\[
+\begin{aligned}
+0 = f(\varnothing) &amp;= \sum_{T \subset U} (-1)^{|T|} g(T) \\
+&amp;= g(\varnothing) + \sum_{k=1}^{|U|} (-1)^k \sum_{|T|=k} g(T) \\
+&amp;= \operatorname{card}\left( \bigcup_{i \in U} A_i \right) + \sum_{k=1}^{|U|} (-1)^k \sum_{i_1 &lt; \dots &lt; i_k} \operatorname{card}\left( A_{i_1} \cap \dots \cap A_{i_k} \right)
+\end{aligned}
+\]</span> 移项即得到常见的“容斥原理”．</p>
+<div id="thm-inex-second-binomal" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 6 (容斥原理，形式二，二项式) </strong></span><span class="math display">\[
+g(n) = \sum_{k=0}^{N-n} \binom {N-n} k f(n+k) \iff f(n) = \sum_{k=0}^{N-n} (-1)^k \binom {N-n} k g(n+k)
+\]</span></p>
+</div>
+</section>
+</section>
+<section id="球盒问题" class="level3 page-columns page-full" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="球盒问题"><span class="header-section-number">3.2</span> 球盒问题</h3>
 <div class="column-page">
 <table class="table">
 <colgroup>
@@ -436,7 +493,7 @@ f = \operatorname{id}^k \varphi, g = \operatorname{id}^k, h = \operatorname{id}^
 <td style="text-align: center;">有标号</td>
 <td style="text-align: center;">不允许</td>
 <td style="text-align: center;"><span class="math display">\[r! {n \brace r}\]</span></td>
-<td style="text-align: center;"><span class="math display">\[\mathrm{EGF}(x)=(e^x - 1)^r\]</span></td>
+<td style="text-align: center;"><span class="math display">\[\mathrm{EGF}_n(x)=(e^x - 1)^r\]</span></td>
 <td style="text-align: center;"><span class="math inline">\([n] \to [r]\)</span> 满射个数</td>
 </tr>
 <tr class="odd">
@@ -444,7 +501,7 @@ f = \operatorname{id}^k \varphi, g = \operatorname{id}^k, h = \operatorname{id}^
 <td style="text-align: center;">无标号</td>
 <td style="text-align: center;">允许</td>
 <td style="text-align: center;"><span class="math display">\[\sum_{k=0}^r {n \brace k}\]</span></td>
-<td style="text-align: center;"><span class="math display">\[\mathrm{EGF}(x)=\sum_{k=0}^r \frac {(e^x - 1)^k}{k!}\]</span></td>
+<td style="text-align: center;"><span class="math display">\[\mathrm{EGF}_n(x)=\sum_{k=0}^r \frac {(e^x - 1)^k}{k!}\]</span></td>
 <td style="text-align: center;"></td>
 </tr>
 <tr class="even">
@@ -452,7 +509,7 @@ f = \operatorname{id}^k \varphi, g = \operatorname{id}^k, h = \operatorname{id}^
 <td style="text-align: center;">无标号</td>
 <td style="text-align: center;">不允许</td>
 <td style="text-align: center;"><span class="math display">\[{n \brace r} = r {n-1 \brace r} + {n-1 \brace r-1}\]</span></td>
-<td style="text-align: center;"><span class="math display">\[\mathrm{EGF}(x)=\frac {(e^x - 1)^r}{r!}\]</span></td>
+<td style="text-align: center;"><span class="math display">\[\begin{aligned} \mathrm{EGF}_n(x) &amp;= \frac{(e^x - 1)^r}{r!} \\ \mathrm{EGF}_r(x) &amp;= e^{-x} \sum_{k=0}^{+\infty} k^n \frac{x^k}{k!} \end{aligned}\]</span></td>
 <td style="text-align: center;">第二类 Stirling 数</td>
 </tr>
 <tr class="odd">
@@ -460,7 +517,7 @@ f = \operatorname{id}^k \varphi, g = \operatorname{id}^k, h = \operatorname{id}^
 <td style="text-align: center;">不限制</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"><span class="math display">\[\sum_{k=0}^n {n \brace k}\]</span></td>
-<td style="text-align: center;"><span class="math display">\[\mathrm{EGF}(x)=e^{e^x - 1}\]</span></td>
+<td style="text-align: center;"><span class="math display">\[\mathrm{EGF}_n(x)=e^{e^x - 1}\]</span></td>
 <td style="text-align: center;">Bell 数；<span class="math inline">\([n]\)</span> 上等价关系（划分）个数</td>
 </tr>
 <tr class="even">
@@ -500,80 +557,39 @@ f = \operatorname{id}^k \varphi, g = \operatorname{id}^k, h = \operatorname{id}^
 <td style="text-align: center;">不限制</td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"><span class="math display">\[\begin{aligned} p(n) &amp;= \sum_{\substack{k \in \mathbb Z}} (-1)^k p_{n-k(3k-1)/2} \\ &amp;= p_{n-1} + p_{n-2} - p_{n-5} - p_{n-7} + \dots \end{aligned}\]</span></td>
-<td style="text-align: center;"><span class="math display">\[\begin{aligned} \mathrm{OGF}(x)&amp;=\prod_{k=1}^{+\infty} \frac 1 {1-x^k} \\ &amp;= \left( \sum_{k \in \mathbb Z} (-1)^k x^{k(3k-1)/2} \right)^{-1} \end{aligned}\]</span></td>
+<td style="text-align: center;"><span class="math display">\[\begin{aligned} \mathrm{OGF}_n(x)&amp;=\prod_{k=1}^{+\infty} \frac 1 {1-x^k} \\ &amp;= \left( \sum_{k \in \mathbb Z} (-1)^k x^{k(3k-1)/2} \right)^{-1} \end{aligned}\]</span></td>
 <td style="text-align: center;">分拆数</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>关于 Stirling 数：</p>
+</section>
+<section id="stirling-数" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="stirling-数"><span class="header-section-number">3.3</span> Stirling 数</h3>
+<p>考虑用容斥非空盒的方法得到球有标号、盒无标号、不允许空盒的球盒问题的解．我们有 <span class="math display">\[
+r^n = \sum_{k=0}^r \binom r k k! {n \brace k}
+\]</span> 二项式反演即得 <span class="math display">\[
+r! {n \brace r} = \sum_{k=0}^r (-1)^{r-k} \binom r k k^n
+\]</span> 即 <span class="math display">\[
+{n \brace r} = \sum_{k=0}^r \frac{(-1)^{r-k} k^n}{k! (r-k)!} = \sum_{k=0}^r \frac{k^n}{k!} \cdot \frac{(-1)^{r-k}}{(r-k)!}
+\]</span> 这就是第二类 Stirling 数的通项公式．注意到其具有卷积的形式（即上文 <span class="math inline">\(\mathrm{EGF}_r(x)\)</span>），由此可快速计算出同一行的第二类 Stirling 数．</p>
+<p>快速计算同一列，考虑将大小为 <span class="math inline">\(n\)</span> 的有标号集合划分为 <span class="math inline">\(r\)</span> 个无标号等价类．这相当于对有序拼接 <span class="math inline">\(r\)</span> 个非零集合后除掉 <span class="math inline">\(r!\)</span> 消序，写成生成函数的形式就得到上文所述 <span class="math inline">\(\mathrm{EGF}_n(x)\)</span>．进一步注意到其具有指数函数幂级数的形式，无穷求和就得到 Bell 数的 <span class="math inline">\(\mathrm{EGF}_n(x)\)</span>．</p>
+<p>更多参考：</p>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Stirling_number">Stirling number - Wikipedia</a></li>
 <li><a href="https://oi-wiki.org/math/combinatorics/stirling/">斯特林数 - OI Wiki</a></li>
 </ul>
-<p>关于分拆数：</p>
+</section>
+<section id="分拆数" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="分拆数"><span class="header-section-number">3.4</span> 分拆数</h3>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Partition_(number_theory)">Partition (number theory) - Wikipedia</a></li>
 <li><a href="https://oi-wiki.org/math/combinatorics/partition/">分拆数 - OI Wiki</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/530925142">组合数学（2）分拆数 - 知乎</a></li>
 </ul>
 </section>
-<section id="容斥-二项式反演" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="容斥-二项式反演"><span class="header-section-number">3.2</span> 容斥 / 二项式反演</h3>
-<section id="形式一" class="level4">
-<h4 class="anchored" data-anchor-id="形式一">形式一</h4>
-<p>容斥原理的第一种形式给出了“子集和变换”的逆变换．</p>
-<div id="thm-inex-first-set" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3 (容斥原理，形式一，集合) </strong></span><span class="math display">\[
-g(S) = \sum_{T \subset S} f(T) \iff f(S) = \sum_{T \subset S} (-1)^{|S| - |T|} g(T)
-\]</span></p>
-</div>
-<p>证明的关键是 <span class="math inline">\(\sum_{k=0}^n \binom n k (-1)^k = (1-1)^n = [n=0]\)</span>．</p>
-<div id="thm-inex-first-binomial" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 4 (容斥原理，形式一，二项式) </strong></span><span class="math display">\[
-g(n) = \sum_{k=0}^n \binom n k f(k) \iff f(n) = \sum_{k=0}^n (-1)^{n-k} \binom n k g(k)
-\]</span></p>
-<p>若设 <span class="math inline">\(F(x)\)</span> 和 <span class="math inline">\(G(x)\)</span> 分别为 <span class="math inline">\(f(n)\)</span> 和 <span class="math inline">\(g(n)\)</span> 的指数型生成函数（EGF），则结论可等价地表示为</p>
-<p><span class="math display">\[
-G(x) = e^x F(x) \iff F(x) = e^{-x} G(x)
-\]</span></p>
-</div>
-</section>
-<section id="形式二" class="level4">
-<h4 class="anchored" data-anchor-id="形式二">形式二</h4>
-<p>形式一的补集形式，给出了全集 <span class="math inline">\(U\)</span> 下“超集和变换”的逆变换．通常在“至少选若干个指定元素的方案数”易求的情况下使用．</p>
-<div id="thm-inex-second-set" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 5 (容斥原理，形式二，集合) </strong></span><span class="math display">\[
-g(S) = \sum_{S \subset T \subset U} f(T) \iff f(S) = \sum_{S \subset T \subset U} (-1)^{|T| - |S|} g(T)
-\]</span></p>
-</div>
-<p>我们最常见到的“容斥原理” <span class="math display">\[
-\operatorname{card}\left( \bigcup_{i \in U} A_i \right) = \sum_{k=1}^{|U|} (-1)^{k-1} \sum_{i_1 &lt; \dots &lt; i_k} \operatorname{card}\left( A_{i_1} \cap \dots \cap A_{i_k} \right)
-\]</span> 就是该形式的一个应用．只需令 <span class="math display">\[
-\begin{gathered}
-f(S) = \operatorname{card}\left( \left( \bigcap_{i \in S} A_i \right) - \left( \bigcup_{i \notin S} A_i \right) \right) \\
-g(S) = \operatorname{card}\left( \left( \bigcup_{i \in U} A_i \right) \cap \left( \bigcap_{i \in S} A_i \right)\right)
-= \begin{cases}
-\operatorname{card}\left( \bigcup_{i \in U} A_i \right) &amp; S = \varnothing \\
-\operatorname{card}\left( \bigcap_{i \in S} A_i \right) &amp; \text{otherwise}
-\end{cases}
-\end{gathered}
-\]</span> 容易验证 <a href="#thm-inex-second-set">Theorem&nbsp;5</a> 的 LHS 成立，故 RHS 亦成立．取 RHS 中 <span class="math inline">\(S=\varnothing\)</span>，就有 <span class="math display">\[
-\begin{aligned}
-0 = f(\varnothing) &amp;= \sum_{T \subset U} (-1)^{|T|} g(T) \\
-&amp;= g(\varnothing) + \sum_{k=1}^{|U|} (-1)^k \sum_{|T|=k} g(T) \\
-&amp;= \operatorname{card}\left( \bigcup_{i \in U} A_i \right) + \sum_{k=1}^{|U|} (-1)^k \sum_{i_1 &lt; \dots &lt; i_k} \operatorname{card}\left( A_{i_1} \cap \dots \cap A_{i_k} \right)
-\end{aligned}
-\]</span> 移项即得到常见的“容斥原理”．</p>
-<div id="thm-inex-second-binomal" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 6 (容斥原理，形式二，二项式) </strong></span><span class="math display">\[
-g(n) = \sum_{k=0}^{N-n} \binom {N-n} k f(n+k) \iff f(n) = \sum_{k=0}^{N-n} (-1)^k \binom {N-n} k g(n+k)
-\]</span></p>
-</div>
-</section>
-</section>
-<section id="lucas-定理" class="level3" data-number="3.3">
-<h3 data-number="3.3" class="anchored" data-anchor-id="lucas-定理"><span class="header-section-number">3.3</span> Lucas 定理</h3>
+<section id="lucas-定理" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="lucas-定理"><span class="header-section-number">3.5</span> Lucas 定理</h3>
 <div id="thm-lucas" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 7 (Lucas 定理) </strong></span><span class="math display">\[
 \binom{n}{m} \equiv \prod_{i} \binom{n_i}{m_i} \equiv \binom{\left\lfloor n/p \right\rfloor}{\left\lfloor m/p \right\rfloor} \binom{n \bmod p}{n \bmod p} \pmod p
@@ -587,8 +603,8 @@ g(n) = \sum_{k=0}^{N-n} \binom {N-n} k f(n+k) \iff f(n) = \sum_{k=0}^{N-n} (-1)^
 <li><a href="https://en.wikipedia.org/wiki/Lucas%27s_theorem">Lucas’s theorem - Wikipedia</a></li>
 </ul>
 </section>
-<section id="矩阵树定理" class="level3" data-number="3.4">
-<h3 data-number="3.4" class="anchored" data-anchor-id="矩阵树定理"><span class="header-section-number">3.4</span> 矩阵树定理</h3>
+<section id="矩阵树定理" class="level3" data-number="3.6">
+<h3 data-number="3.6" class="anchored" data-anchor-id="矩阵树定理"><span class="header-section-number">3.6</span> 矩阵树定理</h3>
 <section id="无向图的情形" class="level4">
 <h4 class="anchored" data-anchor-id="无向图的情形">无向图的情形</h4>
 <p>对无向图，度数矩阵 <span class="math inline">\(D = \operatorname{diag} \{ \operatorname{deg}(i) \}\)</span>，邻接矩阵 <span class="math inline">\(A\)</span> 定义为 <span class="math display">\[
@@ -645,8 +661,8 @@ C_{i,j} = \begin{cases}
 </ul>
 </section>
 </section>
-<section id="polya-计数todo" class="level3" data-number="3.5">
-<h3 data-number="3.5" class="anchored" data-anchor-id="polya-计数todo"><span class="header-section-number">3.5</span> Polya 计数【TODO】</h3>
+<section id="polya-计数todo" class="level3" data-number="3.7">
+<h3 data-number="3.7" class="anchored" data-anchor-id="polya-计数todo"><span class="header-section-number">3.7</span> Polya 计数【TODO】</h3>
 </section>
 </section>
 <section id="多项式" class="level2" data-number="4">
