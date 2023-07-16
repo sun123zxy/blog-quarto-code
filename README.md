@@ -1,4 +1,4 @@
-Quarto version: 1.3.333
+Quarto version: 1.3.340
 
 `quarto publish gh-pages`
 
