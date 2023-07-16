@@ -3,7 +3,7 @@ title: "算法 & 数学碎碎念"
 abstract: "现场赛公式模板库，亦可作为小而精的总结性学习材料参考．无需单独成文或暂不完善的内容会放在这里．"
 author: "sun123zxy"
 date: "2023/06/21"
-date-modified: "2023/07/16"
+date-modified: "2023/07/17"
 
 categories:
   - OI
@@ -320,8 +320,8 @@ $$
 | $${1,1,0}$$ | 有标号 | 有标号 	| 盒可空 | $$r^n$$ | | $[n] \to [r]$ 映射个数 |
 | $${1,1,1}$$ | 有标号 | 有标号 	| 盒非空 | $$r! {n \brace r} = \sum_{k=0}^r (-1)^{r-k} \binom r k k^n$$ | $$\begin{aligned} \mathrm{EGF}_r(x)&=(e^x - 1)^r \\ \mathrm{EGF}_n(x) &= e^{-x} \sum_{k=0}^{+\infty} k^n \frac{x^k}{k!} \end{aligned}$$ | $[n] \to [r]$ 满射个数 |
 | $${1,0,0}$$ | 有标号 | 无标号 	| 盒可空	 | $$\sum_{k=0}^r {n \brace k}$$ | $$\mathrm{EGF}_r(x) = \sum_{k=0}^r \frac {(e^x - 1)^k}{k!}$$ | |
-| $${1,0,1}$$ | 有标号 | 无标号 	| 盒非空 | $$\begin{aligned} {n \brace r} &= r {n-1 \brace r} + {n-1 \brace r-1} \\ &= \sum_{k=0}^r \frac{k^n}{k!} \cdot \frac{(-1)^{r-k}}{(r-k)!} \end{aligned}$$ | $$\begin{aligned} \mathrm{EGF}_r(x) &= \frac{(e^x - 1)^r}{r!} \\ \mathrm{OGF}_n(x) &= e^{-x} \sum_{k=0}^{+\infty} k^n \frac{x^k}{k!} \end{aligned}$$ | 第二类 Stirling 数 |
-| $${1,\emptyset,\emptyset}$$ | 有标号 | 不限制 	|       | $$\sum_{k=0}^n {n \brace k}$$ | $$\mathrm{EGF}(x)=e^{e^x - 1}$$ | Bell 数；$[n]$ 上等价关系（划分）个数 |
+| $${1,0,1}$$ | 有标号 | 无标号 	| 盒非空 | $$\begin{aligned} {n \brace r} &= \sum_{k=0}^r \frac{k^n}{k!} \cdot \frac{(-1)^{r-k}}{(r-k)!} \\ {n+1 \brace r} &= r {n \brace r} + {n \brace r-1} \end{aligned}$$ | $$\begin{aligned} \mathrm{EGF}_r(x) &= \frac{(e^x - 1)^r}{r!} \\ \mathrm{OGF}_n(x) &= e^{-x} \sum_{k=0}^{+\infty} k^n \frac{x^k}{k!} \end{aligned}$$ | 第二类 Stirling 数 |
+| $${1,\emptyset,\emptyset}$$ | 有标号 | 不限制 	|       | $$\begin{aligned} B(n) &= \sum_{k=0}^n {n \brace k} \\ B(n+1) &= \sum_{k=0}^n \binom n k B(k) \end{aligned}$$ | $$\mathrm{EGF}(x)=e^{e^x - 1}$$ | Bell 数；$[n]$ 上等价关系（划分）个数 |
 | $${0,1,0}$$ | 无标号 | 有标号 	| 盒可空 | $$\binom{n+r-1}{r-1}$$ | | $r$ 元不定方程非负整数解个数 |
 | $${0,1,1}$$ | 无标号 | 有标号 	| 盒非空 | $$\binom{n-1}{r-1}$$ | | $r$ 元 $n$ 次单项式构型数 |
 | $${0,0,0}$$ | 无标号 | 无标号 	| 盒可空 | $$\sum_{k=0}^r p(n,k)$$ | | |
@@ -340,7 +340,7 @@ $$
 
 ### 第二类 Stirling 数
 
-第二类 Stirling 数的组合定义即 $1,0,1$-球盒问题的方案数 $\mathrm{BB}_{1,0,1}(n,r) = {n \brace r}$，亦作将 $n$ 元集合划分为 $r$ 个等价类的方案数． 
+第二类 Stirling 数的组合定义即 $1,0,1$-球盒问题的方案数 $\mathrm{BB}_{1,0,1}(n,r) = {n \brace r}$，亦作将 $n$ 个元素划分入 $r$ 个集合的方案数． 
 
 #### 递推
 
@@ -383,7 +383,7 @@ $$
 \mathrm{OGF}_n^{1,0,1}(x) = \mathrm{EGF}_n^{1,1,1}(x) = e^{-x} \mathrm{EGF}_n^{1,1,0}(x) = e^{-x} \sum_{k=0}^{+\infty} k^n \frac{x^k}{k!}
 $$
 
-#### 第二类 Striling 数同列计算：$\mathrm{EGF}_r^{1,0,1}(x)$，$\mathrm{EGF}_r^{1,1,0}(x)$ 与 $\mathrm{EGF}^{1,\emptyset,\emptyset}(x)$（Bell 数）
+#### 第二类 Striling 数同列计算：$\mathrm{EGF}_r^{1,0,1}(x)$，$\mathrm{EGF}_r^{1,1,0}(x)$ 与 $\mathrm{EGF}^{1,\emptyset,\emptyset}(x)$
 
 为快速计算同一列的第二类 Stirling 数，考虑用生成函数的思路构造 $1,1,0$-球盒问题和 $1,0,1$-球盒问题的方案数．前者将大小为 $n$ 的有标号集合划分为 $r$ 个有标号等价类，这相当于有序拼接 $r$ 个非空有标号集合；后者则是前者除掉 $r!$ 消序的版本．写成生成函数即
 $$
@@ -391,20 +391,35 @@ $$
 \mathrm{EGF}_r^{1,1,0}(x) &= (e^x - 1)^r \\
 \mathrm{EGF}_r^{1,0,1}(x) &= \frac{(e^x - 1)^r}{r!}
 \end{aligned}
+$${#eq-egf-110-101}
+
+#### Bell 数
+
+Bell 数 $B(n)$ 的组合定义即 $1,\emptyset,\emptyset$-球盒问题的方案数 $\mathrm{BB}_{1,\emptyset,\emptyset}$，亦可描述为 $n$ 元集合上等价关系（划分）的数量．
+
+注意到 $1,0,1$-球盒问题和 $1,\emptyset,\emptyset$-球盒问题的关系
 $$
-进一步，注意到 $1,0,1$-球盒问题和 $1,\emptyset,\emptyset$-球盒问题的关系
+\mathrm{BB}_{1,\emptyset,\emptyset}(n) = \sum_{r=0}^{n} \mathrm{BB}_{1,0,1}(n,r) = \sum_{r=0}^{+\infty} \mathrm{BB}_{1,0,1}(n,r)
 $$
-\mathrm{BB}_{1,\emptyset,\emptyset} = \sum_{r=0}^{+\infty} \mathrm{BB}_{1,0,1}(n,r)
+我们首先有
 $$
-我们有
+B(n) = \sum_{r=0}^n {n \brace r}
+$$
+其次，根据 [@eq-egf-110-101] 写出此关系的 EGF 形式就有
 $$
 \mathrm{EGF}^{1,\emptyset,\emptyset}(x) = \sum_{r=0}^{+\infty} \mathrm{EGF}_r^{1,0,1}(x) = \sum_{r=0}^{+\infty} \frac{(e^x - 1)^r}{r!} = e^{e^x - 1}
 $$
-此即 $1,\emptyset,\emptyset$-球盒问题的方案数的指数生成函数．此即 Bell 数的组合定义．Bell 数的另一种组合意义是 $n$ 元集合上等价关系（划分）的数量．Bell 数也是第二类 Stirling 数的同行求和． 
+我们得到 Bell 数的可用于快速计算的 EGF．
 
 :::{.remark}
 有标号集合的无序划分是指数型生成函数的一类重要应用．例如，有标号连通图计数可视为对有标号一般图的无序划分，故有标号连通图的 EGF $G(x)$ 和有标号一般图的 EGF $F(x)$ 间有着 $e^{G(x)} = F(x)$ 的关系．
 :::
+
+Bell 数还有递推形式
+$$
+B(n+1) = \sum_{k=0}^n \binom n k B(k)
+$$
+边界 $B(0)=1$．组合的解释是，枚举第 $n+1$ 个元素被放入的集合的大小，再对除该集合之外的元素进行划分．从指数生成函数的角度来看，设 $B(n)$ 的 EGF 为 $F(x)$，由 EGF 的移位性质和二项式反演的 EGF 形式，上式等价于 $F'(x) = e^x F(x)$，解此微分方程也能得到 Bell 数的生成函数．
 
 #### 第一类 Stirling 数、Stirling 数与阶乘幂【TODO】
 
@@ -413,7 +428,7 @@ $$
 - [Stirling number - Wikipedia](https://en.wikipedia.org/wiki/Stirling_number)
 - [斯特林数 - OI Wiki](https://oi-wiki.org/math/combinatorics/stirling/)
 
-### 分拆数
+### 分拆数【TODO】
 
 - [Partition (number theory) - Wikipedia](https://en.wikipedia.org/wiki/Partition_(number_theory))
 - [分拆数 - OI Wiki](https://oi-wiki.org/math/combinatorics/partition/)
