@@ -3,7 +3,7 @@ title: "算法 & 数学碎碎念"
 abstract: "现场赛公式模板库，亦可作为小而精的总结性学习材料参考．无需单独成文或暂不完善的内容会放在这里．"
 author: "sun123zxy"
 date: "2023/06/21"
-date-modified: "2023/07/13"
+date-modified: "2023/07/16"
 
 categories:
   - OI
@@ -795,7 +795,113 @@ $$
 
 ## 集合幂级数【TODO】
 
-## 矩阵【TODO】
+## 矩阵
+
+### 通用
+
+```c++
+// Martix universal 2023/07/16
+class Matrix : public vector<ll>{public:
+	static Matrix ID(ll n){
+		Matrix A(n,n); for(ll i=0;i<n;i++) A(i,i)=1;
+		return A;
+	}
+	ll row,col;
+	template<typename... Args>
+	Matrix(ll row,ll col,Args... args) : row{row},col{col},vector<ll>(row*col,args...){}
+	Matrix(ll row,ll col,initializer_list<ll> lst) : row{row},col{col},vector<ll>(lst){}
+	// Matrix(const Matrix &other) = default;
+	ll& at(ll i,ll j){return vector<ll>::at(i*col+j);}
+	ll cat(ll i,ll j) const {return *(begin()+i*col+j);}
+	ll& operator () (ll i,ll j){return at(i,j);}
+	Matrix submat(list<ll> rlst,list<ll> clst){
+		Matrix A(rlst.size(),clst.size(),{});
+		for(ll r : rlst) for(ll c : clst) A.push_back(at(r,c));
+		return A;
+	}
+	Matrix remmat(unordered_set<ll> rst,unordered_set<ll> cst){
+		Matrix A(row-rst.size(),col-cst.size(),{});
+		for(ll r=0;r<row;r++) if(!rst.count(r))
+			for(ll c=0;c<col;c++) if(!cst.count(c))
+				A.push_back(at(r,c));
+		return A;
+	}
+	void debug(){
+		cout<<'('<<row<<','<<col<<')'<<'\n';
+		for(ll i=0;i<row;i++){for(ll j=0;j<col;j++) cout<<at(i,j)<<',';cout<<'\n';}
+	}
+};
+int main(){
+	Matrix E={2,3,{1,2,3,
+				   4,5,6}},F(2,3,3),G(F);
+	E.debug(); F.debug();G.debug();E.remmat({},{0,2}).debug();
+}
+```
+
+### 矩阵乘法
+
+普通的 $O(n^3)$ 实现．
+
+```c++
+Matrix operator * (const Matrix &A,const Matrix &B){
+	Matrix C(A.row,B.col); if(A.col!=B.row) return Matrix(0,0);
+	for(ll i=0;i<A.row;i++)
+		for(ll j=0;j<B.col;j++)
+			for(ll k=0;k<A.col;k++)
+				mmodp(C(i,j)+=A.cat(i,k)*B.cat(k,j));
+	return C;
+}
+```
+
+### 矩阵快速幂
+
+普通的 $O(n^3 \log k)$ 实现．
+
+```c++
+Matrix qpow(Matrix X,ll up){
+	Matrix A=Matrix::ID(X.row); if(X.row!=X.col) return Matrix(0,0);
+	while(up){
+		if(up&1) A=A*X;
+		X=X*X; up>>=1;
+	}return A;
+}
+```
+
+### 行列式
+
+普通的实现是使用逆元进行高斯消元，可用于域上的线性空间．若求解逆元的时间复杂度为 $O(\log p)$，则时间复杂度为 $O(n^3+ n^2 \log p)$．
+
+下面给出的实现在消去时使用辗转相除法，可用于任意 Euclid 整环（Euclidean domain，有带余除法的无零因子的交换幺环）上的模（环上的线性空间），且时间复杂度不会增加．一个常见的应用是模 $m$ 整数环 $\mathbb Z_m$ 上的行列式求值，其中 $m$ 不是质数．
+
+消去各目标行第 $c$ 列元素时，以第 $c$ 行的 $a_{c,c}$ 为除数与目标行的第 $c$ 列元素辗转相除，最终使 $a_{c,c}$ 变为 $0$，再做一次行交换将其换至目标行，就完成了一次行消去过程．注意到当 $a_{c,c}$ 非零时，一次行消去操作结束后 $a_{c,c}$ 单调不增，且过程中 $a_{c,c}$ 不会从非零变为零，故辗转相除带来的 $\log p$ 次额外操作开销被分摊到整轮对第 $c$ 列的消去过程中，因此时间复杂度仍为 $O(n^3+ n^2 \log p)$．
+
+```c++
+ll det(Matrix A){
+	ll n=A.row; if(A.row!=A.col) return 0;
+	ll ans=1;
+	for(ll c=0;c<n;c++){
+		auto swpl=[&](ll a,ll b){
+			lmodp(ans*=-1); for(ll k=c;k<n;k++) swap(A(a,k),A(b,k));
+		};
+		for(ll r=c+1;r<n;r++){
+			while(A(c,c)!=0){
+				ll factor=A(r,c)/A(c,c);
+				for(ll k=c;k<n;k++) hmodp(A(r,k)-=A(c,k)*factor);
+				swpl(c,r);
+			}swpl(c,r);
+		}
+		/*ll r; for(r=c;r<n;r++) if(A(r,c)!=0) break;
+		if(r==n) return 0;
+		if(r!=c) swpl(r,c);
+		for(r=c+1;r<n;r++){
+			ll factor=inv(A(c,c))*A(r,c)_;
+			for(ll k=0;k<n;k++) hmodp(A(r,k)-=A(c,k)*factor);
+		}*/
+	}
+	for(ll c=0;c<n;c++) mmodp(ans*=A(c,c));
+	return ans;
+}
+```
 
 ## 通用
 
