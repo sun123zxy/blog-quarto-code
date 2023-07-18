@@ -3,7 +3,7 @@ title: "算法 & 数学碎碎念"
 abstract: "现场赛公式模板库，亦可作为小而精的总结性学习材料参考．无需单独成文或暂不完善的内容会放在这里．"
 author: "sun123zxy"
 date: "2023/06/21"
-date-modified: "2023/07/17"
+date-modified: "2023/07/18"
 
 categories:
   - OI
@@ -246,6 +246,52 @@ $$
 
 证明的关键是 $\sum_{k=0}^n \binom n k (-1)^k = (1-1)^n = [n=0]$．
 
+:::{#exm-inex-first-ordinary}
+
+## 常见的“容斥原理”
+
+不满足任何性质的元素数量可容斥地通过下式计算
+$$
+\begin{aligned}
+\card \left( A - \bigcup_{i \in U} A_i \right)
+&= \sum_{k=0}^{|U|} (-1)^k \sum_{|S| = k} \card \left( A \cap \bigcap_{i \in S} A_i \right) \\
+&= \card A + \sum_{k=1}^{|U|} (-1)^k \sum_{|S| = k} \card \left( \bigcap_{i \in S} A_i \right) \\
+&= \card A + \sum_{k=1}^{|U|} (-1)^k \sum_{i_1 < \dots < i_k} \card \left( A_{i_1} \cap \dots \cap A_{i_k} \right)
+\end{aligned}
+$$
+其中 $A$ 代表全集，$A_i$ 代表满足第 $i$ 个性质的元素构成的集合，$i \in U$．
+:::
+
+:::{.proof}
+令 $f(S)$ 为恰好只满足 $S$ 中各性质的元素数量，$g(S)$ 为至少满足 $S$ 中各性质的元素数量，即
+$$
+\begin{gathered}
+f(S) = \card \left( \left( A \cap \bigcap_{i \in S} A_i \right) - \bigcup_{i \in U-S} A_i \right) \\
+g(S) = \card \left( A \cap \bigcap_{i \in S} A_i \right)
+= \begin{cases}
+\card A & S = \varnothing \\
+\card \left( \bigcap_{i \in S} A_i \right) & \text{otherwise}
+\end{cases}
+\end{gathered}
+$$
+取 $S=\varnothing$ 代入 [@thm-inex-first-set] 右侧就得到结论．
+:::
+
+:::{#cor-inex-first-ordinary}
+
+## 更常见的“容斥原理”
+
+满足至少 $1$ 个性质的元素数量可容斥地通过下式计算
+$$
+\begin{aligned}
+\card \left( \bigcup_{i \in U} A_i \right)
+&= \sum_{k=1}^{|U|} (-1)^{k-1} \sum_{|S| = k} \card \left( \bigcap_{i \in S} A_i \right) \\
+&= \sum_{k=1}^{|U|} (-1)^{k-1} \sum_{i_1 < \dots < i_k} \card \left( A_{i_1} \cap \dots \cap A_{i_k} \right)
+\end{aligned}
+$$
+其中 $A_i$ 代表满足第 $i$ 个性质的元素构成的集合，$i \in U$．
+:::
+
 ::: {#thm-inex-first-binomial}
 
 ## 容斥原理，形式一，二项式
@@ -265,7 +311,7 @@ $$
 
 #### 形式二
 
-形式一的补集形式，给出了全集 $U$ 下“超集和变换”的逆变换．通常在“至少选若干个指定元素的方案数”易求的情况下使用．
+形式一的补集形式，给出了全集 $U$ 下“超集和变换”的逆变换．
 
 ::: {#thm-inex-second-set}
 
@@ -275,31 +321,6 @@ $$
 g(S) = \sum_{S \subset T \subset U} f(T) \iff f(S) = \sum_{S \subset T \subset U} (-1)^{|T| - |S|} g(T)
 $$
 :::
-
-我们最常见到的“容斥原理”
-$$
-\card \left( \bigcup_{i \in U} A_i \right) = \sum_{k=1}^{|U|} (-1)^{k-1} \sum_{i_1 < \dots < i_k} \card \left( A_{i_1} \cap \dots \cap A_{i_k} \right)
-$$
-就是该形式的一个应用．只需令
-$$
-\begin{gathered}
-f(S) = \card \left( \left( \bigcap_{i \in S} A_i \right) - \left( \bigcup_{i \notin S} A_i \right) \right) \\
-g(S) = \card \left( \left( \bigcup_{i \in U} A_i \right) \cap \left( \bigcap_{i \in S} A_i \right)\right)
-= \begin{cases}
-\card \left( \bigcup_{i \in U} A_i \right) & S = \varnothing \\
-\card \left( \bigcap_{i \in S} A_i \right) & \text{otherwise}
-\end{cases}
-\end{gathered}
-$$
-容易验证 @thm-inex-second-set 的 LHS 成立，故 RHS 亦成立．取 RHS 中 $S=\varnothing$，就有
-$$
-\begin{aligned}
-0 = f(\varnothing) &= \sum_{T \subset U} (-1)^{|T|} g(T) \\
-&= g(\varnothing) + \sum_{k=1}^{|U|} (-1)^k \sum_{|T|=k} g(T) \\
-&= \card \left( \bigcup_{i \in U} A_i \right) + \sum_{k=1}^{|U|} (-1)^k \sum_{i_1 < \dots < i_k} \card \left( A_{i_1} \cap \dots \cap A_{i_k} \right)
-\end{aligned}
-$$
-移项即得到常见的“容斥原理”．
 
 ::: {#thm-inex-second-binomal}
 
