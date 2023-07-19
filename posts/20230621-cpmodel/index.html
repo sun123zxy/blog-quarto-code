@@ -169,6 +169,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#形式一" id="toc-形式一" class="nav-link" data-scroll-target="#形式一"><span class="header-section-number">3.1.1</span> 形式一</a></li>
   <li><a href="#形式二" id="toc-形式二" class="nav-link" data-scroll-target="#形式二"><span class="header-section-number">3.1.2</span> 形式二</a></li>
+  <li><a href="#应用" id="toc-应用" class="nav-link" data-scroll-target="#应用"><span class="header-section-number">3.1.3</span> 应用</a></li>
   </ul></li>
   <li><a href="#球盒问题" id="toc-球盒问题" class="nav-link" data-scroll-target="#球盒问题"><span class="header-section-number">3.2</span> 球盒问题</a></li>
   <li><a href="#第二类-stirling-数" id="toc-第二类-stirling-数" class="nav-link" data-scroll-target="#第二类-stirling-数"><span class="header-section-number">3.3</span> 第二类 Stirling 数</a>
@@ -259,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">July 17, 2023</p>
+      <p class="date-modified">July 19, 2023</p>
     </div>
   </div>
     
@@ -446,7 +447,7 @@ g(S) = \sum_{T \subset S} f(T) \iff f(S) = \sum_{T \subset S} (-1)^{|S| - |T|} g
 </div>
 <p>证明的关键是 <span class="math inline">\(\sum_{k=0}^n \binom n k (-1)^k = (1-1)^n = [n=0]\)</span>．</p>
 <div id="thm-inex-first-binomial" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 4 (容斥原理，形式一，二项式) </strong></span><span class="math display">\[
+<p><span class="theorem-title"><strong>Theorem 4 (容斥原理，形式一，二项式反演) </strong></span><span class="math display">\[
 g(n) = \sum_{k=0}^n \binom n k f(k) \iff f(n) = \sum_{k=0}^n (-1)^{n-k} \binom n k g(k)
 \]</span></p>
 <p>若设 <span class="math inline">\(F(x)\)</span> 和 <span class="math inline">\(G(x)\)</span> 分别为 <span class="math inline">\(f(n)\)</span> 和 <span class="math inline">\(g(n)\)</span> 的指数生成函数（EGF），则结论可等价地表示为</p>
@@ -458,34 +459,79 @@ G(x) = e^x F(x) \iff F(x) = e^{-x} G(x)
 </section>
 <section id="形式二" class="level4" data-number="3.1.2">
 <h4 data-number="3.1.2" class="anchored" data-anchor-id="形式二"><span class="header-section-number">3.1.2</span> 形式二</h4>
-<p>形式一的补集形式，给出了全集 <span class="math inline">\(U\)</span> 下“超集和变换”的逆变换．通常在“至少选若干个指定元素的方案数”易求的情况下使用．</p>
+<p>形式一的补集形式，给出了全集 <span class="math inline">\(U\)</span> 下“超集和变换”的逆变换．</p>
 <div id="thm-inex-second-set" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 5 (容斥原理，形式二，集合) </strong></span><span class="math display">\[
 g(S) = \sum_{S \subset T \subset U} f(T) \iff f(S) = \sum_{S \subset T \subset U} (-1)^{|T| - |S|} g(T)
 \]</span></p>
 </div>
-<p>我们最常见到的“容斥原理” <span class="math display">\[
-\operatorname{card}\left( \bigcup_{i \in U} A_i \right) = \sum_{k=1}^{|U|} (-1)^{k-1} \sum_{i_1 &lt; \dots &lt; i_k} \operatorname{card}\left( A_{i_1} \cap \dots \cap A_{i_k} \right)
-\]</span> 就是该形式的一个应用．只需令 <span class="math display">\[
+<div id="thm-inex-second-binomal" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 6 (容斥原理，形式二，二项式反演) </strong></span><span class="math display">\[
+g(n) = \sum_{k=0}^{N-n} \binom {N-n} k f(n+k) \iff f(n) = \sum_{k=0}^{N-n} (-1)^k \binom {N-n} k g(n+k)
+\]</span></p>
+</div>
+</section>
+<section id="应用" class="level4" data-number="3.1.3">
+<h4 data-number="3.1.3" class="anchored" data-anchor-id="应用"><span class="header-section-number">3.1.3</span> 应用</h4>
+<div id="exm-inex-extraordinary" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1 (不太常见的“容斥原理”) </strong></span>满足全部性质的元素数量可容斥地通过下式计算 <span class="math display">\[
+\begin{aligned}
+\operatorname{card}\left( \bigcap_{i \in U} A_i \right) &amp;= \sum_{k=0}^{|U|} (-1)^{|U|-k} \sum_{|S|=k} \operatorname{card}\left( A - \bigcup_{i \in U-S} A_i \right) \\
+&amp;= \sum_{k=0}^{|U|} (-1)^{|U|-k} \sum_{|S|=k} \operatorname{card}\left( \bigcup_{i \in S} A_i \right) \\
+&amp;= \sum_{k=0}^{|U|} (-1)^{|U|-k} \sum_{i_1 &lt; \dots &lt; i_k} \operatorname{card}\left( A_{i_1} \cup \dots \cup A_{i_k} \right)
+\end{aligned}
+\]</span> 其中 <span class="math inline">\(A\)</span> 代表全集，<span class="math inline">\(A_i\)</span> 代表满足第 <span class="math inline">\(i\)</span> 个性质的元素构成的集合，<span class="math inline">\(U\)</span> 是非空有限的性质指标集．</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>令 <span class="math inline">\(f(S)\)</span> 为恰好只满足 <span class="math inline">\(S\)</span> 中各性质的元素数量，<span class="math inline">\(g(S)\)</span> 为至多只满足 <span class="math inline">\(S\)</span> 中各性质的元素数量，即 <span class="math display">\[
 \begin{gathered}
-f(S) = \operatorname{card}\left( \left( \bigcap_{i \in S} A_i \right) - \left( \bigcup_{i \notin S} A_i \right) \right) \\
-g(S) = \operatorname{card}\left( \left( \bigcup_{i \in U} A_i \right) \cap \left( \bigcap_{i \in S} A_i \right)\right)
+f(S) := \operatorname{card}\left( \left( A \cap \bigcap_{i \in S} A_i \right) - \bigcup_{i \in U-S} A_i \right) \\
+g(S) := \operatorname{card}\left( A - \bigcup_{i \in U-S} A_i \right)
+= \operatorname{card}\left(A - \bigcup_{i \in U} A_i \right) + \operatorname{card}\left( \bigcup_{i \in S} A_i \right)
+\end{gathered}
+\]</span> 取 <span class="math inline">\(S=U\)</span> 代入 <a href="#thm-inex-first-set">Theorem&nbsp;3</a> 右侧就得到结论第一行的等式．继续化简 <span class="math display">\[
+\begin{aligned}
+\operatorname{card}\left( \bigcap_{i \in U} A_i \right) &amp;= \sum_{k=0}^{|U|} (-1)^{|U|-k} \sum_{|S|=k} \operatorname{card}\left( A - \bigcup_{i \in U-S} A_i \right) \\
+&amp;= \sum_{k=0}^{|U|} (-1)^{|U|-k} \sum_{|S|=k} \left( \operatorname{card}\left(A - \bigcup_{i \in U} A_i \right) + \operatorname{card}\left( \bigcup_{i \in S} A_i \right) \right) \\
+&amp;= \operatorname{card}\left(A - \bigcup_{i \in U} A_i \right) \sum_{k=0}^{|U|} (-1)^{|U|-k} \binom{|U|}{k} + \sum_{k=0}^{|U|} (-1)^{|U|-k} \sum_{|S|=k} \operatorname{card}\left( \bigcup_{i \in S} A_i \right)
+\end{aligned}
+\]</span> 注意到 <span class="math display">\[
+\sum_{k=0}^{|U|} (-1)^{|U|-k} \binom{|U|}{k} = [|U| = 0]
+\]</span> 而 <span class="math inline">\(U \neq \varnothing\)</span>，故上式左项为 <span class="math inline">\(0\)</span>，即得结论式第二行．</p>
+</div>
+<div id="exm-inex-ordinary-out" class="theorem example">
+<p><span class="theorem-title"><strong>Example 2 (有点常见的“容斥原理”) </strong></span>不满足任何性质的元素数量可容斥地通过下式计算 <span class="math display">\[
+\begin{aligned}
+\operatorname{card}\left( A - \bigcup_{i \in U} A_i \right)
+&amp;= \sum_{k=0}^{|U|} (-1)^k \sum_{|S| = k} \operatorname{card}\left( A \cap \bigcap_{i \in S} A_i \right) \\
+&amp;= \operatorname{card}A + \sum_{k=1}^{|U|} (-1)^k \sum_{|S| = k} \operatorname{card}\left( \bigcap_{i \in S} A_i \right) \\
+&amp;= \operatorname{card}A + \sum_{k=1}^{|U|} (-1)^k \sum_{i_1 &lt; \dots &lt; i_k} \operatorname{card}\left( A_{i_1} \cap \dots \cap A_{i_k} \right)
+\end{aligned}
+\]</span> 其中 <span class="math inline">\(A\)</span> 代表全集，<span class="math inline">\(A_i\)</span> 代表满足第 <span class="math inline">\(i\)</span> 个性质的元素构成的集合，<span class="math inline">\(U\)</span> 是非空有限的性质指标集．</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>令 <span class="math inline">\(f(S)\)</span> 为恰好只满足 <span class="math inline">\(S\)</span> 中各性质的元素数量，<span class="math inline">\(g(S)\)</span> 为至少满足 <span class="math inline">\(S\)</span> 中各性质的元素数量，即 <span class="math display">\[
+\begin{gathered}
+f(S) := \operatorname{card}\left( \left( A \cap \bigcap_{i \in S} A_i \right) - \bigcup_{i \in U-S} A_i \right) \\
+g(S) := \operatorname{card}\left( A \cap \bigcap_{i \in S} A_i \right)
 = \begin{cases}
-\operatorname{card}\left( \bigcup_{i \in U} A_i \right) &amp; S = \varnothing \\
+\operatorname{card}A &amp; S = \varnothing \\
 \operatorname{card}\left( \bigcap_{i \in S} A_i \right) &amp; \text{otherwise}
 \end{cases}
 \end{gathered}
-\]</span> 容易验证 <a href="#thm-inex-second-set">Theorem&nbsp;5</a> 的 LHS 成立，故 RHS 亦成立．取 RHS 中 <span class="math inline">\(S=\varnothing\)</span>，就有 <span class="math display">\[
+\]</span> 取 <span class="math inline">\(S=\varnothing\)</span> 代入 <a href="#thm-inex-second-set">Theorem&nbsp;5</a> 右侧就得到结论．</p>
+</div>
+<div id="exm-inex-ordinary-in" class="theorem example">
+<p><span class="theorem-title"><strong>Example 3 (常见的“容斥原理”) </strong></span>满足至少 <span class="math inline">\(1\)</span> 个性质的元素数量可容斥地通过下式计算 <span class="math display">\[
 \begin{aligned}
-0 = f(\varnothing) &amp;= \sum_{T \subset U} (-1)^{|T|} g(T) \\
-&amp;= g(\varnothing) + \sum_{k=1}^{|U|} (-1)^k \sum_{|T|=k} g(T) \\
-&amp;= \operatorname{card}\left( \bigcup_{i \in U} A_i \right) + \sum_{k=1}^{|U|} (-1)^k \sum_{i_1 &lt; \dots &lt; i_k} \operatorname{card}\left( A_{i_1} \cap \dots \cap A_{i_k} \right)
+\operatorname{card}\left( \bigcup_{i \in U} A_i \right)
+&amp;= \sum_{k=1}^{|U|} (-1)^{k-1} \sum_{|S| = k} \operatorname{card}\left( \bigcap_{i \in S} A_i \right) \\
+&amp;= \sum_{k=1}^{|U|} (-1)^{k-1} \sum_{i_1 &lt; \dots &lt; i_k} \operatorname{card}\left( A_{i_1} \cap \dots \cap A_{i_k} \right)
 \end{aligned}
-\]</span> 移项即得到常见的“容斥原理”．</p>
-<div id="thm-inex-second-binomal" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 6 (容斥原理，形式二，二项式) </strong></span><span class="math display">\[
-g(n) = \sum_{k=0}^{N-n} \binom {N-n} k f(n+k) \iff f(n) = \sum_{k=0}^{N-n} (-1)^k \binom {N-n} k g(n+k)
-\]</span></p>
+\]</span> 其中 <span class="math inline">\(A_i\)</span> 代表满足第 <span class="math inline">\(i\)</span> 个性质的元素构成的集合，<span class="math inline">\(i \in U\)</span>．</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>对 <a href="#exm-inex-ordinary-out">Example&nbsp;2</a> 做简单移项即得．</p>
 </div>
 </section>
 </section>
