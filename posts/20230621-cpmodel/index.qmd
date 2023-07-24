@@ -3,7 +3,7 @@ title: "算法 & 数学碎碎念"
 abstract: "现场赛公式模板库，亦可作为小而精的总结性学习材料参考．无需单独成文或暂不完善的内容会放在这里．"
 author: "sun123zxy"
 date: "2023/06/21"
-date-modified: "2023/07/19"
+date-modified: "2023/07/21"
 
 categories:
   - OI
@@ -390,7 +390,7 @@ $$
 | $${1,\emptyset,\emptyset}$$ | 有标号 | 不限制 	|       | $$\begin{aligned} B(n) &= \sum_{k=0}^n {n \brace k} \\ B(n+1) &= \sum_{k=0}^n \binom n k B(k) \end{aligned}$$ | $$\mathrm{EGF}(x)=e^{e^x - 1}$$ | Bell 数；$[n]$ 上等价关系（划分）个数 |
 | $${0,1,0}$$ | 无标号 | 有标号 	| 盒可空 | $$\binom{n+r-1}{r-1}$$ | $$\mathrm{OGF_r}(x) = \left(\frac 1 {1-x}\right)^r$$ | $r$ 元不定方程非负整数解个数 |
 | $${0,1,1}$$ | 无标号 | 有标号 	| 盒非空 | $$\binom{n-1}{r-1}$$ | $$\begin{aligned} \mathrm{OGF_r}(x) &= \left(\frac x {1-x}\right)^r \\ &= x^r \left(\frac 1 {1-x}\right)^r \end{aligned}$$ | $r$ 元 $n$ 次单项式构型数 |
-| $${0,0,0}$$ | 无标号 | 无标号 	| 盒可空 | $$\sum_{k=0}^r p(n,k)$$ | | |
+| $${0,0,0}$$ | 无标号 | 无标号 	| 盒可空 | $$\sum_{k=0}^r p(n,k)$$ | $$\mathrm{OGF}(x)= \frac 1 {1-x} \prod_{k=1}^{+\infty} \frac 1 {1-x^k}$$ | |
 | $${0,0,1}$$ | 无标号 | 无标号 	| 盒非空 | $$p(n,r)=p(n-1,r-1)+p(n-r,r)$$ | | $r$ 部分拆数 |
 | $${0,\emptyset,\emptyset}$$ | 无标号 | 不限制	|       | $$\begin{aligned} p(n) &= \sum_{\substack{k \in \mathbb Z}} (-1)^k p_{n-k(3k-1)/2} \\ &= p_{n-1} + p_{n-2} - p_{n-5} - p_{n-7} + \dots \end{aligned}$$ | $$\begin{aligned} \mathrm{OGF}(x)&=\prod_{k=1}^{+\infty} \frac 1 {1-x^k} \\ &= \left( \sum_{k \in \mathbb Z} (-1)^k x^{k(3k-1)/2} \right)^{-1} \end{aligned}$$ | 分拆数 |
 :::
@@ -403,6 +403,28 @@ $$
 - 普通生成函数 $\mathrm{OGF}_r^{1,1,0}(x)$ 同理．
 
 在不至混淆的情况下，也可省略下标或上标上的代号．
+
+#### 通用性质
+
+::: {#prp-bb-x10-x11}
+$$
+\begin{gathered}
+\mathrm{BB}_{*,1,0}(n,r) = \sum_{k=0}^r \binom r k \mathrm{BB}_{*,1,1}(n,k) \\
+\mathrm{EGF}_n^{*,1,0}(x) = e^x \mathrm{EGF}_n^{*,1,1}(x)
+\end{gathered}
+$$
+:::
+对有标号盒的二项式反演．在 $1,1,0$-球盒问题中，上式体现为第二类 Stirling 数的通项公式；在 $0,1,0$-球盒问题中，上式体现为 Vandermonde 卷积．
+
+::: {#prp-bb-x00-x01}
+$$
+\begin{gathered}
+\mathrm{BB}_{*,0,0}(n,r) = \sum_{k=0}^r \mathrm{BB}_{*,0,1}(n,k) \\
+\mathrm{OGF}_n^{*,0,0}(x) = \frac 1 {1-x} \mathrm{OGF}_n^{*,0,1}(x)
+\end{gathered}
+$$
+:::
+对无标号盒，直接求和即可．
 
 ### 第二类 Stirling 数
 
@@ -606,7 +628,19 @@ $n$ 点有向图以 $i$ 为根的生成叶向树形图的数量与该图入度 L
 - [矩阵树定理 - OI Wiki](https://oi-wiki.org/graph/matrix-tree/)
 - [Kirchhoff's theorem - Wikipedia](https://en.wikipedia.org/wiki/Kirchhoff's_theorem)
 
-### Polya 计数【TODO】
+### Polya 计数
+
+:::{#thm-burnside}
+
+## Burnside
+
+$$
+\begin{aligned}
+等价类计数 &= \frac{1}{|G|}\sum_{f \in G} |C(f)|
+\end{aligned}
+$$
+其中 $G$ 是等价操作群，$C(f)$ 是操作 $f$ 下的不动点集合．
+:::
 
 ## 多项式
 
@@ -1066,6 +1100,14 @@ ll det(Matrix A){
 	return ans;
 }
 ```
+
+## 图论【TODO】
+
+### 最短路
+
+### 强连通分量
+
+### 网络流
 
 ## 通用
 
