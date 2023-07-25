@@ -708,7 +708,7 @@ Poly itg(Poly A,ll c){ // integral
 
 考虑将待变换多项式
 $$
-A(x) = \sum_{k=0}^{2n} a_k x^k
+A(x) = \sum_{k=0}^{2n-1} a_k x^k
 $$
 奇偶分项为两个多项式
 $$
@@ -717,15 +717,15 @@ $$
 其中
 $$
 \begin{aligned}
-A_0 (x) &= \sum_{k=0}^n a_{2k} x^k \\
-A_1 (x) &= \sum_{k=0}^n a_{2k+1} x^k
+A_0 (x) &= \sum_{k=0}^{n-1} a_{2k} x^k \\
+A_1 (x) &= \sum_{k=0}^{n-1} a_{2k+1} x^k
 \end{aligned}
 $$
 代入 $x = \omega_{2n}^k \pod{k = 0,\dots, 2n-1}$，用单位根折半性质（$\omega_{2n}^{2k} = \omega_n^k$）
 $$
 A(\omega_{2n}^k) = A_0 (\omega_{n}^k) + \omega_{2n}^k A_1 (\omega_{n}^k)
 $$
-再用单位根消去性质（$\omega_{2n}^{n+k} = - \omega_{2n}^k$）
+用 $\omega_{2n}^{n+k} = - \omega_{2n}^k$
 $$
 \begin{aligned}
 A(\omega_{2n}^k) &= A_0 (\omega_n^k) + \omega_{2n}^k A_1 (\omega_n^k) \\
