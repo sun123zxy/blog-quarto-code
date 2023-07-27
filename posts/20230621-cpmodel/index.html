@@ -912,17 +912,17 @@ C_{i,j} = \begin{cases}
 <li><p>NTT：<span class="math inline">\(P=998244353 = 7 \times 17 \times 2^{23} + 1\)</span>，<span class="math inline">\(\mathrm{PR} = 3\)</span> 是它的一个原根．（本原）单位根构造 <span class="math inline">\(\omega_{n} = \mathrm{PR}^{\frac{P-1}{n}} \bmod P\)</span>．</p></li>
 </ul>
 <p>考虑将待变换多项式 <span class="math display">\[
-A(x) = \sum_{k=0}^{2n} a_k x^k
+A(x) = \sum_{k=0}^{2n-1} a_k x^k
 \]</span> 奇偶分项为两个多项式 <span class="math display">\[
 A(x) = A_0 (x^2) + x A_1(x^2)
 \]</span> 其中 <span class="math display">\[
 \begin{aligned}
-A_0 (x) &amp;= \sum_{k=0}^n a_{2k} x^k \\
-A_1 (x) &amp;= \sum_{k=0}^n a_{2k+1} x^k
+A_0 (x) &amp;= \sum_{k=0}^{n-1} a_{2k} x^k \\
+A_1 (x) &amp;= \sum_{k=0}^{n-1} a_{2k+1} x^k
 \end{aligned}
 \]</span> 代入 <span class="math inline">\(x = \omega_{2n}^k \pod{k = 0,\dots, 2n-1}\)</span>，用单位根折半性质（<span class="math inline">\(\omega_{2n}^{2k} = \omega_n^k\)</span>） <span class="math display">\[
 A(\omega_{2n}^k) = A_0 (\omega_{n}^k) + \omega_{2n}^k A_1 (\omega_{n}^k)
-\]</span> 再用单位根消去性质（<span class="math inline">\(\omega_{2n}^{n+k} = - \omega_{2n}^k\)</span>） <span class="math display">\[
+\]</span> 用 <span class="math inline">\(\omega_{2n}^{n+k} = - \omega_{2n}^k\)</span> <span class="math display">\[
 \begin{aligned}
 A(\omega_{2n}^k) &amp;= A_0 (\omega_n^k) + \omega_{2n}^k A_1 (\omega_n^k) \\
 A(\omega_{2n}^{n+k}) &amp;= A_0 (\omega_n^k) - \omega_{2n}^k A_1(\omega_n^k)
