@@ -522,6 +522,8 @@ $$
 - [分拆数 - OI Wiki](https://oi-wiki.org/math/combinatorics/partition/)
 - [组合数学（2）分拆数 - 知乎](https://zhuanlan.zhihu.com/p/530925142)
 
+### 各种图计数【TODO】
+
 ### Lucas 定理
 
 ::: {#thm-lucas}
@@ -1109,52 +1111,51 @@ ll det(Matrix A){
 
 ### 网络流
 
-## 通用
+## 杂项
 
 ### 基础模板
 
 ```c++
-//general model 2023/06/26
+//general model 2023/07/28
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
 
-namespace safe{
-    ll rd(){
-        ll ans=0; bool sgn=0; char c=getchar();
-        while(c<'0'||c>'9'){if(c=='-') sgn=1; c=getchar();}
-        while(c>='0'&&c<='9'){ans=ans*10+c-'0';c=getchar();}
-        if(sgn) ans=-ans; return ans;
-    }
-    const ll MOD=;
-    #define _ %MOD
-    ll lmodv(ll x){
-        if(x<0) x+=MOD;
-        else if(x>=MOD) x-=MOD;
-        return x;
-    }void lmodp(ll &x){x=lmodv(x);}
-    ll mmodv(ll x){
-        return x%MOD;
-    }void mmodp(ll &x){x=mmodv(x);}
-    ll hmodv(ll x){
-        return lmodv(x%MOD);
-    }void hmodp(ll &x){x=hmodv(x);}
-    ll qpow(ll x,ll up){
-        hmodp(x); ll ans=1;
-        while(up){
-            if(up&1) ans=ans*x _;
-            x=x*x _; up>>=1;
-        }return ans;
-    }
-    ll inv(ll x){return qpow(x,MOD-2);}
-    
-    void entry(){}
+ll rd(){
+    ll ans=0; bool sgn=0; char c=getchar();
+    while(c<'0'||c>'9'){if(c=='-') sgn=1; c=getchar();}
+    while(c>='0'&&c<='9'){ans=ans*10+c-'0';c=getchar();}
+    if(sgn) ans=-ans; return ans;
 }
+const ll MOD=;
+#define _ %MOD
+ll lmodv(ll x){
+    if(x<0) x+=MOD;
+    else if(x>=MOD) x-=MOD;
+    return x;
+}void lmodp(ll &x){x=lmodv(x);}
+ll mmodv(ll x){
+    return x%MOD;
+}void mmodp(ll &x){x=mmodv(x);}
+ll hmodv(ll x){
+    return lmodv(x%MOD);
+}void hmodp(ll &x){x=hmodv(x);}
+ll qpow(ll x,ll up){
+    hmodp(x); ll ans=1;
+    while(up){
+        if(up&1) ans=ans*x _;
+        x=x*x _; up>>=1;
+    }return ans;
+}
+ll inv(ll x){return qpow(x,MOD-2);}
+    
+void entry(){}
+
 int main(){
     //freopen("t1.in","r",stdin);
     //freopen("t1.out","w",stdout);
-    //ll T=safe::rd(); while(T--){
-    safe::entry();
+    //ll T=rd(); while(T--){
+    entry();
     //}
     return 0;
 }
@@ -1162,16 +1163,50 @@ int main(){
 
 ### 对拍
 
-#### Windows
+#### Windows Batch
 
 ```batch
 :loop
-    make.exe>data.in
-    my.exe<data.in>my.out
-    std.exe<data.in>std.out
+    gen.exe>dat.in
+    my.exe<dat.in>my.out
+    std.exe<dat.in>std.out
     fc my.out std.out
     if not errorlevel 1 goto loop
 pause
 ```
 
-#### Linux【TODO】
+#### Linux Shell
+
+```sh
+while true; do
+	./gen>dat.in
+	./std<dat.in>std.out
+	./my<dat.in>my.out
+	if diff std.out my.out; then
+		printf OK
+	else
+		printf DIFF
+		exit 0
+	fi
+done
+```
+
+### 表
+
+#### 质数表
+
+```default
+1e2 		1e3 		1e4 		1e5 		1e6
+101 		1009 		10007 		100003 		1000003
+
+1e7 		1e8 		1e9 		1e10 		1e11 			
+10000019 	100000007 	1000000007 	10000000019 100000000003
+
+1e12			1e13 			1e14 			1e15
+1000000000039	10000000000037 	100000000000031 1000000000000037
+
+1e16 				1e17 				1e18
+10000000000000061	100000000000000003 	1000000000000000003
+```
+
+#### 典列【TODO】
