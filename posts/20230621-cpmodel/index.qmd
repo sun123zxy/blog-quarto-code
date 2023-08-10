@@ -140,7 +140,11 @@ ll BSGS(ll a,ll b){
 }
 ```
 
-### Euler 降幂【TODO】
+### 扩展 Euler 定理【TODO】
+
+### Miller-Rabin【TODO】
+
+### Pollard-Rho【TODO】
 
 ## 积性函数
 
@@ -723,7 +727,7 @@ A_0 (x) &= \sum_{k=0}^{n-1} a_{2k} x^k \\
 A_1 (x) &= \sum_{k=0}^{n-1} a_{2k+1} x^k
 \end{aligned}
 $$
-代入 $x = \omega_{2n}^k \pod{k = 0,\dots, 2n-1}$，用单位根折半性质（$\omega_{2n}^{2k} = \omega_n^k$）
+代入 $x = \omega_{2n}^k \pod{k = 0,\dots, 2n-1}$，用单位根消去 / 折半性质（$\omega_{2n}^{2k} = \omega_n^k$）
 $$
 A(\omega_{2n}^k) = A_0 (\omega_{n}^k) + \omega_{2n}^k A_1 (\omega_{n}^k)
 $$
@@ -772,6 +776,17 @@ class Poly : public vector<ll>{ public:
 		}
 	}
 };
+// --- trivial ---
+Poly operator * (Poly A,Poly B){
+	ll c_len=A.len()+B.len()-1;
+	ll n=ceil(log2(c_len)); spawn_rev(n); n=1<<n;
+	Poly C(n); A.resize(n); B.resize(n);
+	A.DFT(1); B.DFT(1);
+	for(ll i=0;i<n;i++) C[i]=A[i]*B[i]_;
+	C.DFT(-1); C.resize(c_len);
+	return C;
+}
+// --- optimized ---
 Poly opt(vector<Poly> pv,ll len,std::function<ll(const vector<ll>&)> func){
 	ll n=ceil(log2(len)); spawn_rev(n); n=1<<n;
 	for(auto &P : pv) P.resize(n),P.DFT(1);
@@ -886,6 +901,15 @@ B = 2 B_0 - A B_0^2 \pmod{x^{2n}}
 $$
 
 ```c++
+// trivial
+Poly inv(const Poly &A){
+	ll n=A.len(); Poly B(1); B[0]=inv(A[0]);
+	for(ll hf=1;hf<n;hf<<=1){
+		B=B*2-B*B*A.subpoly(0,hf*2); B.resize(hf*2);
+	} B.resize(n);
+	return B;
+}
+// optimized
 Poly inv(const Poly &A){
 	ll n=A.len(); Poly B={inv(A[0])};
 	for(ll hf=1;hf<n;hf<<=1){
