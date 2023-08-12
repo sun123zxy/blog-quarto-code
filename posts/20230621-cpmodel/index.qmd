@@ -528,6 +528,44 @@ $$
 
 ### 各种图计数【TODO】
 
+#### 有标号 DAG 计数
+
+$$
+f_n=\sum_{i=1}^n(-1)^{i+1}\binom{n}{i}2^{i(n-i)}f_{n-i}
+$$
+思路是对 DAG 的入度为零的点做容斥．进一步推导可拆出卷积形式，再用类似分治 FFT 的生成函数方法可得封闭形式．
+
+#### 有标号偏序图计数
+
+问得好，但这是个著名的 open problem．各种类型的偏序图计数参考 [Partially ordered set - Wikipedia # Number of partial orders](https://en.wikipedia.org/wiki/Partially_ordered_set#Number_of_partial_orders)．我们再给出若干参考资料：
+
+-   <https://math.stackexchange.com/questions/2677986/how-many-partial-orders-can-be-defined-on-varnothing-and-a-finite-set>
+-   <https://oeis.org/A001035>
+-   [Erné, M., Stege, K. Counting finite posets and topologies. Order 8, 247–265 (1991)](https://doi.org/10.1007/BF00383446)（内有研究历史综述）
+
+#### 有标号连通图计数
+
+标准的有标号无序划分．EGF 是有标号一般图计数 EGF 的 $\ln$．
+
+#### 竞赛图
+
+强连通的竞赛图一定存在 Hamilton 回路（归纳证明）；无环的竞赛图是全序图．两者结合可推出竞赛图一定存在 Hamilton 路径．同时，强连通竞赛图中存在所有大小的环路．
+
+#### 有标号划分为 $k$ 个全序图
+
+Lah 数
+$$
+L(n,k) = \frac{n!}{k!} \binom{n-1}{k-1}
+$$
+思路是先 $n!$ 排个大序，再无标号球入非空有标号桶，再除 $k!$ 给桶消序．
+
+生成函数的思路是，考虑非空全序计数的 EGF 为 $\frac 1 {1-x} - 1 = \frac x {1-x}$，$k$ 次有序拼接再消序即得
+$$
+\sum _{n\geq k}L(n,k){\frac {x^{n}}{n!}}={\frac {1}{k!}}\left({\frac {x}{1-x}}\right)^{k}
+$$
+
+更多信息参考 Wikipedia．
+
 ### Lucas 定理
 
 ::: {#thm-lucas}
@@ -1136,6 +1174,8 @@ ll det(Matrix A){
 ### 网络流
 
 ## 杂项
+
+- [超大模板](model.cpp)正在施工中……
 
 ### 基础模板
 
