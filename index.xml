@@ -868,6 +868,33 @@ font-style: inherit;">}</span></span></code></pre></div>
 </section>
 <section id="各种图计数todo" class="level3" data-number="3.5">
 <h3 data-number="3.5" class="anchored" data-anchor-id="各种图计数todo"><span class="header-section-number">3.5</span> 各种图计数【TODO】</h3>
+<section id="有标号-dag-计数" class="level4" data-number="3.5.1">
+<h4 data-number="3.5.1" class="anchored" data-anchor-id="有标号-dag-计数"><span class="header-section-number">3.5.1</span> 有标号 DAG 计数</h4>
+<p><img src="https://latex.codecogs.com/png.latex?%0Af_n=%5Csum_%7Bi=1%7D%5En(-1)%5E%7Bi+1%7D%5Cbinom%7Bn%7D%7Bi%7D2%5E%7Bi(n-i)%7Df_%7Bn-i%7D%0A"> 思路是对 DAG 的入度为零的点做容斥．进一步推导可拆出卷积形式，再用类似分治 FFT 的生成函数方法可得封闭形式．</p>
+</section>
+<section id="有标号偏序图计数" class="level4" data-number="3.5.2">
+<h4 data-number="3.5.2" class="anchored" data-anchor-id="有标号偏序图计数"><span class="header-section-number">3.5.2</span> 有标号偏序图计数</h4>
+<p>问得好，但这是个著名的 open problem．各种类型的偏序图计数参考 <a href="https://en.wikipedia.org/wiki/Partially_ordered_set#Number_of_partial_orders">Partially ordered set - Wikipedia # Number of partial orders</a>．我们再给出若干参考资料：</p>
+<ul>
+<li><a href="https://math.stackexchange.com/questions/2677986/how-many-partial-orders-can-be-defined-on-varnothing-and-a-finite-set" class="uri">https://math.stackexchange.com/questions/2677986/how-many-partial-orders-can-be-defined-on-varnothing-and-a-finite-set</a></li>
+<li><a href="https://oeis.org/A001035" class="uri">https://oeis.org/A001035</a></li>
+<li><a href="https://doi.org/10.1007/BF00383446">Erné, M., Stege, K. Counting finite posets and topologies. Order 8, 247–265 (1991)</a>（内有研究历史综述）</li>
+</ul>
+</section>
+<section id="有标号连通图计数" class="level4" data-number="3.5.3">
+<h4 data-number="3.5.3" class="anchored" data-anchor-id="有标号连通图计数"><span class="header-section-number">3.5.3</span> 有标号连通图计数</h4>
+<p>标准的有标号无序划分．EGF 是有标号一般图计数 EGF 的 <img src="https://latex.codecogs.com/png.latex?%5Cln">．</p>
+</section>
+<section id="竞赛图" class="level4" data-number="3.5.4">
+<h4 data-number="3.5.4" class="anchored" data-anchor-id="竞赛图"><span class="header-section-number">3.5.4</span> 竞赛图</h4>
+<p>强连通的竞赛图一定存在 Hamilton 回路（归纳证明）；无环的竞赛图是全序图．两者结合可推出竞赛图一定存在 Hamilton 路径．同时，强连通竞赛图中存在所有大小的环路．</p>
+</section>
+<section id="有标号划分为-k-个全序图" class="level4" data-number="3.5.5">
+<h4 data-number="3.5.5" class="anchored" data-anchor-id="有标号划分为-k-个全序图"><span class="header-section-number">3.5.5</span> 有标号划分为 <img src="https://latex.codecogs.com/png.latex?k"> 个全序图</h4>
+<p>Lah 数 <img src="https://latex.codecogs.com/png.latex?%0AL(n,k)%20=%20%5Cfrac%7Bn!%7D%7Bk!%7D%20%5Cbinom%7Bn-1%7D%7Bk-1%7D%0A"> 思路是先 <img src="https://latex.codecogs.com/png.latex?n!"> 排个大序，再无标号球入非空有标号桶，再除 <img src="https://latex.codecogs.com/png.latex?k!"> 给桶消序．</p>
+<p>生成函数的思路是，考虑非空全序计数的 EGF 为 <img src="https://latex.codecogs.com/png.latex?%5Cfrac%201%20%7B1-x%7D%20-%201%20=%20%5Cfrac%20x%20%7B1-x%7D">，<img src="https://latex.codecogs.com/png.latex?k"> 次有序拼接再消序即得 <img src="https://latex.codecogs.com/png.latex?%0A%5Csum%20_%7Bn%5Cgeq%20k%7DL(n,k)%7B%5Cfrac%20%7Bx%5E%7Bn%7D%7D%7Bn!%7D%7D=%7B%5Cfrac%20%7B1%7D%7Bk!%7D%7D%5Cleft(%7B%5Cfrac%20%7Bx%7D%7B1-x%7D%7D%5Cright)%5E%7Bk%7D%0A"></p>
+<p>更多信息参考 Wikipedia．</p>
+</section>
 </section>
 <section id="lucas-定理" class="level3" data-number="3.6">
 <h3 data-number="3.6" class="anchored" data-anchor-id="lucas-定理"><span class="header-section-number">3.6</span> Lucas 定理</h3>
@@ -4091,6 +4118,9 @@ font-style: inherit;">}</span></span></code></pre></div>
 </section>
 <section id="杂项" class="level2" data-number="8">
 <h2 data-number="8" class="anchored" data-anchor-id="杂项"><span class="header-section-number">8</span> 杂项</h2>
+<ul>
+<li><a href="model.cpp">超大模板</a>正在施工中……</li>
+</ul>
 <section id="基础模板" class="level3" data-number="8.1">
 <h3 data-number="8.1" class="anchored" data-anchor-id="基础模板"><span class="header-section-number">8.1</span> 基础模板</h3>
 <div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb17-1"><span class="co" style="color: #5E5E5E;
