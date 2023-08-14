@@ -739,7 +739,7 @@ Poly drv(Poly A){ // derivative
 	A.pop_back(); return A;
 }
 Poly itg(Poly A,ll c){ // integral
-	A.push_back(0); for(ll i=A.len();i>=1;i--) A[i]=A[i-1]*inv(i)_;
+	A.push_back(0); for(ll i=A.len()-1;i>=1;i--) A[i]=A[i-1]*inv(i)_;
 	A[0]=c; return A;
 }
 ```
@@ -854,10 +854,10 @@ $$
 
 将待求解方程 $A(B(x)) = 0 \pmod{x^{2n}}$ 左式多项式 $A$ 在 $B_0$ 处 Taylor 展开
 $$
-\begin{multline}
-A(B(x)) = A(B_0(x)) + A'(B_0(x)) (B(x)-B_0(x)) \\ + \frac{A''(B_0(x))}{2!} (B(x)-B_0(x))^2 + \dots
+\begin{split}
+A(B(x)) = A(B_0(x)) &+ A'(B_0(x)) (B(x)-B_0(x)) \\ &+ \frac{A''(B_0(x))}{2!} (B(x)-B_0(x))^2 + \dots
 = 0 \pmod{x^{2n}}
-\end{multline}
+\end{split}
 $$
 注意到 $B(x)-B_0(x)$ 任意项的次数都不低于 $x^n$，故模 $x^{2n}$ 意义下二次方以上的项可以舍去，故上式化为
 $$
@@ -869,9 +869,10 @@ B(x) =  B_0(x) - \frac{A(B_0(x))}{A'(B_0(x))} \pmod{x^{2n}}
 $$
 这里要求 $A'(B_0(x))$ 需在 $x^{2n}$ 意义下可逆，即
 $$
-\begin{multline}
-[x^0] A'(B_0(x)) = [x^0] A'(b_0) = \\ \sum_{k=0}^\infty \left( [x^k] A' \right) b_0^k = \sum_{k=0}^\infty (k+1) a_{k+1} b_0^k \neq 0 \pmod{x^{2n}}
-\end{multline}
+\begin{split}
+[x^0] A'(B_0(x)) = [x^0] A'(b_0) &= \sum_{k=0}^\infty \left( [x^k] A' \right) b_0^k \\
+&= \sum_{k=0}^\infty (k+1) a_{k+1} b_0^k \neq 0 \pmod{x^{2n}}
+\end{split}
 $$
 若上述要求得到满足，根据递推过程，在边界条件 $b_0$ 确定的情况下，满足方程的 $B(x)$ 在模意义下唯一．【TODO：详细讨论边界条件不友好的情况】
 
@@ -1175,7 +1176,7 @@ ll det(Matrix A){
 
 ## 杂项
 
-- [超大模板](model.cpp)正在施工中……
+超大模板正在施工中……
 
 ### 基础模板
 
