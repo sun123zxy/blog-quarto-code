@@ -3,19 +3,28 @@ title: "算法 & 数学碎碎念"
 abstract: "现场赛公式模板库，亦可作为小而精的总结性学习材料参考．无需单独成文或暂不完善的内容会放在这里．"
 author: "sun123zxy"
 date: "2023/06/21"
-date-modified: "2023/07/21"
+date-modified: "2023/08/17"
 
 categories:
   - OI
   - 数学
 
 number-sections: true
+
+format:
+  html:
+    theme: "_assets/custom.scss"
+    linestretch: 1.7
+    code-fold: true
+    html-math-method: mathjax
+    # toc: true
 ---
 
 ::::: {.hidden}
 ::: {.content-hidden unless-format="html"}
 $$
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
 \newcommand{\inv}{\operatorname{inv}}
 \newcommand{\lcm}{\operatorname{lcm}}
 \newcommand{\id}{\operatorname{id}}
@@ -25,6 +34,7 @@ $$
 :::
 ::: {.content-hidden when-format="html"}
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
 \newcommand{\inv}{\operatorname{inv}}
 \newcommand{\lcm}{\operatorname{lcm}}
 \newcommand{\id}{\operatorname{id}}
@@ -32,6 +42,8 @@ $$
 \newcommand{\diff}{\operatorname{d}\!}
 :::
 :::::
+
+前半部分主要为公式、推导、证明等速成提纲，大部分实现、模板、表格放在文末．
 
 ## 数论
 
@@ -47,15 +59,6 @@ a y_1 + b \left( x_1 - \floor{\frac a b} y_1 \right) = \gcd(b, a \bmod b)
 $$
 其中 $x_1, y_1$ 是 $b x + (a \bmod b) y = \gcd(b, a \bmod b)$ 的一组解．
 :::
-
-```c++
-typedef tuple<ll,ll,ll> Tuple;
-Tuple exgcd(ll a,ll b){
-	if(b==0) return {1,0,a};
-	ll x1,y1,d; tie(x1,y1,d)=exgcd(b,a%b);
-	return {y1,x1-(a/b)*y1,d};
-}
-```
 
 ### CRT
 
@@ -105,7 +108,7 @@ k_1 m_1 + a_1 = k_2 m_2 + a_2
 $$
 即
 $$
-k_1 m_1 + k_2 m_2 = a_2 - a_1
+k_1 m_1 - k_2 m_2 = a_2 - a_1
 $$
 此即关于 $k_1, k_2$ 的不定方程．若 $\gcd(m_1, m_2) \mid a_2 - a_1$，则可应用 ExGCD 求得方程的一组解，带回即得
 $$
@@ -119,32 +122,123 @@ $$
 
 ### BSGS
 
-求 $a^x \equiv b \pmod{p}$ 的一个特解，其中 $\gcd(a,p) = 1$．
+求 $a^x \equiv b \pmod{m}$ 的一个特解，其中 $\gcd(a,m) = 1$．
 
-实质是非常暴力的根号分治．时间复杂度 $O(\sqrt p)$．
-
-```c++
-ll BSGS(ll a,ll b){
-    map<ll,bool> mp;
-	ll cur=1,sqrtM=ceil(sqrt(MOD));
-	for(ll bi=1;bi<=sqrtM;bi++){
-		cur=cur*a%MOD;
-		mp[b*cur%MOD]=bi;
-	}
-	ll nw=cur;
-	for(ll ai=1;ai<=sqrtM;ai++){
-		if(mp[nw]) return ai*sqrtM-mp[nw];
-		nw=nw*cur%MOD;
-	}
-	return -1;
-}
-```
-
-### 扩展 Euler 定理【TODO】
+实质是非常暴力的根号分治．根据 Euler 定理，只需检测连续 $\varphi(m)$ 个 $x$ 就可判定是否有解．令 $x = q \ceil{\sqrt m} -r$，其中 $q,r \in [1,\ceil{\sqrt m}]$，于是 $x \in [0,\ceil{\sqrt m}^2)$．代入原方程移项即得 $a^{q \ceil{\sqrt m}} \equiv b a^r \pmod{m}$，右边使用 `map` 提前存下即可．时间复杂度 $O(\sqrt m)$．
 
 ### Miller-Rabin【TODO】
 
 ### Pollard-Rho【TODO】
+
+### 原根、Euler 定理等
+
+见 FFT/NTT 讲稿．
+
+### 定理杂记
+
+#### Lucas 定理
+
+::: {#thm-nt-lucas}
+
+## Lucas 定理
+
+$$
+\binom{n}{m} \equiv \prod_{i} \binom{n_i}{m_i} \equiv \binom{\floor{n/p}}{\floor{m/p}} \binom{n \bmod p}{n \bmod p} \pmod p
+$$
+
+其中 $p$ 是质数，$n_i$ 和 $m_i$ 是 $n$ 和 $m$ 的 $p$ 进制表示下的各数位．
+:::
+
+证明的要点有二：一是 $\binom {p^i} m \bmod {p} = [m = 0 \land m = p^i]$，即 $(1+x)^{p^i} \equiv 1 + x^{p^i} \pmod p$；二是 Vandermonde 卷积．生成函数食用风味更佳．
+
+参考：
+
+- [Lucas's theorem - Wikipedia](https://en.wikipedia.org/wiki/Lucas%27s_theorem)
+- [卢卡斯定理 - OI Wiki](https://oi-wiki.org/math/number-theory/lucas/)
+
+#### Legendre 公式和 Kummer 定理【TODO】
+
+::: {#thm-nt-legendre}
+
+## Legendre 公式
+
+$$
+\nu_p (n!) = \sum_{i=1}^{+\infty} \floor{\frac n {p^i}}
+$$
+
+其中 $p$ 是质数．
+:::
+
+比较显然的结论，按和式统计贡献即证．
+
+::: {#thm-nt-kummer}
+
+## Kummer 定理
+
+$\binom n m$ 中质因子 $p$ 的指数等于 $p$ 进制下加法 $m+(n-m)$ 发生的进位次数，即
+$$
+\nu_p \left( \binom n m \right) = \frac{S_p(m)+S_p(n-m)-S_p(n)}{p-1}
+$$
+其中 $S_p(n)$ 是 $n$ 在 $p$ 进制下各数位数字之和．
+:::
+
+证明待考．参考：
+
+- [Kummer's theorem - Wikipedia](https://en.wikipedia.org/wiki/Kummer%27s_theorem)
+
+#### 扩展 Euler 定理
+
+$$
+a^b \equiv a^{b \bmod \varphi(m) + \varphi(m)} \pmod{m}
+$$
+
+进入循环所需步骤其实很少，一定小于 $\varphi(m)$．（疑似量级在 $\log m$ 以下，存疑，见 FFT 讲稿）
+
+#### Lagrange 定理
+
+::: {#thm-nt-lagrange}
+
+## Lagrange 定理
+
+设 $p$ 是质数，$A(x) \in \mathbb Z_p[x]$．同余方程 $A(x) \equiv 0 \pmod p$ 只有至多 $\operatorname{deg} A(x)$ 个模 $p$ 意义下不同的整数解，除非这多项式的系数在模 $p$ 意义下全为零．
+:::
+
+这是域上的多项式理论在模 $p$ 整数域上的应用．
+
+#### Wilson 定理
+
+::: {#thm-nt-wilson}
+
+## Wilson 定理
+
+对质数 $p$，
+$$
+(p-1)! \equiv -1 \pmod p
+$$
+:::
+
+$p=2$ 容易特判证明．现在只考虑 $p$ 是奇质数的情况．
+
+$(p-1)!$ 中，互为逆元的数相互抵消，仅剩下逆元为自身的数 $\pm 1$，立得上述定理．
+
+另一种证法注意到 $x^{p-1} - 1 = \prod_{k=1}^{p-1} (x-k)$．这是因为 Fermat 小定理指出 $1$ 至 $p-1$ 的所有数的 $p-1$ 次幂均为 $1$，而 Lagrange 定理又保证了多项式点值到系数映射的唯一性．随后代入 $x=0$ 立得结论．
+
+参见 [Wilson's theorem - Wikipedia](https://en.wikipedia.org/wiki/Wilson%27s_theorem)．
+
+### 线性预处理
+
+#### 线性求逆元
+
+现欲求出 $a$ 模质数 $p$ 意义下的逆元 $a^{-1}$．用 $a$ 对 $p$ 做带余除法，$p=qa+r$，于是 $-qa \equiv r \pmod p$．两侧同时乘 $r$ 的逆元 $r^{-1}$ 得 $-q r^{-1} a \equiv 1 \pmod p$，故
+$$
+a^{-1} = - q r^{-1} = - \floor{\frac p a} \cdot (p \bmod a)^{-1}
+$$
+
+#### 线性阶乘逆
+
+$$
+\frac 1 {n!} = (n+1) \cdot \frac 1 {(n+1)!}
+$$
 
 ## 积性函数
 
@@ -526,7 +620,9 @@ $$
 - [分拆数 - OI Wiki](https://oi-wiki.org/math/combinatorics/partition/)
 - [组合数学（2）分拆数 - 知乎](https://zhuanlan.zhihu.com/p/530925142)
 
-### 各种图计数【TODO】
+### 各种图计数
+
+#### 有（无）标号有（无）根树计数【TODO】
 
 #### 有标号 DAG 计数
 
@@ -565,26 +661,6 @@ $$
 $$
 
 更多信息参考 Wikipedia．
-
-### Lucas 定理
-
-::: {#thm-lucas}
-
-## Lucas 定理
-
-$$
-\binom{n}{m} \equiv \prod_{i} \binom{n_i}{m_i} \equiv \binom{\floor{n/p}}{\floor{m/p}} \binom{n \bmod p}{n \bmod p} \pmod p
-$$
-
-其中 $p$ 是质数，$n_i$ 和 $m_i$ 是 $n$ 和 $m$ 的 $p$ 进制表示各数位．
-:::
-
-证明的要点在于 $\binom {p^i} m \bmod {p} = [m = 0 \land m = p^i]$ 和 Vandermonde 卷积，生成函数食用风味更佳．
-
-参考：
-
-- [卢卡斯定理 - OI Wiki](https://oi-wiki.org/math/number-theory/lucas/)
-- [Lucas's theorem - Wikipedia](https://en.wikipedia.org/wiki/Lucas%27s_theorem)
 
 ### 矩阵树定理
 
@@ -690,60 +766,6 @@ $$
 
 ### 通用
 
-```c++
-// polynomial universal, 2023/07/13
-const ll MOD=998244353,PR=3;
-#define _ %MOD
-// ... (MOD, qpow, inv, etc.)
-vector<ll> rev;
-void spawn_rev(ll n){ // n=log2(N)
-	rev.resize(1<<n);
-	rev[0]=0; for(ll i=1;i<(1<<n);i++) rev[i]=(rev[i>>1]>>1)+((i&1)<<(n-1));
-}
-class Poly : public vector<ll>{ public:
-    using vector<ll>::vector; // constructor
-    ll len() const {return size();} // to avoid strange glitches caused by size_t
-	Poly subpoly(ll pos,ll count) const { // imitate std::string::substr with resizing
-		Poly B(begin()+min(pos,len()),begin()+min(pos+count,len()));
-		B.resize(count); return B;
-	}
-	// ll cat(ll idx) const {return *(cbegin()+idx);} // const version of at()
-	// void debug() const {cout<<len()<<": "; for(ll i=0;i<len();i++) cout<<at(i)<<","; cout<<endl;}
-};
-Poly operator + (Poly A,Poly B){
-	ll n=max(A.len(),B.len()); A.resize(n); B.resize(n);
-	for(ll i=0;i<n;i++) lmodp(A[i]+=B[i]);
-	return A;
-}
-Poly operator - (Poly A){
-	for(ll i=0;i<A.len();i++) A[i]=lmodv(-A[i]);
-	return A;
-}Poly operator - (const Poly& A,const Poly &B){return A+(-B);}
-Poly operator * (Poly A,ll c){
-	for(ll i=0;i<A.len();i++) A[i]=A[i]*c _;
-	return A;
-}
-Poly operator << (Poly A,ll shift){ // optional
-	ll n=A.len(); A.resize(n+shift);
-	for(ll i=n-1;i>=0;i--) A[i+shift]=A[i];
-	for(ll i=shift-1;i>=0;i--) A[i]=0;
-	return A;
-}
-Poly operator >> (Poly A,ll shift){ // optional
-	ll n=A.len()-shift; if(n<=0) return {0};
-	for(ll i=0;i<n;i++) A[i]=A[i+shift];
-	A.resize(n); return A;
-}
-Poly drv(Poly A){ // derivative
-	for(ll i=0;i<A.len();i++) A[i]=(i+1)*A[i+1]_;
-	A.pop_back(); return A;
-}
-Poly itg(Poly A,ll c){ // integral
-	A.push_back(0); for(ll i=A.len()-1;i>=1;i--) A[i]=A[i-1]*inv(i)_;
-	A[0]=c; return A;
-}
-```
-
 ### FFT / FNTT / 卷积
 
 - DFT：（本原）单位根构造 $\omega_n = e^{\frac {2 \pi}{n}i}$．
@@ -785,61 +807,10 @@ $$
 
 #### 蝶形运算与迭代算法
 
-为使用迭代算法，需要快速得到递归算法向下深入过程中 $\{ a_n \}$ 置换后的最终结果．观察知该置换是位逆序置换，可线性求出．故可实现如下迭代算法（连带实现卷积运算）
+为使用迭代算法，需要快速得到递归算法向下深入过程中 $\{ a_n \}$ 置换后的最终结果．观察知该置换是位逆序置换，可按如下方法线性求出．
 
 ```c++
-vector<ll> rev;
-void spawn_rev(ll n){ // n=log2(N)
-	rev.resize(1<<n);
-	rev[0]=0; for(ll i=1;i<(1<<n);i++) rev[i]=(rev[i>>1]>>1)+((i&1)<<(n-1));
-}
-class Poly : public vector<ll>{ public:
-	// ... (Poly defaults)
-	void DFT(ll typ){ // to be called by opt() only (with proper length and rev array)
-		ll n=len();
-		for(ll i=0;i<n;i++) if(i<rev[i]) std::swap(at(i),at(rev[i]));
-		for(ll hf=1;hf<n;hf*=2){
-			ll w=qpow(PR,(MOD-1)/(hf*2)); if(typ==-1) w=inv(w);
-			for(ll i=0;i<n;i+=hf*2){
-				ll wk=1;
-				for(ll k=0;k<hf;k++){
-					ll x=at(i+k),y=wk*at(i+hf+k)_;
-					at(i+k)=lmodv(x+y); at(i+hf+k)=lmodv(x-y);
-					wk=wk*w _;
-				}
-			}
-		}
-		if(typ==-1){
-			ll inv_n=inv(n); for(ll i=0;i<n;i++) at(i)=at(i)*inv_n _;
-		}
-	}
-};
-// --- trivial ---
-Poly operator * (Poly A,Poly B){
-	ll c_len=A.len()+B.len()-1;
-	ll n=ceil(log2(c_len)); spawn_rev(n); n=1<<n;
-	Poly C(n); A.resize(n); B.resize(n);
-	A.DFT(1); B.DFT(1);
-	for(ll i=0;i<n;i++) C[i]=A[i]*B[i]_;
-	C.DFT(-1); C.resize(c_len);
-	return C;
-}
-// --- optimized ---
-Poly opt(vector<Poly> pv,ll len,std::function<ll(const vector<ll>&)> func){
-	ll n=ceil(log2(len)); spawn_rev(n); n=1<<n;
-	for(auto &P : pv) P.resize(n),P.DFT(1);
-	Poly C(n); for(ll i=0;i<n;i++){
-		vector<ll> lv; for(auto &P : pv) lv.push_back(P[i]);
-		C[i]=func(lv);
-	}
-	C.DFT(-1); C.resize(len);
-	return C;
-}
-Poly operator * (Poly A,Poly B){
-	return opt({A,B},A.len()+B.len()-1,
-		[](const vector<ll> &lv)->ll{return lv[0]*lv[1]_;}
-	);
-}
+rev[0]=0; for(ll i=1;i<(1<<n);i++) rev[i]=(rev[i>>1]>>1)+((i&1)<<(n-1));
 ```
 
 ### 多项式方程求解（Newton 迭代法）【TODO】
@@ -939,26 +910,6 @@ $$
 B = 2 B_0 - A B_0^2 \pmod{x^{2n}}
 $$
 
-```c++
-// trivial
-Poly inv(const Poly &A){
-	ll n=A.len(); Poly B(1); B[0]=inv(A[0]);
-	for(ll hf=1;hf<n;hf<<=1){
-		B=B*2-B*B*A.subpoly(0,hf*2); B.resize(hf*2);
-	} B.resize(n);
-	return B;
-}
-// optimized
-Poly inv(const Poly &A){
-	ll n=A.len(); Poly B={inv(A[0])};
-	for(ll hf=1;hf<n;hf<<=1){
-		B=opt({A.subpoly(0,hf*2),B},hf*4,[](const vector<ll> &lv)->ll{
-			ll a=lv[0],b=lv[1]; return hmodv((2-a*b)_*b);
-		}); B.resize(hf*2);
-	} B.resize(n); return B;
-}
-```
-
 ### 多项式开方【TODO】
 
 和多项式求逆类似的推导可得递推方程
@@ -966,15 +917,6 @@ $$
 B = \frac 1 2 \left(\frac A {B_0} + B_0 \right) \pmod{x^{2n}}
 $$
 有一些和 Newton 法一样麻烦的边界条件讨论，也会出现复杂的多解情况．$a_0 = 1$ 时 $b_0 = \pm 1$，按 $b_0 = 1$ 的实现如下．
-
-```c++
-Poly sqrt(const Poly &A){
-	ll n=A.len(); Poly B={1}; // assume a_0 = 1 and b_0 positive
-	for(ll hf=1;hf<n;hf<<=1){
-		B=(A.subpoly(0,2*hf)*inv(B.subpoly(0,2*hf))+B)*inv(2); B.resize(hf*2);
-	} B.resize(n); return B;
-}
-```
 
 亦可 $\sqrt A = \exp \left( \frac 1 2 \ln A \right)$，此法可处理多项式任意幂指数运算．
 
@@ -994,12 +936,6 @@ B(x) = \int \frac{A'(x)}{A(x)} \diff x + C \pmod{x^{n}}
 $$
 其中 $C= \ln a_0$．多项式求逆、求导、积分即可．时间复杂度 $O(n \log n)$．
 
-```c++
-Poly ln(const Poly &A){
-	return itg((drv(A)*inv(A)).subpoly(0,A.len()-1),0/*log(A[0])*/);
-}
-```
-
 ### 多项式 $\exp$【TODO】
 
 Newton 迭代法可推出
@@ -1011,16 +947,6 @@ $$
 T(n) = T(\frac n 2) + O(n \log n) = O(n \log n)
 $$
 
-```c++
-Poly exp(const Poly &A){
-	ll n=A.len(); Poly B={1/*exp(A[0])*/};
-	for(ll hf=1;hf<n;hf<<=1){
-		B=B*(Poly{1}-ln(B.subpoly(0,hf*2))+A.subpoly(0,hf*2)); B.resize(hf*2);
-	} B.resize(n);
-	return B;
-}
-```
-
 ### 多项式快速幂
 
 普通的多项式快速幂实现当然是 $O(n \log n \log k)$ 的．下面介绍基于指对数性质的 $O(n \log n)$ 求法．
@@ -1029,10 +955,6 @@ Poly exp(const Poly &A){
 $$
 A^k(x) = e^{k \ln A(x)}
 $$
-
-```c++
-Poly qpow(const Poly &A,ll up){return exp(ln(A)*up);} // assume a_0 = 1
-```
 
 我们指出，在系数对质数 $p$ 取模的意义下，当我们关心的多项式长度 $n \leq p$ 时，有
 $$
@@ -1060,111 +982,21 @@ $$
 
 ## 矩阵
 
-### 通用
-
-```c++
-// Martix universal 2023/07/16
-class Matrix : public vector<ll>{public:
-	static Matrix ID(ll n){
-		Matrix A(n,n); for(ll i=0;i<n;i++) A(i,i)=1;
-		return A;
-	}
-	ll row,col;
-	template<typename... Args>
-	Matrix(ll row,ll col,Args... args) : row{row},col{col},vector<ll>(row*col,args...){}
-	Matrix(ll row,ll col,initializer_list<ll> lst) : row{row},col{col},vector<ll>(lst){}
-	// Matrix(const Matrix &other) = default;
-	ll& at(ll i,ll j){return vector<ll>::at(i*col+j);}
-	ll cat(ll i,ll j) const {return *(begin()+i*col+j);}
-	ll& operator () (ll i,ll j){return at(i,j);}
-	Matrix submat(list<ll> rlst,list<ll> clst){
-		Matrix A(rlst.size(),clst.size(),{});
-		for(ll r : rlst) for(ll c : clst) A.push_back(at(r,c));
-		return A;
-	}
-	Matrix remmat(unordered_set<ll> rst,unordered_set<ll> cst){
-		Matrix A(row-rst.size(),col-cst.size(),{});
-		for(ll r=0;r<row;r++) if(!rst.count(r))
-			for(ll c=0;c<col;c++) if(!cst.count(c))
-				A.push_back(at(r,c));
-		return A;
-	}
-	void debug(){
-		cout<<'('<<row<<','<<col<<')'<<'\n';
-		for(ll i=0;i<row;i++){for(ll j=0;j<col;j++) cout<<at(i,j)<<',';cout<<'\n';}
-	}
-};
-int main(){
-	Matrix E={2,3,{1,2,3,
-				   4,5,6}},F(2,3,3),G(F);
-	E.debug(); F.debug();G.debug();E.remmat({},{0,2}).debug();
-}
-```
-
 ### 矩阵乘法
 
 普通的 $O(n^3)$ 实现．
-
-```c++
-Matrix operator * (const Matrix &A,const Matrix &B){
-	Matrix C(A.row,B.col); if(A.col!=B.row) return Matrix(0,0);
-	for(ll i=0;i<A.row;i++)
-		for(ll j=0;j<B.col;j++)
-			for(ll k=0;k<A.col;k++)
-				mmodp(C(i,j)+=A.cat(i,k)*B.cat(k,j));
-	return C;
-}
-```
 
 ### 矩阵快速幂
 
 普通的 $O(n^3 \log k)$ 实现．
 
-```c++
-Matrix qpow(Matrix X,ll up){
-	Matrix A=Matrix::ID(X.row); if(X.row!=X.col) return Matrix(0,0);
-	while(up){
-		if(up&1) A=A*X;
-		X=X*X; up>>=1;
-	}return A;
-}
-```
-
 ### 行列式
 
 普通的实现是使用逆元进行高斯消元，可用于域上的线性空间．若求解逆元的时间复杂度为 $O(\log p)$，则时间复杂度为 $O(n^3+ n^2 \log p)$．
 
-下面给出的实现在消去时使用辗转相除法，可用于任意 Euclid 整环（Euclidean domain，有带余除法的无零因子的交换幺环）上的模（环上的线性空间），且时间复杂度不会增加．一个常见的应用是模 $m$ 整数环 $\mathbb Z_m$ 上的行列式求值，其中 $m$ 不是质数．
+这里给出另一种做法．该做法在消去时使用辗转相除法，可用于任意 Euclid 整环（Euclidean domain，有带余除法的无零因子的交换幺环）上的模（环上的线性空间），且时间复杂度不会增加．一个常见的应用是模 $m$ 整数环 $\mathbb Z_m$ 上的行列式求值，其中 $m$ 不是质数．
 
 消去各目标行第 $c$ 列元素时，以第 $c$ 行的 $a_{c,c}$ 为除数与目标行的第 $c$ 列元素辗转相除，最终使 $a_{c,c}$ 变为 $0$，再做一次行交换将其换至目标行，就完成了一次行消去过程．注意到当 $a_{c,c}$ 非零时，一次行消去操作结束后 $a_{c,c}$ 单调不增，且过程中 $a_{c,c}$ 不会从非零变为零，故辗转相除带来的 $\log p$ 次额外操作开销被分摊到整轮对第 $c$ 列的消去过程中，因此时间复杂度仍为 $O(n^3+ n^2 \log p)$．
-
-```c++
-ll det(Matrix A){
-	ll n=A.row; if(A.row!=A.col) return 0;
-	ll ans=1;
-	for(ll c=0;c<n;c++){
-		auto swpl=[&](ll a,ll b){
-			lmodp(ans*=-1); for(ll k=c;k<n;k++) swap(A(a,k),A(b,k));
-		};
-		for(ll r=c+1;r<n;r++){
-			while(A(c,c)!=0){
-				ll factor=A(r,c)/A(c,c);
-				for(ll k=c;k<n;k++) hmodp(A(r,k)-=A(c,k)*factor);
-				swpl(c,r);
-			}swpl(c,r);
-		}
-		/*ll r; for(r=c;r<n;r++) if(A(r,c)!=0) break;
-		if(r==n) return 0;
-		if(r!=c) swpl(r,c);
-		for(r=c+1;r<n;r++){
-			ll factor=inv(A(c,c))*A(r,c)_;
-			for(ll k=0;k<n;k++) hmodp(A(r,k)-=A(c,k)*factor);
-		}*/
-	}
-	for(ll c=0;c<n;c++) mmodp(ans*=A(c,c));
-	return ans;
-}
-```
 
 ## 图论【TODO】
 
@@ -1176,55 +1008,9 @@ ll det(Matrix A){
 
 ## 杂项
 
-超大模板正在施工中……
+### 模板
 
-### 基础模板
-
-```c++
-//general model 2023/07/28
-#include<bits/stdc++.h>
-using namespace std;
-typedef long long ll;
-
-ll rd(){
-    ll ans=0; bool sgn=0; char c=getchar();
-    while(c<'0'||c>'9'){if(c=='-') sgn=1; c=getchar();}
-    while(c>='0'&&c<='9'){ans=ans*10+c-'0';c=getchar();}
-    if(sgn) ans=-ans; return ans;
-}
-const ll MOD=;
-#define _ %MOD
-ll lmodv(ll x){
-    if(x<0) x+=MOD;
-    else if(x>=MOD) x-=MOD;
-    return x;
-}void lmodp(ll &x){x=lmodv(x);}
-ll mmodv(ll x){
-    return x%MOD;
-}void mmodp(ll &x){x=mmodv(x);}
-ll hmodv(ll x){
-    return lmodv(x%MOD);
-}void hmodp(ll &x){x=hmodv(x);}
-ll qpow(ll x,ll up){
-    hmodp(x); ll ans=1;
-    while(up){
-        if(up&1) ans=ans*x _;
-        x=x*x _; up>>=1;
-    }return ans;
-}
-ll inv(ll x){return qpow(x,MOD-2);}
-    
-void entry(){}
-
-int main(){
-    //freopen("t1.in","r",stdin);
-    //freopen("t1.out","w",stdout);
-    //ll T=rd(); while(T--){
-    entry();
-    //}
-    return 0;
-}
-```
+见 [model.cpp](model.cpp) 及 [model_temp.cpp](model_temp.cpp)．
 
 ### 对拍
 
@@ -1256,6 +1042,8 @@ while true; do
 done
 ```
 
+
+
 ### 表
 
 #### 质数表
@@ -1274,4 +1062,9 @@ done
 10000000000000061	100000000000000003 	1000000000000000003
 ```
 
-#### 典列【TODO】
+#### 典列
+
+见
+
+- [OEIS Core Sequence](https://oeis.org/wiki/Index_to_OEIS:_Section_Cor#core)
+- [List of Integer Sequences - Wikipedia](https://en.wikipedia.org/wiki/List_of_integer_sequences)
