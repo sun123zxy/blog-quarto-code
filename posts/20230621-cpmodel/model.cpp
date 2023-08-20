@@ -122,8 +122,8 @@ class ModInt{public:
     ModInt(initializer_list<T> lst):dat{*lst.begin()}{} // for mod-free number, use this
     ModInt(U dat):dat{T(hmod(dat))}{} // implicit conversion, slow!
     explicit operator T const(){return dat;}
-    friend ostream& operator << (ostream &out,const ModInt& mi){out<<mi.dat; return out;}
-    // friend ostream& operator << (ostream &out,const ModInt& mi){out<<(mi.dat+mi.dat<MOD?mi.dat:mi.dat-MOD); return out;}
+    friend ostream& operator << (ostream &out,const ModInt& mi){out<<mi.dat<<" "; return out;}
+    // friend ostream& operator << (ostream &out,const ModInt& mi){out<<(mi.dat+mi.dat<MOD?mi.dat:mi.dat-MOD)<<" "; return out;}
     
     friend ModInt operator + (const ModInt a,const ModInt b){return {pmod(a.dat+b.dat)};}
     friend ModInt operator - (const ModInt a){return {nmod(-a.dat)};}

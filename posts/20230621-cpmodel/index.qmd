@@ -3,7 +3,7 @@ title: "算法 & 数学碎碎念"
 abstract: "现场赛公式模板库，亦可作为小而精的总结性学习材料参考．无需单独成文或暂不完善的内容会放在这里．"
 author: "sun123zxy"
 date: "2023/06/21"
-date-modified: "2023/08/17"
+date-modified: "2023/08/20"
 
 categories:
   - OI
@@ -324,6 +324,33 @@ ll S_mu(ll n){
 	return s_mu[n]=1-ans;
 }
 ```
+
+### 杂式
+
+无平方因子数计数：
+$$
+\sum_{i=1}^n \mu^2(i) = \sum_{i=1}^{\floor{\sqrt n}} \mu(i) \floor{\frac n {i^2}}
+$$
+
+约数个数函数的一个性质：
+
+$$
+d(ab) = \sum_{x|a} \sum_{y|b} [\gcd (x,y) = 1]
+$$
+
+$$
+d(abc) = \sum_{x|a} \sum_{y|b} \sum_{z|c} [\gcd (x,y) = 1] [\gcd (y,z) = 1] [\gcd (x,z) =1]
+$$
+
+广义约数个数函数性质扩展：
+
+$$
+\sigma_k (ab) = \sum_{x|a} \sum_{y|b} [\gcd(x,y)=1] (x \frac{b}{y})^k = \sum_{x|a} \sum_{y|b} [\gcd(x,\frac{b}{y})=1] (x y)^k
+$$
+
+$$
+\sigma_k (abc) = \sum_{x|a} \sum_{y|b} \sum_{z|c} [\gcd(x,\frac{b}{y})=1] [\gcd(y,\frac{c}{z})=1] [\gcd(x, \frac{c}{z}=1)] (x y z)^k
+$$
 
 ## 组合
 
@@ -771,6 +798,8 @@ $$
 - DFT：（本原）单位根构造 $\omega_n = e^{\frac {2 \pi}{n}i}$．
 
 - NTT：$P=998244353 = 7 \times 17 \times 2^{23} + 1$，$\mathrm{PR} = 3$ 是它的一个原根．（本原）单位根构造 $\omega_{n} = \mathrm{PR}^{\frac{P-1}{n}} \bmod P$．
+
+- $P=1004535809 = 479 \times 2^{21} + 1$，$\mathrm{PR} = 3$ 
 
 考虑将待变换多项式
 $$
