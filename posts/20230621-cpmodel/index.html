@@ -177,6 +177,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#上取整整除分块" id="toc-上取整整除分块" class="nav-link" data-scroll-target="#上取整整除分块"><span class="header-section-number">2.1.1</span> 上取整整除分块</a></li>
   </ul></li>
   <li><a href="#杜教筛" id="toc-杜教筛" class="nav-link" data-scroll-target="#杜教筛"><span class="header-section-number">2.2</span> 杜教筛</a></li>
+  <li><a href="#杂式" id="toc-杂式" class="nav-link" data-scroll-target="#杂式"><span class="header-section-number">2.3</span> 杂式</a></li>
   </ul></li>
   <li><a href="#组合" id="toc-组合" class="nav-link" data-scroll-target="#组合"><span class="header-section-number">3</span> 组合</a>
   <ul>
@@ -296,7 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">August 17, 2023</p>
+      <p class="date-modified">August 20, 2023</p>
     </div>
   </div>
     
@@ -534,6 +535,26 @@ f = \operatorname{id}^k \varphi, g = \operatorname{id}^k, h = \operatorname{id}^
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">s_mu</span><span class="op">[</span>n<span class="op">]=</span><span class="dv">1</span><span class="op">-</span>ans<span class="op">;</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="杂式" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="杂式"><span class="header-section-number">2.3</span> 杂式</h3>
+<p>无平方因子数计数： <span class="math display">\[
+\sum_{i=1}^n \mu^2(i) = \sum_{i=1}^{\left\lfloor \sqrt n \right\rfloor} \mu(i) \left\lfloor \frac n {i^2} \right\rfloor
+\]</span></p>
+<p>约数个数函数的一个性质：</p>
+<p><span class="math display">\[
+d(ab) = \sum_{x|a} \sum_{y|b} [\gcd (x,y) = 1]
+\]</span></p>
+<p><span class="math display">\[
+d(abc) = \sum_{x|a} \sum_{y|b} \sum_{z|c} [\gcd (x,y) = 1] [\gcd (y,z) = 1] [\gcd (x,z) =1]
+\]</span></p>
+<p>广义约数个数函数性质扩展：</p>
+<p><span class="math display">\[
+\sigma_k (ab) = \sum_{x|a} \sum_{y|b} [\gcd(x,y)=1] (x \frac{b}{y})^k = \sum_{x|a} \sum_{y|b} [\gcd(x,\frac{b}{y})=1] (x y)^k
+\]</span></p>
+<p><span class="math display">\[
+\sigma_k (abc) = \sum_{x|a} \sum_{y|b} \sum_{z|c} [\gcd(x,\frac{b}{y})=1] [\gcd(y,\frac{c}{z})=1] [\gcd(x, \frac{c}{z}=1)] (x y z)^k
+\]</span></p>
 </section>
 </section>
 <section id="组合" class="level2 page-columns page-full" data-number="3">
@@ -977,6 +998,7 @@ C_{i,j} = \begin{cases}
 <ul>
 <li><p>DFT：（本原）单位根构造 <span class="math inline">\(\omega_n = e^{\frac {2 \pi}{n}i}\)</span>．</p></li>
 <li><p>NTT：<span class="math inline">\(P=998244353 = 7 \times 17 \times 2^{23} + 1\)</span>，<span class="math inline">\(\mathrm{PR} = 3\)</span> 是它的一个原根．（本原）单位根构造 <span class="math inline">\(\omega_{n} = \mathrm{PR}^{\frac{P-1}{n}} \bmod P\)</span>．</p></li>
+<li><p><span class="math inline">\(P=1004535809 = 479 \times 2^{21} + 1\)</span>，<span class="math inline">\(\mathrm{PR} = 3\)</span></p></li>
 </ul>
 <p>考虑将待变换多项式 <span class="math display">\[
 A(x) = \sum_{k=0}^{2n-1} a_k x^k
