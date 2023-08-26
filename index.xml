@@ -1558,15 +1558,31 @@ font-style: inherit;">done</span></span></code></pre></div>
 <section id="challenge" class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="challenge"><span class="header-section-number">6</span> Challenge</h2>
 <p>选讲或留作课后讨论．</p>
-<section id="正态分布的唯一性the-herschel-maxwell-derivation" class="level3" data-number="6.1">
-<h3 data-number="6.1" class="anchored" data-anchor-id="正态分布的唯一性the-herschel-maxwell-derivation"><span class="header-section-number">6.1</span> 正态分布的唯一性（The Herschel-Maxwell derivation）</h3>
-<p>二维概率分布的各向同性（只与与原点距离有关）和关于 <img src="https://latex.codecogs.com/png.latex?x,y"> 坐标轴独立的两个假设可唯一确定正态分布密度函数 <img src="https://latex.codecogs.com/png.latex?e%5E%7Bx%5E2%7D"> 的形式．参见 3Blue1Brown 有关 <img src="https://latex.codecogs.com/png.latex?%5Cpi"> 与正态分布的视频<span class="citation" data-cites="3b1b-pi"><sup>[4]</sup></span>．</p>
+<section id="中心极限定理要求下正态分布的唯一性" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="中心极限定理要求下正态分布的唯一性"><span class="header-section-number">6.1</span> 中心极限定理要求下正态分布的唯一性</h3>
+<p>正态分布概率密度函数 <img src="https://latex.codecogs.com/png.latex?e%5E%7B-x%5E2%7D"> 的形式是如何被确定的？怎么说明这形式是满足中心极限定理的独一无二的概率密度函数？</p>
+<p>3Blue1Brown 关于正态分布的系列视频较完整的解答了上述疑问，下面是推导思路的提纲．</p>
+<p>首先需要意识到，随机变量之和的概率分布即原变量概率密度函数的卷积．</p>
+<p>形式化的唯一性证明一般分为两步：</p>
+<ul>
+<li>使用 moment generating function 的方法证明，任一分布的概率密度函数的各次卷积所构成的函数列一定收敛，且收敛至的函数与初始选取的分布无关．</li>
+<li>验证正态分布概率密度函数的卷积仍有 <img src="https://latex.codecogs.com/png.latex?e%5E%7B-x%5E2%7D"> 的形式．</li>
+</ul>
+<p>这是严谨但并不令人满意的．我们需要更“几何”化的理解来理解 <img src="https://latex.codecogs.com/png.latex?e%5E%7B-x%5E2%7D"> 的这种唯一性，即为什么只有 <img src="https://latex.codecogs.com/png.latex?e%5E%7B-x%5E2%7D"> 在卷积下具有形式不变性．（需要指出的是，3Blue1Brown 的系列视频中，下面部分的严谨性不够充分，有待进一步研究）</p>
+<p>Herschel-Maxwell derivation 指出，若二维概率分布满足以下两个条件：</p>
+<ul>
+<li>该分布具有各向同性，即该二维分布概率密度函数在某点处的取值只与该点离原点的距离有关</li>
+<li>分布关于 <img src="https://latex.codecogs.com/png.latex?x,y"> 坐标轴独立，即该二维分布的概率密度函数可写为 <img src="https://latex.codecogs.com/png.latex?f(x)f(y)"> 的形式．</li>
+</ul>
+<p>则一维情形下此分布的概率密度函数被唯一地确定为具有 <img src="https://latex.codecogs.com/png.latex?f(x)%20=%20e%5E%7Bc%20x%5E2%7D"> 的形式．当然需要假设 <img src="https://latex.codecogs.com/png.latex?f(x)"> 连续，并在最后做归一化处理．</p>
+<p>两个随机变量 <img src="https://latex.codecogs.com/png.latex?X,Y"> 的和 <img src="https://latex.codecogs.com/png.latex?X+Y"> 的概率密度函数可被视为这两个随机变量的 Descartes 积 <img src="https://latex.codecogs.com/png.latex?(X,Y)"> 的二元概率密度函数“切片”并按面积（除掉 <img src="https://latex.codecogs.com/png.latex?%5Csqrt%202"> 的常数因子后）“投影”至 <img src="https://latex.codecogs.com/png.latex?y=-x"> 上的结果．</p>
+<p>考虑中心极限定理．两个独立同分布变量相加，这已经满足了二维分布独立性的要求．若考虑要求卷积后形式不变，也有必要要求二维分布的各项同性（这样一来，沿 <img src="https://latex.codecogs.com/png.latex?y=-x"> 方向的“切片”的形状与坐标轴向的“切片”只有一个常数因子 <img src="https://latex.codecogs.com/png.latex?%5Csqrt%202"> 的差别）．因此，中心极限定理某种意义上正好对应了 Herschel-Maxwell derivation 的要求，从而唯一确定了正态分布概率密度函数 <img src="https://latex.codecogs.com/png.latex?e%5E%7B-x%5E2%7D"> 的形式．</p>
 </section>
-<section id="正态分布的归一性验证maxwell-速率分布与高维球体的表面积" class="level3" data-number="6.2">
-<h3 data-number="6.2" class="anchored" data-anchor-id="正态分布的归一性验证maxwell-速率分布与高维球体的表面积"><span class="header-section-number">6.2</span> 正态分布的归一性验证、Maxwell 速率分布与高维球体的表面积</h3>
+<section id="正态分布的归一性验证maxwell-速率分布与高维球体表面积" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="正态分布的归一性验证maxwell-速率分布与高维球体表面积"><span class="header-section-number">6.2</span> 正态分布的归一性验证、Maxwell 速率分布与高维球体表面积</h3>
 <p>Guass 积分： <img src="https://latex.codecogs.com/png.latex?%0A%5Cint_%7B-%5Cinfty%7D%5E%7B+%5Cinfty%7D%20e%5E%7B-x%5E2%7D%20%5Coperatorname%7Bd%7D%5C!x%20=%20%5Csqrt%20%5Cpi%0A"></p>
 <p>Maxwell 速率分布： <img src="https://latex.codecogs.com/png.latex?%0Af(v)%20=%204%20%5Cpi%20v%5E2%20%5Cleft(%20%5Cfrac%7Bm%7D%7B2%20%5Cpi%20kT%7D%20%5Cright)%5E%7B%5Cfrac%203%202%7D%20%5Cexp%20%5Cleft(%20-%20%5Cfrac%7Bm%7D%7B2kT%7Dv%5E2%20%5Cright)%0A"></p>
-<p>以及它们与高维球体表面积的联系涉及多元积分学的内容．同样参见 3Blue1Brown 有关 <img src="https://latex.codecogs.com/png.latex?%5Cpi"> 与正态分布的视频<span class="citation" data-cites="3b1b-pi"><sup>[4]</sup></span>．</p>
+<p>以及它们与高维球体表面积的联系涉及多元积分学的内容．参见 3Blue1Brown 有关 <img src="https://latex.codecogs.com/png.latex?%5Cpi"> 与正态分布的视频<span class="citation" data-cites="3b1b-pi"><sup>[4]</sup></span>．</p>
 </section>
 <section id="n-的其它估计" class="level3" data-number="6.3">
 <h3 data-number="6.3" class="anchored" data-anchor-id="n-的其它估计"><span class="header-section-number">6.3</span> <img src="https://latex.codecogs.com/png.latex?n!"> 的其它估计</h3>
@@ -1607,7 +1623,7 @@ font-style: inherit;">done</span></span></code></pre></div>
 2. 张颢. (2018). <em>概率论</em>. 高等教育出版社.
 </div>
 <div id="ref-3b1b-clt" class="csl-entry">
-3. 3Blue1Brown. (2023). <em>But what is the central limit theorem?</em> <a href="https://www.youtube.com/watch?v=zeJD6dqJ5lo" class="uri">https://www.youtube.com/watch?v=zeJD6dqJ5lo</a>.
+3. 3Blue1Brown. (2023). <em>Why is the "central limit" a normal distribution?</em> <a href="https://www.youtube.com/watch?v=d_qvLDhkg00" class="uri">https://www.youtube.com/watch?v=d_qvLDhkg00</a>.
 </div>
 <div id="ref-3b1b-pi" class="csl-entry">
 4. 3Blue1Brown. (2023). <em>Why π is in the normal distribution (beyond integral tricks)</em>. <a href="https://www.youtube.com/watch?v=cy8r7WSuT1I" class="uri">https://www.youtube.com/watch?v=cy8r7WSuT1I</a>.

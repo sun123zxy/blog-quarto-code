@@ -144,8 +144,8 @@ div.csl-indent {
   </ul></li>
   <li><a href="#challenge" id="toc-challenge" class="nav-link" data-scroll-target="#challenge"><span class="header-section-number">6</span> Challenge</a>
   <ul>
-  <li><a href="#正态分布的唯一性the-herschel-maxwell-derivation" id="toc-正态分布的唯一性the-herschel-maxwell-derivation" class="nav-link" data-scroll-target="#正态分布的唯一性the-herschel-maxwell-derivation"><span class="header-section-number">6.1</span> 正态分布的唯一性（The Herschel-Maxwell derivation）</a></li>
-  <li><a href="#正态分布的归一性验证maxwell-速率分布与高维球体的表面积" id="toc-正态分布的归一性验证maxwell-速率分布与高维球体的表面积" class="nav-link" data-scroll-target="#正态分布的归一性验证maxwell-速率分布与高维球体的表面积"><span class="header-section-number">6.2</span> 正态分布的归一性验证、Maxwell 速率分布与高维球体的表面积</a></li>
+  <li><a href="#中心极限定理要求下正态分布的唯一性" id="toc-中心极限定理要求下正态分布的唯一性" class="nav-link" data-scroll-target="#中心极限定理要求下正态分布的唯一性"><span class="header-section-number">6.1</span> 中心极限定理要求下正态分布的唯一性</a></li>
+  <li><a href="#正态分布的归一性验证maxwell-速率分布与高维球体表面积" id="toc-正态分布的归一性验证maxwell-速率分布与高维球体表面积" class="nav-link" data-scroll-target="#正态分布的归一性验证maxwell-速率分布与高维球体表面积"><span class="header-section-number">6.2</span> 正态分布的归一性验证、Maxwell 速率分布与高维球体表面积</a></li>
   <li><a href="#n-的其它估计" id="toc-n-的其它估计" class="nav-link" data-scroll-target="#n-的其它估计"><span class="header-section-number">6.3</span> <span class="math inline">\(n!\)</span> 的其它估计</a></li>
   <li><a href="#wallis-公式的其它证明" id="toc-wallis-公式的其它证明" class="nav-link" data-scroll-target="#wallis-公式的其它证明"><span class="header-section-number">6.4</span> Wallis 公式的其它证明</a></li>
   <li><a href="#wallis-公式视角下三阶乘与中心三项式系数的渐进估计" id="toc-wallis-公式视角下三阶乘与中心三项式系数的渐进估计" class="nav-link" data-scroll-target="#wallis-公式视角下三阶乘与中心三项式系数的渐进估计"><span class="header-section-number">6.5</span> Wallis 公式视角下三阶乘与中心三项式系数的渐进估计</a></li>
@@ -187,7 +187,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">July 11, 2023</p>
+      <p class="date-modified">August 27, 2023</p>
     </div>
   </div>
     
@@ -478,19 +478,35 @@ f(x) &amp;= \lim_{h \to 0}{\frac{P(x \leq X &lt; x+h)}{h}} \\
 <section id="challenge" class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="challenge"><span class="header-section-number">6</span> Challenge</h2>
 <p>选讲或留作课后讨论．</p>
-<section id="正态分布的唯一性the-herschel-maxwell-derivation" class="level3" data-number="6.1">
-<h3 data-number="6.1" class="anchored" data-anchor-id="正态分布的唯一性the-herschel-maxwell-derivation"><span class="header-section-number">6.1</span> 正态分布的唯一性（The Herschel-Maxwell derivation）</h3>
-<p>二维概率分布的各向同性（只与与原点距离有关）和关于 <span class="math inline">\(x,y\)</span> 坐标轴独立的两个假设可唯一确定正态分布密度函数 <span class="math inline">\(e^{x^2}\)</span> 的形式．参见 3Blue1Brown 有关 <span class="math inline">\(\pi\)</span> 与正态分布的视频<span class="citation" data-cites="3b1b-pi"><sup>[<a href="#ref-3b1b-pi" role="doc-biblioref">4</a>]</sup></span>．</p>
+<section id="中心极限定理要求下正态分布的唯一性" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="中心极限定理要求下正态分布的唯一性"><span class="header-section-number">6.1</span> 中心极限定理要求下正态分布的唯一性</h3>
+<p>正态分布概率密度函数 <span class="math inline">\(e^{-x^2}\)</span> 的形式是如何被确定的？怎么说明这形式是满足中心极限定理的独一无二的概率密度函数？</p>
+<p>3Blue1Brown 关于正态分布的系列视频较完整的解答了上述疑问，下面是推导思路的提纲．</p>
+<p>首先需要意识到，随机变量之和的概率分布即原变量概率密度函数的卷积．</p>
+<p>形式化的唯一性证明一般分为两步：</p>
+<ul>
+<li>使用 moment generating function 的方法证明，任一分布的概率密度函数的各次卷积所构成的函数列一定收敛，且收敛至的函数与初始选取的分布无关．</li>
+<li>验证正态分布概率密度函数的卷积仍有 <span class="math inline">\(e^{-x^2}\)</span> 的形式．</li>
+</ul>
+<p>这是严谨但并不令人满意的．我们需要更“几何”化的理解来理解 <span class="math inline">\(e^{-x^2}\)</span> 的这种唯一性，即为什么只有 <span class="math inline">\(e^{-x^2}\)</span> 在卷积下具有形式不变性．（需要指出的是，3Blue1Brown 的系列视频中，下面部分的严谨性不够充分，有待进一步研究）</p>
+<p>Herschel-Maxwell derivation 指出，若二维概率分布满足以下两个条件：</p>
+<ul>
+<li>该分布具有各向同性，即该二维分布概率密度函数在某点处的取值只与该点离原点的距离有关</li>
+<li>分布关于 <span class="math inline">\(x,y\)</span> 坐标轴独立，即该二维分布的概率密度函数可写为 <span class="math inline">\(f(x)f(y)\)</span> 的形式．</li>
+</ul>
+<p>则一维情形下此分布的概率密度函数被唯一地确定为具有 <span class="math inline">\(f(x) = e^{c x^2}\)</span> 的形式．当然需要假设 <span class="math inline">\(f(x)\)</span> 连续，并在最后做归一化处理．</p>
+<p>两个随机变量 <span class="math inline">\(X,Y\)</span> 的和 <span class="math inline">\(X+Y\)</span> 的概率密度函数可被视为这两个随机变量的 Descartes 积 <span class="math inline">\((X,Y)\)</span> 的二元概率密度函数“切片”并按面积（除掉 <span class="math inline">\(\sqrt 2\)</span> 的常数因子后）“投影”至 <span class="math inline">\(y=-x\)</span> 上的结果．</p>
+<p>考虑中心极限定理．两个独立同分布变量相加，这已经满足了二维分布独立性的要求．若考虑要求卷积后形式不变，也有必要要求二维分布的各项同性（这样一来，沿 <span class="math inline">\(y=-x\)</span> 方向的“切片”的形状与坐标轴向的“切片”只有一个常数因子 <span class="math inline">\(\sqrt 2\)</span> 的差别）．因此，中心极限定理某种意义上正好对应了 Herschel-Maxwell derivation 的要求，从而唯一确定了正态分布概率密度函数 <span class="math inline">\(e^{-x^2}\)</span> 的形式．</p>
 </section>
-<section id="正态分布的归一性验证maxwell-速率分布与高维球体的表面积" class="level3" data-number="6.2">
-<h3 data-number="6.2" class="anchored" data-anchor-id="正态分布的归一性验证maxwell-速率分布与高维球体的表面积"><span class="header-section-number">6.2</span> 正态分布的归一性验证、Maxwell 速率分布与高维球体的表面积</h3>
+<section id="正态分布的归一性验证maxwell-速率分布与高维球体表面积" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="正态分布的归一性验证maxwell-速率分布与高维球体表面积"><span class="header-section-number">6.2</span> 正态分布的归一性验证、Maxwell 速率分布与高维球体表面积</h3>
 <p>Guass 积分： <span class="math display">\[
 \int_{-\infty}^{+\infty} e^{-x^2} \operatorname{d}\!x = \sqrt \pi
 \]</span></p>
 <p>Maxwell 速率分布： <span class="math display">\[
 f(v) = 4 \pi v^2 \left( \frac{m}{2 \pi kT} \right)^{\frac 3 2} \exp \left( - \frac{m}{2kT}v^2 \right)
 \]</span></p>
-<p>以及它们与高维球体表面积的联系涉及多元积分学的内容．同样参见 3Blue1Brown 有关 <span class="math inline">\(\pi\)</span> 与正态分布的视频<span class="citation" data-cites="3b1b-pi"><sup>[<a href="#ref-3b1b-pi" role="doc-biblioref">4</a>]</sup></span>．</p>
+<p>以及它们与高维球体表面积的联系涉及多元积分学的内容．参见 3Blue1Brown 有关 <span class="math inline">\(\pi\)</span> 与正态分布的视频<span class="citation" data-cites="3b1b-pi"><sup>[<a href="#ref-3b1b-pi" role="doc-biblioref">4</a>]</sup></span>．</p>
 </section>
 <section id="n-的其它估计" class="level3" data-number="6.3">
 <h3 data-number="6.3" class="anchored" data-anchor-id="n-的其它估计"><span class="header-section-number">6.3</span> <span class="math inline">\(n!\)</span> 的其它估计</h3>
@@ -545,7 +561,7 @@ n \ln n - n - 1 = \int_1^n \ln x \operatorname{d}\!x \leq
 2. 张颢. (2018). <em>概率论</em>. 高等教育出版社.
 </div>
 <div id="ref-3b1b-clt" class="csl-entry" role="listitem">
-3. 3Blue1Brown. (2023). <em>But what is the central limit theorem?</em> <a href="https://www.youtube.com/watch?v=zeJD6dqJ5lo" class="uri">https://www.youtube.com/watch?v=zeJD6dqJ5lo</a>.
+3. 3Blue1Brown. (2023). <em>Why is the "central limit" a normal distribution?</em> <a href="https://www.youtube.com/watch?v=d_qvLDhkg00" class="uri">https://www.youtube.com/watch?v=d_qvLDhkg00</a>.
 </div>
 <div id="ref-3b1b-pi" class="csl-entry" role="listitem">
 4. 3Blue1Brown. (2023). <em>Why π is in the normal distribution (beyond integral tricks)</em>. <a href="https://www.youtube.com/watch?v=cy8r7WSuT1I" class="uri">https://www.youtube.com/watch?v=cy8r7WSuT1I</a>.
