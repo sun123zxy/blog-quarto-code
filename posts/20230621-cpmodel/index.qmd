@@ -3,7 +3,7 @@ title: "算法 & 数学碎碎念"
 abstract: "现场赛公式模板库，亦可作为小而精的总结性学习材料参考．无需单独成文或暂不完善的内容会放在这里．"
 author: "sun123zxy"
 date: "2023/06/21"
-date-modified: "2023/08/20"
+date-modified: "2023/09/25"
 
 categories:
   - OI
@@ -472,6 +472,27 @@ g(S) := \card \left( A \cap \bigcap_{i \in S} A_i \right)
 $$
 取 $S=\varnothing$ 代入 [@thm-inex-second-set] 右侧就得到结论．
 :::
+
+:::{#exr-inex-shuffle}
+
+## 错排
+
+计算 $n$ 元错排的数量．
+:::
+
+:::{.solution}
+设 $A_i$ 表示第 $i$ 个位置配对正确的置换构成的集合．直接应用 [@exm-inex-ordinary-out] 立得
+
+$$
+\begin{aligned}
+\card \left( A - \bigcup_{i \in U} A_i \right) &= \sum_{k=0}^{|U|} (-1)^k \sum_{|S| = k} \card \left( A \cap \bigcap_{i \in S} A_i \right) \\
+&= \sum_{k=0}^{|U|} (-1)^k \binom n k (n-k)! \\
+&= n! \sum_{k=0}^{|U|} (-1)^k \frac 1 {k!} \sim \frac{n!}{e}
+\end{aligned}
+$$
+:::
+
+这说明随机取一排列，其错排的概率趋近于 $\frac 1 e$．
 
 :::{#exm-inex-ordinary-in}
 
