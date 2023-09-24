@@ -169,7 +169,7 @@ div.csl-indent {
   <ul>
   <li><a href="#文章分节" id="toc-文章分节" class="nav-link" data-scroll-target="#文章分节"><span class="header-section-number">2.1</span> 文章分节</a>
   <ul>
-  <li><a href="#sec-test" id="toc-sec-test" class="nav-link" data-scroll-target="#sec-test"><span class="header-section-number">2.1.1</span> 文章分分节</a>
+  <li><a href="#sec-test" id="toc-sec-test" class="nav-link" data-scroll-target="#sec-test">文章分分节</a>
   <ul>
   <li><a href="#分分分节" id="toc-分分分节" class="nav-link" data-scroll-target="#分分分节">分分分节</a>
   <ul>
@@ -250,8 +250,8 @@ div.csl-indent {
 <section id="文章分节" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="文章分节"><span class="header-section-number">2.1</span> 文章分节</h3>
 <p>非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子。</p>
-<section id="sec-test" class="level4" data-number="2.1.1">
-<h4 data-number="2.1.1" class="anchored" data-anchor-id="sec-test"><span class="header-section-number">2.1.1</span> 文章分分节</h4>
+<section id="sec-test" class="level4">
+<h4 class="anchored" data-anchor-id="sec-test">文章分分节</h4>
 <p>Quarto 支持交叉引用。比如这一节的标题就已经被打上了标签。</p>
 <section id="分分分节" class="level5">
 <h5 class="anchored" data-anchor-id="分分分节">分分分节</h5>
@@ -290,6 +290,9 @@ div.csl-indent {
 <p>当然也可以使用 markdown 表格。例如 <a href="#tbl-cartesian-unsolved">Table&nbsp;1 (a)</a>.</p>
 <p>顺便测试以下多表格并列。加上 <a href="#tbl-power-unsolved">Table&nbsp;1 (b)</a>，它们共同组成了 <a href="#tbl-panel-unsolved">Table&nbsp;1</a>。</p>
 <div id="tbl-panel-unsolved" class="tbl-parent quarto-layout-panel anchored">
+<div class="panel-caption table-caption">
+<p>Table&nbsp;1: 相关集合的势（不完整版）</p>
+</div>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div id="tbl-cartesian-unsolved" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-panel-unsolved" style="flex-basis: 50.0%;justify-content: center;">
 <table class="table">
@@ -354,9 +357,6 @@ div.csl-indent {
 </table>
 </div>
 </div>
-<div class="panel-caption table-caption">
-<p>Table&nbsp;1: 相关集合的势（不完整版）</p>
-</div>
 </div>
 </section>
 <section id="数学公式定理系统测试" class="level2" data-number="4">
@@ -412,8 +412,6 @@ A \approx C \land B \approx D \implies A \times B \approx C \times D
 <h2 data-number="5" class="anchored" data-anchor-id="数据可视化"><span class="header-section-number">5</span> 数据可视化</h2>
 <p>Quarto 的另一大卖点。</p>
 <div class="cell" data-execution_count="1">
-<details>
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -426,7 +424,6 @@ A \approx C \land B \approx D \implies A \times B \approx C \times D
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>ax.set_rticks([<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>])</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output cell-output-display">
 <div id="fig-polar" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -656,36 +653,36 @@ Important
 </section>
 <section id="文献引用测试" class="level2" data-number="7">
 <h2 data-number="7" class="anchored" data-anchor-id="文献引用测试"><span class="header-section-number">7</span> 文献引用测试</h2>
-<p>人脸识别是以人面部特征作为识别个体身份的一种个体生物特征识别方法<span class="citation" data-cites="define"><sup>[<a href="#ref-define" role="doc-biblioref">1</a>]</sup></span>。……人脸识别的研究最早可追溯到上世纪 60 年代，Bledsoe and Chan 研究了编程计算机识别人脸的方法<span class="citation" data-cites="history"><sup>[<a href="#ref-history" role="doc-biblioref">2</a>]</sup></span>。随后，萌芽期的人脸识别技术经历多轮蜕变，在发展中逐渐完善。然而，人脸识别的主要难点在于不同个体的人脸结构并无大异，而同一个体的人脸在不同表情、年龄、妆饰、光照等干扰因素下又往往差异显著<span class="citation" data-cites="technical"><sup>[<a href="#ref-technical" role="doc-biblioref">3</a>]</sup></span>，这要求人脸识别技术既要克服类内因素的干扰，同时又要加强类间差距的显著性，而早期人脸识别方法关注人脸几何特征，识别效果不尽人意。为此，以 Eigenfaces<span class="citation" data-cites="eigenfaces"><sup>[<a href="#ref-eigenfaces" role="doc-biblioref">4</a>]</sup></span> 为代表的子空间学习识别方法和 Gabor<span class="citation" data-cites="gabor"><sup>[<a href="#ref-gabor" role="doc-biblioref">5</a>]</sup></span>、LBP<span class="citation" data-cites="lbp"><sup>[<a href="#ref-lbp" role="doc-biblioref">6</a>]</sup></span> 等局部特征分析的滤波器提取方法在各自领域都有所突破。2014 年，应用新兴的深度卷积神经网络技术，DeepFace<span class="citation" data-cites="deepface"><sup>[<a href="#ref-deepface" role="doc-biblioref">7</a>]</sup></span> 横空出世，以 97.35% 的 LFW 基准数据集识别准确率重塑了人脸识别领域的研究格局。随后，人脸识别技术迎来爆发式增长，并逐渐走进人们的日常生活之中。……个体层面，要加强公众的权利意识，塑造个人的“数字理性”<span class="citation" data-cites="guochunzhen"><sup>[<a href="#ref-guochunzhen" role="doc-biblioref">8</a>]</sup></span>。</p>
+<p>人脸识别是以人面部特征作为识别个体身份的一种个体生物特征识别方法 <span class="citation" data-cites="define">(<a href="#ref-define" role="doc-biblioref">全国信息安全标准化技术委员会 2020</a>)</span>。……人脸识别的研究最早可追溯到上世纪 60 年代，Bledsoe and Chan 研究了编程计算机识别人脸的方法<span class="citation" data-cites="history">(<a href="#ref-history" role="doc-biblioref">Bledsoe and Chan 1965</a>)</span>。随后，萌芽期的人脸识别技术经历多轮蜕变，在发展中逐渐完善。然而，人脸识别的主要难点在于不同个体的人脸结构并无大异，而同一个体的人脸在不同表情、年龄、妆饰、光照等干扰因素下又往往差异显著<span class="citation" data-cites="technical">(<a href="#ref-technical" role="doc-biblioref">余璀璨 and 李慧斌 2021</a>)</span>，这要求人脸识别技术既要克服类内因素的干扰，同时又要加强类间差距的显著性，而早期人脸识别方法关注人脸几何特征，识别效果不尽人意。为此，以 Eigenfaces<span class="citation" data-cites="eigenfaces">(<a href="#ref-eigenfaces" role="doc-biblioref">Turk and Pentland, n.d.</a>)</span> 为代表的子空间学习识别方法和 Gabor<span class="citation" data-cites="gabor">(<a href="#ref-gabor" role="doc-biblioref">Liu and Wechsler 2001</a>)</span>、LBP<span class="citation" data-cites="lbp">(<a href="#ref-lbp" role="doc-biblioref">Ahonen, Hadid, and Pietikäinen 2004</a>)</span> 等局部特征分析的滤波器提取方法在各自领域都有所突破。2014 年，应用新兴的深度卷积神经网络技术，DeepFace<span class="citation" data-cites="deepface">(<a href="#ref-deepface" role="doc-biblioref">Taigman et al., n.d.</a>)</span> 横空出世，以 97.35% 的 LFW 基准数据集识别准确率重塑了人脸识别领域的研究格局。随后，人脸识别技术迎来爆发式增长，并逐渐走进人们的日常生活之中。……个体层面，要加强公众的权利意识，塑造个人的“数字理性”<span class="citation" data-cites="guochunzhen">(<a href="#ref-guochunzhen" role="doc-biblioref">郭春镇 2020</a>)</span>。</p>
 
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list">
-<div id="ref-define" class="csl-entry" role="listitem">
-1. 全国信息安全标准化技术委员会. (2020). <em>《信息安全技术远程人脸识别系统技术要求》（GB/T38671-2020）</em>. <a href="https://std.samr.gov.cn/gb/search/gbDetailed?id=A47A713B767814ABE05397BE0A0ABB25" class="uri">https://std.samr.gov.cn/gb/search/gbDetailed?id=A47A713B767814ABE05397BE0A0ABB25</a>.
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-lbp" class="csl-entry" role="listitem">
+Ahonen, Timo, Abdenour Hadid, and Matti Pietikäinen. 2004. <span>“Face Recognition with Local Binary Patterns.”</span> In <em>European Conference on Computer Vision</em>, 469–81. Springer.
 </div>
 <div id="ref-history" class="csl-entry" role="listitem">
-2. Bledsoe, W. W., &amp; Chan, H. (1965). A man-machine facial recognition system—some preliminary results. <em>Panoramic Research, Inc, Palo Alto, California., Technical Report PRI A</em>, <em>19</em>, 1965.
-</div>
-<div id="ref-technical" class="csl-entry" role="listitem">
-3. 余璀璨, &amp; 李慧斌. (2021). 基于深度学习的人脸识别方法综述. <em>工程数学学报</em>, <em>38</em>(4), 19.
-</div>
-<div id="ref-eigenfaces" class="csl-entry" role="listitem">
-4. Turk, M., &amp; Pentland, A. (n.d.). Eigenfaces for recognition. <em>Journal of Cognitive Neuroscience</em>, <em>3</em>(1), 71–86.
+Bledsoe, Woodrow Wilson, and Helen Chan. 1965. <span>“A Man-Machine Facial Recognition System—Some Preliminary Results.”</span> <em>Panoramic Research, Inc, Palo Alto, California., Technical Report PRI A</em> 19: 1965.
 </div>
 <div id="ref-gabor" class="csl-entry" role="listitem">
-5. Liu, C., &amp; Wechsler, H. (2001). A gabor feature classifier for face recognition. <em>Proceedings Eighth IEEE International Conference on Computer Vision. ICCV 2001</em>, <em>2</em>, 270–275.
-</div>
-<div id="ref-lbp" class="csl-entry" role="listitem">
-6. Ahonen, T., Hadid, A., &amp; Pietikäinen, M. (2004). Face recognition with local binary patterns. <em>European Conference on Computer Vision</em>, 469–481.
+Liu, Chengjun, and Harry Wechsler. 2001. <span>“A Gabor Feature Classifier for Face Recognition.”</span> In <em>Proceedings Eighth IEEE International Conference on Computer Vision. ICCV 2001</em>, 2:270–75. IEEE.
 </div>
 <div id="ref-deepface" class="csl-entry" role="listitem">
-7. Taigman, Y., Yang, M., Ranzato, M., &amp; Wolf, L. (n.d.). Closing the gap to human-level performance in face verification. deepface. <em>Proceedings of the IEEE Computer Vision and Pattern Recognition (CVPR)</em>, <em>5</em>, 6.
+Taigman, Y, M Yang, M Ranzato, and L Wolf. n.d. <span>“Closing the Gap to Human-Level Performance in Face Verification. Deepface.”</span> In <em>Proceedings of the IEEE Computer Vision and Pattern Recognition (CVPR)</em>, 5:6.
+</div>
+<div id="ref-eigenfaces" class="csl-entry" role="listitem">
+Turk, M., and A. Pentland. n.d. <span>“Eigenfaces for Recognition.”</span> <em>Journal of Cognitive Neuroscience</em> 3 (1): 71–86.
+</div>
+<div id="ref-technical" class="csl-entry" role="listitem">
+余璀璨, and 李慧斌. 2021. <span>“基于深度学习的人脸识别方法综述.”</span> <em>工程数学学报</em> 38 (4): 19.
+</div>
+<div id="ref-define" class="csl-entry" role="listitem">
+全国信息安全标准化技术委员会. 2020. <span>“《信息安全技术远程人脸识别系统技术要求》（GB/T38671-2020）.”</span> <a href="https://std.samr.gov.cn/gb/search/gbDetailed?id=A47A713B767814ABE05397BE0A0ABB25" class="uri">https://std.samr.gov.cn/gb/search/gbDetailed?id=A47A713B767814ABE05397BE0A0ABB25</a>.
 </div>
 <div id="ref-guochunzhen" class="csl-entry" role="listitem">
-8. 郭春镇. (2020). 数字人权时代人脸识别技术应用的治理. <em>现代法学</em>, <em>42</em>(4), 18.
+郭春镇. 2020. <span>“数字人权时代人脸识别技术应用的治理.”</span> <em>现代法学</em> 42 (4): 18.
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
