@@ -237,26 +237,26 @@ div.csl-indent {
 <h2 data-number="" class="anchored" data-anchor-id="预备"><span class="header-section-number"></span> 预备</h2>
 <section id="渐进符号" class="level3" data-number="0.1">
 <h3 data-number="0.1" class="anchored" data-anchor-id="渐进符号"><span class="header-section-number">0.1</span> 渐进符号</h3>
-<p>其实不少高等数学 / 数学分析教材在讲解无穷小的比较时已经相当严谨地介绍过大 O、小 O 记号，然而各种历史习惯记法的符号滥用（abuse of notation）<span class="citation" data-cites="wikipedia_abuse">(<a href="#ref-wikipedia_abuse" role="doc-biblioref"><span>“Abuse of Notation - Wikipedia,”</span> n.d.</a>)</span> 直到现在都让笔者头疼. These notations seem to be innocent, but can be catastrophic without careful manipulation. For example,</p>
+<p>其实不少高等数学 / 数学分析教材在讲解无穷小的比较时已经相当严谨地介绍过大 O、小 O 记号，然而各种历史习惯记法的符号滥用（abuse of notation）<span class="citation" data-cites="wikipedia_abuse"><a href="#ref-wikipedia_abuse" role="doc-biblioref">[1]</a></span> 直到现在都让笔者头疼. These notations seem to be innocent, but can be catastrophic without careful manipulation. For example,</p>
 <ul>
 <li><p><span class="math display">\[
 n = O(n^2) \land n^2 = O(n^2) \implies n = n^2
 \]</span></p>
-<p>Knuth 在《具体数学》里举出的例子 <span class="citation" data-cites="concretemath_onotation">Graham, Knuth, and Patashnik (<a href="#ref-concretemath_onotation" role="doc-biblioref">1994a</a>)</span>. “<span class="math inline">\(=\)</span>” 隐含的对称性使其在 <span class="math inline">\(g(x) = O(f(x))\)</span> 中格格不入. 事实上，将 <span class="math inline">\(O(f(x))\)</span> 看作“阶不高于 <span class="math inline">\(f(x)\)</span> 的所有函数的集合”是比“某个阶不高于 <span class="math inline">\(f(x)\)</span> 的函数”更严谨的理解. 因此，本文将使用 <span class="math inline">\(f(x) \in O(g(x))\)</span> （有时也记为 <span class="math inline">\(O(f(x)) \subset O(g(x))\)</span>）的集合论符号代替传统的 <span class="math inline">\(f(x) = O(g(x))\)</span> 记法.</p></li>
+<p>Knuth 在《具体数学》里举出的例子 <span class="citation" data-cites="concretemath_onotation"><a href="#ref-concretemath_onotation" role="doc-biblioref">[2]</a></span>. “<span class="math inline">\(=\)</span>” 隐含的对称性使其在 <span class="math inline">\(g(x) = O(f(x))\)</span> 中格格不入. 事实上，将 <span class="math inline">\(O(f(x))\)</span> 看作“阶不高于 <span class="math inline">\(f(x)\)</span> 的所有函数的集合”是比“某个阶不高于 <span class="math inline">\(f(x)\)</span> 的函数”更严谨的理解. 因此，本文将使用 <span class="math inline">\(f(x) \in O(g(x))\)</span> （有时也记为 <span class="math inline">\(O(f(x)) \subset O(g(x))\)</span>）的集合论符号代替传统的 <span class="math inline">\(f(x) = O(g(x))\)</span> 记法.</p></li>
 <li><p><span class="math display">\[
 n^2 \sin n \in O(n^2) \implies \sum_{i=1}^n i^2 \sin i \in \sum_{i=1}^n O(i^2) \subset O\left( \sum_{i=1}^n i^2 \right) \subset O(n^3)
 \]</span> 或更一般的， <span class="math display">\[
 g(x) \in O(f(x)) \implies \sum_{P(n,i)} g(i) \in \sum_{P(n,i)} O(f(i)) \subset O \left(\sum_{P(n,i)} f(i) \right)
 \]</span></p>
 <p>没看出有啥问题，对吧？笔者在写作此文时犯了同样的错误. 请注意，大 O 记号的作用对象是函数，<span class="math inline">\(f(i)\)</span> 是什么？它只是个函数值，是确定的数——这是因为 <span class="math inline">\(i\)</span> 也是求和枚举中确定的数，而不是 <span class="math inline">\(n\)</span> 这种真正代表变元的记号. 所以 <span class="math inline">\(O(f(i))\)</span> 是什么？它什么也不是.</p>
-<p>这种错误的出现是在所难免的，我们太习惯用 <span class="math inline">\(x\)</span>、<span class="math inline">\(x^3 + 5 x^2 + x\)</span> 这种变元都不明确的记号来表示函数了<span class="citation" data-cites="wikipedia_abuse">(<a href="#ref-wikipedia_abuse" role="doc-biblioref"><span>“Abuse of Notation - Wikipedia,”</span> n.d.</a>)</span>. 写成 <span class="math inline">\(f(x)\)</span> 也不严谨，因为只有 <span class="math inline">\(f\)</span> 才应代表函数本身，<span class="math inline">\(f(x)\)</span> 只能是函数值. 这样我们就可以放心地写下 <span class="math inline">\(O(f)\)</span>，不用担心把变元与确定值弄混了.</p>
+<p>这种错误的出现是在所难免的，我们太习惯用 <span class="math inline">\(x\)</span>、<span class="math inline">\(x^3 + 5 x^2 + x\)</span> 这种变元都不明确的记号来表示函数了<span class="citation" data-cites="wikipedia_abuse"><a href="#ref-wikipedia_abuse" role="doc-biblioref">[1]</a></span>. 写成 <span class="math inline">\(f(x)\)</span> 也不严谨，因为只有 <span class="math inline">\(f\)</span> 才应代表函数本身，<span class="math inline">\(f(x)\)</span> 只能是函数值. 这样我们就可以放心地写下 <span class="math inline">\(O(f)\)</span>，不用担心把变元与确定值弄混了.</p>
 <p>然而大家还是喜欢写 <span class="math inline">\(O(n^2)\)</span> 和 <span class="math inline">\(O(e^{n^2})\)</span>，而不是奇怪的 <span class="math inline">\(O(\mathrm{id}^2)\)</span> 和 <span class="math inline">\(O(\mathrm{exp} \circ {\mathrm{id}^2})\)</span>. 所以，我们大概只能沿用这种不太严谨的记号，并时刻提醒自己加倍小心了. （形如 <span class="math inline">\(x \mapsto e^{x^2}\)</span> 的 <span class="math inline">\(\lambda\)</span> 风格“匿名函数”记号可能更好？）</p>
 <p>但上述命题从结论上是正确的. 正确的推导过程应为 <span class="math display">\[
 \sum_{P(n,i)} g(i) \leq \sum_{P(n,i)} C f(i) \leq C \sum_{P(n,i)} f(i) \in O \left(\sum_{P(n,i)} f(i) \right)\
 \]</span></p>
 <p>第一步是直接由大 O 记号的定义得到的结果.</p></li>
 </ul>
-<p>Wikipedia<span class="citation" data-cites="asymptotic_wikipedia">(<a href="#ref-asymptotic_wikipedia" role="doc-biblioref"><span>“Big o Notation - Wikipedia # Family of Bachmann–Landau Notations,”</span> n.d.</a>)</span> 中有一张详尽的表格介绍了各种渐进符号的定义，OI Wiki<span class="citation" data-cites="asymptotic_oiwiki">(<a href="#ref-asymptotic_oiwiki" role="doc-biblioref"><span>“复杂度 - OI Wiki,”</span> n.d.</a>)</span> 上也有极好的讲解，尚不熟练的读者可以参考. 有兴趣仔细研究的读者可以参考《具体数学》第九章<span class="citation" data-cites="concretemath_onotation">(<a href="#ref-concretemath_onotation" role="doc-biblioref">Graham, Knuth, and Patashnik 1994a</a>)</span>、Wikipedia 及其 reference（个人推荐 Knuth 关于 <span class="math inline">\(O\)</span>、<span class="math inline">\(\Omega\)</span>、<span class="math inline">\(\Theta\)</span> 的短文<span class="citation" data-cites="knuth_omicron">(<a href="#ref-knuth_omicron" role="doc-biblioref">Knuth 1976</a>)</span>）. 本文除用 “<span class="math inline">\(\in\)</span>” 和“<span class="math inline">\(\subset\)</span>”替代 “<span class="math inline">\(=\)</span>” 外，完全使用 Knuth 提议的记号体系.</p>
+<p>Wikipedia<span class="citation" data-cites="asymptotic_wikipedia"><a href="#ref-asymptotic_wikipedia" role="doc-biblioref">[3]</a></span> 中有一张详尽的表格介绍了各种渐进符号的定义，OI Wiki<span class="citation" data-cites="asymptotic_oiwiki"><a href="#ref-asymptotic_oiwiki" role="doc-biblioref">[4]</a></span> 上也有极好的讲解，尚不熟练的读者可以参考. 有兴趣仔细研究的读者可以参考《具体数学》第九章<span class="citation" data-cites="concretemath_onotation"><a href="#ref-concretemath_onotation" role="doc-biblioref">[2]</a></span>、Wikipedia 及其 reference（个人推荐 Knuth 关于 <span class="math inline">\(O\)</span>、<span class="math inline">\(\Omega\)</span>、<span class="math inline">\(\Theta\)</span> 的短文<span class="citation" data-cites="knuth_omicron"><a href="#ref-knuth_omicron" role="doc-biblioref">[5]</a></span>）. 本文除用 “<span class="math inline">\(\in\)</span>” 和“<span class="math inline">\(\subset\)</span>”替代 “<span class="math inline">\(=\)</span>” 外，完全使用 Knuth 提议的记号体系.</p>
 </section>
 <section id="调和数-hn-调和级数" class="level3" data-number="0.2">
 <h3 data-number="0.2" class="anchored" data-anchor-id="调和数-hn-调和级数"><span class="header-section-number">0.2</span> 调和数 <span class="math inline">\(H(n)\)</span> / 调和级数</h3>
@@ -277,7 +277,7 @@ P_p(n) = \sum_{i=1}^n i^{-p}
 P_p(n) \sim \frac{1}{1-p} n^{1-p} \in \Theta(n^{1-p})
 \]</span></p></li>
 </ul>
-<p><span class="math inline">\(-\infty &lt; p &lt; 1\)</span> 时 <span class="math inline">\(p\)</span> - 级数的渐进估计可以从连续幂函数积分的角度理解. 证明这渐进性，离散情况下，可对 <span class="math inline">\(n^p\)</span> 差分后前缀和 + 二项式定理得到高次项系数，或可用离散微积分理论得到精确表示（参见《具体数学》<span class="citation" data-cites="concretemath_calculus">(<a href="#ref-concretemath_calculus" role="doc-biblioref">Graham, Knuth, and Patashnik 1994b</a>)</span>）；连续情况下，Lagrange 中值定理应为较简单的估计方法. 这里从略. 总之，我们得到： <span class="math display">\[
+<p><span class="math inline">\(-\infty &lt; p &lt; 1\)</span> 时 <span class="math inline">\(p\)</span> - 级数的渐进估计可以从连续幂函数积分的角度理解. 证明这渐进性，离散情况下，可对 <span class="math inline">\(n^p\)</span> 差分后前缀和 + 二项式定理得到高次项系数，或可用离散微积分理论得到精确表示（参见《具体数学》<span class="citation" data-cites="concretemath_calculus"><a href="#ref-concretemath_calculus" role="doc-biblioref">[6]</a></span>）；连续情况下，Lagrange 中值定理应为较简单的估计方法. 这里从略. 总之，我们得到： <span class="math display">\[
 P_p(n) \in \begin{cases}
 \Theta(n^{1-p}) &amp; p &lt; 1 \\
 \Theta(n \log n) &amp; p = 1 \\
@@ -299,7 +299,7 @@ P_p(n) \in \begin{cases}
 <p><span class="theorem-title"><strong>Example 1 </strong></span>估计 <span class="math inline">\(\sigma_0 (n)\)</span> 的渐进上界.</p>
 </div>
 <p>也就是估计 <span class="math inline">\(n\)</span> 的因子的数量. 一个广为人知的上界是 <span class="math inline">\(2 \sqrt n\)</span>，因为 <span class="math inline">\(n\)</span> 的所有小于 <span class="math inline">\(\sqrt n\)</span> 的因子 <span class="math inline">\(d\)</span> 均与另一因子 <span class="math inline">\(\frac n d\)</span> 一一对应.</p>
-<p>事实上进一步可以证明 <span class="math inline">\(\sigma_0(n) \in o(n^\epsilon) \quad \forall \epsilon &gt; 0\)</span><span class="citation" data-cites="wikipedia_divisor">(<a href="#ref-wikipedia_divisor" role="doc-biblioref"><span>“Divisor Function - Wikipedia # Growth_rate,”</span> n.d.</a>)</span>，虽然这在 OI 中并不实用.</p>
+<p>事实上进一步可以证明 <span class="math inline">\(\sigma_0(n) \in o(n^\epsilon) \quad \forall \epsilon &gt; 0\)</span><span class="citation" data-cites="wikipedia_divisor"><a href="#ref-wikipedia_divisor" role="doc-biblioref">[7]</a></span>，虽然这在 OI 中并不实用.</p>
 <div id="exm-sumsigma0ub" class="theorem example">
 <p><span class="theorem-title"><strong>Example 2 </strong></span>估计 <span class="math inline">\(\hat{\sigma_0}(n) = \sum_{i=1}^n \sigma_0 (i)\)</span> 的渐进上界.</p>
 </div>
@@ -311,7 +311,7 @@ P_p(n) \in \begin{cases}
 \leq \sum_{d=1}^n \frac n d
 = n H(n) \in O(n \log n)
 \]</span></p>
-<p>显然，这比 <span class="math inline">\(O(n \sqrt n)\)</span> 的平凡估计好上不少. 本例的思路不仅是埃氏筛（Sieve of Eratosthenes）的理论基础，也在杜教筛、快速 Mobius 变换、<span class="math inline">\(\gcd\)</span> 卷积<span class="citation" data-cites="gcdconv">(<a href="#ref-gcdconv" role="doc-biblioref">sun123zxy 2020a</a>)</span>等处出现.</p>
+<p>显然，这比 <span class="math inline">\(O(n \sqrt n)\)</span> 的平凡估计好上不少. 本例的思路不仅是埃氏筛（Sieve of Eratosthenes）的理论基础，也在杜教筛、快速 Mobius 变换、<span class="math inline">\(\gcd\)</span> 卷积<span class="citation" data-cites="gcdconv"><a href="#ref-gcdconv" role="doc-biblioref">[8]</a></span>等处出现.</p>
 <p>进一步利用此技巧和 <span class="math inline">\(p\)</span> - 级数的估计，我们甚至能在仔细研究 <span class="math inline">\(\sigma_z(n)\)</span> 前就得到其前缀和的渐进估计：</p>
 <div id="exm-sumsigmazub" class="theorem example">
 <p><span class="theorem-title"><strong>Example 3 </strong></span>估计 <span class="math inline">\(\hat{\sigma_z}(n) = \sum_{i=1}^n \sigma_z (i)\)</span> 的渐进上界.</p>
@@ -387,10 +387,10 @@ O(1) &amp; z &lt; -1
 <p>我们得到了一个相当优秀的渐进上界. 值得关注的是：</p>
 <ul>
 <li>当 <span class="math inline">\(z=0\)</span> 时，<span class="math inline">\(\sigma_0(n) \in O(n^{\frac 1 2})\)</span>. 这与 <a href="#exm-sigma0ub">Example&nbsp;1</a> 的结果一致.</li>
-<li>当 <span class="math inline">\(z=\frac 1 2\)</span> 时，<span class="math inline">\(\sigma_{\frac 1 2}(n) \in O(n^{\frac 3 4})\)</span>，即 <span class="math inline">\(\sum_{d \mid n} \sqrt d \in O(n^{\frac 3 4})\)</span>. 洛谷 P4980 Polya 定理模板题<span class="citation" data-cites="polya_luogu">(<a href="#ref-polya_luogu" role="doc-biblioref"><span>“P4980 【模板】pólya 定理 - 洛谷 | 计算机科学教育新生态,”</span> n.d.</a>)</span>的一种比较 trivial 的解法<span class="citation" data-cites="polya_my">(<a href="#ref-polya_my" role="doc-biblioref">sun123zxy 2020b</a>)</span>的时间复杂度证明就来源于此. 我们之后还会在整除分块与杜教筛中见到它.</li>
+<li>当 <span class="math inline">\(z=\frac 1 2\)</span> 时，<span class="math inline">\(\sigma_{\frac 1 2}(n) \in O(n^{\frac 3 4})\)</span>，即 <span class="math inline">\(\sum_{d \mid n} \sqrt d \in O(n^{\frac 3 4})\)</span>. 洛谷 P4980 Polya 定理模板题<span class="citation" data-cites="polya_luogu"><a href="#ref-polya_luogu" role="doc-biblioref">[9]</a></span>的一种比较 trivial 的解法<span class="citation" data-cites="polya_my"><a href="#ref-polya_my" role="doc-biblioref">[10]</a></span>的时间复杂度证明就来源于此. 我们之后还会在整除分块与杜教筛中见到它.</li>
 </ul>
 <p>另外，如果只使用 <a href="#prp-trick1">Proposition&nbsp;1</a> ，<span class="math inline">\(-1&lt;z&lt;1\)</span> 部分的渐进上界将只能估计至 <span class="math inline">\(O(n)\)</span>. 因此 <a href="#prp-trick1ex">Proposition&nbsp;2</a> 是更为优越的.</p>
-<p>约数函数更复杂的上限与渐进估计可参考 Wikipedia<span class="citation" data-cites="wikipedia_divisor">(<a href="#ref-wikipedia_divisor" role="doc-biblioref"><span>“Divisor Function - Wikipedia # Growth_rate,”</span> n.d.</a>)</span>.</p>
+<p>约数函数更复杂的上限与渐进估计可参考 Wikipedia<span class="citation" data-cites="wikipedia_divisor"><a href="#ref-wikipedia_divisor" role="doc-biblioref">[7]</a></span>.</p>
 </section>
 <section id="整除分块" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="整除分块"><span class="header-section-number">2</span> 整除分块</h2>
@@ -480,13 +480,13 @@ h(n) = \sum_{d \mid n} g(d) f(\frac n d)
 O(K) + O(n K^{-\frac 1 2})
 \]</span></p>
 <p>为最小化时间复杂度，取 <span class="math inline">\(K = n^{\frac 2 3}\)</span>，得到最优时间复杂度 <span class="math inline">\(O(n^{\frac 2 3})\)</span>.</p>
-<p>这部分的时间复杂度证明主要参考了文章<span class="citation" data-cites="zhihu_dusieve">(<a href="#ref-zhihu_dusieve" role="doc-biblioref">Ander 2022</a>)</span>.</p>
+<p>这部分的时间复杂度证明主要参考了文章<span class="citation" data-cites="zhihu_dusieve"><a href="#ref-zhihu_dusieve" role="doc-biblioref">[11]</a></span>.</p>
 </section>
 <section id="challenge" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="challenge"><span class="header-section-number">4</span> Challenge</h2>
 <div id="exm-nonsquare" class="theorem example">
 <p><span class="theorem-title"><strong>Example 7 </strong></span>对 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 间的无平方因子数计数. <span class="math inline">\(n \leq 10^{18}\)</span>.</p>
-<p>参见蓝桥杯 2023 省赛 A 组 J 题《翻转硬币》<span class="citation" data-cites="nonsquare1_luogu">(<a href="#ref-nonsquare1_luogu" role="doc-biblioref"><span>“P9238 [蓝桥杯 2023 省 a] 翻转硬币 - 洛谷 | 计算机科学教育新生态,”</span> n.d.</a>)</span>或《完全平方数》<span class="citation" data-cites="nonsquare2_luogu">(<a href="#ref-nonsquare2_luogu" role="doc-biblioref"><span>“P4318 完全平方数 - 洛谷 | 计算机科学教育新生态,”</span> n.d.</a>)</span>.</p>
+<p>参见蓝桥杯 2023 省赛 A 组 J 题《翻转硬币》<span class="citation" data-cites="nonsquare1_luogu"><a href="#ref-nonsquare1_luogu" role="doc-biblioref">[12]</a></span>或《完全平方数》<span class="citation" data-cites="nonsquare2_luogu"><a href="#ref-nonsquare2_luogu" role="doc-biblioref">[13]</a></span>.</p>
 </div>
 <p>我们指出，无平方因子数有如下计数公式 <span class="math display">\[
 f(n) = \sum_{i=1}^n \mu^2 (i) = \sum_{i=1}^{\left\lfloor \sqrt n \right\rfloor} \mu(i) \left\lfloor \frac n {i^2} \right\rfloor
@@ -522,57 +522,57 @@ f(n) = \sum_{i=1}^n \mu^2 (i) = \sum_{i=1}^{\left\lfloor \sqrt n \right\rfloor} 
 O(K) + O(n^{\frac 2 3} K^{-\frac 1 2})
 \]</span> 取 <span class="math inline">\(K=n^{\frac 4 9}\)</span>，得到最优时间复杂度 <span class="math inline">\(O(n^{\frac 4 9})\)</span>. 代入 <span class="math inline">\(n = 10^{18}\)</span>，量级约为 <span class="math inline">\(10^8\)</span>.</p>
 <p>这估计并不算优秀. 传言存在 <span class="math inline">\(O(n^{\frac 2 5})\)</span> 的估计，猜测大概优化了 <span class="math inline">\(\left\{ \left\lfloor \frac n i \right\rfloor \right\}_{i=1}^n\)</span> 和 <span class="math inline">\(\left\{ \left\lfloor  \left( \left\lfloor \frac n d \right\rfloor \right)^{\frac 1 2}  \right\rfloor\right\}_{d \in D_2 (n)}\)</span> 的重叠部分。笔者尚未找出其推导方式.</p>
-<p>upd: 关于 <span class="math inline">\(O(n^{\frac 2 5})\)</span> 的估计，请参阅博客<span class="citation" data-cites="nonsquare_blog">(<a href="#ref-nonsquare_blog" role="doc-biblioref">smsxgz 2019</a>)</span>和论文<span class="citation" data-cites="nonsquare_paper">(<a href="#ref-nonsquare_paper" role="doc-biblioref">Pawlewicz 2011</a>)</span>．</p>
+<p>upd: 关于 <span class="math inline">\(O(n^{\frac 2 5})\)</span> 的估计，请参阅博客<span class="citation" data-cites="nonsquare_blog"><a href="#ref-nonsquare_blog" role="doc-biblioref">[14]</a></span>和论文<span class="citation" data-cites="nonsquare_paper"><a href="#ref-nonsquare_paper" role="doc-biblioref">[15]</a></span>．</p>
 
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
 <div id="ref-wikipedia_abuse" class="csl-entry" role="listitem">
-<span>“Abuse of Notation - Wikipedia.”</span> n.d. <a href="https://en.wikipedia.org/wiki/Abuse_of_notation#Function_notation" class="uri">https://en.wikipedia.org/wiki/Abuse_of_notation#Function_notation</a>.
-</div>
-<div id="ref-zhihu_dusieve" class="csl-entry" role="listitem">
-Ander. 2022. <span>“杜教筛.”</span> <a href="https://zhuanlan.zhihu.com/p/521699400" class="uri">https://zhuanlan.zhihu.com/p/521699400</a>.
-</div>
-<div id="ref-asymptotic_wikipedia" class="csl-entry" role="listitem">
-<span>“Big o Notation - Wikipedia # Family of Bachmann–Landau Notations.”</span> n.d. <a href="https://en.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann%E2%80%93Landau_notations" class="uri">https://en.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann%E2%80%93Landau_notations</a>.
-</div>
-<div id="ref-wikipedia_divisor" class="csl-entry" role="listitem">
-<span>“Divisor Function - Wikipedia # Growth_rate.”</span> n.d. <a href="https://en.wikipedia.org/wiki/Divisor_function#Growth_rate" class="uri">https://en.wikipedia.org/wiki/Divisor_function#Growth_rate</a>.
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline"><span>“Abuse of notation - wikipedia.”</span> <a href="https://en.wikipedia.org/wiki/Abuse_of_notation#Function_notation" class="uri">https://en.wikipedia.org/wiki/Abuse_of_notation#Function_notation</a>.</div>
 </div>
 <div id="ref-concretemath_onotation" class="csl-entry" role="listitem">
-Graham, R. L., D. E. Knuth, and O. Patashnik. 1994a. <span>“Concrete Mathematics: A Foundation for Computer Science.”</span> In, second, 443–49. A @Foundation for Computer Science. Addison-Wesley.
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">R. L. Graham, D. E. Knuth, and O. Patashnik, <span>“Concrete mathematics: A foundation for computer science,”</span> Second.in A @foundation for computer science. Addison-Wesley, 1994, pp. 443–449.</div>
 </div>
-<div id="ref-concretemath_calculus" class="csl-entry" role="listitem">
-———. 1994b. <span>“Concrete Mathematics: A Foundation for Computer Science.”</span> In, second, 47–56. A @Foundation for Computer Science. Addison-Wesley.
-</div>
-<div id="ref-knuth_omicron" class="csl-entry" role="listitem">
-Knuth, Donald E. 1976. <span>“Big Omicron and Big Omega and Big Theta.”</span> <em>SIGACT News</em> 8 (2): 18–24. <a href="https://doi.org/10.1145/1008328.1008329">https://doi.org/10.1145/1008328.1008329</a>.
-</div>
-<div id="ref-nonsquare2_luogu" class="csl-entry" role="listitem">
-<span>“P4318 完全平方数 - 洛谷 | 计算机科学教育新生态.”</span> n.d. <a href="https://www.luogu.com.cn/problem/P4318" class="uri">https://www.luogu.com.cn/problem/P4318</a>.
-</div>
-<div id="ref-polya_luogu" class="csl-entry" role="listitem">
-<span>“P4980 【模板】pólya 定理 - 洛谷 | 计算机科学教育新生态.”</span> n.d. <a href="https://www.luogu.com.cn/problem/P4980" class="uri">https://www.luogu.com.cn/problem/P4980</a>.
-</div>
-<div id="ref-nonsquare1_luogu" class="csl-entry" role="listitem">
-<span>“P9238 [蓝桥杯 2023 省 a] 翻转硬币 - 洛谷 | 计算机科学教育新生态.”</span> n.d. <a href="https://www.luogu.com.cn/problem/P9238" class="uri">https://www.luogu.com.cn/problem/P9238</a>.
-</div>
-<div id="ref-nonsquare_paper" class="csl-entry" role="listitem">
-Pawlewicz, Jakub. 2011. <span>“Counting Square-Free Numbers.”</span> <a href="https://arxiv.org/abs/1107.4890">https://arxiv.org/abs/1107.4890</a>.
-</div>
-<div id="ref-nonsquare_blog" class="csl-entry" role="listitem">
-smsxgz. 2019. <span>“Counting Square Free Numbers.”</span> <a href="https://smsxgz.github.io/post/pe/counting_square_free_numbers/" class="uri">https://smsxgz.github.io/post/pe/counting_square_free_numbers/</a>.
-</div>
-<div id="ref-gcdconv" class="csl-entry" role="listitem">
-sun123zxy. 2020a. <span>“Sun123zxy’s Blog - 原创oi题目 Gcd卷积 Problem and Solution.”</span> <a href="https://blog.sun123zxy.top/posts/20201206-gcdconv/" class="uri">https://blog.sun123zxy.top/posts/20201206-gcdconv/</a>.
-</div>
-<div id="ref-polya_my" class="csl-entry" role="listitem">
-———. 2020b. <span>“Sun123zxy’s Blog - 等价类计数：Burnside引理 &amp; Polya定理.”</span> <a href="http://blog.sun123zxy.top/posts/20200321-burnside/#s-4.3" class="uri">http://blog.sun123zxy.top/posts/20200321-burnside/#s-4.3</a>.
+<div id="ref-asymptotic_wikipedia" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline"><span>“Big o notation - wikipedia # family of bachmann–landau notations.”</span> <a href="https://en.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann%E2%80%93Landau_notations" class="uri">https://en.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann%E2%80%93Landau_notations</a>.</div>
 </div>
 <div id="ref-asymptotic_oiwiki" class="csl-entry" role="listitem">
-<span>“复杂度 - OI Wiki.”</span> n.d. <a href="https://oi-wiki.org/basic/complexity/#%E6%B8%90%E8%BF%9B%E7%AC%A6%E5%8F%B7%E7%9A%84%E5%AE%9A%E4%B9%89" class="uri">https://oi-wiki.org/basic/complexity/#%E6%B8%90%E8%BF%9B%E7%AC%A6%E5%8F%B7%E7%9A%84%E5%AE%9A%E4%B9%89</a>.
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline"><span>“复杂度 - OI wiki.”</span> <a href="https://oi-wiki.org/basic/complexity/#%E6%B8%90%E8%BF%9B%E7%AC%A6%E5%8F%B7%E7%9A%84%E5%AE%9A%E4%B9%89" class="uri">https://oi-wiki.org/basic/complexity/#%E6%B8%90%E8%BF%9B%E7%AC%A6%E5%8F%B7%E7%9A%84%E5%AE%9A%E4%B9%89</a>.</div>
+</div>
+<div id="ref-knuth_omicron" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">D. E. Knuth, <span>“Big omicron and big omega and big theta,”</span> <em>SIGACT News</em>, vol. 8, no. 2, pp. 18–24, Apr. 1976, doi: <a href="https://doi.org/10.1145/1008328.1008329">10.1145/1008328.1008329</a>.</div>
+</div>
+<div id="ref-concretemath_calculus" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">R. L. Graham, D. E. Knuth, and O. Patashnik, <span>“Concrete mathematics: A foundation for computer science,”</span> Second.in A @foundation for computer science. Addison-Wesley, 1994, pp. 47–56.</div>
+</div>
+<div id="ref-wikipedia_divisor" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline"><span>“Divisor function - wikipedia # growth_rate.”</span> <a href="https://en.wikipedia.org/wiki/Divisor_function#Growth_rate" class="uri">https://en.wikipedia.org/wiki/Divisor_function#Growth_rate</a>.</div>
+</div>
+<div id="ref-gcdconv" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">sun123zxy, <span>“sun123zxy’s blog - 原创OI题目 GCD卷积 problem and solution.”</span> <a href="https://blog.sun123zxy.top/posts/20201206-gcdconv/" class="uri">https://blog.sun123zxy.top/posts/20201206-gcdconv/</a>, 2020.</div>
+</div>
+<div id="ref-polya_luogu" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[9] </div><div class="csl-right-inline"><span>“P4980 【模板】pólya 定理 - 洛谷 | 计算机科学教育新生态.”</span> <a href="https://www.luogu.com.cn/problem/P4980" class="uri">https://www.luogu.com.cn/problem/P4980</a>.</div>
+</div>
+<div id="ref-polya_my" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[10] </div><div class="csl-right-inline">sun123zxy, <span>“sun123zxy’s blog - 等价类计数：Burnside引理 &amp; Polya定理.”</span> <a href="http://blog.sun123zxy.top/posts/20200321-burnside/#s-4.3" class="uri">http://blog.sun123zxy.top/posts/20200321-burnside/#s-4.3</a>, 2020.</div>
+</div>
+<div id="ref-zhihu_dusieve" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[11] </div><div class="csl-right-inline">Ander, <span>“杜教筛.”</span> <a href="https://zhuanlan.zhihu.com/p/521699400" class="uri">https://zhuanlan.zhihu.com/p/521699400</a>, 2022.</div>
+</div>
+<div id="ref-nonsquare1_luogu" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[12] </div><div class="csl-right-inline"><span>“P9238 [蓝桥杯 2023 省 a] 翻转硬币 - 洛谷 | 计算机科学教育新生态.”</span> <a href="https://www.luogu.com.cn/problem/P9238" class="uri">https://www.luogu.com.cn/problem/P9238</a>.</div>
+</div>
+<div id="ref-nonsquare2_luogu" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[13] </div><div class="csl-right-inline"><span>“P4318 完全平方数 - 洛谷 | 计算机科学教育新生态.”</span> <a href="https://www.luogu.com.cn/problem/P4318" class="uri">https://www.luogu.com.cn/problem/P4318</a>.</div>
+</div>
+<div id="ref-nonsquare_blog" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[14] </div><div class="csl-right-inline">smsxgz, <span>“Counting square free numbers.”</span> <a href="https://smsxgz.github.io/post/pe/counting_square_free_numbers/" class="uri">https://smsxgz.github.io/post/pe/counting_square_free_numbers/</a>, 2019.</div>
+</div>
+<div id="ref-nonsquare_paper" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[15] </div><div class="csl-right-inline">J. Pawlewicz, <span>“Counting square-free numbers.”</span> 2011. Available: <a href="https://arxiv.org/abs/1107.4890">https://arxiv.org/abs/1107.4890</a></div>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -939,7 +939,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
 });
 </script>
-<script src="https://giscus.app/client.js" data-repo="sun123zxy/blog-quarto-code" data-repo-id="R_kgDOIrPs5w" data-category="General" data-category-id="DIC_kwDOIrPs584CV4gd" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark_dimmed" data-lang="en" crossorigin="anonymous" async="">
+<script src="https://giscus.app/client.js" data-repo="sun123zxy/blog-quarto-code" data-repo-id="" data-category="General" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark_dimmed" data-lang="en" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 <footer class="footer">

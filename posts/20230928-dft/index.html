@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="sun123zxy">
+<meta name="dcterms.date" content="2023-08-01">
+
+<title>sun123zxy’s blog - A Convolution-Oriented FFT Tutorial</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">sun123zxy’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts/about" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#forewords" id="toc-forewords" class="nav-link active" data-scroll-target="#forewords"><span class="header-section-number">1</span> Forewords</a>
+  <ul>
+  <li><a href="#卷积但不止卷积---fft-漫谈" id="toc-卷积但不止卷积---fft-漫谈" class="nav-link" data-scroll-target="#卷积但不止卷积---fft-漫谈">卷积，但不止卷积 - FFT 漫谈</a></li>
+  <li><a href="#推荐食用方法" id="toc-推荐食用方法" class="nav-link" data-scroll-target="#推荐食用方法">推荐食用方法</a></li>
+  <li><a href="#记号说明" id="toc-记号说明" class="nav-link" data-scroll-target="#记号说明">记号说明</a></li>
+  </ul></li>
+  <li><a href="#fftntt-in-a-nutshell" id="toc-fftntt-in-a-nutshell" class="nav-link" data-scroll-target="#fftntt-in-a-nutshell"><span class="header-section-number">2</span> FFT/NTT in a nutshell</a>
+  <ul>
+  <li><a href="#fft" id="toc-fft" class="nav-link" data-scroll-target="#fft"><span class="header-section-number">2.1</span> FFT</a>
+  <ul>
+  <li><a href="#多项式卷积" id="toc-多项式卷积" class="nav-link" data-scroll-target="#多项式卷积">多项式卷积</a></li>
+  <li><a href="#系数---点值---系数" id="toc-系数---点值---系数" class="nav-link" data-scroll-target="#系数---点值---系数">系数 - 点值 - 系数</a></li>
+  <li><a href="#系数---点值---系数---快速转换" id="toc-系数---点值---系数---快速转换" class="nav-link" data-scroll-target="#系数---点值---系数---快速转换">系数 - 点值 - 系数 - 快速转换？</a></li>
+  <li><a href="#discrete-fourier-transform" id="toc-discrete-fourier-transform" class="nav-link" data-scroll-target="#discrete-fourier-transform">Discrete Fourier Transform</a></li>
+  <li><a href="#复数域单位根" id="toc-复数域单位根" class="nav-link" data-scroll-target="#复数域单位根">复数域单位根</a></li>
+  <li><a href="#复数域单位根---三个重要性质" id="toc-复数域单位根---三个重要性质" class="nav-link" data-scroll-target="#复数域单位根---三个重要性质">复数域单位根 - 三个重要性质</a></li>
+  <li><a href="#复数域单位根---三个重要性质-1" id="toc-复数域单位根---三个重要性质-1" class="nav-link" data-scroll-target="#复数域单位根---三个重要性质-1">复数域单位根 - 三个重要性质</a></li>
+  <li><a href="#fast-fourier-transform" id="toc-fast-fourier-transform" class="nav-link" data-scroll-target="#fast-fourier-transform">Fast Fourier Transform</a></li>
+  <li><a href="#dft-的矩阵表示" id="toc-dft-的矩阵表示" class="nav-link" data-scroll-target="#dft-的矩阵表示">DFT 的矩阵表示</a></li>
+  <li><a href="#idft" id="toc-idft" class="nav-link" data-scroll-target="#idft">IDFT</a></li>
+  <li><a href="#梳理" id="toc-梳理" class="nav-link" data-scroll-target="#梳理">梳理</a></li>
+  <li><a href="#fft-递归实现---dft-部分" id="toc-fft-递归实现---dft-部分" class="nav-link" data-scroll-target="#fft-递归实现---dft-部分">FFT 递归实现 - DFT 部分</a></li>
+  <li><a href="#fft-递归实现---卷积部分" id="toc-fft-递归实现---卷积部分" class="nav-link" data-scroll-target="#fft-递归实现---卷积部分">FFT 递归实现 - 卷积部分</a></li>
+  <li><a href="#fft-迭代" id="toc-fft-迭代" class="nav-link" data-scroll-target="#fft-迭代">FFT 迭代</a></li>
+  <li><a href="#蝶形运算" id="toc-蝶形运算" class="nav-link" data-scroll-target="#蝶形运算">蝶形运算</a></li>
+  <li><a href="#fft-迭代实现" id="toc-fft-迭代实现" class="nav-link" data-scroll-target="#fft-迭代实现">FFT 迭代实现</a></li>
+  </ul></li>
+  <li><a href="#ntt" id="toc-ntt" class="nav-link" data-scroll-target="#ntt"><span class="header-section-number">2.2</span> NTT</a>
+  <ul>
+  <li><a href="#ntt-速成" id="toc-ntt-速成" class="nav-link" data-scroll-target="#ntt-速成">NTT 速成</a></li>
+  <li><a href="#fftntt-in-a-nutshell---小结概念区分" id="toc-fftntt-in-a-nutshell---小结概念区分" class="nav-link" data-scroll-target="#fftntt-in-a-nutshell---小结概念区分">FFT/NTT in a nutshell - 小结：概念区分</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications"><span class="header-section-number">3</span> Applications</a>
+  <ul>
+  <li><a href="#基本应用" id="toc-基本应用" class="nav-link" data-scroll-target="#基本应用"><span class="header-section-number">3.1</span> 基本应用</a>
+  <ul>
+  <li><a href="#基本应用-1" id="toc-基本应用-1" class="nav-link" data-scroll-target="#基本应用-1">基本应用</a></li>
+  <li><a href="#基本应用---分治-fft" id="toc-基本应用---分治-fft" class="nav-link" data-scroll-target="#基本应用---分治-fft">基本应用 - 分治 FFT</a></li>
+  </ul></li>
+  <li><a href="#生成函数初步" id="toc-生成函数初步" class="nav-link" data-scroll-target="#生成函数初步"><span class="header-section-number">3.2</span> 生成函数初步</a>
+  <ul>
+  <li><a href="#生成函数初步---导言" id="toc-生成函数初步---导言" class="nav-link" data-scroll-target="#生成函数初步---导言">生成函数初步 - 导言</a></li>
+  <li><a href="#ordinary-generating-function" id="toc-ordinary-generating-function" class="nav-link" data-scroll-target="#ordinary-generating-function">Ordinary Generating Function</a></li>
+  <li><a href="#ogf-组合意义" id="toc-ogf-组合意义" class="nav-link" data-scroll-target="#ogf-组合意义">OGF 组合意义</a></li>
+  <li><a href="#exponential-generating-function" id="toc-exponential-generating-function" class="nav-link" data-scroll-target="#exponential-generating-function">Exponential Generating Function</a></li>
+  <li><a href="#egf-组合意义" id="toc-egf-组合意义" class="nav-link" data-scroll-target="#egf-组合意义">EGF 组合意义</a></li>
+  <li><a href="#egf-组合意义-1" id="toc-egf-组合意义-1" class="nav-link" data-scroll-target="#egf-组合意义-1">EGF 组合意义</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#mathematics-behind" id="toc-mathematics-behind" class="nav-link" data-scroll-target="#mathematics-behind"><span class="header-section-number">4</span> Mathematics behind</a>
+  <ul>
+  <li><a href="#ntt-原理" id="toc-ntt-原理" class="nav-link" data-scroll-target="#ntt-原理"><span class="header-section-number">4.1</span> NTT 原理</a>
+  <ul>
+  <li><a href="#ntt-原理---导言" id="toc-ntt-原理---导言" class="nav-link" data-scroll-target="#ntt-原理---导言">NTT 原理 - 导言</a></li>
+  <li><a href="#模-p-剩余类域-mathbb-z_p" id="toc-模-p-剩余类域-mathbb-z_p" class="nav-link" data-scroll-target="#模-p-剩余类域-mathbb-z_p">模 <span class="math inline">\(p\)</span> 剩余类域 <span class="math inline">\(\mathbb Z_p\)</span></a></li>
+  <li><a href="#mathbb-z_px-上的多点插值" id="toc-mathbb-z_px-上的多点插值" class="nav-link" data-scroll-target="#mathbb-z_px-上的多点插值"><span class="math inline">\(\mathbb Z_p[x]\)</span> 上的多点插值</a></li>
+  <li><a href="#mathbb-z_px-上的多点插值-1" id="toc-mathbb-z_px-上的多点插值-1" class="nav-link" data-scroll-target="#mathbb-z_px-上的多点插值-1"><span class="math inline">\(\mathbb Z_p[x]\)</span> 上的多点插值</a></li>
+  <li><a href="#本原单位根" id="toc-本原单位根" class="nav-link" data-scroll-target="#本原单位根">本<strong>原</strong>单位<strong>根</strong></a></li>
+  <li><a href="#mathbb-z_m-上的阶" id="toc-mathbb-z_m-上的阶" class="nav-link" data-scroll-target="#mathbb-z_m-上的阶"><span class="math inline">\(\mathbb Z_m\)</span> 上的阶</a></li>
+  <li><a href="#euler-定理的证明---简化剩余系" id="toc-euler-定理的证明---简化剩余系" class="nav-link" data-scroll-target="#euler-定理的证明---简化剩余系">Euler 定理的证明 - 简化剩余系</a></li>
+  <li><a href="#an-的取值---a-m-互质时" id="toc-an-的取值---a-m-互质时" class="nav-link" data-scroll-target="#an-的取值---a-m-互质时"><span class="math inline">\(a^n\)</span> 的取值 - <span class="math inline">\(a\)</span>, <span class="math inline">\(m\)</span> 互质时</a></li>
+  <li><a href="#an-的取值---一般情况" id="toc-an-的取值---一般情况" class="nav-link" data-scroll-target="#an-的取值---一般情况"><span class="math inline">\(a^n\)</span> 的取值 - 一般情况</a></li>
+  <li><a href="#原根" id="toc-原根" class="nav-link" data-scroll-target="#原根">原根</a></li>
+  <li><a href="#求阶和原根" id="toc-求阶和原根" class="nav-link" data-scroll-target="#求阶和原根">求阶和原根</a></li>
+  <li><a href="#mathbb-z_m-上的本原单位根构造" id="toc-mathbb-z_m-上的本原单位根构造" class="nav-link" data-scroll-target="#mathbb-z_m-上的本原单位根构造"><span class="math inline">\(\mathbb Z_m\)</span> 上的本原单位根构造</a></li>
+  <li><a href="#mathbb-z_m-上的-ntt---m-是质数" id="toc-mathbb-z_m-上的-ntt---m-是质数" class="nav-link" data-scroll-target="#mathbb-z_m-上的-ntt---m-是质数"><span class="math inline">\(\mathbb Z_m\)</span> 上的 NTT - <span class="math inline">\(m\)</span> 是质数</a></li>
+  <li><a href="#mathbb-z_m-上的-fft-与卷积加速---998244353" id="toc-mathbb-z_m-上的-fft-与卷积加速---998244353" class="nav-link" data-scroll-target="#mathbb-z_m-上的-fft-与卷积加速---998244353"><span class="math inline">\(\mathbb Z_m\)</span> 上的 FFT 与卷积加速 - 998244353</a></li>
+  <li><a href="#mathbb-z_m-上的-ntt---对一般的-m" id="toc-mathbb-z_m-上的-ntt---对一般的-m" class="nav-link" data-scroll-target="#mathbb-z_m-上的-ntt---对一般的-m"><span class="math inline">\(\mathbb Z_m\)</span> 上的 NTT - 对一般的 <span class="math inline">\(m\)</span></a></li>
+  <li><a href="#从分析到代数" id="toc-从分析到代数" class="nav-link" data-scroll-target="#从分析到代数">从分析到代数</a></li>
+  </ul></li>
+  <li><a href="#求值与插值" id="toc-求值与插值" class="nav-link" data-scroll-target="#求值与插值"><span class="header-section-number">4.2</span> 求值与插值</a>
+  <ul>
+  <li><a href="#求值与插值---导言" id="toc-求值与插值---导言" class="nav-link" data-scroll-target="#求值与插值---导言">求值与插值 - 导言</a></li>
+  <li><a href="#多项式" id="toc-多项式" class="nav-link" data-scroll-target="#多项式">多项式</a></li>
+  <li><a href="#多项式-1" id="toc-多项式-1" class="nav-link" data-scroll-target="#多项式-1">多项式</a></li>
+  <li><a href="#形式幂级数" id="toc-形式幂级数" class="nav-link" data-scroll-target="#形式幂级数">形式幂级数</a></li>
+  <li><a href="#带余除法" id="toc-带余除法" class="nav-link" data-scroll-target="#带余除法">带余除法</a></li>
+  <li><a href="#多项式函数-幂级数" id="toc-多项式函数-幂级数" class="nav-link" data-scroll-target="#多项式函数-幂级数">多项式函数 / 幂级数</a></li>
+  <li><a href="#求值" id="toc-求值" class="nav-link" data-scroll-target="#求值">求值</a></li>
+  <li><a href="#插值" id="toc-插值" class="nav-link" data-scroll-target="#插值">插值</a></li>
+  <li><a href="#求值与插值的线性表示" id="toc-求值与插值的线性表示" class="nav-link" data-scroll-target="#求值与插值的线性表示">求值与插值的线性表示</a></li>
+  <li><a href="#求值与插值---小结" id="toc-求值与插值---小结" class="nav-link" data-scroll-target="#求值与插值---小结">求值与插值 - 小结</a></li>
+  </ul></li>
+  <li><a href="#环上的-dft" id="toc-环上的-dft" class="nav-link" data-scroll-target="#环上的-dft"><span class="header-section-number">4.3</span> 环上的 DFT</a>
+  <ul>
+  <li><a href="#环上的-dft---导言" id="toc-环上的-dft---导言" class="nav-link" data-scroll-target="#环上的-dft---导言">环上的 DFT - 导言</a></li>
+  <li><a href="#环上的单位根---两个定义" id="toc-环上的单位根---两个定义" class="nav-link" data-scroll-target="#环上的单位根---两个定义">环上的单位根 - 两个定义</a></li>
+  <li><a href="#环上的单位根---区别与联系" id="toc-环上的单位根---区别与联系" class="nav-link" data-scroll-target="#环上的单位根---区别与联系">环上的单位根 - 区别与联系</a></li>
+  <li><a href="#环上的单位根---区别与联系-1" id="toc-环上的单位根---区别与联系-1" class="nav-link" data-scroll-target="#环上的单位根---区别与联系-1">环上的单位根 - 区别与联系</a></li>
+  <li><a href="#环上的单位根---其它性质" id="toc-环上的单位根---其它性质" class="nav-link" data-scroll-target="#环上的单位根---其它性质">环上的单位根 - 其它性质</a></li>
+  <li><a href="#环上的-dft-1" id="toc-环上的-dft-1" class="nav-link" data-scroll-target="#环上的-dft-1">环上的 DFT</a></li>
+  <li><a href="#环上的-fft" id="toc-环上的-fft" class="nav-link" data-scroll-target="#环上的-fft">环上的 FFT</a></li>
+  <li><a href="#环上的-fft-1" id="toc-环上的-fft-1" class="nav-link" data-scroll-target="#环上的-fft-1">环上的 FFT</a></li>
+  </ul></li>
+  <li><a href="#循环卷积与卷积定理" id="toc-循环卷积与卷积定理" class="nav-link" data-scroll-target="#循环卷积与卷积定理"><span class="header-section-number">4.4</span> 循环卷积与卷积定理</a>
+  <ul>
+  <li><a href="#循环卷积与卷积定理---导言" id="toc-循环卷积与卷积定理---导言" class="nav-link" data-scroll-target="#循环卷积与卷积定理---导言">循环卷积与卷积定理 - 导言</a></li>
+  <li><a href="#循环卷积" id="toc-循环卷积" class="nav-link" data-scroll-target="#循环卷积">循环卷积</a></li>
+  <li><a href="#循环卷积-1" id="toc-循环卷积-1" class="nav-link" data-scroll-target="#循环卷积-1">循环卷积</a></li>
+  <li><a href="#卷积定理" id="toc-卷积定理" class="nav-link" data-scroll-target="#卷积定理">卷积定理</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#advanced-operations" id="toc-advanced-operations" class="nav-link" data-scroll-target="#advanced-operations"><span class="header-section-number">5</span> Advanced Operations</a>
+  <ul>
+  <li><a href="#多项式全家桶---序言" id="toc-多项式全家桶---序言" class="nav-link" data-scroll-target="#多项式全家桶---序言">多项式全家桶 - 序言</a></li>
+  <li><a href="#多项式求逆" id="toc-多项式求逆" class="nav-link" data-scroll-target="#多项式求逆">多项式求逆</a></li>
+  <li><a href="#多项式求逆-1" id="toc-多项式求逆-1" class="nav-link" data-scroll-target="#多项式求逆-1">多项式求逆</a></li>
+  <li><a href="#多项式求逆---实现" id="toc-多项式求逆---实现" class="nav-link" data-scroll-target="#多项式求逆---实现">多项式求逆 - 实现</a></li>
+  <li><a href="#多项式-ln" id="toc-多项式-ln" class="nav-link" data-scroll-target="#多项式-ln">多项式 <span class="math inline">\(\ln\)</span></a></li>
+  <li><a href="#多项式-ln---实现" id="toc-多项式-ln---实现" class="nav-link" data-scroll-target="#多项式-ln---实现">多项式 <span class="math inline">\(\ln\)</span> - 实现</a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
+  <li><a href="#题单" id="toc-题单" class="nav-link" data-scroll-target="#题单">题单</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">A Convolution-Oriented FFT Tutorial</h1>
+<p class="subtitle lead">for OI/XCPC participants and algebra enthusiasts</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">OI</div>
+    <div class="quarto-category">数学</div>
+    <div class="quarto-category">讲稿</div>
+  </div>
+  </div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">sun123zxy </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            BITACMCLUB
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 1, 2023</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">September 28, 2023</p>
+    </div>
+  </div>
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="abstract-title">Abstract</div>
+    BITACMCLUB 2023 年暑假集训 FFT/NTT 课程 slide 整理版．随机更新．
+  </div>
+</div>
+
+</header>
+
+<section id="forewords" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Forewords</h1>
+<section id="卷积但不止卷积---fft-漫谈" class="level3">
+<h3 class="anchored" data-anchor-id="卷积但不止卷积---fft-漫谈">卷积，但不止卷积 - FFT 漫谈</h3>
+<ul>
+<li>先有 FT，再有 DFT，才有 FFT</li>
+<li>时频转换是最初的用途</li>
+<li>发现单位根优秀性质，James Cooley, John Tukey 发明现代 FFT 加速 DFT，但此前相似的发现早已有之</li>
+<li>后来将 DFT 与卷积定理联系，FFT 才被用于计算多项式乘法</li>
+<li>复数运算精度误差推动了 NTT 的发展</li>
+<li>应用：任何需要频率和卷积的地方．频谱、滤波器、音乐、雷达、图像处理……</li>
+<li>OI/XCPC 中主要关心卷积</li>
+</ul>
+</section>
+<section id="推荐食用方法" class="level3">
+<h3 class="anchored" data-anchor-id="推荐食用方法">推荐食用方法</h3>
+<ul>
+<li><p>初步要求</p>
+<ul>
+<li>知道 DFT、FFT 可用于快速计算多项式卷积</li>
+<li>掌握 FFT 加速 DFT 计算的原理和实现</li>
+<li>会应用结论改动 FFT 加速 NTT 计算</li>
+<li>见识一些卷积解决的基本问题，初步了解生成函数在组合计数中的应用</li>
+<li>题目可选择性完成，请多花时间消化原理和思想</li>
+</ul></li>
+<li><p>学有余力 / 集训后继续消化</p>
+<ul>
+<li>系统学习生成函数</li>
+<li>实现多项式全家桶</li>
+<li>对原理感兴趣的同学可对数学部分做进一步研究．本讲内容是线性代数、抽象代数、数论等多领域的综合应用．欢迎讨论．</li>
+<li>学习集合幂级数相关知识点（FMT，FWT，……），体会其思想与 FFT 的同与异</li>
+<li>学习 FFT 在信号、频谱等非算法竞赛向实际问题中的应用</li>
+</ul></li>
+<li><p>Learn for fun :)</p></li>
+</ul>
+</section>
+<section id="记号说明" class="level3">
+<h3 class="anchored" data-anchor-id="记号说明">记号说明</h3>
+<ul>
+<li><p>记 <span class="math inline">\([n] = \{ 0,1,\dots,n-1 \}\)</span>，此时可用 <span class="math inline">\(k \in [n]\)</span> 代替下标取值范围 <span class="math inline">\(k=0,1,\dots,n-1\)</span> 的记法．</p>
+<ul>
+<li>集合论中已定义 <span class="math inline">\(n = \{ 0,1,\dots,n-1 \}\)</span>，这里的中括号是为了强调其集合含义．</li>
+</ul></li>
+<li><p>使用 Iverson 括号约定：设 <span class="math inline">\(P\)</span> 是一个命题，记 <span class="math display">\[
+[P] := \begin{cases}
+        1 &amp; \text{$P$ is true} \\
+        0 &amp; \text{otherwise}
+        \end{cases}
+\]</span></p></li>
+<li><p>多项式的规模定义为多项式的次数加一．特别的，零多项式的规模为 <span class="math inline">\(0\)</span>．</p>
+<ul>
+<li>以后会混用 <span class="math inline">\(n-1\)</span> 次多项式和规模为 <span class="math inline">\(n\)</span> 的多项式的说法．</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="fftntt-in-a-nutshell" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> FFT/NTT in a nutshell</h1>
+<section id="fft" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="fft"><span class="header-section-number">2.1</span> FFT</h2>
+<section id="多项式卷积" class="level3">
+<h3 class="anchored" data-anchor-id="多项式卷积">多项式卷积</h3>
+<p>给定两个至多 <span class="math inline">\(n-1\)</span> 次的多项式 <span class="math display">\[
+A(x) = \sum_{k=0}^{n-1} a_k x^k,\quad B(x) = \sum_{k=0}^{n-1} b_k x^k
+\]</span> 如何快速计算两者的卷积，即它们相乘得到的多项式的系数？ <span class="math display">\[
+\begin{aligned}
+        (A*B)(x) = A(x)B(x) &amp;= \sum_{i=0}^{n-1} a_i x^i \sum_{j=0}^{n-1} b_j x^j \\
+        &amp;= \sum_{k=0}^{2n-2} x^k \sum_{i+j=k} a_i b_j
+    \end{aligned}
+\]</span> 上式给出了 <span class="math inline">\(O(n^2)\)</span> 的朴素做法．</p>
+</section>
+<section id="系数---点值---系数" class="level3">
+<h3 class="anchored" data-anchor-id="系数---点值---系数">系数 - 点值 - 系数</h3>
+<ul>
+<li><p>代入任意 <span class="math inline">\(x\)</span> 可得到多项式在 <span class="math inline">\(x\)</span> 处的点值</p></li>
+<li><p>点值意义下的多项式乘法是 <span class="math inline">\(O(n)\)</span> 的 <span class="math display">\[
+(A*B)(x) = A(x)B(x)
+\]</span></p></li>
+<li><p><span class="math inline">\(n\)</span> 点确定一个至多 <span class="math inline">\(n-1\)</span> 次的多项式<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p></li>
+</ul>
+<p>若计算至多 <span class="math inline">\(n-1\)</span> 次的多项式的某 <span class="math inline">\(n\)</span> 个点值存在快速算法，而通过多项式的某 <span class="math inline">\(n\)</span> 个点值确定原多项式系数亦存在快速算法，就有通过 <span class="math inline">\(O(n)\)</span> 的点值乘法加速多项式乘法计算的可能．</p>
+</section>
+<section id="系数---点值---系数---快速转换" class="level3">
+<h3 class="anchored" data-anchor-id="系数---点值---系数---快速转换">系数 - 点值 - 系数 - 快速转换？</h3>
+<ul>
+<li><p>朴素计算任意指定 <span class="math inline">\(n\)</span> 个位置点值需要 <span class="math inline">\(O(n^2)\)</span>．</p></li>
+<li><p>Lagrange<span class="citation" data-cites="oiwiki-lagrange"><a href="#ref-oiwiki-lagrange" role="doc-biblioref">[1]</a></span> 插值给出了 <span class="math inline">\(O(n^2)\)</span> 将任意位置 <span class="math inline">\(n\)</span> 个点值还原为多项式系数的算法．</p></li>
+<li><p>能否选取 <span class="math inline">\(n\)</span> 个特殊的点值使系数 - 点值、点值 - 系数的变换支持快速计算？</p></li>
+</ul>
+</section>
+<section id="discrete-fourier-transform" class="level3">
+<h3 class="anchored" data-anchor-id="discrete-fourier-transform">Discrete Fourier Transform</h3>
+<p>离散傅里叶变换（Discrete Fourier Transform, DFT）接受一个至多 <span class="math inline">\(n-1\)</span> 次的多项式的 <span class="math inline">\(n\)</span> 个系数，将复数域上的 <span class="math inline">\(n\)</span> 个 <span class="math inline">\(n\)</span> 次单位根代入系数表达式以得到给定多项式的 <span class="math inline">\(n\)</span> 个点值． <span class="math display">\[
+a_0,a_1,\dots,a_{n-1} \longrightarrow A(1),A(\omega_n),\dots,A(\omega_n^{n-1})
+\]</span></p>
+<p>得益于单位根的特殊运算性质，二者均有被称为快速傅里叶变换（Fast Fourier Transform, FFT）的快速算法．</p>
+</section>
+<section id="复数域单位根" class="level3">
+<h3 class="anchored" data-anchor-id="复数域单位根">复数域单位根</h3>
+<p>复数域上的 <span class="math inline">\(n\)</span> 个 <span class="math inline">\(n\)</span> 次单位根<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <span class="math display">\[
+\omega_n^k := e^{\frac {2 \pi k}{n} i} = \cos \frac{2 \pi k}{n} + i \sin \frac{2 \pi k}{n},\quad k \in [n]
+\]</span> 是复平面单位圆上的 <span class="math inline">\(n\)</span> 等分点，易验证它们是复数域中唯一满足方程 <span class="math inline">\(z^n = 1\)</span> 的解．</p>
+<p>所有单位根模长均为 <span class="math inline">\(1\)</span>．第 <span class="math inline">\(k\)</span> 个单位根的辐角为 <span class="math inline">\(\frac {2 \pi k}{n}\)</span>．复数乘法”模长相乘，辐角相加”的性质告诉我们 <span class="math inline">\(\omega_n^i \omega_n^j = \omega_n^{i+j}\)</span>．</p>
+<div class="remark proof">
+<p><span class="proof-title"><em>Remark</em> (Euler’s formula for nerds). </span>Euler 公式 <span class="math inline">\(e^{it} = \cos t + i \sin t\)</span> 的一种证明可用指数函数的另一定义 <span class="math inline">\(\exp z = \lim_{n \to \infty} (1+\frac z n)^n\)</span> 分析复数处极坐标的极限 <span class="citation" data-cites="euler-formula"><a href="#ref-euler-formula" role="doc-biblioref">[2]</a></span>．严格来讲，如果三角函数和指数函数都由级数定义 <span class="citation" data-cites="trigonometry"><a href="#ref-trigonometry" role="doc-biblioref">[3]</a></span>，Euler 公式几乎是显然的．总之，这里仅将 Euler 公式作为一种紧凑的记号使用，细节不做要求．</p>
+</div>
+</section>
+<section id="复数域单位根---三个重要性质" class="level3">
+<h3 class="anchored" data-anchor-id="复数域单位根---三个重要性质">复数域单位根 - 三个重要性质<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></h3>
+<div id="thm-cancel" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (消去引理) </strong></span><span class="math display">\[
+\omega_{dn}^{dk} = \omega_n^k,\quad \forall d \in \mathbb N_+
+\]</span></p>
+</div>
+<div id="thm-half" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (折半引理) </strong></span><span class="math display">\[
+\left\{ \omega_{2n}^{2k} : k \in [2n] \right\} = \left\{ \omega_n^k : k \in [n] \right\}
+\]</span></p>
+</div>
+<p>消去 / 折半引理将在 FFT 的推导中使用．</p>
+</section>
+<section id="复数域单位根---三个重要性质-1" class="level3">
+<h3 class="anchored" data-anchor-id="复数域单位根---三个重要性质-1">复数域单位根 - 三个重要性质</h3>
+<div id="thm-summation" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3 (求和引理) </strong></span><span class="math display">\[
+\frac 1 n \sum_{k=0}^{n-1} \omega_n^{ik} = [n \mid i]
+\]</span></p>
+</div>
+<p>求和引理的证明使用了等比数列求和公式．将在 IDFT 的推导中用到．</p>
+</section>
+<section id="fast-fourier-transform" class="level3">
+<h3 class="anchored" data-anchor-id="fast-fourier-transform">Fast Fourier Transform</h3>
+<p>考虑将至多 <span class="math inline">\(2n-1\)</span> 次的待变换多项式 <span class="math inline">\(A(x) = \sum_{k=0}^{2n-1} a_k x^k\)</span> 奇偶分项两个至多 <span class="math inline">\(n-1\)</span> 次的多项式 <span class="math inline">\(A(x) = A_0 (x^2) + x A_1(x^2)\)</span>，其中 <span class="math display">\[
+A_0 (x) = \sum_{k=0}^{n-1} a_{2k} x^k,\quad
+A_1 (x) = \sum_{k=0}^{n-1} a_{2k+1} x^k
+\]</span> 代入 <span class="math inline">\(x = \omega_{2n}^k,\, k \in [2n]\)</span>，用单位根消去或折半引理（<span class="math inline">\(\omega_{2n}^{2k} = \omega_n^k\)</span>）得 <span class="math display">\[
+A(\omega_{2n}^k) = A_0 (\omega_{n}^k) + \omega_{2n}^k A_1 (\omega_{n}^k)
+\]</span> 再用 <span class="math inline">\(\omega_{2n}^{n} = -1\)</span> 得 <span class="math display">\[
+\begin{aligned}
+A(\omega_{2n}^k) &amp;= A_0 (\omega_n^k) + \omega_{2n}^k A_1 (\omega_n^k) \\
+A(\omega_{2n}^{n+k}) &amp;= A_0 (\omega_n^k) - \omega_{2n}^k A_1(\omega_n^k)
+\end{aligned}
+,\quad k \in [n]
+\]</span> 原多项式 <span class="math inline">\(A(x)\)</span> 规模为 <span class="math inline">\(2n\)</span> 的 DFT 转化为规模为 <span class="math inline">\(n\)</span> 的 <span class="math inline">\(A_0(x)\)</span> 和 <span class="math inline">\(A_1(x)\)</span> 的 DFT．递归计算就可得到 <span class="math inline">\(O(n \log n)\)</span> 的算法．</p>
+</section>
+<section id="dft-的矩阵表示" class="level3">
+<h3 class="anchored" data-anchor-id="dft-的矩阵表示">DFT 的矩阵表示</h3>
+<p>记 <span class="math display">\[\begin{gathered}
+\boldsymbol a =  \begin{pmatrix}a_0 \\ a_1 \\ \vdots \\ a_{n-1}\end{pmatrix},\quad
+F = \left( \omega_n^{ij} \right)_{(i,j) \in n \times n} = \begin{pmatrix}
+1 &amp; 1 &amp; \dots &amp; 1 \\
+1 &amp; \omega_n &amp; \dots &amp; \omega_n^{n-1} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; \omega_n^{n-1} &amp; \dots &amp; \omega_n^{(n-1)(n-1)}
+\end{pmatrix}
+\end{gathered}
+\]</span> 则 DFT 的变换结果（给定系数 <span class="math inline">\(a_0,a_1,\dots,a_{n-1}\)</span> 的多项式在 <span class="math inline">\(n\)</span> 个 <span class="math inline">\(n\)</span> 次单位根处的点值）可表示为 <span class="math display">\[
+\hat{\boldsymbol a} = \begin{pmatrix}A(1) \\ A(\omega_n) \\ \vdots \\ A(\omega_n^{n-1})\end{pmatrix} = F \boldsymbol a
+\]</span></p>
+</section>
+<section id="idft" class="level3">
+<h3 class="anchored" data-anchor-id="idft">IDFT</h3>
+<p>由单位根的消去引理可证，DFT 矩阵 <span class="math inline">\(F\)</span> 的逆矩阵为<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> <span class="math display">\[
+F^{-1} = \frac 1 n \left( \omega_n^{-ij} \right)_{(i,j) \in n \times n} = \frac 1 n \begin{pmatrix}
+1 &amp; 1 &amp; \dots &amp; 1 \\
+1 &amp; \omega_n^{-1} &amp; \dots &amp; \omega_n^{-(n-1)} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; \omega_n^{-(n-1)} &amp; \dots &amp; \omega_n^{-(n-1)(n-1)}
+\end{pmatrix}
+\]</span> 于是 IDFT 的过程可表示为 <span class="math display">\[
+\boldsymbol a  = F^{-1} \hat{\boldsymbol a}
+\]</span></p>
+<p>故快速计算 IDFT 的方法与 FFT 几乎一致，只需将计算 DFT 时使用的本原单位根 <span class="math inline">\(\omega_n\)</span> 替换为 <span class="math inline">\(\omega_n^{-1}\)</span> 并对最终结果除以 <span class="math inline">\(n\)</span> 即可．</p>
+</section>
+<section id="梳理" class="level3">
+<h3 class="anchored" data-anchor-id="梳理">梳理</h3>
+<ul>
+<li><p>怎么计算卷积？</p>
+<ul>
+<li>把至多 <span class="math inline">\(n-1\)</span> 次的多项式 <span class="math inline">\(A(x)\)</span> 和至多 <span class="math inline">\(m-1\)</span> 次的多项式 <span class="math inline">\(B(x)\)</span> 写成至多 <span class="math inline">\(n+m-2\)</span> 次的多项式（高位补 <span class="math inline">\(0\)</span>）．为计算 FFT 方便，还要继续补 <span class="math inline">\(0\)</span> 至一个大于其次数的 <span class="math inline">\(2\)</span> 的幂．</li>
+<li>对 <span class="math inline">\(A(x)\)</span> 和 <span class="math inline">\(B(x)\)</span> 多点求值．</li>
+<li>把两个多项式的点值逐点相乘．</li>
+<li>多点插值还原 <span class="math inline">\((A*B)(x)\)</span> 的系数．</li>
+</ul></li>
+<li><p>怎么快速求值？</p>
+<ul>
+<li>选点选单位根就是 DFT．</li>
+<li>消去引理和折半引理使我们可以用 FFT 算法递归地计算 DFT．</li>
+<li>推导已经给出了递归的写法，之后还会介绍常数更优的迭代实现．</li>
+</ul></li>
+<li><p>怎么快速插值？</p>
+<ul>
+<li>求和引理给出了 DFT 矩阵的逆矩阵．</li>
+<li>计算方法很相似，最后逐项除掉一个规模．</li>
+</ul></li>
+</ul>
+</section>
+<section id="fft-递归实现---dft-部分" class="level3">
+<h3 class="anchored" data-anchor-id="fft-递归实现---dft-部分">FFT 递归实现 - DFT 部分</h3>
+<p>方便起见，我们只处理 <span class="math inline">\(n\)</span> 为 <span class="math inline">\(2\)</span> 的幂的情形．以下 C 风格的代码实现了递归的 DFT 和 IDFT．</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;complex&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll<span class="op">;</span> <span class="kw">typedef</span> complex<span class="op">&lt;</span><span class="dt">double</span><span class="op">&gt;</span> CP<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> ll MXN<span class="op">=</span><span class="fl">4E6</span><span class="op">+</span><span class="dv">5</span><span class="op">;</span> <span class="at">const</span> <span class="dt">double</span> PI<span class="op">=</span><span class="fl">3.14159265358979323846</span><span class="bu">l</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>CP tmp<span class="op">[</span>MXN<span class="op">];</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> _DFT<span class="op">(</span>CP A<span class="op">[],</span>ll n<span class="op">,</span>ll typ<span class="op">){</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    n<span class="op">/=</span><span class="dv">2</span><span class="op">;</span> <span class="cf">if</span><span class="op">(</span>n<span class="op">==</span><span class="dv">0</span><span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll k<span class="op">=</span><span class="dv">0</span><span class="op">;</span>k<span class="op">&lt;</span>n<span class="op">;</span>k<span class="op">++)</span> tmp<span class="op">[</span>k<span class="op">]=</span>A<span class="op">[</span><span class="dv">2</span><span class="op">*</span>k<span class="op">],</span>tmp<span class="op">[</span>n<span class="op">+</span>k<span class="op">]=</span>A<span class="op">[</span><span class="dv">2</span><span class="op">*</span>k<span class="op">+</span><span class="dv">1</span><span class="op">];</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll k<span class="op">=</span><span class="dv">0</span><span class="op">;</span>k<span class="op">&lt;</span><span class="dv">2</span><span class="op">*</span>n<span class="op">;</span>k<span class="op">++)</span> A<span class="op">[</span>k<span class="op">]=</span>tmp<span class="op">[</span>k<span class="op">];</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    _DFT<span class="op">(</span>A<span class="op">,</span>n<span class="op">,</span>typ<span class="op">);</span> _DFT<span class="op">(</span>A<span class="op">+</span>n<span class="op">,</span>n<span class="op">,</span>typ<span class="op">);</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    CP w<span class="op">(</span>cos<span class="op">(</span><span class="dv">2</span><span class="op">*</span>PI<span class="op">/(</span><span class="dv">2</span><span class="op">*</span>n<span class="op">)),</span>typ<span class="op">*</span>sin<span class="op">(</span><span class="dv">2</span><span class="op">*</span>PI<span class="op">/(</span><span class="dv">2</span><span class="op">*</span>n<span class="op">))),</span> wk<span class="op">=</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll k<span class="op">=</span><span class="dv">0</span><span class="op">;</span>k<span class="op">&lt;</span>n<span class="op">;</span>k<span class="op">++){</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        tmp<span class="op">[</span>  k<span class="op">]=</span>A<span class="op">[</span>k<span class="op">]+</span>wk<span class="op">*</span>A<span class="op">[</span>n<span class="op">+</span>k<span class="op">];</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        tmp<span class="op">[</span>n<span class="op">+</span>k<span class="op">]=</span>A<span class="op">[</span>k<span class="op">]-</span>wk<span class="op">*</span>A<span class="op">[</span>n<span class="op">+</span>k<span class="op">];</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        wk<span class="op">*=</span>w<span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">for</span><span class="op">(</span>ll k<span class="op">=</span><span class="dv">0</span><span class="op">;</span>k<span class="op">&lt;</span><span class="dv">2</span><span class="op">*</span>n<span class="op">;</span>k<span class="op">++)</span> A<span class="op">[</span>k<span class="op">]=</span>tmp<span class="op">[</span>k<span class="op">];</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="dt">void</span> DFT<span class="op">(</span>CP A<span class="op">[],</span>ll n<span class="op">,</span>ll typ<span class="op">){</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    _DFT<span class="op">(</span>A<span class="op">,</span>n<span class="op">,</span>typ<span class="op">);</span> <span class="cf">if</span><span class="op">(</span>typ<span class="op">==-</span><span class="dv">1</span><span class="op">)</span> <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>n<span class="op">;</span>i<span class="op">++)</span> A<span class="op">[</span>i<span class="op">]*=</span><span class="fl">1.0</span><span class="bu">l</span><span class="op">/</span>n<span class="op">;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="fft-递归实现---卷积部分" class="level3">
+<h3 class="anchored" data-anchor-id="fft-递归实现---卷积部分">FFT 递归实现 - 卷积部分</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// alternatively, use std::__lg() in GCC</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ll log2ceil<span class="op">(</span>ll n<span class="op">){</span>ll cnt<span class="op">=</span><span class="dv">0</span><span class="op">;</span> <span class="cf">for</span><span class="op">(</span>ll t<span class="op">=</span><span class="dv">1</span><span class="op">;</span>t<span class="op">&lt;</span>n<span class="op">;</span>t<span class="op">&lt;&lt;=</span><span class="dv">1</span><span class="op">)</span> cnt<span class="op">++;</span> <span class="cf">return</span> cnt<span class="op">;}</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>CP A<span class="op">[</span>MXN<span class="op">],</span>B<span class="op">[</span>MXN<span class="op">],</span>C<span class="op">[</span>MXN<span class="op">];</span> ll outC<span class="op">[</span>MXN<span class="op">];</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ll<span class="op">*</span> conv<span class="op">(</span>ll inA<span class="op">[],</span>ll aN<span class="op">,</span>ll inB<span class="op">[],</span>ll bN<span class="op">){</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ll n<span class="op">=</span><span class="dv">1</span><span class="bu">LL</span><span class="op">&lt;&lt;</span>log2ceil<span class="op">(</span>aN<span class="op">+</span>bN<span class="op">-</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>aN<span class="op">;</span>i<span class="op">++)</span> A<span class="op">[</span>i<span class="op">]=</span>inA<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>bN<span class="op">;</span>i<span class="op">++)</span> B<span class="op">[</span>i<span class="op">]=</span>inB<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    DFT<span class="op">(</span>A<span class="op">,</span>n<span class="op">,</span><span class="dv">1</span><span class="op">);</span> DFT<span class="op">(</span>B<span class="op">,</span>n<span class="op">,</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>n<span class="op">;</span>i<span class="op">++)</span> C<span class="op">[</span>i<span class="op">]=</span>A<span class="op">[</span>i<span class="op">]*</span>B<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    DFT<span class="op">(</span>C<span class="op">,</span>n<span class="op">,-</span><span class="dv">1</span><span class="op">);</span> <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>n<span class="op">;</span>i<span class="op">++)</span> outC<span class="op">[</span>i<span class="op">]=</span>round<span class="op">(</span>C<span class="op">[</span>i<span class="op">].</span>real<span class="op">());</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> outC<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Drawbacks?</p>
+<ul>
+<li>递归实现慢</li>
+<li>临时数组丑</li>
+<li>封装性为零</li>
+</ul>
+</section>
+<section id="fft-迭代" class="level3">
+<h3 class="anchored" data-anchor-id="fft-迭代">FFT 迭代</h3>
+<p>迭代地实现 FFT 不仅在常数上更加优秀，亦更便于使用 C++ 的容器进行封装．这并不困难，只需自底向上模拟 FFT 递归过程即可．</p>
+<p>唯一的问题——最底层的顺序？</p>
+<p>来观察一轮 <span class="math inline">\(2^3\)</span>-FFT 自顶向下的置换过程 <span class="math display">\[\begin{matrix}
+2^3 &amp; 0/000 &amp; 1/001 &amp; 2/010 &amp; 3/011 &amp; 4/100 &amp; 5/101 &amp; 6/110 &amp; 7/111 \\
+2^2 &amp; 0/000 &amp; 2/010 &amp; 4/100 &amp; 6/110 &amp; 1/001 &amp; 3/011 &amp; 5/101 &amp; 7/111 \\
+2^1 &amp; 0/000 &amp; 4/100 &amp; 2/010 &amp; 6/110 &amp; 1/001 &amp; 5/101 &amp; 3/011 &amp; 7/111 \\
+2^0 &amp; 0/000 &amp; 4/100 &amp; 2/010 &amp; 6/110 &amp; 1/001 &amp; 5/101 &amp; 3/011 &amp; 7/111
+\end{matrix}
+\]</span></p>
+<p>你发现了什么？</p>
+</section>
+<section id="蝶形运算" class="level3">
+<h3 class="anchored" data-anchor-id="蝶形运算">蝶形运算</h3>
+<p>在计算点值前，<span class="math inline">\(2^n\)</span>-FFT 事实上完成了一次 <span class="math inline">\(n\)</span>-位逆序置换．分解来看，规模为 <span class="math inline">\(2^k\)</span> 的层的置换完成了对 <span class="math inline">\(2^{n-k}\)</span> 对应二进制位的分类．</p>
+<p>我们有 <span class="math inline">\(O(n)\)</span> 的递推方法获得这一置换．</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> spawnrev<span class="op">(</span>ll n<span class="op">){</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    rev<span class="op">[</span><span class="dv">0</span><span class="op">]=</span><span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">1</span><span class="op">;</span>i<span class="op">&lt;(</span><span class="dv">1</span><span class="op">&lt;&lt;</span>n<span class="op">);</span>i<span class="op">++)</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        rev<span class="op">[</span>i<span class="op">]=(</span>rev<span class="op">[</span>i<span class="op">&gt;&gt;</span><span class="dv">1</span><span class="op">]&gt;&gt;</span><span class="dv">1</span><span class="op">)+((</span>i<span class="op">&amp;</span><span class="dv">1</span><span class="op">)&lt;&lt;(</span>n<span class="op">-</span><span class="dv">1</span><span class="op">));</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="fft-迭代实现" class="level3">
+<h3 class="anchored" data-anchor-id="fft-迭代实现">FFT 迭代实现</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> DFT<span class="op">(</span>CP A<span class="op">[],</span>ll n<span class="op">,</span>ll typ<span class="op">){</span> <span class="co">// rev[] should be spawned in advance</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>n<span class="op">;</span>i<span class="op">++)</span> <span class="cf">if</span><span class="op">(</span>i<span class="op">&lt;</span>rev<span class="op">[</span>i<span class="op">])</span> swap<span class="op">(</span>A<span class="op">[</span>i<span class="op">],</span>A<span class="op">[</span>rev<span class="op">[</span>i<span class="op">]]);</span> <span class="co">// a one-to-one permutation</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll hf<span class="op">=</span><span class="dv">1</span><span class="op">;</span>hf<span class="op">&lt;</span>n<span class="op">;</span>hf<span class="op">*=</span><span class="dv">2</span><span class="op">){</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        CP w<span class="op">(</span>cos<span class="op">(</span><span class="dv">2</span><span class="op">*</span>PI<span class="op">/(</span><span class="dv">2</span><span class="op">*</span>n<span class="op">)),</span>typ<span class="op">*</span>sin<span class="op">(</span><span class="dv">2</span><span class="op">*</span>PI<span class="op">/(</span><span class="dv">2</span><span class="op">*</span>n<span class="op">))),</span> wk<span class="op">=</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>n<span class="op">;</span>i<span class="op">+=</span>hf<span class="op">*</span><span class="dv">2</span><span class="op">){</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            CP wk<span class="op">=</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span>ll k<span class="op">=</span><span class="dv">0</span><span class="op">;</span>k<span class="op">&lt;</span>hf<span class="op">;</span>k<span class="op">++){</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                CP x<span class="op">=</span>A<span class="op">[</span>i<span class="op">+</span>k<span class="op">],</span>y<span class="op">=</span>wk<span class="op">*</span>A<span class="op">[</span>i<span class="op">+</span>hf<span class="op">+</span>k<span class="op">];</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                A<span class="op">[</span>i<span class="op">+</span>k<span class="op">]=</span>x<span class="op">+</span>y<span class="op">;</span> A<span class="op">[</span>i<span class="op">+</span>hf<span class="op">+</span>k<span class="op">]=</span>x<span class="op">-</span>y<span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                wk<span class="op">=</span>wk<span class="op">*</span>w<span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>typ<span class="op">==-</span><span class="dv">1</span><span class="op">)</span> <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>n<span class="op">;</span>i<span class="op">++)</span> A<span class="op">[</span>i<span class="op">]*=</span><span class="fl">1.0</span><span class="bu">l</span><span class="op">/</span>n<span class="op">;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>请自行实现更易用的容器封装版本．</p>
+</section>
+</section>
+<section id="ntt" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="ntt"><span class="header-section-number">2.2</span> NTT</h2>
+<section id="ntt-速成" class="level3">
+<h3 class="anchored" data-anchor-id="ntt-速成">NTT 速成<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></h3>
+<p>FFT 的缺点？浮点数带来的大常数与精度问题．</p>
+<p><span class="math inline">\(998244353=2^{23} \times 7 \times 17 + 1\)</span>，同时是一个质数．</p>
+<p>我们指出，在系数和点值模 <span class="math inline">\(p=998244353\)</span> 的意义下，当规模 <span class="math inline">\(n \leq p\)</span> 时<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>，至多 <span class="math inline">\(n-1\)</span> 次的多项式仍可由其 <span class="math inline">\(n\)</span> 个点值唯一确定，故仍可使用系数-点值-系数的方法求得多项式卷积．</p>
+<p>我们指出，对于满足 <span class="math inline">\(n \mid p-1\)</span> 的 <span class="math inline">\(n\)</span>，依 <span class="math inline">\(\omega_n := 3^{\frac{p-1}{n}}\)</span> 定义的 <span class="math inline">\(\omega_n\)</span> 在模 <span class="math inline">\(p\)</span> 意义下与复数域中定义的 <span class="math inline">\(\omega_n\)</span> 发挥相同的作用，仍可进行规模至多为 <span class="math inline">\(2^{23}\)</span> 的 FFT 作为模 <span class="math inline">\(p=998244353\)</span> 意义下 NTT 的快速算法．</p>
+<p>只需修改单位根定义，把复数运算改为整数取模，就得到了能算 NTT 的 FFT 的实现．</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> PR<span class="op">=</span><span class="dv">3</span><span class="op">,</span>MOD<span class="op">=</span><span class="dv">998244353</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ll w<span class="op">=</span>qpow<span class="op">(</span>PR<span class="op">,(</span>MOD<span class="op">-</span><span class="dv">1</span><span class="op">)/(</span>hf<span class="op">*</span><span class="dv">2</span><span class="op">));</span> <span class="cf">if</span><span class="op">(</span>typ<span class="op">==-</span><span class="dv">1</span><span class="op">)</span> w<span class="op">=</span>inv<span class="op">(</span>w<span class="op">);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="fftntt-in-a-nutshell---小结概念区分" class="level3">
+<h3 class="anchored" data-anchor-id="fftntt-in-a-nutshell---小结概念区分">FFT/NTT in a nutshell - 小结：概念区分</h3>
+<ul>
+<li><p>关于 DFT</p>
+<ul>
+<li>Discrete Fourier Transform, DFT, 离散傅里叶变换</li>
+<li>Fast Fourier Transform, FFT, 快速傅里叶变换</li>
+<li>FFT 是计算 DFT 的快速算法</li>
+</ul></li>
+<li><p>关于 NTT</p>
+<ul>
+<li>Number Theoretic Transform, NTT, 数论变换</li>
+<li>FFT 在复数域上的多项式环 <span class="math inline">\(\mathbb{C}[x]\)</span> 中进行，而 NTT 在模 <span class="math inline">\(p\)</span> 剩余类域 <span class="math inline">\(\mathbb{Z}_p[x]\)</span> 上进行</li>
+<li>快速计算 DFT / IDFT, NTT 都用 FFT，故一般不使用”FNTT”的说法</li>
+</ul></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="applications" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Applications</h1>
+<section id="基本应用" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="基本应用"><span class="header-section-number">3.1</span> 基本应用</h2>
+<section id="基本应用-1" class="level3">
+<h3 class="anchored" data-anchor-id="基本应用-1">基本应用</h3>
+<dl>
+<dt>大整数乘法</dt>
+<dd>
+<p>十进制数可拆解为多项式表示，计算卷积后处理进位即可．由于数字最大只是 <span class="math inline">\(9\)</span>，合理数据范围下卷起来不会爆模数，直接用 NTT 实现即可．</p>
+</dd>
+<dt>背包计数</dt>
+<dd>
+<p>两个背包的合并就是多项式卷积．</p>
+</dd>
+<dt>滤波器</dt>
+<dd>
+<p>反转多项式的系数数组再做卷积，可以快速得到两个多项式滑动窗口式的内积．</p>
+</dd>
+<dt>位运算</dt>
+<dd>
+<p>有些位运算可以写成卷积的形式．模 <span class="math inline">\(2\)</span> 意义下”异或”是加法，“与”是乘法，“或”可以通过取反转化为”与”．</p>
+</dd>
+<dt>字符串</dt>
+<dd>
+<p>通过巧妙设定字符串距离函数，FFT 可解决更广泛的字符串匹配问题．</p>
+</dd>
+<dt>值域次数化</dt>
+<dd>
+<p>当值域较小时，将待计算的值放在多项式次数上统计贡献次数，可以绕开某些极难求解的数值问题．例如 Vandermonde 行列式的快速计算．</p>
+</dd>
+</dl>
+</section>
+<section id="基本应用---分治-fft" class="level3">
+<h3 class="anchored" data-anchor-id="基本应用---分治-fft">基本应用 - 分治 FFT</h3>
+<p>对多个长度相同的多项式的卷积，分治地卷起来可降低时间复杂度．长度不一时，挑小的先卷也可减小常数（用堆维护）．</p>
+<p>另有一种 CDQ 风格的分治 FFT．CDQ 长于处理带偏序的二元点对贡献，在处理形如 <span class="math inline">\(c_k = \sum_{i&gt;j} [i+j=k] a_i b_j\)</span> 的带偏序卷积时可以应用．</p>
+<p>当卷积的前后项存在依赖关系时，也可使用此法保证处理顺序恰当．然而此类依赖问题往往也可通过解生成函数方程的方法求得封闭形式．</p>
+<p>时间复杂度均为 <span class="math display">\[
+T(n) = 2 T \left( \frac n 2 \right) + O(n \log n) = O(n \log^2 n)
+\]</span></p>
+</section>
+</section>
+<section id="生成函数初步" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="生成函数初步"><span class="header-section-number">3.2</span> 生成函数初步</h2>
+<section id="生成函数初步---导言" class="level3">
+<h3 class="anchored" data-anchor-id="生成函数初步---导言">生成函数初步 - 导言</h3>
+<p>生成函数是一种对数列的操作技巧．通过将数列表示为多项式或形式幂级数，数列间复杂的和式操作可用简单函数的乘法、复合等运算进行表示，从而大大降低了数列变换技巧的使用门槛．</p>
+<p>生成函数在组合数学中应用广泛，且生成函数的部分操作在组合意义下也有较为直观的理解．本节将带大家初窥其中的奥妙．限于篇幅和主讲人能力，我们仅以题带点地讲解，期冀为大家建立构造生成函数的直觉．请感兴趣的同学下来做进一步研究．</p>
+<p>熟悉 Taylor 展开的同学或能较快上手此部分内容．</p>
+</section>
+<section id="ordinary-generating-function" class="level3">
+<h3 class="anchored" data-anchor-id="ordinary-generating-function">Ordinary Generating Function</h3>
+<p>序列 <span class="math inline">\(a_n\)</span> 的普通生成函数（Ordinary Generating Function, OGF）定义为其对应的多项式（形式幂级数）<span class="math inline">\(A(x) = \sum_{n=0}^{+\infty} a_n x^n\)</span>．这样书写的目的是为了便于进行数列间的卷积操作．特别的，Taylor 展开（或广义二项式定理）风格的 <span class="math inline">\(\frac 1 {1-x} = 1 + x + x^2 + \dots\)</span> 也是常用技巧之一<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>．</p>
+<div id="exr-ogf-basic" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1 </strong></span>写出下列数列的 OGF．下标从 <span class="math inline">\(0\)</span> 开始．</p>
+<ul>
+<li><span class="math inline">\(1,0,0,0\dots\)</span></li>
+<li><span class="math inline">\(1,1,1,1,\dots\)</span></li>
+<li><span class="math inline">\(1,0,1,0,\dots\)</span></li>
+<li><span class="math inline">\(1,-1,1,-1,\dots\)</span></li>
+<li><span class="math inline">\(1,2,3,4,\dots\)</span></li>
+<li><span class="math inline">\(1,2,4,8,\dots\)</span></li>
+</ul>
+</div>
+</section>
+<section id="ogf-组合意义" class="level3">
+<h3 class="anchored" data-anchor-id="ogf-组合意义">OGF 组合意义</h3>
+<p>OGF 相乘，是背包，是卷积，是两块无标号组合对象的有序拼接．</p>
+<div id="exr-ogf-comb" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2 </strong></span>写出下列计数问题的 OGF，均以 <span class="math inline">\(n\)</span> 作为数列的下标．</p>
+<ul>
+<li>在 <span class="math inline">\(m\)</span> 个物品中选出 <span class="math inline">\(n\)</span> 个的方案数．</li>
+<li>容量为 <span class="math inline">\(n\)</span> 的背包装下体积分别为 <span class="math inline">\(a_i\)</span> 的 <span class="math inline">\(m\)</span> 个物品的方案数．</li>
+<li>同上，但每个物品有无限个．</li>
+<li><span class="math inline">\(n\)</span> 个无标号球放入 <span class="math inline">\(r\)</span> 个有标号盒的方案数，要求盒非空．</li>
+<li>同上，但盒可空．</li>
+<li>将整数 <span class="math inline">\(n\)</span> 分拆为若干正整数之和的方案数．</li>
+</ul>
+</div>
+</section>
+<section id="exponential-generating-function" class="level3">
+<h3 class="anchored" data-anchor-id="exponential-generating-function">Exponential Generating Function</h3>
+<p>序列 <span class="math inline">\(a_n\)</span> 的指数生成函数（Exponential Generating Function, EGF）定义为 <span class="math display">\[
+A(x) = \sum_{n=0}^{+\infty} a_n \frac {x^n}{n!}
+\]</span></p>
+<div id="exr-egf-basic" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3 </strong></span>写出下列序列的 EGF，下标从 <span class="math inline">\(0\)</span> 开始．</p>
+<ul>
+<li><span class="math inline">\(1,0,0,0,\dots\)</span></li>
+<li><span class="math inline">\(1,1,1,1,\dots\)</span></li>
+<li><span class="math inline">\(1,2,4,8,\dots\)</span></li>
+<li><span class="math inline">\(0,1,0,-1,0,1,0,-1,\dots\)</span></li>
+<li><span class="math inline">\(1,0,-1,0,1,0,-1,0,\dots\)</span></li>
+<li><span class="math inline">\(0,1,-1,2!,-3!,4!,\dots\)</span></li>
+</ul>
+</div>
+</section>
+<section id="egf-组合意义" class="level3">
+<h3 class="anchored" data-anchor-id="egf-组合意义">EGF 组合意义</h3>
+<p>观察两个 EGF 的乘积 <span class="math display">\[
+\begin{aligned}
+A(x) B(x) &amp;= \sum_{i=0}^{+\infty} a_i \frac{x^i}{i!} \sum_{j=0}^{+\infty} b_j \frac{x^j}{j!} \\
+&amp;= \sum_{i=0}^{+\infty} \sum_{j=0}^{+\infty} a_i b_j \frac{x^{i+j}}{i! j!} \\
+&amp;= \sum_{n=0}^{+\infty} \sum_{i=0}^n a_i b_{n-i} \frac{x^n}{i! (n-i)!} \\
+&amp;= \sum_{n=0}^{+\infty} \sum_{i=0}^n a_i b_{n-i} \binom n i \frac{x^n}{n!}
+\end{aligned}
+\]</span> EGF 的乘积，相当于两块有标号组合对象的有序拼接．</p>
+</section>
+<section id="egf-组合意义-1" class="level3">
+<h3 class="anchored" data-anchor-id="egf-组合意义-1">EGF 组合意义</h3>
+<p><span class="math display">\[
+A(x) B(x) = \sum_{i=0}^{+\infty} a_i \frac{x^i}{i!} \sum_{j=0}^{+\infty} b_j \frac{x^j}{j!}
+= \sum_{n=0}^{+\infty} \sum_{i=0}^n a_i b_{n-i} \binom n i \frac{x^n}{n!}\]</span></p>
+<div id="exr-egf-comb" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4 </strong></span>写出下列计数问题的 EGF，均以 <span class="math inline">\(n\)</span> 作为数列的下标．</p>
+<ul>
+<li>长度为 <span class="math inline">\(n\)</span> 的排列的构型数．</li>
+<li>长度为 <span class="math inline">\(n\)</span> 的圆排列的构型数．</li>
+<li>将 <span class="math inline">\(n\)</span> 个有标号球放入 <span class="math inline">\(r\)</span> 个有标号盒的方案数，要求盒非空．</li>
+<li>将 <span class="math inline">\(n\)</span> 个有标号球放入 <span class="math inline">\(r\)</span> 个无标号盒的方案数，要求盒非空．</li>
+<li>将 <span class="math inline">\(n\)</span> 元集合划分为 <span class="math inline">\(r\)</span> 个等价类的方案数．</li>
+<li>划分 <span class="math inline">\(n\)</span> 元集合的方案数．</li>
+</ul>
+</div>
+</section>
+</section>
+</section>
+<section id="mathematics-behind" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Mathematics behind</h1>
+<section id="ntt-原理" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="ntt-原理"><span class="header-section-number">4.1</span> NTT 原理</h2>
+<section id="ntt-原理---导言" class="level3">
+<h3 class="anchored" data-anchor-id="ntt-原理---导言">NTT 原理 - 导言</h3>
+<p>本节介绍 NTT 的原理．</p>
+<p>FFT 加速卷积算法的核心，一是多项式的求值插值原理，二是单位根带来的分治快速算法．我们将在本节中证明，模 <span class="math inline">\(p\)</span> 剩余类域 <span class="math inline">\(\mathbb Z_p\)</span> 中，只要 <span class="math inline">\(n \leq p\)</span>，仍可通过 <span class="math inline">\(n\)</span> 个点值唯一确定至多 <span class="math inline">\(n-1\)</span> 次的 <span class="math inline">\(\mathbb Z_p\)</span> 上的多项式，这保证了系数-点值-系数方法的正确性；此外，基于原根构造出的 <span class="math inline">\(\mathbb Z_p\)</span> 上的本原单位根，使得使用与 FFT 相同的分治算法加速 NTT 的计算成为可能．</p>
+<p>NTT 原理涉及原根等数论内容．本讲的目标是建立 DFT 变换和 FFT 算法的通用数学框架，而非具体研究其某一特例．故我们只讲解 NTT 所需的基础数论知识，无关的细节则略过处理．对数论感兴趣的同学可前往 OI Wiki 学习．</p>
+</section>
+<section id="模-p-剩余类域-mathbb-z_p" class="level3">
+<h3 class="anchored" data-anchor-id="模-p-剩余类域-mathbb-z_p">模 <span class="math inline">\(p\)</span> 剩余类域 <span class="math inline">\(\mathbb Z_p\)</span></h3>
+<p><em>模 <span class="math inline">\(p\)</span> 剩余类域</em> <span class="math inline">\(\mathbb Z_p\)</span> 是刻画取模运算下整数加法、乘法运算规律的代数结构，其良定义性由 <span class="math display">\[
+\begin{cases}
+    a_1 \equiv a_2 \pmod{p} \\
+    b_1 \equiv b_2 \pmod{p}
+\end{cases}
+  \implies
+\begin{cases}
+    a_1 + b_1 \equiv a_2 + b_2 \pmod{p} \\
+    a_1 b_1 \equiv a_2 b_2 \pmod{p}
+\end{cases}
+\]</span> 保证．</p>
+<p>模 <span class="math inline">\(p\)</span> 剩余类域的最大特点是其中每个元素都存在（唯一）逆元．这一点是数论中 Bézout 定理的直接应用．</p>
+<p>模 <span class="math inline">\(p\)</span> 剩余类域的另一优良性质是其满足消去律，即 <span class="math display">\[
+ab \equiv 0 \pmod p \implies a \equiv 0 \lor b \equiv 0 \pmod p
+\]</span> 而模一般的数 <span class="math inline">\(m\)</span> 形成的代数结构则不满足此性质．</p>
+</section>
+<section id="mathbb-z_px-上的多点插值" class="level3">
+<h3 class="anchored" data-anchor-id="mathbb-z_px-上的多点插值"><span class="math inline">\(\mathbb Z_p[x]\)</span> 上的多点插值</h3>
+<p>之后记系数均在 <span class="math inline">\(\mathbb Z_p\)</span> 上的多项式组成的集合为 <span class="math inline">\(\mathbb Z_p[x]\)</span>．</p>
+<div id="lem-zp-remainder" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 1 (<span class="math inline">\(\mathbb Z_p \lbrack x \rbrack\)</span> 上的多项式余式定理) </strong></span>设 <span class="math inline">\(A(x) \in \mathbb Z_p[x]\)</span>，用 <span class="math inline">\(Z_p[x]\)</span> 中的一次多项式 <span class="math inline">\((x-a)\)</span> 对 <span class="math inline">\(A(x)\)</span> 进行带余除法，得到的余式为至多零次的多项式 <span class="math inline">\(A(a)\)</span>．</p>
+</div>
+</section>
+<section id="mathbb-z_px-上的多点插值-1" class="level3">
+<h3 class="anchored" data-anchor-id="mathbb-z_px-上的多点插值-1"><span class="math inline">\(\mathbb Z_p[x]\)</span> 上的多点插值</h3>
+<div id="thm-lagrange" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4 (Lagrange 定理) </strong></span>设 <span class="math inline">\(p\)</span> 是一个质数，设 <span class="math inline">\(A(x) \in Z_p[x]\)</span>．同余方程 <span class="math inline">\(A(x) \equiv 0 \pmod{p}\)</span> 只有至多 <span class="math inline">\(\deg A(x)\)</span> 个模 <span class="math inline">\(p\)</span> 意义下不同的整数解，除非这多项式的系数全为零．</p>
+</div>
+<div id="cor-lagrange-equal" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 1 </strong></span>设 <span class="math inline">\(A(x),B(x) \in \mathbb Z_p[x]\)</span> 是至多 <span class="math inline">\(n-1\)</span> 次的两个多项式．若同余方程 <span class="math inline">\(A(x) \equiv B(x) \pmod{p}\)</span> 有 <span class="math inline">\(n\)</span> 个不同的模 <span class="math inline">\(p\)</span> 意义下的整数解，则两多项式一定相等．</p>
+</div>
+<p>推论告诉我们，欲确定 <span class="math inline">\(\mathbb Z_p\)</span> 上的一个至多 <span class="math inline">\(n-1\)</span> 次的多项式，只需找到其 <span class="math inline">\(n\)</span> 个模 <span class="math inline">\(p\)</span> 意义下的点值即可．因此，使用系数 - 点值 - 系数方法加速 <span class="math inline">\(\mathbb Z_p[x]\)</span> 上的卷积是可行的．</p>
+</section>
+<section id="本原单位根" class="level3">
+<h3 class="anchored" data-anchor-id="本原单位根">本<strong>原</strong>单位<strong>根</strong></h3>
+<p>回顾 DFT 中复数域 <span class="math inline">\(\mathbb C\)</span> 上单位根的定义 <span class="math display">\[
+\omega_n^k := e^{\frac {2 \pi k}{n} i} = \cos \frac{2 \pi k}{n} + i \sin \frac{2 \pi k}{n},\quad k \in [n]
+\]</span> 其中 <span class="math inline">\(\omega_n\)</span> 是最重要的单位根，因为它生成了所有其它的单位根．</p>
+<p>事实上所有的 <span class="math inline">\(\omega_n^{k} : \gcd(n,k)=1\)</span> 也都是重要的，它们的 <span class="math inline">\(0\)</span> 至 <span class="math inline">\(n-1\)</span> 次方也能生成所有的单位根．这也是数论中 Bézout 定理的直接应用．</p>
+<p>我们把这一类重要的单位根称为<em>本原单位根</em>．抽象的来说，<span class="math inline">\(n\)</span> 次本原单位根 <span class="math inline">\(\omega_n\)</span> 可定义如下 <span class="math display">\[
+\omega_n^n = 1;\quad \omega_n^k \neq 1,\quad k=1,2,\dots,n-1
+\]</span></p>
+</section>
+<section id="mathbb-z_m-上的阶" class="level3">
+<h3 class="anchored" data-anchor-id="mathbb-z_m-上的阶"><span class="math inline">\(\mathbb Z_m\)</span> 上的阶</h3>
+<p>如何定义 <span class="math inline">\(\mathbb Z_m\)</span> 上的“本原单位根”呢？</p>
+<p>称在模 <span class="math inline">\(m\)</span> 意义下使得 <span class="math inline">\(a^n=1\)</span> 的最小正整数 <span class="math inline">\(n\)</span> 为 <span class="math inline">\(a\)</span> 的<em>阶</em>，记为 <span class="math inline">\(\operatorname{ord}_m(a)\)</span>．在不至混淆的情况下，也简记为 <span class="math inline">\(\operatorname{ord}(a)\)</span>．</p>
+<ul>
+<li>阶最高有多高？</li>
+</ul>
+<div id="thm-fermat" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 5 (Fermat 小定理) </strong></span>若 <span class="math inline">\(p\)</span> 是质数，<span class="math inline">\(a\)</span> 是非零数，则 <span class="math inline">\(a^{p-1} \equiv 1 \pmod{p}\)</span>．</p>
+</div>
+<div id="thm-euler" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 6 (Euler 定理) </strong></span>若 <span class="math inline">\(\gcd(a,m)=1\)</span>，则 <span class="math inline">\(a^{\varphi(m)} \equiv 1 \pmod{m}\)</span>，其中 <span class="math inline">\(\varphi(m)\)</span> 是数论中的 Euler 函数<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>．</p>
+</div>
+</section>
+<section id="euler-定理的证明---简化剩余系" class="level3">
+<h3 class="anchored" data-anchor-id="euler-定理的证明---简化剩余系">Euler 定理的证明 - 简化剩余系</h3>
+<p><span class="math inline">\(\mathbb Z_m^R := \{a \in \mathbb Z_m: \gcd(a,m)=1 \}\)</span> 被称为 <span class="math inline">\(\mathbb Z_m\)</span> 的<em>简化剩余系</em>．简化剩余系对模 <span class="math inline">\(m\)</span> 乘法封闭．简化剩余系中的每个元素都具有模 <span class="math inline">\(m\)</span> 意义下的唯一逆元，且其也在 <span class="math inline">\(\mathbb Z_m^R\)</span> 中．此二性质易由 <span class="math inline">\(\gcd\)</span> 的线性组合意义证明．</p>
+<p>简化剩余系的大小即 <span class="math inline">\(\varphi(m)\)</span>．这是 Euler 函数的其中一种定义．</p>
+<p>设 <span class="math inline">\(a \in \mathbb Z_m^R\)</span>，其在 <span class="math inline">\(\mathbb Z_m\)</span> 中存在逆元，故我们有 <span class="math display">\[
+\forall x,y \in \mathbb Z_m,\quad x \equiv y \pmod{m} \iff ax \equiv ay \pmod{m}
+\]</span> 当限定 <span class="math inline">\(x,y \in \mathbb Z_m^R\)</span> 时，结合 <span class="math inline">\(\mathbb Z_m^R\)</span> 上述两个性质，就有 <span class="math display">\[
+\mathbb Z_m^R = a \mathbb Z_m^R = \{ ax \bmod m : x \in \mathbb Z_m^R \}
+\]</span> 故 <span class="math display">\[
+a^{\varphi(m)} \prod_{x \in \mathbb Z_m^R} x \equiv \prod_{x \in \mathbb Z_m^R} ax \equiv \prod_{x \in a \mathbb Z_m^R} x \equiv \prod_{x \in \mathbb Z_m^R} x \implies a^{\varphi(m)} \equiv 1 \pmod{m}
+\]</span></p>
+</section>
+<section id="an-的取值---a-m-互质时" class="level3">
+<h3 class="anchored" data-anchor-id="an-的取值---a-m-互质时"><span class="math inline">\(a^n\)</span> 的取值 - <span class="math inline">\(a\)</span>, <span class="math inline">\(m\)</span> 互质时</h3>
+<p>补充讨论 <span class="math inline">\(a^n \bmod m,\, n \in \mathbb Z_{+}\)</span> 可取得哪些 <span class="math inline">\(\mathbb Z_m\)</span> 中的元素．</p>
+<p>当 <span class="math inline">\(\gcd(a,m)=1\)</span> 时，用 <span class="math inline">\(\gcd\)</span> 的线性组合含义，有 <span class="math display">\[
+\begin{aligned}
+\gcd(a,m)=1 &amp;\implies \exists x_0,\quad a x_0 = 1 \pmod{m} \\
+&amp;\implies \exists x_0,\quad a^n x_0^n = 1 \pmod{m} \\
+&amp;\implies \gcd(a^n,m)=1
+\end{aligned}
+\]</span> 故此时 <span class="math inline">\(a^n \bmod m\)</span> 只可能取得 <span class="math inline">\(\mathbb Z_m\)</span> 的简化剩余系 <span class="math inline">\(\mathbb Z_m^R\)</span> 中的元素．</p>
+</section>
+<section id="an-的取值---一般情况" class="level3">
+<h3 class="anchored" data-anchor-id="an-的取值---一般情况"><span class="math inline">\(a^n\)</span> 的取值 - 一般情况<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a></h3>
+<p>当 <span class="math inline">\(d_1 = \gcd(a,m) \neq 1\)</span> 时，设 <span class="math inline">\(a = d_1 a_1,\, m = d_1 m_1\)</span>，当 <span class="math inline">\(n \geq 1\)</span> 时， <span class="math display">\[\begin{aligned}
+a^n \bmod m &amp;= d_1 a_1 a^{n-1} \bmod d_1 m_1 = d_1 \left( a_1 a^{n-1} \bmod m_1 \right)
+\end{aligned}\]</span> 此时 <span class="math inline">\(\gcd(a_1,m_1)=1\)</span>，根据线性同余方程理论，括号内表达式的取值集合仅与 <span class="math inline">\(a^{n-1} \bmod m_1\)</span> 有关．此时若 <span class="math inline">\(d_2 = \gcd(a,m_1)\)</span> 仍不等于 <span class="math inline">\(1\)</span>，则令 <span class="math inline">\(a_1 = d_2 a_2,\, m_1 = d_2 m_2\)</span>．类似地继续化归，最终有 <span class="math inline">\(d_{k+1} = \gcd(a,m_k) = 1\)</span>， <span class="math display">\[
+a^n \bmod m = d_1 \left( a_1 d_2 \left( \dots a_{k-1} d_k (a_k a^{n-k} \bmod m_k) \dots \right) \bmod m_1 \right)
+\]</span> 故当 <span class="math inline">\(n \geq k\)</span> 时，<span class="math inline">\(a^n \bmod m\)</span> 的取值集合为 <span class="math display">\[
+\left\{ d_1 d_2 \dots d_k (a^t \bmod m_k) : t \in \mathbb Z_+ \right\} \subset d_1 d_2 \dots d_k \mathbb Z_{m_k}^R
+\]</span> 事实上，<span class="math inline">\(\prod_{i=1}^k d_i\)</span> 恰为 <span class="math inline">\(\gcd(a,m)\)</span> 的各素因子在 <span class="math inline">\(m\)</span> 中全部成分的乘积．</p>
+</section>
+<section id="原根" class="level3">
+<h3 class="anchored" data-anchor-id="原根">原根<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a></h3>
+<p>需要注意的是，Euler 定理只给出了 <span class="math inline">\(\mathbb Z_m\)</span> 上元素阶的一个上界．换言之，其说明 <span class="math display">\[
+\forall a \in \mathbb Z_m^R \implies \operatorname{ord}_m(a) \mid \varphi(m)
+\]</span> 而对于那些使得 <span class="math inline">\(\gcd(a,m) \neq 1\)</span> 的元素 <span class="math inline">\(a\)</span>，用 <span class="math inline">\(\gcd\)</span> 的线性组合性质容易证明其永远不可能通过自乘变为 <span class="math inline">\(1\)</span>．我们设定这类元素的阶为 <span class="math inline">\(0\)</span>．</p>
+<p>称 <span class="math inline">\(\mathbb Z_m\)</span> 上那些确能达到阶数上界 <span class="math inline">\(\varphi(m)\)</span> 的元素是 <span class="math inline">\(\mathbb Z_m\)</span> 上的<em>原根</em>，用符号 <span class="math inline">\(g\)</span> 表示．</p>
+<div id="thm-pr-exist" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 7 (原根存在定理) </strong></span><span class="math inline">\(\mathbb Z_m\)</span> 上存在原根，当且仅当 <span class="math inline">\(m=2,4,p^{\alpha},2p^{\alpha}\)</span> ，其中 <span class="math inline">\(p\)</span> 是一奇质数．</p>
+</div>
+</section>
+<section id="求阶和原根" class="level3">
+<h3 class="anchored" data-anchor-id="求阶和原根">求阶和原根</h3>
+<ul>
+<li>求阶，用定理 <span class="math inline">\(\operatorname{ord}_m(a) \mid \varphi(m)\)</span>，求因子 + 快速幂即可 <span class="math inline">\(O(\sqrt m \log m)\)</span>．</li>
+<li>找原根，从小到大用上述求阶方法暴力即可．最小原根一般不会太大．</li>
+<li>更快的方法请参考洛谷求原根模板题题解．</li>
+</ul>
+<p>下面再介绍原根的两个定理．</p>
+<div id="thm-pr-check" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 8 (原根判定定理) </strong></span>若 <span class="math inline">\(\gcd(g,m)=1\)</span>，则 <span class="math inline">\(g\)</span> 是 <span class="math inline">\(\mathbb Z_m\)</span> 上原根的充要条件是，对 <span class="math inline">\(\varphi(m)\)</span> 的每个素因数 <span class="math inline">\(p\)</span>，都有 <span class="math inline">\(g^{\frac{\varphi(m)}{p}}\not\equiv 1\pmod m\)</span>.</p>
+</div>
+<p>必要性显然．充分性，反证出所有 <span class="math inline">\(\varphi(m)\)</span> 的非平凡因子均不是 <span class="math inline">\(g\)</span> 的阶即可．</p>
+<div id="thm-pr-num" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 9 (原根个数定理) </strong></span>若 <span class="math inline">\(\mathbb Z_m\)</span> 上存在原根，则它原根的个数为 <span class="math inline">\(\varphi(\varphi(m))\)</span>.</p>
+</div>
+</section>
+<section id="mathbb-z_m-上的本原单位根构造" class="level3">
+<h3 class="anchored" data-anchor-id="mathbb-z_m-上的本原单位根构造"><span class="math inline">\(\mathbb Z_m\)</span> 上的本原单位根构造</h3>
+<p>设 <span class="math inline">\(a\)</span> 是 <span class="math inline">\(\mathbb Z_m\)</span> 上一元素，当 <span class="math inline">\(n \mid \operatorname{ord}_m(a)\)</span>，令 <span class="math inline">\(\omega_n = a^{\frac{\operatorname{ord}_m(a)}{n}}\)</span>，容易发现 <span class="math inline">\(\omega_n\)</span> 就是 <span class="math inline">\(\mathbb Z_m\)</span> 上的 <span class="math inline">\(n\)</span> 次本原单位根．</p>
+<p>使用数论中 Bézout 定理，<strong><span class="math inline">\(\omega_n^k\)</span> 是 <span class="math inline">\(\mathbb Z_m\)</span> 上的 <span class="math inline">\(\frac n {\gcd(n,k)}\)</span> 次本原单位根</strong>．这是 <span class="math inline">\(\mathbb Z_m\)</span> 上本原单位根的<strong>消去引理</strong>．</p>
+<p>遗憾的是，<strong>一般的 <span class="math inline">\(\mathbb Z_m\)</span> 中，本原单位根不一定满足求和引理</strong><a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> <span class="math inline">\(\frac 1 n \sum_{k=0}^{n-1} \omega_{n}^{ik} = [n \mid i]\)</span>．这是因为，求和引理的证明中使用了等比数列求和和消去律，但<strong>一般的 <span class="math inline">\(\mathbb Z_m\)</span> 中消去律并不成立</strong>．</p>
+</section>
+<section id="mathbb-z_m-上的-ntt---m-是质数" class="level3">
+<h3 class="anchored" data-anchor-id="mathbb-z_m-上的-ntt---m-是质数"><span class="math inline">\(\mathbb Z_m\)</span> 上的 NTT - <span class="math inline">\(m\)</span> 是质数</h3>
+<p>求和引理是保障 NTT 逆变换对应矩阵确为 <span class="math inline">\(n^{-1} \begin{pmatrix} \omega_n^{-ij} \end{pmatrix}_{(i,j)\in n \times n}\)</span> 的关键性质．如果我们还想保留这一点，就必须要求 <span class="math inline">\(m\)</span> 是质数．</p>
+<p>为保证 <span class="math inline">\(n\)</span> 在 <span class="math inline">\(\mathbb Z_m\)</span> 中存在逆元，必须要求 <span class="math inline">\(\gcd(n,m)=1\)</span>．已经要求 <span class="math inline">\(m\)</span> 是质数，故无需做出额外要求．</p>
+<p>综上，<strong>逆变换矩阵确为 <span class="math inline">\(n^{-1} \begin{pmatrix} \omega_n^{-ij} \end{pmatrix}_{(i,j)\in n \times n}\)</span> 的 <span class="math inline">\(n\)</span> 点 NTT 要求 <span class="math inline">\(m\)</span> 是质数，且 <span class="math inline">\(n \mid \operatorname{ord}_m(a)\)</span></strong>．已经要求 <span class="math inline">\(m\)</span> 是质数，故 <span class="math inline">\(\mathbb Z_m\)</span> 中必存在原根，不妨直接取 <span class="math inline">\(\mathbb Z_m\)</span> 的一个原根 <span class="math inline">\(g\)</span> 构造 <span class="math inline">\(n\)</span> 次本原单位根 <span class="math inline">\(\omega_n = g^{\frac{\varphi(m)}{n}} = g^{\frac{m-1}{n}}\)</span>，这样的构造支持至多 <span class="math inline">\(m-1\)</span> 次单位根的存在，显然是最优的选择．</p>
+</section>
+<section id="mathbb-z_m-上的-fft-与卷积加速---998244353" class="level3">
+<h3 class="anchored" data-anchor-id="mathbb-z_m-上的-fft-与卷积加速---998244353"><span class="math inline">\(\mathbb Z_m\)</span> 上的 FFT 与卷积加速 - 998244353</h3>
+<p>为满足 FFT 对 <span class="math inline">\(2^m\)</span> 次本原单位根的需求，只需选择 <span class="math inline">\(p = k 2^m + 1\)</span> 型的奇质数 <span class="math inline">\(p\)</span>，就可以在 <span class="math inline">\(\mathbb Z_p\)</span> 上支持规模至多为 <span class="math inline">\(2^m\)</span> 的 NTT/FFT 及其逆变换运行．</p>
+<p><span class="math inline">\(998244353=2^{23} \times 7 \times 17 + 1\)</span>，同时是一个质数，在 <code>int</code> 型中的单次加减操作不会溢出，是 OI/XCPC 计数题中不可多得的优秀模数<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a>．</p>
+<p>结合前述关于 <span class="math inline">\(\mathbb Z_p[x]\)</span> 上多点插值的讨论，通过 NTT/FFT 加速卷积运算的正确性得到完整证明．</p>
+</section>
+<section id="mathbb-z_m-上的-ntt---对一般的-m" class="level3">
+<h3 class="anchored" data-anchor-id="mathbb-z_m-上的-ntt---对一般的-m"><span class="math inline">\(\mathbb Z_m\)</span> 上的 NTT - 对一般的 <span class="math inline">\(m\)</span></h3>
+<p>当 <span class="math inline">\(m\)</span> 不一定是质数时，NTT 逆变换不能表示为 <span class="math inline">\(n^{-1} \begin{pmatrix} \omega_n^{-ij} \end{pmatrix}_{(i,j)\in n \times n}\)</span> 的形式．但这并不代表 NTT 不可逆．因此，尽管不再实用，一般 <span class="math inline">\(\mathbb Z_m\)</span> 上的 NTT 变换仍有讨论价值，即研究 <span class="math inline">\(\begin{pmatrix} \omega_n^{ij} \end{pmatrix}_{(i,j)\in n \times n}\)</span> 的可逆性．</p>
+<p>我们找到一篇有关该问题的参考文献<span class="citation" data-cites="agarwal1974fast"><a href="#ref-agarwal1974fast" role="doc-biblioref">[7, Secs. 3 and appendix B]</a></span>，但尚不确定其证明的正确性．友情提示读者：<span class="math inline">\(\mathbb Z_m\)</span> 不是域，甚至不是整环，故线性空间中矩阵的性质不能直接应用于 <span class="math inline">\(\mathbb Z_m\)</span> 上的矩阵，讨论可逆性时还需小心谨慎．</p>
+</section>
+<section id="从分析到代数" class="level3">
+<h3 class="anchored" data-anchor-id="从分析到代数">从分析到代数</h3>
+<p>后续数学内容导读 NTT 原理虽已非常”数学”，但也只是 DFT 在有限域上的一个实例．本节往后，我们要尝试为多项式系数位于复数域 <span class="math inline">\(\mathbb C\)</span> 上的 DFT、位于模 <span class="math inline">\(p\)</span> 剩余类域 <span class="math inline">\(\mathbb Z_p\)</span> 上的 NTT 及它们的快速算法 FFT 建立一个统一的数学框架．这需要我们剖析求值插值的基本原理，提炼出 FFT 算法成立的根本要求．</p>
+<p>后续数学内容不再要求掌握．望同学们在纷繁的定理定义中抓住要旨，窥见抽象数学背后蕴藏的规律．熟悉高等代数和抽象代数的同学或会对某些内容感到熟悉．抽象地讨论 FFT 的资料并不多见，后续内容多为主讲人的新进探索，或有谬误，望不吝指正．</p>
+</section>
+</section>
+<section id="求值与插值" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="求值与插值"><span class="header-section-number">4.2</span> 求值与插值</h2>
+<section id="求值与插值---导言" class="level3">
+<h3 class="anchored" data-anchor-id="求值与插值---导言">求值与插值 - 导言</h3>
+<p>本节将重新审视已经熟知的多项式，把抽象的、代数的多项式和具体的、分析的多项式函数区分开来．我们指出，多项式和多项式函数不同但关联紧密，形式幂级数与幂级数亦有此类联系．这些抽象的讨论将帮助我们剖析多项式求值插值的基本原理．</p>
+<p>除常见代数书目（如<span class="citation" data-cites="qiu-algebra"><a href="#ref-qiu-algebra" role="doc-biblioref">[8]</a></span>），也推荐参考 OI Wiki 的多项式基础<span class="citation" data-cites="oiwiki-polynomial"><a href="#ref-oiwiki-polynomial" role="doc-biblioref">[9]</a></span>和 Wikipedia 的形式幂级数<span class="citation" data-cites="wikipedia-formalpowerseries"><a href="#ref-wikipedia-formalpowerseries" role="doc-biblioref">[10]</a></span>．</p>
+</section>
+<section id="多项式" class="level3">
+<h3 class="anchored" data-anchor-id="多项式">多项式</h3>
+<p>设（无穷）序列 <span class="math inline">\(\{ a_n \}\)</span> 是一个只有有限个非零项的序列，其元素均在环 <span class="math inline">\(R\)</span> 上．环 <span class="math inline">\(R\)</span> 上的<em>多项式环</em>[^14] <span class="math inline">\(R[x]\)</span> 是所有满足上述条件的序列构成的集合以及在它们之间定义的两种运算 <span class="math inline">\(+, \times\)</span> 的合称．此语境下，我们也将构成 <span class="math inline">\(R[x]\)</span> 的序列称为 <span class="math inline">\(R\)</span> 上的<em>多项式</em>．序列中的元素被称为多项式的系数．<strong>序列间定义的加法和乘法是普通序列升级为多项式的关键．</strong></p>
+<p>多项式环上的加法、乘法的定义已经为大家所熟知．系数所处的环保证了多项式加法和乘法的良定义，而在这两种运算下，<span class="math inline">\(R\)</span> 上多项式的集合也构成一个环的结构．</p>
+<div class="remark proof">
+<p><span class="proof-title"><em>Remark</em> (群、环、域). </span>群、环、域都是常见的代数结构，其中的元素在给定运算下封闭，并满足特定的运算性质．简单来说，环<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a>上定义了加法和可能不可逆的、不一定交换的乘法，域上定义了加减乘除所有四则运算．交换环中的乘法满足交换律．除环中的所有元素有乘法逆元．域是交换除环．</p>
+</div>
+</section>
+<section id="多项式-1" class="level3">
+<h3 class="anchored" data-anchor-id="多项式-1">多项式</h3>
+<p>习惯上也会将多项式 <span class="math inline">\(A\)</span> 写为 <span class="math inline">\(A(x) = \sum_{k=0}^{n-1} a_k x^k\)</span> 的形式．其中未定元 <span class="math inline">\(x\)</span> 只是一个符号，仅为方便加、乘法的理解而使用，并无任何含义．</p>
+<p>多项式 <span class="math inline">\(A\)</span> 的<em>次数</em> <span class="math inline">\(\deg A\)</span> 定义为其最高非零项所处的位置下标．特别的，定义零多项式的次数为 <span class="math inline">\(-\infty\)</span>．对任意多项式 <span class="math inline">\(A,B \in R[x]\)</span>，<span class="math inline">\(\deg(A+B) \leq \max\{ \deg A, \deg B \}\)</span>．当 <span class="math inline">\(R\)</span> 是整环<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a>时，<span class="math inline">\(A,B\)</span> 的首项乘积非零，故 <span class="math inline">\(\deg(A*B) = \deg A + \deg B\)</span>．</p>
+<p>下面额外为多项式定义一种新的运算．多项式 <span class="math inline">\(A\)</span> 和多项式 <span class="math inline">\(B\)</span> 的<em>复合</em> <span class="math inline">\(A \circ B\)</span> 定义为 <span class="math display">\[
+A \circ B := \sum_{k=0}^{+\infty} a_k B^k
+\]</span> 其中 <span class="math inline">\(B^k\)</span> 代表 <span class="math inline">\(k\)</span> 个多项式 <span class="math inline">\(B\)</span> 的乘积．习惯上也会将多项式 <span class="math inline">\(A\)</span> 和多项式 <span class="math inline">\(B\)</span> 的复合写为 <span class="math inline">\(A(B(x)) = \sum_{k=0}^{+\infty} a_k B^k(x)\)</span> 的形式．由于多项式的次数有限，复合运算中仅包含了有限次多项式加法和乘法．</p>
+</section>
+<section id="形式幂级数" class="level3">
+<h3 class="anchored" data-anchor-id="形式幂级数">形式幂级数</h3>
+<p><em>形式幂级数</em>定义与多项式的唯一区别是其不要求 <span class="math inline">\(\{ a_n \}\)</span> 只有有限项非零．类似的，<span class="math inline">\(R\)</span> 上的形式幂级数环记为 <span class="math inline">\(R[[x]]\)</span>．</p>
+<p>由于涉及无限次运算，形式幂级数的复合运算需考虑环 <span class="math inline">\(R\)</span> 上的收敛问题．为回避此问题，一般规定复合右侧函数的常数项须为零．</p>
+<div class="remark proof">
+<p><span class="proof-title"><em>Remark</em>. </span>DFT, NTT 与多项式环 DFT/FFT 加速的多项式卷积在复数域 <span class="math inline">\(\mathbb C\)</span> 上的多项式环 <span class="math inline">\(\mathbb C[x]\)</span> 中进行，NTT/FFT 加速的多项式卷积在模 <span class="math inline">\(p\)</span> 剩余类域 <span class="math inline">\(\mathbb Z_p\)</span> 上的多项式环 <span class="math inline">\(\mathbb Z_p[x]\)</span> 中进行．</p>
+</div>
+</section>
+<section id="带余除法" class="level3">
+<h3 class="anchored" data-anchor-id="带余除法">带余除法</h3>
+<p><em>整环</em>是无零因子的交换幺环．所谓无零因子，即环中任意元素 <span class="math inline">\(a,b\)</span> 满足 <span class="math inline">\(ab = 0 \implies a=0 \lor b=0\)</span>．所有域都是整环．当 <span class="math inline">\(R\)</span> 是整环时，<span class="math inline">\(R[x]\)</span> 也是整环<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a>．整环上可以定义整除相关理论．</p>
+<p>定义有带余除法的环被称为 <em>Euclid 整环</em>．域上的多项式环都是 Euclid 整环<span class="citation" data-cites="qiu-algebra"><a href="#ref-qiu-algebra" role="doc-biblioref">[8, 第 7 章第 2 节定理 3, p.&nbsp;11]</a></span>．值得注意的是，<span class="math inline">\(R\)</span> 的 Euclid 性不可传递至 <span class="math inline">\(R[x]\)</span><a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a>．</p>
+<p>如在带余除法中保证除式是首一多项式<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a>，则带余除法的良定义和进行过程也均可在整环上实现．</p>
+</section>
+<section id="多项式函数-幂级数" class="level3">
+<h3 class="anchored" data-anchor-id="多项式函数-幂级数">多项式函数 / 幂级数</h3>
+<p>刚刚强调，多项式 / 形式幂级数只是定义了加法和乘法的序列．现在介绍多项式函数和幂级数．它们不是序列，而是映射<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a>．</p>
+<p>多项式 <span class="math inline">\(A\)</span> 对应的环 <span class="math inline">\(R\)</span> 上的<em>多项式函数</em> <span class="math inline">\(A(x)\)</span> 定义为映射<a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a> <span class="math display">\[
+A: R \to R,\quad x \mapsto \sum_{k=0}^{+\infty} a_k x^k
+\]</span> 其中 <span class="math inline">\(\{ a_n \}\)</span> 只有有限项非零．环 <span class="math inline">\(R\)</span> 上的幂级数则无此限制<a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a>．</p>
+<p>与多项式 / 形式幂级数不同，这里的 <span class="math inline">\(x \in R\)</span> 代表函数的自变量，是会按环 <span class="math inline">\(R\)</span> 上运算法则参与运算的有意义的变量．</p>
+<p>多项式函数的加法和乘法定义为函数的加法和乘法，即 <span class="math display">\[
+\begin{aligned}
+A+B: x &amp;\mapsto A(x)+B(x) \\
+A \otimes B: x &amp;\mapsto A(x)B(x)
+\end{aligned}
+\]</span></p>
+</section>
+<section id="求值" class="level3">
+<h3 class="anchored" data-anchor-id="求值">求值</h3>
+<p>多项式和多项式函数似乎在许多情况下有着平行的关系．下面介绍一个较直观的结论．</p>
+<p><strong>若环 <span class="math inline">\(R\)</span> 是交换环，则环 <span class="math inline">\(R\)</span> 上每个多项式都唯一确定一个 <span class="math inline">\(R\)</span> 上的多项式函数，且该映射保持加法和乘法运算</strong><a href="#fn21" class="footnote-ref" id="fnref21" role="doc-noteref"><sup>21</sup></a>．形式化地可以记为 <span class="math display">\[
+\begin{aligned}
+    (A+B)(x) &amp;= A(x)+B(x) \\
+    (A*B)(x) &amp;= A(x)B(x)
+    \end{aligned}
+\]</span> 可用于证明上述结论的定理证明见<span class="citation" data-cites="qiu-algebra"><a href="#ref-qiu-algebra" role="doc-biblioref">[8, 第 7 章第 1 节定理 4, p.&nbsp;7]</a></span><a href="#fn22" class="footnote-ref" id="fnref22" role="doc-noteref"><sup>22</sup></a>．由于多项式的复合由多项式加法和乘法组成，而多项式函数的复合（定义为函数的复合）亦可在环上平行地展开，故上述映射也保持了复合运算．</p>
+<p>多项式和多项式函数的这一关系为多项式在任意点的求值操作提供了理论基础．在多项式函数的 <span class="math inline">\(t\)</span> 处求值也被称为用 <span class="math inline">\(t\)</span> 代入多项式 <span class="math inline">\(A\)</span>，记为 <span class="math inline">\(A(t)\)</span>．</p>
+</section>
+<section id="插值" class="level3">
+<h3 class="anchored" data-anchor-id="插值">插值</h3>
+<p>需要注意的是，前述结论的逆命题不一定成立，即<strong>环 <span class="math inline">\(R\)</span> 上的一个多项式函数不一定与 <span class="math inline">\(R\)</span> 上多项式一一对应</strong>．一个经典反例是有限域上多项式环 <span class="math inline">\(\mathbb Z_p[x]\)</span> 上的 <span class="math inline">\((x+1)^p \equiv x^p + 1 \pmod{p}\)</span>．我们指出其成立的一个充分条件是 <strong><span class="math inline">\(R\)</span> 是无限整环</strong><a href="#fn23" class="footnote-ref" id="fnref23" role="doc-noteref"><sup>23</sup></a>．</p>
+<p>该逆命题的本质是通过多项式函数的所有函数值反过来确定多项式（系数）的过程．而如果在确定时只使用一部分函数值，就是所谓的多点插值过程．很多时候待求多项式的次数是已知的，这在相当程度上缩小了待定多项式的范围．我们指出，<strong>只要 <span class="math inline">\(R\)</span> 是整环，就可以通过多项式任意 <span class="math inline">\(n\)</span> 个不同位置的点值确定一个至多 <span class="math inline">\(n-1\)</span> 次的多项式．</strong></p>
+<p>证明的关键是用带余除法<a href="#fn24" class="footnote-ref" id="fnref24" role="doc-noteref"><sup>24</sup></a>讨论多项式根与其一次因式的关系，即多项式余式定理或小 Bézout 定理<span class="citation" data-cites="qiu-algebra"><a href="#ref-qiu-algebra" role="doc-biblioref">[8, 第 7 章第 6 节定理 6, p.&nbsp;35]</a></span>．</p>
+<p>需要强调，上述结论只能说明，只有那些确实可通过多项式 <span class="math inline">\(n\)</span> 点求值得到的点值组，才能与多项式建立保持加法和乘法运算的双射．对于任取的 <span class="math inline">\(R\)</span> 中的一个 <span class="math inline">\(n\)</span> 元组，则无法确定是否存在与之对应的多项式．</p>
+</section>
+<section id="求值与插值的线性表示" class="level3">
+<h3 class="anchored" data-anchor-id="求值与插值的线性表示">求值与插值的线性表示</h3>
+<p>到这里，多项式的求值与插值的线性表示已经呼之欲出了．若将交换环 <span class="math inline">\(R\)</span> 上的至多 <span class="math inline">\(n-1\)</span> 次的多项式看做模<a href="#fn25" class="footnote-ref" id="fnref25" role="doc-noteref"><sup>25</sup></a> <span class="math inline">\(R^n\)</span> 中的一个向量，则多项式多点求值的过程就是 <span class="math inline">\(R^n\)</span> 上的一个线性变换（记为 <span class="math inline">\(V\)</span>），其矩阵表示正是 Vandermonde 矩阵．由先前对求值的讨论，我们还知道其保持模 <span class="math inline">\(R^n\)</span> 上的加法运算，并将结果不超过 <span class="math inline">\(n-1\)</span> 次的卷积运算转化为 <span class="math inline">\(R^n\)</span> 上的逐项乘法．</p>
+<p>若将对 <span class="math inline">\(R\)</span> 的要求<strong>加强到域</strong>，注意到 Vandermonde 行列式在参数互不相同时非零，故此时 <span class="math inline">\(V\)</span> 可逆．事实上，<strong>Vandermonde 矩阵求逆的过程就是 Lagrange 插值</strong>，从而给出了将任意 <span class="math inline">\(R^n\)</span> 中向量还原为其对应多项式的构造方法<a href="#fn26" class="footnote-ref" id="fnref26" role="doc-noteref"><sup>26</sup></a>．这与数论中中国剩余定理的构造有异曲同工之妙<span class="citation" data-cites="wikipedia-lagrange"><a href="#ref-wikipedia-lagrange" role="doc-biblioref">[11, section: A perspective from linear algebra]</a></span>．</p>
+</section>
+<section id="求值与插值---小结" class="level3">
+<h3 class="anchored" data-anchor-id="求值与插值---小结">求值与插值 - 小结</h3>
+<p>本节的核心是多项式和多项式函数的区别与联系，两个方向的”确定”分别给出了多项式多点求值和多点插值的理论基础．</p>
+<p>由于多项式和多项式函数这种若即若离的关系，往往在记号上也有意无意地混淆了它们，某些情况下加大了区分的难度．本篇使用的记号体系将尽量用单个字母 <span class="math inline">\(A\)</span> 表示多项式，用 <span class="math inline">\(A(x)\)</span> 表示多项式 <span class="math inline">\(A\)</span> 对应的多项式函数，用 <span class="math inline">\(A(t)\)</span> 表示用 <span class="math inline">\(t\)</span> 代入多项式 <span class="math inline">\(A\)</span>，同时在需要区分的符号前加上适当的名词．</p>
+</section>
+</section>
+<section id="环上的-dft" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="环上的-dft"><span class="header-section-number">4.3</span> 环上的 DFT</h2>
+<section id="环上的-dft---导言" class="level3">
+<h3 class="anchored" data-anchor-id="环上的-dft---导言">环上的 DFT - 导言</h3>
+<p>前面讨论了在多项式任意点处求值插值的基本原理，但 DFT/FFT 的运行只需在单位根处求值和插值．本节将进一步放宽对多项式环的限制，介绍定义在有主要单位根的环上的一般的 DFT 及其快速算法 FFT．</p>
+<p>本节内容主要参考了 <span class="citation" data-cites="furer2009faster"><a href="#ref-furer2009faster" role="doc-biblioref">[12, Secs. 2, pp.&nbsp;983–984]</a></span> 和 <span class="citation" data-cites="wikipedia-dft-over-ring"><a href="#ref-wikipedia-dft-over-ring" role="doc-biblioref">[13]</a></span>．</p>
+</section>
+<section id="环上的单位根---两个定义" class="level3">
+<h3 class="anchored" data-anchor-id="环上的单位根---两个定义">环上的单位根 - 两个定义</h3>
+<p>定义环 <span class="math inline">\(R\)</span> 上的 <span class="math inline">\(n\)</span> 次<em>主要单位根</em>（principal n-th root of unity）<span class="math inline">\(\omega_n\)</span> 是满足如下条件的环 <span class="math inline">\(R\)</span> 中的一个元素： <span class="math display">\[
+\omega_n^n = 1;\quad \sum_{k=0}^{n-1} \omega_n^{ik} = 0,\quad i=1,2,\dots,n-1
+\]</span> 由定义立得 <span class="math inline">\(\sum_{k=0}^{n-1} \omega_n^{ik} = [n \mid i] n\)</span>，可见主要单位根的定义即求和引理本身．</p>
+<p>定义环 <span class="math inline">\(R\)</span> 上的 <span class="math inline">\(n\)</span> 次<em>本原单位根</em>（primitive n-th root of unity）<span class="math inline">\(\omega_n\)</span> 是满足如下条件的环 <span class="math inline">\(R\)</span> 中的一个元素： <span class="math display">\[
+\omega_n^n = 1;\quad \omega_n^k \neq 1,\quad k=1,2,\dots,n-1
+\]</span></p>
+<p>本原单位根在许多情况下与主要单位根等价，但亦非完全相同．</p>
+</section>
+<section id="环上的单位根---区别与联系" class="level3">
+<h3 class="anchored" data-anchor-id="环上的单位根---区别与联系">环上的单位根 - 区别与联系</h3>
+<div id="prp-root-relation-1" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1 </strong></span>若环 <span class="math inline">\(R\)</span> 是整环，则环上的本原单位根也是一个主要单位根．</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>对任意正整数 <span class="math inline">\(i \in [n]\)</span>，令 <span class="math inline">\(S = \sum_{k=0}^n \omega_n^{ik}\)</span>，则 <span class="math inline">\((1-\omega_n^i) S = S - \omega_n^i S = 1 - \omega_n^n = 0\)</span>，由 <span class="math inline">\(R\)</span> 是整环及 <span class="math inline">\(\omega_n^i=0\)</span> 得 <span class="math inline">\(S=0\)</span>．</p>
+</div>
+</section>
+<section id="环上的单位根---区别与联系-1" class="level3">
+<h3 class="anchored" data-anchor-id="环上的单位根---区别与联系-1">环上的单位根 - 区别与联系</h3>
+<div id="prp-root-relation-2" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2 </strong></span>若环 <span class="math inline">\(R\)</span> 的特征<a href="#fn27" class="footnote-ref" id="fnref27" role="doc-noteref"><sup>27</sup></a> <span class="math inline">\(\operatorname{char}R\)</span> 满足 <span class="math inline">\(\operatorname{char}R \nmid n\)</span>，则环上的主要单位根也是一个本原单位根．</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>反证．若存在一正整数 <span class="math inline">\(i \in [n]\)</span> 使得 <span class="math inline">\(n\)</span> 次主要单位根 <span class="math inline">\(\omega_n\)</span> 的某一幂次 <span class="math inline">\(\omega_n^i=1\)</span>，则 <span class="math inline">\(\sum_{k=0}^{n-1} \omega_n^{ik} = \sum_{k=0}^{n-1} 1^k = n 1 \neq 0\)</span>，与主要单位根定义矛盾．</p>
+</div>
+</section>
+<section id="环上的单位根---其它性质" class="level3">
+<h3 class="anchored" data-anchor-id="环上的单位根---其它性质">环上的单位根 - 其它性质</h3>
+<p>分别根据定义和数论中的 Bézout 定理，容易证明主要单位根和本原单位根的消去引理：设 <span class="math inline">\(\omega_{n}\)</span> 是环上的 <span class="math inline">\(n\)</span> 次主要（本原）单位根，则 <span class="math inline">\(\omega_{n}^{k}\)</span> 是环上的 <span class="math inline">\(\frac n {\gcd(n,k)}\)</span> 次主要（本原）单位根．</p>
+<p>注意到 <span class="math inline">\(\left(\omega_{2n}^n \right)^2=1 \implies (\omega_{2n}^n + 1)(\omega_{2n}^n - 1)=0\)</span>，故整环上的 <span class="math inline">\(2n\)</span> 次主要单位根或本原单位根 <span class="math inline">\(\omega_{2n}\)</span> 均满足 <span class="math inline">\(\omega_{2n}^n = -1\)</span>．</p>
+<p>环上的 <span class="math inline">\(n\)</span> 次主要单位根或本原单位根 <span class="math inline">\(\omega_n\)</span> 都存在逆元 <span class="math inline">\(\omega_n^{-1} = \omega_n^{n-1}\)</span>．</p>
+</section>
+<section id="环上的-dft-1" class="level3">
+<h3 class="anchored" data-anchor-id="环上的-dft-1">环上的 DFT</h3>
+<p>设 <span class="math inline">\(\omega_n\)</span> 是环 <span class="math inline">\(R\)</span> 上的一个 <span class="math inline">\(n\)</span> 次主要单位根，其对应的 <span class="math inline">\(R^n\)</span> 上的 <em><span class="math inline">\(n\)</span> 点 DFT</em> 定义为线性映射（或矩阵） <span class="math display">\[
+F = \left( \omega_n^{ij} \right)_{(i,j) \in n \times n} = \begin{pmatrix}
+    1 &amp; 1 &amp; \dots &amp; 1 \\
+    1 &amp; \omega_n &amp; \dots &amp; \omega_n^{n-1} \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    1 &amp; \omega_n^{n-1} &amp; \dots &amp; \omega_n^{(n-1)(n-1)}
+    \end{pmatrix}
+\]</span> 若 <span class="math inline">\(n 1\)</span> 在环 <span class="math inline">\(R\)</span> 中存在乘法逆元，则 <span class="math inline">\(R^n\)</span> 上的 DFT 可逆，其逆映射为<a href="#fn28" class="footnote-ref" id="fnref28" role="doc-noteref"><sup>28</sup></a> <span class="math display">\[
+F^{-1} = (n 1)^{-1} \left( \omega_n^{-ij} \right)_{(i,j) \in n \times n} = (n 1)^{-1} \begin{pmatrix}
+    1 &amp; 1 &amp; \dots &amp; 1 \\
+    1 &amp; \omega_n^{-1} &amp; \dots &amp; \omega_n^{-(n-1)} \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    1 &amp; \omega_n^{-(n-1)} &amp; \dots &amp; \omega_n^{-(n-1)(n-1)}
+    \end{pmatrix}
+\]</span></p>
+</section>
+<section id="环上的-fft" class="level3">
+<h3 class="anchored" data-anchor-id="环上的-fft">环上的 FFT</h3>
+<p>除无法在任意环上使用 <span class="math inline">\(\omega_{2n}^n = -1\)</span>，现有的抽象已足够让我们写出与之前类似的推导 FFT 的过程．</p>
+<p>设 <span class="math inline">\(R\)</span> 是任意环，<span class="math inline">\(\omega_{2n}\)</span> 是环 <span class="math inline">\(R\)</span> 上的一个 <span class="math inline">\(2n\)</span> 次主要单位根．由主要单位根的消去引理，<span class="math inline">\(\omega_{2n}^2\)</span> 是环 <span class="math inline">\(R\)</span> 上的 <span class="math inline">\(\frac {2n}{\gcd(2n,2)} = n\)</span> 次主要单位根．方便起见，记 <span class="math inline">\(\omega_n = \omega_{2n}^2\)</span>．</p>
+<p>考虑对模 <span class="math inline">\(R^{2n}\)</span> 中向量 <span class="math inline">\(\boldsymbol a = \left( a_0,a_1,\dots,a_{2n-1} \right)^T\)</span> 做 <span class="math inline">\(\omega_{2n}\)</span> 对应的 <span class="math inline">\(2n\)</span> 点 DFT 变换，得到向量 <span class="math inline">\(\hat{\boldsymbol a} = \left( \hat a_0, \hat a_1, \dots, \hat a_{2n-1} \right)^T\)</span>，其中 <span class="math inline">\(\hat a_i = \sum_{k=0}^{2n-1} a_k \omega_{2n}^{ik}\)</span>．将其奇偶分项为 <span class="math inline">\(\hat a_i=A_0(i)+A_1(i) \omega_{2n}^i\)</span>，其中 <span class="math display">\[
+\begin{aligned}
+    A_0(i) &amp;:= \sum_{k=0}^{n-1} a_{2k} \omega_{n}^{ik} = \sum_{k=0}^{n-1} a_{2k} \omega_{2n}^{2ik} \\
+    A_1(i) &amp;:= \sum_{k=0}^{n-1} a_{2k+1} \omega_{n}^{ik} = \sum_{k=0}^{n-1} a_{2k+1} \omega_{2n}^{2ik}
+    \end{aligned}
+\]</span></p>
+</section>
+<section id="环上的-fft-1" class="level3">
+<h3 class="anchored" data-anchor-id="环上的-fft-1">环上的 FFT</h3>
+<p>注意到 <span class="math inline">\(A_0(i)=A_0(n+i)\)</span>，<span class="math inline">\(A_1(i)=A_1(n+i)\)</span>，故 <span class="math display">\[
+\begin{aligned}
+    \hat a_i     &amp;= A_0(i) + A_1(i) \omega_{2n}^i \\
+    \hat a_{n+i} &amp;= A_0(i) + A_1(i) \omega_{2n}^{n+i}
+    \end{aligned},\quad i \in [n]
+\]</span> 而 <span class="math inline">\(A_0(i),\, i \in [n]\)</span> 的计算即计算向量 <span class="math inline">\(\boldsymbol{a_0} = \left( a_0, a_2, \dots, a_{2n-2} \right)\)</span> 对应于 <span class="math inline">\(\omega_n\)</span> 的 <span class="math inline">\(n\)</span> 点 DFT 的过程；<span class="math inline">\(A_1(i),\, i \in [n]\)</span> 的计算即计算向量 <span class="math inline">\(\boldsymbol{a_1} = \left( a_1, a_3, \dots, a_{2n-1} \right)\)</span> 对应于 <span class="math inline">\(\omega_n\)</span> 的 <span class="math inline">\(n\)</span> 点 DFT 的过程．</p>
+<p>因此，令 <span class="math inline">\(n = 2^m\)</span>，则只要环 <span class="math inline">\(R\)</span> 上存在 <span class="math inline">\(2^m\)</span> 次主要单位根，如上形式的 FFT 递归算法就可在 <span class="math inline">\(O(n \log n)\)</span> 的时间复杂度内快速计算 <span class="math inline">\(R^n\)</span> 上的 <span class="math inline">\(n\)</span> 点 DFT．而若 <span class="math inline">\(2^k 1,\, 0 \leq k \leq m\)</span> 在 <span class="math inline">\(R\)</span> 内均存在逆元，<span class="math inline">\(R^n\)</span> 上的 <span class="math inline">\(n\)</span> 点 IDFT 也可类似地快速计算．</p>
+</section>
+</section>
+<section id="循环卷积与卷积定理" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="循环卷积与卷积定理"><span class="header-section-number">4.4</span> 循环卷积与卷积定理</h2>
+<section id="循环卷积与卷积定理---导言" class="level3">
+<h3 class="anchored" data-anchor-id="循环卷积与卷积定理---导言">循环卷积与卷积定理 - 导言</h3>
+<p>上一节中，我们建立了在有主要单位根的环上的 DFT 及其快速算法 FFT 的相关理论，但由于放宽了对多项式环 <span class="math inline">\(R[x]\)</span> 的限制，多项式的求值插值理论无法在此直接得到应用，环上 DFT 加速多项式卷积的理论尚需重新构建．</p>
+<p>在求值与插值部分已经介绍求值变换 <span class="math inline">\(V\)</span> 在 <span class="math inline">\(R^n\)</span> 上的线性表示，其保持 <span class="math inline">\(R^n\)</span> 上的加法运算，并将规模不超过 <span class="math inline">\(n\)</span> 的两向量的卷积转化为 <span class="math inline">\(R^n\)</span> 上的逐项乘法．本节中，我们来证明 DFT 变换 <span class="math inline">\(F\)</span> 也满足同样的性质，且将这一结果推广到卷积规模超过 <span class="math inline">\(n\)</span> 时的情况．</p>
+</section>
+<section id="循环卷积" class="level3">
+<h3 class="anchored" data-anchor-id="循环卷积">循环卷积</h3>
+<p>设 <span class="math inline">\(R\)</span> 是<strong>交换环</strong>，我们记 <span class="math inline">\(A \otimes B\)</span> 代表模 <span class="math inline">\(R^n\)</span> 上两个向量的逐项乘法．</p>
+<p>设 <span class="math inline">\(F\)</span> 是 <span class="math inline">\(R^n\)</span> 上主要单位根 <span class="math inline">\(\omega_n\)</span> 对应的 <span class="math inline">\(n\)</span> 点可逆 DFT 变换，<span class="math inline">\(A,B\)</span> 是 <span class="math inline">\(R^n\)</span> 中两个任意取定的向量．显然 <span class="math inline">\(F(A+B)=FA+FB\)</span>，故 DFT 变换保持 <span class="math inline">\(R^n\)</span> 上的加法运算．现在的主要问题是，求值与插值部分计算卷积的方法 <span class="math inline">\(F^{-1}(FA \otimes FB)\)</span> 在放宽环限制的 <span class="math inline">\(R^n\)</span> 上进行时，将会得到什么结果？</p>
+<p>令 <span class="math display">\[
+\begin{gathered}
+    \hat{\boldsymbol a} = F \boldsymbol a,\quad \hat{\boldsymbol b} = F \boldsymbol b \\
+    \hat {\boldsymbol c}= \hat{\boldsymbol a} \otimes \hat{\boldsymbol b},\quad \boldsymbol c = F^{-1} \hat{\boldsymbol c}
+    \end{gathered}
+\]</span> 则 <span class="math display">\[
+\hat a_i = \sum_{j=0}^{n-1} a_j \omega_n^{ij},\quad \hat b_i = \sum_{k=0}^{n-1} b_k \omega_n^{ik}
+\]</span></p>
+</section>
+<section id="循环卷积-1" class="level3">
+<h3 class="anchored" data-anchor-id="循环卷积-1">循环卷积</h3>
+<p><span class="math display">\[
+\hat c_i = \hat a_i \hat b_i = \sum_{j=0}^{n-1} a_j \omega_n^{ij} \sum_{k=0}^{n-1} b_k \omega_n^{ik} = \sum_{j=0}^{n-1} \sum_{k=0}^{n-1} a_j b_k \omega_n^{i(j+k)}
+\]</span> <span class="math display">\[
+c_i = \sum_{t=0}^{n-1} \omega_n^{-it} \hat c_t =  \sum_{t=0}^{n-1} \omega_n^{-it} \sum_{j=0}^{n-1} \sum_{k=0}^{n-1} a_j b_k \omega_n^{t(j+k)}
+    = \sum_{j=0}^{n-1} \sum_{k=0}^{n-1} a_j b_k \sum_{t=0}^{n-1} \omega_n^{t(j+k-i)}
+\]</span> 对最里侧的求和使用主要单位根的定义（求和引理），就有 <span class="math display">\[
+c_i = \sum_{j=0}^{n-1} \sum_{k=0}^{n-1} a_j b_k [n \mid j+k-i] = \sum_{j+k \equiv i \bmod{n}} a_j b_k
+\]</span> 这便是所谓的循环卷积．以后将 <span class="math inline">\(R^n\)</span> 中向量 <span class="math inline">\(\boldsymbol a\)</span> 和 <span class="math inline">\(\boldsymbol b\)</span> 的循环卷积记为 <span class="math inline">\(\boldsymbol a * \boldsymbol b\)</span>．形象地来看，循环卷积中，次数超过 <span class="math inline">\(n-1\)</span> 的卷积项被模意义地地叠加到了以次数为 <span class="math inline">\(0\)</span> 为始的项上．</p>
+</section>
+<section id="卷积定理" class="level3">
+<h3 class="anchored" data-anchor-id="卷积定理">卷积定理</h3>
+<p>前述讨论已经证明<a href="#fn29" class="footnote-ref" id="fnref29" role="doc-noteref"><sup>29</sup></a> <span class="math display">\[
+F(A * B) = FA \otimes FB
+\]</span> 这便是一般交换环上 DFT 变换的（循环）卷积定理．</p>
+<p>我们指出，当要求所作变换可逆时，卷积定理反过来也要求所作变换是一类似 DFT 映射的变换<a href="#fn30" class="footnote-ref" id="fnref30" role="doc-noteref"><sup>30</sup></a>．</p>
+<div id="exr-2timesdft" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 5 </strong></span>尝试将任意序列 DFT 两次，观察结果．证明你的结论．</p>
+</div>
+<div id="exr-detdft" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 6 </strong></span>求 DFT 矩阵的行列式．尽可能缩小可行解范围．</p>
+</div>
+</section>
+</section>
+</section>
+<section id="advanced-operations" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Advanced Operations</h1>
+<section id="多项式全家桶---序言" class="level3">
+<h3 class="anchored" data-anchor-id="多项式全家桶---序言">多项式全家桶 - 序言</h3>
+<ul>
+<li><p>有哪些？</p>
+<ul>
+<li>求逆、开根、对数、指数、快速幂、复合等</li>
+</ul></li>
+<li><p>咋推的？</p>
+<ul>
+<li>求解思路几乎都是倍增，时间复杂度几乎都是大常数 <span class="math inline">\(O(n \log n)\)</span></li>
+<li>Newton 迭代法是推导全家桶迭代公式的通法</li>
+<li>严格化需要进一步的形式幂级数理论，主讲人不会</li>
+</ul></li>
+<li><p>有啥用？</p>
+<ul>
+<li>当你一波操作化出生成函数发现不会求系数</li>
+</ul></li>
+<li><p>怎么讲？</p>
+<ul>
+<li>受限于篇幅和主讲人能力，我们讲不完</li>
+<li>只讲求逆和对数，其余请左转 OI Wiki</li>
+</ul></li>
+</ul>
+</section>
+<section id="多项式求逆" class="level3">
+<h3 class="anchored" data-anchor-id="多项式求逆">多项式求逆</h3>
+<p>给定一多项式 <span class="math inline">\(A(x)\)</span>，求解满足 <span class="math inline">\(A(x) B(x) = 1 \pmod{x^{n}}\)</span> 的多项式 <span class="math inline">\(B(x)\)</span>．</p>
+<p>多项式逆元存在的充分必要条件是其常数项非零（这是因为边界条件 <span class="math inline">\(b_0 = \frac 1 {a_0}\)</span>），若存在则在模意义下一定唯一．这结论可直接由下述求解方法得到．不失一般性，只研究 <span class="math inline">\(A(x)\)</span> 的次数至多为奇数 <span class="math inline">\(2n-1\)</span> 的情况．设 <span class="math display">\[
+\begin{aligned}
+A(x) &amp;= A_0(x) + x^n A_1(x) \\
+B(x) &amp;= B_0(x) + x^n B_1(x)
+\end{aligned}
+\]</span> 考虑递归地在已知 <span class="math display">\[
+A(x) B_0(x) = A_0(x) B_0(x) = 1 \pmod{x^n}
+\]</span> 的基础上求解 <span class="math inline">\(A(x)\)</span> 的逆元．先指出该方法的时间复杂度为 <span class="math display">\[
+T(n) = T(\frac n 2) + O(n \log n) = O(n \log n)
+\]</span></p>
+</section>
+<section id="多项式求逆-1" class="level3">
+<h3 class="anchored" data-anchor-id="多项式求逆-1">多项式求逆</h3>
+<p>以下简记 <span class="math inline">\(A(x)\)</span> 为 <span class="math inline">\(A\)</span>，其它多项式同理．注意到 <span class="math display">\[
+\begin{cases}
+A B_0 = 1 \pmod{x^n} \\
+A B = 1 \pmod{x^n}
+\end{cases} \implies A (B-B_0) = 0 \pmod{x^n}
+\]</span> 由于 <span class="math inline">\(A \bmod{x^n}\)</span> 非零，故 <span class="math display">\[
+B-B_0 = 0 \pmod{x^n}
+\]</span> 这也说明，多项式逆元在模不同 <span class="math inline">\(x^n\)</span> 下的前缀保持一致．</p>
+<p>两边平方得 <span class="math display">\[B^2 - 2 B B_0 + B_0^2 = 0 \pmod{x^{2n}}\]</span> 两侧同乘 <span class="math inline">\(A\)</span> 并移项得 <span class="math display">\[
+B = 2 B_0 - A B_0^2 \pmod{x^{2n}}
+\]</span></p>
+</section>
+<section id="多项式求逆---实现" class="level3">
+<h3 class="anchored" data-anchor-id="多项式求逆---实现">多项式求逆 - 实现</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Poly inv<span class="op">(</span><span class="at">const</span> Poly <span class="op">&amp;</span>A<span class="op">){</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    ll n<span class="op">=</span>A<span class="op">.</span>len<span class="op">();</span> Poly B<span class="op">(</span><span class="dv">1</span><span class="op">);</span> B<span class="op">[</span><span class="dv">0</span><span class="op">]=</span>inv<span class="op">(</span>A<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll hf<span class="op">=</span><span class="dv">1</span><span class="op">;</span>hf<span class="op">&lt;</span>n<span class="op">;</span>hf<span class="op">&lt;&lt;=</span><span class="dv">1</span><span class="op">){</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        B<span class="op">=</span>B<span class="op">*</span><span class="dv">2</span><span class="op">-</span>B<span class="op">*</span>B<span class="op">*</span>A<span class="op">.</span>subpoly<span class="op">(</span><span class="dv">0</span><span class="op">,</span>hf<span class="op">*</span><span class="dv">2</span><span class="op">);</span> B<span class="op">.</span>resize<span class="op">(</span>hf<span class="op">*</span><span class="dv">2</span><span class="op">);</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> B<span class="op">.</span>resize<span class="op">(</span>n<span class="op">);</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> B<span class="op">;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>常数巨大的写法，仅作演示，请勿学习．</li>
+<li>正确的写法是在 DFT 后的点值上操作多项式，请小心实现封装．</li>
+</ul>
+</section>
+<section id="多项式-ln" class="level3">
+<h3 class="anchored" data-anchor-id="多项式-ln">多项式 <span class="math inline">\(\ln\)</span></h3>
+<p>给定一多项式 <span class="math inline">\(A(x)\)</span>，求解满足 <span class="math inline">\(B(x) = \ln A(x) \pmod{x^{n}}\)</span> 的多项式 <span class="math inline">\(B(x)\)</span>．</p>
+<p>次数为 <span class="math inline">\(+\infty\)</span> 的形式幂级数的 <span class="math inline">\(\ln\)</span> 存在的充分必要条件为其常数项非零（这是因为边界条件 <span class="math inline">\(b_0 = \ln a_0\)</span>），同样一旦存在则唯一．注意到仅整数 <span class="math inline">\(a_0=1\)</span> 时，<span class="math inline">\(\ln a_0\)</span> 可取得整数，故合理的 <span class="math inline">\(a_0\)</span> 只能是 <span class="math inline">\(1\)</span>．</p>
+<p>推导是容易的．方程两侧同时求导得 <span class="math display">\[
+B'(x) = \frac{A'(x)}{A(x)} \pmod{x^{n-1}}
+\]</span> 两侧再积分得 <span class="math display">\[
+B(x) = \int \frac{A'(x)}{A(x)} \operatorname{d}\!x + C \pmod{x^{n}}
+\]</span> 其中 <span class="math inline">\(C= \ln a_0\)</span>．多项式求逆、求导、积分即可．时间复杂度 <span class="math inline">\(O(n \log n)\)</span>．</p>
+</section>
+<section id="多项式-ln---实现" class="level3">
+<h3 class="anchored" data-anchor-id="多项式-ln---实现">多项式 <span class="math inline">\(\ln\)</span> - 实现</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Poly drv<span class="op">(</span>Poly A<span class="op">){</span> <span class="co">// derivative</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">0</span><span class="op">;</span>i<span class="op">&lt;</span>A<span class="op">.</span>len<span class="op">();</span>i<span class="op">++)</span> A<span class="op">[</span>i<span class="op">]=(</span>i<span class="op">+</span><span class="dv">1</span><span class="op">)*</span>A<span class="op">[</span>i<span class="op">+</span><span class="dv">1</span><span class="op">]</span>_<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    A<span class="op">.</span>pop_back<span class="op">();</span> <span class="cf">return</span> A<span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>Poly itg<span class="op">(</span>Poly A<span class="op">,</span>ll c<span class="op">){</span> <span class="co">// integral</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    A<span class="op">.</span>push_back<span class="op">(</span><span class="dv">0</span><span class="op">);</span> <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span>A<span class="op">.</span>len<span class="op">();</span>i<span class="op">&gt;=</span><span class="dv">1</span><span class="op">;</span>i<span class="op">--)</span> A<span class="op">[</span>i<span class="op">]=</span>A<span class="op">[</span>i<span class="op">-</span><span class="dv">1</span><span class="op">]*</span>inv<span class="op">(</span>i<span class="op">)</span>_<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    A<span class="op">[</span><span class="dv">0</span><span class="op">]=</span>c<span class="op">;</span> <span class="cf">return</span> A<span class="op">;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>Poly ln<span class="op">(</span><span class="at">const</span> Poly <span class="op">&amp;</span>A<span class="op">){</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> itg<span class="op">((</span>drv<span class="op">(</span>A<span class="op">)*</span>inv<span class="op">(</span>A<span class="op">)).</span>subpoly<span class="op">(</span><span class="dv">0</span><span class="op">,</span>A<span class="op">.</span>len<span class="op">()-</span><span class="dv">1</span><span class="op">),</span><span class="dv">0</span><span class="co">/*log(A[0])*/</span><span class="op">);</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="acknowledgements" class="level3">
+<h3 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h3>
+<ul>
+<li><p>感谢 <code>keke_046</code> 学长教授 FFT、集合幂级数与生成函数．微言大义，博大精深，至今仍在消化．</p></li>
+<li><p>感谢队友 <code>ItzDesert</code> 提供位运算典题一道并提供内容编排建议．</p></li>
+</ul>
+</section>
+<section id="题单" class="level3 allowframebreaks">
+<h3 class="allowframebreaks anchored" data-anchor-id="题单">题单</h3>
+<p>主讲人练题少，仅供参考．</p>
+<dl>
+<dt>模板</dt>
+<dd>
+<ul>
+<li><p><a href="https://www.luogu.com.cn/problem/P3803">洛谷 P3803</a> 【模板】多项式乘法（FFT）</p></li>
+<li><p><a href="https://www.luogu.com.cn/problem/P6091">洛谷 P6091</a> 【模板】原根</p></li>
+<li><p><a href="https://www.luogu.com.cn/problem/P4238">洛谷 P4238</a> 【模板】多项式乘法逆</p></li>
+<li><p><a href="https://www.luogu.com.cn/problem/P5205">洛谷 P5205</a> 【模板】多项式开根</p></li>
+<li><p><a href="https://www.luogu.com.cn/problem/P4725">洛谷 P4725</a> 【模板】多项式对数函数（多项式 ln）</p></li>
+<li><p><a href="https://www.luogu.com.cn/problem/P4726">洛谷 P4726</a> 【模板】多项式指数函数（多项式 exp）</p></li>
+<li><p><a href="https://www.luogu.com.cn/problem/P5245">洛谷 P5245</a> 【模板】多项式快速幂</p></li>
+</ul>
+</dd>
+<dt>大整数乘法</dt>
+<dd>
+<ul>
+<li><a href="https://www.luogu.com.cn/problem/P1919">洛谷 P1919</a> 【模板】A*B Problem 升级版（FFT 快速傅里叶变换）</li>
+</ul>
+</dd>
+<dt>基础计数</dt>
+<dd>
+<ul>
+<li><p><a href="https://www.spoj.com/problems/TSUM/">SPOJ-TSUM</a> Triple Sums</p></li>
+<li><p>BZOJ3513-MUTC2013 Idiots</p>
+<p>上面两道题都是 OGF 消序，较 EGF 消序困难．一般的方法是使用 Polya 计数原理．</p></li>
+</ul>
+</dd>
+<dt>位运算</dt>
+<dd>
+<ul>
+<li><p><a href="https://atcoder.jp/contests/abc291/tasks/abc291_g">ABC291G</a> OR Sum</p>
+<p>也是滤波器的应用．</p></li>
+</ul>
+</dd>
+<dt>分治 FFT</dt>
+<dd>
+<ul>
+<li><p>百度之星 2023 初赛第二场 T8</p>
+<p>容斥后需要计算若干一次多项式乘积，分治 NTT 即可．</p></li>
+<li><p><a href="https://www.bilibili.com/video/BV1p14y1z7sF">百度之星 2023 初赛第一场 T6</a></p>
+<p>求 <span class="math inline">\(\sum_{i&gt;j} \frac{a_i}{a_i + a_j}\)</span>．值域次数化后 CDQ 处理偏序．</p></li>
+<li><p><a href="https://www.luogu.com.cn/problem/P4721">洛谷 P4721</a> 【模板】分治 FFT</p>
+<p>CDQ 偏序化处理前后项依赖．也可解生成函数方程再多项式求逆．</p></li>
+</ul>
+</dd>
+<dt>字符串</dt>
+<dd>
+<ul>
+<li><p><a href="https://atcoder.jp/contests/abc196/tasks/abc196_f">ABC196F</a> Substring 2</p></li>
+<li><p><a href="https://www.luogu.com.cn/problem/P4173">洛谷 P4173</a> 残缺的字符串</p>
+<p>带单字符通配符的字符串匹配．体会设定字符串距离函数的方法．</p></li>
+</ul>
+</dd>
+<dt>全家桶</dt>
+<dd>
+<ul>
+<li><p><a href="https://www.luogu.com.cn/problem/P4721">洛谷 P4721</a> 【模板】分治 FFT</p>
+<p>体验生成函数简化复杂数列递推的威力．</p></li>
+<li><p><a href="https://www.luogu.com.cn/problem/P4389">洛谷 P4389</a> 付公主的背包</p>
+<p>解决此问题的方法也可用于分拆数计算．</p></li>
+<li><p><a href="https://www.luogu.com.cn/problem/P4841">洛谷 P4841</a> 【集训队作业2013】城市规划</p>
+<p>EGF 消序划分典题．体验生成函数风格的计数方法．</p></li>
+<li><p><a href="https://loj.ac/p/6538">LOJ6538</a> 烷基计数 - 加强版 - 加强版</p>
+<p>对生成函数使用的 Polya 计数．</p>
+<p>Polya ex. 苯环碳接 <span class="math inline">\(\mathrm{-C_4H_9}\)</span> 同分异构体计数</p></li>
+</ul>
+</dd>
+<dt>其它</dt>
+<dd>
+<ul>
+<li><p><a href="https://qoj.ac/problem/5748">QOJ5748</a>-UCUP2023-Stage7-K Determinant, or...?</p>
+<p>看似人畜无害的 <span class="math inline">\(\left( a_{i \operatorname{or} j} \right)_{(i,j) \in n \times n}\)</span> 行列式求值，解法的背后却潜藏 FMT 的思想．此类行列式与各类反演、卷积有密切联系，我们给出一篇研究了其与偏序集上反演的关系的参考文献<span class="citation" data-cites="wilf1968hadamard"><a href="#ref-wilf1968hadamard" role="doc-biblioref">[15]</a></span>，欢迎讨论．</p></li>
+</ul>
+</dd>
+</dl>
+
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-oiwiki-lagrange" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">OI-Wiki, <span>“拉格朗日插值.”</span> <a href="https://oi-wiki.org/math/numerical/lagrange/" class="uri">https://oi-wiki.org/math/numerical/lagrange/</a>.</div>
+</div>
+<div id="ref-euler-formula" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">张筑生, <span>“数学分析新讲（重排本）（第二册）,”</span> 2nd ed.北京: 北京大学出版社, 2021, pp. 256–262.</div>
+</div>
+<div id="ref-trigonometry" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">杨树森, <span>“三角函数的严格定义.”</span> <a href="https://zhuanlan.zhihu.com/p/58814328/" class="uri">https://zhuanlan.zhihu.com/p/58814328/</a>, 2023.</div>
+</div>
+<div id="ref-algointro" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">T. H. Cormen, C. E. Leiserson, R. L. Rivest, and C. Stein, <span>“算法导论（原书第三版）,”</span> 北京: 机械工业出版社, 2013.</div>
+</div>
+<div id="ref-oiwiki-discretelog" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">OI-Wiki, <span>“离散对数.”</span> <a href="https://oi-wiki.org/math/number-theory/discrete-logarithm/" class="uri">https://oi-wiki.org/math/number-theory/discrete-logarithm/</a>.</div>
+</div>
+<div id="ref-oiwiki-pr" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">OI-Wiki, <span>“原根.”</span> <a href="https://oi-wiki.org/math/number-theory/primitive-root/" class="uri">https://oi-wiki.org/math/number-theory/primitive-root/</a>.</div>
+</div>
+<div id="ref-agarwal1974fast" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">R. Agarwal and C. Burrus, <span>“Fast convolution using fermat number transforms with applications to digital filtering,”</span> <em>IEEE Transactions on Acoustics, Speech, and Signal Processing</em>, vol. 22, no. 2, pp. 87–97, 1974, doi: <a href="https://doi.org/10.1109/TASSP.1974.1162555">10.1109/TASSP.1974.1162555</a>.</div>
+</div>
+<div id="ref-qiu-algebra" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">丘维声, <span>“高等代数&nbsp;下册,”</span> 3rd ed.北京: 高等教育出版社, 2015.</div>
+</div>
+<div id="ref-oiwiki-polynomial" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[9] </div><div class="csl-right-inline">OI-Wiki, <span>“多项式与生成函数简介.”</span> <a href="https://oi-wiki.org/math/poly/intro/" class="uri">https://oi-wiki.org/math/poly/intro/</a>.</div>
+</div>
+<div id="ref-wikipedia-formalpowerseries" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[10] </div><div class="csl-right-inline">Wikipedia, <span>“Formal power series.”</span> <a href="https://en.wikipedia.org/wiki/Formal_power_series" class="uri">https://en.wikipedia.org/wiki/Formal_power_series</a>.</div>
+</div>
+<div id="ref-wikipedia-lagrange" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[11] </div><div class="csl-right-inline">Wikipedia, <span>“Lagrange polynomial.”</span> <a href="https://en.wikipedia.org/wiki/Lagrange_polynomial" class="uri">https://en.wikipedia.org/wiki/Lagrange_polynomial</a>.</div>
+</div>
+<div id="ref-furer2009faster" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[12] </div><div class="csl-right-inline">M. Fürer, <span>“Faster integer multiplication,”</span> <em>SIAM Journal on Computing</em>, vol. 39, no. 3, pp. 979–1005, 2009, doi: <a href="https://doi.org/10.1137/070711761">10.1137/070711761</a>.</div>
+</div>
+<div id="ref-wikipedia-dft-over-ring" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[13] </div><div class="csl-right-inline">Wikipedia, <span>“Discrete fourier transform over a ring.”</span> <a href="https://en.wikipedia.org/wiki/Discrete_Fourier_transform_over_a_ring" class="uri">https://en.wikipedia.org/wiki/Discrete_Fourier_transform_over_a_ring</a>.</div>
+</div>
+<div id="ref-baraquin2023uniqueness" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[14] </div><div class="csl-right-inline">I. Baraquin and N. Ratier, <span>“Uniqueness of the discrete fourier transform,”</span> <em>Signal Processing</em>, vol. 209, p. 109041, 2023.</div>
+</div>
+<div id="ref-wilf1968hadamard" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[15] </div><div class="csl-right-inline">H. S. Wilf, <span>“Hadamard determinants m<span>ö</span>bius functions, and the chromatic number of a graph,”</span> 1968.</div>
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>一种常见的证法是使用 Vandermonde 行列式证明矩阵可逆．后面会介绍多项式环风格的证明．<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>有的文献定义 <span class="math inline">\(\omega_n := e^{-\frac {2 \pi}{n} i}\)</span>，或是因为信号处理领域常用 IDFT 将信号时域采样数据变为频域信息．事实上，DFT/IDFT 的说法也常有反转，但这只是形式问题．<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>这三个引理是《算法导论》<span class="citation" data-cites="algointro"><a href="#ref-algointro" role="doc-biblioref">[4]</a></span> 引入的．<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>这也表明适当归一化后的 DFT 矩阵是一个酉矩阵．<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>NTT 原理需较多笔墨，稍后介绍．<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>否则只有 <span class="math inline">\(p\)</span> 个不同元素的 <span class="math inline">\(\mathbb Z_p\)</span> 中根本取不到 <span class="math inline">\(n\)</span> 个不同位置的点值．后面会深入讨论．<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>多项式求逆等多项式进阶操作，我们后续讲解．<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>对质数 <span class="math inline">\(p\)</span>，<span class="math inline">\(\varphi(p)=p-1\)</span>．故 Euler 定理是 Fermat 小定理的一个推广．<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>ExBSGS 求解离散对数 <span class="citation" data-cites="oiwiki-discretelog"><a href="#ref-oiwiki-discretelog" role="doc-biblioref">[5]</a></span> 的推导与此相似．<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>部分证明稍复杂，我们略过处理．感兴趣的同学请参考 OI Wiki <span class="citation" data-cites="oiwiki-pr"><a href="#ref-oiwiki-pr" role="doc-biblioref">[6]</a></span>．<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>这是后文所述定理“整环上的本原单位根也是主要单位根”在一般环上的一个反例．<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>网传此模数由 UOJ 站长 vfleaking 提出并推广．在所有需要取模的题目中使用该模数，可使选手无法通过模数判断题目的做法．<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>本篇中环的定义包含乘法单位元，即幺环．<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p>无零因子的交换幺环，稍后介绍．<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p>可用前述多项式乘积次数公式证明．<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn16"><p>试试在 <span class="math inline">\(\mathbb Z[x]\)</span> 上用 <span class="math inline">\(2x+1\)</span> 去除 <span class="math inline">\(x+1\)</span>．<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn17"><p>首项为 <span class="math inline">\(1\)</span> 的多项式．<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn18"><p>函数和映射几乎是等价名词．有时函数特指值域包含于复数域 <span class="math inline">\(\mathbb C\)</span> 的映射．<a href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn19"><p>为良定义 <span class="math inline">\(x^0\)</span>，环 <span class="math inline">\(R\)</span> 必须有单位元．<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn20"><p>这里再次涉及环 <span class="math inline">\(R\)</span> 上的收敛问题．由于实践中只关心形式幂级数的前有限项，后续讨论系数-点值-系数法转换卷积时不需要用到幂级数理论，可以回避．<a href="#fnref20" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn21"><p>这种保持结构不变的映射被称为同态（homomorphism）．<a href="#fnref21" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn22"><p>其证明了域上一元多项式环的通用性质．仿照该证明应可证明环上的版本，从而证明这一同态关系．<a href="#fnref22" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn23"><p>该定理是下方高亮定理的一个自然的推论．<a href="#fnref23" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn24"><p>由于一次因式均为首一多项式，可以在整环上对其使用带余除法．<a href="#fnref24" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn25"><p>模是定义在环上的“线性空间”．<a href="#fnref25" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn26"><p>Lagrange 插值的构造用到了除法，且行列式非零推出矩阵可逆仅在域上的线性空间中适用，因此必须要求 <span class="math inline">\(R\)</span> 是域．<a href="#fnref26" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn27"><p>使得 <span class="math inline">\(m 1 = \sum_{k=0}^{m-1}1 = 0\)</span> 的最小正整数 <span class="math inline">\(m\)</span>．不存在则记为 <span class="math inline">\(0\)</span>．<span class="math inline">\(\operatorname{char}\mathbb C = 0\)</span>，<span class="math inline">\(\operatorname{char}\mathbb Z_p = p\)</span>．可以证明域的特征一定是 <span class="math inline">\(0\)</span> 或一质数<span class="citation" data-cites="qiu-algebra"><a href="#ref-qiu-algebra" role="doc-biblioref">[8, 第 7 章第 11 节定理 3，p.&nbsp;70]</a></span>．<a href="#fnref27" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn28"><p>证明使用主要单位根的定义（求和引理）即可．<a href="#fnref28" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn29"><p>虽然前面用到了 <span class="math inline">\(F\)</span> 可逆的要求，但该定理在 <span class="math inline">\(F\)</span> 不可逆时也成立．只需类似地验证两边相等即可．<a href="#fnref29" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn30"><p>具体来说，该变换只能是 DFT 矩阵的某个行置换．在 <span class="math inline">\(\mathbb C^n\)</span> 上的证明可参见<span class="citation" data-cites="baraquin2023uniqueness"><a href="#ref-baraquin2023uniqueness" role="doc-biblioref">[14]</a></span>，主讲人目前正在研究整环上的版本，欢迎讨论．<a href="#fnref30" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          // default icon
+          link.classList.add("external");
+      }
+    }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="sun123zxy/blog-quarto-code" data-repo-id="R_kgDOIrPs5w" data-category="General" data-category-id="DIC_kwDOIrPs584CV4gd" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark_dimmed" data-lang="en" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">sun123zxy’s blog | Powered by Quarto</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>
