@@ -3,7 +3,7 @@ title: "算法 & 数学碎碎念"
 abstract: "现场赛公式模板库，亦可作为小而精的总结性学习材料参考．无需单独成文或暂不完善的内容会放在这里．"
 author: "sun123zxy"
 date: "2023/06/21"
-date-modified: "2023/09/25"
+date-modified: "2023/10/15"
 
 categories:
   - OI
@@ -520,7 +520,7 @@ $$
 :::{.column-page}
 
 | 代号 | $n$ 个球 | $r$ 个盒 | 空盒否 | 递推或封闭形式 | 生成函数 | 备注 |
-|:-:|:-:|:-:|:-:|:--:|:--:|:--:|
+|:-:|:-:|:-:|:-:|:--:|:--:|:---:|
 | $${1,1,0}$$ | 有标号 | 有标号 	| 盒可空 | $$r^n$$ | | $[n] \to [r]$ 映射个数 |
 | $${1,1,1}$$ | 有标号 | 有标号 	| 盒非空 | $$r! {n \brace r} = \sum_{k=0}^r (-1)^{r-k} \binom r k k^n$$ | $$\begin{aligned} \mathrm{EGF}_r(x)&=(e^x - 1)^r \\ \mathrm{EGF}_n(x) &= e^{-x} \sum_{k=0}^{+\infty} k^n \frac{x^k}{k!} \end{aligned}$$ | $[n] \to [r]$ 满射个数 |
 | $${1,0,0}$$ | 有标号 | 无标号 	| 盒可空	 | $$\sum_{k=0}^r {n \brace k}$$ | $$\mathrm{EGF}_r(x) = \sum_{k=0}^r \frac {(e^x - 1)^k}{k!}$$ | |
@@ -528,9 +528,9 @@ $$
 | $${1,\emptyset,\emptyset}$$ | 有标号 | 不限制 	|       | $$\begin{aligned} B(n) &= \sum_{k=0}^n {n \brace k} \\ B(n+1) &= \sum_{k=0}^n \binom n k B(k) \end{aligned}$$ | $$\mathrm{EGF}(x)=e^{e^x - 1}$$ | Bell 数；$[n]$ 上等价关系（划分）个数 |
 | $${0,1,0}$$ | 无标号 | 有标号 	| 盒可空 | $$\binom{n+r-1}{r-1}$$ | $$\mathrm{OGF_r}(x) = \left(\frac 1 {1-x}\right)^r$$ | $r$ 元不定方程非负整数解个数 |
 | $${0,1,1}$$ | 无标号 | 有标号 	| 盒非空 | $$\binom{n-1}{r-1}$$ | $$\begin{aligned} \mathrm{OGF_r}(x) &= \left(\frac x {1-x}\right)^r \\ &= x^r \left(\frac 1 {1-x}\right)^r \end{aligned}$$ | $r$ 元 $n$ 次单项式构型数 |
-| $${0,0,0}$$ | 无标号 | 无标号 	| 盒可空 | $$\sum_{k=0}^r p(n,k)$$ | $$\mathrm{OGF}(x)= \frac 1 {1-x} \prod_{k=1}^{+\infty} \frac 1 {1-x^k}$$ | |
+| $${0,0,0}$$ | 无标号 | 无标号 	| 盒可空 | $$\sum_{k=0}^r p(n,k)$$ | | $r$ 元 $n$ 次单项对称多项式（monomial symmetric polynomial）构型数 |
 | $${0,0,1}$$ | 无标号 | 无标号 	| 盒非空 | $$p(n,r)=p(n-1,r-1)+p(n-r,r)$$ | | $r$ 部分拆数 |
-| $${0,\emptyset,\emptyset}$$ | 无标号 | 不限制	|       | $$\begin{aligned} p(n) &= \sum_{\substack{k \in \mathbb Z}} (-1)^k p_{n-k(3k-1)/2} \\ &= p_{n-1} + p_{n-2} - p_{n-5} - p_{n-7} + \dots \end{aligned}$$ | $$\begin{aligned} \mathrm{OGF}(x)&=\prod_{k=1}^{+\infty} \frac 1 {1-x^k} \\ &= \left( \sum_{k \in \mathbb Z} (-1)^k x^{k(3k-1)/2} \right)^{-1} \end{aligned}$$ | 分拆数 |
+| $${0,\emptyset,\emptyset}$$ | 无标号 | 不限制	|       | $$\begin{aligned} p(n) &= \sum_{\substack{k \in \mathbb Z}} (-1)^k p_{n-k(3k-1)/2} \\ &= p_{n-1} + p_{n-2} - p_{n-5} - p_{n-7} + \dots \end{aligned}$$ | $$\begin{aligned} \mathrm{OGF}(x)&=\prod_{k=1}^{+\infty} \frac 1 {1-x^k} \\ &= \left( \sum_{k \in \mathbb Z} (-1)^k x^{k(3k-1)/2} \right)^{-1} \end{aligned}$$ | 分拆数；$n$ 元（含）以上 $n$ 次单项对称多项式构型数 |
 :::
 
 以后我们约定：
