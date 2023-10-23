@@ -2475,6 +2475,7 @@ font-style: inherit;">;</span></span>
 <span id="cb1-5"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span></code></pre></div>
+<p>此 <img src="https://latex.codecogs.com/png.latex?O(%5Csqrt%20n)"> 较满，极大劣于因子个数的 <img src="https://latex.codecogs.com/png.latex?O(%5Csqrt%20n)">．</p>
 <section id="上取整整除分块" class="level4">
 <h4 class="anchored" data-anchor-id="上取整整除分块">上取整整除分块</h4>
 <div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1">ll cdiv<span class="op" style="color: #5E5E5E;
@@ -3983,7 +3984,9 @@ font-style: inherit;">done</span></span></code></pre></div>
 <p><span class="theorem-title"><strong>Example 1 </strong></span>估计 <img src="https://latex.codecogs.com/png.latex?%5Csigma_0%20(n)"> 的渐进上界.</p>
 </div>
 <p>也就是估计 <img src="https://latex.codecogs.com/png.latex?n"> 的因子的数量. 一个广为人知的上界是 <img src="https://latex.codecogs.com/png.latex?2%20%5Csqrt%20n">，因为 <img src="https://latex.codecogs.com/png.latex?n"> 的所有小于 <img src="https://latex.codecogs.com/png.latex?%5Csqrt%20n"> 的因子 <img src="https://latex.codecogs.com/png.latex?d"> 均与另一因子 <img src="https://latex.codecogs.com/png.latex?%5Cfrac%20n%20d"> 一一对应.</p>
-<p>事实上进一步可以证明 <img src="https://latex.codecogs.com/png.latex?%5Csigma_0(n)%20%5Cin%20o(n%5E%5Cepsilon)%20%5Cquad%20%5Cforall%20%5Cepsilon%20%3E%200"><span class="citation" data-cites="wikipedia_divisor">[7]</span>，虽然这在 OI 中并不实用.</p>
+<div class="remark proof">
+<p><span class="proof-title"><em>Remark</em>. </span>事实上进一步可以证明 <img src="https://latex.codecogs.com/png.latex?%5Csigma_0(n)%20%5Cin%20o(n%5E%5Cepsilon)%20%5Cquad%20%5Cforall%20%5Cepsilon%20%3E%200">，或更精确的，<img src="https://latex.codecogs.com/png.latex?%5Csigma_0(n)%20%5Cin%20O(n%5E%7B%5Clog%202%20/%20%5Clog%20%5Clog%20n%7D)"> <span class="citation" data-cites="wikipedia_divisor">[7]</span>．这一点说明，在实现与枚举因子有关的算法时，虽然仍会从 <img src="https://latex.codecogs.com/png.latex?1"> 枚举至 <img src="https://latex.codecogs.com/png.latex?%5Csqrt%20n"> 探测因子，但真正参与计算的因子其实相当少．因此，这些算法的实际表现往往极大程度地优于按 <img src="https://latex.codecogs.com/png.latex?%5Csigma_0(n)%20%5Cin%20O(%5Csqrt%20n)"> 估计的理论时间复杂度．</p>
+</div>
 <div id="exm-sumsigma0ub" class="theorem example">
 <p><span class="theorem-title"><strong>Example 2 </strong></span>估计 <img src="https://latex.codecogs.com/png.latex?%5Chat%7B%5Csigma_0%7D(n)%20=%20%5Csum_%7Bi=1%7D%5En%20%5Csigma_0%20(i)"> 的渐进上界.</p>
 </div>
@@ -4035,6 +4038,9 @@ font-style: inherit;">done</span></span></code></pre></div>
 <p><span class="theorem-title"><strong>Proposition 3 </strong></span><img src="https://latex.codecogs.com/png.latex?%0A%5Csum_%7Bd%20%5Cmid%20n%7D%20f(d)%20%5Cleq%20%5Csum_%7Bd%20%5Cin%20D(n)%7D%20f(d)%20%5Cleq%20%5Csum_%7Bi=1%7D%5E%7B%5Csqrt%20n%7D%20f(i)%20+%20f(%5Cleft%5Clfloor%20%5Cfrac%20n%20i%20%5Cright%5Crfloor)%0A"></p>
 </div>
 <p>LHS 成立的关键在于 <img src="https://latex.codecogs.com/png.latex?%5C%7Bd:%20d%20%5Cmid%20n%5C%7D%20%5Csubset%20D(n)">；而 RHS 的本质就是上述对整除分块块数量上界的估计.</p>
+<div class="remark proof">
+<p><span class="proof-title"><em>Remark</em>. </span>整除分块的 <img src="https://latex.codecogs.com/png.latex?O(%5Csqrt%20n)"> 相当满，而枚举因子的 <img src="https://latex.codecogs.com/png.latex?%5Csigma_0(n)%20%5Cin%20O(%5Csqrt%20n)"> 却相当不满．这一点在前面介绍 <img src="https://latex.codecogs.com/png.latex?%5Csigma_0(n)"> 时已经提到．</p>
+</div>
 <p>注意到 Proposition&nbsp;2 是 Example&nbsp;5 证明的核心，而 Proposition&nbsp;3 是 Proposition&nbsp;2 的加强版，故仿造 Example&nbsp;5 的证明，我们有</p>
 <div id="exm-divissigma" class="theorem example">
 <p><span class="theorem-title"><strong>Example 6 </strong></span>令 <img src="https://latex.codecogs.com/png.latex?%0AS_z(n)%20=%20%5Csum_%7Bd%20%5Cin%20D(n)%7D%20d%5Ez%0A"> 则前述 Example&nbsp;5 中 <img src="https://latex.codecogs.com/png.latex?%5Csigma_z(n)"> 的上界与渐进上界也同样适用于 <img src="https://latex.codecogs.com/png.latex?S_z(n)">.</p>
