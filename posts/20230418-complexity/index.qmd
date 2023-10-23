@@ -116,7 +116,9 @@ $$
 
 也就是估计 $n$ 的因子的数量. 一个广为人知的上界是 $2 \sqrt n$，因为 $n$ 的所有小于 $\sqrt n$ 的因子 $d$ 均与另一因子 $\frac n d$ 一一对应.
 
-事实上进一步可以证明 $\sigma_0(n) \in o(n^\epsilon) \quad \forall \epsilon > 0$[@wikipedia_divisor]，虽然这在 OI 中并不实用.
+:::{.remark}
+事实上进一步可以证明 $\sigma_0(n) \in o(n^\epsilon) \quad \forall \epsilon > 0$，或更精确的，$\sigma_0(n) \in O(n^{\log 2 / \log \log n})$ [@wikipedia_divisor]．这一点说明，在实现与枚举因子有关的算法时，虽然仍会从 $1$ 枚举至 $\sqrt n$ 探测因子，但真正参与计算的因子其实相当少．因此，这些算法的实际表现往往极大程度地优于按 $\sigma_0(n) \in O(\sqrt n)$ 估计的理论时间复杂度．
+:::
 
 ::: {#exm-sumsigma0ub}
 估计 $\hat{\sigma_0}(n) = \sum_{i=1}^n \sigma_0 (i)$ 的渐进上界.
@@ -260,6 +262,10 @@ $$
 :::
 
 LHS 成立的关键在于 $\{d: d \mid n\} \subset D(n)$；而 RHS 的本质就是上述对整除分块块数量上界的估计. 
+
+:::{.remark}
+整除分块的 $O(\sqrt n)$ 相当满，而枚举因子的 $\sigma_0(n) \in O(\sqrt n)$ 却相当不满．这一点在前面介绍 $\sigma_0(n)$ 时已经提到．
+:::
 
 注意到 @prp-trick1ex 是 @exm-sigmazub 证明的核心，而 @prp-trick2ex 是 @prp-trick1ex 的加强版，故仿造 @exm-sigmazub 的证明，我们有
 
