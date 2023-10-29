@@ -2337,7 +2337,7 @@ font-style: inherit;">}</span></span></code></pre></div>
 </section>
 <section id="原根euler-定理等" class="level3" data-number="1.6">
 <h3 data-number="1.6" class="anchored" data-anchor-id="原根euler-定理等"><span class="header-section-number">1.6</span> 原根、Euler 定理等</h3>
-<p>见 FFT/NTT 讲稿．</p>
+<p>见 <a href="../../posts/20230928-dft/">FFT/NTT 讲稿</a>．</p>
 </section>
 <section id="定理杂记" class="level3" data-number="1.7">
 <h3 data-number="1.7" class="anchored" data-anchor-id="定理杂记"><span class="header-section-number">1.7</span> 定理杂记</h3>
@@ -2995,6 +2995,10 @@ font-style: inherit;">}</span></span></code></pre></div>
 </section>
 <section id="分拆数todo" class="level3" data-number="3.4">
 <h3 data-number="3.4" class="anchored" data-anchor-id="分拆数todo"><span class="header-section-number">3.4</span> 分拆数【TODO】</h3>
+<p>关于 <img src="https://latex.codecogs.com/png.latex?k"> 部分拆数，</p>
+<blockquote class="blockquote">
+<p>By taking conjugates, the number <img src="https://latex.codecogs.com/png.latex?p_k(n)"> of partitions of <img src="https://latex.codecogs.com/png.latex?n"> into exactly <img src="https://latex.codecogs.com/png.latex?k"> parts is equal to the number of partitions of <img src="https://latex.codecogs.com/png.latex?n"> in which the largest part has size <img src="https://latex.codecogs.com/png.latex?k">.</p>
+</blockquote>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Partition_(number_theory)">Partition (number theory) - Wikipedia</a></li>
 <li><a href="https://oi-wiki.org/math/combinatorics/partition/">分拆数 - OI Wiki</a></li>
@@ -3032,6 +3036,22 @@ font-style: inherit;">}</span></span></code></pre></div>
 <p>Lah 数 <img src="https://latex.codecogs.com/png.latex?%0AL(n,k)%20=%20%5Cfrac%7Bn!%7D%7Bk!%7D%20%5Cbinom%7Bn-1%7D%7Bk-1%7D%0A"> 思路是先 <img src="https://latex.codecogs.com/png.latex?n!"> 排个大序，再无标号球入非空有标号桶，再除 <img src="https://latex.codecogs.com/png.latex?k!"> 给桶消序．</p>
 <p>生成函数的思路是，考虑非空全序计数的 EGF 为 <img src="https://latex.codecogs.com/png.latex?%5Cfrac%201%20%7B1-x%7D%20-%201%20=%20%5Cfrac%20x%20%7B1-x%7D">，<img src="https://latex.codecogs.com/png.latex?k"> 次有序拼接再消序即得 <img src="https://latex.codecogs.com/png.latex?%0A%5Csum%20_%7Bn%5Cgeq%20k%7DL(n,k)%7B%5Cfrac%20%7Bx%5E%7Bn%7D%7D%7Bn!%7D%7D=%7B%5Cfrac%20%7B1%7D%7Bk!%7D%7D%5Cleft(%7B%5Cfrac%20%7Bx%7D%7B1-x%7D%7D%5Cright)%5E%7Bk%7D%0A"></p>
 <p>更多信息参考 Wikipedia．</p>
+</section>
+<section id="外向树拓扑序计数" class="level4">
+<h4 class="anchored" data-anchor-id="外向树拓扑序计数">外向树拓扑序计数</h4>
+<p><img src="https://latex.codecogs.com/png.latex?%5Cfrac%7Bn!%7D%7B%5Cprod_%7Bu%20%5Cin%20V%7D%20%5Coperatorname%7Bsize%7D(u)%7D">，其中 <img src="https://latex.codecogs.com/png.latex?V"> 是所有节点的集合，<img src="https://latex.codecogs.com/png.latex?n"> 是树大小，<img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Bsize%7D(u)"> 是以 <img src="https://latex.codecogs.com/png.latex?u"> 为根的子树大小．</p>
+<p>树形 DP 风格的归纳证明是可以的．<a href="https://codeforces.com/blog/entry/75627">[Insight] Number of Topological Orderings of a Directed Tree - Codeforces</a> 提供了一个非常有趣的组合理解，其思路是从全序出发，逐步按照拓扑序的要求来消序．</p>
+<p>常常要求对每个节点作为根节点求出，这时换根 DP 即可．</p>
+<p>【TODO】内向树？尚不明确．</p>
+</section>
+<section id="dag-拓扑序计数" class="level4">
+<h4 class="anchored" data-anchor-id="dag-拓扑序计数">DAG 拓扑序计数</h4>
+<p>对一般的 DAG 上的拓扑序计数，其本质上是偏序上线性扩张的计数问题，这被证明是 #P-complete 的问题（总之就是很困难）．</p>
+<ul>
+<li><a href="https://math.stackexchange.com/questions/814177/how-many-topological-orderings-exist-for-a-graph">How many topological orderings exist for a graph? - Mathematics Stack Exchange</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Topological_sorting#Relation_to_partial_orders">Topological sorting - Wikipedia # Relation to partial orders</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Linear_extension">Linear extension - Wikipedia</a></li>
+</ul>
 </section>
 </section>
 <section id="矩阵树定理" class="level3" data-number="3.6">
@@ -3079,6 +3099,7 @@ font-style: inherit;">}</span></span></code></pre></div>
 </section>
 <section id="多项式" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="多项式"><span class="header-section-number">4</span> 多项式</h2>
+<p>此部分详细介绍请移步 <a href="../../posts/20230928-dft/">FFT/NTT 讲稿</a>．</p>
 <section id="通用" class="level3" data-number="4.1">
 <h3 data-number="4.1" class="anchored" data-anchor-id="通用"><span class="header-section-number">4.1</span> 通用</h3>
 </section>
@@ -3237,7 +3258,7 @@ font-style: inherit;">));</span></span></code></pre></div>
 <h2 data-number="8" class="anchored" data-anchor-id="杂项"><span class="header-section-number">8</span> 杂项</h2>
 <section id="模板" class="level3" data-number="8.1">
 <h3 data-number="8.1" class="anchored" data-anchor-id="模板"><span class="header-section-number">8.1</span> 模板</h3>
-<p>见 <a href="model.cpp">model.cpp</a> 及 <a href="model_temp.cpp">model_temp.cpp</a>．</p>
+<p>见 <a href="code/model.cpp">model.cpp</a>, <a href="code/model_temp.cpp">model_temp.cpp</a>, <a href="code/divntt_min.cpp">divntt_min.cpp</a>．</p>
 </section>
 <section id="对拍" class="level3" data-number="8.2">
 <h3 data-number="8.2" class="anchored" data-anchor-id="对拍"><span class="header-section-number">8.2</span> 对拍</h3>

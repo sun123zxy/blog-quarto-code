@@ -209,6 +209,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#有标号连通图计数" id="toc-有标号连通图计数" class="nav-link" data-scroll-target="#有标号连通图计数">有标号连通图计数</a></li>
   <li><a href="#竞赛图" id="toc-竞赛图" class="nav-link" data-scroll-target="#竞赛图">竞赛图</a></li>
   <li><a href="#有标号划分为-k-个全序图" id="toc-有标号划分为-k-个全序图" class="nav-link" data-scroll-target="#有标号划分为-k-个全序图">有标号划分为 <span class="math inline">\(k\)</span> 个全序图</a></li>
+  <li><a href="#外向树拓扑序计数" id="toc-外向树拓扑序计数" class="nav-link" data-scroll-target="#外向树拓扑序计数">外向树拓扑序计数</a></li>
+  <li><a href="#dag-拓扑序计数" id="toc-dag-拓扑序计数" class="nav-link" data-scroll-target="#dag-拓扑序计数">DAG 拓扑序计数</a></li>
   </ul></li>
   <li><a href="#矩阵树定理" id="toc-矩阵树定理" class="nav-link" data-scroll-target="#矩阵树定理"><span class="header-section-number">3.6</span> 矩阵树定理</a>
   <ul>
@@ -389,7 +391,7 @@ x \equiv k_1 m_1 + a_1 \pmod{\operatorname{lcm}(m_1, m_2)}
 </section>
 <section id="原根euler-定理等" class="level3" data-number="1.6">
 <h3 data-number="1.6" class="anchored" data-anchor-id="原根euler-定理等"><span class="header-section-number">1.6</span> 原根、Euler 定理等</h3>
-<p>见 FFT/NTT 讲稿．</p>
+<p>见 <a href="../../posts/20230928-dft/">FFT/NTT 讲稿</a>．</p>
 </section>
 <section id="定理杂记" class="level3" data-number="1.7">
 <h3 data-number="1.7" class="anchored" data-anchor-id="定理杂记"><span class="header-section-number">1.7</span> 定理杂记</h3>
@@ -890,6 +892,10 @@ B(n+1) = \sum_{k=0}^n \binom n k B(k)
 </section>
 <section id="分拆数todo" class="level3" data-number="3.4">
 <h3 data-number="3.4" class="anchored" data-anchor-id="分拆数todo"><span class="header-section-number">3.4</span> 分拆数【TODO】</h3>
+<p>关于 <span class="math inline">\(k\)</span> 部分拆数，</p>
+<blockquote class="blockquote">
+<p>By taking conjugates, the number <span class="math inline">\(p_k(n)\)</span> of partitions of <span class="math inline">\(n\)</span> into exactly <span class="math inline">\(k\)</span> parts is equal to the number of partitions of <span class="math inline">\(n\)</span> in which the largest part has size <span class="math inline">\(k\)</span>.</p>
+</blockquote>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Partition_(number_theory)">Partition (number theory) - Wikipedia</a></li>
 <li><a href="https://oi-wiki.org/math/combinatorics/partition/">分拆数 - OI Wiki</a></li>
@@ -933,6 +939,22 @@ L(n,k) = \frac{n!}{k!} \binom{n-1}{k-1}
 \sum _{n\geq k}L(n,k){\frac {x^{n}}{n!}}={\frac {1}{k!}}\left({\frac {x}{1-x}}\right)^{k}
 \]</span></p>
 <p>更多信息参考 Wikipedia．</p>
+</section>
+<section id="外向树拓扑序计数" class="level4">
+<h4 class="anchored" data-anchor-id="外向树拓扑序计数">外向树拓扑序计数</h4>
+<p><span class="math inline">\(\frac{n!}{\prod_{u \in V} \operatorname{size}(u)}\)</span>，其中 <span class="math inline">\(V\)</span> 是所有节点的集合，<span class="math inline">\(n\)</span> 是树大小，<span class="math inline">\(\operatorname{size}(u)\)</span> 是以 <span class="math inline">\(u\)</span> 为根的子树大小．</p>
+<p>树形 DP 风格的归纳证明是可以的．<a href="https://codeforces.com/blog/entry/75627">[Insight] Number of Topological Orderings of a Directed Tree - Codeforces</a> 提供了一个非常有趣的组合理解，其思路是从全序出发，逐步按照拓扑序的要求来消序．</p>
+<p>常常要求对每个节点作为根节点求出，这时换根 DP 即可．</p>
+<p>【TODO】内向树？尚不明确．</p>
+</section>
+<section id="dag-拓扑序计数" class="level4">
+<h4 class="anchored" data-anchor-id="dag-拓扑序计数">DAG 拓扑序计数</h4>
+<p>对一般的 DAG 上的拓扑序计数，其本质上是偏序上线性扩张的计数问题，这被证明是 #P-complete 的问题（总之就是很困难）．</p>
+<ul>
+<li><a href="https://math.stackexchange.com/questions/814177/how-many-topological-orderings-exist-for-a-graph">How many topological orderings exist for a graph? - Mathematics Stack Exchange</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Topological_sorting#Relation_to_partial_orders">Topological sorting - Wikipedia # Relation to partial orders</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Linear_extension">Linear extension - Wikipedia</a></li>
+</ul>
 </section>
 </section>
 <section id="矩阵树定理" class="level3" data-number="3.6">
@@ -1006,6 +1028,7 @@ C_{i,j} = \begin{cases}
 </section>
 <section id="多项式" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="多项式"><span class="header-section-number">4</span> 多项式</h2>
+<p>此部分详细介绍请移步 <a href="../../posts/20230928-dft/">FFT/NTT 讲稿</a>．</p>
 <section id="通用" class="level3" data-number="4.1">
 <h3 data-number="4.1" class="anchored" data-anchor-id="通用"><span class="header-section-number">4.1</span> 通用</h3>
 </section>
@@ -1190,7 +1213,7 @@ A^k(x) = (a_t x^t)^k \left( \frac{A(x)}{a_t x^t} \right)^k
 <h2 data-number="8" class="anchored" data-anchor-id="杂项"><span class="header-section-number">8</span> 杂项</h2>
 <section id="模板" class="level3" data-number="8.1">
 <h3 data-number="8.1" class="anchored" data-anchor-id="模板"><span class="header-section-number">8.1</span> 模板</h3>
-<p>见 <a href="model.cpp">model.cpp</a> 及 <a href="model_temp.cpp">model_temp.cpp</a>．</p>
+<p>见 <a href="code/model.cpp">model.cpp</a>, <a href="code/model_temp.cpp">model_temp.cpp</a>, <a href="code/divntt_min.cpp">divntt_min.cpp</a>．</p>
 </section>
 <section id="对拍" class="level3" data-number="8.2">
 <h3 data-number="8.2" class="anchored" data-anchor-id="对拍"><span class="header-section-number">8.2</span> 对拍</h3>
