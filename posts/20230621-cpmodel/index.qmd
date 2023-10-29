@@ -124,7 +124,7 @@ $$
 
 ### 原根、Euler 定理等
 
-见 FFT/NTT 讲稿．
+见 [FFT/NTT 讲稿](/posts/20230928-dft/)．
 
 ### 定理杂记
 
@@ -658,6 +658,10 @@ $$
 
 ### 分拆数【TODO】
 
+关于 $k$ 部分拆数，
+
+> By taking conjugates, the number $p_k(n)$ of partitions of $n$ into exactly $k$ parts is equal to the number of partitions of $n$ in which the largest part has size $k$.
+
 - [Partition (number theory) - Wikipedia](https://en.wikipedia.org/wiki/Partition_(number_theory))
 - [分拆数 - OI Wiki](https://oi-wiki.org/math/combinatorics/partition/)
 - [组合数学（2）分拆数 - 知乎](https://zhuanlan.zhihu.com/p/530925142)
@@ -703,6 +707,24 @@ $$
 $$
 
 更多信息参考 Wikipedia．
+
+#### 外向树拓扑序计数
+
+$\frac{n!}{\prod_{u \in V} \operatorname{size}(u)}$，其中 $V$ 是所有节点的集合，$n$ 是树大小，$\operatorname{size}(u)$ 是以 $u$ 为根的子树大小． 
+
+树形 DP 风格的归纳证明是可以的．[[Insight] Number of Topological Orderings of a Directed Tree - Codeforces](https://codeforces.com/blog/entry/75627) 提供了一个非常有趣的组合理解，其思路是从全序出发，逐步按照拓扑序的要求来消序．
+
+常常要求对每个节点作为根节点求出，这时换根 DP 即可．
+
+【TODO】内向树？尚不明确．
+
+#### DAG 拓扑序计数
+
+对一般的 DAG 上的拓扑序计数，其本质上是偏序上线性扩张的计数问题，这被证明是 #P-complete 的问题（总之就是很困难）．
+
+- [How many topological orderings exist for a graph? - Mathematics Stack Exchange](https://math.stackexchange.com/questions/814177/how-many-topological-orderings-exist-for-a-graph)
+- [Topological sorting - Wikipedia # Relation to partial orders](https://en.wikipedia.org/wiki/Topological_sorting#Relation_to_partial_orders)
+- [Linear extension - Wikipedia](https://en.wikipedia.org/wiki/Linear_extension)
 
 ### 矩阵树定理
 
@@ -805,6 +827,8 @@ $$
 :::
 
 ## 多项式
+
+此部分详细介绍请移步 [FFT/NTT 讲稿](/posts/20230928-dft/)．
 
 ### 通用
 
@@ -1054,7 +1078,7 @@ $$
 
 ### 模板
 
-见 [model.cpp](model.cpp) 及 [model_temp.cpp](model_temp.cpp)．
+见 [model.cpp](code/model.cpp), [model_temp.cpp](code/model_temp.cpp), [divntt_min.cpp](code/divntt_min.cpp)．
 
 ### 对拍
 
