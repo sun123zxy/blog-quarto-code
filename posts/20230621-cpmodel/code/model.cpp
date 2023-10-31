@@ -122,9 +122,9 @@ class ModInt{public:
     ModInt(initializer_list<T> lst):dat{*lst.begin()}{} // for mod-free number, use this
     ModInt(U dat):dat{T(hmod(dat))}{} // implicit conversion, slow!
     explicit operator T const(){return dat;}
-    friend ostream& operator << (ostream &out,const ModInt& mi){out<<mi.dat<<" "; return out;}
+    friend ostream& operator << (ostream &out,const ModInt& mi){out<<mi.dat; return out;}
+    // negative number version
     // friend ostream& operator << (ostream &out,const ModInt& mi){out<<(mi.dat+mi.dat<MOD?mi.dat:mi.dat-MOD)<<" "; return out;}
-    
     friend ModInt operator + (const ModInt a,const ModInt b){return {pmod(a.dat+b.dat)};}
     friend ModInt operator - (const ModInt a){return {nmod(-a.dat)};}
     friend ModInt operator - (const ModInt a,const ModInt b){return {nmod(a.dat-b.dat)};}
@@ -163,12 +163,10 @@ void spawn_rev(int n){ // n=log2ceil(N)
 class Poly : public vector<MI>{ public:
     using vector<MI>::vector;
     inline int len() const {return size();} // to avoid strange glitches caused by size_t
-    Poly subpoly(int pos,int count) const { // imitate std::string::substr with resizing
-        Poly B(begin()+min(pos,len()),begin()+min(pos+count,len()));
-        B.resize(count); return B;
+    Poly subpoly(int l,int r) const { // [l,r), zero padded (support negative number)
+        Poly B; for(int i=l;i<r;i++) B.push_back(i>=0&&i<len()?at(i):0); return B;
     }
     friend ostream& operator << (ostream &out,const Poly& A){for(int i=0;i<A.len();i++) out<<A[i]<<' '; return out;}
-    
     friend Poly operator + (Poly A,const Poly& B){
         int n=max(A.len(),B.len()); A.resize(n);
         for(int i=0;i<n;i++) A[i]+=i<B.len()?B[i]:0; return A;
@@ -246,6 +244,18 @@ class Poly : public vector<MI>{ public:
         A=inv(A); cout<<A;*/
     }
 };
+namespace divntt{
+    Poly A,B,C;
+    void divntt(ll l,ll r){ // capable of non-negative [l,r), "i<j" order
+        if(l+1==r) return;
+        ll mid=(l+r)/2;
+        Poly T=A.subpoly(l,mid)*B.subpoly(mid,r);
+        for(ll k=0;k<T.len()&&l+mid+k<C.len();k++){ // CAUTION: time complexity
+            C[l+mid+k]=C[l+mid+k]+T[k];
+        }
+        divntt(l,mid); divntt(mid,r);
+    }
+}
 
 // --- Matrix ---
 class Matrix : public vector<MI>{public:
