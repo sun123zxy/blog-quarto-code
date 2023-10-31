@@ -2476,9 +2476,83 @@ font-style: inherit;">;</span></span>
 background-color: null;
 font-style: inherit;">}</span></span></code></pre></div>
 <p>此 <img src="https://latex.codecogs.com/png.latex?O(%5Csqrt%20n)"> 较满，极大劣于因子个数的 <img src="https://latex.codecogs.com/png.latex?O(%5Csqrt%20n)">．</p>
+<p>另有变种枚举 <img src="https://latex.codecogs.com/png.latex?%5Cleft%5Clfloor%20%5Cfrac%20n%20%7Bd%5E2%7D%20%5Cright%5Crfloor"> 的整除分块如下，复杂度为 <img src="https://latex.codecogs.com/png.latex?O(n%5E%7B1/3%7D)">．</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1">ll ans<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb2-2"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>ll l<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span>r<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">,</span>d<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>l<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>l<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;=</span>N<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span>l<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>r<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">){</span></span>
+<span id="cb2-3">    d<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>N<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/(</span>l<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>l<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">),</span>r<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>sqrt<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>N<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span>d<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">);</span></span>
+<span id="cb2-4">    ans<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+=(</span>S_mu<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>r<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">)-</span>S_mu<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">(</span>l<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">))*</span>d<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">;</span></span>
+<span id="cb2-5"><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span></span></code></pre></div>
 <section id="上取整整除分块" class="level4">
 <h4 class="anchored" data-anchor-id="上取整整除分块">上取整整除分块</h4>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1">ll cdiv<span class="op" style="color: #5E5E5E;
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1">ll cdiv<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>ll a<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2487,7 +2561,7 @@ background-color: null;
 font-style: inherit;">){</span> <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">//ceil(a/b)</span></span>
-<span id="cb2-2">    <span class="cf" style="color: #003B4F;
+<span id="cb3-2">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">return</span> <span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2518,17 +2592,17 @@ background-color: null;
 font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb2-3"><span class="op" style="color: #5E5E5E;
+<span id="cb3-3"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span>
-<span id="cb2-4">ll ans<span class="op" style="color: #5E5E5E;
+<span id="cb3-4">ll ans<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb2-5"><span class="cf" style="color: #003B4F;
+<span id="cb3-5"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2555,7 +2629,7 @@ background-color: null;
 font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">){</span></span>
-<span id="cb2-6">    d<span class="op" style="color: #5E5E5E;
+<span id="cb3-6">    d<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>cdiv<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2572,7 +2646,7 @@ background-color: null;
 font-style: inherit;">,</span>d<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">);</span></span>
-<span id="cb2-7">    ans<span class="op" style="color: #5E5E5E;
+<span id="cb3-7">    ans<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+=(</span>S_mu<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2589,7 +2663,7 @@ background-color: null;
 font-style: inherit;">))*</span>d<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb2-8"><span class="op" style="color: #5E5E5E;
+<span id="cb3-8"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span></code></pre></div>
 </section>
@@ -2603,7 +2677,7 @@ font-style: inherit;">}</span></span></code></pre></div>
 <div class="remark proof">
 <p><span class="proof-title"><em>Remark</em>. </span>杜教筛的这种化法事实上也是 Eratosthenes 筛法的应用．一般的我们有 <img src="https://latex.codecogs.com/png.latex?%0A%5Csum_%7Bd=1%7D%5En%20f(d)%20%5Chat%20g(%20%5Cleft%5Clfloor%20%5Cfrac%20n%20d%20%5Cright%5Crfloor%20)%20=%20%5Csum_%7Bi=1%7D%5En%20%5Csum_%7Bd%20%5Cmid%20i%7D%20f(d)%20g(%5Cfrac%20i%20d)%20=%20%5Csum_%7Bi=1%7D%5En%20%5Csum_%7Bd%20%5Cmid%20i%7D%20f(%5Cfrac%20i%20d)%20g(d)%20%20%20=%20%5Csum_%7Bd=1%7D%5En%20g(d)%20%5Chat%20f(%20%5Cleft%5Clfloor%20%5Cfrac%20n%20d%20%5Cright%5Crfloor%20)%0A"></p>
 </div>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1">unordered_map<span class="op" style="color: #5E5E5E;
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1">unordered_map<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;</span>ll<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2614,12 +2688,12 @@ background-color: null;
 font-style: inherit;">s_mu</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb3-2">ll S_mu<span class="op" style="color: #5E5E5E;
+<span id="cb4-2">ll S_mu<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">(</span>ll n<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">){</span></span>
-<span id="cb3-3">    <span class="cf" style="color: #003B4F;
+<span id="cb4-3">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2628,7 +2702,7 @@ background-color: null;
 font-style: inherit;">&lt;=</span>MXG<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">){</span></span>
-<span id="cb3-4">        <span class="cf" style="color: #003B4F;
+<span id="cb4-4">        <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">return</span> mu<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2637,7 +2711,7 @@ background-color: null;
 font-style: inherit;">];</span> <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">// already accumulated</span></span>
-<span id="cb3-5">    <span class="op" style="color: #5E5E5E;
+<span id="cb4-5">    <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span><span class="cf" style="color: #003B4F;
 background-color: null;
@@ -2654,7 +2728,7 @@ background-color: null;
 font-style: inherit;">(</span>n<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">)){</span></span>
-<span id="cb3-6">        <span class="cf" style="color: #003B4F;
+<span id="cb4-6">        <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">return</span> <span class="va" style="color: #111111;
 background-color: null;
@@ -2663,17 +2737,17 @@ background-color: null;
 font-style: inherit;">[</span>n<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">];</span></span>
-<span id="cb3-7">    <span class="op" style="color: #5E5E5E;
+<span id="cb4-7">    <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span>
-<span id="cb3-8">    ll ans<span class="op" style="color: #5E5E5E;
+<span id="cb4-8">    ll ans<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">0</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb3-9">    <span class="cf" style="color: #003B4F;
+<span id="cb4-9">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span><span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2700,7 +2774,7 @@ background-color: null;
 font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">){</span></span>
-<span id="cb3-10">        d<span class="op" style="color: #5E5E5E;
+<span id="cb4-10">        d<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">=</span>n<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2713,7 +2787,7 @@ background-color: null;
 font-style: inherit;">/</span>d<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb3-11">        ans<span class="op" style="color: #5E5E5E;
+<span id="cb4-11">        ans<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">+=</span>S_mu<span class="op" style="color: #5E5E5E;
 background-color: null;
@@ -2728,10 +2802,10 @@ background-color: null;
 font-style: inherit;">1</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">);</span></span>
-<span id="cb3-12">    <span class="op" style="color: #5E5E5E;
+<span id="cb4-12">    <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span>
-<span id="cb3-13">    <span class="cf" style="color: #003B4F;
+<span id="cb4-13">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">return</span> <span class="va" style="color: #111111;
 background-color: null;
@@ -2746,7 +2820,7 @@ background-color: null;
 font-style: inherit;">-</span>ans<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">;</span></span>
-<span id="cb3-14"><span class="op" style="color: #5E5E5E;
+<span id="cb4-14"><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">}</span></span></code></pre></div>
 </section>
@@ -3114,7 +3188,7 @@ font-style: inherit;">}</span></span></code></pre></div>
 <section id="蝶形运算与迭代算法" class="level4">
 <h4 class="anchored" data-anchor-id="蝶形运算与迭代算法">蝶形运算与迭代算法</h4>
 <p>为使用迭代算法，需要快速得到递归算法向下深入过程中 <img src="https://latex.codecogs.com/png.latex?%5C%7B%20a_n%20%5C%7D"> 置换后的最终结果．观察知该置换是位逆序置换，可按如下方法线性求出．</p>
-<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1">rev<span class="op" style="color: #5E5E5E;
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1">rev<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">[</span><span class="dv" style="color: #AD0000;
 background-color: null;
@@ -3274,7 +3348,7 @@ pause</code></pre>
 </section>
 <section id="linux-shell" class="level4">
 <h4 class="anchored" data-anchor-id="linux-shell">Linux Shell</h4>
-<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><span class="cf" style="color: #003B4F;
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">while</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -3283,26 +3357,26 @@ background-color: null;
 font-style: inherit;">;</span> <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">do</span></span>
-<span id="cb6-2">    <span class="ex" style="color: null;
+<span id="cb7-2">    <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">./gen</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span>dat.in</span>
-<span id="cb6-3">    <span class="ex" style="color: null;
+<span id="cb7-3">    <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">./std</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;</span>dat.in<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span>std.out</span>
-<span id="cb6-4">    <span class="ex" style="color: null;
+<span id="cb7-4">    <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">./my</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;</span>dat.in<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span>my.out</span>
-<span id="cb6-5">    <span class="cf" style="color: #003B4F;
+<span id="cb7-5">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -3311,22 +3385,22 @@ background-color: null;
 font-style: inherit;">;</span> <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">then</span></span>
-<span id="cb6-6">        <span class="bu" style="color: null;
+<span id="cb7-6">        <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">printf</span> OK</span>
-<span id="cb6-7">    <span class="cf" style="color: #003B4F;
+<span id="cb7-7">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">else</span></span>
-<span id="cb6-8">        <span class="bu" style="color: null;
+<span id="cb7-8">        <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">printf</span> DIFF</span>
-<span id="cb6-9">        <span class="bu" style="color: null;
+<span id="cb7-9">        <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">exit</span> 0</span>
-<span id="cb6-10">    <span class="cf" style="color: #003B4F;
+<span id="cb7-10">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">fi</span></span>
-<span id="cb6-11"><span class="cf" style="color: #003B4F;
+<span id="cb7-11"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">done</span></span></code></pre></div>
 </section>
@@ -3335,17 +3409,17 @@ font-style: inherit;">done</span></span></code></pre></div>
 <h3 data-number="8.3" class="anchored" data-anchor-id="表"><span class="header-section-number">8.3</span> 表</h3>
 <section id="质数表" class="level4">
 <h4 class="anchored" data-anchor-id="质数表">质数表</h4>
-<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb7-1">1e2         1e3         1e4         1e5         1e6</span>
-<span id="cb7-2">101         1009        10007       100003      1000003</span>
-<span id="cb7-3"></span>
-<span id="cb7-4">1e7         1e8         1e9         1e10        1e11            </span>
-<span id="cb7-5">10000019    100000007   1000000007  10000000019 100000000003</span>
-<span id="cb7-6"></span>
-<span id="cb7-7">1e12            1e13            1e14            1e15</span>
-<span id="cb7-8">1000000000039   10000000000037  100000000000031 1000000000000037</span>
-<span id="cb7-9"></span>
-<span id="cb7-10">1e16                1e17                1e18</span>
-<span id="cb7-11">10000000000000061   100000000000000003  1000000000000000003</span></code></pre></div>
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb8-1">1e2         1e3         1e4         1e5         1e6</span>
+<span id="cb8-2">101         1009        10007       100003      1000003</span>
+<span id="cb8-3"></span>
+<span id="cb8-4">1e7         1e8         1e9         1e10        1e11            </span>
+<span id="cb8-5">10000019    100000007   1000000007  10000000019 100000000003</span>
+<span id="cb8-6"></span>
+<span id="cb8-7">1e12            1e13            1e14            1e15</span>
+<span id="cb8-8">1000000000039   10000000000037  100000000000031 1000000000000037</span>
+<span id="cb8-9"></span>
+<span id="cb8-10">1e16                1e17                1e18</span>
+<span id="cb8-11">10000000000000061   100000000000000003  1000000000000000003</span></code></pre></div>
 </section>
 <section id="典列" class="level4">
 <h4 class="anchored" data-anchor-id="典列">典列</h4>
