@@ -12,9 +12,6 @@ categories:
 number-sections: true
 ---
 
-::::: {.hidden}
-::: {.content-hidden unless-format="html"}
-$$
 \newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
 \newcommand{\inv}{\operatorname{inv}}
@@ -22,18 +19,7 @@ $$
 \newcommand{\id}{\operatorname{id}}
 \newcommand{\card}{\operatorname{card}}
 \newcommand{\diff}{\operatorname{d}\!}
-$$
-:::
-::: {.content-hidden when-format="html"}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
-\newcommand{\inv}{\operatorname{inv}}
-\newcommand{\lcm}{\operatorname{lcm}}
-\newcommand{\id}{\operatorname{id}}
-\newcommand{\card}{\operatorname{card}}
-\newcommand{\diff}{\operatorname{d}\!}
-:::
-:::::
+\renewcommand{\vec}{\boldsymbol}
 
 前半部分主要为公式、推导、证明等速成提纲，大部分实现、模板、表格放在文末．
 
@@ -676,6 +662,29 @@ $$
 - [分拆数 - OI Wiki](https://oi-wiki.org/math/combinatorics/partition/)
 - [组合数学（2）分拆数 - 知乎](https://zhuanlan.zhihu.com/p/530925142)
 
+### 背包计数 
+
+通式：
+$$
+\prod_{i=1}^n (1+ s_i x^{v_i})^{m_i} = \exp \sum_{i=1}^n m_i \ln (1 + s_i x^{v_i}) = \exp \sum_{i=1}^n m_i \sum_{k=1}^{+\infty} (-1)^{k-1} \frac {s_i^k}{k} x^{k v_i} 
+$$
+其中 $v_i$ 互不相同（相同者体现在 $m_i$ 上）．后者可以埃筛调和级数计算贡献 + 多项式 $\exp$ 地在 $O(t \log t)$（这里的 $t$ 指我们所关心的体积上限）内快速计算．
+
+下面问题的 OGF 都可化归至通式，从而 $O(t \log t)$ 地得到计算．
+
+设有 $n$ 种可区分的物品，体积分别为 $v_i$．当每种物品只有一件时，方案数 OGF 为
+$$
+\prod_{i=1}^n (1+ x^{v_i})
+$$
+当每种物品有无限件时，方案数 OGF 为
+$$
+\prod_{i=1}^n (1+ x^{v_i} + x^{2 v_i} + \dots) = \prod_{i=1}^n (1 - x^{v_i})^{-1}
+$$
+当每种物品分别有 $c_i$ 件时，方案数 OGF 为
+$$
+\prod_{i=1}^n (1+ x^{v_i} + x^{2 v_i} + \dots + x^{c_i v_i}) = \prod_{i=1}^n \frac{1 - x^{(c_i+1) v_i}}{1 - x^{v_i}} = \prod_{i=1}^n (1 - x^{(c_i+1) v_i}) \prod_{i=1}^n (1 - x^{v_i})^{-1}
+$$
+
 ### 各种图计数
 
 #### 有（无）标号有（无）根树计数【TODO】
@@ -849,6 +858,8 @@ $$
 - NTT：$P=998244353 = 7 \times 17 \times 2^{23} + 1$，$\mathrm{PR} = 3$ 是它的一个原根．（本原）单位根构造 $\omega_{n} = \mathrm{PR}^{\frac{P-1}{n}} \bmod P$．
 
 - $P=1004535809 = 479 \times 2^{21} + 1$，$\mathrm{PR} = 3$ 
+
+- $P=469762049 = 7 \times 2^{26}+1$，$\mathrm{PR} = 3$
 
 考虑将待变换多项式
 $$
