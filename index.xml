@@ -2295,9 +2295,6 @@ font-style: inherit;">}</span></span></code></pre></div>
 
 
 
-<div class="hidden">
-<p><img src="https://latex.codecogs.com/png.latex?%0A%5Cnewcommand%7B%5Cfloor%7D%5B1%5D%7B%5Cleft%5Clfloor%20#1%20%5Cright%5Crfloor%7D%0A%5Cnewcommand%7B%5Cceil%7D%5B1%5D%7B%5Cleft%5Clceil%20#1%20%5Cright%5Crceil%7D%0A%5Cnewcommand%7B%5Cinv%7D%7B%5Coperatorname%7Binv%7D%7D%0A%5Cnewcommand%7B%5Clcm%7D%7B%5Coperatorname%7Blcm%7D%7D%0A%5Cnewcommand%7B%5Cid%7D%7B%5Coperatorname%7Bid%7D%7D%0A%5Cnewcommand%7B%5Ccard%7D%7B%5Coperatorname%7Bcard%7D%7D%0A%5Cnewcommand%7B%5Cdiff%7D%7B%5Coperatorname%7Bd%7D%5C!%7D%0A"></p>
-</div>
 <p>前半部分主要为公式、推导、证明等速成提纲，大部分实现、模板、表格放在文末．</p>
 <section id="数论" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="数论"><span class="header-section-number">1</span> 数论</h2>
@@ -3079,8 +3076,14 @@ font-style: inherit;">}</span></span></code></pre></div>
 <li><a href="https://zhuanlan.zhihu.com/p/530925142">组合数学（2）分拆数 - 知乎</a></li>
 </ul>
 </section>
-<section id="各种图计数" class="level3" data-number="3.5">
-<h3 data-number="3.5" class="anchored" data-anchor-id="各种图计数"><span class="header-section-number">3.5</span> 各种图计数</h3>
+<section id="背包计数" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="背包计数"><span class="header-section-number">3.5</span> 背包计数</h3>
+<p>通式： <img src="https://latex.codecogs.com/png.latex?%0A%5Cprod_%7Bi=1%7D%5En%20(1+%20s_i%20x%5E%7Bv_i%7D)%5E%7Bm_i%7D%20=%20%5Cexp%20%5Csum_%7Bi=1%7D%5En%20m_i%20%5Cln%20(1%20+%20s_i%20x%5E%7Bv_i%7D)%20=%20%5Cexp%20%5Csum_%7Bi=1%7D%5En%20m_i%20%5Csum_%7Bk=1%7D%5E%7B+%5Cinfty%7D%20(-1)%5E%7Bk-1%7D%20%5Cfrac%20%7Bs_i%5Ek%7D%7Bk%7D%20x%5E%7Bk%20v_i%7D%0A"> 其中 <img src="https://latex.codecogs.com/png.latex?v_i"> 互不相同（相同者体现在 <img src="https://latex.codecogs.com/png.latex?m_i"> 上）．后者可以埃筛调和级数计算贡献 + 多项式 <img src="https://latex.codecogs.com/png.latex?%5Cexp"> 地在 <img src="https://latex.codecogs.com/png.latex?O(t%20%5Clog%20t)">（这里的 <img src="https://latex.codecogs.com/png.latex?t"> 指我们所关心的体积上限）内快速计算．</p>
+<p>下面问题的 OGF 都可化归至通式，从而 <img src="https://latex.codecogs.com/png.latex?O(t%20%5Clog%20t)"> 地得到计算．</p>
+<p>设有 <img src="https://latex.codecogs.com/png.latex?n"> 种可区分的物品，体积分别为 <img src="https://latex.codecogs.com/png.latex?v_i">．当每种物品只有一件时，方案数 OGF 为 <img src="https://latex.codecogs.com/png.latex?%0A%5Cprod_%7Bi=1%7D%5En%20(1+%20x%5E%7Bv_i%7D)%0A"> 当每种物品有无限件时，方案数 OGF 为 <img src="https://latex.codecogs.com/png.latex?%0A%5Cprod_%7Bi=1%7D%5En%20(1+%20x%5E%7Bv_i%7D%20+%20x%5E%7B2%20v_i%7D%20+%20%5Cdots)%20=%20%5Cprod_%7Bi=1%7D%5En%20(1%20-%20x%5E%7Bv_i%7D)%5E%7B-1%7D%0A"> 当每种物品分别有 <img src="https://latex.codecogs.com/png.latex?c_i"> 件时，方案数 OGF 为 <img src="https://latex.codecogs.com/png.latex?%0A%5Cprod_%7Bi=1%7D%5En%20(1+%20x%5E%7Bv_i%7D%20+%20x%5E%7B2%20v_i%7D%20+%20%5Cdots%20+%20x%5E%7Bc_i%20v_i%7D)%20=%20%5Cprod_%7Bi=1%7D%5En%20%5Cfrac%7B1%20-%20x%5E%7B(c_i+1)%20v_i%7D%7D%7B1%20-%20x%5E%7Bv_i%7D%7D%20=%20%5Cprod_%7Bi=1%7D%5En%20(1%20-%20x%5E%7B(c_i+1)%20v_i%7D)%20%5Cprod_%7Bi=1%7D%5En%20(1%20-%20x%5E%7Bv_i%7D)%5E%7B-1%7D%0A"></p>
+</section>
+<section id="各种图计数" class="level3" data-number="3.6">
+<h3 data-number="3.6" class="anchored" data-anchor-id="各种图计数"><span class="header-section-number">3.6</span> 各种图计数</h3>
 <section id="有无标号有无根树计数todo" class="level4">
 <h4 class="anchored" data-anchor-id="有无标号有无根树计数todo">有（无）标号有（无）根树计数【TODO】</h4>
 </section>
@@ -3128,8 +3131,8 @@ font-style: inherit;">}</span></span></code></pre></div>
 </ul>
 </section>
 </section>
-<section id="矩阵树定理" class="level3" data-number="3.6">
-<h3 data-number="3.6" class="anchored" data-anchor-id="矩阵树定理"><span class="header-section-number">3.6</span> 矩阵树定理</h3>
+<section id="矩阵树定理" class="level3" data-number="3.7">
+<h3 data-number="3.7" class="anchored" data-anchor-id="矩阵树定理"><span class="header-section-number">3.7</span> 矩阵树定理</h3>
 <section id="无向图的情形" class="level4">
 <h4 class="anchored" data-anchor-id="无向图的情形">无向图的情形</h4>
 <p>对无向图，度数矩阵 <img src="https://latex.codecogs.com/png.latex?D%20=%20%5Coperatorname%7Bdiag%7D%20%5C%7B%20%5Coperatorname%7Bdeg%7D(i)%20%5C%7D">，邻接矩阵 <img src="https://latex.codecogs.com/png.latex?A"> 定义为 <img src="https://latex.codecogs.com/png.latex?%0AA_%7Bi,j%7D%20=%20%5Cbegin%7Bcases%7D%0A0%20&amp;%20i=j%20%5C%5C%0Ae(i,j)%20&amp;%20i%20%5Cneq%20j%0A%5Cend%7Bcases%7D%0A"> 其中 <img src="https://latex.codecogs.com/png.latex?e(i,j)"> 表示点 <img src="https://latex.codecogs.com/png.latex?i"> 到点 <img src="https://latex.codecogs.com/png.latex?j"> 的边的数量（对无向图，<img src="https://latex.codecogs.com/png.latex?e(i,j)%20=%20e(j,i)">）．</p>
@@ -3164,8 +3167,8 @@ font-style: inherit;">}</span></span></code></pre></div>
 </ul>
 </section>
 </section>
-<section id="polya-计数" class="level3" data-number="3.7">
-<h3 data-number="3.7" class="anchored" data-anchor-id="polya-计数"><span class="header-section-number">3.7</span> Polya 计数</h3>
+<section id="polya-计数" class="level3" data-number="3.8">
+<h3 data-number="3.8" class="anchored" data-anchor-id="polya-计数"><span class="header-section-number">3.8</span> Polya 计数</h3>
 <div id="thm-burnside" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 15 (Burnside) </strong></span><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%E7%AD%89%E4%BB%B7%E7%B1%BB%E8%AE%A1%E6%95%B0%20&amp;=%20%5Cfrac%7B1%7D%7B%7CG%7C%7D%5Csum_%7Bf%20%5Cin%20G%7D%20%7CC(f)%7C%0A%5Cend%7Baligned%7D%0A"> 其中 <img src="https://latex.codecogs.com/png.latex?G"> 是等价操作群，<img src="https://latex.codecogs.com/png.latex?C(f)"> 是操作 <img src="https://latex.codecogs.com/png.latex?f"> 下的不动点集合．</p>
 </div>
@@ -3183,6 +3186,7 @@ font-style: inherit;">}</span></span></code></pre></div>
 <li><p>DFT：（本原）单位根构造 <img src="https://latex.codecogs.com/png.latex?%5Comega_n%20=%20e%5E%7B%5Cfrac%20%7B2%20%5Cpi%7D%7Bn%7Di%7D">．</p></li>
 <li><p>NTT：<img src="https://latex.codecogs.com/png.latex?P=998244353%20=%207%20%5Ctimes%2017%20%5Ctimes%202%5E%7B23%7D%20+%201">，<img src="https://latex.codecogs.com/png.latex?%5Cmathrm%7BPR%7D%20=%203"> 是它的一个原根．（本原）单位根构造 <img src="https://latex.codecogs.com/png.latex?%5Comega_%7Bn%7D%20=%20%5Cmathrm%7BPR%7D%5E%7B%5Cfrac%7BP-1%7D%7Bn%7D%7D%20%5Cbmod%20P">．</p></li>
 <li><p><img src="https://latex.codecogs.com/png.latex?P=1004535809%20=%20479%20%5Ctimes%202%5E%7B21%7D%20+%201">，<img src="https://latex.codecogs.com/png.latex?%5Cmathrm%7BPR%7D%20=%203"></p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?P=469762049%20=%207%20%5Ctimes%202%5E%7B26%7D+1">，<img src="https://latex.codecogs.com/png.latex?%5Cmathrm%7BPR%7D%20=%203"></p></li>
 </ul>
 <p>考虑将待变换多项式 <img src="https://latex.codecogs.com/png.latex?%0AA(x)%20=%20%5Csum_%7Bk=0%7D%5E%7B2n-1%7D%20a_k%20x%5Ek%0A"> 奇偶分项为两个多项式 <img src="https://latex.codecogs.com/png.latex?%0AA(x)%20=%20A_0%20(x%5E2)%20+%20x%20A_1(x%5E2)%0A"> 其中 <img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0AA_0%20(x)%20&amp;=%20%5Csum_%7Bk=0%7D%5E%7Bn-1%7D%20a_%7B2k%7D%20x%5Ek%20%5C%5C%0AA_1%20(x)%20&amp;=%20%5Csum_%7Bk=0%7D%5E%7Bn-1%7D%20a_%7B2k+1%7D%20x%5Ek%0A%5Cend%7Baligned%7D%0A"> 代入 <img src="https://latex.codecogs.com/png.latex?x%20=%20%5Comega_%7B2n%7D%5Ek%20%5Cpod%7Bk%20=%200,%5Cdots,%202n-1%7D">，用单位根消去 / 折半性质（<img src="https://latex.codecogs.com/png.latex?%5Comega_%7B2n%7D%5E%7B2k%7D%20=%20%5Comega_n%5Ek">） <img src="https://latex.codecogs.com/png.latex?%0AA(%5Comega_%7B2n%7D%5Ek)%20=%20A_0%20(%5Comega_%7Bn%7D%5Ek)%20+%20%5Comega_%7B2n%7D%5Ek%20A_1%20(%5Comega_%7Bn%7D%5Ek)%0A"> 用 <img src="https://latex.codecogs.com/png.latex?%5Comega_%7B2n%7D%5E%7Bn+k%7D%20=%20-%20%5Comega_%7B2n%7D%5Ek"> <img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0AA(%5Comega_%7B2n%7D%5Ek)%20&amp;=%20A_0%20(%5Comega_n%5Ek)%20+%20%5Comega_%7B2n%7D%5Ek%20A_1%20(%5Comega_n%5Ek)%20%5C%5C%0AA(%5Comega_%7B2n%7D%5E%7Bn+k%7D)%20&amp;=%20A_0%20(%5Comega_n%5Ek)%20-%20%5Comega_%7B2n%7D%5Ek%20A_1(%5Comega_n%5Ek)%0A%5Cend%7Baligned%7D%0A%5Cpod%7Bk%20=%200,%20%5Cdots,%20n-1%7D%0A"> 即得 FFT/FNTT 递归算法．用单位根求和性质 <img src="https://latex.codecogs.com/png.latex?%0A%5Cfrac%201%20n%20%5Csum_%7Bk=0%7D%5E%7Bn-1%7D%20%5Comega%5E%7Bik%7D%20=%20%5Bi%20%5Cmid%20n%5D%0A"> 可知 DFT/NTT 变换矩阵 <img src="https://latex.codecogs.com/png.latex?F%20=%20%5Cbegin%7Bpmatrix%7D%5Comega_%7Bn%7D%5E%7Bij%7D%5Cend%7Bpmatrix%7D_%7B(i,j)%20%5Cin%20n%20%5Ctimes%20n%7D"> 满足 <img src="https://latex.codecogs.com/png.latex?F%20F%5EH%20=%20F%5EH%20F%20=%20n%20I_n">，故 <img src="https://latex.codecogs.com/png.latex?F%5E%7B-1%7D%20=%20%5Cfrac%201%20n%20F%5EH%20=%20%5Cbegin%7Bpmatrix%7D%20%5Cfrac%201%20n%20%5Comega_%7Bn%7D%5E%7B-ij%7D%5Cend%7Bpmatrix%7D_%7B(i,j)%20%5Cin%20n%20%5Ctimes%20n%7D">，此即 DFT/NTT 逆变换矩阵．</p>
 <section id="蝶形运算与迭代算法" class="level4">
