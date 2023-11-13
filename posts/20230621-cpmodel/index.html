@@ -210,7 +210,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#有标号连通图计数" id="toc-有标号连通图计数" class="nav-link" data-scroll-target="#有标号连通图计数">有标号连通图计数</a></li>
   <li><a href="#竞赛图" id="toc-竞赛图" class="nav-link" data-scroll-target="#竞赛图">竞赛图</a></li>
   <li><a href="#有标号划分为-k-个全序图" id="toc-有标号划分为-k-个全序图" class="nav-link" data-scroll-target="#有标号划分为-k-个全序图">有标号划分为 <span class="math inline">\(k\)</span> 个全序图</a></li>
-  <li><a href="#外向树拓扑序计数" id="toc-外向树拓扑序计数" class="nav-link" data-scroll-target="#外向树拓扑序计数">外向树拓扑序计数</a></li>
+  <li><a href="#有根树拓扑序计数" id="toc-有根树拓扑序计数" class="nav-link" data-scroll-target="#有根树拓扑序计数">有根树拓扑序计数</a></li>
   <li><a href="#dag-拓扑序计数" id="toc-dag-拓扑序计数" class="nav-link" data-scroll-target="#dag-拓扑序计数">DAG 拓扑序计数</a></li>
   </ul></li>
   <li><a href="#矩阵树定理" id="toc-矩阵树定理" class="nav-link" data-scroll-target="#矩阵树定理"><span class="header-section-number">3.7</span> 矩阵树定理</a>
@@ -541,7 +541,7 @@ f = \operatorname{id}^k \varphi, g = \operatorname{id}^k, h = \operatorname{id}^
 <p>无平方因子数计数： <span class="math display">\[
 \sum_{i=1}^n \mu^2(i) = \sum_{i=1}^{\left\lfloor \sqrt n \right\rfloor} \mu(i) \left\lfloor \frac n {i^2} \right\rfloor
 \]</span></p>
-<p>约数个数函数的一个性质：</p>
+<p><a href="../../posts/20200220-factor/">约数个数函数的一个性质</a>：</p>
 <p><span class="math display">\[
 d(ab) = \sum_{x|a} \sum_{y|b} [\gcd (x,y) = 1]
 \]</span></p>
@@ -705,7 +705,7 @@ g(S) := \operatorname{card}\left( A \cap \bigcap_{i \in S} A_i \right)
 <td style="text-align: center;">有标号</td>
 <td style="text-align: center;">盒可空</td>
 <td style="text-align: center;"><span class="math display">\[r^n\]</span></td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math display">\[\begin{aligned}\mathrm{EGF}_r(x) &amp;= (e^{x})^r = e^{rx} \\ \mathrm{OGF}_r(x) &amp;= \frac{1}{1-rx}\end{aligned}\]</span></td>
 <td style="text-align: center;"><span class="math inline">\([n] \to [r]\)</span> 映射个数</td>
 </tr>
 <tr class="even">
@@ -911,6 +911,7 @@ B(n+1) = \sum_{k=0}^n \binom n k B(k)
 \]</span> 当每种物品分别有 <span class="math inline">\(c_i\)</span> 件时，方案数 OGF 为 <span class="math display">\[
 \prod_{i=1}^n (1+ x^{v_i} + x^{2 v_i} + \dots + x^{c_i v_i}) = \prod_{i=1}^n \frac{1 - x^{(c_i+1) v_i}}{1 - x^{v_i}} = \prod_{i=1}^n (1 - x^{(c_i+1) v_i}) \prod_{i=1}^n (1 - x^{v_i})^{-1}
 \]</span></p>
+<p>ex：普通的最优化背包也有卷积视角的理解，见 <a href="https://codeforces.com/blog/entry/98663">Knapsack, Subset Sum and the (max,+) Convolution - Codeforces</a>．</p>
 </section>
 <section id="各种图计数" class="level3" data-number="3.6">
 <h3 data-number="3.6" class="anchored" data-anchor-id="各种图计数"><span class="header-section-number">3.6</span> 各种图计数</h3>
@@ -922,13 +923,19 @@ B(n+1) = \sum_{k=0}^n \binom n k B(k)
 <p><span class="math display">\[
 f_n=\sum_{i=1}^n(-1)^{i+1}\binom{n}{i}2^{i(n-i)}f_{n-i}
 \]</span> 思路是对 DAG 的入度为零的点做容斥．进一步推导可拆出卷积形式，再用类似分治 FFT 的生成函数方法可得封闭形式．</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph#Combinatorial_enumeration">Wikipedia</a></li>
+<li><a href="https://oeis.org/A003024">OEIS</a></li>
+<li><a href="https://oi-wiki.org/math/combinatorics/inclusion-exclusion-principle/#dag-%E8%AE%A1%E6%95%B0">OI-Wiki</a></li>
+<li><a href="https://www.cnblogs.com/cjyyb/p/10134575.html">cjyyb 题解</a></li>
+</ul>
 </section>
 <section id="有标号偏序图计数" class="level4">
 <h4 class="anchored" data-anchor-id="有标号偏序图计数">有标号偏序图计数</h4>
-<p>问得好，但这是个著名的 open problem．各种类型的偏序图计数参考 <a href="https://en.wikipedia.org/wiki/Partially_ordered_set#Number_of_partial_orders">Partially ordered set - Wikipedia # Number of partial orders</a>．我们再给出若干参考资料：</p>
+<p>问得好，但这是个著名的 open problem．各种类型的偏序图计数参考 <a href="https://en.wikipedia.org/wiki/Partially_ordered_set#Number_of_partial_orders">Partially ordered set - Wikipedia # Number of partial orders</a>．</p>
 <ul>
-<li><a href="https://math.stackexchange.com/questions/2677986/how-many-partial-orders-can-be-defined-on-varnothing-and-a-finite-set" class="uri">https://math.stackexchange.com/questions/2677986/how-many-partial-orders-can-be-defined-on-varnothing-and-a-finite-set</a></li>
-<li><a href="https://oeis.org/A001035" class="uri">https://oeis.org/A001035</a></li>
+<li><a href="https://math.stackexchange.com/questions/2677986/how-many-partial-orders-can-be-defined-on-varnothing-and-a-finite-set">Stack Exchange</a></li>
+<li><a href="https://oeis.org/A001035">OEIS</a></li>
 <li><a href="https://doi.org/10.1007/BF00383446">Erné, M., Stege, K. Counting finite posets and topologies. Order 8, 247–265 (1991)</a>（内有研究历史综述）</li>
 </ul>
 </section>
@@ -950,12 +957,15 @@ L(n,k) = \frac{n!}{k!} \binom{n-1}{k-1}
 \]</span></p>
 <p>更多信息参考 Wikipedia．</p>
 </section>
-<section id="外向树拓扑序计数" class="level4">
-<h4 class="anchored" data-anchor-id="外向树拓扑序计数">外向树拓扑序计数</h4>
-<p><span class="math inline">\(\frac{n!}{\prod_{u \in V} \operatorname{size}(u)}\)</span>，其中 <span class="math inline">\(V\)</span> 是所有节点的集合，<span class="math inline">\(n\)</span> 是树大小，<span class="math inline">\(\operatorname{size}(u)\)</span> 是以 <span class="math inline">\(u\)</span> 为根的子树大小．</p>
-<p>树形 DP 风格的归纳证明是可以的．<a href="https://codeforces.com/blog/entry/75627">[Insight] Number of Topological Orderings of a Directed Tree - Codeforces</a> 提供了一个非常有趣的组合理解，其思路是从全序出发，逐步按照拓扑序的要求来消序．</p>
-<p>常常要求对每个节点作为根节点求出，这时换根 DP 即可．</p>
-<p>【TODO】内向树？尚不明确．</p>
+<section id="有根树拓扑序计数" class="level4">
+<h4 class="anchored" data-anchor-id="有根树拓扑序计数">有根树拓扑序计数</h4>
+<p>对于外向树，<span class="math inline">\(\frac{n!}{\prod_{u \in V} \operatorname{size}(u)}\)</span>，其中 <span class="math inline">\(V\)</span> 是所有节点的集合，<span class="math inline">\(n\)</span> 是树大小，<span class="math inline">\(\operatorname{size}(u)\)</span> 是以 <span class="math inline">\(u\)</span> 为根的子树大小．</p>
+<p>树形 DP 风格的归纳证明是可以的．下面的链接中提供了一个有趣的组合理解，其思路是从全序出发，逐步按照拓扑序的要求对每个节点下的子树消序．</p>
+<p>题目常见要求对每个节点作为根节点求出方案数，换根 DP 即可．</p>
+<p>注意到每个合法的外向树拓扑序 reverse 后立刻与内向树拓扑序形成一一对应，故内向树拓扑序计数与外向树相同．</p>
+<ul>
+<li><a href="https://codeforces.com/blog/entry/75627">[Insight] Number of Topological Orderings of a Directed Tree - Codeforces</a></li>
+</ul>
 </section>
 <section id="dag-拓扑序计数" class="level4">
 <h4 class="anchored" data-anchor-id="dag-拓扑序计数">DAG 拓扑序计数</h4>
