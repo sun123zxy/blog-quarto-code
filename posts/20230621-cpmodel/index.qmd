@@ -322,7 +322,7 @@ $$
 \sum_{i=1}^n \mu^2(i) = \sum_{i=1}^{\floor{\sqrt n}} \mu(i) \floor{\frac n {i^2}}
 $$
 
-约数个数函数的一个性质：
+[约数个数函数的一个性质](/posts/20200220-factor/)：
 
 $$
 d(ab) = \sum_{x|a} \sum_{y|b} [\gcd (x,y) = 1]
@@ -519,7 +519,7 @@ $$
 
 | 代号 | $n$ 个球 | $r$ 个盒 | 空盒否 | 递推或封闭形式 | 生成函数 | 备注 |
 |:-:|:-:|:-:|:-:|:--:|:--:|:---:|
-| $${1,1,0}$$ | 有标号 | 有标号 	| 盒可空 | $$r^n$$ | | $[n] \to [r]$ 映射个数 |
+| $${1,1,0}$$ | 有标号 | 有标号 	| 盒可空 | $$r^n$$ | $$\begin{aligned}\mathrm{EGF}_r(x) &= (e^{x})^r = e^{rx} \\ \mathrm{OGF}_r(x) &= \frac{1}{1-rx}\end{aligned}$$ | $[n] \to [r]$ 映射个数 |
 | $${1,1,1}$$ | 有标号 | 有标号 	| 盒非空 | $$r! {n \brace r} = \sum_{k=0}^r (-1)^{r-k} \binom r k k^n$$ | $$\begin{aligned} \mathrm{EGF}_r(x)&=(e^x - 1)^r \\ \mathrm{EGF}_n(x) &= e^{-x} \sum_{k=0}^{+\infty} k^n \frac{x^k}{k!} \end{aligned}$$ | $[n] \to [r]$ 满射个数 |
 | $${1,0,0}$$ | 有标号 | 无标号 	| 盒可空	 | $$\sum_{k=0}^r {n \brace k}$$ | $$\mathrm{EGF}_r(x) = \sum_{k=0}^r \frac {(e^x - 1)^k}{k!}$$ | |
 | $${1,0,1}$$ | 有标号 | 无标号 	| 盒非空 | $$\begin{aligned} {n \brace r} &= \sum_{k=0}^r \frac{k^n}{k!} \cdot \frac{(-1)^{r-k}}{(r-k)!} \\ {n+1 \brace r} &= r {n \brace r} + {n \brace r-1} \end{aligned}$$ | $$\begin{aligned} \mathrm{EGF}_r(x) &= \frac{(e^x - 1)^r}{r!} \\ \mathrm{OGF}_n(x) &= e^{-x} \sum_{k=0}^{+\infty} k^n \frac{x^k}{k!} \end{aligned}$$ | 第二类 Stirling 数 |
@@ -698,12 +698,17 @@ f_n=\sum_{i=1}^n(-1)^{i+1}\binom{n}{i}2^{i(n-i)}f_{n-i}
 $$
 思路是对 DAG 的入度为零的点做容斥．进一步推导可拆出卷积形式，再用类似分治 FFT 的生成函数方法可得封闭形式．
 
+- [Wikipedia](https://en.wikipedia.org/wiki/Directed_acyclic_graph#Combinatorial_enumeration)
+- [OEIS](https://oeis.org/A003024)
+- [OI-Wiki](https://oi-wiki.org/math/combinatorics/inclusion-exclusion-principle/#dag-%E8%AE%A1%E6%95%B0)
+- [cjyyb 题解](https://www.cnblogs.com/cjyyb/p/10134575.html)
+
 #### 有标号偏序图计数
 
-问得好，但这是个著名的 open problem．各种类型的偏序图计数参考 [Partially ordered set - Wikipedia # Number of partial orders](https://en.wikipedia.org/wiki/Partially_ordered_set#Number_of_partial_orders)．我们再给出若干参考资料：
+问得好，但这是个著名的 open problem．各种类型的偏序图计数参考 [Partially ordered set - Wikipedia # Number of partial orders](https://en.wikipedia.org/wiki/Partially_ordered_set#Number_of_partial_orders)．
 
--   <https://math.stackexchange.com/questions/2677986/how-many-partial-orders-can-be-defined-on-varnothing-and-a-finite-set>
--   <https://oeis.org/A001035>
+-   [Stack Exchange](https://math.stackexchange.com/questions/2677986/how-many-partial-orders-can-be-defined-on-varnothing-and-a-finite-set)
+-   [OEIS](https://oeis.org/A001035)
 -   [Erné, M., Stege, K. Counting finite posets and topologies. Order 8, 247–265 (1991)](https://doi.org/10.1007/BF00383446)（内有研究历史综述）
 
 #### 有标号连通图计数
@@ -729,15 +734,17 @@ $$
 
 更多信息参考 Wikipedia．
 
-#### 外向树拓扑序计数
+#### 有根树拓扑序计数
 
-$\frac{n!}{\prod_{u \in V} \operatorname{size}(u)}$，其中 $V$ 是所有节点的集合，$n$ 是树大小，$\operatorname{size}(u)$ 是以 $u$ 为根的子树大小． 
+对于外向树，$\frac{n!}{\prod_{u \in V} \operatorname{size}(u)}$，其中 $V$ 是所有节点的集合，$n$ 是树大小，$\operatorname{size}(u)$ 是以 $u$ 为根的子树大小． 
 
-树形 DP 风格的归纳证明是可以的．[[Insight] Number of Topological Orderings of a Directed Tree - Codeforces](https://codeforces.com/blog/entry/75627) 提供了一个非常有趣的组合理解，其思路是从全序出发，逐步按照拓扑序的要求来消序．
+树形 DP 风格的归纳证明是可以的．下面的链接中提供了一个有趣的组合理解，其思路是从全序出发，逐步按照拓扑序的要求对每个节点下的子树消序．
 
-常常要求对每个节点作为根节点求出，这时换根 DP 即可．
+题目常见要求对每个节点作为根节点求出方案数，换根 DP 即可．
 
-【TODO】内向树？尚不明确．
+注意到每个合法的外向树拓扑序 reverse 后立刻与内向树拓扑序形成一一对应，故内向树拓扑序计数与外向树相同．
+
+- [[Insight] Number of Topological Orderings of a Directed Tree - Codeforces](https://codeforces.com/blog/entry/75627)
 
 #### DAG 拓扑序计数
 
