@@ -196,7 +196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#递推" id="toc-递推" class="nav-link" data-scroll-target="#递推">递推</a></li>
   <li><a href="#第二类-striling-数同行计算mathrmogf_n101x-或-mathrmegf_n111x" id="toc-第二类-striling-数同行计算mathrmogf_n101x-或-mathrmegf_n111x" class="nav-link" data-scroll-target="#第二类-striling-数同行计算mathrmogf_n101x-或-mathrmegf_n111x">第二类 Striling 数同行计算：<span class="math inline">\(\mathrm{OGF}_n^{1,0,1}(x)\)</span> 或 <span class="math inline">\(\mathrm{EGF}_n^{1,1,1}(x)\)</span></a></li>
-  <li><a href="#第二类-striling-数同列计算mathrmegf_r101xmathrmegf_r110x-与-mathrmegf1emptysetemptysetx" id="toc-第二类-striling-数同列计算mathrmegf_r101xmathrmegf_r110x-与-mathrmegf1emptysetemptysetx" class="nav-link" data-scroll-target="#第二类-striling-数同列计算mathrmegf_r101xmathrmegf_r110x-与-mathrmegf1emptysetemptysetx">第二类 Striling 数同列计算：<span class="math inline">\(\mathrm{EGF}_r^{1,0,1}(x)\)</span>，<span class="math inline">\(\mathrm{EGF}_r^{1,1,0}(x)\)</span> 与 <span class="math inline">\(\mathrm{EGF}^{1,\emptyset,\emptyset}(x)\)</span></a></li>
+  <li><a href="#第二类-striling-数同列计算mathrmegf_r101xmathrmegf_r110x-与-mathrmegf10sigma1x" id="toc-第二类-striling-数同列计算mathrmegf_r101xmathrmegf_r110x-与-mathrmegf10sigma1x" class="nav-link" data-scroll-target="#第二类-striling-数同列计算mathrmegf_r101xmathrmegf_r110x-与-mathrmegf10sigma1x">第二类 Striling 数同列计算：<span class="math inline">\(\mathrm{EGF}_r^{1,0,1}(x)\)</span>，<span class="math inline">\(\mathrm{EGF}_r^{1,1,0}(x)\)</span> 与 <span class="math inline">\(\mathrm{EGF}^{1,0/\Sigma,1}(x)\)</span></a></li>
   <li><a href="#bell-数" id="toc-bell-数" class="nav-link" data-scroll-target="#bell-数">Bell 数</a></li>
   <li><a href="#第一类-stirling-数stirling-数与阶乘幂todo" id="toc-第一类-stirling-数stirling-数与阶乘幂todo" class="nav-link" data-scroll-target="#第一类-stirling-数stirling-数与阶乘幂todo">第一类 Stirling 数、Stirling 数与阶乘幂【TODO】</a></li>
   </ul></li>
@@ -302,7 +302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">November 1, 2023</p>
+      <p class="date-modified">November 19, 2023</p>
     </div>
   </div>
     
@@ -677,118 +677,136 @@ g(S) := \operatorname{card}\left( A \cap \bigcap_{i \in S} A_i \right)
 <section id="球盒问题" class="level3 page-columns page-full" data-number="3.2">
 <h3 data-number="3.2" class="anchored" data-anchor-id="球盒问题"><span class="header-section-number">3.2</span> 球盒问题</h3>
 <p>组合数学的万恶之源．</p>
-<div class="column-page">
+<div class="column-screen-inset">
 <table class="table">
 <colgroup>
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 20%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 23%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">代号</th>
-<th style="text-align: center;"><span class="math inline">\(n\)</span> 个球</th>
-<th style="text-align: center;"><span class="math inline">\(r\)</span> 个盒</th>
-<th style="text-align: center;">空盒否</th>
-<th style="text-align: center;">递推或封闭形式</th>
-<th style="text-align: center;">生成函数</th>
-<th style="text-align: center;">备注</th>
+<th style="text-align: center;">ID</th>
+<th style="text-align: center;"><span class="math inline">\(n\)</span> balls</th>
+<th style="text-align: center;"><span class="math inline">\(r\)</span> boxes</th>
+<th style="text-align: center;">allow empty?</th>
+<th style="text-align: center;">recurrence / closed-form</th>
+<th style="text-align: center;">generating functions</th>
+<th style="text-align: center;">notes</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><span class="math display">\[{1,1,0}\]</span></td>
-<td style="text-align: center;">有标号</td>
-<td style="text-align: center;">有标号</td>
-<td style="text-align: center;">盒可空</td>
+<td style="text-align: center;">Labeled</td>
+<td style="text-align: center;">Labeled</td>
+<td style="text-align: center;">MAY empty</td>
 <td style="text-align: center;"><span class="math display">\[r^n\]</span></td>
 <td style="text-align: center;"><span class="math display">\[\begin{aligned}\mathrm{EGF}_r(x) &amp;= (e^{x})^r = e^{rx} \\ \mathrm{OGF}_r(x) &amp;= \frac{1}{1-rx}\end{aligned}\]</span></td>
-<td style="text-align: center;"><span class="math inline">\([n] \to [r]\)</span> 映射个数</td>
+<td style="text-align: center;">number of <span class="math inline">\([n] \to [r]\)</span> mappings</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math display">\[{1,1,1}\]</span></td>
-<td style="text-align: center;">有标号</td>
-<td style="text-align: center;">有标号</td>
-<td style="text-align: center;">盒非空</td>
+<td style="text-align: center;">Labeled</td>
+<td style="text-align: center;">Labeled</td>
+<td style="text-align: center;">NON empty</td>
 <td style="text-align: center;"><span class="math display">\[r! {n \brace r} = \sum_{k=0}^r (-1)^{r-k} \binom r k k^n\]</span></td>
-<td style="text-align: center;"><span class="math display">\[\begin{aligned} \mathrm{EGF}_r(x)&amp;=(e^x - 1)^r \\ \mathrm{EGF}_n(x) &amp;= e^{-x} \sum_{k=0}^{+\infty} k^n \frac{x^k}{k!} \end{aligned}\]</span></td>
-<td style="text-align: center;"><span class="math inline">\([n] \to [r]\)</span> 满射个数</td>
+<td style="text-align: center;"><span class="math display">\[\begin{aligned} \mathrm{EGF}_r(x)&amp;=(e^x - 1)^r \\ \mathrm{EGF}_n(x) &amp;= e^{-x} \sum_{r=0}^{+\infty} r^n \frac{x^r}{r!} \end{aligned}\]</span></td>
+<td style="text-align: center;">number of <span class="math inline">\([n] \to [r]\)</span> surjections</td>
 </tr>
 <tr class="odd">
+<td style="text-align: center;"><span class="math display">\[{1,1/\Sigma,1}\]</span></td>
+<td style="text-align: center;">Labeled</td>
+<td style="text-align: center;">Labeled; <span class="math inline">\(r\)</span>-disabled</td>
+<td style="text-align: center;">NON empty</td>
+<td style="text-align: center;"><span class="math display">\[\sum_{k=0}^n k! {n \brace k}\]</span></td>
+<td style="text-align: center;"><span class="math display">\[\mathrm{EGF}_r(x)=\frac{1}{2-e^x} = \frac{1}{1-(e^x-1)}\]</span></td>
+<td style="text-align: center;">ordered Bell number; number of week orderings / ordered set partitions on <span class="math inline">\([n]\)</span></td>
+</tr>
+<tr class="even">
 <td style="text-align: center;"><span class="math display">\[{1,0,0}\]</span></td>
-<td style="text-align: center;">有标号</td>
-<td style="text-align: center;">无标号</td>
-<td style="text-align: center;">盒可空</td>
+<td style="text-align: center;">Labeled</td>
+<td style="text-align: center;">UNLabeled</td>
+<td style="text-align: center;">NON empty</td>
 <td style="text-align: center;"><span class="math display">\[\sum_{k=0}^r {n \brace k}\]</span></td>
 <td style="text-align: center;"><span class="math display">\[\mathrm{EGF}_r(x) = \sum_{k=0}^r \frac {(e^x - 1)^k}{k!}\]</span></td>
 <td style="text-align: center;"></td>
 </tr>
-<tr class="even">
-<td style="text-align: center;"><span class="math display">\[{1,0,1}\]</span></td>
-<td style="text-align: center;">有标号</td>
-<td style="text-align: center;">无标号</td>
-<td style="text-align: center;">盒非空</td>
-<td style="text-align: center;"><span class="math display">\[\begin{aligned} {n \brace r} &amp;= \sum_{k=0}^r \frac{k^n}{k!} \cdot \frac{(-1)^{r-k}}{(r-k)!} \\ {n+1 \brace r} &amp;= r {n \brace r} + {n \brace r-1} \end{aligned}\]</span></td>
-<td style="text-align: center;"><span class="math display">\[\begin{aligned} \mathrm{EGF}_r(x) &amp;= \frac{(e^x - 1)^r}{r!} \\ \mathrm{OGF}_n(x) &amp;= e^{-x} \sum_{k=0}^{+\infty} k^n \frac{x^k}{k!} \end{aligned}\]</span></td>
-<td style="text-align: center;">第二类 Stirling 数</td>
-</tr>
 <tr class="odd">
-<td style="text-align: center;"><span class="math display">\[{1,\emptyset,\emptyset}\]</span></td>
-<td style="text-align: center;">有标号</td>
-<td style="text-align: center;">不限制</td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math display">\[{1,0,1}\]</span></td>
+<td style="text-align: center;">Labeled</td>
+<td style="text-align: center;">UNLabeled</td>
+<td style="text-align: center;">NON empty</td>
+<td style="text-align: center;"><span class="math display">\[\begin{aligned} {n \brace r} &amp;= \sum_{k=0}^r \frac{k^n}{k!} \cdot \frac{(-1)^{r-k}}{(r-k)!} \\ {n+1 \brace r} &amp;= r {n \brace r} + {n \brace r-1} \end{aligned}\]</span></td>
+<td style="text-align: center;"><span class="math display">\[\begin{aligned} \mathrm{EGF}_r(x) &amp;= \frac{(e^x - 1)^r}{r!} \\ \mathrm{OGF}_n(x) &amp;= e^{-x} \sum_{r=0}^{+\infty} r^n \frac{x^r}{r!} \end{aligned}\]</span></td>
+<td style="text-align: center;">Stirling number of the second kind</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math display">\[{1,0/\Sigma,1}\]</span></td>
+<td style="text-align: center;">labeled</td>
+<td style="text-align: center;">UNLabeled; <span class="math inline">\(r\)</span>-disabled</td>
+<td style="text-align: center;">NON empty</td>
 <td style="text-align: center;"><span class="math display">\[\begin{aligned} B(n) &amp;= \sum_{k=0}^n {n \brace k} \\ B(n+1) &amp;= \sum_{k=0}^n \binom n k B(k) \end{aligned}\]</span></td>
 <td style="text-align: center;"><span class="math display">\[\mathrm{EGF}(x)=e^{e^x - 1}\]</span></td>
-<td style="text-align: center;">Bell 数；<span class="math inline">\([n]\)</span> 上等价关系（划分）个数</td>
+<td style="text-align: center;">Bell number; number of equivialent relations / set partitions on <span class="math inline">\([n]\)</span></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: center;"><span class="math display">\[{0,1,0}\]</span></td>
-<td style="text-align: center;">无标号</td>
-<td style="text-align: center;">有标号</td>
-<td style="text-align: center;">盒可空</td>
+<td style="text-align: center;">UNLabeled</td>
+<td style="text-align: center;">Labeled</td>
+<td style="text-align: center;">MAY empty</td>
 <td style="text-align: center;"><span class="math display">\[\binom{n+r-1}{r-1}\]</span></td>
 <td style="text-align: center;"><span class="math display">\[\mathrm{OGF_r}(x) = \left(\frac 1 {1-x}\right)^r\]</span></td>
 <td style="text-align: center;"><span class="math inline">\(r\)</span> 元不定方程非负整数解个数</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: center;"><span class="math display">\[{0,1,1}\]</span></td>
-<td style="text-align: center;">无标号</td>
-<td style="text-align: center;">有标号</td>
-<td style="text-align: center;">盒非空</td>
+<td style="text-align: center;">UNLabeled</td>
+<td style="text-align: center;">Labeled</td>
+<td style="text-align: center;">NON empty</td>
 <td style="text-align: center;"><span class="math display">\[\binom{n-1}{r-1}\]</span></td>
 <td style="text-align: center;"><span class="math display">\[\begin{aligned} \mathrm{OGF_r}(x) &amp;= \left(\frac x {1-x}\right)^r \\ &amp;= x^r \left(\frac 1 {1-x}\right)^r \end{aligned}\]</span></td>
 <td style="text-align: center;"><span class="math inline">\(r\)</span> 元 <span class="math inline">\(n\)</span> 次单项式构型数</td>
 </tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math display">\[{0,1/\Sigma,1}\]</span></td>
+<td style="text-align: center;">UNLabeled</td>
+<td style="text-align: center;">Labeled; <span class="math inline">\(r\)</span>-disabled</td>
+<td style="text-align: center;">NON empty</td>
+<td style="text-align: center;"><span class="math display">\[a(n)=\begin{cases}1 &amp; n=1 \\ 2^{n-1} &amp; n\geq 2 \end{cases}\]</span></td>
+<td style="text-align: center;"><span class="math display">\[\mathrm{OGF}(x) = 1+\frac{x}{1-2x} = \frac{1}{1-\frac{x}{1-x}}\]</span></td>
+<td style="text-align: center;">考虑“是否向前拼接”的 <span class="math inline">\(n-1\)</span> 个选择</td>
+</tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math display">\[{0,0,0}\]</span></td>
-<td style="text-align: center;">无标号</td>
-<td style="text-align: center;">无标号</td>
-<td style="text-align: center;">盒可空</td>
+<td style="text-align: center;">UNLabeled</td>
+<td style="text-align: center;">UNLabeled</td>
+<td style="text-align: center;">MAY empty</td>
 <td style="text-align: center;"><span class="math display">\[\sum_{k=0}^r p(n,k)\]</span></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"><span class="math inline">\(r\)</span> 元 <span class="math inline">\(n\)</span> 次单项对称多项式（monomial symmetric polynomial）构型数</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><span class="math display">\[{0,0,1}\]</span></td>
-<td style="text-align: center;">无标号</td>
-<td style="text-align: center;">无标号</td>
-<td style="text-align: center;">盒非空</td>
+<td style="text-align: center;">UNLabeled</td>
+<td style="text-align: center;">UNLabeled</td>
+<td style="text-align: center;">NON empty</td>
 <td style="text-align: center;"><span class="math display">\[p(n,r)=p(n-1,r-1)+p(n-r,r)\]</span></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;"><span class="math inline">\(r\)</span> 部分拆数</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;"><span class="math display">\[{0,\emptyset,\emptyset}\]</span></td>
-<td style="text-align: center;">无标号</td>
-<td style="text-align: center;">不限制</td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math display">\[{0,0/\Sigma,1}\]</span></td>
+<td style="text-align: center;">UNLabeled</td>
+<td style="text-align: center;">UNLabeled; <span class="math inline">\(r\)</span>-disabled</td>
+<td style="text-align: center;">NON empty</td>
 <td style="text-align: center;"><span class="math display">\[\begin{aligned} p(n) &amp;= \sum_{\substack{k \in \mathbb Z}} (-1)^k p_{n-k(3k-1)/2} \\ &amp;= p_{n-1} + p_{n-2} - p_{n-5} - p_{n-7} + \dots \end{aligned}\]</span></td>
 <td style="text-align: center;"><span class="math display">\[\begin{aligned} \mathrm{OGF}(x)&amp;=\prod_{k=1}^{+\infty} \frac 1 {1-x^k} \\ &amp;= \left( \sum_{k \in \mathbb Z} (-1)^k x^{k(3k-1)/2} \right)^{-1} \end{aligned}\]</span></td>
-<td style="text-align: center;">分拆数；<span class="math inline">\(n\)</span> 元（含）以上 <span class="math inline">\(n\)</span> 次单项对称多项式构型数</td>
+<td style="text-align: center;">partition function（分拆数）; number of partitions of <span class="math inline">\(n\)</span>; <span class="math inline">\(n\)</span> 元（含）以上 <span class="math inline">\(n\)</span> 次单项对称多项式构型数</td>
 </tr>
 </tbody>
 </table>
@@ -803,8 +821,16 @@ g(S) := \operatorname{card}\left( A \cap \bigcap_{i \in S} A_i \right)
 <p>在不至混淆的情况下，也可省略下标或上标上的代号．</p>
 <section id="通用性质" class="level4">
 <h4 class="anchored" data-anchor-id="通用性质">通用性质</h4>
+<div id="prp-bb-sigma" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1 (非空盒数量不限制) </strong></span><span class="math display">\[
+\begin{gathered}
+\mathrm{BB}_{*,*/\Sigma,1}(n) = \sum_{k=0}^n \mathrm{BB}_{*,*,1}(n,k) \\
+\mathrm{EGF}^{*,*/\Sigma,1}(x) = \sum_{k=0}^{+\infty} \mathrm{EGF}_{r=k}^{*,*,1}(x)
+\end{gathered}
+\]</span></p>
+</div>
 <div id="prp-bb-x10-x11" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 1 </strong></span><span class="math display">\[
+<p><span class="theorem-title"><strong>Proposition 2 (有标号盒空置) </strong></span><span class="math display">\[
 \begin{gathered}
 \mathrm{BB}_{*,1,0}(n,r) = \sum_{k=0}^r \binom r k \mathrm{BB}_{*,1,1}(n,k) \\
 \mathrm{EGF}_n^{*,1,0}(x) = e^x \mathrm{EGF}_n^{*,1,1}(x)
@@ -813,7 +839,7 @@ g(S) := \operatorname{card}\left( A \cap \bigcap_{i \in S} A_i \right)
 </div>
 <p>对有标号盒的二项式反演．在 <span class="math inline">\(1,1,0\)</span>-球盒问题中，上式体现为第二类 Stirling 数的通项公式；在 <span class="math inline">\(0,1,0\)</span>-球盒问题中，上式体现为 Vandermonde 卷积．</p>
 <div id="prp-bb-x00-x01" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 2 </strong></span><span class="math display">\[
+<p><span class="theorem-title"><strong>Proposition 3 (无标号盒空置) </strong></span><span class="math display">\[
 \begin{gathered}
 \mathrm{BB}_{*,0,0}(n,r) = \sum_{k=0}^r \mathrm{BB}_{*,0,1}(n,k) \\
 \mathrm{OGF}_n^{*,0,0}(x) = \frac 1 {1-x} \mathrm{OGF}_n^{*,0,1}(x)
@@ -852,8 +878,8 @@ r! {n \brace r} = \sum_{k=0}^r (-1)^{r-k} \binom r k k^n
 \mathrm{OGF}_n^{1,0,1}(x) = \mathrm{EGF}_n^{1,1,1}(x) = e^{-x} \mathrm{EGF}_n^{1,1,0}(x) = e^{-x} \sum_{k=0}^{+\infty} k^n \frac{x^k}{k!}
 \]</span></p>
 </section>
-<section id="第二类-striling-数同列计算mathrmegf_r101xmathrmegf_r110x-与-mathrmegf1emptysetemptysetx" class="level4">
-<h4 class="anchored" data-anchor-id="第二类-striling-数同列计算mathrmegf_r101xmathrmegf_r110x-与-mathrmegf1emptysetemptysetx">第二类 Striling 数同列计算：<span class="math inline">\(\mathrm{EGF}_r^{1,0,1}(x)\)</span>，<span class="math inline">\(\mathrm{EGF}_r^{1,1,0}(x)\)</span> 与 <span class="math inline">\(\mathrm{EGF}^{1,\emptyset,\emptyset}(x)\)</span></h4>
+<section id="第二类-striling-数同列计算mathrmegf_r101xmathrmegf_r110x-与-mathrmegf10sigma1x" class="level4">
+<h4 class="anchored" data-anchor-id="第二类-striling-数同列计算mathrmegf_r101xmathrmegf_r110x-与-mathrmegf10sigma1x">第二类 Striling 数同列计算：<span class="math inline">\(\mathrm{EGF}_r^{1,0,1}(x)\)</span>，<span class="math inline">\(\mathrm{EGF}_r^{1,1,0}(x)\)</span> 与 <span class="math inline">\(\mathrm{EGF}^{1,0/\Sigma,1}(x)\)</span></h4>
 <p>为快速计算同一列的第二类 Stirling 数，考虑用生成函数的思路构造 <span class="math inline">\(1,1,0\)</span>-球盒问题和 <span class="math inline">\(1,0,1\)</span>-球盒问题的方案数．前者将大小为 <span class="math inline">\(n\)</span> 的有标号集合划分为 <span class="math inline">\(r\)</span> 个有标号等价类，这相当于有序拼接 <span class="math inline">\(r\)</span> 个非空有标号集合；后者则是前者除掉 <span class="math inline">\(r!\)</span> 消序的版本．写成生成函数即 <span id="eq-egf-110-101"><span class="math display">\[
 \begin{aligned}
 \mathrm{EGF}_r^{1,1,0}(x) &amp;= (e^x - 1)^r \\
@@ -863,13 +889,13 @@ r! {n \brace r} = \sum_{k=0}^r (-1)^{r-k} \binom r k k^n
 </section>
 <section id="bell-数" class="level4">
 <h4 class="anchored" data-anchor-id="bell-数">Bell 数</h4>
-<p>Bell 数 <span class="math inline">\(B(n)\)</span> 的组合定义即 <span class="math inline">\(1,\emptyset,\emptyset\)</span>-球盒问题的方案数 <span class="math inline">\(\mathrm{BB}_{1,\emptyset,\emptyset}\)</span>，亦可描述为 <span class="math inline">\(n\)</span> 元集合上等价关系（划分）的数量．</p>
-<p>注意到 <span class="math inline">\(1,0,1\)</span>-球盒问题和 <span class="math inline">\(1,\emptyset,\emptyset\)</span>-球盒问题的关系 <span class="math display">\[
-\mathrm{BB}_{1,\emptyset,\emptyset}(n) = \sum_{r=0}^{n} \mathrm{BB}_{1,0,1}(n,r) = \sum_{r=0}^{+\infty} \mathrm{BB}_{1,0,1}(n,r)
+<p>Bell 数 <span class="math inline">\(B(n)\)</span> 的组合定义即 <span class="math inline">\(1,0/\Sigma,1\)</span>-球盒问题的方案数 <span class="math inline">\(\mathrm{BB}_{1,0/\Sigma,1}\)</span>，亦可描述为 <span class="math inline">\(n\)</span> 元集合上等价关系（划分）的数量．</p>
+<p>注意到 <span class="math inline">\(1,0,1\)</span>-球盒问题和 <span class="math inline">\(1,0/\Sigma,1\)</span>-球盒问题的关系 <span class="math display">\[
+\mathrm{BB}_{1,0/\Sigma,1}(n) = \sum_{r=0}^{n} \mathrm{BB}_{1,0,1}(n,r) = \sum_{r=0}^{+\infty} \mathrm{BB}_{1,0,1}(n,r)
 \]</span> 我们首先有 <span class="math display">\[
 B(n) = \sum_{r=0}^n {n \brace r}
 \]</span> 其次，根据 <a href="#eq-egf-110-101">Equation&nbsp;1</a> 写出此关系的 EGF 形式就有 <span class="math display">\[
-\mathrm{EGF}^{1,\emptyset,\emptyset}(x) = \sum_{r=0}^{+\infty} \mathrm{EGF}_r^{1,0,1}(x) = \sum_{r=0}^{+\infty} \frac{(e^x - 1)^r}{r!} = e^{e^x - 1}
+\mathrm{EGF}^{1,0/\Sigma,1}(x) = \sum_{r=0}^{+\infty} \mathrm{EGF}_r^{1,0,1}(x) = \sum_{r=0}^{+\infty} \frac{(e^x - 1)^r}{r!} = e^{e^x - 1}
 \]</span> 我们得到 Bell 数的可用于快速计算的 EGF．</p>
 <div class="remark proof">
 <p><span class="proof-title"><em>Remark</em>. </span>有标号集合的无序划分是指数型生成函数的一类重要应用．例如，有标号连通图计数可视为对有标号一般图的无序划分，故有标号连通图的 EGF <span class="math inline">\(G(x)\)</span> 和有标号一般图的 EGF <span class="math inline">\(F(x)\)</span> 间有着 <span class="math inline">\(e^{G(x)} = F(x)\)</span> 的关系．</p>
