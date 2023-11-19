@@ -3,7 +3,7 @@ title: "算法 & 数学碎碎念"
 abstract: "现场赛公式模板库，亦可作为小而精的总结性学习材料参考．无需单独成文或暂不完善的内容会放在这里．"
 author: "sun123zxy"
 date: "2023/06/21"
-date-modified: "2023/11/01"
+date-modified: "2023/11/19"
 
 categories:
   - OI
@@ -515,20 +515,22 @@ $$
 
 组合数学的万恶之源．
 
-:::{.column-page}
+:::{.column-screen-inset}
 
-| 代号 | $n$ 个球 | $r$ 个盒 | 空盒否 | 递推或封闭形式 | 生成函数 | 备注 |
-|:-:|:-:|:-:|:-:|:--:|:--:|:---:|
-| $${1,1,0}$$ | 有标号 | 有标号 	| 盒可空 | $$r^n$$ | $$\begin{aligned}\mathrm{EGF}_r(x) &= (e^{x})^r = e^{rx} \\ \mathrm{OGF}_r(x) &= \frac{1}{1-rx}\end{aligned}$$ | $[n] \to [r]$ 映射个数 |
-| $${1,1,1}$$ | 有标号 | 有标号 	| 盒非空 | $$r! {n \brace r} = \sum_{k=0}^r (-1)^{r-k} \binom r k k^n$$ | $$\begin{aligned} \mathrm{EGF}_r(x)&=(e^x - 1)^r \\ \mathrm{EGF}_n(x) &= e^{-x} \sum_{k=0}^{+\infty} k^n \frac{x^k}{k!} \end{aligned}$$ | $[n] \to [r]$ 满射个数 |
-| $${1,0,0}$$ | 有标号 | 无标号 	| 盒可空	 | $$\sum_{k=0}^r {n \brace k}$$ | $$\mathrm{EGF}_r(x) = \sum_{k=0}^r \frac {(e^x - 1)^k}{k!}$$ | |
-| $${1,0,1}$$ | 有标号 | 无标号 	| 盒非空 | $$\begin{aligned} {n \brace r} &= \sum_{k=0}^r \frac{k^n}{k!} \cdot \frac{(-1)^{r-k}}{(r-k)!} \\ {n+1 \brace r} &= r {n \brace r} + {n \brace r-1} \end{aligned}$$ | $$\begin{aligned} \mathrm{EGF}_r(x) &= \frac{(e^x - 1)^r}{r!} \\ \mathrm{OGF}_n(x) &= e^{-x} \sum_{k=0}^{+\infty} k^n \frac{x^k}{k!} \end{aligned}$$ | 第二类 Stirling 数 |
-| $${1,\emptyset,\emptyset}$$ | 有标号 | 不限制 	|       | $$\begin{aligned} B(n) &= \sum_{k=0}^n {n \brace k} \\ B(n+1) &= \sum_{k=0}^n \binom n k B(k) \end{aligned}$$ | $$\mathrm{EGF}(x)=e^{e^x - 1}$$ | Bell 数；$[n]$ 上等价关系（划分）个数 |
-| $${0,1,0}$$ | 无标号 | 有标号 	| 盒可空 | $$\binom{n+r-1}{r-1}$$ | $$\mathrm{OGF_r}(x) = \left(\frac 1 {1-x}\right)^r$$ | $r$ 元不定方程非负整数解个数 |
-| $${0,1,1}$$ | 无标号 | 有标号 	| 盒非空 | $$\binom{n-1}{r-1}$$ | $$\begin{aligned} \mathrm{OGF_r}(x) &= \left(\frac x {1-x}\right)^r \\ &= x^r \left(\frac 1 {1-x}\right)^r \end{aligned}$$ | $r$ 元 $n$ 次单项式构型数 |
-| $${0,0,0}$$ | 无标号 | 无标号 	| 盒可空 | $$\sum_{k=0}^r p(n,k)$$ | | $r$ 元 $n$ 次单项对称多项式（monomial symmetric polynomial）构型数 |
-| $${0,0,1}$$ | 无标号 | 无标号 	| 盒非空 | $$p(n,r)=p(n-1,r-1)+p(n-r,r)$$ | | $r$ 部分拆数 |
-| $${0,\emptyset,\emptyset}$$ | 无标号 | 不限制	|       | $$\begin{aligned} p(n) &= \sum_{\substack{k \in \mathbb Z}} (-1)^k p_{n-k(3k-1)/2} \\ &= p_{n-1} + p_{n-2} - p_{n-5} - p_{n-7} + \dots \end{aligned}$$ | $$\begin{aligned} \mathrm{OGF}(x)&=\prod_{k=1}^{+\infty} \frac 1 {1-x^k} \\ &= \left( \sum_{k \in \mathbb Z} (-1)^k x^{k(3k-1)/2} \right)^{-1} \end{aligned}$$ | 分拆数；$n$ 元（含）以上 $n$ 次单项对称多项式构型数 |
+| ID | $n$ balls | $r$ boxes | allow empty? | recurrence / closed-form | generating functions | notes |
+|:-:|:-:|:-:|:-:|:--:|:--:|:----:|
+| $${1,1,0}$$ | Labeled 	| Labeled 		| MAY empty | $$r^n$$ | $$\begin{aligned}\mathrm{EGF}_r(x) &= (e^{x})^r = e^{rx} \\ \mathrm{OGF}_r(x) &= \frac{1}{1-rx}\end{aligned}$$ | number of $[n] \to [r]$ mappings |
+| $${1,1,1}$$ | Labeled 	| Labeled 		| NON empty | $$r! {n \brace r} = \sum_{k=0}^r (-1)^{r-k} \binom r k k^n$$ | $$\begin{aligned} \mathrm{EGF}_r(x)&=(e^x - 1)^r \\ \mathrm{EGF}_n(x) &= e^{-x} \sum_{r=0}^{+\infty} r^n \frac{x^r}{r!} \end{aligned}$$ | number of $[n] \to [r]$ surjections |
+| $${1,1/\Sigma,1}$$ | Labeled | Labeled; $r$-disabled | NON empty | $$\sum_{k=0}^n k! {n \brace k}$$ | $$\mathrm{EGF}_r(x)=\frac{1}{2-e^x} = \frac{1}{1-(e^x-1)}$$ | ordered Bell number; number of week orderings / ordered set partitions on $[n]$ |
+| $${1,0,0}$$ | Labeled 	| UNLabeled 	| NON empty	 | $$\sum_{k=0}^r {n \brace k}$$ | $$\mathrm{EGF}_r(x) = \sum_{k=0}^r \frac {(e^x - 1)^k}{k!}$$ | |
+| $${1,0,1}$$ | Labeled 	| UNLabeled 	| NON empty | $$\begin{aligned} {n \brace r} &= \sum_{k=0}^r \frac{k^n}{k!} \cdot \frac{(-1)^{r-k}}{(r-k)!} \\ {n+1 \brace r} &= r {n \brace r} + {n \brace r-1} \end{aligned}$$ | $$\begin{aligned} \mathrm{EGF}_r(x) &= \frac{(e^x - 1)^r}{r!} \\ \mathrm{OGF}_n(x) &= e^{-x} \sum_{r=0}^{+\infty} r^n \frac{x^r}{r!} \end{aligned}$$ | Stirling number of the second kind |
+| $${1,0/\Sigma,1}$$ | labeled | UNLabeled; $r$-disabled | NON empty | $$\begin{aligned} B(n) &= \sum_{k=0}^n {n \brace k} \\ B(n+1) &= \sum_{k=0}^n \binom n k B(k) \end{aligned}$$ | $$\mathrm{EGF}(x)=e^{e^x - 1}$$ | Bell number; number of equivialent relations / set partitions on $[n]$ |
+| $${0,1,0}$$ | UNLabeled 	| Labeled 	| MAY empty | $$\binom{n+r-1}{r-1}$$ | $$\mathrm{OGF_r}(x) = \left(\frac 1 {1-x}\right)^r$$ | $r$ 元不定方程非负整数解个数 |
+| $${0,1,1}$$ | UNLabeled 	| Labeled 	| NON empty | $$\binom{n-1}{r-1}$$ | $$\begin{aligned} \mathrm{OGF_r}(x) &= \left(\frac x {1-x}\right)^r \\ &= x^r \left(\frac 1 {1-x}\right)^r \end{aligned}$$ | $r$ 元 $n$ 次单项式构型数 |
+| $${0,1/\Sigma,1}$$ | UNLabeled | Labeled; $r$-disabled	| NON empty | $$a(n)=\begin{cases}1 & n=1 \\ 2^{n-1} & n\geq 2 \end{cases}$$ | $$\mathrm{OGF}(x) = 1+\frac{x}{1-2x} = \frac{1}{1-\frac{x}{1-x}}$$ | 考虑“是否向前拼接”的 $n-1$ 个选择 |
+| $${0,0,0}$$ | UNLabeled 	| UNLabeled 	| MAY empty | $$\sum_{k=0}^r p(n,k)$$ | | $r$ 元 $n$ 次单项对称多项式（monomial symmetric polynomial）构型数 |
+| $${0,0,1}$$ | UNLabeled 	| UNLabeled 	| NON empty | $$p(n,r)=p(n-1,r-1)+p(n-r,r)$$ | | $r$ 部分拆数 |
+| $${0,0/\Sigma,1}$$ | UNLabeled | UNLabeled; $r$-disabled	| NON empty | $$\begin{aligned} p(n) &= \sum_{\substack{k \in \mathbb Z}} (-1)^k p_{n-k(3k-1)/2} \\ &= p_{n-1} + p_{n-2} - p_{n-5} - p_{n-7} + \dots \end{aligned}$$ | $$\begin{aligned} \mathrm{OGF}(x)&=\prod_{k=1}^{+\infty} \frac 1 {1-x^k} \\ &= \left( \sum_{k \in \mathbb Z} (-1)^k x^{k(3k-1)/2} \right)^{-1} \end{aligned}$$ | partition function（分拆数）; number of partitions of $n$; $n$ 元（含）以上 $n$ 次单项对称多项式构型数 |
 :::
 
 以后我们约定：
@@ -542,7 +544,22 @@ $$
 
 #### 通用性质
 
+::: {#prp-bb-sigma}
+
+## 非空盒数量不限制
+
+$$
+\begin{gathered}
+\mathrm{BB}_{*,*/\Sigma,1}(n) = \sum_{k=0}^n \mathrm{BB}_{*,*,1}(n,k) \\
+\mathrm{EGF}^{*,*/\Sigma,1}(x) = \sum_{k=0}^{+\infty} \mathrm{EGF}_{r=k}^{*,*,1}(x)
+\end{gathered}
+$$
+:::
+
 ::: {#prp-bb-x10-x11}
+
+## 有标号盒空置
+
 $$
 \begin{gathered}
 \mathrm{BB}_{*,1,0}(n,r) = \sum_{k=0}^r \binom r k \mathrm{BB}_{*,1,1}(n,k) \\
@@ -553,6 +570,9 @@ $$
 对有标号盒的二项式反演．在 $1,1,0$-球盒问题中，上式体现为第二类 Stirling 数的通项公式；在 $0,1,0$-球盒问题中，上式体现为 Vandermonde 卷积．
 
 ::: {#prp-bb-x00-x01}
+
+## 无标号盒空置
+
 $$
 \begin{gathered}
 \mathrm{BB}_{*,0,0}(n,r) = \sum_{k=0}^r \mathrm{BB}_{*,0,1}(n,k) \\
@@ -607,7 +627,7 @@ $$
 \mathrm{OGF}_n^{1,0,1}(x) = \mathrm{EGF}_n^{1,1,1}(x) = e^{-x} \mathrm{EGF}_n^{1,1,0}(x) = e^{-x} \sum_{k=0}^{+\infty} k^n \frac{x^k}{k!}
 $$
 
-#### 第二类 Striling 数同列计算：$\mathrm{EGF}_r^{1,0,1}(x)$，$\mathrm{EGF}_r^{1,1,0}(x)$ 与 $\mathrm{EGF}^{1,\emptyset,\emptyset}(x)$
+#### 第二类 Striling 数同列计算：$\mathrm{EGF}_r^{1,0,1}(x)$，$\mathrm{EGF}_r^{1,1,0}(x)$ 与 $\mathrm{EGF}^{1,0/\Sigma,1}(x)$
 
 为快速计算同一列的第二类 Stirling 数，考虑用生成函数的思路构造 $1,1,0$-球盒问题和 $1,0,1$-球盒问题的方案数．前者将大小为 $n$ 的有标号集合划分为 $r$ 个有标号等价类，这相当于有序拼接 $r$ 个非空有标号集合；后者则是前者除掉 $r!$ 消序的版本．写成生成函数即
 $$
@@ -619,11 +639,11 @@ $${#eq-egf-110-101}
 
 #### Bell 数
 
-Bell 数 $B(n)$ 的组合定义即 $1,\emptyset,\emptyset$-球盒问题的方案数 $\mathrm{BB}_{1,\emptyset,\emptyset}$，亦可描述为 $n$ 元集合上等价关系（划分）的数量．
+Bell 数 $B(n)$ 的组合定义即 $1,0/\Sigma,1$-球盒问题的方案数 $\mathrm{BB}_{1,0/\Sigma,1}$，亦可描述为 $n$ 元集合上等价关系（划分）的数量．
 
-注意到 $1,0,1$-球盒问题和 $1,\emptyset,\emptyset$-球盒问题的关系
+注意到 $1,0,1$-球盒问题和 $1,0/\Sigma,1$-球盒问题的关系
 $$
-\mathrm{BB}_{1,\emptyset,\emptyset}(n) = \sum_{r=0}^{n} \mathrm{BB}_{1,0,1}(n,r) = \sum_{r=0}^{+\infty} \mathrm{BB}_{1,0,1}(n,r)
+\mathrm{BB}_{1,0/\Sigma,1}(n) = \sum_{r=0}^{n} \mathrm{BB}_{1,0,1}(n,r) = \sum_{r=0}^{+\infty} \mathrm{BB}_{1,0,1}(n,r)
 $$
 我们首先有
 $$
@@ -631,7 +651,7 @@ B(n) = \sum_{r=0}^n {n \brace r}
 $$
 其次，根据 [@eq-egf-110-101] 写出此关系的 EGF 形式就有
 $$
-\mathrm{EGF}^{1,\emptyset,\emptyset}(x) = \sum_{r=0}^{+\infty} \mathrm{EGF}_r^{1,0,1}(x) = \sum_{r=0}^{+\infty} \frac{(e^x - 1)^r}{r!} = e^{e^x - 1}
+\mathrm{EGF}^{1,0/\Sigma,1}(x) = \sum_{r=0}^{+\infty} \mathrm{EGF}_r^{1,0,1}(x) = \sum_{r=0}^{+\infty} \frac{(e^x - 1)^r}{r!} = e^{e^x - 1}
 $$
 我们得到 Bell 数的可用于快速计算的 EGF．
 
