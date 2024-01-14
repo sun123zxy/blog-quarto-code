@@ -220,6 +220,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#有向图的情形" id="toc-有向图的情形" class="nav-link" data-scroll-target="#有向图的情形">有向图的情形</a></li>
   </ul></li>
   <li><a href="#polya-计数" id="toc-polya-计数" class="nav-link" data-scroll-target="#polya-计数"><span class="header-section-number">3.8</span> Polya 计数</a></li>
+  <li><a href="#杂数选提" id="toc-杂数选提" class="nav-link" data-scroll-target="#杂数选提"><span class="header-section-number">3.9</span> 杂数选提</a>
+  <ul>
+  <li><a href="#catalan-数" id="toc-catalan-数" class="nav-link" data-scroll-target="#catalan-数">Catalan 数</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#多项式" id="toc-多项式" class="nav-link" data-scroll-target="#多项式"><span class="header-section-number">4</span> 多项式</a>
   <ul>
@@ -725,7 +729,7 @@ g(S) := \operatorname{card}\left( A \cap \bigcap_{i \in S} A_i \right)
 <td style="text-align: center;">NON empty</td>
 <td style="text-align: center;"><span class="math display">\[\sum_{k=0}^n k! {n \brace k}\]</span></td>
 <td style="text-align: center;"><span class="math display">\[\mathrm{EGF}_r(x)=\frac{1}{2-e^x} = \frac{1}{1-(e^x-1)}\]</span></td>
-<td style="text-align: center;">ordered Bell number; number of week orderings / ordered set partitions on <span class="math inline">\([n]\)</span></td>
+<td style="text-align: center;">ordered Bell number; number of weak orderings / ordered set partitions on <span class="math inline">\([n]\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math display">\[{1,0,0}\]</span></td>
@@ -1091,6 +1095,36 @@ C_{i,j} = \begin{cases}
 \]</span> 其中 <span class="math inline">\(G\)</span> 是等价操作群，<span class="math inline">\(C(f)\)</span> 是操作 <span class="math inline">\(f\)</span> 下的不动点集合．</p>
 </div>
 </section>
+<section id="杂数选提" class="level3" data-number="3.9">
+<h3 data-number="3.9" class="anchored" data-anchor-id="杂数选提"><span class="header-section-number">3.9</span> 杂数选提</h3>
+<section id="catalan-数" class="level4">
+<h4 class="anchored" data-anchor-id="catalan-数">Catalan 数</h4>
+<div class="sourceCode" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, ...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math display">\[
+C_n = \binom{2n}{n} - \binom{2n}{n+1} = \frac 1 {n+1} \binom{2n}{n} = \prod_{k=2}^n \frac{n+k}{k}
+\]</span></p>
+<p>Segner’s recurrence relation: <span class="math display">\[
+C_0 = 1;\quad C_{n+1} = \sum_{i=0}^n C_i C_{n-i}
+\]</span></p>
+<p>OGF: <span class="math display">\[
+A(z) = 1 + z A^2(z) \implies A(z) = \frac{1-\sqrt{1-4z}}{2z}
+\]</span></p>
+<p>注意下面组合意义间的前后逻辑顺序．</p>
+<ul>
+<li><p>number of full binary tree with <span class="math inline">\(n\)</span> interior nodes / <span class="math inline">\(n+1\)</span> leaves / <span class="math inline">\(2n+1\)</span> nodes</p>
+<p>在数内点意义下可以导出 Catalan 数的生成函数．</p></li>
+<li><p>number of ways of associating <span class="math inline">\(n\)</span> binary operators / parenthesizing <span class="math inline">\(n+1\)</span> factors completely</p></li>
+<li><p>number of proper parenthesis sequences with <span class="math inline">\(n\)</span> pairs of parentheses</p>
+<p>【TODO】暂时不知道怎么从上面推过来的．另一种理解是长度为 <span class="math inline">\(n\)</span> 的出栈序列的数量．</p></li>
+<li><p>number of ordered trees with <span class="math inline">\(n+1\)</span> vertices</p>
+<p>最外层要补一对括号．</p></li>
+<li><p>number of binary trees with <span class="math inline">\(n\)</span> vertices</p>
+<p>by left-child right-sibling encoding of ordered trees. 最后删去只有左儿子的根．</p>
+<p>该组合意义可以导出 Catalan 数的生成函数．</p></li>
+</ul>
+<p>Catalan 数的组合意义并不止如此几种．cf.&nbsp;<a href="https://en.wikipedia.org/wiki/Catalan_number">Wikipedia</a></p>
+</section>
+</section>
 </section>
 <section id="多项式" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="多项式"><span class="header-section-number">4</span> 多项式</h2>
@@ -1129,7 +1163,7 @@ A(\omega_{2n}^{n+k}) &amp;= A_0 (\omega_n^k) - \omega_{2n}^k A_1(\omega_n^k)
 <section id="蝶形运算与迭代算法" class="level4">
 <h4 class="anchored" data-anchor-id="蝶形运算与迭代算法">蝶形运算与迭代算法</h4>
 <p>为使用迭代算法，需要快速得到递归算法向下深入过程中 <span class="math inline">\(\{ a_n \}\)</span> 置换后的最终结果．观察知该置换是位逆序置换，可按如下方法线性求出．</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rev<span class="op">[</span><span class="dv">0</span><span class="op">]=</span><span class="dv">0</span><span class="op">;</span> <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">1</span><span class="op">;</span>i<span class="op">&lt;(</span><span class="dv">1</span><span class="op">&lt;&lt;</span>n<span class="op">);</span>i<span class="op">++)</span> rev<span class="op">[</span>i<span class="op">]=(</span>rev<span class="op">[</span>i<span class="op">&gt;&gt;</span><span class="dv">1</span><span class="op">]&gt;&gt;</span><span class="dv">1</span><span class="op">)+((</span>i<span class="op">&amp;</span><span class="dv">1</span><span class="op">)&lt;&lt;(</span>n<span class="op">-</span><span class="dv">1</span><span class="op">));</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>rev<span class="op">[</span><span class="dv">0</span><span class="op">]=</span><span class="dv">0</span><span class="op">;</span> <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">1</span><span class="op">;</span>i<span class="op">&lt;(</span><span class="dv">1</span><span class="op">&lt;&lt;</span>n<span class="op">);</span>i<span class="op">++)</span> rev<span class="op">[</span>i<span class="op">]=(</span>rev<span class="op">[</span>i<span class="op">&gt;&gt;</span><span class="dv">1</span><span class="op">]&gt;&gt;</span><span class="dv">1</span><span class="op">)+((</span>i<span class="op">&amp;</span><span class="dv">1</span><span class="op">)&lt;&lt;(</span>n<span class="op">-</span><span class="dv">1</span><span class="op">));</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="多项式方程求解newton-迭代法todo" class="level3" data-number="4.3">
@@ -1296,34 +1330,34 @@ pause</code></pre>
 </section>
 <section id="linux-shell" class="level4">
 <h4 class="anchored" data-anchor-id="linux-shell">Linux Shell</h4>
-<div class="sourceCode" id="cb7"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="fu">true</span><span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">./gen</span><span class="op">&gt;</span>dat.in</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">./std</span><span class="op">&lt;</span>dat.in<span class="op">&gt;</span>std.out</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">./my</span><span class="op">&lt;</span>dat.in<span class="op">&gt;</span>my.out</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="fu">diff</span> std.out my.out<span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">printf</span> OK</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">printf</span> DIFF</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">exit</span> 0</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="fu">true</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">./gen</span><span class="op">&gt;</span>dat.in</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">./std</span><span class="op">&lt;</span>dat.in<span class="op">&gt;</span>std.out</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">./my</span><span class="op">&lt;</span>dat.in<span class="op">&gt;</span>my.out</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="fu">diff</span> std.out my.out<span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">printf</span> OK</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">printf</span> DIFF</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">exit</span> 0</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="表" class="level3" data-number="8.3">
 <h3 data-number="8.3" class="anchored" data-anchor-id="表"><span class="header-section-number">8.3</span> 表</h3>
 <section id="质数表" class="level4">
 <h4 class="anchored" data-anchor-id="质数表">质数表</h4>
-<div class="sourceCode" id="cb8"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>1e2         1e3         1e4         1e5         1e6</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>101         1009        10007       100003      1000003</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>1e7         1e8         1e9         1e10        1e11            </span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>10000019    100000007   1000000007  10000000019 100000000003</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>1e12            1e13            1e14            1e15</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>1000000000039   10000000000037  100000000000031 1000000000000037</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>1e16                1e17                1e18</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>10000000000000061   100000000000000003  1000000000000000003</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>1e2         1e3         1e4         1e5         1e6</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>101         1009        10007       100003      1000003</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>1e7         1e8         1e9         1e10        1e11            </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>10000019    100000007   1000000007  10000000019 100000000003</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>1e12            1e13            1e14            1e15</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>1000000000039   10000000000037  100000000000031 1000000000000037</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>1e16                1e17                1e18</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>10000000000000061   100000000000000003  1000000000000000003</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="典列" class="level4">
 <h4 class="anchored" data-anchor-id="典列">典列</h4>

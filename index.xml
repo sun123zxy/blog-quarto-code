@@ -2941,7 +2941,7 @@ font-style: inherit;">}</span></span></code></pre></div>
 <td style="text-align: center;">NON empty</td>
 <td style="text-align: center;"><img src="https://latex.codecogs.com/png.latex?%5Csum_%7Bk=0%7D%5En%20k!%20%7Bn%20%5Cbrace%20k%7D"></td>
 <td style="text-align: center;"><img src="https://latex.codecogs.com/png.latex?%5Cmathrm%7BEGF%7D_r(x)=%5Cfrac%7B1%7D%7B2-e%5Ex%7D%20=%20%5Cfrac%7B1%7D%7B1-(e%5Ex-1)%7D"></td>
-<td style="text-align: center;">ordered Bell number; number of week orderings / ordered set partitions on <img src="https://latex.codecogs.com/png.latex?%5Bn%5D"></td>
+<td style="text-align: center;">ordered Bell number; number of weak orderings / ordered set partitions on <img src="https://latex.codecogs.com/png.latex?%5Bn%5D"></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><img src="https://latex.codecogs.com/png.latex?%7B1,0,0%7D"></td>
@@ -3223,6 +3223,30 @@ font-style: inherit;">}</span></span></code></pre></div>
 <p><span class="theorem-title"><strong>Theorem 15 (Burnside) </strong></span><img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%E7%AD%89%E4%BB%B7%E7%B1%BB%E8%AE%A1%E6%95%B0%20&amp;=%20%5Cfrac%7B1%7D%7B%7CG%7C%7D%5Csum_%7Bf%20%5Cin%20G%7D%20%7CC(f)%7C%0A%5Cend%7Baligned%7D%0A"> 其中 <img src="https://latex.codecogs.com/png.latex?G"> 是等价操作群，<img src="https://latex.codecogs.com/png.latex?C(f)"> 是操作 <img src="https://latex.codecogs.com/png.latex?f"> 下的不动点集合．</p>
 </div>
 </section>
+<section id="杂数选提" class="level3" data-number="3.9">
+<h3 data-number="3.9" class="anchored" data-anchor-id="杂数选提"><span class="header-section-number">3.9</span> 杂数选提</h3>
+<section id="catalan-数" class="level4">
+<h4 class="anchored" data-anchor-id="catalan-数">Catalan 数</h4>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1">1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, ...</span></code></pre></div>
+<p><img src="https://latex.codecogs.com/png.latex?%0AC_n%20=%20%5Cbinom%7B2n%7D%7Bn%7D%20-%20%5Cbinom%7B2n%7D%7Bn+1%7D%20=%20%5Cfrac%201%20%7Bn+1%7D%20%5Cbinom%7B2n%7D%7Bn%7D%20=%20%5Cprod_%7Bk=2%7D%5En%20%5Cfrac%7Bn+k%7D%7Bk%7D%0A"></p>
+<p>Segner’s recurrence relation: <img src="https://latex.codecogs.com/png.latex?%0AC_0%20=%201;%5Cquad%20C_%7Bn+1%7D%20=%20%5Csum_%7Bi=0%7D%5En%20C_i%20C_%7Bn-i%7D%0A"></p>
+<p>OGF: <img src="https://latex.codecogs.com/png.latex?%0AA(z)%20=%201%20+%20z%20A%5E2(z)%20%5Cimplies%20A(z)%20=%20%5Cfrac%7B1-%5Csqrt%7B1-4z%7D%7D%7B2z%7D%0A"></p>
+<p>注意下面组合意义间的前后逻辑顺序．</p>
+<ul>
+<li><p>number of full binary tree with <img src="https://latex.codecogs.com/png.latex?n"> interior nodes / <img src="https://latex.codecogs.com/png.latex?n+1"> leaves / <img src="https://latex.codecogs.com/png.latex?2n+1"> nodes</p>
+<p>在数内点意义下可以导出 Catalan 数的生成函数．</p></li>
+<li><p>number of ways of associating <img src="https://latex.codecogs.com/png.latex?n"> binary operators / parenthesizing <img src="https://latex.codecogs.com/png.latex?n+1"> factors completely</p></li>
+<li><p>number of proper parenthesis sequences with <img src="https://latex.codecogs.com/png.latex?n"> pairs of parentheses</p>
+<p>【TODO】暂时不知道怎么从上面推过来的．另一种理解是长度为 <img src="https://latex.codecogs.com/png.latex?n"> 的出栈序列的数量．</p></li>
+<li><p>number of ordered trees with <img src="https://latex.codecogs.com/png.latex?n+1"> vertices</p>
+<p>最外层要补一对括号．</p></li>
+<li><p>number of binary trees with <img src="https://latex.codecogs.com/png.latex?n"> vertices</p>
+<p>by left-child right-sibling encoding of ordered trees. 最后删去只有左儿子的根．</p>
+<p>该组合意义可以导出 Catalan 数的生成函数．</p></li>
+</ul>
+<p>Catalan 数的组合意义并不止如此几种．cf.&nbsp;<a href="https://en.wikipedia.org/wiki/Catalan_number">Wikipedia</a></p>
+</section>
+</section>
 </section>
 <section id="多项式" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="多项式"><span class="header-section-number">4</span> 多项式</h2>
@@ -3242,7 +3266,7 @@ font-style: inherit;">}</span></span></code></pre></div>
 <section id="蝶形运算与迭代算法" class="level4">
 <h4 class="anchored" data-anchor-id="蝶形运算与迭代算法">蝶形运算与迭代算法</h4>
 <p>为使用迭代算法，需要快速得到递归算法向下深入过程中 <img src="https://latex.codecogs.com/png.latex?%5C%7B%20a_n%20%5C%7D"> 置换后的最终结果．观察知该置换是位逆序置换，可按如下方法线性求出．</p>
-<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1">rev<span class="op" style="color: #5E5E5E;
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb6-1">rev<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">[</span><span class="dv" style="color: #AD0000;
 background-color: null;
@@ -3402,7 +3426,7 @@ pause</code></pre>
 </section>
 <section id="linux-shell" class="level4">
 <h4 class="anchored" data-anchor-id="linux-shell">Linux Shell</h4>
-<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="cf" style="color: #003B4F;
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">while</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -3411,26 +3435,26 @@ background-color: null;
 font-style: inherit;">;</span> <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">do</span></span>
-<span id="cb7-2">    <span class="ex" style="color: null;
+<span id="cb8-2">    <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">./gen</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span>dat.in</span>
-<span id="cb7-3">    <span class="ex" style="color: null;
+<span id="cb8-3">    <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">./std</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;</span>dat.in<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span>std.out</span>
-<span id="cb7-4">    <span class="ex" style="color: null;
+<span id="cb8-4">    <span class="ex" style="color: null;
 background-color: null;
 font-style: inherit;">./my</span><span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&lt;</span>dat.in<span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">&gt;</span>my.out</span>
-<span id="cb7-5">    <span class="cf" style="color: #003B4F;
+<span id="cb8-5">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -3439,22 +3463,22 @@ background-color: null;
 font-style: inherit;">;</span> <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">then</span></span>
-<span id="cb7-6">        <span class="bu" style="color: null;
+<span id="cb8-6">        <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">printf</span> OK</span>
-<span id="cb7-7">    <span class="cf" style="color: #003B4F;
+<span id="cb8-7">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">else</span></span>
-<span id="cb7-8">        <span class="bu" style="color: null;
+<span id="cb8-8">        <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">printf</span> DIFF</span>
-<span id="cb7-9">        <span class="bu" style="color: null;
+<span id="cb8-9">        <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">exit</span> 0</span>
-<span id="cb7-10">    <span class="cf" style="color: #003B4F;
+<span id="cb8-10">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">fi</span></span>
-<span id="cb7-11"><span class="cf" style="color: #003B4F;
+<span id="cb8-11"><span class="cf" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">done</span></span></code></pre></div>
 </section>
@@ -3463,17 +3487,17 @@ font-style: inherit;">done</span></span></code></pre></div>
 <h3 data-number="8.3" class="anchored" data-anchor-id="表"><span class="header-section-number">8.3</span> 表</h3>
 <section id="质数表" class="level4">
 <h4 class="anchored" data-anchor-id="质数表">质数表</h4>
-<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb8-1">1e2         1e3         1e4         1e5         1e6</span>
-<span id="cb8-2">101         1009        10007       100003      1000003</span>
-<span id="cb8-3"></span>
-<span id="cb8-4">1e7         1e8         1e9         1e10        1e11            </span>
-<span id="cb8-5">10000019    100000007   1000000007  10000000019 100000000003</span>
-<span id="cb8-6"></span>
-<span id="cb8-7">1e12            1e13            1e14            1e15</span>
-<span id="cb8-8">1000000000039   10000000000037  100000000000031 1000000000000037</span>
-<span id="cb8-9"></span>
-<span id="cb8-10">1e16                1e17                1e18</span>
-<span id="cb8-11">10000000000000061   100000000000000003  1000000000000000003</span></code></pre></div>
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb9-1">1e2         1e3         1e4         1e5         1e6</span>
+<span id="cb9-2">101         1009        10007       100003      1000003</span>
+<span id="cb9-3"></span>
+<span id="cb9-4">1e7         1e8         1e9         1e10        1e11            </span>
+<span id="cb9-5">10000019    100000007   1000000007  10000000019 100000000003</span>
+<span id="cb9-6"></span>
+<span id="cb9-7">1e12            1e13            1e14            1e15</span>
+<span id="cb9-8">1000000000039   10000000000037  100000000000031 1000000000000037</span>
+<span id="cb9-9"></span>
+<span id="cb9-10">1e16                1e17                1e18</span>
+<span id="cb9-11">10000000000000061   100000000000000003  1000000000000000003</span></code></pre></div>
 </section>
 <section id="典列" class="level4">
 <h4 class="anchored" data-anchor-id="典列">典列</h4>
