@@ -3,7 +3,7 @@ title: "算法 & 数学碎碎念"
 abstract: "现场赛公式模板库，亦可作为小而精的总结性学习材料参考．无需单独成文或暂不完善的内容会放在这里．"
 author: "sun123zxy"
 date: "2023/06/21"
-date-modified: "2023/11/19"
+date-modified: "2024/1/14"
 
 categories:
   - OI
@@ -521,7 +521,7 @@ $$
 |:-:|:-:|:-:|:-:|:--:|:--:|:----:|
 | $${1,1,0}$$ | Labeled 	| Labeled 		| MAY empty | $$r^n$$ | $$\begin{aligned}\mathrm{EGF}_r(x) &= (e^{x})^r = e^{rx} \\ \mathrm{OGF}_r(x) &= \frac{1}{1-rx}\end{aligned}$$ | number of $[n] \to [r]$ mappings |
 | $${1,1,1}$$ | Labeled 	| Labeled 		| NON empty | $$r! {n \brace r} = \sum_{k=0}^r (-1)^{r-k} \binom r k k^n$$ | $$\begin{aligned} \mathrm{EGF}_r(x)&=(e^x - 1)^r \\ \mathrm{EGF}_n(x) &= e^{-x} \sum_{r=0}^{+\infty} r^n \frac{x^r}{r!} \end{aligned}$$ | number of $[n] \to [r]$ surjections |
-| $${1,1/\Sigma,1}$$ | Labeled | Labeled; $r$-disabled | NON empty | $$\sum_{k=0}^n k! {n \brace k}$$ | $$\mathrm{EGF}_r(x)=\frac{1}{2-e^x} = \frac{1}{1-(e^x-1)}$$ | ordered Bell number; number of week orderings / ordered set partitions on $[n]$ |
+| $${1,1/\Sigma,1}$$ | Labeled | Labeled; $r$-disabled | NON empty | $$\sum_{k=0}^n k! {n \brace k}$$ | $$\mathrm{EGF}_r(x)=\frac{1}{2-e^x} = \frac{1}{1-(e^x-1)}$$ | ordered Bell number; number of weak orderings / ordered set partitions on $[n]$ |
 | $${1,0,0}$$ | Labeled 	| UNLabeled 	| NON empty	 | $$\sum_{k=0}^r {n \brace k}$$ | $$\mathrm{EGF}_r(x) = \sum_{k=0}^r \frac {(e^x - 1)^k}{k!}$$ | |
 | $${1,0,1}$$ | Labeled 	| UNLabeled 	| NON empty | $$\begin{aligned} {n \brace r} &= \sum_{k=0}^r \frac{k^n}{k!} \cdot \frac{(-1)^{r-k}}{(r-k)!} \\ {n+1 \brace r} &= r {n \brace r} + {n \brace r-1} \end{aligned}$$ | $$\begin{aligned} \mathrm{EGF}_r(x) &= \frac{(e^x - 1)^r}{r!} \\ \mathrm{OGF}_n(x) &= e^{-x} \sum_{r=0}^{+\infty} r^n \frac{x^r}{r!} \end{aligned}$$ | Stirling number of the second kind |
 | $${1,0/\Sigma,1}$$ | labeled | UNLabeled; $r$-disabled | NON empty | $$\begin{aligned} B(n) &= \sum_{k=0}^n {n \brace k} \\ B(n+1) &= \sum_{k=0}^n \binom n k B(k) \end{aligned}$$ | $$\mathrm{EGF}(x)=e^{e^x - 1}$$ | Bell number; number of equivialent relations / set partitions on $[n]$ |
@@ -893,6 +893,52 @@ $$
 $$
 其中 $G$ 是等价操作群，$C(f)$ 是操作 $f$ 下的不动点集合．
 :::
+
+### 杂数选提
+
+#### Catalan 数
+
+```default
+1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, ...
+```
+
+$$
+C_n = \binom{2n}{n} - \binom{2n}{n+1} = \frac 1 {n+1} \binom{2n}{n} = \prod_{k=2}^n \frac{n+k}{k}
+$$
+
+Segner's recurrence relation:
+$$
+C_0 = 1;\quad C_{n+1} = \sum_{i=0}^n C_i C_{n-i} 
+$$
+
+OGF:
+$$
+A(z) = 1 + z A^2(z) \implies A(z) = \frac{1-\sqrt{1-4z}}{2z}
+$$
+
+注意下面组合意义间的前后逻辑顺序．
+
+- number of full binary tree with $n$ interior nodes / $n+1$ leaves / $2n+1$ nodes
+
+  在数内点意义下可以导出 Catalan 数的生成函数．
+
+- number of ways of associating $n$ binary operators / parenthesizing $n+1$ factors completely
+
+- number of proper parenthesis sequences with $n$ pairs of parentheses
+
+  【TODO】暂时不知道怎么从上面推过来的．另一种理解是长度为 $n$ 的出栈序列的数量．
+
+- number of ordered trees with $n+1$ vertices
+
+  最外层要补一对括号．
+
+- number of binary trees with $n$ vertices
+
+  by left-child right-sibling encoding of ordered trees. 最后删去只有左儿子的根．
+
+  该组合意义可以导出 Catalan 数的生成函数．
+
+Catalan 数的组合意义并不止如此几种．cf. [Wikipedia](https://en.wikipedia.org/wiki/Catalan_number)
 
 ## 多项式
 
