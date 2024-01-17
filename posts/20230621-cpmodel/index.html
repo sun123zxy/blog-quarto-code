@@ -1171,13 +1171,13 @@ A(\omega_{2n}^{n+k}) &amp;= A_0 (\omega_n^k) - \omega_{2n}^k A_1(\omega_n^k)
 <p>给定一多项式 <span class="math inline">\(A(x)\)</span>，求解满足 <span class="math inline">\(A(B(x)) = 0 \pmod{x^n}\)</span> 的多项式 <span class="math inline">\(B(x)\)</span>．</p>
 <p>显然 <span class="math inline">\(B(x)\)</span> 只有前 <span class="math inline">\(n\)</span> 项有效．目前我们尚不清楚解的存在性、唯一性等性质，但注意到 <span class="math display">\[
 A(B(x)) = 0 \pmod{x^{2n}} \implies A(B(x)) = 0 \pmod{x^n}
-\]</span> 故考虑递推求解．首先，边界条件 <span class="math inline">\(A(b_0) = 0\)</span> 需要单独求解．在这些解的基础上，我们开始递推．考虑已经获得 <span class="math inline">\(A(B(x)) = 0 \pmod{x^n}\)</span> 的一个解 <span class="math inline">\(B(x) = B_0(x)\)</span>，我们尝试得到方程 <span class="math inline">\(A(B(x)) = 0 \pmod{x^{2n}}\)</span> 的解．</p>
+\]</span> 故考虑递推求解．首先，边界条件 <span class="math inline">\(A(b_0) = 0\)</span> 需要单独求解．在确定某一 <span class="math inline">\(b_0\)</span> 的基础上，我们开始递推．考虑已经获得 <span class="math inline">\(A(B(x)) = 0 \pmod{x^n}\)</span> 的一个解 <span class="math inline">\(B(x) = B_0(x)\)</span>，下面尝试得到方程 <span class="math inline">\(A(B(x)) = 0 \pmod{x^{2n}}\)</span> 的解．</p>
 <p>将待求解方程 <span class="math inline">\(A(B(x)) = 0 \pmod{x^{2n}}\)</span> 左式多项式 <span class="math inline">\(A\)</span> 在 <span class="math inline">\(B_0\)</span> 处 Taylor 展开 <span class="math display">\[
 \begin{split}
 A(B(x)) = A(B_0(x)) &amp;+ A'(B_0(x)) (B(x)-B_0(x)) \\ &amp;+ \frac{A''(B_0(x))}{2!} (B(x)-B_0(x))^2 + \dots
 = 0 \pmod{x^{2n}}
 \end{split}
-\]</span> 注意到 <span class="math inline">\(B(x)-B_0(x)\)</span> 任意项的次数都不低于 <span class="math inline">\(x^n\)</span>，故模 <span class="math inline">\(x^{2n}\)</span> 意义下二次方以上的项可以舍去，故上式化为 <span class="math display">\[
+\]</span> <strong>假若</strong> <span class="math inline">\(B(x)-B_0(x) = 0 \pmod{x^n}\)</span>，那么模 <span class="math inline">\(x^{2n}\)</span> 意义下二次方以上的项可以舍去，上式等价于 <span class="math display">\[
 A(B_0(x)) + A'(B_0(x)) (B(x)-B_0(x)) = 0 \pmod{x^{2n}}
 \]</span> 移项即可解出待求 <span class="math inline">\(B(x)\)</span> <span class="math display">\[
 B(x) =  B_0(x) - \frac{A(B_0(x))}{A'(B_0(x))} \pmod{x^{2n}}
@@ -1186,7 +1186,7 @@ B(x) =  B_0(x) - \frac{A(B_0(x))}{A'(B_0(x))} \pmod{x^{2n}}
 [x^0] A'(B_0(x)) = [x^0] A'(b_0) &amp;= \sum_{k=0}^\infty \left( [x^k] A' \right) b_0^k \\
 &amp;= \sum_{k=0}^\infty (k+1) a_{k+1} b_0^k \neq 0 \pmod{x^{2n}}
 \end{split}
-\]</span> 若上述要求得到满足，根据递推过程，在边界条件 <span class="math inline">\(b_0\)</span> 确定的情况下，满足方程的 <span class="math inline">\(B(x)\)</span> 在模意义下唯一．【TODO：详细讨论边界条件不友好的情况】</p>
+\]</span> 注意到 <span class="math inline">\(B(x) - B_0(x) = -\frac{A(B_0(x))}{A'(B_0(x))} = 0 \pmod{x^{n}}\)</span>，故满足上述“假若”的解存在且唯一．然而，若不要求这一“假若”成立，则每步迭代解的唯一性无法得到保证．考虑到边界条件 <span class="math inline">\(b_0\)</span> 的解亦不一定唯一，故一般的 Newton 迭代法解唯一性的讨论较为复杂．当然，上述推导至少为我们提供了一种寻找特解的方法．</p>
 <p>Newton 迭代法作为通用求解框架，可涵盖几乎所有多项式初等运算．【TODO】</p>
 </section>
 <section id="多项式求逆" class="level3" data-number="4.4">
