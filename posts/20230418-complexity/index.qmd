@@ -163,6 +163,7 @@ $$
 现在引入一个重要放缩技巧，其在后续估计中屡试不爽.
 
 ::: {#prp-trick1}
+
 $$
 \sum_{d \mid n} f(d) \leq \sum_{i=1}^n f (\floor{\frac n i})
 $$
@@ -171,6 +172,7 @@ $$
 显然，右式比左式多算了 $i \nmid n$ 的项，因此命题是正确的. 但我们还可以做得更好：
 
 ::: {#prp-trick1ex}
+
 $$
 \sum_{d \mid n} f(d) \leq \sum_{i=1}^{\sqrt n} f(i) + f(\floor{\frac n i})
 $$
@@ -256,6 +258,7 @@ $$
 将 @prp-trick1ex 加强，我们有如下通用放缩：
 
 ::: {#prp-trick2ex}
+
 $$
 \sum_{d \mid n} f(d) \leq \sum_{d \in D(n)} f(d) \leq \sum_{i=1}^{\sqrt n} f(i) + f(\floor{\frac n i})
 $$
@@ -270,7 +273,6 @@ LHS 成立的关键在于 $\{d: d \mid n\} \subset D(n)$；而 RHS 的本质就�
 注意到 @prp-trick1ex 是 @exm-sigmazub 证明的核心，而 @prp-trick2ex 是 @prp-trick1ex 的加强版，故仿造 @exm-sigmazub 的证明，我们有
 
 ::: {#exm-divissigma}
-
 令
 $$
 S_z(n) = \sum_{d \in D(n)} d^z
@@ -334,6 +336,7 @@ $$
 但我们还可以做得更好——考虑先用 $O(K)$ 的时间复杂度线性筛出前 $K$ 个 $f(n)$ 并求前缀和，则递归求解时，$d \leq K$ 的 $\hat f(d)$ 就无需再向下递归了. 为分析此类时间复杂度，对 @prp-trick2ex 做最后一点扩展：
 
 ::: {#prp-trick3ex}
+
 $$
 \sum_{\begin{gathered} d \mid n \\ d > K \end{gathered}} f(d) \leq \sum_{\begin{gathered} d \in D(n) \\ d > K \end{gathered}} f(d) \leq \sum_{K < i \leq \sqrt n} f(i) + \sum_{1 \leq i \leq \min{\{ \floor{\frac n K},\sqrt n \} }} f(\floor{\frac n i})
 $$
@@ -406,6 +409,7 @@ $$
 同样类似 @prp-trick2ex ，我们有
 
 ::: {#prp-trick4ex}
+
 $$
 \sum_{d^2 \mid n} f(\frac n {d^2}) \leq \sum_{d \in D_2(n)} f(d) \leq \sum_{i=1}^{n^{\frac 1 3}} f(i) + f(\floor{\frac n {i^2}})
 $$
