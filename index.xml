@@ -10,7 +10,115 @@
 <atom:link href="https://blog.sun123zxy.top/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.3.450</generator>
-<lastBuildDate>Tue, 17 Oct 2023 16:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 20 Jan 2024 16:00:00 GMT</lastBuildDate>
+<item>
+  <title>矩阵代数的 Burnside 定理</title>
+  <dc:creator>sun123zxy </dc:creator>
+  <link>https://blog.sun123zxy.top/posts/20240121-burnside/index.html</link>
+  <description><![CDATA[ 
+
+
+
+<p>我们详细重述并证明 <span class="citation" data-cites="radjavi_simultaneous_2000">[1, Sec. 1.2]</span> 中的 Burnside 定理及其相关推论．</p>
+<p>下面设 <img src="https://latex.codecogs.com/png.latex?V"> 是复数域 <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%20C"> 上的有限维线性空间，<img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 是 <img src="https://latex.codecogs.com/png.latex?V"> 上的线性变换代数；<img src="https://latex.codecogs.com/png.latex?I"> 是 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 的单位元．</p>
+<p>Burnside 定理证明较长．为使逻辑顺畅，先做一些准备工作．</p>
+<div id="lem-cyclic-vector" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 1 </strong></span>设 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A"> 是 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 上的乘法半群，若 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A"> 不可约，则对任意非零的 <img src="https://latex.codecogs.com/png.latex?x%20%5Cin%20V">，都有 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A%20x%20:=%20%5C%7B%20Ax%20:%20A%20%5Cin%20%5Cmathcal%20A%20%5C%7D%20=%20V">（此时称 <img src="https://latex.codecogs.com/png.latex?x"> 是 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A"> 的循环向量）．</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>首先 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A%20%5Cneq%20%5C%7B%200%20%5C%7D">，因为任何 <img src="https://latex.codecogs.com/png.latex?V"> 的子空间都是后者的不变子空间．</p>
+<ul>
+<li>注意到 <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BKer%7D%5Cmathcal%20A%20:=%20%5Cbigcap_%7BA%20%5Cin%20%5Cmathcal%20A%7D%20%5Coperatorname%7BKer%7DA"> 是 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A"> 的一个不变子空间，而 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A"> 不可约，故 <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BKer%7D%5Cmathcal%20A%20=%20%5C%7B%200%20%5C%7D"> 或 <img src="https://latex.codecogs.com/png.latex?V">．因为 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A%20%5Cneq%20%5C%7B0%5C%7D">，后者不可能发生，故 <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BKer%7D%5Cmathcal%20A%20=%20%5C%7B%200%20%5C%7D">．</li>
+<li>注意到 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A%20x%20:=%20%5C%7B%20A%20x%20:%20A%20%5Cin%20%5Cmathcal%20A%20%5C%7D"> 是 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A"> 的一个不变子空间，而 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A"> 不可约，故 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A%20x%20=%20%5C%7B%200%20%5C%7D"> 或 <img src="https://latex.codecogs.com/png.latex?V">．由 <img src="https://latex.codecogs.com/png.latex?x%20%5Cneq%200"> 和 <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BKer%7D%5Cmathcal%20A%20=%20%5C%7B%200%20%5C%7D">，前者不可能发生，故 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A%20x%20=%20V">．</li>
+</ul>
+</div>
+<div class="remark proof">
+<p><span class="proof-title"><em>Remark</em>. </span>事实上 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 上半群的可约性等价于其线性生成的代数的可约性，见 <span class="citation" data-cites="radjavi_simultaneous_2000">[1], Definition 2.1.1</span>．</p>
+</div>
+<div id="cor-cyclic-vector-dual" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 1 </strong></span>设 <img src="https://latex.codecogs.com/png.latex?V%5E*"> 是 <img src="https://latex.codecogs.com/png.latex?V"> 的对偶空间．设 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A"> 是 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 上的乘法半群，<img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A%5E*%20:=%20%5C%7BA%5E*%20:%20A%20%5Cin%20%5Cmathcal%20A%20%5C%7D"> 是 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A"> 的对偶线性变换构成的集合（显然它也是个半群）．若 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A"> 不可约，则对任意非零的线性函数 <img src="https://latex.codecogs.com/png.latex?%5Cvarphi%20%5Cin%20V%5E*">，都有 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A%5E*%20%5Cvarphi%20:=%20%5C%7B%20A%5E*%20%5Cvarphi%20:%20A%5E*%20%5Cin%20%5Cmathcal%20A%5E*%20%5C%7D%20=%20%5C%7B%20%5Cvarphi%20A%20:%20A%20%5Cin%20%5Cmathcal%20A%20%5C%7D%20=%20V%5E*">．</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>定义 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A%5E*%20%5Cvarphi"> 的 annihilator <img src="https://latex.codecogs.com/png.latex?(%5Cmathcal%20A%5E*%20%5Cvarphi)%5E0%20:=%20%5C%7B%20x%5E%7B**%7D%20%5Cin%20V%5E%7B**%7D%20:%20(%5Cmathcal%20A%5E*%20%5Cvarphi)(x)%20=%200%20%5C%7D">．由 <img src="https://latex.codecogs.com/png.latex?%5Cdim%20(A%5E*%20%5Cvarphi)%5E0%20=%20%5Cdim%20V%5E*%20-%20%5Cdim%20(A%5E*%20%5Cvarphi)"> <span class="citation" data-cites="axler_linear_2015">见 [2, Sec. 3F]</span>， <img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%5Cmathcal%20A%5E*%20%5Cvarphi%20=%20V%5E*%0A&amp;%5Ciff%20%5Cdim%20(%5Cmathcal%20A%5E*%20%5Cvarphi)%20=%20%5Cdim%20V%5E*%20%5C%5C%0A&amp;%5Ciff%20%5Cdim%20(%5Cmathcal%20A%5E*%20%5Cvarphi)%5E0%20=%200%20%5C%5C%0A&amp;%5Ciff%20(%5Cmathcal%20A%5E*%20%5Cvarphi)%5E0%20=%20%5C%7B0%5C%7D%0A%5Cend%7Baligned%7D%0A"> 由 annihilator 的定义和 Lemma&nbsp;1， <img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A(%5Cmathcal%20A%5E*%20%5Cvarphi)%5E0%20=%20%5C%7B0%5C%7D%0A&amp;%5Ciff%20(%5Cmathcal%20A%5E*%20%5Cvarphi)%20x%20%5Cneq%20%5C%7B0%5C%7D,%5Cquad%20%5Cforall%20x%20%5Cneq%200%20%5C%5C%0A&amp;%5Ciff%20%5Cvarphi%20%5Cmathcal%20A%20x%20%20%5Cneq%20%5C%7B0%5C%7D,%5Cquad%20%5Cforall%20x%20%5Cneq%200%20%5C%5C%0A&amp;%5Ciff%20%5Cvarphi%20V%20%5Cneq%20%5C%7B0%5C%7D%20%5C%5C%0A&amp;%5Ciff%20%5Cvarphi%20%5Cneq%200%0A%5Cend%7Baligned%7D%0A"> 故最终我们得到 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A%5E*%20%5Cvarphi%20=%20V%5E*%20%5Ciff%20%5Cvarphi%20%5Cneq%200">．</p>
+</div>
+<p>若下面的猜想成立，则上述推论将具有更简单的推导．</p>
+<div id="cnj-cyclic-vector-dual" class="theorem conjecture">
+<p><span class="theorem-title"><strong>Conjecture 1 </strong></span>若 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A"> 不可约，则 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A%5E*"> 也不可约．</p>
+</div>
+<p>我们暂未找到证明或证伪上述猜想的方法．</p>
+<p>下面来证明 Burnside 定理．</p>
+<div id="thm-burnside" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Burnside 定理) </strong></span><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 的不可约子代数有且只有 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)">．</p>
+</div>
+<p>首先说明 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 的不可约性．因为 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)%20M%20=%20V"> 对任意非零不变子空间 <img src="https://latex.codecogs.com/png.latex?M"> 成立，故 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 不可约．下面设 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A"> 是一任意给定的 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 的一个不可约子代数．显然 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A%20%5Cneq%20%5C%7B%200%20%5C%7D">，原因在 Lemma&nbsp;1 中已述．我们的证明分三步进行：</p>
+<ol type="1">
+<li>证明 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A"> 中存在一个秩为 <img src="https://latex.codecogs.com/png.latex?1"> 的线性变换 <img src="https://latex.codecogs.com/png.latex?T_0">．</li>
+<li>证明所有 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 中秩为 <img src="https://latex.codecogs.com/png.latex?1"> 的线性变换都在 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A"> 中．</li>
+<li>证明任何 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 中的线性变换都可被分解为若干个秩不超过 <img src="https://latex.codecogs.com/png.latex?1"> 的线性变换的和，从而（利用代数对加法的封闭性）<img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A%20=%20%5Cmathcal%20B(V)">．</li>
+</ol>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em> (第一部分). </span>由 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A%20%5Cneq%20%5C%7B%200%20%5C%7D">，可以取 <img src="https://latex.codecogs.com/png.latex?T_0"> 是 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A"> 中的一个秩最小的非零线性变换，<img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Brank%7DT_0%20%5Cgeq%201">．考虑反证，假设 <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Brank%7DT_0%20%5Cgeq%202">，只要构造出一个非零线性变换 <img src="https://latex.codecogs.com/png.latex?S_*%20%5Cin%20%5Cmathcal%20A"> 使得 <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BIm%7DS_*%20%5Csubsetneq%20%5Coperatorname%7BIm%7DT_0">，就能推出矛盾．</p>
+<p>由 <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7Brank%7DT_0%20%5Cgeq%202">，可设 <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BIm%7DT_0"> 中存在两个线性无关的非零向量 <img src="https://latex.codecogs.com/png.latex?%5C%7B%20T_0%20x_1,T_0%20x_2%20%5C%7D">（因此 <img src="https://latex.codecogs.com/png.latex?x_1"> 与 <img src="https://latex.codecogs.com/png.latex?x_2"> 也线性无关）．由 Lemma&nbsp;1，存在线性变换 <img src="https://latex.codecogs.com/png.latex?A_0%20%5Cin%20%5Cmathcal%20A"> 使得 <img src="https://latex.codecogs.com/png.latex?A_0%20T_0%20x_1%20=%20x_2">，于是 <img src="https://latex.codecogs.com/png.latex?%5C%7B%20T_0%20x_1,T_0%20x_2%20%5C%7D%20=%20%5C%7B%20T_0%20x_1,%20T_0%20A%20T_0%20x_1%20%5C%7D"> 线性无关．这意味着 <img src="https://latex.codecogs.com/png.latex?(%5Clambda%20T_0%20-%20T_0%20A_0%20T_0)x_1%20%5Cneq%200"> 对任意 <img src="https://latex.codecogs.com/png.latex?%5Clambda%20%5Cin%20%5Cmathbb%20C"> 成立，即线性变换 <img src="https://latex.codecogs.com/png.latex?S_%5Clambda%20:=%20%5Clambda%20T_0%20-%20T_0%20A_0%20T_0%20%5Cin%20%5Cmathcal%20A"> 非零．下面尝试从这些 <img src="https://latex.codecogs.com/png.latex?S_%5Clambda"> 中找到我们想要的 <img src="https://latex.codecogs.com/png.latex?S_*">．</p>
+<ul>
+<li>注意到 <img src="https://latex.codecogs.com/png.latex?S_%5Clambda%20=%20T_0(%5Clambda%20I%20-%20A_0%20T_0)">，故 <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BIm%7DS_%5Clambda%20%5Csubset%20%5Coperatorname%7BIm%7DT_0">．</li>
+<li>注意到 <img src="https://latex.codecogs.com/png.latex?S_%5Clambda%20=%20(%5Clambda%20I%20-%20T_0%20A_0)%20T_0">，而 <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BIm%7DT_0"> 是 <img src="https://latex.codecogs.com/png.latex?T_0%20A_0"> 的一个不变子空间．故可以取 <img src="https://latex.codecogs.com/png.latex?T_0%20A_0"> 在 <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BIm%7DT_0"> 上的限制 <img src="https://latex.codecogs.com/png.latex?T_0%20A_0%20%7C_%7B%5Coperatorname%7BIm%7DT_0%7D">．设 <img src="https://latex.codecogs.com/png.latex?T_0%20A_0%20%7C_%7B%5Coperatorname%7BIm%7DT_0%7D"> 有一特征值 <img src="https://latex.codecogs.com/png.latex?%5Clambda_0">（由于 <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BIm%7DT_0"> 是复数域上有限维线性空间），这样 <img src="https://latex.codecogs.com/png.latex?%5Clambda_0%20I%20-%20T_0%20A_0%20%7C_%7B%5Coperatorname%7BIm%7DT_0%7D"> 就不是单射，因此也不是满射（由于 <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BIm%7DT_0"> 是有限维线性空间），即 <img src="https://latex.codecogs.com/png.latex?S_%7B%5Clambda_0%7D%20=%20(%5Clambda_0%20I%20-%20T_0%20A_0)%20T_0"> 不能映满 <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BIm%7DT_0">．</li>
+</ul>
+<p>综上 <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BIm%7DS_%7B%5Clambda_0%7D%20%5Csubsetneq%20%5Coperatorname%7BIm%7DT_0"> 且 <img src="https://latex.codecogs.com/png.latex?0%20%5Cneq%20S_%7B%5Clambda_0%7D%20%5Cin%20%5Cmathcal%20A">，故 <img src="https://latex.codecogs.com/png.latex?S_%7B%5Clambda_0%7D"> 就是我们想要的 <img src="https://latex.codecogs.com/png.latex?S_*">．</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em> (第二部分). </span>对任意给定的某一秩为 <img src="https://latex.codecogs.com/png.latex?1"> 的线性变换 <img src="https://latex.codecogs.com/png.latex?T%20%5Cin%20%5Cmathcal%20B(V)">，任取非零的 <img src="https://latex.codecogs.com/png.latex?y%20%5Cin%20%5Coperatorname%7BIm%7DT">，存在线性函数 <img src="https://latex.codecogs.com/png.latex?%5Cvarphi%20%5Cin%20V%5E*"> 使得 <img src="https://latex.codecogs.com/png.latex?T%20x%20=%20%5Cvarphi(x)%20y,%5C,%20%5Cforall%20x%20%5Cin%20V">．已经知道 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20A"> 中存在一个秩为 <img src="https://latex.codecogs.com/png.latex?1"> 的线性变换 <img src="https://latex.codecogs.com/png.latex?T_0">，则任取非零的 <img src="https://latex.codecogs.com/png.latex?y_0%20%5Cin%20%5Coperatorname%7BIm%7DT_0">，存在线性函数 <img src="https://latex.codecogs.com/png.latex?%5Cvarphi_0%20%5Cin%20V%5E*"> 使得 <img src="https://latex.codecogs.com/png.latex?T_0%20x%20=%20%5Cvarphi_0(x)%20y_0,%5C,%20%5Cforall%20x%20%5Cin%20V">．</p>
+<ul>
+<li>由 Lemma&nbsp;1，存在 <img src="https://latex.codecogs.com/png.latex?A%20%5Cin%20%5Cmathcal%20A"> 使得 <img src="https://latex.codecogs.com/png.latex?A%20y_0%20=%20y">．</li>
+<li>由 Corollary&nbsp;1，存在 <img src="https://latex.codecogs.com/png.latex?B%20%5Cin%20%5Cmathcal%20A"> 使得 <img src="https://latex.codecogs.com/png.latex?%5Cvarphi_0%20B%20=%20%5Cvarphi">．</li>
+</ul>
+<p>综上， <img src="https://latex.codecogs.com/png.latex?%0AT%20x%20=%20%5Cvarphi(x)%20y%20=%20%5Cvarphi_0(Bx)%20A%20y_0%20=%20A(%5Cvarphi_0(Bx)%20y_0)%20=%20A%20T_0%20B%20x,%5Cquad%20%5Cforall%20x%20%5Cin%20V%0A"> 故 <img src="https://latex.codecogs.com/png.latex?T%20=%20A%20T_0%20B%20%5Cin%20%5Cmathcal%20A">．</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em> (第三部分). </span>设 <img src="https://latex.codecogs.com/png.latex?A%20%5Cin%20%5Cmathcal%20B(V)"> 是任一给定的线性变换，任取 <img src="https://latex.codecogs.com/png.latex?V"> 中的一组基 <img src="https://latex.codecogs.com/png.latex?b_1,%5Cdots,b_n">，设其对偶基为 <img src="https://latex.codecogs.com/png.latex?%5Cvarphi_1,%5Cdots,%5Cvarphi_n">．定义关于基 <img src="https://latex.codecogs.com/png.latex?b_1,%5Cdots,b_n"> 的 <img src="https://latex.codecogs.com/png.latex?n"> 个投影变换 <img src="https://latex.codecogs.com/png.latex?P_k:%20x%20%5Cmapsto%20%5Cvarphi_k(x)%20b_k">，由对偶基性质，显然有 <img src="https://latex.codecogs.com/png.latex?I%20=%20%5Csum_%7Bk=1%7D%5En%20P_k">，于是 <img src="https://latex.codecogs.com/png.latex?%0AA%20=%20A%20I%20=%20A%20%5Csum_%7Bk=1%7D%5En%20P_k%20=%20%5Csum_%7Bk=1%7D%5En%20A%20P_k%0A"> 其中每一个 <img src="https://latex.codecogs.com/png.latex?A%20P_k"> 都是秩不超过 <img src="https://latex.codecogs.com/png.latex?1"> 的线性变换．</p>
+</div>
+<p>至此，Theorem&nbsp;1 得到完整证明．</p>
+<p>Burnside 定理可以为下面的定理提供一个较为简单的证明．</p>
+<div id="thm-bv-simple" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 </strong></span><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 是单代数，即 <img src="https://latex.codecogs.com/png.latex?%5C%7B%200%20%5C%7D"> 和 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 是代数 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 上唯二的双边理想．</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>显然 <img src="https://latex.codecogs.com/png.latex?%5C%7B%200%20%5C%7D"> 和 <img src="https://latex.codecogs.com/png.latex?%5C%7B%20%5Cmathcal%20B(V)%20%5C%7D"> 都是双边理想．下面任取一 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 上的双边理想 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20I%20%5Cneq%20%5C%7B%200%20%5C%7D">，我们证明它不可约．任取 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20I"> 的一个非零不变子空间 <img src="https://latex.codecogs.com/png.latex?M">，由 <img src="https://latex.codecogs.com/png.latex?M,%5C,%20%5Cmathcal%20I"> 的非零性和 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20I%20V"> 的非零性， <img src="https://latex.codecogs.com/png.latex?%0AM%20%5Csupset%20%5Cmathcal%20I%20M%20%5Csupset%20%5Cmathcal%20B(V)%20%5Cmathcal%20I%20%5Cmathcal%20B(V)%20M%20=%20%5Cmathcal%20B(V)%20%5Cmathcal%20I%20V%20=%20%5Cmathcal%20B(V)%20(%5Cmathcal%20I%20V)%20=%20V%0A"> 故只能有 <img src="https://latex.codecogs.com/png.latex?M%20=%20V">，因此 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20I"> 确不可约．现在 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20I"> 是 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 的不可约理想，理想一定是子代数，根据 Theorem&nbsp;1 就有 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20I%20=%20%5Cmathcal%20B(V)">．</p>
+</div>
+<p>下面的定理为 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 上的全体代数自同构提供了表示方法．</p>
+<div id="thm-bv-inner-aut" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3 </strong></span><img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 上的全体代数自同构均为内自同构．即，任意 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 上的自同构 <img src="https://latex.codecogs.com/png.latex?%5Cvarphi:%20%5Cmathcal%20B(V)%20%5Cto%20%5Cmathcal%20B(V)"> 都可写为 <img src="https://latex.codecogs.com/png.latex?A%20%5Cmapsto%20S%20A%20S%5E%7B-1%7D"> 的形式，其中 <img src="https://latex.codecogs.com/png.latex?S%20%5Cin%20%5Cmathcal%20B(V)"> 为与 <img src="https://latex.codecogs.com/png.latex?%5Cvarphi"> 相关的某一可逆线性变换．</p>
+</div>
+<p>将矩阵表示和线性空间的语言相结合，可以为该定理提供思路更清晰的证明．</p>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>取定 <img src="https://latex.codecogs.com/png.latex?V"> 上的一组基 <img src="https://latex.codecogs.com/png.latex?x_1,%5Cdots,x_n">，定义 <img src="https://latex.codecogs.com/png.latex?%0AE_%7Bi,j%7D(x_1,%5Cdots,x_n)%20:=%20(x_1,%5Cdots,x_n)%20%5Chat%20E_%7Bi,j%7D%20%5Cpod%7Bi=1,2,%5Cdots,n;%5C;%20j=1,2,%5Cdots,n%7D%0A"> 其中全体 <img src="https://latex.codecogs.com/png.latex?%5Chat%20E_%7Bi,j%7D%20%5Cin%20%5Cmathrm%20M_n(%5Cmathbb%20C)"> 代表 <img src="https://latex.codecogs.com/png.latex?n"> 阶矩阵空间的一组自然基．于是全体 <img src="https://latex.codecogs.com/png.latex?E_%7Bi,j%7D"> 自然也是 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 的一组基．现在只需研究自同构 <img src="https://latex.codecogs.com/png.latex?%5Cvarphi"> 将 <img src="https://latex.codecogs.com/png.latex?E_%7Bi,j%7D"> 映至何处．为显式地将 <img src="https://latex.codecogs.com/png.latex?S"> 确定出来，不妨先考虑 <img src="https://latex.codecogs.com/png.latex?%5Cvarphi(E_%7Bi,i%7D)"> 的性质．</p>
+<p>首先指出，<img src="https://latex.codecogs.com/png.latex?%5Cvarphi(E_%7Bi,i%7D)"> 仍然是秩为 <img src="https://latex.codecogs.com/png.latex?1"> 的投影变换，因为：</p>
+<ul>
+<li><p><img src="https://latex.codecogs.com/png.latex?E_%7Bi,i%7D"> 是投影变换，根据其幂等性和代数自同构保持乘法，<img src="https://latex.codecogs.com/png.latex?%5Cvarphi(E_%7Bi,i%7D)"> 也是投影变换．</p></li>
+<li><p><img src="https://latex.codecogs.com/png.latex?E_%7Bi,i%7D%20%5Cmathcal%20B(V)%20E_%7Bi,i%7D"> 是 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 的 <img src="https://latex.codecogs.com/png.latex?1"> 维子空间（从矩阵表示角度考虑），因此 <img src="https://latex.codecogs.com/png.latex?%5Cvarphi(E_%7Bi,i%7D%20%5Cmathcal%20B(V)%20E_%7Bi,i%7D)%20=%20%5Cvarphi(E_%7Bi,i%7D)%20%5Cmathcal%20B(V)%20%5Cvarphi(E_%7Bi,i%7D)"> 也是 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 的 <img src="https://latex.codecogs.com/png.latex?1"> 维子空间．考虑到 <img src="https://latex.codecogs.com/png.latex?%5Cvarphi(E_%7Bi,i%7D)"> 还是投影变换，故其秩只能为 <img src="https://latex.codecogs.com/png.latex?1">（同样从矩阵表示角度考虑）．</p></li>
+</ul>
+<p>现在设 <img src="https://latex.codecogs.com/png.latex?%5Coperatorname%7BIm%7D%5Cvarphi(E_%7Bi,i%7D)%20=%20%5Coperatorname%7Bspan%7D%5C%7By_i%5C%7D">．因为 <img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A%5Csum_%7Bi=1%7D%5En%20%5Coperatorname%7Bspan%7D%5C%7By_i%5C%7D%0A&amp;=%20%5Csum_%7Bi=1%7D%5En%20%5Cvarphi(E_%7Bi,i%7D)%20V%20%5C%5C%0A&amp;%5Csupset%20%5Cleft(%20%5Csum_%7Bi=1%7D%5En%20%5Cvarphi(E_%7Bi,i%7D)%20%5Cright)%20V%20%5C%5C%0A&amp;=%20%5Cvarphi%20%5Cleft(%5Csum_%7Bi=1%7D%5En%20E_%7Bi,i%7D%20%5Cright)%20V%20%5C%5C%0A&amp;=%20%5Cvarphi(I)%20V%20=%20I%20V%20=%20V%0A%5Cend%7Baligned%7D%0A"> 故 <img src="https://latex.codecogs.com/png.latex?y_1,%5Cdots,y_n"> 仍是 <img src="https://latex.codecogs.com/png.latex?V"> 的一组基．定义可逆线性变换 <img src="https://latex.codecogs.com/png.latex?S(x_1,%5Cdots,x_n)%20:=%20(y_1,%5Cdots,y_n)">．至此，断言 <img src="https://latex.codecogs.com/png.latex?%5Cvarphi"> 就是 <img src="https://latex.codecogs.com/png.latex?A%20%5Cmapsto%20S%20A%20S%5E%7B-1%7D">，为此下面证明 <img src="https://latex.codecogs.com/png.latex?%5Cvarphi(E_%7Bi,j%7D)%20=%20S%20E_%7Bi,j%7D%20S%5E%7B-1%7D">．</p>
+<p>仍然先看 <img src="https://latex.codecogs.com/png.latex?%5Cvarphi(E_%7Bi,i%7D)">．已经知道 <img src="https://latex.codecogs.com/png.latex?%5Cvarphi(E_%7Bi,i%7D)"> 是秩为 <img src="https://latex.codecogs.com/png.latex?1"> 的投影变换，故 <img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A&amp;%5Cphantom%7B%5Cimplies%20.%7D%20%5Cvarphi(E_%7Bi,i%7D)%20y_i%20=%20y_i%20%5C%5C%0A&amp;%5Cimplies%20%5Cvarphi(E_%7Bi,i%7D)%20S%20x_i%20=%20S%20x_i%20%5C%5C%0A&amp;%5Cimplies%20S%5E%7B-1%7D%20%5Cvarphi(E_%7Bi,i%7D)%20S%20x_i%20=%20x_i%0A%5Cend%7Baligned%7D%0A"> 容易验证 <img src="https://latex.codecogs.com/png.latex?S%5E%7B-1%7D%20%5Cvarphi(E_%7Bi,i%7D)%20S"> 幂等且秩为 <img src="https://latex.codecogs.com/png.latex?1">，因此只能有 <img src="https://latex.codecogs.com/png.latex?S%5E%7B-1%7D%20%5Cvarphi(E_%7Bi,i%7D)%20S%20=%20E_%7Bi,i%7D">，即 <img src="https://latex.codecogs.com/png.latex?%5Cvarphi(E_%7Bi,i%7D)%20=%20S%20E_%7Bi,i%7D%20S%5E%7B-1%7D">．</p>
+<p>现在看 <img src="https://latex.codecogs.com/png.latex?%5Cvarphi(E_%7Bi,j%7D)">．事实上 <img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A&amp;%5Cphantom%7B%5Cimplies%20.%7D%20%5Cvarphi(E_%7Bi,j%7D)%20%5Cvarphi(E_%7Bj,j%7D)%20=%20%5Cvarphi(E_%7Bi,j%7D%20E_%7Bj,j%7D)%20=%20%5Cvarphi(E_%7Bi,i%7D)%20%5C%5C%0A&amp;%5Cimplies%20%5Cvarphi(E_%7Bi,j%7D)%20S%20E_%7Bj,j%7D%20S%5E%7B-1%7D%20=%20S%20E_%7Bi,i%7D%20S%5E%7B-1%7D%5C%5C%0A&amp;%5Cimplies%20S%5E%7B-1%7D%20%5Cvarphi(E_%7Bi,j%7D)%20S%20E_%7Bj,j%7D%20=%20E_%7Bi,i%7D%5C%5C%0A&amp;%5Cimplies%20S%5E%7B-1%7D%20%5Cvarphi(E_%7Bi,j%7D)%20S%20x_j%20=%20x_i%0A%5Cend%7Baligned%7D%0A"> 现在 <img src="https://latex.codecogs.com/png.latex?S%5E%7B-1%7D%20%5Cvarphi(E_%7Bi,j%7D)%20S"> 秩为 <img src="https://latex.codecogs.com/png.latex?1">，且对任何 <img src="https://latex.codecogs.com/png.latex?k%20%5Cneq%20j">， <img src="https://latex.codecogs.com/png.latex?%0A%5Cbegin%7Baligned%7D%0A(S%5E%7B-1%7D%20%5Cvarphi(E_%7Bi,j%7D)%20S)%20x_k%0A&amp;=%20S%5E%7B-1%7D%20%5Cvarphi(E_%7Bi,j%7D)%20y_k%20%5C%5C%0A&amp;=%20S%5E%7B-1%7D%20%5Cvarphi(E_%7Bi,j%7D%20E_%7Bj,j%7D)%20y_k%20%5C%5C%0A&amp;=%20S%5E%7B-1%7D%20%5Cvarphi(E_%7Bi,j%7D)%20(%5Cvarphi(E_%7Bj,j%7D)%20y_k)%20%5C%5C%0A&amp;=%200%0A%5Cend%7Baligned%7D%0A"> 故可以断定 <img src="https://latex.codecogs.com/png.latex?S%5E%7B-1%7D%20%5Cvarphi(E_%7Bi,j%7D)%20S%20=%20E_%7Bi,j%7D">，即 <img src="https://latex.codecogs.com/png.latex?%5Cvarphi(E_%7Bi,j%7D)%20=%20S%5E%7B-1%7D%20E_%7Bi,j%7D%20S">．</p>
+</div>
+<div class="remark proof">
+<p><span class="proof-title"><em>Remark</em>. </span>研究 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 上的自同态时，可能在应用线性变换关于其作用域 <img src="https://latex.codecogs.com/png.latex?V"> 的性质时遇到困难．这时需要将其合理转化为 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 上的代数性质，如考虑投影变换的幂等性，将投影变换秩为 <img src="https://latex.codecogs.com/png.latex?1"> 转化为 <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%20B(V)"> 上的 <img src="https://latex.codecogs.com/png.latex?1"> 维子空间等．这些技巧在证明中多次使用．</p>
+</div>
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body">
+<div id="ref-radjavi_simultaneous_2000" class="csl-entry">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">H. Radjavi and P. Rosenthal, <em>Simultaneous <span>Triangularization</span></em>. in Universitext. New York, NY: Springer, 2000. doi: <a href="https://doi.org/10.1007/978-1-4612-1200-3">10.1007/978-1-4612-1200-3</a>.</div>
+</div>
+<div id="ref-axler_linear_2015" class="csl-entry">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">S. Axler, <em>Linear <span>Algebra</span> <span>Done</span> <span>Right</span></em>. in Undergraduate <span>Texts</span> in <span>Mathematics</span>. Cham: Springer International Publishing, 2015. doi: <a href="https://doi.org/10.1007/978-3-319-11080-6">10.1007/978-3-319-11080-6</a>.</div>
+</div>
+</div></section></div> ]]></description>
+  <category>数学</category>
+  <guid>https://blog.sun123zxy.top/posts/20240121-burnside/index.html</guid>
+  <pubDate>Sat, 20 Jan 2024 16:00:00 GMT</pubDate>
+</item>
 <item>
   <title>一元多项式的 Delta 判别式</title>
   <dc:creator>sun123zxy </dc:creator>
@@ -7522,41 +7630,6 @@ font-style: inherit;">]</span></span></code></pre></div>
   <category>web</category>
   <guid>https://blog.sun123zxy.top/posts/20220204-vmagic/index.html</guid>
   <pubDate>Thu, 03 Feb 2022 16:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>原创生物选修一大题 - 药水酿造</title>
-  <link>https://blog.sun123zxy.top/posts/20211023-potion/index.html</link>
-  <description><![CDATA[ 
-
-
-
-<section id="problem" class="level2">
-<h2 class="anchored" data-anchor-id="problem">Problem</h2>
-<p>“夜视药水”常用于治疗误食夜雀所致的夜盲症。Steve 领导的研究小组正在探究 Minecraft Java Edition 1.13+ 夜视药水的各项理化“特性”。</p>
-<p><img src="https://blog.sun123zxy.top/posts/20211023-potion/potion.jpg" style="height: 210px"> <img src="https://blog.sun123zxy.top/posts/20211023-potion/yeast.jpg" style="height: 210px"></p>
-<p>（图1: 部分药水酿造系统）（图2：某品牌“下界疣”粉的包装袋）</p>
-<ol type="1">
-<li>小酌怡情，大饮伤身。为提高团队工作效率，Steve 称取 1g “下界疣”粉置于 50mL 玻璃瓶中，加入 10mL 蒸馏水，用玻璃棒搅拌均匀，静置 1h 后得到糊状“粗制的药水”。向“粗制的药水”中加入葡萄糖并在 20 摄氏度环境中培养数天，得到速度加成为 20% 的“迅捷药水”。使用酸性重铬酸钾溶液对产品进行检测，发现溶液由橙色变为灰绿色，由此推断“下界疣”粉中主要微生物的代谢类型为 <code>______________</code>。制备“粗制的药水”的实验过程也被称为 <code>__________</code>。组装仪器时，Steve 在玻璃瓶上额外加装一段长而弯曲的胶管，其目的是 <code>__________________</code>。</li>
-<li><img src="https://latex.codecogs.com/png.latex?%5Cbeta">​​​​​ - 胡萝卜素是“夜视药水”的主要有效成分，推测“夜视药水”治疗夜盲症的原理可能为 <code>____________________________</code>。“金胡萝卜”富含天然胡萝卜素，成本低廉，不仅是各大工业 MOD 中制取“夜视药水”的主要原料，也是代替“金苹果”治疗僵尸村民的不二之选。在最新研究中，小组成员向虚弱的僵尸村民喂食“金胡萝卜”，一段时间后取其细胞检测，发现癌胚抗原和甲胎蛋白的表达量明显减少，这说明“金胡萝卜”具有 <code>______________________</code> 的作用。</li>
-<li>小组成员 Alex 在《探究“红石粉”对“夜视药水”作用时间的影响》的实验中，错将“蜘蛛眼”当作“红石粉”加入已制好的“夜视药水”，随后密封于泡菜坛，在燃烧的熔炉附近发酵 8d，意外的得到了粗制的“隐身药水”。但此方法制备的“隐身药水”常因亚硝酸盐含量过高而使人虚弱甚至中毒。Alex 计划通过改变发酵过程的各项参数来降低成品中亚硝酸盐的含量，请写出你的建议 <code>________________________________</code>（任写两点即可）。</li>
-<li>更新至 Minecraft Java Edition 1.14.4 后，小组成员 Iron Golem 了解到使用“虞美人”（一种植物）制作的“迷之炖菜”同样具有极佳的夜视效果。“虞美人”精油易挥发、难水解，常使用水蒸气蒸馏法提取。提取过程中，需先后在油水混合物中加入 <code>____________</code> 两种盐。蒸馏过程中 <code>__________________</code>（从两方面作答），产品的质量就会下降。</li>
-</ol>
-</section>
-<section id="answer" class="level2">
-<h2 class="anchored" data-anchor-id="answer">Answer</h2>
-<pre><code>(1) 异养兼性厌氧型 （酵母细胞的）活化 排气、防止杂菌污染
-(2) （一分子）beta-胡萝卜素在体内被转化（氧化）为（两分子）维生素A 使癌变细胞恢复成正常细胞
-(3) 适当降低温度、发酵前加入食盐（增加食盐用量）、加长腌制时间
-(4) NaCl、（无水）Na2SO4 温度太高、时间太短</code></pre>
-
-
-</section>
-
- ]]></description>
-  <category>高考</category>
-  <category>原创题目</category>
-  <guid>https://blog.sun123zxy.top/posts/20211023-potion/index.html</guid>
-  <pubDate>Fri, 22 Oct 2021 16:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
