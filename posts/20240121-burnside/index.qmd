@@ -1,0 +1,216 @@
+---
+title: "矩阵代数的 Burnside 定理"
+subtitle: "《高等代数 II 研讨课》期末报告 之一"
+author: "sun123zxy"
+date: "2024/01/21"
+abstract: "我们详细重述并证明 Simultaneous Triangularization (H. Radjavi and P. Rosenthal) 中的 Burnside 定理及其相关推论． "
+
+categories:
+  - 数学
+
+bibliography: index.bib
+number-sections: true
+---
+
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\Image}{\operatorname{Im}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\renewcommand{\span}{\operatorname{span}}
+
+我们详细重述并证明 [@radjavi_simultaneous_2000, section 1.2] 中的 Burnside 定理及其相关推论． 
+
+下面设 $V$ 是复数域 $\mathbb C$ 上的有限维线性空间，$\mathcal B(V)$ 是 $V$ 上的线性变换代数；$I$ 是 $\mathcal B(V)$ 的单位元．
+
+Burnside 定理证明较长．为使逻辑顺畅，先做一些准备工作．
+
+:::{#lem-cyclic-vector}
+设 $\mathcal A$ 是 $\mathcal B(V)$ 上的乘法半群，若 $\mathcal A$ 不可约，则对任意非零的 $x \in V$，都有 $\mathcal A x := \{ Ax : A \in \mathcal A \} = V$（此时称 $x$ 是 $\mathcal A$ 的循环向量）．
+:::
+
+:::{.proof}
+首先 $\mathcal A \neq \{ 0 \}$，因为任何 $V$ 的子空间都是后者的不变子空间．
+
+- 注意到 $\Ker \mathcal A := \bigcap_{A \in \mathcal A} \Ker A$ 是 $\mathcal A$ 的一个不变子空间，而 $\mathcal A$ 不可约，故 $\Ker \mathcal A = \{ 0 \}$ 或 $V$．因为 $\mathcal A \neq \{0\}$，后者不可能发生，故 $\Ker \mathcal A = \{ 0 \}$．
+- 注意到 $\mathcal A x := \{ A x : A \in \mathcal A \}$ 是 $\mathcal A$ 的一个不变子空间，而 $\mathcal A$ 不可约，故 $\mathcal A x = \{ 0 \}$ 或 $V$．由 $x \neq 0$ 和 $\Ker \mathcal A = \{ 0 \}$，前者不可能发生，故 $\mathcal A x = V$．
+:::
+
+:::{.remark}
+事实上 $\mathcal B(V)$ 上半群的可约性等价于其线性生成的代数的可约性，见 [@radjavi_simultaneous_2000, Definition 2.1.1]．
+:::
+
+:::{#cor-cyclic-vector-dual}
+设 $V^*$ 是 $V$ 的对偶空间．设 $\mathcal A$ 是 $\mathcal B(V)$ 上的乘法半群，$\mathcal A^* := \{A^* : A \in \mathcal A \}$ 是 $\mathcal A$ 的对偶线性变换构成的集合（显然它也是个半群）．若 $\mathcal A$ 不可约，则对任意非零的线性函数 $\varphi \in V^*$，都有 $\mathcal A^* \varphi := \{ A^* \varphi : A^* \in \mathcal A^* \} = \{  \varphi A : A \in \mathcal A \} = V^*$．
+:::
+
+:::{.proof}
+定义 $\mathcal A^* \varphi$ 的 annihilator $(\mathcal A^* \varphi)^0 := \{ x^{**} \in V^{**} : (\mathcal A^* \varphi)(x) = 0 \}$．由 $\dim (A^* \varphi)^0 = \dim V^* - \dim (A^* \varphi)$ [见 @axler_linear_2015, section 3F]，
+$$
+\begin{aligned}
+\mathcal A^* \varphi = V^*
+&\iff \dim (\mathcal A^* \varphi) = \dim V^* \\
+&\iff \dim (\mathcal A^* \varphi)^0 = 0 \\
+&\iff (\mathcal A^* \varphi)^0 = \{0\}
+\end{aligned}
+$$
+由 annihilator 的定义和 [@lem-cyclic-vector]，
+$$
+\begin{aligned}
+(\mathcal A^* \varphi)^0 = \{0\}
+&\iff (\mathcal A^* \varphi) x \neq \{0\},\quad \forall x \neq 0 \\
+&\iff \varphi \mathcal A x  \neq \{0\},\quad \forall x \neq 0 \\
+&\iff \varphi V \neq \{0\} \\
+&\iff \varphi \neq 0
+\end{aligned}
+$$
+故最终我们得到 $\mathcal A^* \varphi = V^* \iff \varphi \neq 0$．
+:::
+
+若下面的猜想成立，则上述推论将具有更简单的推导．
+
+:::{#cnj-cyclic-vector-dual}
+若 $\mathcal A$ 不可约，则 $\mathcal A^*$ 也不可约．
+:::
+
+我们暂未找到证明或证伪上述猜想的方法．
+
+下面来证明 Burnside 定理．
+
+:::{#thm-burnside}
+
+## Burnside 定理
+
+$\mathcal B(V)$ 的不可约子代数有且只有 $\mathcal B(V)$．
+:::
+
+首先说明 $\mathcal B(V)$ 的不可约性．因为 $\mathcal B(V) M = V$ 对任意非零不变子空间 $M$ 成立，故 $\mathcal B(V)$ 不可约．下面设 $\mathcal A$ 是一任意给定的 $\mathcal B(V)$ 的一个不可约子代数．显然 $\mathcal A \neq \{ 0 \}$，原因在 [@lem-cyclic-vector] 中已述．我们的证明分三步进行：
+
+1. 证明 $\mathcal A$ 中存在一个秩为 $1$ 的线性变换 $T_0$．
+2. 证明所有 $\mathcal B(V)$ 中秩为 $1$ 的线性变换都在 $\mathcal A$ 中．
+3. 证明任何 $\mathcal B(V)$ 中的线性变换都可被分解为若干个秩不超过 $1$ 的线性变换的和，从而（利用代数对加法的封闭性）$\mathcal A = \mathcal B(V)$．
+
+:::{.proof}
+
+## 第一部分
+
+由 $\mathcal A \neq \{ 0 \}$，可以取 $T_0$ 是 $\mathcal A$ 中的一个秩最小的非零线性变换，$\rank T_0 \geq 1$．考虑反证，假设 $\rank T_0 \geq 2$，只要构造出一个非零线性变换 $S_* \in \mathcal A$ 使得 $\Image S_* \subsetneq \Image T_0$，就能推出矛盾．
+
+由 $\rank T_0 \geq 2$，可设 $\Image T_0$ 中存在两个线性无关的非零向量 $\{ T_0 x_1,T_0 x_2 \}$（因此 $x_1$ 与 $x_2$ 也线性无关）．由 [@lem-cyclic-vector]，存在线性变换 $A_0 \in \mathcal A$ 使得 $A_0 T_0 x_1 = x_2$，于是 $\{ T_0 x_1,T_0 x_2 \} = \{ T_0 x_1, T_0 A T_0 x_1 \}$ 线性无关．这意味着 $(\lambda T_0 - T_0 A_0 T_0)x_1 \neq 0$ 对任意 $\lambda \in \mathbb C$ 成立，即线性变换 $S_\lambda := \lambda T_0 - T_0 A_0 T_0 \in \mathcal A$ 非零．下面尝试从这些 $S_\lambda$ 中找到我们想要的 $S_*$．
+
+- 注意到 $S_\lambda =  T_0(\lambda I - A_0 T_0)$，故 $\Image S_\lambda \subset \Image T_0$．
+- 注意到 $S_\lambda =  (\lambda I - T_0 A_0) T_0$，而 $\Image T_0$ 是 $T_0 A_0$ 的一个不变子空间．故可以取 $T_0 A_0$ 在 $\Image T_0$ 上的限制 $T_0 A_0 |_{\Image T_0}$．设 $T_0 A_0 |_{\Image T_0}$ 有一特征值 $\lambda_0$（由于 $\Image T_0$ 是复数域上有限维线性空间），这样 $\lambda_0 I - T_0 A_0 |_{\Image T_0}$ 就不是单射，因此也不是满射（由于 $\Image T_0$ 是有限维线性空间），即 $S_{\lambda_0} = (\lambda_0 I - T_0 A_0) T_0$ 不能映满 $\Image T_0$．
+
+综上 $\Image S_{\lambda_0} \subsetneq \Image T_0$ 且 $0 \neq S_{\lambda_0} \in \mathcal A$，故 $S_{\lambda_0}$ 就是我们想要的 $S_*$．
+:::
+
+:::{.proof}
+
+## 第二部分
+
+对任意给定的某一秩为 $1$ 的线性变换 $T \in \mathcal B(V)$，任取非零的 $y \in \Image T$，存在线性函数 $\varphi \in V^*$ 使得 $T x = \varphi(x) y,\, \forall x \in V$．已经知道 $\mathcal A$ 中存在一个秩为 $1$ 的线性变换 $T_0$，则任取非零的 $y_0 \in \Image T_0$，存在线性函数 $\varphi_0 \in V^*$ 使得 $T_0 x = \varphi_0(x) y_0,\, \forall x \in V$．
+
+- 由 [@lem-cyclic-vector]，存在 $A \in \mathcal A$ 使得 $A y_0 = y$．
+- 由 [@cor-cyclic-vector-dual]，存在 $B \in \mathcal A$ 使得 $\varphi_0 B = \varphi$．
+
+综上，
+$$
+T x = \varphi(x) y = \varphi_0(Bx) A y_0 = A(\varphi_0(Bx) y_0) = A T_0 B x,\quad \forall x \in V
+$$
+故 $T = A T_0 B \in \mathcal A$．
+:::
+
+:::{.proof}
+
+## 第三部分
+
+设 $A \in \mathcal B(V)$ 是任一给定的线性变换，任取 $V$ 中的一组基 $b_1,\dots,b_n$，设其对偶基为 $\varphi_1,\dots,\varphi_n$．定义关于基 $b_1,\dots,b_n$ 的 $n$ 个投影变换 $P_k: x \mapsto \varphi_k(x) b_k$，由对偶基性质，显然有 $I = \sum_{k=1}^n P_k$，于是
+$$
+A = A I = A \sum_{k=1}^n P_k = \sum_{k=1}^n A P_k
+$$
+其中每一个 $A P_k$ 都是秩不超过 $1$ 的线性变换．
+:::
+
+至此，[@thm-burnside] 得到完整证明．
+
+Burnside 定理可以为下面的定理提供一个较为简单的证明．
+
+:::{#thm-bv-simple}
+$\mathcal B(V)$ 是单代数，即 $\{ 0 \}$ 和 $\mathcal B(V)$ 是代数 $\mathcal B(V)$ 上唯二的双边理想．
+:::
+
+:::{.proof}
+显然 $\{ 0 \}$ 和 $\{ \mathcal B(V) \}$ 都是双边理想．下面任取一 $\mathcal B(V)$ 上的双边理想 $\mathcal I \neq \{ 0 \}$，我们证明它不可约．任取 $\mathcal I$ 的一个非零不变子空间 $M$，由 $M,\, \mathcal I$ 的非零性和 $\mathcal I V$ 的非零性，
+$$
+M \supset \mathcal I M \supset \mathcal B(V) \mathcal I \mathcal B(V) M = \mathcal B(V) \mathcal I V = \mathcal B(V) (\mathcal I V) = V
+$$
+故只能有 $M = V$，因此 $\mathcal I$ 确不可约．现在 $\mathcal I$ 是 $\mathcal B(V)$ 的不可约理想，理想一定是子代数，根据 [@thm-burnside] 就有 $\mathcal I = \mathcal B(V)$．
+:::
+
+下面的定理为 $\mathcal B(V)$ 上的全体代数自同构提供了表示方法．
+
+:::{#thm-bv-inner-aut}
+
+$\mathcal B(V)$ 上的全体代数自同构均为内自同构．即，任意 $\mathcal B(V)$ 上的自同构 $\varphi: \mathcal B(V) \to \mathcal B(V)$ 都可写为 $A \mapsto S A S^{-1}$ 的形式，其中 $S \in \mathcal B(V)$ 为与 $\varphi$ 相关的某一可逆线性变换．
+:::
+
+将矩阵表示和线性空间的语言相结合，可以为该定理提供思路更清晰的证明．
+
+:::{.proof}
+取定 $V$ 上的一组基 $x_1,\dots,x_n$，定义
+$$
+E_{i,j}(x_1,\dots,x_n) := (x_1,\dots,x_n) \hat E_{i,j} \pod{i=1,2,\dots,n;\; j=1,2,\dots,n}
+$$
+其中全体 $\hat E_{i,j} \in \mathrm M_n(\mathbb C)$ 代表 $n$ 阶矩阵空间的一组自然基．于是全体 $E_{i,j}$ 自然也是 $\mathcal B(V)$ 的一组基．现在只需研究自同构 $\varphi$ 将 $E_{i,j}$ 映至何处．为显式地将 $S$ 确定出来，不妨先考虑 $\varphi(E_{i,i})$ 的性质．
+
+首先指出，$\varphi(E_{i,i})$ 仍然是秩为 $1$ 的投影变换，因为：
+
+- $E_{i,i}$ 是投影变换，根据其幂等性和代数自同构保持乘法，$\varphi(E_{i,i})$ 也是投影变换．
+
+- $E_{i,i} \mathcal B(V) E_{i,i}$ 是 $\mathcal B(V)$ 的 $1$ 维子空间（从矩阵表示角度考虑），因此 $\varphi(E_{i,i} \mathcal B(V) E_{i,i}) = \varphi(E_{i,i}) \mathcal B(V) \varphi(E_{i,i})$ 也是 $\mathcal B(V)$ 的 $1$ 维子空间．考虑到 $\varphi(E_{i,i})$ 还是投影变换，故其秩只能为 $1$（同样从矩阵表示角度考虑）．
+
+现在设 $\Image \varphi(E_{i,i}) = \span\{y_i\}$．因为
+$$
+\begin{aligned}
+\sum_{i=1}^n \span\{y_i\}
+&= \sum_{i=1}^n \varphi(E_{i,i}) V \\
+&\supset \left( \sum_{i=1}^n \varphi(E_{i,i}) \right) V \\
+&= \varphi \left(\sum_{i=1}^n E_{i,i} \right) V \\
+&= \varphi(I) V = I V = V
+\end{aligned}
+$$
+故 $y_1,\dots,y_n$ 仍是 $V$ 的一组基．定义可逆线性变换 $S(x_1,\dots,x_n) := (y_1,\dots,y_n)$．至此，断言 $\varphi$ 就是 $A \mapsto S A S^{-1}$，为此下面证明 $\varphi(E_{i,j}) = S E_{i,j} S^{-1}$．
+
+仍然先看 $\varphi(E_{i,i})$．已经知道 $\varphi(E_{i,i})$ 是秩为 $1$ 的投影变换，故
+$$
+\begin{aligned}
+&\phantom{\implies .} \varphi(E_{i,i}) y_i = y_i \\
+&\implies \varphi(E_{i,i}) S x_i = S x_i \\
+&\implies S^{-1} \varphi(E_{i,i}) S x_i = x_i
+\end{aligned}
+$$
+容易验证 $S^{-1} \varphi(E_{i,i}) S$ 幂等且秩为 $1$，因此只能有 $S^{-1} \varphi(E_{i,i}) S = E_{i,i}$，即 $\varphi(E_{i,i}) = S E_{i,i} S^{-1}$．
+
+现在看 $\varphi(E_{i,j})$．事实上
+$$
+\begin{aligned}
+&\phantom{\implies .} \varphi(E_{i,j}) \varphi(E_{j,j}) = \varphi(E_{i,j} E_{j,j}) = \varphi(E_{i,i}) \\
+&\implies \varphi(E_{i,j}) S E_{j,j} S^{-1} = S E_{i,i} S^{-1}\\
+&\implies S^{-1} \varphi(E_{i,j}) S E_{j,j} = E_{i,i}\\
+&\implies S^{-1} \varphi(E_{i,j}) S x_j = x_i
+\end{aligned}
+$$
+现在 $S^{-1} \varphi(E_{i,j}) S$ 秩为 $1$，且对任何 $k \neq j$，
+$$
+\begin{aligned}
+(S^{-1} \varphi(E_{i,j}) S) x_k
+&= S^{-1} \varphi(E_{i,j}) y_k \\
+&= S^{-1} \varphi(E_{i,j} E_{j,j}) y_k \\
+&= S^{-1} \varphi(E_{i,j}) (\varphi(E_{j,j}) y_k) \\
+&= 0
+\end{aligned}
+$$
+故可以断定 $S^{-1} \varphi(E_{i,j}) S = E_{i,j}$，即 $\varphi(E_{i,j}) = S^{-1} E_{i,j} S$．
+:::
+
+:::{.remark}
+研究 $\mathcal B(V)$ 上的自同态时，可能在应用线性变换关于其作用域 $V$ 的性质时遇到困难．这时需要将其合理转化为 $\mathcal B(V)$ 上的代数性质，如考虑投影变换的幂等性，将投影变换秩为 $1$ 转化为 $\mathcal B(V)$ 上的 $1$ 维子空间等．这些技巧在证明中多次使用．
+:::
