@@ -146,11 +146,11 @@ typedef ModInt<int,ll> MI;
 
 // --- linear init ---
 vector<MI> fac,facinv,inv_s;
-void linear_init(ll n){
+void linear_init(int n){
     fac.resize(n+1); facinv.resize(n+1); inv_s.resize(n+1);
-    inv_s[1]=1; for(ll i=1;i<=n;i++) inv_s[i]=-(MOD/i)*inv_s[MOD%i];
-    fac[0]=1; for(ll i=1;i<=n;i++) fac[i]=fac[i-1]*i;
-    facinv[n]=inv(MI(fac[n])); for(ll i=n-1;i>=0;i--) facinv[i]=facinv[i+1]*(i+1);
+    inv_s[1]=1; for(int i=1;i<=n;i++) inv_s[i]=-(MOD/i)*inv_s[MOD%i];
+    fac[0]=1; for(int i=1;i<=n;i++) fac[i]=fac[i-1]*i;
+    facinv[n]=inv(MI(fac[n])); for(int i=n-1;i>=0;i--) facinv[i]=facinv[i+1]*(i+1);
 }
 
 // --- polynomial ---
@@ -251,7 +251,7 @@ namespace divntt{
         ll mid=(l+r)/2;
         Poly T=A.subpoly(l,mid)*B.subpoly(mid,r);
         for(ll k=0;k<T.len()&&l+mid+k<C.len();k++){ // CAUTION: time complexity
-            C[l+mid+k]=C[l+mid+k]+T[k];
+            C[l+mid+k]+=T[k];
         }
         divntt(l,mid); divntt(mid,r);
     }
@@ -272,7 +272,7 @@ class Matrix : public vector<MI>{public:
     MI& operator () (int i,int j){return at(i,j);}
     Matrix submat(int sr,int sc,int tr,int tc){
         Matrix A(tr-sr,tc-sc,{});
-        for(int i=sr;i<tr;i++) for(int j=sc;j<tc;j++) A.push_back(at(i,j));
+        for(int i=sr;i<tr;i++) for(int j=sc;j<tc;j++) A(i-sr,j-sc)=at(i,j);
         return A;
     }
     friend ostream& operator << (ostream &out,const Matrix& A){
@@ -325,7 +325,58 @@ class Matrix : public vector<MI>{public:
     }
 };
 
-void entry(){}
+template<int PTN> // 2 * length of string suffices
+class SuffixAutomation{public: // id: 0 is null, 1 is start
+    struct Vtx{
+        int fa,len; bool real;
+        map<char,int> ch; // feel free to modify to array<int,26>
+    }vtx[PTN];
+    int n,last;
+    SuffixAutomation(){n=last=0; vtx[++n]={0,0,true}; last=n;}
+    void insert(char c){
+        int p=last,cur=++n; vtx[cur]={0,vtx[last].len+1,true};
+        for(;p&&!vtx[p].ch[c];p=vtx[p].fa) vtx[p].ch[c]=cur;
+        int q=vtx[p].ch[c];
+        if(!p) vtx[cur].fa=1;
+        else if(vtx[q].len==vtx[p].len+1) vtx[cur].fa=q;
+        else{ // vtx[q].len>vtx[p].len+1, partition needed
+            vtx[++n]=vtx[q]; vtx[n].real=false; vtx[n].len=vtx[p].len+1;
+            for(;p&&vtx[p].ch[c]==q;p=vtx[p].fa) vtx[p].ch[c]=n;
+            vtx[cur].fa=vtx[q].fa=n;
+        }
+        last=cur;
+    }
+    ll LCSWith(string s){ // as an example of matching
+        ll p=1; ll ans=0,cnt=0;
+        for(char c : s){
+            if(vtx[p].ch[c]) cnt++;
+            else{
+                for(;p&&!vtx[p].ch[c];p=vtx[p].fa);
+                cnt=p?vtx[p].len+1:0;
+            } ans=max(ans,cnt);
+            p=p?vtx[p].ch[c]:1;
+        } return ans;
+    }
+    // below: subject to problem Luogu P3804
+    vector<int> edge[PTN]; int sz[PTN];
+    void initDFS(int u){
+        sz[u]=vtx[u].real; for(int v : edge[u]) initDFS(v),sz[u]+=sz[v];
+    }
+    void treeInit(){
+        for(int u=2;u<=n;u++) edge[vtx[u].fa].push_back(u);
+        initDFS(1);
+    }
+    ll answer(){
+        ll ans=0;
+        for(ll u=1;u<=n;u++) if(sz[u]>1) ans=max(ans,1LL*sz[u]*vtx[u].len);
+        return ans; 
+    }
+};
+typedef SuffixAutomation<int(2E6+5)> SAM;
+
+void entry(){
+    
+}
 int main(){
     //freopen("t1.in","r",stdin);
     //freopen("t1.out","w",stdout);
