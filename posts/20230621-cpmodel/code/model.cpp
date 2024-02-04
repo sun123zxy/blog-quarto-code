@@ -257,7 +257,7 @@ namespace divntt{
     }
 }
 
-// --- Matrix ---
+// --- matrix ---
 class Matrix : public vector<MI>{public:
     static Matrix I(int n){
         Matrix A(n,n); for(int i=0;i<n;i++) A(i,i)=1;
@@ -325,7 +325,7 @@ class Matrix : public vector<MI>{public:
     }
 };
 
-// --- Automata ---
+// --- automata ---
 template<int PTN> // 2 * length of string suffices
 class SuffixAutomation{public: // id: 0 is null, 1 is start
     struct Vtx{
@@ -382,7 +382,7 @@ class ACAutomation{public:
         int fail;
         array<int,CHAR> ch;
     }vtx[PTN];
-    int edp[STRN]; // store the endpoint of each inserted string
+    int last[STRN];
     int vn,sn;
     ACAutomation(){
         sn=0; vn=0; vtx[++vn]={0};
@@ -393,7 +393,7 @@ class ACAutomation{public:
         for(char c : s){ c-=OFFSET;
             if(!vtx[p].ch[c]) vtx[p].ch[c]=++vn;
             p=vtx[p].ch[c];
-        } edp[++sn]=p;
+        } last[++sn]=p;
     }
     void buildFail(){
         queue<int> que; que.push(1);
@@ -424,7 +424,7 @@ class ACAutomation{public:
         }; dfs(1);
     }
     void answer(){
-        for(int i=1;i<=sn;i++) cout<<cnt[edp[i]]<<'\n';
+        for(int i=1;i<=sn;i++) cout<<cnt[last[i]]<<'\n';
     }
 };
 typedef ACAutomation<int(1E6+5),int(1E6+5),26,'a'> ACAM;
