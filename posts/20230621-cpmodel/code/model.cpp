@@ -325,6 +325,7 @@ class Matrix : public vector<MI>{public:
     }
 };
 
+// --- Automata ---
 template<int PTN> // 2 * length of string suffices
 class SuffixAutomation{public: // id: 0 is null, 1 is start
     struct Vtx{
@@ -359,12 +360,13 @@ class SuffixAutomation{public: // id: 0 is null, 1 is start
     }
     // below: subject to problem Luogu P3804
     vector<int> edge[PTN]; int sz[PTN];
-    void initDFS(int u){
-        sz[u]=vtx[u].real; for(int v : edge[u]) initDFS(v),sz[u]+=sz[v];
-    }
-    void treeInit(){
+    void buildTree(){
+        for(int u=1;u<=n;u++) edge[u].clear();
         for(int u=2;u<=n;u++) edge[vtx[u].fa].push_back(u);
-        initDFS(1);
+        function<void(int)> dfs=[&](int u){
+            sz[u]=vtx[u].real;
+            for(int v : edge[u]) dfs(v),sz[u]+=sz[v];
+        }; dfs(1);
     }
     ll answer(){
         ll ans=0;
@@ -373,6 +375,59 @@ class SuffixAutomation{public: // id: 0 is null, 1 is start
     }
 };
 typedef SuffixAutomation<int(2E6+5)> SAM;
+
+template <int PTN,int STRN,int CHAR,char OFFSET>
+class ACAutomation{public:
+    struct Vtx{
+        int fail;
+        array<int,CHAR> ch;
+    }vtx[PTN];
+    int edp[STRN]; // store the endpoint of each inserted string
+    int vn,sn;
+    ACAutomation(){
+        sn=0; vn=0; vtx[++vn]={0};
+        for(int c=0;c<CHAR;c++) vtx[0].ch[c]=1;
+    }
+    void insert(string s){
+        int p=1;
+        for(char c : s){ c-=OFFSET;
+            if(!vtx[p].ch[c]) vtx[p].ch[c]=++vn;
+            p=vtx[p].ch[c];
+        } edp[++sn]=p;
+    }
+    void buildFail(){
+        queue<int> que; que.push(1);
+        while(!que.empty()){
+            int p=que.front(),f=vtx[p].fail; que.pop();
+            for(int c=0;c<CHAR;c++){ int q=vtx[p].ch[c];
+                if(q) vtx[q].fail=vtx[f].ch[c],que.push(q);
+                else vtx[p].ch[c]=vtx[f].ch[c];
+            }
+        }
+    }
+    // below: subject to problem Lugou P5357
+    int cnt[PTN];
+    void match(string s){
+        for(int i=1;i<=vn;i++) cnt[i]=0;
+        int p=1;
+        for(char c : s){ c-=OFFSET;
+            p=vtx[p].ch[c];
+            cnt[p]++;
+        }
+    }
+    vector<int> edge[PTN];
+    void buildTree(){ // fail tree
+        for(int u=1;u<=vn;u++) edge[u].clear();
+        for(int u=2;u<=vn;u++) edge[vtx[u].fail].push_back(u);
+        function<void(int)> dfs=[&](int u){
+            for(int v : edge[u]) dfs(v),cnt[u]+=cnt[v];
+        }; dfs(1);
+    }
+    void answer(){
+        for(int i=1;i<=sn;i++) cout<<cnt[edp[i]]<<'\n';
+    }
+};
+typedef ACAutomation<int(1E6+5),int(1E6+5),26,'a'> ACAM;
 
 void entry(){
     
