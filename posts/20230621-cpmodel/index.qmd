@@ -3,7 +3,7 @@ title: "算法 & 数学碎碎念"
 abstract: "现场赛公式模板库，亦可作为小而精的总结性学习材料参考．无需单独成文或暂不完善的内容会放在这里．"
 author: "sun123zxy"
 date: "2023/06/21"
-date-modified: "2024/1/14"
+date-modified: "2024/02/04"
 
 categories:
   - OI
@@ -899,10 +899,6 @@ $$
 
 #### Catalan 数
 
-```default
-1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, ...
-```
-
 $$
 C_n = \binom{2n}{n} - \binom{2n}{n+1} = \frac 1 {n+1} \binom{2n}{n} = \prod_{k=2}^n \frac{n+k}{k}
 $$
@@ -1185,6 +1181,10 @@ $$
 
 消去各目标行第 $c$ 列元素时，以第 $c$ 行的 $a_{c,c}$ 为除数与目标行的第 $c$ 列元素辗转相除，最终使 $a_{c,c}$ 变为 $0$，再做一次行交换将其换至目标行，就完成了一次行消去过程．注意到当 $a_{c,c}$ 非零时，一次行消去操作结束后 $a_{c,c}$ 单调不增，且过程中 $a_{c,c}$ 不会从非零变为零，故辗转相除带来的 $\log p$ 次额外操作开销被分摊到整轮对第 $c$ 列的消去过程中，因此时间复杂度仍为 $O(n^3+ n^2 \log p)$．
 
+## 字符串 / 自动机
+
+基于 DFA 理论，[OI-Wiki](https://oi-wiki.org/string/automaton/) 上有对 KMP / AC 自动机，SAM / GSAM 和 PAM 简明扼要的概括．[OI-Wiki](https://oi-wiki.org/string/sam/) 的后缀自动机讲解亦值得参考．
+
 ## 图论【TODO】
 
 ### 最短路
@@ -1197,7 +1197,7 @@ $$
 
 ### 模板
 
-见 [model.cpp](code/model.cpp), [model_temp.cpp](code/model_temp.cpp), [divntt_min.cpp](code/divntt_min.cpp)．
+见 [model.cpp](code/model.cpp), [model_temp.cpp](code/model_temp.cpp)．
 
 ### 对拍
 
@@ -1229,29 +1229,76 @@ while true; do
 done
 ```
 
-
-
 ### 表
 
 #### 质数表
 
 ```default
-1e2 		1e3 		1e4 		1e5 		1e6
+1e2     1e3     1e4       1e5       1e6
 101 		1009 		10007 		100003 		1000003
 
-1e7 		1e8 		1e9 		1e10 		1e11 			
+1e7       1e8         1e9         1e10        1e11 			
 10000019 	100000007 	1000000007 	10000000019 100000000003
 
-1e12			1e13 			1e14 			1e15
+1e12          1e13            1e14            1e15
 1000000000039	10000000000037 	100000000000031 1000000000000037
 
-1e16 				1e17 				1e18
+1e16              1e17                1e18
 10000000000000061	100000000000000003 	1000000000000000003
 ```
 
 #### 典列
 
-见
+```default
+index         0   1   2   3   4   5   6   7   8     9     10
+Catalan       1   1   2   5   14  42  132 429 1430  4862  16796
+Bell          1   1   2   5   15  52  203 877 4140  21147 115975
+partition     1   1   2   3   5   7   11  15  22    30    42
+```
 
-- [OEIS Core Sequence](https://oeis.org/wiki/Index_to_OEIS:_Section_Cor#core)
-- [List of Integer Sequences - Wikipedia](https://en.wikipedia.org/wiki/List_of_integer_sequences)
+```default
+binomial
+x   0   1   2   3   4   5
+0 | 1
+1 | 1   1
+2 | 1   2   1
+3 | 1   3   3   1
+4 | 1   4   6   4   1
+5 | 1   5   10  10  5  1
+
+Stirling I
+x   0   1   2   3   4   5
+0 | 1
+1 |     1
+2 |     1   1
+3 |     2   3   1
+4 |     6   11  6   1
+5 |     24  50  355 10  1
+
+Stirling II
+x   0   1   2   3   4   5
+0 | 1
+1 |     1
+2 |     1   1
+3 |     1   3   1
+4 |     1   7   6   1
+5 |     1   15  25  10  1
+
+Lah
+x   0   1   2   3   4   5
+0 | 1
+1 |     1
+2 |     2   1
+3 |     6   6   1
+4 |     24  36  12  1
+5 |     120 240 120 20  1
+
+k-partition
+    0   1   2   3   4   5
+0 | 1
+1 |     1
+2 |     1   1
+3 |     1   1   1
+4 |     1   2   1   1
+5 |     1   2   2   1   1
+```
