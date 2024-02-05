@@ -294,7 +294,9 @@ class Matrix : public vector<MI>{public:
     bool stair(){ // row reduce to upper stair matrix, return swap time % 2. capable of any ring
         bool swp=0;
         for(int c=0,p=0;c<min(row,col);c++){
-            auto swpl=[&](int a,int b){swp^=1; for(int k=c;k<col;k++) std::swap(at(a,k),at(b,k));};
+            auto swpl=[&](int a,int b){
+                swp^=1; for(int k=c;k<col;k++) std::swap(at(a,k),at(b,k));
+            };
             for(int r=p+1;r<row;r++){
                 while(at(p,c)!=0){
                     MI factor=at(r,c)/at(p,c);
@@ -326,58 +328,8 @@ class Matrix : public vector<MI>{public:
 };
 
 // --- automata ---
-template<int PTN> // 2 * length of string suffices
-class SuffixAutomation{public: // id: 0 is null, 1 is start
-    struct Vtx{
-        int fa,len; bool real;
-        map<char,int> ch; // feel free to modify to array<int,26>
-    }vtx[PTN];
-    int n,last;
-    SuffixAutomation(){n=last=0; vtx[++n]={0,0,true}; last=n;}
-    void insert(char c){
-        int p=last,cur=++n; vtx[cur]={0,vtx[last].len+1,true};
-        for(;p&&!vtx[p].ch[c];p=vtx[p].fa) vtx[p].ch[c]=cur;
-        int q=vtx[p].ch[c];
-        if(!p) vtx[cur].fa=1;
-        else if(vtx[q].len==vtx[p].len+1) vtx[cur].fa=q;
-        else{ // vtx[q].len>vtx[p].len+1, partition needed
-            vtx[++n]=vtx[q]; vtx[n].real=false; vtx[n].len=vtx[p].len+1;
-            for(;p&&vtx[p].ch[c]==q;p=vtx[p].fa) vtx[p].ch[c]=n;
-            vtx[cur].fa=vtx[q].fa=n;
-        }
-        last=cur;
-    }
-    ll LCSWith(string s){ // as an example of matching
-        ll p=1; ll ans=0,cnt=0;
-        for(char c : s){
-            if(vtx[p].ch[c]) cnt++;
-            else{
-                for(;p&&!vtx[p].ch[c];p=vtx[p].fa);
-                cnt=p?vtx[p].len+1:0;
-            } ans=max(ans,cnt);
-            p=p?vtx[p].ch[c]:1;
-        } return ans;
-    }
-    // below: subject to problem Luogu P3804
-    vector<int> edge[PTN]; int sz[PTN];
-    void buildTree(){
-        for(int u=1;u<=n;u++) edge[u].clear();
-        for(int u=2;u<=n;u++) edge[vtx[u].fa].push_back(u);
-        function<void(int)> dfs=[&](int u){
-            sz[u]=vtx[u].real;
-            for(int v : edge[u]) dfs(v),sz[u]+=sz[v];
-        }; dfs(1);
-    }
-    ll answer(){
-        ll ans=0;
-        for(ll u=1;u<=n;u++) if(sz[u]>1) ans=max(ans,1LL*sz[u]*vtx[u].len);
-        return ans; 
-    }
-};
-typedef SuffixAutomation<int(2E6+5)> SAM;
-
 template <int PTN,int STRN,int CHAR,char OFFSET>
-class ACAutomation{public:
+class ACAutomation{public: // id: 0 is null, 1 is start
     struct Vtx{
         int fail;
         array<int,CHAR> ch;
@@ -428,6 +380,87 @@ class ACAutomation{public:
     }
 };
 typedef ACAutomation<int(1E6+5),int(1E6+5),26,'a'> ACAM;
+
+template<int PTN> // 2 * length of string suffices
+class SuffixAutomation{public: // id: 0 is null, 1 is start
+    struct Vtx{
+        int fa,len; bool real;
+        map<char,int> ch; // feel free to modify to array<int,26>
+    }vtx[PTN];
+    int n,last;
+    SuffixAutomation(){n=last=0; vtx[++n]={0,0,true}; last=n;}
+    void insert(char c){
+        int p=last,cur=++n; vtx[cur]={0,vtx[last].len+1,true};
+        for(;p&&!vtx[p].ch[c];p=vtx[p].fa) vtx[p].ch[c]=cur;
+        int q=vtx[p].ch[c];
+        if(!p) vtx[cur].fa=1;
+        else if(vtx[q].len==vtx[p].len+1) vtx[cur].fa=q;
+        else{ // vtx[q].len>vtx[p].len+1, partition needed
+            vtx[++n]=vtx[q]; vtx[n].real=false; vtx[n].len=vtx[p].len+1;
+            for(;p&&vtx[p].ch[c]==q;p=vtx[p].fa) vtx[p].ch[c]=n;
+            vtx[cur].fa=vtx[q].fa=n;
+        }
+        last=cur;
+    }
+    ll LCSWith(string s){ // as an example of matching
+        ll p=1; ll ans=0,cnt=0;
+        for(char c : s){
+            if(vtx[p].ch[c]) cnt++;
+            else{
+                for(;p&&!vtx[p].ch[c];p=vtx[p].fa);
+                cnt=p?vtx[p].len+1:0;
+            } ans=max(ans,cnt);
+            p=p?vtx[p].ch[c]:1;
+        } return ans;
+    }
+    // below: subject to problem Luogu P3804
+    vector<int> edge[PTN]; int sz[PTN];
+    void buildTree(){
+        for(int u=1;u<=n;u++) edge[u].clear();
+        for(int u=2;u<=n;u++) edge[vtx[u].fa].push_back(u);
+        function<void(int)> dfs=[&](int u){
+            sz[u]=vtx[u].real;
+            for(int v : edge[u]) dfs(v),sz[u]+=sz[v];
+        }; dfs(1);
+    }
+    ll answer(){
+        ll ans=0;
+        for(ll u=1;u<=n;u++) if(sz[u]>1) ans=max(ans,1LL*sz[u]*vtx[u].len);
+        return ans; 
+    }
+};
+typedef SuffixAutomation<int(2E6+5)> SAM;
+
+template <int PTN>
+class PalindromicAutomation{public: // id: 1 is odd root, 0 is even root (as fallback)
+    struct Vtx{
+        int fail,len;
+        map<char,int> ch; // feel free to modify to array<int,26>
+    }vtx[PTN];
+    int vn,sn,last; char s[PTN];
+    int cnt[PTN]; // subject to problem Luogu P5496
+    PalindromicAutomation(){
+        vn=1; vtx[0]={1,0}; vtx[1]={0,-1}; // fail[even]=odd, fail[odd]=even
+        last=0; sn=0;
+    }
+    int getValid(int p){ // even is never valid, odd is always valid
+        for(;s[sn-vtx[p].len-1]!=s[sn];p=vtx[p].fail);
+        return p;
+    }
+    void insert(char c){
+        s[++sn]=c; int p=getValid(last); 
+        if(!vtx[p].ch[c]){
+            int f=getValid(vtx[p].fail); // when p=odd, fail[p]=even, then f is still odd
+            vtx[++vn]={vtx[f].ch[c],vtx[p].len+2}; // len[odd]=-1 useful here
+                                                   // vtx[f].ch[c]=0 only happens when p=odd
+                                                   // for s[sn-vtx[p].len-1..sn] is already a palindrome
+            vtx[p].ch[c]=vn;
+            cnt[vn]=cnt[vtx[vn].fail]+1; // subject...
+        } last=vtx[p].ch[c];
+        cout<<cnt[last]<<" "; // subject...
+    }
+};
+typedef PalindromicAutomation<int(1E6+5)> PAM;
 
 void entry(){
     
