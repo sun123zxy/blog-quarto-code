@@ -247,16 +247,13 @@ server {
 # modified from (2022/01/30) https://guide.v2fly.org/advanced/wss_and_web.html#nginx-%E9%85%8D%E7%BD%AE
 ```
 
-然后在 `/etc/nginx/sites-enabled/` 目录下，先删除原有的 `default` 文件，然后新建 `my-enabled.conf`（文件名可自行调整）：
+然后在 `/etc/nginx/sites-enabled/` 目录下，保持原有的 `default` 文件，并利用
 
-```nginx
-include /etc/nginx/sites-available/default; # 继续使用 Nginx 的默认站点配置文件
-include /etc/nginx/sites-available/{[YOUR_DOMAIN]}.conf; # 引用刚刚新建的配置文件
+```bash
+ln -s /etc/nginx/sites-available/{[YOUR_DOMAIN]}.conf
 ```
 
-- Update: 实际上推荐的方式是用 `ln -s` 在 `/etc/nginx/sites-enabled/` 里创建 symbolic link，当时搞的时候还不太懂，是我 naive 了（
-
-最后重新加载配置文件：
+创建软链接至刚才保存的配置文件．最后重新加载配置文件：
 
 ```bash
 nginx -s reload
