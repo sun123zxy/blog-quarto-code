@@ -401,13 +401,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }
 # modified from (2022/01/30) https://guide.v2fly.org/advanced/wss_and_web.html#nginx-%E9%85%8D%E7%BD%AE</code></pre>
-<p>然后在 <code>/etc/nginx/sites-enabled/</code> 目录下，先删除原有的 <code>default</code> 文件，然后新建 <code>my-enabled.conf</code>（文件名可自行调整）：</p>
-<pre class="nginx"><code>include /etc/nginx/sites-available/default; # 继续使用 Nginx 的默认站点配置文件
-include /etc/nginx/sites-available/{[YOUR_DOMAIN]}.conf; # 引用刚刚新建的配置文件</code></pre>
-<ul>
-<li>Update: 实际上推荐的方式是用 <code>ln -s</code> 在 <code>/etc/nginx/sites-enabled/</code> 里创建 symbolic link，当时搞的时候还不太懂，是我 naive 了（</li>
-</ul>
-<p>最后重新加载配置文件：</p>
+<p>然后在 <code>/etc/nginx/sites-enabled/</code> 目录下，保持原有的 <code>default</code> 文件，并利用</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ln</span> <span class="at">-s</span> /etc/nginx/sites-available/{[YOUR_DOMAIN]}.conf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>创建软链接至刚才保存的配置文件．最后重新加载配置文件：</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nginx</span> <span class="at">-s</span> reload</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="客户端" class="level3">
