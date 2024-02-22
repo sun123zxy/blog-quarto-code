@@ -1,0 +1,72 @@
+\RequirePackage{xstring}
+\IfBeginWith{$lang$}{zh}{
+    \documentclass{_assets/suncnart}
+    \def\transmodified{最后更新于}
+}{
+    \documentclass{_assets/sunenart}
+    \def\transmodified{Last modified on}
+}
+
+% --- pandoc ---
+
+\usepackage{subcaption}
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+$tightlist.tex()$
+$tables.tex()$
+$graphics.tex()$
+
+% --- adjust code font size ---
+
+$if(highlighting-macros)$
+\renewenvironment{Shaded} {\begin{snugshade}\small} {\end{snugshade}}
+$endif$
+
+% --- math ---
+
+\usepackage{amssymb} % better symbols like \varnothing. amsfonts inside (which support \mathbb etc.)
+
+% --- bibliography ---
+
+\addbibresource{$bibliography$}
+
+% --- hyperref ---
+
+\usepackage[colorlinks=true, allcolors=blue]{hyperref} % render refs as hyperlinks
+
+% --- floating ---
+
+\usepackage{float} % for better floating for tables and figures, such as "H" option for tables to make them stay HERE precisely
+\floatplacement{figure}{H}
+\floatplacement{table}{H}
+
+% --- main ---
+
+\title{$title$}
+
+$if(subtitle)$
+\subtitle{$subtitle$}
+$endif$
+
+\author{$for(author)$$author$$sep$ \and $endfor$}
+
+\date{$date$$if(date-modified)$\thanks{\transmodified \space $date-modified$.}$endif$}
+
+\begin{document}
+
+\maketitle
+
+$if(abstract)$
+\begin{abstract}
+    $abstract$
+\end{abstract}
+$endif$
+
+$body$
+
+\printbibliography
+
+\end{document}

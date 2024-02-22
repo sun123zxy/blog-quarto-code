@@ -1,0 +1,112 @@
+\RequirePackage{xstring}
+\IfBeginWith{$lang$}{zh}{
+    \documentclass{_assets/suncnpre}
+    \def\transmodified{最后更新于}
+    \def\transtoc{目录}
+    \def\transreferences{参考文献}
+}{
+    \documentclass{_assets/sunenpre}
+    \def\transmodified{Last modified on}
+    \def\transtoc{Table of Contents}
+    \def\transreferences{References}
+}
+
+% --- pandoc ---
+
+\usepackage{subcaption}
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+$tightlist.tex()$
+$tables.tex()$
+$graphics.tex()$
+
+% --- adjust code font size ---
+
+$if(highlighting-macros)$
+\renewenvironment{Shaded} {\begin{snugshade}\scriptsize} {\end{snugshade}}
+$endif$
+
+% --- bibliography ---
+
+\addbibresource{$bibliography$}
+
+\makeatletter % force emph things in biblatex to be italic
+\renewrobustcmd*{\mkbibemph}{\mkbibitalic}
+\protected\long\def\blx@imc@mkbibemph#1{\blx@imc@mkbibitalic{#1}}
+\makeatother
+
+% --- theorem ---
+
+\setbeamertemplate{theorems}[numbered]
+\setbeamertemplate{caption}[numbered]
+
+% \addtobeamertemplate{proof begin}{\setbeamercolor{block title}{bg=black}}{}
+\AtBeginEnvironment{proof}{\setbeamercolor{block title}{bg=black}}
+\AtBeginEnvironment{solution}{\setbeamercolor{block title}{bg=black}}
+\AtBeginEnvironment{remark}{\setbeamercolor{block title}{bg=black}}
+
+% --- styles ---
+
+\usetheme{Madrid}
+\usefonttheme[onlymath]{serif}
+
+\hypersetup{
+    colorlinks=true,
+    urlcolor=violet,
+    linkcolor=, % default color for other links
+    citecolor=beamer@blendedblue,
+    anchorcolor=,
+    filecolor=
+}
+
+\newcommand{\myemph}[1]{{\usebeamercolor[fg]{structure} #1}}
+\renewcommand{\emph}{\myemph}
+\let\textbf\alert
+
+% --- structures ---
+
+\AtBeginSection[]
+{
+  \begin{frame}{\transtoc}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+\AtBeginSubsection[]
+{
+  \begin{frame}{\transtoc}
+    \tableofcontents[currentsubsection]
+  \end{frame}
+}
+
+% --- main ---
+
+\title{$title$}
+$if(subtitle)$
+\subtitle{$subtitle$}
+$endif$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+$if(institute)$
+\institute{$for(institute)$$institute$$sep$ \and $endfor$}
+$endif$
+\date{$date$$if(date-modified)$\thanks{\transmodified \space $date-modified$.}$endif$}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{\transtoc}
+  \tableofcontents
+\end{frame}
+
+$body$
+
+$if(bibliography)$
+\begin{frame}[allowframebreaks]{\transreferences}
+    \printbibliography[heading=none]
+\end{frame}
+$endif$
+
+\end{document}
