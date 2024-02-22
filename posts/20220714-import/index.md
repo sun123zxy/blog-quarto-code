@@ -5,6 +5,9 @@ date: 2022/07/14
 date-modified: 2022/07/14
 categories:
   - Python
+  
+format:
+  html: default
 ---
 
 好久以前就被 Python 的相对与绝对导入所困扰。去年粗浅探究后自以为完全理解，近来又因 `sys.path[0]` 和 `os.getcwd()` 的不一致而刷新了认知...

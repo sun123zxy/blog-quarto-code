@@ -7,6 +7,9 @@ categories:
   - OI
   - 数学
   - 题解
+  
+format:
+  html: default
 ---
 
 [bsoj7076](https://oj.bashu.com.cn/code/problempage.php?problem_id=7076)，没找到出处...

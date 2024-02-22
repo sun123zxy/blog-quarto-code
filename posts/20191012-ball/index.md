@@ -6,6 +6,9 @@ categories:
   - OI
   - 数学
   - 题解
+  
+format:
+  html: default
 ---
 
 ```

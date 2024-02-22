@@ -5,6 +5,9 @@ date-modified: 2020/12/02
 categories:
   - OI
   - 数学
+  
+format:
+  html: default
 ---
 
 ## 中国剩余定理 CRT

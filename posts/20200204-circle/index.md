@@ -6,6 +6,9 @@ date-modified: 2020/02/04
 categories:
   - OI
   - 题解
+  
+format:
+  html: default
 ---
 
 ## 经典

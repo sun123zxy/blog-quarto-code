@@ -7,6 +7,9 @@ categories:
   - OI
   - 数学
   - 题解
+  
+format:
+  html: default
 ---
 
 [传送门](https://www.luogu.com.cn/problem/P5364)

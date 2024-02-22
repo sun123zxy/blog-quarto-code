@@ -5,6 +5,9 @@ date-modified: 2020/11/18
 categories:
   - OI
   - 题解
+  
+format:
+  html: default
 ---
 
 [CodeChef-LECOINS Little Elephant and Colored Coins](https://www.codechef.com/problems/LECOINS)

@@ -6,6 +6,9 @@ categories:
   - OI
   - 原创题目
   - 题解
+  
+format:
+  html: default
 ---
 
 比赛用题面、题解、标程和数据生成器都挂在 [git@github.com:sun123zxy/spring.git](https://github.com/sun123zxy/spring) 上。

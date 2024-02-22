@@ -8,6 +8,9 @@ categories:
   - Minecraft
   - 音乐
   - Python
+  
+format:
+  html: default
 ---
 
 咕极必肝，肝极必咕。

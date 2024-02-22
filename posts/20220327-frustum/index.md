@@ -6,6 +6,9 @@ date-modified: 2022/03/27
 categories:
   - 数学
   - 意识流
+  
+format:
+  html: default
 ---
 
 前些天做到一个猜圆台体两端电阻阻值公式的题，刚想积分乱搞时突然想起——台体不是有体积公式的吗...

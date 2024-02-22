@@ -5,6 +5,9 @@ date-modified: 2019/08/28
 categories:
   - OI
   - 题解
+  
+format:
+  html: default
 ---
 
 [bsoj5089 文本编辑器](https://oj.bashu.com.cn/code/problempage.php?problem_id=5089)

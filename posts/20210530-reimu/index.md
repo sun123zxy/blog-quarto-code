@@ -6,6 +6,9 @@ date-modified: 2021/05/30
 categories:
   - 高考
   - 原创题目
+  
+format:
+  html: default
 ---
 
 ## Problem

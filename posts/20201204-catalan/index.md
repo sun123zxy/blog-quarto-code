@@ -5,6 +5,9 @@ date-modified: 2020/12/04
 categories:
   - OI
   - 题解
+  
+format:
+  html: default
 ---
 
 [bsoj7107](https://oj.bashu.com.cn/code/problempage.php?problem_id=7107) ，来源不明。

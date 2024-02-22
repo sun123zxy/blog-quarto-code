@@ -5,6 +5,9 @@ date-modified: 2019/12/21
 categories:
   - OI
   - 数学
+  
+format:
+  html: default
 ---
 
 ## 瞎扯

@@ -6,6 +6,9 @@ date-modified: 2020/03/08
 categories:
   - OI
   - 数学
+  
+format:
+  html: default
 ---
 
 [洛谷P3327 [SDOI2015]约数个数和](https://www.luogu.com.cn/problem/P3327)

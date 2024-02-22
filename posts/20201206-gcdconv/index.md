@@ -8,6 +8,9 @@ categories:
   - 原创题目
   - 题解
   - 意识流
+  
+format:
+  html: default
 ---
 
 比赛用题面、题解、标程和数据生成器均已挂在 [git@github.com:sun123zxy/gcdconv.git](https://github.com/sun123zxy/gcdconv) 上。

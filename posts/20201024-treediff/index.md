@@ -5,6 +5,9 @@ date-modified: 2020/10/24
 categories:
   - OI
   - 题解
+  
+format:
+  html: default
 ---
 
 emm，这很NOIP...

@@ -5,6 +5,9 @@ date-modified: 2021/08/13
 categories:
   - OI
   - 数学
+  
+format:
+  html: default
 ---
 
 upd 2021/08/13:

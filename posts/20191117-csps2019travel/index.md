@@ -7,6 +7,9 @@ categories:
   - OI
   - 游记
   - 回忆
+  
+format:
+  html: default
 ---
 
 ## Day -26

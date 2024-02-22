@@ -7,6 +7,9 @@ categories:
   - OI
   - 数学
   - 题解
+  
+format:
+  html: default
 ---
 
 [CodeChef-RNDRATIO Mysterious Ratio](https://www.codechef.com/problems/RNDRATIO)
