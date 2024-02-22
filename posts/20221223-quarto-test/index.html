@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="sun123zxy">
-<meta name="dcterms.date" content="2022-12-23">
 
-<title>sun123zxy’s blog - SunQuarTeX 中文学术写作示例文档</title>
+<title>sun123zxy’s blog - SunQuarTeX-cnart 测试文档</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -60,6 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -102,7 +102,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -111,6 +117,7 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -120,15 +127,42 @@ div.csl-indent {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
@@ -140,19 +174,19 @@ div.csl-indent {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../posts/about" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="../../posts/about"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -167,32 +201,24 @@ div.csl-indent {
   <ul>
   <li><a href="#前言" id="toc-前言" class="nav-link active" data-scroll-target="#前言"><span class="header-section-number">1</span> 前言</a></li>
   <li><a href="#文章结构测试" id="toc-文章结构测试" class="nav-link" data-scroll-target="#文章结构测试"><span class="header-section-number">2</span> 文章结构测试</a>
-  <ul>
-  <li><a href="#文章分节" id="toc-文章分节" class="nav-link" data-scroll-target="#文章分节"><span class="header-section-number">2.1</span> 文章分节</a>
-  <ul>
-  <li><a href="#sec-test" id="toc-sec-test" class="nav-link" data-scroll-target="#sec-test">文章分分节</a>
-  <ul>
-  <li><a href="#分分分节" id="toc-分分分节" class="nav-link" data-scroll-target="#分分分节">分分分节</a>
-  <ul>
-  <li><a href="#分分分分节" id="toc-分分分分节" class="nav-link" data-scroll-target="#分分分分节">分分分分节</a></li>
-  </ul></li>
-  </ul></li>
-  </ul></li>
+  <ul class="collapse">
+  <li><a href="#文章分节" id="toc-文章分节" class="nav-link" data-scroll-target="#文章分节"><span class="header-section-number">2.1</span> 文章分节</a></li>
   </ul></li>
   <li><a href="#图片表格列表测试" id="toc-图片表格列表测试" class="nav-link" data-scroll-target="#图片表格列表测试"><span class="header-section-number">3</span> 图片、表格、列表测试</a></li>
   <li><a href="#数学公式定理系统测试" id="toc-数学公式定理系统测试" class="nav-link" data-scroll-target="#数学公式定理系统测试"><span class="header-section-number">4</span> 数学公式、定理系统测试</a></li>
-  <li><a href="#数据可视化" id="toc-数据可视化" class="nav-link" data-scroll-target="#数据可视化"><span class="header-section-number">5</span> 数据可视化</a></li>
-  <li><a href="#html-专用测试" id="toc-html-专用测试" class="nav-link" data-scroll-target="#html-专用测试"><span class="header-section-number">6</span> HTML 专用测试</a>
-  <ul>
-  <li><a href="#代码块引用" id="toc-代码块引用" class="nav-link" data-scroll-target="#代码块引用"><span class="header-section-number">6.1</span> 代码块、引用</a></li>
-  <li><a href="#callouts" id="toc-callouts" class="nav-link" data-scroll-target="#callouts"><span class="header-section-number">6.2</span> Callouts</a></li>
+  <li><a href="#数据可视化table-figure-diagram" id="toc-数据可视化table-figure-diagram" class="nav-link" data-scroll-target="#数据可视化table-figure-diagram"><span class="header-section-number">5</span> 数据可视化（Table, Figure &amp; Diagram）</a></li>
+  <li><a href="#layout" id="toc-layout" class="nav-link" data-scroll-target="#layout"><span class="header-section-number">6</span> Layout</a></li>
+  <li><a href="#代码块和引用" id="toc-代码块和引用" class="nav-link" data-scroll-target="#代码块和引用"><span class="header-section-number">7</span> 代码块和引用</a></li>
+  <li><a href="#html-专用测试" id="toc-html-专用测试" class="nav-link" data-scroll-target="#html-专用测试"><span class="header-section-number">8</span> HTML 专用测试</a>
+  <ul class="collapse">
+  <li><a href="#callouts" id="toc-callouts" class="nav-link" data-scroll-target="#callouts"><span class="header-section-number">8.1</span> Callouts</a></li>
   </ul></li>
-  <li><a href="#文献引用测试" id="toc-文献引用测试" class="nav-link" data-scroll-target="#文献引用测试"><span class="header-section-number">7</span> 文献引用测试</a></li>
+  <li><a href="#文献引用测试" id="toc-文献引用测试" class="nav-link" data-scroll-target="#文献引用测试"><span class="header-section-number">9</span> 文献引用测试</a></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://data.nasa.gov/"><i class="bi bi-link-45deg"></i>NASA Open Data</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -219,14 +245,14 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 23, 2022</p>
+      <p class="date">2022年12月23日</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">April 28, 2023</p>
+      <p class="date-modified">2023年8月10日</p>
     </div>
   </div>
     
@@ -234,32 +260,34 @@ div.csl-indent {
   
 <div>
   <div class="abstract">
-    <div class="abstract-title">Abstract</div>
-    使用 Quarto Markdown 语法，支持输出至 HTML、PDF/LaTeX、MS Word 等多种格式的中文学术写作工具，覆盖交叉引用、插图绘制、定理系统等多种功能。
+    <div class="block-title">Abstract</div>
+    使用 Quarto Markdown 语法，支持输出至 HTML、PDF/LaTeX、MS Word 等多种格式的中文学术写作工具，覆盖交叉引用、插图绘制、定理系统等多种功能．
   </div>
 </div>
 
+
 </header>
+
 
 <section id="前言" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="前言"><span class="header-section-number">1</span> 前言</h2>
-<p>具体使用方法等参见 <a href="https://github.com/sun123zxy/sunquartex">sun123zxy/sunquartex</a>。</p>
+<p>具体使用方法等参见 <a href="https://github.com/sun123zxy/sunquartex">sun123zxy/sunquartex</a>．</p>
 </section>
 <section id="文章结构测试" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="文章结构测试"><span class="header-section-number">2</span> 文章结构测试</h2>
-<p>这一节测试文章结构。</p>
+<p>这一节测试文章结构．</p>
 <section id="文章分节" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="文章分节"><span class="header-section-number">2.1</span> 文章分节</h3>
-<p>非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子。</p>
+<p>非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子．</p>
 <section id="sec-test" class="level4">
 <h4 class="anchored" data-anchor-id="sec-test">文章分分节</h4>
-<p>Quarto 支持交叉引用。比如这一节的标题就已经被打上了标签。</p>
+<p>Quarto 支持交叉引用．比如这一节的标题就已经被打上了标签．</p>
 <section id="分分分节" class="level5">
 <h5 class="anchored" data-anchor-id="分分分节">分分分节</h5>
-<p>本节中我们测试交叉引用 <a href="#sec-test">Section&nbsp;2.1.1</a>。</p>
+<p>本节中我们测试交叉引用 <a href="#sec-test" class="quarto-xref">小节&nbsp;2.1.1</a>．</p>
 <section id="分分分分节" class="level6">
 <h6 class="anchored" data-anchor-id="分分分分节">分分分分节</h6>
-<p>这是最小的一级了。</p>
+<p>这是最小的一级了．</p>
 </section>
 </section>
 </section>
@@ -267,34 +295,42 @@ div.csl-indent {
 </section>
 <section id="图片表格列表测试" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="图片表格列表测试"><span class="header-section-number">3</span> 图片、表格、列表测试</h2>
-<p>这是 Quarto 的图标。</p>
-<div id="fig-quarto" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="quarto.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: 这是一张插图</figcaption>
+<p>这是 Quarto 的图标．</p>
+<div id="fig-quarto" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="quarto.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1: 这是一张插图
+</figcaption>
 </figure>
 </div>
-<p>交叉引用 <a href="#fig-quarto">Figure&nbsp;1</a> 当然也是可以的。</p>
-<p>这是一个紧凑列表。</p>
+<p>交叉引用 <a href="#fig-quarto" class="quarto-xref">图&nbsp;1</a> 当然也是可以的．</p>
+<p>这是一个紧凑列表．</p>
 <ul>
-<li>自反性。</li>
-<li>反对称性一个和非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子。</li>
-<li>传递性。</li>
+<li>自反性．</li>
+<li>反对称性一个和非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子．</li>
+<li>传递性．</li>
 </ul>
-<p>这是一个宽松列表。</p>
+<p>这是一个宽松列表．</p>
 <ul>
-<li><p>自反性。</p></li>
-<li><p>反对称性一个和非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子。</p>
-<p>还多加了一段。</p></li>
-<li><p>传递性。</p></li>
+<li><p>自反性．</p></li>
+<li><p>反对称性一个和非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子．</p>
+<p>还多加了一段．</p></li>
+<li><p>传递性．</p></li>
 </ul>
-<p>当然也可以使用 markdown 表格。例如 <a href="#tbl-cartesian-unsolved">Table&nbsp;1 (a)</a>.</p>
-<p>顺便测试以下多表格并列。加上 <a href="#tbl-power-unsolved">Table&nbsp;1 (b)</a>，它们共同组成了 <a href="#tbl-panel-unsolved">Table&nbsp;1</a>。</p>
-<div id="tbl-panel-unsolved" class="tbl-parent quarto-layout-panel anchored">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div id="tbl-cartesian-unsolved" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-panel-unsolved" style="flex-basis: 50.0%;justify-content: center;">
+<p>当然也可以使用 Markdown 表格．例如 <a href="#tbl-cartesian-unsolved" class="quarto-xref">表&nbsp;1 (a)</a>.</p>
+<p>多表格并列．加上 <a href="#tbl-power-unsolved" class="quarto-xref">表&nbsp;1 (b)</a>，它们共同组成了 <a href="#tbl-panel-unsolved" class="quarto-xref">表&nbsp;1</a>．</p>
+<div id="tbl-panel-unsolved" class="quarto-layout-panel anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<div aria-describedby="tbl-panel-unsolved-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-panel-unsolved" style="flex-basis: 50.0%;justify-content: center;">
+<div id="tbl-cartesian-unsolved" class="quarto-float anchored">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<div aria-describedby="tbl-cartesian-unsolved-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
-<caption>(a) 笛卡尔积</caption>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(L_i \times C_j\)</span></td>
@@ -323,9 +359,17 @@ div.csl-indent {
 </tbody>
 </table>
 </div>
-<div id="tbl-power-unsolved" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-panel-unsolved" style="flex-basis: 50.0%;justify-content: center;">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-cartesian-unsolved-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) 笛卡尔积
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-panel-unsolved" style="flex-basis: 50.0%;justify-content: center;">
+<div id="tbl-power-unsolved" class="quarto-float anchored">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<div aria-describedby="tbl-power-unsolved-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
-<caption>(b) 集合幂</caption>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><span class="math inline">\(L_i^{C_j}\)</span></td>
@@ -336,7 +380,7 @@ div.csl-indent {
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(2\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(4\)</span></td>
-<td style="text-align: center;"><span class="math inline">\(\mathbb N\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\mathbb R\)</span></td>
 <td style="text-align: center;"><span class="math inline">\(2^{\mathbb R}\)</span></td>
 </tr>
 <tr class="odd">
@@ -354,66 +398,101 @@ div.csl-indent {
 </tbody>
 </table>
 </div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-power-unsolved-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) 集合幂
+</figcaption>
+</figure>
 </div>
-<div class="panel-caption table-caption">
-<p>Table&nbsp;1: 相关集合的势（不完整版）</p>
 </div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-panel-unsolved-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;1: 相关集合的势（不完整版）
+</figcaption>
+</figure>
 </div>
 </section>
 <section id="数学公式定理系统测试" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="数学公式定理系统测试"><span class="header-section-number">4</span> 数学公式、定理系统测试</h2>
-<p>Quarto 的一大卖点。</p>
+<p>Quarto 的一大卖点．</p>
 <p>这一节我们测试数学相关内容. HTML 中的定理标号方式目前没有方法更改，但 LaTeX 中的定理标号可通过自行修改模板中 <code>amsthm</code> 宏包的定义实现.</p>
-<p>此外，根据 <a href="https://quarto.org/docs/authoring/markdown-basics.html#equations">Quarto - Markdown Basics # Equations</a> 和 <a href="https://github.com/quarto-dev/quarto-cli/discussions/1793">Defining LaTeX commands for HTML and PDF rendering - Discussion #1793</a> 和 <a href="https://quarto.org/docs/authoring/conditional.html">Quarto - Conditional Content</a>，按如下面方式自定义 macro 可确保其在 HTML、 LaTeX/PDF 和 MS Word 中都得到正确渲染。值得注意的是，由于 <code>\DeclareMathOperator</code> 只能在 LaTeX 的导言区使用，这里我们用 <code>\newcommand</code> + <code>\operatorname</code> 的方式替代。</p>
+<p>此外，根据 <a href="https://quarto.org/docs/authoring/markdown-basics.html#equations">Quarto - Markdown Basics # Equations</a> 和 <a href="https://github.com/quarto-dev/quarto-cli/discussions/1793">Defining LaTeX commands for HTML and PDF rendering - Discussion #1793</a> 和 <a href="https://quarto.org/docs/authoring/conditional.html">Quarto - Conditional Content</a>，按如下面方式自定义 macro 可确保其在 HTML、 LaTeX/PDF 和 MS Word 中都得到正确渲染．值得注意的是，由于 <code>\DeclareMathOperator</code> 只能在 LaTeX 的导言区使用，这里我们用 <code>\newcommand</code> + <code>\operatorname</code> 的方式替代．</p>
 <div class="hidden">
 <p><span class="math display">\[
 \newcommand{\ran}{\operatorname{ran}}
 \]</span></p>
 </div>
-<p>下面的公式使用了上面定义的 macro。 <span class="math display">\[
+<p>下面的公式使用了上面定义的 macro． <span class="math display">\[
 \operatorname{ran}A := \{ y \mid (x,y) \in A \}
 \]</span></p>
 <p>两个集合 <span class="math inline">\(A, B\)</span> 的笛卡尔积定义为 <span class="math display">\[
 A \times B = \{\langle x,y \rangle \mid x \in A \land y \in B \}
 \]</span></p>
 <p>显然，笛卡尔积不满足交换律和结合律. 在势的视角下，它的表现如何呢？</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <div id="thm-cartesian-preserve" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1 (笛卡尔积的保势性) </strong></span>这是一个有 caption 的定理.</p>
+<p><span class="theorem-title"><strong>定理 1 (笛卡尔积的保势性)</strong></span> 这是一个有 caption 的定理.</p>
 <p><span class="math display">\[
 A \preccurlyeq C \land B \preccurlyeq D \implies A \times B \preccurlyeq C \times D
 \]</span></p>
 </div>
+</div>
+</div>
+</div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>建立单射 <span class="math display">\[
+<p><span class="proof-title"><em>证明</em>. </span>建立单射 <span class="math display">\[
 \begin{aligned}
 \varphi: A \times B &amp;\to C \times D \\
 \langle x,y \rangle &amp;\mapsto \langle f(x), g(y) \rangle
 \end{aligned}
 \]</span> 即可，其中 <span class="math inline">\(f\)</span> 和 <span class="math inline">\(g\)</span> 是由 <span class="math inline">\(A \preccurlyeq C\)</span> 和 <span class="math inline">\(B \preccurlyeq D\)</span> 确定的单射.</p>
 </div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <div id="cor-random" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 1 </strong></span>等势意义下可用等势的集合替换参与笛卡尔积运算的集合，即 <span class="math display">\[
+<p><span class="theorem-title"><strong>推论 1</strong></span> 等势意义下可用等势的集合替换参与笛卡尔积运算的集合，即 <span class="math display">\[
 A \approx C \land B \approx D \implies A \times B \approx C \times D
 \]</span></p>
 <p>这是一个没有 caption 的定理.</p>
 </div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <div id="exm-rtimesn" class="theorem example">
-<p><span class="theorem-title"><strong>Example 1 </strong></span>证明 <span class="math display">\[
+<p><span class="theorem-title"><strong>例 1</strong></span> 证明 <span class="math display">\[
 \mathbb R \times \mathbb N \approx \mathbb N \times \mathbb R \approx \mathbb R
 \]</span></p>
 </div>
+</div>
+</div>
+</div>
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>利用 <a href="#thm-cartesian-preserve">Theorem&nbsp;1</a> 对 <span class="math inline">\(\mathbb R \times 2\)</span> 和 <span class="math inline">\(\mathbb R \times \mathbb R\)</span> 夹逼，立刻得到 <span class="math display">\[
+<p><span class="proof-title"><em>证明</em>. </span>利用 <a href="#thm-cartesian-preserve" class="quarto-xref">定理&nbsp;1</a> 对 <span class="math inline">\(\mathbb R \times 2\)</span> 和 <span class="math inline">\(\mathbb R \times \mathbb R\)</span> 夹逼，立刻得到 <span class="math display">\[
 \mathbb R \approx \mathbb R \times 2 \preccurlyeq \mathbb R \times \mathbb N \preccurlyeq \mathbb R \times \mathbb R \approx \mathbb R
 \implies \mathbb R \times \mathbb N \approx \mathbb N \times \mathbb R \approx \mathbb R
 \]</span></p>
 </div>
 </section>
-<section id="数据可视化" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="数据可视化"><span class="header-section-number">5</span> 数据可视化</h2>
-<p>Quarto 的另一大卖点。</p>
-<div class="cell" data-execution_count="1">
-<details>
+<section id="数据可视化table-figure-diagram" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="数据可视化table-figure-diagram"><span class="header-section-number">5</span> 数据可视化（Table, Figure &amp; Diagram）</h2>
+<p>Quarto 的另一大卖点．</p>
+<div id="cell-fig-polar" class="cell" data-execution_count="1">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -429,141 +508,614 @@ A \approx C \land B \approx D \implies A \times B \approx C \times D
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-polar" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-polar-output-1.png" width="450" height="439" class="figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;2: A line plot on a polar axis</figcaption>
+<div id="fig-polar" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-polar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-polar-output-1.png" width="450" height="439" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-polar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;2: A line plot on a polar axis
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>交叉引用 <a href="#fig-polar">Figure&nbsp;2</a> 当然也是可以的.</p>
-<p>另外，支持使用 GraphViz 或 Mermaid 绘制有向图或流程图。</p>
-<div class="cell" data-fig-width="6.25" data-fig-height="2.5">
+<p>交叉引用 <a href="#fig-polar" class="quarto-xref">图&nbsp;2</a> 当然也是可以的.</p>
+<p>这里再测试一些较复杂的并列效果．（<a href="#tbl-light-on" class="quarto-xref">表&nbsp;2</a>, <a href="#tbl-light-on-1" class="quarto-xref">表&nbsp;2 (a)</a>, <a href="#tbl-light-on-2" class="quarto-xref">表&nbsp;2 (b)</a>, <a href="#fig-light-on" class="quarto-xref">图&nbsp;3</a>, <a href="#fig-light-on-1" class="quarto-xref">图&nbsp;3 (a)</a>, <a href="#fig-light-on-2" class="quarto-xref">图&nbsp;3 (b)</a>）</p>
+<div id="62fadcfb" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Markdown, display</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tabulate <span class="im">import</span> tabulate</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> np.array([<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">200</span>,<span class="dv">300</span>,<span class="dv">400</span>,<span class="dv">500</span>,<span class="dv">600</span>,<span class="dv">700</span>,<span class="dv">800</span>,<span class="dv">900</span>,<span class="dv">1000</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="dv">1100</span>,<span class="dv">1110</span>,<span class="dv">1120</span>,<span class="dv">1130</span>,<span class="dv">1140</span>,<span class="dv">1150</span>,<span class="dv">1160</span>,<span class="dv">1170</span>,<span class="dv">1180</span>,<span class="dv">1190</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="dv">1200</span>,<span class="dv">1210</span>,<span class="dv">1220</span>,<span class="dv">1230</span>,<span class="dv">1240</span>,<span class="dv">1250</span>,<span class="dv">1260</span>,<span class="dv">1270</span>,<span class="dv">1280</span>,<span class="dv">1290</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="dv">1300</span>,<span class="dv">1400</span>,<span class="dv">1500</span>,<span class="dv">2000</span>,<span class="dv">4000</span>,math.inf])</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>U <span class="op">=</span> np.array([<span class="fl">24.2E-3</span>, <span class="fl">0.386</span>,<span class="fl">0.747</span>,<span class="fl">1.104</span>,<span class="fl">1.460</span>,<span class="fl">1.813</span>,<span class="fl">2.16</span>,<span class="fl">2.51</span>,<span class="fl">2.86</span>,<span class="fl">3.19</span>,<span class="fl">3.48</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fl">3.70</span>,<span class="fl">3.75</span>,<span class="fl">3.77</span>,<span class="fl">3.78</span>,<span class="fl">3.80</span>,<span class="fl">3.81</span>,<span class="fl">3.83</span>,<span class="fl">3.84</span>,<span class="fl">3.85</span>,<span class="fl">3.86</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fl">3.87</span>,<span class="fl">3.90</span>,<span class="fl">3.92</span>,<span class="fl">3.93</span>,<span class="fl">3.94</span>,<span class="fl">3.95</span>,<span class="fl">3.95</span>,<span class="fl">3.96</span>,<span class="fl">3.97</span>,<span class="fl">3.98</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fl">3.99</span>,<span class="fl">4.08</span>,<span class="fl">4.16</span>,<span class="fl">4.39</span>,<span class="fl">4.66</span>,<span class="fl">4.85</span>])</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>I <span class="op">=</span> np.array([<span class="fl">3.6</span>,<span class="fl">3.6</span>,<span class="fl">3.6</span>,<span class="fl">3.6</span>,<span class="fl">3.6</span>,<span class="fl">3.5</span>,<span class="fl">3.5</span>,<span class="fl">3.5</span>,<span class="fl">3.5</span>,<span class="fl">3.5</span>,<span class="fl">3.4</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fl">3.3</span>,<span class="fl">3.4</span>,<span class="fl">3.4</span>,<span class="fl">3.4</span>,<span class="fl">3.4</span>,<span class="fl">3.3</span>,<span class="fl">3.3</span>,<span class="fl">3.3</span>,<span class="fl">3.3</span>,<span class="fl">3.3</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fl">3.2</span>,<span class="fl">3.2</span>,<span class="fl">3.2</span>,<span class="fl">3.2</span>,<span class="fl">3.2</span>,<span class="fl">3.2</span>,<span class="fl">3.2</span>,<span class="fl">3.1</span>,<span class="fl">3.1</span>,<span class="fl">3.1</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fl">3.0</span>,<span class="fl">2.9</span>,<span class="fl">2.7</span>,<span class="fl">2.2</span>,<span class="fl">1.130</span>,<span class="fl">47.7E-3</span>])</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>P <span class="op">=</span> U<span class="op">*</span>I</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>table <span class="op">=</span> [[R[i], U[i], I[i], P[i]] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">11</span>)) <span class="op">+</span> [<span class="dv">11</span>,<span class="dv">21</span>,<span class="dv">31</span>,<span class="dv">32</span>,<span class="dv">33</span>,<span class="dv">34</span>,<span class="dv">35</span>,<span class="dv">36</span>]]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>display(Markdown(tabulate(table, headers<span class="op">=</span>[<span class="st">"R (Ω)"</span>, <span class="st">"U (V)"</span>, <span class="st">"I (mA)"</span>, <span class="st">"P (mW)"</span>])))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>table <span class="op">=</span> [[R[i], U[i], I[i], P[i]] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">12</span>, <span class="dv">31</span>)]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>display(Markdown(tabulate(table, headers<span class="op">=</span>[<span class="st">"R (Ω)"</span>, <span class="st">"U (V)"</span>, <span class="st">"I (mA)"</span>, <span class="st">"P (mW)"</span>])))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-light-on" class="quarto-layout-panel anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<div aria-describedby="tbl-light-on-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-display cell-output-markdown quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-light-on" style="flex-basis: 50.0%;justify-content: center;">
+<div id="tbl-light-on-1" class="do-not-create-environment quarto-float anchored">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<div aria-describedby="tbl-light-on-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="tbl-light-on-1" class="do-not-create-environment table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">R (Ω)</th>
+<th style="text-align: right;">U (V)</th>
+<th style="text-align: right;">I (mA)</th>
+<th style="text-align: right;">P (mW)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.0242</td>
+<td style="text-align: right;">3.6</td>
+<td style="text-align: right;">0.08712</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">0.386</td>
+<td style="text-align: right;">3.6</td>
+<td style="text-align: right;">1.3896</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">0.747</td>
+<td style="text-align: right;">3.6</td>
+<td style="text-align: right;">2.6892</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">300</td>
+<td style="text-align: right;">1.104</td>
+<td style="text-align: right;">3.6</td>
+<td style="text-align: right;">3.9744</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">400</td>
+<td style="text-align: right;">1.46</td>
+<td style="text-align: right;">3.6</td>
+<td style="text-align: right;">5.256</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">500</td>
+<td style="text-align: right;">1.813</td>
+<td style="text-align: right;">3.5</td>
+<td style="text-align: right;">6.3455</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">600</td>
+<td style="text-align: right;">2.16</td>
+<td style="text-align: right;">3.5</td>
+<td style="text-align: right;">7.56</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">700</td>
+<td style="text-align: right;">2.51</td>
+<td style="text-align: right;">3.5</td>
+<td style="text-align: right;">8.785</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">800</td>
+<td style="text-align: right;">2.86</td>
+<td style="text-align: right;">3.5</td>
+<td style="text-align: right;">10.01</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">900</td>
+<td style="text-align: right;">3.19</td>
+<td style="text-align: right;">3.5</td>
+<td style="text-align: right;">11.165</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">3.48</td>
+<td style="text-align: right;">3.4</td>
+<td style="text-align: right;">11.832</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1100</td>
+<td style="text-align: right;">3.7</td>
+<td style="text-align: right;">3.3</td>
+<td style="text-align: right;">12.21</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1200</td>
+<td style="text-align: right;">3.87</td>
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">12.384</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1300</td>
+<td style="text-align: right;">3.99</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">11.97</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1400</td>
+<td style="text-align: right;">4.08</td>
+<td style="text-align: right;">2.9</td>
+<td style="text-align: right;">11.832</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1500</td>
+<td style="text-align: right;">4.16</td>
+<td style="text-align: right;">2.7</td>
+<td style="text-align: right;">11.232</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">4.39</td>
+<td style="text-align: right;">2.2</td>
+<td style="text-align: right;">9.658</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4000</td>
+<td style="text-align: right;">4.66</td>
+<td style="text-align: right;">1.13</td>
+<td style="text-align: right;">5.2658</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">inf</td>
+<td style="text-align: right;">4.85</td>
+<td style="text-align: right;">0.0477</td>
+<td style="text-align: right;">0.231345</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-light-on-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) （粗）
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display cell-output-markdown quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-light-on" style="flex-basis: 50.0%;justify-content: center;">
+<div id="tbl-light-on-2" class="do-not-create-environment quarto-float anchored">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<div aria-describedby="tbl-light-on-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table id="tbl-light-on-2" class="do-not-create-environment table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">R (Ω)</th>
+<th style="text-align: right;">U (V)</th>
+<th style="text-align: right;">I (mA)</th>
+<th style="text-align: right;">P (mW)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1110</td>
+<td style="text-align: right;">3.75</td>
+<td style="text-align: right;">3.4</td>
+<td style="text-align: right;">12.75</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1120</td>
+<td style="text-align: right;">3.77</td>
+<td style="text-align: right;">3.4</td>
+<td style="text-align: right;">12.818</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1130</td>
+<td style="text-align: right;">3.78</td>
+<td style="text-align: right;">3.4</td>
+<td style="text-align: right;">12.852</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1140</td>
+<td style="text-align: right;">3.8</td>
+<td style="text-align: right;">3.4</td>
+<td style="text-align: right;">12.92</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1150</td>
+<td style="text-align: right;">3.81</td>
+<td style="text-align: right;">3.3</td>
+<td style="text-align: right;">12.573</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1160</td>
+<td style="text-align: right;">3.83</td>
+<td style="text-align: right;">3.3</td>
+<td style="text-align: right;">12.639</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1170</td>
+<td style="text-align: right;">3.84</td>
+<td style="text-align: right;">3.3</td>
+<td style="text-align: right;">12.672</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1180</td>
+<td style="text-align: right;">3.85</td>
+<td style="text-align: right;">3.3</td>
+<td style="text-align: right;">12.705</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1190</td>
+<td style="text-align: right;">3.86</td>
+<td style="text-align: right;">3.3</td>
+<td style="text-align: right;">12.738</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1200</td>
+<td style="text-align: right;">3.87</td>
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">12.384</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1210</td>
+<td style="text-align: right;">3.9</td>
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">12.48</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1220</td>
+<td style="text-align: right;">3.92</td>
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">12.544</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1230</td>
+<td style="text-align: right;">3.93</td>
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">12.576</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1240</td>
+<td style="text-align: right;">3.94</td>
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">12.608</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1250</td>
+<td style="text-align: right;">3.95</td>
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">12.64</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1260</td>
+<td style="text-align: right;">3.95</td>
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">12.64</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1270</td>
+<td style="text-align: right;">3.96</td>
+<td style="text-align: right;">3.1</td>
+<td style="text-align: right;">12.276</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1280</td>
+<td style="text-align: right;">3.97</td>
+<td style="text-align: right;">3.1</td>
+<td style="text-align: right;">12.307</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1290</td>
+<td style="text-align: right;">3.98</td>
+<td style="text-align: right;">3.1</td>
+<td style="text-align: right;">12.338</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-light-on-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) （细）
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-light-on-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+表&nbsp;2: 太阳能电池的负载特性
+</figcaption>
+</figure>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"U (V)"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"I (mA)"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>ax.plot(U, I, marker<span class="op">=</span><span class="st">"o"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"R (Ω)"</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"P (mW)"</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>ax.plot(R, P, marker<span class="op">=</span><span class="st">"o"</span>)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>ax.set_xlim((<span class="dv">0</span>, <span class="dv">2000</span>))</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-light-on" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-light-on-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-light-on" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-light-on-1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-light-on-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-light-on-output-1.png" data-ref-parent="fig-light-on" width="589" height="429" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-light-on-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) 输出电流与电压关系曲线
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-light-on" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-light-on-2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-light-on-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-light-on-output-2.png" data-ref-parent="fig-light-on" width="602" height="429" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-light-on-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) 输出功率与负载电阻关系曲线
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-light-on-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;3: 太阳能电池的负载特性
+</figcaption>
+</figure>
+</div>
+<p>另外，支持使用 GraphViz 或 Mermaid 绘制有向图或流程图．</p>
+<div class="cell" data-fig-width="6.25" data-fig-height="2.5" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-real" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
+<div id="fig-real" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-real-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
 <svg width="600" height="240" viewbox="0.00 0.00 422.00 310.40" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 306.4)">
-<title>
-G
-</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-306.4 418,-306.4 418,4 -4,4"></polygon> <!-- sup --> <g id="node1" class="node">
-<title>
-sup
-</title>
-<ellipse fill="none" stroke="black" cx="27" cy="-106.8" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="27" y="-102.6" font-family="Times,serif" font-size="14.00">A</text> </g> <!-- mono --> <g id="node2" class="node">
-<title>
-mono
-</title>
-<ellipse fill="none" stroke="black" cx="117" cy="-106.8" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="117" y="-102.6" font-family="Times,serif" font-size="14.00">B</text> </g> <!-- sup&#45;&gt;mono --> <g id="edge1" class="edge">
-<title>
-sup-&gt;mono
-</title>
-<path fill="none" stroke="black" d="M54.07,-106.8C62.67,-106.8 71.27,-106.8 79.87,-106.8"></path> <polygon fill="black" stroke="black" points="79.96,-110.3 89.96,-106.8 79.96,-103.3 79.96,-110.3"></polygon> </g> <!-- nested --> <g id="node3" class="node">
-<title>
-nested
-</title>
-<ellipse fill="none" stroke="black" cx="207" cy="-106.8" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="207" y="-102.6" font-family="Times,serif" font-size="14.00">C</text> </g> <!-- mono&#45;&gt;nested --> <g id="edge2" class="edge">
-<title>
-mono-&gt;nested
-</title>
-<path fill="none" stroke="black" d="M144.07,-106.8C152.67,-106.8 161.27,-106.8 169.87,-106.8"></path> <polygon fill="black" stroke="black" points="169.96,-110.3 179.96,-106.8 169.96,-103.3 169.96,-110.3"></polygon> </g> <!-- nested&#45;&gt;sup --> <g id="edge6" class="edge">
-<title>
-nested-&gt;sup
-</title>
-<path fill="none" stroke="black" d="M188.83,-93.14C172.85,-82.02 148.45,-67.2 124.5,-61 97.85,-54.1 69.61,-70.28 50.42,-85.28"></path> <polygon fill="black" stroke="black" points="48.02,-82.72 42.53,-91.78 52.47,-88.12 48.02,-82.72"></polygon> <text text-anchor="middle" x="121" y="-58.2" font-family="Times,serif" font-size="14.00">2</text> </g> <!-- bw --> <g id="node4" class="node">
-<title>
-bw
-</title>
-<ellipse fill="none" stroke="black" cx="387" cy="-106.8" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="387" y="-102.6" font-family="Times,serif" font-size="14.00">D</text> </g> <!-- nested&#45;&gt;bw --> <!-- accu --> <g id="node6" class="node">
-<title>
-accu
-</title>
-<ellipse fill="none" stroke="black" cx="297" cy="-106.8" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="297" y="-102.6" font-family="Times,serif" font-size="14.00">F</text> </g> <!-- nested&#45;&gt;accu --> <g id="edge8" class="edge">
-<title>
-nested-&gt;accu
-</title>
-<path fill="none" stroke="black" d="M234,-106.8C242.03,-106.8 250.97,-106.8 259.53,-106.8"></path> <polygon fill="black" stroke="black" points="259.71,-110.3 269.71,-106.8 259.7,-103.3 259.71,-110.3"></polygon> <text text-anchor="middle" x="252" y="-91.2" font-family="Times,serif" font-size="14.00">4</text> </g> <!-- finite --> <g id="node7" class="node">
-<title>
-finite
-</title>
-<ellipse fill="none" stroke="black" cx="252" cy="-284.4" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="252" y="-280.2" font-family="Times,serif" font-size="14.00">G</text> </g> <!-- nested&#45;&gt;finite --> <g id="edge7" class="edge">
-<title>
-nested-&gt;finite
-</title>
-<path fill="none" stroke="black" d="M211.31,-124.64C219.14,-155.19 235.74,-219.97 245.14,-256.64"></path> <polygon fill="black" stroke="black" points="241.83,-257.8 247.7,-266.61 248.61,-256.06 241.83,-257.8"></polygon> <text text-anchor="middle" x="237.5" y="-191.4" font-family="Times,serif" font-size="14.00">3</text> </g> <!-- cauchy --> <g id="node5" class="node">
-<title>
-cauchy
-</title>
-<ellipse fill="none" stroke="black" cx="228" cy="-18" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="228" y="-13.8" font-family="Times,serif" font-size="14.00">E</text> </g> <!-- bw&#45;&gt;cauchy --> <g id="edge4" class="edge">
-<title>
-bw-&gt;cauchy
-</title>
-<path fill="none" stroke="black" d="M366.78,-94.76C338.97,-79.58 288.77,-52.17 256.97,-34.82"></path> <polygon fill="black" stroke="black" points="258.59,-31.71 248.14,-29.99 255.24,-37.86 258.59,-31.71"></polygon> </g> <!-- lebesgue --> <g id="node8" class="node">
-<title>
-lebesgue
-</title>
-<ellipse fill="none" stroke="black" cx="368" cy="-195.6" rx="27" ry="18"></ellipse> <text text-anchor="middle" x="368" y="-191.4" font-family="Times,serif" font-size="14.00">H</text> </g> <!-- bw&#45;&gt;lebesgue --> <g id="edge11" class="edge">
-<title>
-bw-&gt;lebesgue
-</title>
-<path fill="none" stroke="black" d="M383.25,-124.95C380.59,-137.08 376.98,-153.58 373.94,-167.48"></path> <polygon fill="black" stroke="black" points="370.47,-166.97 371.75,-177.49 377.3,-168.47 370.47,-166.97"></polygon> <text text-anchor="middle" x="382.5" y="-147" font-family="Times,serif" font-size="14.00">7</text> </g> <!-- cauchy&#45;&gt;mono --> <g id="edge5" class="edge">
-<title>
-cauchy-&gt;mono
-</title>
-<path fill="none" stroke="black" d="M211.14,-32.18C192.72,-46.59 163.03,-69.8 141.92,-86.31"></path> <polygon fill="black" stroke="black" points="139.74,-83.58 134.02,-92.49 144.05,-89.09 139.74,-83.58"></polygon> <text text-anchor="middle" x="186.5" y="-58.2" font-family="Times,serif" font-size="14.00">1</text> </g> <!-- accu&#45;&gt;bw --> <g id="edge10" class="edge">
-<title>
-accu-&gt;bw
-</title>
-<path fill="none" stroke="black" d="M334.16,-106.8C339.24,-106.8 344.45,-106.8 349.54,-106.8"></path> <polygon fill="black" stroke="black" points="334,-103.3 324,-106.8 334,-110.3 334,-103.3"></polygon> <polygon fill="black" stroke="black" points="349.71,-110.3 359.71,-106.8 349.7,-103.3 349.71,-110.3"></polygon> <text text-anchor="middle" x="342" y="-91.2" font-family="Times,serif" font-size="14.00">6</text> </g> <!-- finite&#45;&gt;sup --> <g id="edge13" class="edge">
-<title>
-finite-&gt;sup
-</title>
-<path fill="none" stroke="black" d="M235.2,-270.29C195.96,-239.66 98.12,-163.3 51.91,-127.24"></path> <polygon fill="black" stroke="black" points="53.95,-124.39 43.91,-121 49.64,-129.91 53.95,-124.39"></polygon> <text text-anchor="middle" x="165.5" y="-191.4" font-family="Times,serif" font-size="14.00">9</text> </g> <!-- finite&#45;&gt;accu --> <g id="edge9" class="edge">
-<title>
-finite-&gt;accu
-</title>
-<path fill="none" stroke="black" d="M256.3,-266.61C264.12,-236.1 280.72,-171.32 290.13,-134.62"></path> <polygon fill="black" stroke="black" points="293.59,-135.19 292.69,-124.64 286.81,-133.46 293.59,-135.19"></polygon> <text text-anchor="middle" x="282.5" y="-191.4" font-family="Times,serif" font-size="14.00">5</text> </g> <!-- lebesgue&#45;&gt;finite --> <g id="edge12" class="edge">
-<title>
-lebesgue-&gt;finite
-</title>
-<path fill="none" stroke="black" d="M350.72,-209.6C336.77,-220.09 316.63,-235.21 299,-248.4 292.13,-253.54 284.68,-259.09 277.78,-264.23"></path> <polygon fill="black" stroke="black" points="275.35,-261.67 269.42,-270.45 279.53,-267.29 275.35,-261.67"></polygon> <text text-anchor="middle" x="322.5" y="-235.8" font-family="Times,serif" font-size="14.00">8</text> </g> </g>
+<title>G</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-306.4 418,-306.4 418,4 -4,4"></polygon>
+<!-- sup -->
+<g id="node1" class="node">
+<title>sup</title>
+<ellipse fill="none" stroke="black" cx="27" cy="-106.8" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="27" y="-102.6" font-family="Times,serif" font-size="14.00">A</text>
+</g>
+<!-- mono -->
+<g id="node2" class="node">
+<title>mono</title>
+<ellipse fill="none" stroke="black" cx="117" cy="-106.8" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="117" y="-102.6" font-family="Times,serif" font-size="14.00">B</text>
+</g>
+<!-- sup&#45;&gt;mono -->
+<g id="edge1" class="edge">
+<title>sup-&gt;mono</title>
+<path fill="none" stroke="black" d="M54.07,-106.8C62.67,-106.8 71.27,-106.8 79.87,-106.8"></path>
+<polygon fill="black" stroke="black" points="79.96,-110.3 89.96,-106.8 79.96,-103.3 79.96,-110.3"></polygon>
+</g>
+<!-- nested -->
+<g id="node3" class="node">
+<title>nested</title>
+<ellipse fill="none" stroke="black" cx="207" cy="-106.8" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="207" y="-102.6" font-family="Times,serif" font-size="14.00">C</text>
+</g>
+<!-- mono&#45;&gt;nested -->
+<g id="edge2" class="edge">
+<title>mono-&gt;nested</title>
+<path fill="none" stroke="black" d="M144.07,-106.8C152.67,-106.8 161.27,-106.8 169.87,-106.8"></path>
+<polygon fill="black" stroke="black" points="169.96,-110.3 179.96,-106.8 169.96,-103.3 169.96,-110.3"></polygon>
+</g>
+<!-- nested&#45;&gt;sup -->
+<g id="edge6" class="edge">
+<title>nested-&gt;sup</title>
+<path fill="none" stroke="black" d="M188.83,-93.14C172.85,-82.02 148.45,-67.2 124.5,-61 97.85,-54.1 69.61,-70.28 50.42,-85.28"></path>
+<polygon fill="black" stroke="black" points="48.02,-82.72 42.53,-91.78 52.47,-88.12 48.02,-82.72"></polygon>
+<text text-anchor="middle" x="121" y="-58.2" font-family="Times,serif" font-size="14.00">2</text>
+</g>
+<!-- bw -->
+<g id="node4" class="node">
+<title>bw</title>
+<ellipse fill="none" stroke="black" cx="387" cy="-106.8" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="387" y="-102.6" font-family="Times,serif" font-size="14.00">D</text>
+</g>
+<!-- nested&#45;&gt;bw -->
+<!-- accu -->
+<g id="node6" class="node">
+<title>accu</title>
+<ellipse fill="none" stroke="black" cx="297" cy="-106.8" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="297" y="-102.6" font-family="Times,serif" font-size="14.00">F</text>
+</g>
+<!-- nested&#45;&gt;accu -->
+<g id="edge8" class="edge">
+<title>nested-&gt;accu</title>
+<path fill="none" stroke="black" d="M234,-106.8C242.03,-106.8 250.97,-106.8 259.53,-106.8"></path>
+<polygon fill="black" stroke="black" points="259.71,-110.3 269.71,-106.8 259.7,-103.3 259.71,-110.3"></polygon>
+<text text-anchor="middle" x="252" y="-91.2" font-family="Times,serif" font-size="14.00">4</text>
+</g>
+<!-- finite -->
+<g id="node7" class="node">
+<title>finite</title>
+<ellipse fill="none" stroke="black" cx="252" cy="-284.4" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="252" y="-280.2" font-family="Times,serif" font-size="14.00">G</text>
+</g>
+<!-- nested&#45;&gt;finite -->
+<g id="edge7" class="edge">
+<title>nested-&gt;finite</title>
+<path fill="none" stroke="black" d="M211.31,-124.64C219.14,-155.19 235.74,-219.97 245.14,-256.64"></path>
+<polygon fill="black" stroke="black" points="241.83,-257.8 247.7,-266.61 248.61,-256.06 241.83,-257.8"></polygon>
+<text text-anchor="middle" x="237.5" y="-191.4" font-family="Times,serif" font-size="14.00">3</text>
+</g>
+<!-- cauchy -->
+<g id="node5" class="node">
+<title>cauchy</title>
+<ellipse fill="none" stroke="black" cx="228" cy="-18" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="228" y="-13.8" font-family="Times,serif" font-size="14.00">E</text>
+</g>
+<!-- bw&#45;&gt;cauchy -->
+<g id="edge4" class="edge">
+<title>bw-&gt;cauchy</title>
+<path fill="none" stroke="black" d="M366.78,-94.76C338.97,-79.58 288.77,-52.17 256.97,-34.82"></path>
+<polygon fill="black" stroke="black" points="258.59,-31.71 248.14,-29.99 255.24,-37.86 258.59,-31.71"></polygon>
+</g>
+<!-- lebesgue -->
+<g id="node8" class="node">
+<title>lebesgue</title>
+<ellipse fill="none" stroke="black" cx="368" cy="-195.6" rx="27" ry="18"></ellipse>
+<text text-anchor="middle" x="368" y="-191.4" font-family="Times,serif" font-size="14.00">H</text>
+</g>
+<!-- bw&#45;&gt;lebesgue -->
+<g id="edge11" class="edge">
+<title>bw-&gt;lebesgue</title>
+<path fill="none" stroke="black" d="M383.25,-124.95C380.59,-137.08 376.98,-153.58 373.94,-167.48"></path>
+<polygon fill="black" stroke="black" points="370.47,-166.97 371.75,-177.49 377.3,-168.47 370.47,-166.97"></polygon>
+<text text-anchor="middle" x="382.5" y="-147" font-family="Times,serif" font-size="14.00">7</text>
+</g>
+<!-- cauchy&#45;&gt;mono -->
+<g id="edge5" class="edge">
+<title>cauchy-&gt;mono</title>
+<path fill="none" stroke="black" d="M211.14,-32.18C192.72,-46.59 163.03,-69.8 141.92,-86.31"></path>
+<polygon fill="black" stroke="black" points="139.74,-83.58 134.02,-92.49 144.05,-89.09 139.74,-83.58"></polygon>
+<text text-anchor="middle" x="186.5" y="-58.2" font-family="Times,serif" font-size="14.00">1</text>
+</g>
+<!-- accu&#45;&gt;bw -->
+<g id="edge10" class="edge">
+<title>accu-&gt;bw</title>
+<path fill="none" stroke="black" d="M334.16,-106.8C339.24,-106.8 344.45,-106.8 349.54,-106.8"></path>
+<polygon fill="black" stroke="black" points="334,-103.3 324,-106.8 334,-110.3 334,-103.3"></polygon>
+<polygon fill="black" stroke="black" points="349.71,-110.3 359.71,-106.8 349.7,-103.3 349.71,-110.3"></polygon>
+<text text-anchor="middle" x="342" y="-91.2" font-family="Times,serif" font-size="14.00">6</text>
+</g>
+<!-- finite&#45;&gt;sup -->
+<g id="edge13" class="edge">
+<title>finite-&gt;sup</title>
+<path fill="none" stroke="black" d="M235.2,-270.29C195.96,-239.66 98.12,-163.3 51.91,-127.24"></path>
+<polygon fill="black" stroke="black" points="53.95,-124.39 43.91,-121 49.64,-129.91 53.95,-124.39"></polygon>
+<text text-anchor="middle" x="165.5" y="-191.4" font-family="Times,serif" font-size="14.00">9</text>
+</g>
+<!-- finite&#45;&gt;accu -->
+<g id="edge9" class="edge">
+<title>finite-&gt;accu</title>
+<path fill="none" stroke="black" d="M256.3,-266.61C264.12,-236.1 280.72,-171.32 290.13,-134.62"></path>
+<polygon fill="black" stroke="black" points="293.59,-135.19 292.69,-124.64 286.81,-133.46 293.59,-135.19"></polygon>
+<text text-anchor="middle" x="282.5" y="-191.4" font-family="Times,serif" font-size="14.00">5</text>
+</g>
+<!-- lebesgue&#45;&gt;finite -->
+<g id="edge12" class="edge">
+<title>lebesgue-&gt;finite</title>
+<path fill="none" stroke="black" d="M350.72,-209.6C336.77,-220.09 316.63,-235.21 299,-248.4 292.13,-253.54 284.68,-259.09 277.78,-264.23"></path>
+<polygon fill="black" stroke="black" points="275.35,-261.67 269.42,-270.45 279.53,-267.29 275.35,-261.67"></polygon>
+<text text-anchor="middle" x="322.5" y="-235.8" font-family="Times,serif" font-size="14.00">8</text>
+</g>
+</g>
 </svg>
 </div>
-<figcaption class="figure-caption">Figure&nbsp;3: GraphViz 有向图</figcaption>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-real-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;4: GraphViz 有向图
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="html-专用测试" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="html-专用测试"><span class="header-section-number">6</span> HTML 专用测试</h2>
-<p>目前暂未处理 LaTeX/PDF 格式的代码高亮和 callout，MS Word 格式可兼容但效果不佳。本节测试内容不会在 LaTeX/PDF 格式下被渲染。</p>
-<section id="代码块引用" class="level3" data-number="6.1">
-<h3 data-number="6.1" class="anchored" data-anchor-id="代码块引用"><span class="header-section-number">6.1</span> 代码块、引用</h3>
-<p>本节测试代码块和引用。</p>
-<blockquote class="blockquote">
-<p>这是一个引用块和一个非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子。</p>
-</blockquote>
-<p>Quarto 具有 5 种 callout 类型：<code>note</code>，<code>warning</code>，<code>important</code>，<code>tip</code>，和 <code>caution</code>。</p>
-<p>下面是代码块。</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> r</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  subplot_kw <span class="op">=</span> {<span class="st">'projection'</span>: <span class="st">'polar'</span>} </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>ax.plot(theta, r)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>ax.set_rticks([<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>])</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="layout" class="level2 page-columns page-full" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="layout"><span class="header-section-number">6</span> Layout</h2>
+<p>如 <a href="https://quarto.org/docs/authoring/article-layout.html">Quarto - Article Layout</a> 所述，有时可让文章某些部分超出常规的宽度限制．此功能主要在 HTML 中使用，PDF 中部分生效，其它格式不生效．</p>
+<div class="column-page">
+<table class="table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 19%">
+<col style="width: 19%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(n\)</span> 个球</th>
+<th style="text-align: center;"><span class="math inline">\(r\)</span> 个盒</th>
+<th style="text-align: center;">空盒</th>
+<th style="text-align: center;">递推或封闭形式</th>
+<th style="text-align: center;">生成函数</th>
+<th style="text-align: center;">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">有标号</td>
+<td style="text-align: center;">无标号</td>
+<td style="text-align: center;">不允许</td>
+<td style="text-align: center;"><span class="math display">\[{n \brace r} = r {n-1 \brace r} + {n-1 \brace r-1}\]</span></td>
+<td style="text-align: center;"><span class="math display">\[\mathrm{EGF}(x)=\frac {(e^x - 1)^r}{r!}\]</span></td>
+<td style="text-align: center;">第二类 Stirling 数</td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
-<section id="callouts" class="level3" data-number="6.2">
-<h3 data-number="6.2" class="anchored" data-anchor-id="callouts"><span class="header-section-number">6.2</span> Callouts</h3>
+<section id="代码块和引用" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="代码块和引用"><span class="header-section-number">7</span> 代码块和引用</h2>
+<p>下面是代码块．</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.01</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>theta <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> r</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  subplot_kw <span class="op">=</span> {<span class="st">'projection'</span>: <span class="st">'polar'</span>} </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>ax.plot(theta, r)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>ax.set_rticks([<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>])</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>下面是引用块和一个非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子．</p>
+<blockquote class="blockquote">
+<p>这是一个引用块和一个非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子．</p>
+</blockquote>
+</section>
+<section id="html-专用测试" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="html-专用测试"><span class="header-section-number">8</span> HTML 专用测试</h2>
+<p>目前暂未处理 LaTeX/PDF 格式的 callout，MS Word 格式可兼容但效果不佳．本节后续内容将不会在 LaTeX/PDF 格式下被渲染．</p>
+<section id="callouts" class="level3" data-number="8.1">
+<h3 data-number="8.1" class="anchored" data-anchor-id="callouts"><span class="header-section-number">8.1</span> Callouts</h3>
+<p>Quarto 具有 5 种 callout 类型：<code>note</code>，<code>warning</code>，<code>important</code>，<code>tip</code>，和 <code>caution</code>．</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -574,7 +1126,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>普通的 note callout。</p>
+<p>普通的 note callout．</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-warning callout-titled">
@@ -587,10 +1139,10 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>这是 warning callout 和一个和非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子。</p>
+<p>这是 warning callout 和一个和非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子．</p>
 </div>
 </div>
-<p>这是两个 callout 中间的一个段落。</p>
+<p>这是两个 callout 中间的一个段落．</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -601,7 +1153,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>这是 important callout。</p>
+<p>这是 important callout．</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -614,7 +1166,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>这是有 caption 的 callout。</p>
+<p>这是有 caption 的 callout．</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-caution callout-titled">
@@ -629,7 +1181,7 @@ Important
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>开启 collapse 的可折叠 caution callout。</p>
+<p>开启 collapse 的可折叠 caution callout．</p>
 </div>
 </div>
 </div>
@@ -639,7 +1191,7 @@ Important
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>simple 风格的 callout 和一个和非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子。</p>
+<p>simple 风格的 callout 和一个和非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子．</p>
 </div>
 </div>
 </div>
@@ -649,44 +1201,44 @@ Important
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>minimal 风格的 callout 和一个和非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子。</p>
+<p>minimal 风格的 callout 和一个和非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子．</p>
 </div>
 </div>
 </div>
 </section>
 </section>
-<section id="文献引用测试" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="文献引用测试"><span class="header-section-number">7</span> 文献引用测试</h2>
-<p>人脸识别是以人面部特征作为识别个体身份的一种个体生物特征识别方法 <span class="citation" data-cites="define"><a href="#ref-define" role="doc-biblioref">[1]</a></span>。……人脸识别的研究最早可追溯到上世纪 60 年代，Bledsoe and Chan 研究了编程计算机识别人脸的方法<span class="citation" data-cites="history"><a href="#ref-history" role="doc-biblioref">[2]</a></span>。随后，萌芽期的人脸识别技术经历多轮蜕变，在发展中逐渐完善。然而，人脸识别的主要难点在于不同个体的人脸结构并无大异，而同一个体的人脸在不同表情、年龄、妆饰、光照等干扰因素下又往往差异显著<span class="citation" data-cites="technical"><a href="#ref-technical" role="doc-biblioref">[3]</a></span>，这要求人脸识别技术既要克服类内因素的干扰，同时又要加强类间差距的显著性，而早期人脸识别方法关注人脸几何特征，识别效果不尽人意。为此，以 Eigenfaces<span class="citation" data-cites="eigenfaces"><a href="#ref-eigenfaces" role="doc-biblioref">[4]</a></span> 为代表的子空间学习识别方法和 Gabor<span class="citation" data-cites="gabor"><a href="#ref-gabor" role="doc-biblioref">[5]</a></span>、LBP<span class="citation" data-cites="lbp"><a href="#ref-lbp" role="doc-biblioref">[6]</a></span> 等局部特征分析的滤波器提取方法在各自领域都有所突破。2014 年，应用新兴的深度卷积神经网络技术，DeepFace<span class="citation" data-cites="deepface"><a href="#ref-deepface" role="doc-biblioref">[7]</a></span> 横空出世，以 97.35% 的 LFW 基准数据集识别准确率重塑了人脸识别领域的研究格局。随后，人脸识别技术迎来爆发式增长，并逐渐走进人们的日常生活之中。……个体层面，要加强公众的权利意识，塑造个人的“数字理性”<span class="citation" data-cites="guochunzhen"><a href="#ref-guochunzhen" role="doc-biblioref">[8]</a></span>。</p>
+<section id="文献引用测试" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="文献引用测试"><span class="header-section-number">9</span> 文献引用测试</h2>
+<p>人脸识别是以人面部特征作为识别个体身份的一种个体生物特征识别方法 <span class="citation" data-cites="define"><a href="#ref-define" role="doc-biblioref">[1]</a></span>．……人脸识别的研究最早可追溯到上世纪 60 年代，Bledsoe and Chan 研究了编程计算机识别人脸的方法<span class="citation" data-cites="history"><a href="#ref-history" role="doc-biblioref">[2]</a></span>．随后，萌芽期的人脸识别技术经历多轮蜕变，在发展中逐渐完善．然而，人脸识别的主要难点在于不同个体的人脸结构并无大异，而同一个体的人脸在不同表情、年龄、妆饰、光照等干扰因素下又往往差异显著<span class="citation" data-cites="technical"><a href="#ref-technical" role="doc-biblioref">[3]</a></span>，这要求人脸识别技术既要克服类内因素的干扰，同时又要加强类间差距的显著性，而早期人脸识别方法关注人脸几何特征，识别效果不尽人意．为此，以 Eigenfaces<span class="citation" data-cites="eigenfaces"><a href="#ref-eigenfaces" role="doc-biblioref">[4]</a></span> 为代表的子空间学习识别方法和 Gabor<span class="citation" data-cites="gabor"><a href="#ref-gabor" role="doc-biblioref">[5]</a></span>、LBP<span class="citation" data-cites="lbp"><a href="#ref-lbp" role="doc-biblioref">[6]</a></span> 等局部特征分析的滤波器提取方法在各自领域都有所突破．2014 年，应用新兴的深度卷积神经网络技术，DeepFace<span class="citation" data-cites="deepface"><a href="#ref-deepface" role="doc-biblioref">[7]</a></span> 横空出世，以 97.35% 的 LFW 基准数据集识别准确率重塑了人脸识别领域的研究格局．随后，人脸识别技术迎来爆发式增长，并逐渐走进人们的日常生活之中．……个体层面，要加强公众的权利意识，塑造个人的“数字理性”<span class="citation" data-cites="guochunzhen"><a href="#ref-guochunzhen" role="doc-biblioref">[8]</a></span>．</p>
 
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
 <div id="ref-define" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline">全国信息安全标准化技术委员会, <span>“《信息安全技术远程人脸识别系统技术要求》（GB/T38671-2020）.”</span> <a href="https://std.samr.gov.cn/gb/search/gbDetailed?id=A47A713B767814ABE05397BE0A0ABB25" class="uri">https://std.samr.gov.cn/gb/search/gbDetailed?id=A47A713B767814ABE05397BE0A0ABB25</a>, 2020.</div>
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">全国信息安全标准化技术委员会, <span>《《信息安全技术远程人脸识别系统技术要求》（GB/T38671-2020）》</span>. <a href="https://std.samr.gov.cn/gb/search/gbDetailed?id=A47A713B767814ABE05397BE0A0ABB25" class="uri">https://std.samr.gov.cn/gb/search/gbDetailed?id=A47A713B767814ABE05397BE0A0ABB25</a>, 2020年.</div>
 </div>
 <div id="ref-history" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">W. W. Bledsoe and H. Chan, <span>“A man-machine facial recognition system—some preliminary results,”</span> <em>Panoramic Research, Inc, Palo Alto, California., Technical Report PRI A</em>, vol. 19, p. 1965, 1965.</div>
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">W. W. Bledsoe 和 H. Chan, <span>《A man-machine facial recognition system—some preliminary results》</span>, <em>Panoramic Research, Inc, Palo Alto, California., Technical Report PRI A</em>, 卷 19, 页 1965, 1965.</div>
 </div>
 <div id="ref-technical" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[3] </div><div class="csl-right-inline">余璀璨 and 李慧斌, <span>“基于深度学习的人脸识别方法综述,”</span> <em>工程数学学报</em>, vol. 38, no. 4, p. 19, 2021.</div>
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">余璀璨 和 李慧斌, <span>《基于深度学习的人脸识别方法综述》</span>, <em>工程数学学报</em>, 卷 38, 期 4, 页 19, 2021.</div>
 </div>
 <div id="ref-eigenfaces" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[4] </div><div class="csl-right-inline">M. Turk and A. Pentland, <span>“Eigenfaces for recognition,”</span> <em>Journal of Cognitive Neuroscience</em>, vol. 3, no. 1, pp. 71–86.</div>
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">M. Turk 和 A. Pentland, <span>《Eigenfaces for Recognition》</span>, <em>Journal of Cognitive Neuroscience</em>, 卷 3, 期 1, 页 71–86.</div>
 </div>
 <div id="ref-gabor" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[5] </div><div class="csl-right-inline">C. Liu and H. Wechsler, <span>“A gabor feature classifier for face recognition,”</span> in <em>Proceedings eighth IEEE international conference on computer vision. ICCV 2001</em>, IEEE, 2001, pp. 270–275.</div>
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">C. Liu 和 H. Wechsler, <span>《A Gabor feature classifier for face recognition》</span>, 收入 <em>Proceedings Eighth IEEE International Conference on Computer Vision. ICCV 2001</em>, IEEE, 2001, 页 270–275.</div>
 </div>
 <div id="ref-lbp" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[6] </div><div class="csl-right-inline">T. Ahonen, A. Hadid, and M. Pietikäinen, <span>“Face recognition with local binary patterns,”</span> in <em>European conference on computer vision</em>, Springer, 2004, pp. 469–481.</div>
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">T. Ahonen, A. Hadid, 和 M. Pietikäinen, <span>《Face recognition with local binary patterns》</span>, 收入 <em>European conference on computer vision</em>, Springer, 2004, 页 469–481.</div>
 </div>
 <div id="ref-deepface" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[7] </div><div class="csl-right-inline">Y. Taigman, M. Yang, M. Ranzato, and L. Wolf, <span>“Closing the gap to human-level performance in face verification. deepface,”</span> in <em>Proceedings of the IEEE computer vision and pattern recognition (CVPR)</em>, p. 6.</div>
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">Y. Taigman, M. Yang, M. Ranzato, 和 L. Wolf, <span>《Closing the gap to human-level performance in face verification. deepface》</span>, 收入 <em>Proceedings of the IEEE Computer Vision and Pattern Recognition (CVPR)</em>, 页 6.</div>
 </div>
 <div id="ref-guochunzhen" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[8] </div><div class="csl-right-inline">郭春镇, <span>“数字人权时代人脸识别技术应用的治理,”</span> <em>现代法学</em>, vol. 42, no. 4, p. 18, 2020.</div>
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">郭春镇, <span>《数字人权时代人脸识别技术应用的治理》</span>, <em>现代法学</em>, 卷 42, 期 4, 页 18, 2020.</div>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -730,6 +1282,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -798,13 +1377,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'alternate';
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -883,10 +1464,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -896,8 +1496,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -910,6 +1519,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -953,6 +1681,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -978,6 +1707,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1035,38 +1790,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          // default icon
-          link.classList.add("external");
-      }
-    }
 });
 </script>
 <script src="https://giscus.app/client.js" data-repo="sun123zxy/blog-quarto-code" data-repo-id="R_kgDOIrPs5w" data-category="General" data-category-id="DIC_kwDOIrPs584CV4gd" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark_dimmed" data-lang="en" crossorigin="anonymous" async="">
 </script>
+<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
+<input type="hidden" id="giscus-alt-theme" value="light">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">sun123zxy’s blog | Powered by Quarto</div>
+    <div class="nav-footer-center">
+<p>sun123zxy’s blog | Powered by Quarto</p>
+</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -23,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -82,7 +82,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -91,6 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -100,15 +107,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
@@ -120,19 +154,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../posts/about" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="../../posts/about"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -146,68 +180,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#s-0" id="toc-s-0" class="nav-link active" data-scroll-target="#s-0">0. 引子 (update 2020/12/21)</a>
-  <ul>
+  <ul class="collapse">
   <li><a href="#s-0.1" id="toc-s-0.1" class="nav-link" data-scroll-target="#s-0.1">0.1 倒序同构序列计数</a></li>
   </ul></li>
   <li><a href="#s-1" id="toc-s-1" class="nav-link" data-scroll-target="#s-1">1. 群</a>
-  <ul>
-  <li><a href="#s-1.1" id="toc-s-1.1" class="nav-link" data-scroll-target="#s-1.1">1.1 群的概念</a>
-  <ul>
-  <li><a href="#封闭性" id="toc-封闭性" class="nav-link" data-scroll-target="#封闭性">封闭性</a></li>
-  <li><a href="#结合律" id="toc-结合律" class="nav-link" data-scroll-target="#结合律">结合律</a></li>
-  <li><a href="#单位元" id="toc-单位元" class="nav-link" data-scroll-target="#单位元">单位元</a></li>
-  <li><a href="#逆元" id="toc-逆元" class="nav-link" data-scroll-target="#逆元">逆元</a></li>
-  </ul></li>
+  <ul class="collapse">
+  <li><a href="#s-1.1" id="toc-s-1.1" class="nav-link" data-scroll-target="#s-1.1">1.1 群的概念</a></li>
   <li><a href="#s-1.2" id="toc-s-1.2" class="nav-link" data-scroll-target="#s-1.2">1.2 更抽象的群</a></li>
   <li><a href="#s-1.3" id="toc-s-1.3" class="nav-link" data-scroll-target="#s-1.3">1.3 提示</a></li>
   </ul></li>
   <li><a href="#s-2" id="toc-s-2" class="nav-link" data-scroll-target="#s-2">2. Burnside</a>
-  <ul>
-  <li><a href="#s-2.1" id="toc-s-2.1" class="nav-link" data-scroll-target="#s-2.1">2.1 等价</a>
-  <ul>
-  <li><a href="#自反性" id="toc-自反性" class="nav-link" data-scroll-target="#自反性">自反性</a></li>
-  <li><a href="#对称性" id="toc-对称性" class="nav-link" data-scroll-target="#对称性">对称性</a></li>
-  <li><a href="#传递性" id="toc-传递性" class="nav-link" data-scroll-target="#传递性">传递性</a></li>
-  </ul></li>
+  <ul class="collapse">
+  <li><a href="#s-2.1" id="toc-s-2.1" class="nav-link" data-scroll-target="#s-2.1">2.1 等价</a></li>
   <li><a href="#s-2.2" id="toc-s-2.2" class="nav-link" data-scroll-target="#s-2.2">2.2 等价类及等价类计数</a></li>
-  <li><a href="#s-2.3" id="toc-s-2.3" class="nav-link" data-scroll-target="#s-2.3">2.3 弱化版</a>
-  <ul>
-  <li><a href="#s-2.3.1" id="toc-s-2.3.1" class="nav-link" data-scroll-target="#s-2.3.1">2.3.1 引理</a></li>
-  <li><a href="#s-2.3.2" id="toc-s-2.3.2" class="nav-link" data-scroll-target="#s-2.3.2">2.3.2 弱化版Burnside</a></li>
-  </ul></li>
-  <li><a href="#s-2.4" id="toc-s-2.4" class="nav-link" data-scroll-target="#s-2.4">2.4 标准版</a>
-  <ul>
-  <li><a href="#s-2.4.1" id="toc-s-2.4.1" class="nav-link" data-scroll-target="#s-2.4.1">2.4.1 稳定核 &amp; 不动点</a></li>
-  <li><a href="#s-2.4.2" id="toc-s-2.4.2" class="nav-link" data-scroll-target="#s-2.4.2">2.4.2 引理1</a></li>
-  <li><a href="#s-2.4.3" id="toc-s-2.4.3" class="nav-link" data-scroll-target="#s-2.4.3">2.4.3 引理2</a>
-  <ul>
-  <li><a href="#封闭性-1" id="toc-封闭性-1" class="nav-link" data-scroll-target="#封闭性-1">封闭性</a></li>
-  <li><a href="#结合律-1" id="toc-结合律-1" class="nav-link" data-scroll-target="#结合律-1">结合律</a></li>
-  <li><a href="#单位元-1" id="toc-单位元-1" class="nav-link" data-scroll-target="#单位元-1">单位元</a></li>
-  <li><a href="#逆元-1" id="toc-逆元-1" class="nav-link" data-scroll-target="#逆元-1">逆元</a></li>
-  <li><a href="#extra-update-20200328" id="toc-extra-update-20200328" class="nav-link" data-scroll-target="#extra-update-20200328">Extra (update 2020/03/28)</a></li>
-  </ul></li>
-  <li><a href="#s-2.4.4" id="toc-s-2.4.4" class="nav-link" data-scroll-target="#s-2.4.4">2.4.4 引理3</a></li>
-  <li><a href="#s-2.4.5" id="toc-s-2.4.5" class="nav-link" data-scroll-target="#s-2.4.5">2.4.5 Burnside</a></li>
-  </ul></li>
+  <li><a href="#s-2.3" id="toc-s-2.3" class="nav-link" data-scroll-target="#s-2.3">2.3 弱化版</a></li>
+  <li><a href="#s-2.4" id="toc-s-2.4" class="nav-link" data-scroll-target="#s-2.4">2.4 标准版</a></li>
   <li><a href="#s-2.5" id="toc-s-2.5" class="nav-link" data-scroll-target="#s-2.5">2.5 Burnside的本质</a></li>
   </ul></li>
   <li><a href="#s-3" id="toc-s-3" class="nav-link" data-scroll-target="#s-3">3. 置换群</a>
-  <ul>
+  <ul class="collapse">
   <li><a href="#s-3.1" id="toc-s-3.1" class="nav-link" data-scroll-target="#s-3.1">3.1 置换</a></li>
   <li><a href="#s-3.2" id="toc-s-3.2" class="nav-link" data-scroll-target="#s-3.2">3.2 移位置换</a></li>
   <li><a href="#s-3.3" id="toc-s-3.3" class="nav-link" data-scroll-target="#s-3.3">3.3 移位置换图</a></li>
   <li><a href="#s-3.4" id="toc-s-3.4" class="nav-link" data-scroll-target="#s-3.4">3.4 移位置换环个数定理</a></li>
   </ul></li>
   <li><a href="#s-4" id="toc-s-4" class="nav-link" data-scroll-target="#s-4">4. Polya</a>
-  <ul>
+  <ul class="collapse">
   <li><a href="#s-4.1" id="toc-s-4.1" class="nav-link" data-scroll-target="#s-4.1">4.1 概念</a></li>
   <li><a href="#s-4.2" id="toc-s-4.2" class="nav-link" data-scroll-target="#s-4.2">4.2 推导</a></li>
   <li><a href="#s-4.3" id="toc-s-4.3" class="nav-link" data-scroll-target="#s-4.3">4.3 实现</a></li>
   </ul></li>
   <li><a href="#s-5" id="toc-s-5" class="nav-link" data-scroll-target="#s-5">5. 总结</a></li>
   <li><a href="#s-6" id="toc-s-6" class="nav-link" data-scroll-target="#s-6">6. 参考及后记</a>
-  <ul>
+  <ul class="collapse">
   <li><a href="#zkx-keke_046-彳亍-学长的-polya计数.pptx" id="toc-zkx-keke_046-彳亍-学长的-polya计数.pptx" class="nav-link" data-scroll-target="#zkx-keke_046-彳亍-学长的-polya计数.pptx">zkx / keke_046 / 彳亍 学长的 《Polya计数.pptx》</a></li>
   <li><a href="#算法导论第三版-31章-数论算法" id="toc-算法导论第三版-31章-数论算法" class="nav-link" data-scroll-target="#算法导论第三版-31章-数论算法">《算法导论》第三版 31章 数论算法</a></li>
   <li><a href="#后记" id="toc-后记" class="nav-link" data-scroll-target="#后记">后记</a></li>
@@ -250,12 +255,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 <div>
   <div class="abstract">
-    <div class="abstract-title">Abstract</div>
+    <div class="block-title">Abstract</div>
     《同分异构体计数从入门到精通》（不是）
   </div>
 </div>
 
+
 </header>
+
 
 <p>PS: 写的时候博主比较naive，所有的变换都是向右结合的，还请谅解（</p>
 <section id="s-0" class="level2">
@@ -304,7 +311,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>对于 <span class="math inline">\(\forall a \in S\)</span> ， <span class="math inline">\(\exists a^{-1} \in S\)</span> ，使得 <span class="math inline">\(a \circ a^{-1} = a^{-1} \circ a = I\)</span></p>
 </blockquote>
 <p>根据定义，逆元具有唯一性，即每个元素有且仅有一个逆元。</p>
-<p>证明：设 <span class="math inline">\(a\)</span> 有两个逆元 <span class="math inline">\(b,c\)</span> ，则 <span class="math inline">\(b = b \circ I = b \circ (a \circ c) = (b \circ a) \circ c = I \circ c = c\)</span> ，两者实质相同。</p>
+<p>证明：设 <span class="math inline">\(a\)</span> 有两个逆元 <span class="math inline">\(b,c\)</span> ，则 <span class="math inline">\(b = b \circ I  = b \circ (a \circ c) = (b \circ a) \circ c = I \circ c  = c\)</span> ，两者实质相同。</p>
 <p>这也同时说明了不存在两个元素 <span class="math inline">\(a, b\)</span> 的逆元是同一个元素 <span class="math inline">\(c\)</span>，因为 <span class="math inline">\(c\)</span> 只有唯一一个逆元。</p>
 <p>即逆元是一一对应的。</p>
 </section>
@@ -353,7 +360,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p><span class="math inline">\(a \sim b , b \sim c \Rightarrow a \sim c\)</span></p>
 </blockquote>
-<p>设 <span class="math inline">\(a \circ f = b, b \circ g = c\)</span>，因为 <span class="math inline">\(G\)</span> 是群，所以 <span class="math inline">\(f \circ g \in G\)</span>（封闭性），<span class="math inline">\(a \circ (f \circ g) = (a \circ f) \circ g = b \circ g = c\)</span>，满足等价定义。</p>
+<p>设 <span class="math inline">\(a \circ f  = b, b \circ g = c\)</span>，因为 <span class="math inline">\(G\)</span> 是群，所以 <span class="math inline">\(f \circ g \in G\)</span>（封闭性），<span class="math inline">\(a \circ (f \circ g) = (a \circ f) \circ g = b \circ g = c\)</span>，满足等价定义。</p>
 </section>
 </section>
 <section id="s-2.2" class="level3">
@@ -486,7 +493,7 @@ c \circ f = c \circ g \iff c \circ f \circ g^{-1} = c \iff (f \circ g^{-1}) \in 
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="burnside.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">来自zkx学长的课件《Polya计数.pptx》</figcaption>
+<figcaption>来自zkx学长的课件《Polya计数.pptx》</figcaption>
 </figure>
 </div>
 <blockquote class="blockquote">
@@ -542,7 +549,7 @@ k,k+1,...,n&amp;,1,...,k-1
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="tau62.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption"><span class="math inline">\(tau_6^2\)</span>移位置换图</figcaption>
+<figcaption><span class="math inline">\(tau_6^2\)</span>移位置换图</figcaption>
 </figure>
 </div>
 <p>如图便是 <span class="math inline">\(\tau_6^2\)</span> 形成的移位置换图，共有两个环。</p>
@@ -612,7 +619,7 @@ G = \{ \tau_n^k \ | \ k \in [0,n), k \in Z \}
 <p>提示一下实现上的一些细节。</p>
 <p>快速幂作为基本技巧就不提了；</p>
 <p>欧拉函数直接质因数分解求即可。这里会遇到一个小问题：外面一层枚举因数，里面一层分解质因数，这不 <span class="math inline">\(O(\sum_{d|n} \sqrt d)\)</span> 了吗？</p>
-<p>用一些<a href="../../posts/20230418-complexity/#exm-sigmazub">黑科技</a>可以证明一个比 <span class="math inline">\(O(n)\)</span> 更紧的上界是 <span class="math inline">\(O(n^{\frac 3 4})\)</span> ，实际上则有香港记者的速度（洛谷 <span class="math inline">\(n=10^9\)</span> ， <span class="math inline">\(10^3\)</span> 组数据可以随便跑过）</p>
+<p>用一些<a href="../..\posts/20230418-complexity/#exm-sigmazub">黑科技</a>可以证明一个比 <span class="math inline">\(O(n)\)</span> 更紧的上界是 <span class="math inline">\(O(n^{\frac 3 4})\)</span> ，实际上则有香港记者的速度（洛谷 <span class="math inline">\(n=10^9\)</span> ， <span class="math inline">\(10^3\)</span> 组数据可以随便跑过）</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">洛谷P4980 Polya定理</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">sun123zxy</span></span>
@@ -844,6 +851,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
   }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
   const toggleColorMode = (alternate) => {
     // Switch the stylesheets
     const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
@@ -910,13 +944,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'alternate';
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -995,10 +1031,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1008,8 +1063,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1022,6 +1086,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1065,6 +1248,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1090,6 +1274,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1147,38 +1357,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          // default icon
-          link.classList.add("external");
-      }
-    }
 });
 </script>
 <script src="https://giscus.app/client.js" data-repo="sun123zxy/blog-quarto-code" data-repo-id="R_kgDOIrPs5w" data-category="General" data-category-id="DIC_kwDOIrPs584CV4gd" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark_dimmed" data-lang="en" crossorigin="anonymous" async="">
 </script>
+<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
+<input type="hidden" id="giscus-alt-theme" value="light">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">sun123zxy’s blog | Powered by Quarto</div>
+    <div class="nav-footer-center">
+<p>sun123zxy’s blog | Powered by Quarto</p>
+</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 

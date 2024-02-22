@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="sun123zxy">
-<meta name="dcterms.date" content="2023-10-18">
 
 <title>sun123zxy’s blog - 一元多项式的 Delta 判别式</title>
 <style>
@@ -26,6 +25,7 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -68,7 +68,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -77,6 +83,7 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -86,15 +93,42 @@ div.csl-indent {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
@@ -106,19 +140,19 @@ div.csl-indent {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../posts/about" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="../../posts/about"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -132,7 +166,7 @@ div.csl-indent {
    
   <ul>
   <li><a href="#e-基m-基与-p-基" id="toc-e-基m-基与-p-基" class="nav-link active" data-scroll-target="#e-基m-基与-p-基"><span class="header-section-number">1</span> <span class="math inline">\(e\)</span>-基、<span class="math inline">\(m\)</span>-基与 <span class="math inline">\(p\)</span>-基</a>
-  <ul>
+  <ul class="collapse">
   <li><a href="#整数分拆" id="toc-整数分拆" class="nav-link" data-scroll-target="#整数分拆">整数分拆</a></li>
   <li><a href="#单项对称多项式" id="toc-单项对称多项式" class="nav-link" data-scroll-target="#单项对称多项式">单项对称多项式</a></li>
   <li><a href="#单项对称多项式-1" id="toc-单项对称多项式-1" class="nav-link" data-scroll-target="#单项对称多项式-1">单项对称多项式</a></li>
@@ -143,7 +177,7 @@ div.csl-indent {
   <li><a href="#其它基底" id="toc-其它基底" class="nav-link" data-scroll-target="#其它基底">其它基底</a></li>
   </ul></li>
   <li><a href="#delta-判别式" id="toc-delta-判别式" class="nav-link" data-scroll-target="#delta-判别式"><span class="header-section-number">2</span> Delta 判别式</a>
-  <ul>
+  <ul class="collapse">
   <li><a href="#vietas-formulas" id="toc-vietas-formulas" class="nav-link" data-scroll-target="#vietas-formulas">Vieta’s formulas</a></li>
   <li><a href="#vieta-定理与对称多项式基本定理" id="toc-vieta-定理与对称多项式基本定理" class="nav-link" data-scroll-target="#vieta-定理与对称多项式基本定理">Vieta 定理与对称多项式基本定理</a></li>
   <li><a href="#vandermonde-行列式" id="toc-vandermonde-行列式" class="nav-link" data-scroll-target="#vandermonde-行列式">Vandermonde 行列式</a></li>
@@ -153,7 +187,7 @@ div.csl-indent {
   <li><a href="#另一分解方法-1" id="toc-另一分解方法-1" class="nav-link" data-scroll-target="#另一分解方法-1">另一分解方法</a></li>
   </ul></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>Beamer</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -183,7 +217,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 18, 2023</p>
+      <p class="date">2023年10月18日</p>
     </div>
   </div>
   
@@ -191,7 +225,9 @@ div.csl-indent {
   </div>
   
 
+
 </header>
+
 
 <section id="e-基m-基与-p-基" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> <span class="math inline">\(e\)</span>-基、<span class="math inline">\(m\)</span>-基与 <span class="math inline">\(p\)</span>-基</h1>
@@ -214,12 +250,30 @@ div.csl-indent {
 </section>
 <section id="单项对称多项式-1" class="level3">
 <h3 class="anchored" data-anchor-id="单项对称多项式-1">单项对称多项式</h3>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <div id="exr-mono-term-count" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 1 </strong></span>对一给定的长度不超过 <span class="math inline">\(n\)</span> 的分拆 <span class="math inline">\(\lambda := (\lambda_1, \lambda_2, \dots \lambda_n)\)</span>，<span class="math inline">\(n\)</span> 元单项对称多项式 <span class="math inline">\(m_\lambda(\boldsymbol x)\)</span> 共有多少项？</p>
+<p><span class="theorem-title"><strong>习题 1</strong></span> 对一给定的长度不超过 <span class="math inline">\(n\)</span> 的分拆 <span class="math inline">\(\lambda := (\lambda_1, \lambda_2, \dots \lambda_n)\)</span>，<span class="math inline">\(n\)</span> 元单项对称多项式 <span class="math inline">\(m_\lambda(\boldsymbol x)\)</span> 共有多少项？</p>
+</div>
+</div>
+</div>
 </div>
 <p>在计数时根据分拆中重复项的分布情况进行消序．</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <div id="exr-lambda-dim" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 2 </strong></span><span class="math inline">\(n\)</span> 元 <span class="math inline">\(d\)</span> 次单项对称多项式共有多少种可能的构型？设 <span class="math inline">\(\Lambda_n^{(d)} \subset \Lambda_n\)</span> 由全体至多 <span class="math inline">\(d\)</span> 次的 <span class="math inline">\(n\)</span> 元对称多项式构成，其作为 <span class="math inline">\(K\)</span> 上线性空间的维数是多少？</p>
+<p><span class="theorem-title"><strong>习题 2</strong></span> <span class="math inline">\(n\)</span> 元 <span class="math inline">\(d\)</span> 次单项对称多项式共有多少种可能的构型？设 <span class="math inline">\(\Lambda_n^{(d)} \subset \Lambda_n\)</span> 由全体至多 <span class="math inline">\(d\)</span> 次的 <span class="math inline">\(n\)</span> 元对称多项式构成，其作为 <span class="math inline">\(K\)</span> 上线性空间的维数是多少？</p>
+</div>
+</div>
+</div>
 </div>
 <p>该问题等价于求满足 <span class="math inline">\(\mathcal S(\boldsymbol\lambda) = d\)</span>，<span class="math inline">\(\mathcal L(\boldsymbol\lambda) \leq n\)</span> 的所有可能分拆 <span class="math inline">\(\boldsymbol\lambda\)</span> 的数量，也即“将 <span class="math inline">\(d\)</span> 个无标号球放入 <span class="math inline">\(n\)</span> 个可空置的无标号盒”的可行方案数．</p>
 </section>
@@ -234,10 +288,19 @@ e_k(\boldsymbol x) := m_{\boldsymbol\lambda_k} (\boldsymbol x)
 </section>
 <section id="基本对称多项式-1" class="level3">
 <h3 class="anchored" data-anchor-id="基本对称多项式-1">基本对称多项式</h3>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <div id="thm-e-decomp" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1 (对称多项式基本定理) </strong></span>设 <span class="math inline">\(f(\boldsymbol x)\)</span> 是域 <span class="math inline">\(K\)</span> 上的 <span class="math inline">\(n\)</span> 元对称多项式，则存在唯一的 <span class="math inline">\(g(\boldsymbol x) \in K[\boldsymbol x]\)</span>，使得 <span class="math display">\[
+<p><span class="theorem-title"><strong>定理 1 (对称多项式基本定理)</strong></span> 设 <span class="math inline">\(f(\boldsymbol x)\)</span> 是域 <span class="math inline">\(K\)</span> 上的 <span class="math inline">\(n\)</span> 元对称多项式，则存在唯一的 <span class="math inline">\(g(\boldsymbol x) \in K[\boldsymbol x]\)</span>，使得 <span class="math display">\[
 f(\boldsymbol x) = g(e_1(\boldsymbol x),\dots,e_n(\boldsymbol x))
 \]</span></p>
+</div>
+</div>
+</div>
 </div>
 <p>该定理对交换环上的对称多项式仍然成立．这意味着若 <span class="math inline">\(f\)</span> 是整系数对称多项式，则 <span class="math inline">\(g\)</span> 也是整系数多项式．</p>
 <p>在定理的存在性证明中，为消去首项对应的单项对称多项式 <span class="math inline">\(m_{\boldsymbol\lambda}(\boldsymbol x)\)</span>，我们构造的若干个基本对称多项式的乘积恰为 <span class="math inline">\(\boldsymbol e_{\boldsymbol\lambda^\mathrm{T}}\)</span>．</p>
@@ -250,16 +313,31 @@ p_k(x_1,\dots,x_n) := x_1^k + x_2^k + \dots + x_n^k,\quad k \in \mathbb N
 \]</span> 使用单项对称多项式的记号，也可记为 <span class="math display">\[
 p_k(\boldsymbol x) := m_{(k,0,0,\dots)}
 \]</span> 特别的，<span class="math inline">\(p_0(\boldsymbol x) = n\)</span>．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <div id="thm-p-decomp" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2 </strong></span>设 <span class="math inline">\(\mathbb Q \subset K \subset \mathbb C\)</span> 是数域，设 <span class="math inline">\(f(\boldsymbol x)\)</span> 是域 <span class="math inline">\(K\)</span> 上的 <span class="math inline">\(n\)</span> 元对称多项式，则存在唯一的 <span class="math inline">\(g(\boldsymbol x) \in K[\boldsymbol x]\)</span>，使得 <span class="math inline">\(f(\boldsymbol x) = g(p_1(\boldsymbol x),\dots,p_n(\boldsymbol x))\)</span>．</p>
+<p><span class="theorem-title"><strong>定理 2</strong></span> 设 <span class="math inline">\(\mathbb Q \subset K \subset \mathbb C\)</span> 是数域，设 <span class="math inline">\(f(\boldsymbol x)\)</span> 是域 <span class="math inline">\(K\)</span> 上的 <span class="math inline">\(n\)</span> 元对称多项式，则存在唯一的 <span class="math inline">\(g(\boldsymbol x) \in K[\boldsymbol x]\)</span>，使得 <span class="math inline">\(f(\boldsymbol x) = g(p_1(\boldsymbol x),\dots,p_n(\boldsymbol x))\)</span>．</p>
+</div>
+</div>
+</div>
 </div>
 <p>一般地，结论对特征为 <span class="math inline">\(0\)</span> 的域 <span class="math inline">\(K\)</span> 也成立．</p>
 </section>
 <section id="幂和对称多项式-1" class="level3">
 <h3 class="anchored" data-anchor-id="幂和对称多项式-1">幂和对称多项式</h3>
-<p>以下定理递推地给出了幂和对称多项式 <span class="math inline">\(p_1,\dots,p_n\)</span> 与基本对称多项式 <span class="math inline">\(e_1,\dots,e_n\)</span> 间的关系．<a href="#thm-p-decomp">Theorem&nbsp;2</a> 的存在性部分可由这一定理给出．</p>
+<p>以下定理递推地给出了幂和对称多项式 <span class="math inline">\(p_1,\dots,p_n\)</span> 与基本对称多项式 <span class="math inline">\(e_1,\dots,e_n\)</span> 间的关系．<a href="#thm-p-decomp" class="quarto-xref">定理&nbsp;2</a> 的存在性部分可由这一定理给出．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <div id="thm-newton" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3 (Newton’s Identities) </strong></span><span class="math display">\[
+<p><span class="theorem-title"><strong>定理 3 (Newton’s Identities)</strong></span> <span class="math display">\[
 \begin{aligned}
 p_k &amp;= \sum_{i=1}^{k-1} (-1)^{i-1} e_i p_{k-i} + (-1)^{k-1} k e_k &amp; k &amp;= 1,2,\dots,n \\
 p_k &amp;= \sum_{i=1}^n (-1)^{i-1} e_i p_{k-i} &amp; k&amp;&gt;n \\
@@ -267,6 +345,9 @@ k e_k &amp;= \sum_{i=1}^k (-1)^{i-1} p_{i} e_{k-i} &amp; k &amp;= 1,2,\dots,n \\
 0 &amp;= \sum_{i=1}^n (-1)^{i-1} p_{i} e_{k-i} &amp; k &amp;&gt; n
 \end{aligned}
 \]</span></p>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="其它基底" class="level3">
@@ -279,8 +360,14 @@ k e_k &amp;= \sum_{i=1}^k (-1)^{i-1} p_{i} e_{k-i} &amp; k &amp;= 1,2,\dots,n \\
 <h1 data-number="2"><span class="header-section-number">2</span> Delta 判别式</h1>
 <section id="vietas-formulas" class="level3">
 <h3 class="anchored" data-anchor-id="vietas-formulas">Vieta’s formulas</h3>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <div id="thm-vieta" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 4 (Vieta’s formulas) </strong></span>设数域 <span class="math inline">\(K \subset \mathbb C\)</span> 上 <span class="math inline">\(n\)</span> 次首一多项式（monic polynomial） <span class="math display">\[
+<p><span class="theorem-title"><strong>定理 4 (Vieta’s formulas)</strong></span> 设数域 <span class="math inline">\(K \subset \mathbb C\)</span> 上 <span class="math inline">\(n\)</span> 次首一多项式（monic polynomial） <span class="math display">\[
 A(x) := x^n + a_{n-1} x^{n-1} + \dots + a_0 = (x-c_1)(x-c_2)\dots(x-c_n)
 \]</span> 其 <span class="math inline">\(n\)</span> 个复根分别为 <span class="math inline">\(\boldsymbol c := (c_1, c_2,\dots,c_n)\)</span>，则 <span class="math inline">\(A(x)\)</span> 的系数可由关于根的 <span class="math inline">\(n\)</span> 个 <span class="math inline">\(n\)</span> 元基本对称多项式表示 <span class="math display">\[
 a_{n-k} = e_k(-\boldsymbol c) = (-1)^k \sum_{1 \leq i_1 &lt; \dots &lt; i_k \leq n} c_{i_1} c_{i_2} \dots c_{i_k}
@@ -290,6 +377,9 @@ a_0 &amp;= e_n(-\boldsymbol c) = (-1)^n c_1 c_2 \dots c_n \\
 a_{n-1} &amp;= e_1(-\boldsymbol c) = -(c_1 + c_2 + \dots + c_n)
 \end{aligned}
 \]</span></p>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="vieta-定理与对称多项式基本定理" class="level3">
@@ -315,8 +405,8 @@ x_1^{n-1} &amp; x_2^{n-1} &amp; \dots &amp; x_n^{n-1}
 \end{pmatrix} = \prod_{1 \leq i &lt; j \leq n} (x_j - x_i)
 \end{split}
 \]</span> 它是否可用于判定重根？它是对称多项式吗？</p>
-<div class="remark proof">
-<p><span class="proof-title"><em>Remark</em>. </span><span class="math inline">\(\det V\)</span> 是一个斜对称多项式．事实上，<span class="math inline">\(\det V\)</span> 与所有对称多项式的乘积构成了全体斜对称多项式（alternating polynomials）．</p>
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span><span class="math inline">\(\det V\)</span> 是一个斜对称多项式．事实上，<span class="math inline">\(\det V\)</span> 与所有对称多项式的乘积构成了全体斜对称多项式（alternating polynomials）．</p>
 </div>
 </section>
 <section id="判别式" class="level3">
@@ -325,8 +415,17 @@ x_1^{n-1} &amp; x_2^{n-1} &amp; \dots &amp; x_n^{n-1}
 D(x_1,\dots,x_n) := (\det V)^2 = \prod_{1 \leq i &lt; j \leq n} (x_j - x_i)^2
 \]</span> 称其为（数域 <span class="math inline">\(K\)</span> 上）一元 <span class="math inline">\(n\)</span> 次首一多项式的<em>判别式</em>（Discriminant）．当代入的 <span class="math inline">\(\boldsymbol x := (x_1,\dots,x_n) \subset \mathbb C\)</span> 互不相同时，<span class="math inline">\(D(\boldsymbol x) \neq 0\)</span>；否则 <span class="math inline">\(D(\boldsymbol x) = 0\)</span>．</p>
 <p>根据对称多项式基本定理，存在唯一数域 <span class="math inline">\(K\)</span> 上的 <span class="math inline">\(n\)</span> 元多项式 <span class="math inline">\(d\)</span>，使得 <span class="math inline">\(d(e_1(\boldsymbol x),\dots,e_n(\boldsymbol x)) = D(\boldsymbol x)\)</span>．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <div id="prp-discriminant" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 1 </strong></span>数域 <span class="math inline">\(K \subset \mathbb C\)</span> 上的 <span class="math inline">\(n\)</span> 次首一多项式 <span class="math inline">\(f(x) := x^n + a_{n-1} x^{n-1} + \dots + a_0\)</span> 在复数域中有重根的充分必要条件是 <span class="math inline">\(d(a_{n-1},\dots,a_0) = 0\)</span>．</p>
+<p><span class="theorem-title"><strong>命题 1</strong></span> 数域 <span class="math inline">\(K \subset \mathbb C\)</span> 上的 <span class="math inline">\(n\)</span> 次首一多项式 <span class="math inline">\(f(x) := x^n + a_{n-1} x^{n-1} + \dots + a_0\)</span> 在复数域中有重根的充分必要条件是 <span class="math inline">\(d(a_{n-1},\dots,a_0) = 0\)</span>．</p>
+</div>
+</div>
+</div>
 </div>
 <p>这是因为 <span class="math inline">\(f(x)\)</span> 的 <span class="math inline">\(n\)</span> 个复根 <span class="math inline">\(\boldsymbol c := (c_1,\dots,c_n)\)</span> 满足 <span class="math display">\[
 D(-\boldsymbol c) = d(e_1(-\boldsymbol c),\dots,e_n(-\boldsymbol c)) = d(a_{n-1},\dots,a_0)
@@ -334,8 +433,17 @@ D(-\boldsymbol c) = d(e_1(-\boldsymbol c),\dots,e_n(-\boldsymbol c)) = d(a_{n-1}
 </section>
 <section id="判别式-1" class="level3">
 <h3 class="anchored" data-anchor-id="判别式-1">判别式</h3>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <div id="exr-2-discriminant" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 3 </strong></span>写出数域 <span class="math inline">\(K \subset \mathbb C\)</span> 上一元二次多项式 <span class="math inline">\(x^2 + bx + c\)</span> 的判别式．</p>
+<p><span class="theorem-title"><strong>习题 3</strong></span> 写出数域 <span class="math inline">\(K \subset \mathbb C\)</span> 上一元二次多项式 <span class="math inline">\(x^2 + bx + c\)</span> 的判别式．</p>
+</div>
+</div>
+</div>
 </div>
 <p>对次数更高的方程，直接使用消首项方法求解判别式 <span class="math inline">\(D(\boldsymbol x)\)</span> 在基本对称多项式下的表示 <span class="math inline">\(d(e_1,\dots,e_n)\)</span> 将变得相当繁琐．下面利用判别式与 Vandermonde 行列式的关系得到另一种分解方法．</p>
 </section>
@@ -367,8 +475,17 @@ p_{n-1}(\boldsymbol x) &amp; p_n(\boldsymbol x)   &amp; \dots     &amp; p_{2n-2}
 </section>
 <section id="另一分解方法-1" class="level3">
 <h3 class="anchored" data-anchor-id="另一分解方法-1">另一分解方法</h3>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <div id="exr-3-discriminant" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 4 </strong></span>写出数域 <span class="math inline">\(K \subset \mathbb C\)</span> 上不完全三次多项式 <span class="math inline">\(x^3 + bx + c\)</span> 的判别式．</p>
+<p><span class="theorem-title"><strong>习题 4</strong></span> 写出数域 <span class="math inline">\(K \subset \mathbb C\)</span> 上不完全三次多项式 <span class="math inline">\(x^3 + bx + c\)</span> 的判别式．</p>
+</div>
+</div>
+</div>
 </div>
 <p>本节主要参考 <span class="citation" data-cites="qiu-algebra lan-algebra wp_partition wp_alternating"><a href="#ref-qiu-algebra" role="doc-biblioref">[5]</a>–<a href="#ref-wp_alternating" role="doc-biblioref">[8]</a></span>．</p>
 
@@ -377,30 +494,30 @@ p_{n-1}(\boldsymbol x) &amp; p_n(\boldsymbol x)   &amp; \dots     &amp; p_{2n-2}
 </section>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
 <div id="ref-wp_sympoly" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline">Wikipedia, <span>“Symmetric polynomial.”</span> <a href="https://en.wikipedia.org/wiki/Symmetric_polynomial" class="uri">https://en.wikipedia.org/wiki/Symmetric_polynomial</a>.</div>
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">Wikipedia, <span>《Symmetric polynomial》</span>. <a href="https://en.wikipedia.org/wiki/Symmetric_polynomial" class="uri">https://en.wikipedia.org/wiki/Symmetric_polynomial</a>.</div>
 </div>
 <div id="ref-wp_e-basis" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">Wikipedia, <span>“Elementary symmetric polynomial.”</span> <a href="https://en.wikipedia.org/wiki/Elementary_symmetric_polynomial" class="uri">https://en.wikipedia.org/wiki/Elementary_symmetric_polynomial</a>.</div>
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">Wikipedia, <span>《Elementary symmetric polynomial》</span>. <a href="https://en.wikipedia.org/wiki/Elementary_symmetric_polynomial" class="uri">https://en.wikipedia.org/wiki/Elementary_symmetric_polynomial</a>.</div>
 </div>
 <div id="ref-wp_p-basis" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[3] </div><div class="csl-right-inline">Wikipedia, <span>“Power sum symmetric polynomial.”</span> <a href="https://en.wikipedia.org/wiki/Power_sum_symmetric_polynomial" class="uri">https://en.wikipedia.org/wiki/Power_sum_symmetric_polynomial</a>.</div>
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">Wikipedia, <span>《Power sum symmetric polynomial》</span>. <a href="https://en.wikipedia.org/wiki/Power_sum_symmetric_polynomial" class="uri">https://en.wikipedia.org/wiki/Power_sum_symmetric_polynomial</a>.</div>
 </div>
 <div id="ref-wp_newton" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[4] </div><div class="csl-right-inline">Wikipedia, <span>“Newton’s identities.”</span> <a href="https://en.wikipedia.org/wiki/Newton%27s_identities" class="uri">https://en.wikipedia.org/wiki/Newton%27s_identities</a>.</div>
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">Wikipedia, <span>《Newton’s identities》</span>. <a href="https://en.wikipedia.org/wiki/Newton%27s_identities" class="uri">https://en.wikipedia.org/wiki/Newton%27s_identities</a>.</div>
 </div>
 <div id="ref-qiu-algebra" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[5] </div><div class="csl-right-inline">丘维声, <span>“高等代数&nbsp;下册,”</span> 3rd ed.北京: 高等教育出版社, 2015, pp. 57–66.</div>
+<div class="csl-left-margin">[5] </div><div class="csl-right-inline">丘维声, <span>《高等代数&nbsp;下册》</span>, 3 本北京: 高等教育出版社, 2015, 页 57–66.</div>
 </div>
 <div id="ref-lan-algebra" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[6] </div><div class="csl-right-inline">蓝以中, <span>“高等代数简明教程（下册）,”</span> 2nd ed.北京: 北京大学出版社, 2007, pp. 213–217.</div>
+<div class="csl-left-margin">[6] </div><div class="csl-right-inline">蓝以中, <span>《高等代数简明教程（下册）》</span>, 2 本北京: 北京大学出版社, 2007, 页 213–217.</div>
 </div>
 <div id="ref-wp_partition" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[7] </div><div class="csl-right-inline">Wikipedia, <span>“Partition (number theory).”</span> <a href="https://en.wikipedia.org/wiki/Partition_(number_theory)" class="uri">https://en.wikipedia.org/wiki/Partition_(number_theory)</a>.</div>
+<div class="csl-left-margin">[7] </div><div class="csl-right-inline">Wikipedia, <span>《Partition (number theory)》</span>. <a href="https://en.wikipedia.org/wiki/Partition_(number_theory)" class="uri">https://en.wikipedia.org/wiki/Partition_(number_theory)</a>.</div>
 </div>
 <div id="ref-wp_alternating" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[8] </div><div class="csl-right-inline">Wikipedia, <span>“Alternating polynomial.”</span> <a href="https://en.wikipedia.org/wiki/Alternating_polynomial" class="uri">https://en.wikipedia.org/wiki/Alternating_polynomial</a>.</div>
+<div class="csl-left-margin">[8] </div><div class="csl-right-inline">Wikipedia, <span>《Alternating polynomial》</span>. <a href="https://en.wikipedia.org/wiki/Alternating_polynomial" class="uri">https://en.wikipedia.org/wiki/Alternating_polynomial</a>.</div>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -444,6 +561,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -512,13 +656,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'alternate';
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -597,10 +743,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -610,8 +775,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -624,6 +798,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -667,6 +960,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -692,6 +986,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -749,38 +1069,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          // default icon
-          link.classList.add("external");
-      }
-    }
 });
 </script>
 <script src="https://giscus.app/client.js" data-repo="sun123zxy/blog-quarto-code" data-repo-id="R_kgDOIrPs5w" data-category="General" data-category-id="DIC_kwDOIrPs584CV4gd" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark_dimmed" data-lang="en" crossorigin="anonymous" async="">
 </script>
+<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
+<input type="hidden" id="giscus-alt-theme" value="light">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">sun123zxy’s blog | Powered by Quarto</div>
+    <div class="nav-footer-center">
+<p>sun123zxy’s blog | Powered by Quarto</p>
+</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 

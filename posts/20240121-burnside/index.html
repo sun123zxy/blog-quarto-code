@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.550">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -26,6 +26,7 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -68,7 +69,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -77,6 +84,7 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -86,15 +94,42 @@ div.csl-indent {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
@@ -106,19 +141,19 @@ div.csl-indent {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../posts/about" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="../../posts/about"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="../../index.xml" rel="" target=""><i class="bi bi-rss" role="img">
+    <a class="nav-link" href="../../index.xml"> <i class="bi bi-rss" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -164,18 +199,29 @@ div.csl-indent {
   
 <div>
   <div class="abstract">
-    <div class="abstract-title">Abstract</div>
+    <div class="block-title">Abstract</div>
     我们详细重述并证明 Simultaneous Triangularization (H. Radjavi and P. Rosenthal) 中的 Burnside 定理及其相关推论．
   </div>
 </div>
 
+
 </header>
+
 
 <p>我们详细重述并证明 <span class="citation" data-cites="radjavi_simultaneous_2000"><a href="#ref-radjavi_simultaneous_2000" role="doc-biblioref">[1, Sec. 1.2]</a></span> 中的 Burnside 定理及其相关推论．</p>
 <p>下面设 <span class="math inline">\(V\)</span> 是复数域 <span class="math inline">\(\mathbb C\)</span> 上的有限维线性空间，<span class="math inline">\(\mathcal B(V)\)</span> 是 <span class="math inline">\(V\)</span> 上的线性变换代数；<span class="math inline">\(I\)</span> 是 <span class="math inline">\(\mathcal B(V)\)</span> 的单位元．</p>
 <p>Burnside 定理证明较长．为使逻辑顺畅，先做一些准备工作．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <div id="lem-cyclic-vector" class="theorem lemma">
-<p><span class="theorem-title"><strong>Lemma 1 </strong></span>设 <span class="math inline">\(\mathcal A\)</span> 是 <span class="math inline">\(\mathcal B(V)\)</span> 上的乘法半群，若 <span class="math inline">\(\mathcal A\)</span> 不可约，则对任意非零的 <span class="math inline">\(x \in V\)</span>，都有 <span class="math inline">\(\mathcal A x := \{ Ax : A \in \mathcal A \} = V\)</span>（此时称 <span class="math inline">\(x\)</span> 是 <span class="math inline">\(\mathcal A\)</span> 的循环向量）．</p>
+<p><span class="theorem-title"><strong>Lemma 1</strong></span> 设 <span class="math inline">\(\mathcal A\)</span> 是 <span class="math inline">\(\mathcal B(V)\)</span> 上的乘法半群，若 <span class="math inline">\(\mathcal A\)</span> 不可约，则对任意非零的 <span class="math inline">\(x \in V\)</span>，都有 <span class="math inline">\(\mathcal A x := \{ Ax : A \in \mathcal A \} = V\)</span>（此时称 <span class="math inline">\(x\)</span> 是 <span class="math inline">\(\mathcal A\)</span> 的循环向量）．</p>
+</div>
+</div>
+</div>
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>首先 <span class="math inline">\(\mathcal A \neq \{ 0 \}\)</span>，因为任何 <span class="math inline">\(V\)</span> 的子空间都是后者的不变子空间．</p>
@@ -184,11 +230,20 @@ div.csl-indent {
 <li>注意到 <span class="math inline">\(\mathcal A x := \{ A x : A \in \mathcal A \}\)</span> 是 <span class="math inline">\(\mathcal A\)</span> 的一个不变子空间，而 <span class="math inline">\(\mathcal A\)</span> 不可约，故 <span class="math inline">\(\mathcal A x = \{ 0 \}\)</span> 或 <span class="math inline">\(V\)</span>．由 <span class="math inline">\(x \neq 0\)</span> 和 <span class="math inline">\(\operatorname{Ker}\mathcal A = \{ 0 \}\)</span>，前者不可能发生，故 <span class="math inline">\(\mathcal A x = V\)</span>．</li>
 </ul>
 </div>
-<div class="remark proof">
+<div class="proof remark">
 <p><span class="proof-title"><em>Remark</em>. </span>事实上 <span class="math inline">\(\mathcal B(V)\)</span> 上半群的可约性等价于其线性生成的代数的可约性，见 <span class="citation" data-cites="radjavi_simultaneous_2000"><a href="#ref-radjavi_simultaneous_2000" role="doc-biblioref">[1]</a>, Definition 2.1.1</span>．</p>
 </div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <div id="cor-cyclic-vector-dual" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 1 </strong></span>设 <span class="math inline">\(V^*\)</span> 是 <span class="math inline">\(V\)</span> 的对偶空间．设 <span class="math inline">\(\mathcal A\)</span> 是 <span class="math inline">\(\mathcal B(V)\)</span> 上的乘法半群，<span class="math inline">\(\mathcal A^* := \{A^* : A \in \mathcal A \}\)</span> 是 <span class="math inline">\(\mathcal A\)</span> 的对偶线性变换构成的集合（显然它也是个半群）．若 <span class="math inline">\(\mathcal A\)</span> 不可约，则对任意非零的线性函数 <span class="math inline">\(\varphi \in V^*\)</span>，都有 <span class="math inline">\(\mathcal A^* \varphi := \{ A^* \varphi : A^* \in \mathcal A^* \} = \{ \varphi A : A \in \mathcal A \} = V^*\)</span>．</p>
+<p><span class="theorem-title"><strong>Corollary 1</strong></span> 设 <span class="math inline">\(V^*\)</span> 是 <span class="math inline">\(V\)</span> 的对偶空间．设 <span class="math inline">\(\mathcal A\)</span> 是 <span class="math inline">\(\mathcal B(V)\)</span> 上的乘法半群，<span class="math inline">\(\mathcal A^* := \{A^* : A \in \mathcal A \}\)</span> 是 <span class="math inline">\(\mathcal A\)</span> 的对偶线性变换构成的集合（显然它也是个半群）．若 <span class="math inline">\(\mathcal A\)</span> 不可约，则对任意非零的线性函数 <span class="math inline">\(\varphi \in V^*\)</span>，都有 <span class="math inline">\(\mathcal A^* \varphi := \{ A^* \varphi : A^* \in \mathcal A^* \} = \{  \varphi A : A \in \mathcal A \} = V^*\)</span>．</p>
+</div>
+</div>
+</div>
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>定义 <span class="math inline">\(\mathcal A^* \varphi\)</span> 的 annihilator <span class="math inline">\((\mathcal A^* \varphi)^0 := \{ x^{**} \in V^{**} : (\mathcal A^* \varphi)(x) = 0 \}\)</span>．由 <span class="math inline">\(\dim (A^* \varphi)^0 = \dim V^* - \dim (A^* \varphi)\)</span> <span class="citation" data-cites="axler_linear_2015">见 <a href="#ref-axler_linear_2015" role="doc-biblioref">[2, Sec. 3F]</a></span>， <span class="math display">\[
@@ -198,7 +253,7 @@ div.csl-indent {
 &amp;\iff \dim (\mathcal A^* \varphi)^0 = 0 \\
 &amp;\iff (\mathcal A^* \varphi)^0 = \{0\}
 \end{aligned}
-\]</span> 由 annihilator 的定义和 <a href="#lem-cyclic-vector">Lemma&nbsp;1</a>， <span class="math display">\[
+\]</span> 由 annihilator 的定义和 <a href="#lem-cyclic-vector" class="quarto-xref">Lemma&nbsp;1</a>， <span class="math display">\[
 \begin{aligned}
 (\mathcal A^* \varphi)^0 = \{0\}
 &amp;\iff (\mathcal A^* \varphi) x \neq \{0\},\quad \forall x \neq 0 \\
@@ -209,15 +264,33 @@ div.csl-indent {
 \]</span> 故最终我们得到 <span class="math inline">\(\mathcal A^* \varphi = V^* \iff \varphi \neq 0\)</span>．</p>
 </div>
 <p>若下面的猜想成立，则上述推论将具有更简单的推导．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <div id="cnj-cyclic-vector-dual" class="theorem conjecture">
-<p><span class="theorem-title"><strong>Conjecture 1 </strong></span>若 <span class="math inline">\(\mathcal A\)</span> 不可约，则 <span class="math inline">\(\mathcal A^*\)</span> 也不可约．</p>
+<p><span class="theorem-title"><strong>Conjecture 1</strong></span> 若 <span class="math inline">\(\mathcal A\)</span> 不可约，则 <span class="math inline">\(\mathcal A^*\)</span> 也不可约．</p>
+</div>
+</div>
+</div>
 </div>
 <p>我们暂未找到证明或证伪上述猜想的方法．</p>
 <p>下面来证明 Burnside 定理．</p>
-<div id="thm-burnside" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 1 (Burnside 定理) </strong></span><span class="math inline">\(\mathcal B(V)\)</span> 的不可约子代数有且只有 <span class="math inline">\(\mathcal B(V)\)</span>．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
 </div>
-<p>首先说明 <span class="math inline">\(\mathcal B(V)\)</span> 的不可约性．因为 <span class="math inline">\(\mathcal B(V) M = V\)</span> 对任意非零不变子空间 <span class="math inline">\(M\)</span> 成立，故 <span class="math inline">\(\mathcal B(V)\)</span> 不可约．下面设 <span class="math inline">\(\mathcal A\)</span> 是一任意给定的 <span class="math inline">\(\mathcal B(V)\)</span> 的一个不可约子代数．显然 <span class="math inline">\(\mathcal A \neq \{ 0 \}\)</span>，原因在 <a href="#lem-cyclic-vector">Lemma&nbsp;1</a> 中已述．我们的证明分三步进行：</p>
+<div class="callout-body-container">
+<div id="thm-burnside" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Burnside 定理)</strong></span> <span class="math inline">\(\mathcal B(V)\)</span> 的不可约子代数有且只有 <span class="math inline">\(\mathcal B(V)\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<p>首先说明 <span class="math inline">\(\mathcal B(V)\)</span> 的不可约性．因为 <span class="math inline">\(\mathcal B(V) M = V\)</span> 对任意非零不变子空间 <span class="math inline">\(M\)</span> 成立，故 <span class="math inline">\(\mathcal B(V)\)</span> 不可约．下面设 <span class="math inline">\(\mathcal A\)</span> 是一任意给定的 <span class="math inline">\(\mathcal B(V)\)</span> 的一个不可约子代数．显然 <span class="math inline">\(\mathcal A \neq \{ 0 \}\)</span>，原因在 <a href="#lem-cyclic-vector" class="quarto-xref">Lemma&nbsp;1</a> 中已述．我们的证明分三步进行：</p>
 <ol type="1">
 <li>证明 <span class="math inline">\(\mathcal A\)</span> 中存在一个秩为 <span class="math inline">\(1\)</span> 的线性变换 <span class="math inline">\(T_0\)</span>．</li>
 <li>证明所有 <span class="math inline">\(\mathcal B(V)\)</span> 中秩为 <span class="math inline">\(1\)</span> 的线性变换都在 <span class="math inline">\(\mathcal A\)</span> 中．</li>
@@ -225,18 +298,18 @@ div.csl-indent {
 </ol>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em> (第一部分). </span>由 <span class="math inline">\(\mathcal A \neq \{ 0 \}\)</span>，可以取 <span class="math inline">\(T_0\)</span> 是 <span class="math inline">\(\mathcal A\)</span> 中的一个秩最小的非零线性变换，<span class="math inline">\(\operatorname{rank}T_0 \geq 1\)</span>．考虑反证，假设 <span class="math inline">\(\operatorname{rank}T_0 \geq 2\)</span>，只要构造出一个非零线性变换 <span class="math inline">\(S_* \in \mathcal A\)</span> 使得 <span class="math inline">\(\operatorname{Im}S_* \subsetneq \operatorname{Im}T_0\)</span>，就能推出矛盾．</p>
-<p>由 <span class="math inline">\(\operatorname{rank}T_0 \geq 2\)</span>，可设 <span class="math inline">\(\operatorname{Im}T_0\)</span> 中存在两个线性无关的非零向量 <span class="math inline">\(\{ T_0 x_1,T_0 x_2 \}\)</span>（因此 <span class="math inline">\(x_1\)</span> 与 <span class="math inline">\(x_2\)</span> 也线性无关）．由 <a href="#lem-cyclic-vector">Lemma&nbsp;1</a>，存在线性变换 <span class="math inline">\(A_0 \in \mathcal A\)</span> 使得 <span class="math inline">\(A_0 T_0 x_1 = x_2\)</span>，于是 <span class="math inline">\(\{ T_0 x_1,T_0 x_2 \} = \{ T_0 x_1, T_0 A T_0 x_1 \}\)</span> 线性无关．这意味着 <span class="math inline">\((\lambda T_0 - T_0 A_0 T_0)x_1 \neq 0\)</span> 对任意 <span class="math inline">\(\lambda \in \mathbb C\)</span> 成立，即线性变换 <span class="math inline">\(S_\lambda := \lambda T_0 - T_0 A_0 T_0 \in \mathcal A\)</span> 非零．下面尝试从这些 <span class="math inline">\(S_\lambda\)</span> 中找到我们想要的 <span class="math inline">\(S_*\)</span>．</p>
+<p>由 <span class="math inline">\(\operatorname{rank}T_0 \geq 2\)</span>，可设 <span class="math inline">\(\operatorname{Im}T_0\)</span> 中存在两个线性无关的非零向量 <span class="math inline">\(\{ T_0 x_1,T_0 x_2 \}\)</span>（因此 <span class="math inline">\(x_1\)</span> 与 <span class="math inline">\(x_2\)</span> 也线性无关）．由 <a href="#lem-cyclic-vector" class="quarto-xref">Lemma&nbsp;1</a>，存在线性变换 <span class="math inline">\(A_0 \in \mathcal A\)</span> 使得 <span class="math inline">\(A_0 T_0 x_1 = x_2\)</span>，于是 <span class="math inline">\(\{ T_0 x_1,T_0 x_2 \} = \{ T_0 x_1, T_0 A T_0 x_1 \}\)</span> 线性无关．这意味着 <span class="math inline">\((\lambda T_0 - T_0 A_0 T_0)x_1 \neq 0\)</span> 对任意 <span class="math inline">\(\lambda \in \mathbb C\)</span> 成立，即线性变换 <span class="math inline">\(S_\lambda := \lambda T_0 - T_0 A_0 T_0 \in \mathcal A\)</span> 非零．下面尝试从这些 <span class="math inline">\(S_\lambda\)</span> 中找到我们想要的 <span class="math inline">\(S_*\)</span>．</p>
 <ul>
-<li>注意到 <span class="math inline">\(S_\lambda = T_0(\lambda I - A_0 T_0)\)</span>，故 <span class="math inline">\(\operatorname{Im}S_\lambda \subset \operatorname{Im}T_0\)</span>．</li>
-<li>注意到 <span class="math inline">\(S_\lambda = (\lambda I - T_0 A_0) T_0\)</span>，而 <span class="math inline">\(\operatorname{Im}T_0\)</span> 是 <span class="math inline">\(T_0 A_0\)</span> 的一个不变子空间．故可以取 <span class="math inline">\(T_0 A_0\)</span> 在 <span class="math inline">\(\operatorname{Im}T_0\)</span> 上的限制 <span class="math inline">\(T_0 A_0 |_{\operatorname{Im}T_0}\)</span>．设 <span class="math inline">\(T_0 A_0 |_{\operatorname{Im}T_0}\)</span> 有一特征值 <span class="math inline">\(\lambda_0\)</span>（由于 <span class="math inline">\(\operatorname{Im}T_0\)</span> 是复数域上有限维线性空间），这样 <span class="math inline">\(\lambda_0 I - T_0 A_0 |_{\operatorname{Im}T_0}\)</span> 就不是单射，因此也不是满射（由于 <span class="math inline">\(\operatorname{Im}T_0\)</span> 是有限维线性空间），即 <span class="math inline">\(S_{\lambda_0} = (\lambda_0 I - T_0 A_0) T_0\)</span> 不能映满 <span class="math inline">\(\operatorname{Im}T_0\)</span>．</li>
+<li>注意到 <span class="math inline">\(S_\lambda =  T_0(\lambda I - A_0 T_0)\)</span>，故 <span class="math inline">\(\operatorname{Im}S_\lambda \subset \operatorname{Im}T_0\)</span>．</li>
+<li>注意到 <span class="math inline">\(S_\lambda =  (\lambda I - T_0 A_0) T_0\)</span>，而 <span class="math inline">\(\operatorname{Im}T_0\)</span> 是 <span class="math inline">\(T_0 A_0\)</span> 的一个不变子空间．故可以取 <span class="math inline">\(T_0 A_0\)</span> 在 <span class="math inline">\(\operatorname{Im}T_0\)</span> 上的限制 <span class="math inline">\(T_0 A_0 |_{\operatorname{Im}T_0}\)</span>．设 <span class="math inline">\(T_0 A_0 |_{\operatorname{Im}T_0}\)</span> 有一特征值 <span class="math inline">\(\lambda_0\)</span>（由于 <span class="math inline">\(\operatorname{Im}T_0\)</span> 是复数域上有限维线性空间），这样 <span class="math inline">\(\lambda_0 I - T_0 A_0 |_{\operatorname{Im}T_0}\)</span> 就不是单射，因此也不是满射（由于 <span class="math inline">\(\operatorname{Im}T_0\)</span> 是有限维线性空间），即 <span class="math inline">\(S_{\lambda_0} = (\lambda_0 I - T_0 A_0) T_0\)</span> 不能映满 <span class="math inline">\(\operatorname{Im}T_0\)</span>．</li>
 </ul>
 <p>综上 <span class="math inline">\(\operatorname{Im}S_{\lambda_0} \subsetneq \operatorname{Im}T_0\)</span> 且 <span class="math inline">\(0 \neq S_{\lambda_0} \in \mathcal A\)</span>，故 <span class="math inline">\(S_{\lambda_0}\)</span> 就是我们想要的 <span class="math inline">\(S_*\)</span>．</p>
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em> (第二部分). </span>对任意给定的某一秩为 <span class="math inline">\(1\)</span> 的线性变换 <span class="math inline">\(T \in \mathcal B(V)\)</span>，任取非零的 <span class="math inline">\(y \in \operatorname{Im}T\)</span>，存在线性函数 <span class="math inline">\(\varphi \in V^*\)</span> 使得 <span class="math inline">\(T x = \varphi(x) y,\, \forall x \in V\)</span>．已经知道 <span class="math inline">\(\mathcal A\)</span> 中存在一个秩为 <span class="math inline">\(1\)</span> 的线性变换 <span class="math inline">\(T_0\)</span>，则任取非零的 <span class="math inline">\(y_0 \in \operatorname{Im}T_0\)</span>，存在线性函数 <span class="math inline">\(\varphi_0 \in V^*\)</span> 使得 <span class="math inline">\(T_0 x = \varphi_0(x) y_0,\, \forall x \in V\)</span>．</p>
 <ul>
-<li>由 <a href="#lem-cyclic-vector">Lemma&nbsp;1</a>，存在 <span class="math inline">\(A \in \mathcal A\)</span> 使得 <span class="math inline">\(A y_0 = y\)</span>．</li>
-<li>由 <a href="#cor-cyclic-vector-dual">Corollary&nbsp;1</a>，存在 <span class="math inline">\(B \in \mathcal A\)</span> 使得 <span class="math inline">\(\varphi_0 B = \varphi\)</span>．</li>
+<li>由 <a href="#lem-cyclic-vector" class="quarto-xref">Lemma&nbsp;1</a>，存在 <span class="math inline">\(A \in \mathcal A\)</span> 使得 <span class="math inline">\(A y_0 = y\)</span>．</li>
+<li>由 <a href="#cor-cyclic-vector-dual" class="quarto-xref">Corollary&nbsp;1</a>，存在 <span class="math inline">\(B \in \mathcal A\)</span> 使得 <span class="math inline">\(\varphi_0 B = \varphi\)</span>．</li>
 </ul>
 <p>综上， <span class="math display">\[
 T x = \varphi(x) y = \varphi_0(Bx) A y_0 = A(\varphi_0(Bx) y_0) = A T_0 B x,\quad \forall x \in V
@@ -247,19 +320,37 @@ T x = \varphi(x) y = \varphi_0(Bx) A y_0 = A(\varphi_0(Bx) y_0) = A T_0 B x,\qua
 A = A I = A \sum_{k=1}^n P_k = \sum_{k=1}^n A P_k
 \]</span> 其中每一个 <span class="math inline">\(A P_k\)</span> 都是秩不超过 <span class="math inline">\(1\)</span> 的线性变换．</p>
 </div>
-<p>至此，<a href="#thm-burnside">Theorem&nbsp;1</a> 得到完整证明．</p>
+<p>至此，<a href="#thm-burnside" class="quarto-xref">Theorem&nbsp;1</a> 得到完整证明．</p>
 <p>Burnside 定理可以为下面的定理提供一个较为简单的证明．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <div id="thm-bv-simple" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2 </strong></span><span class="math inline">\(\mathcal B(V)\)</span> 是单代数，即 <span class="math inline">\(\{ 0 \}\)</span> 和 <span class="math inline">\(\mathcal B(V)\)</span> 是代数 <span class="math inline">\(\mathcal B(V)\)</span> 上唯二的双边理想．</p>
+<p><span class="theorem-title"><strong>Theorem 2</strong></span> <span class="math inline">\(\mathcal B(V)\)</span> 是单代数，即 <span class="math inline">\(\{ 0 \}\)</span> 和 <span class="math inline">\(\mathcal B(V)\)</span> 是代数 <span class="math inline">\(\mathcal B(V)\)</span> 上唯二的双边理想．</p>
+</div>
+</div>
+</div>
 </div>
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>显然 <span class="math inline">\(\{ 0 \}\)</span> 和 <span class="math inline">\(\{ \mathcal B(V) \}\)</span> 都是双边理想．下面任取一 <span class="math inline">\(\mathcal B(V)\)</span> 上的双边理想 <span class="math inline">\(\mathcal I \neq \{ 0 \}\)</span>，我们证明它不可约．任取 <span class="math inline">\(\mathcal I\)</span> 的一个非零不变子空间 <span class="math inline">\(M\)</span>，由 <span class="math inline">\(M,\, \mathcal I\)</span> 的非零性和 <span class="math inline">\(\mathcal I V\)</span> 的非零性， <span class="math display">\[
 M \supset \mathcal I M \supset \mathcal B(V) \mathcal I \mathcal B(V) M = \mathcal B(V) \mathcal I V = \mathcal B(V) (\mathcal I V) = V
-\]</span> 故只能有 <span class="math inline">\(M = V\)</span>，因此 <span class="math inline">\(\mathcal I\)</span> 确不可约．现在 <span class="math inline">\(\mathcal I\)</span> 是 <span class="math inline">\(\mathcal B(V)\)</span> 的不可约理想，理想一定是子代数，根据 <a href="#thm-burnside">Theorem&nbsp;1</a> 就有 <span class="math inline">\(\mathcal I = \mathcal B(V)\)</span>．</p>
+\]</span> 故只能有 <span class="math inline">\(M = V\)</span>，因此 <span class="math inline">\(\mathcal I\)</span> 确不可约．现在 <span class="math inline">\(\mathcal I\)</span> 是 <span class="math inline">\(\mathcal B(V)\)</span> 的不可约理想，理想一定是子代数，根据 <a href="#thm-burnside" class="quarto-xref">Theorem&nbsp;1</a> 就有 <span class="math inline">\(\mathcal I = \mathcal B(V)\)</span>．</p>
 </div>
 <p>下面的定理为 <span class="math inline">\(\mathcal B(V)\)</span> 上的全体代数自同构提供了表示方法．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
 <div id="thm-bv-inner-aut" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 3 </strong></span><span class="math inline">\(\mathcal B(V)\)</span> 上的全体代数自同构均为内自同构．即，任意 <span class="math inline">\(\mathcal B(V)\)</span> 上的自同构 <span class="math inline">\(\varphi: \mathcal B(V) \to \mathcal B(V)\)</span> 都可写为 <span class="math inline">\(A \mapsto S A S^{-1}\)</span> 的形式，其中 <span class="math inline">\(S \in \mathcal B(V)\)</span> 为与 <span class="math inline">\(\varphi\)</span> 相关的某一可逆线性变换．</p>
+<p><span class="theorem-title"><strong>Theorem 3</strong></span> <span class="math inline">\(\mathcal B(V)\)</span> 上的全体代数自同构均为内自同构．即，任意 <span class="math inline">\(\mathcal B(V)\)</span> 上的自同构 <span class="math inline">\(\varphi: \mathcal B(V) \to \mathcal B(V)\)</span> 都可写为 <span class="math inline">\(A \mapsto S A S^{-1}\)</span> 的形式，其中 <span class="math inline">\(S \in \mathcal B(V)\)</span> 为与 <span class="math inline">\(\varphi\)</span> 相关的某一可逆线性变换．</p>
+</div>
+</div>
+</div>
 </div>
 <p>将矩阵表示和线性空间的语言相结合，可以为该定理提供思路更清晰的证明．</p>
 <div class="proof">
@@ -304,14 +395,14 @@ E_{i,j}(x_1,\dots,x_n) := (x_1,\dots,x_n) \hat E_{i,j} \pod{i=1,2,\dots,n;\; j=1
 \end{aligned}
 \]</span> 故可以断定 <span class="math inline">\(S^{-1} \varphi(E_{i,j}) S = E_{i,j}\)</span>，即 <span class="math inline">\(\varphi(E_{i,j}) = S^{-1} E_{i,j} S\)</span>．</p>
 </div>
-<div class="remark proof">
+<div class="proof remark">
 <p><span class="proof-title"><em>Remark</em>. </span>研究 <span class="math inline">\(\mathcal B(V)\)</span> 上的自同态时，可能在应用线性变换关于其作用域 <span class="math inline">\(V\)</span> 的性质时遇到困难．这时需要将其合理转化为 <span class="math inline">\(\mathcal B(V)\)</span> 上的代数性质，如考虑投影变换的幂等性，将投影变换秩为 <span class="math inline">\(1\)</span> 转化为 <span class="math inline">\(\mathcal B(V)\)</span> 上的 <span class="math inline">\(1\)</span> 维子空间等．这些技巧在证明中多次使用．</p>
 </div>
 
 
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
 <div id="ref-radjavi_simultaneous_2000" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[1] </div><div class="csl-right-inline">H. Radjavi and P. Rosenthal, <em>Simultaneous <span>Triangularization</span></em>. in Universitext. New York, NY: Springer, 2000. doi: <a href="https://doi.org/10.1007/978-1-4612-1200-3">10.1007/978-1-4612-1200-3</a>.</div>
 </div>
@@ -360,6 +451,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -428,13 +546,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'alternate';
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -513,10 +633,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -526,8 +665,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -540,6 +688,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -583,6 +850,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -608,6 +876,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -665,38 +959,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          // default icon
-          link.classList.add("external");
-      }
-    }
 });
 </script>
 <script src="https://giscus.app/client.js" data-repo="sun123zxy/blog-quarto-code" data-repo-id="R_kgDOIrPs5w" data-category="General" data-category-id="DIC_kwDOIrPs584CV4gd" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark_dimmed" data-lang="en" crossorigin="anonymous" async="">
 </script>
+<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
+<input type="hidden" id="giscus-alt-theme" value="light">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">sun123zxy’s blog | Powered by Quarto</div>
+    <div class="nav-footer-center">
+<p>sun123zxy’s blog | Powered by Quarto</p>
+</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 
