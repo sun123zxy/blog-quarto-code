@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="sun123zxy">
+<meta name="author" content="佚名">
 
 <title>sun123zxy’s blog - SunQuarTeX-cnart 测试文档</title>
 <style>
@@ -213,7 +214,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#callouts" id="toc-callouts" class="nav-link" data-scroll-target="#callouts"><span class="header-section-number">8.1</span> Callouts</a></li>
   </ul></li>
-  <li><a href="#文献引用测试" id="toc-文献引用测试" class="nav-link" data-scroll-target="#文献引用测试"><span class="header-section-number">9</span> 文献引用测试</a></li>
+  <li><a href="#引用脚注测试" id="toc-引用脚注测试" class="nav-link" data-scroll-target="#引用脚注测试"><span class="header-section-number">9</span> 引用、脚注测试</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://data.nasa.gov/"><i class="bi bi-link-45deg"></i>NASA Open Data</a></li></ul></div></nav>
     </div>
@@ -222,7 +223,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">SunQuarTeX 中文学术写作示例文档</h1>
+<h1 class="title">SunQuarTeX-cnart 测试文档</h1>
 <p class="subtitle lead">这是副标题</p>
   <div class="quarto-categories">
     <div class="quarto-category">web</div>
@@ -236,23 +237,24 @@ window.Quarto = {
 <div class="quarto-title-meta">
 
     <div>
-    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Authors</div>
     <div class="quarto-title-meta-contents">
              <p>sun123zxy </p>
+             <p>佚名 </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2022年12月23日</p>
+      <p class="date">2022年12月7日</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2023年8月10日</p>
+      <p class="date-modified">2024年2月23日</p>
     </div>
   </div>
     
@@ -299,7 +301,7 @@ window.Quarto = {
 <div id="fig-quarto" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="quarto.png" class="img-fluid figure-img">
+<img src="index-quarto.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 图&nbsp;1: 这是一张插图
@@ -320,6 +322,21 @@ window.Quarto = {
 <p>还多加了一段．</p></li>
 <li><p>传递性．</p></li>
 </ul>
+<p>这是一个定义列表．</p>
+<dl>
+<dt>自反性</dt>
+<dd>
+<p><span class="math inline">\(a \sim a\)</span></p>
+</dd>
+<dt>反对称性</dt>
+<dd>
+<p><span class="math inline">\(a \leq b \land b \leq a \implies a=b\)</span></p>
+</dd>
+<dt>传递性</dt>
+<dd>
+<p><span class="math inline">\(a \leq b \land b \leq c \implies a \leq c\)</span></p>
+</dd>
+</dl>
 <p>当然也可以使用 Markdown 表格．例如 <a href="#tbl-cartesian-unsolved" class="quarto-xref">表&nbsp;1 (a)</a>.</p>
 <p>多表格并列．加上 <a href="#tbl-power-unsolved" class="quarto-xref">表&nbsp;1 (b)</a>，它们共同组成了 <a href="#tbl-panel-unsolved" class="quarto-xref">表&nbsp;1</a>．</p>
 <div id="tbl-panel-unsolved" class="quarto-layout-panel anchored">
@@ -417,11 +434,6 @@ window.Quarto = {
 <p>Quarto 的一大卖点．</p>
 <p>这一节我们测试数学相关内容. HTML 中的定理标号方式目前没有方法更改，但 LaTeX 中的定理标号可通过自行修改模板中 <code>amsthm</code> 宏包的定义实现.</p>
 <p>此外，根据 <a href="https://quarto.org/docs/authoring/markdown-basics.html#equations">Quarto - Markdown Basics # Equations</a> 和 <a href="https://github.com/quarto-dev/quarto-cli/discussions/1793">Defining LaTeX commands for HTML and PDF rendering - Discussion #1793</a> 和 <a href="https://quarto.org/docs/authoring/conditional.html">Quarto - Conditional Content</a>，按如下面方式自定义 macro 可确保其在 HTML、 LaTeX/PDF 和 MS Word 中都得到正确渲染．值得注意的是，由于 <code>\DeclareMathOperator</code> 只能在 LaTeX 的导言区使用，这里我们用 <code>\newcommand</code> + <code>\operatorname</code> 的方式替代．</p>
-<div class="hidden">
-<p><span class="math display">\[
-\newcommand{\ran}{\operatorname{ran}}
-\]</span></p>
-</div>
 <p>下面的公式使用了上面定义的 macro． <span class="math display">\[
 \operatorname{ran}A := \{ y \mid (x,y) \in A \}
 \]</span></p>
@@ -487,6 +499,12 @@ A \approx C \land B \approx D \implies A \times B \approx C \times D
 \implies \mathbb R \times \mathbb N \approx \mathbb N \times \mathbb R \approx \mathbb R
 \]</span></p>
 </div>
+<div class="proof solution">
+<p><span class="proof-title"><em>解</em>. </span>这是一个解．</p>
+</div>
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>这是一个注记．</p>
+</div>
 </section>
 <section id="数据可视化table-figure-diagram" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="数据可视化table-figure-diagram"><span class="header-section-number">5</span> 数据可视化（Table, Figure &amp; Diagram）</h2>
@@ -522,7 +540,7 @@ A \approx C \land B \approx D \implies A \times B \approx C \times D
 </div>
 <p>交叉引用 <a href="#fig-polar" class="quarto-xref">图&nbsp;2</a> 当然也是可以的.</p>
 <p>这里再测试一些较复杂的并列效果．（<a href="#tbl-light-on" class="quarto-xref">表&nbsp;2</a>, <a href="#tbl-light-on-1" class="quarto-xref">表&nbsp;2 (a)</a>, <a href="#tbl-light-on-2" class="quarto-xref">表&nbsp;2 (b)</a>, <a href="#fig-light-on" class="quarto-xref">图&nbsp;3</a>, <a href="#fig-light-on-1" class="quarto-xref">图&nbsp;3 (a)</a>, <a href="#fig-light-on-2" class="quarto-xref">图&nbsp;3 (b)</a>）</p>
-<div id="62fadcfb" class="cell" data-execution_count="2">
+<div id="000eda48" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1207,13 +1225,15 @@ Important
 </div>
 </section>
 </section>
-<section id="文献引用测试" class="level2" data-number="9">
-<h2 data-number="9" class="anchored" data-anchor-id="文献引用测试"><span class="header-section-number">9</span> 文献引用测试</h2>
-<p>人脸识别是以人面部特征作为识别个体身份的一种个体生物特征识别方法 <span class="citation" data-cites="define"><a href="#ref-define" role="doc-biblioref">[1]</a></span>．……人脸识别的研究最早可追溯到上世纪 60 年代，Bledsoe and Chan 研究了编程计算机识别人脸的方法<span class="citation" data-cites="history"><a href="#ref-history" role="doc-biblioref">[2]</a></span>．随后，萌芽期的人脸识别技术经历多轮蜕变，在发展中逐渐完善．然而，人脸识别的主要难点在于不同个体的人脸结构并无大异，而同一个体的人脸在不同表情、年龄、妆饰、光照等干扰因素下又往往差异显著<span class="citation" data-cites="technical"><a href="#ref-technical" role="doc-biblioref">[3]</a></span>，这要求人脸识别技术既要克服类内因素的干扰，同时又要加强类间差距的显著性，而早期人脸识别方法关注人脸几何特征，识别效果不尽人意．为此，以 Eigenfaces<span class="citation" data-cites="eigenfaces"><a href="#ref-eigenfaces" role="doc-biblioref">[4]</a></span> 为代表的子空间学习识别方法和 Gabor<span class="citation" data-cites="gabor"><a href="#ref-gabor" role="doc-biblioref">[5]</a></span>、LBP<span class="citation" data-cites="lbp"><a href="#ref-lbp" role="doc-biblioref">[6]</a></span> 等局部特征分析的滤波器提取方法在各自领域都有所突破．2014 年，应用新兴的深度卷积神经网络技术，DeepFace<span class="citation" data-cites="deepface"><a href="#ref-deepface" role="doc-biblioref">[7]</a></span> 横空出世，以 97.35% 的 LFW 基准数据集识别准确率重塑了人脸识别领域的研究格局．随后，人脸识别技术迎来爆发式增长，并逐渐走进人们的日常生活之中．……个体层面，要加强公众的权利意识，塑造个人的“数字理性”<span class="citation" data-cites="guochunzhen"><a href="#ref-guochunzhen" role="doc-biblioref">[8]</a></span>．</p>
+<section id="引用脚注测试" class="level2 page-columns page-full" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="引用脚注测试"><span class="header-section-number">9</span> 引用、脚注测试</h2>
+<p>这是一个脚注<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>．</p>
+<div class="no-row-height column-margin column-container"><p><sup>1</sup>&nbsp;参见 <a href="https://quarto.org/docs/authoring/footnotes-and-citations.html">Quarto - Citations &amp; Footnotes</a></p></div><p>人脸识别是以人面部特征作为识别个体身份的一种个体生物特征识别方法 <span class="citation" data-cites="define"><a href="#ref-define" role="doc-biblioref">[1]</a></span>．……人脸识别的研究最早可追溯到上世纪 60 年代，Bledsoe and Chan 研究了编程计算机识别人脸的方法<span class="citation" data-cites="history"><a href="#ref-history" role="doc-biblioref">[2]</a></span>．随后，萌芽期的人脸识别技术经历多轮蜕变，在发展中逐渐完善．然而，人脸识别的主要难点在于不同个体的人脸结构并无大异，而同一个体的人脸在不同表情、年龄、妆饰、光照等干扰因素下又往往差异显著<span class="citation" data-cites="technical"><a href="#ref-technical" role="doc-biblioref">[3]</a></span>，这要求人脸识别技术既要克服类内因素的干扰，同时又要加强类间差距的显著性，而早期人脸识别方法关注人脸几何特征，识别效果不尽人意．为此，以 Eigenfaces<span class="citation" data-cites="eigenfaces"><a href="#ref-eigenfaces" role="doc-biblioref">[4]</a></span> 为代表的子空间学习识别方法和 Gabor<span class="citation" data-cites="gabor"><a href="#ref-gabor" role="doc-biblioref">[5]</a></span>、LBP<span class="citation" data-cites="lbp"><a href="#ref-lbp" role="doc-biblioref">[6]</a></span> 等局部特征分析的滤波器提取方法在各自领域都有所突破．2014 年，应用新兴的深度卷积神经网络技术，DeepFace<span class="citation" data-cites="deepface"><a href="#ref-deepface" role="doc-biblioref">[7]</a></span> 横空出世，以 97.35% 的 LFW 基准数据集识别准确率重塑了人脸识别领域的研究格局．随后，人脸识别技术迎来爆发式增长，并逐渐走进人们的日常生活之中．……个体层面，要加强公众的权利意识，塑造个人的“数字理性”<span class="citation" data-cites="guochunzhen"><a href="#ref-guochunzhen" role="doc-biblioref">[8]</a></span>．</p>
 
 
 
 </section>
+
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
 <div id="ref-define" class="csl-entry" role="listitem">
