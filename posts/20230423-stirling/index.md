@@ -1,0 +1,559 @@
+# Wallis 公式、Stirling 公式与正态分布
+sun123zxy
+2023-04-23
+
+<div class="hidden">
+
+</div>
+
+参考：
+
+- 张筑生《数学分析新讲》第二册(张筑生 2021)
+- 张颢《概率论》(张颢 2018)
+- Wikipedia, Math StackExchange, etc.
+
+## Warm up
+
+<div id="exm-double-factorial" class="theorem example">
+
+<span class="theorem-title">**Example 1**</span> 求
+$$
+\lim_{n \to \infty} \frac{(2n-1)!!}{(2n)!!} = \lim_{n \to \infty} \frac{1 \times 3 \times 5 \times \dots \times (2n-1)}{2 \times 4 \times 6 \times \dots \times 2n}
+$$
+
+</div>
+
+<div class="proof solution">
+
+<span class="proof-title">*Solution*. </span>用放缩
+$$
+2k > \sqrt{(2k-1)(2k+1)}
+$$
+拆分母即得
+$$
+\frac{(2n-1)!!}{(2n)!!} < \frac 1 {\sqrt{2n+1}} \sim 0
+$$
+
+</div>
+
+<div id="exm-binomial" class="theorem example">
+
+<span class="theorem-title">**Example 2 (中心二项式系数)**</span> 求
+$$
+\lim_{n \to \infty} \frac{\binom{2n}{n}}{2^{2n}}
+$$
+
+</div>
+
+<div class="proof solution">
+
+<span class="proof-title">*Solution*. </span>$$
+\frac{\binom{2n}{n}}{2^{2n}} = \frac{(2n)!}{2^{2n} (n!)^2} = \frac{(2n)!}{(2^n n!)^2} = \frac{(2n)!}{((2n)!!)^2} = \frac{(2n-1)!!}{(2n)!!} < \frac 1 {\sqrt{2n+1}} \sim 0
+$$
+
+</div>
+
+上两例有没有更精确的渐进估计？这便是我们马上要研究的问题．
+
+## Wallis 公式
+
+<div id="lem-wallis-integral" class="theorem lemma">
+
+<span class="theorem-title">**Lemma 1 (Wallis 积分公式)**</span> 定积分系列
+$$
+J_n = \int_0^{\frac \pi 2} \sin^n x \operatorname{d}\!x
+$$
+满足
+$$
+\begin{aligned}
+J_{2n} &= \frac{(2n-1)!!}{(2n)!!} \cdot \frac \pi 2 \\
+J_{2n+1} &= \frac{(2n)!!}{(2n+1)!!} \cdot 1
+\end{aligned}
+$$
+
+</div>
+
+<div class="proof">
+
+<span class="proof-title">*Proof*. </span>我们的思路是：先把一个 $\sin x$ 放进微分中，然后分部积分得到递推式．
+
+$$
+\begin{aligned}
+J_n &= \int_0^{\frac \pi 2} \sin^n x \operatorname{d}\!x \\
+&= - \int_0^{\frac \pi 2} \sin^{n-1} x \operatorname{d}\!\cos x \\
+&= \left[ - \sin^{n-1} x \cos x \right]_{0}^{\frac \pi 2} + \int_0^{\frac \pi 2} \cos x \operatorname{d}\!\sin^{n-1} x \\
+&= (n-1) \int_0^{\frac \pi 2} \cos^2 x \sin^{n-2} x \operatorname{d}\!x \\
+&= (n-1) \int_0^{\frac \pi 2} (1 - \sin^2 x) \sin^{n-2} x \operatorname{d}\!x \\
+&= (n-1) \int_0^{\frac \pi 2} \sin^{n-2} x \operatorname{d}\!x - (n-1) \int_0^{\frac \pi 2} \sin^n x \operatorname{d}\!x \\
+&= (n-1) J_{n-2} - (n-1) J_n
+\end{aligned}
+$$
+
+故
+$$
+J_n = \frac{n-1}{n} J_{n-2}
+$$
+边界条件
+$$
+\begin{aligned}
+J_0 &= \frac \pi 2 \\
+J_1 &= \int_0^{\frac \pi 2} \sin x \operatorname{d}\!x = 1
+\end{aligned}
+$$
+代入递推式求解就得到了要证的结论．
+
+</div>
+
+<div id="thm-wallis" class="theorem">
+
+<span class="theorem-title">**Theorem 1 (Wallis 公式)**</span> $$
+\frac \pi 2 = \lim_{n \to \infty} \frac 1 {2n+1} \left( \frac{(2n)!!}{(2n-1)!!} \right)^2
+$$
+
+</div>
+
+<div class="proof">
+
+<span class="proof-title">*Proof*. </span>注意到在积分区间上，$\sin^n x \geq \sin^{n+1} x$，由积分的单调性，$J_n$ 随 $n$ 单调递减，故 $J_{2n+1} \leq J_{2n} \leq J_{2n-1}$ 成立．代入 <a href="#lem-wallis-integral" class="quarto-xref">Lemma 1</a> 中得到的结果
+$$
+\frac{(2n)!!}{(2n+1)!!} \leq \frac{(2n-1)!!}{(2n)!!} \cdot \frac \pi 2 \leq \frac{(2n-2)!!}{(2n-1)!!}
+$$
+移项得
+$$
+\left( \frac{(2n)!!}{(2n-1)!!} \right)^2 \frac{1}{2n+1} \leq \frac \pi 2 \leq \left( \frac{(2n)!!}{(2n-1)!!} \right)^2 \frac 1 {2n}
+$$
+
+现在只需说明 RHS 与 LHS 的差是一个无穷小．
+$$
+\begin{aligned}
+\left( \frac{(2n)!!}{(2n-1)!!} \right)^2 \left( \frac 1 {2n} - \frac 1 {2n+1}  \right)
+&= \left( \frac{(2n)!!}{(2n-1)!!} \right)^2 \left( \frac 1 {2n(2n+1)} \right) \\
+&= \left( \frac{(2n-2)!!}{(2n-1)!!} \right)^2 \frac {2n}{(2n+1)}
+\end{aligned}
+$$
+由 <a href="#exm-double-factorial" class="quarto-xref">Example 1</a> ，$\lim_{n \to \infty} \frac{(2n-2)!!}{(2n-1)!!} = 0$，故上式确为一个无穷小，定理得证．
+
+</div>
+
+Wallis 公式还有其它表现形式：
+$$
+\frac{2^{2n}}{\binom{2n}{n}} = \frac{(2n)!!}{(2n-1)!!} \sim \sqrt{\pi n} \pod{n \to \infty}
+$$
+这里 Wallis 公式反映为对 <a href="#exm-double-factorial" class="quarto-xref">Example 1</a> 和 <a href="#exm-binomial" class="quarto-xref">Example 2</a> 的渐进估计．
+
+<div id="exr-catalan" class="theorem exercise">
+
+<span class="theorem-title">**Exercise 1**</span> 对 Catalan 数
+$$
+C_n = \binom{2n}{n} - \binom{2n}{n+1}
+$$
+做出渐进估计．
+
+</div>
+
+<div class="proof solution">
+
+<span class="proof-title">*Solution*. </span>注意到
+$$
+C_n = \binom{2n}{n} - \binom{2n}{n+1} = \binom{2n}{n} - \frac n {n+1} \binom{2n}{n} = \frac 1 {n+1} \binom{2n}{n}
+$$
+用 Wallis 公式计算即得
+$$
+C_n \sim \frac {2^{2n}}{\sqrt{\pi} n^{\frac 3 2}}
+$$
+
+</div>
+
+Wallis 公式的另一种表现形式是
+$$
+\frac \pi 2 = \prod_{n=1}^\infty \frac{4 n^2}{4 n^2-1} = \prod_{n=1}^\infty \left( \frac{2n}{2n-1} \cdot \frac{2n}{2n+1} \right)
+$$
+这表达式也被称为 Wallis product，用于近似计算 $\pi$．
+
+<div class="proof remark">
+
+<span class="proof-title">*Remark*. </span>这和我们在 <a href="#exm-double-factorial" class="quarto-xref">Example 1</a> 中使用的放缩技巧……
+
+</div>
+
+## Stirling 公式
+
+<div id="lem-e" class="theorem lemma">
+
+<span class="theorem-title">**Lemma 2**</span> $$
+\left( 1+\frac 1 n \right)^n < e < \left( 1 + \frac 1 n \right)^{n+1}
+$$
+
+</div>
+
+这是《数学分析 I》中大家所熟知的．
+
+<div id="thm-stirling-weak" class="theorem">
+
+<span class="theorem-title">**Theorem 2**</span> $$
+\left(\frac n e \right)^n < \frac {n!} e
+ < n \left( \frac n e \right)^n
+$$
+
+</div>
+
+<div class="proof">
+
+<span class="proof-title">*Proof*. </span>将 <a href="#lem-e" class="quarto-xref">Lemma 2</a> 写成
+$$
+\frac{(n+1)^n}{n^n} < e < \frac{(n+1)^{n+1}}{n^{n+1}}
+$$
+对 $k = 1,2, \dots, n-1$ 做连乘
+$$
+\prod_{k=1}^{n-1} \frac{(k+1)^k}{k^k} < e^{n-1} < \prod_{k=1}^{n-1} \frac{(k+1)^{k+1}}{k^{k+1}}
+$$
+注意到乘积的相邻两项中，前一项的分子与后一项的分母可以约分，中间每项只余下 $\frac 1 k$，故上式可化为
+$$
+\frac{n^{n-1}}{(n-1)!} < e^{n-1} < \frac{n^n}{(n-1)!}
+$$
+两端再同乘 $\frac{n!}{e^{n}}$ 就得到
+$$
+\left(\frac n e \right)^n < \frac {n!} e
+ < n \left( \frac n e \right)^n
+$$
+
+</div>
+
+<div id="thm-stirling" class="theorem">
+
+<span class="theorem-title">**Theorem 3 (Stirling 公式)**</span> $$
+n! \sim \sqrt{2 \pi n} \left( \frac n e \right)^n \pod{n \to \infty}
+$$
+
+</div>
+
+完整证明较复杂，这里介绍证明最后一步：已知 $n! \sim a \sqrt n \left( \frac n e \right)^n$，用 Wallis 公式对 $2^{2n} / \binom{2n}{n}$ 的渐进估计确定系数 $a$．
+
+$$
+\sqrt{\pi n} \sim \frac {2^{2n}}{\binom{2n}{n}} = \frac{2^{2n} (n!)^2}{(2n)!} \sim \frac{2^{2n} (a \sqrt n n^n e^{-n})^2}{a \sqrt{2n} 2^{2n} n^{2n} e^{-2n}} = \sqrt{\frac n 2} a
+$$
+
+因此 $a=\sqrt{2 \pi}$．
+
+<div id="exm-stirling-binomial" class="theorem example">
+
+<span class="theorem-title">**Example 3**</span> 当 $n \to \infty$，$k \to \infty$ 时，用 Stirling 公式渐进估计 $\binom n k$．
+
+</div>
+
+<div class="proof solution">
+
+<span class="proof-title">*Solution*. </span>$$
+\binom n k \sim \sqrt{\frac{n}{2 \pi k (n-k)}} \frac{n^n}{k^k (n-k)^{n-k}}
+$$
+
+</div>
+
+## Poisson 分布
+
+描述单位时间平均发生次数恒定的随机事件的概率分布．
+
+<div id="def-poission" class="theorem definition">
+
+<span class="theorem-title">**Definition 1 (Poisson 分布)**</span> 若离散随机变量 $X$ 满足
+$$
+P(X = k) = \frac{\lambda^k}{k!}e^{-\lambda}
+$$
+其中 $\lambda > 0$ 是确定的常数，则随机变量 $X$ 服从 Poisson 分布．
+
+</div>
+
+### 从二项分布的推导
+
+在 $np = \lambda$ 的条件下，取 $P(X_n = k) = \binom n k p^k (1-p)^{n-k}$ 在 $n \to \infty$ 在 $n \to \infty$ 上的逐点极限．
+
+$$
+\begin{aligned}
+P(X_n = k)
+&= \binom{n}{k} p^k (1-p)^{n-k} \\
+&= \binom{n}{k} \frac{\lambda^k}{n^k} \left( 1-\frac \lambda n \right)^{n-k} \\
+&= \lambda^k \left( 1-\frac \lambda n \right)^n \left( 1-\frac \lambda n \right)^{-k} \binom{n}{k} \frac{1}{n^k} \\
+&\sim \lambda^k e^{-\lambda}\binom{n}{k} \frac 1 {n^k} \\
+&= \lambda^k e^{-\lambda} \frac {n (n-1) \dots (n-k+1)}{k! n^k} \\
+&= \frac{\lambda^k}{k!} e^{-\lambda} \cdot 1 \cdot (1-\frac 1 n) \dots (1 - \frac{k-1}{n}) \\
+&\sim \frac{\lambda^k}{k!} e^{-\lambda}
+\end{aligned}
+$$
+
+### 归一性验证
+
+$$
+\sum_{k=0}^{+\infty} P(X = k) = \sum_{k=0}^{+\infty} \frac{\lambda^k}{k!}e^{-\lambda} =  e^{-\lambda} \sum_{k=0}^{+\infty} \frac{\lambda^k}{k!} = e^{-\lambda} e^{\lambda} = 1
+$$
+
+## 正态分布
+
+与 Poisson 分布不同，（标准）正态分布是在 $n \to \infty$ 的过程中假定 $p$ 不变的情况下，对归一化（即假定期望和方差不变）后的 $X_n$ 取逐点极限得到的．
+
+<div id="def-poission" class="theorem definition">
+
+<span class="theorem-title">**Definition 2 (正态分布)**</span> 若连续随机变量 $X$ 的期望 $E(X) = \mu$，方差 $D(X) = \sigma$，且其概率分布函数为
+$$
+f(x) = \frac 1 {\sqrt{2 \pi} \sigma} \exp \left(-\frac{(x-\mu)^2}{2 \sigma^2}\right)
+$$
+则变量 $X$ 服从正态分布，记为 $X \sim N(\mu, \sigma^2)$．
+
+特别的，当 $\mu = 0$，$\sigma = 1$ 时，变量 $X$ 服从标准正态分布
+$$
+f(x) = \frac 1 {\sqrt{2 \pi}} \exp \left(-\frac{1}{2} x^2\right)
+$$
+
+</div>
+
+### 从二项分布的推导（de Moivre-Laplace 定理）
+
+设随机变量 $X_n \sim B(n,p)$．方便起见，令 $q = 1-p$．众所周知，二项分布的期望与方差满足 $E(X_n) = np$，$D(X_n) = npq$．
+
+对随机变量 $X_n$ 做归一化：
+$$
+\bar X_n = \frac{X_n - E(X_n)}{\sqrt{D(X_n)}} = \frac{X_n - np}{\sqrt{npq}}
+$$
+考虑到
+$$
+P(\bar X_n = x) = P(X_n = np + x \sqrt{npq})
+$$
+令 $k = np + x \sqrt{npq}$，则
+$$
+P(\bar X_n = x) = P(X_n = k) = \binom{n}{k} p^k q^{n-k}
+$$
+此时 $n,k$ 均趋于无穷大，故可应用 <a href="#exm-stirling-binomial" class="quarto-xref">Example 3</a> 对二项式系数做出估计
+$$
+\begin{aligned}
+\binom{n}{k} p^k q^{n-k}
+&\sim \sqrt{\frac{n}{2 \pi k (n-k)}} \frac{n^n}{k^k (n-k)^{n-k}} p^k q^{n-k} \\
+&= \sqrt{\frac{n}{2 \pi k (n-k)}} \left( \frac{np}{k} \right)^{k} \left( \frac{nq}{n-k} \right)^{n-k} \\
+&= \sqrt{\frac{n}{2 \pi k (n-k)}} \exp{\left( k \ln{\frac{np}{k}} + (n-k) \ln{\frac{nq}{n-k}} \right)}
+\end{aligned}
+$$
+
+下面分别处理 $k \ln{\frac{np}{k}}$ 和 $(n-k) \ln{\frac{nq}{n-k}}$．
+
+$$
+\begin{aligned}
+k \ln{\frac{np}{k}}
+&= -(np + x \sqrt{npq}) \ln{\frac{np + x \sqrt{npq}}{np}} \\
+&= -(np + x \sqrt{npq}) \ln{\left( 1 + x \sqrt{\frac q {np}} \right)} \\
+&= -(np + x \sqrt{npq}) \left( x \sqrt{\frac q {np}} - \frac{x^2 q}{2np} + o\left( \frac 1 n \right) \right) \\
+&= -x \sqrt{npq} + \frac{1}{2} x^2 q - x^2 q + o(1)
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+(n-k) \ln{\frac{nq}{n-k}}
+&= -(nq - x \sqrt{npq}) \ln{\frac{nq - x \sqrt{npq}}{nq}} \\
+&= -(nq - x \sqrt{npq}) \ln{\left( 1 - x \sqrt{\frac p {nq}} \right)} \\
+&= (nq - x \sqrt{npq}) \left( x \sqrt{\frac p {nq}} + \frac{x^2 p}{2nq} + o\left( \frac 1 n \right) \right) \\
+&= x \sqrt{npq} + \frac{1}{2} x^2 p - x^2 p + o(1)
+\end{aligned}
+$$
+
+因此
+$$
+k \ln{\frac{np}{k}} + (n-k) \ln{\frac{nq}{n-k}} = - \frac{1}{2} x^2 (p+q) + o(1) = - \frac 1 2 x^2 + o(1)
+$$
+
+下面处理 $\sqrt{\frac{n}{2 \pi k (n-k)}}$．
+
+$$
+\begin{aligned}
+\sqrt{\frac{n}{2 \pi k (n-k)}}
+&= \sqrt{\frac{n}{2 \pi (np + x \sqrt{npq}) (nq - x \sqrt{npq})}} \\
+&= \sqrt{\frac{1}{2 \pi (p + x \sqrt{\frac{pq}{n}}) (q - x \sqrt{\frac{pq}{n}})}} \\
+&= \sqrt{\frac{1}{2 \pi n p q + o(1)}}
+\end{aligned}
+$$
+
+将上述结果代回，我们就得到
+$$
+\begin{aligned}
+\binom{n}{k} p^k q^{n-k}
+&\sim \sqrt{\frac{1}{2 \pi n p q + o(1)}} \exp{\left( - \frac 1 2 x^2 + o(1) \right)} \\
+&\sim \frac{1}{\sqrt{2 \pi n p q}} \exp{\left( - \frac 1 2 x^2 \right)}
+\end{aligned}
+$$
+即
+$$
+P(\bar X_n = x) = P(X_n = k) \sim \frac 1 {\sqrt{2 \pi npq}} \exp \left( -{\frac 1 2 x^2} \right) = \frac 1 {\sqrt{2 \pi npq}} \exp \left( -\frac{(k-np)^2}{2npq} \right)
+$$
+这正是我们想要的．
+
+<div class="proof remark">
+
+<span class="proof-title">*Remark*. </span>细心的同学可能会对式子前边的系数仍是 $n \to \infty$ 时的无穷小产生疑问．事实上，在将 $X_n$ 归一化为 $\bar X_n$ 的过程中，我们将整个变量“压缩”至原来的 $\frac{1}{\sqrt{npq}}$，因此前面的系数可以理解为一种类似 $\operatorname{d}\!x$ 的存在．关于归一化的直观理解，3Blue1Brown 的中心极限定理视频(3Blue1Brown 2023a)提供了很好的讲解．
+
+更形式化的，由于归一化得到的离散型随机变量 $\bar X_n$ 在 $n \to \infty$ 的过程中已经变成连续型随机变量 $X$，我们研究的对象也应从单点转向区间．因此，对 $X_n$ 与 $\bar X_n$ 概率分布的叙述做一点变动
+$$
+P\left(x \leq \bar X_n < x + \frac 1 {\sqrt{npq}}\right)
+= P\left(k \leq X_n < k + 1 \right)
+= P(X_n=k) \sim \frac 1 {\sqrt{2 \pi npq}} \exp \left( -{\frac 1 2 x^2} \right)
+$$
+令区间大小趋于 $0$ 就得到
+$$
+\begin{aligned}
+f(x) &= \lim_{h \to 0}{\frac{P(x \leq X < x+h)}{h}} \\
+&=  \lim_{n \to \infty} \sqrt{npq} \cdot P\left(x \leq \bar X_n < x + \frac 1 {\sqrt{npq}}\right) \\
+&= \lim_{n \to \infty} \sqrt{npq} \cdot \frac 1 {\sqrt{2 \pi npq}} \exp \left( -{\frac 1 2 x^2} \right) & \dots \text{这里 $\sim$ 表现为等价无穷小替换} \\
+&= \frac 1 {\sqrt{2 \pi}} \exp \left( -{\frac 1 2 x^2} \right)
+\end{aligned}
+$$
+这才是我们真正想要的，由二项分布归一化后取极限得到的，标准正态分布的概率密度函数．
+
+</div>
+
+## Challenge
+
+选讲或留作课后讨论．
+
+### 中心极限定理要求下正态分布的唯一性
+
+正态分布概率密度函数 $e^{-x^2}$ 的形式是如何被确定的？怎么说明这形式是满足中心极限定理的独一无二的概率密度函数？
+
+3Blue1Brown 关于正态分布的系列视频较完整的解答了上述疑问，下面是推导思路的提纲．
+
+首先需要意识到，随机变量之和的概率分布即原变量概率密度函数的卷积．
+
+形式化的唯一性证明一般分为两步：
+
+- 使用 moment generating function 的方法证明，任一分布的概率密度函数的各次卷积所构成的函数列一定收敛，且收敛至的函数与初始选取的分布无关．
+- 验证正态分布概率密度函数的卷积仍有 $e^{-x^2}$ 的形式．
+
+这是严谨但并不令人满意的．我们需要更“几何”化的理解来理解 $e^{-x^2}$ 的这种唯一性，即为什么只有 $e^{-x^2}$ 在卷积下具有形式不变性．（需要指出的是，3Blue1Brown 的系列视频中，下面部分的严谨性不够充分，有待进一步研究）
+
+Herschel-Maxwell derivation 指出，若二维概率分布满足以下两个条件：
+
+- 该分布具有各向同性，即该二维分布概率密度函数在某点处的取值只与该点离原点的距离有关
+- 分布关于 $x,y$ 坐标轴独立，即该二维分布的概率密度函数可写为 $f(x)f(y)$ 的形式．
+
+则一维情形下此分布的概率密度函数被唯一地确定为具有 $f(x) = e^{c x^2}$ 的形式．当然需要假设 $f(x)$ 连续，并在最后做归一化处理．
+
+两个随机变量 $X,Y$ 的和 $X+Y$ 的概率密度函数可被视为这两个随机变量的 Descartes 积 $(X,Y)$ 的二元概率密度函数“切片”并按面积（除掉 $\sqrt 2$ 的常数因子后）“投影”至 $y=-x$ 上的结果．
+
+考虑中心极限定理．两个独立同分布变量相加，这已经满足了二维分布独立性的要求．若考虑要求卷积后形式不变，也有必要要求二维分布的各项同性（这样一来，沿 $y=-x$ 方向的“切片”的形状与坐标轴向的“切片”只有一个常数因子 $\sqrt 2$ 的差别）．因此，中心极限定理某种意义上正好对应了 Herschel-Maxwell derivation 的要求，从而唯一确定了正态分布概率密度函数 $e^{-x^2}$ 的形式．
+
+### 正态分布的归一性验证、Maxwell 速率分布与高维球体表面积
+
+Guass 积分：
+$$
+\int_{-\infty}^{+\infty} e^{-x^2} \operatorname{d}\!x = \sqrt \pi
+$$
+
+Maxwell 速率分布：
+$$
+f(v) = 4 \pi v^2 \left( \frac{m}{2 \pi kT} \right)^{\frac 3 2} \exp \left( - \frac{m}{2kT}v^2 \right)
+$$
+
+以及它们与高维球体表面积的联系涉及多元积分学的内容．参见 3Blue1Brown 有关 $\pi$ 与正态分布的视频(3Blue1Brown 2023b)．
+
+### $n!$ 的其它估计
+
+一种更容易想到的做法是
+$$
+n \ln n - n - 1 = \int_1^n \ln x \operatorname{d}\!x \leq
+\ln n! = \sum_{k=1}^n \ln k
+\leq \int_1^{n+1} \ln x \operatorname{d}\!x = (n+1) \ln (n+1) - n - 2
+$$
+从而
+$$
+\left( \frac n e \right)^n \leq e \cdot n! \leq \left(\frac{n+1}{e}\right)^{n+1}
+$$
+当然这比 <a href="#thm-stirling-weak" class="quarto-xref">Theorem 2</a> 的估计稍差．
+
+更多估计可参考这篇文章(hijjjjq 2022)．
+
+### Wallis 公式的其它证明
+
+3Blue1Brown 频道提供了一个几何风格的证明(3Blue1Brown 2018)，其与 Bassel 问题的 Euler 解法有着神秘的联系．事实上，Euler 对 $\frac{\sin x}{x}$ 的无穷乘积拆解也可用于证明 Wallis product，参见 Wikipedia(Wikipedia, n.d.)．
+
+### Wallis 公式视角下三阶乘与中心三项式系数的渐进估计
+
+<div id="exr-triple-factorial-1" class="theorem exercise">
+
+<span class="theorem-title">**Exercise 2**</span> 求
+$$
+\lim_{n \to \infty} \frac{(3n-2)!!!}{(3n)!!!} = \lim_{n \to \infty} \frac{1 \times 4 \times 7 \times \dots \times (3n-2)}{3 \times 6 \times 9 \times \dots \times 3n}
+$$
+并对其做出渐进估计．
+
+</div>
+
+<div id="exr-triple-factorial-2" class="theorem exercise">
+
+<span class="theorem-title">**Exercise 3**</span> 求
+$$
+\lim_{n \to \infty} \frac{(3n-1)!!!}{(3n)!!!} = \lim_{n \to \infty} \frac{2 \times 5 \times 8 \times \dots \times (3n-1)}{3 \times 6 \times 9 \times \dots \times 3n}
+$$
+并对其做出渐进估计．
+
+</div>
+
+<div id="exr-trinomial" class="theorem exercise">
+
+<span class="theorem-title">**Exercise 4**</span> 求
+$$
+\lim_{n \to \infty} \frac{(3n)! / (n!)^3}{3^{3n}}
+$$
+并对其做出渐进估计．
+
+</div>
+
+用 Stirling 公式计算得到的结果是
+$$
+\frac{\sqrt 3}{2 \pi n}
+$$
+但在 Wallis 公式的视角下如何获得？
+
+## Acknowledgments
+
+感谢吕老师组织~~我最喜欢的~~研讨课环节．此外，<a href="#exm-double-factorial" class="quarto-xref">Example 1</a> 的放缩技巧由“吸取教训”同学提供，Poisson 分布的二项分布推导是与“抱头蹲防”同学讨论的结果，在此表示感谢．
+
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+
+<div id="ref-3b1b-wallis" class="csl-entry">
+
+3Blue1Brown. 2018. “The Wallis Product for Pi, Proved Geometrically.” <https://www.youtube.com/watch?v=8GPy_UMV-08>.
+
+</div>
+
+<div id="ref-3b1b-clt" class="csl-entry">
+
+———. 2023a. “Why Is the "Central Limit" a Normal Distribution?” <https://www.youtube.com/watch?v=d_qvLDhkg00>.
+
+</div>
+
+<div id="ref-3b1b-pi" class="csl-entry">
+
+———. 2023b. “Why π Is in the Normal Distribution (Beyond Integral Tricks).” <https://www.youtube.com/watch?v=cy8r7WSuT1I>.
+
+</div>
+
+<div id="ref-hijjjjq" class="csl-entry">
+
+hijjjjq. 2022. “对n的阶乘（n!）进行估计.” <https://zhuanlan.zhihu.com/p/552658420>.
+
+</div>
+
+<div id="ref-wp-wallis" class="csl-entry">
+
+Wikipedia. n.d. “Wallis Product.” <https://en.wikipedia.org/wiki/Wallis_product#Proof_using_Euler's_infinite_product_for_the_sine_function>.
+
+</div>
+
+<div id="ref-analysis" class="csl-entry">
+
+张筑生. 2021. *数学分析新讲（重排本）（第二册）*. 2nd ed. 北京: 北京大学出版社.
+
+</div>
+
+<div id="ref-prob" class="csl-entry">
+
+张颢. 2018. *概率论*. 北京: 高等教育出版社.
+
+</div>
+
+</div>

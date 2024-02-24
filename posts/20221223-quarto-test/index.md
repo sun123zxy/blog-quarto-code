@@ -1,0 +1,455 @@
+# SunQuarTeX-cnart 测试文档
+sun123zxy, 佚名
+2022-12-07
+
+## 前言
+
+具体使用方法等参见 [sun123zxy/sunquartex](https://github.com/sun123zxy/sunquartex)．
+
+## 文章结构测试
+
+这一节测试文章结构．
+
+### 文章分节
+
+非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子．
+
+#### 文章分分节
+
+Quarto 支持交叉引用．比如这一节的标题就已经被打上了标签．
+
+##### 分分分节
+
+本节中我们测试交叉引用 <a href="#sec-test" class="quarto-xref">小节 2.1.1</a>．
+
+###### 分分分分节
+
+这是最小的一级了．
+
+## 图片、表格、列表测试
+
+这是 Quarto 的图标．
+
+![](index-quarto.png)
+
+交叉引用 <a href="#fig-quarto" class="quarto-xref">图 1</a> 当然也是可以的．
+
+这是一个紧凑列表．
+
+- 自反性．
+- 反对称性一个和非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子．
+- 传递性．
+
+这是一个宽松列表．
+
+- 自反性．
+
+- 反对称性一个和非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子．
+
+  还多加了一段．
+
+- 传递性．
+
+这是一个定义列表．
+
+自反性  
+$a \sim a$
+
+反对称性  
+$a \leq b \land b \leq a \implies a=b$
+
+传递性  
+$a \leq b \land b \leq c \implies a \leq c$
+
+当然也可以使用 Markdown 表格．例如 <a href="#tbl-cartesian-unsolved" class="quarto-xref">表 1 (a)</a>.
+
+多表格并列．加上 <a href="#tbl-power-unsolved" class="quarto-xref">表 1 (b)</a>，它们共同组成了 <a href="#tbl-panel-unsolved" class="quarto-xref">表 1</a>．
+
+|                  |             |             |             |
+|:----------------:|:-----------:|:-----------:|:-----------:|
+| $L_i \times C_j$ |     $2$     | $\mathbb N$ | $\mathbb R$ |
+|       $2$        |     $4$     | $\mathbb N$ | $\mathbb R$ |
+|   $\mathbb N$    | $\mathbb N$ | $\mathbb N$ |      ?      |
+|   $\mathbb R$    | $\mathbb R$ |      ?      | $\mathbb R$ |
+
+|             |             |             |                 |
+|:-----------:|:-----------:|:-----------:|:---------------:|
+| $L_i^{C_j}$ |     $2$     | $\mathbb N$ |   $\mathbb R$   |
+|     $2$     |     $4$     | $\mathbb R$ | $2^{\mathbb R}$ |
+| $\mathbb N$ | $\mathbb N$ |      ?      |        ?        |
+| $\mathbb R$ | $\mathbb R$ |      ?      |        ?        |
+
+## 数学公式、定理系统测试
+
+Quarto 的一大卖点．
+
+这一节我们测试数学相关内容. HTML 中的定理标号方式目前没有方法更改，但 LaTeX 中的定理标号可通过自行修改模板中 `amsthm` 宏包的定义实现.
+
+此外，根据 [Quarto - Markdown Basics \# Equations](https://quarto.org/docs/authoring/markdown-basics.html#equations) 和 [Defining LaTeX commands for HTML and PDF rendering - Discussion \#1793](https://github.com/quarto-dev/quarto-cli/discussions/1793) 和 [Quarto - Conditional Content](https://quarto.org/docs/authoring/conditional.html)，按如下面方式自定义 macro 可确保其在 HTML、 LaTeX/PDF 和 MS Word 中都得到正确渲染．值得注意的是，由于 `\DeclareMathOperator` 只能在 LaTeX 的导言区使用，这里我们用 `\newcommand` + `\operatorname` 的方式替代．
+
+下面的公式使用了上面定义的 macro．
+$$
+\operatorname{ran}A := \{ y \mid (x,y) \in A \}
+$$
+
+两个集合 $A, B$ 的笛卡尔积定义为
+$$
+A \times B = \{\langle x,y \rangle \mid x \in A \land y \in B \}
+$$
+
+显然，笛卡尔积不满足交换律和结合律. 在势的视角下，它的表现如何呢？
+
+<div id="thm-cartesian-preserve" class="theorem">
+
+<span class="theorem-title">**定理 1 (笛卡尔积的保势性)**</span> 这是一个有 caption 的定理.
+
+$$
+A \preccurlyeq C \land B \preccurlyeq D \implies A \times B \preccurlyeq C \times D
+$$
+
+</div>
+
+<div class="proof">
+
+<span class="proof-title">*证明*. </span>建立单射
+$$
+\begin{aligned}
+\varphi: A \times B &\to C \times D \\
+\langle x,y \rangle &\mapsto \langle f(x), g(y) \rangle
+\end{aligned}
+$$
+即可，其中 $f$ 和 $g$ 是由 $A \preccurlyeq C$ 和 $B \preccurlyeq D$ 确定的单射.
+
+</div>
+
+<div id="cor-random" class="theorem corollary">
+
+<span class="theorem-title">**推论 1**</span> 等势意义下可用等势的集合替换参与笛卡尔积运算的集合，即
+$$
+A \approx C \land B \approx D \implies A \times B \approx C \times D
+$$
+
+这是一个没有 caption 的定理.
+
+</div>
+
+<div id="exm-rtimesn" class="theorem example">
+
+<span class="theorem-title">**例 1**</span> 证明
+$$
+\mathbb R \times \mathbb N \approx \mathbb N \times \mathbb R \approx \mathbb R
+$$
+
+</div>
+
+<div class="proof">
+
+<span class="proof-title">*证明*. </span>利用 <a href="#thm-cartesian-preserve" class="quarto-xref">定理 1</a> 对 $\mathbb R \times 2$ 和 $\mathbb R \times \mathbb R$ 夹逼，立刻得到
+$$
+\mathbb R \approx \mathbb R \times 2 \preccurlyeq \mathbb R \times \mathbb N \preccurlyeq \mathbb R \times \mathbb R \approx \mathbb R
+\implies \mathbb R \times \mathbb N \approx \mathbb N \times \mathbb R \approx \mathbb R
+$$
+
+</div>
+
+<div class="proof solution">
+
+<span class="proof-title">*解*. </span>这是一个解．
+
+</div>
+
+<div class="proof remark">
+
+<span class="proof-title">*注记*. </span>这是一个注记．
+
+</div>
+
+## 数据可视化（Table, Figure & Diagram）
+
+Quarto 的另一大卖点．
+
+``` python
+import numpy as np
+import matplotlib.pyplot as plt
+
+r = np.arange(0, 2, 0.01)
+theta = 2 * np.pi * r
+fig, ax = plt.subplots(
+  subplot_kw = {'projection': 'polar'} 
+)
+ax.plot(theta, r)
+ax.set_rticks([0.5, 1, 1.5, 2])
+ax.grid(True)
+plt.show()
+```
+
+![](index_files/figure-commonmark/fig-polar-output-1.png)
+
+交叉引用 <a href="#fig-polar" class="quarto-xref">图 2</a> 当然也是可以的.
+
+这里再测试一些较复杂的并列效果．（<a href="#tbl-light-on" class="quarto-xref">表 2</a>, <a href="#tbl-light-on-1" class="quarto-xref">表 2 (a)</a>, <a href="#tbl-light-on-2" class="quarto-xref">表 2 (b)</a>, <a href="#fig-light-on" class="quarto-xref">图 3</a>, <a href="#fig-light-on-1" class="quarto-xref">图 3 (a)</a>, <a href="#fig-light-on-2" class="quarto-xref">图 3 (b)</a>）
+
+``` python
+import numpy as np
+import math
+from IPython.display import Markdown, display
+from tabulate import tabulate
+import matplotlib.pyplot as plt
+
+R = np.array([0,100,200,300,400,500,600,700,800,900,1000,
+1100,1110,1120,1130,1140,1150,1160,1170,1180,1190,
+1200,1210,1220,1230,1240,1250,1260,1270,1280,1290,
+1300,1400,1500,2000,4000,math.inf])
+U = np.array([24.2E-3, 0.386,0.747,1.104,1.460,1.813,2.16,2.51,2.86,3.19,3.48,
+3.70,3.75,3.77,3.78,3.80,3.81,3.83,3.84,3.85,3.86,
+3.87,3.90,3.92,3.93,3.94,3.95,3.95,3.96,3.97,3.98,
+3.99,4.08,4.16,4.39,4.66,4.85])
+I = np.array([3.6,3.6,3.6,3.6,3.6,3.5,3.5,3.5,3.5,3.5,3.4,
+3.3,3.4,3.4,3.4,3.4,3.3,3.3,3.3,3.3,3.3,
+3.2,3.2,3.2,3.2,3.2,3.2,3.2,3.1,3.1,3.1,
+3.0,2.9,2.7,2.2,1.130,47.7E-3])
+P = U*I
+```
+
+``` python
+table = [[R[i], U[i], I[i], P[i]] for i in list(range(0, 11)) + [11,21,31,32,33,34,35,36]]
+display(Markdown(tabulate(table, headers=["R (Ω)", "U (V)", "I (mA)", "P (mW)"])))
+table = [[R[i], U[i], I[i], P[i]] for i in range(12, 31)]
+display(Markdown(tabulate(table, headers=["R (Ω)", "U (V)", "I (mA)", "P (mW)"])))
+```
+
+<div class="cell-output cell-output-display cell-output-markdown">
+
+| R (Ω) |  U (V) | I (mA) |   P (mW) |
+|------:|-------:|-------:|---------:|
+|     0 | 0.0242 |    3.6 |  0.08712 |
+|   100 |  0.386 |    3.6 |   1.3896 |
+|   200 |  0.747 |    3.6 |   2.6892 |
+|   300 |  1.104 |    3.6 |   3.9744 |
+|   400 |   1.46 |    3.6 |    5.256 |
+|   500 |  1.813 |    3.5 |   6.3455 |
+|   600 |   2.16 |    3.5 |     7.56 |
+|   700 |   2.51 |    3.5 |    8.785 |
+|   800 |   2.86 |    3.5 |    10.01 |
+|   900 |   3.19 |    3.5 |   11.165 |
+|  1000 |   3.48 |    3.4 |   11.832 |
+|  1100 |    3.7 |    3.3 |    12.21 |
+|  1200 |   3.87 |    3.2 |   12.384 |
+|  1300 |   3.99 |      3 |    11.97 |
+|  1400 |   4.08 |    2.9 |   11.832 |
+|  1500 |   4.16 |    2.7 |   11.232 |
+|  2000 |   4.39 |    2.2 |    9.658 |
+|  4000 |   4.66 |   1.13 |   5.2658 |
+|   inf |   4.85 | 0.0477 | 0.231345 |
+
+</div>
+
+<div class="cell-output cell-output-display cell-output-markdown">
+
+| R (Ω) | U (V) | I (mA) | P (mW) |
+|------:|------:|-------:|-------:|
+|  1110 |  3.75 |    3.4 |  12.75 |
+|  1120 |  3.77 |    3.4 | 12.818 |
+|  1130 |  3.78 |    3.4 | 12.852 |
+|  1140 |   3.8 |    3.4 |  12.92 |
+|  1150 |  3.81 |    3.3 | 12.573 |
+|  1160 |  3.83 |    3.3 | 12.639 |
+|  1170 |  3.84 |    3.3 | 12.672 |
+|  1180 |  3.85 |    3.3 | 12.705 |
+|  1190 |  3.86 |    3.3 | 12.738 |
+|  1200 |  3.87 |    3.2 | 12.384 |
+|  1210 |   3.9 |    3.2 |  12.48 |
+|  1220 |  3.92 |    3.2 | 12.544 |
+|  1230 |  3.93 |    3.2 | 12.576 |
+|  1240 |  3.94 |    3.2 | 12.608 |
+|  1250 |  3.95 |    3.2 |  12.64 |
+|  1260 |  3.95 |    3.2 |  12.64 |
+|  1270 |  3.96 |    3.1 | 12.276 |
+|  1280 |  3.97 |    3.1 | 12.307 |
+|  1290 |  3.98 |    3.1 | 12.338 |
+
+</div>
+
+``` python
+fig, ax = plt.subplots()
+
+ax.set_xlabel("U (V)")
+ax.set_ylabel("I (mA)")
+
+ax.plot(U, I, marker="o")
+ax.grid(True)
+ax.set_xlim(0)
+ax.set_ylim(0)
+
+plt.show()
+
+
+fig, ax = plt.subplots()
+
+ax.set_xlabel("R (Ω)")
+ax.set_ylabel("P (mW)")
+
+ax.plot(R, P, marker="o")
+ax.grid(True)
+ax.set_xlim((0, 2000))
+ax.set_ylim(0)
+
+plt.show()
+```
+
+<div class="cell-output cell-output-display">
+
+<img src="index_files/figure-commonmark/fig-light-on-output-1.png" data-ref-parent="fig-light-on" />
+
+</div>
+
+<div class="cell-output cell-output-display">
+
+<img src="index_files/figure-commonmark/fig-light-on-output-2.png" data-ref-parent="fig-light-on" />
+
+</div>
+
+另外，支持使用 GraphViz 或 Mermaid 绘制有向图或流程图．
+
+<div>
+
+<img src="index_files\figure-commonmark\dot-figure-1.png" style="width:6.25in;height:2.5in" />
+
+</div>
+
+## Layout
+
+如 [Quarto - Article Layout](https://quarto.org/docs/authoring/article-layout.html) 所述，有时可让文章某些部分超出常规的宽度限制．此功能主要在 HTML 中使用，PDF 中部分生效，其它格式不生效．
+
+<div class="column-page">
+
+| $n$ 个球 | $r$ 个盒 |  空盒  |                     递推或封闭形式                     |                  生成函数                   |        备注        |
+|:--------:|:--------:|:------:|:------------------------------------------------------:|:-------------------------------------------:|:------------------:|
+|  有标号  |  无标号  | 不允许 | $${n \brace r} = r {n-1 \brace r} + {n-1 \brace r-1}$$ | $$\mathrm{EGF}(x)=\frac {(e^x - 1)^r}{r!}$$ | 第二类 Stirling 数 |
+
+</div>
+
+## 代码块和引用
+
+下面是代码块．
+
+``` python
+import numpy as np
+import matplotlib.pyplot as plt
+
+r = np.arange(0, 2, 0.01)
+theta = 2 * np.pi * r
+fig, ax = plt.subplots(
+  subplot_kw = {'projection': 'polar'} 
+)
+ax.plot(theta, r)
+ax.set_rticks([0.5, 1, 1.5, 2])
+ax.grid(True)
+plt.show()
+```
+
+下面是引用块和一个非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子．
+
+> 这是一个引用块和一个非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子．
+
+## HTML 专用测试
+
+目前暂未处理 LaTeX/PDF 格式的 callout，MS Word 格式可兼容但效果不佳．本节后续内容将不会在 LaTeX/PDF 格式下被渲染．
+
+### Callouts
+
+Quarto 具有 5 种 callout 类型：`note`，`warning`，`important`，`tip`，和 `caution`．
+
+> [!NOTE]
+>
+> 普通的 note callout．
+
+> [!WARNING]
+>
+> 这是 warning callout 和一个和非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子．
+
+这是两个 callout 中间的一个段落．
+
+> [!IMPORTANT]
+>
+> 这是 important callout．
+
+> [!TIP]
+>
+> ### 有 caption 的 callout
+>
+> 这是有 caption 的 callout．
+
+> [!CAUTION]
+>
+> ### 可折叠的 callout
+>
+> 开启 collapse 的可折叠 caution callout．
+
+> [!CAUTION]
+>
+> simple 风格的 callout 和一个和非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子．
+
+> [!CAUTION]
+>
+> minimal 风格的 callout 和一个和非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的句子．
+
+## 引用、脚注测试
+
+这是一个脚注[^1]．
+
+人脸识别是以人面部特征作为识别个体身份的一种个体生物特征识别方法 (全国信息安全标准化技术委员会 2020)．……人脸识别的研究最早可追溯到上世纪 60 年代，Bledsoe and Chan 研究了编程计算机识别人脸的方法(Bledsoe 和 Chan 1965)．随后，萌芽期的人脸识别技术经历多轮蜕变，在发展中逐渐完善．然而，人脸识别的主要难点在于不同个体的人脸结构并无大异，而同一个体的人脸在不同表情、年龄、妆饰、光照等干扰因素下又往往差异显著(余璀璨 和 李慧斌 2021)，这要求人脸识别技术既要克服类内因素的干扰，同时又要加强类间差距的显著性，而早期人脸识别方法关注人脸几何特征，识别效果不尽人意．为此，以 Eigenfaces(Turk 和 Pentland, 不详) 为代表的子空间学习识别方法和 Gabor(Liu 和 Wechsler 2001)、LBP(Ahonen, Hadid, 和 Pietikäinen 2004) 等局部特征分析的滤波器提取方法在各自领域都有所突破．2014 年，应用新兴的深度卷积神经网络技术，DeepFace(Taigman 等, 不详) 横空出世，以 97.35% 的 LFW 基准数据集识别准确率重塑了人脸识别领域的研究格局．随后，人脸识别技术迎来爆发式增长，并逐渐走进人们的日常生活之中．……个体层面，要加强公众的权利意识，塑造个人的“数字理性”(郭春镇 2020)．
+
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+
+<div id="ref-lbp" class="csl-entry">
+
+Ahonen, Timo, Abdenour Hadid, 和 Matti Pietikäinen. 2004. 《Face recognition with local binary patterns》. 收入 *European conference on computer vision*, 469–81. Springer.
+
+</div>
+
+<div id="ref-history" class="csl-entry">
+
+Bledsoe, Woodrow Wilson, 和 Helen Chan. 1965. 《A man-machine facial recognition system—some preliminary results》. *Panoramic Research, Inc, Palo Alto, California., Technical Report PRI A* 19: 1965.
+
+</div>
+
+<div id="ref-gabor" class="csl-entry">
+
+Liu, Chengjun, 和 Harry Wechsler. 2001. 《A Gabor feature classifier for face recognition》. 收入 *Proceedings Eighth IEEE International Conference on Computer Vision. ICCV 2001*, 2:270–75. IEEE.
+
+</div>
+
+<div id="ref-deepface" class="csl-entry">
+
+Taigman, Y, M Yang, M Ranzato, 和 L Wolf. 不详. 《Closing the gap to human-level performance in face verification. deepface》. 收入 *Proceedings of the IEEE Computer Vision and Pattern Recognition (CVPR)*, 5:6.
+
+</div>
+
+<div id="ref-eigenfaces" class="csl-entry">
+
+Turk, M., 和 A. Pentland. 不详. 《Eigenfaces for Recognition》. *Journal of Cognitive Neuroscience* 3 (1): 71–86.
+
+</div>
+
+<div id="ref-technical" class="csl-entry">
+
+余璀璨, 和 李慧斌. 2021. 《基于深度学习的人脸识别方法综述》. *工程数学学报* 38 (4): 19.
+
+</div>
+
+<div id="ref-define" class="csl-entry">
+
+全国信息安全标准化技术委员会. 2020. 《《信息安全技术远程人脸识别系统技术要求》（GB/T38671-2020）》. <https://std.samr.gov.cn/gb/search/gbDetailed?id=A47A713B767814ABE05397BE0A0ABB25>.
+
+</div>
+
+<div id="ref-guochunzhen" class="csl-entry">
+
+郭春镇. 2020. 《数字人权时代人脸识别技术应用的治理》. *现代法学* 42 (4): 18.
+
+</div>
+
+</div>
+
+[^1]: 参见 [Quarto - Citations & Footnotes](https://quarto.org/docs/authoring/footnotes-and-citations.html)

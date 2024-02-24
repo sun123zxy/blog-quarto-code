@@ -1,0 +1,534 @@
+# OI 数论中的上界估计与时间复杂度证明
+sun123zxy
+2023-04-18
+
+<div class="hidden">
+
+</div>
+
+## 预备
+
+### 渐进符号
+
+其实不少高等数学 / 数学分析教材在讲解无穷小的比较时已经相当严谨地介绍过大 O、小 O 记号，然而各种历史习惯记法的符号滥用（abuse of notation）(“Abuse of Notation - Wikipedia,” n.d.) 直到现在都让笔者头疼. These notations seem to be innocent, but can be catastrophic without careful manipulation. For example,
+
+- $$
+  n = O(n^2) \land n^2 = O(n^2) \implies n = n^2
+  $$
+
+  Knuth 在《具体数学》里举出的例子 Graham, Knuth, and Patashnik (1994a). “$=$” 隐含的对称性使其在 $g(x) = O(f(x))$ 中格格不入. 事实上，将 $O(f(x))$ 看作“阶不高于 $f(x)$ 的所有函数的集合”是比“某个阶不高于 $f(x)$ 的函数”更严谨的理解. 因此，本文将使用 $f(x) \in O(g(x))$ （有时也记为 $O(f(x)) \subset O(g(x))$）的集合论符号代替传统的 $f(x) = O(g(x))$ 记法.
+
+- $$
+  n^2 \sin n \in O(n^2) \implies \sum_{i=1}^n i^2 \sin i \in \sum_{i=1}^n O(i^2) \subset O\left( \sum_{i=1}^n i^2 \right) \subset O(n^3)
+  $$
+  或更一般的，
+  $$
+  g(x) \in O(f(x)) \implies \sum_{P(n,i)} g(i) \in \sum_{P(n,i)} O(f(i)) \subset O \left(\sum_{P(n,i)} f(i) \right)
+  $$
+
+  没看出有啥问题，对吧？笔者在写作此文时犯了同样的错误. 请注意，大 O 记号的作用对象是函数，$f(i)$ 是什么？它只是个函数值，是确定的数——这是因为 $i$ 也是求和枚举中确定的数，而不是 $n$ 这种真正代表变元的记号. 所以 $O(f(i))$ 是什么？它什么也不是.
+
+  这种错误的出现是在所难免的，我们太习惯用 $x$、$x^3 + 5 x^2 + x$ 这种变元都不明确的记号来表示函数了(“Abuse of Notation - Wikipedia,” n.d.). 写成 $f(x)$ 也不严谨，因为只有 $f$ 才应代表函数本身，$f(x)$ 只能是函数值. 这样我们就可以放心地写下 $O(f)$，不用担心把变元与确定值弄混了.
+
+  然而大家还是喜欢写 $O(n^2)$ 和 $O(e^{n^2})$，而不是奇怪的 $O(\mathrm{id}^2)$ 和 $O(\mathrm{exp} \circ {\mathrm{id}^2})$. 所以，我们大概只能沿用这种不太严谨的记号，并时刻提醒自己加倍小心了. （形如 $x \mapsto e^{x^2}$ 的 $\lambda$ 风格“匿名函数”记号可能更好？）
+
+  但上述命题从结论上是正确的. 正确的推导过程应为
+  $$
+  \sum_{P(n,i)} g(i) \leq \sum_{P(n,i)} C f(i) \leq C \sum_{P(n,i)} f(i) \in O \left(\sum_{P(n,i)} f(i) \right)\
+  $$
+
+  第一步是直接由大 O 记号的定义得到的结果.
+
+Wikipedia(“Big o Notation - Wikipedia \# Family of Bachmann–Landau Notations,” n.d.) 中有一张详尽的表格介绍了各种渐进符号的定义，OI Wiki(“复杂度 - OI Wiki,” n.d.) 上也有极好的讲解，尚不熟练的读者可以参考. 有兴趣仔细研究的读者可以参考《具体数学》第九章(Graham, Knuth, and Patashnik 1994a)、Wikipedia 及其 reference（个人推荐 Knuth 关于 $O$、$\Omega$、$\Theta$ 的短文(Knuth 1976)）. 本文除用 “$\in$” 和“$\subset$”替代 “$=$” 外，完全使用 Knuth 提议的记号体系.
+
+### 调和数 $H(n)$ / 调和级数
+
+调和级数的部分和 $H(n)$ 定义为
+$$
+H(n) = \sum_{i=1}^n \frac 1 i
+$$
+通过一些与 $e$ 有关的数列放缩可以证明 $\lim_{n \to \infty} ( H(n) - \log n ) = c$，其中 $c \approx 0.577$ 是 Euler 常数. 因此 $n H(n) \sim n \log n \in \Theta(\log n)$.
+
+### 自然数等幂和 $P_p(n)$ / $p$ - 级数
+
+$p$ - 级数可视为调和级数的推广. 其部分和定义为
+$$
+P_p(n) = \sum_{i=1}^n i^{-p}
+$$
+
+$p$ - 级数具有如下性质：
+
+- 当 $p > 1$ 时，$p$ - 级数收敛；
+
+- 当 $p = 1$ 时，$p$ - 级数是调和级数；
+
+- 当 $-\infty < p < 1$ 时，我们指出
+  $$
+  P_p(n) \sim \frac{1}{1-p} n^{1-p} \in \Theta(n^{1-p})
+  $$
+
+$-\infty < p < 1$ 时 $p$ - 级数的渐进估计可以从连续幂函数积分的角度理解. 证明这渐进性，离散情况下，可对 $n^p$ 差分后前缀和 + 二项式定理得到高次项系数，或可用离散微积分理论得到精确表示（参见《具体数学》(Graham, Knuth, and Patashnik 1994b)）；连续情况下，Lagrange 中值定理应为较简单的估计方法. 这里从略. 总之，我们得到：
+$$
+P_p(n) \in \begin{cases}
+\Theta(n^{1-p}) & p < 1 \\
+\Theta(n \log n) & p = 1 \\
+\Theta(1) & p > 1
+\end{cases}
+$$
+
+## 约数函数 $\sigma_z(n)$
+
+约数函数（Divisor Function，也可称为除数函数、因数函数）是与 $n$ 的因子有关的一类函数，定义如下：
+
+<div id="def-sigma" class="theorem definition">
+
+<span class="theorem-title">**Definition 1 (约数函数)**</span> $$
+\sigma_z(n) = \sum_{d \mid n} d^z
+$$
+
+</div>
+
+当 $z=0$ 时，$\sigma_0(n)$ 被称为约数个数函数（number-of-divisors function），常被记为 $d(n)$ 或 $\tau(n)$. 当 $z=1$ 时，$\sigma_1(n)$ 被称为约数和函数（sum-of-divisors function），常直接记为 $\sigma(n)$.
+
+<div id="exm-sigma0ub" class="theorem example">
+
+<span class="theorem-title">**Example 1**</span> 估计 $\sigma_0 (n)$ 的渐进上界.
+
+</div>
+
+也就是估计 $n$ 的因子的数量. 一个广为人知的上界是 $2 \sqrt n$，因为 $n$ 的所有小于 $\sqrt n$ 的因子 $d$ 均与另一因子 $\frac n d$ 一一对应.
+
+<div class="proof remark">
+
+<span class="proof-title">*Remark*. </span>事实上进一步可以证明 $\sigma_0(n) \in o(n^\epsilon) \quad \forall \epsilon > 0$，或更精确的，$\sigma_0(n) \in O(n^{\log 2 / \log \log n})$ (“Divisor Function - Wikipedia \# Growth_rate,” n.d.)．这一点说明，在实现与枚举因子有关的算法时，虽然仍会从 $1$ 枚举至 $\sqrt n$ 探测因子，但真正参与计算的因子其实相当少．因此，这些算法的实际表现往往极大程度地优于按 $\sigma_0(n) \in O(\sqrt n)$ 估计的理论时间复杂度．
+
+</div>
+
+<div id="exm-sumsigma0ub" class="theorem example">
+
+<span class="theorem-title">**Example 2**</span> 估计 $\hat{\sigma_0}(n) = \sum_{i=1}^n \sigma_0 (i)$ 的渐进上界.
+
+</div>
+
+即估计 $1$ 到 $n$ 中所有数因子个数的和. 这是一个形式上鲜为人知但其应用广为人知的例子. 变换求和顺序，容易得到
+
+$$
+\hat{\sigma_0}(n) = \sum_{i=1}^n \sigma_0 (i)
+= \sum_{i=1}^n \sum_{d \mid i} 1
+= \sum_{d=1}^n \left\lfloor \frac n d \right\rfloor
+\leq \sum_{d=1}^n \frac n d
+= n H(n) \in O(n \log n)
+$$
+
+显然，这比 $O(n \sqrt n)$ 的平凡估计好上不少. 本例的思路不仅是埃氏筛（Sieve of Eratosthenes）的理论基础，也在杜教筛、快速 Mobius 变换、$\gcd$ 卷积(sun123zxy 2020a)等处出现.
+
+进一步利用此技巧和 $p$ - 级数的估计，我们甚至能在仔细研究 $\sigma_z(n)$ 前就得到其前缀和的渐进估计：
+
+<div id="exm-sumsigmazub" class="theorem example">
+
+<span class="theorem-title">**Example 3**</span> 估计 $\hat{\sigma_z}(n) = \sum_{i=1}^n \sigma_z (i)$ 的渐进上界.
+
+</div>
+
+$$
+\begin{aligned}
+\hat{\sigma_z}(n)
+&= \sum_{i=1}^n \sigma_z (i)
+= \sum_{i=1}^n \sum_{d \mid i} d^z
+= \sum_{d=1}^n d^z \left\lfloor \frac n d \right\rfloor \\
+&\leq n \sum_{d=1}^n d^{z-1}
+= n P_{1-z}(n)
+\in \begin{cases}
+O(n^{z+1}) & z > 0 \\
+O(n \log n) & z = 0 \\
+O(n) & z < 0
+\end{cases}
+\end{aligned}
+$$
+
+遗憾的是，对此前缀和做差分并不能得到 $\sigma_z(n)$ 的优秀估计.
+
+现在引入一个重要放缩技巧，其在后续估计中屡试不爽.
+
+<div id="prp-trick1" class="theorem proposition">
+
+<span class="theorem-title">**Proposition 1**</span> $$
+\sum_{d \mid n} f(d) \leq \sum_{i=1}^n f (\left\lfloor \frac n i \right\rfloor)
+$$
+
+</div>
+
+显然，右式比左式多算了 $i \nmid n$ 的项，因此命题是正确的. 但我们还可以做得更好：
+
+<div id="prp-trick1ex" class="theorem proposition">
+
+<span class="theorem-title">**Proposition 2**</span> $$
+\sum_{d \mid n} f(d) \leq \sum_{i=1}^{\sqrt n} f(i) + f(\left\lfloor \frac n i \right\rfloor)
+$$
+
+</div>
+
+$\sqrt n$ 分治. 我们其实已经在 <a href="#exm-sigma0ub" class="quarto-xref">Example 1</a> 估计 $\sigma_0(n)$ 时用过此技巧了.
+
+<div id="exm-sigma1ub" class="theorem example">
+
+<span class="theorem-title">**Example 4**</span> 估计 $\sigma_1 (n)$ 的渐进上界.
+
+</div>
+
+用 <a href="#prp-trick1" class="quarto-xref">Proposition 1</a>：
+$$
+\sigma_1 (n)
+= \sum_{d \mid n} d \leq \sum_{i=1}^n \left\lfloor \frac n i \right\rfloor \leq n H(n) \in O(n \log n)
+$$
+
+可以证明用 <a href="#prp-trick1ex" class="quarto-xref">Proposition 2</a> 不会得到更优的结果.
+
+我们发现了一个有趣的事实：$\sigma_1 (n)$ 和 $\hat{\sigma_0}(n)$ 的渐进上界均为 $O(n \log n)$.
+
+<div id="exm-sigmazub" class="theorem example">
+
+<span class="theorem-title">**Example 5**</span> 估计 $\sigma_z (n)$ 的渐进上界.
+
+</div>
+
+用 <a href="#prp-trick1ex" class="quarto-xref">Proposition 2</a> 和 $p$ - 级数的性质：
+
+$$
+\begin{aligned}
+\sigma_z (n)
+&= \sum_{d \mid n} d^z
+\leq \sum_{i=1}^{\sqrt n} i^z + \left\lfloor \frac n i \right\rfloor^z \\
+&\leq \begin{cases}
+\displaystyle 2 \sum_{i=1}^{\sqrt n} \left\lfloor \frac n i \right\rfloor^z \leq 2 n^z \sum_{i=1}^{\sqrt n} i^{-z} & = 2 n^z P_z(\sqrt n) & z \geq 0\\
+\displaystyle 2 \sum_{i=1}^{\sqrt n} i^z & = 2 P_{-z}(\sqrt n)  & z < 0
+\end{cases} \\
+\in & \begin{cases}
+2 n^z O(1) & z > 1 \\
+2 n O(\log \sqrt n) & z = 1 \\
+2 n^z O(n^{\frac {1-z} 2}) & 0 \leq z < 1 \\
+2 O(n^{\frac {1+z} 2}) & -1 < z < 0 \\
+2 O(\log \sqrt n) & z = -1 \\ 
+2 O(1) & z < -1
+\end{cases}
+= \begin{cases}
+O(n^z) & z > 1 \\
+O(n \log n) & z = 1 \\
+O(n^{\frac {1+z} 2}) & -1 < z < 1 \\
+O(\log n) & z = -1 \\
+O(1) & z < -1
+\end{cases}
+\end{aligned}
+$$
+
+我们得到了一个相当优秀的渐进上界. 值得关注的是：
+
+- 当 $z=0$ 时，$\sigma_0(n) \in O(n^{\frac 1 2})$. 这与 <a href="#exm-sigma0ub" class="quarto-xref">Example 1</a> 的结果一致.
+- 当 $z=\frac 1 2$ 时，$\sigma_{\frac 1 2}(n) \in O(n^{\frac 3 4})$，即 $\sum_{d \mid n} \sqrt d \in O(n^{\frac 3 4})$. 洛谷 P4980 Polya 定理模板题(“P4980 【模板】pólya 定理 - 洛谷 \| 计算机科学教育新生态,” n.d.)的一种比较 trivial 的解法(sun123zxy 2020b)的时间复杂度证明就来源于此. 我们之后还会在整除分块与杜教筛中见到它.
+
+另外，如果只使用 <a href="#prp-trick1" class="quarto-xref">Proposition 1</a> ，$-1<z<1$ 部分的渐进上界将只能估计至 $O(n)$. 因此 <a href="#prp-trick1ex" class="quarto-xref">Proposition 2</a> 是更为优越的.
+
+约数函数更复杂的上限与渐进估计可参考 Wikipedia(“Divisor Function - Wikipedia \# Growth_rate,” n.d.).
+
+## 整除分块
+
+也被称为数论分块. 求
+$$
+\sum_{i=1}^n f(i) g(\left\lfloor \frac n i \right\rfloor)
+$$
+我们按 $d = \left\lfloor \frac n i \right\rfloor$ 分块求和：
+$$
+\sum_{d} g(d) \sum_{\left\lfloor \frac n i \right\rfloor = d} f(i)
+$$
+可以证明，对一指定的 $d$，满足 $d = \left\lfloor \frac n i \right\rfloor$ 的 $i$ 取遍一连续区间，故若 $f$ 的前缀和能 $O(1)$ 求出，块数量 $\# \left\{ \left\lfloor \frac n i \right\rfloor \right\}_{i=1}^n$ 即该算法的时间复杂度. 注意到当 $i \leq \sqrt n$ 时，$\left\lfloor \frac n i \right\rfloor$ 最多只有 $\left\lfloor \sqrt n \right\rfloor$ 种取值，而 $i \geq \sqrt n$ 时，$1 \leq \left\lfloor \frac n i \right\rfloor \leq \sqrt n$ 表明其也最多只有 $\left\lfloor \sqrt n \right\rfloor$ 种取值. 因此整除分块的时间复杂度
+$$
+T_1(n) = \# \left\{ \left\lfloor \frac n i \right\rfloor \right\}_{i=1}^n \leq 2 \sqrt n \in O(\sqrt n)
+$$
+
+方便起见，后文记 $D(n) = \left\{ \left\lfloor \frac n i \right\rfloor \right\}_{i=1}^n$.
+
+### 整除分块嵌套
+
+将 <a href="#prp-trick1ex" class="quarto-xref">Proposition 2</a> 加强，我们有如下通用放缩：
+
+<div id="prp-trick2ex" class="theorem proposition">
+
+<span class="theorem-title">**Proposition 3**</span> $$
+\sum_{d \mid n} f(d) \leq \sum_{d \in D(n)} f(d) \leq \sum_{i=1}^{\sqrt n} f(i) + f(\left\lfloor \frac n i \right\rfloor)
+$$
+
+</div>
+
+LHS 成立的关键在于 $\{d: d \mid n\} \subset D(n)$；而 RHS 的本质就是上述对整除分块块数量上界的估计.
+
+<div class="proof remark">
+
+<span class="proof-title">*Remark*. </span>整除分块的 $O(\sqrt n)$ 相当满，而枚举因子的 $\sigma_0(n) \in O(\sqrt n)$ 却相当不满．这一点在前面介绍 $\sigma_0(n)$ 时已经提到．
+
+</div>
+
+注意到 <a href="#prp-trick1ex" class="quarto-xref">Proposition 2</a> 是 <a href="#exm-sigmazub" class="quarto-xref">Example 5</a> 证明的核心，而 <a href="#prp-trick2ex" class="quarto-xref">Proposition 3</a> 是 <a href="#prp-trick1ex" class="quarto-xref">Proposition 2</a> 的加强版，故仿造 <a href="#exm-sigmazub" class="quarto-xref">Example 5</a> 的证明，我们有
+
+<div id="exm-divissigma" class="theorem example">
+
+<span class="theorem-title">**Example 6**</span> 令
+$$
+S_z(n) = \sum_{d \in D(n)} d^z
+$$
+则前述 <a href="#exm-sigmazub" class="quarto-xref">Example 5</a> 中 $\sigma_z(n)$ 的上界与渐进上界也同样适用于 $S_z(n)$.
+
+</div>
+
+现在可以对嵌套整除分块
+$$
+\sum_{i=1}^n f(i) \sum_{j=1}^{\left\lfloor \frac n i \right\rfloor} g(j) h(\left\lfloor \frac n {ij} \right\rfloor)
+$$
+的时间复杂度 $T_2$ 做出估计了. 对 <a href="#exm-divissigma" class="quarto-xref">Example 6</a> 取 $z=\frac 1 2$，立刻有
+$$
+T_2(n) = \sum_{d \in D(n)} T_1(d) \leq 2 \sum_{d \in D(n)} \sqrt d = 2 S_{\frac 1 2}(n) \leq 4 \sqrt n P_{\frac 1 2}(\sqrt n) \in O(n^{\frac 3 4})
+$$
+
+我们还可以进一步归纳. 假定 $\forall m \geq 0, \quad \exists z_m : 0 \leq z_m < 1, \quad T_m(n) = O(n^{z_m})$，我们有
+
+$$
+T_{m+1}(n) = \sum_{d \in D(n)} T_m(d) \leq C \sum_{d \in D(n)} n^{z_m} = C S_{z_m}(n) \in O(n^{\frac {1+z_m} 2})
+$$
+
+因此 $z_{m+1} = \frac {1+z_m} 2$. 边界条件 $z_0 = 0$，数列递推求得 $z_m = 1-2^{-m}$，检验满足条件. 因此 $m$ 重嵌套整除分块的时间复杂度
+$$
+T_m(n) \in O(n^{1- 2^{-m}})
+$$
+
+## 杜教筛
+
+杜教筛可以以低于线性的时间复杂度求解某些数论函数的前缀和. 其思路并不复杂. 设 $f$ 为一数论函数，我们希望快速求得其前缀和 $\hat f (n) = \sum_{i=1}^n f(i)$. 考虑数论函数 $g$ 和 $h = g * f$，
+$$
+h(n) = \sum_{d \mid n} g(d) f(\frac n d)
+$$
+两端做前缀和得
+$$
+\begin{aligned}
+\hat h (n)
+&= \sum_{i=1}^n h(i) \\
+&= \sum_{i=1}^n \sum_{d \mid i} g(d) f(\frac i d) \\
+&= \sum_{d=1}^n g(d) \sum_{i=1}^{\left\lfloor \frac n d \right\rfloor} f(i) \\
+&= \sum_{d=1}^n g(d) \hat f (\left\lfloor \frac n d \right\rfloor) \\
+&= g(1) \hat f (n) + \sum_{d=2}^n g(d) \hat f (\left\lfloor \frac n d \right\rfloor)
+\end{aligned}
+$$
+因此
+$$
+\hat f (n) = \frac 1 {g(1)} \left( \hat h (n) - \sum_{d=2}^n g(d) \hat f (\left\lfloor \frac n d \right\rfloor) \right)
+$$
+
+故若 $g$、$h$ 的前缀和可 $O(1)$ 算得，根据上式整除分块即可递归地计算出 $f$ 的前缀和.
+
+下面分析算法的复杂度. 注意到
+$$
+\left\lfloor \frac{\left\lfloor \frac n i \right\rfloor}{j} \right\rfloor = \left\lfloor \frac{n}{ij} \right\rfloor
+$$
+故单轮递归涉及到的自变量均可表示为 $d = \left\lfloor \frac n i \right\rfloor$ 的形式. 一个 $\hat f (d)$ 做整除分块耗时 $T_1(d)$，若采用记忆化递归，由上节分析，算法总时间复杂度为
+$$
+\sum_{d \in D(n)} T_1(d) = T_2(n) \in O(n^{\frac 3 4})
+$$
+
+但我们还可以做得更好——考虑先用 $O(K)$ 的时间复杂度线性筛出前 $K$ 个 $f(n)$ 并求前缀和，则递归求解时，$d \leq K$ 的 $\hat f(d)$ 就无需再向下递归了. 为分析此类时间复杂度，对 <a href="#prp-trick2ex" class="quarto-xref">Proposition 3</a> 做最后一点扩展：
+
+<div id="prp-trick3ex" class="theorem proposition">
+
+<span class="theorem-title">**Proposition 4**</span> $$
+\sum_{\begin{gathered} d \mid n \\ d > K \end{gathered}} f(d) \leq \sum_{\begin{gathered} d \in D(n) \\ d > K \end{gathered}} f(d) \leq \sum_{K < i \leq \sqrt n} f(i) + \sum_{1 \leq i \leq \min{\{ \left\lfloor \frac n K \right\rfloor,\sqrt n \} }} f(\left\lfloor \frac n i \right\rfloor)
+$$
+
+特别的，当 $K > \sqrt n$ 时，有
+
+$$
+\sum_{\begin{gathered} d \mid n \\ d > K \end{gathered}} f(d) \leq \sum_{\begin{gathered} d \in D(n) \\ d > K \end{gathered}} f(d) \leq \sum_{1 \leq i \leq \left\lfloor \frac n K \right\rfloor} f(\left\lfloor \frac n i \right\rfloor)
+$$
+
+</div>
+
+故用 <a href="#prp-trick3ex" class="quarto-xref">Proposition 4</a> ，当 $K > \sqrt n$ 时，算法在递归部分的时间复杂度降低为
+
+$$
+\begin{aligned}
+\mathrm{Du}_K(n) &= 
+\sum_{\begin{gathered} d \in D(n) \\ d > K \end{gathered}} T_1(d) \\
+&= \sum_{1 \leq i \leq \left\lfloor \frac n K \right\rfloor} T_1(\left\lfloor \frac n i \right\rfloor) \\
+&\leq \sum_{1 \leq i \leq \left\lfloor \frac n K \right\rfloor} C \sqrt{\frac n i} \\
+&= C \sqrt n \sum_{1 \leq i \leq \left\lfloor \frac n K \right\rfloor} i^{-\frac 1 2} \\
+&=  C \sqrt n P_{\frac 1 2}\left(\left\lfloor \frac n K \right\rfloor\right) \\
+&\in \sqrt n O\left( \left(\frac n K\right)^{\frac 1 2} \right) \\
+&\subset O(n K^{-\frac 1 2})
+\end{aligned}
+$$
+
+总时间复杂度
+$$
+O(K) + O(n K^{-\frac 1 2})
+$$
+
+为最小化时间复杂度，取 $K = n^{\frac 2 3}$，得到最优时间复杂度 $O(n^{\frac 2 3})$.
+
+这部分的时间复杂度证明主要参考了文章(Ander 2022).
+
+## Challenge
+
+<div id="exm-nonsquare" class="theorem example">
+
+<span class="theorem-title">**Example 7**</span> 对 $1$ 到 $n$ 间的无平方因子数计数. $n \leq 10^{18}$.
+
+参见蓝桥杯 2023 省赛 A 组 J 题《翻转硬币》(“P9238 \[蓝桥杯 2023 省 a\] 翻转硬币 - 洛谷 \| 计算机科学教育新生态,” n.d.)或《完全平方数》(“P4318 完全平方数 - 洛谷 \| 计算机科学教育新生态,” n.d.).
+
+</div>
+
+我们指出，无平方因子数有如下计数公式
+$$
+f(n) = \sum_{i=1}^n \mu^2 (i) = \sum_{i=1}^{\left\lfloor \sqrt n \right\rfloor} \mu(i) \left\lfloor \frac n {i^2} \right\rfloor
+$$
+
+朴素实现复杂度为 $O(\sqrt n)$，考虑对 $\left\lfloor \frac n {i^2} \right\rfloor$ 开发一种新的整除分块算法. 现在问题有三. 一是估计
+$$
+\# D_2(n) = \# \left\{ \left\lfloor \frac n {i^2} \right\rfloor \right\}_{i=1}^{\sqrt n}
+$$
+这并不困难，按 $i \leq n^{\frac 1 3}$ 和 $i \geq n^{\frac 1 3}$ 讨论即知其上界为 $O(n^{\frac 1 3})$.
+
+二是实现方案. 这里也直接给出：
+
+``` cpp
+ll sqrtN=sqrt(N);
+ll ans=0;
+for(ll l=1,r,d;l<=sqrtN;l=r+1){
+    d=N/(l*l),r=sqrt(N/d);
+    ans+=(S_mu(r)-S_mu(l-1))*d;
+}
+```
+
+最后是算法时间复杂度分析. 普通的 $\left\lfloor  \frac n i \right\rfloor$ 整除分块不会因杜教筛增加时间复杂度，但 $\left\lfloor  \frac n {i^2} \right\rfloor$ 则需要额外的讨论. 注意到该整除分块枚举中，需做杜教筛的数的集合为
+$$
+\left\{ \left\lfloor  \left( \left\lfloor \frac n d \right\rfloor \right)^{\frac 1 2}  \right\rfloor\right\}_{d \in D_2 (n)}
+$$
+同样类似 <a href="#prp-trick2ex" class="quarto-xref">Proposition 3</a> ，我们有
+
+<div id="prp-trick4ex" class="theorem proposition">
+
+<span class="theorem-title">**Proposition 5**</span> $$
+\sum_{d^2 \mid n} f(\frac n {d^2}) \leq \sum_{d \in D_2(n)} f(d) \leq \sum_{i=1}^{n^{\frac 1 3}} f(i) + f(\left\lfloor \frac n {i^2} \right\rfloor)
+$$
+
+</div>
+
+因此算法递归部分时间复杂度可估计为
+$$
+\begin{aligned}
+\sum_{d \in D_2 (n)} \mathrm{Du}_K \left(\left\lfloor \left( \left\lfloor \frac n d \right\rfloor \right)^{\frac 1 2} \right\rfloor\right)
+&\leq \sum_{d \in D_2 (n)} C \left\lfloor \left( \left\lfloor \frac n d \right\rfloor \right)^{\frac 1 2} \right\rfloor K^{-\frac 1 2} \\ 
+&\leq C K^{-\frac 1 2} \left( \sum_{i=1}^{n^{\frac 1 3}} \left( \frac n {\frac n {i^2}} \right)^{\frac 1 2} + \sum_{i=1}^{n^{\frac 1 3}} \left( \frac n i \right)^{\frac 1 2} \right) \\
+&= C K^{-\frac 1 2} \left( \sum_{i=1}^{n^{\frac 1 3}} i + n^{\frac 1 2} \sum_{i=1}^{n^{\frac 1 3}} i^{-\frac 1 2} \right) \\
+&\in K^{-\frac 1 2} \left( O(n^{\frac 2 3}) + n^{\frac 1 2} O(n^{\frac 1 6}) \right) \\
+&\subset O(n^{\frac 2 3} K^{-\frac 1 2})
+\end{aligned}
+$$
+总时间复杂度为
+$$
+O(K) + O(n^{\frac 2 3} K^{-\frac 1 2})
+$$
+取 $K=n^{\frac 4 9}$，得到最优时间复杂度 $O(n^{\frac 4 9})$. 代入 $n = 10^{18}$，量级约为 $10^8$.
+
+这估计并不算优秀. 传言存在 $O(n^{\frac 2 5})$ 的估计，猜测大概优化了 $\left\{ \left\lfloor \frac n i \right\rfloor \right\}_{i=1}^n$ 和 $\left\{ \left\lfloor  \left( \left\lfloor \frac n d \right\rfloor \right)^{\frac 1 2}  \right\rfloor\right\}_{d \in D_2 (n)}$ 的重叠部分。笔者尚未找出其推导方式.
+
+upd: 关于 $O(n^{\frac 2 5})$ 的估计，请参阅博客(smsxgz 2019)和论文(Pawlewicz 2011)．
+
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+
+<div id="ref-wikipedia_abuse" class="csl-entry">
+
+“Abuse of Notation - Wikipedia.” n.d. <https://en.wikipedia.org/wiki/Abuse_of_notation#Function_notation>.
+
+</div>
+
+<div id="ref-zhihu_dusieve" class="csl-entry">
+
+Ander. 2022. “杜教筛.” <https://zhuanlan.zhihu.com/p/521699400>.
+
+</div>
+
+<div id="ref-asymptotic_wikipedia" class="csl-entry">
+
+“Big o Notation - Wikipedia \# Family of Bachmann–Landau Notations.” n.d. <https://en.wikipedia.org/wiki/Big_O_notation#Family_of_Bachmann%E2%80%93Landau_notations>.
+
+</div>
+
+<div id="ref-wikipedia_divisor" class="csl-entry">
+
+“Divisor Function - Wikipedia \# Growth_rate.” n.d. <https://en.wikipedia.org/wiki/Divisor_function#Growth_rate>.
+
+</div>
+
+<div id="ref-concretemath_onotation" class="csl-entry">
+
+Graham, R. L., D. E. Knuth, and O. Patashnik. 1994a. “Concrete Mathematics: A Foundation for Computer Science.” In, second, 443–49. A @Foundation for Computer Science. Addison-Wesley.
+
+</div>
+
+<div id="ref-concretemath_calculus" class="csl-entry">
+
+———. 1994b. “Concrete Mathematics: A Foundation for Computer Science.” In, second, 47–56. A @Foundation for Computer Science. Addison-Wesley.
+
+</div>
+
+<div id="ref-knuth_omicron" class="csl-entry">
+
+Knuth, Donald E. 1976. “Big Omicron and Big Omega and Big Theta.” *SIGACT News* 8 (2): 18–24. <https://doi.org/10.1145/1008328.1008329>.
+
+</div>
+
+<div id="ref-nonsquare2_luogu" class="csl-entry">
+
+“P4318 完全平方数 - 洛谷 \| 计算机科学教育新生态.” n.d. <https://www.luogu.com.cn/problem/P4318>.
+
+</div>
+
+<div id="ref-polya_luogu" class="csl-entry">
+
+“P4980 【模板】pólya 定理 - 洛谷 \| 计算机科学教育新生态.” n.d. <https://www.luogu.com.cn/problem/P4980>.
+
+</div>
+
+<div id="ref-nonsquare1_luogu" class="csl-entry">
+
+“P9238 \[蓝桥杯 2023 省 a\] 翻转硬币 - 洛谷 \| 计算机科学教育新生态.” n.d. <https://www.luogu.com.cn/problem/P9238>.
+
+</div>
+
+<div id="ref-nonsquare_paper" class="csl-entry">
+
+Pawlewicz, Jakub. 2011. “Counting Square-Free Numbers.” <https://arxiv.org/abs/1107.4890>.
+
+</div>
+
+<div id="ref-nonsquare_blog" class="csl-entry">
+
+smsxgz. 2019. “Counting Square Free Numbers.” <https://smsxgz.github.io/post/pe/counting_square_free_numbers/>.
+
+</div>
+
+<div id="ref-gcdconv" class="csl-entry">
+
+sun123zxy. 2020a. “Sun123zxy’s Blog - 原创oi题目 Gcd卷积 Problem and Solution.” <https://blog.sun123zxy.top/posts/20201206-gcdconv/>.
+
+</div>
+
+<div id="ref-polya_my" class="csl-entry">
+
+———. 2020b. “Sun123zxy’s Blog - 等价类计数：Burnside引理 & Polya定理.” <http://blog.sun123zxy.top/posts/20200321-burnside/#s-4.3>.
+
+</div>
+
+<div id="ref-asymptotic_oiwiki" class="csl-entry">
+
+“复杂度 - OI Wiki.” n.d. <https://oi-wiki.org/basic/complexity/#%E6%B8%90%E8%BF%9B%E7%AC%A6%E5%8F%B7%E7%9A%84%E5%AE%9A%E4%B9%89>.
+
+</div>
+
+</div>
