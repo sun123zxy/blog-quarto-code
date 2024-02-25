@@ -9,7 +9,7 @@
 <meta name="author" content="sun123zxy">
 <meta name="dcterms.date" content="2023-04-18">
 
-<title>sun123zxy’s blog - OI 数论中的上界估计与时间复杂度证明</title>
+<title>sun123zxy’s blog - 一些数论算法的时间复杂度分析</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -226,7 +226,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">OI 数论中的上界估计与时间复杂度证明</h1>
+<h1 class="title">一些数论算法的时间复杂度分析</h1>
   <div class="quarto-categories">
     <div class="quarto-category">OI</div>
     <div class="quarto-category">数学</div>
@@ -263,7 +263,7 @@ window.Quarto = {
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    渐进符号、约数函数、整除分块嵌套与杜教筛.
+    OI/XCPC 常见算法为主，渐进符号、约数函数、整除分块嵌套与杜教筛．
   </div>
 </div>
 
@@ -271,35 +271,49 @@ window.Quarto = {
 </header>
 
 
-<div class="hidden">
-<p><span class="math display">\[
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\]</span></p>
-</div>
 <section id="预备" class="level2" data-number="">
 <h2 data-number="" class="anchored" data-anchor-id="预备"><span class="header-section-number"></span> 预备</h2>
 <section id="渐进符号" class="level3" data-number="0.1">
 <h3 data-number="0.1" class="anchored" data-anchor-id="渐进符号"><span class="header-section-number">0.1</span> 渐进符号</h3>
-<p>其实不少高等数学 / 数学分析教材在讲解无穷小的比较时已经相当严谨地介绍过大 O、小 O 记号，然而各种历史习惯记法的符号滥用（abuse of notation）<span class="citation" data-cites="wikipedia_abuse"><a href="#ref-wikipedia_abuse" role="doc-biblioref">[1]</a></span> 直到现在都让笔者头疼. These notations seem to be innocent, but can be catastrophic without careful manipulation. For example,</p>
-<ul>
-<li><p><span class="math display">\[
+<p>其实不少高等数学 / 数学分析教材在讲解无穷小的比较时已经相当严谨地介绍过大 O、小 O 记号，然而各种历史习惯记法的符号滥用（abuse of notation）<span class="citation" data-cites="wikipedia_abuse"><a href="#ref-wikipedia_abuse" role="doc-biblioref">[1]</a></span> 直到现在都让笔者头疼. These notations seem to be innocent, but can be catastrophic without careful manipulation. 例如</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="exm-error-1" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1 (反例 1)</strong></span> <span class="math display">\[
 n = O(n^2) \land n^2 = O(n^2) \implies n = n^2
 \]</span></p>
-<p>Knuth 在《具体数学》里举出的例子 <span class="citation" data-cites="concretemath_onotation"><a href="#ref-concretemath_onotation" role="doc-biblioref">[2]</a></span>. “<span class="math inline">\(=\)</span>” 隐含的对称性使其在 <span class="math inline">\(g(x) = O(f(x))\)</span> 中格格不入. 事实上，将 <span class="math inline">\(O(f(x))\)</span> 看作“阶不高于 <span class="math inline">\(f(x)\)</span> 的所有函数的集合”是比“某个阶不高于 <span class="math inline">\(f(x)\)</span> 的函数”更严谨的理解. 因此，本文将使用 <span class="math inline">\(f(x) \in O(g(x))\)</span> （有时也记为 <span class="math inline">\(O(f(x)) \subset O(g(x))\)</span>）的集合论符号代替传统的 <span class="math inline">\(f(x) = O(g(x))\)</span> 记法.</p></li>
-<li><p><span class="math display">\[
+</div>
+</div>
+</div>
+</div>
+<p>Knuth 在《具体数学》里举出的例子 <span class="citation" data-cites="concretemath_onotation"><a href="#ref-concretemath_onotation" role="doc-biblioref">[2]</a></span>. “<span class="math inline">\(=\)</span>” 隐含的对称性使其在 <span class="math inline">\(g(x) = O(f(x))\)</span> 中格格不入. 事实上，将 <span class="math inline">\(O(f(x))\)</span> 看作“阶不高于 <span class="math inline">\(f(x)\)</span> 的所有函数的集合”是比“某个阶不高于 <span class="math inline">\(f(x)\)</span> 的函数”更严谨的理解. 因此，本文将使用 <span class="math inline">\(f(x) \in O(g(x))\)</span> （有时也记为 <span class="math inline">\(O(f(x)) \subset O(g(x))\)</span>）的集合论符号代替传统的 <span class="math inline">\(f(x) = O(g(x))\)</span> 记法.</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="exm-error-2" class="theorem example">
+<p><span class="theorem-title"><strong>Example 2 (反例 2)</strong></span> <span class="math display">\[
 n^2 \sin n \in O(n^2) \implies \sum_{i=1}^n i^2 \sin i \in \sum_{i=1}^n O(i^2) \subset O\left( \sum_{i=1}^n i^2 \right) \subset O(n^3)
 \]</span> 或更一般的， <span class="math display">\[
 g(x) \in O(f(x)) \implies \sum_{P(n,i)} g(i) \in \sum_{P(n,i)} O(f(i)) \subset O \left(\sum_{P(n,i)} f(i) \right)
 \]</span></p>
+</div>
+</div>
+</div>
+</div>
 <p>没看出有啥问题，对吧？笔者在写作此文时犯了同样的错误. 请注意，大 O 记号的作用对象是函数，<span class="math inline">\(f(i)\)</span> 是什么？它只是个函数值，是确定的数——这是因为 <span class="math inline">\(i\)</span> 也是求和枚举中确定的数，而不是 <span class="math inline">\(n\)</span> 这种真正代表变元的记号. 所以 <span class="math inline">\(O(f(i))\)</span> 是什么？它什么也不是.</p>
 <p>这种错误的出现是在所难免的，我们太习惯用 <span class="math inline">\(x\)</span>、<span class="math inline">\(x^3 + 5 x^2 + x\)</span> 这种变元都不明确的记号来表示函数了<span class="citation" data-cites="wikipedia_abuse"><a href="#ref-wikipedia_abuse" role="doc-biblioref">[1]</a></span>. 写成 <span class="math inline">\(f(x)\)</span> 也不严谨，因为只有 <span class="math inline">\(f\)</span> 才应代表函数本身，<span class="math inline">\(f(x)\)</span> 只能是函数值. 这样我们就可以放心地写下 <span class="math inline">\(O(f)\)</span>，不用担心把变元与确定值弄混了.</p>
 <p>然而大家还是喜欢写 <span class="math inline">\(O(n^2)\)</span> 和 <span class="math inline">\(O(e^{n^2})\)</span>，而不是奇怪的 <span class="math inline">\(O(\mathrm{id}^2)\)</span> 和 <span class="math inline">\(O(\mathrm{exp} \circ {\mathrm{id}^2})\)</span>. 所以，我们大概只能沿用这种不太严谨的记号，并时刻提醒自己加倍小心了. （形如 <span class="math inline">\(x \mapsto e^{x^2}\)</span> 的 <span class="math inline">\(\lambda\)</span> 风格“匿名函数”记号可能更好？）</p>
 <p>但上述命题从结论上是正确的. 正确的推导过程应为 <span class="math display">\[
 \sum_{P(n,i)} g(i) \leq \sum_{P(n,i)} C f(i) \leq C \sum_{P(n,i)} f(i) \in O \left(\sum_{P(n,i)} f(i) \right)\
-\]</span></p>
-<p>第一步是直接由大 O 记号的定义得到的结果.</p></li>
-</ul>
-<p>Wikipedia<span class="citation" data-cites="asymptotic_wikipedia"><a href="#ref-asymptotic_wikipedia" role="doc-biblioref">[3]</a></span> 中有一张详尽的表格介绍了各种渐进符号的定义，OI Wiki<span class="citation" data-cites="asymptotic_oiwiki"><a href="#ref-asymptotic_oiwiki" role="doc-biblioref">[4]</a></span> 上也有极好的讲解，尚不熟练的读者可以参考. 有兴趣仔细研究的读者可以参考《具体数学》第九章<span class="citation" data-cites="concretemath_onotation"><a href="#ref-concretemath_onotation" role="doc-biblioref">[2]</a></span>、Wikipedia 及其 reference（个人推荐 Knuth 关于 <span class="math inline">\(O\)</span>、<span class="math inline">\(\Omega\)</span>、<span class="math inline">\(\Theta\)</span> 的短文<span class="citation" data-cites="knuth_omicron"><a href="#ref-knuth_omicron" role="doc-biblioref">[5]</a></span>）. 本文除用 “<span class="math inline">\(\in\)</span>” 和“<span class="math inline">\(\subset\)</span>”替代 “<span class="math inline">\(=\)</span>” 外，完全使用 Knuth 提议的记号体系.</p>
+\]</span> 第一步是直接由大 O 记号的定义得到的结果.</p>
+<p>Wikipedia <span class="citation" data-cites="asymptotic_wikipedia"><a href="#ref-asymptotic_wikipedia" role="doc-biblioref">[3]</a></span> 中有一张详尽的表格介绍了各种渐进符号的定义，OI Wiki <span class="citation" data-cites="asymptotic_oiwiki"><a href="#ref-asymptotic_oiwiki" role="doc-biblioref">[4]</a></span> 上也有极好的讲解，尚不熟练的读者可以参考. 有兴趣仔细研究的读者可以参考《具体数学》第九章 <span class="citation" data-cites="concretemath_onotation"><a href="#ref-concretemath_onotation" role="doc-biblioref">[2]</a></span>、Wikipedia 及其 reference（个人推荐 Knuth 关于 <span class="math inline">\(O\)</span>、<span class="math inline">\(\Omega\)</span>、<span class="math inline">\(\Theta\)</span> 的短文 <span class="citation" data-cites="knuth_omicron"><a href="#ref-knuth_omicron" role="doc-biblioref">[5]</a></span>）. 本文除用 “<span class="math inline">\(\in\)</span>” 和“<span class="math inline">\(\subset\)</span>”替代 “<span class="math inline">\(=\)</span>” 外，完全使用 Knuth 提议的记号体系.</p>
 </section>
 <section id="调和数-hn-调和级数" class="level3" data-number="0.2">
 <h3 data-number="0.2" class="anchored" data-anchor-id="调和数-hn-调和级数"><span class="header-section-number">0.2</span> 调和数 <span class="math inline">\(H(n)\)</span> / 调和级数</h3>
@@ -309,16 +323,11 @@ H(n) = \sum_{i=1}^n \frac 1 i
 </section>
 <section id="自然数等幂和-p_pn-p---级数" class="level3" data-number="0.3">
 <h3 data-number="0.3" class="anchored" data-anchor-id="自然数等幂和-p_pn-p---级数"><span class="header-section-number">0.3</span> 自然数等幂和 <span class="math inline">\(P_p(n)\)</span> / <span class="math inline">\(p\)</span> - 级数</h3>
-<p><span class="math inline">\(p\)</span> - 级数可视为调和级数的推广. 其部分和定义为 <span class="math display">\[
-P_p(n) = \sum_{i=1}^n i^{-p}
-\]</span></p>
-<p><span class="math inline">\(p\)</span> - 级数具有如下性质：</p>
+<p><span class="math inline">\(p\)</span> - 级数可视为调和级数的推广. 其部分和定义为 <span class="math inline">\(P_p(n) = \sum_{i=1}^n i^{-p}\)</span>．<span class="math inline">\(p\)</span> - 级数具有如下性质：</p>
 <ul>
-<li><p>当 <span class="math inline">\(p &gt; 1\)</span> 时，<span class="math inline">\(p\)</span> - 级数收敛；</p></li>
-<li><p>当 <span class="math inline">\(p = 1\)</span> 时，<span class="math inline">\(p\)</span> - 级数是调和级数；</p></li>
-<li><p>当 <span class="math inline">\(-\infty &lt; p &lt; 1\)</span> 时，我们指出 <span class="math display">\[
-P_p(n) \sim \frac{1}{1-p} n^{1-p} \in \Theta(n^{1-p})
-\]</span></p></li>
+<li>当 <span class="math inline">\(p &gt; 1\)</span> 时，<span class="math inline">\(p\)</span> - 级数收敛；</li>
+<li>当 <span class="math inline">\(p = 1\)</span> 时，<span class="math inline">\(p\)</span> - 级数是调和级数；</li>
+<li>当 <span class="math inline">\(-\infty &lt; p &lt; 1\)</span> 时，我们指出 <span class="math inline">\(P_p(n) \sim \frac{1}{1-p} n^{1-p} \in \Theta(n^{1-p})\)</span></li>
 </ul>
 <p><span class="math inline">\(-\infty &lt; p &lt; 1\)</span> 时 <span class="math inline">\(p\)</span> - 级数的渐进估计可以从连续幂函数积分的角度理解. 证明这渐进性，离散情况下，可对 <span class="math inline">\(n^p\)</span> 差分后前缀和 + 二项式定理得到高次项系数，或可用离散微积分理论得到精确表示（参见《具体数学》<span class="citation" data-cites="concretemath_calculus"><a href="#ref-concretemath_calculus" role="doc-biblioref">[6]</a></span>）；连续情况下，Lagrange 中值定理应为较简单的估计方法. 这里从略. 总之，我们得到： <span class="math display">\[
 P_p(n) \in \begin{cases}
@@ -331,22 +340,7 @@ P_p(n) \in \begin{cases}
 </section>
 <section id="约数函数-sigma_zn" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="约数函数-sigma_zn"><span class="header-section-number">1</span> 约数函数 <span class="math inline">\(\sigma_z(n)\)</span></h2>
-<p>约数函数（Divisor Function，也可称为除数函数、因数函数）是与 <span class="math inline">\(n\)</span> 的因子有关的一类函数，定义如下：</p>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<div id="def-sigma" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1 (约数函数)</strong></span> <span class="math display">\[
-\sigma_z(n) = \sum_{d \mid n} d^z
-\]</span></p>
-</div>
-</div>
-</div>
-</div>
-<p>当 <span class="math inline">\(z=0\)</span> 时，<span class="math inline">\(\sigma_0(n)\)</span> 被称为约数个数函数（number-of-divisors function），常被记为 <span class="math inline">\(d(n)\)</span> 或 <span class="math inline">\(\tau(n)\)</span>. 当 <span class="math inline">\(z=1\)</span> 时，<span class="math inline">\(\sigma_1(n)\)</span> 被称为约数和函数（sum-of-divisors function），常直接记为 <span class="math inline">\(\sigma(n)\)</span>.</p>
+<p>约数函数（Divisor Function，也可称为除数函数、因数函数）是与 <span class="math inline">\(n\)</span> 的因子有关的一类函数，定义为 <span class="math inline">\(\sigma_z(n) = \sum_{d \mid n} d^z\)</span>．当 <span class="math inline">\(z=0\)</span> 时，<span class="math inline">\(\sigma_0(n)\)</span> 被称为约数个数函数（number-of-divisors function），常被记为 <span class="math inline">\(d(n)\)</span> 或 <span class="math inline">\(\tau(n)\)</span>. 当 <span class="math inline">\(z=1\)</span> 时，<span class="math inline">\(\sigma_1(n)\)</span> 被称为约数和函数（sum-of-divisors function），常直接记为 <span class="math inline">\(\sigma(n)\)</span>.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -354,7 +348,7 @@ P_p(n) \in \begin{cases}
 </div>
 <div class="callout-body-container">
 <div id="exm-sigma0ub" class="theorem example">
-<p><span class="theorem-title"><strong>Example 1</strong></span> 估计 <span class="math inline">\(\sigma_0 (n)\)</span> 的渐进上界.</p>
+<p><span class="theorem-title"><strong>Example 3</strong></span> 估计 <span class="math inline">\(\sigma_0 (n)\)</span> 的渐进上界.</p>
 </div>
 </div>
 </div>
@@ -370,20 +364,19 @@ P_p(n) \in \begin{cases}
 </div>
 <div class="callout-body-container">
 <div id="exm-sumsigma0ub" class="theorem example">
-<p><span class="theorem-title"><strong>Example 2</strong></span> 估计 <span class="math inline">\(\hat{\sigma_0}(n) = \sum_{i=1}^n \sigma_0 (i)\)</span> 的渐进上界.</p>
+<p><span class="theorem-title"><strong>Example 4</strong></span> 估计 <span class="math inline">\(\hat{\sigma_0}(n) = \sum_{i=1}^n \sigma_0 (i)\)</span> 的渐进上界.</p>
 </div>
 </div>
 </div>
 </div>
-<p>即估计 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 中所有数因子个数的和. 这是一个形式上鲜为人知但其应用广为人知的例子. 变换求和顺序，容易得到</p>
-<p><span class="math display">\[
+<p>即估计 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 中所有数因子个数的和. 这是一个形式上鲜为人知但其应用广为人知的例子. 变换求和顺序，容易得到 <span class="math display">\[
 \hat{\sigma_0}(n) = \sum_{i=1}^n \sigma_0 (i)
 = \sum_{i=1}^n \sum_{d \mid i} 1
 = \sum_{d=1}^n \left\lfloor \frac n d \right\rfloor
 \leq \sum_{d=1}^n \frac n d
 = n H(n) \in O(n \log n)
 \]</span></p>
-<p>显然，这比 <span class="math inline">\(O(n \sqrt n)\)</span> 的平凡估计好上不少. 本例的思路不仅是埃氏筛（Sieve of Eratosthenes）的理论基础，也在杜教筛、快速 Mobius 变换、<span class="math inline">\(\gcd\)</span> 卷积<span class="citation" data-cites="gcdconv"><a href="#ref-gcdconv" role="doc-biblioref">[8]</a></span>等处出现.</p>
+<p>显然，这比 <span class="math inline">\(O(n \sqrt n)\)</span> 的平凡估计好上不少. 本例的思路不仅是埃氏筛（Sieve of Eratosthenes）的理论基础，也在杜教筛、快速 Mobius 变换、<span class="math inline">\(\gcd\)</span> 卷积 <span class="citation" data-cites="gcdconv"><a href="#ref-gcdconv" role="doc-biblioref">[8]</a></span> 等处出现.</p>
 <p>进一步利用此技巧和 <span class="math inline">\(p\)</span> - 级数的估计，我们甚至能在仔细研究 <span class="math inline">\(\sigma_z(n)\)</span> 前就得到其前缀和的渐进估计：</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
@@ -392,7 +385,7 @@ P_p(n) \in \begin{cases}
 </div>
 <div class="callout-body-container">
 <div id="exm-sumsigmazub" class="theorem example">
-<p><span class="theorem-title"><strong>Example 3</strong></span> 估计 <span class="math inline">\(\hat{\sigma_z}(n) = \sum_{i=1}^n \sigma_z (i)\)</span> 的渐进上界.</p>
+<p><span class="theorem-title"><strong>Example 5</strong></span> 估计 <span class="math inline">\(\hat{\sigma_z}(n) = \sum_{i=1}^n \sigma_z (i)\)</span> 的渐进上界.</p>
 </div>
 </div>
 </div>
@@ -428,7 +421,7 @@ O(n) &amp; z &lt; 0
 </div>
 </div>
 </div>
-<p>显然，右式比左式多算了 <span class="math inline">\(i \nmid n\)</span> 的项，因此命题是正确的. 但我们还可以做得更好：</p>
+<p>右式比左式多算了 <span class="math inline">\(i \nmid n\)</span> 的项，因此命题是正确的. 但我们还可以做得更好：</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -443,7 +436,7 @@ O(n) &amp; z &lt; 0
 </div>
 </div>
 </div>
-<p><span class="math inline">\(\sqrt n\)</span> 分治. 我们其实已经在 <a href="#exm-sigma0ub" class="quarto-xref">Example&nbsp;1</a> 估计 <span class="math inline">\(\sigma_0(n)\)</span> 时用过此技巧了.</p>
+<p><span class="math inline">\(\sqrt n\)</span> 分治. 我们其实已经在 <a href="#exm-sigma0ub" class="quarto-xref">Example&nbsp;3</a> 估计 <span class="math inline">\(\sigma_0(n)\)</span> 时用过此技巧了.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -451,7 +444,7 @@ O(n) &amp; z &lt; 0
 </div>
 <div class="callout-body-container">
 <div id="exm-sigma1ub" class="theorem example">
-<p><span class="theorem-title"><strong>Example 4</strong></span> 估计 <span class="math inline">\(\sigma_1 (n)\)</span> 的渐进上界.</p>
+<p><span class="theorem-title"><strong>Example 6</strong></span> 估计 <span class="math inline">\(\sigma_1 (n)\)</span> 的渐进上界.</p>
 </div>
 </div>
 </div>
@@ -469,13 +462,12 @@ O(n) &amp; z &lt; 0
 </div>
 <div class="callout-body-container">
 <div id="exm-sigmazub" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5</strong></span> 估计 <span class="math inline">\(\sigma_z (n)\)</span> 的渐进上界.</p>
+<p><span class="theorem-title"><strong>Example 7</strong></span> 估计 <span class="math inline">\(\sigma_z (n)\)</span> 的渐进上界.</p>
 </div>
 </div>
 </div>
 </div>
-<p>用 <a href="#prp-trick1ex" class="quarto-xref">Proposition&nbsp;2</a> 和 <span class="math inline">\(p\)</span> - 级数的性质：</p>
-<p><span class="math display">\[
+<p>用 <a href="#prp-trick1ex" class="quarto-xref">Proposition&nbsp;2</a> 和 <span class="math inline">\(p\)</span> - 级数的性质： <span class="math display">\[
 \begin{aligned}
 \sigma_z (n)
 &amp;= \sum_{d \mid n} d^z
@@ -501,13 +493,13 @@ O(1) &amp; z &lt; -1
 \end{cases}
 \end{aligned}
 \]</span></p>
-<p>我们得到了一个相当优秀的渐进上界. 值得关注的是：</p>
+<p>这是一个相当优秀的渐进上界. 值得关注的是：</p>
 <ul>
-<li>当 <span class="math inline">\(z=0\)</span> 时，<span class="math inline">\(\sigma_0(n) \in O(n^{\frac 1 2})\)</span>. 这与 <a href="#exm-sigma0ub" class="quarto-xref">Example&nbsp;1</a> 的结果一致.</li>
-<li>当 <span class="math inline">\(z=\frac 1 2\)</span> 时，<span class="math inline">\(\sigma_{\frac 1 2}(n) \in O(n^{\frac 3 4})\)</span>，即 <span class="math inline">\(\sum_{d \mid n} \sqrt d \in O(n^{\frac 3 4})\)</span>. 洛谷 P4980 Polya 定理模板题<span class="citation" data-cites="polya_luogu"><a href="#ref-polya_luogu" role="doc-biblioref">[9]</a></span>的一种比较 trivial 的解法<span class="citation" data-cites="polya_my"><a href="#ref-polya_my" role="doc-biblioref">[10]</a></span>的时间复杂度证明就来源于此. 我们之后还会在整除分块与杜教筛中见到它.</li>
+<li>当 <span class="math inline">\(z=0\)</span> 时，<span class="math inline">\(\sigma_0(n) \in O(n^{\frac 1 2})\)</span>. 这与 <a href="#exm-sigma0ub" class="quarto-xref">Example&nbsp;3</a> 的结果一致.</li>
+<li>当 <span class="math inline">\(z=\frac 1 2\)</span> 时，<span class="math inline">\(\sigma_{\frac 1 2}(n) \in O(n^{\frac 3 4})\)</span>，即 <span class="math inline">\(\sum_{d \mid n} \sqrt d \in O(n^{\frac 3 4})\)</span>. 洛谷 P4980 Polya 定理模板题 <span class="citation" data-cites="polya_luogu"><a href="#ref-polya_luogu" role="doc-biblioref">[9]</a></span> 的一种比较 trivial 的解法 <span class="citation" data-cites="polya_my"><a href="#ref-polya_my" role="doc-biblioref">[10]</a></span> 的时间复杂度证明就来源于此. 我们之后还会在整除分块与杜教筛中见到它.</li>
 </ul>
 <p>另外，如果只使用 <a href="#prp-trick1" class="quarto-xref">Proposition&nbsp;1</a> ，<span class="math inline">\(-1&lt;z&lt;1\)</span> 部分的渐进上界将只能估计至 <span class="math inline">\(O(n)\)</span>. 因此 <a href="#prp-trick1ex" class="quarto-xref">Proposition&nbsp;2</a> 是更为优越的.</p>
-<p>约数函数更复杂的上限与渐进估计可参考 Wikipedia<span class="citation" data-cites="wikipedia_divisor"><a href="#ref-wikipedia_divisor" role="doc-biblioref">[7]</a></span>.</p>
+<p>约数函数更复杂的上限与渐进估计可参考 Wikipedia <span class="citation" data-cites="wikipedia_divisor"><a href="#ref-wikipedia_divisor" role="doc-biblioref">[7]</a></span>.</p>
 </section>
 <section id="整除分块" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="整除分块"><span class="header-section-number">2</span> 整除分块</h2>
@@ -540,7 +532,7 @@ T_1(n) = \# \left\{ \left\lfloor \frac n i \right\rfloor \right\}_{i=1}^n \leq 2
 <div class="proof remark">
 <p><span class="proof-title"><em>Remark</em>. </span>整除分块的 <span class="math inline">\(O(\sqrt n)\)</span> 相当满，而枚举因子的 <span class="math inline">\(\sigma_0(n) \in O(\sqrt n)\)</span> 却相当不满．这一点在前面介绍 <span class="math inline">\(\sigma_0(n)\)</span> 时已经提到．</p>
 </div>
-<p>注意到 <a href="#prp-trick1ex" class="quarto-xref">Proposition&nbsp;2</a> 是 <a href="#exm-sigmazub" class="quarto-xref">Example&nbsp;5</a> 证明的核心，而 <a href="#prp-trick2ex" class="quarto-xref">Proposition&nbsp;3</a> 是 <a href="#prp-trick1ex" class="quarto-xref">Proposition&nbsp;2</a> 的加强版，故仿造 <a href="#exm-sigmazub" class="quarto-xref">Example&nbsp;5</a> 的证明，我们有</p>
+<p>注意到 <a href="#prp-trick1ex" class="quarto-xref">Proposition&nbsp;2</a> 是 <a href="#exm-sigmazub" class="quarto-xref">Example&nbsp;7</a> 证明的核心，而 <a href="#prp-trick2ex" class="quarto-xref">Proposition&nbsp;3</a> 是 <a href="#prp-trick1ex" class="quarto-xref">Proposition&nbsp;2</a> 的加强版，故仿造 <a href="#exm-sigmazub" class="quarto-xref">Example&nbsp;7</a> 的证明，我们有</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -548,23 +540,21 @@ T_1(n) = \# \left\{ \left\lfloor \frac n i \right\rfloor \right\}_{i=1}^n \leq 2
 </div>
 <div class="callout-body-container">
 <div id="exm-divissigma" class="theorem example">
-<p><span class="theorem-title"><strong>Example 6</strong></span> 令 <span class="math display">\[
+<p><span class="theorem-title"><strong>Example 8</strong></span> 令 <span class="math display">\[
 S_z(n) = \sum_{d \in D(n)} d^z
-\]</span> 则前述 <a href="#exm-sigmazub" class="quarto-xref">Example&nbsp;5</a> 中 <span class="math inline">\(\sigma_z(n)\)</span> 的上界与渐进上界也同样适用于 <span class="math inline">\(S_z(n)\)</span>.</p>
+\]</span> 则前述 <a href="#exm-sigmazub" class="quarto-xref">Example&nbsp;7</a> 中 <span class="math inline">\(\sigma_z(n)\)</span> 的上界与渐进上界也同样适用于 <span class="math inline">\(S_z(n)\)</span>.</p>
 </div>
 </div>
 </div>
 </div>
 <p>现在可以对嵌套整除分块 <span class="math display">\[
 \sum_{i=1}^n f(i) \sum_{j=1}^{\left\lfloor \frac n i \right\rfloor} g(j) h(\left\lfloor \frac n {ij} \right\rfloor)
-\]</span> 的时间复杂度 <span class="math inline">\(T_2\)</span> 做出估计了. 对 <a href="#exm-divissigma" class="quarto-xref">Example&nbsp;6</a> 取 <span class="math inline">\(z=\frac 1 2\)</span>，立刻有 <span class="math display">\[
+\]</span> 的时间复杂度 <span class="math inline">\(T_2\)</span> 做出估计了. 对 <a href="#exm-divissigma" class="quarto-xref">Example&nbsp;8</a> 取 <span class="math inline">\(z=\frac 1 2\)</span>，立刻有 <span class="math display">\[
 T_2(n) = \sum_{d \in D(n)} T_1(d) \leq 2 \sum_{d \in D(n)} \sqrt d = 2 S_{\frac 1 2}(n) \leq 4 \sqrt n P_{\frac 1 2}(\sqrt n) \in O(n^{\frac 3 4})
 \]</span></p>
-<p>我们还可以进一步归纳. 假定 <span class="math inline">\(\forall m \geq 0, \quad \exists z_m : 0 \leq z_m &lt; 1, \quad T_m(n) = O(n^{z_m})\)</span>，我们有</p>
-<p><span class="math display">\[
+<p>我们还可以进一步归纳. 假定 <span class="math inline">\(\forall m \geq 0, \quad \exists z_m : 0 \leq z_m &lt; 1, \quad T_m(n) = O(n^{z_m})\)</span>，我们有 <span class="math display">\[
 T_{m+1}(n) = \sum_{d \in D(n)} T_m(d) \leq C \sum_{d \in D(n)} n^{z_m} = C S_{z_m}(n) \in O(n^{\frac {1+z_m} 2})
-\]</span></p>
-<p>因此 <span class="math inline">\(z_{m+1} = \frac {1+z_m} 2\)</span>. 边界条件 <span class="math inline">\(z_0 = 0\)</span>，数列递推求得 <span class="math inline">\(z_m = 1-2^{-m}\)</span>，检验满足条件. 因此 <span class="math inline">\(m\)</span> 重嵌套整除分块的时间复杂度 <span class="math display">\[
+\]</span> 因此 <span class="math inline">\(z_{m+1} = \frac {1+z_m} 2\)</span>. 边界条件 <span class="math inline">\(z_0 = 0\)</span>，数列递推求得 <span class="math inline">\(z_m = 1-2^{-m}\)</span>，检验满足条件. 因此 <span class="math inline">\(m\)</span> 重嵌套整除分块的时间复杂度 <span class="math display">\[
 T_m(n) \in O(n^{1- 2^{-m}})
 \]</span></p>
 </section>
@@ -584,8 +574,7 @@ h(n) = \sum_{d \mid n} g(d) f(\frac n d)
 \end{aligned}
 \]</span> 因此 <span class="math display">\[
 \hat f (n) = \frac 1 {g(1)} \left( \hat h (n) - \sum_{d=2}^n g(d) \hat f (\left\lfloor \frac n d \right\rfloor) \right)
-\]</span></p>
-<p>故若 <span class="math inline">\(g\)</span>、<span class="math inline">\(h\)</span> 的前缀和可 <span class="math inline">\(O(1)\)</span> 算得，根据上式整除分块即可递归地计算出 <span class="math inline">\(f\)</span> 的前缀和.</p>
+\]</span> 故若 <span class="math inline">\(g\)</span>、<span class="math inline">\(h\)</span> 的前缀和可 <span class="math inline">\(O(1)\)</span> 算得，根据上式整除分块即可递归地计算出 <span class="math inline">\(f\)</span> 的前缀和.</p>
 <p>下面分析算法的复杂度. 注意到 <span class="math display">\[
 \left\lfloor \frac{\left\lfloor \frac n i \right\rfloor}{j} \right\rfloor = \left\lfloor \frac{n}{ij} \right\rfloor
 \]</span> 故单轮递归涉及到的自变量均可表示为 <span class="math inline">\(d = \left\lfloor \frac n i \right\rfloor\)</span> 的形式. 一个 <span class="math inline">\(\hat f (d)\)</span> 做整除分块耗时 <span class="math inline">\(T_1(d)\)</span>，若采用记忆化递归，由上节分析，算法总时间复杂度为 <span class="math display">\[
@@ -601,17 +590,14 @@ h(n) = \sum_{d \mid n} g(d) f(\frac n d)
 <div id="prp-trick3ex" class="theorem proposition">
 <p><span class="theorem-title"><strong>Proposition 4</strong></span> <span class="math display">\[
 \sum_{\begin{gathered} d \mid n \\ d &gt; K \end{gathered}} f(d) \leq \sum_{\begin{gathered} d \in D(n) \\ d &gt; K \end{gathered}} f(d) \leq \sum_{K &lt; i \leq \sqrt n} f(i) + \sum_{1 \leq i \leq \min{\{ \left\lfloor \frac n K \right\rfloor,\sqrt n \} }} f(\left\lfloor \frac n i \right\rfloor)
-\]</span></p>
-<p>特别的，当 <span class="math inline">\(K &gt; \sqrt n\)</span> 时，有</p>
-<p><span class="math display">\[
+\]</span> 特别的，当 <span class="math inline">\(K &gt; \sqrt n\)</span> 时，有 <span class="math display">\[
 \sum_{\begin{gathered} d \mid n \\ d &gt; K \end{gathered}} f(d) \leq \sum_{\begin{gathered} d \in D(n) \\ d &gt; K \end{gathered}} f(d) \leq \sum_{1 \leq i \leq \left\lfloor \frac n K \right\rfloor} f(\left\lfloor \frac n i \right\rfloor)
 \]</span></p>
 </div>
 </div>
 </div>
 </div>
-<p>故用 <a href="#prp-trick3ex" class="quarto-xref">Proposition&nbsp;4</a> ，当 <span class="math inline">\(K &gt; \sqrt n\)</span> 时，算法在递归部分的时间复杂度降低为</p>
-<p><span class="math display">\[
+<p>利用此估计，当 <span class="math inline">\(K &gt; \sqrt n\)</span> 时，算法在递归部分的时间复杂度估计降低为 <span class="math display">\[
 \begin{aligned}
 \mathrm{Du}_K(n) &amp;=
 \sum_{\begin{gathered} d \in D(n) \\ d &gt; K \end{gathered}} T_1(d) \\
@@ -622,12 +608,10 @@ h(n) = \sum_{d \mid n} g(d) f(\frac n d)
 &amp;\in \sqrt n O\left( \left(\frac n K\right)^{\frac 1 2} \right) \\
 &amp;\subset O(n K^{-\frac 1 2})
 \end{aligned}
-\]</span></p>
-<p>总时间复杂度 <span class="math display">\[
+\]</span> 总时间复杂度 <span class="math display">\[
 O(K) + O(n K^{-\frac 1 2})
-\]</span></p>
-<p>为最小化时间复杂度，取 <span class="math inline">\(K = n^{\frac 2 3}\)</span>，得到最优时间复杂度 <span class="math inline">\(O(n^{\frac 2 3})\)</span>.</p>
-<p>这部分的时间复杂度证明主要参考了文章<span class="citation" data-cites="zhihu_dusieve"><a href="#ref-zhihu_dusieve" role="doc-biblioref">[11]</a></span>.</p>
+\]</span> 为最小化时间复杂度，取 <span class="math inline">\(K = n^{\frac 2 3}\)</span>，即得最优时间复杂度 <span class="math inline">\(O(n^{\frac 2 3})\)</span>.</p>
+<p>这部分的时间复杂度证明主要参考了文章 <span class="citation" data-cites="zhihu_dusieve"><a href="#ref-zhihu_dusieve" role="doc-biblioref">[11]</a></span>.</p>
 </section>
 <section id="challenge" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="challenge"><span class="header-section-number">4</span> Challenge</h2>
@@ -638,8 +622,8 @@ O(K) + O(n K^{-\frac 1 2})
 </div>
 <div class="callout-body-container">
 <div id="exm-nonsquare" class="theorem example">
-<p><span class="theorem-title"><strong>Example 7</strong></span> 对 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 间的无平方因子数计数. <span class="math inline">\(n \leq 10^{18}\)</span>.</p>
-<p>参见蓝桥杯 2023 省赛 A 组 J 题《翻转硬币》<span class="citation" data-cites="nonsquare1_luogu"><a href="#ref-nonsquare1_luogu" role="doc-biblioref">[12]</a></span>或《完全平方数》<span class="citation" data-cites="nonsquare2_luogu"><a href="#ref-nonsquare2_luogu" role="doc-biblioref">[13]</a></span>.</p>
+<p><span class="theorem-title"><strong>Example 9</strong></span> 对 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 间的无平方因子数计数. <span class="math inline">\(n \leq 10^{18}\)</span>.</p>
+<p>参见蓝桥杯 2023 省赛 A 组 J 题《翻转硬币》<span class="citation" data-cites="nonsquare1_luogu"><a href="#ref-nonsquare1_luogu" role="doc-biblioref">[12]</a></span> 或《完全平方数》<span class="citation" data-cites="nonsquare2_luogu"><a href="#ref-nonsquare2_luogu" role="doc-biblioref">[13]</a></span>.</p>
 </div>
 </div>
 </div>
@@ -686,8 +670,7 @@ f(n) = \sum_{i=1}^n \mu^2 (i) = \sum_{i=1}^{\left\lfloor \sqrt n \right\rfloor} 
 \]</span> 总时间复杂度为 <span class="math display">\[
 O(K) + O(n^{\frac 2 3} K^{-\frac 1 2})
 \]</span> 取 <span class="math inline">\(K=n^{\frac 4 9}\)</span>，得到最优时间复杂度 <span class="math inline">\(O(n^{\frac 4 9})\)</span>. 代入 <span class="math inline">\(n = 10^{18}\)</span>，量级约为 <span class="math inline">\(10^8\)</span>.</p>
-<p>这估计并不算优秀. 传言存在 <span class="math inline">\(O(n^{\frac 2 5})\)</span> 的估计，猜测大概优化了 <span class="math inline">\(\left\{ \left\lfloor \frac n i \right\rfloor \right\}_{i=1}^n\)</span> 和 <span class="math inline">\(\left\{ \left\lfloor  \left( \left\lfloor \frac n d \right\rfloor \right)^{\frac 1 2}  \right\rfloor\right\}_{d \in D_2 (n)}\)</span> 的重叠部分。笔者尚未找出其推导方式.</p>
-<p>upd: 关于 <span class="math inline">\(O(n^{\frac 2 5})\)</span> 的估计，请参阅博客<span class="citation" data-cites="nonsquare_blog"><a href="#ref-nonsquare_blog" role="doc-biblioref">[14]</a></span>和论文<span class="citation" data-cites="nonsquare_paper"><a href="#ref-nonsquare_paper" role="doc-biblioref">[15]</a></span>．</p>
+<p>这估计并不算优秀. 传言存在 <span class="math inline">\(O(n^{\frac 2 5})\)</span> 的估计，猜测大概优化了 <span class="math inline">\(\left\{ \left\lfloor \frac n i \right\rfloor \right\}_{i=1}^n\)</span> 和 <span class="math inline">\(\left\{ \left\lfloor  \left( \left\lfloor \frac n d \right\rfloor \right)^{\frac 1 2}  \right\rfloor\right\}_{d \in D_2 (n)}\)</span> 的重叠部分．关于这一估计，我们找到两篇参考文献，请参阅博客 <span class="citation" data-cites="nonsquare_blog"><a href="#ref-nonsquare_blog" role="doc-biblioref">[14]</a></span> 和论文 <span class="citation" data-cites="nonsquare_paper"><a href="#ref-nonsquare_paper" role="doc-biblioref">[15]</a></span>．</p>
 
 
 
