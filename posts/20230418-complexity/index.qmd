@@ -1,9 +1,9 @@
 ---
-title: "OI 数论中的上界估计与时间复杂度证明"
+title: "一些数论算法的时间复杂度分析"
 author: "sun123zxy"
 date: 2023/04/18
 date-modified: 2023/05/25
-abstract: "渐进符号、约数函数、整除分块嵌套与杜教筛."
+abstract: "OI/XCPC 常见算法为主，渐进符号、约数函数、整除分块嵌套与杜教筛．"
 categories:
   - OI
   - 数学
@@ -17,51 +17,50 @@ format:
   html: default
 ---
 
-::::: {.hidden}
-::: {.content-hidden unless-format="html"}
-$$
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-$$
-:::
-::: {.content-hidden when-format="html"}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-:::
-:::::
-
 ## 预备
 
 ### 渐进符号
 
-其实不少高等数学 / 数学分析教材在讲解无穷小的比较时已经相当严谨地介绍过大 O、小 O 记号，然而各种历史习惯记法的符号滥用（abuse of notation）[@wikipedia_abuse] 直到现在都让笔者头疼. These notations seem to be innocent, but can be catastrophic without careful manipulation. For example,
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 
-- $$
-  n = O(n^2) \land n^2 = O(n^2) \implies n = n^2
-  $$
+其实不少高等数学 / 数学分析教材在讲解无穷小的比较时已经相当严谨地介绍过大 O、小 O 记号，然而各种历史习惯记法的符号滥用（abuse of notation）[@wikipedia_abuse] 直到现在都让笔者头疼. These notations seem to be innocent, but can be catastrophic without careful manipulation. 例如
 
-  Knuth 在《具体数学》里举出的例子 @concretemath_onotation. “$=$” 隐含的对称性使其在 $g(x) = O(f(x))$ 中格格不入. 事实上，将 $O(f(x))$ 看作“阶不高于 $f(x)$ 的所有函数的集合”是比“某个阶不高于 $f(x)$ 的函数”更严谨的理解. 因此，本文将使用 $f(x) \in O(g(x))$ （有时也记为 $O(f(x)) \subset O(g(x))$）的集合论符号代替传统的 $f(x) = O(g(x))$ 记法.
+:::{#exm-error-1}
 
-- $$
-  n^2 \sin n \in O(n^2) \implies \sum_{i=1}^n i^2 \sin i \in \sum_{i=1}^n O(i^2) \subset O\left( \sum_{i=1}^n i^2 \right) \subset O(n^3)
-  $$
-  或更一般的，
-  $$
-  g(x) \in O(f(x)) \implies \sum_{P(n,i)} g(i) \in \sum_{P(n,i)} O(f(i)) \subset O \left(\sum_{P(n,i)} f(i) \right)
-  $$
-  
-  没看出有啥问题，对吧？笔者在写作此文时犯了同样的错误. 请注意，大 O 记号的作用对象是函数，$f(i)$ 是什么？它只是个函数值，是确定的数——这是因为 $i$ 也是求和枚举中确定的数，而不是 $n$ 这种真正代表变元的记号. 所以 $O(f(i))$ 是什么？它什么也不是.
+## 反例 1
 
-  这种错误的出现是在所难免的，我们太习惯用 $x$、$x^3 + 5 x^2 + x$ 这种变元都不明确的记号来表示函数了[@wikipedia_abuse]. 写成 $f(x)$ 也不严谨，因为只有 $f$ 才应代表函数本身，$f(x)$ 只能是函数值. 这样我们就可以放心地写下 $O(f)$，不用担心把变元与确定值弄混了.
+$$
+n = O(n^2) \land n^2 = O(n^2) \implies n = n^2
+$$
+:::
 
-  然而大家还是喜欢写 $O(n^2)$ 和 $O(e^{n^2})$，而不是奇怪的 $O(\mathrm{id}^2)$ 和 $O(\mathrm{exp} \circ {\mathrm{id}^2})$. 所以，我们大概只能沿用这种不太严谨的记号，并时刻提醒自己加倍小心了. （形如 $x \mapsto e^{x^2}$ 的 $\lambda$ 风格“匿名函数”记号可能更好？）
+Knuth 在《具体数学》里举出的例子 [@concretemath_onotation]. “$=$” 隐含的对称性使其在 $g(x) = O(f(x))$ 中格格不入. 事实上，将 $O(f(x))$ 看作“阶不高于 $f(x)$ 的所有函数的集合”是比“某个阶不高于 $f(x)$ 的函数”更严谨的理解. 因此，本文将使用 $f(x) \in O(g(x))$ （有时也记为 $O(f(x)) \subset O(g(x))$）的集合论符号代替传统的 $f(x) = O(g(x))$ 记法.
 
-  但上述命题从结论上是正确的. 正确的推导过程应为
-  $$
-  \sum_{P(n,i)} g(i) \leq \sum_{P(n,i)} C f(i) \leq C \sum_{P(n,i)} f(i) \in O \left(\sum_{P(n,i)} f(i) \right)\
-  $$
+:::{#exm-error-2}
 
-  第一步是直接由大 O 记号的定义得到的结果.
+##  反例 2
+$$
+n^2 \sin n \in O(n^2) \implies \sum_{i=1}^n i^2 \sin i \in \sum_{i=1}^n O(i^2) \subset O\left( \sum_{i=1}^n i^2 \right) \subset O(n^3)
+$$
+或更一般的，
+$$
+g(x) \in O(f(x)) \implies \sum_{P(n,i)} g(i) \in \sum_{P(n,i)} O(f(i)) \subset O \left(\sum_{P(n,i)} f(i) \right)
+$$
+:::
 
-Wikipedia[@asymptotic_wikipedia] 中有一张详尽的表格介绍了各种渐进符号的定义，OI Wiki[@asymptotic_oiwiki] 上也有极好的讲解，尚不熟练的读者可以参考. 有兴趣仔细研究的读者可以参考《具体数学》第九章[@concretemath_onotation]、Wikipedia 及其 reference（个人推荐 Knuth 关于 $O$、$\Omega$、$\Theta$ 的短文[@knuth_omicron]）. 本文除用 “$\in$” 和“$\subset$”替代 “$=$” 外，完全使用 Knuth 提议的记号体系.
+没看出有啥问题，对吧？笔者在写作此文时犯了同样的错误. 请注意，大 O 记号的作用对象是函数，$f(i)$ 是什么？它只是个函数值，是确定的数——这是因为 $i$ 也是求和枚举中确定的数，而不是 $n$ 这种真正代表变元的记号. 所以 $O(f(i))$ 是什么？它什么也不是.
+
+这种错误的出现是在所难免的，我们太习惯用 $x$、$x^3 + 5 x^2 + x$ 这种变元都不明确的记号来表示函数了[@wikipedia_abuse]. 写成 $f(x)$ 也不严谨，因为只有 $f$ 才应代表函数本身，$f(x)$ 只能是函数值. 这样我们就可以放心地写下 $O(f)$，不用担心把变元与确定值弄混了.
+
+然而大家还是喜欢写 $O(n^2)$ 和 $O(e^{n^2})$，而不是奇怪的 $O(\mathrm{id}^2)$ 和 $O(\mathrm{exp} \circ {\mathrm{id}^2})$. 所以，我们大概只能沿用这种不太严谨的记号，并时刻提醒自己加倍小心了. （形如 $x \mapsto e^{x^2}$ 的 $\lambda$ 风格“匿名函数”记号可能更好？）
+
+但上述命题从结论上是正确的. 正确的推导过程应为
+$$
+\sum_{P(n,i)} g(i) \leq \sum_{P(n,i)} C f(i) \leq C \sum_{P(n,i)} f(i) \in O \left(\sum_{P(n,i)} f(i) \right)\
+$$
+第一步是直接由大 O 记号的定义得到的结果.
+
+Wikipedia [@asymptotic_wikipedia] 中有一张详尽的表格介绍了各种渐进符号的定义，OI Wiki [@asymptotic_oiwiki] 上也有极好的讲解，尚不熟练的读者可以参考. 有兴趣仔细研究的读者可以参考《具体数学》第九章 [@concretemath_onotation]、Wikipedia 及其 reference（个人推荐 Knuth 关于 $O$、$\Omega$、$\Theta$ 的短文 [@knuth_omicron]）. 本文除用 “$\in$” 和“$\subset$”替代 “$=$” 外，完全使用 Knuth 提议的记号体系.
 
 ### 调和数 $H(n)$ / 调和级数
 
@@ -73,21 +72,11 @@ $$
 
 ### 自然数等幂和 $P_p(n)$ / $p$ - 级数
 
-$p$ - 级数可视为调和级数的推广. 其部分和定义为
-$$
-P_p(n) = \sum_{i=1}^n i^{-p}
-$$
-
-$p$ - 级数具有如下性质：
+$p$ - 级数可视为调和级数的推广. 其部分和定义为 $P_p(n) = \sum_{i=1}^n i^{-p}$．$p$ - 级数具有如下性质：
 
 - 当 $p > 1$ 时，$p$ - 级数收敛；
-
 - 当 $p = 1$ 时，$p$ - 级数是调和级数；
-
-- 当 $-\infty < p < 1$ 时，我们指出
-  $$
-  P_p(n) \sim \frac{1}{1-p} n^{1-p} \in \Theta(n^{1-p})
-  $$
+- 当 $-\infty < p < 1$ 时，我们指出 $P_p(n) \sim \frac{1}{1-p} n^{1-p} \in \Theta(n^{1-p})$
 
 $-\infty < p < 1$ 时 $p$ - 级数的渐进估计可以从连续幂函数积分的角度理解. 证明这渐进性，离散情况下，可对 $n^p$ 差分后前缀和 + 二项式定理得到高次项系数，或可用离散微积分理论得到精确表示（参见《具体数学》[@concretemath_calculus]）；连续情况下，Lagrange 中值定理应为较简单的估计方法. 这里从略. 总之，我们得到：
 $$
@@ -100,18 +89,7 @@ $$
 
 ## 约数函数 $\sigma_z(n)$
 
-约数函数（Divisor Function，也可称为除数函数、因数函数）是与 $n$ 的因子有关的一类函数，定义如下：
-
-::: {#def-sigma}
-
-## 约数函数
-
-$$
-\sigma_z(n) = \sum_{d \mid n} d^z
-$$
-:::
-
-当 $z=0$ 时，$\sigma_0(n)$ 被称为约数个数函数（number-of-divisors function），常被记为 $d(n)$ 或 $\tau(n)$. 当 $z=1$ 时，$\sigma_1(n)$ 被称为约数和函数（sum-of-divisors function），常直接记为 $\sigma(n)$.
+约数函数（Divisor Function，也可称为除数函数、因数函数）是与 $n$ 的因子有关的一类函数，定义为 $\sigma_z(n) = \sum_{d \mid n} d^z$．当 $z=0$ 时，$\sigma_0(n)$ 被称为约数个数函数（number-of-divisors function），常被记为 $d(n)$ 或 $\tau(n)$. 当 $z=1$ 时，$\sigma_1(n)$ 被称为约数和函数（sum-of-divisors function），常直接记为 $\sigma(n)$.
 
 ::: {#exm-sigma0ub}
 估计 $\sigma_0 (n)$ 的渐进上界.
@@ -128,7 +106,6 @@ $$
 :::
 
 即估计 $1$ 到 $n$ 中所有数因子个数的和. 这是一个形式上鲜为人知但其应用广为人知的例子. 变换求和顺序，容易得到
-
 $$
 \hat{\sigma_0}(n) = \sum_{i=1}^n \sigma_0 (i)
 = \sum_{i=1}^n \sum_{d \mid i} 1
@@ -137,7 +114,7 @@ $$
 = n H(n) \in O(n \log n)
 $$
 
-显然，这比 $O(n \sqrt n)$ 的平凡估计好上不少. 本例的思路不仅是埃氏筛（Sieve of Eratosthenes）的理论基础，也在杜教筛、快速 Mobius 变换、$\gcd$ 卷积[@gcdconv]等处出现.
+显然，这比 $O(n \sqrt n)$ 的平凡估计好上不少. 本例的思路不仅是埃氏筛（Sieve of Eratosthenes）的理论基础，也在杜教筛、快速 Mobius 变换、$\gcd$ 卷积 [@gcdconv] 等处出现.
 
 进一步利用此技巧和 $p$ - 级数的估计，我们甚至能在仔细研究 $\sigma_z(n)$ 前就得到其前缀和的渐进估计：
 
@@ -172,7 +149,7 @@ $$
 $$
 :::
 
-显然，右式比左式多算了 $i \nmid n$ 的项，因此命题是正确的. 但我们还可以做得更好：
+右式比左式多算了 $i \nmid n$ 的项，因此命题是正确的. 但我们还可以做得更好：
 
 ::: {#prp-trick1ex}
 
@@ -181,19 +158,19 @@ $$
 $$
 :::
 
-$\sqrt n$ 分治. 我们其实已经在 @exm-sigma0ub 估计 $\sigma_0(n)$ 时用过此技巧了.
+$\sqrt n$ 分治. 我们其实已经在 [@exm-sigma0ub] 估计 $\sigma_0(n)$ 时用过此技巧了.
 
 ::: {#exm-sigma1ub}
 估计 $\sigma_1 (n)$ 的渐进上界.
 :::
 
-用 @prp-trick1：
+用 [@prp-trick1]：
 $$
 \sigma_1 (n)
 = \sum_{d \mid n} d \leq \sum_{i=1}^n \floor{\frac n i} \leq n H(n) \in O(n \log n)
 $$
 
-可以证明用 @prp-trick1ex 不会得到更优的结果.
+可以证明用 [@prp-trick1ex] 不会得到更优的结果.
 
 我们发现了一个有趣的事实：$\sigma_1 (n)$ 和 $\hat{\sigma_0}(n)$ 的渐进上界均为 $O(n \log n)$.
 
@@ -201,8 +178,7 @@ $$
 估计 $\sigma_z (n)$ 的渐进上界.
 :::
 
-用 @prp-trick1ex 和 $p$ - 级数的性质：
-
+用 [@prp-trick1ex] 和 $p$ - 级数的性质：
 $$
 \begin{aligned}
 \sigma_z (n)
@@ -230,14 +206,14 @@ O(1) & z < -1
 \end{aligned}
 $$
 
-我们得到了一个相当优秀的渐进上界. 值得关注的是：
+这是一个相当优秀的渐进上界. 值得关注的是：
 
-- 当 $z=0$ 时，$\sigma_0(n) \in O(n^{\frac 1 2})$. 这与 @exm-sigma0ub 的结果一致.
-- 当 $z=\frac 1 2$ 时，$\sigma_{\frac 1 2}(n) \in O(n^{\frac 3 4})$，即 $\sum_{d \mid n} \sqrt d \in O(n^{\frac 3 4})$. 洛谷 P4980 Polya 定理模板题[@polya_luogu]的一种比较 trivial 的解法[@polya_my]的时间复杂度证明就来源于此. 我们之后还会在整除分块与杜教筛中见到它.
+- 当 $z=0$ 时，$\sigma_0(n) \in O(n^{\frac 1 2})$. 这与 [@exm-sigma0ub] 的结果一致.
+- 当 $z=\frac 1 2$ 时，$\sigma_{\frac 1 2}(n) \in O(n^{\frac 3 4})$，即 $\sum_{d \mid n} \sqrt d \in O(n^{\frac 3 4})$. 洛谷 P4980 Polya 定理模板题 [@polya_luogu] 的一种比较 trivial 的解法 [@polya_my] 的时间复杂度证明就来源于此. 我们之后还会在整除分块与杜教筛中见到它.
 
-另外，如果只使用 @prp-trick1 ，$-1<z<1$ 部分的渐进上界将只能估计至 $O(n)$. 因此 @prp-trick1ex 是更为优越的.
+另外，如果只使用 [@prp-trick1] ，$-1<z<1$ 部分的渐进上界将只能估计至 $O(n)$. 因此 [@prp-trick1ex] 是更为优越的.
 
-约数函数更复杂的上限与渐进估计可参考 Wikipedia[@wikipedia_divisor].
+约数函数更复杂的上限与渐进估计可参考 Wikipedia [@wikipedia_divisor].
 
 ## 整除分块
 
@@ -258,7 +234,7 @@ $$
 
 ### 整除分块嵌套
 
-将 @prp-trick1ex 加强，我们有如下通用放缩：
+将 [@prp-trick1ex] 加强，我们有如下通用放缩：
 
 ::: {#prp-trick2ex}
 
@@ -273,31 +249,29 @@ LHS 成立的关键在于 $\{d: d \mid n\} \subset D(n)$；而 RHS 的本质就�
 整除分块的 $O(\sqrt n)$ 相当满，而枚举因子的 $\sigma_0(n) \in O(\sqrt n)$ 却相当不满．这一点在前面介绍 $\sigma_0(n)$ 时已经提到．
 :::
 
-注意到 @prp-trick1ex 是 @exm-sigmazub 证明的核心，而 @prp-trick2ex 是 @prp-trick1ex 的加强版，故仿造 @exm-sigmazub 的证明，我们有
+注意到 [@prp-trick1ex] 是 [@exm-sigmazub] 证明的核心，而 [@prp-trick2ex] 是 [@prp-trick1ex] 的加强版，故仿造 [@exm-sigmazub] 的证明，我们有
 
 ::: {#exm-divissigma}
 令
 $$
 S_z(n) = \sum_{d \in D(n)} d^z
 $$
-则前述 @exm-sigmazub 中 $\sigma_z(n)$ 的上界与渐进上界也同样适用于 $S_z(n)$.
+则前述 [@exm-sigmazub] 中 $\sigma_z(n)$ 的上界与渐进上界也同样适用于 $S_z(n)$.
 :::
 
 现在可以对嵌套整除分块
 $$
 \sum_{i=1}^n f(i) \sum_{j=1}^{\floor{\frac n i}} g(j) h(\floor{\frac n {ij}})
 $$
-的时间复杂度 $T_2$ 做出估计了. 对 @exm-divissigma 取 $z=\frac 1 2$，立刻有
+的时间复杂度 $T_2$ 做出估计了. 对 [@exm-divissigma] 取 $z=\frac 1 2$，立刻有
 $$
 T_2(n) = \sum_{d \in D(n)} T_1(d) \leq 2 \sum_{d \in D(n)} \sqrt d = 2 S_{\frac 1 2}(n) \leq 4 \sqrt n P_{\frac 1 2}(\sqrt n) \in O(n^{\frac 3 4})
 $$
 
 我们还可以进一步归纳. 假定 $\forall m \geq 0, \quad \exists z_m : 0 \leq z_m < 1, \quad T_m(n) = O(n^{z_m})$，我们有
-
 $$
 T_{m+1}(n) = \sum_{d \in D(n)} T_m(d) \leq C \sum_{d \in D(n)} n^{z_m} = C S_{z_m}(n) \in O(n^{\frac {1+z_m} 2})
 $$
-
 因此 $z_{m+1} = \frac {1+z_m} 2$. 边界条件 $z_0 = 0$，数列递推求得 $z_m = 1-2^{-m}$，检验满足条件. 因此 $m$ 重嵌套整除分块的时间复杂度
 $$
 T_m(n) \in O(n^{1- 2^{-m}})
@@ -324,7 +298,6 @@ $$
 $$
 \hat f (n) = \frac 1 {g(1)} \left( \hat h (n) - \sum_{d=2}^n g(d) \hat f (\floor{\frac n d}) \right)
 $$
-
 故若 $g$、$h$ 的前缀和可 $O(1)$ 算得，根据上式整除分块即可递归地计算出 $f$ 的前缀和.
 
 下面分析算法的复杂度. 注意到
@@ -336,23 +309,20 @@ $$
 \sum_{d \in D(n)} T_1(d) = T_2(n) \in O(n^{\frac 3 4})
 $$
 
-但我们还可以做得更好——考虑先用 $O(K)$ 的时间复杂度线性筛出前 $K$ 个 $f(n)$ 并求前缀和，则递归求解时，$d \leq K$ 的 $\hat f(d)$ 就无需再向下递归了. 为分析此类时间复杂度，对 @prp-trick2ex 做最后一点扩展：
+但我们还可以做得更好——考虑先用 $O(K)$ 的时间复杂度线性筛出前 $K$ 个 $f(n)$ 并求前缀和，则递归求解时，$d \leq K$ 的 $\hat f(d)$ 就无需再向下递归了. 为分析此类时间复杂度，对 [@prp-trick2ex] 做最后一点扩展：
 
 ::: {#prp-trick3ex}
 
 $$
 \sum_{\begin{gathered} d \mid n \\ d > K \end{gathered}} f(d) \leq \sum_{\begin{gathered} d \in D(n) \\ d > K \end{gathered}} f(d) \leq \sum_{K < i \leq \sqrt n} f(i) + \sum_{1 \leq i \leq \min{\{ \floor{\frac n K},\sqrt n \} }} f(\floor{\frac n i})
 $$
-
 特别的，当 $K > \sqrt n$ 时，有
-
 $$
 \sum_{\begin{gathered} d \mid n \\ d > K \end{gathered}} f(d) \leq \sum_{\begin{gathered} d \in D(n) \\ d > K \end{gathered}} f(d) \leq \sum_{1 \leq i \leq \floor{\frac n K}} f(\floor{\frac n i})
 $$
 :::
 
-故用 @prp-trick3ex ，当 $K > \sqrt n$ 时，算法在递归部分的时间复杂度降低为
-
+利用此估计，当 $K > \sqrt n$ 时，算法在递归部分的时间复杂度估计降低为
 $$
 \begin{aligned}
 \mathrm{Du}_K(n) &= 
@@ -365,22 +335,20 @@ $$
 &\subset O(n K^{-\frac 1 2})
 \end{aligned}
 $$
-
 总时间复杂度
 $$
 O(K) + O(n K^{-\frac 1 2})
 $$
+为最小化时间复杂度，取 $K = n^{\frac 2 3}$，即得最优时间复杂度 $O(n^{\frac 2 3})$.
 
-为最小化时间复杂度，取 $K = n^{\frac 2 3}$，得到最优时间复杂度 $O(n^{\frac 2 3})$.
-
-这部分的时间复杂度证明主要参考了文章[@zhihu_dusieve].
+这部分的时间复杂度证明主要参考了文章 [@zhihu_dusieve].
 
 ## Challenge
 
 ::: {#exm-nonsquare}
 对 $1$ 到 $n$ 间的无平方因子数计数. $n \leq 10^{18}$.
 
-参见蓝桥杯 2023 省赛 A 组 J 题《翻转硬币》[@nonsquare1_luogu]或《完全平方数》[@nonsquare2_luogu].
+参见蓝桥杯 2023 省赛 A 组 J 题《翻转硬币》[@nonsquare1_luogu] 或《完全平方数》[@nonsquare2_luogu].
 :::
 
 我们指出，无平方因子数有如下计数公式
@@ -409,7 +377,7 @@ for(ll l=1,r,d;l<=sqrtN;l=r+1){
 $$
 \left\{ \floor{ \left( \floor{\frac n d} \right)^{\frac 1 2} }\right\}_{d \in D_2 (n)}
 $$
-同样类似 @prp-trick2ex ，我们有
+同样类似 [@prp-trick2ex] ，我们有
 
 ::: {#prp-trick4ex}
 
@@ -435,6 +403,4 @@ O(K) + O(n^{\frac 2 3} K^{-\frac 1 2})
 $$
 取 $K=n^{\frac 4 9}$，得到最优时间复杂度 $O(n^{\frac 4 9})$. 代入 $n = 10^{18}$，量级约为 $10^8$.
 
-这估计并不算优秀. 传言存在 $O(n^{\frac 2 5})$ 的估计，猜测大概优化了 $\left\{ \floor{\frac n i} \right\}_{i=1}^n$ 和 $\left\{ \floor{ \left( \floor{\frac n d} \right)^{\frac 1 2} }\right\}_{d \in D_2 (n)}$ 的重叠部分。笔者尚未找出其推导方式.
-
-upd: 关于 $O(n^{\frac 2 5})$ 的估计，请参阅博客[@nonsquare_blog]和论文[@nonsquare_paper]．
+这估计并不算优秀. 传言存在 $O(n^{\frac 2 5})$ 的估计，猜测大概优化了 $\left\{ \floor{\frac n i} \right\}_{i=1}^n$ 和 $\left\{ \floor{ \left( \floor{\frac n d} \right)^{\frac 1 2} }\right\}_{d \in D_2 (n)}$ 的重叠部分．关于这一估计，我们找到两篇参考文献，请参阅博客 [@nonsquare_blog] 和论文 [@nonsquare_paper]．
