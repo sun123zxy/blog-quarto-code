@@ -3,7 +3,7 @@ title: "算法 & 数学碎碎念"
 abstract: "现场赛公式模板库，亦可作为小而精的总结性学习材料参考．无需单独成文或暂不完善的内容会放在这里．"
 author: "sun123zxy"
 date: "2023/06/21"
-date-modified: "2024/02/04"
+date-modified: "2024/03/10"
 lang: zh
 
 categories:
@@ -134,7 +134,7 @@ $$
 其中 $p$ 是质数，$n_i$ 和 $m_i$ 是 $n$ 和 $m$ 的 $p$ 进制表示下的各数位．
 :::
 
-证明的要点有二：一是 $\binom {p^i} m \bmod {p} = [m = 0 \land m = p^i]$，即 $(1+x)^{p^i} \equiv 1 + x^{p^i} \pmod p$；二是 Vandermonde 卷积．生成函数食用风味更佳．
+证明的要点有二：一是 $\binom {p^i} m \bmod {p} = [m = 0 \land m = p^i]$，即 $(1+x)^{p^i} \equiv 1 + x^{p^i} \pmod p$；二是 Vandermonde 卷积按 $p$ 进制拆分．生成函数食用风味更佳．
 
 参考：
 
@@ -169,7 +169,16 @@ $$
 
 证明待考．参考：
 
-- [Kummer's theorem - Wikipedia](https://en.wikipedia.org/wiki/Kummer%27s_theorem)
+- [Kummer's theorem - Wikipedia](https://en.wiokipedia.org/wiki/Kummer%27s_theorem)
+
+研究该定理 $n = p^m$ 的特例．用下降阶乘幂形式考虑 $k$ 递增的过程，考虑到 $\nu_p (p^m-k) = \nu_p(k)$，可以发现分子新增的 $n-k+1$ 和分母新增的 $k$ 恰好错一位，于是
+$$
+\nu_p \left( \binom {p^m} k \right) = m - \nu_p (k),\quad k = 1,2,\dots,p^m
+$$
+作为推论，我们有
+$$
+\gcd_{k=1}^{p^m-1} \binom{p^m}{k} = p
+$$
 
 #### 扩展 Euler 定理
 
