@@ -119,9 +119,7 @@ $$
 
 见 [FFT/NTT 讲稿](/posts/20230928-dft/)．
 
-### 定理杂记
-
-#### Lucas 定理
+### Lucas 定理
 
 ::: {#thm-nt-lucas}
 
@@ -141,46 +139,70 @@ $$
 - [Lucas's theorem - Wikipedia](https://en.wikipedia.org/wiki/Lucas%27s_theorem)
 - [卢卡斯定理 - OI Wiki](https://oi-wiki.org/math/number-theory/lucas/)
 
-#### Legendre 公式和 Kummer 定理【TODO】
+### Legendre 公式和 Kummer 定理
 
 ::: {#thm-nt-legendre}
 
 ## Legendre 公式
 
 $$
-\nu_p (n!) = \sum_{i=1}^{+\infty} \floor{\frac n {p^i}}
+\nu_p (n!) = \sum_{i=1}^{+\infty} \floor{\frac n {p^i}} = \frac{n-S_p(n)}{p-1}
 $$
 
-其中 $p$ 是质数．
+其中 $p$ 是质数，$S_p(n)$ 是 $n$ 在 $p$ 进制下各数位数字之和．$\nu_p (n!)$ 为 $n!$ 中质因子 $p$ 的含量，即所谓的 $p$-adic valuation of $n!$．
 :::
 
-比较显然的结论，按和式统计贡献即证．
+左侧显然，按和式统计贡献即证．对于右侧，
+$$
+\begin{aligned}
+\sum_{i=1}^{+\infty} \floor{\frac n {p^i}} &= \sum_{i=1}^{+\infty} \sum_{k=0}^{+\infty} n_{k+i} p^k \\
+&= \sum_{j=1}^{+\infty} n_j \sum_{k=0}^{j-1} p^k \\
+&= \sum_{j=1}^{+\infty} n_j \frac{p^j-1}{p-1} \\
+&= \frac 1 {p-1} \left(\sum_{j=1}^{+\infty} n_j p^j - \sum_{j=1}^{+\infty} n_j\right) \\
+&= \frac 1 {p-1} \left(\sum_{j=0}^{+\infty} n_j p^j - \sum_{j=0}^{+\infty} n_j\right) \\
+&= \frac {n - S_p(n)}{p-1}
+\end{aligned}
+$$
 
 ::: {#thm-nt-kummer}
 
 ## Kummer 定理
 
-$\binom n m$ 中质因子 $p$ 的指数等于 $p$ 进制下加法 $m+(n-m)$ 发生的进位次数，即
+$\binom {a+b} a$ 中质因子 $p$ 的含量等于 $p$ 进制下加法 $a+b$ 发生的进位次数，也可表示为
 $$
-\nu_p \left( \binom n m \right) = \frac{S_p(m)+S_p(n-m)-S_p(n)}{p-1}
+\nu_p \left( \binom {a+b}{a} \right) = \frac{S_p(a)+S_p(b)-S_p(a+b)}{p-1}
 $$
-其中 $S_p(n)$ 是 $n$ 在 $p$ 进制下各数位数字之和．
 :::
 
-证明待考．参考：
+大力使用 [@thm-nt-legendre] 考察 $\binom {a+b}{a}$ 的含 $p$ 量：
+$$
+\begin{aligned}
+\nu_p \left( \binom {a+b}{a} \right) &= \nu_p((a+b)!) - \nu_p(a!) - \nu_p(b!) \\
+&= \sum_{k=1}^\infty \left( \floor{\frac {a+b}{p^k}} - \floor{\frac {a}{p^k}} - \floor{\frac {b}{p^k}} \right)
+\end{aligned}
+$$
+该公式恰好对 $a+b$ 在 $p$ 进制计算过程中每一位发生的进位进行了求和．定理的 $S_p$ 形式容易通过 [@thm-nt-legendre] 的另一形式得到．
 
-- [Kummer's theorem - Wikipedia](https://en.wiokipedia.org/wiki/Kummer%27s_theorem)
-
-研究该定理 $n = p^m$ 的特例．用下降阶乘幂形式考虑 $k$ 递增的过程，考虑到 $\nu_p (p^m-k) = \nu_p(k)$，可以发现分子新增的 $n-k+1$ 和分母新增的 $k$ 恰好错一位，于是
+研究该定理 $a+b = p^m$ 的特例．用下降阶乘幂形式考虑二形式系数中 $k$ 递增的过程，注意到 $\nu_p (p^m-k) = \nu_p(k)$，可以发现分子新增的 $n-k+1$ 和分母新增的 $k$ 恰好错一位，于是
 $$
 \nu_p \left( \binom {p^m} k \right) = m - \nu_p (k),\quad k = 1,2,\dots,p^m
 $$
-作为推论，我们有
-$$
-\gcd_{k=1}^{p^m-1} \binom{p^m}{k} = p
-$$
 
-#### 扩展 Euler 定理
+作为 Kummer 定理和上述特殊情况的推论，我们有
+$$
+\gcd_{k=1}^{n-1} \binom{n}{k} = \begin{cases}
+p & n = p^m \\
+1 & \text{otherwise}
+\end{cases}
+$$
+其中 $p$ 是某一质数．这符合 Kummer 定理的直观描述．得到 $p^m$ 的加法必然会出现进位，在加法 $p^{m-1} + p^{m-1}$ 时达到最小进位次数 $1$；否则在任一质数进制 $p$ 下，都可以取加法 $\operatorname{lowbit}_p (n) + (n - \operatorname{lowbit}_p (n))$ 使得不发生进位．
+
+参考：
+
+- [Legendre's formula - Wikipedia](https://en.wikipedia.org/wiki/Legendre%27s_formula)
+- [Kummer's theorem - Wikipedia](https://en.wiokipedia.org/wiki/Kummer%27s_theorem)
+
+### 扩展 Euler 定理
 
 $$
 a^b \equiv a^{b \bmod \varphi(m) + \varphi(m)} \pmod{m}
@@ -188,7 +210,7 @@ $$
 
 进入循环所需步骤其实很少，一定小于 $\varphi(m)$．（疑似量级在 $\log m$ 以下，存疑，见 FFT 讲稿）
 
-#### Lagrange 定理
+### Lagrange 定理
 
 ::: {#thm-nt-lagrange}
 
@@ -199,7 +221,7 @@ $$
 
 这是域上的多项式理论在模 $p$ 整数域上的应用．
 
-#### Wilson 定理
+### Wilson 定理
 
 ::: {#thm-nt-wilson}
 
