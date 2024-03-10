@@ -192,8 +192,12 @@ window.Quarto = {
   <li><a href="#miller-rabintodo" id="toc-miller-rabintodo" class="nav-link" data-scroll-target="#miller-rabintodo"><span class="header-section-number">1.4</span> Miller-Rabin【TODO】</a></li>
   <li><a href="#pollard-rhotodo" id="toc-pollard-rhotodo" class="nav-link" data-scroll-target="#pollard-rhotodo"><span class="header-section-number">1.5</span> Pollard-Rho【TODO】</a></li>
   <li><a href="#原根euler-定理等" id="toc-原根euler-定理等" class="nav-link" data-scroll-target="#原根euler-定理等"><span class="header-section-number">1.6</span> 原根、Euler 定理等</a></li>
-  <li><a href="#定理杂记" id="toc-定理杂记" class="nav-link" data-scroll-target="#定理杂记"><span class="header-section-number">1.7</span> 定理杂记</a></li>
-  <li><a href="#线性预处理" id="toc-线性预处理" class="nav-link" data-scroll-target="#线性预处理"><span class="header-section-number">1.8</span> 线性预处理</a></li>
+  <li><a href="#lucas-定理" id="toc-lucas-定理" class="nav-link" data-scroll-target="#lucas-定理"><span class="header-section-number">1.7</span> Lucas 定理</a></li>
+  <li><a href="#legendre-公式和-kummer-定理" id="toc-legendre-公式和-kummer-定理" class="nav-link" data-scroll-target="#legendre-公式和-kummer-定理"><span class="header-section-number">1.8</span> Legendre 公式和 Kummer 定理</a></li>
+  <li><a href="#扩展-euler-定理" id="toc-扩展-euler-定理" class="nav-link" data-scroll-target="#扩展-euler-定理"><span class="header-section-number">1.9</span> 扩展 Euler 定理</a></li>
+  <li><a href="#lagrange-定理" id="toc-lagrange-定理" class="nav-link" data-scroll-target="#lagrange-定理"><span class="header-section-number">1.10</span> Lagrange 定理</a></li>
+  <li><a href="#wilson-定理" id="toc-wilson-定理" class="nav-link" data-scroll-target="#wilson-定理"><span class="header-section-number">1.11</span> Wilson 定理</a></li>
+  <li><a href="#线性预处理" id="toc-线性预处理" class="nav-link" data-scroll-target="#线性预处理"><span class="header-section-number">1.12</span> 线性预处理</a></li>
   </ul></li>
   <li><a href="#积性函数" id="toc-积性函数" class="nav-link" data-scroll-target="#积性函数"><span class="header-section-number">2</span> 积性函数</a>
   <ul class="collapse">
@@ -382,10 +386,8 @@ x \equiv k_1 m_1 + a_1 \pmod{\operatorname{lcm}(m_1, m_2)}
 <h3 data-number="1.6" class="anchored" data-anchor-id="原根euler-定理等"><span class="header-section-number">1.6</span> 原根、Euler 定理等</h3>
 <p>见 <a href="../..\posts/20230928-dft/">FFT/NTT 讲稿</a>．</p>
 </section>
-<section id="定理杂记" class="level3" data-number="1.7">
-<h3 data-number="1.7" class="anchored" data-anchor-id="定理杂记"><span class="header-section-number">1.7</span> 定理杂记</h3>
-<section id="lucas-定理" class="level4">
-<h4 class="anchored" data-anchor-id="lucas-定理">Lucas 定理</h4>
+<section id="lucas-定理" class="level3" data-number="1.7">
+<h3 data-number="1.7" class="anchored" data-anchor-id="lucas-定理"><span class="header-section-number">1.7</span> Lucas 定理</h3>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -408,8 +410,8 @@ x \equiv k_1 m_1 + a_1 \pmod{\operatorname{lcm}(m_1, m_2)}
 <li><a href="https://oi-wiki.org/math/number-theory/lucas/">卢卡斯定理 - OI Wiki</a></li>
 </ul>
 </section>
-<section id="legendre-公式和-kummer-定理todo" class="level4">
-<h4 class="anchored" data-anchor-id="legendre-公式和-kummer-定理todo">Legendre 公式和 Kummer 定理【TODO】</h4>
+<section id="legendre-公式和-kummer-定理" class="level3" data-number="1.8">
+<h3 data-number="1.8" class="anchored" data-anchor-id="legendre-公式和-kummer-定理"><span class="header-section-number">1.8</span> Legendre 公式和 Kummer 定理</h3>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -418,14 +420,23 @@ x \equiv k_1 m_1 + a_1 \pmod{\operatorname{lcm}(m_1, m_2)}
 <div class="callout-body-container">
 <div id="thm-nt-legendre" class="theorem">
 <p><span class="theorem-title"><strong>定理 4 (Legendre 公式)</strong></span> <span class="math display">\[
-\nu_p (n!) = \sum_{i=1}^{+\infty} \left\lfloor \frac n {p^i} \right\rfloor
+\nu_p (n!) = \sum_{i=1}^{+\infty} \left\lfloor \frac n {p^i} \right\rfloor = \frac{n-S_p(n)}{p-1}
 \]</span></p>
-<p>其中 <span class="math inline">\(p\)</span> 是质数．</p>
+<p>其中 <span class="math inline">\(p\)</span> 是质数，<span class="math inline">\(S_p(n)\)</span> 是 <span class="math inline">\(n\)</span> 在 <span class="math inline">\(p\)</span> 进制下各数位数字之和．<span class="math inline">\(\nu_p (n!)\)</span> 为 <span class="math inline">\(n!\)</span> 中质因子 <span class="math inline">\(p\)</span> 的含量，即所谓的 <span class="math inline">\(p\)</span>-adic valuation of <span class="math inline">\(n!\)</span>．</p>
 </div>
 </div>
 </div>
 </div>
-<p>比较显然的结论，按和式统计贡献即证．</p>
+<p>左侧显然，按和式统计贡献即证．对于右侧， <span class="math display">\[
+\begin{aligned}
+\sum_{i=1}^{+\infty} \left\lfloor \frac n {p^i} \right\rfloor &amp;= \sum_{i=1}^{+\infty} \sum_{k=0}^{+\infty} n_{k+i} p^k \\
+&amp;= \sum_{j=1}^{+\infty} n_j \sum_{k=0}^{j-1} p^k \\
+&amp;= \sum_{j=1}^{+\infty} n_j \frac{p^j-1}{p-1} \\
+&amp;= \frac 1 {p-1} \left(\sum_{j=1}^{+\infty} n_j p^j - \sum_{j=1}^{+\infty} n_j\right) \\
+&amp;= \frac 1 {p-1} \left(\sum_{j=0}^{+\infty} n_j p^j - \sum_{j=0}^{+\infty} n_j\right) \\
+&amp;= \frac {n - S_p(n)}{p-1}
+\end{aligned}
+\]</span></p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -433,32 +444,43 @@ x \equiv k_1 m_1 + a_1 \pmod{\operatorname{lcm}(m_1, m_2)}
 </div>
 <div class="callout-body-container">
 <div id="thm-nt-kummer" class="theorem">
-<p><span class="theorem-title"><strong>定理 5 (Kummer 定理)</strong></span> <span class="math inline">\(\binom n m\)</span> 中质因子 <span class="math inline">\(p\)</span> 的指数等于 <span class="math inline">\(p\)</span> 进制下加法 <span class="math inline">\(m+(n-m)\)</span> 发生的进位次数，即 <span class="math display">\[
-\nu_p \left( \binom n m \right) = \frac{S_p(m)+S_p(n-m)-S_p(n)}{p-1}
-\]</span> 其中 <span class="math inline">\(S_p(n)\)</span> 是 <span class="math inline">\(n\)</span> 在 <span class="math inline">\(p\)</span> 进制下各数位数字之和．</p>
+<p><span class="theorem-title"><strong>定理 5 (Kummer 定理)</strong></span> <span class="math inline">\(\binom {a+b} a\)</span> 中质因子 <span class="math inline">\(p\)</span> 的含量等于 <span class="math inline">\(p\)</span> 进制下加法 <span class="math inline">\(a+b\)</span> 发生的进位次数，也可表示为 <span class="math display">\[
+\nu_p \left( \binom {a+b}{a} \right) = \frac{S_p(a)+S_p(b)-S_p(a+b)}{p-1}
+\]</span></p>
 </div>
 </div>
 </div>
 </div>
-<p>证明待考．参考：</p>
+<p>大力使用 <a href="#thm-nt-legendre" class="quarto-xref">定理&nbsp;4</a> 考察 <span class="math inline">\(\binom {a+b}{a}\)</span> 的含 <span class="math inline">\(p\)</span> 量： <span class="math display">\[
+\begin{aligned}
+\nu_p \left( \binom {a+b}{a} \right) &amp;= \nu_p((a+b)!) - \nu_p(a!) - \nu_p(b!) \\
+&amp;= \sum_{k=1}^\infty \left( \left\lfloor \frac {a+b}{p^k} \right\rfloor - \left\lfloor \frac {a}{p^k} \right\rfloor - \left\lfloor \frac {b}{p^k} \right\rfloor \right)
+\end{aligned}
+\]</span> 该公式恰好对 <span class="math inline">\(a+b\)</span> 在 <span class="math inline">\(p\)</span> 进制计算过程中每一位发生的进位进行了求和．定理的 <span class="math inline">\(S_p\)</span> 形式容易通过 <a href="#thm-nt-legendre" class="quarto-xref">定理&nbsp;4</a> 的另一形式得到．</p>
+<p>研究该定理 <span class="math inline">\(a+b = p^m\)</span> 的特例．用下降阶乘幂形式考虑二形式系数中 <span class="math inline">\(k\)</span> 递增的过程，注意到 <span class="math inline">\(\nu_p (p^m-k) = \nu_p(k)\)</span>，可以发现分子新增的 <span class="math inline">\(n-k+1\)</span> 和分母新增的 <span class="math inline">\(k\)</span> 恰好错一位，于是 <span class="math display">\[
+\nu_p \left( \binom {p^m} k \right) = m - \nu_p (k),\quad k = 1,2,\dots,p^m
+\]</span></p>
+<p>作为 Kummer 定理和上述特殊情况的推论，我们有 <span class="math display">\[
+\gcd_{k=1}^{n-1} \binom{n}{k} = \begin{cases}
+p &amp; n = p^m \\
+1 &amp; \text{otherwise}
+\end{cases}
+\]</span> 其中 <span class="math inline">\(p\)</span> 是某一质数．这符合 Kummer 定理的直观描述．得到 <span class="math inline">\(p^m\)</span> 的加法必然会出现进位，在加法 <span class="math inline">\(p^{m-1} + p^{m-1}\)</span> 时达到最小进位次数 <span class="math inline">\(1\)</span>；否则在任一质数进制 <span class="math inline">\(p\)</span> 下，都可以取加法 <span class="math inline">\(\operatorname{lowbit}_p (n) + (n - \operatorname{lowbit}_p (n))\)</span> 使得不发生进位．</p>
+<p>参考：</p>
 <ul>
+<li><a href="https://en.wikipedia.org/wiki/Legendre%27s_formula">Legendre’s formula - Wikipedia</a></li>
 <li><a href="https://en.wiokipedia.org/wiki/Kummer%27s_theorem">Kummer’s theorem - Wikipedia</a></li>
 </ul>
-<p>研究该定理 <span class="math inline">\(n = p^m\)</span> 的特例．用下降阶乘幂形式考虑 <span class="math inline">\(k\)</span> 递增的过程，考虑到 <span class="math inline">\(\nu_p (p^m-k) = \nu_p(k)\)</span>，可以发现分子新增的 <span class="math inline">\(n-k+1\)</span> 和分母新增的 <span class="math inline">\(k\)</span> 恰好错一位，于是 <span class="math display">\[
-\nu_p \left( \binom {p^m} k \right) = m - \nu_p (k),\quad k = 1,2,\dots,p^m
-\]</span> 作为推论，我们有 <span class="math display">\[
-\gcd_{k=1}^{p^m-1} \binom{p^m}{k} = p
-\]</span></p>
 </section>
-<section id="扩展-euler-定理" class="level4">
-<h4 class="anchored" data-anchor-id="扩展-euler-定理">扩展 Euler 定理</h4>
+<section id="扩展-euler-定理" class="level3" data-number="1.9">
+<h3 data-number="1.9" class="anchored" data-anchor-id="扩展-euler-定理"><span class="header-section-number">1.9</span> 扩展 Euler 定理</h3>
 <p><span class="math display">\[
 a^b \equiv a^{b \bmod \varphi(m) + \varphi(m)} \pmod{m}
 \]</span></p>
 <p>进入循环所需步骤其实很少，一定小于 <span class="math inline">\(\varphi(m)\)</span>．（疑似量级在 <span class="math inline">\(\log m\)</span> 以下，存疑，见 FFT 讲稿）</p>
 </section>
-<section id="lagrange-定理" class="level4">
-<h4 class="anchored" data-anchor-id="lagrange-定理">Lagrange 定理</h4>
+<section id="lagrange-定理" class="level3" data-number="1.10">
+<h3 data-number="1.10" class="anchored" data-anchor-id="lagrange-定理"><span class="header-section-number">1.10</span> Lagrange 定理</h3>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -473,8 +495,8 @@ a^b \equiv a^{b \bmod \varphi(m) + \varphi(m)} \pmod{m}
 </div>
 <p>这是域上的多项式理论在模 <span class="math inline">\(p\)</span> 整数域上的应用．</p>
 </section>
-<section id="wilson-定理" class="level4">
-<h4 class="anchored" data-anchor-id="wilson-定理">Wilson 定理</h4>
+<section id="wilson-定理" class="level3" data-number="1.11">
+<h3 data-number="1.11" class="anchored" data-anchor-id="wilson-定理"><span class="header-section-number">1.11</span> Wilson 定理</h3>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -494,9 +516,8 @@ a^b \equiv a^{b \bmod \varphi(m) + \varphi(m)} \pmod{m}
 <p>另一种证法注意到 <span class="math inline">\(x^{p-1} - 1 = \prod_{k=1}^{p-1} (x-k)\)</span>．这是因为 Fermat 小定理指出 <span class="math inline">\(1\)</span> 至 <span class="math inline">\(p-1\)</span> 的所有数的 <span class="math inline">\(p-1\)</span> 次幂均为 <span class="math inline">\(1\)</span>，而 Lagrange 定理又保证了多项式点值到系数映射的唯一性．随后代入 <span class="math inline">\(x=0\)</span> 立得结论．</p>
 <p>参见 <a href="https://en.wikipedia.org/wiki/Wilson%27s_theorem">Wilson’s theorem - Wikipedia</a>．</p>
 </section>
-</section>
-<section id="线性预处理" class="level3" data-number="1.8">
-<h3 data-number="1.8" class="anchored" data-anchor-id="线性预处理"><span class="header-section-number">1.8</span> 线性预处理</h3>
+<section id="线性预处理" class="level3" data-number="1.12">
+<h3 data-number="1.12" class="anchored" data-anchor-id="线性预处理"><span class="header-section-number">1.12</span> 线性预处理</h3>
 <section id="线性求逆元" class="level4">
 <h4 class="anchored" data-anchor-id="线性求逆元">线性求逆元</h4>
 <p>现欲求出 <span class="math inline">\(a\)</span> 模质数 <span class="math inline">\(p\)</span> 意义下的逆元 <span class="math inline">\(a^{-1}\)</span>．用 <span class="math inline">\(a\)</span> 对 <span class="math inline">\(p\)</span> 做带余除法，<span class="math inline">\(p=qa+r\)</span>，于是 <span class="math inline">\(-qa \equiv r \pmod p\)</span>．两侧同时乘 <span class="math inline">\(r\)</span> 的逆元 <span class="math inline">\(r^{-1}\)</span> 得 <span class="math inline">\(-q r^{-1} a \equiv 1 \pmod p\)</span>，故 <span class="math display">\[
