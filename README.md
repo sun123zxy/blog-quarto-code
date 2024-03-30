@@ -4,7 +4,8 @@ Quarto version: 1.4.550
 
 1. Install [Quarto](https://github.com/quarto-dev/quarto-cli/).
 2. Clone.
-3. `quarto preview`
+3. Check [SunQuarTeX](https://github.com/sun123zxy/sunquartex) for additional requirements.
+4. `quarto preview`
 
 ## Deployment
 
