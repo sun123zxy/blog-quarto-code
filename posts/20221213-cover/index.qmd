@@ -107,47 +107,19 @@ $$\{ \Omega_n \} = \{ [a_n, b_n] \} \subset [a,b]$$
 
 作为小结，下图展现了刚刚介绍的几个定理在整个实数完备性等价定理体系中的地位.
 
-```{dot}
-//| label: fig-real
-//| fig-cap: 实数完备性等价定理关系图
-//| fig-width: 6.25
-//| fig-height: 2.5
-digraph G{
-    //bgcolor="transparent"
-    //node [style="filled", fillcolor="white"]
-    //edge [color="gray" penwidth=2]
+:::{#fig-real}
 
-    //layout=neato
-    //ratio=0.5
-
-    rankdir=BT
-    sup[label="确界原理"];
-    mono[label="单调有界定理"];
-    nested[label="闭区间套定理"];
-    bw[label="Bolzano-Weierstrass 定理"];
-    cauchy[label="Cauchy 收敛原理"];
-    
-    accu[label="（数列）聚点定理"]
-    finite[label="有限覆盖定理"];
-    lebesgue[label="Lebesgue 覆盖定理"];
-
-    { rank=max; finite }
-    { rank=same;  lebesgue }
-    { rank=same; sup, mono, nested, accu, bw }
-    { rank=min; cauchy}
-
-    sup -> mono -> nested; nested -> bw [style=invis]; bw -> cauchy;
-    cauchy -> mono[label="反证"];
-    nested -> sup[label="构造"];
-    nested -> finite[dir=both, label="反证"];
-    nested -> accu[label="构造"];
-    finite -> accu[label="反证"];
-    finite -> mono[label="反证"]
-    accu -> bw[dir=both, label="构造"];
-    bw -> lebesgue[label="反证"]; lebesgue -> finite[label="构造"];
-    finite -> sup[label="反证"];
-}
+```{tikz}
+\begin{tikzcd}
+    & \text{有限覆盖定理} \arrow[ld, "\text{反证}" description] \arrow[d, "\text{反证}" description] \arrow[rd, "\text{反证}" description] \arrow[rrd, "\text{反证}" description] &                                                                                                 & \text{Labesgue 覆盖定理} \arrow[ll, "\text{构造}" description]       &                                                                                                     \\
+\text{确界原理} \arrow[r] & \text{单调有界定理} \arrow[r]                                                                                                                                       & \text{闭区间套定理} \arrow[r, "\text{构造}" description] \arrow[ll, "\text{构造}" description, bend left] & \text{(数列)聚点定理} \arrow[r] & \text{Bolzano-Weierstrass 定理} \arrow[lu, "\text{反证}" description] \arrow[lld] \arrow[l, "\text{构造}" description] \\
+    &                                                                                                                                                               & \text{Cauchy 收敛原理} \arrow[lu, "\text{反证}" description]                                          &                                                                &                                                                                                    
+\end{tikzcd}
 ```
+
+实数完备性定理等价关系示意图
+
+:::
 
 ## Example 3
 
