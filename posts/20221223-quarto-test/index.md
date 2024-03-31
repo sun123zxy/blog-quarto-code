@@ -173,6 +173,9 @@ theta = 2 * np.pi * r
 fig, ax = plt.subplots(
   subplot_kw = {'projection': 'polar'} 
 )
+fig.patch.set_alpha(0)
+ax.patch.set_alpha(0)
+
 ax.plot(theta, r)
 ax.set_rticks([0.5, 1, 1.5, 2])
 ax.grid(True)
@@ -268,6 +271,8 @@ display(Markdown(tabulate(table, headers=["R (Ω)", "U (V)", "I (mA)", "P (mW)"]
 
 ``` python
 fig, ax = plt.subplots()
+fig.patch.set_alpha(0)
+ax.patch.set_alpha(0)
 
 ax.set_xlabel("U (V)")
 ax.set_ylabel("I (mA)")
@@ -281,6 +286,8 @@ plt.show()
 
 
 fig, ax = plt.subplots()
+fig.patch.set_alpha(0)
+ax.patch.set_alpha(0)
 
 ax.set_xlabel("R (Ω)")
 ax.set_ylabel("P (mW)")
