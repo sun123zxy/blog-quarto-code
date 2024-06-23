@@ -651,7 +651,7 @@ F^{-1} = \frac 1 n \left( \omega_n^{-ij} \right)_{(i,j) \in n \times n} = \frac 
 <p>来观察一轮 <span class="math inline">\(2^3\)</span>-FFT 自顶向下的置换过程 <span class="math display">\[\begin{matrix}
 2^3 &amp; 0/000 &amp; 1/001 &amp; 2/010 &amp; 3/011 &amp; 4/100 &amp; 5/101 &amp; 6/110 &amp; 7/111 \\
 2^2 &amp; 0/000 &amp; 2/010 &amp; 4/100 &amp; 6/110 &amp; 1/001 &amp; 3/011 &amp; 5/101 &amp; 7/111 \\
-2^1 &amp; 0/000 &amp; 4/100 &amp; 1/001 &amp; 5/101 &amp; 2/010 &amp; 6/110 &amp; 3/011 &amp; 7/111 \\
+2^1 &amp; 0/000 &amp; 4/100 &amp; 2/010 &amp; 6/110 &amp; 1/001 &amp; 5/101 &amp; 3/011 &amp; 7/111 \\
 2^0 &amp; 0/000 &amp; 4/100 &amp; 2/010 &amp; 6/110 &amp; 1/001 &amp; 5/101 &amp; 3/011 &amp; 7/111
 \end{matrix}
 \]</span></p>
@@ -659,7 +659,7 @@ F^{-1} = \frac 1 n \left( \omega_n^{-ij} \right)_{(i,j) \in n \times n} = \frac 
 </section>
 <section id="蝶形运算" class="level3">
 <h3 class="anchored" data-anchor-id="蝶形运算">蝶形运算</h3>
-<p>在计算点值前，<span class="math inline">\(2^n\)</span>-FFT 事实上完成了一次 <span class="math inline">\(n\)</span>-位逆序置换．分解来看，规模为 <span class="math inline">\(2^k\)</span> 的层的置换完成了对 <span class="math inline">\(2^{n-k}\)</span> 对应二进制位的分类，结果为：以 <span class="math inline">\(x \bmod 2^{n-k}\)</span> 为第一关键字、<span class="math inline">\(\left\lfloor \frac x {2^{n-k}} \right\rfloor\)</span> 为第二关键字的升序排序．</p>
+<p>在计算点值前，<span class="math inline">\(2^n\)</span>-FFT 事实上完成了一次 <span class="math inline">\(n\)</span>-位逆序置换．分解来看，规模为 <span class="math inline">\(2^k\)</span> 的层的置换完成了对 <span class="math inline">\(2^{n-k}\)</span> 对应二进制位的分类．</p>
 <p>我们有 <span class="math inline">\(O(n)\)</span> 的递推方法获得这一置换．</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> spawnrev<span class="op">(</span>ll n<span class="op">){</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    rev<span class="op">[</span><span class="dv">0</span><span class="op">]=</span><span class="dv">0</span><span class="op">;</span></span>
