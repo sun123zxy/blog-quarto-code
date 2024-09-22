@@ -3,7 +3,8 @@ title: "卡特兰数 题解"
 date: 2020/12/04
 date-modified: 2020/12/04
 categories:
-  - OI
+  - 算法
+  - 组合
   - 题解
   
 format:

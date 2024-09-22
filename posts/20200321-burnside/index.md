@@ -4,8 +4,10 @@ abstract: "《同分异构体计数从入门到精通》（不是）"
 date: 2020/03/21
 date-modified: 2023/04/06
 categories:
-  - OI
+  - 算法
   - 数学
+  - 组合
+  - 代数
   
 format:
   html: default

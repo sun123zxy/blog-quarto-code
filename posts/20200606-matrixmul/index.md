@@ -3,7 +3,7 @@ title: "关于矩阵乘法结合律的证明"
 date: 2020/06/06
 date-modified: 2021/08/13
 categories:
-  - OI
+  - 算法
   - 数学
   
 format:

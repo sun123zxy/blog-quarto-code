@@ -3,8 +3,9 @@ title: "由 [SDOI2012]Longge的问题 探讨欧拉函数和莫比乌斯函数的
 date: 2019/09/22
 date-modified: 2019/11/04
 categories:
-  - OI
+  - 算法
   - 数学
+  - 数论
   - 题解
   
 format:

@@ -3,11 +3,11 @@ title: "原创OI题目 GCD卷积 Problem and Solution"
 date: 2020/12/06
 date-modified: 2020/12/06
 categories:
-  - OI
+  - 算法
   - 数学
+  - 组合
   - 原创题目
   - 题解
-  - 意识流
   
 format:
   html: default

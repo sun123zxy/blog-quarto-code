@@ -4,9 +4,10 @@ abstract: '关于 \(d(AB) = \sum_{x|A} \sum_{y|B} [\gcd (x,y) = 1]\) 的一系�
 date: 2020/02/20
 date-modified: 2020/03/08
 categories:
-  - OI
+  - 算法
   - 数学
-  
+  - 数论
+
 format:
   html: default
 ---

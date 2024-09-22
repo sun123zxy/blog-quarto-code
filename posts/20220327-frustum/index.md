@@ -5,7 +5,6 @@ date: 2022/03/27
 date-modified: 2022/03/27
 categories:
   - 数学
-  - 意识流
   
 format:
   html: default

@@ -4,7 +4,8 @@ abstract: "一道并不是特别难但没有切掉的期望题。"
 date: 2020/11/27
 date-modified: 2020/11/27
 categories:
-  - OI
+  - 算法
+  - 概率
   - 数学
   - 题解
   

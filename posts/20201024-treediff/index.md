@@ -3,7 +3,7 @@ title: "树上差分的两种形式（相遇 or 行程的交集 题解）"
 date: 2020/10/24
 date-modified: 2020/10/24
 categories:
-  - OI
+  - 算法
   - 题解
   
 format:

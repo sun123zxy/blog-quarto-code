@@ -3,8 +3,9 @@ title: "中国剩余定理（CRT）及其扩展（ExCRT）"
 date: 2019/12/21
 date-modified: 2020/12/02
 categories:
-  - OI
+  - 算法
   - 数学
+  - 数论
   
 format:
   html: default

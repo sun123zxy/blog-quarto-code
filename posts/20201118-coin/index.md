@@ -3,7 +3,7 @@ title: "CodeChef-LECOINS Little Elephant and Colored Coins 题解"
 date: 2020/11/18
 date-modified: 2020/11/18
 categories:
-  - OI
+  - 算法
   - 题解
   
 format:

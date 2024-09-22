@@ -4,7 +4,7 @@ abstract: "你们这个CSP啊，Exciting！"
 date: 2019/11/17
 date-modified: 2021/08/13
 categories:
-  - OI
+  - 算法
   - 游记
   - 回忆
   

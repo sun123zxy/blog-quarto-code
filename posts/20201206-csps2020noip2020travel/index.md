@@ -3,7 +3,7 @@ title: "终末之章——CSP-S2020&NOIP2020退役记"
 date: 2020/12/06
 date-modified: 2021/08/14
 categories:
-  - OI
+  - 算法
   - 游记
   - 回忆
   

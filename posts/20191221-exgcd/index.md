@@ -3,7 +3,7 @@ title: "扩展欧几里得算法（ExGCD）"
 date: 2019/12/21
 date-modified: 2019/12/21
 categories:
-  - OI
+  - 算法
   - 数学
   
 format:
