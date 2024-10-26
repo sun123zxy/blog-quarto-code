@@ -2,6 +2,7 @@
 title: "原根、原根存在定理和模 m 剩余类环的乘法结构"
 author: "sun123zxy"
 date: "2024/09/22"
+date-modified: "2024/10/26"
 bibliography: index.bib
 lang: zh
 
@@ -25,6 +26,9 @@ format:
 ## 序
 
 \newcommand{\inv}{\operatorname{inv}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\lgd}[2]{\left( \frac{#1}{#2} \right)}
 
 这次来聊聊原根．何谓原根？本原单位根是也．何谓本原单位根？自乘若干次而归于一者，谓之单位根．若兼为乘法生成元，则称其本原，以示强调．原根有三定理，一是判定原根的方法，二是原根存在的条件，三是对原根的计数^[这三个定理的提法来自 [OI Wiki 的原根介绍](https://oi-wiki.org/math/number-theory/primitive-root/)．]．其中原根存在定理最难证明．固然有初等数论的证法，然而技巧性较强，或有碍阅读，亦难于记忆．使用代数方法研究原根，虽对基础有一定要求，证明亦不短，但胜在自然流畅，更具启发性．本文宗旨，应用代数工具，对模 $m$ 剩余类环 $\mathbb Z / m \mathbb Z$ 的乘法结构做出流畅的刻画，兼以部分随性的发散讨论，原根存在定理则作为推论导出．我们介绍的内容对有经验的读者或属“自证不难”，但完整证明的逻辑链条较长，需要了解原根的人群亦不一定有系统的代数基础（如 OI / XCPC 算法竞赛选手），故整理于此，供略知代数一二的同学按图索骥．
 
@@ -381,7 +385,12 @@ $$
 
 :::{#cor-field-mul-subgroup}
 
-域 $F$ 的任意有限乘法子群 $G \le F^\times$ 均为循环群．
+域 $F$ 的任意有限乘法子群 $G \leq F^\times$ 均为循环群．
+:::
+
+:::{.remark}
+
+对 $F$ 的要求甚至还可进一步减弱为整环——这是因为带余除一个首一多项式并不需要可逆元的参与，亦可通过取 $F$ 的分式域直接证明．进一步拓展，$F$ 的乘法群的挠子群（torsion subgroup）
 :::
 
 :::{.proof}
@@ -616,3 +625,59 @@ $$
 
 综上，仅当 $m = 2,4,p^\alpha,2p^\alpha$ 时 $Z_m^\times$ 为循环群．
 :::
+
+## 番外：相关数论结果选谈
+
+### Fermat 骗子群，Carmichael 函数与 Carmichael 数
+
+笔者能力所限，暂时在乘法群里讨论问题．模 $m$ 的 Fermat 骗子（Fermat liar）群 $\mathcal L_m^\times$ 定义为所有使得 $m$ 通过 Fermat 素性测试 $a^{m} \equiv a \pmod m$ 的模 $m$ 乘法群 $Z_m^\times$ 中的元素，即
+$$
+\begin{aligned}
+\mathcal L_m^\times :&= \{ a \in Z_m^\times : \ord(a) \mid m-1 \} \\
+&= \{ a \in Z_m^\times : \ord(a) \mid m-1 \} \\
+&= \{ a \in Z_m^\times : \ord(a) \mid \gcd(\varphi(m),m-1) \} \\
+&= \{ a \in Z_m^\times : a^{\gcd(\varphi(m),m-1)} = 1 \}
+\end{aligned}
+$$
+容易验证 $\mathcal L_m^\times \leq Z_m^\times$ 确为群．
+
+Carmichael 函数 $\lambda(m)$ 定义为群 $Z_m^\times$ 的指数（exponent），即群内各元素阶的最小公倍数：
+$$
+\lambda(m) := \lcm_{a \in Z_m^\times} \ord(a)
+$$
+显然 $\lambda(m) \mid \varphi(m)$．下面的习题给出了计算 Carmichael 函数的方法．
+
+:::{#exr-carmichael-lcm-comm}
+
+证明 Carmichael 函数和 $\lcm$ 交换．
+:::
+
+:::{#exr-carmichael-power}
+
+利用 $Z_m^\times$ 的结构证明 Carmichael 函数在奇素数幂 $p^\alpha$ 处的取值为
+
+$$
+\lambda(p^\alpha) = p^\alpha - p^{\alpha-1}
+$$
+在 $2^\alpha$, $\alpha \geq 3$ 处的取值为
+$$
+\lambda(2^\alpha) = 2^{\alpha-2}
+$$
+并且
+$$
+\lambda(2) = \lambda(4) = 2
+$$
+:::
+
+Carmichael 数定义为使得 $\lambda(m) = \varphi(m)$ 的合数 $m$．此时所有乘法群内的元素都是 Fermat 骗子，即 $\mathcal L_m^\times = Z_m^\times$．我们指出（因为证明似乎不甚轻松，例如需要使用下面的 Korselt's criterion），合数 $m$ 成为 Carmichael 数的充分必要条件是，$m$ 通过了所有整数 $a$ 的 Fermat 素性测试（即 $a^m \equiv a \pmod{m}$ 对所有 $a$ 成立，或所有 $a$ 都是模 $m$ 的 Fermat 骗子）．
+
+:::{#exr-korselt}
+
+## Korselt's criterion
+
+合数 $m$ 是 Carmichael 数当且仅当其无平方因子，且 $p-1 \mid m-1$ 对所有 $m$ 的素因子 $p$ 成立．
+:::
+
+### 二次剩余
+
+一般来讲这是个复杂繁琐的问题．我们暂时局限在乘法群 $\mathbb Z_m^\times$ 中寻找二次剩余．则全体乘法群内二次剩余构成的集合 $\mathcal R_m^\times$ 就是群同态 $a \mapsto a^2$ 的像，故 $\mathcal R_m^\times \leq Z_m^\times$ 是子群．
