@@ -2,6 +2,7 @@
 title: "一元多项式的 Delta 判别式"
 author: "sun123zxy"
 date: "2023/10/18"
+date-modified: "2024/10/26"
 lang: zh
 
 categories:
@@ -23,9 +24,13 @@ format:
 
 # $e$-基、$m$-基与 $p$-基
 
+## 整数分拆
+
 ### 整数分拆
 
 \renewcommand\vec\boldsymbol
+
+\newcommand{\diff}{\operatorname{d}\!}
 
 \providecommand{\T}{\mathrm{T}}
 
@@ -36,6 +41,8 @@ format:
 Ferrers diagram 和 Young diagram 是图示分拆的常见方法．
 
 通过沿主对角线翻转分拆的 Ferrers diagram 或 Young diagram，可以定义*分拆的转置*．分拆 $\lambda$ 的转置记为 $\lambda^\T$．转置后分拆的长度变为原分拆的首项，而首项变为原分拆的长度．
+
+## 单项对称多项式
 
 ### 单项对称多项式
 
@@ -48,7 +55,7 @@ Ferrers diagram 和 Young diagram 是图示分拆的常见方法．
 
 易见 $m_{\vec \lambda}(\vec x)$ 是次数为 $\mathcal S(\vec \lambda)$ 的齐次（homogeneous）多项式．全体单项对称多项式构成 $n$ 元对称多项式环 $\Lambda_n \subset K[\vec x]$ 作为 $K$ 上线性空间的一组基底．
 
-### 单项对称多项式
+### 来数数
 
 :::{#exr-mono-term-count}
 对一给定的长度不超过 $n$ 的分拆 $\vec \lambda := (\lambda_1, \lambda_2, \dots \lambda_n)$，$n$ 元单项对称多项式 $m_\lambda(\vec x)$ 共有多少项？
@@ -62,6 +69,8 @@ $n$ 元 $d$ 次单项对称多项式共有多少种可能的构型？设 $\Lambd
 
 该问题等价于求满足 $\mathcal S(\vec \lambda) = d$，$\mathcal L(\vec \lambda) \leq n$ 的所有可能分拆 $\vec \lambda$ 的数量，也即“将 $d$ 个无标号球放入 $n$ 个可空置的无标号盒”的可行方案数．
 
+## 基本对称多项式
+
 ### 基本对称多项式
 
 $n$ 元多项式环 $K[\vec x]$ 上的 $n$ 个*基本对称多项式*（elementary symmetric polynomial）定义为
@@ -74,9 +83,16 @@ e_k(\vec x) := m_{\vec \lambda_k} (\vec x)
 $$
 其中分拆 $\vec \lambda_k := (1,\dots,1,0,\dots)$ 的前 $k$ 项为 $1$，其余项皆为 $0$．
 
-设分拆 $\vec \lambda := (\lambda_1,\lambda_2,\dots)$ 满足 $\lambda_i \leq n, \quad \forall i \in \mathbb N_+$．我们记 $e_{\vec \lambda}(\vec x) := e_{\lambda_1}(\vec x) e_{\lambda_2}(\vec x) \dots e_{\lambda_{\mathcal L(\vec \lambda)}}(\vec x)$．
+方便起见，定义 $\vec e_0 = 1$，定义 $k>n$ 和 $k<0$ 的 $e_k = 0$．设分拆 $\vec \lambda := (\lambda_1,\lambda_2,\dots)$ 满足 $\lambda_i \leq n, \quad \forall i \in \mathbb N_+$．我们记 $e_{\vec \lambda}(\vec x) := e_{\lambda_1}(\vec x) e_{\lambda_2}(\vec x) \dots e_{\lambda_{\mathcal L(\vec \lambda)}}(\vec x)$．
 
-### 基本对称多项式
+### 生成函数
+
+基本对称多项式有生成函数
+$$
+E(s) := \sum_{k \in \mathbb Z} e_k s^k = \prod_{i=1}^m (1 + x_i s)
+$$
+
+### 对称多项式基本定理
 
 :::{#thm-e-decomp}
 
@@ -94,17 +110,19 @@ $$
 
 考察全体满足 $\lambda_i \leq n, \quad \forall i \in \mathbb N_+$ 的分拆 $\vec \lambda$ 对应的 $e_{\vec \lambda}(\vec x)$，它们构成了 $n$ 元对称多项式环 $\Lambda_n$ 作为 $K$ 上线性空间的另一组基底．
 
+## 幂和对称多项式
+
 ### 幂和对称多项式
 
 $n$ 元多项式环 $K[\vec x]$ 上的*幂和对称多项式*（power sum symmetric polynomial）定义为
 $$
-p_k(x_1,\dots,x_n) := x_1^k + x_2^k + \dots + x_n^k,\quad k \in \mathbb N
+p_k(x_1,\dots,x_n) := x_1^k + x_2^k + \dots + x_n^k,\quad k \in \mathbb N_{\geq 0}
 $$
 使用单项对称多项式的记号，也可记为
 $$
 p_k(\vec x) := m_{(k,0,0,\dots)}
 $$
-特别的，$p_0(\vec x) = n$．
+特别的，$p_0(\vec x) = n$．方便起见，定义 $k < 0$ 的 $p_k = 0$．
 
 :::{#thm-p-decomp}
 设 $\mathbb Q \subset K \subset \mathbb C$ 是数域，设 $f(\vec x)$ 是域 $K$ 上的 $n$ 元对称多项式，则存在唯一的 $g(\vec x) \in K[\vec x]$，使得 $f(\vec x) = g(p_1(\vec x),\dots,p_n(\vec x))$．
@@ -112,7 +130,14 @@ $$
 
 一般地，结论对特征为 $0$ 的域 $K$ 也成立．
 
-### 幂和对称多项式
+### 生成函数
+
+幂和对称多项式有生成函数
+$$
+P(s) := \sum_{k \in \mathbb Z} p_k s^k = \sum_{k=0}^{+\infty} s^k \sum_{i=1}^m x_i^k = \sum_{i=1}^m \sum_{k=0}^{+\infty} (x_i s)^k = \sum_{i=1}^m \frac{1}{1-x_i s}
+$$
+
+### Newton 公式
 
 以下定理递推地给出了幂和对称多项式 $p_1,\dots,p_n$ 与基本对称多项式 $e_1,\dots,e_n$ 间的关系．[@thm-p-decomp] 的存在性部分可由这一定理给出．
 
@@ -129,6 +154,26 @@ k e_k &= \sum_{i=1}^k (-1)^{i-1} p_{i} e_{k-i} & k &= 1,2,\dots,n \\
 \end{aligned}
 $$
 :::
+
+### 更简单的写法
+
+$$
+\sum_{\substack{i+j=k}} (-1)^i e_i p_j = 0,\quad k \in \mathbb N_{\geq 0}
+$$
+但在求和中“认为” $p_0 = k$．
+
+### 一个基于生成函数的证明
+
+$$
+\frac{s E'(s)}{E(s)} =  s \frac{\diff}{\diff s} \left( \ln E(s) \right) = \sum_{i=1}^m \frac{x_i s}{1+x_i s} = m - \sum_{i=1}^m \frac{1}{1+x_i s} = m - P(-s)
+$$
+即
+$$
+\sum_{k=0}^\infty k e_k s^k  = s E'(s) = E(s) (m - P(-s)) = E(s) \sum_{k=1}^\infty (-1)^{k-1} p_k
+$$
+对比各项即得 Newton 公式．
+
+## 其它基底
 
 ### 其它基底
 
