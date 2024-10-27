@@ -29,6 +29,7 @@ format:
 \newcommand{\lcm}{\operatorname{lcm}}
 \newcommand{\ord}{\operatorname{ord}}
 \newcommand{\lgd}[2]{\left( \frac{#1}{#2} \right)}
+\newcommand{\Tor}{\operatorname{Tor}}
 
 这次来聊聊原根．何谓原根？本原单位根是也．何谓本原单位根？自乘若干次而归于一者，谓之单位根．若兼为乘法生成元，则称其本原，以示强调．原根有三定理，一是判定原根的方法，二是原根存在的条件，三是对原根的计数^[这三个定理的提法来自 [OI Wiki 的原根介绍](https://oi-wiki.org/math/number-theory/primitive-root/)．]．其中原根存在定理最难证明．固然有初等数论的证法，然而技巧性较强，或有碍阅读，亦难于记忆．使用代数方法研究原根，虽对基础有一定要求，证明亦不短，但胜在自然流畅，更具启发性．本文宗旨，应用代数工具，对模 $m$ 剩余类环 $\mathbb Z / m \mathbb Z$ 的乘法结构做出流畅的刻画，兼以部分随性的发散讨论，原根存在定理则作为推论导出．我们介绍的内容对有经验的读者或属“自证不难”，但完整证明的逻辑链条较长，需要了解原根的人群亦不一定有系统的代数基础（如 OI / XCPC 算法竞赛选手），故整理于此，供略知代数一二的同学按图索骥．
 
@@ -330,7 +331,7 @@ $$
 
 ## $Z_p^\times$ 的结构：域的有限乘法子群 {#sec-zpt}
 
-因为 $Z_2^\times$ 是平凡群，故只需研究 $p \ge 3$ 的情况．事实上我们已经比较清楚环 $Z_p$ 的结构——它是一个域．[@dummit_abstract_2003, {section 9.5, pp. 313--314}] 给出了一种利用域上多项式环性质证明 $Z_p^\times$ 是循环群的神奇做法．我们知道，域上的 $n$ 阶多项式至多只能有 $n$ 个根（又名 Lagrange 定理），而 $Z_p^\times$ 内满足 $x^d = 1$ 的元素（即 $d$ 阶单位根）都是多项式 $x^d - 1$ 的根，故 $d$ 阶单位根的个数至多为 $d$ 个．令人惊奇的是，如此松弛的估计足以确定 $Z_p^\times$ 的结构．请看如下定理 [@dummit_abstract_2003, {section 6.1, proposition 5, p. 192}]．
+因为 $Z_2^\times$ 是平凡群，故只需研究 $p \ge 3$ 的情况．事实上我们已经比较清楚环 $Z_p$ 的结构——它是一个域．[@dummit_abstract_2003, {section 9.5, pp. 313--314}] 给出了一种利用域上多项式环性质证明 $Z_p^\times$ 是循环群的神奇做法．我们知道，域上的 $n$ 阶多项式至多只能有 $n$ 个根（数论中又名 Lagrange 定理），而 $Z_p^\times$ 内满足 $x^d = 1$ 的元素（即 $d$ 阶单位根）都是多项式 $x^d - 1$ 的根，故 $d$ 阶单位根的个数至多为 $d$ 个．令人惊奇的是，如此松弛的估计足以确定 $Z_p^\times$ 的结构．请看如下定理 [@dummit_abstract_2003, {section 6.1, proposition 5, p. 192}]．
 
 :::{#thm-zpt-cyclic}
 
@@ -378,24 +379,34 @@ $$
 这逼迫 $h(n)=\varphi(n)$ 对所有 $n \mid |G|$ 成立．特别地，$h(|G|) = \varphi(|G|) \geq 1$，故 $G$ 是循环群．
 :::
 
-:::{.remark}
-
-结合前述讨论，我们已经证明 $Z_p^\times$ 是循环群．事实上 [@thm-zpt-cyclic] 将导出如下更广泛的结果 [@dummit_abstract_2003, {section 9.5, proposition 18, p. 314}]
-:::
+结合前述讨论，我们已经证明 $Z_p^\times$ 是循环群，并事实上导出了如下广为人知的结果 [@dummit_abstract_2003, {section 9.5, proposition 18, p. 314}]
 
 :::{#cor-field-mul-subgroup}
 
 域 $F$ 的任意有限乘法子群 $G \leq F^\times$ 均为循环群．
 :::
 
-:::{.remark}
-
-对 $F$ 的要求甚至还可进一步减弱为整环 $R$——这是因为带余除一个首一多项式并不需要可逆元的参与，亦可通过取 $R$ 的分式域直接证明．进一步分析，$R$ 的特定阶数有限乘法子群要么不存在，要么唯一且是循环群，并按阶数的整除关系相互构成包含关系．这些有限乘法子群的并便是 $R$ 的乘法群的挠子群（torsion subgroup）．
-:::
-
 :::{.proof}
 
 与本节开始的讨论相仿．考察 $G$ 中所有 $d$ 阶单位根，它们均为 $F[x]$ 中多项式 $x^d - 1$ 的根，但域上的 $d$ 次多项式至多只有 $d$ 个根，故 [@thm-zpt-cyclic] 的条件得到满足．
+:::
+
+:::{.remark}
+
+对 $F$ 的要求甚至还可进一步减弱为整环 $R$——这是因为在关于多项式根数量上限的 Lagrange 定理的证明中，带余除一个首一多项式并不需要可逆元的参与．这一结果亦可通过取 $R$ 的分式域直接弱化得到．
+
+设 $n$ 次单位根群 $U_n := \{ x \in R: x^n = 1 \} \leq \Tor R^\times \leq R^\times$，它们的并构成了整环 $R$ 的乘法群 $R^\times$ 的挠子群（torsion subgroup）$\Tor R^\times$．我们的推导实际上说明：
+
+- 每个 $U_n$ 都是循环群，也是乘法群 $R^\times$ 唯一的 $n$ 阶子群．
+
+- 若 $d | n$，则 $U_d \leq U_n$．特别地，阶数互素的两群之交为单位元群．
+
+- 使用 $\mathbb Z$-模风格的记号，
+  $$
+  \Tor R^\times = \bigoplus_{p \in \text{prime}} \bigcup{\alpha=1}^{+\infty} U_{p^\alpha}
+  $$
+  故 $\Tor R^\times$ 的结构似乎和 $\mathbb Q/\mathbb Z$ 和 $p$ 进数 $\mathbb Z_p$ 有一定联系．笔者能力有限，有机会再填坑．
+  
 :::
 
 ## $\ker \pi$ 的结构：二项式定理与含 $p$ 量估计 {#sec-nup}
