@@ -290,7 +290,7 @@ $$
 
 使用商同态研究交换群的结构，最好的情况是这个同态分裂^[关于正合列，见 [@dummit_abstract_2003 {section 10.5}]]——在这里即希望 $Z_{p^\alpha}^\times / \ker \pi$ 或者说 $Z_p^\times$ 在 $Z_{p^\alpha}^\times$ 中有一个同构的拷贝．此时由子群直积的识别定理 [@dummit_abstract_2003, {section 5.4, theorem 9, p. 171}] 我们有 $Z_{p^\alpha}^\times \cong \ker \pi \times Z_p^\times$．但真的可以吗？我们另从 $Z_{p^\alpha}^\times$ 的大小——$p^{\alpha - 1} (p - 1)$——的角度下手试试．固然 $p^\alpha$ 与 $p-1$ 互素，故
 
-- 如果你了解有限交换群的基本结构：由有限交换群的结构性定理 [@dummit_abstract_2003, {section 5.2}]
+- 如果你了解有限交换群的基本结构：由有限交换群基本定理 [@dummit_abstract_2003, {section 5.2}]
 
 - 如果你学过有限群的 Sylow 定理 [@dummit_abstract_2003, {section 4.5}]：考虑到 $Z_{p^\alpha}^\times$ 是交换群，其所有子群均为正规子群，熟记如下结果 [@dummit_abstract_2003, {section 6.1, theorem 3, p. 191}]
 
@@ -331,37 +331,39 @@ $$
 
 ## $Z_p^\times$ 的结构：域的有限乘法子群 {#sec-zpt}
 
-因为 $Z_2^\times$ 是平凡群，故只需研究 $p \ge 3$ 的情况．事实上我们已经比较清楚环 $Z_p$ 的结构——它是一个域．[@dummit_abstract_2003, {section 9.5, pp. 313--314}] 给出了一种利用域上多项式环性质证明 $Z_p^\times$ 是循环群的神奇做法．我们知道，域上的 $n$ 阶多项式至多只能有 $n$ 个根（数论中又名 Lagrange 定理），而 $Z_p^\times$ 内满足 $x^d = 1$ 的元素（即 $d$ 阶单位根）都是多项式 $x^d - 1$ 的根，故 $d$ 阶单位根的个数至多为 $d$ 个．令人惊奇的是，如此松弛的估计足以确定 $Z_p^\times$ 的结构．请看如下定理 [@dummit_abstract_2003, {section 6.1, proposition 5, p. 192}]．
+因为 $Z_2^\times$ 是平凡群，故只需研究 $p \ge 3$ 的情况．事实上我们已经比较清楚环 $Z_p$ 的结构——它是一个域．[@dummit_abstract_2003, {section 9.5, pp. 313--314}] 给出了一种利用域上多项式环性质证明 $Z_p^\times$ 是循环群的神奇做法．我们知道，域上的 $n$ 阶多项式至多只能有 $n$ 个根（数论中又名 Lagrange 定理），而 $Z_p^\times$ 内满足 $x^d = 1$ 的元素（即 $d$ 次单位根）都是多项式 $x^d - 1$ 的根，故 $d$ 次单位根的个数至多为 $d$ 个．令人惊奇的是，如此松弛的估计足以确定 $Z_p^\times$ 的结构．请看如下定理 [@dummit_abstract_2003, {section 6.1, proposition 5, p. 192}]．
 
 :::{#thm-zpt-cyclic}
 
 ## 循环群判定：基于单位根数量上限
 
-设 $G$ 是一有限群，满足对任意正整数 $n$，$n$ 阶单位根的个数至多为 $n$ 个，则 $G$ 是循环群．
+设 $G$ 是一有限群，满足对任意正整数 $n$，$n$ 次单位根的个数至多为 $n$ 个，则 $G$ 是循环群．
 :::
+
+我们提供 2.5 种不同的证明．
 
 :::{.proof}
 
 ## Sylow 定理向
 
-首先注意到对任意正整数 $n$，$G$ 中若存在 $n$ 阶子群则必定唯一，且恰为 $G_n := \{ g \in G: g^n = 1 \}$．这是因为任何 $n$ 阶子群内的元素均为 $n$ 阶单位根，数量已达到条件中给出的 $n$ 个的上限，故无法再支撑另一 $n$ 阶子群的存在．特别地，$G$ 的 Sylow $p$-子群 $S_p$ 存在且唯一．由 [@thm-sylow-normal]，$G$ 为 $G$ 的各个 Sylow $p$-子群 $S_p$ 的（内）直积．于是只需证每个 $S_p$ 都是循环群．记 $\alpha$ 是 $p$ 在 $n$ 中的指数．由 Sylow 定理，$S_p$ 有一个 $p^{\alpha - 1}$ 阶子群 $H_p$，据前述观察
+首先注意到对任意正整数 $n$，$G$ 中若存在 $n$ 阶子群则必定唯一，且恰为 $G_n := \{ g \in G: g^n = 1 \}$．这是因为任何 $n$ 阶子群内的元素均为 $n$ 次单位根，数量已达到条件中给出的 $n$ 个的上限，故无法再支撑另一 $n$ 阶子群的存在．特别地，$G$ 的 Sylow $p$-子群 $S_p$ 存在且唯一．由 [@thm-sylow-normal]，$G$ 为 $G$ 的各个 Sylow $p$-子群 $S_p$ 的（内）直积．于是只需证每个 $S_p$ 都是循环群．记 $\alpha$ 是 $p$ 在 $n$ 中的指数．由 Sylow 定理，$S_p$ 有一个 $p^{\alpha - 1}$ 阶子群 $H_p$，据前述观察
 $$
 H_p = \{ g \in G : g^{p^{\alpha-1}} = 1\} < \{g \in G : g^{p^\alpha} = 1\} = S_p
 $$
 故任取 $g \in S_p \setminus H_p$ 就得到一个 $p^{\alpha}$ 阶元，故 $S_p$ 是循环群．
 :::
 
-我们再提供一个使用 Dirichlet 卷积 / Möbius 反演的数论风格的证明 [@dummit_abstract_2003, {section 9.5, exercise 6, p. 315}]．
+下面是一个使用 Dirichlet 卷积 / Möbius 反演的数论风格的证明 [@dummit_abstract_2003, {section 9.5, exercise 6, p. 315}]．
 
 :::{.proof}
 
 ## 数论向
 
-对所有 $n \mid |G|$，记
+记
 $$
 \begin{aligned}
 g(n) &:= \#\{ x \in G: x^n = 1 \} \\
-h(n) &:= \#\{ x \in G: x \text{ is of order }n \}
+h(n) &:= \#\{ x \in G: \ord(x) = n \}
 \end{aligned}
 $$
 则
@@ -379,6 +381,19 @@ $$
 这逼迫 $h(n)=\varphi(n)$ 对所有 $n \mid |G|$ 成立．特别地，$h(|G|) = \varphi(|G|) \geq 1$，故 $G$ 是循环群．
 :::
 
+最后半种证明方法相对简明，但需增加群 $G$ 交换的条件．
+
+:::{.proof}
+
+## 交换群的特例
+
+由有限交换群基本定理，$G$ 内存在阶为群 $G$ 的指数（exponent）
+$$
+\exp G := \min \{n \in \mathbb N_+ : g^n = 1,\, \forall g \in G \}
+$$
+的元素．故只需证 $\exp G = |G|$．根据定义，$G$ 中所有元素都是 $\exp G$ 次单位根，故由关于单位根数量上限的假设，$|G| \leq \exp G \leq G$，故 $\exp G = |G|$，得证．
+:::
+
 结合前述讨论，我们已经证明 $Z_p^\times$ 是循环群，并事实上导出了如下广为人知的结果 [@dummit_abstract_2003, {section 9.5, proposition 18, p. 314}]
 
 :::{#cor-field-mul-subgroup}
@@ -388,18 +403,18 @@ $$
 
 :::{.proof}
 
-与本节开始的讨论相仿．考察 $G$ 中所有 $d$ 阶单位根，它们均为 $F[x]$ 中多项式 $x^d - 1$ 的根，但域上的 $d$ 次多项式至多只有 $d$ 个根，故 [@thm-zpt-cyclic] 的条件得到满足．
+与本节开始的讨论相仿．考察 $G$ 中所有 $d$ 次单位根，它们均为 $F[x]$ 中多项式 $x^d - 1$ 的根，但域上的 $d$ 次多项式至多只有 $d$ 个根，故 [@thm-zpt-cyclic] 的条件得到满足．
 :::
 
 :::{.remark}
 
 对 $F$ 的要求甚至还可进一步减弱为整环 $R$——这是因为在关于多项式根数量上限的 Lagrange 定理的证明中，带余除一个首一多项式并不需要可逆元的参与．这一结果亦可通过取 $R$ 的分式域直接弱化得到．
 
-设 $n$ 次单位根群 $U_n := \{ x \in R: x^n = 1 \} \leq \Tor R^\times \leq R^\times$，它们的并构成了整环 $R$ 的乘法群 $R^\times$ 的挠子群（torsion subgroup）$\Tor R^\times$．我们的推导实际上说明：
+设整环 $R$ 的 $n$ 次单位根子群 $U_n := \{ x \in R: x^n = 1 \} \leq \Tor R^\times \leq R^\times$，它们的并构成了 $R$ 的乘法群 $R^\times$ 的挠子群（torsion subgroup）$\Tor R^\times$．我们的推导实际上说明：
 
 - 每个 $U_n$ 都是循环群，也是乘法群 $R^\times$ 唯一的 $n$ 阶子群．
 
-- 若 $d | n$，则 $U_d \leq U_n$．特别地，阶数互素的两群之交为单位元群．
+- 若 $d | n$，则 $U_d \leq U_n$．特别地，阶数互素的两群之交平凡．
 
 - 使用 $\mathbb Z$-模风格的记号，
   $$
@@ -637,7 +652,7 @@ $$
 综上，仅当 $m = 2,4,p^\alpha,2p^\alpha$ 时 $Z_m^\times$ 为循环群．
 :::
 
-## 番外：相关数论结果选谈
+## 番外：相关数论结果选谈【TODO】
 
 ### Fermat 骗子群，Carmichael 函数与 Carmichael 数
 
