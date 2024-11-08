@@ -315,16 +315,18 @@ $$
 
 便知道 $Z_{p^\alpha}^\times$ 是其两个大小分别为 $p^{\alpha - 1}$ 和 $p-1$ 的子群（记为 $Q$ 和 $S$）的（内）直积．现在结合上一段构造的乘法群商同态 $\pi: Z_{p^\alpha}^\times \to Z_p^\times$ 对 $Q$ 和 $S$ 作考察：
 
-- 考虑到 $Z_{p^\alpha}^\times \cong Q \times S$，故 $Z_{p^\alpha}$ 的 $p^\alpha$ 阶子群只有 $Q$ 唯一一个．而已经知道 $|\ker \pi| = p^{\alpha-1} = |Q|$，故立得 $Q = \ker \pi$．
+- 考虑到 $Z_{p^\alpha}^\times \cong Q \times S$，故 $Z_{p^\alpha}$ 的 $p^{\alpha-1}$ 阶子群只有 $Q$ 唯一一个．而已经知道 $|\ker \pi| = p^{\alpha-1} = |Q|$，故立得 $Q = \ker \pi$．
 - 将 $\pi$ 限制在 $S$ 上得到新同态 $\pi \vert_S : S \to Z_p^\times$，其核为 $S \cap \ker \pi$．注意 $|S| = p-1$ 且 $|\ker \pi| = p^\alpha$，故这个核只能是平凡的，即 $\pi \vert_S$ 是单同态．再考虑到 $|Z_p^\times| = p - 1 = |S|$，我们得到 $S \cong Z_p^\times$．
 
 故真的有
 $$
 Z_{p^\alpha}^\times \cong \ker \pi \times Z_p^\times
 $$
-而 $Z_p^\times$ 在 $Z_{p^\alpha}$ 中的像恰为 $p$ 进制表示下 $a_0 \in Z_p^\times$，其余为 $0$ 的那些数．接下来的工作是分别研究 $\ker\pi$ 和 $Z_p^\times$．
+接下来的工作是分别研究 $\ker\pi$ 和 $Z_p^\times$．
 
 :::{.remark}
+
+现在已经清楚 $Z_{p^\alpha}^\times$ 的子群 $Q = \ker \pi$ 的具体表达——它恰是全体模 $p$ 余 $1$ 的数——即 $p$ 进制表示下 $a_0 = 1$，其余位置任取的数．但受到构造手段的限制，$Z_p^\times$ 在 $Z_{p^\alpha}^\times$ 中的像 $S$ 的具体表达目前尚不明确——且似乎结果也并不平凡【TODO】．
 
 本节内容，另可参考 [@dummit_abstract_2003, {section 9.5, corollary 20, p. 314}]．
 :::
@@ -652,7 +654,7 @@ $$
 综上，仅当 $m = 2,4,p^\alpha,2p^\alpha$ 时 $Z_m^\times$ 为循环群．
 :::
 
-## 番外：$Z_m^\times$ 的特殊子群们【TODO】
+## 番外：$Z_m^\times$ 的特殊子群们
 
 $Z_m^\times$ 结构的完全解决，对处理有关模 $m$ 乘法性质的数论问题大有裨益．需要指出的是，这些问题的完全解决需要跳出乘法群考虑整个 $Z_m$ 的结构，考虑到与正文关联不大且笔者能力有限，下面主要在 $Z_m^\times$ 中考虑问题．
 
@@ -696,6 +698,11 @@ $$
 $$
 :::
 
+:::{.remark}
+
+Carmichael 函数在公钥系统 RSA 中有应用．
+:::
+
 *Carmichael 数*定义为使得 $\lambda(m) \mid m - 1$ 的合数 $m$．此时所有乘法群内的元素都是 Fermat 骗子，即 $\mathcal L_m^\times = Z_m^\times$．我们指出（因为证明似乎不甚轻松，例如需要使用下面的 Korselt's criterion），合数 $m$ 成为 Carmichael 数的充分必要条件是，$m$ 通过了所有整数 $a$ 的 Fermat 素性测试（即 $a^m \equiv a \pmod{m}$ 对所有 $a$ 成立，或所有 $a$ 都是模 $m$ 的 Fermat 骗子）．
 
 :::{#exr-korselt}
@@ -705,6 +712,10 @@ $$
 合数 $m$ 是 Carmichael 数当且仅当其无平方因子，且 $p-1 \mid m-1$ 对所有 $m$ 的素因子 $p$ 成立．
 :::
 
-### 二次剩余
+### 二次剩余【TODO】
 
-一般来讲这是个复杂繁琐的问题．我们暂时局限在乘法群 $\mathbb Z_m^\times$ 中寻找二次剩余．则全体乘法群内二次剩余构成的集合 $\mathcal R_m^\times$ 就是群同态 $a \mapsto a^2$ 的像，故 $\mathcal R_m^\times \leq Z_m^\times$ 是子群．
+模 $m$ 的*二次剩余*构成集合
+$$
+\mathcal R_m := \{ a^2 : a \in Z_m \} \subseteq Z_m
+$$
+$Z_m$ 中全体可逆二次剩余构成集合 $\mathcal R_m^\times = Z_m^\times \cap \mathcal R_m$．注意到 $\mathcal R_m^\times$ 恰为交换群同态 $a \mapsto a^2$ 的像，故 $\mathcal R_m^\times \leq Z_m^\times$ 是子群．
