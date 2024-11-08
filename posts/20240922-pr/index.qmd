@@ -414,11 +414,11 @@ $$
 
 - 每个 $U_n$ 都是循环群，也是乘法群 $R^\times$ 唯一的 $n$ 阶子群．
 
-- 若 $d | n$，则 $U_d \leq U_n$．特别地，阶数互素的两群之交平凡．
+- 若 $d \mid n$，则 $U_d \leq U_n$．特别地，阶数互素的两群之交平凡．
 
 - 使用 $\mathbb Z$-模风格的记号，
   $$
-  \Tor R^\times = \bigoplus_{p \in \text{prime}} \bigcup{\alpha=1}^{+\infty} U_{p^\alpha}
+  \Tor R^\times = \bigoplus_{p \in \text{prime}} \bigcup_{\alpha=1}^{+\infty} U_{p^\alpha}
   $$
   故 $\Tor R^\times$ 的结构似乎和 $\mathbb Q/\mathbb Z$ 和 $p$ 进数 $\mathbb Z_p$ 有一定联系．笔者能力有限，有机会再填坑．
   
@@ -652,24 +652,25 @@ $$
 综上，仅当 $m = 2,4,p^\alpha,2p^\alpha$ 时 $Z_m^\times$ 为循环群．
 :::
 
-## 番外：相关数论结果选谈【TODO】
+## 番外：$Z_m^\times$ 的特殊子群们
 
-### Fermat 骗子群，Carmichael 函数与 Carmichael 数
+$Z_m^\times$ 结构的完全解决，对处理有关模 $m$ 乘法性质的数论问题大有裨益．需要指出的是，这些问题的完全解决需要跳出乘法群考虑整个 $Z_m$ 的结构，考虑到与正文关联不大且笔者能力有限，下面主要在 $Z_m^\times$ 中考虑问题．
 
-笔者能力所限，暂时在乘法群里讨论问题．模 $m$ 的 Fermat 骗子（Fermat liar）群 $\mathcal L_m^\times$ 定义为所有使得 $m$ 通过 Fermat 素性测试 $a^{m} \equiv a \pmod m$ 的模 $m$ 乘法群 $Z_m^\times$ 中的元素，即
+### Fermat 骗子群 $\mathcal L_m^\times$
+
+模 $m$ 的 *Fermat 骗子（Fermat liar）群* $\mathcal L_m^\times$ 定义为所有使得 $m$ 通过 Fermat 素性测试 $a^{m} \equiv a \pmod m$ 的模 $m$ 乘法群 $Z_m^\times$ 中的元素，即
 $$
 \begin{aligned}
 \mathcal L_m^\times :&= \{ a \in Z_m^\times : \ord(a) \mid m-1 \} \\
-&= \{ a \in Z_m^\times : \ord(a) \mid m-1 \} \\
 &= \{ a \in Z_m^\times : \ord(a) \mid \gcd(\varphi(m),m-1) \} \\
 &= \{ a \in Z_m^\times : a^{\gcd(\varphi(m),m-1)} = 1 \}
 \end{aligned}
 $$
 容易验证 $\mathcal L_m^\times \leq Z_m^\times$ 确为群．
 
-Carmichael 函数 $\lambda(m)$ 定义为群 $Z_m^\times$ 的指数（exponent），即群内各元素阶的最小公倍数：
+*Carmichael 函数* $\lambda(m)$ 定义为交换群 $Z_m^\times$ 的指数（exponent），也即其各元素阶的最小公倍数：
 $$
-\lambda(m) := \lcm_{a \in Z_m^\times} \ord(a)
+\lambda(m) := \lcm_{a \in Z_m^\times} \ord(a) = \exp Z_m^\times
 $$
 显然 $\lambda(m) \mid \varphi(m)$．下面的习题给出了计算 Carmichael 函数的方法．
 
@@ -683,11 +684,11 @@ $$
 利用 $Z_m^\times$ 的结构证明 Carmichael 函数在奇素数幂 $p^\alpha$ 处的取值为
 
 $$
-\lambda(p^\alpha) = p^\alpha - p^{\alpha-1}
+\lambda(p^\alpha) = p^\alpha - p^{\alpha-1} = \varphi(p^\alpha)
 $$
 在 $2^\alpha$, $\alpha \geq 3$ 处的取值为
 $$
-\lambda(2^\alpha) = 2^{\alpha-2}
+\lambda(2^\alpha) = 2^{\alpha-2} = \varphi(2^\alpha)/2
 $$
 并且
 $$
@@ -695,7 +696,7 @@ $$
 $$
 :::
 
-Carmichael 数定义为使得 $\lambda(m) = \varphi(m)$ 的合数 $m$．此时所有乘法群内的元素都是 Fermat 骗子，即 $\mathcal L_m^\times = Z_m^\times$．我们指出（因为证明似乎不甚轻松，例如需要使用下面的 Korselt's criterion），合数 $m$ 成为 Carmichael 数的充分必要条件是，$m$ 通过了所有整数 $a$ 的 Fermat 素性测试（即 $a^m \equiv a \pmod{m}$ 对所有 $a$ 成立，或所有 $a$ 都是模 $m$ 的 Fermat 骗子）．
+*Carmichael 数*定义为使得 $\lambda(m) \mid m - 1$ 的合数 $m$．此时所有乘法群内的元素都是 Fermat 骗子，即 $\mathcal L_m^\times = Z_m^\times$．我们指出（因为证明似乎不甚轻松，例如需要使用下面的 Korselt's criterion），合数 $m$ 成为 Carmichael 数的充分必要条件是，$m$ 通过了所有整数 $a$ 的 Fermat 素性测试（即 $a^m \equiv a \pmod{m}$ 对所有 $a$ 成立，或所有 $a$ 都是模 $m$ 的 Fermat 骗子）．
 
 :::{#exr-korselt}
 
