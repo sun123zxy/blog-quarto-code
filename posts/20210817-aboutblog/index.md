@@ -8,7 +8,7 @@ categories:
   - site-related
   - web
   - memories
-  
+seriousness: casual
 format:
   html: default
 ---
