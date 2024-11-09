@@ -4,10 +4,10 @@ abstract: "一类神烦的dp边界题。"
 date: 2020/02/04
 date-modified: 2020/02/04
 categories:
-  - 算法
-  - 数学
-  - 组合
-  - 题解
+  - algorithm
+  - math
+  - combinatorics
+  - solution
   
 format:
   html: default

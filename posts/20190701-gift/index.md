@@ -4,10 +4,10 @@ abstract: '求 \(A_1 = 1,A_n = \sum_{i=1}^{n-1} A_i + n^k\) 的通项公式。'
 date: 2019/07/01
 date-modified: 2020/05/16
 categories:
-  - 算法
-  - 数学
-  - 组合
-  - 题解
+  - algorithm
+  - math
+  - combinatorics
+  - solution
   
 format:
   html: default

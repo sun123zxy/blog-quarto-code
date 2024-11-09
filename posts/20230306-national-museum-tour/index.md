@@ -6,7 +6,7 @@ abstract: "或许是第一篇正常的游记（"
 
 image: "img/wangfujing.jpg"
 categories:
-  - "游记"
+  - tour
   
 format:
   html: default

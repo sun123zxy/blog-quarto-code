@@ -4,8 +4,8 @@ abstract: "文化课整活计划第二弹"
 date: 2021/10/23
 date-modified: 2021/10/23
 categories:
-  - 高考
-  - 原创题目
+  - Gaokao
+  - original problem
   
 format:
   html: default

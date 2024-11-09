@@ -4,11 +4,11 @@ abstract: "容斥、二项式反演、minmax容斥和树形dp，人类智慧神�
 date: 2019/12/09
 date-modified: 2019/12/09
 categories:
-  - 算法
-  - 数学
-  - 组合
-  - 概率
-  - 题解
+  - algorithm
+  - math
+  - combinatorics
+  - probability
+  - solution
   
 format:
   html: default

@@ -4,11 +4,11 @@ abstract: "“套着期望皮的容斥题。”"
 date: 2019/12/18
 date-modified: 2019/12/18
 categories:
-  - 算法
-  - 数学
-  - 数论
-  - 组合
-  - 题解
+  - algorithm
+  - math
+  - number theory
+  - combinatorics
+  - solution
   
 format:
   html: default

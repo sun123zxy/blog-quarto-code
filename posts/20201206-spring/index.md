@@ -3,9 +3,9 @@ title: "原创OI题目 白银之春 Problem and Solution"
 date: 2020/12/06
 date-modified: 2020/12/06
 categories:
-  - 算法
-  - 原创题目
-  - 题解
+  - algorithm
+  - original problem
+  - solution
   
 format:
   html: default

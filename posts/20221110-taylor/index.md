@@ -4,9 +4,9 @@ abstract: "中科大《数学分析教程》第三版问题 4.3.1"
 date: 2022/11/02
 date-modified: 2022/11/02
 categories:
-  - 数学
-  - 分析
-  - 题解
+  - math
+  - analysis
+  - solution
   
 format:
   html: default

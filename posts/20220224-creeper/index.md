@@ -4,8 +4,8 @@ abstract: "文化课整活计划第三弹（"
 date: 2022/02/24
 date-modified: 2022/02/24
 categories:
-  - 高考
-  - 原创题目
+  - Gaokao
+  - original problem
   
 format:
   html: default

@@ -4,7 +4,7 @@ abstract: "一些探究，一个证明，以及幂函数求导之类的玩意儿
 date: 2022/03/27
 date-modified: 2022/03/27
 categories:
-  - 数学
+  - math
   
 format:
   html: default

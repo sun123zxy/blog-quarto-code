@@ -3,8 +3,8 @@ title: "[NOIP模拟]文本编辑器 题解"
 date: 2019/08/28
 date-modified: 2019/08/28
 categories:
-  - 算法
-  - 题解
+  - algorithm
+  - solution
   
 format:
   html: default

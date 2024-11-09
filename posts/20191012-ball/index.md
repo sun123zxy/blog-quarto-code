@@ -3,11 +3,11 @@ title: "[JZOJ A组]球 题解"
 date: 2019/10/12
 date-modified: 2019/10/12
 categories:
-  - 算法
-  - 数学
-  - 组合
-  - 概率
-  - 题解
+  - algorithm
+  - math
+  - combinatorics
+  - probability
+  - solution
   
 format:
   html: default

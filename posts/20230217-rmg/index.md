@@ -4,9 +4,9 @@ author: "sun123zxy"
 abstract: "封存的幻想。"
 date: 2023/02/17
 categories:
-  - 回忆
+  - memories
   - Minecraft
-  - 音乐
+  - music
   - Python
   
 format:

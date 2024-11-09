@@ -4,10 +4,10 @@ abstract: "积性函数推式子纪念题。"
 date: 2020/11/16
 date-modified: 2020/11/16
 categories:
-  - 算法
-  - 数学
-  - 数论
-  - 题解
+  - algorithm
+  - math
+  - number theory
+  - solution
   
 format:
   html: default

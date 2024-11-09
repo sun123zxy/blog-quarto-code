@@ -5,9 +5,9 @@ abstract: "某不务正业 OIer 摸鱼日记。"
 date: 2021/08/17
 date-modified: 2022/12/25
 categories:
-  - 站点相关
+  - site-related
   - web
-  - 回忆
+  - memories
   
 format:
   html: default
