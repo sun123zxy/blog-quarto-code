@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2020-11-27">
 
-<title>树的解构 题解 – sun123zxy’s blog</title>
+<title>sun123zxy – sun123zxy’s blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,62 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href=".//assets/images/avatar.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -105,46 +69,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
@@ -155,7 +90,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../listings/overview.html"> 
+    <a class="nav-link" href="./listings/overview.html"> 
 <span class="menu-text">Overview</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -164,21 +99,21 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-posts">    
         <li>
-    <a class="dropdown-item" href="../../listings/all.html">
+    <a class="dropdown-item" href="./listings/all.html">
  <span class="dropdown-text">All Posts</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../listings/dedicated.html">
+    <a class="dropdown-item" href="./listings/dedicated.html">
  <span class="dropdown-text">Dedicated</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../listings/casual.html">
+    <a class="dropdown-item" href="./listings/casual.html">
  <span class="dropdown-text">Casual</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html"> 
+    <a class="nav-link active" href="./about.html" aria-current="page"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -196,15 +131,15 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-bi-rss">    
         <li>
-    <a class="dropdown-item" href="../../listings/all.xml">
+    <a class="dropdown-item" href="./listings/all.xml">
  <span class="dropdown-text">All</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../listings/dedicated.xml">
+    <a class="dropdown-item" href="./listings/dedicated.xml">
  <span class="dropdown-text">Dedicated</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../listings/casual.xml">
+    <a class="dropdown-item" href="./listings/casual.xml">
  <span class="dropdown-text">Casual</span></a>
   </li>  
     </ul>
@@ -221,139 +156,53 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
-    </div>
+    
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-about-jolla">
+  <img src="/assets/images/avatar.png" class="about-image
+  round " style="height: 13em; width: 13em;">
+ <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">树的解构 题解</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">algorithm</div>
-    <div class="quarto-category">probability</div>
-    <div class="quarto-category">math</div>
-    <div class="quarto-category">solution</div>
-  </div>
-  </div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">November 27, 2020</p>
-    </div>
-  </div>
-  
-    <div>
-    <div class="quarto-title-meta-heading">Modified</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date-modified">November 27, 2020</p>
-    </div>
-  </div>
-    
-  </div>
-  
-<div>
-  <div class="abstract">
-    <div class="block-title">Abstract</div>
-    一道并不是特别难但没有切掉的期望题。
-  </div>
+<h1 class="title">sun123zxy</h1>
 </div>
+<div class="quarto-title-meta">
+  </div>
+</header><main class="content" id="quarto-document-content">
+<p>Ex-OI/XCPCer, major in mathematics currently. Intrest ranges from mathematics (algebra mainly) to computer science (TCS / web mainly). In my spare time, I enjoy learning anything that occurred to my mind. In weekends one might catch me wandering around Wikipedia, writting blogs, exploring publishing systems (Quarto, LaTeX, etc.) or creating handy codes for myself. When I really want to relax, I play independent games and enjoy their OST.</p>
+<p>A more casual introduction can be found <a href="./posts/about">here</a>.</p>
+<p>The avatar is drawn by myself with Photoshop when I was a kid. Nothing special beside that, though.</p>
 
 
-</header>
-
-
-<p><a href="https://oj.bashu.com.cn/code/problempage.php?problem_id=7076">bsoj7076</a>，没找到出处…</p>
-<blockquote class="blockquote">
-<p>树的解构</p>
-<p>Mivik 喜欢 Eprom 的解构俱乐部，于是他想解构一棵树。</p>
-<p>Mivik 找到了一棵以 <span class="math inline">\(1\)</span> 为根的有 <span class="math inline">\(n\)</span> 个结点的有根外向树。Mivik 会进行 <span class="math inline">\((n−1)\)</span> 次操作，每次 Mivik 都会从未删掉的边中等概率选择一条边将其删去。记这条边为 <span class="math inline">\(a \to b\)</span> ，则删去这条边的代价是删边时 <span class="math inline">\(b\)</span> 的子树大小（包括 <span class="math inline">\(b\)</span> 自己）；删去这条边后 <span class="math inline">\(b\)</span> 为根的子树会形成一棵新的以 <span class="math inline">\(b\)</span> 为根的有根树。</p>
-<p>Mivik 想知道，他进行这 <span class="math inline">\((n−1)\)</span> 次操作后期望的代价总和是多少。由于 Mivik 不喜欢太大的数，你只需要输出期望的值对 <span class="math inline">\(10^9 + 7\)</span> 取模的结果。</p>
-<p>对于所有测试点，满足 <span class="math inline">\(1 \le n \le 2 \times 10^6\)</span> 。保证给出的有根树合法。</p>
-</blockquote>
-<p>一道并不是特别难但没有切掉的期望题。</p>
-<p>考场写了链过后就一直在想怎么拆树，无果而终。然后想到解决排列问题的一个常见的思路是考虑所有排列方案的贡献和，最后乘个 <span class="math inline">\(\frac{1}{(n-1)!}\)</span> 就可以了。尝试在树形dp边的排列顺序，同样无果而终。</p>
-<p>对整体dp不好做，那就转而思考每个点对答案的贡献。</p>
-<p>考虑从树上某个深度（到根需经过的边数）为 <span class="math inline">\(d_u\)</span> 的点 <span class="math inline">\(u\)</span> ，其向上到根的路径上各边的相对删除顺序可以用一个阶为 <span class="math inline">\(d_u\)</span> 的排列 <span class="math inline">\(P\)</span> 表示。若只考虑该路径，设此时对答案的贡献为 <span class="math inline">\(f_u(P)\)</span> ，我们尝试化简 <span class="math inline">\(\sum_{P \in \mathrm{perm(d_u)}} f_u(P)\)</span> 。（其中 <span class="math inline">\(\mathrm{perm(n)}\)</span> 表示所有 <span class="math inline">\(n\)</span> 阶排列的集合）</p>
-<p>对于其中某条位置为 <span class="math inline">\(i\)</span> 的边，若其被删除时点 <span class="math inline">\(u\)</span> 可对答案产生贡献，则必须保证删除该边时该边与 <span class="math inline">\(u\)</span> 仍然连通，也就是对于任意位置为 <span class="math inline">\(j\)</span> 且 <span class="math inline">\(j &lt; i\)</span> 的的边，有 <span class="math inline">\(P_j &gt; P_i\)</span> 。换句话说，若从后往前 （从上至下）决定边的删除时间，那么一条删除时间为 <span class="math inline">\(x\)</span> 的边必须在 <span class="math inline">\([1,x]\)</span> 中最后被选中才能满足上述条件。显然其发生概率为 <span class="math inline">\(\frac{1}{x}\)</span> ，故在所有排列中 <span class="math inline">\(x\)</span> 产生贡献的次数为 <span class="math inline">\(\frac{d_u !}{x}\)</span> 。因此 <span class="math display">\[
-\sum_{P \in \mathrm{perm(d_u)}} f_u(P) = \sum_{x=1}^{d_u} \frac{d_u!}{x}
-\]</span> <span class="math inline">\(P\)</span> 的相对顺序已经确定，而在整棵树中还有其他边的相对顺序未被决定，因此点 <span class="math inline">\(u\)</span> 的总贡献还要再乘上对 <span class="math inline">\(P\)</span> 消序后的全部排列方案数 <span class="math display">\[
-\frac{(n-1)!}{d_u!} \sum_{x=1}^{d_u} \frac{d_u!}{x} = (n-1)! \sum_{x=1}^{d_u} \frac{1}{x}
-\]</span> 整合所有点的贡献并乘上概率就是最终的期望 <span class="math display">\[
-\begin{aligned} \mathrm{ans} &amp;= \frac{1}{(n-1)!} \sum_{u=1}^n (n-1)! \sum_{x=1}^{d_u} \frac{1}{x} \\ &amp;= \sum_{u=1}^n \sum_{x=1}^{d_u} \frac{1}{x} \end{aligned}
-\]</span> <del>意外的约掉了好多玩意儿呢</del></p>
-<p>线性求逆元并前缀和即可 <span class="math inline">\(O(n)\)</span> 解决。</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;cstdio&gt;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;cmath&gt;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;cstring&gt;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;ctime&gt;</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;cstdlib&gt;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;queue&gt;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;algorithm&gt;</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;map&gt;</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;set&gt;</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;vector&gt;</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll<span class="op">;</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>ll Rd<span class="op">(){</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> ans<span class="op">=</span><span class="dv">0</span><span class="op">;</span><span class="dt">bool</span> fh<span class="op">=</span><span class="dv">0</span><span class="op">;</span><span class="dt">char</span> c<span class="op">=</span>getchar<span class="op">();</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>c<span class="op">&lt;</span><span class="ch">'0'</span><span class="op">||</span>c<span class="op">&gt;</span><span class="ch">'9'</span><span class="op">){</span><span class="cf">if</span><span class="op">(</span>c<span class="op">==</span><span class="ch">'-'</span><span class="op">)</span> fh<span class="op">=</span><span class="dv">1</span><span class="op">;</span> c<span class="op">=</span>getchar<span class="op">();}</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>c<span class="op">&gt;=</span><span class="ch">'0'</span><span class="op">&amp;&amp;</span>c<span class="op">&lt;=</span><span class="ch">'9'</span><span class="op">)</span> ans<span class="op">=</span>ans<span class="op">*</span><span class="dv">10</span><span class="op">+</span>c<span class="op">-</span><span class="ch">'0'</span><span class="op">,</span>c<span class="op">=</span>getchar<span class="op">();</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>fh<span class="op">)</span> ans<span class="op">=-</span>ans<span class="op">;</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ans<span class="op">;</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> vector<span class="op">&lt;</span>ll<span class="op">&gt;</span> Vec<span class="op">;</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> vector<span class="op">&lt;</span>ll<span class="op">&gt;::</span>iterator IVec<span class="op">;</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="pp">#define foreach</span><span class="op">(</span>it<span class="op">,</span>v<span class="op">)</span><span class="pp"> </span><span class="cf">for</span><span class="op">(</span>IVec<span class="pp"> </span>it<span class="op">=</span>v<span class="op">.</span>begin<span class="op">();</span>it<span class="op">!=</span>v<span class="op">.</span>end<span class="op">();</span>it<span class="op">++)</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> ll MOD<span class="op">=</span><span class="fl">1E9</span><span class="op">+</span><span class="dv">7</span><span class="op">;</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="pp">#define _ </span><span class="op">%</span>MOD</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>ll PMod<span class="op">(</span>ll x<span class="op">){</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>x<span class="op">&lt;</span><span class="dv">0</span><span class="op">)</span> <span class="cf">return</span> x<span class="op">+</span>MOD<span class="op">;</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span><span class="op">(</span>x<span class="op">&gt;=</span>MOD<span class="op">)</span> <span class="cf">return</span> x<span class="op">-=</span>MOD<span class="op">;</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">return</span> x<span class="op">;</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> ll MXN<span class="op">=</span><span class="fl">2E6</span><span class="op">+</span><span class="dv">5</span><span class="op">;</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>ll N<span class="op">;</span>Vec chd<span class="op">[</span>MXN<span class="op">];</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>ll dep<span class="op">[</span>MXN<span class="op">];</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> InfoDFS<span class="op">(</span>ll u<span class="op">,</span>ll depth<span class="op">){</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    dep<span class="op">[</span>u<span class="op">]=</span>depth<span class="op">;</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="ex">foreach</span><span class="op">(</span>it<span class="op">,</span>chd<span class="op">[</span>u<span class="op">])</span> InfoDFS<span class="op">((*</span>it<span class="op">),</span>depth<span class="op">+</span><span class="dv">1</span><span class="op">);</span> </span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>ll inv<span class="op">[</span>MXN<span class="op">],</span>sInv<span class="op">[</span>MXN<span class="op">];</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> SpawnInv<span class="op">(){</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    inv<span class="op">[</span><span class="dv">1</span><span class="op">]=</span><span class="dv">1</span><span class="op">;</span><span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">2</span><span class="op">;</span>i<span class="op">&lt;=</span>N<span class="op">;</span>i<span class="op">++)</span> inv<span class="op">[</span>i<span class="op">]=</span>PMod<span class="op">(-(</span>MOD<span class="op">/</span>i<span class="op">)*</span>inv<span class="op">[</span>MOD<span class="op">%</span>i<span class="op">]</span>_<span class="op">);</span> </span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    sInv<span class="op">[</span><span class="dv">1</span><span class="op">]=</span>inv<span class="op">[</span><span class="dv">1</span><span class="op">];</span><span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">2</span><span class="op">;</span>i<span class="op">&lt;=</span>N<span class="op">;</span>i<span class="op">++)</span> sInv<span class="op">[</span>i<span class="op">]=</span>PMod<span class="op">(</span>sInv<span class="op">[</span>i<span class="op">-</span><span class="dv">1</span><span class="op">]+</span>inv<span class="op">[</span>i<span class="op">]);</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> Solve<span class="op">(){</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    SpawnInv<span class="op">();</span> </span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    InfoDFS<span class="op">(</span><span class="dv">1</span><span class="op">,</span><span class="dv">0</span><span class="op">);</span></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    ll ans<span class="op">=</span><span class="dv">0</span><span class="op">;</span></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll u<span class="op">=</span><span class="dv">1</span><span class="op">;</span>u<span class="op">&lt;=</span>N<span class="op">;</span>u<span class="op">++)</span> ans<span class="op">=</span>PMod<span class="op">(</span>ans<span class="op">+</span>sInv<span class="op">[</span>dep<span class="op">[</span>u<span class="op">]]);</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">"</span><span class="sc">%lld</span><span class="st">"</span><span class="op">,</span>ans<span class="op">);</span> </span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(){</span></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="co">//freopen("deconstruct.in","r",stdin);</span></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    <span class="co">//freopen("deconstruct.out","w",stdout);</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    N<span class="op">=</span>Rd<span class="op">();</span></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">2</span><span class="op">;</span>i<span class="op">&lt;=</span>N<span class="op">;</span>i<span class="op">++)</span> chd<span class="op">[</span>Rd<span class="op">()].</span>push_back<span class="op">(</span>i<span class="op">);</span></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    Solve<span class="op">();</span></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-
-
-</main> <!-- /main -->
+</main> 
+  <hr class="about-sep">
+   <div class="about-links">
+  <a href="https://github.com/sun123zxy" class="about-link" rel="" target="">
+    <i class="bi bi-github"></i>
+     <span class="about-link-text">Github</span>
+  </a>
+  <a href="https://space.bilibili.com/70234413" class="about-link" rel="" target="">
+    <i class="bi bi-play-btn"></i>
+     <span class="about-link-text">Bilibili</span>
+  </a>
+  <a href="https://www.zhihu.com/people/sun123zxy" class="about-link" rel="" target="">
+    <i class="bi bi-question-circle"></i>
+     <span class="about-link-text">Zhihu</span>
+  </a>
+  <a href="mailto:sun123zxy@qq.com" class="about-link" rel="" target="">
+    <i class="bi bi-envelope"></i>
+     <span class="about-link-text">Email</span>
+  </a>
+  <a href="https://www.cnblogs.com/sun123zxy/" class="about-link" rel="" target="">
+    <i class="bi bi-journal"></i>
+     <span class="about-link-text">previous blog on Cnblogs</span>
+  </a>
+  <a href="https://blog-jekyll.sun123zxy.top/" class="about-link" rel="" target="">
+    <i class="bi bi-journal"></i>
+     <span class="about-link-text">previous blog powered by Jekyll</span>
+  </a>
+</div>
+</div>
+ <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -518,13 +367,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   } else {
     toggleColorMode(false);
   }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
@@ -925,10 +767,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<script src="https://giscus.app/client.js" data-repo="sun123zxy/blog-quarto-code" data-repo-id="R_kgDOIrPs5w" data-category="General" data-category-id="DIC_kwDOIrPs584CV4gd" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark_dimmed" data-lang="en" crossorigin="anonymous" async="">
-</script>
-<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
-<input type="hidden" id="giscus-alt-theme" value="light">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -941,7 +779,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="../../thanks.html">
+    <a class="nav-link" href="./thanks.html">
 <p>Thanks</p>
 </a>
   </li>  
