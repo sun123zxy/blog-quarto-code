@@ -259,7 +259,7 @@ window.Quarto = {
 </header>
 
 
-<p>热身赛 D 题出题人．原题出自 <a href="https://codeforces.com/gym/104825/problem/H">2023 年 BIT 校赛 H</a>，非常荣幸被组题人选入热身赛供大家把玩．看到很多人对题目背后的动机感兴趣，也在这里写个题解．</p>
+<p>热身赛 D 供题人．原题出自 <a href="https://codeforces.com/gym/104825/problem/H">2023 年 BIT 校赛 H</a>，非常荣幸被组题人收入热身赛供大家把玩．看到很多人对题目背后的动机感兴趣，也在这里写个题解．</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -331,16 +331,48 @@ a_{\operatorname{lca}(2,1)} &amp; a_{\operatorname{lca}(2,2)} &amp; \dots &amp; 
 </section>
 <section id="remark" class="level2">
 <h2 class="anchored" data-anchor-id="remark">Remark</h2>
-<p>Idea 来自去年和队友 vp UCup 做到的 <a href="https://qoj.ac/problem/5748">Universal Cup 2023 Stage 7 Zaporizhzhia Problem K. Determinant, or…?</a>（甚至更难一点？）．官方题解给到的证明是递归构造分块矩阵，神似 FMT 的实现代码和与本题类似的变换技巧似乎暗示着更一般的结论．回顾证明，我们对行和列进行对称的消法变换，最终将矩阵化为对角矩阵，从而计算出行列式的值．按照线性代数的观点，若将这些变换用矩阵 <span class="math inline">\(P\)</span> 记录，上述过程事实上完成了对称矩阵 <span class="math inline">\(A\)</span> 的合同对角化，即 <span class="math inline">\(A = P \Lambda P^\mathrm{T}\)</span>．我们指出，用于合同对角化的矩阵 <span class="math inline">\(P\)</span> 完全由树上偏序关系决定，且 <span class="math inline">\(\det P = 1\)</span>．一般地，类似结论对任意下确界存在的偏序集成立——这是偏序集上广义 Möbius 变换框架下的强大结果．感兴趣的同学可参考 <span class="citation" data-cites="wilf1968hadamard"><a href="#ref-wilf1968hadamard" role="doc-biblioref">[1]</a></span>（没错，就是写 generatingfunctionology 的那个 Wilf :p）．如果你懒得去找这篇论文，我们将与本题相关的关键几式转录于此：</p>
-<p><span class="math display">\[
+<p>Idea 来自去年和队友 vp UCup 做到的 <a href="https://qoj.ac/problem/5748">Universal Cup 2023 Stage 7 Zaporizhzhia Problem K. Determinant, or…?</a>（甚至更难一点？）．官方题解给到的证明是递归构造分块矩阵，神似 FMT 的实现代码和与本题类似的变换技巧似乎暗示着更一般的结论．回顾证明，我们对行和列进行对称的消法变换，最终将矩阵化为对角矩阵，从而计算出行列式的值．按照线性代数的观点，若将这些变换用矩阵 <span class="math inline">\(P^{-1}\)</span> 记录，上述过程事实上完成了对称矩阵 <span class="math inline">\(A\)</span> 的合同对角化，即 <span class="math inline">\(A = P \Lambda P^\mathrm{T}\)</span> 或 <span class="math inline">\(P^{-1} A (P^{-1})^\mathrm{T} = \Lambda\)</span>．我们指出，用于合同对角化的矩阵 <span class="math inline">\(P\)</span> 完全由树上偏序关系决定，且 <span class="math inline">\(\det P = 1\)</span>．一般地，类似结论对任意下确界存在的偏序集成立——这是偏序集上广义 Zeta / Möbius 变换框架下的强大结果．感兴趣的同学可参考 <span class="citation" data-cites="wilf1968hadamard"><a href="#ref-wilf1968hadamard" role="doc-biblioref">[1]</a></span>（没错，就是写 generatingfunctionology 的那个 Wilf :p）．不过也许你懒得去找这篇论文，所以我们把和本题相关的关键几式转录于此并做一些批注：</p>
+<ul>
+<li><p><span class="math display">\[
 P :=  \begin{pmatrix} p_{i,j} \end{pmatrix}_{n \times n} \text{  where  } p_{i,j} := \begin{cases} 1 &amp; j \leq i \\ 0 &amp; \text{otherwise} \end{cases}
-\]</span></p>
-<p><span class="math display">\[
-a_{i \land j} = A_{i,j} = (P \Lambda P^\mathrm{T})_{i,j} = \sum_{k} p_{i,k} \lambda_k p_{j,k} = \sum_{\substack{k \leq i \\ k \leq j}} \lambda_k = \sum_{\substack{k \leq i \land j}} \lambda_k
-\]</span></p>
-<p><span class="math display">\[
+\]</span> 这里 <span class="math inline">\(P\)</span> 被称为偏序集上的 Zeta 变换，而对应的 <span class="math inline">\(P^{-1}\)</span> 被称为 Möbius 变换．对本题而言， <span class="math display">\[
+p_{i,j} = \begin{cases} 1 &amp; j \text{ is an ancestor of  } i \\ 0 &amp; \text{otherwise} \end{cases}
+\]</span> 而其逆矩阵 <span class="math display">\[
+\left( P^{-1} \right)_{i,j} = \begin{cases} 1 &amp; j = i \\ -1 &amp; j = \operatorname{fa}(i) \\ 0 &amp; \text{otherwise} \end{cases}
+\]</span> 恰记录了对行列式所作的消法变换．</p></li>
+<li><p><span class="math display">\[
+a_{i \land j} = A_{i,j} = (P \Lambda P^\mathrm{T})_{i,j} = \sum_{k} p_{i,k} \lambda_k p_{j,k} = \sum_{\substack{k \leq i \\ k \leq j}} \lambda_k = \sum_{\substack{k \leq i \land j}} \lambda_k = \sum_{k} p_{i \land j, k} \lambda_k = (P \vec \lambda)_{i \land j}
+\]</span> 描述了对角化前后两个数列的变换关系．可见已知 <span class="math inline">\(\vec \lambda\)</span>，求 <span class="math inline">\(\vec a = P \vec \lambda\)</span> 的过程便是偏序集上的 Zeta 变换．已知 <span class="math inline">\(\vec a\)</span>，反求 <span class="math inline">\(\vec \lambda = P^{-1} \vec a\)</span> 的过程便是偏序集上的 Möbius 反演．对本题而言，Zeta 变换 <span class="math inline">\(P\)</span> 是树上前缀和，而反演 <span class="math inline">\(P^{-1}\)</span> 是树上差分．</p></li>
+<li><p><span class="math display">\[
 \det A = \det P \det \Lambda \det P^\mathrm{T} = \det \Lambda = \prod_{k} \lambda_k
-\]</span></p>
+\]</span> 只需注意到 <span class="math inline">\(\det P = 1\)</span>——按拓扑序重标号后的 <span class="math inline">\(P\)</span> 是对角线全一的下三角矩阵．</p></li>
+</ul>
+<p>至此，行列式变换技巧背后的系统理论得以建立，配合反演理论如法炮制便可造出一众钓鱼行列式：</p>
+<ul>
+<li><p>LCA Determinant / 树上前缀和 / 树上差分：</p>
+<p><span class="math display">\[
+\det (a_{\operatorname{lca}(i,j)})_{n \times n} = a_1 \prod_{\substack{2 \leq u \leq n}} (a_u - a_{\operatorname{fa}(u)})
+\]</span></p></li>
+<li><p>MIN Determinant / 前缀和 / 差分：</p>
+<p><span class="math display">\[
+\det \begin{pmatrix} a_{\min(i,j)} \end{pmatrix}_{n \times n} = a_1 \prod_{2 \leq k \leq n} (a_k - a_{k-1})
+\]</span></p></li>
+<li><p>AND Determinant / 高维前缀和 / 容斥原理：</p>
+<p><span class="math display">\[
+\det \begin{pmatrix} a_{i \&amp; j} \end{pmatrix}_{2^n \times 2^n} = \prod_{1 \leq k \leq n} \sum_{t \subseteq k} (-1)^{\operatorname{popcount}(k)-\operatorname{popcount}(t)} a_t
+\]</span> 借助 FMT 可做到 <span class="math inline">\(O(n 2^n)\)</span>．</p></li>
+<li><p>GCD Determinant / Zeta 变换 / Möbius 反演： <span class="math display">\[
+\det \begin{pmatrix} a_{\gcd(i,j)} \end{pmatrix}_{n \times n} = \prod_{1 \leq k \leq n} \sum_{d \mid k} \mu(\frac k d) a_d
+\]</span> 借助类似埃筛的方法可以做到 <span class="math inline">\(O(n \log n)\)</span>．</p></li>
+</ul>
+<p>对于一般的偏序，Zeta / Möbius 变换有没有快速计算方法呢？这篇论文 <span class="citation" data-cites="pegolotti_fast_2022"><a href="#ref-pegolotti_fast_2022" role="doc-biblioref">[2]</a></span> 给出了 <span class="math inline">\(O(nk)\)</span> 时间复杂度下的算法，这里 <span class="math inline">\(k\)</span> 是偏序集的宽度．</p>
+<p>偏序并不是此类行列式求解问题的终点．上述论证成立的核心在于 <span class="math inline">\(p_{i,k} p_{j,k} = p_{i \land j,k}\)</span>，而 <span class="math inline">\(\land\)</span> 可以是任何一种二元运算．稍加改动，循环矩阵的行列式求值也被我们纳入囊中：</p>
+<ul>
+<li>Cyclic Determinant / 离散 Fourier 变换 / 离散 Fourier 逆变换： <span class="math display">\[
+\det \begin{pmatrix} a_{(i+j) \bmod n} \end{pmatrix}_{0 \leq i,j &lt; n} = \prod_{0 \leq k &lt; n} \frac 1 n \sum_{0 \leq t &lt; n} \omega_n^{-kt} a_t
+\]</span> 借助 FFT 可以做到 <span class="math inline">\(O(n \log n)\)</span>．</li>
+</ul>
+<p><del>快把这些问题和你的小伙伴分享，一起成为线代高手吧！</del></p>
 
 
 
@@ -349,6 +381,9 @@ a_{i \land j} = A_{i,j} = (P \Lambda P^\mathrm{T})_{i,j} = \sum_{k} p_{i,k} \lam
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
 <div id="ref-wilf1968hadamard" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[1] </div><div class="csl-right-inline">H. S. Wilf, <span>“Hadamard determinants m<span>ö</span>bius functions, and the chromatic number of a graph,”</span> <em>Bulletin of the American Mathematical Society</em>, vol. 74, no. 5, pp. 960–964, 1968.</div>
+</div>
+<div id="ref-pegolotti_fast_2022" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">T. Pegolotti, B. Seifert, and M. Püschel, <span>“Fast m<span>\</span>"obius and zeta transforms.”</span> <span>arXiv</span>, Nov. 24, 2022. doi: <a href="https://doi.org/10.48550/arXiv.2211.13706">10.48550/arXiv.2211.13706</a>.</div>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
