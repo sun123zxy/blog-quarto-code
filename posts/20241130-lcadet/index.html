@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="sun123zxy">
-<meta name="dcterms.date" content="2023-02-17">
+<meta name="dcterms.date" content="2024-11-30">
 
-<title>聊聊红石音乐 – sun123zxy’s blog</title>
+<title>【ICPC 2024 Regional 昆明热身赛 D】LCA Determinant 题解 – sun123zxy’s blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -72,6 +92,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -164,48 +213,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#一点随想" id="toc-一点随想" class="nav-link active" data-scroll-target="#一点随想">一点随想</a></li>
-  <li><a href="#mc-指令相关" id="toc-mc-指令相关" class="nav-link" data-scroll-target="#mc-指令相关">MC 指令相关</a>
-  <ul class="collapse">
-  <li><a href="#setblock-datavalue-block-state-and-data-tag-nbt" id="toc-setblock-datavalue-block-state-and-data-tag-nbt" class="nav-link" data-scroll-target="#setblock-datavalue-block-state-and-data-tag-nbt">setblock, dataValue, block state and data tag (nbt)</a></li>
-  <li><a href="#fallingsand-or-falling_block" id="toc-fallingsand-or-falling_block" class="nav-link" data-scroll-target="#fallingsand-or-falling_block">FallingSand or falling_block</a></li>
-  <li><a href="#解决指令引号嵌套无法识别问题" id="toc-解决指令引号嵌套无法识别问题" class="nav-link" data-scroll-target="#解决指令引号嵌套无法识别问题">解决指令引号嵌套无法识别问题</a></li>
-  </ul></li>
-  <li><a href="#mod资源包" id="toc-mod资源包" class="nav-link" data-scroll-target="#mod资源包">mod、资源包</a>
-  <ul class="collapse">
-  <li><a href="#worldedit" id="toc-worldedit" class="nav-link" data-scroll-target="#worldedit">WorldEdit</a></li>
-  <li><a href="#voxelmap" id="toc-voxelmap" class="nav-link" data-scroll-target="#voxelmap">VoxelMap</a></li>
-  <li><a href="#tickratechanger" id="toc-tickratechanger" class="nav-link" data-scroll-target="#tickratechanger">TickrateChanger</a></li>
-  <li><a href="#colored-redstone" id="toc-colored-redstone" class="nav-link" data-scroll-target="#colored-redstone">Colored Redstone</a></li>
-  <li><a href="#invisiblights" id="toc-invisiblights" class="nav-link" data-scroll-target="#invisiblights">InvisibLights</a></li>
-  <li><a href="#realpiano-资源包" id="toc-realpiano-资源包" class="nav-link" data-scroll-target="#realpiano-资源包">realpiano 资源包</a></li>
-  <li><a href="#soma-资源包" id="toc-soma-资源包" class="nav-link" data-scroll-target="#soma-资源包">soma 资源包</a></li>
-  <li><a href="#材质包编辑" id="toc-材质包编辑" class="nav-link" data-scroll-target="#材质包编辑">材质包编辑</a></li>
-  </ul></li>
-  <li><a href="#mcpi-和-raspberryjammod-相关" id="toc-mcpi-和-raspberryjammod-相关" class="nav-link" data-scroll-target="#mcpi-和-raspberryjammod-相关">MCPI 和 RaspberryJamMod 相关</a>
-  <ul class="collapse">
-  <li><a href="#mcpi-block-类在-setblock-setblockwithnbt-中的使用" id="toc-mcpi-block-类在-setblock-setblockwithnbt-中的使用" class="nav-link" data-scroll-target="#mcpi-block-类在-setblock-setblockwithnbt-中的使用">MCPI Block 类在 setBlock &amp; setBlockWithNBT 中的使用</a></li>
-  <li><a href="#关于-mcpi-与游戏内的坐标差" id="toc-关于-mcpi-与游戏内的坐标差" class="nav-link" data-scroll-target="#关于-mcpi-与游戏内的坐标差">关于 MCPI 与游戏内的坐标差</a></li>
-  </ul></li>
-  <li><a href="#自制轮子" id="toc-自制轮子" class="nav-link" data-scroll-target="#自制轮子">自制轮子</a>
-  <ul class="collapse">
-  <li><a href="#redstone-music-generator旧版" id="toc-redstone-music-generator旧版" class="nav-link" data-scroll-target="#redstone-music-generator旧版">redstone-music-generator（旧版）</a></li>
-  <li><a href="#redstone-music-generator新版" id="toc-redstone-music-generator新版" class="nav-link" data-scroll-target="#redstone-music-generator新版">redstone-music-generator（新版）</a></li>
-  </ul></li>
+  <li><a href="#solution" id="toc-solution" class="nav-link active" data-scroll-target="#solution">Solution</a></li>
+  <li><a href="#remark" id="toc-remark" class="nav-link" data-scroll-target="#remark">Remark</a></li>
   </ul>
-</nav>
+<div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://www.zhihu.com/question/883251623/answer/44580637390"><i class="bi bi-question-circle"></i>在知乎上阅读</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">聊聊红石音乐</h1>
+<h1 class="title">【ICPC 2024 Regional 昆明热身赛 D】LCA Determinant 题解</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">memories</div>
-    <div class="quarto-category">Minecraft</div>
-    <div class="quarto-category">music</div>
-    <div class="quarto-category">Python</div>
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">algorithm</div>
+    <div class="quarto-category">combinatorics</div>
+    <div class="quarto-category">original problem</div>
+    <div class="quarto-category">solution</div>
   </div>
   </div>
 
@@ -223,227 +247,110 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 17, 2023</p>
+      <p class="date">November 30, 2024</p>
     </div>
   </div>
   
     
   </div>
   
-<div>
-  <div class="abstract">
-    <div class="block-title">Abstract</div>
-    封存的幻想。
-  </div>
-</div>
 
 
 </header>
 
 
-<p>咕极必肝，肝极必咕。</p>
-<p>本来是打算做完 Ancient Temple 和视频一起发出的，但现在看到这篇文章，说明下文随想里立下的 flag 已经被打脸了（</p>
-<p>咕的原因，一方面是因为现实生活太过充实有趣，即使红乐般的激昂也有黯淡之时；但更重要的，还是对第二次迭代的表现效果不满意。模子是 Foxtail Grass Studio 的专辑封面和《妖妖剑戟梦想》的白玉楼阶梯，但始终没能做出想要的效果。更好的想法？暂时也没有。</p>
-<p>半途而废很可惜，但糟蹋更可惜。或许暂时搁置、静待花开，会有更好的结果。</p>
-<p>写下随想与技术细节，封存于冷清的博客，是纪念，还是重启的依托？</p>
-<blockquote class="blockquote">
-<p>东方的天空微微露出青白色的天光，幻想乡迎来了又一个清晨。</p>
-<p>很快，太阳就会出现，将光芒洒满这片遗忘之地。</p>
-<p>尽管，那片原野已然如幻梦般消失不见——</p>
-<p>但，在看不见的隐秘角落，无数的原野正在悄然生长——</p>
-<p>这里也是，那里也是</p>
-<p>——如同小小的光芒。</p>
-<p>——<a href="https://www.bilibili.com/read/cv11907285">东方莳梦原～Champaign of Unfinished Dreams</a> by 秋ノ宮飛鳥</p>
-</blockquote>
-<section id="一点随想" class="level2">
-<h2 class="anchored" data-anchor-id="一点随想">一点随想</h2>
-<p>2022 年 8 月 17 日夜，Ancient Temple 完成过半，月色入户，欣然开摆。</p>
-<p>对，今天又是 8 月 17 日，是妖妖梦、风神录的发售日，<del>也是某个枪毙节</del>，还是某个新博客启用的周年纪念日——我又来写随想了。</p>
-<p>18 年华灯宴 1U_s 大佬一曲<a href="https://b23.tv/FwrlLWL">十七岁</a>把我拉入红石音乐的大坑，到现在也有 4 年多了。随便聊聊感想，谈谈技术和非技术的各种话题。</p>
-<p>我玩红乐，或许“科技靠考古的自闭造轮手”是个不错的形容。不加红石群、不更新版本，没人带没人陪，Google + Minecraft Wiki 在手，自己瞎倒腾，其他看造化。风格是 18 年的远古遗风——realpiano + 命令方块 + WorldEdit 的前进式、贪吃蛇式、下落式红石音乐大行其道的年头。到后来，特效红石音乐开始流行，但我心中的红乐早已定型。</p>
-<p>我喜欢那个年代红石音乐特有的那种风格，那种朴素，但红石音乐完美融入场景的感觉。当年东方各作红石音乐全曲中就可见一斑——跟随红石信号一步步向前，如同听着 BGM 驾驶自机飞翔于道中，看版面缓缓向前伸展——STG 原作与 Minecraft 的奇妙融合让我着迷。我想做这样的红石音乐，我想做这样能化出心中幻想的红石音乐。</p>
-<p>想做？音乐你懂吗？建筑你会吗？</p>
-<p>不会，但可以学！</p>
-<p>那你还会什么？</p>
-<p>我是 OIer！我会编程！</p>
-<p>这就是后来近三年红乐自动化尝试的开端。倒也开始稍微认真点的学习 MIDI、乐理以及其他各种各样的东西。</p>
-<p>时间来到 20 年暑假。当时正好在玩 Python，偶然一搜，找到了 Raspberry Jam Mod 和 <a href="https://github.com/mido/mido">mido</a>——前者把 <a href="https://www.minecraft.net/en-us/edition/pi" class="uri">https://www.minecraft.net/en-us/edition/pi</a> 的 Python API 移植到 Java 版，后者提供在 Python 中处理 MIDI 文件的方法。</p>
-<p>诶，这就不可以开工了吗！</p>
-<p>肝能量发动，写了第一个能跑起来的脚本，随便丢了个正在做的第三版 Ancient Temple 进去听听——哎哟挺不错啊！</p>
-<p>生产力工具上线，整活得以开始。要说最想做的，那一定是妖妖梦五面道中。对，就是 《东方妖妖梦 ~ Ancient Temple》。如 ZUN 所说，那是使古老寺院的空气突然升温的曲子。樱花上飘，楼观斩下……那是原作带来的难以忘怀的幻想。</p>
-<p>但当时的我，没打算做，或者说有点不敢做。一方面，当然是 1U_s 大大的<a href="https://www.bilibili.com/video/BV1Gs411i7K9">妖妖梦红乐曲集</a>实在精彩，随手制作的五面道中已足以满足我自娱自乐的需求；二来也是对自己实力不太自信，怕做出自己也不太喜欢的作品。但 1U 的曲集毕竟是手工打造，两条音轨虽然意境极佳，但与原曲相比确也是捉襟见肘，而我手中的自动化可以极大程度地减轻工作量（虽然造轮子的过程没少花时间 (lll￢ω￢)）</p>
-<p>所以到头来还是想做——或者下次一定？</p>
-<p>那这次造啥呢？</p>
-<p>余光瞄到刚退坑不久的 Dancing Line——说是舞线，其实脑子里全是 Through the Fog 的场景。回去重打 TTF 风暴的时候，听着 90% 后疯狂的雷声，突然想到 Minecraft 可以 <code>/weather rain</code> 可以 <code>/summon lightning_bolt</code>，加之场景想要偷懒的话搞个单层水世界就行，倒是试水的不错选择。</p>
-<p>于是就开始试着扒谱。暑假结束，MIDI 是写好了，人却咕起来了。一咕就咕到了后一年的四月，忍不住了，爆肝三个周末整出来了。这个明显还是有很多问题的，首先曲子扒得就不太好，而且灯光一直到最后一小段才加上，另外前面下雨那段也太黑了。Sildur’s Vibrant Shader 的黑雷电问题也没解决，加上当时电脑太菜，Replaymod 录制还是挺难受的（不过预览模式倒是意外的贡献了个封面 XD），当然凑合能看。</p>
-<p>后来就又到暑假了，打算一口气把 RMG 这个烂摊子写好，于是大刀阔斧的重构了，命名为 <a href="https://github.com/sun123zxy/redstone-music-generator">redstone-music-generator</a>，甚至还写了文档发了 Github，收获人生首 star &amp; issue（</p>
-<p>或许是为了尝试 observer 的设计模式，亦或是太重视轮子的易用性，代码比较臃肿，过了几个月发现自己也很难看懂了。</p>
-<p>其实写脚本主要还是给自己创作使用啊，没必要考虑太多“别人的需求”。</p>
-<p>反思的结果就是新版的 redstone-music-generator 了，现暂存于原版本的 <code>develop</code> 分支下。这个版本再次重构，学习了某些命令行软件的做法，配置参数从之前在各个组件上的零散分布变为了单一配置文件的集中分布，显然提高了效率。</p>
-<p>Ancient Temple 的 MIDI 也已经做到第五版了，这次以红乐的标准，大幅参考原曲 MIDI，期望能尽力还原出原作的表现。</p>
-<p>鼓起勇气脱离咕海的动力来源，还是喜欢这曲子吧。说到底还是想把它做了再养老。</p>
-<p>说起来，红石音乐到底应该怎样定义呢？之前 WorldEdit 的使用就已经引发过争议，那自动化搭建到底是红是黑？而在发声方面，是坚持音符盒的原教旨主义，还是命令方块的改良革新，甚至是更激进的 Midiout？</p>
-<blockquote class="blockquote">
-<p>up辛苦了，工作量能看出来。</p>
-<p>但是原谅我还是很难接受这种从mc映射到外部midi播放器的格式。我觉得这并不能称作红石音乐，因为不是在mc内部完成播放的。</p>
-<p>不过，用资源包和用接口，也不过只是内部调用和外部调用的区别罢了，也说不清…这是个哲学层次的问题。</p>
-<p>红石音乐最后到底会变成什么样我也不知道，而且这种发展的方向和趋势我也没办法也没有理由去阻止。</p>
-<p>我大概是，跟不上时代了吧…</p>
-<p>——<a href="https://www.bilibili.com/video/BV1oW411a7eJ">【黑石音乐】aLIEz【接近完美的还原】_哔哩哔哩_bilibili</a> 下 <a href="https://space.bilibili.com/32262433">NJune六月</a> 的评论</p>
-</blockquote>
-<p>或许每个人心中的红乐标准都有所不同……或许我们只能求同存异，力求百花齐放，不要走火入魔。但最近粒子特效红石音乐的发展又让我感到困惑——一点红石、音符盒甚至命令方块都不出现，真的算红乐吗？那些炫酷的粒子特效，真的属于 Minecraft 吗？</p>
-<p>只能交给时间回答了。我想，我能保证的，只是一颗全心投入、宁缺毋滥的创作心态；而我应该做的，是继续完成手头的作品。</p>
-</section>
-<section id="mc-指令相关" class="level2">
-<h2 class="anchored" data-anchor-id="mc-指令相关">MC 指令相关</h2>
-<section id="setblock-datavalue-block-state-and-data-tag-nbt" class="level3">
-<h3 class="anchored" data-anchor-id="setblock-datavalue-block-state-and-data-tag-nbt">setblock, dataValue, block state and data tag (nbt)</h3>
-<section id="扁平化前1.12-及以前" class="level4">
-<h4 class="anchored" data-anchor-id="扁平化前1.12-及以前">扁平化前（1.12 及以前）</h4>
-<p><code>setblock &lt;x&gt; &lt;y&gt; &lt;z&gt; &lt;block&gt; [dataValue|state] [oldBlockHandling] [dataTag]</code></p>
-<p><code>dataValue</code> 和 <code>blockstate</code> 在扁平化之前是方块状态的两种不同描述方式，<code>dataValue</code> 是实际存储时使用的 4 bit 数据。通常，<code>blockstate</code> 或 <code>dataValue</code> 用来描述方块的一些基本性质，比如朝向 <code>facing</code>、羊毛的颜色 <code>color</code>、中继器的延迟刻数 <code>delay</code>。</p>
-<p>具体写法例如：<code>/setblock ~ ~ ~1 minecraft:unpowered_repeater delay=4,facing=east</code> 设置一个延迟为 4 rt，面朝“东方”的红石中继器。（这里打上了引号，因为事实上<strong>红石中继器的 facing 代表的方向与信号传导的方向是相反的</strong>）</p>
-<p>又，其效果等同于 <code>/setblock ~ ~ ~1 minecraft:unpowered_repeater 15</code>。（<code>dataValue = (delay - 1) * 4 + facing</code>，<code>facing=south|west|north|east</code> 分别对应 <code>0|1|2|3</code> 。默认值是 <code>north</code>）</p>
-<p>再例如，<code>/setblock ~ ~ ~1 minecraft:command_block facing=down 0 {Command:"/time set 6000"}</code> 设置一个修改时间为正午的，面朝下方的命令方块。</p>
-<p>中间的 <code>0</code> 是用来占位的。</p>
-<p>查找某方块的 <code>dataValue</code> 和 <code>blockstate</code> 时可以翻阅 Minecraft Wiki 1.13 以前的历史版本（1.13 于 2018 年 6 月 18 日发布）</p>
-</section>
-<section id="扁平化后1.13-及以后" class="level4">
-<h4 class="anchored" data-anchor-id="扁平化后1.13-及以后">扁平化后（1.13 及以后）</h4>
-<p><code>setblock &lt;pos&gt; &lt;block&gt; [destroy|keep|replace]</code></p>
-<p>其中 <code>&lt;block&gt;</code> 是 <code>block_state</code>， 具体的写法是 <code>namespaced_ID[block_states=value]{data_tags:value}</code></p>
-<p>也就是说，原先的 <code>block</code>、<code>block_state</code> 和 <code>dataTag</code> 现在被统一整合入 <code>block_state</code> 里面，显然这更方便使用了。（然而作为考古学家，这好像也没法用上…）</p>
-</section>
-</section>
-<section id="fallingsand-or-falling_block" class="level3">
-<h3 class="anchored" data-anchor-id="fallingsand-or-falling_block">FallingSand or falling_block</h3>
-<p>掉落方块实体。1.11 前它叫 <code>FallingSand</code>，1.11 及以后它叫 <code>falling_block</code>。</p>
-<p>1.12 及以前可用 <code>/summon falling_block ~ ~ ~ {Block:minecraft:redstone_block,Time: 1}</code> 召唤掉落的红石块。Time 参数设置最长掉落时间，实际上会与 30 秒取最大值，但如果留空则会马上消失。</p>
-<p>而 <code>/summon falling_block ~ ~ ~ {Block:"minecraft:wool", Data: 14, Time:1}</code> 可召唤掉落的红色羊毛。<code>Data</code> 标签自然与颜色对应了。</p>
-<p>1.13 后由于扁平化更新了 <code>block_state</code> 的概念，指令格式变为 <code>/summon falling_block &lt;x&gt; &lt;y&gt; &lt;z&gt; {BlockState:{Name:&lt;Namespaced block ID&gt;,Properties:{&lt;blockstate_name&gt;:&lt;value&gt;}}}</code>。</p>
-<p>参见：</p>
+<p>热身赛 D 题出题人．原题出自 <a href="https://codeforces.com/gym/104825/problem/H">2023 年 BIT 校赛 H</a>，非常荣幸被组题人选入热身赛供大家把玩．看到很多人对题目背后的动机感兴趣，也在这里写个题解．</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="exm-problem" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1</strong></span> You are given a tree consisting of <span class="math inline">\(n\)</span> vertices. Vertices are numbered from <span class="math inline">\(1\)</span> to <span class="math inline">\(n\)</span>. The vertex <span class="math inline">\(1\)</span> is the root of the tree. Each vertex has a weight <span class="math inline">\(a_i\)</span>. Consider a matrix <span class="math display">\[
+A := \begin{pmatrix} a_{\operatorname{lca}(i,j)} \end{pmatrix}_{n \times n}
+= \begin{pmatrix}
+a_{\operatorname{lca}(1,1)} &amp; a_{\operatorname{lca}(1,2)} &amp; \dots &amp; a_{\operatorname{lca}(1,n)} \\
+a_{\operatorname{lca}(2,1)} &amp; a_{\operatorname{lca}(2,2)} &amp; \dots &amp; a_{\operatorname{lca}(2,n)} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+a_{\operatorname{lca}(n,1)} &amp; a_{\operatorname{lca}(n,2)} &amp; \dots &amp; a_{\operatorname{lca}(n,n)}
+\end{pmatrix}
+\]</span> where <span class="math inline">\(\operatorname{lca}(i,j)\)</span> denotes the lowest common ancestor of vertex <span class="math inline">\(i\)</span> and vertex <span class="math inline">\(j\)</span>. Calculate the determinant of matrix <span class="math inline">\(A\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<section id="solution" class="level2">
+<h2 class="anchored" data-anchor-id="solution">Solution</h2>
+<p>本题定位智慧 / 猜结论 / 线代高手题，结论为 <span class="math display">\[
+\det A = a_1 \prod_{\substack{u \in V \\ u \neq 1}} (a_u - a_{\operatorname{fa}(u)})
+\]</span> 其中 <span class="math inline">\(V\)</span> 是全体树上节点构成的集合，<span class="math inline">\(\operatorname{fa}(u)\)</span> 代表节点 <span class="math inline">\(u\)</span> 在树上的父亲节点．</p>
+<p>赛时技巧而言，样例已给出树为单链之一例，选手应考虑补充举例菊花图的情况，并分别应用行列式消法变换证明两种特殊情况的正确性．分析两种消去方法的共性便可得到结论的雏形．</p>
+<p>一般地，考虑对节点按深度从小到大进行重标号，由于重标号对行和列进行的置换相同，行列式的值和正负性均不会发生变化．现在归纳地证明结论．当 <span class="math inline">\(n=1\)</span> 时，结论平凡．当 <span class="math inline">\(n \geq 2\)</span>，假设结论对全体大小为 <span class="math inline">\(n-1\)</span> 的树成立．现给定一颗大小为 <span class="math inline">\(n\)</span> 的按上述方法重标号后的树，设其对应行列式为 <span class="math inline">\(A_n\)</span>．由重标号方法，编号为 <span class="math inline">\(n\)</span> 的节点一定为叶子节点；且由 <span class="math inline">\(n \geq 2\)</span>，其父节点存在．在行列式中做消法变换：</p>
 <ul>
-<li><p><a href="https://minecraft.fandom.com/wiki/Falling_Block">Falling Block – Minecraft Wiki</a></p></li>
-<li><p><a href="https://minecraft.fandom.com/wiki/Tutorials/Falling_blocks">Tutorials/Falling blocks – Minecraft Wiki</a></p></li>
-<li><p><a href="https://minecraft.fandom.com/wiki/Tutorials/Command_NBT_tags#Entities">Tutorials/Command NBT tags – Minecraft Wiki</a></p></li>
+<li>将第 <span class="math inline">\(n\)</span> 列减去第 <span class="math inline">\(\operatorname{fa}(u)\)</span> 列；</li>
+<li>将第 <span class="math inline">\(n\)</span> 行减去第 <span class="math inline">\(\operatorname{fa}(u)\)</span> 行．</li>
 </ul>
+<p>行列式变为 <span class="math display">\[
+\begin{aligned}
+&amp;\phantom{\to} \begin{pmatrix}
+a_{\operatorname{lca}(1,1)} &amp; a_{\operatorname{lca}(1,2)} &amp; \dots &amp; a_{\operatorname{lca}(1,n)} \\
+a_{\operatorname{lca}(2,1)} &amp; a_{\operatorname{lca}(2,2)} &amp; \dots &amp; a_{\operatorname{lca}(2,n)} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+a_{\operatorname{lca}(n,1)} &amp; a_{\operatorname{lca}(n,2)} &amp; \dots &amp; a_{\operatorname{lca}(n,n)}
+\end{pmatrix} \\
+&amp;\to
+\begin{pmatrix}
+a_{\operatorname{lca}(1,1)} &amp; a_{\operatorname{lca}(1,2)} &amp; \dots &amp; a_{\operatorname{lca}(1,n)} - a_{\operatorname{lca}(1,\operatorname{fa}(n))} \\
+a_{\operatorname{lca}(2,1)} &amp; a_{\operatorname{lca}(2,2)} &amp; \dots &amp; a_{\operatorname{lca}(2,n)} - a_{\operatorname{lca}(2,\operatorname{fa}(n))} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots
+\\ a_{\operatorname{lca}(n,1)} &amp; a_{\operatorname{lca}(n,2)} &amp; \dots &amp; a_{\operatorname{lca}(n,n)} - a_{\operatorname{lca}(n,\operatorname{fa}(n))}
+\end{pmatrix} \\
+&amp;= \begin{pmatrix}
+a_{\operatorname{lca}(1,1)} &amp; a_{\operatorname{lca}(1,2)} &amp; \dots &amp; 0 \\
+a_{\operatorname{lca}(2,1)} &amp; a_{\operatorname{lca}(2,2)} &amp; \dots &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots
+\\ a_{\operatorname{lca}(n,1)} &amp; a_{\operatorname{lca}(n,2)} &amp; \dots &amp; a_n - a_{\operatorname{fa}(n)}
+\end{pmatrix} \\\\
+&amp;\to \begin{pmatrix}
+a_{\operatorname{lca}(1,1)} &amp; a_{\operatorname{lca}(1,2)} &amp; \dots &amp; 0 \\
+a_{\operatorname{lca}(2,1)} &amp; a_{\operatorname{lca}(2,2)} &amp; \dots &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots
+\\ a_{\operatorname{lca}(n,1)} - a_{\operatorname{lca}(\operatorname{fa}(n),1)} &amp; a_{\operatorname{lca}(n,2)} - a_{\operatorname{lca}(\operatorname{fa}(n),2)} &amp; \dots &amp; a_n - a_{\operatorname{fa}(n)}
+\end{pmatrix}\\
+&amp;= \begin{pmatrix}
+a_{\operatorname{lca}(1,1)} &amp; a_{\operatorname{lca}(1,2)} &amp; \dots &amp; 0 \\
+a_{\operatorname{lca}(2,1)} &amp; a_{\operatorname{lca}(2,2)} &amp; \dots &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots
+\\ 0 &amp; 0 &amp; \dots &amp; a_n - a_{\operatorname{fa}(n)}
+\end{pmatrix} \\
+&amp;\to (a_n - a_{\operatorname{fa}(n)}) \det A_{n-1} \\
+&amp;= a_1 \prod_{\substack{u \in V \\ u \neq 1}} (a_u - a_{\operatorname{fa}(u)})
+\end{aligned}
+\]</span> 故结论对任意 <span class="math inline">\(n \in \mathbb N_+\)</span> 均成立．</p>
 </section>
-<section id="解决指令引号嵌套无法识别问题" class="level3">
-<h3 class="anchored" data-anchor-id="解决指令引号嵌套无法识别问题">解决指令引号嵌套无法识别问题</h3>
-<p>见 <a href="https://gaming.stackexchange.com/questions/246064/why-are-my-quotation-marks-causing-an-unexpected-token-error-with-this-command">minecraft java edition - Why are my quotation marks causing an “unexpected token” error with this command? - Arqade</a>，用 <code>\</code> 转义即可。</p>
-</section>
-</section>
-<section id="mod资源包" class="level2">
-<h2 class="anchored" data-anchor-id="mod资源包">mod、资源包</h2>
-<p>注意此处提到的 mod 和资源包均只在其 1.12.2 对应版本下测试，不少功能在新版已经不需要 mod 了。</p>
-<section id="worldedit" class="level3">
-<h3 class="anchored" data-anchor-id="worldedit">WorldEdit</h3>
-<p>建筑党老相识了，不细讲了，Google 一下你就知道。</p>
-<ul>
-<li><a href="https://worldedit.enginehub.org/en/latest/">WorldEdit Documentation</a></li>
-</ul>
-<p>用的多的命令 <code>copy</code>、<code>flip</code>、<code>rotate</code>、<code>paste</code>、<code>stack</code>、<code>set</code>、<code>replace</code>。当然还有最要命的 <code>undo</code> 啦（</p>
-<p><code>schematic</code> 系列指令也很好用（用来偷建筑）（逃）</p>
-</section>
-<section id="voxelmap" class="level3">
-<h3 class="anchored" data-anchor-id="voxelmap">VoxelMap</h3>
-<p>常见的小地图，用来传送挺方便的。也不细讲了。</p>
-</section>
-<section id="tickratechanger" class="level3">
-<h3 class="anchored" data-anchor-id="tickratechanger">TickrateChanger</h3>
-<p><a href="https://www.curseforge.com/minecraft/mc-mods/tickratechanger">TickrateChanger - Mods - Minecraft - CurseForge</a></p>
-<p>tickrate changer，就是字面意思嘛。改 tickrate 可以使游戏变快或变慢，从而实现精确调节 BPM。正常值 20。</p>
-<p>但是有个挺烦的问题是调了过后声音的频率也随之改变了，这样音高就发生变化了…有大佬知道怎么办吗？</p>
-</section>
-<section id="colored-redstone" class="level3">
-<h3 class="anchored" data-anchor-id="colored-redstone">Colored Redstone</h3>
-<p><a href="https://www.curseforge.com/minecraft/mc-mods/colored-redstone">Colored Redstone - Mods - Minecraft - CurseForge</a></p>
-<p>材质包编辑红石颜色失败后的替代品。具体细节有点忘了，只记得生成时 namespace 好像是 <code>coloredredstone:colored_redstone_block</code>，用 datavalue 来调颜色。（也忘了自己是怎么知道的了……好像是拆 jar 看的？）</p>
-<p>顺序大概是这样：</p>
-<p><img src="colorful-redstone.jpg" class="img-fluid"></p>
-</section>
-<section id="invisiblights" class="level3">
-<h3 class="anchored" data-anchor-id="invisiblights">InvisibLights</h3>
-<p><a href="https://www.curseforge.com/minecraft/mc-mods/invisiblights">InvisibLights - Mods - Minecraft - CurseForge</a></p>
-<p>材质包编辑发光材质失败后的替代品。字面义，作为隐形光源使用。</p>
-</section>
-<section id="realpiano-资源包" class="level3">
-<h3 class="anchored" data-anchor-id="realpiano-资源包">realpiano 资源包</h3>
-<p><a href="http://lkrb.net/blog/54.html">原出处</a>已挂，有个<a href="https://www.cr173.com/soft/277354.html">下载站</a>还有资源。</p>
-<p>发声命令 <code>/execute @p ~ ~ ~ playsound lkrb.piano.p60fff voice @p ~ ~ ~"</code>，<code>C5 = 60</code>，音高 21 至 108，力度可选 <code>ppp,pp,p,mp,mf,f,ff,fff</code>。</p>
-</section>
-<section id="soma-资源包" class="level3">
-<h3 class="anchored" data-anchor-id="soma-资源包">soma 资源包</h3>
-<p>这个老强了，按 MIDI 音源标准制作的全套音色，长短音都有。</p>
-<p>因为没怎么用就不细讲了。</p>
-</section>
-<section id="材质包编辑" class="level3">
-<h3 class="anchored" data-anchor-id="材质包编辑">材质包编辑</h3>
-<p>一开始是因为 SEUS v11.0 太黑看不清红石块，想找个方法让红石块自发光 。找了半天没找到的现成的，只好现学现做。</p>
-<p>关于如何获取作为参考的 Default 材质包，参考 <a href="https://www.reddit.com/r/Minecraft/comments/47sycp/where_can_i_find_the_default_texture_pack_to_edit/">Where can I find the default texture pack to edit? : Minecraft</a>，直接把 <code>1.12.2.jar</code> 解压后里面的 <code>assets</code> 文件夹提到资源包里就可以用了，意外的方便啊（</p>
-<p>（其实 mod 的 jar 里面也有这个文件夹！）</p>
-<p>参考 <a href="https://optifine.readthedocs.io/emissive_textures.html">Emissive Textures - OptiFine documentation</a>，只需在材质包放置 <code>/assets/minecraft/optifine/emissive.properties</code> 和 <code>/assets/minecraft/textures/blocks/redstone_block_e.png</code>，<code>emissive.properties</code> 里写上 <code>suffix.emissive=_e</code> 就可以了。</p>
-<p>1.12 差不多也算是古董版本了，参考网上教程时还需注意版本差异。</p>
-<p>于是兴高采烈的准备用到掉落式红石钢琴上，发现——欸？光呢？？？</p>
-<p>于是发现了 <a href="https://github.com/sp614x/optifine/issues/1342">Emissive textures not working for certain entities and items · Issue #1342 · sp614x/optifine · GitHub</a>——woc，这不是 xwj 大佬吗？？？</p>
-<p>所以人家 18 年就把这些东西玩透了……<del>只有红石音乐作者才能发现的 bug</del></p>
-<p>这个 Issue 至今 open，一下不知道怎么办了…只能暂时搁置。后来使用上文提到的 Colored Redstone 和 invisiblights 解决问题。</p>
-<p>此外，发现同一地点方块贴图始终一致，这说明随机种子由位置决定。但作为 Falling_block 生成时，全都只会用第一个贴图。</p>
-</section>
-</section>
-<section id="mcpi-和-raspberryjammod-相关" class="level2">
-<h2 class="anchored" data-anchor-id="mcpi-和-raspberryjammod-相关">MCPI 和 RaspberryJamMod 相关</h2>
-<p>RaspberryJamMod：把 <a href="https://www.minecraft.net/en-us/edition/pi">Minecraft: Pi Edition</a> 的 Python API 移植到 Java 版的一款 mod。</p>
-<ul>
-<li>Github 库：<a href="https://github.com/arpruss/raspberryjammod">GitHub - arpruss/raspberryjammod: Raspberry Jam Mod - a Mod Forge Minecraft mod implementing most of Raspberry Juice/Pi API</a></li>
-<li>官方指南：<a href="https://www.instructables.com/Python-coding-for-Minecraft/">Python Coding for Minecraft : 18 Steps (with Pictures) - Instructables</a></li>
-<li>Minecraft: Pi Edition 的 API：<a href="https://www.stuffaboutcode.com/p/minecraft-api-reference.html">Minecraft: Pi Edition API</a></li>
-</ul>
-<section id="mcpi-block-类在-setblock-setblockwithnbt-中的使用" class="level3">
-<h3 class="anchored" data-anchor-id="mcpi-block-类在-setblock-setblockwithnbt-中的使用">MCPI Block 类在 setBlock &amp; setBlockWithNBT 中的使用</h3>
-<p><code>Block</code> 类被封装成了包含三个元素 <code>id:int</code>, <code>data:int</code>, <code>nbt:str</code> 的“数组”，在 <code>setBlock</code> 和 <code>setBlockWithNBT</code> 中直接使用 <code>Block</code> 类会被 <code>flatten()</code> 或 <code>floorFlatten()</code> 函数“拍扁”成分散的参数。一个 <code>Block</code> 对象只可能被拍扁成 <code>data, id</code> 或 <code>id, data, nbt</code>，取决于该对象是否设置了 <code>nbt</code> （用 <code>None</code> 判断）。</p>
-<p>因此，需要自定义 <code>data</code> 时，不能使用 <code>block</code> 模块的预设方块。</p>
-<p><code>Vec3</code> 类也可被拍扁。</p>
-<p>例如：</p>
-<ul>
-<li><code>setBlock(Vec3(0,0,0), 137, 2)</code> 等同于 <code>mc.setBlock(Vec3(0,0,0), Block(137, 2))</code></li>
-<li><code>setBlockWithNBT(Vec3(0,0,0), 137, 2, '{Command:"your command"}')</code> 等同于 <code>setBlockWithNBT(Vec3(0,0,0), Block(137, 2), '{Command:"your command"}')</code> 等同于 <code>setBlockWithNBT(Vec3(0,0,0), Block(137, 2, '{Command:"your command"}'))</code></li>
-</ul>
-<p>需要注意的是， <code>setBlock()</code> 不能接受 <code>nbt</code> 参数或带 <code>nbt</code> 的 <code>Block</code> 对象，否则会报错。而 <code>setBlockWithNBT()</code> 则有无 <code>nbt</code> 皆可。</p>
-</section>
-<section id="关于-mcpi-与游戏内的坐标差" class="level3">
-<h3 class="anchored" data-anchor-id="关于-mcpi-与游戏内的坐标差">关于 MCPI 与游戏内的坐标差</h3>
-<p>见 <a href="https://stackoverflow.com/questions/70747581/python-minecraft-coordinates-trouble">Python + Minecraft Coordinates Trouble - Stack Overflow</a>：</p>
-<blockquote class="blockquote">
-<p>getPos, getTilePos, setPos and setTilePos all appear to be relative to the player’s spawn point at least in a single player world. I am going through trying to teleport my character but the coordinates I end up on are not the world’s coordinates but a coordinate relative to where my character would spawn.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>So, either fix an offset of 66 blocks into the y-axis values, or manually set the world spawn to <code>(0, 0, 0)</code> with <code>/setworldspawn</code>.</p>
-</blockquote>
-</section>
-</section>
-<section id="自制轮子" class="level2">
-<h2 class="anchored" data-anchor-id="自制轮子">自制轮子</h2>
-<section id="redstone-music-generator旧版" class="level3">
-<h3 class="anchored" data-anchor-id="redstone-music-generator旧版">redstone-music-generator（旧版）</h3>
-<p>（这是重构旧版前再次阅读代码后的小报告）</p>
-<p>大概使用了 observer 的设计模式，写了类似 C# 中的 Event，Delegate 暂时还没有封装，稍微有点混乱。</p>
-<p>自己写了一些工具类，然后弄了个 <code>MIDIHandler</code> 预处理 MIDI 文件。</p>
-<p>整个生成在最上层由 <code>RMG</code> 类管，<code>RMG</code> 读取 <code>MIDIHandler</code> 的信息然后触发绑定在 <code>RMG</code> 上的各种 <code>onNote()</code>、<code>onBeat()</code> 函数（触发过程由封装的 <code>Event</code> 类实现）。通过设置 <code>RMG</code> 的成员变量可以设置例如要生成的音轨、起始终止拍等参数。</p>
-<p>然后各种插件都丢在了 <code>observer.py</code> 里。这些插件接受各种需要的信息（当前音符编号、音高等），一些是用于生成 <code>Vec3</code> 或 <code>Block</code> 的 <code>XXXPosGen</code> 和 <code>XXXBlockGen</code>（还没有给他们写基类，主要是现在还没封装 Delegate），另一些是包含 <code>onNote()</code>、<code>onBeat()</code>，用来绑在 <code>RMG</code> 上的插件。（注意绑在 <code>RMG</code> 上的是函数而不是插件本身！）每个插件都有自己的参数，插件之间也可以相互嵌套（例如 <code>GroundedAdvancing</code> 里面就套了个 <code>SingleBlock</code>）。插件存在的目的是为各个输出函数 <code>onNote()</code>、<code>onBeat()</code> 统一设置参数。（这里是否可以再改的函数式编程一点？）</p>
-<p>现在有一个问题就是 PosGen 和 BlockGen 分开了，有 Issue 提到想要自定义每个 Note 下放的 partBlock，像这样搞就很麻烦。</p>
-<p>应该有一个把 PosGen 和 BlockGen 合起来的方案，最好是能独立表示多个方块及其位置信息的一个整体。</p>
-</section>
-<section id="redstone-music-generator新版" class="level3">
-<h3 class="anchored" data-anchor-id="redstone-music-generator新版">redstone-music-generator（新版）</h3>
-<p>TODO（咕咕咕）</p>
-<p>temp: <code>/execute @p ~ ~ ~ playsound block.note.guitar voice @p ~ ~ ~</code></p>
+<section id="remark" class="level2">
+<h2 class="anchored" data-anchor-id="remark">Remark</h2>
+<p>Idea 来自去年和队友 vp UCup 做到的 <a href="https://qoj.ac/problem/5748">Universal Cup 2023 Stage 7 Zaporizhzhia Problem K. Determinant, or…?</a>（甚至更难一点？）．官方题解给到的证明是递归构造分块矩阵，神似 FMT 的实现代码和与本题类似的变换技巧似乎暗示着更一般的结论．回顾证明，我们对行和列进行对称的消法变换，最终将矩阵化为对角矩阵，从而计算出行列式的值．按照线性代数的观点，若将这些变换用矩阵 <span class="math inline">\(P\)</span> 记录，上述过程事实上完成了对称矩阵 <span class="math inline">\(A\)</span> 的合同对角化，即 <span class="math inline">\(A = P \Lambda P^\mathrm{T}\)</span>．我们指出，用于合同对角化的矩阵 <span class="math inline">\(P\)</span> 完全由树上偏序关系决定，且 <span class="math inline">\(\det P = 1\)</span>．一般地，类似结论对任意下确界存在的偏序集成立——这是偏序集上广义 Möbius 变换框架下的强大结果．感兴趣的同学可参考 <span class="citation" data-cites="wilf1968hadamard"><a href="#ref-wilf1968hadamard" role="doc-biblioref">[1]</a></span>（没错，就是写 generatingfunctionology 的那个 Wilf :p）．如果你懒得去找这篇论文，我们将与本题相关的关键几式转录于此：</p>
+<p><span class="math display">\[
+P :=  \begin{pmatrix} p_{i,j} \end{pmatrix}_{n \times n} \text{  where  } p_{i,j} := \begin{cases} 1 &amp; j \leq i \\ 0 &amp; \text{otherwise} \end{cases}
+\]</span></p>
+<p><span class="math display">\[
+a_{i \land j} = A_{i,j} = (P \Lambda P^\mathrm{T})_{i,j} = \sum_{k} p_{i,k} \lambda_k p_{j,k} = \sum_{\substack{k \leq i \\ k \leq j}} \lambda_k = \sum_{\substack{k \leq i \land j}} \lambda_k
+\]</span></p>
+<p><span class="math display">\[
+\det A = \det P \det \Lambda \det P^\mathrm{T} = \det \Lambda = \prod_{k} \lambda_k
+\]</span></p>
+
 
 
 </section>
-</section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-wilf1968hadamard" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">H. S. Wilf, <span>“Hadamard determinants m<span>ö</span>bius functions, and the chromatic number of a graph,”</span> <em>Bulletin of the American Mathematical Society</em>, vol. 74, no. 5, pp. 960–964, 1968.</div>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
