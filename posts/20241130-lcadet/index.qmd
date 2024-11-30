@@ -1,0 +1,111 @@
+---
+title: "【ICPC 2024 Regional 昆明热身赛 D】LCA Determinant 题解"
+author: "sun123zxy"
+date: "2024/11/30"
+bibliography: index.bib
+image: title.jpg
+
+format:
+  html:
+    other-links:
+      - text: "在知乎上阅读"
+        icon: "question-circle"
+        href: "https://www.zhihu.com/question/883251623/answer/44580637390"
+
+categories:
+  - math
+  - algorithm
+  - combinatorics
+  - original problem
+  - solution
+
+seriousness: dedicated
+---
+
+热身赛 D 题出题人．原题出自 [2023 年 BIT 校赛 H](https://codeforces.com/gym/104825/problem/H)，非常荣幸被组题人选入热身赛供大家把玩．看到很多人对题目背后的动机感兴趣，也在这里写个题解．
+
+:::{#exm-problem}
+
+You are given a tree consisting of $n$ vertices. Vertices are numbered from $1$ to $n$. The vertex $1$ is the root of the tree. Each vertex has a weight $a_i$. Consider a matrix
+$$
+A := \begin{pmatrix} a_{\operatorname{lca}(i,j)} \end{pmatrix}_{n \times n}
+= \begin{pmatrix}
+a_{\operatorname{lca}(1,1)} & a_{\operatorname{lca}(1,2)} & \dots & a_{\operatorname{lca}(1,n)} \\
+a_{\operatorname{lca}(2,1)} & a_{\operatorname{lca}(2,2)} & \dots & a_{\operatorname{lca}(2,n)} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{\operatorname{lca}(n,1)} & a_{\operatorname{lca}(n,2)} & \dots & a_{\operatorname{lca}(n,n)}
+\end{pmatrix}
+$$
+where $\operatorname{lca}(i,j)$ denotes the lowest common ancestor of vertex $i$ and vertex $j$. Calculate the determinant of matrix $A$.
+:::
+
+## Solution
+
+本题定位智慧 / 猜结论 / 线代高手题，结论为
+$$
+\det A = a_1 \prod_{\substack{u \in V \\ u \neq 1}} (a_u - a_{\operatorname{fa}(u)})
+$$
+其中 $V$ 是全体树上节点构成的集合，$\operatorname{fa}(u)$ 代表节点 $u$ 在树上的父亲节点．
+
+赛时技巧而言，样例已给出树为单链之一例，选手应考虑补充举例菊花图的情况，并分别应用行列式消法变换证明两种特殊情况的正确性．分析两种消去方法的共性便可得到结论的雏形．
+
+一般地，考虑对节点按深度从小到大进行重标号，由于重标号对行和列进行的置换相同，行列式的值和正负性均不会发生变化．现在归纳地证明结论．当 $n=1$ 时，结论平凡．当 $n \geq 2$，假设结论对全体大小为 $n-1$ 的树成立．现给定一颗大小为 $n$ 的按上述方法重标号后的树，设其对应行列式为 $A_n$．由重标号方法，编号为 $n$ 的节点一定为叶子节点；且由 $n \geq 2$，其父节点存在．在行列式中做消法变换：
+
+- 将第 $n$ 列减去第 $\operatorname{fa}(u)$ 列；
+- 将第 $n$ 行减去第 $\operatorname{fa}(u)$ 行．
+
+行列式变为
+$$
+\begin{aligned}
+&\phantom{\to} \begin{pmatrix}
+a_{\operatorname{lca}(1,1)} & a_{\operatorname{lca}(1,2)} & \dots & a_{\operatorname{lca}(1,n)} \\
+a_{\operatorname{lca}(2,1)} & a_{\operatorname{lca}(2,2)} & \dots & a_{\operatorname{lca}(2,n)} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{\operatorname{lca}(n,1)} & a_{\operatorname{lca}(n,2)} & \dots & a_{\operatorname{lca}(n,n)}
+\end{pmatrix} \\
+&\to
+\begin{pmatrix}
+a_{\operatorname{lca}(1,1)} & a_{\operatorname{lca}(1,2)} & \dots & a_{\operatorname{lca}(1,n)} - a_{\operatorname{lca}(1,\operatorname{fa}(n))} \\
+a_{\operatorname{lca}(2,1)} & a_{\operatorname{lca}(2,2)} & \dots & a_{\operatorname{lca}(2,n)} - a_{\operatorname{lca}(2,\operatorname{fa}(n))} \\
+\vdots & \vdots & \ddots & \vdots
+\\ a_{\operatorname{lca}(n,1)} & a_{\operatorname{lca}(n,2)} & \dots & a_{\operatorname{lca}(n,n)} - a_{\operatorname{lca}(n,\operatorname{fa}(n))}
+\end{pmatrix} \\
+&= \begin{pmatrix}
+a_{\operatorname{lca}(1,1)} & a_{\operatorname{lca}(1,2)} & \dots & 0 \\
+a_{\operatorname{lca}(2,1)} & a_{\operatorname{lca}(2,2)} & \dots & 0 \\
+\vdots & \vdots & \ddots & \vdots
+\\ a_{\operatorname{lca}(n,1)} & a_{\operatorname{lca}(n,2)} & \dots & a_n - a_{\operatorname{fa}(n)}
+\end{pmatrix} \\\\
+&\to \begin{pmatrix}
+a_{\operatorname{lca}(1,1)} & a_{\operatorname{lca}(1,2)} & \dots & 0 \\
+a_{\operatorname{lca}(2,1)} & a_{\operatorname{lca}(2,2)} & \dots & 0 \\
+\vdots & \vdots & \ddots & \vdots
+\\ a_{\operatorname{lca}(n,1)} - a_{\operatorname{lca}(\operatorname{fa}(n),1)} & a_{\operatorname{lca}(n,2)} - a_{\operatorname{lca}(\operatorname{fa}(n),2)} & \dots & a_n - a_{\operatorname{fa}(n)}
+\end{pmatrix}\\
+&= \begin{pmatrix}
+a_{\operatorname{lca}(1,1)} & a_{\operatorname{lca}(1,2)} & \dots & 0 \\
+a_{\operatorname{lca}(2,1)} & a_{\operatorname{lca}(2,2)} & \dots & 0 \\
+\vdots & \vdots & \ddots & \vdots
+\\ 0 & 0 & \dots & a_n - a_{\operatorname{fa}(n)}
+\end{pmatrix} \\
+&\to (a_n - a_{\operatorname{fa}(n)}) \det A_{n-1} \\
+&= a_1 \prod_{\substack{u \in V \\ u \neq 1}} (a_u - a_{\operatorname{fa}(u)})
+\end{aligned}
+$$
+故结论对任意 $n \in \mathbb N_+$ 均成立．
+
+## Remark
+
+Idea 来自去年和队友 vp UCup 做到的 [Universal Cup 2023 Stage 7 Zaporizhzhia Problem K. Determinant, or...?](https://qoj.ac/problem/5748)（甚至更难一点？）．官方题解给到的证明是递归构造分块矩阵，神似 FMT 的实现代码和与本题类似的变换技巧似乎暗示着更一般的结论．回顾证明，我们对行和列进行对称的消法变换，最终将矩阵化为对角矩阵，从而计算出行列式的值．按照线性代数的观点，若将这些变换用矩阵 $P$ 记录，上述过程事实上完成了对称矩阵 $A$ 的合同对角化，即 $A = P \Lambda P^\mathrm{T}$．我们指出，用于合同对角化的矩阵 $P$ 完全由树上偏序关系决定，且 $\det P = 1$．一般地，类似结论对任意下确界存在的偏序集成立——这是偏序集上广义 Möbius 变换框架下的强大结果．感兴趣的同学可参考 [@wilf1968hadamard]（没错，就是写 generatingfunctionology 的那个 Wilf :p）．如果你懒得去找这篇论文，我们将与本题相关的关键几式转录于此：
+
+$$
+P :=  \begin{pmatrix} p_{i,j} \end{pmatrix}_{n \times n} \text{  where  } p_{i,j} := \begin{cases} 1 & j \leq i \\ 0 & \text{otherwise} \end{cases}
+$$
+
+$$
+a_{i \land j} = A_{i,j} = (P \Lambda P^\mathrm{T})_{i,j} = \sum_{k} p_{i,k} \lambda_k p_{j,k} = \sum_{\substack{k \leq i \\ k \leq j}} \lambda_k = \sum_{\substack{k \leq i \land j}} \lambda_k
+$$
+
+$$
+\det A = \det P \det \Lambda \det P^\mathrm{T} = \det \Lambda = \prod_{k} \lambda_k
+$$
