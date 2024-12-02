@@ -259,7 +259,7 @@ window.Quarto = {
 </header>
 
 
-<p>热身赛 D 供题人．原题出自 <a href="https://codeforces.com/gym/104825/problem/H">2023 年 BIT 校赛 H</a>，非常荣幸被组题人收入热身赛供大家把玩．看到很多人对题目背后的动机感兴趣，也在这里写个题解，稍稍探讨一下此类行列式背后通用的计算技巧．</p>
+<p>热身赛 D 供题人．原题出自 <a href="https://codeforces.com/gym/104825/problem/H">2023 年 BIT 校赛 H</a>，非常荣幸被组题人收入热身赛供大家把玩．看到很多人对题目背后的动机感兴趣，也把题解放到这里，趁机聊聊此类行列式背后的技巧和理论．</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -282,7 +282,7 @@ a_{\operatorname{lca}(n,1)} &amp; a_{\operatorname{lca}(n,2)} &amp; \dots &amp; 
 </div>
 <section id="solution" class="level2">
 <h2 class="anchored" data-anchor-id="solution">Solution</h2>
-<p>本题定位智慧 / 猜结论 / 线代高手题，结论为 <span class="math display">\[
+<p>本题定位智慧 / 猜结论 / 线代高手 / <del>出进正赛会被骂</del>题，结论为 <span class="math display">\[
 \det A = a_1 \prod_{\substack{u \in V \\ u \neq 1}} (a_u - a_{\operatorname{fa}(u)})
 \]</span> 其中 <span class="math inline">\(V\)</span> 是全体树上节点构成的集合，<span class="math inline">\(\operatorname{fa}(u)\)</span> 代表节点 <span class="math inline">\(u\)</span> 在树上的父亲节点．</p>
 <p>赛时技巧而言，样例已给出树为单链之一例，选手应考虑补充举例菊花图的情况，并分别应用行列式消法变换证明两种特殊情况的正确性．分析两种消去方法的共性便可得到结论的雏形．</p>
@@ -359,7 +359,7 @@ a_{i \land j} = A_{i,j} = (P \Lambda P^\mathrm{T})_{i,j} = \sum_{k} p_{i,k} \lam
 \]</span></p></li>
 <li><p>AND Determinant / 高维前缀和 / 容斥原理：</p>
 <p><span class="math display">\[
-\det \begin{pmatrix} a_{i \&amp; j} \end{pmatrix}_{2^n \times 2^n} = \prod_{1 \leq k \leq n} \sum_{t \subseteq k} (-1)^{\operatorname{popcount}(k)-\operatorname{popcount}(t)} a_t
+\det \begin{pmatrix} a_{i \&amp; j} \end{pmatrix}_{2^n \times 2^n} = \prod_{0 \leq k &lt; 2^n} \sum_{t \subseteq k} (-1)^{\operatorname{popcount}(k)-\operatorname{popcount}(t)} a_t
 \]</span> 借助 FMT 可做到 <span class="math inline">\(O(n 2^n)\)</span>．</p></li>
 <li><p>GCD Determinant / Zeta 变换 / Möbius 反演： <span class="math display">\[
 \det \begin{pmatrix} a_{\gcd(i,j)} \end{pmatrix}_{n \times n} = \prod_{1 \leq k \leq n} \sum_{d \mid k} \mu(\frac k d) a_d
