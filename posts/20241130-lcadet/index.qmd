@@ -22,7 +22,7 @@ categories:
 seriousness: dedicated
 ---
 
-热身赛 D 供题人．原题出自 [2023 年 BIT 校赛 H](https://codeforces.com/gym/104825/problem/H)，非常荣幸被组题人收入热身赛供大家把玩．看到很多人对题目背后的动机感兴趣，也在这里写个题解，稍稍探讨一下此类行列式背后通用的计算技巧．
+热身赛 D 供题人．原题出自 [2023 年 BIT 校赛 H](https://codeforces.com/gym/104825/problem/H)，非常荣幸被组题人收入热身赛供大家把玩．看到很多人对题目背后的动机感兴趣，也把题解放到这里，趁机聊聊此类行列式背后的技巧和理论．
 
 :::{#exm-problem}
 
@@ -41,7 +41,7 @@ where $\operatorname{lca}(i,j)$ denotes the lowest common ancestor of vertex $i$
 
 ## Solution
 
-本题定位智慧 / 猜结论 / 线代高手题，结论为
+本题定位智慧 / 猜结论 / 线代高手 / ~~出进正赛会被骂~~题，结论为
 $$
 \det A = a_1 \prod_{\substack{u \in V \\ u \neq 1}} (a_u - a_{\operatorname{fa}(u)})
 $$
@@ -138,7 +138,7 @@ Idea 来自去年和队友 vp UCup 做到的 [Universal Cup 2023 Stage 7 Zaporiz
 - AND Determinant / 高维前缀和 / 容斥原理：
 
   $$
-  \det \begin{pmatrix} a_{i \& j} \end{pmatrix}_{2^n \times 2^n} = \prod_{1 \leq k \leq n} \sum_{t \subseteq k} (-1)^{\operatorname{popcount}(k)-\operatorname{popcount}(t)} a_t
+  \det \begin{pmatrix} a_{i \& j} \end{pmatrix}_{2^n \times 2^n} = \prod_{0 \leq k < 2^n} \sum_{t \subseteq k} (-1)^{\operatorname{popcount}(k)-\operatorname{popcount}(t)} a_t
   $$
   借助 FMT 可做到 $O(n 2^n)$．
 
