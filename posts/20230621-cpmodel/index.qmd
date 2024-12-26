@@ -1243,40 +1243,6 @@ $$
 
 ## 杂项
 
-### 模板
-
-见 [model.cpp](code/model.cpp), [model_temp.cpp](code/model_temp.cpp)．
-
-### 对拍
-
-#### Windows Batch
-
-```batch
-:loop
-    gen.exe>dat.in
-    my.exe<dat.in>my.out
-    std.exe<dat.in>std.out
-    fc my.out std.out
-    if not errorlevel 1 goto loop
-pause
-```
-
-#### Linux Shell
-
-```sh
-while true; do
-	./gen>dat.in
-	./std<dat.in>std.out
-	./my<dat.in>my.out
-	if diff std.out my.out; then
-		printf OK
-	else
-		printf DIFF
-		exit 0
-	fi
-done
-```
-
 ### 表
 
 #### 质数表
@@ -1350,4 +1316,50 @@ k-partition
 3 |     1   1   1
 4 |     1   2   1   1
 5 |     1   2   2   1   1
+```
+
+### 对拍
+
+#### Windows Batch
+
+```batch
+:loop
+    gen.exe>dat.in
+    my.exe<dat.in>my.out
+    std.exe<dat.in>std.out
+    fc my.out std.out
+    if not errorlevel 1 goto loop
+pause
+```
+
+#### Linux Shell
+
+```sh
+while true; do
+	./gen>dat.in
+	./std<dat.in>std.out
+	./my<dat.in>my.out
+	if diff std.out my.out; then
+		printf OK
+	else
+		printf DIFF
+		exit 0
+	fi
+done
+```
+
+### 模板
+
+见 [model.cpp](code/model.cpp), [model_temp.cpp](code/model_temp.cpp)．
+
+#### model.cpp
+
+```cpp
+{{< include code/model.cpp >}}
+```
+
+#### model_temp.cpp
+
+```cpp
+{{< include code/model_temp.cpp >}}
 ```
