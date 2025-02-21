@@ -1196,8 +1196,8 @@ L(n,k) = \frac{n!}{k!} \binom{n-1}{k-1}
 \]</span></p>
 <p>更多信息参考 Wikipedia．</p>
 </section>
-<section id="特殊-dag-的拓扑序计数有根树-young-表" class="level4">
-<h4 class="anchored" data-anchor-id="特殊-dag-的拓扑序计数有根树-young-表">特殊 DAG 的拓扑序计数（有根树 / Young 表）</h4>
+<section id="特殊-dag-的拓扑序计数有根树-young-tableaux" class="level4">
+<h4 class="anchored" data-anchor-id="特殊-dag-的拓扑序计数有根树-young-tableaux">特殊 DAG 的拓扑序计数（有根树 / Young Tableaux）</h4>
 <p>对一般 DAG 上拓扑序计数，其本质上是偏序上线性扩张的计数问题，这被证明是 #P-complete 的问题（总之就是很困难）．</p>
 <ul>
 <li><a href="https://math.stackexchange.com/questions/814177/how-many-topological-orderings-exist-for-a-graph">How many topological orderings exist for a graph? - Mathematics Stack Exchange</a></li>
@@ -1210,9 +1210,12 @@ L(n,k) = \frac{n!}{k!} \binom{n-1}{k-1}
 <p>对于外向树： <span class="math display">\[
 \frac{n!}{\prod_{u \in V} \operatorname{size}(u)}
 \]</span> 其中 <span class="math inline">\(V\)</span> 是所有节点的集合，<span class="math inline">\(n\)</span> 是树大小，<span class="math inline">\(\operatorname{size}(u)\)</span> 是以 <span class="math inline">\(u\)</span> 为根的子树大小．</p>
-<p>树形 DP 风格的归纳证明是可以的．下面的链接中提供了一个有趣的组合理解．考虑依深度由叶到根递归，每次确定当前节点 <span class="math inline">\(u\)</span> 对应子树内的相对顺序．在尚未要求 <span class="math inline">\(u\)</span> 满足拓扑序（在其子树内排位第一）时，由于 <span class="math inline">\(u\)</span> 的各子节点 <span class="math inline">\(v\)</span> 对应子树内的相对顺序已经确定，故事实上只需确定 <span class="math inline">\(u\)</span> 在其对应子树内的相对排位——这恰有 <span class="math inline">\(\operatorname{size}(u)\)</span> 种选择——故除掉此数消序以确保 <span class="math inline">\(u\)</span> 在其子树内排位第一．</p>
+<p>这里提供若干种理解或证明方法．</p>
 <ul>
-<li><a href="https://codeforces.com/blog/entry/75627">[Insight] Number of Topological Orderings of a Directed Tree - Codeforces</a></li>
+<li><p>树形 DP 风格的归纳证明是可以的．</p></li>
+<li><p>下面的链接中提供了一个有趣的组合理解．考虑依深度由叶到根递归，每次确定当前节点 <span class="math inline">\(u\)</span> 对应子树内的相对顺序．在尚未要求 <span class="math inline">\(u\)</span> 满足拓扑序（在其子树内排位第一）时，由于 <span class="math inline">\(u\)</span> 的各子节点 <span class="math inline">\(v\)</span> 对应子树内的相对顺序已经确定，故事实上只需确定 <span class="math inline">\(u\)</span> 在其对应子树内的相对排位——这恰有 <span class="math inline">\(\operatorname{size}(u)\)</span> 种选择——故除掉此数消序以确保 <span class="math inline">\(u\)</span> 在其子树内排位第一．</p>
+<p><a href="https://codeforces.com/blog/entry/75627">[Insight] Number of Topological Orderings of a Directed Tree - Codeforces</a></p></li>
+<li><p>简化上述组合理解后得到的概率风格证明：每个节点在其对应子树中排位第一的概率恰为 <span class="math inline">\(1/\operatorname{size}(u)\)</span>，而这些事件相互独立．</p></li>
 </ul>
 <p>题目常见要求对每个节点作为根节点求出方案数，换根 DP 即可．</p>
 <p>注意到每个合法的外向树拓扑序 reverse 后立刻与内向树拓扑序形成一一对应，故内向树拓扑序计数与外向树相同．</p>
@@ -1221,7 +1224,7 @@ L(n,k) = \frac{n!}{k!} \binom{n-1}{k-1}
 <h5 class="anchored" data-anchor-id="young-tableaux">Young tableaux</h5>
 <p>特定形状 Young tableau 的计数问题也是 DAG 拓扑序计数的一个特例．对形状为 <span class="math inline">\(\lambda\)</span>（一个整数分拆）的全体 Young tableau 计数，我们有著名的钩长公式（hook length formula）： <span class="math display">\[
 \frac{n!}{\prod_{(i,j) \in \lambda} h_\lambda (i,j)}
-\]</span> 简单而并不平凡，且与有根树拓扑序计数相似的公式似乎意味着类似的组合解释——其被称为 <a href="https://en.wikipedia.org/wiki/Hook_length_formula#Knuth's_heuristic_argument">Knuth’s heuristic argument</a>．可惜在 Young tableau 中，相对顺序的确定并不相互独立，故更严谨的论证或还需多费些口舌．</p>
+\]</span> 简单而并不平凡，且与有根树拓扑序计数相似的公式似乎意味着类似的组合解释——其被称为 <a href="https://en.wikipedia.org/wiki/Hook_length_formula#Knuth's_heuristic_argument">Knuth’s heuristic argument</a>．可惜在 Young tableau 中，相对顺序的确定并不相互独立，故更严谨的论证还需多费些口舌（详见 Wikipedia）．</p>
 <div id="fig-young-tableaux-counting" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-young-tableaux-counting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
