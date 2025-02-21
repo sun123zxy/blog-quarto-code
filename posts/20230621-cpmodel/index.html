@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.40">
+<meta name="generator" content="quarto-1.6.41">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -71,12 +71,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-1092c56c6cadf2eb47b1bc8063ab382a.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d8c89e26045d7c6858d3ec399ef65be1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-62dcb3dbfa471fa89900659fe90c62b2.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-83b8fe88fb1707c6912181afe95fd7ec.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-1aa428c78c6b1413c41e04679240c0c4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-84077ae7ac91e720d75d70894c458d5a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-5289b772a233717b90bf2592d0705465.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-155d534f578a5bfe3f1c4545c6510df8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -328,7 +328,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2024年3月10日</p>
+      <p class="date-modified">2025年2月21日</p>
     </div>
   </div>
     
@@ -1196,24 +1196,90 @@ L(n,k) = \frac{n!}{k!} \binom{n-1}{k-1}
 \]</span></p>
 <p>更多信息参考 Wikipedia．</p>
 </section>
-<section id="有根树拓扑序计数" class="level4">
-<h4 class="anchored" data-anchor-id="有根树拓扑序计数">有根树拓扑序计数</h4>
-<p>对于外向树，<span class="math inline">\(\frac{n!}{\prod_{u \in V} \operatorname{size}(u)}\)</span>，其中 <span class="math inline">\(V\)</span> 是所有节点的集合，<span class="math inline">\(n\)</span> 是树大小，<span class="math inline">\(\operatorname{size}(u)\)</span> 是以 <span class="math inline">\(u\)</span> 为根的子树大小．</p>
-<p>树形 DP 风格的归纳证明是可以的．下面的链接中提供了一个有趣的组合理解，其思路是从全序出发，逐步按照拓扑序的要求对每个节点下的子树消序．</p>
-<p>题目常见要求对每个节点作为根节点求出方案数，换根 DP 即可．</p>
-<p>注意到每个合法的外向树拓扑序 reverse 后立刻与内向树拓扑序形成一一对应，故内向树拓扑序计数与外向树相同．</p>
-<ul>
-<li><a href="https://codeforces.com/blog/entry/75627">[Insight] Number of Topological Orderings of a Directed Tree - Codeforces</a></li>
-</ul>
-</section>
-<section id="dag-拓扑序计数" class="level4">
-<h4 class="anchored" data-anchor-id="dag-拓扑序计数">DAG 拓扑序计数</h4>
-<p>对一般的 DAG 上的拓扑序计数，其本质上是偏序上线性扩张的计数问题，这被证明是 #P-complete 的问题（总之就是很困难）．</p>
+<section id="特殊-dag-的拓扑序计数有根树-young-表" class="level4">
+<h4 class="anchored" data-anchor-id="特殊-dag-的拓扑序计数有根树-young-表">特殊 DAG 的拓扑序计数（有根树 / Young 表）</h4>
+<p>对一般 DAG 上拓扑序计数，其本质上是偏序上线性扩张的计数问题，这被证明是 #P-complete 的问题（总之就是很困难）．</p>
 <ul>
 <li><a href="https://math.stackexchange.com/questions/814177/how-many-topological-orderings-exist-for-a-graph">How many topological orderings exist for a graph? - Mathematics Stack Exchange</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Topological_sorting#Relation_to_partial_orders">Topological sorting - Wikipedia # Relation to partial orders</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Linear_extension">Linear extension - Wikipedia</a></li>
 </ul>
+<p>一些具有较好性质的 DAG 的拓扑序计数问题具有较好的封闭形式．</p>
+<section id="有根树" class="level5">
+<h5 class="anchored" data-anchor-id="有根树">有根树</h5>
+<p>对于外向树： <span class="math display">\[
+\frac{n!}{\prod_{u \in V} \operatorname{size}(u)}
+\]</span> 其中 <span class="math inline">\(V\)</span> 是所有节点的集合，<span class="math inline">\(n\)</span> 是树大小，<span class="math inline">\(\operatorname{size}(u)\)</span> 是以 <span class="math inline">\(u\)</span> 为根的子树大小．</p>
+<p>树形 DP 风格的归纳证明是可以的．下面的链接中提供了一个有趣的组合理解．考虑依深度由叶到根递归，每次确定当前节点 <span class="math inline">\(u\)</span> 对应子树内的相对顺序．在尚未要求 <span class="math inline">\(u\)</span> 满足拓扑序（在其子树内排位第一）时，由于 <span class="math inline">\(u\)</span> 的各子节点 <span class="math inline">\(v\)</span> 对应子树内的相对顺序已经确定，故事实上只需确定 <span class="math inline">\(u\)</span> 在其对应子树内的相对排位——这恰有 <span class="math inline">\(\operatorname{size}(u)\)</span> 种选择——故除掉此数消序以确保 <span class="math inline">\(u\)</span> 在其子树内排位第一．</p>
+<ul>
+<li><a href="https://codeforces.com/blog/entry/75627">[Insight] Number of Topological Orderings of a Directed Tree - Codeforces</a></li>
+</ul>
+<p>题目常见要求对每个节点作为根节点求出方案数，换根 DP 即可．</p>
+<p>注意到每个合法的外向树拓扑序 reverse 后立刻与内向树拓扑序形成一一对应，故内向树拓扑序计数与外向树相同．</p>
+</section>
+<section id="young-tableaux" class="level5">
+<h5 class="anchored" data-anchor-id="young-tableaux">Young tableaux</h5>
+<p>特定形状 Young tableau 的计数问题也是 DAG 拓扑序计数的一个特例．对形状为 <span class="math inline">\(\lambda\)</span>（一个整数分拆）的全体 Young tableau 计数，我们有著名的钩长公式（hook length formula）： <span class="math display">\[
+\frac{n!}{\prod_{(i,j) \in \lambda} h_\lambda (i,j)}
+\]</span> 简单而并不平凡，且与有根树拓扑序计数相似的公式似乎意味着类似的组合解释——其被称为 <a href="https://en.wikipedia.org/wiki/Hook_length_formula#Knuth's_heuristic_argument">Knuth’s heuristic argument</a>．可惜在 Young tableau 中，相对顺序的确定并不相互独立，故更严谨的论证或还需多费些口舌．</p>
+<div id="fig-young-tableaux-counting" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-young-tableaux-counting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.2.2 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="243.9pt" height="129.945pt" viewbox="0 0 162.6 86.63">
+<g id="page1">
+<path d="M.796997 .793991V29.140791H29.143797V.793991Z" fill="#f00"></path>
+<path d="M.796997 .793991V29.140791H29.143797V.793991Z" stroke="#000" fill="none" stroke-width="1.59404" stroke-miterlimit="10"></path>
+<path d="M29.143797 .793991V29.140791H57.490617V.793991Z" fill="#ff8000"></path>
+<path d="M29.143797 .793991V29.140791H57.490617V.793991Z" stroke="#000" fill="none" stroke-width="1.59404" stroke-miterlimit="10"></path>
+<path d="M57.490617 .793991V29.140791H85.837417V.793991Z" fill="#ff8000"></path>
+<path d="M57.490617 .793991V29.140791H85.837417V.793991Z" stroke="#000" fill="none" stroke-width="1.59404" stroke-miterlimit="10"></path>
+<path d="M85.837417 .793991V29.140791H114.184237V.793991Z" fill="#ff8000"></path>
+<path d="M85.837417 .793991V29.140791H114.184237V.793991Z" stroke="#000" fill="none" stroke-width="1.59404" stroke-miterlimit="10"></path>
+<path d="M.796997 29.140791V57.487611H29.143797V29.140791Z" fill="#ff8000"></path>
+<path d="M.796997 29.140791V57.487611H29.143797V29.140791Z" stroke="#000" fill="none" stroke-width="1.59404" stroke-miterlimit="10"></path>
+<path d="M29.143797 29.140791V57.487611H57.490617V29.140791Z" fill="#ff0"></path>
+<path d="M29.143797 29.140791V57.487611H57.490617V29.140791Z" stroke="#000" fill="none" stroke-width="1.59404" stroke-miterlimit="10"></path>
+<path d="M57.490617 29.140791V57.487611H85.837417V29.140791Z" fill="#ff0"></path>
+<path d="M57.490617 29.140791V57.487611H85.837417V29.140791Z" stroke="#000" fill="none" stroke-width="1.59404" stroke-miterlimit="10"></path>
+<path d="M.796997 57.487611V85.834411H29.143797V57.487611Z" fill="#ff8000"></path>
+<path d="M.796997 57.487611V85.834411H29.143797V57.487611Z" stroke="#000" fill="none" stroke-width="1.59404" stroke-miterlimit="10"></path>
+<path d="M29.143797 57.487611V85.834411H57.490617V57.487611Z" fill="#ff0"></path>
+<path d="M29.143797 57.487611V85.834411H57.490617V57.487611Z" stroke="#000" fill="none" stroke-width="1.59404" stroke-miterlimit="10"></path>
+<path d="M3.348097 31.691891V82.999541" stroke="#008080" fill="none" stroke-width="1.59404" stroke-miterlimit="10" stroke-dasharray="2.98883 2.98883"></path>
+<path d="M3.348097 82.999541H54.939487" stroke="#008080" fill="none" stroke-width="1.59404" stroke-miterlimit="10" stroke-dasharray="2.98883 2.98883"></path>
+<path d="M54.939487 82.999541L55.222807 54.086121" stroke="#008080" fill="none" stroke-width="1.59404" stroke-miterlimit="10" stroke-dasharray="2.98883 2.98883"></path>
+<path d="M55.222807 54.086121H82.719257" stroke="#008080" fill="none" stroke-width="1.59404" stroke-miterlimit="10" stroke-dasharray="2.98883 2.98883"></path>
+<path d="M82.719257 54.086121L83.002547 31.975651" stroke="#008080" fill="none" stroke-width="1.59404" stroke-miterlimit="10" stroke-dasharray="2.98883 2.98883"></path>
+<path d="M83.002547 31.975651L3.631837 31.691891" stroke="#008080" fill="none" stroke-width="1.59404" stroke-miterlimit="10" stroke-dasharray="2.98883 2.98883"></path>
+<path d="M31.128277 3.628831L31.411597 81.015491" stroke="#00f" fill="none" stroke-width="1.59404" stroke-miterlimit="10" stroke-dasharray="2.98883 2.98883"></path>
+<path d="M31.411597 81.015491H53.522077" stroke="#00f" fill="none" stroke-width="1.59404" stroke-miterlimit="10" stroke-dasharray="2.98883 2.98883"></path>
+<path d="M53.522077 81.298811L53.805377 52.668691" stroke="#00f" fill="none" stroke-width="1.59404" stroke-miterlimit="10" stroke-dasharray="2.98883 2.98883"></path>
+<path d="M53.805377 52.668691L81.301817 52.951991" stroke="#00f" fill="none" stroke-width="1.59404" stroke-miterlimit="10" stroke-dasharray="2.98883 2.98883"></path>
+<path d="M81.301817 52.951991L81.585557 27.440051" stroke="#00f" fill="none" stroke-width="1.59404" stroke-miterlimit="10" stroke-dasharray="2.98883 2.98883"></path>
+<path d="M81.585557 27.440051L112.483477 27.723361" stroke="#00f" fill="none" stroke-width="1.59404" stroke-miterlimit="10" stroke-dasharray="2.98883 2.98883"></path>
+<path d="M112.483477 27.723361V2.494721" stroke="#00f" fill="none" stroke-width="1.59404" stroke-miterlimit="10" stroke-dasharray="2.98883 2.98883"></path>
+<path d="M112.483477 2.494721L31.128277 2.778461" stroke="#00f" fill="none" stroke-width="1.59404" stroke-miterlimit="10" stroke-dasharray="2.98883 2.98883"></path>
+<path d="M152.168857 80.165131H161.806657" stroke="#00f" fill="none" stroke-width="1.59404" stroke-miterlimit="10" stroke-dasharray="2.98883 2.98883"></path>
+<path d="M152.168857 63.723921H161.806657" stroke="#008080" fill="none" stroke-width="1.59404" stroke-miterlimit="10" stroke-dasharray="2.98883 2.98883"></path>
+<path d="M160.105917 50.400891V42.747131H151.885527V50.400891Z" fill="#ff0"></path>
+<path d="M160.105917 50.400891V42.747131H151.885527V50.400891Z" stroke="#000" fill="none" stroke-width="1.59404" stroke-miterlimit="10"></path>
+<path d="M159.822597 33.392641V25.455571H151.885527V33.392641Z" fill="#ff8000"></path>
+<path d="M159.822597 33.392641V25.455571H151.885527V33.392641Z" stroke="#000" fill="none" stroke-width="1.59404" stroke-miterlimit="10"></path>
+<path d="M159.539297 17.235191V9.014361H151.602217V17.235191Z" fill="#f00"></path>
+<path d="M159.539297 17.235191V9.014361H151.602217V17.235191Z" stroke="#000" fill="none" stroke-width="1.59404" stroke-miterlimit="10"></path>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-young-tableaux-counting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1: hook length formula 的组合直觉
+</figcaption>
+</figure>
+</div>
+</section>
 </section>
 <section id="无向图的色多项式chromatic-polynomial和无环定向acyclic-orientations" class="level4">
 <h4 class="anchored" data-anchor-id="无向图的色多项式chromatic-polynomial和无环定向acyclic-orientations">无向图的色多项式（chromatic polynomial）和无环定向（acyclic orientations）</h4>
