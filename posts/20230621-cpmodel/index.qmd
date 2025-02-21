@@ -3,7 +3,7 @@ title: "算法 & 数学碎碎念"
 abstract: "现场赛公式模板库，亦可作为小而精的总结性学习材料参考．无需单独成文或暂不完善的内容会放在这里．"
 author: "sun123zxy"
 date: "2023/06/21"
-date-modified: "2024/03/10"
+date-modified: "2025/02/21"
 lang: zh
 
 categories:
@@ -795,25 +795,77 @@ $$
 
 更多信息参考 Wikipedia．
 
-#### 有根树拓扑序计数
+#### 特殊 DAG 的拓扑序计数（有根树 / Young 表）
 
-对于外向树，$\frac{n!}{\prod_{u \in V} \operatorname{size}(u)}$，其中 $V$ 是所有节点的集合，$n$ 是树大小，$\operatorname{size}(u)$ 是以 $u$ 为根的子树大小． 
+对一般 DAG 上拓扑序计数，其本质上是偏序上线性扩张的计数问题，这被证明是 #P-complete 的问题（总之就是很困难）．
 
-树形 DP 风格的归纳证明是可以的．下面的链接中提供了一个有趣的组合理解，其思路是从全序出发，逐步按照拓扑序的要求对每个节点下的子树消序．
+- [How many topological orderings exist for a graph? - Mathematics Stack Exchange](https://math.stackexchange.com/questions/814177/how-many-topological-orderings-exist-for-a-graph)
+- [Topological sorting - Wikipedia # Relation to partial orders](https://en.wikipedia.org/wiki/Topological_sorting#Relation_to_partial_orders)
+- [Linear extension - Wikipedia](https://en.wikipedia.org/wiki/Linear_extension)
+
+一些具有较好性质的 DAG 的拓扑序计数问题具有较好的封闭形式。
+
+##### 有根树
+
+对于外向树：
+$$
+\frac{n!}{\prod_{u \in V} \operatorname{size}(u)}
+$$
+其中 $V$ 是所有节点的集合，$n$ 是树大小，$\operatorname{size}(u)$ 是以 $u$ 为根的子树大小． 
+
+树形 DP 风格的归纳证明是可以的．下面的链接中提供了一个有趣的组合理解。考虑依深度由叶到根递归，每次确定当前节点 $u$ 对应子树内的相对顺序。在尚未要求 $u$ 满足拓扑序（在其子树内排位第一）时，由于 $u$ 的各子节点 $v$ 对应子树内的相对顺序已经确定，故事实上只需确定 $u$ 在其对应子树内的相对排位——这恰有 $\operatorname{size}(u)$ 种选择——故除掉此数消序以确保 $u$ 在其子树内排位第一。
+
+- [[Insight] Number of Topological Orderings of a Directed Tree - Codeforces](https://codeforces.com/blog/entry/75627)
 
 题目常见要求对每个节点作为根节点求出方案数，换根 DP 即可．
 
 注意到每个合法的外向树拓扑序 reverse 后立刻与内向树拓扑序形成一一对应，故内向树拓扑序计数与外向树相同．
 
-- [[Insight] Number of Topological Orderings of a Directed Tree - Codeforces](https://codeforces.com/blog/entry/75627)
+##### Young tableaux
 
-#### DAG 拓扑序计数
+特定形状 Young tableau 的计数问题也是 DAG 拓扑序计数的一个特例．对形状为 $\lambda$（一个整数分拆）的全体 Young tableau 计数，我们有著名的钩长公式（hook length formula）：
+$$
+\frac{n!}{\prod_{(i,j) \in \lambda} h_\lambda (i,j)}
+$$
+简单而并不平凡，且与有根树拓扑序计数相似的公式似乎意味着类似的组合解释——其被称为 [Knuth's heuristic argument](https://en.wikipedia.org/wiki/Hook_length_formula#Knuth's_heuristic_argument)．可惜在 Young tableau 中，相对顺序的确定并不相互独立，故更严谨的论证或还需多费些口舌．
 
-对一般的 DAG 上的拓扑序计数，其本质上是偏序上线性扩张的计数问题，这被证明是 #P-complete 的问题（总之就是很困难）．
+:::{#fig-young-tableaux-counting}
 
-- [How many topological orderings exist for a graph? - Mathematics Stack Exchange](https://math.stackexchange.com/questions/814177/how-many-topological-orderings-exist-for-a-graph)
-- [Topological sorting - Wikipedia # Relation to partial orders](https://en.wikipedia.org/wiki/Topological_sorting#Relation_to_partial_orders)
-- [Linear extension - Wikipedia](https://en.wikipedia.org/wiki/Linear_extension)
+```{tikz}
+\begin{tikzpicture}
+	\draw[draw=black, fill=red, ultra thick, solid] (0.00,0.00) rectangle (1.00,-1.00);
+	\draw[draw=black, fill=orange, ultra thick, solid] (1.00,0.00) rectangle (2.00,-1.00);
+	\draw[draw=black, fill=orange, ultra thick, solid] (2.00,0.00) rectangle (3.00,-1.00);
+	\draw[draw=black, fill=orange, ultra thick, solid] (3.00,0.00) rectangle (4.00,-1.00);
+	\draw[draw=black, fill=orange, ultra thick, solid] (0.00,-1.00) rectangle (1.00,-2.00);
+	\draw[draw=black, fill=yellow, ultra thick, solid] (1.00,-1.00) rectangle (2.00,-2.00);
+	\draw[draw=black, fill=yellow, ultra thick, solid] (2.00,-1.00) rectangle (3.00,-2.00);
+	\draw[draw=black, fill=orange, ultra thick, solid] (0.00,-2.00) rectangle (1.00,-3.00);
+	\draw[draw=black, fill=yellow, ultra thick, solid] (1.00,-2.00) rectangle (2.00,-3.00);
+	\draw[draw=teal, ultra thick, dashed] (0.09,-1.09) -- (0.09,-2.90);
+	\draw[draw=teal, ultra thick, dashed] (0.09,-2.90) -- (1.91,-2.90);
+	\draw[draw=teal, ultra thick, dashed] (1.91,-2.90) -- (1.92,-1.88);
+	\draw[draw=teal, ultra thick, dashed] (1.92,-1.88) -- (2.89,-1.88);
+	\draw[draw=teal, ultra thick, dashed] (2.89,-1.88) -- (2.90,-1.10);
+	\draw[draw=teal, ultra thick, dashed] (2.90,-1.10) -- (0.10,-1.09);
+	\draw[draw=blue, ultra thick, dashed] (1.07,-0.10) -- (1.08,-2.83);
+	\draw[draw=blue, ultra thick, dashed] (1.08,-2.83) -- (1.86,-2.83);
+	\draw[draw=blue, ultra thick, dashed] (1.86,-2.84) -- (1.87,-1.83);
+	\draw[draw=blue, ultra thick, dashed] (1.87,-1.83) -- (2.84,-1.84);
+	\draw[draw=blue, ultra thick, dashed] (2.84,-1.84) -- (2.85,-0.94);
+	\draw[draw=blue, ultra thick, dashed] (2.85,-0.94) -- (3.94,-0.95);
+	\draw[draw=blue, ultra thick, dashed] (3.94,-0.95) -- (3.94,-0.06);
+	\draw[draw=blue, ultra thick, dashed] (3.94,-0.06) -- (1.07,-0.07);
+	\draw[draw=blue, ultra thick, dashed] (5.34,-2.80) -- (5.68,-2.80);
+	\draw[draw=teal, ultra thick, dashed] (5.34,-2.22) -- (5.68,-2.22);
+	\draw[draw=black, fill=yellow, ultra thick, solid] (5.62,-1.75) rectangle (5.33,-1.48);
+	\draw[draw=black, fill=orange, ultra thick, solid] (5.61,-1.15) rectangle (5.33,-0.87);
+	\draw[draw=black, fill=red, ultra thick, solid] (5.60,-0.58) rectangle (5.32,-0.29);
+\end{tikzpicture}
+```
+
+hook length formula 的组合直觉
+:::
 
 #### 无向图的色多项式（chromatic polynomial）和无环定向（acyclic orientations）
 
