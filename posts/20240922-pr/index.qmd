@@ -2,7 +2,7 @@
 title: "原根、原根存在定理和模 m 剩余类环的乘法结构"
 author: "sun123zxy"
 date: "2024/09/22"
-date-modified: "2024/11/08"
+date-modified: "2025/03/13"
 bibliography: index.bib
 lang: zh
 
@@ -39,7 +39,7 @@ format:
 
 - 完全没有抽象代数基础：
 
-  可能在阅读中遇到较大的困难。
+  可能在阅读中遇到较大的困难．
 
 - 有朴素的抽象代数基础：
   
@@ -279,18 +279,145 @@ $$
 
 ## $Z_{p^\alpha}^\times$ 的结构：分裂的商同态 {#sec-zpat}
 
-加法和乘法运算，但对 $p^\alpha$ 取模，似乎不太熟悉？事实上，将 $0$ 到 $p^\alpha -1$ 间的所有整数写为 $\sum_{i=0}^{\alpha - 1} a_i p^i$ 的 $p$ 进制形式，是刻画该剩余类环的一种良好方法，其实质为以 $p \in Z_{p^\alpha}$ 带入整系数多项式环得到的一个 $\mathbb Z[x] \to Z_{p^\alpha}$ 的环同态．读者可在接下来的探究中借其指导直觉．
+加法和乘法运算，但对 $p^\alpha$ 取模，似乎不太熟悉？事实上，将 $0$ 到 $p^\alpha -1$ 间的所有整数 $a$ 写为 $\sum_{i=0}^{\alpha - 1} a_i p^i$ 的 $p$ 进制形式，是刻画该剩余类环的一种良好方法，其实质为以 $p \in Z_{p^\alpha}$ 带入整系数多项式环得到的一个 $\mathbb Z[x] \to Z_{p^\alpha}$ 的环同态．读者可在接下来的探究中借其指导直觉．
 
-首先，粗略地看看哪些环 $Z_{p^\alpha}$ 元素（在乘法意义下）可逆——自然是与 $p^\alpha$ 互素——即不被 $p$ 整除——即 $p$ 进制表示下 $a_0 \neq 0$ 的那些数——即 $Z_{p^\alpha}^\times = Z_{p^\alpha} \setminus p Z_{p^\alpha}$．简单的计数就得到其大小为 $\varphi(p^\alpha) = p^\alpha - p^{\alpha - 1} = p^{\alpha - 1} (p - 1)$．一个受此启发的想法是，如果仅在模 $p$ 意义下考虑 $Z_{p^\alpha}$ 中的运算——即只看 $p$ 进制表示下 $a_0$ 的变化情况，自然得到商同态 $\pi$：
+粗略一瞥 $Z_{p^\alpha}$ 中的可逆元素，易得如下几种不同视角：
+$$
+Z_{p^\alpha}^\times = \{ a \in Z_{p^\alpha} : \gcd(a, p^\alpha) = \gcd(a, p) = 1 \} = \{ a \in Z_{p^\alpha} : a_0 \neq 0 \}
+$$
+简单计数知其大小为 $\varphi(p^\alpha) = p^\alpha - p^{\alpha - 1} = p^{\alpha - 1} (p - 1)$．一个受此启发的想法是，如果仅在模 $p$ 意义下考虑 $Z_{p^\alpha}$ 中的运算——即只看 $p$ 进制表示下 $a_0$ 的变化情况，自然得到商同态 $\pi$：
 $$
 \begin{aligned}
 Z_{p^\alpha} &\twoheadrightarrow Z_{p^\alpha} / p Z_{p^\alpha} \cong Z_p \\
 a \bmod p^\alpha &\mapsto a \bmod p
 \end{aligned}
 $$
-注意环同态保持可逆元，故若只考虑乘法结构，$\pi$ 也给出了交换群 $Z_{p^\alpha}^\times \twoheadrightarrow Z_p^\times$ 的一个满同态，其核 $\ker \pi$ 为模 $p$ 余 $1$——即 $p$ 进制表示下 $a_0 = 1$，其余位置任取——的那些数构成的 $p^{\alpha-1}$ 阶乘法子群．此外我们还有 $Z_{p^\alpha}^\times / \ker \pi \cong Z_p^\times$．
+注意环同态保持可逆元，故若只考虑乘法结构，$\pi$ 也给出了交换群 $Z_{p^\alpha}^\times \twoheadrightarrow Z_p^\times$ 的一个满同态，其核 $\ker \pi$ 恰为 $1 + p Z_{p^\alpha}$：由模 $p$ 余 $1$ 元素构成的 $p^{\alpha-1}$ 阶乘法子群．此外我们还有 $Z_{p^\alpha}^\times / \ker \pi \cong Z_p^\times$．将上述事实用正合列^[关于正合列，见 [@dummit_abstract_2003 {section 10.5}]]紧凑书写如下：
 
-使用商同态研究交换群的结构，最好的情况是这个同态分裂^[关于正合列，见 [@dummit_abstract_2003 {section 10.5}]]——在这里即希望 $Z_{p^\alpha}^\times / \ker \pi$ 或者说 $Z_p^\times$ 在 $Z_{p^\alpha}^\times$ 中有一个同构的拷贝．此时由子群直积的识别定理 [@dummit_abstract_2003, {section 5.4, theorem 9, p. 171}] 我们有 $Z_{p^\alpha}^\times \cong \ker \pi \times Z_p^\times$．但真的可以吗？我们另从 $Z_{p^\alpha}^\times$ 的大小——$p^{\alpha - 1} (p - 1)$——的角度下手试试．固然 $p^\alpha$ 与 $p-1$ 互素，故
+:::{#fig-exact-zpa}
+
+```{tikz}
+\begin{tikzcd}
+	1 & {1 + p Z_{p^\alpha}} & {Z_{p^\alpha}^\times} & {Z_p^\times} & 1
+	\arrow[from=1-1, to=1-2]
+	\arrow["\subset", from=1-2, to=1-3]
+	\arrow["\pi", from=1-3, to=1-4]
+	\arrow["{\psi}", shift left=2, dashed, from=1-4, to=1-3]
+	\arrow[from=1-4, to=1-5]
+\end{tikzcd}
+```
+
+$Z_{p^\alpha}^\times$ 的正合列分解
+:::
+
+使用商同态研究交换群的结构，最好的情况是这个同态分裂——在这里即希望 $Z_p^\times$ 在 $Z_{p^\alpha}^\times$ 中有一个同构的拷贝：其由分裂同态 $\psi$ 的像给出，满足 $\pi \circ \psi = \operatorname{id}_{Z_p}$．此时由子群直积的识别定理 [@dummit_abstract_2003, {section 5.4, theorem 9, p. 171}] 或分裂正合列常识，我们有
+$$
+Z_{p^\alpha}^\times \cong \left( 1 + p Z_{p^\alpha}^\times \right) \times Z_p^\times
+$$
+
+但真的可以吗？这里提供两类风格迥异的处理方法．
+
+### 正面进攻：Hensel 引理
+
+我们直接找到 $Z_p^\times$ 在 $Z_{p^\alpha}^\times$ 中的像 $\psi(Z_p^\times)$ 的具体表达——这需要我们找到 $Z_{p^\alpha}^\times$ 中的元素 $a$ 满足：
+$$
+\begin{aligned}
+a &\neq 1 \pmod{p} \\
+a^{p-1} &= 1 \pmod{p^\alpha}
+\end{aligned}
+$$
+考虑归纳地寻找：
+
+- 初值：寻找非单位元的 $a = a_0 \in Z_p^\times$ 使得 $a^{p-1} = 1 \pmod{p}$，即模素数原根的存在性问题——并非平凡的问题，我们留待 [@sec-zpt] 处理．
+
+- 归纳：假定已经获得
+  $$
+  \begin{aligned}
+  a &\neq 1 \pmod{p} \\
+  a^{p-1} &= 1 \pmod{p^n}
+  \end{aligned}
+  $$
+  的解 $a = a_n \in Z_{p^n}^\times$，去构造 $a = a_{n+1} \in Z_{p^{n+1}}^\times$ 使得
+  $$
+  a^{p-1} = 1 \pmod{p^{n+1}}
+  $$
+
+这种归纳手法可以推广到其它不少地方（$p$-adic 数、形式幂级数的隐函数定理等），并被统一地称为“Hensel 引理”．
+
+下面处理归纳部分．由 $p$ 进制观点启发，不妨设存在 $b_n \in Z_p$ 使得 $a_{n+1} = a_n + b_n p^n \pmod{p^{n+1}}$．同时设存在 $t_n \in Z_p$ 使得 $a_n^{p-1} = 1 + t_n p^n \pmod{p^{n+1}}$．则
+$$
+\begin{aligned}
+1 &= a_{n+1}^{p-1} \\
+&= \left( a_n + b_n p^n \right)^{p-1} \\
+&= a_n^{p-1} + \binom{p-1}{1} a_n^{p-2} b_n p^n + \dots \pmod{p^{n+1}} \\
+&= a_n^{p-1} + a_n^{p-2} b_n (p-1) p^n \\
+&= 1 + t_n p^n - a_n^{p-2} b_n p^n \\
+&= 1 + ( t_n - a_n^{p-2} b_n ) p^n \pmod{p^{n+1}}
+\end{aligned}
+$$
+这意味着 $t_n = a_n^{p-2} b_n = a_n^{-1} b_n \pmod{p}$ 或 $b_n = t_n a_n \pmod{p}$．故
+$$
+a_{n+1} = a_n + b_n p^n = a_n (1 + t_n p^n) = a_n^p \pmod{p^{n+1}}
+$$
+便是我们所需的构造．
+
+:::::{.remark}
+
+Hensel 引理的递归构造其实暗藏更多结构．我们将一点直觉在下图中展示，感兴趣的读者可参见 [@gupta_padic_2018, {section 6--7}]．
+
+:::{#fig-exact-p-adic}
+
+```{tikz}
+% https://q.uiver.app/#q=WzAsMzEsWzIsMiwiMSArIHAgWl97cF57bisxfX0iXSxbMywyLCJaX3twXntuKzF9fV5cXHRpbWVzIl0sWzEsMiwiMSJdLFs0LDIsIlpfcF5cXHRpbWVzIl0sWzUsMiwiMSJdLFsxLDMsIjEiXSxbNSwzLCIxIl0sWzIsMywiMSArIHAgWl97cF5ufSJdLFszLDMsIlpfe3Bebn1eXFx0aW1lcyJdLFs0LDMsIlpfcF5cXHRpbWVzIl0sWzEsNSwiMSJdLFs1LDUsIjEiXSxbMyw1LCJaX3BeXFx0aW1lcyJdLFs0LDUsIlpfcF5cXHRpbWVzIl0sWzIsNSwiMSJdLFszLDEsIlxcdmRvdHMiXSxbNCwxLCJcXHZkb3RzIl0sWzIsMSwiXFx2ZG90cyJdLFsxLDAsIjEiXSxbMiwwLCIxICsgcCBcXG1hdGhiYiBaX3AiXSxbMywwLCJcXG1hdGhiYiBaX3BeXFx0aW1lcyJdLFs0LDAsIlpfcF5cXHRpbWVzIl0sWzUsMCwiMSJdLFswLDUsIjEiXSxbMCwyLCJuKzEiXSxbMCwwLCJcXHZhcnByb2psaW0iXSxbMCwxLCJcXHZkb3RzIl0sWzAsMywibiJdLFsyLDQsIlxcdmRvdHMiXSxbMyw0LCJcXHZkb3RzIl0sWzQsNCwiXFx2ZG90cyJdLFsyLDBdLFswLDEsIlxcc3Vic2V0Il0sWzEsMywiXFxwaV97bisxfSJdLFszLDRdLFszLDEsIlxccHNpX3tuKzF9IiwwLHsib2Zmc2V0IjotMiwic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzUsN10sWzcsOCwiXFxzdWJzZXQiXSxbOCw5LCJcXHBpX24iXSxbOSw2XSxbMTAsMTRdLFsxNCwxMiwiXFxzdWJzZXQiXSxbMTIsMTMsIlxccGlfMSJdLFsxMywxMV0sWzE1LDEsIiIsMSx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFsxNiwzLCIiLDEseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMTcsMCwiIiwxLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzE4LDE5XSxbMTksMjAsIlxcc3Vic2V0Il0sWzIwLDIxLCJcXHBpX1xcb21lZ2EiXSxbMjEsMjJdLFsxMywxMiwiXFxwc2lfMSIsMCx7Im9mZnNldCI6LTIsInN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFs5LDgsIlxccHNpX24iLDAseyJvZmZzZXQiOi0yLCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMCw3LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMSw4LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMyw5LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbNywyOCwiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzgsMjksIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFs5LDMwLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMjgsMTQsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFsyOSwxMiwiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzMwLDEzLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XV0=
+\begin{tikzcd}
+	\varprojlim & 1 & {1 + p \mathbb Z_p} & {\mathbb Z_p^\times} & {Z_p^\times} & 1 \\
+	\vdots && \vdots & \vdots & \vdots \\
+	{n+1} & 1 & {1 + p Z_{p^{n+1}}} & {Z_{p^{n+1}}^\times} & {Z_p^\times} & 1 \\
+	n & 1 & {1 + p Z_{p^n}} & {Z_{p^n}^\times} & {Z_p^\times} & 1 \\
+	&& \vdots & \vdots & \vdots \\
+	1 & 1 & 1 & {Z_p^\times} & {Z_p^\times} & 1
+	\arrow[from=1-2, to=1-3]
+	\arrow["\subset", from=1-3, to=1-4]
+	\arrow["{\pi_\omega}", from=1-4, to=1-5]
+	\arrow[from=1-5, to=1-6]
+	\arrow[two heads, from=2-3, to=3-3]
+	\arrow[two heads, from=2-4, to=3-4]
+	\arrow[two heads, from=2-5, to=3-5]
+	\arrow[from=3-2, to=3-3]
+	\arrow["\subset", from=3-3, to=3-4]
+	\arrow[two heads, from=3-3, to=4-3]
+	\arrow["{\pi_{n+1}}", from=3-4, to=3-5]
+	\arrow[two heads, from=3-4, to=4-4]
+	\arrow["{\psi_{n+1}}", shift left=2, dashed, from=3-5, to=3-4]
+	\arrow[from=3-5, to=3-6]
+	\arrow[two heads, from=3-5, to=4-5]
+	\arrow[from=4-2, to=4-3]
+	\arrow["\subset", from=4-3, to=4-4]
+	\arrow[two heads, from=4-3, to=5-3]
+	\arrow["{\pi_n}", from=4-4, to=4-5]
+	\arrow[two heads, from=4-4, to=5-4]
+	\arrow["{\psi_n}", shift left=2, dashed, from=4-5, to=4-4]
+	\arrow[from=4-5, to=4-6]
+	\arrow[two heads, from=4-5, to=5-5]
+	\arrow[two heads, from=5-3, to=6-3]
+	\arrow[two heads, from=5-4, to=6-4]
+	\arrow[two heads, from=5-5, to=6-5]
+	\arrow[from=6-2, to=6-3]
+	\arrow["\subset", from=6-3, to=6-4]
+	\arrow["{\pi_1}", from=6-4, to=6-5]
+	\arrow["{\psi_1}", shift left=2, dashed, from=6-5, to=6-4]
+	\arrow[from=6-5, to=6-6]
+\end{tikzcd}
+```
+
+$p$-adic 整数的乘法群分解：逆向极限保持分裂正合列？
+:::
+
+:::::
+
+### 旁敲侧击：从基数下手
+
+我们另从 $Z_{p^\alpha}^\times$ 的大小——$p^{\alpha - 1} (p - 1)$——的角度下手试试^[本节内容，另可参考 [@dummit_abstract_2003, {section 9.5, corollary 20, p. 314}]．]．固然 $p^\alpha$ 与 $p-1$ 互素，故
 
 - 如果你了解有限交换群的基本结构：由有限交换群基本定理 [@dummit_abstract_2003, {section 5.2}]
 
@@ -317,21 +444,14 @@ $$
 
 便知道 $Z_{p^\alpha}^\times$ 是其两个大小分别为 $p^{\alpha - 1}$ 和 $p-1$ 的子群（记为 $Q$ 和 $S$）的（内）直积．现在结合上一段构造的乘法群商同态 $\pi: Z_{p^\alpha}^\times \to Z_p^\times$ 对 $Q$ 和 $S$ 作考察：
 
-- 考虑到 $Z_{p^\alpha}^\times \cong Q \times S$，故 $Z_{p^\alpha}$ 的 $p^{\alpha-1}$ 阶子群只有 $Q$ 唯一一个．而已经知道 $|\ker \pi| = p^{\alpha-1} = |Q|$，故立得 $Q = \ker \pi$．
-- 将 $\pi$ 限制在 $S$ 上得到新同态 $\pi \vert_S : S \to Z_p^\times$，其核为 $S \cap \ker \pi$．注意 $|S| = p-1$ 且 $|\ker \pi| = p^\alpha$，故这个核只能是平凡的，即 $\pi \vert_S$ 是单同态．再考虑到 $|Z_p^\times| = p - 1 = |S|$，我们得到 $S \cong Z_p^\times$．
+- 考虑到 $Z_{p^\alpha}^\times \cong Q \times S$，故 $Z_{p^\alpha}$ 的 $p^{\alpha-1}$ 阶子群只有 $Q$ 唯一一个．而已经知道 $|1 + p Z_{p^\alpha}^\times| = p^{\alpha-1} = |Q|$，故立得 $Q = 1 + p Z_{p^\alpha}^\times$．
+- 将 $\pi$ 限制在 $S$ 上得到新同态 $\pi \vert_S : S \to Z_p^\times$，其核为 $S \cap 1 + p Z_{p^\alpha}^\times$．注意 $|S| = p-1$ 且 $|1 + p Z_{p^\alpha}^\times| = p^\alpha$，故这个核只能是平凡的，即 $\pi \vert_S$ 是单同态．再考虑到 $|Z_p^\times| = p - 1 = |S|$，我们得到 $S \cong Z_p^\times$．
 
-故真的有
+无论采用何种方法，最终我们得到
 $$
-Z_{p^\alpha}^\times \cong \ker \pi \times Z_p^\times
+Z_{p^\alpha}^\times \cong \left( 1 + p Z_{p^\alpha}^\times \right) \times Z_p^\times
 $$
-接下来的工作是分别研究 $\ker\pi$ 和 $Z_p^\times$．
-
-:::{.remark}
-
-现在已经清楚 $Z_{p^\alpha}^\times$ 的子群 $Q = \ker \pi$ 的具体表达——它恰是全体模 $p$ 余 $1$ 的数——即 $p$ 进制表示下 $a_0 = 1$，其余位置任取的数．但受到构造手段的限制，$Z_p^\times$ 在 $Z_{p^\alpha}^\times$ 中的像 $S$ 的具体表达目前尚不明确——且似乎结果也并不平凡【TODO】．
-
-本节内容，另可参考 [@dummit_abstract_2003, {section 9.5, corollary 20, p. 314}]．
-:::
+接下来的工作是分别研究 $1 + p Z_{p^\alpha}^\times$ 和 $Z_p^\times$．
 
 ## $Z_p^\times$ 的结构：域的有限乘法子群 {#sec-zpt}
 
@@ -428,12 +548,12 @@ $$
   
 :::
 
-## $\ker \pi$ 的结构：二项式定理与含 $p$ 量估计 {#sec-nup}
+## $1 + p Z_{p^\alpha}^\times$ 的结构：二项式定理与含 $p$ 量估计 {#sec-nup}
 
-这里处理 $\ker \pi$ 的结构的办法相当暴力 [@dummit_abstract_2003, {section 2.4, exercises 21--23, p. 60}]：
+这里处理 $1 + p Z_{p^\alpha}^\times$ 的结构的办法相当暴力 [@dummit_abstract_2003, {section 2.4, exercises 21--23, p. 60}]：
 
-- 当 $p$ 是奇质数时，我们将直接找到一个 $\ker \pi \le Z_{p^\alpha}^\times$ 中的一个 $p^{\alpha-1}$ 阶元，据此得到 $\ker \pi \cong Z_{p^{\alpha - 1}}$；
-- 当 $p = 2$ 时（此时 $Z_p^\times$ 是平凡群，故 $\ker \pi = Z_{2^\alpha}^\times$），我们将直接找到一个 $\ker \pi$ 中的 $2^{\alpha-2}$ 阶元，再找到两个不同的 $2$ 阶元，据此证明 $\ker \pi \cong Z_2 \times Z_{2^{\alpha - 2}}$．
+- 当 $p$ 是奇质数时，我们将直接找到一个 $1 + p Z_{p^\alpha}^\times \le Z_{p^\alpha}^\times$ 中的一个 $p^{\alpha-1}$ 阶元，据此得到 $1 + p Z_{p^\alpha}^\times \cong Z_{p^{\alpha - 1}}$；
+- 当 $p = 2$ 时（此时 $Z_p^\times$ 是平凡群，故 $1 + p Z_{p^\alpha}^\times = Z_{2^\alpha}^\times$），我们将直接找到一个 $1 + p Z_{p^\alpha}^\times$ 中的 $2^{\alpha-2}$ 阶元，再找到两个不同的 $2$ 阶元，据此证明 $1 + p Z_{p^\alpha}^\times \cong Z_2 \times Z_{2^{\alpha - 2}}$．
 
 先介绍一个关于二项式含 $p$ 量的有趣结果．
 
@@ -532,7 +652,7 @@ plt.show()
 
 :::{#prp-kerphi-oddp}
 
-设 $p$ 是奇质数，$\alpha \ge 1$ 是正整数，则元素 $1+p \in \ker \pi \le Z_{p^\alpha}^\times$ 的阶为 $p^{\alpha-1}$．
+设 $p$ 是奇质数，$\alpha \ge 1$ 是正整数，则元素 $1+p \in 1 + p Z_{p^\alpha}^\times \le Z_{p^\alpha}^\times$ 的阶为 $p^{\alpha-1}$．
 :::
 
 :::{.proof}
@@ -562,12 +682,12 @@ $$
 
 :::{#cor-kerphi-oddp}
 
-设 $p$ 是奇质数，$\alpha \ge 1$ 是正整数，则 $\ker \pi \cong Z_{p^{\alpha-1}}$．
+设 $p$ 是奇质数，$\alpha \ge 1$ 是正整数，则 $1 + p Z_{p^\alpha}^\times \cong Z_{p^{\alpha-1}}$．
 :::
 
 :::{#prp-kerphi-evenp}
 
-设正整数 $\alpha \ge 2$．元素 $5 = 1+ 2^2 \in \ker \pi = Z_{2^\alpha}^\times$ 的阶为 $2^{\alpha-2}$．
+设正整数 $\alpha \ge 2$．元素 $5 = 1+ 2^2 \in 1 + p Z_{p^\alpha}^\times = Z_{2^\alpha}^\times$ 的阶为 $2^{\alpha-2}$．
 :::
 
 :::{.proof}
@@ -577,7 +697,7 @@ $$
 
 :::{#prp-kerphi-notcyc}
 
-设 $\alpha \ge 2$ 是正整数，则元素 $-1$ 和 $1+2^{\alpha-1}$ 在 $\ker \pi = Z_{2^\alpha}^\times$ 的阶为 $2$．当 $\alpha \ge 3$ 时两者互异．
+设 $\alpha \ge 2$ 是正整数，则元素 $-1$ 和 $1+2^{\alpha-1}$ 在 $1 + p Z_{p^\alpha}^\times = Z_{2^\alpha}^\times$ 的阶为 $2$．当 $\alpha \ge 3$ 时两者互异．
 :::
 
 :::{.proof}
@@ -590,12 +710,12 @@ $$
 
 :::{#cor-kerphi-notcyc}
 
-设 $\alpha \ge 2$ 是正整数，则 $Z_{2^\alpha}^\times = \ker \pi \cong Z_2 \times Z_{2^{\alpha-2}}$．
+设 $\alpha \ge 2$ 是正整数，则 $Z_{2^\alpha}^\times = 1 + p Z_{p^\alpha}^\times \cong Z_2 \times Z_{2^{\alpha-2}}$．
 :::
 
 :::{.proof}
 
-当 $\alpha = 2$，$|\ker \pi| = 2$，平凡．当 $\alpha \ge 3$，[@prp-kerphi-notcyc] 给出了两个无交且生成整个 $\ker \pi$ 的循环群，使用子群直积的识别定理即可．
+当 $\alpha = 2$，$|1 + p Z_{p^\alpha}^\times| = 2$，平凡．当 $\alpha \ge 3$，[@prp-kerphi-notcyc] 给出了两个无交且生成整个 $1 + p Z_{p^\alpha}^\times$ 的循环群，使用子群直积的识别定理即可．
 :::
 
 ## 结论
