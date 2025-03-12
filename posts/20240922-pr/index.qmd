@@ -312,7 +312,7 @@ $Z_{p^\alpha}^\times$ 的正合列分解
 
 使用商同态研究交换群的结构，最好的情况是这个同态分裂——在这里即希望 $Z_p^\times$ 在 $Z_{p^\alpha}^\times$ 中有一个同构的拷贝：其由分裂同态 $\psi$ 的像给出，满足 $\pi \circ \psi = \operatorname{id}_{Z_p}$．此时由子群直积的识别定理 [@dummit_abstract_2003, {section 5.4, theorem 9, p. 171}] 或分裂正合列常识，我们有
 $$
-Z_{p^\alpha}^\times \cong \left( 1 + p Z_{p^\alpha}^\times \right) \times Z_p^\times
+Z_{p^\alpha}^\times \cong \left( 1 + p Z_{p^\alpha} \right) \times Z_p^\times
 $$
 
 但真的可以吗？这里提供两类风格迥异的处理方法．
@@ -341,8 +341,9 @@ $$
   $$
   a^{p-1} = 1 \pmod{p^{n+1}}
   $$
+  且满足 $a_{n+1} = a_n \pmod{p^n}$．
 
-这种归纳手法可以推广到其它不少地方（$p$-adic 数、形式幂级数的隐函数定理等），并被统一地称为“Hensel 引理”．
+这种归纳方法将方程的解不断提升到更“大”的代数结构上，且可推广到 $p$-adic 数、形式幂级数等一众具有逆向极限性质的代数结构上．我们统一地将这种手段称为“Hensel 引理”．
 
 下面处理归纳部分．由 $p$ 进制观点启发，不妨设存在 $b_n \in Z_p$ 使得 $a_{n+1} = a_n + b_n p^n \pmod{p^{n+1}}$．同时设存在 $t_n \in Z_p$ 使得 $a_n^{p-1} = 1 + t_n p^n \pmod{p^{n+1}}$．则
 $$
@@ -363,7 +364,11 @@ $$
 
 :::::{.remark}
 
-Hensel 引理的递归构造其实暗藏更多结构．我们将一点直觉在下图中展示，感兴趣的读者可参见 [@gupta_padic_2018, {section 6--7}]．
+这里 Hensel 引理的递归构造具有相对较好的形式，这种提升被称为 [Teichmüller lift](https://planetmath.org/teichmullercharacter)．在 $p$-adic 整数环上，其恰将每个模 $p$ 原根 $g$ 提升至 $\lim_{n\to \infty} g^{p^n}$．
+
+注意我们的构造给出的提升是存在且唯一的．这一性质在一般的 Hensel 引理中同样适用．
+
+我们将 Hensel 引理、逆向极限和 $p$-adic 整数的一些本质关联于下图中集中展示．感兴趣的读者可参见 [@gupta_padic_2018, {section 6--7}]．
 
 :::{#fig-exact-p-adic}
 
@@ -444,14 +449,14 @@ $p$-adic 整数的乘法群分解：逆向极限保持分裂正合列？
 
 便知道 $Z_{p^\alpha}^\times$ 是其两个大小分别为 $p^{\alpha - 1}$ 和 $p-1$ 的子群（记为 $Q$ 和 $S$）的（内）直积．现在结合上一段构造的乘法群商同态 $\pi: Z_{p^\alpha}^\times \to Z_p^\times$ 对 $Q$ 和 $S$ 作考察：
 
-- 考虑到 $Z_{p^\alpha}^\times \cong Q \times S$，故 $Z_{p^\alpha}$ 的 $p^{\alpha-1}$ 阶子群只有 $Q$ 唯一一个．而已经知道 $|1 + p Z_{p^\alpha}^\times| = p^{\alpha-1} = |Q|$，故立得 $Q = 1 + p Z_{p^\alpha}^\times$．
-- 将 $\pi$ 限制在 $S$ 上得到新同态 $\pi \vert_S : S \to Z_p^\times$，其核为 $S \cap 1 + p Z_{p^\alpha}^\times$．注意 $|S| = p-1$ 且 $|1 + p Z_{p^\alpha}^\times| = p^\alpha$，故这个核只能是平凡的，即 $\pi \vert_S$ 是单同态．再考虑到 $|Z_p^\times| = p - 1 = |S|$，我们得到 $S \cong Z_p^\times$．
+- 考虑到 $Z_{p^\alpha}^\times \cong Q \times S$，故 $Z_{p^\alpha}$ 的 $p^{\alpha-1}$ 阶子群只有 $Q$ 唯一一个．而已经知道 $|1 + p Z_{p^\alpha}| = p^{\alpha-1} = |Q|$，故立得 $Q = 1 + p Z_{p^\alpha}$．
+- 将 $\pi$ 限制在 $S$ 上得到新同态 $\pi \vert_S : S \to Z_p^\times$，其核为 $S \cap 1 + p Z_{p^\alpha}$．注意 $|S| = p-1$ 且 $|1 + p Z_{p^\alpha}| = p^\alpha$，故这个核只能是平凡的，即 $\pi \vert_S$ 是单同态．再考虑到 $|Z_p^\times| = p - 1 = |S|$，我们得到 $S \cong Z_p^\times$．
 
 无论采用何种方法，最终我们得到
 $$
-Z_{p^\alpha}^\times \cong \left( 1 + p Z_{p^\alpha}^\times \right) \times Z_p^\times
+Z_{p^\alpha}^\times \cong \left( 1 + p Z_{p^\alpha} \right) \times Z_p^\times
 $$
-接下来的工作是分别研究 $1 + p Z_{p^\alpha}^\times$ 和 $Z_p^\times$．
+接下来的工作是分别研究 $1 + p Z_{p^\alpha}$ 和 $Z_p^\times$．
 
 ## $Z_p^\times$ 的结构：域的有限乘法子群 {#sec-zpt}
 
@@ -548,12 +553,12 @@ $$
   
 :::
 
-## $1 + p Z_{p^\alpha}^\times$ 的结构：二项式定理与含 $p$ 量估计 {#sec-nup}
+## $1 + p Z_{p^\alpha}$ 的结构：二项式定理与含 $p$ 量估计 {#sec-nup}
 
-这里处理 $1 + p Z_{p^\alpha}^\times$ 的结构的办法相当暴力 [@dummit_abstract_2003, {section 2.4, exercises 21--23, p. 60}]：
+这里处理 $1 + p Z_{p^\alpha}$ 的结构的办法相当暴力 [@dummit_abstract_2003, {section 2.4, exercises 21--23, p. 60}]：
 
-- 当 $p$ 是奇质数时，我们将直接找到一个 $1 + p Z_{p^\alpha}^\times \le Z_{p^\alpha}^\times$ 中的一个 $p^{\alpha-1}$ 阶元，据此得到 $1 + p Z_{p^\alpha}^\times \cong Z_{p^{\alpha - 1}}$；
-- 当 $p = 2$ 时（此时 $Z_p^\times$ 是平凡群，故 $1 + p Z_{p^\alpha}^\times = Z_{2^\alpha}^\times$），我们将直接找到一个 $1 + p Z_{p^\alpha}^\times$ 中的 $2^{\alpha-2}$ 阶元，再找到两个不同的 $2$ 阶元，据此证明 $1 + p Z_{p^\alpha}^\times \cong Z_2 \times Z_{2^{\alpha - 2}}$．
+- 当 $p$ 是奇质数时，我们将直接找到一个 $1 + p Z_{p^\alpha} \le Z_{p^\alpha}^\times$ 中的一个 $p^{\alpha-1}$ 阶元，据此得到 $1 + p Z_{p^\alpha} \cong Z_{p^{\alpha - 1}}$；
+- 当 $p = 2$ 时（此时 $Z_p^\times$ 是平凡群，故 $1 + p Z_{p^\alpha} = Z_{2^\alpha}^\times$），我们将直接找到一个 $1 + p Z_{p^\alpha}$ 中的 $2^{\alpha-2}$ 阶元，再找到两个不同的 $2$ 阶元，据此证明 $1 + p Z_{p^\alpha} \cong Z_2 \times Z_{2^{\alpha - 2}}$．
 
 先介绍一个关于二项式含 $p$ 量的有趣结果．
 
@@ -652,7 +657,7 @@ plt.show()
 
 :::{#prp-kerphi-oddp}
 
-设 $p$ 是奇质数，$\alpha \ge 1$ 是正整数，则元素 $1+p \in 1 + p Z_{p^\alpha}^\times \le Z_{p^\alpha}^\times$ 的阶为 $p^{\alpha-1}$．
+设 $p$ 是奇质数，$\alpha \ge 1$ 是正整数，则元素 $1+p \in 1 + p Z_{p^\alpha} \le Z_{p^\alpha}^\times$ 的阶为 $p^{\alpha-1}$．
 :::
 
 :::{.proof}
@@ -682,12 +687,12 @@ $$
 
 :::{#cor-kerphi-oddp}
 
-设 $p$ 是奇质数，$\alpha \ge 1$ 是正整数，则 $1 + p Z_{p^\alpha}^\times \cong Z_{p^{\alpha-1}}$．
+设 $p$ 是奇质数，$\alpha \ge 1$ 是正整数，则 $1 + p Z_{p^\alpha} \cong Z_{p^{\alpha-1}}$．
 :::
 
 :::{#prp-kerphi-evenp}
 
-设正整数 $\alpha \ge 2$．元素 $5 = 1+ 2^2 \in 1 + p Z_{p^\alpha}^\times = Z_{2^\alpha}^\times$ 的阶为 $2^{\alpha-2}$．
+设正整数 $\alpha \ge 2$．元素 $5 = 1+ 2^2 \in 1 + p Z_{p^\alpha} = Z_{2^\alpha}^\times$ 的阶为 $2^{\alpha-2}$．
 :::
 
 :::{.proof}
@@ -697,7 +702,7 @@ $$
 
 :::{#prp-kerphi-notcyc}
 
-设 $\alpha \ge 2$ 是正整数，则元素 $-1$ 和 $1+2^{\alpha-1}$ 在 $1 + p Z_{p^\alpha}^\times = Z_{2^\alpha}^\times$ 的阶为 $2$．当 $\alpha \ge 3$ 时两者互异．
+设 $\alpha \ge 2$ 是正整数，则元素 $-1$ 和 $1+2^{\alpha-1}$ 在 $1 + p Z_{p^\alpha} = Z_{2^\alpha}^\times$ 的阶为 $2$．当 $\alpha \ge 3$ 时两者互异．
 :::
 
 :::{.proof}
@@ -710,12 +715,12 @@ $$
 
 :::{#cor-kerphi-notcyc}
 
-设 $\alpha \ge 2$ 是正整数，则 $Z_{2^\alpha}^\times = 1 + p Z_{p^\alpha}^\times \cong Z_2 \times Z_{2^{\alpha-2}}$．
+设 $\alpha \ge 2$ 是正整数，则 $Z_{2^\alpha}^\times = 1 + p Z_{p^\alpha} \cong Z_2 \times Z_{2^{\alpha-2}}$．
 :::
 
 :::{.proof}
 
-当 $\alpha = 2$，$|1 + p Z_{p^\alpha}^\times| = 2$，平凡．当 $\alpha \ge 3$，[@prp-kerphi-notcyc] 给出了两个无交且生成整个 $1 + p Z_{p^\alpha}^\times$ 的循环群，使用子群直积的识别定理即可．
+当 $\alpha = 2$，$|1 + p Z_{p^\alpha}| = 2$，平凡．当 $\alpha \ge 3$，[@prp-kerphi-notcyc] 给出了两个无交且生成整个 $1 + p Z_{p^\alpha}$ 的循环群，使用子群直积的识别定理即可．
 :::
 
 ## 结论
