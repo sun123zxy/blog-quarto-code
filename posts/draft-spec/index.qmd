@@ -1,0 +1,170 @@
+---
+title: "On Determining Prime Spectra of Some Coordinate Rings"
+author: "sun123zxy"
+bibliography: index.bib
+lang: en
+
+categories:
+  - math
+  - algebra
+
+format:
+  html: default
+
+seriousness: dedicated
+draft: true
+---
+
+\newcommand{\Spec}{\operatorname{Spec}}
+\renewcommand{\mapsto}{\rightarrowtail}
+\newcommand{\mapsfrom}{\leftarrowtail}
+\newcommand{\coresp}{\longleftrightarrow}
+\newcommand{\V}{\operatorname{V}}
+\newcommand{\D}{\operatorname{D}}
+
+\newcommand{\injto}{\hookrightarrow}
+\newcommand{\surjto}{\twoheadrightarrow}
+\newcommand{\bijto}{\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow}
+
+In this article, all rings are commutative with $1$ unless otherwise specified. [@atiyah_commalg] is referred for terms not defined here.
+
+## Review
+
+Before start, we review some basic facts about prime ideals. These facts turn out to be useful in the study of prime specturms of specific rings.
+
+Recall that the spectrum $\Spec R$ of a ring $R$ consists of all prime ideals of $R$. The Zariski topology is defined on $\Spec R$ by declaring the closed sets to be of the form $\V(\mathfrak a) := \{ \mathfrak p \in \Spec R : \mathfrak p \supseteq \mathfrak a \}$ for any ideal $\mathfrak a$ of $R$. Equivalently, one can define the Zariski topology by the topological base consisting of the open sets $\D(f) := \{ \mathfrak p \in \Spec R : f \notin \mathfrak p \}$ for any $f \in R$.
+
+:::{#prp-preimage-preserve-prime}
+
+## Preimage preserves prime ideals
+
+Let $\varphi: R \to S$ be any ring homomorphism. Let $\mathfrak p$ be a prime ideal of $S$, then $\varphi^{-1}(\mathfrak p)$ is a prime ideal of $R$.
+:::
+
+:::{#cor-subring-preserve-prime}
+
+## Subring preserves prime ideals
+
+Let $R$ be a ring and $S$ be a subring of $R$. Let $\mathfrak p$ be a prime ideal of $R$, then $\mathfrak p \cap S$ is a prime ideal^[Not true for maximal ideals. e.g. $(x)$ is an ideal of $R := \mathbb C[x]$, but it is contained in a larger ideal $(2,x)$ in the subring $S := \mathbb Z[x] \subset R$.] of $S$.
+:::
+
+:::{#thm-quotient-ideal-correspondence}
+
+## Ideal correspondence theorem for quotient rings
+
+Let $R$ be a ring and $\mathfrak a$ be an ideal of $R$. Then there is a one-to-one correspondence:
+$$
+\{ \text{ideals of } R / \mathfrak a \} \coresp \{ \text{ideals of } R \text{ containing } \mathfrak a \} 
+$$
+Moreover, prime ideals^[In fact, also maximal ideals] are also one-to-one corresponded: In fact, the natrual quotient homomorphism $\pi: R \to R / \mathfrak a$ induces a Zariski-topological closed embedding:
+$$
+\begin{aligned}
+\Spec \pi : \Spec R / \mathfrak a &\bijto \V(\mathfrak a) \subseteq \Spec R \\
+\mathfrak q &\mapsto \pi^{-1} (\mathfrak q) \\
+\mathfrak p / \mathfrak a &\mapsfrom \mathfrak p
+\end{aligned}
+$$
+where $\V (\mathfrak a) := \{ \mathfrak p \in \Spec R : \mathfrak p \supseteq \mathfrak a \}$ is the set of prime ideals containing $\mathfrak a$.
+:::
+
+:::{#thm-localization-ideal-correspondence}
+
+## Spectrum correspondence theorem for localizations of rings
+
+Let $R$ be a ring with and $S$ be a multiplicatively closed subset of $R$. Then the localization homomorphism $\iota : R \to S^{-1} R$ induces a Zariski-topological open embedding:
+$$
+\begin{aligned}
+\Spec \iota : \Spec S^{-1} R &\bijto \D(S) \subseteq \Spec R \\
+                 \mathfrak q &\mapsto \iota^{-1} (\mathfrak q) \\
+          S^{-1} \mathfrak p &\mapsfrom \mathfrak p
+\end{aligned}
+$$
+where $\D(S) := \{ \mathfrak p \in \Spec R : \mathfrak p \cap S = \varnothing \}$ is the set of prime ideals disjoint from $S$.
+:::
+
+Correspondence of arbitrary ideals is not mentioned in the statement because its subtlety: $\mathfrak a \mapsto S^{-1} \mathfrak a$ is indeed surjective, but is not injective because in $S^{-1} R$ one can use elements in $S$ to "cancel out" the numerators. See the proof for details.
+
+:::{.proof}
+
+For simplicity, we introduce some terminology first:
+
+- For any ideal $\mathfrak a$ of $R$ disjoint from $S$, let $\mathfrak a^\mathrm e := S^{-1} \mathfrak a$ denote the extension of $\mathfrak a$. $\mathfrak a^\mathrm e$ consists of all fractions whose numerators are in $\mathfrak a$.
+
+- For any ideal $\mathfrak b$ of $S^{-1} R$, let $\mathfrak b^\mathrm c := \iota^{-1} (\mathfrak b)$ denote the contraction of $\mathfrak a$. $\mathfrak b^\mathrm c$ consist of all numerators of fractions in $\mathfrak b$.
+
+Extension and contraction are, to some extent, inverse operations (but not genuinely before we restrict to the prime ideals):
+
+- $$\mathfrak b^\mathrm{ce} = \mathfrak b$${#eq-bce}
+
+  Every ideal of $S^{-1} R$ is an extended ideal: extended from the ideal consisting of its numerators.
+  
+- $$\mathfrak a^\mathrm{ec} = \{ c \in R: \exists u \in S,\, c u \in \mathfrak a \}$${#eq-aec}
+
+  $\mathfrak a^\mathrm{ec}$ consists of those elements in $R$ that may reach $\mathfrak a$ after some multiplication by $S$. To show this,
+  $$
+  \begin{aligned}
+  c \in \mathfrak a^\mathrm{ec}
+  &\iff \exists a \in \mathfrak a,\, \exists s \in S,\, \frac c 1 = \frac a s \\
+  &\iff \exists a \in \mathfrak a,\, \exists s \in S,\, \exists t \in S,\, (cs-a) t = 0 \\
+  &\iff \exists s \in S,\, \exists t \in S,\, cst \in \mathfrak a \\
+  &\iff \exists u \in S,\, c u \in \mathfrak a
+  \end{aligned}
+  $$
+
+The following is where the "disjoint from $S$" requirement shows up:
+
+- $$\mathfrak a^\mathrm{ec} = R \iff S \cap \mathfrak a \neq \varnothing$${#eq-disjoint-from-S}
+
+  The part of $\impliedby$ is easy. To establish the $\implies$ part, pick $c = 1$, then $\exists u \in S,\, u = 1 u \in \mathfrak a$ and hence $S \cap \mathfrak a \neq \varnothing$.
+  
+  The statement is equivalent of saying that for any proper ideal $\mathfrak b$ of $S^{-1} R$, its contraction must be disjoint from $S$ --- otherwise its numerators are entire $R$, resulting $\mathfrak b = S^{-1} R$ being not proper. In fancy symbols,
+  $$
+  \mathfrak b^\mathrm c = R \iff \mathfrak b^\mathrm{cec} = R \iff S \cap \mathfrak b^\mathrm c \neq \varnothing
+  $$
+
+  - As a conseqence, contractions of prime ideals in $S^{-1} R$ are disjoint from $S$, i.e. fall into $\D(S)$.
+
+We now focus on prime ideals.
+
+- Extension preserves prime ideals: Extension is $S^{-1}$, preserves prime ideals by trivial verification.
+
+- Contraction preserves prime ideals: Contraction is $\iota^{-1}$, preserves prime ideals by [@prp-preimage-preserve-prime].
+
+- For any $\mathfrak p \in \Spec(R)$, we have $\mathfrak p^\mathrm{ec} = \mathfrak p$.
+
+  By [@eq-aec], $\mathfrak p^\mathrm{ec} = \{ c \in R: \exists u \in S,\, c u \in \mathfrak p \}$. But $\mathfrak p$ is prime and disjoint from $S$, thus equivalently $c \in p$ and in turn $\mathfrak p^\mathrm{ec} = \mathfrak p$.
+
+Thus extension and contraction are genuinely inverse operations between $\Spec S^{-1} R$ and $\D(S)$, and the one-to-one correspondence is established. Below we turn to the topological part of the correspondence.
+
+- Extension is Zariski-continuous: For any $a \in R$,
+  $$
+  \begin{aligned}
+  \left( \D_R(a) \right)^\mathrm e
+  &= \{ \mathfrak p \in \Spec R : a \notin \mathfrak p \}^\mathrm e \\
+  &= \{ \mathfrak q \in \Spec S^{-1} R,\, a \notin \mathfrak q \} \\
+  &= D_{S^{-1} R}(a) \\
+  \end{aligned}
+  $$
+
+- Contraction is Zariski-continuous: For any $a/s \in S^{-1}R$,
+  $$
+  \begin{aligned}
+  \left( \D_{S^{-1}R}(\frac a s) \right)^\mathrm c
+  &= \{ \mathfrak q \in \Spec S^{-1} R : \frac a s \notin \mathfrak q \}^\mathrm c \\
+  &= \{ \mathfrak q \in \Spec S^{-1} R,\, a \notin \mathfrak q^\mathrm c \}^\mathrm c \\
+  &= \{ \mathfrak p \in R : a \notin \mathfrak p \} \\
+  &= \D_R(a) \\
+  \end{aligned}
+  $$
+
+Thus the correspondence is actually a Zariski-homeomorphism between $\Spec S^{-1} R$ and $\D(S)$. Note that $\D(S)$ is open in $\Spec R$. Thus we are done.
+:::
+
+## Prime ideals of $\mathbb Z[x]$
+
+
+TODO
+
+## Prime ideals of $\mathbb Z[i]$
+
+TODO
