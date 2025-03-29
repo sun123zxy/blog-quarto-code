@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.6.42">
@@ -8,7 +8,7 @@
 
 <meta name="author" content="sun123zxy">
 
-<title>【ICPC 2024 Regional 昆明热身赛 D】LCA Determinant 题解 – sun123zxy’s blog</title>
+<title>On Determining Prime Spectra of Some Coordinate Rings – sun123zxy’s blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -90,6 +90,7 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<meta name="quarto:status" content="draft">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -126,7 +127,7 @@ window.Quarto = {
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -212,23 +213,21 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#solution" id="toc-solution" class="nav-link active" data-scroll-target="#solution">Solution</a></li>
-  <li><a href="#remark" id="toc-remark" class="nav-link" data-scroll-target="#remark">Remark</a></li>
+  <li><a href="#review" id="toc-review" class="nav-link active" data-scroll-target="#review">Review</a></li>
+  <li><a href="#prime-ideals-of-mathbb-zx" id="toc-prime-ideals-of-mathbb-zx" class="nav-link" data-scroll-target="#prime-ideals-of-mathbb-zx">Prime ideals of <span class="math inline">\(\mathbb Z[x]\)</span></a></li>
+  <li><a href="#prime-ideals-of-mathbb-zi" id="toc-prime-ideals-of-mathbb-zi" class="nav-link" data-scroll-target="#prime-ideals-of-mathbb-zi">Prime ideals of <span class="math inline">\(\mathbb Z[i]\)</span></a></li>
   </ul>
-<div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://www.zhihu.com/question/883251623/answer/44580637390"><i class="bi bi-question-circle"></i>在知乎上阅读</a></li></ul></div></nav>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">【ICPC 2024 Regional 昆明热身赛 D】LCA Determinant 题解</h1>
+<h1 class="title">On Determining Prime Spectra of Some Coordinate Rings</h1>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
-    <div class="quarto-category">algorithm</div>
-    <div class="quarto-category">combinatorics</div>
-    <div class="quarto-category">original problem</div>
-    <div class="quarto-category">solution</div>
+    <div class="quarto-category">algebra</div>
   </div>
   </div>
 
@@ -243,12 +242,6 @@ window.Quarto = {
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">2024年11月30日</p>
-    </div>
-  </div>
   
     
   </div>
@@ -258,131 +251,167 @@ window.Quarto = {
 </header>
 
 
-<p>热身赛 D 供题人．原题出自 <a href="https://codeforces.com/gym/104825/problem/H">2023 年 BIT 校赛 H</a>，非常荣幸被组题人收入热身赛供大家把玩．看到很多人对题目背后的动机感兴趣，也把题解放到这里，趁机聊聊此类行列式背后的技巧和理论．</p>
-<div class="callout callout-style-simple callout-tip no-icon">
+<p>In this article, all rings are commutative with <span class="math inline">\(1\)</span> unless otherwise specified. <span class="citation" data-cites="atiyah_commalg"><a href="#ref-atiyah_commalg" role="doc-biblioref">[1]</a></span> is referred for terms not defined here.</p>
+<section id="review" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="review">Review</h2>
+<p>Before start, we review some basic facts about prime ideals. These facts turn out to be useful in the study of prime specturms of specific rings.</p>
+<p>Recall that the spectrum <span class="math inline">\(\operatorname{Spec}R\)</span> of a ring <span class="math inline">\(R\)</span> consists of all prime ideals of <span class="math inline">\(R\)</span>. The Zariski topology is defined on <span class="math inline">\(\operatorname{Spec}R\)</span> by declaring the closed sets to be of the form <span class="math inline">\(\operatorname{V}(\mathfrak a) := \{ \mathfrak p \in \operatorname{Spec}R : \mathfrak p \supseteq \mathfrak a \}\)</span> for any ideal <span class="math inline">\(\mathfrak a\)</span> of <span class="math inline">\(R\)</span>. Equivalently, one can define the Zariski topology by the topological base consisting of the open sets <span class="math inline">\(\operatorname{D}(f) := \{ \mathfrak p \in \operatorname{Spec}R : f \notin \mathfrak p \}\)</span> for any <span class="math inline">\(f \in R\)</span>.</p>
+<div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<div id="exm-problem" class="theorem example">
-<p><span class="theorem-title"><strong>例 1</strong></span> You are given a tree consisting of <span class="math inline">\(n\)</span> vertices. Vertices are numbered from <span class="math inline">\(1\)</span> to <span class="math inline">\(n\)</span>. The vertex <span class="math inline">\(1\)</span> is the root of the tree. Each vertex has a weight <span class="math inline">\(a_i\)</span>. Consider a matrix <span class="math display">\[
-A := \begin{pmatrix} a_{\operatorname{lca}(i,j)} \end{pmatrix}_{n \times n}
-= \begin{pmatrix}
-a_{\operatorname{lca}(1,1)} &amp; a_{\operatorname{lca}(1,2)} &amp; \dots &amp; a_{\operatorname{lca}(1,n)} \\
-a_{\operatorname{lca}(2,1)} &amp; a_{\operatorname{lca}(2,2)} &amp; \dots &amp; a_{\operatorname{lca}(2,n)} \\
-\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-a_{\operatorname{lca}(n,1)} &amp; a_{\operatorname{lca}(n,2)} &amp; \dots &amp; a_{\operatorname{lca}(n,n)}
-\end{pmatrix}
-\]</span> where <span class="math inline">\(\operatorname{lca}(i,j)\)</span> denotes the lowest common ancestor of vertex <span class="math inline">\(i\)</span> and vertex <span class="math inline">\(j\)</span>. Calculate the determinant of matrix <span class="math inline">\(A\)</span>.</p>
+<div id="prp-preimage-preserve-prime" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1 (Preimage preserves prime ideals)</strong></span> Let <span class="math inline">\(\varphi: R \to S\)</span> be any ring homomorphism. Let <span class="math inline">\(\mathfrak p\)</span> be a prime ideal of <span class="math inline">\(S\)</span>, then <span class="math inline">\(\varphi^{-1}(\mathfrak p)\)</span> is a prime ideal of <span class="math inline">\(R\)</span>.</p>
 </div>
 </div>
 </div>
 </div>
-<section id="solution" class="level2">
-<h2 class="anchored" data-anchor-id="solution">Solution</h2>
-<p>本题定位智慧 / 猜结论 / 线代高手 / <del>出进正赛会被骂</del>题，结论为 <span class="math display">\[
-\det A = a_1 \prod_{\substack{u \in V \\ u \neq 1}} (a_u - a_{\operatorname{fa}(u)})
-\]</span> 其中 <span class="math inline">\(V\)</span> 是全体树上节点构成的集合，<span class="math inline">\(\operatorname{fa}(u)\)</span> 代表节点 <span class="math inline">\(u\)</span> 在树上的父亲节点．</p>
-<p>赛时技巧而言，样例已给出树为单链之一例，选手应考虑补充举例菊花图的情况，并分别应用行列式消法变换证明两种特殊情况的正确性．分析两种消去方法的共性便可得到结论的雏形．</p>
-<p>一般地，考虑对节点按深度从小到大进行重标号，由于重标号对行和列进行的置换相同，行列式的值和正负性均不会发生变化．现在归纳地证明结论．当 <span class="math inline">\(n=1\)</span> 时，结论平凡．当 <span class="math inline">\(n \geq 2\)</span>，假设结论对全体大小为 <span class="math inline">\(n-1\)</span> 的树成立．现给定一颗大小为 <span class="math inline">\(n\)</span> 的按上述方法重标号后的树，设其对应行列式为 <span class="math inline">\(A_n\)</span>．由重标号方法，编号为 <span class="math inline">\(n\)</span> 的节点一定为叶子节点；且由 <span class="math inline">\(n \geq 2\)</span>，其父节点存在．在行列式中做消法变换：</p>
-<ul>
-<li>将第 <span class="math inline">\(n\)</span> 列减去第 <span class="math inline">\(\operatorname{fa}(u)\)</span> 列；</li>
-<li>将第 <span class="math inline">\(n\)</span> 行减去第 <span class="math inline">\(\operatorname{fa}(u)\)</span> 行．</li>
-</ul>
-<p>行列式变为 <span class="math display">\[
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="cor-subring-preserve-prime" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 1 (Subring preserves prime ideals)</strong></span> Let <span class="math inline">\(R\)</span> be a ring and <span class="math inline">\(S\)</span> be a subring of <span class="math inline">\(R\)</span>. Let <span class="math inline">\(\mathfrak p\)</span> be a prime ideal of <span class="math inline">\(R\)</span>, then <span class="math inline">\(\mathfrak p \cap S\)</span> is a prime ideal<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> of <span class="math inline">\(S\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Not true for maximal ideals. e.g.&nbsp;<span class="math inline">\((x)\)</span> is an ideal of <span class="math inline">\(R := \mathbb C[x]\)</span>, but it is contained in a larger ideal <span class="math inline">\((2,x)\)</span> in the subring <span class="math inline">\(S := \mathbb Z[x] \subset R\)</span>.</p></div></div><div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-quotient-ideal-correspondence" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Ideal correspondence theorem for quotient rings)</strong></span> Let <span class="math inline">\(R\)</span> be a ring and <span class="math inline">\(\mathfrak a\)</span> be an ideal of <span class="math inline">\(R\)</span>. Then there is a one-to-one correspondence: <span class="math display">\[
+\{ \text{ideals of } R / \mathfrak a \} \longleftrightarrow\{ \text{ideals of } R \text{ containing } \mathfrak a \}
+\]</span> Moreover, prime ideals<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> are also one-to-one corresponded: In fact, the natrual quotient homomorphism <span class="math inline">\(\pi: R \to R / \mathfrak a\)</span> induces a Zariski-topological closed embedding: <span class="math display">\[
 \begin{aligned}
-&amp;\phantom{\to} \begin{pmatrix}
-a_{\operatorname{lca}(1,1)} &amp; a_{\operatorname{lca}(1,2)} &amp; \dots &amp; a_{\operatorname{lca}(1,n)} \\
-a_{\operatorname{lca}(2,1)} &amp; a_{\operatorname{lca}(2,2)} &amp; \dots &amp; a_{\operatorname{lca}(2,n)} \\
-\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-a_{\operatorname{lca}(n,1)} &amp; a_{\operatorname{lca}(n,2)} &amp; \dots &amp; a_{\operatorname{lca}(n,n)}
-\end{pmatrix} \\
-&amp;\to
-\begin{pmatrix}
-a_{\operatorname{lca}(1,1)} &amp; a_{\operatorname{lca}(1,2)} &amp; \dots &amp; a_{\operatorname{lca}(1,n)} - a_{\operatorname{lca}(1,\operatorname{fa}(n))} \\
-a_{\operatorname{lca}(2,1)} &amp; a_{\operatorname{lca}(2,2)} &amp; \dots &amp; a_{\operatorname{lca}(2,n)} - a_{\operatorname{lca}(2,\operatorname{fa}(n))} \\
-\vdots &amp; \vdots &amp; \ddots &amp; \vdots
-\\ a_{\operatorname{lca}(n,1)} &amp; a_{\operatorname{lca}(n,2)} &amp; \dots &amp; a_{\operatorname{lca}(n,n)} - a_{\operatorname{lca}(n,\operatorname{fa}(n))}
-\end{pmatrix} \\
-&amp;= \begin{pmatrix}
-a_{\operatorname{lca}(1,1)} &amp; a_{\operatorname{lca}(1,2)} &amp; \dots &amp; 0 \\
-a_{\operatorname{lca}(2,1)} &amp; a_{\operatorname{lca}(2,2)} &amp; \dots &amp; 0 \\
-\vdots &amp; \vdots &amp; \ddots &amp; \vdots
-\\ a_{\operatorname{lca}(n,1)} &amp; a_{\operatorname{lca}(n,2)} &amp; \dots &amp; a_n - a_{\operatorname{fa}(n)}
-\end{pmatrix} \\\\
-&amp;\to \begin{pmatrix}
-a_{\operatorname{lca}(1,1)} &amp; a_{\operatorname{lca}(1,2)} &amp; \dots &amp; 0 \\
-a_{\operatorname{lca}(2,1)} &amp; a_{\operatorname{lca}(2,2)} &amp; \dots &amp; 0 \\
-\vdots &amp; \vdots &amp; \ddots &amp; \vdots
-\\ a_{\operatorname{lca}(n,1)} - a_{\operatorname{lca}(\operatorname{fa}(n),1)} &amp; a_{\operatorname{lca}(n,2)} - a_{\operatorname{lca}(\operatorname{fa}(n),2)} &amp; \dots &amp; a_n - a_{\operatorname{fa}(n)}
-\end{pmatrix}\\
-&amp;= \begin{pmatrix}
-a_{\operatorname{lca}(1,1)} &amp; a_{\operatorname{lca}(1,2)} &amp; \dots &amp; 0 \\
-a_{\operatorname{lca}(2,1)} &amp; a_{\operatorname{lca}(2,2)} &amp; \dots &amp; 0 \\
-\vdots &amp; \vdots &amp; \ddots &amp; \vdots
-\\ 0 &amp; 0 &amp; \dots &amp; a_n - a_{\operatorname{fa}(n)}
-\end{pmatrix} \\
-&amp;\to (a_n - a_{\operatorname{fa}(n)}) \det A_{n-1} \\
-&amp;= a_1 \prod_{\substack{u \in V \\ u \neq 1}} (a_u - a_{\operatorname{fa}(u)})
+\operatorname{Spec}\pi : \operatorname{Spec}R / \mathfrak a &amp;\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow\operatorname{V}(\mathfrak a) \subseteq \operatorname{Spec}R \\
+\mathfrak q &amp;\rightarrowtail\pi^{-1} (\mathfrak q) \\
+\mathfrak p / \mathfrak a &amp;\leftarrowtail\mathfrak p
 \end{aligned}
-\]</span> 故结论对任意 <span class="math inline">\(n \in \mathbb N_+\)</span> 均成立．</p>
-</section>
-<section id="remark" class="level2">
-<h2 class="anchored" data-anchor-id="remark">Remark</h2>
-<p>Idea 来自去年和队友 vp UCup 做到的 <a href="https://qoj.ac/problem/5748">Universal Cup 2023 Stage 7 Zaporizhzhia Problem K. Determinant, or…?</a>（甚至更难一点？）．官方题解给到的证明是递归构造分块矩阵，神似 FMT 的实现代码和与本题类似的变换技巧似乎暗示着更一般的结论．回顾证明，我们对行和列进行对称的消法变换，最终将矩阵化为对角矩阵，从而计算出行列式的值．按照线性代数的观点，若将这些变换用矩阵 <span class="math inline">\(P^{-1}\)</span> 记录，上述过程事实上完成了对称矩阵 <span class="math inline">\(A\)</span> 的合同对角化，即 <span class="math inline">\(A = P \Lambda P^\mathrm{T}\)</span> 或 <span class="math inline">\(P^{-1} A (P^{-1})^\mathrm{T} = \Lambda\)</span>．我们指出，用于合同对角化的矩阵 <span class="math inline">\(P\)</span> 完全由树上偏序关系决定，且 <span class="math inline">\(\det P = 1\)</span>．一般地，类似结论对任意下确界存在的偏序集成立——这是偏序集上广义 Zeta / Möbius 变换框架下的强大结果．感兴趣的同学可参考 <span class="citation" data-cites="wilf1968hadamard"><a href="#ref-wilf1968hadamard" role="doc-biblioref">[1]</a></span>（没错，就是写 generatingfunctionology 的那个 Wilf :p）．不过也许你懒得去找这篇论文，所以我们把和本题相关的关键几式转录于此并做一些批注：</p>
+\]</span> where <span class="math inline">\(\operatorname{V}(\mathfrak a) := \{ \mathfrak p \in \operatorname{Spec}R : \mathfrak p \supseteq \mathfrak a \}\)</span> is the set of prime ideals containing <span class="math inline">\(\mathfrak a\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;In fact, also maximal ideals</p></div></div><div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-localization-ideal-correspondence" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (Spectrum correspondence theorem for localizations of rings)</strong></span> Let <span class="math inline">\(R\)</span> be a ring with and <span class="math inline">\(S\)</span> be a multiplicatively closed subset of <span class="math inline">\(R\)</span>. Then the localization homomorphism <span class="math inline">\(\iota : R \to S^{-1} R\)</span> induces a Zariski-topological open embedding: <span class="math display">\[
+\begin{aligned}
+\operatorname{Spec}\iota : \operatorname{Spec}S^{-1} R &amp;\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow\operatorname{D}(S) \subseteq \operatorname{Spec}R \\
+                 \mathfrak q &amp;\rightarrowtail\iota^{-1} (\mathfrak q) \\
+          S^{-1} \mathfrak p &amp;\leftarrowtail\mathfrak p
+\end{aligned}
+\]</span> where <span class="math inline">\(\operatorname{D}(S) := \{ \mathfrak p \in \operatorname{Spec}R : \mathfrak p \cap S = \varnothing \}\)</span> is the set of prime ideals disjoint from <span class="math inline">\(S\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<p>Correspondence of arbitrary ideals is not mentioned in the statement because its subtlety: <span class="math inline">\(\mathfrak a \rightarrowtail S^{-1} \mathfrak a\)</span> is indeed surjective, but is not injective because in <span class="math inline">\(S^{-1} R\)</span> one can use elements in <span class="math inline">\(S\)</span> to “cancel out” the numerators. See the proof for details.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>For simplicity, we introduce some terminology first:</p>
 <ul>
-<li><p><span class="math display">\[
-P :=  \begin{pmatrix} p_{i,j} \end{pmatrix}_{n \times n} \text{  where  } p_{i,j} := \begin{cases} 1 &amp; j \leq i \\ 0 &amp; \text{otherwise} \end{cases}
-\]</span> 这里 <span class="math inline">\(P\)</span> 被称为偏序集上的 Zeta 变换，而对应的 <span class="math inline">\(P^{-1}\)</span> 被称为 Möbius 变换．对本题而言， <span class="math display">\[
-p_{i,j} = \begin{cases} 1 &amp; j \text{ is an ancestor of  } i \\ 0 &amp; \text{otherwise} \end{cases}
-\]</span> 而其逆矩阵 <span class="math display">\[
-\left( P^{-1} \right)_{i,j} = \begin{cases} 1 &amp; j = i \\ -1 &amp; j = \operatorname{fa}(i) \\ 0 &amp; \text{otherwise} \end{cases}
-\]</span> 恰记录了对行列式所作的消法变换．</p></li>
-<li><p><span class="math display">\[
-a_{i \land j} = A_{i,j} = (P \Lambda P^\mathrm{T})_{i,j} = \sum_{k} p_{i,k} \lambda_k p_{j,k} = \sum_{\substack{k \leq i \\ k \leq j}} \lambda_k = \sum_{\substack{k \leq i \land j}} \lambda_k = \sum_{k} p_{i \land j, k} \lambda_k = (P \vec \lambda)_{i \land j}
-\]</span> 描述了对角化前后两个数列的变换关系．可见已知 <span class="math inline">\(\vec \lambda\)</span>，求 <span class="math inline">\(\vec a = P \vec \lambda\)</span> 的过程便是偏序集上的 Zeta 变换．已知 <span class="math inline">\(\vec a\)</span>，反求 <span class="math inline">\(\vec \lambda = P^{-1} \vec a\)</span> 的过程便是偏序集上的 Möbius 反演．对本题而言，Zeta 变换 <span class="math inline">\(P\)</span> 是树上前缀和，而反演 <span class="math inline">\(P^{-1}\)</span> 是树上差分．</p></li>
-<li><p><span class="math display">\[
-\det A = \det P \det \Lambda \det P^\mathrm{T} = \det \Lambda = \prod_{k} \lambda_k
-\]</span> 只需注意到 <span class="math inline">\(\det P = 1\)</span>——按拓扑序重标号后的 <span class="math inline">\(P\)</span> 是对角线全一的下三角矩阵．</p></li>
+<li><p>For any ideal <span class="math inline">\(\mathfrak a\)</span> of <span class="math inline">\(R\)</span> disjoint from <span class="math inline">\(S\)</span>, let <span class="math inline">\(\mathfrak a^\mathrm e := S^{-1} \mathfrak a\)</span> denote the extension of <span class="math inline">\(\mathfrak a\)</span>. <span class="math inline">\(\mathfrak a^\mathrm e\)</span> consists of all fractions whose numerators are in <span class="math inline">\(\mathfrak a\)</span>.</p></li>
+<li><p>For any ideal <span class="math inline">\(\mathfrak b\)</span> of <span class="math inline">\(S^{-1} R\)</span>, let <span class="math inline">\(\mathfrak b^\mathrm c := \iota^{-1} (\mathfrak b)\)</span> denote the contraction of <span class="math inline">\(\mathfrak a\)</span>. <span class="math inline">\(\mathfrak b^\mathrm c\)</span> consist of all numerators of fractions in <span class="math inline">\(\mathfrak b\)</span>.</p></li>
 </ul>
-<p>至此，行列式变换技巧背后的系统理论得以建立，配合反演理论如法炮制便可造出一众钓鱼行列式：</p>
+<p>Extension and contraction are, to some extent, inverse operations (but not genuinely before we restrict to the prime ideals):</p>
 <ul>
-<li><p>LCA Determinant / 树上前缀和 / 树上差分：</p>
-<p><span class="math display">\[
-\det (a_{\operatorname{lca}(i,j)})_{n \times n} = a_1 \prod_{\substack{2 \leq u \leq n}} (a_u - a_{\operatorname{fa}(u)})
+<li><p><span id="eq-bce"><span class="math display">\[\mathfrak b^\mathrm{ce} = \mathfrak b \tag{1}\]</span></span></p>
+<p>Every ideal of <span class="math inline">\(S^{-1} R\)</span> is an extended ideal: extended from the ideal consisting of its numerators.</p></li>
+<li><p><span id="eq-aec"><span class="math display">\[\mathfrak a^\mathrm{ec} = \{ c \in R: \exists u \in S,\, c u \in \mathfrak a \} \tag{2}\]</span></span></p>
+<p><span class="math inline">\(\mathfrak a^\mathrm{ec}\)</span> consists of those elements in <span class="math inline">\(R\)</span> that may reach <span class="math inline">\(\mathfrak a\)</span> after some multiplication by <span class="math inline">\(S\)</span>. To show this, <span class="math display">\[
+\begin{aligned}
+c \in \mathfrak a^\mathrm{ec}
+&amp;\iff \exists a \in \mathfrak a,\, \exists s \in S,\, \frac c 1 = \frac a s \\
+&amp;\iff \exists a \in \mathfrak a,\, \exists s \in S,\, \exists t \in S,\, (cs-a) t = 0 \\
+&amp;\iff \exists s \in S,\, \exists t \in S,\, cst \in \mathfrak a \\
+&amp;\iff \exists u \in S,\, c u \in \mathfrak a
+\end{aligned}
 \]</span></p></li>
-<li><p>MIN Determinant / 前缀和 / 差分：</p>
-<p><span class="math display">\[
-\det \begin{pmatrix} a_{\min(i,j)} \end{pmatrix}_{n \times n} = a_1 \prod_{2 \leq k \leq n} (a_k - a_{k-1})
-\]</span></p></li>
-<li><p>AND Determinant / 高维前缀和 / 容斥原理：</p>
-<p><span class="math display">\[
-\det \begin{pmatrix} a_{i \&amp; j} \end{pmatrix}_{2^n \times 2^n} = \prod_{0 \leq k &lt; 2^n} \sum_{t \subseteq k} (-1)^{\operatorname{popcount}(k)-\operatorname{popcount}(t)} a_t
-\]</span> 借助 FMT 可做到 <span class="math inline">\(O(n 2^n)\)</span>．</p></li>
-<li><p>GCD Determinant / Zeta 变换 / Möbius 反演： <span class="math display">\[
-\det \begin{pmatrix} a_{\gcd(i,j)} \end{pmatrix}_{n \times n} = \prod_{1 \leq k \leq n} \sum_{d \mid k} \mu(\frac k d) a_d
-\]</span> 借助类似埃筛的方法可以做到 <span class="math inline">\(O(n \log n)\)</span>．</p></li>
 </ul>
-<p>对于一般的偏序，Zeta / Möbius 变换有没有快速计算方法呢？这篇论文 <span class="citation" data-cites="pegolotti_fast_2022"><a href="#ref-pegolotti_fast_2022" role="doc-biblioref">[2]</a></span> 给出了 <span class="math inline">\(O(nk)\)</span> 时间复杂度下的算法，这里 <span class="math inline">\(k\)</span> 是偏序集的宽度．</p>
-<p>偏序并不是此类行列式求解问题的终点．上述论证成立的核心在于 <span class="math inline">\(p_{i,k} p_{j,k} = p_{i \land j,k}\)</span>，而 <span class="math inline">\(\land\)</span> 可以是任何一种二元运算．稍加改动，循环矩阵的行列式求值也被我们纳入囊中：</p>
+<p>The following is where the “disjoint from <span class="math inline">\(S\)</span>” requirement shows up:</p>
 <ul>
-<li>Cyclic Determinant / 离散 Fourier 变换 / 离散 Fourier 逆变换： <span class="math display">\[
-\det \begin{pmatrix} a_{(i+j) \bmod n} \end{pmatrix}_{0 \leq i,j &lt; n} = \prod_{0 \leq k &lt; n} \frac 1 n \sum_{0 \leq t &lt; n} \omega_n^{-kt} a_t
-\]</span> 借助 FFT 可以做到 <span class="math inline">\(O(n \log n)\)</span>．</li>
+<li><p><span id="eq-disjoint-from-S"><span class="math display">\[\mathfrak a^\mathrm{ec} = R \iff S \cap \mathfrak a \neq \varnothing \tag{3}\]</span></span></p>
+<p>The part of <span class="math inline">\(\impliedby\)</span> is easy. To establish the <span class="math inline">\(\implies\)</span> part, pick <span class="math inline">\(c = 1\)</span>, then <span class="math inline">\(\exists u \in S,\, u = 1 u \in \mathfrak a\)</span> and hence <span class="math inline">\(S \cap \mathfrak a \neq \varnothing\)</span>.</p>
+<p>The statement is equivalent of saying that for any proper ideal <span class="math inline">\(\mathfrak b\)</span> of <span class="math inline">\(S^{-1} R\)</span>, its contraction must be disjoint from <span class="math inline">\(S\)</span> — otherwise its numerators are entire <span class="math inline">\(R\)</span>, resulting <span class="math inline">\(\mathfrak b = S^{-1} R\)</span> being not proper. In fancy symbols, <span class="math display">\[
+\mathfrak b^\mathrm c = R \iff \mathfrak b^\mathrm{cec} = R \iff S \cap \mathfrak b^\mathrm c \neq \varnothing
+\]</span></p>
+<ul>
+<li>As a conseqence, contractions of prime ideals in <span class="math inline">\(S^{-1} R\)</span> are disjoint from <span class="math inline">\(S\)</span>, i.e.&nbsp;fall into <span class="math inline">\(\operatorname{D}(S)\)</span>.</li>
+</ul></li>
 </ul>
-<p><del>快把这些问题和你的小伙伴分享，一起成为线代高手吧！</del></p>
+<p>We now focus on prime ideals.</p>
+<ul>
+<li><p>Extension preserves prime ideals: Extension is <span class="math inline">\(S^{-1}\)</span>, preserves prime ideals by trivial verification.</p></li>
+<li><p>Contraction preserves prime ideals: Contraction is <span class="math inline">\(\iota^{-1}\)</span>, preserves prime ideals by <a href="#prp-preimage-preserve-prime" class="quarto-xref">Proposition&nbsp;1</a>.</p></li>
+<li><p>For any <span class="math inline">\(\mathfrak p \in \operatorname{Spec}(R)\)</span>, we have <span class="math inline">\(\mathfrak p^\mathrm{ec} = \mathfrak p\)</span>.</p>
+<p>By <a href="#eq-aec" class="quarto-xref">Equation&nbsp;2</a>, <span class="math inline">\(\mathfrak p^\mathrm{ec} = \{ c \in R: \exists u \in S,\, c u \in \mathfrak p \}\)</span>. But <span class="math inline">\(\mathfrak p\)</span> is prime and disjoint from <span class="math inline">\(S\)</span>, thus equivalently <span class="math inline">\(c \in p\)</span> and in turn <span class="math inline">\(\mathfrak p^\mathrm{ec} = \mathfrak p\)</span>.</p></li>
+</ul>
+<p>Thus extension and contraction are genuinely inverse operations between <span class="math inline">\(\operatorname{Spec}S^{-1} R\)</span> and <span class="math inline">\(\operatorname{D}(S)\)</span>, and the one-to-one correspondence is established. Below we turn to the topological part of the correspondence.</p>
+<ul>
+<li><p>Extension is Zariski-continuous: For any <span class="math inline">\(a \in R\)</span>, <span class="math display">\[
+\begin{aligned}
+\left( \operatorname{D}_R(a) \right)^\mathrm e
+&amp;= \{ \mathfrak p \in \operatorname{Spec}R : a \notin \mathfrak p \}^\mathrm e \\
+&amp;= \{ \mathfrak q \in \operatorname{Spec}S^{-1} R,\, a \notin \mathfrak q \} \\
+&amp;= D_{S^{-1} R}(a) \\
+\end{aligned}
+\]</span></p></li>
+<li><p>Contraction is Zariski-continuous: For any <span class="math inline">\(a/s \in S^{-1}R\)</span>, <span class="math display">\[
+\begin{aligned}
+\left( \operatorname{D}_{S^{-1}R}(\frac a s) \right)^\mathrm c
+&amp;= \{ \mathfrak q \in \operatorname{Spec}S^{-1} R : \frac a s \notin \mathfrak q \}^\mathrm c \\
+&amp;= \{ \mathfrak q \in \operatorname{Spec}S^{-1} R,\, a \notin \mathfrak q^\mathrm c \}^\mathrm c \\
+&amp;= \{ \mathfrak p \in R : a \notin \mathfrak p \} \\
+&amp;= \operatorname{D}_R(a) \\
+\end{aligned}
+\]</span></p></li>
+</ul>
+<p>Thus the correspondence is actually a Zariski-homeomorphism between <span class="math inline">\(\operatorname{Spec}S^{-1} R\)</span> and <span class="math inline">\(\operatorname{D}(S)\)</span>. Note that <span class="math inline">\(\operatorname{D}(S)\)</span> is open in <span class="math inline">\(\operatorname{Spec}R\)</span>. Thus we are done.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="prime-ideals-of-mathbb-zx" class="level2">
+<h2 class="anchored" data-anchor-id="prime-ideals-of-mathbb-zx">Prime ideals of <span class="math inline">\(\mathbb Z[x]\)</span></h2>
+<p>TODO</p>
+</section>
+<section id="prime-ideals-of-mathbb-zi" class="level2">
+<h2 class="anchored" data-anchor-id="prime-ideals-of-mathbb-zi">Prime ideals of <span class="math inline">\(\mathbb Z[i]\)</span></h2>
+<p>TODO</p>
 
 
 
 </section>
+
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
-<div id="ref-wilf1968hadamard" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline">H. S. Wilf, <span>《Hadamard determinants M<span>ö</span>bius functions, and the chromatic number of a graph》</span>, <em>Bulletin of the American Mathematical Society</em>, 卷 74, 期 5, 页 960–964, 1968.</div>
-</div>
-<div id="ref-pegolotti_fast_2022" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">T. Pegolotti, B. Seifert, 和 M. Püschel, <span>《Fast M<span>\</span>"obius and Zeta Transforms》</span>. <span>arXiv</span>, 2022年11月24日. doi: <a href="https://doi.org/10.48550/arXiv.2211.13706">10.48550/arXiv.2211.13706</a>.</div>
+<div id="ref-atiyah_commalg" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">M. F. Atiyah and I.G. Macdonald, <em>Introduction to commutative algebra</em>. Addison-Wesley Publishing Company, Inc., 1969.</div>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
