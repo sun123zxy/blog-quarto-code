@@ -1,4 +1,4 @@
-Quarto version: 1.6.39
+Quarto version: 1.7.26
 
 ## Installation
 
