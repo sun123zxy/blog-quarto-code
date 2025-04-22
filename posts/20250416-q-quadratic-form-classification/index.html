@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.43">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="sun123zxy">
+<meta name="dcterms.date" content="2025-04-16">
+
+<title>Classification of Quardratic Forms over \mathbb Q – sun123zxy's blog</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-4f17641596142cbde708c01b3a465e62.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-25acc18d4bd8a392162da96172bc6577.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-3ba8acf77ff18977d94f5d031728e7e8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-931f6a63db16cd9b12c9b8459888fd67.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">sun123zxy’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../listings/overview.html"> 
+<span class="menu-text">Overview</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-posts" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Posts</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-posts">    
+        <li>
+    <a class="dropdown-item" href="../../listings/all.html">
+ <span class="dropdown-text">All Posts</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../listings/dedicated.html">
+ <span class="dropdown-text">Dedicated</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../listings/casual.html">
+ <span class="dropdown-text">Casual</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/sun123zxy/blog-quarto-code/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-bi-rss" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-bi-rss">    
+        <li>
+    <a class="dropdown-item" href="../../listings/all.xml">
+ <span class="dropdown-text">All Posts</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../listings/dedicated.xml">
+ <span class="dropdown-text">Dedicated</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../listings/casual.xml">
+ <span class="dropdown-text">Casual</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#first-attempts-and-general-approachs" id="toc-first-attempts-and-general-approachs" class="nav-link active" data-scroll-target="#first-attempts-and-general-approachs">First Attempts and General Approachs</a>
+  <ul class="collapse">
+  <li><a href="#foreword" id="toc-foreword" class="nav-link" data-scroll-target="#foreword">Foreword</a></li>
+  <li><a href="#notations" id="toc-notations" class="nav-link" data-scroll-target="#notations">Notations</a></li>
+  <li><a href="#example-quadratic-forms-over-mathbb-r-and-mathbb-f_q" id="toc-example-quadratic-forms-over-mathbb-r-and-mathbb-f_q" class="nav-link" data-scroll-target="#example-quadratic-forms-over-mathbb-r-and-mathbb-f_q">Example: Quadratic Forms over <span class="math inline">\(\mathbb R\)</span> and <span class="math inline">\(\mathbb F_q\)</span></a>
+  <ul class="collapse">
+  <li><a href="#review-quadratic-forms-over-mathbb-r" id="toc-review-quadratic-forms-over-mathbb-r" class="nav-link" data-scroll-target="#review-quadratic-forms-over-mathbb-r">Review: Quadratic Forms over <span class="math inline">\(\mathbb R\)</span></a></li>
+  <li><a href="#some-refinement" id="toc-some-refinement" class="nav-link" data-scroll-target="#some-refinement">Some Refinement</a></li>
+  <li><a href="#another-example-quadratic-forms-over-mathbb-f_q" id="toc-another-example-quadratic-forms-over-mathbb-f_q" class="nav-link" data-scroll-target="#another-example-quadratic-forms-over-mathbb-f_q">Another Example: Quadratic Forms over <span class="math inline">\(\mathbb F_q\)</span></a></li>
+  </ul></li>
+  <li><a href="#quadratic-spaces" id="toc-quadratic-spaces" class="nav-link" data-scroll-target="#quadratic-spaces">Quadratic Spaces</a>
+  <ul class="collapse">
+  <li><a href="#quadratic-spaces-1" id="toc-quadratic-spaces-1" class="nav-link" data-scroll-target="#quadratic-spaces-1">Quadratic Spaces</a></li>
+  <li><a href="#structure-of-quadratic-spaces" id="toc-structure-of-quadratic-spaces" class="nav-link" data-scroll-target="#structure-of-quadratic-spaces">Structure of Quadratic Spaces</a></li>
+  </ul></li>
+  <li><a href="#the-common-represented-element-method" id="toc-the-common-represented-element-method" class="nav-link" data-scroll-target="#the-common-represented-element-method">The Common Represented Element Method</a>
+  <ul class="collapse">
+  <li><a href="#another-invariant-the-range" id="toc-another-invariant-the-range" class="nav-link" data-scroll-target="#another-invariant-the-range">Another Invariant: The Range</a></li>
+  <li><a href="#insights-from-the-range" id="toc-insights-from-the-range" class="nav-link" data-scroll-target="#insights-from-the-range">Insights from the Range</a></li>
+  <li><a href="#insights-from-the-range-1" id="toc-insights-from-the-range-1" class="nav-link" data-scroll-target="#insights-from-the-range-1">Insights from the Range</a></li>
+  </ul></li>
+  <li><a href="#global-and-local-equivalence" id="toc-global-and-local-equivalence" class="nav-link" data-scroll-target="#global-and-local-equivalence">Global and Local Equivalence</a>
+  <ul class="collapse">
+  <li><a href="#global-and-local-equivalence-1" id="toc-global-and-local-equivalence-1" class="nav-link" data-scroll-target="#global-and-local-equivalence-1">Global and Local Equivalence</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#quadratic-forms-over-mathbb-q_p-and-mathbb-q" id="toc-quadratic-forms-over-mathbb-q_p-and-mathbb-q" class="nav-link" data-scroll-target="#quadratic-forms-over-mathbb-q_p-and-mathbb-q">Quadratic Forms over <span class="math inline">\(\mathbb Q_p\)</span> and <span class="math inline">\(\mathbb Q\)</span></a>
+  <ul class="collapse">
+  <li><a href="#structure-of-mathbb-q_ptimes-mathbb-q_ptimes2" id="toc-structure-of-mathbb-q_ptimes-mathbb-q_ptimes2" class="nav-link" data-scroll-target="#structure-of-mathbb-q_ptimes-mathbb-q_ptimes2">Structure of <span class="math inline">\(\mathbb Q_p^\times / (\mathbb Q_p^\times)^2\)</span></a>
+  <ul class="collapse">
+  <li><a href="#structure-of-mathbb-q_ptimes" id="toc-structure-of-mathbb-q_ptimes" class="nav-link" data-scroll-target="#structure-of-mathbb-q_ptimes">Structure of <span class="math inline">\(\mathbb Q_p^\times\)</span></a></li>
+  <li><a href="#structure-of-1-p-mathbb-z_p-and-the-log-exp-map" id="toc-structure-of-1-p-mathbb-z_p-and-the-log-exp-map" class="nav-link" data-scroll-target="#structure-of-1-p-mathbb-z_p-and-the-log-exp-map">Structure of <span class="math inline">\(1 + p \mathbb Z_p\)</span> and the log / exp map</a></li>
+  <li><a href="#quadratic-residues-of-mathbb-q_p" id="toc-quadratic-residues-of-mathbb-q_p" class="nav-link" data-scroll-target="#quadratic-residues-of-mathbb-q_p">Quadratic residues of <span class="math inline">\(\mathbb Q_p\)</span></a></li>
+  </ul></li>
+  <li><a href="#the-hilbert-symbol" id="toc-the-hilbert-symbol" class="nav-link" data-scroll-target="#the-hilbert-symbol">The Hilbert Symbol</a>
+  <ul class="collapse">
+  <li><a href="#the-hilbert-symbol-1" id="toc-the-hilbert-symbol-1" class="nav-link" data-scroll-target="#the-hilbert-symbol-1">The Hilbert Symbol</a></li>
+  <li><a href="#properties-of-the-hilbert-symbol" id="toc-properties-of-the-hilbert-symbol" class="nav-link" data-scroll-target="#properties-of-the-hilbert-symbol">Properties of the Hilbert Symbol</a></li>
+  <li><a href="#the-explicit-formula-of-the-hilbert-symbol" id="toc-the-explicit-formula-of-the-hilbert-symbol" class="nav-link" data-scroll-target="#the-explicit-formula-of-the-hilbert-symbol">The Explicit Formula of the Hilbert Symbol</a></li>
+  </ul></li>
+  <li><a href="#invariants-that-determines-the-range" id="toc-invariants-that-determines-the-range" class="nav-link" data-scroll-target="#invariants-that-determines-the-range">Invariants that Determines the Range</a>
+  <ul class="collapse">
+  <li><a href="#the-hasse-invariant" id="toc-the-hasse-invariant" class="nav-link" data-scroll-target="#the-hasse-invariant">The Hasse Invariant</a></li>
+  <li><a href="#d-and-varepsilon-determine-the-range" id="toc-d-and-varepsilon-determine-the-range" class="nav-link" data-scroll-target="#d-and-varepsilon-determine-the-range"><span class="math inline">\(d\)</span> and <span class="math inline">\(\varepsilon\)</span> Determine the Range</a></li>
+  </ul></li>
+  <li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification">Classification</a>
+  <ul class="collapse">
+  <li><a href="#classification-of-quadratic-forms-over-mathbb-q_p" id="toc-classification-of-quadratic-forms-over-mathbb-q_p" class="nav-link" data-scroll-target="#classification-of-quadratic-forms-over-mathbb-q_p">Classification of Quadratic Forms over <span class="math inline">\(\mathbb Q_p\)</span></a></li>
+  <li><a href="#classification-of-quadratic-forms-over-mathbb-q" id="toc-classification-of-quadratic-forms-over-mathbb-q" class="nav-link" data-scroll-target="#classification-of-quadratic-forms-over-mathbb-q">Classification of Quadratic Forms over <span class="math inline">\(\mathbb Q\)</span></a></li>
+  <li><a href="#problem-remains" id="toc-problem-remains" class="nav-link" data-scroll-target="#problem-remains">Problem Remains</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>Beamer</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Classification of Quardratic Forms over <span class="math inline">\(\mathbb Q\)</span></h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">algebra</div>
+    <div class="quarto-category">number theory</div>
+    <div class="quarto-category">lecture notes</div>
+    <div class="quarto-category">slides</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>sun123zxy </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 16, 2025</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">April 22, 2025</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="first-attempts-and-general-approachs" class="level1 page-columns page-full">
+<h1>First Attempts and General Approachs</h1>
+<section id="foreword" class="level3">
+<h3 class="anchored" data-anchor-id="foreword">Foreword</h3>
+<ul>
+<li><p>References relied on heavily:</p>
+<ul>
+<li><p>J.P. Serre “A Course in Arithmetic” <span class="citation" data-cites="serre_course_1973"><a href="#ref-serre_course_1973" role="doc-biblioref">[1]</a></span></p></li>
+<li><p>Shiva Chidambaram, MIT18.782 Introduction to Arithmetic Geometry (Spring 2023) <a href="https://math.mit.edu/classes/18.782/2023sp/LectureNotes9.pdf">Lecture Notes</a></p></li>
+<li><p>Arushi Gupta, Participant Papers of The University of Chicago Mathematics REU 2018, <a href="https://math.uchicago.edu/~may/REU2018/REUPapers/Gupta.pdf">The p-adic Integers, Analytically and Algebraically</a></p></li>
+</ul></li>
+<li><p>May serve as a guidance of the first part of <span class="citation" data-cites="serre_course_1973"><a href="#ref-serre_course_1973" role="doc-biblioref">[1]</a></span></p></li>
+<li><p>Assume familarity of quadratic residues and basic knowledge of <span class="math inline">\(p\)</span>-adic numbers</p></li>
+<li><p>Skip most of the proofs</p></li>
+<li><p>Apology in advance for potential mistakes</p></li>
+</ul>
+</section>
+<section id="notations" class="level3">
+<h3 class="anchored" data-anchor-id="notations">Notations</h3>
+<ul>
+<li><p>We denote by <span class="math inline">\(K\)</span> an arbitrary field. <strong>All fields are assumed to be of characteristic <span class="math inline">\(\neq 2\)</span></strong>.</p></li>
+<li><p><span class="math inline">\(\nu_p : \mathbb Q_p \to \mathbb Z\)</span> being the <span class="math inline">\(p\)</span>-adic valuation.</p></li>
+<li><p><span class="math inline">\(\left(\dfrac a p \right)\)</span> being the Legendre symbol. <span class="math inline">\(a\)</span> is understanded as <span class="math inline">\(p^{-\nu_p(a)} a \bmod p\)</span> if <span class="math inline">\(a \in \mathbb Q_p\)</span>. Define this similarly in <span class="math inline">\(\mathbb F_q\)</span>.</p></li>
+<li><p>Let <span class="math inline">\(f \oplus g\)</span> denote the direct sum of two quadratic forms <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span>.</p></li>
+</ul>
+</section>
+<section id="example-quadratic-forms-over-mathbb-r-and-mathbb-f_q" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="example-quadratic-forms-over-mathbb-r-and-mathbb-f_q">Example: Quadratic Forms over <span class="math inline">\(\mathbb R\)</span> and <span class="math inline">\(\mathbb F_q\)</span></h2>
+<section id="review-quadratic-forms-over-mathbb-r" class="level3">
+<h3 class="anchored" data-anchor-id="review-quadratic-forms-over-mathbb-r">Review: Quadratic Forms over <span class="math inline">\(\mathbb R\)</span></h3>
+<ul>
+<li><p>A quadratic form <span class="math inline">\(f: V \to K\)</span> may be identified by a symmetric matrix <span class="math inline">\(A \in M_n(K)\)</span> by <span class="math inline">\(f(v) = v^\mathrm{T}A v\)</span>.</p>
+<p>Their equivalence is defined by <em>congruence</em>: <span class="math inline">\(A \sim B \iff A = Q^\mathrm{T}B Q\)</span>.</p></li>
+<li><p>Real symmetric matrices may be diagonalized orthogonally.</p></li>
+<li><p>Scale each eigenvalue by multiplying a square. Only their sign matters.</p>
+<ul>
+<li>the <em>rank</em> <span class="math inline">\(n\)</span>, an invariant</li>
+<li>the <em>signature</em> <span class="math inline">\((r,s) := (\# \text{positive eigenvalues}, \# \text{negative eigenvalues})\)</span>.</li>
+</ul></li>
+<li><p>Same rank and signature implies the equivalence.</p></li>
+<li><p>Sylvester’s law of inertia: signature is also an invariant.</p></li>
+</ul>
+</section>
+<section id="some-refinement" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="some-refinement">Some Refinement</h3>
+<p>On an abitrary field <span class="math inline">\(K\)</span>:</p>
+<ul>
+<li><p>All symmetric matrix is equivalent to a diagonal one.</p>
+<ul>
+<li>Pick a non-isotropic vector <span class="math inline">\(v\)</span> (exists when the form is nonzero), its orthogonal complement is a hyperplane and does not include <span class="math inline">\(v\)</span>. Change basis and do the induction.</li>
+</ul></li>
+<li><p>The rank is always a invariant. <strong>We may (and we shall always) reduce to classify the non-degenerate quadratic forms of rank <span class="math inline">\(n\)</span>.</strong></p></li>
+<li><p>The squares <span class="math inline">\((K^\times)^2\)</span> give us the ability to scale. Knowledge of distribution of diagonal elements in <span class="math inline">\(K^\times / (K^\times)^2\)</span> suffices to show the equivalence<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<ul>
+<li><span class="math inline">\(\mathbb C^\times / (\mathbb C^\times)^2 \cong \{1\}\)</span>, suffices to classify by the rank.</li>
+<li><span class="math inline">\(\mathbb R^\times / (\mathbb R^\times)^2 \cong \{1,-1\}\)</span>, signature is also needed.</li>
+<li><span class="math inline">\(\mathbb F_q^\times / (\mathbb F_q^\times)^2 \cong \{1,a\}\)</span>, where <span class="math inline">\(a \in \mathbb F_q\)</span> is a quadratic nonresidue.</li>
+<li>For <span class="math inline">\(\mathbb Q_p\)</span> and <span class="math inline">\(\mathbb Q\)</span>?</li>
+</ul></li>
+</ul>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Though working in the refined structure <span class="math inline">\(\{0\} \cup K^\times / (K^\times)^2\)</span> is probably a better idea if one wish to deal with the degenerate case in a uniform manner.</p></div></div></section>
+<section id="another-example-quadratic-forms-over-mathbb-f_q" class="level3">
+<h3 class="anchored" data-anchor-id="another-example-quadratic-forms-over-mathbb-f_q">Another Example: Quadratic Forms over <span class="math inline">\(\mathbb F_q\)</span></h3>
+<p>We classify the non-degenerate quadratic forms of rank <span class="math inline">\(n\)</span>.</p>
+<ul>
+<li><p>Refined signature: counting nonzero quadratic residues and nonresidues. It may serve as a sufficient criterion of the equivalence.</p></li>
+<li><p>But it’s not an invariant. <span class="math inline">\(a X^2 + a Y^2 \sim X^2 + Y^2\)</span> over <span class="math inline">\(\mathbb F_q\)</span>.</p>
+<ul>
+<li><p>Do a change of basis <span class="math inline">\(X=sU+tV\)</span> and <span class="math inline">\(Y=tU-sV\)</span>. If we require <span class="math inline">\(a U^2 + a V^2 = X^2 + Y^2\)</span>, then <span class="math inline">\(s^2+t^2=a\)</span>.</p></li>
+<li><p>It always has a nonzero solution in <span class="math inline">\(\mathbb F_q\)</span>: <span class="math inline">\(s^2\)</span> and <span class="math inline">\(a - t^2\)</span> have both <span class="math inline">\((q+1)/2\)</span> possible values, thus must reach a common value.</p></li>
+</ul></li>
+<li><p>The <em>discriminant</em> <span class="math inline">\(d := \left( \dfrac{\det(A)}{q} \right) \in \mathbb F_q^\times / (\mathbb F_q^\times)^2\)</span> is an invariant and reveals the parity of the signature. It classifies the non-degenerate quadratic forms over <span class="math inline">\(\mathbb F_q\)</span>.</p></li>
+</ul>
+<p>Insight: Existence of nonzero solutions of the equation <span class="math inline">\(a X^2 + b Y^2 = Z^2\)</span> in <span class="math inline">\(K\)</span> seems to be of great importantance.</p>
+</section>
+</section>
+<section id="quadratic-spaces" class="level2">
+<h2 class="anchored" data-anchor-id="quadratic-spaces">Quadratic Spaces</h2>
+<section id="quadratic-spaces-1" class="level3">
+<h3 class="anchored" data-anchor-id="quadratic-spaces-1">Quadratic Spaces</h3>
+<p>The structure of a quadratic space, i.e.&nbsp;vector space equipped with a symmetric bilinear form, is much more subtle than its positive-definite counterpart over <span class="math inline">\(\mathbb R\)</span> or <span class="math inline">\(\mathbb C\)</span>. For example, for a non-degenerate quadratic space <span class="math inline">\(V\)</span> and a subspace <span class="math inline">\(U\)</span> of <span class="math inline">\(V\)</span> (<span class="citation" data-cites="serre_course_1973"><a href="#ref-serre_course_1973" role="doc-biblioref">[1]</a></span> p.&nbsp;28, chap.&nbsp;4, sec.&nbsp;1.2):</p>
+<ul>
+<li><p><span class="math inline">\(U \cap U^\perp = \operatorname{rad}(U)\)</span>, <span class="math inline">\(\dim U + \dim U^\perp = \dim V\)</span>, <span class="math inline">\((U^\perp)^\perp = U\)</span></p></li>
+<li><p><span class="math inline">\(U \oplus U^\perp = V\)</span> iff <span class="math inline">\(U + U^\perp = V\)</span> iff <span class="math inline">\(\operatorname{rad}(U) = 0\)</span></p></li>
+<li><p>It’s much harder to show that an orthogonal basis of <span class="math inline">\(U\)</span> expands to an orthogonal basis of <span class="math inline">\(V\)</span>.</p></li>
+</ul>
+</section>
+<section id="structure-of-quadratic-spaces" class="level3">
+<h3 class="anchored" data-anchor-id="structure-of-quadratic-spaces">Structure of Quadratic Spaces</h3>
+<p>We mention some results here without details.</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-witt" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Witt (<span class="citation" data-cites="serre_course_1973"><a href="#ref-serre_course_1973" role="doc-biblioref">[1]</a></span> p.&nbsp;31, chap.&nbsp;4, sec.&nbsp;1.5, theorem 3))</strong></span> Every injective metric-preserving map from a subspace <span class="math inline">\(U\)</span> of a quadratic space <span class="math inline">\(V\)</span> to another quadratic space <span class="math inline">\(W\)</span> may be extended to a metric-preserving map from <span class="math inline">\(V\)</span> to <span class="math inline">\(W\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-witt-cancel" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (Witt’s cancellation (<span class="citation" data-cites="serre_course_1973"><a href="#ref-serre_course_1973" role="doc-biblioref">[1]</a></span> p.&nbsp;34, chap.&nbsp;4, sec.&nbsp;1.6, theorem 4))</strong></span> <span class="math inline">\(f_1 \oplus g_1 \sim f_2 \oplus g_2\)</span> and <span class="math inline">\(g_1 \sim g_2\)</span> implies <span class="math inline">\(f_1 \sim f_2\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-witt-decomposition" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3 (Witt’s decomposition)</strong></span> Every quadratic space <span class="math inline">\(V\)</span> is a direct sum of: <span class="math inline">\(\operatorname{rad}(V)\)</span>, an anisotropic quadratic space (i.e.&nbsp;its nonzero vectors has nonzero norms) and a split quadratic space (i.e.&nbsp;<span class="math inline">\(U = U^\perp\)</span>, full of hyperbolas)</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="the-common-represented-element-method" class="level2">
+<h2 class="anchored" data-anchor-id="the-common-represented-element-method">The Common Represented Element Method</h2>
+<section id="another-invariant-the-range" class="level3">
+<h3 class="anchored" data-anchor-id="another-invariant-the-range">Another Invariant: The Range</h3>
+<p>On an abitrary field <span class="math inline">\(K\)</span>, we say that a quadratic form <span class="math inline">\(f\)</span> <em>represent</em>s <span class="math inline">\(a \in K\)</span> if there exists a nonzero <span class="math inline">\(v \in V\)</span> such that <span class="math inline">\(f(v) = a\)</span>.</p>
+<ul>
+<li><p>The range of <span class="math inline">\(f\)</span>, <span class="math inline">\(\operatorname{Im}f\)</span>, is an invariant.</p></li>
+<li><p>It may be viewed in <span class="math inline">\(\{0\} \cup K^\times / (K^{\times})^2\)</span>.</p></li>
+<li><p>Is it complete?</p></li>
+</ul>
+</section>
+<section id="insights-from-the-range" class="level3">
+<h3 class="anchored" data-anchor-id="insights-from-the-range">Insights from the Range</h3>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-range" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1 ((<span class="citation" data-cites="serre_course_1973"><a href="#ref-serre_course_1973" role="doc-biblioref">[1]</a></span> p.&nbsp;33, chap.&nbsp;4, sec.&nbsp;1.6, corollary 1))</strong></span> Let <span class="math inline">\(a \in K^\times\)</span>. TFAE:</p>
+<ul>
+<li><span class="math inline">\(f\)</span> represents <span class="math inline">\(a\)</span></li>
+<li><span class="math inline">\(f \sim g \oplus (Z \mapsto a Z^2)\)</span> where <span class="math inline">\(g\)</span> is of rank <span class="math inline">\(\operatorname{rk}f - 1\)</span>.</li>
+<li><span class="math inline">\(f \oplus (Z \mapsto -a Z^2)\)</span> represents <span class="math inline">\(0\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>Insight from line 3: To understand the range, it suffices to examine when a quadratic form represents <span class="math inline">\(0\)</span>.</li>
+<li>Insight from line 2 (<em>the common represented element method</em>): Say <span class="math inline">\(f_1\)</span>, <span class="math inline">\(f_2\)</span> are nozero and represent a common <span class="math inline">\(a \in K^\times\)</span>. Reducing <span class="math inline">\(Z \mapsto aZ^2\)</span>, if only <span class="math inline">\(g_1\)</span> and <span class="math inline">\(g_2\)</span> also share a common represented element…</li>
+</ul>
+</section>
+<section id="insights-from-the-range-1" class="level3">
+<h3 class="anchored" data-anchor-id="insights-from-the-range-1">Insights from the Range</h3>
+<ul>
+<li><p>Sadly, range is not always a complete invariant.</p>
+<ul>
+<li>Otherwise all indefinite quadratic forms over <span class="math inline">\(\mathbb R\)</span> are equivalent, absurd.</li>
+</ul></li>
+<li><p>But we shall show that when <span class="math inline">\(K = \mathbb Q_p\)</span> and moreover <span class="math inline">\(K = \mathbb Q\)</span>, it plays a subtle role in the classification of quadratic forms. This requires a more precise characterization of the range.</p></li>
+<li><p>In fact, if only there are some simple invariants that can fully determines the range…</p></li>
+</ul>
+</section>
+</section>
+<section id="global-and-local-equivalence" class="level2">
+<h2 class="anchored" data-anchor-id="global-and-local-equivalence">Global and Local Equivalence</h2>
+<section id="global-and-local-equivalence-1" class="level3">
+<h3 class="anchored" data-anchor-id="global-and-local-equivalence-1">Global and Local Equivalence</h3>
+<ul>
+<li><p>Fact: Field extensions preserve the equivalence of quadratic forms.</p>
+<ul>
+<li>Example: Equivalence classes are finer over <span class="math inline">\(\mathbb R\)</span> than those over <span class="math inline">\(\mathbb C\)</span>.</li>
+</ul></li>
+<li><p><span class="math inline">\(\mathbb Q \hookrightarrow \mathbb R\)</span>, thus the rank and the signature are invariants. But we need more information to classify.</p></li>
+<li><p>Other field extension of <span class="math inline">\(\mathbb Q\)</span>? <span class="math inline">\(\mathbb Q \hookrightarrow \mathbb Q_p\)</span></p></li>
+</ul>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-hasse-minkowski" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4 (Hasse-Minkowski (<span class="citation" data-cites="serre_course_1973"><a href="#ref-serre_course_1973" role="doc-biblioref">[1]</a></span> p.&nbsp;41, chap.&nbsp;4, sec.&nbsp;3.1, theorem 8))</strong></span> <span class="math inline">\(f\)</span> represents <span class="math inline">\(0\)</span> over <span class="math inline">\(\mathbb Q\)</span> iff it represents <span class="math inline">\(0\)</span> over <span class="math inline">\(\mathbb R\)</span> and all <span class="math inline">\(\mathbb Q_p\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>To gain more invariants for <span class="math inline">\(\mathbb Q\)</span> (especially those related to the range), let’s classify quadratic forms over <span class="math inline">\(\mathbb Q_p\)</span> first.</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="quadratic-forms-over-mathbb-q_p-and-mathbb-q" class="level1 page-columns page-full">
+<h1>Quadratic Forms over <span class="math inline">\(\mathbb Q_p\)</span> and <span class="math inline">\(\mathbb Q\)</span></h1>
+<section id="structure-of-mathbb-q_ptimes-mathbb-q_ptimes2" class="level2">
+<h2 class="anchored" data-anchor-id="structure-of-mathbb-q_ptimes-mathbb-q_ptimes2">Structure of <span class="math inline">\(\mathbb Q_p^\times / (\mathbb Q_p^\times)^2\)</span></h2>
+<section id="structure-of-mathbb-q_ptimes" class="level3">
+<h3 class="anchored" data-anchor-id="structure-of-mathbb-q_ptimes">Structure of <span class="math inline">\(\mathbb Q_p^\times\)</span></h3>
+<ul>
+<li><p><span class="math inline">\(\mathbb Q_p^\times \cong \mathbb Z \times \mathbb Z_p^\times\)</span> by collecting common powers of <span class="math inline">\(p\)</span></p></li>
+<li><p><span class="math inline">\(\mathbb Z_p^\times \cong \mathbb F_p^\times \times (1 + p \mathbb Z_p)\)</span> by <span class="math inline">\(a \mapsto a \bmod p\)</span></p>
+<ul>
+<li>It splits by the explicit construction of a primitive root of order <span class="math inline">\(p\)</span>, via Hensel’s lemma / Teichmüller lift <span class="math inline">\(\lim_{n \to \infty} g^{p^n}\)</span>, where <span class="math inline">\(g\)</span> is a primitive root of <span class="math inline">\(\mathbb F_p^\times\)</span>.</li>
+</ul></li>
+</ul>
+</section>
+<section id="structure-of-1-p-mathbb-z_p-and-the-log-exp-map" class="level3">
+<h3 class="anchored" data-anchor-id="structure-of-1-p-mathbb-z_p-and-the-log-exp-map">Structure of <span class="math inline">\(1 + p \mathbb Z_p\)</span> and the log / exp map</h3>
+<p>For <span class="math inline">\(p \neq 2,\, \alpha \geq 1\)</span> or <span class="math inline">\(p = 2,\, \alpha \geq 2\)</span>: <span class="math display">\[
+\begin{aligned}
+1 + p^\alpha \mathbb Z_p &amp;\cong (p^\alpha \mathbb Z_p, +) \cong (\mathbb Z_p, +) \\
+1 + p^\alpha a &amp;\mapsto \log(1+p^\alpha a)
+\end{aligned}
+\]</span></p>
+<p>For <span class="math inline">\(p=2,\,\alpha = 1\)</span>,</p>
+<ul>
+<li><p><span class="math display">\[
+1 + 2 \mathbb Z_2 \cong \mathbb Z / 2 \mathbb Z \times (1 + 4 \mathbb Z_2)
+\]</span></p>
+<ul>
+<li><p>by <span class="math inline">\(1 + 2a \mapsto a \bmod 2\)</span></p></li>
+<li><p>It splits by the explicit construction of a primitive root of order <span class="math inline">\(2\)</span>: <span class="math inline">\((-1,-1,\dots) = \sum_{n=0}^{+\infty} 2^n\)</span>.</p></li>
+</ul></li>
+<li><p><span class="math inline">\((1 + 4 \mathbb Z_2) \cong (4 \mathbb Z_2, +) \cong (\mathbb Z_2, +)\)</span> by the log map</p></li>
+<li><p>Thus <span class="math display">\[
+1 + 2 \mathbb Z_2 \cong \mathbb Z / 2 \mathbb Z \times (\mathbb Z_2, +)
+\]</span></p></li>
+</ul>
+</section>
+<section id="quadratic-residues-of-mathbb-q_p" class="level3">
+<h3 class="anchored" data-anchor-id="quadratic-residues-of-mathbb-q_p">Quadratic residues of <span class="math inline">\(\mathbb Q_p\)</span></h3>
+<p>For <span class="math inline">\(p \neq 2\)</span>:</p>
+<ul>
+<li><p><span class="math inline">\(\mathbb Q_p^\times \cong \mathbb Z \times \mathbb F_p^\times \times (\mathbb Z_p, +)\)</span></p></li>
+<li><p><span class="math inline">\(2\)</span> is a unit in <span class="math inline">\(\mathbb Z_p\)</span>. Thus <span class="math inline">\(a \in (\mathbb Q_p^\times)^2\)</span> iff <span class="math inline">\(\nu_p(a) \bmod 2 = 0\)</span> and <span class="math inline">\(a \bmod p \in \mathbb F_p^\times\)</span> is a quadratic residue.</p></li>
+<li><p><span class="math inline">\(\mathbb Q_p^\times / (\mathbb Q_p^\times)^2 \cong \mathbb Z / 2\mathbb Z \times \mathbb Z / 2\mathbb Z\)</span>, generated by <span class="math inline">\(p\)</span> and <span class="math inline">\(a\)</span>, where <span class="math inline">\(a \bmod p\)</span> is a quadratic nonresidue．</p></li>
+</ul>
+<p>For <span class="math inline">\(p = 2\)</span>:</p>
+<ul>
+<li><p><span class="math inline">\(\mathbb Q_2^\times \cong \mathbb Z \times \mathbb Z / 2 \mathbb Z \times (\mathbb Z_2, +)\)</span></p></li>
+<li><p>Quadratic residues of <span class="math inline">\((\mathbb Z_2, +)\)</span> are <span class="math inline">\((2 \mathbb Z_2, +)\)</span>, which pulls back to <span class="math inline">\(1 + 8 \mathbb Z_2\)</span>.</p></li>
+<li><p><span class="math inline">\(a \in (\mathbb Q_2^\times)^2\)</span> iff <span class="math inline">\(\nu_2(a) \bmod 2 = 0\)</span> and <span class="math inline">\(a \bmod 8 \equiv 1\)</span>.</p></li>
+<li><p><span class="math inline">\(\mathbb Q_2^\times / (\mathbb Q_2^\times)^2 \cong \mathbb Z / 2\mathbb Z \times \mathbb Z / 2\mathbb Z \times \mathbb Z / 2\mathbb Z\)</span>, generated by <span class="math inline">\(2\)</span>, <span class="math inline">\(3\)</span> and <span class="math inline">\(5\)</span>.</p></li>
+</ul>
+</section>
+</section>
+<section id="the-hilbert-symbol" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="the-hilbert-symbol">The Hilbert Symbol</h2>
+<section id="the-hilbert-symbol-1" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="the-hilbert-symbol-1">The Hilbert Symbol</h3>
+<p>The Hilbert symbol over <span class="math inline">\(\mathbb Q_p\)</span> is defined as: <span class="math display">\[
+\langle a, b \rangle := \begin{cases}
+  1 &amp; \text{if } a X^2 + b Y^2 = Z^2 \text{ has a nonzero solution in } \mathbb Q_p \\
+  -1 &amp; \text{otherwise}
+\end{cases}
+\]</span> The symbol may be also viewed in <span class="math inline">\(\{0\} \cup \mathbb Q_p^\times / (\mathbb Q_p^\times)^2\)</span> or even more simply in <span class="math inline">\(\mathbb Q_p^\times / (\mathbb Q_p^\times)^2\)</span> when working with non-degenerate forms.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Lots of the resources, even <span class="citation" data-cites="serre_course_1973"><a href="#ref-serre_course_1973" role="doc-biblioref">[1]</a></span>, switch between these three views without enough warning. Sadly we shall also commit this ususal mild sin (and have already done to other innocent invariants such as the discriminant…)</p></div></div></section>
+<section id="properties-of-the-hilbert-symbol" class="level3">
+<h3 class="anchored" data-anchor-id="properties-of-the-hilbert-symbol">Properties of the Hilbert Symbol</h3>
+<ul>
+<li><p><span class="math inline">\(\langle a, -a \rangle = 1\)</span></p></li>
+<li><p><span class="math inline">\(\langle a, b \rangle = \langle b, a \rangle\)</span> (symmetric)</p></li>
+<li><p>If <span class="math inline">\(\langle a_2,b \rangle = 1\)</span>, then <span class="math inline">\(\langle a_1 a_2, b \rangle = \langle a_1,b \rangle\)</span></p>
+<ul>
+<li>In fact, <span class="math inline">\(\langle a_1 a_2, b \rangle = \langle a_1, b \rangle \langle a_2, b \rangle\)</span> (multiplicatively bilinear)</li>
+</ul></li>
+<li><p><span class="math inline">\(\langle a, b \rangle = 1\)</span> for all <span class="math inline">\(b\)</span> iff <span class="math inline">\(a \in \mathbb Q_p^2\)</span> (nondegenerate)</p></li>
+<li><p>the Hilbert symbol is a non-degenerate symmetric bilinear form of the <span class="math inline">\(\mathbb F_2\)</span>-vector space <span class="math inline">\(\mathbb Q_p^\times / (\mathbb Q_p^\times)^2\)</span></p>
+<ul>
+<li><p>This is a non-trivial result and is said to be, to some extent, a generalization of the law of quadratic reciprocity in local class field theory.</p></li>
+<li><p>To show above over <span class="math inline">\(\mathbb Q_p\)</span>, we develop an explicit formula for the Hilbert symbol.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="the-explicit-formula-of-the-hilbert-symbol" class="level3">
+<h3 class="anchored" data-anchor-id="the-explicit-formula-of-the-hilbert-symbol">The Explicit Formula of the Hilbert Symbol</h3>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-hilbert-symbol" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 5 ((<span class="citation" data-cites="serre_course_1973"><a href="#ref-serre_course_1973" role="doc-biblioref">[1]</a></span> p.&nbsp;20, chap.&nbsp;3, sec.&nbsp;1.2, theorem 1))</strong></span> Say <span class="math inline">\(a = p^\alpha u\)</span> and <span class="math inline">\(b = p^\beta v\)</span> are <span class="math inline">\(p\)</span>-adic numbers where <span class="math inline">\(u,v \in \mathbb Z_p^\times\)</span>, then <span class="math display">\[
+\langle a, b \rangle = (-1)^{\alpha \cdot \beta \cdot \frac{p-1}{2}} \left(\dfrac{u}{p}\right)^\beta \left(\dfrac{v}{p}\right)^\alpha \text{ if } p \neq 2
+\]</span> We omit the case <span class="math inline">\(p=2\)</span>. It’s a tedious modification of the above formula.</p>
+</div>
+</div>
+</div>
+</div>
+<table class="table">
+<caption>Table of Hilbert symbol, <span class="math inline">\(p \neq 2\)</span></caption>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;"><span class="math inline">\(0\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(1\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(a\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(p\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(0\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(a\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(-1\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(p\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><span class="math inline">\((-1)^{\frac{p-1}{2}}\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="invariants-that-determines-the-range" class="level2">
+<h2 class="anchored" data-anchor-id="invariants-that-determines-the-range">Invariants that Determines the Range</h2>
+<section id="the-hasse-invariant" class="level3">
+<h3 class="anchored" data-anchor-id="the-hasse-invariant">The Hasse Invariant</h3>
+<p>Recall that we have reduced to work with non-degenerate diagonalized quadratic forms of rank <span class="math inline">\(n\)</span>. Recall that the discriminant <span class="math display">\[
+d(f) = a_1 a_2 \dots a_n \in \mathbb Q_p^\times / (\mathbb Q_p^\times)^2
+\]</span> is an invariant.</p>
+<ul>
+<li><p>Define the <em>Hasse invariant</em> <span class="math inline">\(\varepsilon(f) := \prod_{1 \leq i &lt; j \leq n} \langle a_i, a_j \rangle\)</span></p></li>
+<li><p>It is an invariant: <span class="math display">\[
+\varepsilon(f) = \prod_{1 \leq i &lt; j \leq n} \langle a_i, a_j \rangle = \varepsilon(f_1) \prod_{2 \leq j \leq n} \langle a_1, a_j \rangle = \varepsilon(f_1) \cdot \langle a_1, a_1 d(f) \rangle
+\]</span> Thus <span class="math inline">\(\varepsilon\)</span> is preserved under <em>contiguous</em> change of orthogonal bases (fixes one of the vector of the basis)</p>
+<ul>
+<li>For <span class="math inline">\(n \geq 3\)</span>, orthorgonal bases are transitive under contiguous change (<span class="citation" data-cites="serre_course_1973"><a href="#ref-serre_course_1973" role="doc-biblioref">[1]</a></span> p.&nbsp;30, sec.&nbsp;4.1.4, theorem 2)</li>
+</ul></li>
+</ul>
+</section>
+<section id="d-and-varepsilon-determine-the-range" class="level3">
+<h3 class="anchored" data-anchor-id="d-and-varepsilon-determine-the-range"><span class="math inline">\(d\)</span> and <span class="math inline">\(\varepsilon\)</span> Determine the Range</h3>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-qp-range-determine" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 6 ((<span class="citation" data-cites="serre_course_1973"><a href="#ref-serre_course_1973" role="doc-biblioref">[1]</a></span> p.&nbsp;36, chap.&nbsp;4, sec.&nbsp;2.2, theorem 6))</strong></span> For a non-degenerate quadratic form <span class="math inline">\(f\)</span> of rank <span class="math inline">\(n\)</span> over <span class="math inline">\(\mathbb Q_p\)</span>, the range of <span class="math inline">\(f\)</span> is determined by the discriminant <span class="math inline">\(d := d(f)\)</span> and the Hasse invariant <span class="math inline">\(\varepsilon := \varepsilon(f)\)</span>.</p>
+<p>Or, in detail, <span class="math inline">\(f\)</span> represents <span class="math inline">\(0\)</span> iff:</p>
+<ul>
+<li>For <span class="math inline">\(n=2\)</span>: <span class="math inline">\(d=-1\)</span></li>
+<li>For <span class="math inline">\(n=3\)</span>: <span class="math inline">\(\langle -1,-d \rangle = \varepsilon\)</span></li>
+<li>For <span class="math inline">\(n=4\)</span>: <span class="math inline">\(d \neq 1\)</span> or <span class="math inline">\(d=1\)</span> and <span class="math inline">\(\varepsilon = \langle -1,-1 \rangle\)</span></li>
+<li>For <span class="math inline">\(n=5\)</span>: no conditions</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<p>Recall that <span class="math inline">\(f\)</span> represents <span class="math inline">\(a \in \mathbb Q_p^\times / (\mathbb Q_p^\times)^2\)</span> iff <span class="math inline">\(f \oplus (Z \mapsto -a Z^2)\)</span> represents <span class="math inline">\(0\)</span>, thus above fully characterizes the range.</p>
+</section>
+</section>
+<section id="classification" class="level2">
+<h2 class="anchored" data-anchor-id="classification">Classification</h2>
+<section id="classification-of-quadratic-forms-over-mathbb-q_p" class="level3">
+<h3 class="anchored" data-anchor-id="classification-of-quadratic-forms-over-mathbb-q_p">Classification of Quadratic Forms over <span class="math inline">\(\mathbb Q_p\)</span></h3>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-qp-classification" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 7 ((<span class="citation" data-cites="serre_course_1973"><a href="#ref-serre_course_1973" role="doc-biblioref">[1]</a></span> p.&nbsp;39, chap.&nbsp;4, sec.&nbsp;2.3, theorem 7))</strong></span> Two non-degenerate quadratic forms of rank <span class="math inline">\(n\)</span> over <span class="math inline">\(\mathbb Q_p\)</span> are equivalent iff they have the same discriminant <span class="math inline">\(d\)</span> and Hasse invariant <span class="math inline">\(\varepsilon\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li><p><span class="math inline">\(f,g\)</span> have same <span class="math inline">\(d\)</span> and <span class="math inline">\(\varepsilon\)</span>, thus have the same range. Say they both represent <span class="math inline">\(a \in \mathbb Q_p^\times / (\mathbb Q_p^\times)^2\)</span>.</p></li>
+<li><p>Then <span class="math inline">\(f \sim f_1 \oplus (Z \mapsto a Z^2)\)</span>, where <span class="math inline">\(f_1\)</span> is of rank <span class="math inline">\(n-1\)</span>.</p></li>
+<li><p><span class="math inline">\(d\)</span> and <span class="math inline">\(\varepsilon\)</span> of <span class="math inline">\(f_1\)</span> can be determined:</p>
+<ul>
+<li><span class="math inline">\(d(f_1) = a d(f)\)</span></li>
+<li><span class="math inline">\(\varepsilon(f_1) = \varepsilon(f) \cdot (a, a d(f))\)</span> (shown when discussing the invariance of <span class="math inline">\(\varepsilon\)</span>)</li>
+</ul></li>
+<li><p>The same for <span class="math inline">\(g\)</span>. Thus <span class="math inline">\(f_1, g_1\)</span> shares the same <span class="math inline">\(d\)</span> and <span class="math inline">\(\varepsilon\)</span> (thus also their range). QED by induction.</p></li>
+</ul>
+</section>
+<section id="classification-of-quadratic-forms-over-mathbb-q" class="level3">
+<h3 class="anchored" data-anchor-id="classification-of-quadratic-forms-over-mathbb-q">Classification of Quadratic Forms over <span class="math inline">\(\mathbb Q\)</span></h3>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-qp-classification" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 8 ((<span class="citation" data-cites="serre_course_1973"><a href="#ref-serre_course_1973" role="doc-biblioref">[1]</a></span> p.&nbsp;39, chap.&nbsp;4, sec.&nbsp;2.3, theorem 7))</strong></span> Two non-degenerate quadratic forms of rank <span class="math inline">\(n\)</span> over <span class="math inline">\(\mathbb Q_p\)</span> are equivalent iff they are equivalent over <span class="math inline">\(\mathbb R\)</span> and over each <span class="math inline">\(\mathbb Q_p\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Say <span class="math inline">\(f,g\)</span> are equivalent over each local field (<span class="math inline">\(\mathbb Q_p\)</span> and <span class="math inline">\(\mathbb R\)</span>), thus they share the same range locally.</p></li>
+<li><p>By Hasse-Minkowski theorem, they also share the same range globally over <span class="math inline">\(\mathbb Q\)</span>.</p></li>
+<li><p>Then <span class="math inline">\(f \sim f_1 \oplus (Z \mapsto a Z^2)\)</span> globally, where <span class="math inline">\(f_1\)</span> is of rank <span class="math inline">\(n-1\)</span>. The same for <span class="math inline">\(g\)</span>.</p></li>
+<li><p><span class="math inline">\(f_1 \sim g_1\)</span> locally by Witt’s cancellation theorem. QED by induction.</p></li>
+</ul>
+</section>
+<section id="problem-remains" class="level3">
+<h3 class="anchored" data-anchor-id="problem-remains">Problem Remains</h3>
+<ul>
+<li><p>Proof of the Hasse-Minkowski theorem</p>
+<ul>
+<li>essentially needs some understanding of the global property of the Hilbert symbol, which we have not discussed (cf. <span class="citation" data-cites="serre_course_1973"><a href="#ref-serre_course_1973" role="doc-biblioref">[1]</a></span>)</li>
+</ul></li>
+<li><p>Refine the theory for degenerate quadratic forms (relatively easy)</p></li>
+<li><p>Enumerate all the equivalence classes of quadratic forms over <span class="math inline">\(\mathbb Q_p\)</span> and <span class="math inline">\(\mathbb Q\)</span> (cf. <span class="citation" data-cites="serre_course_1973"><a href="#ref-serre_course_1973" role="doc-biblioref">[1]</a></span>)</p></li>
+<li><p>To what extent can we use the common represented element method to classify quadratic forms over other fields?</p></li>
+<li><p>For which fields, the range of a quadratic form is a complete invariant? (At least <span class="math inline">\(\mathbb R\)</span> fails. <span class="math inline">\(\mathbb Q\)</span>, <span class="math inline">\(\mathbb Q_p\)</span>?)</p></li>
+<li><p>What can we say about <span class="math inline">\(\mathbb Q^\times / (\mathbb Q^\times)^2\)</span>?</p></li>
+<li><p>Classification of quadratic forms over commutative rings (e.g.&nbsp;<span class="math inline">\(\mathbb Z\)</span>, <span class="math inline">\(\mathbb Z / m \mathbb Z\)</span>)</p></li>
+</ul>
+
+
+
+</section>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-serre_course_1973" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">J.-P. Serre, <em>A course in arithmetic</em>, vol. 7. in Graduate texts in mathematics, vol. 7. New York, <span>NY</span>: Springer, 1973. doi: <a href="https://doi.org/10.1007/978-1-4684-9884-4">10.1007/978-1-4684-9884-4</a>.</div>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="sun123zxy/blog-quarto-code" data-repo-id="R_kgDOIrPs5w" data-category="General" data-category-id="DIC_kwDOIrPs584CV4gd" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark_dimmed" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
+<input type="hidden" id="giscus-alt-theme" value="light">
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Proudly powered by <a href="https://quarto.org/">Quarto</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>sun123zxy’s blog</p>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="../../thanks.html">
+<p>Thanks</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
