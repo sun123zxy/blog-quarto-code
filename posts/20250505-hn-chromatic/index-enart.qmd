@@ -1,0 +1,193 @@
+---
+title: "On the Number of 3-Part Stable Partitions of the Half Graph"
+author: "sun123zxy"
+date: "2025/05/04"
+date-modified: "2025/05/05"
+lang: en
+
+format:
+    html: default
+---
+
+\newcommand{\R}{\textcolor{red}{\mathrm{R}}}
+\newcommand{\G}{\textcolor{green}{\mathrm{G}}}
+\newcommand{\B}{\textcolor{blue}{\mathrm{B}}}
+\newcommand{\Binom}[2]{\left(\!{\binom {#1}{#2}}\!\right)}
+
+Disclaimer: Results below are original and not formally verified. Stay sharp for potential mistakes.
+
+:::{#exr-halfgraph}
+
+Determine the number of stable partitions of type $(a,b,c)$ of the half graph $H_m$. Here $1 \leq c \leq b \leq a \leq m$ and $a+b+c = 2m$.
+
+A stable partition of type $(a,b,c)$ is a partition of the vertices of the half graph $H_m$ into three parts of $a,b,c$ vertices respectively, such that no two vertices in the same part are adjacent.
+
+:::{#fig-Hn}
+
+```{tikz}
+\begin{tikzcd}
+	{u_1} & {u_2} & {u_3} & {u_4} \\
+	{v_1} & {v_2} & {v_3} & {v_4}
+	\arrow[no head, from=1-1, to=2-1]
+	\arrow[no head, from=1-1, to=2-2]
+	\arrow[no head, from=1-1, to=2-3]
+	\arrow[""{name=0, anchor=center, inner sep=0}, no head, from=1-1, to=2-4]
+	\arrow[no head, from=1-2, to=2-2]
+	\arrow[no head, from=1-2, to=2-3]
+	\arrow[no head, from=1-3, to=2-3]
+	\arrow[no head, from=1-3, to=2-4]
+	\arrow[no head, from=1-4, to=2-4]
+	\arrow[no head, from=1-2, to=0]
+\end{tikzcd}
+```
+
+The half graph $H_4$ and the labeling of the vertices
+:::
+
+:::
+
+Below we assume $m \geq 2$ to avoid trivial cases.
+
+Consider a refined problem: we wish to count the number of proper colorings of the half graph $H_{m}$ with $3$ colors denoted by $\R,\G,\B$, where $a,b,c$ vertices are colored in $\R,\G,\B$ respectively. We also constraint the color of $u_1$ to be $\R$ and the color of $v_m$ to be $\B$. Denote this number by $\mathrm{rgb}_{a,b,c}$. It follows that the number of stable partitions of shape $(a,b,c)$ should be
+$$
+\mathrm{ans}_{a,b,c} = \sum_{\text{distinct permutations of }(a,b,c)}\mathrm{rgb}_{a,b,c}
+$${#eq-ans}
+
+We claim that the generating function of $\mathrm{rgb}_{a,b,c}$ is given by
+$$
+\begin{aligned}
+\mathrm{RGB}(X,Y,Z)
+:&= \sum_{\substack{1 \leq a,c \leq m \\ 0 \leq b \leq m \\ a+b+c=2m}} \mathrm{rgb}_{a,b,c} X^a Y^b Z^c \\
+&= \frac{X(Y+Z)}{1-X(Y+Z)} \cdot \left(XZ + \frac{YZ}{1-Z(X+Y)} \right) \\
+&= \frac{XZ(X+Y)(Y+Z)(1-XZ)}{(1-X(Y+Z))(1-Z(X+Y))}
+\end{aligned}
+$$
+which may be illustrated by the following:
+
+:::{#fig-Hn-colored}
+
+:::{#fig-Hn-colored-1}
+```{tikz}
+\begin{tikzcd}
+	{\textcolor{red}{\mathrm R}} & \cdots & {\textcolor{red}{\mathrm R}} & {\textcolor{green}{\mathrm G}} & {\textcolor{red}{\mathrm R} / \textcolor{green}{\mathrm G}} & \cdots & {\textcolor{red}{\mathrm R} / \textcolor{green}{\mathrm G}} \\
+	{\textcolor{green}{\mathrm G} / \textcolor{blue}{\mathrm B}} & \cdots & {\textcolor{green}{\mathrm G} / \textcolor{blue}{\mathrm B}} & {\textcolor{blue}{\mathrm B}} & {\textcolor{blue}{\mathrm B}} & \cdots & {\textcolor{blue}{\mathrm B}}
+	\arrow[no head, from=1-1, to=2-1]
+	\arrow[no head, from=1-1, to=2-3]
+	\arrow[no head, from=1-1, to=2-4]
+	\arrow[no head, from=1-1, to=2-5]
+	\arrow[no head, from=1-1, to=2-7]
+	\arrow[no head, from=1-3, to=2-3]
+	\arrow[no head, from=1-3, to=2-4]
+	\arrow[no head, from=1-3, to=2-5]
+	\arrow[no head, from=1-3, to=2-7]
+	\arrow[no head, from=1-4, to=2-4]
+	\arrow[no head, from=1-4, to=2-5]
+	\arrow[no head, from=1-4, to=2-7]
+	\arrow[no head, from=1-5, to=2-5]
+	\arrow[no head, from=1-5, to=2-7]
+	\arrow[no head, from=1-7, to=2-7]
+\end{tikzcd}
+```
+:::
+
+:::{#fig-Hn-colored-2}
+
+```{tikz}
+% https://q.uiver.app/#q=WzAsOCxbMCwwLCJcXHRleHRjb2xvcntyZWR9e1xcbWF0aHJtIFJ9Il0sWzAsMSwiXFx0ZXh0Y29sb3J7Z3JlZW59e1xcbWF0aHJtIEd9IC8gXFx0ZXh0Y29sb3J7Ymx1ZX17XFxtYXRocm0gQn0iXSxbMiwxLCJcXHRleHRjb2xvcntncmVlbn17XFxtYXRocm0gR30gLyBcXHRleHRjb2xvcntibHVlfXtcXG1hdGhybSBCfSJdLFsyLDAsIlxcdGV4dGNvbG9ye3JlZH17XFxtYXRocm0gUn0iXSxbMywxLCJcXHRleHRjb2xvcntibHVlfXtcXG1hdGhybSBCfSJdLFszLDAsIlxcdGV4dGNvbG9ye3JlZH17XFxtYXRocm0gUn0iXSxbMSwwLCJcXGNkb3RzIl0sWzEsMSwiXFxjZG90cyJdLFswLDEsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMCwyLCIiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzAsNCwiIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszLDIsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMyw0LCIiLDEseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzUsNCwiIiwxLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
+\begin{tikzcd}
+	{\textcolor{red}{\mathrm R}} & \cdots & {\textcolor{red}{\mathrm R}} & {\textcolor{red}{\mathrm R}} \\
+	{\textcolor{green}{\mathrm G} / \textcolor{blue}{\mathrm B}} & \cdots & {\textcolor{green}{\mathrm G} / \textcolor{blue}{\mathrm B}} & {\textcolor{blue}{\mathrm B}}
+	\arrow[no head, from=1-1, to=2-1]
+	\arrow[no head, from=1-1, to=2-3]
+	\arrow[no head, from=1-1, to=2-4]
+	\arrow[no head, from=1-3, to=2-3]
+	\arrow[no head, from=1-3, to=2-4]
+	\arrow[no head, from=1-4, to=2-4]
+\end{tikzcd}
+```
+:::
+
+Possible colorings of the half graph
+:::
+
+Now we try to extract the coefficients of $\mathrm{RGB}(X,Y,Z)$. Taking the symmetry of $X$ and $Z$ into account, extract $Y$ first and then $X$ and $Z$:
+$$
+\begin{aligned}
+\mathrm{RGB}(X,Y,Z)
+&= \frac{XZ(X+Y)(Y+Z)(1-XZ)}{(1-X(Y+Z))(1-Z(X+Y))} \\
+&= \frac{XZ(X+Y)(Y+Z)}{\left(1-\frac{X}{1-XZ}Y\right)\left(1-\frac{Z}{1-XZ}Y\right) (1-XZ)} \\
+&= \frac{XZ(X+Y)(Y+Z)}{1-XZ} \sum_{i=0}^{\infty} \left(\frac{X}{1-XZ}\right)^i Y^i \sum_{j=0}^{\infty} \left(\frac{Z}{1-XZ}\right)^j Y^j \\
+&= XZ(X+Y)(Y+Z) \sum_{i=0}^{\infty} \sum_{j=0}^{\infty} \left(\frac{1}{1-XZ}\right)^{i+j+1} Y^{i+j} X^i Z^j \\
+&= XZ(X+Y)(Y+Z) \sum_{i=0}^{\infty} \sum_{j=0}^{\infty} \left( \sum_{k=0}^{\infty} \Binom{i+j+1}{k} X^k Z^k \right) Y^{i+j} X^i Z^j \\
+&= XZ(X+Y)(Y+Z) \sum_{i=0}^{\infty} \sum_{j=0}^{\infty} \sum_{k=0}^{\infty} \Binom{i+j+1}{k} X^{i+k} Y^{i+j} Z^{j+k} \\
+&= XZ (XZ + XY + ZY + Y^2) \sum_{i=0}^{\infty} \sum_{j=0}^{\infty} \sum_{k=0}^{\infty} \binom{i+j+k}{k} X^{i+k} Y^{i+j} Z^{j+k}
+\end{aligned}
+$$
+where $\Binom{i+j+1}{k} = \binom{k+(i+j+1)-1}{k} = \binom{i+j+k}{k}$ is the multiset binomial coefficient.
+
+To extract the coefficent for each $X^a Y^b Z^c$, denote by $a',b',c'$ the exponents of $X,Y,Z$ excluding the contribution of the first part of the above equation. Solve the linear equation system
+$$
+\left\{\begin{aligned}
+a' &= i+k \\
+b' &= i+j \\
+c' &= j+k \\
+m' &= i+j+k \\
+& i,j,k \geq 0
+\end{aligned}\right.
+\implies
+\left\{\begin{aligned}
+m' &= \frac 1 2 (a' + b' + c') \\
+i &= \frac 1 2 (a' + b' - c') &= m' - c' \\
+j &= \frac 1 2 (- a' + b' + c') &= m' - a'  \\
+k &= \frac 1 2 (a' - b' + c') &=  m' - b' \\
+  & 0 \leq a',b',c' \leq m'
+\end{aligned}\right.
+$$
+Thus we have
+$$
+\begin{aligned}
+\mathrm{rgb}_{a,b,c}
+&= \sum_{\substack{i,j,k \geq 0 \\ \text{constrainted by } a,b,c}} \binom{i+j+k}{k} \\
+&= \sum_{\substack{i,j,k \geq 0 \\ \text{constrainted by } a,b,c}} \binom{m'}{b'} \\
+&= [0 \leq a-2, b, c-2 \leq m-2] \binom{m-2}{b}
+&+&& [0 \leq a-2, b-1, c-1 \leq m-2] \binom{m-2}{b-1} \\
+&+ [0 \leq a-1, b-1, c-2 \leq m-2] \binom{m-2}{b-1}
+&+&& [0 \leq a-1, b-2, c-1 \leq m-2] \binom{m-2}{b-2} \\
+&= [2 \leq a \leq m] [2 \leq c \leq m] \binom{m-2}{b}
+&+&& [2 \leq a \leq m] [1 \leq c \leq m-1] \binom{m-2}{b-1} \\
+&+ [1 \leq a \leq m-1] [2 \leq c \leq m] \binom{m-2}{b-1}
+&+&& [1 \leq a \leq m-1] [1 \leq c \leq m-1] \binom{m-2}{b-2}
+\end{aligned}
+$$
+Combining this with [@eq-ans] solves the problem.
+
+We check a few special cases. For the case $(m,*,*)$, we have
+$$
+\begin{aligned}
+\mathrm{rgb}_{a,m,c} &= 1 \\
+\mathrm{rgb}_{m,b,c} &= \begin{cases}
+\binom{m-2}{b-1} & c=1 \\
+\binom{m-2}{b} + \binom{m-2}{b-1} & 2 \leq c \leq m-1 \\
+\binom{m-2}{b} & c=m
+\end{cases}
+= 
+\begin{cases}
+1 & b=0,\,m-1 \\
+\binom{m-1}{b} & 1 \leq b \leq m-2 \\
+\end{cases}
+= \binom{m-1}{b} \\
+\mathrm{ans}_{m,b,c} &= \begin{cases}
+\mathrm{rgb}_{m,b,c} + \mathrm{rgb}_{m,c,b} + \mathrm{rgb}_{b,m,c} + \mathrm{rgb}_{c,m,b} + \mathrm{rgb}_{b,c,m} + \mathrm{rgb}_{c,b,m} = 2 \binom{m-1}{b} + 2 \binom{m-1}{c} + 2 & b \neq c \\
+\mathrm{rgb}_{m,m/2,m/2} + \mathrm{rgb}_{m/2,m,m/2} + \mathrm{rgb}_{m,m/2,m/2} = 2 \binom{m-1}{m/2} + 1 & b = c
+\end{cases}
+\end{aligned}
+$$
+For the case $(m-1,m-1,2)$, we have
+$$
+\begin{aligned}
+\mathrm{rgb}_{m-1,m-1,2} &= 2 \binom{m-2}{m-2} + \binom{m-2}{m-3} = m \\
+\mathrm{rgb}_{m-1,2,m-1} &= \binom{m-2}{2} + 2 \binom{m-2}{1} + \binom{m-2}{0} = \binom{m}{2} \\
+\mathrm{ans}_{m-1,m-1,2} &= \mathrm{rgb}_{m-1,m-1,2} + \mathrm{rgb}_{m-1,2,m-1} + \mathrm{rgb}_{2,m-1,m-1} = \binom{m+1}{2}
+\end{aligned}
+$$
+These are consistent with the results of brute-force computation.
