@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.29">
+<meta name="generator" content="quarto-1.7.30">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -58,12 +58,12 @@ div.csl-indent {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-6c63763c1ae9bd01aad4ba4dab843f5b.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-9251f45900ce1b667f7b19674cf3c8ec.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-1456680686c67bd47a766edffe5b8ea0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d1141b4643f125ffca9bc7d61822d744.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-37369569f848b6975ac23803cb9eeff1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-e53b5866fc37ba6a57612b04a4613a76.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-67b83802b5d63dd0bba8021e9f0a7882.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-4ed5d130abd3d4d592f818260875b235.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -277,6 +277,7 @@ window.Quarto = {
       toggleColorMode(toAlternate);
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
     };
     // Switch to dark mode if need be
     if (hasAlternateSentinel()) {
@@ -373,9 +374,10 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#review" id="toc-review" class="nav-link active" data-scroll-target="#review">Review</a></li>
-  <li><a href="#prime-ideals-of-mathbb-zx" id="toc-prime-ideals-of-mathbb-zx" class="nav-link" data-scroll-target="#prime-ideals-of-mathbb-zx">Prime ideals of <span class="math inline">\(\mathbb Z[x]\)</span></a></li>
-  <li><a href="#prime-ideals-of-mathbb-zi" id="toc-prime-ideals-of-mathbb-zi" class="nav-link" data-scroll-target="#prime-ideals-of-mathbb-zi">Prime ideals of <span class="math inline">\(\mathbb Z[i]\)</span></a></li>
+  <li><a href="#correspondences-of-prime-spectrua-under-quotients-and-localizations" id="toc-correspondences-of-prime-spectrua-under-quotients-and-localizations" class="nav-link active" data-scroll-target="#correspondences-of-prime-spectrua-under-quotients-and-localizations"><span class="header-section-number">1</span> Correspondences of prime spectrua under quotients and localizations</a></li>
+  <li><a href="#the-prime-spectrum-of-mathbb-zx" id="toc-the-prime-spectrum-of-mathbb-zx" class="nav-link" data-scroll-target="#the-prime-spectrum-of-mathbb-zx"><span class="header-section-number">2</span> The prime spectrum of <span class="math inline">\(\mathbb Z[x]\)</span></a></li>
+  <li><a href="#the-prime-spectrum-of-mathbb-zi" id="toc-the-prime-spectrum-of-mathbb-zi" class="nav-link" data-scroll-target="#the-prime-spectrum-of-mathbb-zi"><span class="header-section-number">3</span> The prime spectrum of <span class="math inline">\(\mathbb Z[i]\)</span></a></li>
+  <li><a href="#the-prime-spectrum-of-fxy" id="toc-the-prime-spectrum-of-fxy" class="nav-link" data-scroll-target="#the-prime-spectrum-of-fxy"><span class="header-section-number">4</span> The prime spectrum of <span class="math inline">\({F[x,y]}\)</span></a></li>
   </ul>
 </nav>
     </div>
@@ -386,6 +388,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">On Determining Prime Spectra of Some Coordinate Rings</h1>
+<p class="subtitle lead">with Applications to the Two Squares Theorem</p>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
     <div class="quarto-category">algebra</div>
@@ -407,14 +410,20 @@ window.Quarto = {
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    Thanks to the strong tools borrowed from commutative algebra, we show a general approach to determine the prime spectrum of a coordinate ring by examples. As we determine the spectrum of the Guassian integers, a proof of the famous two squares theorem emerges without tricky techniques.
+  </div>
+</div>
 
 
 </header>
 
 
 <p>In this article, all rings are commutative with <span class="math inline">\(1\)</span> unless otherwise specified. <span class="citation" data-cites="atiyah_commalg"><a href="#ref-atiyah_commalg" role="doc-biblioref">[1]</a></span> is referred for terms not defined here.</p>
-<section id="review" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="review">Review</h2>
+<section id="correspondences-of-prime-spectrua-under-quotients-and-localizations" class="level2 page-columns page-full" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="correspondences-of-prime-spectrua-under-quotients-and-localizations"><span class="header-section-number">1</span> Correspondences of prime spectrua under quotients and localizations</h2>
 <p>Before start, we review some basic facts about prime ideals. These facts turn out to be useful in the study of prime specturms of specific rings.</p>
 <p>Recall that the spectrum <span class="math inline">\(\operatorname{Spec}R\)</span> of a ring <span class="math inline">\(R\)</span> consists of all prime ideals of <span class="math inline">\(R\)</span>. The Zariski topology is defined on <span class="math inline">\(\operatorname{Spec}R\)</span> by declaring the closed sets to be of the form <span class="math inline">\(\operatorname{V}(\mathfrak a) := \{ \mathfrak p \in \operatorname{Spec}R : \mathfrak p \supseteq \mathfrak a \}\)</span> for any ideal <span class="math inline">\(\mathfrak a\)</span> of <span class="math inline">\(R\)</span>. Equivalently, one can define the Zariski topology by the topological base consisting of the open sets <span class="math inline">\(\operatorname{D}(f) := \{ \mathfrak p \in \operatorname{Spec}R : f \notin \mathfrak p \}\)</span> for any <span class="math inline">\(f \in R\)</span>.</p>
 <div class="callout callout-style-simple callout-note no-icon">
@@ -557,12 +566,183 @@ c \in \mathfrak a^\mathrm{ec}
 </div>
 </div>
 </section>
-<section id="prime-ideals-of-mathbb-zx" class="level2">
-<h2 class="anchored" data-anchor-id="prime-ideals-of-mathbb-zx">Prime ideals of <span class="math inline">\(\mathbb Z[x]\)</span></h2>
-<p>TODO</p>
+<section id="the-prime-spectrum-of-mathbb-zx" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="the-prime-spectrum-of-mathbb-zx"><span class="header-section-number">2</span> The prime spectrum of <span class="math inline">\(\mathbb Z[x]\)</span></h2>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-prime-spectrum-Zx" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2 (The prime spectrum of <span class="math inline">\({\mathbb Z[x]}\)</span>)</strong></span> <span class="math inline">\(\operatorname{Spec}\mathbb Z[x]\)</span> consists of</p>
+<ul>
+<li><span class="math inline">\(\mathbb Q[x]\)</span>-identified prime ideals:
+<ul>
+<li>The zero ideal <span class="math inline">\((0)\)</span></li>
+<li><span class="math inline">\((f)\)</span> where <span class="math inline">\(f(x) \in \mathbb Z[x]\)</span> is an irreducible polynomial of degree <span class="math inline">\(\geq 1\)</span></li>
+</ul></li>
+<li><span class="math inline">\(\mathbb F_p[x]\)</span>-identified prime ideals:
+<ul>
+<li><span class="math inline">\((p)\)</span> where <span class="math inline">\(p\)</span> is a prime number</li>
+<li><span class="math inline">\((p, f)\)</span> where <span class="math inline">\(f(x) \in \mathbb Z[x]\)</span> is irreducible when viewed in <span class="math inline">\(\mathbb F_p[x]\)</span></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Note that <span class="math inline">\(\mathbb Z \hookrightarrow\mathbb Z[x]\)</span> by mapping to constant polynomials. For any <span class="math inline">\(\mathfrak p \in \operatorname{Spec}\mathbb Z[x]\)</span>, by <a href="#cor-subring-preserve-prime" class="quarto-xref">Corollary&nbsp;1</a>, we have <span class="math inline">\(\mathfrak p \cap \mathbb Z \in \operatorname{Spec}\mathbb Z\)</span>. Recall that <span class="math inline">\(\operatorname{Spec}\mathbb Z\)</span> consists of all principal ideals generated by prime numbers and the zero ideal <span class="math inline">\((0)\)</span>. Let’s do them case by case:</p>
+<ul>
+<li><p>If <span class="math inline">\(\mathfrak p \cap \mathbb Z = (0)\)</span>: Then <span class="math inline">\(\mathfrak p \in \operatorname{Spec}Z[x]\)</span> is disjoint from <span class="math inline">\(\mathbb Z\)</span>. By <a href="#thm-localization-ideal-correspondence" class="quarto-xref">Theorem&nbsp;2</a>, the spectrum of <span class="math inline">\(\mathbb Z[x]\)</span> is in one-to-one correspondence with the spectrum of the localization <span class="math inline">\(\mathbb Z^{-1} \left( \mathbb Z[x] \right) \cong \mathbb Q[x]\)</span>. Since <span class="math inline">\(\operatorname{Spec}\mathbb Q[x]\)</span> consists of:</p>
+<ul>
+<li>The zero ideal <span class="math inline">\((0)\)</span></li>
+<li><span class="math inline">\((f)\)</span> where <span class="math inline">\(f(x) \in \mathbb Q[x]\)</span> is irreducible and of degree <span class="math inline">\(\geq 1\)</span></li>
+</ul>
+<p>They pull back (by contraction) to <span class="math inline">\(\operatorname{Spec}\mathbb Z[x]\)</span> to be:</p>
+<ul>
+<li>The zero ideal <span class="math inline">\((0)\)</span></li>
+<li><span class="math inline">\((f)\)</span> where <span class="math inline">\(f(x) \in \mathbb Z[x]\)</span> is irreducible</li>
+</ul></li>
+<li><p>If <span class="math inline">\(\mathfrak p \cap \mathbb Z = p \mathbb Z\)</span> for some prime <span class="math inline">\(p\)</span>: Then <span class="math inline">\(\mathfrak p \in \operatorname{Spec}\mathbb Z[x]\)</span> contains <span class="math inline">\(p \mathbb Z[x]\)</span>. By <a href="#thm-quotient-ideal-correspondence" class="quarto-xref">Theorem&nbsp;1</a>, the spectrum of <span class="math inline">\(\mathbb Z[x]\)</span> is in one-to-one correspondence with the spectrum of the quotient ring <span class="math inline">\(\mathbb Z[x] / p \mathbb Z[x] \cong \mathbb F_p[x]\)</span>. Since <span class="math inline">\(\operatorname{Spec}\mathbb F_p[x]\)</span> consists of:</p>
+<ul>
+<li>The zero ideal <span class="math inline">\((0)\)</span></li>
+<li><span class="math inline">\((f)\)</span> where <span class="math inline">\(f(x) \in \mathbb F_p[x]\)</span> is an irreducible polynomial of degree <span class="math inline">\(\geq 1\)</span></li>
+</ul>
+<p>They pull back to <span class="math inline">\(\operatorname{Spec}\mathbb Z[x]\)</span> to be:</p>
+<ul>
+<li><span class="math inline">\((p)\)</span></li>
+<li><span class="math inline">\((p, f)\)</span> where <span class="math inline">\(f(x) \in \mathbb Z[x]\)</span> is irreducible when viewed in <span class="math inline">\(\mathbb F_p[x]\)</span></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="prime-ideals-of-mathbb-zi" class="level2">
-<h2 class="anchored" data-anchor-id="prime-ideals-of-mathbb-zi">Prime ideals of <span class="math inline">\(\mathbb Z[i]\)</span></h2>
+<section id="the-prime-spectrum-of-mathbb-zi" class="level2 page-columns page-full" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="the-prime-spectrum-of-mathbb-zi"><span class="header-section-number">3</span> The prime spectrum of <span class="math inline">\(\mathbb Z[i]\)</span></h2>
+<p>Recall that <span class="math inline">\(\mathbb Z[\mathrm i] := \mathbb Z[x] / (x^2 + 1) = \{a+ b\mathrm i: a,b \in \mathbb Z \}\)</span>. The (multiplicative) norm of <span class="math inline">\(z := a + b \mathrm i\)</span> is defined as <span class="math inline">\(\operatorname{N}(z) := z \bar z = a^2 + b^2\)</span>. The units of <span class="math inline">\(\mathbb Z[\mathrm i]\)</span> are <span class="math inline">\(\{ 1, -1, \mathrm i, -\mathrm i\}\)</span>, all of them are of norm <span class="math inline">\(1\)</span>. By the regular argument of the Euclidean division, <span class="math inline">\(\mathbb Z[\mathrm i]\)</span> is an an ED<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> and hence a PID<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> and a UFD<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;Euclidean domain</p></div><div id="fn4"><p><sup>4</sup>&nbsp;principal ideal domain</p></div><div id="fn5"><p><sup>5</sup>&nbsp;unique factorization domain</p></div></div><div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-prime-spectrum-Zi" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 3 (The prime spectrum of <span class="math inline">\({\mathbb Z[i]}\)</span>)</strong></span> The spectrum of Guassian integers <span class="math inline">\(\mathbb Z[\mathrm i] := \mathbb Z[x]/(x^2+1)\)</span> consists of</p>
+<ul>
+<li>The zero ideal <span class="math inline">\((0)\)</span></li>
+<li><span class="math inline">\((p)\)</span> where <span class="math inline">\(p\)</span> is a prime number s.t. <span class="math inline">\(p \equiv 3 \pmod 4\)</span></li>
+<li><span class="math inline">\((z)\)</span> where <span class="math inline">\(z \in \mathbb Z[\mathrm i]\)</span> and <span class="math inline">\(\operatorname{N}(z) = p\)</span> for some prime <span class="math inline">\(p\)</span> (which always satisfies <span class="math inline">\(p=2\)</span> or <span class="math inline">\(p \equiv 1 \pmod 4\)</span> by a trivial modular argument)</li>
+</ul>
+<p>These principal ideals also determine all prime elements of <span class="math inline">\(\mathbb Z[\mathrm i]\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>By <a href="#thm-quotient-ideal-correspondence" class="quarto-xref">Theorem&nbsp;1</a>, the spectrum of <span class="math inline">\(\mathbb Z[\mathrm i]\)</span> consists of the quotient image of the prime ideals of <span class="math inline">\(\mathbb Z[x]\)</span> containing <span class="math inline">\(x^2+1\)</span>. We apply the previous result to <span class="math inline">\(\mathbb Z[x]\)</span> and get the following cases:</p>
+<ul>
+<li><p>For <span class="math inline">\(\mathbb Q[x]\)</span>-identified prime ideals in <span class="math inline">\(\mathbb Z[x]\)</span>:</p>
+<ul>
+<li><p>The zero ideal <span class="math inline">\((0) \in \operatorname{Spec}\mathbb Z[x]\)</span>: does not contain <span class="math inline">\(x^2+1\)</span>.</p></li>
+<li><p><span class="math inline">\((f) \in \operatorname{Spec}\mathbb Z[x]\)</span> where <span class="math inline">\(f(x) \in \mathbb Z[x]\)</span> is an irreducible polynomial of degree <span class="math inline">\(\geq 1\)</span>: Note that <span class="math inline">\(x^2+1 \in \mathbb Z[x]\)</span> is irreducible, thus <span class="math inline">\((f)\)</span> does not contain <span class="math inline">\(x^2+1\)</span> unless <span class="math inline">\(f(x) = x^2+1\)</span>. In this case, it identifies to <span class="math inline">\((0) \in \operatorname{Spec}\mathbb Z[\mathrm i]\)</span>.</p></li>
+</ul></li>
+<li><p>For <span class="math inline">\(\mathbb F_p[x]\)</span>-identified prime ideals in <span class="math inline">\(\mathbb Z[x]\)</span>:</p>
+<ul>
+<li><p><span class="math inline">\((p) \in \operatorname{Spec}\mathbb Z[x]\)</span> where <span class="math inline">\(p\)</span> is a prime number: does not contain <span class="math inline">\(x^2+1\)</span>.</p></li>
+<li><p><span class="math inline">\((p, f) \in \operatorname{Spec}\mathbb Z[x]\)</span> where <span class="math inline">\(f(x) \in \mathbb Z[x]\)</span> is irreducible when viewed in <span class="math inline">\(\mathbb F_p[x]\)</span>: <span class="math inline">\(x^2+1 \in (p,f)_{\mathbb Z_[x]}\)</span> iff <span class="math inline">\(x^2+1 \in (f)_{\mathbb F_p[x]}\)</span>, thus below let’s focus on this case and work in <span class="math inline">\(\mathbb F_p[x]\)</span>.</p></li>
+</ul></li>
+</ul>
+<p>We first check whether <span class="math inline">\(x^2+1\)</span> is irreducible in <span class="math inline">\(\mathbb F_p[x]\)</span>:</p>
+<ul>
+<li><p>For <span class="math inline">\(p \geq 3\)</span>, it is reducible iff <span class="math inline">\(x^2 = -1\)</span> has a solution in <span class="math inline">\(\mathbb F_p\)</span>, i.e.&nbsp;<span class="math inline">\(-1\)</span> is a quadratic residue in <span class="math inline">\(\mathbb F_p\)</span>, i.e.&nbsp;the multiplicative group <span class="math inline">\(\mathbb F_p^\times\)</span> has an element of order <span class="math inline">\(4\)</span>. By the common sense that <span class="math inline">\(\mathbb F_p^\times\)</span> is cyclic of order <span class="math inline">\(p-1\)</span>, we know it happens iff <span class="math inline">\(p \equiv 1 \pmod 4\)</span>.</p></li>
+<li><p>For <span class="math inline">\(p = 2\)</span>, Since <span class="math inline">\(-1 = 1\)</span>, we have <span class="math inline">\(x^2 + 1 = (x+1)^2\)</span>.</p></li>
+</ul>
+<p>When <span class="math inline">\(x^2 + 1\)</span> is irreducible, i.e.&nbsp;when <span class="math inline">\(p \equiv 3 \pmod 4\)</span>, <span class="math inline">\((x^2+1) \in \operatorname{Spec}\mathbb F_p[x]\)</span> is the only prime ideal that contains <span class="math inline">\(x^2+1\)</span>, which pulls back to <span class="math inline">\((p) \in \operatorname{Spec}\mathbb Z[\mathrm i]\)</span>.</p>
+<p>When <span class="math inline">\(x^2 + 1\)</span> is reducible, i.e.&nbsp;when <span class="math inline">\(p \equiv 1 \pmod 4\)</span> or <span class="math inline">\(p=2\)</span>, it can be written as <span class="math inline">\((x-a)(x+a)\)</span> for some <span class="math inline">\(a \in \mathbb F_p\)</span> s.t. <span class="math inline">\(a^2 = -1\)</span>. Thus <span class="math inline">\((x-a),\,(x+a) \in \operatorname{Spec}\mathbb F_p[x]\)</span> are the prime ideals containing <span class="math inline">\(x^2 + 1\)</span>. They pull back to <span class="math inline">\((p,\mathrm i- \tilde a) = (p,\tilde a - \mathrm i) \in \operatorname{Spec}\mathbb Z[\mathrm i]\)</span> and <span class="math inline">\((p,\mathrm i+ \tilde a) = (p, \tilde a + \mathrm i) \in \operatorname{Spec}\mathbb Z[\mathrm i]\)</span>, where <span class="math inline">\(\tilde a \in \mathbb Z\)</span> satisfies <span class="math inline">\(\tilde a \bmod p = a\)</span>.</p>
+<p>Since <span class="math inline">\(\mathbb Z[\mathrm i]\)</span> is a PID, we are supposed to rewrite above two prime ideals into principal ones, i.e.&nbsp;find <span class="math inline">\(\gcd(p,\tilde a + \mathrm i)\)</span> and <span class="math inline">\(\gcd(p,\tilde a - \mathrm i)\)</span> in <span class="math inline">\(\mathbb Z[\mathrm i]\)</span>. We attack this by checking the norm <span class="math inline">\(\operatorname{N}(p) = p^2\)</span> and <span class="math inline">\(\operatorname{N}(\tilde a + \mathrm i) = \operatorname{N}(\tilde a - \mathrm i) = 1 + \tilde a^2\)</span>. We may choose <span class="math inline">\(\tilde a\)</span>, the lift of <span class="math inline">\(a\)</span>, wisely so that <span class="math inline">\(0 \leq \tilde a \leq p-1\)</span>. Then <span class="math inline">\(p \mid 1 + \tilde a^2 &lt; p^2\)</span> and <span class="math inline">\(p \mid \operatorname{N}(\tilde a + \mathrm i) = \operatorname{N}(\tilde a - \mathrm i) &lt; \operatorname{N}(p)\)</span>. By this comparison of norms, we have <span class="math inline">\(p \nmid \tilde a + \mathrm i\)</span> and <span class="math inline">\(p \nmid \tilde a - \mathrm i\)</span>. But <span class="math inline">\(p \mid 1 + \tilde a^2 = (\tilde a + \mathrm i)(\tilde a - \mathrm i)\)</span>, so (by that <span class="math inline">\(\mathbb Z[\mathrm i]\)</span> is a UFD) <span class="math inline">\(p\)</span> is not a prime element of <span class="math inline">\(\mathbb Z[\mathrm i]\)</span>. It must decompose into two conjugate prime elements <span class="math inline">\(p = z \bar z\)</span> s.t. <span class="math inline">\(N(z) = p\)</span> and <span class="math inline">\(z \mid \tilde a + \mathrm i\)</span> and <span class="math inline">\(\bar z \mid \tilde a - \mathrm i\)</span>. Thus <span class="math inline">\((p,\tilde a + \mathrm i) = (z)\)</span> and <span class="math inline">\((p,\tilde a + \mathrm i) = (\bar z)\)</span>.</p>
+<ul>
+<li>Note that when <span class="math inline">\(p=2\)</span> these two prime ideals are actually the same. It is <span class="math display">\[
+  (1+\mathrm i) = (1-\mathrm i) = (-1+\mathrm i) = (-1-\mathrm i) \in \operatorname{Spec}\mathbb Z[\mathrm i]
+  \]</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="cor-prime-two-squares" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 2</strong></span> A prime number <span class="math inline">\(p\)</span> can be expressed as a sum of two squares iff <span class="math inline">\(p = 2\)</span> or <span class="math inline">\(p \equiv 1 \pmod 4\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-two-squares" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3 (The two squares theorem)</strong></span> A positive integer <span class="math inline">\(n\)</span> can be expressed as a sum of two squares iff for every prime <span class="math inline">\(p \equiv 3 \pmod 4\)</span>, <span class="math inline">\(p\)</span> has an even exponent in the prime factorization of <span class="math inline">\(n\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>For the forward direction, if <span class="math inline">\(n = a^2 + b^2\)</span>, for any prime factor <span class="math inline">\(p \equiv 3 \pmod 4\)</span> of <span class="math inline">\(n\)</span>, it suffices to show that <span class="math inline">\(p\)</span> divides both <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. Otherwise, <span class="math inline">\(a^2,\,b^2 \not \equiv 0 \pmod p\)</span>. But we have <span class="math inline">\(a^2 + b^2 \equiv 0 \pmod p\)</span> thus <span class="math inline">\((a/b)^2 \equiv -1 \pmod p\)</span>, i.e.&nbsp;<span class="math inline">\(-1\)</span> is a quadratic residue in <span class="math inline">\(\mathbb F_p\)</span>, which is impossible for <span class="math inline">\(p \equiv 3 \pmod 4\)</span>.</p>
+<p>For the backward direction, it suffices to assume <span class="math inline">\(n\)</span> is square-free. Say its decomposition is <span class="math inline">\(n = \prod_{i=1}^k p_k\)</span> where <span class="math inline">\(p_i = 2\)</span> or <span class="math inline">\(p_i \equiv 1 \pmod 4\)</span>. By <a href="#cor-prime-two-squares" class="quarto-xref">Corollary&nbsp;2</a>, <span class="math inline">\(p_i = \operatorname{N}(z_i)\)</span> for some <span class="math inline">\(z_i \in \mathbb Z[\mathrm i]\)</span>. Thus <span class="math inline">\(n = \prod_{i=1}^k p_k = \operatorname{N}\left( \prod_{i=1} z_i \right)\)</span>, thus a sum of two squares.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-prime-spectrum-of-fxy" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="the-prime-spectrum-of-fxy"><span class="header-section-number">4</span> The prime spectrum of <span class="math inline">\({F[x,y]}\)</span></h2>
 <p>TODO</p>
 
 
@@ -994,30 +1174,38 @@ c \in \mathfrak a^\mathrm{ec}
     }
   });
   </script>
-<script src="https://giscus.app/client.js" data-repo="sun123zxy/blog-quarto-code" data-repo-id="R_kgDOIrPs5w" data-category="General" data-category-id="DIC_kwDOIrPs584CV4gd" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="dark_dimmed" data-lang="en" crossorigin="anonymous" async="">
-</script>
-<script type="application/javascript">
-  const giscusIframeObserver = new MutationObserver(function (mutations) {
-    mutations.forEach(function (mutation) {
-      mutation.addedNodes.forEach(function (addedNode) {
-        if (addedNode.matches && addedNode.matches('div.giscus')) {
-          const giscusIframe = addedNode.querySelector('iframe.giscus-frame');
-          if(giscusIframe) {
-            giscusIframe.addEventListener("load", function() {
-              window.setTimeout(() => {
-                toggleGiscusIfUsed(hasAlternateSentinel(), authorPrefersDark);
-              }, 100);
-            });
-            giscusIframeObserver.disconnect();
-          }
-        }
-      });
-    });
-  });
-  giscusIframeObserver.observe(document.body, { childList: true, subtree: true });
-</script>
 <input type="hidden" id="giscus-base-theme" value="dark_dimmed">
 <input type="hidden" id="giscus-alt-theme" value="light">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "sun123zxy/blog-quarto-code";
+    script.dataset.repoId = "R_kgDOIrPs5w";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOIrPs584CV4gd";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
