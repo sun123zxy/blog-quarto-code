@@ -8,7 +8,8 @@ categories:
   - Minecraft
   - music
   - Python
-seriousness: casual
+collection:
+  - casual
   
 format:
   html: default

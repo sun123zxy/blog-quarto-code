@@ -7,7 +7,8 @@ categories:
   - algorithm
   - tour
   - memories
-seriousness: casual
+collection:
+  - casual
 
 format:
   html: default

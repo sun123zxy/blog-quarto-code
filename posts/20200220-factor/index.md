@@ -7,7 +7,8 @@ categories:
   - algorithm
   - math
   - number theory
-seriousness: dedicated
+collection:
+  - dedicated
 
 format:
   html: default

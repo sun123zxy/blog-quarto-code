@@ -8,7 +8,8 @@ categories:
   - math
   - combinatorics
   - algebra
-seriousness: dedicated
+collection: 
+  - dedicated
 
 format:
   html: default
