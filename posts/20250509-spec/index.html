@@ -352,9 +352,11 @@ window.Quarto = {
    
   <ul>
   <li><a href="#correspondences-of-prime-spectrua-under-quotients-and-localizations" id="toc-correspondences-of-prime-spectrua-under-quotients-and-localizations" class="nav-link active" data-scroll-target="#correspondences-of-prime-spectrua-under-quotients-and-localizations"><span class="header-section-number">1</span> Correspondences of prime spectrua under quotients and localizations</a></li>
-  <li><a href="#the-prime-spectrum-of-mathbb-zx" id="toc-the-prime-spectrum-of-mathbb-zx" class="nav-link" data-scroll-target="#the-prime-spectrum-of-mathbb-zx"><span class="header-section-number">2</span> The prime spectrum of <span class="math inline">\(\mathbb Z[x]\)</span></a></li>
-  <li><a href="#the-prime-spectrum-of-mathbb-zi" id="toc-the-prime-spectrum-of-mathbb-zi" class="nav-link" data-scroll-target="#the-prime-spectrum-of-mathbb-zi"><span class="header-section-number">3</span> The prime spectrum of <span class="math inline">\(\mathbb Z[i]\)</span></a></li>
-  <li><a href="#the-prime-spectrum-of-fxy" id="toc-the-prime-spectrum-of-fxy" class="nav-link" data-scroll-target="#the-prime-spectrum-of-fxy"><span class="header-section-number">4</span> The prime spectrum of <span class="math inline">\({F[x,y]}\)</span></a></li>
+  <li><a href="#the-prime-spectrum-of-the-polynomial-ring-over-a-pid" id="toc-the-prime-spectrum-of-the-polynomial-ring-over-a-pid" class="nav-link" data-scroll-target="#the-prime-spectrum-of-the-polynomial-ring-over-a-pid"><span class="header-section-number">2</span> The prime spectrum of the polynomial ring over a PID</a></li>
+  <li><a href="#the-prime-spectrum-of-mathbb-zi" id="toc-the-prime-spectrum-of-mathbb-zi" class="nav-link" data-scroll-target="#the-prime-spectrum-of-mathbb-zi"><span class="header-section-number">3</span> The prime spectrum of <span class="math inline">\(\mathbb Z[i]\)</span></a>
+  <ul class="collapse">
+  <li><a href="#the-two-squares-theorem" id="toc-the-two-squares-theorem" class="nav-link" data-scroll-target="#the-two-squares-theorem"><span class="header-section-number">3.1</span> The two squares theorem</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -387,7 +389,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">May 9, 2025</p>
+      <p class="date-modified">May 15, 2025</p>
     </div>
   </div>
     
@@ -405,7 +407,8 @@ window.Quarto = {
 
 
 <p>In this article, all rings are commutative with <span class="math inline">\(1\)</span> unless otherwise specified. <span class="citation" data-cites="atiyah_commalg"><a href="#ref-atiyah_commalg" role="doc-biblioref">[1]</a></span> is referred for terms not defined here.</p>
-<section id="correspondences-of-prime-spectrua-under-quotients-and-localizations" class="level2 page-columns page-full" data-number="1">
+<p>Recall that ED<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> implies PID<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> implies UFD<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Euclidean domain</p></div><div id="fn2"><p><sup>2</sup>&nbsp;principal ideal domain</p></div><div id="fn3"><p><sup>3</sup>&nbsp;unique factorization domain</p></div></div><section id="correspondences-of-prime-spectrua-under-quotients-and-localizations" class="level2 page-columns page-full" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="correspondences-of-prime-spectrua-under-quotients-and-localizations"><span class="header-section-number">1</span> Correspondences of prime spectrua under quotients and localizations</h2>
 <p>Before start, we review some basic facts about prime ideals. These facts turn out to be useful in the study of prime specturms of specific rings.</p>
 <p>Recall that the spectrum <span class="math inline">\(\operatorname{Spec}R\)</span> of a ring <span class="math inline">\(R\)</span> consists of all prime ideals of <span class="math inline">\(R\)</span>. The Zariski topology is defined on <span class="math inline">\(\operatorname{Spec}R\)</span> by declaring the closed sets to be of the form <span class="math inline">\(\operatorname{V}(\mathfrak a) := \{ \mathfrak p \in \operatorname{Spec}R : \mathfrak p \supseteq \mathfrak a \}\)</span> for any ideal <span class="math inline">\(\mathfrak a\)</span> of <span class="math inline">\(R\)</span>. Equivalently, one can define the Zariski topology by the topological base consisting of the open sets <span class="math inline">\(\operatorname{D}(f) := \{ \mathfrak p \in \operatorname{Spec}R : f \notin \mathfrak p \}\)</span> for any <span class="math inline">\(f \in R\)</span>.</p>
@@ -428,12 +431,12 @@ window.Quarto = {
 </div>
 <div class="callout-body-container">
 <div id="cor-subring-preserve-prime" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 1 (Subring preserves prime ideals)</strong></span> Let <span class="math inline">\(R\)</span> be a ring and <span class="math inline">\(S\)</span> be a subring of <span class="math inline">\(R\)</span>. Let <span class="math inline">\(\mathfrak p\)</span> be a prime ideal of <span class="math inline">\(R\)</span>, then <span class="math inline">\(\mathfrak p \cap S\)</span> is a prime ideal<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> of <span class="math inline">\(S\)</span>.</p>
+<p><span class="theorem-title"><strong>Corollary 1 (Subring preserves prime ideals)</strong></span> Let <span class="math inline">\(R\)</span> be a ring and <span class="math inline">\(S\)</span> be a subring of <span class="math inline">\(R\)</span>. Let <span class="math inline">\(\mathfrak p\)</span> be a prime ideal of <span class="math inline">\(R\)</span>, then <span class="math inline">\(\mathfrak p \cap S\)</span> is a prime ideal<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> of <span class="math inline">\(S\)</span>.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Not true for maximal ideals. e.g.&nbsp;<span class="math inline">\((x)\)</span> is an ideal of <span class="math inline">\(R := \mathbb C[x]\)</span>, but it is contained in a larger ideal <span class="math inline">\((2,x)\)</span> in the subring <span class="math inline">\(S := \mathbb Z[x] \subset R\)</span>.</p></div></div><div class="callout callout-style-simple callout-note no-icon">
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;Not true for maximal ideals. e.g.&nbsp;<span class="math inline">\((x)\)</span> is an ideal of <span class="math inline">\(R := \mathbb C[x]\)</span>, but it is contained in a larger ideal <span class="math inline">\((2,x)\)</span> in the subring <span class="math inline">\(S := \mathbb Z[x] \subset R\)</span>.</p></div></div><div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -442,7 +445,7 @@ window.Quarto = {
 <div id="thm-quotient-ideal-correspondence" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1 (Ideal correspondence theorem for quotient rings)</strong></span> Let <span class="math inline">\(R\)</span> be a ring and <span class="math inline">\(\mathfrak a\)</span> be an ideal of <span class="math inline">\(R\)</span>. Then there is a one-to-one correspondence: <span class="math display">\[
 \{ \text{ideals of } R / \mathfrak a \} \longleftrightarrow\{ \text{ideals of } R \text{ containing } \mathfrak a \}
-\]</span> Moreover, prime ideals<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> are also one-to-one corresponded: In fact, the natrual quotient homomorphism <span class="math inline">\(\pi: R \to R / \mathfrak a\)</span> induces a Zariski-topological closed embedding: <span class="math display">\[
+\]</span> Moreover, prime ideals<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> are also one-to-one corresponded: In fact, the natrual quotient homomorphism <span class="math inline">\(\pi: R \to R / \mathfrak a\)</span> induces a Zariski-topological closed embedding: <span class="math display">\[
 \begin{aligned}
 \operatorname{Spec}\pi : \operatorname{Spec}R / \mathfrak a &amp;\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow\operatorname{V}(\mathfrak a) \subseteq \operatorname{Spec}R \\
 \mathfrak q &amp;\rightarrowtail\pi^{-1} (\mathfrak q) \\
@@ -453,7 +456,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;In fact, also maximal ideals</p></div></div><div class="callout callout-style-simple callout-note no-icon">
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;In fact, also maximal ideals</p></div></div><p>Its proof is relatively straightforward and is omitted.</p>
+<div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -471,9 +475,26 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Correspondence of arbitrary ideals is not mentioned in the statement because of its subtlety: <span class="math inline">\(\mathfrak a \rightarrowtail S^{-1} \mathfrak a\)</span> is indeed surjective, but is not injective because in <span class="math inline">\(S^{-1} R\)</span> one can use elements in <span class="math inline">\(S\)</span> to “cancel out” the numerators. See the proof for details.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>Remark</em>. </span>Correspondence of arbitrary ideals is not mentioned in the statement because of its subtlety: <span class="math inline">\(\mathfrak a \rightarrowtail S^{-1} \mathfrak a\)</span> is indeed surjective, but is not injective because in <span class="math inline">\(S^{-1} R\)</span> one can use elements in <span class="math inline">\(S\)</span> to “cancel out” the numerators. See the proof for details.</p>
+</div>
+</div>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -482,7 +503,7 @@ Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>For simplicity, we introduce some terminology first:</p>
@@ -561,34 +582,71 @@ c \in \mathfrak a^\mathrm{ec}
 </div>
 </div>
 </section>
-<section id="the-prime-spectrum-of-mathbb-zx" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="the-prime-spectrum-of-mathbb-zx"><span class="header-section-number">2</span> The prime spectrum of <span class="math inline">\(\mathbb Z[x]\)</span></h2>
+<section id="the-prime-spectrum-of-the-polynomial-ring-over-a-pid" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="the-prime-spectrum-of-the-polynomial-ring-over-a-pid"><span class="header-section-number">2</span> The prime spectrum of the polynomial ring over a PID</h2>
+<p>Our inspiring example is <span class="math inline">\(\mathbb Z[x]\)</span>, the polynomial ring over the integers. The theorem below captures the essence of the way to determine the prime spectrum of <span class="math inline">\(\mathbb Z[x]\)</span>.</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<div id="prp-prime-spectrum-Zx" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 2 (The prime spectrum of <span class="math inline">\({\mathbb Z[x]}\)</span>)</strong></span> <span class="math inline">\(\operatorname{Spec}\mathbb Z[x]\)</span> consists of</p>
+<div id="prp-prime-spectrum-poly-over-pid" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2 (The prime spectrum of the polynomial ring over a PID)</strong></span> Let <span class="math inline">\(R\)</span> be a PID and <span class="math inline">\(K\)</span> be its field of fractions. Then <span class="math inline">\(\operatorname{Spec}R[x]\)</span> consists of</p>
 <ul>
-<li><span class="math inline">\(\mathbb Q[x]\)</span>-identified prime ideals:
+<li><span class="math inline">\(K[x]\)</span>-identified prime ideals:
 <ul>
 <li>The zero ideal <span class="math inline">\((0)\)</span></li>
-<li><span class="math inline">\((f)\)</span> where <span class="math inline">\(f(x) \in \mathbb Z[x]\)</span> is an irreducible polynomial of degree <span class="math inline">\(\geq 1\)</span></li>
+<li><span class="math inline">\((f)\)</span> where <span class="math inline">\(f(x) \in R[x]\)</span> is an irreducible polynomial of degree <span class="math inline">\(\geq 1\)</span></li>
 </ul></li>
-<li><span class="math inline">\(\mathbb F_p[x]\)</span>-identified prime ideals:
+<li><span class="math inline">\(R/pR[x]\)</span>-identified prime ideals (where <span class="math inline">\(p\)</span> is a prime element of <span class="math inline">\(R\)</span>):
 <ul>
-<li><span class="math inline">\((p)\)</span> where <span class="math inline">\(p\)</span> is a prime number</li>
-<li><span class="math inline">\((p, f)\)</span> where <span class="math inline">\(f(x) \in \mathbb Z[x]\)</span> is irreducible when viewed in <span class="math inline">\(\mathbb F_p[x]\)</span></li>
+<li><span class="math inline">\((p)\)</span></li>
+<li><span class="math inline">\((p, f)\)</span> where <span class="math inline">\(f(x) \in R[x]\)</span> is irreducible when viewed in <span class="math inline">\(R/pR[x]\)</span></li>
 </ul></li>
 </ul>
 </div>
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>Remark</em>. </span>We require <span class="math inline">\(R\)</span> to be a PID to make sure that <span class="math inline">\((p) = pR\)</span> is a maximal ideal and <span class="math inline">\(R/pR\)</span> is a field.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>Remark</em>. </span>Note that <span class="math inline">\(R/pR[x]\)</span>-identified prime ideals are exactly the maximal ideals of <span class="math inline">\(R[x]\)</span>. This actually reveals that <span class="math inline">\(R[x]\)</span> is of Krull dimension <span class="math inline">\(2\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -597,27 +655,52 @@ Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
-<p><span class="proof-title"><em>Proof</em>. </span>Note that <span class="math inline">\(\mathbb Z \hookrightarrow\mathbb Z[x]\)</span> by mapping to constant polynomials. For any <span class="math inline">\(\mathfrak p \in \operatorname{Spec}\mathbb Z[x]\)</span>, by <a href="#cor-subring-preserve-prime" class="quarto-xref">Corollary&nbsp;1</a>, we have <span class="math inline">\(\mathfrak p \cap \mathbb Z \in \operatorname{Spec}\mathbb Z\)</span>. Recall that <span class="math inline">\(\operatorname{Spec}\mathbb Z\)</span> consists of all principal ideals generated by prime numbers and the zero ideal <span class="math inline">\((0)\)</span>. Let’s do them case by case:</p>
+<p><span class="proof-title"><em>Proof</em>. </span>Note that <span class="math inline">\(R \hookrightarrow R[x]\)</span> by mapping to constant polynomials. For any <span class="math inline">\(\mathfrak p \in \operatorname{Spec}R[x]\)</span>, by <a href="#cor-subring-preserve-prime" class="quarto-xref">Corollary&nbsp;1</a>, we have <span class="math inline">\(\mathfrak p \cap R \in \operatorname{Spec}R\)</span>. As the spectrum of a PID, <span class="math inline">\(\operatorname{Spec}R\)</span> consists of all principal ideals generated by prime elements and the zero ideal <span class="math inline">\((0)\)</span>. Let’s do them case by case:</p>
 <ul>
-<li><p>If <span class="math inline">\(\mathfrak p \cap \mathbb Z = (0)\)</span>: Then <span class="math inline">\(\mathfrak p \in \operatorname{Spec}Z[x]\)</span> is disjoint from <span class="math inline">\(\mathbb Z\)</span>. By <a href="#thm-localization-ideal-correspondence" class="quarto-xref">Theorem&nbsp;2</a>, the spectrum of <span class="math inline">\(\mathbb Z[x]\)</span> is in one-to-one correspondence with the spectrum of the localization <span class="math inline">\(\mathbb Z^{-1} \left( \mathbb Z[x] \right) \cong \mathbb Q[x]\)</span>. Since <span class="math inline">\(\operatorname{Spec}\mathbb Q[x]\)</span> consists of:</p>
+<li><p>If <span class="math inline">\(\mathfrak p \cap R = (0)\)</span>: Then <span class="math inline">\(\mathfrak p \in \operatorname{Spec}R[x]\)</span> is disjoint from <span class="math inline">\(R\)</span>. By <a href="#thm-localization-ideal-correspondence" class="quarto-xref">Theorem&nbsp;2</a>, the spectrum of <span class="math inline">\(R[x]\)</span> is in one-to-one correspondence with the spectrum of the localization <span class="math inline">\((R \setminus \{0\})^{-1} \left( R[x] \right) \cong K[x]\)</span>. Since <span class="math inline">\(\operatorname{Spec}K[x]\)</span> consists of:</p>
 <ul>
 <li>The zero ideal <span class="math inline">\((0)\)</span></li>
-<li><span class="math inline">\((f)\)</span> where <span class="math inline">\(f(x) \in \mathbb Q[x]\)</span> is irreducible and of degree <span class="math inline">\(\geq 1\)</span></li>
+<li><span class="math inline">\((f)\)</span> where <span class="math inline">\(f(x) \in K[x]\)</span> is irreducible (and of degree <span class="math inline">\(\geq 1\)</span>)</li>
 </ul>
-<p>They pull back (by contraction) to <span class="math inline">\(\operatorname{Spec}\mathbb Z[x]\)</span> to be:</p>
+<p>They pull back (by contraction) to <span class="math inline">\(\operatorname{Spec}R[x]\)</span> to be:</p>
 <ul>
 <li>The zero ideal <span class="math inline">\((0)\)</span></li>
-<li><span class="math inline">\((f)\)</span> where <span class="math inline">\(f(x) \in \mathbb Z[x]\)</span> is irreducible</li>
+<li><span class="math inline">\((f)\)</span> where <span class="math inline">\(f(x) \in R[x]\)</span> is irreducible and of degree <span class="math inline">\(\geq 1\)</span></li>
 </ul></li>
-<li><p>If <span class="math inline">\(\mathfrak p \cap \mathbb Z = p \mathbb Z\)</span> for some prime <span class="math inline">\(p\)</span>: Then <span class="math inline">\(\mathfrak p \in \operatorname{Spec}\mathbb Z[x]\)</span> contains <span class="math inline">\(p \mathbb Z[x]\)</span>. By <a href="#thm-quotient-ideal-correspondence" class="quarto-xref">Theorem&nbsp;1</a>, the spectrum of <span class="math inline">\(\mathbb Z[x]\)</span> is in one-to-one correspondence with the spectrum of the quotient ring <span class="math inline">\(\mathbb Z[x] / p \mathbb Z[x] \cong \mathbb F_p[x]\)</span>. Since <span class="math inline">\(\operatorname{Spec}\mathbb F_p[x]\)</span> consists of:</p>
+<li><p>If <span class="math inline">\(\mathfrak p \cap R = p R\)</span> for some prime <span class="math inline">\(p\)</span>: Then <span class="math inline">\(\mathfrak p \in \operatorname{Spec}R[x]\)</span> contains <span class="math inline">\(p R[x]\)</span>. By <a href="#thm-quotient-ideal-correspondence" class="quarto-xref">Theorem&nbsp;1</a>, the spectrum of <span class="math inline">\(R[x]\)</span> is in one-to-one correspondence with the spectrum of the quotient ring <span class="math inline">\(R[x] / p R[x] \cong R/pR[x]\)</span>. Since <span class="math inline">\(\operatorname{Spec}R/pR[x]\)</span> consists of:</p>
 <ul>
 <li>The zero ideal <span class="math inline">\((0)\)</span></li>
-<li><span class="math inline">\((f)\)</span> where <span class="math inline">\(f(x) \in \mathbb F_p[x]\)</span> is an irreducible polynomial of degree <span class="math inline">\(\geq 1\)</span></li>
+<li><span class="math inline">\((f)\)</span> where <span class="math inline">\(f(x) \in R/pR[x]\)</span> is an irreducible polynomial</li>
 </ul>
-<p>They pull back to <span class="math inline">\(\operatorname{Spec}\mathbb Z[x]\)</span> to be:</p>
+<p>They pull back to <span class="math inline">\(\operatorname{Spec}R[x]\)</span> to be:</p>
+<ul>
+<li><span class="math inline">\((p)\)</span></li>
+<li><span class="math inline">\((p, f)\)</span> where <span class="math inline">\(f(x) \in R[x]\)</span> is irreducible when viewed in <span class="math inline">\(R/pR[x]\)</span></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<p>As <span class="math inline">\(\mathbb Z\)</span> is a PID, the spectrum of <span class="math inline">\(\mathbb Z[x]\)</span> is determined:</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="cor-prime-spectrum-Zx" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 2 (The prime spectrum of <span class="math inline">\({\mathbb Z[x]}\)</span>)</strong></span> <span class="math inline">\(\operatorname{Spec}\mathbb Z[x]\)</span> consists of</p>
+<ul>
+<li><span class="math inline">\(\mathbb Q[x]\)</span>-identified prime ideals:
+<ul>
+<li>The zero ideal <span class="math inline">\((0)\)</span></li>
+<li><span class="math inline">\((f)\)</span> where <span class="math inline">\(f(x) \in \mathbb Z[x]\)</span> is an irreducible polynomial of degree <span class="math inline">\(\geq 1\)</span></li>
+</ul></li>
+<li><span class="math inline">\(\mathbb F_p[x]\)</span>-identified prime ideals (where <span class="math inline">\(p\)</span> is a prime number):
 <ul>
 <li><span class="math inline">\((p)\)</span></li>
 <li><span class="math inline">\((p, f)\)</span> where <span class="math inline">\(f(x) \in \mathbb Z[x]\)</span> is irreducible when viewed in <span class="math inline">\(\mathbb F_p[x]\)</span></li>
@@ -627,11 +710,37 @@ Proof
 </div>
 </div>
 </div>
+<p>The power of <a href="#prp-prime-spectrum-poly-over-pid" class="quarto-xref">Proposition&nbsp;2</a> does not stop here. Apply it to <span class="math inline">\(K[x]\)</span> for any field <span class="math inline">\(K\)</span>, we have the following:</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="cor-prime-spectrum-kxy" class="theorem corollary">
+<p><span class="theorem-title"><strong>Corollary 3 (The prime spectrum of <span class="math inline">\({K[x,y]}\)</span>)</strong></span> Let <span class="math inline">\(K\)</span> be a field. Then <span class="math inline">\(\operatorname{Spec}K[x,y]\)</span> consists of</p>
+<ul>
+<li><span class="math inline">\(K(x)[y]\)</span>-identified prime ideals:
+<ul>
+<li>The zero ideal <span class="math inline">\((0)\)</span></li>
+<li><span class="math inline">\((f)\)</span> where <span class="math inline">\(f \in K[x,y]\)</span> is an irreducible polynomial of degree <span class="math inline">\(\geq 1\)</span></li>
+</ul></li>
+<li><span class="math inline">\(K[x,y] / (p(x))\)</span>-identified prime ideals (where <span class="math inline">\(p(x)\)</span> is an irreducible polynomial of <span class="math inline">\(K[x]\)</span>):
+<ul>
+<li><span class="math inline">\((p)\)</span></li>
+<li><span class="math inline">\((p, f)\)</span> where <span class="math inline">\(f \in K[x,y]\)</span> is irreducible when viewed in <span class="math inline">\(K[x,y] / (p(x))\)</span></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<p>This still looks complicated, but if we restrict to the case where <span class="math inline">\(K\)</span> is algebraically closed (e.g.&nbsp;<span class="math inline">\(K = \mathbb C\)</span>), above results simplifies to that all prime ideals of <span class="math inline">\(K[x,y]\)</span> are the zero ideal, maximal ideals (points in <span class="math inline">\(\mathbb C^2\)</span>) and principal ideals generated by irreducible polynomials.</p>
 </section>
-<section id="the-prime-spectrum-of-mathbb-zi" class="level2 page-columns page-full" data-number="3">
+<section id="the-prime-spectrum-of-mathbb-zi" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="the-prime-spectrum-of-mathbb-zi"><span class="header-section-number">3</span> The prime spectrum of <span class="math inline">\(\mathbb Z[i]\)</span></h2>
-<p>Recall that <span class="math inline">\(\mathbb Z[\mathrm i] := \mathbb Z[x] / (x^2 + 1) = \{a+ b\mathrm i: a,b \in \mathbb Z \}\)</span>. The (multiplicative) norm of <span class="math inline">\(z := a + b \mathrm i\)</span> is defined as <span class="math inline">\(\operatorname{N}(z) := z \bar z = a^2 + b^2\)</span>. The units of <span class="math inline">\(\mathbb Z[\mathrm i]\)</span> are <span class="math inline">\(\{ 1, -1, \mathrm i, -\mathrm i\}\)</span>, all of them are of norm <span class="math inline">\(1\)</span>. By the regular argument of the Euclidean division, <span class="math inline">\(\mathbb Z[\mathrm i]\)</span> is an an ED<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> and hence a PID<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> and a UFD<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
-<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;Euclidean domain</p></div><div id="fn4"><p><sup>4</sup>&nbsp;principal ideal domain</p></div><div id="fn5"><p><sup>5</sup>&nbsp;unique factorization domain</p></div></div><div class="callout callout-style-simple callout-note no-icon">
+<p>Recall that <span class="math inline">\(\mathbb Z[\mathrm i] := \mathbb Z[x] / (x^2 + 1) = \{a+ b\mathrm i: a,b \in \mathbb Z \}\)</span>. The (multiplicative) norm of <span class="math inline">\(z := a + b \mathrm i\)</span> is defined as <span class="math inline">\(\operatorname{N}(z) := z \bar z = a^2 + b^2\)</span>. The units of <span class="math inline">\(\mathbb Z[\mathrm i]\)</span> are <span class="math inline">\(\{ 1, -1, \mathrm i, -\mathrm i\}\)</span>, all of them are of norm <span class="math inline">\(1\)</span>. By the regular argument of the Euclidean division, <span class="math inline">\(\mathbb Z[\mathrm i]\)</span> is an ED and hence a PID and a UFD.</p>
+<div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -650,7 +759,7 @@ Proof
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -659,7 +768,7 @@ Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>By <a href="#thm-quotient-ideal-correspondence" class="quarto-xref">Theorem&nbsp;1</a>, the spectrum of <span class="math inline">\(\mathbb Z[\mathrm i]\)</span> consists of the quotient image of the prime ideals of <span class="math inline">\(\mathbb Z[x]\)</span> containing <span class="math inline">\(x^2+1\)</span>. We apply the previous result to <span class="math inline">\(\mathbb Z[x]\)</span> and get the following cases:</p>
@@ -692,6 +801,8 @@ Proof
 </div>
 </div>
 </div>
+<section id="the-two-squares-theorem" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="the-two-squares-theorem"><span class="header-section-number">3.1</span> The two squares theorem</h3>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -699,7 +810,7 @@ Proof
 </div>
 <div class="callout-body-container">
 <div id="cor-prime-two-squares" class="theorem corollary">
-<p><span class="theorem-title"><strong>Corollary 2</strong></span> A prime number <span class="math inline">\(p\)</span> can be expressed as a sum of two squares iff <span class="math inline">\(p = 2\)</span> or <span class="math inline">\(p \equiv 1 \pmod 4\)</span>.</p>
+<p><span class="theorem-title"><strong>Corollary 4</strong></span> A prime number <span class="math inline">\(p\)</span> can be expressed as a sum of two squares iff <span class="math inline">\(p = 2\)</span> or <span class="math inline">\(p \equiv 1 \pmod 4\)</span>.</p>
 </div>
 </div>
 </div>
@@ -717,7 +828,7 @@ Proof
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -726,22 +837,19 @@ Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>For the forward direction, if <span class="math inline">\(n = a^2 + b^2\)</span>, for any prime factor <span class="math inline">\(p \equiv 3 \pmod 4\)</span> of <span class="math inline">\(n\)</span>, it suffices to show that <span class="math inline">\(p\)</span> divides both <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. Otherwise, <span class="math inline">\(a^2,\,b^2 \not \equiv 0 \pmod p\)</span>. But we have <span class="math inline">\(a^2 + b^2 \equiv 0 \pmod p\)</span> thus <span class="math inline">\((a/b)^2 \equiv -1 \pmod p\)</span>, i.e.&nbsp;<span class="math inline">\(-1\)</span> is a quadratic residue in <span class="math inline">\(\mathbb F_p\)</span>, which is impossible for <span class="math inline">\(p \equiv 3 \pmod 4\)</span>.</p>
-<p>For the backward direction, it suffices to assume <span class="math inline">\(n\)</span> is square-free. Say its decomposition is <span class="math inline">\(n = \prod_{i=1}^k p_k\)</span> where <span class="math inline">\(p_i = 2\)</span> or <span class="math inline">\(p_i \equiv 1 \pmod 4\)</span>. By <a href="#cor-prime-two-squares" class="quarto-xref">Corollary&nbsp;2</a>, <span class="math inline">\(p_i = \operatorname{N}(z_i)\)</span> for some <span class="math inline">\(z_i \in \mathbb Z[\mathrm i]\)</span>. Thus <span class="math inline">\(n = \prod_{i=1}^k p_k = \operatorname{N}\left( \prod_{i=1}^k z_i \right)\)</span>, thus a sum of two squares.</p>
+<p>For the backward direction, it suffices to assume <span class="math inline">\(n\)</span> is square-free. Say its decomposition is <span class="math inline">\(n = \prod_{i=1}^k p_k\)</span> where <span class="math inline">\(p_i = 2\)</span> or <span class="math inline">\(p_i \equiv 1 \pmod 4\)</span>. By <a href="#cor-prime-two-squares" class="quarto-xref">Corollary&nbsp;4</a>, <span class="math inline">\(p_i = \operatorname{N}(z_i)\)</span> for some <span class="math inline">\(z_i \in \mathbb Z[\mathrm i]\)</span>. Thus <span class="math inline">\(n = \prod_{i=1}^k p_k = \operatorname{N}\left( \prod_{i=1}^k z_i \right)\)</span>, thus a sum of two squares.</p>
 </div>
 </div>
 </div>
 </div>
+
+
+
 </section>
-<section id="the-prime-spectrum-of-fxy" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="the-prime-spectrum-of-fxy"><span class="header-section-number">4</span> The prime spectrum of <span class="math inline">\({F[x,y]}\)</span></h2>
-<p>TODO</p>
-
-
-
 </section>
 
 
