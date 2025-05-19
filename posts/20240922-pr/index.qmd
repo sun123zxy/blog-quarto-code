@@ -2,7 +2,7 @@
 title: "原根、原根存在定理和模 m 剩余类环的乘法结构"
 author: "sun123zxy"
 date: "2024/09/22"
-date-modified: "2025/03/13"
+date-modified: "2025/05/19"
 bibliography: index.bib
 lang: zh
 
@@ -839,10 +839,37 @@ Carmichael 函数在公钥系统 RSA 中有应用．
 合数 $m$ 是 Carmichael 数当且仅当其无平方因子，且 $p-1 \mid m-1$ 对所有 $m$ 的素因子 $p$ 成立．
 :::
 
-### 二次剩余【TODO】
+### 二次剩余
 
 模 $m$ 的*二次剩余*构成集合
 $$
 \mathcal R_m := \{ a^2 : a \in Z_m \} \subseteq Z_m
 $$
 $Z_m$ 中全体可逆二次剩余构成集合 $\mathcal R_m^\times = Z_m^\times \cap \mathcal R_m$．注意到 $\mathcal R_m^\times$ 恰为交换群同态 $a \mapsto a^2$ 的像，故 $\mathcal R_m^\times \leq Z_m^\times$ 是子群．
+
+:::{#exr-quad-res-num}
+
+可逆二次剩余的数量是积性函数．二次剩余的数量是积性函数．
+
+对奇素数幂 $p^\alpha$，
+$$
+|\mathcal R_{p^\alpha}^\times| = \varphi(p^\alpha) / 2 = (p^\alpha - p^{\alpha-1})/2
+$$
+对偶素数幂 $2^\alpha$，
+$$
+|\mathcal R_{2^\alpha}^\times| = \begin{cases}
+\varphi(2^\alpha) &= 1 & \alpha = 1 \\
+\varphi(2^\alpha) / 2 &= 1 & \alpha = 2 \\
+\varphi(2^\alpha) / 4 &= 2^{\alpha-3} & \alpha \ge 3
+\end{cases}
+$$
+:::
+
+:::{.remark}
+
+我们进一步讨论 $|\mathcal R_{p^\alpha}|$．注意 $\mathcal R_{p^\alpha} = \mathcal R_{p^\alpha}^\times \sqcup (\mathcal R_{p^\alpha} \cap pZ_{p^\alpha})$，故只需讨论 $pZ_{p^\alpha}$ 中的二次剩余．$p$-valuation 不会撒谎，$Z_{p^{\alpha-2}} \to p^2 Z_p ,\, a \mapsto p^2 a$ 事实上给出了其与 $\mathcal R_{p^{\alpha-2}}$ 间的一一对应——放在 $p$-adic 数 $\mathbb Q_p^\times \cong \mathbb Z \times \mathbb Z_p^\times$ 中更容易看出．总之，
+$$
+|\mathcal R_{p^\alpha}| = |\mathcal R_{p^\alpha}^\times| + |\mathcal R_{p^{\alpha-2}}|
+$$
+解递推即可获得详细表达式，详细推导可参见 [@stangl_counting_1996]．
+:::
