@@ -6,6 +6,7 @@ date: 2021/08/17
 date-modified: 2022/12/25
 categories:
   - site-related
+  - technical
   - web
   - memories
 collection:

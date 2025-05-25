@@ -7,6 +7,7 @@ categories:
   - memories
   - Minecraft
   - music
+  - technical
   - Python
 collection:
   - casual

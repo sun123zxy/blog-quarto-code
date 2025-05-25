@@ -4,6 +4,7 @@ abstract: "无懈可击的超强配置搭建教程。"
 date: 2022/02/04
 date-modified: 2022/06/01
 categories:
+  - technical
   - web
 
 format:

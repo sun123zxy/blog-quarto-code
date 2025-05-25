@@ -4,6 +4,7 @@ abstract: "`__init__.py`, `sys.path`, `python -m` and more..."
 date: 2022/07/14
 date-modified: 2022/07/14
 categories:
+  - technical
   - Python
   
 format:
