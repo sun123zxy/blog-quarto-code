@@ -5,8 +5,6 @@ date: 2022/07/14
 date-modified: 2022/07/14
 categories:
   - Python
-collection:
-  - dedicated
   
 format:
   html: default
