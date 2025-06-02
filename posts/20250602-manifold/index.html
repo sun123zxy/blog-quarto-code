@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="sun123zxy">
-<meta name="dcterms.date" content="2025-06-02">
 
-<title>Gallery of mysterious manifolds – sun123zxy’s blog</title>
+<title>神奇流形在哪里 – sun123zxy’s blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -394,7 +393,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Gallery of mysterious manifolds</h1>
+<h1 class="title">神奇流形在哪里</h1>
+<p class="subtitle lead">Fantastic Manifolds and Where to Find Them</p>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
     <div class="quarto-category">geometry</div>
@@ -412,12 +412,6 @@ window.Quarto = {
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">June 2, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -427,66 +421,70 @@ window.Quarto = {
 </header>
 
 
+<div id="751a5c34" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.cm <span class="im">import</span> hsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <section id="a-dense-curve-on-the-torus" class="level2">
 <h2 class="anchored" data-anchor-id="a-dense-curve-on-the-torus">A dense curve on the torus</h2>
 <p><span class="math display">\[
 \gamma(t) := (e^{2\pi i t}, e^{2 \pi i \alpha t})
 \]</span> is an <span class="math inline">\(\mathbb R \to \mathbb T^2 \subset \mathbb C^2\)</span> immersion (Note that it’s injective!). The corresponding immersed <span class="math inline">\(1\)</span>-submanifold is a Lie subgroup that is dense in <span class="math inline">\(\mathbb T^2\)</span> (by Dirichlet’s approximation theorem), which confirms that it is not an embedded submanifold. For more information, see <span class="citation" data-cites="lee_introduction_2012"><a href="#ref-lee_introduction_2012" role="doc-biblioref">[1, Example 4.20]</a></span>.</p>
 <p>Below is a plot of this curve taking <span class="math inline">\(\alpha = \sqrt 2\)</span>. The torus is embedded in <span class="math inline">\(\mathbb R^3\)</span>. <span class="math display">\[
-\Phi(t) := \left( \cos( \sqrt{2}\,t ) \left( 1 + \frac{1}{2} \cos t \right), \sin( \sqrt{2}\,t ) \left( 1 + \frac{1}{2} \cos t \right), \frac{1}{2} \sin t \right)
+\Phi(t) := \left( \cos( \alpha t ) \left( 1 + \frac{1}{2} \cos t \right), \sin( \alpha t ) \left( 1 + \frac{1}{2} \cos t \right), \frac{1}{2} \sin t \right)
 \]</span></p>
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.mplot3d <span class="im">import</span> Axes3D</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the parametric equations</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> phi(t):</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.cos(np.sqrt(<span class="dv">2</span>) <span class="op">*</span> t) <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> np.cos(t))</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.sin(np.sqrt(<span class="dv">2</span>) <span class="op">*</span> t) <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> np.cos(t))</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> np.sin(t)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x, y, z</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate t values</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">10000</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>x, y, z <span class="op">=</span> phi(t)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Create figure with transparent background</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>), facecolor<span class="op">=</span><span class="st">'none'</span>)  <span class="co"># &lt;-- Transparent figure</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>, facecolor<span class="op">=</span><span class="st">'none'</span>)  <span class="co"># &lt;-- Transparent axes</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the curve</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y, z)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Manually set equal aspect ratio</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>max_range <span class="op">=</span> np.array([x.<span class="bu">max</span>()<span class="op">-</span>x.<span class="bu">min</span>(), y.<span class="bu">max</span>()<span class="op">-</span>y.<span class="bu">min</span>(), z.<span class="bu">max</span>()<span class="op">-</span>z.<span class="bu">min</span>()]).<span class="bu">max</span>() <span class="op">*</span> <span class="fl">0.5</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>mid_x <span class="op">=</span> (x.<span class="bu">max</span>() <span class="op">+</span> x.<span class="bu">min</span>()) <span class="op">*</span> <span class="fl">0.5</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>mid_y <span class="op">=</span> (y.<span class="bu">max</span>() <span class="op">+</span> y.<span class="bu">min</span>()) <span class="op">*</span> <span class="fl">0.5</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>mid_z <span class="op">=</span> (z.<span class="bu">max</span>() <span class="op">+</span> z.<span class="bu">min</span>()) <span class="op">*</span> <span class="fl">0.5</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(mid_x <span class="op">-</span> max_range, mid_x <span class="op">+</span> max_range)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(mid_y <span class="op">-</span> max_range, mid_y <span class="op">+</span> max_range)</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>ax.set_zlim(mid_z <span class="op">-</span> max_range, mid_z <span class="op">+</span> max_range)</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels and title (customize colors for visibility)</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'X'</span>)  <span class="co"># Ensure labels are visible</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Y'</span>)</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="st">'Z'</span>)</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust view</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>ax.view_init(elev<span class="op">=</span><span class="dv">30</span>, azim<span class="op">=</span><span class="dv">45</span>)</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the parametric equations</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> phi(t):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.cos(np.sqrt(<span class="dv">2</span>) <span class="op">*</span> t) <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> np.cos(t))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.sin(np.sqrt(<span class="dv">2</span>) <span class="op">*</span> t) <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> np.cos(t))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> np.sin(t)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x, y, z</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate t values</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">10000</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>x, y, z <span class="op">=</span> phi(t)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create figure with transparent background</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(facecolor<span class="op">=</span><span class="st">'none'</span>)  <span class="co"># &lt;-- Transparent figure</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>, facecolor<span class="op">=</span><span class="st">'none'</span>)  <span class="co"># &lt;-- Transparent axes</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the curve</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y, z)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Manually set equal aspect ratio</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>max_range <span class="op">=</span> np.array([x.<span class="bu">max</span>()<span class="op">-</span>x.<span class="bu">min</span>(), y.<span class="bu">max</span>()<span class="op">-</span>y.<span class="bu">min</span>(), z.<span class="bu">max</span>()<span class="op">-</span>z.<span class="bu">min</span>()]).<span class="bu">max</span>() <span class="op">*</span> <span class="fl">0.5</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>mid_x <span class="op">=</span> (x.<span class="bu">max</span>() <span class="op">+</span> x.<span class="bu">min</span>()) <span class="op">*</span> <span class="fl">0.5</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>mid_y <span class="op">=</span> (y.<span class="bu">max</span>() <span class="op">+</span> y.<span class="bu">min</span>()) <span class="op">*</span> <span class="fl">0.5</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>mid_z <span class="op">=</span> (z.<span class="bu">max</span>() <span class="op">+</span> z.<span class="bu">min</span>()) <span class="op">*</span> <span class="fl">0.5</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(mid_x <span class="op">-</span> max_range, mid_x <span class="op">+</span> max_range)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(mid_y <span class="op">-</span> max_range, mid_y <span class="op">+</span> max_range)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>ax.set_zlim(mid_z <span class="op">-</span> max_range, mid_z <span class="op">+</span> max_range)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels and title (customize colors for visibility)</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'X'</span>)  <span class="co"># Ensure labels are visible</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Y'</span>)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="st">'Z'</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust view</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>ax.view_init(elev<span class="op">=</span><span class="dv">30</span>, azim<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div id="fig-dense-curve-on-torus" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-dense-curve-on-torus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="67204254" class="cell" data-execution_count="1">
+<div id="04debc5a" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="index_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -500,7 +498,19 @@ Figure&nbsp;1: a dense curve on the torus
 </section>
 <section id="hopf-fiberation" class="level2">
 <h2 class="anchored" data-anchor-id="hopf-fiberation">Hopf fiberation</h2>
-<p>TODO</p>
+<p>Recommended online meterials:</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/112985074">Hopf纤维化</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/51684298">MP69：典型群(3)：三维空间的旋转，Pauli矩阵、四元数、SO(3)~RP3、SU(2)~S3</a></li>
+</ul>
+<p>Recall the three equivalent descriptions of <span class="math inline">\(\mathrm{SU}(2)\)</span>: <span class="math display">\[
+\begin{matrix}
+\mathbb T^3           &amp; \to &amp; \mathbb S^3 \subset \mathbb H &amp; \to   &amp; \mathrm{SU}(2) \\
+(\theta,\varphi,\psi) &amp; \substack{ a = \cos \theta \cos \varphi \\ b = \cos \theta \sin \varphi \\ c = \sin \theta \cos \psi \\ d = \sin \theta \sin \psi}  &amp; a \boldsymbol 1 + b \boldsymbol i + c \boldsymbol j + d \boldsymbol k &amp;              \substack{z=a+bi \\ w=c+di}  &amp; \begin{bmatrix}z &amp; w \\ -\bar w &amp; \bar z\end{bmatrix} \\
+                      &amp;     &amp;  a^2+b^2+c^2+d^2 = 1  &amp;       &amp; |z|^2 + |w|^2 = 1 \\
+\end{matrix}
+\]</span></p>
+<p>A nice figure of the Hopf fibration can be found in <span class="citation" data-cites="stillwell_naive_2008"><a href="#ref-stillwell_naive_2008" role="doc-biblioref">[2, Secs. 2.2, figure 2.2]</a></span>. The circle decomposition of <span class="math inline">\(\mathbb S^3\)</span> is just the coset partition of <span class="math inline">\(\mathbb S^3 \subset \mathbb H\)</span> by the subgroup <span class="math inline">\(\langle a + b \boldsymbol i : a^2+b^2=1 \rangle\)</span>.</p>
 
 
 
@@ -509,6 +519,9 @@ Figure&nbsp;1: a dense curve on the torus
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
 <div id="ref-lee_introduction_2012" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[1] </div><div class="csl-right-inline">J. M. Lee, <em>Introduction to smooth manifolds</em>, vol. 218. in Graduate texts in mathematics, vol. 218. New York, <span>NY</span>: Springer, 2012. doi: <a href="https://doi.org/10.1007/978-1-4419-9982-5">10.1007/978-1-4419-9982-5</a>.</div>
+</div>
+<div id="ref-stillwell_naive_2008" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">J. Stillwell, <em>Naive lie theory</em>. in Undergraduate texts in mathematics. New York, <span>NY</span>: Springer, 2008. doi: <a href="https://doi.org/10.1007/978-0-387-78214-0">10.1007/978-0-387-78214-0</a>.</div>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
