@@ -1,0 +1,81 @@
+---
+title: "Gallery of mysterious manifolds"
+date: 2025/06/02
+author: "sun123zxy"
+lang: en
+bibliography: index.bib
+draft: true
+
+categories:
+  - math
+  - geometry
+
+format:
+  html: default
+---
+
+## A dense curve on the torus
+
+$$
+\gamma(t) := (e^{2\pi i t}, e^{2 \pi i \alpha t})
+$$
+is a immersed $1$-submanifold (actually also a Lie group) of the torus $\mathbb T^2 \subset \mathbb C^2$ that is dense (hence not embedded). The background knowledge for this is Dirichlet's approximation theorem. For more information, see [@lee_introduction_2012, {Example 4.20}].
+
+Below is a plot of this curve taking $\alpha = \sqrt 2$. The torus is embedded in $\mathbb R^3$.
+$$
+\Phi(t) := \left( \cos( \sqrt{2}\,t ) \left( 1 + \frac{1}{2} \cos t \right), \sin( \sqrt{2}\,t ) \left( 1 + \frac{1}{2} \cos t \right), \frac{1}{2} \sin t \right)
+$$
+ 
+
+:::{#fig-dense-curve-on-torus}
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+# Define the parametric equations
+def phi(t):
+    x = np.cos(np.sqrt(2) * t) * (1 + 0.5 * np.cos(t))
+    y = np.sin(np.sqrt(2) * t) * (1 + 0.5 * np.cos(t))
+    z = 0.5 * np.sin(t)
+    return x, y, z
+
+# Generate t values
+t = np.linspace(0, 100, 10000)
+x, y, z = phi(t)
+
+# Create figure with transparent background
+fig = plt.figure(figsize=(10, 8), facecolor='none')  # <-- Transparent figure
+ax = fig.add_subplot(111, projection='3d', facecolor='none')  # <-- Transparent axes
+
+# Plot the curve
+ax.plot(x, y, z)
+
+# Manually set equal aspect ratio
+max_range = np.array([x.max()-x.min(), y.max()-y.min(), z.max()-z.min()]).max() * 0.5
+mid_x = (x.max() + x.min()) * 0.5
+mid_y = (y.max() + y.min()) * 0.5
+mid_z = (z.max() + z.min()) * 0.5
+ax.set_xlim(mid_x - max_range, mid_x + max_range)
+ax.set_ylim(mid_y - max_range, mid_y + max_range)
+ax.set_zlim(mid_z - max_range, mid_z + max_range)
+
+# Labels and title (customize colors for visibility)
+ax.set_xlabel('X')  # Ensure labels are visible
+ax.set_ylabel('Y')
+ax.set_zlabel('Z')
+
+# Adjust view
+ax.view_init(elev=30, azim=45)
+plt.tight_layout()
+
+plt.show()
+```
+
+a dense curve on the torus
+:::
+
+## Hopf fiberation
+
+TODO
