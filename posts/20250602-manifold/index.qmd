@@ -1,18 +1,27 @@
 ---
-title: "Gallery of mysterious manifolds"
-date: 2025/06/02
+title: "神奇流形在哪里"
+subtitle: "Fantastic Manifolds and Where to Find Them"
 author: "sun123zxy"
-lang: en
 bibliography: index.bib
 draft: true
 
 categories:
   - math
   - geometry
+collection:
+  - short
 
 format:
   html: default
 ---
+
+\renewcommand\vec\boldsymbol
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.cm import hsv
+```
 
 ## A dense curve on the torus
 
@@ -23,17 +32,13 @@ is a immersed $1$-submanifold (actually also a Lie group) of the torus $\mathbb 
 
 Below is a plot of this curve taking $\alpha = \sqrt 2$. The torus is embedded in $\mathbb R^3$.
 $$
-\Phi(t) := \left( \cos( \sqrt{2}\,t ) \left( 1 + \frac{1}{2} \cos t \right), \sin( \sqrt{2}\,t ) \left( 1 + \frac{1}{2} \cos t \right), \frac{1}{2} \sin t \right)
+\Phi(t) := \left( \cos( \alpha t ) \left( 1 + \frac{1}{2} \cos t \right), \sin( \alpha t ) \left( 1 + \frac{1}{2} \cos t \right), \frac{1}{2} \sin t \right)
 $$
  
 
 :::{#fig-dense-curve-on-torus}
 
 ```{python}
-import numpy as np
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-
 # Define the parametric equations
 def phi(t):
     x = np.cos(np.sqrt(2) * t) * (1 + 0.5 * np.cos(t))
@@ -46,7 +51,7 @@ t = np.linspace(0, 100, 10000)
 x, y, z = phi(t)
 
 # Create figure with transparent background
-fig = plt.figure(figsize=(10, 8), facecolor='none')  # <-- Transparent figure
+fig = plt.figure(facecolor='none')  # <-- Transparent figure
 ax = fig.add_subplot(111, projection='3d', facecolor='none')  # <-- Transparent axes
 
 # Plot the curve
@@ -78,4 +83,18 @@ a dense curve on the torus
 
 ## Hopf fiberation
 
-TODO
+Recommended online meterials:
+
+- [Hopf纤维化](https://zhuanlan.zhihu.com/p/112985074)
+- [MP69：典型群(3)：三维空间的旋转，Pauli矩阵、四元数、SO(3)\~RP3、SU(2)\~S3](https://zhuanlan.zhihu.com/p/51684298)
+
+Recall the three equivalent descriptions of $\mathrm{SU}(2)$:
+$$
+\begin{matrix}
+\mathbb T^3           & \to & \mathbb S^3 \subset \mathbb H & \to   & \mathrm{SU}(2) \\
+(\theta,\varphi,\psi) & \substack{ a = \cos \theta \cos \varphi \\ b = \cos \theta \sin \varphi \\ c = \sin \theta \cos \psi \\ d = \sin \theta \sin \psi}  & a \vec 1 + b \vec i + c \vec j + d \vec k &              \substack{z=a+bi \\ w=c+di}  & \begin{bmatrix}z & w \\ -\bar w & \bar z\end{bmatrix} \\
+                      &     &  a^2+b^2+c^2+d^2 = 1  &       & |z|^2 + |w|^2 = 1 \\
+\end{matrix}
+$$
+
+A nice figure of the Hopf fibration can be found in [@stillwell_naive_2008, {section 2.2, figure 2.2}]. The circle decomposition of $\mathbb S^3$ is just the coset partition of $\mathbb S^3 \subset \mathbb H$ by the subgroup $\langle a + b \vec i : a^2+b^2=1 \rangle$.
