@@ -2,26 +2,34 @@
 title: "【BICMR 怀新一题】人偶之舞 题解"
 author: "sun123zxy"
 date: "2025/01/17"
+date-modified: "2025/06/02"
 lang: zh
 
 categories:
   - math
   - analysis
+  - number theory
   - solution
 
 format:
   html: default
 ---
 
-[题目出处](http://mp.weixin.qq.com/s?__biz=MzI1ODQ2MTkwOQ==&mid=2247510941&idx=1&sn=d6be579314208c927ce355ddf42d3a53&chksm=eb20018e9d57b9451f5fb2077066ec2afff9c71fbdd44be64687231f1bb1e5073f3e15772827&mpshare=1&scene=23&srcid=01172FUgvtDyueXMvf83LQ3H&sharer_shareinfo=c5ba425d6078685bc81f1b7641398a51&sharer_shareinfo_first=c5ba425d6078685bc81f1b7641398a51#rd)，[官方解答点评](https://mp.weixin.qq.com/s?__biz=MzI1ODQ2MTkwOQ==&mid=2247511705&idx=1&sn=236443a3891bbdc29e155f54ffa89d61&chksm=ebf6bca27adc9a01bd9a625102da57c6c0ec10a90aeff620854befea04f4efe3662971862e3d&xtrack=1&scene=90&subscene=93&sessionid=1737127652&flutter_pos=0&clicktime=1737127653&enterid=1737127653&finder_biz_enter_id=4&ranksessionid=1737125498&ascene=56&fasttmpl_type=0&fasttmpl_fullversion=7563132-zh_CN-zip&fasttmpl_flag=0&realreporttime=1737127653486#rd)．上个月随便做了一下，估出的上界还差了个常数，所以没有提交．放在这里吧．
+:::{#exm-1}
 
-记 $m = 100$．题目等价于：
-
-- 寻找各人偶速度 $v_1,\dots,v_m \in \mathbb R / \mathbb Z$，使得对任意的人偶起始位置 $a_1,\dots,a_m \in \mathbb R / \mathbb Z$，存在数列 $N_k \subseteq \mathbb N$ 使得 Shanghai 人偶旋转 $N_k$ 圈后，各人偶位置 $x_{i,N_k} := a_i - N_k v_i$ 满足
+寻找各人偶速度 $v_1,\dots,v_m \in \mathbb R / \mathbb Z$，使得对任意的人偶起始位置 $a_1,\dots,a_m \in \mathbb R / \mathbb Z$，存在数列 $N_k \subseteq \mathbb N$ 使得 Shanghai 人偶旋转 $N_k$ 圈后，各人偶位置 $x_{i,N_k} := a_i - N_k v_i$ 满足
   $$
   \max_{1 \leq i \leq m} |x_{i,N_k}| = O(N_k^{-1/m}), \quad k \to \infty
   $$
   这里 $| \cdot |$ 表示与 $0$ 在 $\mathbb R / \mathbb Z$ 中的距离．
+:::
+
+:::{.remark}
+
+[题目出处](http://mp.weixin.qq.com/s?__biz=MzI1ODQ2MTkwOQ==&mid=2247510941&idx=1&sn=d6be579314208c927ce355ddf42d3a53&chksm=eb20018e9d57b9451f5fb2077066ec2afff9c71fbdd44be64687231f1bb1e5073f3e15772827&mpshare=1&scene=23&srcid=01172FUgvtDyueXMvf83LQ3H&sharer_shareinfo=c5ba425d6078685bc81f1b7641398a51&sharer_shareinfo_first=c5ba425d6078685bc81f1b7641398a51#rd)，[官方解答点评](https://mp.weixin.qq.com/s?__biz=MzI1ODQ2MTkwOQ==&mid=2247511705&idx=1&sn=236443a3891bbdc29e155f54ffa89d61&chksm=ebf6bca27adc9a01bd9a625102da57c6c0ec10a90aeff620854befea04f4efe3662971862e3d&xtrack=1&scene=90&subscene=93&sessionid=1737127652&flutter_pos=0&clicktime=1737127653&enterid=1737127653&finder_biz_enter_id=4&ranksessionid=1737125498&ascene=56&fasttmpl_type=0&fasttmpl_fullversion=7563132-zh_CN-zip&fasttmpl_flag=0&realreporttime=1737127653486#rd)．本题的背景是 simultaneous version of Dirichlet approximation therorem，常见的鸽巢原理证明可以推广到一般情形，参见 [Wikipedia](https://en.wikipedia.org/wiki/Dirichlet%27s_approximation_theorem#Simultaneous_version)．下面是当时写的题解，估出的上界还差了个常数，所以没有提交．
+:::
+
+:::{.solution}
 
 任取 $p$ 是任意大于 $2$ 的正整数．对任意 $1 \leq i \leq m$，取
 $$
@@ -72,3 +80,4 @@ $$
 $$
 \max_{1 \leq i \leq m} |x_{i,N_k}| = O(N_k^{-1/(2m-1)})
 $$
+:::
