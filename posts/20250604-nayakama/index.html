@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Lengthy articles written with more care.">
+<meta name="author" content="sun123zxy">
 
-<title>Dedicated – sun123zxy’s blog</title>
+<title>推广的 Cayley-Hamilton 定理与 Nayakama 引理 – sun123zxy’s blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,31 +21,49 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="..//assets/images/avatar.png" rel="icon" type="image/png">
-<script src="../site_libs/quarto-listing/list.min.js"></script>
-<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ae0b5334a1ec0bf99af3d0c304a697d2.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-ec1a76e08afe61c088d6e5e184de512e.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-3cb5fed003c060aed2276d01e1a7a258.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-6f89639c9394f88299c5b4c6b9434b3a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ae0b5334a1ec0bf99af3d0c304a697d2.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-ec1a76e08afe61c088d6e5e184de512e.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-3cb5fed003c060aed2276d01e1a7a258.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-6f89639c9394f88299c5b4c6b9434b3a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,35 +91,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-subtitle','listing-lang','listing-categories','listing-description','listing-date','listing-image','listing-collection',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
+<meta name="quarto:status" content="draft">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -133,7 +123,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="alternate" type="application/rss+xml" title="sun123zxy's blog" href="dedicated.xml" data-external="1"></head>
+</head>
 
 <body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
@@ -298,11 +288,11 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
@@ -313,11 +303,11 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../listings/overview.html"> 
+    <a class="nav-link" href="../../listings/overview.html"> 
 <span class="menu-text">Overview</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -335,7 +325,7 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-bi-rss">    
         <li>
-    <a class="dropdown-item" href="../listings/all.xml">
+    <a class="dropdown-item" href="../../listings/all.xml">
  <span class="dropdown-text">All Posts</span></a>
   </li>  
     </ul>
@@ -349,30 +339,35 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(10)</span></div><div class="category" data-category="YWxnZWJyYQ==">algebra <span class="quarto-category-count">(7)</span></div><div class="category" data-category="YWxnb3JpdGht">algorithm <span class="quarto-category-count">(4)</span></div><div class="category" data-category="YW5hbHlzaXM=">analysis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y29tYmluYXRvcmljcw==">combinatorics <span class="quarto-category-count">(3)</span></div><div class="category" data-category="bWF0aA==">math <span class="quarto-category-count">(10)</span></div><div class="category" data-category="bnVtYmVyJTIwdGhlb3J5">number theory <span class="quarto-category-count">(3)</span></div><div class="category" data-category="dGFsa3M=">talks <span class="quarto-category-count">(4)</span></div></div></div>
+    </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Dedicated</h1>
-</div>
-
-<div>
-  <div class="description">
-    Lengthy articles written with more care.
+<h1 class="title">推广的 Cayley-Hamilton 定理与 Nayakama 引理</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">algebra</div>
   </div>
-</div>
+  </div>
 
 
-<div class="quarto-title-meta column-page-left">
 
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>sun123zxy </p>
+          </div>
+  </div>
     
   
     
@@ -383,434 +378,104 @@ window.Quarto = {
 </header>
 
 
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-    <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-    <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-      <option value="" disabled="" selected="" hidden="">Order By</option>
-      <option value="index" data-direction="asc">Default</option>
-      <option value="listing-title" data-direction="asc">
-        Title
-      </option>
-      <option value="listing-date-sort" data-direction="asc">
-        Date - Oldest
-      </option>
-      <option value="listing-date-sort" data-direction="desc">
-        Date - Newest
-      </option>
-    </select>
-  </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
-</div>
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="bWF0aCUyQ2FsZ2VicmE=" data-listing-date-sort="1747353600000" data-listing-file-modified-sort="1748985300342" data-listing-date-modified-sort="1747353600000" data-listing-reading-time-sort="15" data-listing-word-count-sort="2903">
-<div class="thumbnail"><a href="../posts/20250509-spec/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20250509-spec/index.html" class="no-external">On Determining Prime Spectra of Some Coordinate Rings</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20250509-spec/index.html" class="no-external">with Applications to the Two Squares Theorem</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20250509-spec/index.html" class="no-external">
-<p>Thanks to the powerful tools borrowed from commutative algebra, we show a general approach to determine the prime spectra of some coordinate rings by examples. As we determine the spectrum of the Guassian integers, a proof of the famous two squares theorem emerges without tricky techniques.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20250509-spec/index.html" class="no-external">
-<div class="listing-date">
-2025/05/16
-</div>
-<div class="metadata-value listing-lang">
-en
-</div>
-<div class="metadata-value listing-collection">
-dedicated
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="bWF0aCUyQ2FsZ2VicmElMkNudW1iZXIlMjB0aGVvcnklMkN0YWxrcw==" data-listing-date-sort="1744761600000" data-listing-file-modified-sort="1748985300342" data-listing-date-modified-sort="1745280000000" data-listing-reading-time-sort="13" data-listing-word-count-sort="2536">
-<div class="thumbnail"><a href="../posts/20250416-q-quadratic-form-classification/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20250416-q-quadratic-form-classification/index.html" class="no-external">Classification of Quardratic Forms over <span class="math inline">\(\mathbb Q\)</span></a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20250416-q-quadratic-form-classification/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bnVtYmVyJTIwdGhlb3J5'); return false;">number theory</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGFsa3M='); return false;">talks</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20250416-q-quadratic-form-classification/index.html" class="no-external">
-<p>A reading guidance of the first part of J. P. Serre’s <em>A Course in Arithmetic</em></p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20250416-q-quadratic-form-classification/index.html" class="no-external">
-<div class="listing-date">
-2025/04/16
-</div>
-<div class="metadata-value listing-lang">
-en
-</div>
-<div class="metadata-value listing-collection">
-dedicated
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="bWF0aCUyQ2FsZ2VicmElMkNudW1iZXIlMjB0aGVvcnk=" data-listing-date-sort="1726963200000" data-listing-file-modified-sort="1748985300342" data-listing-date-modified-sort="1747612800000" data-listing-reading-time-sort="14" data-listing-word-count-sort="2724">
-<div class="thumbnail"><a href="../posts/20240922-pr/index.html" class="no-external">
-
-<p class="card-img-top"><img src="../posts/20240922-pr/index_files/figure-html/cell-2-output-1.png"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20240922-pr/index.html" class="no-external">原根、原根存在定理和模 m 剩余类环的乘法结构</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20240922-pr/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bnVtYmVyJTIwdGhlb3J5'); return false;">number theory</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20240922-pr/index.html" class="no-external">
-<p>应用代数工具，对模 <span class="math inline">\(m\)</span> 剩余类环 <span class="math inline">\(\mathbb Z / m \mathbb Z\)</span> 的乘法结构做出流畅的刻画，作为推论导出原根存在定理．面向有朴素抽象代数基础的 OI/XCPC 算法竞赛选手和学习过本科抽象代数课程的同学．</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20240922-pr/index.html" class="no-external">
-<div class="listing-date">
-2024/09/22
-</div>
-<div class="metadata-value listing-lang">
-zh
-</div>
-<div class="metadata-value listing-collection">
-dedicated
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="bWF0aCUyQ2FsZ2VicmElMkN0YWxrcw==" data-listing-date-sort="1715558400000" data-listing-file-modified-sort="1748985300340" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1575">
-<div class="thumbnail"><a href="../posts/20240513-isodft/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20240513-isodft/index.html" class="no-external">代数同构视角下的离散 Fourier 变换</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20240513-isodft/index.html" class="no-external">多项式环、求值插值与相似对角化</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGFsa3M='); return false;">talks</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20240513-isodft/index.html" class="no-external">
-Fourier 变换：将给定函数 <span class="math inline">\(f\)</span> 映为函数 <span class="math inline">\(\mathcal F[f]\)</span>： <span class="math display">\[
-\mathcal F[f](\lambda) := \int_{-\infty}^{\infty} f(t) e^{- \mathrm{i}\lambda t} \operatorname{d}\!t
-\]</span>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20240513-isodft/index.html" class="no-external">
-<div class="listing-date">
-2024/05/13
+<p>线性代数中大家熟知的 Cayley-Hamilton 定理指出，域 <span class="math inline">\(K\)</span> 上线性变换 <span class="math inline">\(\varphi\)</span> 的特征多项式 <span class="math inline">\(f(\lambda) = \det(\lambda I_n - \Phi)\)</span> 是它的一个零化多项式，这里 <span class="math inline">\(\Phi \in \operatorname{Mat}_{n \times n}(K)\)</span> 是 <span class="math inline">\(\varphi\)</span> 在某组基下的矩阵表示．</p>
+<p>我们将这一定理稍做推广：</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
 </div>
-<div class="metadata-value listing-lang">
-zh
+<div class="callout-body-container">
+<div id="thm-cayley-hamilton" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1</strong></span> 设 <span class="math inline">\(A\)</span> 为一含幺交换环，<span class="math inline">\(M\)</span> 为一有限生成 <span class="math inline">\(A\)</span>-模，<span class="math inline">\(\varphi \in \operatorname{End}_A(M)\)</span> 为一 <span class="math inline">\(A\)</span>-模同态．则存在零化 <span class="math inline">\(\varphi\)</span> 的 <span class="math inline">\(n\)</span> 次首一多项式．</p>
 </div>
-<div class="metadata-value listing-collection">
-dedicated
 </div>
-</a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="bWF0aCUyQ2FsZ2VicmE=" data-listing-date-sort="1705795200000" data-listing-file-modified-sort="1748985300340" data-listing-date-modified-sort="1710806400000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1074">
-<div class="thumbnail"><a href="../posts/20240121-burnside/index.html" class="no-external">
-
-<img loading="lazy" src="../posts/20240121-burnside/cover.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20240121-burnside/index.html" class="no-external">矩阵代数的 Burnside 定理</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20240121-burnside/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20240121-burnside/index.html" class="no-external">
-<p>我们详细重述并证明 Simultaneous Triangularization (H. Radjavi and P. Rosenthal) 中的 Burnside 定理及其相关推论．</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20240121-burnside/index.html" class="no-external">
-<div class="listing-date">
-2024/01/21
-</div>
-<div class="metadata-value listing-collection">
-dedicated
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="bWF0aCUyQ2FsZ2VicmElMkNjb21iaW5hdG9yaWNzJTJDdGFsa3M=" data-listing-date-sort="1697587200000" data-listing-file-modified-sort="1748985300339" data-listing-date-modified-sort="1729900800000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1120">
-<div class="thumbnail"><a href="../posts/20231018-discriminant/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20231018-discriminant/index.html" class="no-external">一元多项式的 Delta 判别式</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20231018-discriminant/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y29tYmluYXRvcmljcw=='); return false;">combinatorics</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGFsa3M='); return false;">talks</div>
-
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div class="delink listing-description"><a href="../posts/20231018-discriminant/index.html" class="no-external">
-设非负整数数列 <span class="math inline">\(\boldsymbol\lambda := (\lambda_1, \lambda_2, \dots)\)</span> 只有有限项非零且（不严格）单调递减．定义长度 <span class="math inline">\(\mathcal L(\boldsymbol\lambda)\)</span> 为其非零项元素个数；定义 <span class="math inline">\(\mathcal S(\boldsymbol\lambda)\)</span> 为其非零…<span class="math inline"></span><span class="math inline"></span><span class="math inline"></span><em></em>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20231018-discriminant/index.html" class="no-external">
-<div class="listing-date">
-2023/10/18
-</div>
-<div class="metadata-value listing-lang">
-zh
-</div>
-<div class="metadata-value listing-collection">
-dedicated
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="YWxnb3JpdGhtJTJDbWF0aCUyQ3RhbGtz" data-listing-date-sort="1690848000000" data-listing-file-modified-sort="1748985300339" data-listing-date-modified-sort="1695859200000" data-listing-reading-time-sort="22" data-listing-word-count-sort="4274">
-<div class="thumbnail"><a href="../posts/20230928-dft/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20230928-dft/index.html" class="no-external">A Convolution-Oriented FFT Tutorial</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20230928-dft/index.html" class="no-external">for OI/XCPC participants and algebra enthusiasts</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnb3JpdGht'); return false;">algorithm</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGFsa3M='); return false;">talks</div>
-
+<div class="callout-title-container flex-fill">
+Proof
 </div>
-<div class="delink listing-description"><a href="../posts/20230928-dft/index.html" class="no-external">
-初步要求
-</a></div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div class="metadata">
-<a href="../posts/20230928-dft/index.html" class="no-external">
-<div class="listing-date">
-2023/08/01
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>设 <span class="math inline">\((x_1, \ldots, x_n)\)</span> 为 <span class="math inline">\(M\)</span> 一组生成元．设 <span class="math inline">\(\Phi \in \operatorname{Mat}_{n \times n}(A)\)</span> 是 <span class="math inline">\(\varphi\)</span> 在该组生成元下的矩阵表示，即 <span class="math display">\[
+(\varphi(x_1), \ldots, \varphi(x_n)) = (x_1, \ldots, x_n) \Phi
+\]</span> 便利起见，我们做一转置 <span class="math display">\[
+\begin{bmatrix}\varphi(x_1) \\ \vdots \\ \varphi(x_n)\end{bmatrix} = \Phi^\mathrm{T}\begin{bmatrix}x_1 \\ \ldots \\ x_n\end{bmatrix}
+\]</span> 注意 <span class="math inline">\(A\)</span> 自然地嵌入 <span class="math inline">\(A[\varphi] \subset \operatorname{End}_A(M)\)</span> 且 <span class="math inline">\(A[\varphi]\)</span> 是交换环，故 <span class="math inline">\(A[\varphi]\)</span> 上的矩阵运算、伴随矩阵和行列式均正常运作．在此意义下重写上式左侧： <span class="math display">\[
+(\varphi I_n) \begin{bmatrix}x_1 \\ \vdots \\ x_n\end{bmatrix} = \Phi^\mathrm{T}\begin{bmatrix}x_1 \\ \vdots \\ x_n\end{bmatrix}
+\]</span> 即 <span class="math display">\[
+(\varphi I_n - \Phi^\mathrm{T}) \begin{bmatrix}x_1 \\ \vdots \\ x_n\end{bmatrix} = 0
+\]</span> 使用伴随矩阵左乘得 <span class="math display">\[
+\det(\varphi I_n - \Phi^\mathrm{T}) \begin{bmatrix}x_1 \\ \vdots \\ x_n\end{bmatrix} = 0
+\]</span> 因此 <span class="math inline">\(\det(\varphi I_n - \Phi^\mathrm{T}) = 0\)</span>，故 <span class="math inline">\(f(\lambda) = \det(\lambda I_n - \Phi^\mathrm{T}) = \det(\lambda I_n - \Phi) \in A[\lambda]\)</span> 是 <span class="math inline">\(\varphi\)</span> 的一个满足条件的零化多项式．</p>
 </div>
-<div class="metadata-value listing-lang">
-zh
 </div>
-<div class="metadata-value listing-collection">
-dedicated
 </div>
-</a>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="YWxnb3JpdGhtJTJDbWF0aCUyQ2NvbWJpbmF0b3JpY3M=" data-listing-date-sort="1687305600000" data-listing-file-modified-sort="1748985300339" data-listing-date-modified-sort="1740096000000" data-listing-reading-time-sort="23" data-listing-word-count-sort="4503">
-<div class="thumbnail"><a href="../posts/20230621-cpmodel/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20230621-cpmodel/index.html" class="no-external">算法 &amp; 数学碎碎念</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20230621-cpmodel/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnb3JpdGht'); return false;">algorithm</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y29tYmluYXRvcmljcw=='); return false;">combinatorics</div>
-
+<div class="callout-title-container flex-fill">
+Remark
 </div>
-<div class="delink listing-description"><a href="../posts/20230621-cpmodel/index.html" class="no-external">
-<p>现场赛公式模板库，亦可作为小而精的总结性学习材料参考．无需单独成文或暂不完善的内容会放在这里．</p>
-</a></div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div class="metadata">
-<a href="../posts/20230621-cpmodel/index.html" class="no-external">
-<div class="listing-date">
-2023/06/21
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>Remark</em>. </span>上面给出的证明微妙之处在于每一步看上去都非常正确的矩阵运算．首先就需要注意到不能直接在 <span class="math inline">\(\operatorname{End}_A(M)\)</span> 中使用伴随矩阵——它可能不交换，只有缩小到交换的 <span class="math inline">\(A[\varphi]\)</span> 中工作才是安全的．其次，<span class="math inline">\(A[\varphi]\)</span>-矩阵和 <span class="math inline">\(M\)</span>-向量之间的乘法也需要重新定义并验证结合律之类的性质——可以认为 <span class="math inline">\(M\)</span> 是 <span class="math inline">\(A[\varphi]\)</span>-模，随后 <span class="math inline">\(\operatorname{Mat}_{n\times n}(A[\varphi])\)</span> 就会自然地左作用在 <span class="math inline">\(M^n\)</span> 上．</p>
 </div>
-<div class="metadata-value listing-lang">
-zh
 </div>
-<div class="metadata-value listing-collection">
-dedicated
 </div>
-</a>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="YWxnb3JpdGhtJTJDbWF0aCUyQ251bWJlciUyMHRoZW9yeSUyQ2FuYWx5c2lz" data-listing-date-sort="1681776000000" data-listing-file-modified-sort="1748985300308" data-listing-date-modified-sort="1684972800000" data-listing-reading-time-sort="8" data-listing-word-count-sort="1534">
-<div class="thumbnail"><a href="../posts/20230418-complexity/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20230418-complexity/index.html" class="no-external">一些数论算法的时间复杂度分析</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20230418-complexity/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnb3JpdGht'); return false;">algorithm</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bnVtYmVyJTIwdGhlb3J5'); return false;">number theory</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YW5hbHlzaXM='); return false;">analysis</div>
-
+<div class="callout-title-container flex-fill">
+Remark
 </div>
-<div class="delink listing-description"><a href="../posts/20230418-complexity/index.html" class="no-external">
-<p>OI/XCPC 常见算法为主，渐进符号、约数函数、整除分块嵌套与杜教筛．</p>
-</a></div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div class="metadata">
-<a href="../posts/20230418-complexity/index.html" class="no-external">
-<div class="listing-date">
-2023/04/18
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>Remark</em>. </span>如果你觉得这里给出的证明有滥用矩阵记号之嫌，想看个用得不是那么多的（虽然还是绕不开伴随矩阵）：</p>
+<ul>
+<li><p>可以参考 <span class="citation" data-cites="m_f_atiyah_introduction_1969"><a href="#ref-m_f_atiyah_introduction_1969" role="doc-biblioref">[1, proposition 2.4]</a></span> 的证明（Atiyah 甚至没提在 <span class="math inline">\(A[\varphi]\)</span> 里工作，太惜字如金了.jpg）</p></li>
+<li><p>可以参考 <span class="citation" data-cites="neukirch_algebraic_1999"><a href="#ref-neukirch_algebraic_1999" role="doc-biblioref">[2, Ch. 1, proposition 2.2]</a></span> 的证明，是证明 integral closure 构成环的一个中间步骤．因为代数数论的世界比较美好（例如线性变换都是乘一个扩环里的数，自动交换），写出来会好看一些．</p></li>
+</ul>
+<p>如果你想看其它的证明方法：</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Cayley%E2%80%93Hamilton_theorem">Wikipedia</a> 细节丰富地记录了多种证明方法，虽然是在域上做的但区别应该不大．</li>
+</ul>
 </div>
-<div class="metadata-value listing-collection">
-dedicated
 </div>
-</a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="YWxnb3JpdGhtJTJDbWF0aCUyQ2NvbWJpbmF0b3JpY3MlMkNhbGdlYnJh" data-listing-date-sort="1584748800000" data-listing-file-modified-sort="1748985300285" data-listing-date-modified-sort="1680739200000" data-listing-reading-time-sort="9" data-listing-word-count-sort="1785">
-<div class="thumbnail"><a href="../posts/20200321-burnside/index.html" class="no-external">
-
-<p class="card-img-top"><img src="../posts/20200321-burnside/burnside.jpg"  class="thumbnail-image card-img"/></p>
 
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20200321-burnside/index.html" class="no-external">等价类计数：Burnside引理 &amp; Polya定理</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20200321-burnside/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
 
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnb3JpdGht'); return false;">algorithm</div>
 
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
 
-<div class="listing-category" onclick="window.quartoListingCategory('Y29tYmluYXRvcmljcw=='); return false;">combinatorics</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20200321-burnside/index.html" class="no-external">
-<p>《同分异构体计数从入门到精通》（不是）</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20200321-burnside/index.html" class="no-external">
-<div class="listing-date">
-2020/03/21
-</div>
-<div class="metadata-value listing-collection">
-dedicated
-</div>
-</a>
-</div>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-m_f_atiyah_introduction_1969" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">M. F. Atiyah and I.G. Macdonald, <em>Introduction to commutative algebra</em>. Addison-Wesley Publishing Company, Inc., 1969.</div>
 </div>
+<div id="ref-neukirch_algebraic_1999" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">J. Neukirch, <em>Algebraic number theory</em>, vol. 322. in Grundlehren der mathematischen wissenschaften, vol. 322. Berlin, Heidelberg: Springer, 1999. doi: <a href="https://doi.org/10.1007/978-3-662-03983-0">10.1007/978-3-662-03983-0</a>.</div>
 </div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -1230,6 +895,38 @@ dedicated
     }
   });
   </script>
+<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
+<input type="hidden" id="giscus-alt-theme" value="light">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "sun123zxy/blog-quarto-code";
+    script.dataset.repoId = "R_kgDOIrPs5w";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOIrPs584CV4gd";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1242,7 +939,7 @@ dedicated
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="../thanks.html">
+    <a class="nav-link" href="../../thanks.html">
 <p>Thanks</p>
 </a>
   </li>  
