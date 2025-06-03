@@ -1,0 +1,73 @@
+---
+title: "推广的 Cayley-Hamilton 定理与 Nayakama 引理"
+author: "sun123zxy"
+bibliography: index.bib
+draft: true
+
+categories:
+  - math
+  - algebra
+collection:
+  - short
+
+format:
+  html: default
+---
+
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\injto}{\hookrightarrow}
+\newcommand{\T}{\mathrm{T}}
+
+线性代数中大家熟知的 Cayley-Hamilton 定理指出，域 $K$ 上线性变换 $\varphi$ 的特征多项式 $f(\lambda) = \det(\lambda I_n - \Phi)$ 是它的一个零化多项式，这里 $\Phi \in \Mat_{n \times n}(K)$ 是 $\varphi$ 在某组基下的矩阵表示．
+
+我们将这一定理稍做推广：
+
+:::{#thm-cayley-hamilton}
+
+设 $A$ 为一含幺交换环，$M$ 为一有限生成 $A$-模，$\varphi \in \End_A(M)$ 为一 $A$-模同态．则存在零化 $\varphi$ 的 $n$ 次首一多项式．
+:::
+
+:::{.proof}
+
+设 $(x_1, \ldots, x_n)$ 为 $M$ 一组生成元．设 $\Phi \in \Mat_{n \times n}(A)$ 是 $\varphi$ 在该组生成元下的矩阵表示，即
+$$
+(\varphi(x_1), \ldots, \varphi(x_n)) = (x_1, \ldots, x_n) \Phi
+$$
+便利起见，我们做一转置
+$$
+\begin{bmatrix}\varphi(x_1) \\ \vdots \\ \varphi(x_n)\end{bmatrix} = \Phi^\T \begin{bmatrix}x_1 \\ \ldots \\ x_n\end{bmatrix}
+$$
+注意 $A$ 自然地嵌入 $A[\varphi] \subset \End_A(M)$ 且 $A[\varphi]$ 是交换环，故 $A[\varphi]$ 上的矩阵运算、伴随矩阵和行列式均正常运作．在此意义下重写上式左侧：
+$$
+(\varphi I_n) \begin{bmatrix}x_1 \\ \vdots \\ x_n\end{bmatrix} = \Phi^\T \begin{bmatrix}x_1 \\ \vdots \\ x_n\end{bmatrix}
+$$
+即
+$$
+(\varphi I_n - \Phi^\T) \begin{bmatrix}x_1 \\ \vdots \\ x_n\end{bmatrix} = 0
+$$
+使用伴随矩阵左乘得
+$$
+\det(\varphi I_n - \Phi^\T) \begin{bmatrix}x_1 \\ \vdots \\ x_n\end{bmatrix} = 0
+$$
+因此 $\det(\varphi I_n - \Phi^\T) = 0$，故 $f(\lambda) = \det(\lambda I_n - \Phi^\T) = \det(\lambda I_n - \Phi) \in A[\lambda]$ 是 $\varphi$ 的一个满足条件的零化多项式．
+:::
+
+:::{.remark}
+
+上面给出的证明微妙之处在于每一步看上去都非常正确的矩阵运算．首先就需要注意到不能直接在 $\End_A(M)$ 中使用伴随矩阵——它可能不交换，只有缩小到交换的 $A[\varphi]$ 中工作才是安全的．其次，$A[\varphi]$-矩阵和 $M$-向量之间的乘法也需要重新定义并验证结合律之类的性质——可以认为 $M$ 是 $A[\varphi]$-模，随后 $\Mat_{n\times n}(A[\varphi])$ 就会自然地左作用在 $M^n$ 上．
+:::
+
+:::{.remark}
+
+如果你觉得这里给出的证明有滥用矩阵记号之嫌，想看个用得不是那么多的（虽然还是绕不开伴随矩阵）：
+
+- 可以参考 [@m_f_atiyah_introduction_1969, {proposition 2.4}] 的证明（Atiyah 甚至没提在 $A[\varphi]$ 里工作，太惜字如金了.jpg）
+
+- 可以参考 [@neukirch_algebraic_1999, {chapter 1, proposition 2.2}] 的证明，是证明 integral closure 构成环的一个中间步骤．因为代数数论的世界比较美好（例如线性变换都是乘一个扩环里的数，自动交换），写出来会好看一些．
+
+如果你想看其它的证明方法：
+
+- [Wikipedia](https://en.wikipedia.org/wiki/Cayley%E2%80%93Hamilton_theorem) 细节丰富地记录了多种证明方法，虽然是在域上做的但区别应该不大．
+:::
