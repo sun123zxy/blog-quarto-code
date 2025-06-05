@@ -1,0 +1,64 @@
+---
+title: "对称群的复不可约表示"
+author: "sun123zxy"
+date: 2025/06/06
+bibliography: index.bib 
+draft: true
+
+categories:
+  - math
+  - algebra
+  - combinatorics
+collection:
+  - dedicated
+
+format:
+  html: default
+---
+
+\newcommand{\sgn}{\operatorname{sgn}}
+
+我们尽可能简明快速地完成对称群的复不可约表示的分类．本文主要微调自 [@fulton_representation_2004, {section 4.2}]，亦少量参考 [@sagan_symmetric_2001, {chapter 2}]．
+
+## 速览
+
+一个 Young 图由一个整数分拆 $\lambda \vdash n$ 唯一确定，一个 Young 表将一个 $n$ 元置换填入 Young 图——本质上是一组信息 $T = (\lambda \vdash n, \sigma \in \mathcal S_n)$．如果 $T$ 的各行各列均严格单增，则称 $T$ 是标准 Young 表．
+
+置换 $g \in \mathcal S_n$ 作用在全体形状为 $\lambda$ 的 Young 表 $T$ 上的方式为将数字 $i$ 替换为 $g(i)$，即 $gT := (\lambda \vdash n, g \sigma)$．易见对称群在固定形状 Young 表上的作用传递．作用在给定 Young 表 $T$ 上的效果表现为对同行元素的置换的那些置换构成的群记为 $P_T$，置换同列元素的记为 $Q_T$．易见 $P_{gT} = g P_T g^{-1}$, $Q_{gT} = g Q_T g^{-1}$．
+
+设 $\mathbb C[\mathcal S_n]$ 是 $S_n$ 的复群代数，即其复正则表示．定义：
+
+- 行对称化子 $a_T := \sum_{g \in P_T} g \in \mathbb C[\mathcal S_n]$
+- 列对称化子 $b_T := \sum_{g \in Q_T} \sgn(g) g \in \mathbb C[\mathcal S_n]$
+- Young 对称化子 $c_T := a_T b_T$
+
+易见对任意 $p \in P_T$, $q \in Q_T$，有：
+
+- $p a_T = a_T p = a_T$
+- $q b_T = b_T q = \sgn(q) b_T$
+- $p c_T q = \sgn(q) c_T$
+
+最后一条性质对 $c_T$ 成立固然是显然的事实，但满足此条件的群代数元素的唯一性就不平凡了：
+
+:::{#prp-c-unique}
+
+设 $c \in \mathbb C[\mathcal S_n]$ 满足对任意 $p \in P_T$, $q \in Q_T$，有 $p c q = \sgn(q) c$，则 $c \in \mathbb C c_T$，即 $c$ 在模掉标量乘法意义下唯一．
+:::
+
+我们之后证明这一结果．
+
+Young 表 $T$ 诱导得到的 Specht 模 $V_T := \mathbb C[\mathcal S_n] c_T$．我们将先以迅捷速度证明：
+
+- 每个 Specht 模都是 $\mathcal S_n$ 的不可约表示
+
+随后稍微放慢节奏证明：
+
+- 两个 Specht 模不同构当且仅当诱导它们的 Young 表具有不同的形状
+- $\mathcal S_n$ 的每个不可约表示都（同构于）某一 Specht 模
+- 每个 Specht 模 $V_T$ 的维数恰为形状同 $T$ 的标准 Young 表的个数
+
+## 准备
+
+- 半单群代数与幂零
+- 字典序
+- 同行不同列引理
