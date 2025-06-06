@@ -349,7 +349,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#速览" id="toc-速览" class="nav-link active" data-scroll-target="#速览">速览</a></li>
-  <li><a href="#准备" id="toc-准备" class="nav-link" data-scroll-target="#准备">准备</a></li>
+  <li><a href="#specht-模的不可约性" id="toc-specht-模的不可约性" class="nav-link" data-scroll-target="#specht-模的不可约性">Specht 模的不可约性</a></li>
   </ul>
 </nav>
     </div>
@@ -397,7 +397,12 @@ window.Quarto = {
 <section id="速览" class="level2">
 <h2 class="anchored" data-anchor-id="速览">速览</h2>
 <p>一个 Young 图由一个整数分拆 <span class="math inline">\(\lambda \vdash n\)</span> 唯一确定，一个 Young 表将一个 <span class="math inline">\(n\)</span> 元置换填入 Young 图——本质上是一组信息 <span class="math inline">\(T = (\lambda \vdash n, \sigma \in \mathcal S_n)\)</span>．如果 <span class="math inline">\(T\)</span> 的各行各列均严格单增，则称 <span class="math inline">\(T\)</span> 是标准 Young 表．</p>
-<p>置换 <span class="math inline">\(g \in \mathcal S_n\)</span> 作用在全体形状为 <span class="math inline">\(\lambda\)</span> 的 Young 表 <span class="math inline">\(T\)</span> 上的方式为将数字 <span class="math inline">\(i\)</span> 替换为 <span class="math inline">\(g(i)\)</span>，即 <span class="math inline">\(gT := (\lambda \vdash n, g \sigma)\)</span>．易见对称群在固定形状 Young 表上的作用传递．作用在给定 Young 表 <span class="math inline">\(T\)</span> 上的效果表现为对同行元素的置换的那些置换构成的群记为 <span class="math inline">\(P_T\)</span>，置换同列元素的记为 <span class="math inline">\(Q_T\)</span>．易见 <span class="math inline">\(P_{gT} = g P_T g^{-1}\)</span>, <span class="math inline">\(Q_{gT} = g Q_T g^{-1}\)</span>．</p>
+<p>置换 <span class="math inline">\(g \in \mathcal S_n\)</span> 作用在全体形状为 <span class="math inline">\(\lambda\)</span> 的 Young 表 <span class="math inline">\(T\)</span> 上的方式为将数字 <span class="math inline">\(i\)</span> 替换为 <span class="math inline">\(g(i)\)</span>，即 <span class="math inline">\(gT := (\lambda, g \sigma)\)</span>．易见对称群在固定形状 Young 表上的作用传递．作用在给定 Young 表 <span class="math inline">\(T\)</span> 上的效果表现为对同行元素的置换的那些置换构成的群记为 <span class="math inline">\(P_T\)</span>，置换同列元素的记为 <span class="math inline">\(Q_T\)</span>．易见 <span class="math inline">\(P_T\)</span> 和 <span class="math inline">\(Q_T\)</span> 交平凡，两群之并生成整个 <span class="math inline">\(\mathcal S_n\)</span>．</p>
+<p>我们来刻画不同 Young 表行、列置换之间的关系．注意 <span class="math inline">\(gT \to gpT\)</span> 的过程可以理解为在 <span class="math inline">\(gT\)</span> 上做“效果”相当于 <span class="math inline">\(T\)</span> 上 <span class="math inline">\(p \in P_T\)</span> 的行置换，故</p>
+<ul>
+<li><span class="math inline">\(P_{gT} = g P_T g^{-1}\)</span></li>
+<li><span class="math inline">\(Q_{gT} = g Q_T g^{-1}\)</span></li>
+</ul>
 <p>设 <span class="math inline">\(\mathbb C[\mathcal S_n]\)</span> 是 <span class="math inline">\(S_n\)</span> 的复群代数，即其复正则表示．定义：</p>
 <ul>
 <li>行对称化子 <span class="math inline">\(a_T := \sum_{g \in P_T} g \in \mathbb C[\mathcal S_n]\)</span></li>
@@ -424,24 +429,121 @@ window.Quarto = {
 </div>
 </div>
 <p>我们之后证明这一结果．</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark (对称化子的组合观点)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>Remark</em> (对称化子的组合观点). </span>组合上来讲，行对称化后的 Young 表 <span class="math inline">\(a_T T\)</span> 可以认为是 Young 表 <span class="math inline">\(T\)</span> 无视行内数字排列得到的行等价类，即我们可以认为 <span class="citation" data-cites="sagan_symmetric_2001"><a href="#ref-sagan_symmetric_2001" role="doc-biblioref">[2, Definition 2.1.4]</a></span> 书中定义的“tabloid” <span class="math inline">\(\{ T \} := a_T T\)</span>．此时 <span class="math inline">\(\mathcal S_n\)</span> 作用在全体形状为 <span class="math inline">\(\lambda\)</span> 的 tabloid 上形成的表示即是 <span class="citation" data-cites="sagan_symmetric_2001"><a href="#ref-sagan_symmetric_2001" role="doc-biblioref">[2, Definition 2.1.5]</a></span> 定义的 <span class="math inline">\(M^T\)</span>．这些 tabloid 构成该表示的一组基，故 <span class="math inline">\(M^\lambda\)</span> 的维数为 <span class="math inline">\(n! / \lambda ! := n! / \prod_i \lambda_i !\)</span>．（书中将 <span class="math inline">\(M^T\)</span> 写作 <span class="math inline">\(M^\lambda\)</span> 其实不甚严谨：作为集合 <span class="math inline">\(M^T\)</span> 对所有形状相同的 <span class="math inline">\(T\)</span> 相等，但其上的模作用是不同的！）</p>
+<p>由行对称化子的性质，<span class="math inline">\(P_T \leq \mathcal S_n\)</span> 作用在 tabloid <span class="math inline">\(\{ T \}\)</span> 上不会有任何效果．事实上，<span class="math inline">\(M^T\)</span> 恰为从 <span class="math inline">\(P_T\)</span> 的平凡表示提升到 <span class="math inline">\(\mathcal S_n\)</span> 得到的诱导表示 <span class="math inline">\(1\uparrow_{P_T}^{\mathcal S_n}\)</span>．</p>
+<p>除考虑符号问题外，<span class="math inline">\(b_T T\)</span> 的看法类似可得——即 <span class="math inline">\(Q_T\)</span> 的交错表示提升到 <span class="math inline">\(\mathcal S_n\)</span> 的诱导表示．但，如何看待 <span class="math inline">\(c_T T\)</span> 呢？</p>
+</div>
+</div>
+</div>
+</div>
 <p>Young 表 <span class="math inline">\(T\)</span> 诱导得到的 Specht 模 <span class="math inline">\(V_T := \mathbb C[\mathcal S_n] c_T\)</span>．我们将先以迅捷速度证明：</p>
 <ul>
 <li>每个 Specht 模都是 <span class="math inline">\(\mathcal S_n\)</span> 的不可约表示</li>
 </ul>
-<p>随后稍微放慢节奏证明：</p>
+<p>并计划填坑以下内容：</p>
 <ul>
 <li>两个 Specht 模不同构当且仅当诱导它们的 Young 表具有不同的形状</li>
 <li><span class="math inline">\(\mathcal S_n\)</span> 的每个不可约表示都（同构于）某一 Specht 模</li>
 <li>每个 Specht 模 <span class="math inline">\(V_T\)</span> 的维数恰为形状同 <span class="math inline">\(T\)</span> 的标准 Young 表的个数</li>
+<li>Specht 模对应的特征标</li>
 </ul>
 </section>
-<section id="准备" class="level2">
-<h2 class="anchored" data-anchor-id="准备">准备</h2>
-<ul>
-<li>半单群代数与幂零</li>
-<li>字典序</li>
-<li>同行不同列引理</li>
-</ul>
+<section id="specht-模的不可约性" class="level2">
+<h2 class="anchored" data-anchor-id="specht-模的不可约性">Specht 模的不可约性</h2>
+<p>首先介绍一个必要的组合结果．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-srdc" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2 (Same row, different column, S.R.D.C.)</strong></span> 设 <span class="math inline">\(T, S\)</span> 是形状为 <span class="math inline">\(\lambda\)</span> 的两个 Young 表，若任意一对 <span class="math inline">\(T\)</span> 中同行的数字均落在 <span class="math inline">\(S\)</span> 中的不同列，则存在 <span class="math inline">\(p \in P_T,q' \in Q_S\)</span> 使得 <span class="math inline">\(pT = q'S\)</span>．</p>
+<p>作为推论，考虑 <span class="math inline">\(T,S\)</span> 间的作用转移关系．令 <span class="math inline">\(S = gT\)</span>，<span class="math inline">\(q' = g q g^{-1}\)</span>，这里 <span class="math inline">\(q \in Q_T\)</span>，则 <span class="math inline">\(pT = q'S = gqT\)</span>，于是 <span class="math inline">\(g=p q^{-1} \in P_T Q_T\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>如图所示，将 <span class="math inline">\(T\)</span> 中第一行全体元素取出，其在 <span class="math inline">\(S\)</span> 中的对应元素必然在不同列．因此，可以通过 <span class="math inline">\(S\)</span> 上的列置换将其移至 <span class="math inline">\(S\)</span> 的第一行．随后对 <span class="math inline">\(T\)</span> 的第一行元素做行置换即可使得 <span class="math inline">\(T\)</span> 的第一行与 <span class="math inline">\(S\)</span> 的第一行相同．顺次对第二行，第三行完成上述操作即可． <span class="math display">\[
+\begin{matrix}
+T &amp;
+\begin{matrix}
+i &amp; j &amp; k &amp; l \\
+* &amp; * &amp; * \\
+* &amp; *
+\end{matrix}
+&amp; \xrightarrow{p_1 \in P_T} &amp;
+\begin{matrix}
+l &amp; k &amp; i &amp; j \\
+* &amp; * &amp; * \\
+* &amp; *
+\end{matrix}
+&amp; \xrightarrow{p_2 \in P_T} &amp; \dots
+\\
+\\
+S &amp;
+\begin{matrix}
+l &amp; * &amp; * &amp; j \\
+* &amp; * &amp; i \\
+* &amp; k
+\end{matrix}
+&amp; \xrightarrow{q'_1 \in Q_S} &amp;
+\begin{matrix}
+l &amp; k &amp; i &amp; j \\
+* &amp; * &amp; * \\
+* &amp; *
+\end{matrix}
+&amp; \xrightarrow{q'_2 \in Q_S} &amp; \dots
+\end{matrix}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>Remark</em>. </span>这个条件甚至是当且仅当的：对任意 <span class="math inline">\(p \in P_T\)</span>, <span class="math inline">\(q \in Q_T\)</span>，<span class="math inline">\(pT\)</span> 的同行元素确落在 <span class="math inline">\(qT\)</span> 的不同列．<a href="#prp-srdc" class="quarto-xref">Proposition&nbsp;2</a> 事实上给出了 <span class="math inline">\(S \in P_T Q_T T\)</span> 的充要条件．值得一提——这一关系既不对称，也不传递．</p>
+</div>
+</div>
+</div>
+</div>
 
 
 
