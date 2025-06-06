@@ -24,7 +24,12 @@ format:
 
 一个 Young 图由一个整数分拆 $\lambda \vdash n$ 唯一确定，一个 Young 表将一个 $n$ 元置换填入 Young 图——本质上是一组信息 $T = (\lambda \vdash n, \sigma \in \mathcal S_n)$．如果 $T$ 的各行各列均严格单增，则称 $T$ 是标准 Young 表．
 
-置换 $g \in \mathcal S_n$ 作用在全体形状为 $\lambda$ 的 Young 表 $T$ 上的方式为将数字 $i$ 替换为 $g(i)$，即 $gT := (\lambda \vdash n, g \sigma)$．易见对称群在固定形状 Young 表上的作用传递．作用在给定 Young 表 $T$ 上的效果表现为对同行元素的置换的那些置换构成的群记为 $P_T$，置换同列元素的记为 $Q_T$．易见 $P_{gT} = g P_T g^{-1}$, $Q_{gT} = g Q_T g^{-1}$．
+置换 $g \in \mathcal S_n$ 作用在全体形状为 $\lambda$ 的 Young 表 $T$ 上的方式为将数字 $i$ 替换为 $g(i)$，即 $gT := (\lambda, g \sigma)$．易见对称群在固定形状 Young 表上的作用传递．作用在给定 Young 表 $T$ 上的效果表现为对同行元素的置换的那些置换构成的群记为 $P_T$，置换同列元素的记为 $Q_T$．易见 $P_T$ 和 $Q_T$ 交平凡，两群之并生成整个 $\mathcal S_n$．
+
+我们来刻画不同 Young 表行、列置换之间的关系．注意 $gT \to gpT$ 的过程可以理解为在 $gT$ 上做“效果”相当于 $T$ 上 $p \in P_T$ 的行置换，故
+
+- $P_{gT} = g P_T g^{-1}$
+- $Q_{gT} = g Q_T g^{-1}$
 
 设 $\mathbb C[\mathcal S_n]$ 是 $S_n$ 的复群代数，即其复正则表示．定义：
 
@@ -47,18 +52,79 @@ format:
 
 我们之后证明这一结果．
 
+:::{.remark}
+
+## 对称化子的组合观点
+
+组合上来讲，行对称化后的 Young 表 $a_T T$ 可以认为是 Young 表 $T$ 无视行内数字排列得到的行等价类，即我们可以认为 [@sagan_symmetric_2001, {Definition 2.1.4}] 书中定义的“tabloid” $\{ T \} := a_T T$．此时 $\mathcal S_n$ 作用在全体形状为 $\lambda$ 的 tabloid 上形成的表示即是 [@sagan_symmetric_2001, {Definition 2.1.5}] 定义的 $M^T$．这些 tabloid 构成该表示的一组基，故 $M^\lambda$ 的维数为 $n! / \lambda ! := n! / \prod_i \lambda_i !$．（书中将 $M^T$ 写作 $M^\lambda$ 其实不甚严谨：作为集合 $M^T$ 对所有形状相同的 $T$ 相等，但其上的模作用是不同的！）
+
+由行对称化子的性质，$P_T \leq \mathcal S_n$ 作用在 tabloid $\{ T \}$ 上不会有任何效果．事实上，$M^T$ 恰为从 $P_T$ 的平凡表示提升到 $\mathcal S_n$ 得到的诱导表示 $1\uparrow_{P_T}^{\mathcal S_n}$．
+
+除考虑符号问题外，$b_T T$ 的看法类似可得——即 $Q_T$ 的交错表示提升到 $\mathcal S_n$ 的诱导表示．但，如何看待 $c_T T$ 呢？
+:::
+
 Young 表 $T$ 诱导得到的 Specht 模 $V_T := \mathbb C[\mathcal S_n] c_T$．我们将先以迅捷速度证明：
 
 - 每个 Specht 模都是 $\mathcal S_n$ 的不可约表示
 
-随后稍微放慢节奏证明：
+并计划填坑以下内容：
 
 - 两个 Specht 模不同构当且仅当诱导它们的 Young 表具有不同的形状
 - $\mathcal S_n$ 的每个不可约表示都（同构于）某一 Specht 模
 - 每个 Specht 模 $V_T$ 的维数恰为形状同 $T$ 的标准 Young 表的个数
+- Specht 模对应的特征标
 
-## 准备
+## Specht 模的不可约性
 
-- 半单群代数与幂零
-- 字典序
-- 同行不同列引理
+首先介绍一个必要的组合结果．
+
+:::{#prp-srdc}
+
+## Same row, different column, S.R.D.C.
+
+设 $T, S$ 是形状为 $\lambda$ 的两个 Young 表，若任意一对 $T$ 中同行的数字均落在 $S$ 中的不同列，则存在 $p \in P_T,q' \in Q_S$ 使得 $pT = q'S$．
+
+作为推论，考虑 $T,S$ 间的作用转移关系．令 $S = gT$，$q' = g q g^{-1}$，这里 $q \in Q_T$，则 $pT = q'S = gqT$，于是 $g=p q^{-1} \in P_T Q_T$．
+:::
+
+:::{.proof}
+
+如图所示，将 $T$ 中第一行全体元素取出，其在 $S$ 中的对应元素必然在不同列．因此，可以通过 $S$ 上的列置换将其移至 $S$ 的第一行．随后对 $T$ 的第一行元素做行置换即可使得 $T$ 的第一行与 $S$ 的第一行相同．顺次对第二行，第三行完成上述操作即可．
+$$
+\begin{matrix}
+T &
+\begin{matrix}
+i & j & k & l \\
+* & * & * \\
+* & *
+\end{matrix}
+& \xrightarrow{p_1 \in P_T} &
+\begin{matrix}
+l & k & i & j \\
+* & * & * \\
+* & *
+\end{matrix}
+& \xrightarrow{p_2 \in P_T} & \dots
+\\
+\\
+S &
+\begin{matrix}
+l & * & * & j \\
+* & * & i \\
+* & k
+\end{matrix}
+& \xrightarrow{q'_1 \in Q_S} &
+\begin{matrix}
+l & k & i & j \\
+* & * & * \\
+* & *
+\end{matrix}
+& \xrightarrow{q'_2 \in Q_S} & \dots
+\end{matrix}
+$$
+:::
+
+:::{.remark}
+
+这个条件甚至是当且仅当的：对任意 $p \in P_T$, $q \in Q_T$，$pT$ 的同行元素确落在 $qT$ 的不同列．[@prp-srdc] 事实上给出了 $S \in P_T Q_T T$ 的充要条件．值得一提——这一关系既不对称，也不传递．
+:::
