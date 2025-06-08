@@ -1,9 +1,8 @@
 ---
 title: "对称群的复不可约表示"
 author: "sun123zxy"
-date: 2025/06/06
-bibliography: index.bib 
-draft: true
+date: 2025/06/08
+bibliography: index.bib
 
 categories:
   - math
@@ -17,8 +16,10 @@ format:
 ---
 
 \newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
 
-我们尽可能简明快速地完成对称群的复不可约表示的分类．本文主要微调自 [@fulton_representation_2004, {section 4.2}]，亦少量参考 [@sagan_symmetric_2001, {chapter 2}]．
+我们尽可能简明快速地完成对称群的复不可约表示的分类．本文主要微调自 [@fulton_representation_2004, {section 4.2}]，亦少量参考 [@sagan_symmetric_2001, {chapter 2}]．推荐读者阅读前熟悉群的复表示的基本常识 [@serre_linear_1977, {chapter 1--2}] 和群代数模的观点．
 
 ## 速览
 
@@ -47,6 +48,8 @@ format:
 
 :::{#prp-c-unique}
 
+## Young 对称化子的唯一性
+
 设 $c \in \mathbb C[\mathcal S_n]$ 满足对任意 $p \in P_T$, $q \in Q_T$，有 $p c q = \sgn(q) c$，则 $c \in \mathbb C c_T$，即 $c$ 在模掉标量乘法意义下唯一．
 :::
 
@@ -60,7 +63,7 @@ format:
 
 由行对称化子的性质，$P_T \leq \mathcal S_n$ 作用在 tabloid $\{ T \}$ 上不会有任何效果．事实上，$M^T$ 恰为从 $P_T$ 的平凡表示提升到 $\mathcal S_n$ 得到的诱导表示 $1\uparrow_{P_T}^{\mathcal S_n}$．
 
-除考虑符号问题外，$b_T T$ 的看法类似可得——即 $Q_T$ 的交错表示提升到 $\mathcal S_n$ 的诱导表示．但，如何看待 $c_T T$ 呢？
+除考虑符号问题外，$b_T T$ 的看法类似可得——即 $Q_T$ 的交错表示提升到 $\mathcal S_n$ 的诱导表示．但，如何看待 $c_T T$ 呢？我们不得而知，但 [@prp-c-unique] 指出，做一次 Young 对称化和做很多次 Young 对称化没有区别．
 :::
 
 Young 表 $T$ 诱导得到的 Specht 模 $V_T := \mathbb C[\mathcal S_n] c_T$．我们将先以迅捷速度证明：
@@ -69,7 +72,7 @@ Young 表 $T$ 诱导得到的 Specht 模 $V_T := \mathbb C[\mathcal S_n] c_T$．
 
 并计划填坑以下内容：
 
-- 两个 Specht 模不同构当且仅当诱导它们的 Young 表具有不同的形状
+- 两个 Specht 模同构当且仅当诱导它们的 Young 表具有相同的形状
 - $\mathcal S_n$ 的每个不可约表示都（同构于）某一 Specht 模
 - 每个 Specht 模 $V_T$ 的维数恰为形状同 $T$ 的标准 Young 表的个数
 - Specht 模对应的特征标
@@ -126,5 +129,86 @@ $$
 
 :::{.remark}
 
-这个条件甚至是当且仅当的：对任意 $p \in P_T$, $q \in Q_T$，$pT$ 的同行元素确落在 $qT$ 的不同列．[@prp-srdc] 事实上给出了 $S \in P_T Q_T T$ 的充要条件．值得一提——这一关系既不对称，也不传递．
+这个条件甚至是当且仅当的：对任意 $p \in P_T$, $q \in Q_T$，$pT$ 的同行元素确落在 $qT$ 的不同列．[@prp-srdc] 事实上给出了 $S = g T \in P_T Q_T T$，或者说 $g \in P_T Q_T$ 的充要条件．值得一提——这一关系既不对称，也不传递．
 :::
+
+下面证明 [@prp-c-unique]．
+
+:::{.proof}
+
+不妨设 $c = \sum_{g \in \mathcal S_n} n_g g$ 是满足对任意 $p \in P_T$, $q \in Q_T$，有 $p c q = \sgn(q) c$ 的某一 $\mathbb C[G]$ 中元素．注意我们已经知道满足这条件的 Young 对称化子 $c_T \in P_T Q_T$，所以我们应当指望，也只需证明如下两个事实：
+
+- 对任意 $p \in P_T$, $q \in Q_T$，$n_{pq}$ 在模掉标量乘法意义下唯一．
+
+只需利用
+$$
+\sgn(q) \sum_{g \in \mathcal S_n} n_g g = \sgn(q) c = pcq = \sum_{g \in \mathcal S_n} n_g pgq
+$$
+便得到 $n_{pgq} = \sgn(q) n_g$．特取 $g=1$ 得 $n_{pq} = \sgn(q) n_1$，相对 $n_1$ 唯一．
+
+- 对所有 $g \notin P_T Q_T$，有 $n_g = 0$ 成立．
+
+由 [@prp-srdc]，此时存在一对数字 $(i,j)$ 落在 $T$ 上同行 $S:=gT$ 上同列的位置，翻译过来便是对换 $p := (i,j) \in P_T \cap Q_S = P_T \cap g Q_T g^{-1}$．于是可取对换 $q := g^{-1} p g \in Q_T$，这样就有
+$$
+n_g = n_{pgq} = \sgn(q) n_g = - n_g
+$$
+因此 $n_g = 0$．
+:::
+
+:::{#cor-c-unique}
+
+$c_T x c_T \in \mathbb C c_T$ 对任意 $x \in \mathbb C[\mathcal S_n]$ 成立．
+:::
+
+:::{.remark}
+
+## $c_T$ 的“幂等系数”
+
+可设 $c_T^2 = \alpha c_T$，$\alpha \in \mathbb C$．这意味着 $c_T$ 作为左乘在 $\mathbb C[\mathcal S_n]$ 上的线性变换几乎是幂等变换，此时 $\ker c_T \oplus \im c_T = \mathbb C[G]$．这里 $\im c_T$ 就是 $V_T$，因此 $c_T$ 的迹 $\tr c_T = \alpha \dim V_T$．又注意到 $c_T$ 作用在 $g$ 上得到向量的 $g$ 分量对应系数是 $1$，故 $\tr c_T = n!$．综上 $\alpha = n! / \dim V_T$．
+:::
+
+:::{#prp-specht-irr}
+
+## Specht 模的不可约性
+
+Specht 模 $V_T := \mathbb C[\mathcal S_n] c_T$ 是 $\mathcal S_n$ 的复不可约表示．
+:::
+
+:::{.proof}
+
+设 $V_T$ 有子表示 $W \subseteq V_T$，则子空间
+$$
+c_T W \subset c_T V_T = c_T \mathbb C[\mathcal S_n] c_T \subset \mathbb C c^T
+$$
+后者是一维子空间，故分以下两种情况讨论：
+
+- $c_T W = \mathbb C c_T$． 此时
+$$
+V_T = \mathbb C[\mathcal S_n] c_T = \mathbb C[\mathcal S_n] (\mathbb C c_T) = \mathbb C[\mathcal S_n] W = W
+$$
+
+- $c_T W = 0$．此时对任意 $w = x c_T \in W$ 都有 $w^2 = x c_T w = 0$，即 $W^2 = 0$．我们知道有限维半单群代数 $\mathbb C[\mathcal S_n]$ 中没有非零幂零左理想，故 $w=0$，$W=0$．
+
+  > 啊这可能有点 fancy，我们也给出一个来自 [Math StackExchange](https://math.stackexchange.com/questions/4329256/about-young-symmetrizer-c-lambda) 的直接证明：
+  > 
+  > 由群表示的完全可约性，存在子表示 $U$ 使得  $U \oplus W = \mathbb C[G]$．故可记 $1 = u + w$，这里 $u \in U$, $v \in V$．于是 $W \ni w = w (u+w) = wu + w^2 = wu \in U$，故 $w=0$，$1 \in U$，$U=C[G]$，$W=0$．
+
+综上，$V_T$ 是 $\mathcal S_n$ 的复不可约表示．
+:::
+
+:::{.remark}
+
+## 关于域的特征
+
+注意直到该定理前，我们都没有用到 $\mathbb C$ 的任何性质．在此定理中我们使用了 $\mathbb C$ 特征为 $0$ 导致的群代数 $\mathbb C[G]$ 的半单性，故 Specht 模的不可约性对任意特征为 $0$ 的域都成立．
+:::
+
+## 复不可约表示的分类
+
+已经找到了一大类 $\mathcal S_n$ 的复不可约表示——Specht 模 $V_T$．下面我们证明事实上只有这些复不可约表示．回忆本质不同复不可约表示的数量等于群的共轭类的数量，而 $\mathcal S_n$ 的共轭类数恰为 $n$ 的整数拆分的数量，故只要证明
+
+- 两个 Specht 模同构当且仅当诱导它们的 Young 表具有相同的形状
+
+就完成了 $\mathcal S_n$ 的复不可约表示的分类．
+
+（TODO）
