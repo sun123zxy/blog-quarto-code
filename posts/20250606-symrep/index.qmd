@@ -42,6 +42,11 @@ format:
 - 列对称化子 $b_T := \sum_{g \in Q_T} \sgn(g) g \in \mathbb C[\mathcal S_n]$
 - Young 对称化子 $c_T := a_T b_T$
 
+:::{.remark}
+
+将 Young 对称化子定义为 $b_T a_T$ 也是可以的，请参考 [@fulton_representation_2004, {exercise 4.4}]．
+:::
+
 易见对任意 $p \in P_T$, $q \in Q_T$，有：
 
 - $p a_T = a_T p = a_T$
@@ -70,14 +75,14 @@ format:
 除考虑符号问题外，$b_T T$ 的看法类似可得——即 $Q_T$ 的交错表示提升到 $\mathcal S_n$ 的诱导表示．但，如何看待 $c_T T$ 呢？我们不得而知，但 [@prp-c-unique] 指出，做一次 Young 对称化和做很多次 Young 对称化没有区别．
 :::
 
-Young 表 $T$ 诱导得到的 Specht 模 $V_T := \mathbb C[\mathcal S_n] c_T$．我们将先以迅捷速度证明：
+Young 表 $T$ 诱导得到的 Specht 模 $V_T := \mathbb C[\mathcal S_n] c_T$．我们将以迅捷速度完成 $\mathcal S_n$ 复表示的分类：
 
 - 每个 Specht 模都是 $\mathcal S_n$ 的不可约表示
-
-并计划填坑以下内容：
-
 - 两个 Specht 模同构当且仅当诱导它们的 Young 表具有相同的形状
-- $\mathcal S_n$ 的每个不可约表示都（同构于）某一 Specht 模
+- $\mathcal S_n$ 的每个不可约表示都同构于某一 Specht 模
+
+并计划在未来填坑如下内容：
+
 - 每个 Specht 模 $V_T$ 的维数恰为形状同 $T$ 的标准 Young 表的个数
 - Specht 模对应的特征标
 
@@ -87,7 +92,7 @@ Young 表 $T$ 诱导得到的 Specht 模 $V_T := \mathbb C[\mathcal S_n] c_T$．
 
 :::{#prp-srdc}
 
-## Same row, different column, S.R.D.C.
+## 同形状 Young 表的 S.R.D.C.^[Same row, different column]
 
 设 $T, S$ 是形状为 $\lambda$ 的两个 Young 表，若任意一对 $T$ 中同行的数字均落在 $S$ 中的不同列，则存在 $p \in P_T,q' \in Q_S$ 使得 $pT = q'S$．
 
@@ -159,7 +164,7 @@ $$
 因此 $n_g = 0$．
 :::
 
-:::{#cor-c-unique}
+:::{#cor-cxc}
 
 $c_T x c_T \in \mathbb C c_T$ 对任意 $x \in \mathbb C[\mathcal S_n]$ 成立．
 :::
@@ -200,13 +205,6 @@ $$
 综上，$V_T$ 是 $\mathcal S_n$ 的复不可约表示．
 :::
 
-:::{.remark}
-
-## 关于域的特征
-
-注意直到该定理前，我们都没有用到 $\mathbb C$ 的任何性质．在此定理中我们使用了 $\mathbb C$ 特征为 $0$ 导致的群代数 $\mathbb C[\mathcal S_n]$ 的半单性，故 Specht 模的不可约性对任意特征为 $0$ 的域都成立．
-:::
-
 ## 复不可约表示的分类
 
 已经找到了一大类 $\mathcal S_n$ 的复不可约表示——Specht 模 $V_T$．下面我们证明事实上只有这些复不可约表示．回忆本质不同复不可约表示的数量等于群的共轭类的数量，而 $\mathcal S_n$ 的共轭类数恰为 $n$ 的整数拆分的数量，故只要证明
@@ -215,4 +213,61 @@ $$
 
 就完成了 $\mathcal S_n$ 的复不可约表示的分类．
 
-（TODO）
+首先处理同形状 $\lambda \vdash n$ Young 表 $T, S:=gT$ 诱导的 Specht 模 $V_T$, $V_S$ 之间的同构问题．这个只需注意到 $c_{gT} = g c_T g^{-1}$ 便可嗯造如下：
+$$
+\begin{aligned}
+\varphi: V_T &\to V_S \\
+x &\mapsto x g^{-1}
+\end{aligned}
+$$
+那下面来处理形状不同的情况．受之前 [@prp-srdc] 刻画同形状 Young 表间群作用关系的启发，我们可能也需要从组合上对 Young 表形状不同一事做一点文章．以后设 $T,S$ 为形状分别为 $\lambda, \mu \vdash n$ 的 Young 表，不妨设 $\lambda > \mu$（这里全序取为 $n$ 的整数划分的字典序）．
+
+:::{#prp-srdc-diff}
+
+## 不同形状 Young 表的 S.R.D.C.
+
+存在一对互异数字 $(i,j)$ 既落在 $T$ 中同一行，也落在 $S$ 中同一列． 
+:::
+
+:::{.proof}
+
+若不然，设第 $i$ 行是第一个 $\lambda_i > \mu_i$ 的行．在此行之前，使用与 [@prp-srdc] 一样的方法，可以在对 $T$ 做行置换和对 $S$ 做列置换后使得 $T$ 与 $S$ 的前 $i-1$ 行相同．考察 $T$ 的第 $i$ 行的 $\lambda_i$ 个元素，它们应落在 $S$ 的第 $i$ 行及其下方，且列号互不相同．但这些行的长度 $\mu_j \leq \mu_i < \lambda$，根本装不下 $\lambda_i$ 个元素，矛盾．
+:::
+
+:::{#cor-axb}
+
+对任意 $x \in \mathbb C[\mathcal S_n]$ 都有 $a_T x b_S = 0$．特别地，$c_T c_S = 0$．
+:::
+
+:::{.proof}
+
+不妨设这 $\lambda > \mu$．由线性性可以只考虑 $x = g \in \mathcal S_n$ 的情况．由[@prp-srdc-diff]，存在一对互异数字 $(i,j)$ 既落在 $T$ 中同一行，也落在 $gS$ 中同一列，翻译过来就是对换 $p := (i,j) \in P_T \cap Q_{gS}$．于是
+$$
+a_T g b_S = a_T (g b_S g^{-1}) g = a_T b_{gS} g = a_T p p b_{gS} g = \sgn(p) a_T b_{gS} g = -a_T b_{gS} g = -a_T g b_S
+$$
+故 $a_T g b_S = 0$．
+:::
+
+:::{.remark}
+
+在 $\lambda < \mu$ 时是否也有 $a_T x b_S = 0$ 呢？答案是肯定的．请参考 [@fulton_representation_2004, {Exercise 4.24}]．
+:::
+
+:::{#prp-specht-diff}
+
+$V_T$, $V_S$ 不同构．
+:::
+
+:::{.proof}
+
+由 [@cor-cxc] 和 [@cor-axb]，注意 $c_T V_T = c_T \mathbb C[\mathcal S_n] c_T = \mathbb C c_T$ 但 $c_T V_S = c_T \mathbb C[\mathcal S_n] c_S = 0$，故它们不可能同构．
+:::
+
+综上，我们完成了 $\mathcal S_n$ 的复不可约表示的分类：它们恰为全体 Specht 模 $V_T$，其中 $T$ 是形状为 $\lambda \vdash n$ 的 Young 表．两个 Specht 模同构当且仅当诱导它们的 Young 表具有相同的形状．
+
+:::{.remark}
+
+## 关于域的特征
+
+注意到除了 [@prp-specht-irr] 的证明，所有论证没有用到 $\mathbb C$ 的任何特殊性质．在 [@prp-specht-irr] 中我们使用了 $\mathbb C$ 特征不整除 $n!$ 导致的群代数 $\mathbb C[\mathcal S_n]$ 的半单性，故这里描述的 $\mathcal S_n$ 不可约表示的分类对任意特征不整除 $n!$ 的域都成立．
+:::
