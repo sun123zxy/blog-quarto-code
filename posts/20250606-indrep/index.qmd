@@ -1,0 +1,70 @@
+---
+title: "诱导表示乱炖"
+author: "sun123zxy"
+date: 2025/06/07
+lang: zh
+bibliography: index.bib
+draft: true
+
+categories:
+  - math
+  - algebra
+collection:
+  - short
+
+format:
+  html: default
+---
+
+在日常生产生活中，我们经常需要将一个群表示从一个子群扩展到整个群．在所有可能的选择中，诱导表示是最自然的一种．
+
+> 本文口胡为主，严谨为辅，没有口胡的部分主要参考 [@serre_linear_1977]．
+
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\acts}{\curvearrowright}
+
+具体来说，设 $H$ 是群 $G$ 的一个子群，$\theta: H \to \GL(W)$ 是 $H$ 的一个表示，我们希望构造的诱导表示 $\rho := \theta \uparrow_H^G : G \to \GL(V)$ 满足：
+
+- $(\theta, W)$ 是 $(\rho,V)$ 在 $H$ 上的限制 $\rho \downarrow_H^G$ 的子表示．
+
+- 当无视 $\rho$ 在 $W$ 内部的置换效果时，$\rho$ “表现得就像是” $G$ 作用在左陪集族 $G/H$ 上一样．具体来说，考虑 $V$ 的如下子空间 $\rho_\sigma W : \sigma \in G$，因为 $W$ 是 $H$-不变子空间，事实上可以用陪集 $G/H$ 中的元素来标记这些子空间，故记 $W_{\sigma H} := \rho_\sigma W$．这些空间自然满足 $\rho_g W_{\sigma H} = W_{g \sigma H}$——这便是“长得像” $G \acts G/H$ 的含义；同时我们希望这些 $W_{\sigma H}$ 间两两无交，这样在线性空间意义下 $V$ 就是所有 $W_{\sigma H}$ 的直和．
+
+## 存在性
+
+那么这么好的表示存不存在呢？答案是我们可以嗯造．具体来说：
+
+- 取一组 $G/H$ 的代表元 $\Sigma := \{ \sigma_1,\dots,\sigma_{|\Sigma|} \} \subset G$．
+
+- 令线性空间 $V := \bigoplus_{\sigma \in \Sigma} W_{\sigma H}$，这里每个 $W_{\sigma H}$ 都是同构于 $W$ 的线性空间．我们认为 $W_H = W$，并把这些同构写作 $W \to W_{\sigma H}, w \mapsto w_{\to \sigma H}$．
+
+- 定义 $V$ 上的群作用 $\rho$：对任意 $g \in G$, $\sigma_j \in \Sigma$ 和 $w \in W$，设 $g \sigma_j$ 落在 $\sigma_i \in \Sigma$ 对应陪集中，定义
+  $$
+  \rho_g (w_{\to\sigma_j H}) := (\theta_{\sigma_i^{-1} g \sigma_j}(w))_{\to \sigma_i H}
+  $$
+  最后将定义线性张成到 $V$ 即可．
+
+验证它确实满足我们的期待：
+
+- $(\theta,W)$ 是它的子表示：对任意 $g = h \in H$, $w \in W$，此时 $\sigma_j = \sigma_i = \sigma_1 \in H$，我们有：
+  $$
+  \rho_h(w) = \theta_{\sigma_1^{-1}h \sigma_1}(w)
+  $$
+  好像不太妙，因为我们是希望它等于 $\theta_h(w)$ 的．但问题不大：至少 $(\theta, W)$ 是同构地嵌入 $(\rho, V)$ 的——只差一个共轭而已——在之前选取 $G/H$ 的代表元时强行让 $\sigma_1=1$ 也可以．
+
+
+- “长得像” $G \acts G/H$：对任意 $g \in G$，$\rho_g$ 把 $W_{\sigma_j H}$ 映到 $W_{\sigma_i H} = W_{g \sigma_j H}$，确实长得像．无交性根据构造自然成立．
+
+## 矩阵表示与特征标
+
+那么这是一个好的定义．我们来算一算它的矩阵表示．按 $W_{\sigma H}$ 分块来看，在分块矩阵的第 $j$ 列上，只有一个 $\sigma_i$ 可使得 $g \sigma_j H = \sigma_i H$——便在这一列的第 $i$ 行放入 $\theta(\sigma_i^{-1} g \sigma_j)$ 的矩阵表示，其余位置置零．这里的描述由 [@sagan_symmetric_2001, {Definition 1.12.2}] 看图说话得到．
+
+下面算算它的特征标 $\chi_\rho: G \to \mathbb C^\times$，也就是 $\rho(g)$ 对应矩阵表示的迹．想要在分块对角线上有所贡献的 $W_{\sigma H}$ 至少需要满足 $\sigma H = g \sigma H$，即 $\sigma^{-1} g \sigma \in H$．此时，对角线上的分块矩阵是 $\theta(\sigma^{-1} g \sigma)$ 的矩阵表示，故每个满足条件的 $W_{\sigma H}$ 为特征标贡献 $\chi_\theta (\sigma^{-1} g \sigma)$，合计如下：
+$$
+\chi_\rho(g) = \sum_{\substack{\sigma \in \Sigma \\ \sigma^{-1} g \sigma \in H}} \chi_\theta(\sigma^{-1} g \sigma)
+$$
+
+诱导表示最基本的定义和性质差不多就是这样．有人可能会 argue 说你这个诱导表示的定义完全是凑出来的，一方面非常不自然，另一方面也不见得是唯一“好”的构造．所以下面谈谈其它不太 explicit 的构造方法和它的唯一性．
+
+## 其它构造方法
+
+TODO
