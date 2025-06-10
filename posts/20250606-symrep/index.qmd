@@ -2,7 +2,7 @@
 title: "对称群的复不可约表示"
 author: "sun123zxy"
 date: 2025/06/08
-date-modified: 2025/06/09
+date-modified: 2025/06/10
 lang: zh
 bibliography: index.bib
 
@@ -12,6 +12,8 @@ categories:
   - combinatorics
 collection:
   - dedicated
+
+number-sections: true
 
 format:
   html:
@@ -24,6 +26,7 @@ format:
 \newcommand{\sgn}{\operatorname{sgn}}
 \newcommand{\im}{\operatorname{im}}
 \newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\operatorname{id}}
 
 我们尽可能简明快速地完成对称群的复不可约表示的分类．本文主要微调自 [@fulton_representation_2004, {section 4.2}]，亦少量参考 [@sagan_symmetric_2001, {chapter 2}]．推荐读者阅读前熟悉群的复表示的基本常识 [@serre_linear_1977, {chapter 1--2}] 和群代数模的观点．
 
@@ -147,9 +150,13 @@ $$
 
 :::{.proof}
 
-不妨设 $c = \sum_{g \in \mathcal S_n} n_g g$ 是满足对任意 $p \in P_T$, $q \in Q_T$，有 $p c q = \sgn(q) c$ 的某一 $\mathbb C[\mathcal S_n]$ 中元素．注意我们已经知道满足这条件的 Young 对称化子 $c_T \in P_T Q_T$，所以我们应当指望，也只需证明如下两个事实：
+不妨设 $c = \sum_{g \in \mathcal S_n} n_g g$ 是满足对任意 $p \in P_T$, $q \in Q_T$，有 $p c q = \sgn(q) c$ 的某一 $\mathbb C[\mathcal S_n]$ 中元素．注意我们已经知道满足这条件的 Young 对称化子
+$$
+c_T = a_T b_T = \sum_{p \in P_T} \sum_{Q \in Q_T} \sgn(q) pq
+$$
+所以我们应当指望，也只需证明如下两个事实：
 
-- 对任意 $p \in P_T$, $q \in Q_T$，$n_{pq}$ 在模掉标量乘法意义下唯一．
+- 对任意 $p \in P_T$, $q \in Q_T$，$n_{pq} = \sgn(q)$ 乘上某个常数．
 
 只需利用
 $$
@@ -175,7 +182,60 @@ $c_T x c_T \in \mathbb C c_T$ 对任意 $x \in \mathbb C[\mathcal S_n]$ 成立�
 
 ## $c_T$ 的“幂等系数”
 
-可设 $c_T^2 = \alpha c_T$，$\alpha \in \mathbb C$．这意味着 $c_T$ 作为左乘在 $\mathbb C[\mathcal S_n]$ 上的线性变换几乎是幂等变换，此时 $\ker c_T \oplus \im c_T = \mathbb C[\mathcal S_n]$．这里 $\im c_T$ 就是 $V_T$，因此 $c_T$ 的迹 $\tr c_T = \alpha \dim V_T$．又注意到 $c_T$ 作用在 $g$ 上得到向量的 $g$ 分量对应系数是 $1$，故 $\tr c_T = n!$．综上 $\alpha = n! / \dim V_T$．
+可设 $c_T^2 = \alpha c_T$，$\alpha \in \mathbb C$．将 $c_T$ 看作左乘在 $\mathbb C[\mathcal S_n]$ 上的线性变换，它几乎是幂等变换，此时 $\ker c_T \oplus \im c_T = \mathbb C[\mathcal S_n]$．这里 $\im c_T$ 就是 $V_T$，因此 $c_T$ 的迹 $\tr c_T = \alpha \dim V_T$．注意 $c_T$ 左作用在 $g$ 上得到向量的 $g$ 分量对应系数（记为 $[g] (c_T g)$）恰为 $1$，故 $\tr c_T = n!$．综上 $\alpha = n! / \dim V_T$．
+:::
+
+::: {.remark .hidden}
+
+## 关于 $P_T Q_T \cap Q_T P_T$ 的一个错误猜想，已隐藏
+
+$\alpha$ 也应等于 $c_T^2$ 在单位元处的系数
+$$
+[\id_{\mathcal S_n}] c_T^2 = \sum_{\substack{p_1,p_2 \in P_T \\ q_1, q_2 \in Q_T \\ p_1 q_1 p_2 q_2 = \id_{\mathcal S_n}}} \sgn(q_1) \sgn(q_2) 
+$$
+
+猜想求和中的每一项都满足 $\sgn(q_1) = \sgn(q_2)$，这样就有
+$$
+\alpha = |P_T Q_T \cap Q_T P_T|
+$$
+然而这并不正确．使用如下 Sage 代码可以验证：
+
+```python
+# Define the symmetric group
+S = SymmetricGroup(8)
+
+"""
+1 2 3
+4 5 6
+7 8
+"""
+
+P_gens = [S((1,2)), S((2,3)),
+          S((4,5)), S((5,6)),
+          S((7,8))]
+Q_gens = [S((1,4)),S((4,7)),
+          S((2,5)),S((5,8)),
+          S((3,6))]
+
+# Create the subgroups P and Q
+P = S.subgroup(P_gens)
+Q = S.subgroup(Q_gens)
+
+print("P", len(P))
+print("Q", len(Q))
+
+PQ = Set([p * q for p in P for q in Q])
+QP = Set([q * p for q in Q for p in P])
+
+print("PQ:", len(PQ))
+print("QP:", len(QP))
+
+# Compute the intersection of P and Q
+cap = PQ.intersection(QP)
+
+# Display the intersection
+print("PQ cap QP:", len(cap))
+```
 :::
 
 :::{#prp-specht-irr}
@@ -207,7 +267,7 @@ $$
 综上，$V_T$ 是 $\mathcal S_n$ 的复不可约表示．
 :::
 
-## 复不可约表示的分类
+## 复不可约表示的分类 {#sec-classification}
 
 已经找到了一大类 $\mathcal S_n$ 的复不可约表示——Specht 模 $V_T$．下面我们证明事实上只有这些复不可约表示．回忆本质不同复不可约表示的数量等于群的共轭类的数量，而 $\mathcal S_n$ 的共轭类数恰为 $n$ 的整数拆分的数量，故只要证明
 
@@ -234,6 +294,11 @@ $$
 :::{.proof}
 
 若不然，设第 $i$ 行是第一个 $\lambda_i > \mu_i$ 的行．在此行之前，使用与 [@prp-srdc] 一样的方法，可以在对 $T$ 做行置换和对 $S$ 做列置换后使得 $T$ 与 $S$ 的前 $i-1$ 行相同．考察 $T$ 的第 $i$ 行的 $\lambda_i$ 个元素，它们应落在 $S$ 的第 $i$ 行及其下方，且列号互不相同．但这些行的长度 $\mu_j \leq \mu_i < \lambda$，根本装不下 $\lambda_i$ 个元素，矛盾．
+:::
+
+:::{.remark}
+
+会问在何种程度上此命题的否命题成立．事实上有：若每个落在 $T$ 中同行的互异数对均落在 $S$ 中的不同列，则 $\lambda$ 的每个前缀和均小于等于 $\mu$ 的对应前缀和（此偏序记为 $\lambda \trianglelefteq \mu$，字典序是它的细化版本）．仿照 [@prp-srdc] 读者自证不难，亦可见 [@sagan_symmetric_2001, {lemma 2.2.4}]．
 :::
 
 :::{#cor-axb}
@@ -269,7 +334,9 @@ $V_T$, $V_S$ 不同构．
 
 :::{.remark}
 
-## 关于域的特征
+## 关于使用到的复数域 $\mathbb C$ 的特殊性质
 
-注意到除了 [@prp-specht-irr] 的证明，所有论证没有用到 $\mathbb C$ 的任何特殊性质．在 [@prp-specht-irr] 中我们使用了 $\mathbb C$ 特征不整除 $n!$ 导致的群代数 $\mathbb C[\mathcal S_n]$ 的半单性，故这里描述的 $\mathcal S_n$ 不可约表示的分类对任意特征不整除 $n!$ 的域都成立．
+- 在 [@prp-specht-irr] 中，我们使用了 $\mathbb C$ 特征不整除 $n!$ 导致的群代数 $\mathbb C[\mathcal S_n]$ 的半单性．
+- 在 [@sec-classification] 开头，我们使用了群的复不可约表示数量等于群的共轭类的数量的结果．
+- 其它论证没有用到 $\mathbb C$ 的特殊性质．
 :::
