@@ -377,14 +377,14 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Remark
+Remark (OGF magic)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
-<p><span class="proof-title"><em>Remark</em>. </span>Fancy way to write this identity in terms of symmetric functions:</p>
+<p><span class="proof-title"><em>Remark</em> (OGF magic). </span>A fancy way to find this number:</p>
 <p><span class="math display">\[
 \frac{1}{1 - e_1} = \sum_{n \in \mathbb N} e_1^n = \sum_{n \in \mathbb N} \sum_{\lambda \vdash n} \binom{n}{\lambda} m_\lambda
 \]</span></p>
@@ -394,14 +394,35 @@ Remark
 </div>
 <p>What if these sets are indistinguishable? Some solutions may be counted multiple times. For example, in the <span class="math inline">\(\lambda = (n,n) \vdash 2n\)</span> case, it does not matter which set is the first or the second.</p>
 <p>In this case, we need to divide by <span class="math inline">\(2!\)</span> to cancel out the order of the two sets. In general, sets with the same size are indistinguishable, so we need to divide by the product of factorials of the multiplicities of each set size. This leads us to the second variant.</p>
-<p>Recall that another way to write an integer partition is to apply the multiplicity notation, that is, we count the number of occurrences <span class="math inline">\(m_i\)</span> of the number <span class="math inline">\(i\)</span> in the sequence <span class="math inline">\((\lambda_1,\lambda_2,\dots)\)</span> to write <span class="math inline">\(\lambda = 1^{m_1} 2^{m_2} 3^{m_3} \dots\)</span>．Now we may define <span class="math display">\[
-\lambda^! := \prod_i m_i!
-\]</span> and the number of ways to partition <span class="math inline">\(n\)</span> distinct objects into indistinguishable sets of size <span class="math inline">\(\lambda\)</span> is now given by <span class="math display">\[
+<p>Recall that another way to write an integer partition is to apply the multiplicity notation, that is, we count the number of occurrences <span class="math inline">\(c_i\)</span> of the number <span class="math inline">\(i\)</span> in the sequence <span class="math inline">\((\lambda_1,\lambda_2,\dots)\)</span> to write <span class="math inline">\(\lambda = 1^{c_1} 2^{c_2} 3^{c_3} \dots\)</span>．Now we may define <span class="math display">\[
+\lambda^! := \prod_i c_i!
+\]</span> and the number of ways to partition <span class="math inline">\(n\)</span> distinct objects into indistinguishable sets of sizes <span class="math inline">\(\lambda\)</span> is now given by <span class="math display">\[
 \frac{n!}{\lambda! \cdot \lambda^!}
 \]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark (EGF magic)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>Remark</em> (EGF magic). </span>A fancy way to find this number:</p>
+<p><span class="math display">\[
+[t^c] \exp \left( \sum_{k \geq 1} \frac 1 {k!} t_k \right) = \frac{1}{\lambda! \cdot \lambda^!}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
 <p>We provide some other examples of <span class="math inline">\(\lambda^!\)</span>. First, the number of permuations of cycle type <span class="math inline">\(\lambda\)</span> is given by <span class="math display">\[
 \frac{n!}{(\prod_i \lambda_i) \cdot \lambda^!}
-\]</span> whose denominator is known as the coefficients of the <span class="math inline">\(n\)</span>-th cycle indicator <span class="math inline">\(Z_n\)</span>. Second, when computing the chromatic symmetric function of a graph by hand, it’s often the case that we first partition the vertices into groups, and then assign colors to these groups. Upon assignment, <span class="math inline">\(\lambda^! m_\lambda\)</span> is contributed to the chromatic symmetric function.</p>
+\]</span> whose denominator is known as the coefficients of the <span class="math inline">\(n\)</span>-th cycle indicator <span class="math inline">\(Z_n\)</span>. Second, when computing the chromatic symmetric function of a graph by hand, it’s often the case that we first partition the vertices into groups, and then assign colors to these groups. Say these groups are of sizes <span class="math inline">\(\lambda\)</span>, then upon assignment, <span class="math inline">\(\lambda^! m_\lambda\)</span> is contributed to the chromatic symmetric function.</p>
 
 
 
