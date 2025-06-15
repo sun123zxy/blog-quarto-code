@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Technical posts.">
+<meta name="author" content="sun123zxy">
+<meta name="dcterms.date" content="2025-06-15">
 
-<title>Technical – sun123zxy’s blog</title>
+<title>Factorials and Integer Partitions – sun123zxy’s blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,28 +25,26 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="..//assets/images/avatar.png" rel="icon" type="image/png">
-<script src="../site_libs/quarto-listing/list.min.js"></script>
-<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ae0b5334a1ec0bf99af3d0c304a697d2.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-ec1a76e08afe61c088d6e5e184de512e.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-5e0a9713dc0a5c971657bc3041908b4b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-b5c8236c1ef134a4605ed09e7930a8d2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ae0b5334a1ec0bf99af3d0c304a697d2.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-ec1a76e08afe61c088d6e5e184de512e.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-5e0a9713dc0a5c971657bc3041908b4b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-b5c8236c1ef134a4605ed09e7930a8d2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,35 +72,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-subtitle','listing-lang','listing-categories','listing-description','listing-date','listing-image','listing-collection',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -133,7 +103,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="alternate" type="application/rss+xml" title="sun123zxy's blog" href="technical.xml" data-external="1"></head>
+</head>
 
 <body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
@@ -302,7 +272,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
@@ -313,11 +283,11 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../listings/overview.html"> 
+    <a class="nav-link" href="../../listings/overview.html"> 
 <span class="menu-text">Overview</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -335,7 +305,7 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-bi-rss">    
         <li>
-    <a class="dropdown-item" href="../listings/all.xml">
+    <a class="dropdown-item" href="../../listings/all.xml">
  <span class="dropdown-text">All Posts</span></a>
   </li>  
     </ul>
@@ -349,31 +319,42 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="YWxnb3JpdGht">algorithm <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QyUyQiUyQg==">C++ <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TGFUZVg=">LaTeX <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWVtb3JpZXM=">memories <span class="quarto-category-count">(3)</span></div><div class="category" data-category="TWluZWNyYWZ0">Minecraft <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bXVzaWM=">music <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHl0aG9u">Python <span class="quarto-category-count">(2)</span></div><div class="category" data-category="c2l0ZS1yZWxhdGVk">site-related <span class="quarto-category-count">(2)</span></div><div class="category" data-category="dGVjaG5pY2Fs">technical <span class="quarto-category-count">(6)</span></div><div class="category" data-category="d2Vi">web <span class="quarto-category-count">(3)</span></div></div></div>
+    </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Technical</h1>
-</div>
-
-<div>
-  <div class="description">
-    Technical posts.
+<h1 class="title">Factorials and Integer Partitions</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">combinatorics</div>
   </div>
-</div>
+  </div>
 
 
-<div class="quarto-title-meta column-page-left">
 
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>sun123zxy </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 15, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -383,256 +364,48 @@ window.Quarto = {
 </header>
 
 
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-    <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-    <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-      <option value="" disabled="" selected="" hidden="">Order By</option>
-      <option value="index" data-direction="asc">Default</option>
-      <option value="listing-title" data-direction="asc">
-        Title
-      </option>
-      <option value="listing-date-sort" data-direction="asc">
-        Date - Oldest
-      </option>
-      <option value="listing-date-sort" data-direction="desc">
-        Date - Newest
-      </option>
-    </select>
-  </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
+<p>Factorials are commonly seen in combinatorics, and today we talk about some variants of them related to integer partitions. Recall that if one wish to count the number of ways to choose <span class="math inline">\(k\)</span> objects from <span class="math inline">\(n\)</span> distinct objects, we have binomial coefficients defined as <span class="math display">\[
+\binom n k := \frac{n!}{k!(n-k)!}
+\]</span> A slightly more general case is when we want to partition <span class="math inline">\(n\)</span> distinct objects into several labeled sets, with the size of each set is identified by an integer partition <span class="math inline">\((\lambda_1,\lambda_2,\dots) = \lambda \vdash n\)</span>. In such circumstance, the multinomial coefficients, <span class="math display">\[
+\binom{n}{\lambda} := \frac{n!}{\lambda!} := \frac{n!}{\prod_i \lambda_i!}
+\]</span> counts the number of ways to do so. So here comes the first variant <span class="math display">\[
+\lambda! := \prod_i \lambda_i!
+\]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="bWVtb3JpZXMlMkNNaW5lY3JhZnQlMkNtdXNpYyUyQ3RlY2huaWNhbCUyQ1B5dGhvbg==" data-listing-date-sort="1676592000000" data-listing-file-modified-sort="1749980833764" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="775">
-<div class="thumbnail"><a href="../posts/20230217-rmg/index.html" class="no-external">
-
-<p class="card-img-top"><img src="../posts/20230217-rmg/colorful-redstone.jpg"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20230217-rmg/index.html" class="no-external">聊聊红石音乐</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20230217-rmg/index.html" class="no-external"></a>
+<div class="callout-title-container flex-fill">
+Remark
 </div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWVtb3JpZXM='); return false;">memories</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TWluZWNyYWZ0'); return false;">Minecraft</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bXVzaWM='); return false;">music</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVjaG5pY2Fs'); return false;">technical</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
-
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div class="delink listing-description"><a href="../posts/20230217-rmg/index.html" class="no-external">
-<p>封存的幻想。</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20230217-rmg/index.html" class="no-external">
-<div class="listing-date">
-2023/02/17
-</div>
-<div class="metadata-value listing-collection">
-casual
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="YWxnb3JpdGhtJTJDdGVjaG5pY2FsJTJDQyUyQiUyQg==" data-listing-date-sort="1674518400000" data-listing-file-modified-sort="1749980833764" data-listing-date-modified-sort="1689206400000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1064">
-<div class="thumbnail"><a href="../posts/20230124-stl/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20230124-stl/index.html" class="no-external">算法竞赛向 C++ Standard Library 使用速查</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20230124-stl/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnb3JpdGht'); return false;">algorithm</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVjaG5pY2Fs'); return false;">technical</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('QyUyQiUyQg=='); return false;">C++</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20230124-stl/index.html" class="no-external">
-本文旨在对算法竞赛所需 C++ Standard Library 做一个全面而相对严谨的总结。
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20230124-stl/index.html" class="no-external">
-<div class="listing-date">
-2023/01/24
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="c2l0ZS1yZWxhdGVkJTJDdGVjaG5pY2FsJTJDd2ViJTJDTGFUZVglMkNtZW1vcmllcw==" data-listing-date-sort="1672012800000" data-listing-file-modified-sort="1749980833759" data-listing-date-modified-sort="1681689600000" data-listing-reading-time-sort="4" data-listing-word-count-sort="623">
-<div class="thumbnail"><a href="../posts/20221226-quarto-fantasia/index.html" class="no-external">
-
-<p class="card-img-top"><img src="../posts/20221226-quarto-fantasia/quarto-begin.jpg"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20221226-quarto-fantasia/index.html" class="no-external">Jekyll 2 Quarto: Academic Writing’s not All About PDF</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20221226-quarto-fantasia/index.html" class="no-external">博客搭建随想 Part II</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('c2l0ZS1yZWxhdGVk'); return false;">site-related</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVjaG5pY2Fs'); return false;">technical</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('d2Vi'); return false;">web</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TGFUZVg='); return false;">LaTeX</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWVtb3JpZXM='); return false;">memories</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20221226-quarto-fantasia/index.html" class="no-external">
-<p>PDF，我所欲也；HTML，亦我所欲也。二者不可得兼……</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20221226-quarto-fantasia/index.html" class="no-external">
-<div class="listing-date">
-2022/12/26
-</div>
-<div class="metadata-value listing-collection">
-casual
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="dGVjaG5pY2FsJTJDUHl0aG9u" data-listing-date-sort="1657756800000" data-listing-file-modified-sort="1749980833758" data-listing-date-modified-sort="1657756800000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1174">
-<div class="thumbnail"><a href="../posts/20220714-import/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20220714-import/index.html" class="no-external">关于 Python 的 import</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20220714-import/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVjaG5pY2Fs'); return false;">technical</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20220714-import/index.html" class="no-external">
-<p><code>__init__.py</code>, <code>sys.path</code>, <code>python -m</code> and more…</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20220714-import/index.html" class="no-external">
-<div class="listing-date">
-2022/07/14
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="dGVjaG5pY2FsJTJDd2Vi" data-listing-date-sort="1643932800000" data-listing-file-modified-sort="1749980833758" data-listing-date-modified-sort="1654041600000" data-listing-reading-time-sort="8" data-listing-word-count-sort="1480">
-<div class="thumbnail"><a href="../posts/20220204-vmagic/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20220204-vmagic/index.html" class="no-external">DockerCompose+VLESS+WS+TLS+Web 方式搭建 V2Ray 代理</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20220204-vmagic/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVjaG5pY2Fs'); return false;">technical</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('d2Vi'); return false;">web</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20220204-vmagic/index.html" class="no-external">
-<p>无懈可击的超强配置搭建教程。</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20220204-vmagic/index.html" class="no-external">
-<div class="listing-date">
-2022/02/04
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="c2l0ZS1yZWxhdGVkJTJDdGVjaG5pY2FsJTJDd2ViJTJDbWVtb3JpZXM=" data-listing-date-sort="1629158400000" data-listing-file-modified-sort="1749980833751" data-listing-date-modified-sort="1671926400000" data-listing-reading-time-sort="3" data-listing-word-count-sort="468">
-<div class="thumbnail"><a href="../posts/20210817-aboutblog/index.html" class="no-external">
-
-<p class="card-img-top"><img src="../posts/20210817-aboutblog/cnblogs-19.jpg"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20210817-aboutblog/index.html" class="no-external">Cnblogs 2 Jekyll：从寄人篱下到手撸全站</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20210817-aboutblog/index.html" class="no-external">博客搭建随想 Part I</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('c2l0ZS1yZWxhdGVk'); return false;">site-related</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVjaG5pY2Fs'); return false;">technical</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('d2Vi'); return false;">web</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWVtb3JpZXM='); return false;">memories</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20210817-aboutblog/index.html" class="no-external">
-<p>某不务正业 OIer 摸鱼日记。</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20210817-aboutblog/index.html" class="no-external">
-<div class="listing-date">
-2021/08/17
-</div>
-<div class="metadata-value listing-collection">
-casual
-</div>
-</a>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>Remark</em>. </span>Fancy way to write this identity in terms of symmetric functions:</p>
+<p><span class="math display">\[
+\frac{1}{1 - e_1} = \sum_{n \in \mathbb N} e_1^n = \sum_{n \in \mathbb N} \sum_{\lambda \vdash n} \binom{n}{\lambda} m_\lambda
+\]</span></p>
 </div>
 </div>
 </div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</div>
+<p>What if these sets are indistinguishable? Some solutions may be counted multiple times. For example, in the <span class="math inline">\(\lambda = (n,n) \vdash 2n\)</span> case, it does not matter which set is the first or the second.</p>
+<p>In this case, we need to divide by <span class="math inline">\(2!\)</span> to cancel out the order of the two sets. In general, sets with the same size are indistinguishable, so we need to divide by the product of factorials of the multiplicities of each set size. This leads us to the second variant.</p>
+<p>Recall that another way to write an integer partition is to apply the multiplicity notation, that is, we count the number of occurrences <span class="math inline">\(m_i\)</span> of the number <span class="math inline">\(i\)</span> in the sequence <span class="math inline">\((\lambda_1,\lambda_2,\dots)\)</span> to write <span class="math inline">\(\lambda = 1^{m_1} 2^{m_2} 3^{m_3} \dots\)</span>．Now we may define <span class="math display">\[
+\lambda^! := \prod_i m_i!
+\]</span> and the number of ways to partition <span class="math inline">\(n\)</span> distinct objects into indistinguishable sets of size <span class="math inline">\(\lambda\)</span> is now given by <span class="math display">\[
+\frac{n!}{\lambda! \cdot \lambda^!}
+\]</span></p>
+<p>We provide some other examples of <span class="math inline">\(\lambda^!\)</span>. First, the number of permuations of cycle type <span class="math inline">\(\lambda\)</span> is given by <span class="math display">\[
+\frac{n!}{(\prod_i \lambda_i) \cdot \lambda^!}
+\]</span> whose denominator is known as the coefficients of the <span class="math inline">\(n\)</span>-th cycle indicator <span class="math inline">\(Z_n\)</span>. Second, when computing the chromatic symmetric function of a graph by hand, it’s often the case that we first partition the vertices into groups, and then assign colors to these groups. Upon assignment, <span class="math inline">\(\lambda^! m_\lambda\)</span> is contributed to the chromatic symmetric function.</p>
+
+
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -1052,6 +825,38 @@ casual
     }
   });
   </script>
+<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
+<input type="hidden" id="giscus-alt-theme" value="light">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "sun123zxy/blog-quarto-code";
+    script.dataset.repoId = "R_kgDOIrPs5w";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOIrPs584CV4gd";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1064,7 +869,7 @@ casual
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="../thanks.html">
+    <a class="nav-link" href="../../thanks.html">
 <p>Thanks</p>
 </a>
   </li>  
