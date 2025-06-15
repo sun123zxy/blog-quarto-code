@@ -29,7 +29,9 @@ $$
 
 :::{.remark}
 
-Fancy way to write this identity in terms of symmetric functions:
+## OGF magic
+
+A fancy way to find this number:
 
 $$
 \frac{1}{1 - e_1} = \sum_{n \in \mathbb N} e_1^n = \sum_{n \in \mathbb N} \sum_{\lambda \vdash n} \binom{n}{\lambda} m_\lambda
@@ -40,17 +42,28 @@ What if these sets are indistinguishable? Some solutions may be counted multiple
 
 In this case, we need to divide by $2!$ to cancel out the order of the two sets. In general, sets with the same size are indistinguishable, so we need to divide by the product of factorials of the multiplicities of each set size. This leads us to the second variant.
 
-Recall that another way to write an integer partition is to apply the multiplicity notation, that is, we count the number of occurrences $m_i$ of the number $i$ in the sequence $(\lambda_1,\lambda_2,\dots)$ to write $\lambda = 1^{m_1} 2^{m_2} 3^{m_3} \dots$．Now we may define
+Recall that another way to write an integer partition is to apply the multiplicity notation, that is, we count the number of occurrences $c_i$ of the number $i$ in the sequence $(\lambda_1,\lambda_2,\dots)$ to write $\lambda = 1^{c_1} 2^{c_2} 3^{c_3} \dots$．Now we may define
 $$
-\lambda^! := \prod_i m_i!
+\lambda^! := \prod_i c_i!
 $$
-and the number of ways to partition $n$ distinct objects into indistinguishable sets of size $\lambda$ is now given by
+and the number of ways to partition $n$ distinct objects into indistinguishable sets of sizes $\lambda$ is now given by
 $$
 \frac{n!}{\lambda! \cdot \lambda^!}
 $$
+
+:::{.remark}
+
+## EGF magic
+
+A fancy way to find this number:
+
+$$
+[t^c] \exp \left( \sum_{k \geq 1} \frac 1 {k!} t_k \right) = \frac{1}{\lambda! \cdot \lambda^!}
+$$
+:::
 
 We provide some other examples of $\lambda^!$. First, the number of permuations of cycle type $\lambda$ is given by
 $$
 \frac{n!}{(\prod_i \lambda_i) \cdot \lambda^!}
 $$
-whose denominator is known as the coefficients of the $n$-th cycle indicator $Z_n$. Second, when computing the chromatic symmetric function of a graph by hand, it's often the case that we first partition the vertices into groups, and then assign colors to these groups. Upon assignment, $\lambda^! m_\lambda$ is contributed to the chromatic symmetric function.
+whose denominator is known as the coefficients of the $n$-th cycle indicator $Z_n$. Second, when computing the chromatic symmetric function of a graph by hand, it's often the case that we first partition the vertices into groups, and then assign colors to these groups. Say these groups are of sizes $\lambda$, then upon assignment, $\lambda^! m_\lambda$ is contributed to the chromatic symmetric function.
