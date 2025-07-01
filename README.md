@@ -1,5 +1,3 @@
-Quarto version: 1.7.26
-
 ## Installation
 
 1. Install [Quarto](https://github.com/quarto-dev/quarto-cli/).
