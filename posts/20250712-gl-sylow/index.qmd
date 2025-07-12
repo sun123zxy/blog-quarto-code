@@ -1,0 +1,62 @@
+---
+title: 一般线性群 $\operatorname{GL}_n(\mathbb F_q)$ 的 Sylow $p$-子群
+subtitle: Sylow $p$-subgroups of the General Linear Group $\operatorname{GL}_n(\mathbb F_q)$
+author: "sun123zxy"
+lang: zh
+bibliography: index.bib
+draft: true
+
+categories:
+  - math
+  - algebra
+collection:
+  - short
+
+number-sections: true
+
+format:
+  html: default
+---
+
+\newcommand{\GL}{\operatorname{GL}}
+
+设 $p$ 为素数，$q = p^\alpha$．记 $G:=\GL_n(\mathbb F_q)$．回忆
+$$
+G = \prod_{i=0}^{n-1} (q^n - q^i) = q^{n(n-1)/2} \prod_{i=1}^{n} (q^i - 1)
+$$
+故 $G$ 的 Sylow $p$-子群的阶为 $q^{n(n-1)/2}$．这些子群长什么样子呢？
+
+随便找一个先．例如某组基下对角线全一的上三角矩阵群 $U$（单位上三角矩阵群，unitriangular matrix group）．注意全体 Sylow $p$-子群相互共轭，故全体 $G$ 的 Sylow $p$-子群恰为全体单位上三角矩阵群．
+
+那我再问，$G$ 的 Sylow $p$-子群有多少个呢？根据群作用的观点，其数量应为 $[G : N_G(U)]$．故只需给出正规化子 $N_G(U)$ 的刻画．固然有 $U \subseteq N_G(U)$；简单验证也可得 $B \subseteq N_G(U)$，这里 $B$ 是与 $U$ 基底相同的可逆上三角矩阵群．我们断言：事实上 $B = N_G(U)$，于是 $G$ 的 Sylow $p$-子群数量为
+$$
+\frac{\prod_{i=1}^{n} (q^i - 1)}{(p-1)^n} = \left(\frac{q - 1}{p - 1}\right)^n \prod_{i=1}^{n} \frac{q^i-1}{q-1} = (p^{\alpha-1} + \dots + 1)^n \prod_{i=1}^{n} (q^{i-1} + \dots + 1)
+$$
+
+下面证明这个断言．我们先引入一个定理：
+
+:::{#thm-bruhat-decomp}
+
+## Bruhat 分解
+
+任意域 $F$ 上的 $\GL_n(F)$ 有如下分解：
+$$
+\GL_n(F) = \bigsqcup_{w \in S_n} B w B
+$$
+这里 $B$ 是任意指定一组基下的可逆上三角矩阵群；$S_n$ 是 $n$ 阶对称群，通过置换矩阵的方式嵌入 $\GL_n(F)$．
+
+换言之，对任意 $g \in \GL_n(F)$，存在唯一的 $w \in S_n$ 使得存在 $b_1, b_2 \in B$ 使得 $g = b_1 w b_2$．
+:::
+
+:::{.proof}
+
+用类似 Guass 消元的处理方法易见并的部分的正确性．对于无交性，设 $B w_1 B = B w_2 B$，即 $w_1 B = B w_2$，特别的 $w_1 \in B w_2$ 或 $w_1 w_2^{-1} \in B$．至此从形状上易见 $w_1 w_2^{-1} = 1$．详情可见 [@alperin_groups_1995, {chapter 2, section 4}]．
+:::
+
+继续证明断言．任取 $g \in N_G(U)$，则 $g U g^{-1} = U$．做 Bruhat 分解 $g = b_1 w b_2$，于是
+$$
+U = g U g^{-1} = b_1 w (b_2 U b_2^{-1}) w^{-1} b_1^{-1} = b_1 w U w^{-1} b_1^{-1}
+$$
+移项得 $b_1^{-1} U b_1 = w U w^{-1}$，即 $U = w U w^{-1}$．类似 Bruhat 分解证明中无交性的讨论得 $w = 1$．因此 $g = b_1 b_2 \in B$．故 $N_G(U) \subseteq B$，证毕．
+
+问题得到解决的关键是发现 $N_G(U) = B$．进而容易发现 $N_G(B) = B$．
