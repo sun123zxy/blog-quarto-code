@@ -1,6 +1,6 @@
 ---
-title: 一般线性群 $\operatorname{GL}_n(\mathbb F_q)$ 的 Sylow $p$-子群
-subtitle: Sylow $p$-subgroups of the General Linear Group $\operatorname{GL}_n(\mathbb F_q)$
+title: 从一般线性群 $\operatorname{GL}_n(\mathbb F_q)$ 的 Sylow $p$-子群谈起
+subtitle: Rambling from the Sylow $p$-subgroups of the General Linear Group $\operatorname{GL}_n(\mathbb F_q)$
 author: "sun123zxy"
 lang: zh
 bibliography: index.bib
@@ -18,6 +18,8 @@ format:
   html: default
 ---
 
+## $U$
+
 \newcommand{\GL}{\operatorname{GL}}
 
 设 $p$ 为素数，$q = p^\alpha$．记 $G:=\GL_n(\mathbb F_q)$．回忆
@@ -28,7 +30,7 @@ $$
 
 随便找一个先．例如某组基下对角线全一的上三角矩阵群 $U$（单位上三角矩阵群，unitriangular matrix group）．注意全体 Sylow $p$-子群相互共轭，故全体 $G$ 的 Sylow $p$-子群恰为全体单位上三角矩阵群．
 
-那我再问，$G$ 的 Sylow $p$-子群有多少个呢？根据群作用的观点，其数量应为 $[G : N_G(U)]$．故只需给出正规化子 $N_G(U)$ 的刻画．固然有 $U \subseteq N_G(U)$；简单验证也可得 $B \subseteq N_G(U)$，这里 $B$ 是与 $U$ 基底相同的可逆上三角矩阵群．我们断言：事实上 $B = N_G(U)$，于是 $G$ 的 Sylow $p$-子群数量为
+那我问你，$G$ 的 Sylow $p$-子群有多少个呢？根据群作用的观点，其数量应为 $[G : N_G(U)]$．故只需给出正规化子 $N_G(U)$ 的刻画．固然有 $U \subseteq N_G(U)$；简单验证也可得 $B \subseteq N_G(U)$，这里 $B$ 是与 $U$ 基底相同的可逆上三角矩阵群．我们断言：事实上 $B = N_G(U)$，于是 $G$ 的 Sylow $p$-子群数量为
 $$
 \frac{\prod_{i=1}^{n} (q^i - 1)}{(p-1)^n} = \left(\frac{q - 1}{p - 1}\right)^n \prod_{i=1}^{n} \frac{q^i-1}{q-1} = (p^{\alpha-1} + \dots + 1)^n \prod_{i=1}^{n} (q^{i-1} + \dots + 1)
 $$
@@ -59,4 +61,109 @@ U = g U g^{-1} = b_1 w (b_2 U b_2^{-1}) w^{-1} b_1^{-1} = b_1 w U w^{-1} b_1^{-1
 $$
 移项得 $b_1^{-1} U b_1 = w U w^{-1}$，即 $U = w U w^{-1}$．类似 Bruhat 分解证明中无交性的讨论得 $w = 1$．因此 $g = b_1 b_2 \in B$．故 $N_G(U) \subseteq B$，证毕．
 
-问题得到解决的关键是发现 $N_G(U) = B$．进而容易发现 $N_G(B) = B$．
+## $B$
+
+问题得到解决的关键是发现 $N_G(U) = B$．进而容易意识到并证明 $N_G(B) = B$．这并不奇怪，因为一个还算为人熟知的 Sylow 定理指出
+
+:::{#thm-ng-ng-sylow}
+
+设 $P$ 是有限群 $G$ 的 Sylow $p$-子群，则 $N_G(N_G(P))=N_G(P)$．
+:::
+
+总之，我们也开始对 $B$ 的性质感兴趣了．先不说别的，为什么用字母 $B$ 呢——这是 Borel 子群的记号：
+
+> In the theory of algebraic groups, a Borel subgroup of an algebraic group G is a maximal Zariski closed and connected solvable algebraic subgroup.
+>
+> Wikipedia
+
+……叽里咕噜的说什么呢？一个一个看吧．
+
+### $B$ 的可解性
+
+考察交换子 $[b,c] := bcb^{-1}c^{-1}$ 的情况，这里 $b,c \in B$．只看对角线可见 $[b,c]$ 对角线全一，故 $[B,B] \leq U$，只需研究 $U$ 的可解性．设 $b,c \in U$ 写作
+$$
+b := \begin{pmatrix}
+1 & \beta_1 & * & * & * \\
+0 & 1 & \beta_2 & * & * \\
+0 & 0 & 1 & \ddots & * \\
+\vdots & \vdots & \ddots & \ddots & \beta_{n-1} \\
+0 & 0 & \cdots & 0 & 1
+\end{pmatrix}
+\quad
+c := \begin{pmatrix}
+1 & \gamma_1 & * & * & * \\
+0 & 1 & \gamma_2 & * & * \\
+0 & 0 & 1 & \ddots & * \\
+\vdots & \vdots & \ddots & \ddots & \gamma_{n-1} \\
+0 & 0 & \cdots & 0 & 1
+\end{pmatrix}
+$$
+用力计算
+$$
+b^{-1} = \begin{pmatrix}
+1 & - \beta_1 & * & * & * \\
+0 & 1 & - \beta_2 & * & * \\
+0 & 0 & 1 & \ddots & * \\
+\vdots & \vdots & \ddots & \ddots & -\beta_{n-1} \\
+0 & 0 & \cdots & 0 & 1
+\end{pmatrix}
+$$
+
+$$
+bc = \begin{pmatrix}
+1 & \gamma_1 + \beta_1& * & * & * \\
+0 & 1 & \gamma_2 + \beta_2 & * & * \\
+0 & 0 & 1 & \ddots & * \\
+\vdots & \vdots & \ddots & \ddots & b_{n-1} + \beta_{n-1} \\
+0 & 0 & \cdots & 0 & 1
+\end{pmatrix}
+$$
+
+$$
+[b,c] = bc b^{-1} c^{-1} = \begin{pmatrix}
+1 & 0 & * & * & * \\
+0 & 1 & 0 & * & * \\
+0 & 0 & 1 & \ddots & * \\
+\vdots & \vdots & \ddots & \ddots & 0 \\
+0 & 0 & \cdots & 0 & 1
+\end{pmatrix}
+$$
+
+可以看到 $[b,c]$ 落到了某个更小的结构上．我们现在为 $B$ 和 $U$ 加上角标 $n$ 来区分维度，则可以认为 $[U_n,U_n] \leq U_{n-1}$，这里 $U_{n-1}$ 通过单的群同态
+$$
+\begin{pmatrix}
+1 & * & * & * \\
+0 & 1 & * & * \\
+\vdots & \vdots & \ddots & * \\
+0 & 0 & \cdots & 1
+\end{pmatrix}
+\mapsto
+\begin{pmatrix}
+1 & 0 & * & * & * \\
+0 & 1 & 0 & * & * \\
+0 & 0 & 1 & \ddots & * \\
+\vdots & \vdots & \ddots & \ddots & 0 \\
+0 & 0 & \cdots & 0 & 1
+\end{pmatrix}
+$$
+嵌入 $U_{n}$．现在结构相对明确了：我们有可解群链
+$$
+B_n \triangleright U_n \triangleright U_{n-1} \triangleright \cdots \triangleright U_1 = \{1\}
+$$
+
+:::{.remark}
+
+$[B_n,B_n] = U_n$？$[U_n,U_n] = U_{n-1}$？TODO.
+:::
+
+### 闭连通？
+
+TODO
+
+### 极大？
+
+TODO
+
+## $G/B$: Flag Variety
+
+TODO
