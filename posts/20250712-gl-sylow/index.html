@@ -8,7 +8,7 @@
 
 <meta name="author" content="sun123zxy">
 
-<title>一般线性群 \operatorname{GL}_n(\mathbb F_q) 的 Sylow p-子群 – sun123zxy's blog</title>
+<title>从一般线性群 \operatorname{GL}_n(\mathbb F_q) 的 Sylow p-子群谈起 – sun123zxy's blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -342,8 +342,21 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#u" id="toc-u" class="nav-link active" data-scroll-target="#u"><span class="header-section-number">1</span> <span class="math inline">\(U\)</span></a></li>
+  <li><a href="#b" id="toc-b" class="nav-link" data-scroll-target="#b"><span class="header-section-number">2</span> <span class="math inline">\(B\)</span></a>
+  <ul class="collapse">
+  <li><a href="#b-的可解性" id="toc-b-的可解性" class="nav-link" data-scroll-target="#b-的可解性"><span class="header-section-number">2.1</span> <span class="math inline">\(B\)</span> 的可解性</a></li>
+  <li><a href="#闭连通" id="toc-闭连通" class="nav-link" data-scroll-target="#闭连通"><span class="header-section-number">2.2</span> 闭连通？</a></li>
+  <li><a href="#极大" id="toc-极大" class="nav-link" data-scroll-target="#极大"><span class="header-section-number">2.3</span> 极大？</a></li>
+  </ul></li>
+  <li><a href="#gb-flag-variety" id="toc-gb-flag-variety" class="nav-link" data-scroll-target="#gb-flag-variety"><span class="header-section-number">3</span> <span class="math inline">\(G/B\)</span>: Flag Variety</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -351,8 +364,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">一般线性群 <span class="math inline">\(\operatorname{GL}_n(\mathbb F_q)\)</span> 的 Sylow <span class="math inline">\(p\)</span>-子群</h1>
-<p class="subtitle lead">Sylow <span class="math inline">\(p\)</span>-subgroups of the General Linear Group <span class="math inline">\(\operatorname{GL}_n(\mathbb F_q)\)</span></p>
+<h1 class="title">从一般线性群 <span class="math inline">\(\operatorname{GL}_n(\mathbb F_q)\)</span> 的 Sylow <span class="math inline">\(p\)</span>-子群谈起</h1>
+<p class="subtitle lead">Rambling from the Sylow <span class="math inline">\(p\)</span>-subgroups of the General Linear Group <span class="math inline">\(\operatorname{GL}_n(\mathbb F_q)\)</span></p>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
     <div class="quarto-category">algebra</div>
@@ -379,11 +392,13 @@ window.Quarto = {
 </header>
 
 
+<section id="u" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="u"><span class="header-section-number">1</span> <span class="math inline">\(U\)</span></h2>
 <p>设 <span class="math inline">\(p\)</span> 为素数，<span class="math inline">\(q = p^\alpha\)</span>．记 <span class="math inline">\(G:=\operatorname{GL}_n(\mathbb F_q)\)</span>．回忆 <span class="math display">\[
 G = \prod_{i=0}^{n-1} (q^n - q^i) = q^{n(n-1)/2} \prod_{i=1}^{n} (q^i - 1)
 \]</span> 故 <span class="math inline">\(G\)</span> 的 Sylow <span class="math inline">\(p\)</span>-子群的阶为 <span class="math inline">\(q^{n(n-1)/2}\)</span>．这些子群长什么样子呢？</p>
 <p>随便找一个先．例如某组基下对角线全一的上三角矩阵群 <span class="math inline">\(U\)</span>（单位上三角矩阵群，unitriangular matrix group）．注意全体 Sylow <span class="math inline">\(p\)</span>-子群相互共轭，故全体 <span class="math inline">\(G\)</span> 的 Sylow <span class="math inline">\(p\)</span>-子群恰为全体单位上三角矩阵群．</p>
-<p>那我再问，<span class="math inline">\(G\)</span> 的 Sylow <span class="math inline">\(p\)</span>-子群有多少个呢？根据群作用的观点，其数量应为 <span class="math inline">\([G : N_G(U)]\)</span>．故只需给出正规化子 <span class="math inline">\(N_G(U)\)</span> 的刻画．固然有 <span class="math inline">\(U \subseteq N_G(U)\)</span>；简单验证也可得 <span class="math inline">\(B \subseteq N_G(U)\)</span>，这里 <span class="math inline">\(B\)</span> 是与 <span class="math inline">\(U\)</span> 基底相同的可逆上三角矩阵群．我们断言：事实上 <span class="math inline">\(B = N_G(U)\)</span>，于是 <span class="math inline">\(G\)</span> 的 Sylow <span class="math inline">\(p\)</span>-子群数量为 <span class="math display">\[
+<p>那我问你，<span class="math inline">\(G\)</span> 的 Sylow <span class="math inline">\(p\)</span>-子群有多少个呢？根据群作用的观点，其数量应为 <span class="math inline">\([G : N_G(U)]\)</span>．故只需给出正规化子 <span class="math inline">\(N_G(U)\)</span> 的刻画．固然有 <span class="math inline">\(U \subseteq N_G(U)\)</span>；简单验证也可得 <span class="math inline">\(B \subseteq N_G(U)\)</span>，这里 <span class="math inline">\(B\)</span> 是与 <span class="math inline">\(U\)</span> 基底相同的可逆上三角矩阵群．我们断言：事实上 <span class="math inline">\(B = N_G(U)\)</span>，于是 <span class="math inline">\(G\)</span> 的 Sylow <span class="math inline">\(p\)</span>-子群数量为 <span class="math display">\[
 \frac{\prod_{i=1}^{n} (q^i - 1)}{(p-1)^n} = \left(\frac{q - 1}{p - 1}\right)^n \prod_{i=1}^{n} \frac{q^i-1}{q-1} = (p^{\alpha-1} + \dots + 1)^n \prod_{i=1}^{n} (q^{i-1} + \dots + 1)
 \]</span></p>
 <p>下面证明这个断言．我们先引入一个定理：</p>
@@ -423,10 +438,126 @@ Proof
 <p>继续证明断言．任取 <span class="math inline">\(g \in N_G(U)\)</span>，则 <span class="math inline">\(g U g^{-1} = U\)</span>．做 Bruhat 分解 <span class="math inline">\(g = b_1 w b_2\)</span>，于是 <span class="math display">\[
 U = g U g^{-1} = b_1 w (b_2 U b_2^{-1}) w^{-1} b_1^{-1} = b_1 w U w^{-1} b_1^{-1}
 \]</span> 移项得 <span class="math inline">\(b_1^{-1} U b_1 = w U w^{-1}\)</span>，即 <span class="math inline">\(U = w U w^{-1}\)</span>．类似 Bruhat 分解证明中无交性的讨论得 <span class="math inline">\(w = 1\)</span>．因此 <span class="math inline">\(g = b_1 b_2 \in B\)</span>．故 <span class="math inline">\(N_G(U) \subseteq B\)</span>，证毕．</p>
-<p>问题得到解决的关键是发现 <span class="math inline">\(N_G(U) = B\)</span>．进而容易发现 <span class="math inline">\(N_G(B) = B\)</span>．</p>
+</section>
+<section id="b" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="b"><span class="header-section-number">2</span> <span class="math inline">\(B\)</span></h2>
+<p>问题得到解决的关键是发现 <span class="math inline">\(N_G(U) = B\)</span>．进而容易意识到并证明 <span class="math inline">\(N_G(B) = B\)</span>．这并不奇怪，因为一个还算为人熟知的 Sylow 定理指出</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-ng-ng-sylow" class="theorem">
+<p><span class="theorem-title"><strong>定理 2</strong></span> 设 <span class="math inline">\(P\)</span> 是有限群 <span class="math inline">\(G\)</span> 的 Sylow <span class="math inline">\(p\)</span>-子群，则 <span class="math inline">\(N_G(N_G(P))=N_G(P)\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<p>总之，我们也开始对 <span class="math inline">\(B\)</span> 的性质感兴趣了．先不说别的，为什么用字母 <span class="math inline">\(B\)</span> 呢——这是 Borel 子群的记号：</p>
+<blockquote class="blockquote">
+<p>In the theory of algebraic groups, a Borel subgroup of an algebraic group G is a maximal Zariski closed and connected solvable algebraic subgroup.</p>
+<p>Wikipedia</p>
+</blockquote>
+<p>……叽里咕噜的说什么呢？一个一个看吧．</p>
+<section id="b-的可解性" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="b-的可解性"><span class="header-section-number">2.1</span> <span class="math inline">\(B\)</span> 的可解性</h3>
+<p>考察交换子 <span class="math inline">\([b,c] := bcb^{-1}c^{-1}\)</span> 的情况，这里 <span class="math inline">\(b,c \in B\)</span>．只看对角线可见 <span class="math inline">\([b,c]\)</span> 对角线全一，故 <span class="math inline">\([B,B] \leq U\)</span>，只需研究 <span class="math inline">\(U\)</span> 的可解性．设 <span class="math inline">\(b,c \in U\)</span> 写作 <span class="math display">\[
+b := \begin{pmatrix}
+1 &amp; \beta_1 &amp; * &amp; * &amp; * \\
+0 &amp; 1 &amp; \beta_2 &amp; * &amp; * \\
+0 &amp; 0 &amp; 1 &amp; \ddots &amp; * \\
+\vdots &amp; \vdots &amp; \ddots &amp; \ddots &amp; \beta_{n-1} \\
+0 &amp; 0 &amp; \cdots &amp; 0 &amp; 1
+\end{pmatrix}
+\quad
+c := \begin{pmatrix}
+1 &amp; \gamma_1 &amp; * &amp; * &amp; * \\
+0 &amp; 1 &amp; \gamma_2 &amp; * &amp; * \\
+0 &amp; 0 &amp; 1 &amp; \ddots &amp; * \\
+\vdots &amp; \vdots &amp; \ddots &amp; \ddots &amp; \gamma_{n-1} \\
+0 &amp; 0 &amp; \cdots &amp; 0 &amp; 1
+\end{pmatrix}
+\]</span> 用力计算 <span class="math display">\[
+b^{-1} = \begin{pmatrix}
+1 &amp; - \beta_1 &amp; * &amp; * &amp; * \\
+0 &amp; 1 &amp; - \beta_2 &amp; * &amp; * \\
+0 &amp; 0 &amp; 1 &amp; \ddots &amp; * \\
+\vdots &amp; \vdots &amp; \ddots &amp; \ddots &amp; -\beta_{n-1} \\
+0 &amp; 0 &amp; \cdots &amp; 0 &amp; 1
+\end{pmatrix}
+\]</span></p>
+<p><span class="math display">\[
+bc = \begin{pmatrix}
+1 &amp; \gamma_1 + \beta_1&amp; * &amp; * &amp; * \\
+0 &amp; 1 &amp; \gamma_2 + \beta_2 &amp; * &amp; * \\
+0 &amp; 0 &amp; 1 &amp; \ddots &amp; * \\
+\vdots &amp; \vdots &amp; \ddots &amp; \ddots &amp; b_{n-1} + \beta_{n-1} \\
+0 &amp; 0 &amp; \cdots &amp; 0 &amp; 1
+\end{pmatrix}
+\]</span></p>
+<p><span class="math display">\[
+[b,c] = bc b^{-1} c^{-1} = \begin{pmatrix}
+1 &amp; 0 &amp; * &amp; * &amp; * \\
+0 &amp; 1 &amp; 0 &amp; * &amp; * \\
+0 &amp; 0 &amp; 1 &amp; \ddots &amp; * \\
+\vdots &amp; \vdots &amp; \ddots &amp; \ddots &amp; 0 \\
+0 &amp; 0 &amp; \cdots &amp; 0 &amp; 1
+\end{pmatrix}
+\]</span></p>
+<p>可以看到 <span class="math inline">\([b,c]\)</span> 落到了某个更小的结构上．我们现在为 <span class="math inline">\(B\)</span> 和 <span class="math inline">\(U\)</span> 加上角标 <span class="math inline">\(n\)</span> 来区分维度，则可以认为 <span class="math inline">\([U_n,U_n] \leq U_{n-1}\)</span>，这里 <span class="math inline">\(U_{n-1}\)</span> 通过单的群同态 <span class="math display">\[
+\begin{pmatrix}
+1 &amp; * &amp; * &amp; * \\
+0 &amp; 1 &amp; * &amp; * \\
+\vdots &amp; \vdots &amp; \ddots &amp; * \\
+0 &amp; 0 &amp; \cdots &amp; 1
+\end{pmatrix}
+\mapsto
+\begin{pmatrix}
+1 &amp; 0 &amp; * &amp; * &amp; * \\
+0 &amp; 1 &amp; 0 &amp; * &amp; * \\
+0 &amp; 0 &amp; 1 &amp; \ddots &amp; * \\
+\vdots &amp; \vdots &amp; \ddots &amp; \ddots &amp; 0 \\
+0 &amp; 0 &amp; \cdots &amp; 0 &amp; 1
+\end{pmatrix}
+\]</span> 嵌入 <span class="math inline">\(U_{n}\)</span>．现在结构相对明确了：我们有可解群链 <span class="math display">\[
+B_n \triangleright U_n \triangleright U_{n-1} \triangleright \cdots \triangleright U_1 = \{1\}
+\]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span><span class="math inline">\([B_n,B_n] = U_n\)</span>？<span class="math inline">\([U_n,U_n] = U_{n-1}\)</span>？TODO.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="闭连通" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="闭连通"><span class="header-section-number">2.2</span> 闭连通？</h3>
+<p>TODO</p>
+</section>
+<section id="极大" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="极大"><span class="header-section-number">2.3</span> 极大？</h3>
+<p>TODO</p>
+</section>
+</section>
+<section id="gb-flag-variety" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="gb-flag-variety"><span class="header-section-number">3</span> <span class="math inline">\(G/B\)</span>: Flag Variety</h2>
+<p>TODO</p>
 
 
 
+</section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
 <div id="ref-alperin_groups_1995" class="csl-entry" role="listitem">
