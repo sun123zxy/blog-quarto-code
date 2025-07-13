@@ -22,18 +22,27 @@ format:
 
 \newcommand{\GL}{\operatorname{GL}}
 
-设 $p$ 为素数，$q = p^\alpha$．记 $G:=\GL_n(\mathbb F_q)$．回忆
+设 $p$ 为素数，$q = p^\alpha$．我们引入一点先进的 $q$-analog 记号：
 $$
-G = \prod_{i=0}^{n-1} (q^n - q^i) = q^{n(n-1)/2} \prod_{i=1}^{n} (q^i - 1)
+\begin{aligned}[]
+[n]_q  &:= \frac{q^n - 1}{q - 1} = q^{n-1} + q^{n-2} + \cdots + q + 1 \\
+[n]_q! &:= \prod_{i=1}^{n} [i]_q
+\end{aligned}
+$$
+
+记 $G:=\GL_n(\mathbb F_q)$．回忆
+$$
+|G| = \prod_{i=0}^{n-1} (q^n - q^i) = q^{n(n-1)/2} \prod_{i=1}^{n} (q^i - 1) = q^{n(n-1)/2} (q-1)^n [n]_q!
 $$
 故 $G$ 的 Sylow $p$-子群的阶为 $q^{n(n-1)/2}$．这些子群长什么样子呢？
 
-随便找一个先．例如某组基下对角线全一的上三角矩阵群 $U$（单位上三角矩阵群，unitriangular matrix group）．注意全体 Sylow $p$-子群相互共轭，故全体 $G$ 的 Sylow $p$-子群恰为全体单位上三角矩阵群．
+随便找一个先．例如取定某组基下对角线全一的上三角矩阵群 $U$（单位上三角矩阵群，unitriangular matrix group）．注意全体 Sylow $p$-子群相互共轭，故全体 $G$ 的 Sylow $p$-子群恰为全体不同基下的单位上三角矩阵群．
 
 那我问你，$G$ 的 Sylow $p$-子群有多少个呢？根据群作用的观点，其数量应为 $[G : N_G(U)]$．故只需给出正规化子 $N_G(U)$ 的刻画．固然有 $U \subseteq N_G(U)$；简单验证也可得 $B \subseteq N_G(U)$，这里 $B$ 是与 $U$ 基底相同的可逆上三角矩阵群．我们断言：事实上 $B = N_G(U)$，于是 $G$ 的 Sylow $p$-子群数量为
 $$
-\frac{\prod_{i=1}^{n} (q^i - 1)}{(p-1)^n} = \left(\frac{q - 1}{p - 1}\right)^n \prod_{i=1}^{n} \frac{q^i-1}{q-1} = (p^{\alpha-1} + \dots + 1)^n \prod_{i=1}^{n} (q^{i-1} + \dots + 1)
+\frac{q^{n(n-1)/2} (q-1)^n [n]_q!}{q^{n(n-1)/2} (q-1)^n} = [n]_q!
 $$
+可以看出 $q$-analog 阶乘的记号的引入是有的放矢的．
 
 下面证明这个断言．我们先引入一个定理：
 
@@ -41,9 +50,9 @@ $$
 
 ## Bruhat 分解
 
-任意域 $F$ 上的 $\GL_n(F)$ 有如下分解：
+任意域 $F$ 上的 $\GL_n(F)$ 有如下双边陪集分解：
 $$
-\GL_n(F) = \bigsqcup_{w \in S_n} B w B
+\GL_n(F) = \coprod_{w \in S_n} B w B
 $$
 这里 $B$ 是任意指定一组基下的可逆上三角矩阵群；$S_n$ 是 $n$ 阶对称群，通过置换矩阵的方式嵌入 $\GL_n(F)$．
 
@@ -52,14 +61,97 @@ $$
 
 :::{.proof}
 
-用类似 Guass 消元的处理方法易见并的部分的正确性．对于无交性，设 $B w_1 B = B w_2 B$，即 $w_1 B = B w_2$，特别的 $w_1 \in B w_2$ 或 $w_1 w_2^{-1} \in B$．至此从形状上易见 $w_1 w_2^{-1} = 1$．详情可见 [@alperin_groups_1995, {chapter 2, section 4}]．
+用类似 Guass 消元的处理方法可见并的部分的正确性．具体来说，从第一列开始，自下而上找到第一个非零元，用它行变换消掉其上方所有非零元．接着处理第二列，直到最后一列．这些行变换操作对应的矩阵是上三角矩阵．得到的结果再进行一次行置换就可以得到上三角矩阵．
+
+对于无交 / 唯一性，设 $b_1 w_1 b_2 = b_3 w_2 b_4$，则 $w_1 (b_2 b_4^{-1}) = (b_2^{-1} b_3) w_2$，只看对角线元素的移动情况即可断言 $w_1 = w_2$．详情可见 [@alperin_groups_1995, {chapter 2, section 4}]．
 :::
 
 继续证明断言．任取 $g \in N_G(U)$，则 $g U g^{-1} = U$．做 Bruhat 分解 $g = b_1 w b_2$，于是
 $$
 U = g U g^{-1} = b_1 w (b_2 U b_2^{-1}) w^{-1} b_1^{-1} = b_1 w U w^{-1} b_1^{-1}
 $$
-移项得 $b_1^{-1} U b_1 = w U w^{-1}$，即 $U = w U w^{-1}$．类似 Bruhat 分解证明中无交性的讨论得 $w = 1$．因此 $g = b_1 b_2 \in B$．故 $N_G(U) \subseteq B$，证毕．
+移项得 $b_1^{-1} U b_1 = w U w^{-1}$，即 $U = w U w^{-1}$，看形状即可断言 $w = 1$．因此 $g = b_1 b_2 \in B$．故 $N_G(U) \subseteq B$，证毕．
+
+:::{.remark}
+
+注意 Bruhat 分解没有保证 $b$ 的唯一性．例如：
+$$
+\begin{pmatrix}
+1 & 1 \\
+0 & 1
+\end{pmatrix}
+\begin{pmatrix}
+1 & -1 \\
+0 & 1
+\end{pmatrix}
+= I
+$$
+:::
+
+:::{.remark}
+
+## 纤维丛？
+
+Bruhat 分解这个无交并记号让人浮想联翩，一眼看上去像流形里面的纤维丛．$S_n$ 本来就通过置换矩阵嵌入 $GL_n(F)$，又根据 Bruhat 分解的唯一性，我们也有 $GL_n(F) \to S_n$ 的投影．要是这个投影是群同态就好了，可惜它不是——否则它的核是 $B$，但这东西根本不是正规子群．先进的 DeepSeek 给出了一个具体反例：
+$$
+\begin{aligned}
+g &:= \begin{pmatrix}
+1 & 0 \\
+1 & 1
+\end{pmatrix}
+= \begin{pmatrix}
+1 & 1 \\
+0 & 1
+\end{pmatrix}
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}
+\begin{pmatrix}
+1 & 1 \\
+0 & -1
+\end{pmatrix}
+\\
+h &:= \begin{pmatrix}
+1 & 1 \\
+1 & 0
+\end{pmatrix}
+= \begin{pmatrix}
+1 & 1 \\
+0 & 1
+\end{pmatrix}
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}
+\end{aligned}
+$$
+但
+$$
+gh = \begin{pmatrix}
+1 & 1 \\
+2 & 1
+\end{pmatrix}
+= \begin{pmatrix}
+1 & 1/2 \\
+0 & 1
+\end{pmatrix}
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}
+\begin{pmatrix}
+2 & 1 \\
+0 & 1/2
+\end{pmatrix}
+$$
+
+$S_n$ 当然也不是 $GL_n(F)$ 的正规子群，所以咱还是别想着能掏出正合列半直积什么的了．总之，$B w B$ 是某种纤维．具体是什么样的呢？TODO．
+:::
 
 ## $B$
 
@@ -158,12 +250,12 @@ $[B_n,B_n] = U_n$？$[U_n,U_n] = U_{n-1}$？TODO.
 
 ### 闭连通？
 
-TODO
+TODO．
 
 ### 极大？
 
-TODO
+TODO．
 
 ## $G/B$: Flag Variety
 
-TODO
+TODO．
