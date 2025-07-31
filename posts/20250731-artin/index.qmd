@@ -18,12 +18,14 @@ format:
   html: default
 ---
 
-本文所指环均为交换幺环．我们来开发如下著名 Artin 环等价刻画的证明：
+本文所指环均为交换幺环．没有胡说八道的部分主要参考 [@m_f_atiyah_introduction_1969, {chapter 8}]．我们来开发如下著名 Artin 环等价刻画的证明：
 
 :::{#thm-artin-noether}
 
 环 $A$ 是 Artin 环当且仅当它是（Krull 维度）零维的 Noether 环．
 :::
+
+## 局部
 
 让我们先解决局部的情况．设 $A$ 是具有唯一极大理想 $\mathfrak m$ 的局部环．回忆如果环 $A$ 作为 $A$-模具有有限长度的合成列，那么它既是 Artin 环，也是 Noether 环．所以我们可以考虑研究什么情况下环 $A$ 具有有限长度的合成列．
 
@@ -35,7 +37,16 @@ $$
 
 - 降链不稳定，即 $m^i \supsetneq m^{i+1}$．
 
-  如形式幂级数环 $K[[x]]$．它是 Noether 环，不是 Artin 环．
+  如形式幂级数环 $K[[x]]$．它是 Noether 环，不是 Artin 环，降链为：
+  $$
+  K[[x]] \supsetneq (x) \supsetneq (x^2) \supsetneq \dots 
+  $$ 
+
+  如多项式环 $K[x]$ 在素理想 $(x)$ 处的局部化 $K[x]_{(x)}$．它是 Noether 环，不是 Artin 环．
+
+  $$
+    K[x]_{(x)} \supsetneq (x) \supsetneq (x^2) \supsetneq \dots
+  $$
 
 - 降链稳定，即存在 $k$ 使得 $\mathfrak m^k = \mathfrak m^{k+1} = \cdots$，但稳定的 $\mathfrak m^k$ 不是零理想．
 
@@ -54,15 +65,35 @@ $$
 $$
 A \supseteq \mathfrak m \supseteq \mathfrak m^2 \supseteq \dots \supseteq \mathfrak m^k = (0)
 $$
-让我们试着把它补全成一个合成列．$A / \mathfrak m$ 是域；$\mathfrak m^i / \mathfrak m^{i+1}$ 是 $A / \mathfrak m$-模，也就是线性空间．嗯，于是想让它长度有限，只需要求每个 $\mathfrak m^i / \mathfrak m^{i+1}$ 的维数有限即可．而在线性空间里，Artinian 和 Noetherian 是等价的，而这两个性质都是子结构、商结构遗传的——故 $\mathfrak m$ 幂零时，局部环 $A$ 的 Artinian 性质和 Noetherian 性质等价．
+让我们试着把它补全成一个合成列．$A / \mathfrak m$ 是域；$\mathfrak m^i / \mathfrak m^{i+1}$ 是 $A / \mathfrak m$-模，也就是线性空间．嗯，于是想让它长度有限，只需要求每个 $\mathfrak m^i / \mathfrak m^{i+1}$ 的维数有限即可．而在线性空间里，Artinian 和 Noetherian 是等价的，而这两个性质都是子模、商模遗传的——故 $\mathfrak m$ 幂零时，局部环 $A$ 的 Artinian 性质和 Noetherian 性质等价．
 
 等等，$\mathfrak m$ 幂零和 Krull 维度为零有什么关系？
 
 - $\mathfrak m$ 幂零可以推出 Krull 维度为零．设 $\mathfrak m^k = (0)$，两端同时取 radical 就有 $\mathfrak m = \sqrt{(0)}$，后者是 nilradical，是全体素理想的交．那随便取一素理想 $\mathfrak p$ 就有 $\mathfrak m = \sqrt{(0)} \subseteq \mathfrak p$，再用 $\mathfrak m$ 的极大性就有 $\mathfrak m = \mathfrak p$，也就是说 $\mathfrak m$ 也是局部环 $A$ 唯一的素理想．因此 $A$ 的 Krull 维度为零．
 
-- 当 $A$ 是 Noether 环时，Krull 维度为零可以推出 $\mathfrak m$ 幂零．Krull 维数为零意味着 $\mathfrak m$ 就是 nilradical，后者在 Noether 环中是幂零的——这是在有限生成元上使用鸽巢原理得到的结果．
+- 当 $A$ 是 Noether 环时，Krull 维度为零可以推出 $\mathfrak m$ 幂零．Krull 维数为零意味着 $\mathfrak m$ 就是 nilradical，后者在 Noether 环中是幂零理想——这是在有限生成元上使用鸽巢原理得到的结果．
 
-所以局部环 $A$ 是 Artin 环当且仅当它是 Noether 环且 Krull 维度为零．
+- $A$ 是 Artin 环蕴含了 $A$ 是零维的——我们直接给出一般情况的证明：
+
+:::{#prp-artin-zero-dim}
+
+## [@m_f_atiyah_introduction_1969, {proposition 8.1}]
+
+Artin 环中的素理想都是极大理想．
+:::
+
+:::{.proof}
+
+设 $A$ 是 Artin 环，$\mathfrak p$ 是 $A$ 的素理想．注意 Artinian 性质在商模上保持，我们证明 Artin 整环 $A / \mathfrak p$ 是域．任取非零元 $x \in A / \mathfrak p$，考察理想降链
+$$
+(x) \supseteq (x^2) \supseteq (x^3) \supseteq \dots
+$$
+由于 $A / \mathfrak p$ 是 Artin 环，降链稳定，则存在 $k$ 使得 $(x^k) = (x^{k+1})$，于是存在可逆元 $c \in A / \mathfrak p$ 使得 $x^{k+1} = c x^k$．用整环消去律立得 $x = c$，即 $x$ 可逆．因此 $A / \mathfrak p$ 是域，$\mathfrak p$ 是极大理想．
+:::
+
+## 全局
+
+TODO
 
 ## Acknowledgement {.appendix}
 
