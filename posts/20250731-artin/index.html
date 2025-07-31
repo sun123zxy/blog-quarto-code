@@ -21,7 +21,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -327,6 +347,8 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
+  <li><a href="#局部" id="toc-局部" class="nav-link active" data-scroll-target="#局部">局部</a></li>
+  <li><a href="#全局" id="toc-全局" class="nav-link" data-scroll-target="#全局">全局</a></li>
   
   </ul>
 </nav>
@@ -377,7 +399,7 @@ window.Quarto = {
 </header>
 
 
-<p>本文所指环均为交换幺环．我们来开发如下著名 Artin 环等价刻画的证明：</p>
+<p>本文所指环均为交换幺环．没有胡说八道的部分主要参考 <span class="citation" data-cites="m_f_atiyah_introduction_1969"><a href="#ref-m_f_atiyah_introduction_1969" role="doc-biblioref">[1, chapter 8]</a></span>．我们来开发如下著名 Artin 环等价刻画的证明：</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -390,13 +412,21 @@ window.Quarto = {
 </div>
 </div>
 </div>
+<section id="局部" class="level2">
+<h2 class="anchored" data-anchor-id="局部">局部</h2>
 <p>让我们先解决局部的情况．设 <span class="math inline">\(A\)</span> 是具有唯一极大理想 <span class="math inline">\(\mathfrak m\)</span> 的局部环．回忆如果环 <span class="math inline">\(A\)</span> 作为 <span class="math inline">\(A\)</span>-模具有有限长度的合成列，那么它既是 Artin 环，也是 Noether 环．所以我们可以考虑研究什么情况下环 <span class="math inline">\(A\)</span> 具有有限长度的合成列．</p>
 <p>在局部环中，我们有一条天然的理想降链 <span class="math display">\[
 A \supseteq \mathfrak m \supseteq \mathfrak m^2 \supseteq \dots
 \]</span> 这条降链可能出现以下三种情况：</p>
 <ul>
 <li><p>降链不稳定，即 <span class="math inline">\(m^i \supsetneq m^{i+1}\)</span>．</p>
-<p>如形式幂级数环 <span class="math inline">\(K[[x]]\)</span>．它是 Noether 环，不是 Artin 环．</p></li>
+<p>如形式幂级数环 <span class="math inline">\(K[[x]]\)</span>．它是 Noether 环，不是 Artin 环，降链为： <span class="math display">\[
+K[[x]] \supsetneq (x) \supsetneq (x^2) \supsetneq \dots
+\]</span></p>
+<p>如多项式环 <span class="math inline">\(K[x]\)</span> 在素理想 <span class="math inline">\((x)\)</span> 处的局部化 <span class="math inline">\(K[x]_{(x)}\)</span>．它是 Noether 环，不是 Artin 环．</p>
+<p><span class="math display">\[
+  K[x]_{(x)} \supsetneq (x) \supsetneq (x^2) \supsetneq \dots
+\]</span></p></li>
 <li><p>降链稳定，即存在 <span class="math inline">\(k\)</span> 使得 <span class="math inline">\(\mathfrak m^k = \mathfrak m^{k+1} = \cdots\)</span>，但稳定的 <span class="math inline">\(\mathfrak m^k\)</span> 不是零理想．</p>
 <p>例子有点难找，我们暂且不表．</p></li>
 <li><p>降链稳定且 <span class="math inline">\(\mathfrak m^k = (0)\)</span>，即 <span class="math inline">\(\mathfrak m\)</span> 是幂零理想．</p>
@@ -422,13 +452,50 @@ Remark
 </div>
 <p>根据这些例子，看起来我们有必要加入 <span class="math inline">\(\mathfrak m\)</span> 是幂零理想的条件．设其幂零指数为 <span class="math inline">\(k\)</span>．此时有理想降链 <span class="math display">\[
 A \supseteq \mathfrak m \supseteq \mathfrak m^2 \supseteq \dots \supseteq \mathfrak m^k = (0)
-\]</span> 让我们试着把它补全成一个合成列．<span class="math inline">\(A / \mathfrak m\)</span> 是域；<span class="math inline">\(\mathfrak m^i / \mathfrak m^{i+1}\)</span> 是 <span class="math inline">\(A / \mathfrak m\)</span>-模，也就是线性空间．嗯，于是想让它长度有限，只需要求每个 <span class="math inline">\(\mathfrak m^i / \mathfrak m^{i+1}\)</span> 的维数有限即可．而在线性空间里，Artinian 和 Noetherian 是等价的，而这两个性质都是子结构、商结构遗传的——故 <span class="math inline">\(\mathfrak m\)</span> 幂零时，局部环 <span class="math inline">\(A\)</span> 的 Artinian 性质和 Noetherian 性质等价．</p>
+\]</span> 让我们试着把它补全成一个合成列．<span class="math inline">\(A / \mathfrak m\)</span> 是域；<span class="math inline">\(\mathfrak m^i / \mathfrak m^{i+1}\)</span> 是 <span class="math inline">\(A / \mathfrak m\)</span>-模，也就是线性空间．嗯，于是想让它长度有限，只需要求每个 <span class="math inline">\(\mathfrak m^i / \mathfrak m^{i+1}\)</span> 的维数有限即可．而在线性空间里，Artinian 和 Noetherian 是等价的，而这两个性质都是子模、商模遗传的——故 <span class="math inline">\(\mathfrak m\)</span> 幂零时，局部环 <span class="math inline">\(A\)</span> 的 Artinian 性质和 Noetherian 性质等价．</p>
 <p>等等，<span class="math inline">\(\mathfrak m\)</span> 幂零和 Krull 维度为零有什么关系？</p>
 <ul>
 <li><p><span class="math inline">\(\mathfrak m\)</span> 幂零可以推出 Krull 维度为零．设 <span class="math inline">\(\mathfrak m^k = (0)\)</span>，两端同时取 radical 就有 <span class="math inline">\(\mathfrak m = \sqrt{(0)}\)</span>，后者是 nilradical，是全体素理想的交．那随便取一素理想 <span class="math inline">\(\mathfrak p\)</span> 就有 <span class="math inline">\(\mathfrak m = \sqrt{(0)} \subseteq \mathfrak p\)</span>，再用 <span class="math inline">\(\mathfrak m\)</span> 的极大性就有 <span class="math inline">\(\mathfrak m = \mathfrak p\)</span>，也就是说 <span class="math inline">\(\mathfrak m\)</span> 也是局部环 <span class="math inline">\(A\)</span> 唯一的素理想．因此 <span class="math inline">\(A\)</span> 的 Krull 维度为零．</p></li>
-<li><p>当 <span class="math inline">\(A\)</span> 是 Noether 环时，Krull 维度为零可以推出 <span class="math inline">\(\mathfrak m\)</span> 幂零．Krull 维数为零意味着 <span class="math inline">\(\mathfrak m\)</span> 就是 nilradical，后者在 Noether 环中是幂零的——这是在有限生成元上使用鸽巢原理得到的结果．</p></li>
+<li><p>当 <span class="math inline">\(A\)</span> 是 Noether 环时，Krull 维度为零可以推出 <span class="math inline">\(\mathfrak m\)</span> 幂零．Krull 维数为零意味着 <span class="math inline">\(\mathfrak m\)</span> 就是 nilradical，后者在 Noether 环中是幂零理想——这是在有限生成元上使用鸽巢原理得到的结果．</p></li>
+<li><p><span class="math inline">\(A\)</span> 是 Artin 环蕴含了 <span class="math inline">\(A\)</span> 是零维的——我们直接给出一般情况的证明：</p></li>
 </ul>
-<p>所以局部环 <span class="math inline">\(A\)</span> 是 Artin 环当且仅当它是 Noether 环且 Krull 维度为零．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-artin-zero-dim" class="theorem proposition">
+<p><span class="theorem-title"><strong>命题 1 (<span class="citation" data-cites="m_f_atiyah_introduction_1969"><a href="#ref-m_f_atiyah_introduction_1969" role="doc-biblioref">[1, proposition 8.1]</a></span>)</strong></span> Artin 环中的素理想都是极大理想．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span>设 <span class="math inline">\(A\)</span> 是 Artin 环，<span class="math inline">\(\mathfrak p\)</span> 是 <span class="math inline">\(A\)</span> 的素理想．注意 Artinian 性质在商模上保持，我们证明 Artin 整环 <span class="math inline">\(A / \mathfrak p\)</span> 是域．任取非零元 <span class="math inline">\(x \in A / \mathfrak p\)</span>，考察理想降链 <span class="math display">\[
+(x) \supseteq (x^2) \supseteq (x^3) \supseteq \dots
+\]</span> 由于 <span class="math inline">\(A / \mathfrak p\)</span> 是 Artin 环，降链稳定，则存在 <span class="math inline">\(k\)</span> 使得 <span class="math inline">\((x^k) = (x^{k+1})\)</span>，于是存在可逆元 <span class="math inline">\(c \in A / \mathfrak p\)</span> 使得 <span class="math inline">\(x^{k+1} = c x^k\)</span>．用整环消去律立得 <span class="math inline">\(x = c\)</span>，即 <span class="math inline">\(x\)</span> 可逆．因此 <span class="math inline">\(A / \mathfrak p\)</span> 是域，<span class="math inline">\(\mathfrak p\)</span> 是极大理想．</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="全局" class="level2">
+<h2 class="anchored" data-anchor-id="全局">全局</h2>
+<p>TODO</p>
+</section>
 
 
 <div id="quarto-appendix" class="default"><section id="acknowledgement" class="level2 appendix"><h2 class="anchored quarto-appendix-heading">Acknowledgement</h2><div class="quarto-appendix-contents">
@@ -436,6 +503,11 @@ A \supseteq \mathfrak m \supseteq \mathfrak m^2 \supseteq \dots \supseteq \mathf
 <p>感谢 Luna 在本文写作过程中提供的帮助和建议．</p>
 
 
+
+</div></section><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-m_f_atiyah_introduction_1969" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">M. F. Atiyah 和 I.G. Macdonald, <em>Introduction To Commutative Algebra</em>. Addison-Wesley Publishing Company, Inc., 1969.</div>
+</div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
