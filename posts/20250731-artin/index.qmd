@@ -71,29 +71,52 @@ $$
 
 - $\mathfrak m$ 幂零可以推出 Krull 维度为零．设 $\mathfrak m^k = (0)$，两端同时取 radical 就有 $\mathfrak m = \sqrt{(0)}$，后者是 nilradical，是全体素理想的交．那随便取一素理想 $\mathfrak p$ 就有 $\mathfrak m = \sqrt{(0)} \subseteq \mathfrak p$，再用 $\mathfrak m$ 的极大性就有 $\mathfrak m = \mathfrak p$，也就是说 $\mathfrak m$ 也是局部环 $A$ 唯一的素理想．因此 $A$ 的 Krull 维度为零．
 
-- 当 $A$ 是 Noether 环时，Krull 维度为零可以推出 $\mathfrak m$ 幂零．Krull 维数为零意味着 $\mathfrak m$ 就是 nilradical，后者在 Noether 环中是幂零理想——这是在有限生成元上使用鸽巢原理得到的结果．
+- 当 $A$ 是 Noether 环时，Krull 维度为零可以推出 $\mathfrak m$ 幂零．Krull 维数为零意味着 $\mathfrak m$ 就是 nilradical，后者在 Noether 环中是幂零理想——这是在有限生成元上使用鸽巢原理得到的结果：
+
+  :::{#prp-noether-nilradical-nilpotent}
+
+  Noether 环中 nilradical 是幂零理想．
+  :::
 
 - $A$ 是 Artin 环蕴含了 $A$ 是零维的——我们直接给出一般情况的证明：
 
-:::{#prp-artin-zero-dim}
+  :::{#prp-artin-zero-dim}
 
-## [@m_f_atiyah_introduction_1969, {proposition 8.1}]
+  ## [@m_f_atiyah_introduction_1969, {proposition 8.1}]
 
-Artin 环中的素理想都是极大理想．
-:::
+  Artin 环中的素理想都是极大理想．
+  :::
 
-:::{.proof}
+  :::{.proof}
 
-设 $A$ 是 Artin 环，$\mathfrak p$ 是 $A$ 的素理想．注意 Artinian 性质在商模上保持，我们证明 Artin 整环 $A / \mathfrak p$ 是域．任取非零元 $x \in A / \mathfrak p$，考察理想降链
-$$
-(x) \supseteq (x^2) \supseteq (x^3) \supseteq \dots
-$$
-由于 $A / \mathfrak p$ 是 Artin 环，降链稳定，则存在 $k$ 使得 $(x^k) = (x^{k+1})$，于是存在可逆元 $c \in A / \mathfrak p$ 使得 $x^{k+1} = c x^k$．用整环消去律立得 $x = c$，即 $x$ 可逆．因此 $A / \mathfrak p$ 是域，$\mathfrak p$ 是极大理想．
-:::
+  设 $A$ 是 Artin 环，$\mathfrak p$ 是 $A$ 的素理想．注意 Artinian 性质在商模上保持，我们证明 Artin 整环 $A / \mathfrak p$ 是域．任取非零元 $x \in A / \mathfrak p$，考察理想降链
+  $$
+  (x) \supseteq (x^2) \supseteq (x^3) \supseteq \dots
+  $$
+  由于 $A / \mathfrak p$ 是 Artin 环，降链稳定，则存在 $k$ 使得 $(x^k) = (x^{k+1})$，于是存在可逆元 $c \in A / \mathfrak p$ 使得 $x^{k+1} = c x^k$．用整环消去律立得 $x = c$，即 $x$ 可逆．因此 $A / \mathfrak p$ 是域，$\mathfrak p$ 是极大理想．
+  :::
+
+- $A$ 是 Artin 环蕴含了 $\mathfrak m$ 幂零．$\mathfrak m$ 在 Artin 环中其实就是 nilradical，我们可以使用如下一般的结果：
+
+  :::{#prp-artin-nilradical-nilpotent}
+
+  ## [@m_f_atiyah_introduction_1969, {proposition 8.4}]
+
+  Artin 环的 nilradical $\mathfrak N$ 是幂零理想．
+  :::
+
+  :::{.proof}
+  
+  Artinian 性质使得 $\mathfrak N$ 降链稳定，不妨设最后稳定在 $\mathfrak L$，于是 $\mathfrak N \mathfrak L = \mathfrak L$．假如 $\mathfrak L$ 非零，取一极小（Artin 降链条件保证了能取到）非零子理想 $\mathfrak a \subseteq \mathfrak N$ 满足 $\mathfrak a \mathfrak L \neq (0)$，则 $\mathfrak a$ 必为一主理想 $(a)$．但理想 $a \mathfrak L$ 也满足 $(a \mathfrak L) \mathfrak L = a(\mathfrak L \mathfrak L) = a \mathfrak L \neq (0)$，故由极小性，$(a) = a \mathfrak L$．于是存在 $l \in \mathfrak L \subset \mathfrak N$ 使得 $a = al$．但 $l$ 是幂零元，故 $a = al = al^2 = \dots = 0$，矛盾．
+  :::
 
 ## 全局
 
-TODO
+现在我们不再假设 $A$ 是局部环．发挥类似 $\mathfrak m$ 效果的理想变成了 Jacobson radical $\mathfrak J := \bigcap_{\mathfrak m \in\operatorname{Specmax}(A)} \mathfrak m$．我们仍然可以考虑 $\mathfrak J$ 的各幂次形成的降链
+$$
+A \supseteq \mathfrak J \supseteq \mathfrak J^2 \supseteq \dots
+$$
+并讨论它的稳定性——类似的，我们要求 $\mathfrak J$ 是幂零理想——这一点仍然可以通过：TODO 
 
 ## Acknowledgement {.appendix}
 
