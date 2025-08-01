@@ -18,7 +18,7 @@ format:
   html: default
 ---
 
-本文所指环均为交换幺环．没有胡说八道的部分主要参考 [@m_f_atiyah_introduction_1969, {chapter 8}]．我们来开发如下著名 Artin 环等价刻画的证明：
+本文所指环均为交换幺环．我们重新组织编排一下 [@m_f_atiyah_introduction_1969, {chapter 8}] 的顺序，开发如下著名的 Artin 环等价刻画的证明：
 
 :::{#thm-artin-noether}
 
@@ -58,24 +58,34 @@ $$
 
 :::{.remark}
 
-在 Noetherian 的条件要求下，第二种情况不可能出现——这用 Nakayama 引理分析降链尾部稳定部分立得；而第一种情况的降链也必然趋于零理想——这是 Krull 交定理保证的．我们在之后讨论全局的情况的时候再详细说明．
+事实上，如果环是 Noetherian 的，第二种情况不可能出现——这用 Nakayama 引理分析降链尾部稳定部分立得；而第一种情况的降链也必然趋于零理想——这是 Krull 交定理保证的．
 :::
 
-根据这些例子，看起来我们有必要加入 $\mathfrak m$ 是幂零理想的条件．设其幂零指数为 $k$．此时有理想降链
+根据这些例子，看起来我们有必要**加入 $\mathfrak m$ 是幂零理想的条件**．设其幂零指数为 $k$．此时有理想降链
 $$
 A \supseteq \mathfrak m \supseteq \mathfrak m^2 \supseteq \dots \supseteq \mathfrak m^k = (0)
 $$
-让我们试着把它补全成一个合成列．$A / \mathfrak m$ 是域；$\mathfrak m^i / \mathfrak m^{i+1}$ 是 $A / \mathfrak m$-模，也就是线性空间．嗯，于是想让它长度有限，只需要求每个 $\mathfrak m^i / \mathfrak m^{i+1}$ 的维数有限即可．而在线性空间里，Artinian 和 Noetherian 是等价的，而这两个性质都是子模、商模遗传的——故 $\mathfrak m$ 幂零时，局部环 $A$ 的 Artinian 性质和 Noetherian 性质等价．
+让我们试着把它补全成一个合成列．$A / \mathfrak m$ 是域；$\mathfrak m^i / \mathfrak m^{i+1}$ 是 $A / \mathfrak m$-模，也就是线性空间．嗯，于是想让它长度有限，只需要求每个 $\mathfrak m^i / \mathfrak m^{i+1}$ 的维数有限即可．而在线性空间里，Artinian 和 Noetherian 是等价的，而这两个性质都是子模、商模遗传的——故 **$\mathfrak m$ 幂零时，局部环 $A$ 的 Artinian 性质和 Noetherian 性质等价**．
 
-等等，$\mathfrak m$ 幂零和 Krull 维度为零有什么关系？
+:::{.remark}
 
-- $\mathfrak m$ 幂零可以推出 Krull 维度为零．设 $\mathfrak m^k = (0)$，两端同时取 radical 就有 $\mathfrak m = \sqrt{(0)}$，后者是 nilradical，是全体素理想的交．那随便取一素理想 $\mathfrak p$ 就有 $\mathfrak m = \sqrt{(0)} \subseteq \mathfrak p$，再用 $\mathfrak m$ 的极大性就有 $\mathfrak m = \mathfrak p$，也就是说 $\mathfrak m$ 也是局部环 $A$ 唯一的素理想．因此 $A$ 的 Krull 维度为零．
+这个思路其实是 [@m_f_atiyah_introduction_1969, {corollary 6.11}] 的特例．
+:::
 
-- 当 $A$ 是 Noether 环时，Krull 维度为零可以推出 $\mathfrak m$ 幂零．Krull 维数为零意味着 $\mathfrak m$ 就是 nilradical，后者在 Noether 环中是幂零理想——这是在有限生成元上使用鸽巢原理得到的结果：
+那什么时候 $\mathfrak m$ 幂零呢？
+
+- $\mathfrak m$ 幂零蕴含着 Krull 维度为零．设 $\mathfrak m^k = (0)$，两端同时取 radical 就有 $\mathfrak m = \sqrt{(0)}$，后者是 nilradical，是全体素理想的交．那随便取一素理想 $\mathfrak p$ 就有 $\mathfrak m = \sqrt{(0)} \subseteq \mathfrak p$，再用 $\mathfrak m$ 的极大性就有 $\mathfrak m = \mathfrak p$，也就是说 $\mathfrak m$ 也是局部环 $A$ 唯一的素理想．因此 $A$ 的 Krull 维度为零．
+
+- 当 $A$ 是 Noether 环时，Krull 维度为零可以推出 $\mathfrak m$ 幂零．Krull 维数为零意味着 $\mathfrak m$ 就是 nilradical，后者在 Noether 环中是幂零理想：
 
   :::{#prp-noether-nilradical-nilpotent}
 
   Noether 环中 nilradical 是幂零理想．
+  :::
+
+  :::{.proof}
+  
+  容易利用生成元有限和鸽巢原理得证．
   :::
 
 - $A$ 是 Artin 环蕴含了 $A$ 是零维的——我们直接给出一般情况的证明：
@@ -96,19 +106,23 @@ $$
   由于 $A / \mathfrak p$ 是 Artin 环，降链稳定，则存在 $k$ 使得 $(x^k) = (x^{k+1})$，于是存在可逆元 $c \in A / \mathfrak p$ 使得 $x^{k+1} = c x^k$．用整环消去律立得 $x = c$，即 $x$ 可逆．因此 $A / \mathfrak p$ 是域，$\mathfrak p$ 是极大理想．
   :::
 
-- $A$ 是 Artin 环蕴含了 $\mathfrak m$ 幂零．$\mathfrak m$ 在 Artin 环中其实就是 nilradical，我们可以使用如下一般的结果：
+- $A$ 是 Artin 环蕴含了 $\mathfrak m$ 幂零．根据上一条结果，$\mathfrak m$ 在 Artin 环中其实就是 nilradical，我们可以使用如下不太平凡的结果：
 
   :::{#prp-artin-nilradical-nilpotent}
 
   ## [@m_f_atiyah_introduction_1969, {proposition 8.4}]
 
-  Artin 环的 nilradical $\mathfrak N$ 是幂零理想．
+  Artin 环的 nilradical（或 Jacobson radical）$\mathfrak N$ 是幂零理想．
   :::
 
   :::{.proof}
   
-  Artinian 性质使得 $\mathfrak N$ 降链稳定，不妨设最后稳定在 $\mathfrak L$，于是 $\mathfrak N \mathfrak L = \mathfrak L$．假如 $\mathfrak L$ 非零，取一极小（Artin 降链条件保证了能取到）非零子理想 $\mathfrak a \subseteq \mathfrak N$ 满足 $\mathfrak a \mathfrak L \neq (0)$，则 $\mathfrak a$ 必为一主理想 $(a)$．但理想 $a \mathfrak L$ 也满足 $(a \mathfrak L) \mathfrak L = a(\mathfrak L \mathfrak L) = a \mathfrak L \neq (0)$，故由极小性，$(a) = a \mathfrak L$．于是存在 $l \in \mathfrak L \subset \mathfrak N$ 使得 $a = al$．但 $l$ 是幂零元，故 $a = al = al^2 = \dots = 0$，矛盾．
+  Artinian 性质使得 $\mathfrak N$ 降链稳定，不妨设最后稳定在 $\mathfrak L$，于是 $\mathfrak N \mathfrak L = \mathfrak L$．假如 $\mathfrak L$ 非零，取一极小（Artin 降链条件保证了能取到）非零子理想 $\mathfrak a$ 满足 $\mathfrak a \mathfrak L \neq (0)$，则 $\mathfrak a$ 必为一主理想 $(a)$．但理想 $a \mathfrak L$ 也满足 $(a \mathfrak L) \mathfrak L = a(\mathfrak L \mathfrak L) = a \mathfrak L \neq (0)$，故由极小性，$(a) = a \mathfrak L$．于是存在 $l \in \mathfrak L \subset \mathfrak N$ 使得 $a = al$．但 $l$ 是幂零元，故 $a = al = al^2 = \dots = 0$，矛盾．
   :::
+
+  （TODO：直觉？）
+
+综上，我们获得了局部环内 Artin 环等价于零维 Noether 环的证明．
 
 ## 全局
 
@@ -116,7 +130,54 @@ $$
 $$
 A \supseteq \mathfrak J \supseteq \mathfrak J^2 \supseteq \dots
 $$
-并讨论它的稳定性——类似的，我们要求 $\mathfrak J$ 是幂零理想——这一点仍然可以通过：TODO 
+并讨论它的稳定性——类似的，我们**要求 $\mathfrak J$ 是幂零理想**．刚刚已经做过局部环的情况，自然会考虑做一下约化．Jacobson radical 作为极大理想的交很自然的让我们想到中国剩余定理，于是我们再**加入一个条件：$A$ 的极大理想数量有限**，此时
+$$
+\begin{aligned}
+A
+&\cong A / \mathfrak J^k \\
+&\cong A / \left(\bigcap_i \mathfrak m_i \right)^k \\
+&\cong A / \left(\prod_i \mathfrak m_i \right)^k \\
+&\cong A / \prod_i \mathfrak m_i^k \\
+&\cong \prod_i A / \mathfrak m_i^k
+\end{aligned}
+$$
+注意 $A / \mathfrak m_i^k$ 都是极大理想为 $\mathfrak m_i$ 的局部环．于是 $A$ 被拆分为有限个局部环的直积．Artinian、Noetherian、零维的性质都因此在 $A$ 及其局部环间双向传播．这样
+$$
+\begin{aligned}
+A \text{ is Artinian}
+&\iff A / m_i^k \text{ is Artinian for each } i \\
+&\iff A / m_i^k \text{ is Noetherian and of Krull dimension $0$ for each } i \\
+&\iff A \text{ is Noetherian and of Krull dimension $0$}
+\end{aligned}
+$$
+
+总结一下，**在 Jacobson radical $\mathfrak J$ 幂零且极大理想数量有限的环中，Artinian 等价于零维 Noetherian**．
+
+现在只需研究这额外增加的两个条件的性质．和我们在局部环中的讨论一致，Jacobson radical $\mathfrak J$ 的幂零性可由：
+
+- Artin 环：[@prp-artin-nilradical-nilpotent]
+
+- 零维 Noether 环：$\mathfrak J = \mathfrak N$ 及 [@prp-noether-nilradical-nilpotent]
+
+获得．而关于极大理想数量有限的条件：
+
+- Artin 环：
+
+  :::{#prp-artin-finite-specmax}
+
+  ## [@m_f_atiyah_introduction_1969, {proposition 8.3}]
+
+  Artin 环的极大理想数量有限．
+  :::
+
+  :::{.proof}
+  
+  考虑所有极大理想的有限交组成的理想族，通过 Artin 环的降链稳定性取出其中的一个极小理想，设它是 $\mathfrak a := \mathfrak m_1 \cap \dots \cap \mathfrak m_k$．假若极大理想无限，则取一不同于 $\mathfrak m_1, \dots, \mathfrak m_k$ 的极大理想 $\mathfrak m_{k+1}$，就有 $a \cap m_{k+1} \subsetneq a$，与 $\mathfrak a$ 的极小性矛盾．
+  :::
+
+- 零维 Noether 环：
+
+  TODO（准素分解）
 
 ## Acknowledgement {.appendix}
 
