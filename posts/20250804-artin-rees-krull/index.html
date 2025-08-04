@@ -8,7 +8,7 @@
 
 <meta name="author" content="sun123zxy">
 
-<title>Artin–Noether 乱炖 – sun123zxy's blog</title>
+<title>Artin–Rees–Krull 乱炖 – sun123zxy's blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,27 +21,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -347,21 +327,18 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#局部" id="toc-局部" class="nav-link active" data-scroll-target="#局部">局部</a></li>
-  <li><a href="#全局" id="toc-全局" class="nav-link" data-scroll-target="#全局">全局</a></li>
-  <li><a href="#extra主理想局部-noether-环的理想结构" id="toc-extra主理想局部-noether-环的理想结构" class="nav-link" data-scroll-target="#extra主理想局部-noether-环的理想结构">Extra：主理想局部 Noether 环的理想结构</a></li>
   
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Artin–Noether 乱炖</h1>
-<p class="subtitle lead">On Proving the Akizuki–Hopkins–Levitzki Theorem</p>
+<h1 class="title">Artin–Rees–Krull 乱炖</h1>
+<p class="subtitle lead">Artin–Rees Lemma and Krull Intersection Theorem</p>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
     <div class="quarto-category">algebra</div>
@@ -382,7 +359,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2025年8月1日</p>
+      <p class="date">2025年8月4日</p>
     </div>
   </div>
   
@@ -394,308 +371,32 @@ window.Quarto = {
 </header>
 
 
-<p>本文所指环均为交换幺环．我们重新编排一下 <span class="citation" data-cites="m_f_atiyah_introduction_1969"><a href="#ref-m_f_atiyah_introduction_1969" role="doc-biblioref">[1, chapter 8]</a></span> 的顺序，开发如下著名的 Artin 环等价刻画的证明：</p>
+<p>本文所指环均为交换幺环．Krull 交定理刻画了 Noether 环中任意理想幂次组成的降链的极限形态：</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<div id="thm-artin-noether" class="theorem">
-<p><span class="theorem-title"><strong>定理 1 (Akizuki–Hopkins–Levitzki)</strong></span> 环 <span class="math inline">\(A\)</span> 是 Artin 环当且仅当它是（Krull 维度）零维的 Noether 环．</p>
-</div>
-</div>
-</div>
-</div>
-<p>回忆如果环 <span class="math inline">\(A\)</span> 作为 <span class="math inline">\(A\)</span>-模具有有限长度的合成列，那么它既是 Artin 环，也是 Noether 环<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>．故只需分析环拥有有限长度合成列的条件．</p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;这甚至是充要条件，详见 <span class="citation" data-cites="altman_term_2013"><a href="#ref-altman_term_2013" role="doc-biblioref">[2, corollary 19.5]</a></span></p></div></div><section id="局部" class="level2">
-<h2 class="anchored" data-anchor-id="局部">局部</h2>
-<p>让我们先解决局部的情况．设 <span class="math inline">\(A\)</span> 是具有唯一极大理想 <span class="math inline">\(\mathfrak m\)</span> 的局部环．我们有一条天然的理想降链 <span class="math display">\[
-A \supseteq \mathfrak m \supseteq \mathfrak m^2 \supseteq \dots
-\]</span> 这条降链可能出现以下三种情况：</p>
-<ul>
-<li><p>降链不稳定，即 <span class="math inline">\(m^i \supsetneq m^{i+1}\)</span>．</p>
-<p>如形式幂级数环 <span class="math inline">\(K[[x]]\)</span>．它是 Noether 环，不是 Artin 环，降链为： <span class="math display">\[
-K[[x]] \supsetneq (x) \supsetneq (x^2) \supsetneq \dots
+<div id="thm-krull-intersection" class="theorem">
+<p><span class="theorem-title"><strong>定理 1 (Krull 交定理)</strong></span> 设 <span class="math inline">\(A\)</span> 是 Noether 环，<span class="math inline">\(\mathfrak{a}\)</span> 是 <span class="math inline">\(A\)</span> 的一个理想．则 <span class="math display">\[
+\bigcap_{i=0}^\infty \mathfrak a^i = \{ x \in A : (1-a) x = 0 \text{ for some } a \in \mathfrak a \}
 \]</span></p>
-<p>如多项式环 <span class="math inline">\(K[x]\)</span> 在素理想 <span class="math inline">\((x)\)</span> 处的局部化 <span class="math inline">\(K[x]_{(x)}\)</span>．它是 Noether 环，不是 Artin 环．</p>
-<p><span class="math display">\[
-  K[x]_{(x)} \supsetneq (x) \supsetneq (x^2) \supsetneq \dots
-\]</span></p></li>
-<li><p>降链稳定，即存在 <span class="math inline">\(k\)</span> 使得 <span class="math inline">\(\mathfrak m^k = \mathfrak m^{k+1} = \cdots\)</span>，但稳定的 <span class="math inline">\(\mathfrak m^k\)</span> 不是零理想．</p>
-<p>例子有点难找，我们暂且不表．</p></li>
-<li><p>降链稳定且 <span class="math inline">\(\mathfrak m^k = (0)\)</span>，即 <span class="math inline">\(\mathfrak m\)</span> 是幂零理想．</p>
-<p>如 <span class="math inline">\(K[x] / (x^3)\)</span>．它是 Noether 环，也是 Artin 环．</p></li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Remark
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>事实上，如果环是 Noetherian 的，第二种情况不可能出现——这用 Nakayama 引理分析降链尾部稳定部分立得；而第一种情况的降链也必然趋于零理想——这是局部环上的 Krull 交定理保证的．</p>
 </div>
 </div>
 </div>
 </div>
-<p>根据这些例子，看起来我们有必要<strong>加入 <span class="math inline">\(\mathfrak m\)</span> 是幂零理想的条件</strong>．设其幂零指数为 <span class="math inline">\(k\)</span>．此时有理想降链 <span class="math display">\[
-A \supseteq \mathfrak m \supseteq \mathfrak m^2 \supseteq \dots \supseteq \mathfrak m^k = (0)
-\]</span> 让我们试着把它补全成一个合成列．<span class="math inline">\(A / \mathfrak m\)</span> 是域；<span class="math inline">\(\mathfrak m^i / \mathfrak m^{i+1}\)</span> 是 <span class="math inline">\(A / \mathfrak m\)</span>-模，也就是线性空间．嗯，于是想让它长度有限，只需要求每个 <span class="math inline">\(\mathfrak m^i / \mathfrak m^{i+1}\)</span> 的维数有限即可．而在线性空间里，Artinian 和 Noetherian 是等价的，而这两个性质都是子模、商模遗传的——故 <strong><span class="math inline">\(\mathfrak m\)</span> 幂零时，局部环 <span class="math inline">\(A\)</span> 的 Artinian 性质和 Noetherian 性质等价</strong>．</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Remark
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>这个思路其实是 <span class="citation" data-cites="m_f_atiyah_introduction_1969"><a href="#ref-m_f_atiyah_introduction_1969" role="doc-biblioref">[1, corollary 6.11]</a></span> 的特例．</p>
-</div>
-</div>
-</div>
-</div>
-<p>那什么时候 <span class="math inline">\(\mathfrak m\)</span> 幂零呢？</p>
+<p>我们经常在以下几种特殊情形下使用 Krull 交定理，这些情况下均有 <span class="math inline">\(\bigcap_{i=0}^\infty \mathfrak a^i = (0)\)</span>：</p>
 <ul>
-<li><p><span class="math inline">\(\mathfrak m\)</span> 幂零蕴含着 Krull 维度为零．设 <span class="math inline">\(\mathfrak m^k = (0)\)</span>，两端同时取 radical 就有 <span class="math inline">\(\mathfrak m = \sqrt{(0)}\)</span>，后者是 nilradical，是全体素理想的交．那随便取一素理想 <span class="math inline">\(\mathfrak p\)</span> 就有 <span class="math inline">\(\mathfrak m = \sqrt{(0)} \subseteq \mathfrak p\)</span>，再用 <span class="math inline">\(\mathfrak m\)</span> 的极大性就有 <span class="math inline">\(\mathfrak m = \mathfrak p\)</span>，也就是说 <span class="math inline">\(\mathfrak m\)</span> 也是局部环 <span class="math inline">\(A\)</span> 唯一的素理想．因此 <span class="math inline">\(A\)</span> 的 Krull 维度为零．</p></li>
-<li><p>当 <span class="math inline">\(A\)</span> 是 Noether 环时，Krull 维度为零可以推出 <span class="math inline">\(\mathfrak m\)</span> 幂零．Krull 维数为零意味着 <span class="math inline">\(\mathfrak m\)</span> 就是 nilradical，后者在 Noether 环中是幂零理想：</p>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<div id="prp-noether-nilradical-nilpotent" class="theorem proposition">
-<p><span class="theorem-title"><strong>命题 1</strong></span> Noether 环中 nilradical 是幂零理想．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Proof
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="proof">
-<p><span class="proof-title"><em>证明</em>. </span>容易利用生成元有限和鸽巢原理得证．</p>
-</div>
-</div>
-</div>
-</div></li>
-<li><p><span class="math inline">\(A\)</span> 是 Artin 环蕴含了 <span class="math inline">\(A\)</span> 是零维的——我们直接给出一般情况的证明：</p>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<div id="prp-artin-zero-dim" class="theorem proposition">
-<p><span class="theorem-title"><strong>命题 2 (<span class="citation" data-cites="m_f_atiyah_introduction_1969"><a href="#ref-m_f_atiyah_introduction_1969" role="doc-biblioref">[1, proposition 8.1]</a></span>)</strong></span> Artin 环中的素理想都是极大理想．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Proof
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="proof">
-<p><span class="proof-title"><em>证明</em>. </span>设 <span class="math inline">\(A\)</span> 是 Artin 环，<span class="math inline">\(\mathfrak p\)</span> 是 <span class="math inline">\(A\)</span> 的素理想．注意 Artinian 性质在商模上保持，我们证明 Artin 整环 <span class="math inline">\(A / \mathfrak p\)</span> 是域．任取非零元 <span class="math inline">\(x \in A / \mathfrak p\)</span>，考察理想降链 <span class="math display">\[
-(x) \supseteq (x^2) \supseteq (x^3) \supseteq \dots
-\]</span> 由于 <span class="math inline">\(A / \mathfrak p\)</span> 是 Artin 环，降链稳定，则存在 <span class="math inline">\(k\)</span> 使得 <span class="math inline">\((x^k) = (x^{k+1})\)</span>，于是存在可逆元 <span class="math inline">\(c \in A / \mathfrak p\)</span> 使得 <span class="math inline">\(x^{k+1} = c x^k\)</span>．用整环消去律立得 <span class="math inline">\(x = c\)</span>，即 <span class="math inline">\(x\)</span> 可逆．因此 <span class="math inline">\(A / \mathfrak p\)</span> 是域，<span class="math inline">\(\mathfrak p\)</span> 是极大理想．</p>
-</div>
-</div>
-</div>
-</div></li>
-<li><p><span class="math inline">\(A\)</span> 是 Artin 环蕴含了 <span class="math inline">\(\mathfrak m\)</span> 幂零．根据上一条结果，<span class="math inline">\(\mathfrak m\)</span> 在 Artin 环中其实就是 nilradical，我们可以使用如下不太平凡的结果：</p>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<div id="prp-artin-nilradical-nilpotent" class="theorem proposition">
-<p><span class="theorem-title"><strong>命题 3 (<span class="citation" data-cites="m_f_atiyah_introduction_1969"><a href="#ref-m_f_atiyah_introduction_1969" role="doc-biblioref">[1, proposition 8.4]</a></span>)</strong></span> Artin 环的 nilradical（或 Jacobson radical）<span class="math inline">\(\mathfrak N\)</span> 是幂零理想．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Proof
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="proof">
-<p><span class="proof-title"><em>证明</em>. </span>Artinian 性质使得 <span class="math inline">\(\mathfrak N\)</span> 幂次组成的降链稳定，不妨设最后稳定在 <span class="math inline">\(\mathfrak L\)</span>，于是 <span class="math inline">\(\mathfrak N \mathfrak L = \mathfrak L\)</span>．假如 <span class="math inline">\(\mathfrak L\)</span> 非零，取一极小（Artin 降链条件保证能取到）非零子理想 <span class="math inline">\(\mathfrak a \subset \mathfrak L\)</span> 满足 <span class="math inline">\(\mathfrak a \mathfrak L \neq (0)\)</span>，则 <span class="math inline">\(\mathfrak a\)</span> 必为一主理想 <span class="math inline">\((a)\)</span>．但理想 <span class="math inline">\(a \mathfrak L\)</span> 也满足 <span class="math inline">\((a \mathfrak L) \mathfrak L = a(\mathfrak L \mathfrak L) = a \mathfrak L \neq (0)\)</span>，故由极小性，<span class="math inline">\((a) = a \mathfrak L\)</span>．于是存在 <span class="math inline">\(l \in \mathfrak L \subset \mathfrak N\)</span> 使得 <span class="math inline">\(a = al\)</span>．但 <span class="math inline">\(l\)</span> 是幂零元，故 <span class="math inline">\(a = al = al^2 = \dots = 0\)</span>，矛盾．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Remark
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>这个证明比较难想，主要是利用了 <span class="math inline">\(\mathfrak L\)</span> 是幂等理想的性质．事实上可以使用 Nakayama 引理证明：任何有限生成的幂等理想都是某一幂等元素生成的主理想．这个幂等元素就类似于上述证明中我们费力构造出的 <span class="math inline">\(a\)</span>．</p>
-</div>
-</div>
-</div>
-</div></li>
+<li>如果 <span class="math inline">\(A\)</span> 是 Noether 环，<span class="math inline">\(\mathfrak a\)</span> 落在 <span class="math inline">\(A\)</span> 的 Jacobson radical 中</li>
+<li>如果 <span class="math inline">\(A\)</span> 是 Noether 局部环，<span class="math inline">\(\mathfrak a\)</span> 是某一真理想</li>
+<li>如果 <span class="math inline">\(A\)</span> 是 Noether 整环，<span class="math inline">\(\mathfrak a\)</span> 是某一真理想</li>
 </ul>
-<p>综上，我们获得了局部环内 Artin 环等价于零维 Noether 环的证明．</p>
-</section>
-<section id="全局" class="level2">
-<h2 class="anchored" data-anchor-id="全局">全局</h2>
-<p>现在我们不再假设 <span class="math inline">\(A\)</span> 是局部环．发挥类似 <span class="math inline">\(\mathfrak m\)</span> 效果的理想变成了 Jacobson radical <span class="math inline">\(\mathfrak J := \bigcap_{\mathfrak m \in\operatorname{Specmax}(A)} \mathfrak m\)</span>．我们仍然可以考虑 <span class="math inline">\(\mathfrak J\)</span> 的各幂次形成的降链 <span class="math display">\[
-A \supseteq \mathfrak J \supseteq \mathfrak J^2 \supseteq \dots
-\]</span> 并讨论它的稳定性——类似的，我们<strong>要求 <span class="math inline">\(\mathfrak J\)</span> 是幂零理想</strong>．刚刚已经做过局部环的情况，自然会考虑做一下约化．Jacobson radical 作为极大理想的交很自然的让我们想到中国剩余定理，于是我们再<strong>加入一个条件：<span class="math inline">\(A\)</span> 的极大理想数量有限</strong>，此时 <span class="math display">\[
-\begin{aligned}
-A
-&amp;\cong A / \mathfrak J^k &amp; \text{by nilpotency of } \mathfrak J \\
-&amp;\cong A / \left(\bigcap_i \mathfrak m_i \right)^k \\
-&amp;\cong A / \left(\prod_i \mathfrak m_i \right)^k &amp; \text{by finite maximal ideals}\\
-&amp;\cong A / \prod_i \mathfrak m_i^k \\
-&amp;\cong \prod_i A / \mathfrak m_i^k &amp; \text{by Chinese Remainder Theorem}
-\end{aligned}
-\]</span> 注意 <span class="math inline">\(A / \mathfrak m_i^k\)</span> 都是极大理想为 <span class="math inline">\(\mathfrak m_i\)</span> 的局部环．于是 <span class="math inline">\(A\)</span> 被拆分为有限个局部环的直积．Artinian、Noetherian、零维的性质都因此在 <span class="math inline">\(A\)</span> 及其局部环间双向传播．这样 <span class="math display">\[
-\begin{aligned}
-A \text{ is Artinian}
-&amp;\iff A / m_i^k \text{ is Artinian for each } i \\
-&amp;\iff A / m_i^k \text{ is Noetherian and of Krull dimension $0$ for each } i \\
-&amp;\iff A \text{ is Noetherian and of Krull dimension $0$}
-\end{aligned}
-\]</span></p>
-<p>总结一下，<strong>在 Jacobson radical <span class="math inline">\(\mathfrak J\)</span> 幂零且极大理想数量有限的环中，Artinian 等价于零维 Noetherian</strong>．</p>
-<p>现在只需研究这额外增加的两个条件的性质．和我们在局部环中的讨论一致，Jacobson radical <span class="math inline">\(\mathfrak J\)</span> 的幂零性可由：</p>
+<p>可以看到，Krull 交定理使得 Noether 环的 Jacobson radical 的幂次理想降链一定“趋于”零理想，事实上只有两类情况：</p>
 <ul>
-<li><p>Artin 环：<a href="#prp-artin-nilradical-nilpotent" class="quarto-xref">命题&nbsp;3</a></p></li>
-<li><p>零维 Noether 环：<span class="math inline">\(\mathfrak J = \mathfrak N\)</span> 及 <a href="#prp-noether-nilradical-nilpotent" class="quarto-xref">命题&nbsp;1</a></p></li>
+<li>Jacobson radical 是幂零理想，此时环是 Artin 环</li>
+<li>Jacobson radical 幂次不稳定，但趋于零理想，例如形式幂级数环</li>
 </ul>
-<p>获得．而关于极大理想数量有限的条件：</p>
-<ul>
-<li><p>Artin 环：</p>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<div id="prp-artin-finite-specmax" class="theorem proposition">
-<p><span class="theorem-title"><strong>命题 4 (<span class="citation" data-cites="m_f_atiyah_introduction_1969"><a href="#ref-m_f_atiyah_introduction_1969" role="doc-biblioref">[1, proposition 8.3]</a></span>)</strong></span> Artin 环的极大理想数量有限．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Proof
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="proof">
-<p><span class="proof-title"><em>证明</em>. </span>考虑所有极大理想的有限交组成的理想族，通过 Artin 环的降链稳定性取出其中的一个极小理想，设它是 <span class="math inline">\(\mathfrak a := \mathfrak m_1 \cap \dots \cap \mathfrak m_k\)</span>．假若极大理想无限，则取一不同于 <span class="math inline">\(\mathfrak m_1, \dots, \mathfrak m_k\)</span> 的极大理想 <span class="math inline">\(\mathfrak m_{k+1}\)</span>，就有 <span class="math inline">\(a \cap m_{k+1} \subsetneq a\)</span>，与 <span class="math inline">\(\mathfrak a\)</span> 的极小性矛盾．</p>
-</div>
-</div>
-</div>
-</div></li>
-<li><p>零维 Noether 环：</p>
-<p>TODO：准素分解</p></li>
-</ul>
-<p>至此我们完成了 Artin 环等价于零维 Noether 环的证明．</p>
-<p>TODO：<span class="citation" data-cites="altman_term_2013"><a href="#ref-altman_term_2013" role="doc-biblioref">[2]</a></span> 提供了证明的另一条路径．</p>
-</section>
-<section id="extra主理想局部-noether-环的理想结构" class="level2">
-<h2 class="anchored" data-anchor-id="extra主理想局部-noether-环的理想结构">Extra：主理想局部 Noether 环的理想结构</h2>
-<p>当局部 Artin 环 <span class="math inline">\(A\)</span> 的极大理想 <span class="math inline">\(\mathfrak m\)</span> 是主理想时，<span class="math inline">\(A\)</span> 的理想结构将变得异常简单．以下结果甚至对 Noether 环也是成立的：</p>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<div id="prp-noether-local-principal" class="theorem proposition">
-<p><span class="theorem-title"><strong>命题 5 (<span class="citation" data-cites="m_f_atiyah_introduction_1969"><a href="#ref-m_f_atiyah_introduction_1969" role="doc-biblioref">[1, proposition 8.8]</a></span>，有改动)</strong></span> 设 <span class="math inline">\((A, \mathfrak m)\)</span> 是局部 Noether 环，则以下等价：</p>
-<ul>
-<li><span class="math inline">\(A\)</span> 是主理想环（PIR）；</li>
-<li><span class="math inline">\(\mathfrak m\)</span> 是主理想；</li>
-<li>作为 <span class="math inline">\(A / \mathfrak m\)</span>-线性空间，<span class="math inline">\(\dim (\mathfrak m / \mathfrak m^2) \leq 1\)</span>；</li>
-<li><span class="math inline">\(A\)</span> 是单链（uniserial）环，即其所有理想在包含关系下构成全序集；</li>
-<li><span class="math inline">\(A\)</span> 的全体（非平凡）理想均形如 <span class="math inline">\(\mathfrak m^k\)</span>．</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Proof
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="proof">
-<p><span class="proof-title"><em>证明</em>. </span>我们需要引用 Krull 交定理在局部环上的版本来获得 <span class="math display">\[
-\bigcap_{i \geq 0} \mathfrak m^i = (0)
-\]</span></p>
-<p>TODO．</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-
 
 
 <div id="quarto-appendix" class="default"><section id="acknowledgement" class="level2 appendix"><h2 class="anchored quarto-appendix-heading">Acknowledgement</h2><div class="quarto-appendix-contents">
@@ -703,14 +404,6 @@ Proof
 <p>感谢 Luna 在本文写作过程中提供的帮助和建议．</p>
 
 
-
-</div></section><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
-<div id="ref-m_f_atiyah_introduction_1969" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline">M. F. Atiyah 和 I.G. Macdonald, <em>Introduction To Commutative Algebra</em>. Addison-Wesley Publishing Company, Inc., 1969.</div>
-</div>
-<div id="ref-altman_term_2013" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">A. Altman 和 S. Kleiman, <em>A term of Commutative Algebra</em>. 2013.</div>
-</div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {

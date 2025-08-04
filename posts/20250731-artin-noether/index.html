@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.32">
@@ -7,9 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="sun123zxy">
-<meta name="dcterms.date" content="2025-06-02">
 
-<title>神奇流形在哪里 – sun123zxy’s blog</title>
+<title>Artin–Noether 乱炖 – sun123zxy's blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -383,22 +347,24 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#a-dense-curve-on-the-torus" id="toc-a-dense-curve-on-the-torus" class="nav-link active" data-scroll-target="#a-dense-curve-on-the-torus">A dense curve on the torus</a></li>
-  <li><a href="#hopf-fibration" id="toc-hopf-fibration" class="nav-link" data-scroll-target="#hopf-fibration">Hopf fibration</a></li>
+  <li><a href="#局部" id="toc-局部" class="nav-link active" data-scroll-target="#局部">局部</a></li>
+  <li><a href="#全局" id="toc-全局" class="nav-link" data-scroll-target="#全局">全局</a></li>
+  <li><a href="#extratfae-version" id="toc-extratfae-version" class="nav-link" data-scroll-target="#extratfae-version">Extra：TFAE version</a></li>
+  
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">神奇流形在哪里</h1>
-<p class="subtitle lead">Fantastic Manifolds and Where to Find Them</p>
+<h1 class="title">Artin–Noether 乱炖</h1>
+<p class="subtitle lead">On the commutative Akizuki–Hopkins–Levitzki Theorem</p>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
-    <div class="quarto-category">geometry</div>
+    <div class="quarto-category">algebra</div>
   </div>
   </div>
 
@@ -416,119 +382,354 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 2, 2025</p>
+      <p class="date">2025年8月1日</p>
     </div>
   </div>
   
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    交换幺环 Artinian 等价于零维 Noetherian．
+  </div>
+</div>
 
 
 </header>
 
 
-<div id="89d33e94" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.cm <span class="im">import</span> hsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<p>本文所指环均为交换幺环．我们重新编排一下 <span class="citation" data-cites="m_f_atiyah_introduction_1969"><a href="#ref-m_f_atiyah_introduction_1969" role="doc-biblioref">[1, chapter 8]</a></span> 的顺序，开发以下著名的 Artin 环等价刻画的证明：</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
 </div>
-<section id="a-dense-curve-on-the-torus" class="level2">
-<h2 class="anchored" data-anchor-id="a-dense-curve-on-the-torus">A dense curve on the torus</h2>
-<p><span class="math display">\[
-\gamma(t) := (e^{2\pi i t}, e^{2 \pi i \alpha t})
-\]</span> is an <span class="math inline">\(\mathbb R \to \mathbb T^2 \subset \mathbb C^2\)</span> immersion (Note that it’s injective!). The corresponding immersed <span class="math inline">\(1\)</span>-submanifold is a Lie subgroup that is dense in <span class="math inline">\(\mathbb T^2\)</span> (by Dirichlet’s approximation theorem), which confirms that it is not an embedded submanifold. For more information, see <span class="citation" data-cites="lee_introduction_2012"><a href="#ref-lee_introduction_2012" role="doc-biblioref">[1, Example 4.20]</a></span>.</p>
-<p>Below is a plot of this curve taking <span class="math inline">\(\alpha = \sqrt 2\)</span>. The torus is embedded in <span class="math inline">\(\mathbb R^3\)</span>. <span class="math display">\[
-\Phi(t) := \left( \cos( \alpha t ) \left( 1 + \frac{1}{2} \cos t \right), \sin( \alpha t ) \left( 1 + \frac{1}{2} \cos t \right), \frac{1}{2} \sin t \right)
-\]</span></p>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the parametric equations</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> phi(t):</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.cos(np.sqrt(<span class="dv">2</span>) <span class="op">*</span> t) <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> np.cos(t))</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.sin(np.sqrt(<span class="dv">2</span>) <span class="op">*</span> t) <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> np.cos(t))</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> np.sin(t)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x, y, z</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate t values</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">10000</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>x, y, z <span class="op">=</span> phi(t)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create figure with transparent background</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(facecolor<span class="op">=</span><span class="st">'none'</span>)  <span class="co"># &lt;-- Transparent figure</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>, facecolor<span class="op">=</span><span class="st">'none'</span>)  <span class="co"># &lt;-- Transparent axes</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the curve</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y, z)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Manually set equal aspect ratio</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>max_range <span class="op">=</span> np.array([x.<span class="bu">max</span>()<span class="op">-</span>x.<span class="bu">min</span>(), y.<span class="bu">max</span>()<span class="op">-</span>y.<span class="bu">min</span>(), z.<span class="bu">max</span>()<span class="op">-</span>z.<span class="bu">min</span>()]).<span class="bu">max</span>() <span class="op">*</span> <span class="fl">0.5</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>mid_x <span class="op">=</span> (x.<span class="bu">max</span>() <span class="op">+</span> x.<span class="bu">min</span>()) <span class="op">*</span> <span class="fl">0.5</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>mid_y <span class="op">=</span> (y.<span class="bu">max</span>() <span class="op">+</span> y.<span class="bu">min</span>()) <span class="op">*</span> <span class="fl">0.5</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>mid_z <span class="op">=</span> (z.<span class="bu">max</span>() <span class="op">+</span> z.<span class="bu">min</span>()) <span class="op">*</span> <span class="fl">0.5</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(mid_x <span class="op">-</span> max_range, mid_x <span class="op">+</span> max_range)</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(mid_y <span class="op">-</span> max_range, mid_y <span class="op">+</span> max_range)</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>ax.set_zlim(mid_z <span class="op">-</span> max_range, mid_z <span class="op">+</span> max_range)</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels and title (customize colors for visibility)</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'X'</span>)  <span class="co"># Ensure labels are visible</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Y'</span>)</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="st">'Z'</span>)</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust view</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>ax.view_init(elev<span class="op">=</span><span class="dv">30</span>, azim<span class="op">=</span><span class="dv">45</span>)</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div id="fig-dense-curve-on-torus" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-dense-curve-on-torus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="315796c8" class="cell" data-execution_count="2">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
-</figure>
+<div class="callout-body-container">
+<div id="thm-artin-noether" class="theorem">
+<p><span class="theorem-title"><strong>定理 1 (Akizuki–Hopkins–Levitzki)</strong></span> 环 <span class="math inline">\(A\)</span> 是 Artin 环当且仅当它是（Krull 维度）零维的 Noether 环．</p>
 </div>
 </div>
 </div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dense-curve-on-torus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: a dense curve on the torus
-</figcaption>
-</figure>
-</div>
-</section>
-<section id="hopf-fibration" class="level2">
-<h2 class="anchored" data-anchor-id="hopf-fibration">Hopf fibration</h2>
-<p>Recommended online meterials:</p>
+<p>回忆如果环 <span class="math inline">\(A\)</span> 作为 <span class="math inline">\(A\)</span>-模具有有限长度的合成列，那么它既是 Artin 环，也是 Noether 环<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>．故只需分析环拥有有限长度合成列的条件．</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;这甚至是充要条件，详见 <span class="citation" data-cites="altman_term_2013"><a href="#ref-altman_term_2013" role="doc-biblioref">[2, corollary 19.5]</a></span></p></div></div><section id="局部" class="level2">
+<h2 class="anchored" data-anchor-id="局部">局部</h2>
+<p>让我们先解决局部的情况．设 <span class="math inline">\(A\)</span> 是具有唯一极大理想 <span class="math inline">\(\mathfrak m\)</span> 的局部环．我们有一条天然的理想降链 <span class="math display">\[
+A \supseteq \mathfrak m \supseteq \mathfrak m^2 \supseteq \dots
+\]</span> 这条降链可能出现以下三种情况：</p>
 <ul>
-<li><a href="https://zhuanlan.zhihu.com/p/112985074">Hopf纤维化</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/51684298">MP69：典型群(3)：三维空间的旋转，Pauli矩阵、四元数、SO(3)~RP3、SU(2)~S3</a></li>
+<li><p>降链不稳定，即 <span class="math inline">\(m^i \supsetneq m^{i+1}\)</span>．</p>
+<p>如形式幂级数环 <span class="math inline">\(K[[x]]\)</span>．它是 Noether 环，不是 Artin 环，降链为： <span class="math display">\[
+K[[x]] \supsetneq (x) \supsetneq (x^2) \supsetneq \dots
+\]</span></p>
+<p>如多项式环 <span class="math inline">\(K[x]\)</span> 在素理想 <span class="math inline">\((x)\)</span> 处的局部化 <span class="math inline">\(K[x]_{(x)}\)</span>．它是 Noether 环，不是 Artin 环．</p>
+<p><span class="math display">\[
+  K[x]_{(x)} \supsetneq (x) \supsetneq (x^2) \supsetneq \dots
+\]</span></p></li>
+<li><p>降链稳定，即存在 <span class="math inline">\(k\)</span> 使得 <span class="math inline">\(\mathfrak m^k = \mathfrak m^{k+1} = \cdots\)</span>，但稳定的 <span class="math inline">\(\mathfrak m^k\)</span> 不是零理想．</p>
+<p>例子有点难找，我们暂且不表．</p></li>
+<li><p>降链稳定且 <span class="math inline">\(\mathfrak m^k = (0)\)</span>，即 <span class="math inline">\(\mathfrak m\)</span> 是幂零理想．</p>
+<p>如 <span class="math inline">\(K[x] / (x^3)\)</span>．它是 Noether 环，也是 Artin 环．</p></li>
 </ul>
-<p>Recall the three equivalent descriptions of <span class="math inline">\(\mathrm{SU}(2)\)</span>: <span class="math display">\[
-\begin{matrix}
-\mathbb T^3           &amp; \to &amp; \mathbb S^3 \subset \mathbb H &amp; \to   &amp; \mathrm{SU}(2) \\
-(\theta,\varphi,\psi) &amp; \substack{ a = \cos \theta \cos \varphi \\ b = \cos \theta \sin \varphi \\ c = \sin \theta \cos \psi \\ d = \sin \theta \sin \psi}  &amp; a \boldsymbol 1 + b \boldsymbol i + c \boldsymbol j + d \boldsymbol k &amp;              \substack{z=a+bi \\ w=c+di}  &amp; \begin{bmatrix}z &amp; w \\ -\bar w &amp; \bar z\end{bmatrix} \\
-                      &amp;     &amp;  a^2+b^2+c^2+d^2 = 1  &amp;       &amp; |z|^2 + |w|^2 = 1 \\
-\end{matrix}
-\]</span> More of these relationships can be found in <span class="citation" data-cites="stillwell_naive_2008"><a href="#ref-stillwell_naive_2008" role="doc-biblioref">[2, Ch. 1–2]</a></span>. A nice figure of the Hopf fibration can be found in <span class="citation" data-cites="stillwell_naive_2008"><a href="#ref-stillwell_naive_2008" role="doc-biblioref">[2, Secs. 2.2, figure 2.2]</a></span>. The circle decomposition of <span class="math inline">\(\mathbb S^3\)</span> is just the coset partition of <span class="math inline">\(\mathbb S^3 \subset \mathbb H\)</span> by the subgroup <span class="math inline">\(\langle a + b \boldsymbol i : a^2+b^2=1 \rangle\)</span>.</p>
-<p>Fibre bundle description: TODO</p>
-
-
-
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>事实上，如果环是 Noetherian 的，第二种情况不可能出现——这用 Nakayama 引理分析降链尾部稳定部分立得；而第一种情况的降链也必然趋于零理想——这是局部环上的 Krull 交定理保证的．</p>
+</div>
+</div>
+</div>
+</div>
+<p>根据这些例子，看起来我们有必要<strong>加入 <span class="math inline">\(\mathfrak m\)</span> 是幂零理想的条件</strong>．设其幂零指数为 <span class="math inline">\(k\)</span>．此时有理想降链 <span class="math display">\[
+A \supseteq \mathfrak m \supseteq \mathfrak m^2 \supseteq \dots \supseteq \mathfrak m^k = (0)
+\]</span> 让我们试着把它补全成一个合成列．<span class="math inline">\(A / \mathfrak m\)</span> 是域；<span class="math inline">\(\mathfrak m^i / \mathfrak m^{i+1}\)</span> 是 <span class="math inline">\(A / \mathfrak m\)</span>-模，也就是线性空间．嗯，于是想让它长度有限，只需要求每个 <span class="math inline">\(\mathfrak m^i / \mathfrak m^{i+1}\)</span> 的维数有限即可．而在线性空间里，Artinian 和 Noetherian 是等价的，而这两个性质都是子模、商模遗传的——故 <strong><span class="math inline">\(\mathfrak m\)</span> 幂零时，局部环 <span class="math inline">\(A\)</span> 的 Artinian 性质和 Noetherian 性质等价</strong>．</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>这个思路其实是 <span class="citation" data-cites="m_f_atiyah_introduction_1969"><a href="#ref-m_f_atiyah_introduction_1969" role="doc-biblioref">[1, corollary 6.11]</a></span> 的特例．</p>
+</div>
+</div>
+</div>
+</div>
+<p>那什么时候 <span class="math inline">\(\mathfrak m\)</span> 幂零呢？</p>
+<ul>
+<li><p><span class="math inline">\(\mathfrak m\)</span> 幂零蕴含着 Krull 维度为零．设 <span class="math inline">\(\mathfrak m^k = (0)\)</span>，两端同时取 radical 就有 <span class="math inline">\(\mathfrak m = \sqrt{(0)}\)</span>，后者是 nilradical，是全体素理想的交．那随便取一素理想 <span class="math inline">\(\mathfrak p\)</span> 就有 <span class="math inline">\(\mathfrak m = \sqrt{(0)} \subseteq \mathfrak p\)</span>，再用 <span class="math inline">\(\mathfrak m\)</span> 的极大性就有 <span class="math inline">\(\mathfrak m = \mathfrak p\)</span>，也就是说 <span class="math inline">\(\mathfrak m\)</span> 也是局部环 <span class="math inline">\(A\)</span> 唯一的素理想．因此 <span class="math inline">\(A\)</span> 的 Krull 维度为零．</p></li>
+<li><p>当 <span class="math inline">\(A\)</span> 是 Noether 环时，Krull 维度为零可以推出 <span class="math inline">\(\mathfrak m\)</span> 幂零．Krull 维数为零意味着 <span class="math inline">\(\mathfrak m\)</span> 就是 nilradical，后者在 Noether 环中是幂零理想：</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-noether-nilradical-nilpotent" class="theorem proposition">
+<p><span class="theorem-title"><strong>命题 1</strong></span> Noether 环中 nilradical 是幂零理想．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span>容易利用生成元有限和鸽巢原理得证．</p>
+</div>
+</div>
+</div>
+</div></li>
+<li><p><span class="math inline">\(A\)</span> 是 Artin 环蕴含了 <span class="math inline">\(A\)</span> 是零维的——我们直接给出一般情况的证明：</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-artin-zero-dim" class="theorem proposition">
+<p><span class="theorem-title"><strong>命题 2 (<span class="citation" data-cites="m_f_atiyah_introduction_1969"><a href="#ref-m_f_atiyah_introduction_1969" role="doc-biblioref">[1, proposition 8.1]</a></span>)</strong></span> Artin 环中的素理想都是极大理想．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span>设 <span class="math inline">\(A\)</span> 是 Artin 环，<span class="math inline">\(\mathfrak p\)</span> 是 <span class="math inline">\(A\)</span> 的素理想．注意 Artinian 性质在商模上保持，我们证明 Artin 整环 <span class="math inline">\(A / \mathfrak p\)</span> 是域．任取非零元 <span class="math inline">\(x \in A / \mathfrak p\)</span>，考察理想降链 <span class="math display">\[
+(x) \supseteq (x^2) \supseteq (x^3) \supseteq \dots
+\]</span> 由于 <span class="math inline">\(A / \mathfrak p\)</span> 是 Artin 环，降链稳定，则存在 <span class="math inline">\(k\)</span> 使得 <span class="math inline">\((x^k) = (x^{k+1})\)</span>，于是存在可逆元 <span class="math inline">\(c \in A / \mathfrak p\)</span> 使得 <span class="math inline">\(x^{k+1} = c x^k\)</span>．用整环消去律立得 <span class="math inline">\(x = c\)</span>，即 <span class="math inline">\(x\)</span> 可逆．因此 <span class="math inline">\(A / \mathfrak p\)</span> 是域，<span class="math inline">\(\mathfrak p\)</span> 是极大理想．</p>
+</div>
+</div>
+</div>
+</div></li>
+<li><p><span class="math inline">\(A\)</span> 是 Artin 环蕴含了 <span class="math inline">\(\mathfrak m\)</span> 幂零．根据上一条结果，<span class="math inline">\(\mathfrak m\)</span> 在 Artin 环中其实就是 nilradical，我们可以使用如下不太平凡的结果：</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-artin-nilradical-nilpotent" class="theorem proposition">
+<p><span class="theorem-title"><strong>命题 3 (<span class="citation" data-cites="m_f_atiyah_introduction_1969"><a href="#ref-m_f_atiyah_introduction_1969" role="doc-biblioref">[1, proposition 8.4]</a></span>)</strong></span> Artin 环的 nilradical（或 Jacobson radical）<span class="math inline">\(\mathfrak N\)</span> 是幂零理想．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span>Artinian 性质使得 <span class="math inline">\(\mathfrak N\)</span> 幂次组成的降链稳定，不妨设最后稳定在 <span class="math inline">\(\mathfrak L\)</span>，于是 <span class="math inline">\(\mathfrak N \mathfrak L = \mathfrak L\)</span>．假如 <span class="math inline">\(\mathfrak L\)</span> 非零，取一极小（Artin 降链条件保证能取到）非零子理想 <span class="math inline">\(\mathfrak a \subset \mathfrak L\)</span> 满足 <span class="math inline">\(\mathfrak a \mathfrak L \neq (0)\)</span>，则 <span class="math inline">\(\mathfrak a\)</span> 必为一主理想 <span class="math inline">\((a)\)</span>．但理想 <span class="math inline">\(a \mathfrak L\)</span> 也满足 <span class="math inline">\((a \mathfrak L) \mathfrak L = a(\mathfrak L \mathfrak L) = a \mathfrak L \neq (0)\)</span>，故由极小性，<span class="math inline">\((a) = a \mathfrak L\)</span>．于是存在 <span class="math inline">\(l \in \mathfrak L \subset \mathfrak N\)</span> 使得 <span class="math inline">\(a = al\)</span>．但 <span class="math inline">\(l\)</span> 是幂零元，故 <span class="math inline">\(a = al = al^2 = \dots = 0\)</span>，矛盾．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>这个证明比较难想，主要是利用了 <span class="math inline">\(\mathfrak L\)</span> 是幂等理想的性质．事实上可以使用 Nakayama 引理证明：任何有限生成的幂等理想都是某一幂等元素生成的主理想．这个幂等元素就类似于上述证明中我们费力构造出的 <span class="math inline">\(a\)</span>．</p>
+</div>
+</div>
+</div>
+</div></li>
+</ul>
+<p>综上，我们获得了局部环内 Artin 环等价于零维 Noether 环的证明．</p>
+</section>
+<section id="全局" class="level2">
+<h2 class="anchored" data-anchor-id="全局">全局</h2>
+<p>现在我们不再假设 <span class="math inline">\(A\)</span> 是局部环．发挥类似 <span class="math inline">\(\mathfrak m\)</span> 效果的理想变成了 Jacobson radical <span class="math inline">\(\mathfrak J := \bigcap_{\mathfrak m \in\operatorname{Specmax}(A)} \mathfrak m\)</span>．我们仍然可以考虑 <span class="math inline">\(\mathfrak J\)</span> 的各幂次形成的降链 <span class="math display">\[
+A \supseteq \mathfrak J \supseteq \mathfrak J^2 \supseteq \dots
+\]</span> 并讨论它的稳定性——类似的，我们<strong>要求 <span class="math inline">\(\mathfrak J\)</span> 是幂零理想</strong>．刚刚已经做过局部环的情况，自然会考虑做一下约化．Jacobson radical 作为极大理想的交很自然的让我们想到中国剩余定理，于是我们再<strong>加入一个条件：<span class="math inline">\(A\)</span> 的极大理想数量有限</strong>，此时 <span class="math display">\[
+\begin{aligned}
+A
+&amp;\cong A / \mathfrak J^k &amp; \text{by nilpotency of } \mathfrak J \\
+&amp;\cong A / \left(\bigcap_i \mathfrak m_i \right)^k \\
+&amp;\cong A / \left(\prod_i \mathfrak m_i \right)^k &amp; \text{by finite maximal ideals}\\
+&amp;\cong A / \prod_i \mathfrak m_i^k \\
+&amp;\cong \prod_i A / \mathfrak m_i^k &amp; \text{by Chinese Remainder Theorem}
+\end{aligned}
+\]</span> 注意 <span class="math inline">\(A / \mathfrak m_i^k\)</span> 都是极大理想为 <span class="math inline">\(\mathfrak m_i\)</span> 的局部环．于是 <span class="math inline">\(A\)</span> 被拆分为有限个局部环的直积．Artinian、Noetherian、零维的性质都因此在 <span class="math inline">\(A\)</span> 及其局部环间双向传播．这样 <span class="math display">\[
+\begin{aligned}
+A \text{ is Artinian}
+&amp;\iff A / m_i^k \text{ is Artinian for each } i \\
+&amp;\iff A / m_i^k \text{ is Noetherian and of Krull dimension $0$ for each } i \\
+&amp;\iff A \text{ is Noetherian and of Krull dimension $0$}
+\end{aligned}
+\]</span></p>
+<p>总结一下，<strong>在 Jacobson radical <span class="math inline">\(\mathfrak J\)</span> 幂零且极大理想数量有限的环中，Artinian 等价于零维 Noetherian</strong>．</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>上述将 Artin 环分解为若干 Artin 局部环的分解被称为 Artin 环的结构定理．该分解事实上还具有唯一性，请参考 <span class="citation" data-cites="m_f_atiyah_introduction_1969"><a href="#ref-m_f_atiyah_introduction_1969" role="doc-biblioref">[1, theorem 8.7]</a></span>．</p>
+</div>
+</div>
+</div>
+</div>
+<p>现在只需研究这额外增加的两个条件的性质．和我们在局部环中的讨论一致，Jacobson radical <span class="math inline">\(\mathfrak J\)</span> 的幂零性可由：</p>
+<ul>
+<li><p>Artin 环：<a href="#prp-artin-nilradical-nilpotent" class="quarto-xref">命题&nbsp;3</a></p></li>
+<li><p>零维 Noether 环：<span class="math inline">\(\mathfrak J = \mathfrak N\)</span> 及 <a href="#prp-noether-nilradical-nilpotent" class="quarto-xref">命题&nbsp;1</a></p></li>
+</ul>
+<p>获得．而关于极大理想数量有限的条件：</p>
+<ul>
+<li><p>Artin 环：</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-artin-finite-specmax" class="theorem proposition">
+<p><span class="theorem-title"><strong>命题 4 (<span class="citation" data-cites="m_f_atiyah_introduction_1969"><a href="#ref-m_f_atiyah_introduction_1969" role="doc-biblioref">[1, proposition 8.3]</a></span>)</strong></span> Artin 环的极大理想数量有限．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span>考虑所有极大理想的有限交组成的理想族，通过 Artin 环的降链稳定性取出其中的一个极小理想，设它是 <span class="math inline">\(\mathfrak a := \mathfrak m_1 \cap \dots \cap \mathfrak m_k\)</span>．假若极大理想无限，则取一不同于 <span class="math inline">\(\mathfrak m_1, \dots, \mathfrak m_k\)</span> 的极大理想 <span class="math inline">\(\mathfrak m_{k+1}\)</span>，就有 <span class="math inline">\(a \cap m_{k+1} \subsetneq a\)</span>，与 <span class="math inline">\(\mathfrak a\)</span> 的极小性矛盾．</p>
+</div>
+</div>
+</div>
+</div></li>
+<li><p>零维 Noether 环：</p>
+<p>TODO：准素分解</p></li>
+</ul>
+<p>至此我们完成了 Artin 环等价于零维 Noether 环的证明．</p>
+<p>TODO：<span class="citation" data-cites="altman_term_2013"><a href="#ref-altman_term_2013" role="doc-biblioref">[2]</a></span> 提供了证明的另一条路径．</p>
+</section>
+<section id="extratfae-version" class="level2">
+<h2 class="anchored" data-anchor-id="extratfae-version">Extra：TFAE version</h2>
+<p>既然已经知道 Artinian 强于 Noetherian，让我们把定理改写成更加令人印象深刻的形式：</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-artin-noether-ex" class="theorem">
+<p><span class="theorem-title"><strong>定理 2</strong></span> 以下条件对 Noether 环 <span class="math inline">\(A\)</span> 等价：</p>
+<ul>
+<li><span class="math inline">\(A\)</span> 作为 <span class="math inline">\(A\)</span>-模具有有限合成列；</li>
+<li><span class="math inline">\(A\)</span> 是 Artin 环；</li>
+<li><span class="math inline">\(A\)</span> 的 Jacobson radical <span class="math inline">\(\mathfrak J\)</span> 是幂零理想；</li>
+<li><span class="math inline">\(A\)</span> 的 Krull 维度为零．</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span>TODO，尤其是 Jacobson radical 幂零的部分．</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
-<div id="ref-lee_introduction_2012" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline">J. M. Lee, <em>Introduction to smooth manifolds</em>, vol. 218. in Graduate texts in mathematics, vol. 218. New York, <span>NY</span>: Springer, 2012. doi: <a href="https://doi.org/10.1007/978-1-4419-9982-5">10.1007/978-1-4419-9982-5</a>.</div>
+
+
+<div id="quarto-appendix" class="default"><section id="acknowledgement" class="level2 appendix"><h2 class="anchored quarto-appendix-heading">Acknowledgement</h2><div class="quarto-appendix-contents">
+
+<p>感谢 Luna 在本文写作过程中提供的帮助和建议．</p>
+
+
+
+</div></section><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-m_f_atiyah_introduction_1969" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">M. F. Atiyah 和 I.G. Macdonald, <em>Introduction To Commutative Algebra</em>. Addison-Wesley Publishing Company, Inc., 1969.</div>
 </div>
-<div id="ref-stillwell_naive_2008" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">J. Stillwell, <em>Naive lie theory</em>. in Undergraduate texts in mathematics. New York, <span>NY</span>: Springer, 2008. doi: <a href="https://doi.org/10.1007/978-0-387-78214-0">10.1007/978-0-387-78214-0</a>.</div>
+<div id="ref-altman_term_2013" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">A. Altman 和 S. Kleiman, <em>A term of Commutative Algebra</em>. 2013.</div>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
