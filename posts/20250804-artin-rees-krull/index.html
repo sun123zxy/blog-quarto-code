@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.7.33">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -38,12 +38,12 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-236d90495073fb2ac8939117e3e83141.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-4a6024c8e726f0003063457aed99150f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dcd723bd3e2d8e65306aa707aebc1039.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-85db7d5dcf7cb494a729c344c7ce1ef6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-a071ded3bad69e2fb742acd62726e5c9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-9925dae29749dc91f9b309f203d81f23.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-22c4f84cd9759e0761f9cca58362f8eb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7d0000408bde71fab4edf7b39a758e1e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -397,6 +397,51 @@ window.Quarto = {
 <li>Jacobson radical 是幂零理想，例如 Artin 环，多项式环</li>
 <li>Jacobson radical 幂次不稳定，但趋于零理想，例如形式幂级数环</li>
 </ul>
+<p>下面来开发证明．<span class="math inline">\(\supseteq\)</span> 一侧是相对容易的： <span class="math display">\[
+(1-a) x = 0 \implies ax=x \implies a^n x = x \implies x \in \mathfrak a^n
+\]</span> 来看另一侧．记 <span class="math inline">\(\bigcap_{i=0}^\infty \mathfrak a^i =: \mathfrak A\)</span>，让我们猜测 <span class="math display">\[
+\mathfrak a \mathfrak A = \mathfrak A
+\]</span> 这样由 Nakayama 引理就存在 <span class="math inline">\(1-a \in \mathfrak A\)</span> 使得 <span class="math inline">\((1-a) \mathfrak A = 0\)</span>，得证．</p>
+<p>所以关键在于怎么证明 <span class="math inline">\(\mathfrak a \mathfrak A = \mathfrak A\)</span>．想象中，我们怎么把左边乘在外面的 <span class="math inline">\(\mathfrak a\)</span> 想办法放入交中？</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-artin-rees" class="theorem">
+<p><span class="theorem-title"><strong>定理 2 (Artin–Rees)</strong></span> 设 <span class="math inline">\(R\)</span> 为一 Noether 环，<span class="math inline">\(I\)</span> 是 <span class="math inline">\(R\)</span> 的一个理想，<span class="math inline">\(M\)</span> 为一有限生成 <span class="math inline">\(R\)</span>-模，<span class="math inline">\(N\)</span> 是 <span class="math inline">\(M\)</span> 的子模．则存在正整数 <span class="math inline">\(k\)</span> 使得 <span class="math display">\[
+I^{n} (I^k M \cap N) = I^{n+k} M \cap N
+\]</span> 对任意 <span class="math inline">\(n \in \mathbb N\)</span> 成立．</p>
+</div>
+</div>
+</div>
+</div>
+<p>使用该引理，取 <span class="math inline">\(R = A\)</span>, <span class="math inline">\(I = \mathfrak a\)</span>, <span class="math inline">\(M=\mathfrak a^k\)</span>, <span class="math inline">\(N=\bigcap_{i=k+1}^\infty \mathfrak a^i\)</span>, <span class="math inline">\(n=1\)</span> 就有 <span class="math display">\[
+\mathfrak a \mathfrak A
+= \mathfrak a \bigcap_{i=k}^\infty \mathfrak a^i
+= \mathfrak a \left( \mathfrak a^k \cap \bigcap_{i=k+1}^\infty \mathfrak a^i \right)
+= \mathfrak a^{k+1} \cap \bigcap_{i=k+1}^\infty \mathfrak a^i
+= \mathfrak A
+\]</span> 证毕．下面来证明引理．</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof (<a href="#thm-artin-rees" class="quarto-xref">定理&nbsp;2</a>)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em> (<a href="#thm-artin-rees" class="quarto-xref">定理&nbsp;2</a>). </span>左边一定是在右边里的．我们来证明右边一定包含在左边里．TODO</p>
+</div>
+</div>
+</div>
+</div>
 
 
 <div id="quarto-appendix" class="default"><section id="acknowledgement" class="level2 appendix"><h2 class="anchored quarto-appendix-heading">Acknowledgement</h2><div class="quarto-appendix-contents">
