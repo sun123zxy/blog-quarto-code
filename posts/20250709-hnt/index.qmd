@@ -20,14 +20,58 @@ format:
 ---
 
 \renewcommand{\vec}{\boldsymbol}
+\newcommand{\X}{\mathrm X}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\Specmax}{\operatorname{Specmax}}
+\newcommand{\ev}{\operatorname{ev}}
 
-> 我们在代数闭域 $K = \overline K$ 中工作．环均为含幺交换环．记 $K[\vec X]$ 为 $K$ 上的多元多项式环．
+我们在代数闭域 $K = \overline K$ 中工作．环均为含幺交换环．记号上我们用 $\X$ 标记多项式不定元，用 $\vec x$ 表示向量．记 $K[\vec\X]$ 为 $K$ 上的 $n$ 元多项式环，$\Spec A$ 为环 $A$ 的全体素理想，$\Specmax A$ 为环 $A$ 的全体极大理想．
 
-一般把 Hilbert 零点定理分为弱形式和强形式．$\mathcal M$
+我们假设读者具有 nilradical 的幂零元刻画和局部化素理想对应定理的常识．
+
+考虑带入映射 $\ev_{\vec x}: K[\vec\X] \to K$, $f \mapsto f(\vec x)$．这映射的核 $\ker \ev_{\vec x}$ 为所有在点 $\vec x$ 处取值为零的多项式，且 $K[\vec\X] / \ker \ev_{\vec x} \cong K$，故它是极大理想．容易验证理想 $(\X_i - x_i)_{i=1}^n \subseteq \ker \ev_{\vec x}$ 且也是极大理想，故二者相等．这意味着 $\vec x \mapsto \ker \ev_{\vec x}$ 给出了一个 $K^n \to \Specmax K[\vec\X]$ 的映射——容易验证它也是单射．
+
+弱形式的 Hilbert 零点定理断言这个映射甚至还是满射：
 
 :::{#thm-hnt-weak}
 
 ## Hilbert's Nullstellensatz (Weak Form)
 
-
+$K[\vec\X]$ 中的极大理想都是点，即均形如 $(\X_i - x_i)_{i=1}^n$．
 :::
+
+来考虑怎么证明．对任意 $K[\vec\X]$ 的极大理想 $\mathfrak m$，我们来想办法把它对应的点找出来．考察 $K[\vec x] \to K[\vec x] / \mathfrak m$，后者是一个域．如果后者同构于 $K$ 的话，那么复合映射
+$$
+K[\vec x] \to K[\vec x] / \mathfrak m \cong K
+$$
+就把 $\X_i$ 映到某一 $k_i \in K$，这样就有 $(\X_i - k_i)_{i=1}^n \subset \mathfrak m$ 了．考虑到前者的极大性，我们便有 $(\X_i - k_i)_{i=1}^n = \mathfrak m$．
+
+那关键在于为什么一定有 $K[\vec x] / \mathfrak m \cong K$，而不是什么别的域．我们介绍一个极其重要的引理：
+
+:::{#prp-fg-algebra-fd-of-field}
+
+有限生成 $K$-代数 $A$ 如果是一个域，则它也是有限维的．
+:::
+
+:::{.proof}
+
+TODO，并不容易．有多种证明路径．
+:::
+
+那么作为推论，对任意 $A$ 的极大理想 $\mathfrak m$，$A / \mathfrak m$ 都是 $K$ 的有限维扩张，因此也是代数扩张．当 $K$ 是代数闭域的时候，我们就有 $A / \mathfrak m \cong K$．特别地取 $A = K[\vec \X]$ 就补全了 [@#thm-hnt-weak] 证明缺失的步骤．
+
+Hilbert 零点定理还有更强的形式：
+
+:::{#thm-hnt-strong}
+
+## Hilbert's Nullstellensatz (Strong Form)
+
+$K[\vec \X]$ 是 Jacobson 环——即以下 TFAE 的任意一条均成立：
+
+- 任何 $K[\vec \X]$ 的素理想可以写为包含它的所有极大理想的交
+- 任何有限生成 $K$-代数 $A \cong K[\vec \X] / \mathfrak a$ 的 Jacobson radical 与其 nilradical 相等
+:::
+
+为什么说它更强？TODO
+
+TFAE 是平凡的，让我们来证第二条，即任意 $A$ Jacobson radical 中的元素 $\bar f$ 都是幂零元——这当且仅当 $A$ 在 $\bar f$ 处的局部化 $A_{\bar f} = 0$，也就是任意 $g \in A$ 都可以通过乘上某个 $f$ 的幂次变成 $0$．
