@@ -4,12 +4,12 @@
 \RequirePackage{xstring}
 \IfBeginWith{$lang$}{zh}{
     \zhtrue
-    \documentclass[fontset=fandol, zihao=5]{ctexart}
+    \documentclass[fontset=fandol,$if(fontsize)$ $fontsize$,$endif$]{ctexart}
     \def\transmodified{最后更新于}
     \def\transtoc{目录}
 }{
     \zhfalse
-    \documentclass{article}
+    \documentclass[$if(fontsize)$ $fontsize$,$endif$]{article}
     \usepackage{xeCJK}
     \def\transmodified{Last modified on}
     \def\transtoc{Table of Contents}
@@ -193,6 +193,14 @@ $endif$
 
 \fi % endthm
 
+% --- SunQuarTeX ---
+
+\newcommand{\SunQuarTeX}{\phantom{}\kern-.0em\lower.0ex\hbox{\(\mathbf S\)}\kern-.045em\lower.0ex\hbox{\(\scriptstyle \mathbf U\)}\kern-.045em\hbox{\(\scriptstyle \mathbb N\)}\kern-.0em\hbox{\(\mathbb Q\)}\kern-.045em\lower.0ex\hbox{\(\scriptstyle \mathbf U\)}\kern-.135em\lower.0ex\hbox{\(\scriptstyle \mathbf A\)}\kern-.09em\lower.0ex\hbox{\(\scriptstyle \mathbb R\)}\kern-.072em\text{\bfseries\TeX}}
+
+$if(header-includes)$
+$header-includes/first$
+$endif$
+
 % --- main ---
 
 \title{$title$}
@@ -215,6 +223,11 @@ $if(abstract)$
 \end{abstract}
 $endif$
 
+$for(include-before)$
+$include-before$
+
+$endfor$
+
 $if(toc)$
 $if(toc-title)$
 \renewcommand*\contentsname{\transtoc}
@@ -232,5 +245,10 @@ $body$
 \else
   \printbibliography
 \fi
+
+$for(include-after)$
+$include-after$
+
+$endfor$
 
 \end{document}
