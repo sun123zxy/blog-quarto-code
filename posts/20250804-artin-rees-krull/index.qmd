@@ -40,6 +40,46 @@ $$
 - Jacobson radical 是幂零理想，例如 Artin 环，多项式环
 - Jacobson radical 幂次不稳定，但趋于零理想，例如形式幂级数环
 
+下面来开发证明．$\supseteq$ 一侧是相对容易的：
+$$
+(1-a) x = 0 \implies ax=x \implies a^n x = x \implies x \in \mathfrak a^n
+$$
+来看另一侧．记 $\bigcap_{i=0}^\infty \mathfrak a^i =: \mathfrak A$，让我们猜测
+$$
+\mathfrak a \mathfrak A = \mathfrak A
+$$
+这样由 Nakayama 引理就存在 $1-a \in \mathfrak A$ 使得 $(1-a) \mathfrak A = 0$，得证．
+
+所以关键在于怎么证明 $\mathfrak a \mathfrak A = \mathfrak A$．想象中，我们怎么把左边乘在外面的 $\mathfrak a$ 想办法放入交中？
+
+:::{#thm-artin-rees}
+
+## Artin--Rees
+
+设 $R$ 为一 Noether 环，$I$ 是 $R$ 的一个理想，$M$ 为一有限生成 $R$-模，$N$ 是 $M$ 的子模．则存在正整数 $k$ 使得
+$$
+I^{n} (I^k M \cap N) = I^{n+k} M \cap N
+$$
+对任意 $n \in \mathbb N$ 成立．
+:::
+
+使用该引理，取 $R = A$, $I = \mathfrak a$, $M=\mathfrak a^k$, $N=\bigcap_{i=k+1}^\infty \mathfrak a^i$, $n=1$ 就有
+$$
+\mathfrak a \mathfrak A
+= \mathfrak a \bigcap_{i=k}^\infty \mathfrak a^i
+= \mathfrak a \left( \mathfrak a^k \cap \bigcap_{i=k+1}^\infty \mathfrak a^i \right)
+= \mathfrak a^{k+1} \cap \bigcap_{i=k+1}^\infty \mathfrak a^i
+= \mathfrak A
+$$
+证毕．下面来证明引理．
+
+:::{.proof}
+
+## [@thm-artin-rees]
+
+左边一定是在右边里的．我们来证明右边一定包含在左边里．TODO
+:::
+
 ## Acknowledgement {.appendix}
 
 感谢 Luna 在本文写作过程中提供的帮助和建议．
