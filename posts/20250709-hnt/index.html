@@ -100,6 +100,7 @@ MathJax = {
   }
 };
 </script>
+<meta name="quarto:status" content="draft">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -296,7 +297,7 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -355,12 +356,13 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#hilberts-nullstellensatz-theorem" id="toc-hilberts-nullstellensatz-theorem" class="nav-link active" data-scroll-target="#hilberts-nullstellensatz-theorem"><span class="header-section-number">1</span> Hilbert’s Nullstellensatz Theorem</a></li>
+  <li><a href="#hilberts-nullstellensatz" id="toc-hilberts-nullstellensatz" class="nav-link active" data-scroll-target="#hilberts-nullstellensatz"><span class="header-section-number">1</span> Hilbert’s Nullstellensatz</a></li>
   <li><a href="#idealvariety-correspondence" id="toc-idealvariety-correspondence" class="nav-link" data-scroll-target="#idealvariety-correspondence"><span class="header-section-number">2</span> Ideal–Variety Correspondence</a>
   <ul class="collapse">
   <li><a href="#world-of-prime-ideals" id="toc-world-of-prime-ideals" class="nav-link" data-scroll-target="#world-of-prime-ideals"><span class="header-section-number">2.1</span> World of Prime Ideals</a></li>
   <li><a href="#world-of-maximal-ideals" id="toc-world-of-maximal-ideals" class="nav-link" data-scroll-target="#world-of-maximal-ideals"><span class="header-section-number">2.2</span> World of Maximal Ideals</a></li>
   </ul></li>
+  <li><a href="#a-few-remarks" id="toc-a-few-remarks" class="nav-link" data-scroll-target="#a-few-remarks"><span class="header-section-number">3</span> A Few Remarks</a></li>
   </ul>
 </nav>
     </div>
@@ -396,13 +398,19 @@ window.Quarto = {
     </div>
   </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">2025年8月18日</p>
+    </div>
+  </div>
     
   </div>
   
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    On Hilbert’s Nullstellensatz theorem and the ideal–variety correspondence.
+    On Hilbert’s Nullstellensatz and the ideal–variety correspondence.
   </div>
 </div>
 
@@ -410,13 +418,13 @@ window.Quarto = {
 </header>
 
 
-<p>我们在代数闭域 <span class="math inline">\(K = \overline K\)</span> 中工作．环均为含幺交换环．</p>
+<p>本文所指环均为含幺交换环．</p>
 <p>记号上我们用正体大写字母 <span class="math inline">\(\mathrm{X}\)</span> 标记多项式不定元，用粗体 <span class="math inline">\(\boldsymbol{x}\)</span> 标记向量．记 <span class="math inline">\(K[\boldsymbol{\mathrm{X}}]\)</span> 为 <span class="math inline">\(K\)</span> 上的 <span class="math inline">\(n\)</span> 元多项式环——这个记号可以有两种理解方式：一种是认为 <span class="math inline">\(\boldsymbol{\mathrm{X}}\)</span> 是不定元的向量，另一种是就认为 <span class="math inline">\(\boldsymbol{\mathrm{X}}\)</span> 就是 <span class="math inline">\(n\)</span> 维仿射空间 <span class="math inline">\(K^n\)</span>，而 <span class="math inline">\(K[\boldsymbol{\mathrm{X}}]\)</span> 是它的坐标环．</p>
-<p>我们记 <span class="math inline">\(\operatorname{Spec}R\)</span> 为环 <span class="math inline">\(R\)</span> 的全体素理想，<span class="math inline">\(\operatorname{Specmax}R\)</span> 为环 <span class="math inline">\(R\)</span> 的全体极大理想．</p>
-<section id="hilberts-nullstellensatz-theorem" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="hilberts-nullstellensatz-theorem"><span class="header-section-number">1</span> Hilbert’s Nullstellensatz Theorem</h2>
+<p>我们记 <span class="math inline">\(\operatorname{Spec}R\)</span> 为环 <span class="math inline">\(R\)</span> 的全体素理想，<span class="math inline">\(\operatorname{Specmax}R\)</span> 为环 <span class="math inline">\(R\)</span> 的全体极大理想．对任意 <span class="math inline">\(R\)</span> 的理想 <span class="math inline">\(\mathfrak a\)</span>，记 <span class="math inline">\(J(\mathfrak a)\)</span> 是其 Jacobson radical，即全体包含 <span class="math inline">\(\mathfrak a\)</span> 的极大理想的交．记 <span class="math inline">\(\sqrt{\mathfrak a}\)</span> 为理想 <span class="math inline">\(\mathfrak a\)</span> 的根理想 / nilradical，即 <span class="math inline">\(\{ f \in R : f^n \in \mathfrak a \text{ for some } n \in \mathbb N_+ \}\)</span>．<span class="citation" data-cites="m_f_atiyah_introduction_1969"><a href="#ref-m_f_atiyah_introduction_1969" role="doc-biblioref">[1, proposition 1.8]</a></span> 给出了 nilradical 的等价刻画：它也是全体包含 <span class="math inline">\(\mathfrak a\)</span> 的素理想的交．</p>
+<section id="hilberts-nullstellensatz" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="hilberts-nullstellensatz"><span class="header-section-number">1</span> Hilbert’s Nullstellensatz</h2>
 <p>对任意子集 <span class="math inline">\(T \subseteq K[\boldsymbol{\mathrm{X}}]\)</span>，我们记 <span class="math inline">\(V(T)\)</span> 为全体 <span class="math inline">\(T\)</span> 中函数在 <span class="math inline">\(K^n\)</span> 中零点集的交．对任意子集 <span class="math inline">\(S \subseteq K^n\)</span>，记 <span class="math inline">\(I(S)\)</span> 是全体在 <span class="math inline">\(S\)</span> 上取值为 <span class="math inline">\(0\)</span> 的 <span class="math inline">\(K[\boldsymbol{\mathrm{X}}]\)</span> 中的多项式．</p>
-<p>考虑代入映射 <span class="math inline">\(\operatorname{ev}_{\boldsymbol{x}}: K[\boldsymbol{\mathrm{X}}] \to K\)</span>, <span class="math inline">\(f \mapsto f(\boldsymbol{x})\)</span>．这映射的核 <span class="math inline">\(\ker \operatorname{ev}_{\boldsymbol{x}}\)</span> 为所有在点 <span class="math inline">\(\boldsymbol{x}\)</span> 处取值为零的多项式，且 <span class="math inline">\(K[\boldsymbol{\mathrm{X}}] / \ker \operatorname{ev}_{\boldsymbol{x}} \cong K\)</span>，故它是极大理想．容易验证理想 <span class="math inline">\((\mathrm{X}_i - x_i)_{i=1}^n \subseteq \ker \operatorname{ev}_{\boldsymbol{x}}\)</span> 且也是极大理想，故二者相等．这意味着 <span class="math inline">\(\boldsymbol{x} \mapsto \ker \operatorname{ev}_{\boldsymbol{x}}\)</span> 给出了一个 <span class="math inline">\(K^n \to \operatorname{Specmax}K[\boldsymbol{\mathrm{X}}]\)</span> 的映射——容易验证它也是单射．</p>
+<p>考虑代入映射 <span class="math inline">\(\operatorname{ev}_{\boldsymbol{x}}: K[\boldsymbol{\mathrm{X}}] \to K\)</span>, <span class="math inline">\(f \mapsto f(\boldsymbol{x})\)</span>．这是一个 <span class="math inline">\(K\)</span>-代数同态，其核 <span class="math inline">\(\ker \operatorname{ev}_{\boldsymbol{x}}\)</span> 为所有在点 <span class="math inline">\(\boldsymbol{x}\)</span> 处取值为零的多项式，且 <span class="math inline">\(K[\boldsymbol{\mathrm{X}}] / \ker \operatorname{ev}_{\boldsymbol{x}} \cong K\)</span>，故它是极大理想．容易验证理想 <span class="math inline">\((\mathrm{X}_i - x_i)_{i=1}^n \subseteq \ker \operatorname{ev}_{\boldsymbol{x}}\)</span> 且也是极大理想，故二者相等．这意味着 <span class="math inline">\(\boldsymbol{x} \mapsto \ker \operatorname{ev}_{\boldsymbol{x}}\)</span> 给出了一个 <span class="math inline">\(K^n \to \operatorname{Specmax}K[\boldsymbol{\mathrm{X}}]\)</span> 的映射——容易验证它也是单射．</p>
 <p>弱形式的 Hilbert 零点定理断言这个映射甚至还是满射：</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
@@ -425,7 +433,7 @@ window.Quarto = {
 </div>
 <div class="callout-body-container">
 <div id="thm-hnt-weak" class="theorem">
-<p><span class="theorem-title"><strong>定理 1 (Hilbert’s Nullstellensatz (Weak Form))</strong></span> 以下 TFAE 表述中的任意一条成立：</p>
+<p><span class="theorem-title"><strong>定理 1 (Hilbert’s Nullstellensatz (Weak Form))</strong></span> 以下表述等价，并在 <span class="math inline">\(K\)</span> 是代数闭域时成立：</p>
 <ul>
 <li><p><span class="math inline">\(K[\boldsymbol{\mathrm{X}}]\)</span> 中的极大理想都是点，即均形如 <span class="math inline">\((\mathrm{X}_i - x_i)_{i=1}^n\)</span>．</p></li>
 <li><p>对任意理想 <span class="math inline">\(\mathfrak a \subseteq K[\boldsymbol{\mathrm{X}}]\)</span>，如果 <span class="math inline">\(V(\mathfrak a) = \varnothing\)</span>，则必有 <span class="math inline">\(\mathfrak a = K[\boldsymbol{\mathrm{X}}]\)</span>．</p></li>
@@ -434,10 +442,10 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>TFAE 是显然的．来考虑怎么证明第一条．对任意 <span class="math inline">\(K[\boldsymbol{\mathrm{X}}]\)</span> 的极大理想 <span class="math inline">\(\mathfrak m\)</span>，我们来想办法把它对应的点找出来．考察 <span class="math inline">\(K[\boldsymbol{\mathrm{X}}] \to K[\boldsymbol{\mathrm{X}}] / \mathfrak m\)</span>，后者是一个域．如果后者同构于 <span class="math inline">\(K\)</span> 的话，那么复合映射 <span class="math display">\[
+<p>TFAE 是容易的．来考虑在代数闭域情形下证明第一条．对任意 <span class="math inline">\(K[\boldsymbol{\mathrm{X}}]\)</span> 的极大理想 <span class="math inline">\(\mathfrak m\)</span>，我们来想办法把它对应的点找出来．考察自然的 <span class="math inline">\(K\)</span>-代数同态 <span class="math inline">\(K[\boldsymbol{\mathrm{X}}] \to K[\boldsymbol{\mathrm{X}}] / \mathfrak m\)</span>，后者是一个域．如果后者作为 <span class="math inline">\(K\)</span>-代数典范地同构于 <span class="math inline">\(K\)</span>（或者更准确来说，其作为 <span class="math inline">\(K\)</span>-线性空间维数为 <span class="math inline">\(1\)</span>）的话，那么复合 <span class="math inline">\(K\)</span>-代数同态 <span class="math display">\[
 K[\boldsymbol{\mathrm{X}}] \to K[\boldsymbol{\mathrm{X}}] / \mathfrak m \cong K
 \]</span> 就把 <span class="math inline">\(\mathrm{X}_i\)</span> 映到某一 <span class="math inline">\(k_i \in K\)</span>，这样就有 <span class="math inline">\((\mathrm{X}_i - k_i)_{i=1}^n \subseteq \mathfrak m\)</span> 了．考虑到前者的极大性，我们便有 <span class="math inline">\((\mathrm{X}_i - k_i)_{i=1}^n = \mathfrak m\)</span>．</p>
-<p>那关键在于为什么一定有 <span class="math inline">\(K[\boldsymbol{\mathrm{X}}] / \mathfrak m \cong K\)</span>，而不是什么别的域．我们介绍一个极其重要的引理：</p>
+<p>那关键在于为什么一定有 <span class="math inline">\(K\)</span>-代数同态 <span class="math inline">\(K[\boldsymbol{\mathrm{X}}] / \mathfrak m \cong K\)</span>，而不是什么别的域．我们介绍一个极其重要的引理：</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -477,19 +485,12 @@ Proof
 </div>
 <div class="callout-body-container">
 <div id="thm-hnt-strong" class="theorem">
-<p><span class="theorem-title"><strong>定理 2 (Hilbert’s Nullstellensatz (Strong Form))</strong></span> <span class="math inline">\(R := K[\boldsymbol{\mathrm{X}}]\)</span> 是 Jacobson 环——以下 TFAE 表述中的任意一条成立：</p>
-<ul>
-<li>对任意理想 <span class="math inline">\(\mathfrak a \subseteq R\)</span>，均有 <span class="math inline">\(IV(\mathfrak a) = \sqrt{\mathfrak a}\)</span>．</li>
-<li>对任意理想 <span class="math inline">\(\mathfrak a \subseteq R\)</span>，<span class="math inline">\(R / \mathfrak a\)</span> 的 Jacobson radical 与其 nilradical 相等</li>
-<li>每个素理想均能写成包含它的极大理想的交</li>
-<li>（Zariski’s Lemma）每个有限生成 <span class="math inline">\(R\)</span>-代数如果是域，则作为 <span class="math inline">\(R\)</span>-模有限生成．</li>
-</ul>
+<p><span class="theorem-title"><strong>定理 2 (Hilbert’s Nullstellensatz (Strong Form))</strong></span> 当 <span class="math inline">\(K\)</span> 是代数闭域时，对任意理想 <span class="math inline">\(\mathfrak a \subseteq K[\boldsymbol{\mathrm{X}}]\)</span>，均有 <span class="math inline">\(IV(\mathfrak a) = \sqrt{\mathfrak a}\)</span>．</p>
 </div>
 </div>
 </div>
 </div>
 <p>为什么说它更强？因为当 <span class="math inline">\(V(\mathfrak a) = \varnothing\)</span> 时可以推出 <span class="math inline">\(IV(\mathfrak a) = I(\varnothing) = R\)</span>，即弱形式的 Hilbert 零点定理．</p>
-<p>前两条的 TFAE 是平凡的．加入第三条是著名的 nilradical 等价刻画 <span class="citation" data-cites="m_f_atiyah_introduction_1969"><a href="#ref-m_f_atiyah_introduction_1969" role="doc-biblioref">[1, proposition 1.8]</a></span> 的简单应用．加入第四条和前面提到的 Zariski lemma 的证明有关，TODO．</p>
 <p>下面给出第一条的证明，思路来自 <a href="https://mathoverflow.net/questions/90661/the-rabinowitz-trick">MathOverflow</a>：</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -527,15 +528,40 @@ V_{K[\boldsymbol{\mathrm{X}}, \mathrm{Y}]}(\mathfrak a) \cap V_{K[\boldsymbol{\m
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark (Jacobson 环)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em> (Jacobson 环). </span>当 <span class="math inline">\(K\)</span> 是代数闭域时，由于弱形式的 Hilbert 零点定理，<span class="math inline">\(IV(\mathfrak a) = J(\mathfrak a)\)</span>．于是定理的陈述等价于 <span class="math inline">\(J(\mathfrak a) = \sqrt{\mathfrak a}\)</span>——对一般的环 <span class="math inline">\(R\)</span> 来说，这是 Jacobson 环的等价定义之一．Jacobson 环有如下等价刻画：</p>
+<ul>
+<li>对任意理想 <span class="math inline">\(\mathfrak a \subseteq R\)</span>，<span class="math inline">\(J(\mathfrak a) = \sqrt a\)</span></li>
+<li>对任意理想 <span class="math inline">\(\mathfrak a \subseteq R\)</span>，<span class="math inline">\(R / \mathfrak a\)</span> 的 Jacobson radical 与其 nilradical 相等</li>
+<li>每个素理想均能写成包含它的极大理想的交</li>
+<li>（Zariski’s Lemma）任意有限生成 <span class="math inline">\(R\)</span>-代数 <span class="math inline">\(A\)</span> 如果是域，则 <span class="math inline">\(A\)</span> 作为 <span class="math inline">\(R\)</span>-模有限生成．</li>
+</ul>
+<p>前三条的 TFAE 是平凡的．加入第四条和前面提到的 Zariski lemma 的证明有关，TODO．</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="idealvariety-correspondence" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="idealvariety-correspondence"><span class="header-section-number">2</span> Ideal–Variety Correspondence</h2>
-<p>强形式的 Hilbert 零点定理，即多项式环是 Jacobson 环，可以帮我们将 <span class="math inline">\(K^n\)</span> 上的 Zariski 拓扑和一般环上基于素理想的 Zariski 拓扑统一起来．</p>
+<p>强形式的 Hilbert 零点定理，可以帮我们将代数闭域上 <span class="math inline">\(n\)</span> 维仿射空间的 Zariski 拓扑和一般环上基于素理想的 Zariski 拓扑统一起来．</p>
 <section id="world-of-prime-ideals" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="world-of-prime-ideals"><span class="header-section-number">2.1</span> World of Prime Ideals</h3>
 <p>在素理想版本的 Zariski 拓扑中，我们定义了映射</p>
 <ul>
-<li><span class="math inline">\(\operatorname{Spec}R \overset{I_p}{\underset{V_p}\rightleftarrows} \text{ideals of } R\)</span></li>
+<li><span class="math inline">\(\text{subsets of } \operatorname{Spec}R \overset{I_p}{\underset{V_p}\rightleftarrows} \text{ideals of } R\)</span></li>
 <li><span class="math inline">\(V_p(\mathfrak a) := \{ \mathfrak p \in \operatorname{Spec}R : \mathfrak a \subseteq \mathfrak p \}\)</span> 定义了 <span class="math inline">\(\operatorname{Spec}R\)</span> 上的闭集</li>
 <li><span class="math inline">\(I_p(S) := \bigcap_{\mathfrak p \in S} \mathfrak p\)</span>：易证它是根理想（radical ideal），对开根号封闭</li>
 </ul>
@@ -562,7 +588,7 @@ V_{K[\boldsymbol{\mathrm{X}}, \mathrm{Y}]}(\mathfrak a) \cap V_{K[\boldsymbol{\m
 \overline S = \bigcap_{S \subseteq V_p(\mathfrak a)} V_p(\mathfrak a) = \bigcap_{a \subseteq I_p(S)} V_p(\mathfrak a) = V_p I_p (S)
 \]</span></p>
 <p>这是 <span class="math inline">\(VI: A \to A\)</span> 在 Galois connection 的语境中被称为闭包算子（closure operator）的原因．</p></li>
-<li><p><span class="math inline">\(I_p V_p (\mathfrak a) = \sqrt{\mathfrak a}\)</span>：著名的 nilradical 等价刻画 <span class="citation" data-cites="m_f_atiyah_introduction_1969"><a href="#ref-m_f_atiyah_introduction_1969" role="doc-biblioref">[1, proposition 1.8]</a></span></p>
+<li><p><span class="math inline">\(I_p V_p (\mathfrak a) = \sqrt{\mathfrak a}\)</span>：即 nilradical 的等价刻画</p>
 <p>这是 <span class="math inline">\(IV: B \to B\)</span> 在 Galois connection 的语境中被称为核算子（kernel operator）的原因．</p></li>
 </ul>
 <p>作为推论：</p>
@@ -574,16 +600,16 @@ V_{K[\boldsymbol{\mathrm{X}}, \mathrm{Y}]}(\mathfrak a) \cap V_{K[\boldsymbol{\m
 </section>
 <section id="world-of-maximal-ideals" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="world-of-maximal-ideals"><span class="header-section-number">2.2</span> World of Maximal Ideals</h3>
-<p>现在来到极大理想的世界．因为 Hilbert 零点定理的存在，我们先前在多项式环上定义的 <span class="math inline">\(V\)</span> 和 <span class="math inline">\(I\)</span> 推广到环上其实是：</p>
+<p>现在来到极大理想的世界．因为弱形式 Hilbert 零点定理的存在，我们先前在（代数闭域上）多项式环上定义的 <span class="math inline">\(V\)</span> 和 <span class="math inline">\(I\)</span> 推广到环上其实是：</p>
 <ul>
-<li><p><span class="math inline">\(\operatorname{Specmax}R \rightleftarrows \text{ideals of } R\)</span></p></li>
-<li><p><span class="math inline">\(V_m(\mathfrak a) = \{ \mathfrak m \in \operatorname{Specmax}R : \mathfrak m \supseteq \mathfrak a \} = V_p(\mathfrak a) \cap \operatorname{Specmax}R\)</span>：仍然作为闭集，在多项式环中它们被称为代数簇（algebraic variety）．注意现在 <span class="math inline">\(\operatorname{Specmax}R\)</span> 成为 <span class="math inline">\(\operatorname{Spec}R\)</span> 的子拓扑．</p></li>
+<li><p><span class="math inline">\(\text{subsets of } \operatorname{Specmax}R \rightleftarrows \text{ideals of } R\)</span></p></li>
+<li><p><span class="math inline">\(V_m(\mathfrak a) = \{ \mathfrak m \in \operatorname{Specmax}R : \mathfrak m \supseteq \mathfrak a \} = V_p(\mathfrak a) \cap \operatorname{Specmax}R\)</span>：仍然作为闭集，在（代数闭域上）多项式环中它们被称为代数簇（algebraic variety）．注意现在 <span class="math inline">\(\operatorname{Specmax}R\)</span> 成为 <span class="math inline">\(\operatorname{Spec}R\)</span> 的子拓扑．</p></li>
 <li><p><span class="math inline">\(I_m(S) = \bigcap_{\mathfrak m \in S} \mathfrak m\)</span>，所谓的 vanishing ideals．</p></li>
 </ul>
 <p>上述 Galois connection 仍然完全适用于极大理想的这个世界，故我们仍然有对应 <span class="math inline">\(I_m V_m(\{ \text{ideals of } R \}) \cong V_m I_m(\operatorname{Specmax}R)\)</span>．但是一一对应的对象有细微的变化：</p>
 <ul>
 <li><p><span class="math inline">\(V_m I_m (S) = \overline S\)</span>，但这个闭包是限制在 <span class="math inline">\(\operatorname{Specmax}R\)</span> 的子拓扑下取的．</p></li>
-<li><p><span class="math inline">\(I_m V_m (\mathfrak a) = J(\mathfrak a)\)</span>，所有包含 <span class="math inline">\(\mathfrak a\)</span> 的极大理想的交．满足 <span class="math inline">\(\mathfrak a = J(\mathfrak a)\)</span> 的理想被称为 semiprimitive ideals．</p></li>
+<li><p><span class="math inline">\(I_m V_m (\mathfrak a) = J(\mathfrak a)\)</span>，<span class="math inline">\(\mathfrak a\)</span> 的 Jacobson radical．满足 <span class="math inline">\(\mathfrak a = J(\mathfrak a)\)</span> 的理想被称为 semiprimitive ideals．</p></li>
 </ul>
 <p>作为推论：</p>
 <ul>
@@ -591,10 +617,14 @@ V_{K[\boldsymbol{\mathrm{X}}, \mathrm{Y}]}(\mathfrak a) \cap V_{K[\boldsymbol{\m
 <li><p><span class="math inline">\(I_m (S) = I_m V_m I_m (S) = I(\overline S)\)</span></p></li>
 </ul>
 <p>也就是说，这里建立的是极大理想世界 Zariski 拓扑闭集和 semiprimitive ideals 的一一对应．</p>
-<p>也许是因为 nilradical 具有更直观的基于幂零的等价刻画，代数几何学家们更喜欢研究根理想而不是 semiprimitive ideals．但是他们又懒得素理想世界里面工作——在多项式环的语境中，极大理想就是点，<span class="math inline">\(\operatorname{Specmax}R\)</span> 蕴含的信息等价于仅看多项式零点可以给出的信息——比起复杂太多的素理想，谁不喜欢这种更清晰的几何直观呢！</p>
-<p>固然 <span class="math inline">\(\sqrt a \subseteq J(\mathfrak a)\)</span>，要是更有 <span class="math inline">\(\sqrt{\mathfrak a} = J(\mathfrak a)\)</span> 就好了——这恰是 Jacobson 环的定义．综上，可以看到 Jacobson 性使得我们可以把 Zariski 拓扑限制到极大理想上研究，而仍然获得根理想的全部信息．特别地，在多项式环上，这使得研究多项式零点成为了解多项式环性质的重要手段．</p>
+<p>也许是因为 nilradical 具有更直观的基于幂零的等价刻画，代数几何学家们更喜欢研究根理想而不是 semiprimitive ideals．但是他们又懒得素理想世界里面工作——在（代数闭域上）多项式环的语境中，极大理想就是点，<span class="math inline">\(\operatorname{Specmax}R\)</span> 蕴含的信息等价于仅看多项式零点可以给出的信息——比起复杂太多的素理想，谁不喜欢这种更清晰的几何直观呢！</p>
+<p>固然 <span class="math inline">\(\sqrt a \subseteq J(\mathfrak a)\)</span>，要是更有 <span class="math inline">\(\sqrt{\mathfrak a} = J(\mathfrak a)\)</span> 就好了——这恰是 Jacobson 环的定义．综上，可以看到 Jacobson 性使得我们可以把 Zariski 拓扑限制到极大理想上研究，而仍然获得根理想的全部信息．特别地，这使得研究多项式零点成为了解（代数闭域上）多项式环性质的重要手段．</p>
+</section>
+</section>
+<section id="a-few-remarks" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="a-few-remarks"><span class="header-section-number">3</span> A Few Remarks</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -603,32 +633,10 @@ Remark (Scheme)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (Scheme). </span>值得一提，这并不是说多项式零点包含多项式环的所有信息——只看 Zariski 拓扑仍然会使我们丢失环的幂零信息——这是更精细的代数几何需要概型（scheme）的原因之一．另一个原因和从 <span class="math inline">\(\mathbb R^n\)</span> 到流形的过程很类似：为了建立 algebraic variety 和 projective variety 的统一表述．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Remark (哪些环是 Jacobson 环)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (哪些环是 Jacobson 环). </span></p>
-<ul>
-<li><p>见 <a href="https://en.wikipedia.org/wiki/Jacobson_ring#Examples">Wikipedia</a></p></li>
-<li><p>商环保 Jacobson 性</p></li>
-</ul>
+<p><span class="proof-title"><em>注记</em> (Scheme). </span>值得一提，这并不是说多项式零点包含（代数闭域上）多项式环的所有信息——只看 Zariski 拓扑仍然会使我们丢失环的幂零信息——这是更精细的代数几何需要概型（scheme）的原因之一．另一个原因和从 <span class="math inline">\(\mathbb R^n\)</span> 到流形的过程很类似：为了建立 algebraic variety 和 projective variety 的统一表述．</p>
 </div>
 </div>
 </div>
@@ -639,17 +647,42 @@ Remark (哪些环是 Jacobson 环)
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Remark (哪些环不是 Jacobson 环)
+Remark (哪些环是 Jacobson 环)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
+<p><span class="proof-title"><em>注记</em> (哪些环是 Jacobson 环). </span>比你想象的要多！</p>
+<ul>
+<li><p>域</p></li>
+<li><p>零维环</p></li>
+<li><p>Jacobson radical 为零的 PID</p></li>
+<li><p><span class="math inline">\(R[\mathrm{X}]\)</span> 是 Jacobson 环当且仅当 <span class="math inline">\(R\)</span> 是 Jacobson 环</p>
+<p>故事实上所有域上的多项式环都是 Jacobson 环！</p>
+<p>证明 TODO</p></li>
+<li><p>商环保 Jacobson 性</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark (哪些环不是 Jacobson 环)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
 <p><span class="proof-title"><em>注记</em> (哪些环不是 Jacobson 环). </span></p>
 <ul>
-<li><p>只看零点会丢失除了幂零之外更多信息的多项式环</p>
-<p>例如 <span class="math inline">\(\mathbb F_p [\boldsymbol{\mathrm{X}}]\)</span>，你甚至无法分辨 <span class="math inline">\(\mathrm{X}^{p-1} - 1\)</span> 和 <span class="math inline">\(0\)</span> 的区别</p></li>
 <li><p>非零维局部环，如 DVR</p>
 <p>这些环的极大理想非零唯一，但还有别的素理想</p></li>
 <li><p>所以局部化不一定保持 Jacobson 性</p></li>
@@ -658,10 +691,52 @@ Remark (哪些环不是 Jacobson 环)
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark (不应简单认为 Jacobson 环是强形式 Hilbert 零点定理的推广)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em> (不应简单认为 Jacobson 环是强形式 Hilbert 零点定理的推广). </span>事实上域上的多项式环都是 Jacobson 环，但非代数闭域只看零点仍会丢失除了幂零之外的更多信息：</p>
+<ul>
+<li><p>例如 <span class="math inline">\(\mathbb R [\mathrm{X}]\)</span>，<span class="math inline">\(V(X^2 + 1) = \varnothing = V(1)\)</span>，观察零点集无法区别这两个多项式．</p>
+<p>事实上 <span class="math inline">\(\mathbb R [\mathrm{X}] / (X^2 + 1) \cong \mathbb C\)</span>，而不是同构于 Hilbert 零点定理会希望有的 <span class="math inline">\(\mathbb R\)</span>．</p></li>
+<li><p>例如 <span class="math inline">\(\mathbb F_p [\mathrm{X}]\)</span>．你甚至无法分辨 <span class="math inline">\(\mathrm{X}^{p-1} - 1\)</span> 和 <span class="math inline">\(0\)</span> 的区别．</p>
+<p>这甚至是更极端的例子——即使观察全部函数值（强于观察零点集）也会丢失信息．这类多项式环与对应的其多项式函数环不同构．</p></li>
+</ul>
+<p>二者的等价性只在代数闭域上多项式环中能够得到理解，由 Hilbert 零点定理弱形式建立桥梁．因此，代数闭域和 Jacobson 环的特点都是 Hilbert 零点定理不可或缺的组成部分．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark (Hilbert Nullstellensatz over polynomial rings of infinite variables)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em> (Hilbert Nullstellensatz over polynomial rings of infinite variables). </span>TODO</p>
+</div>
+</div>
+</div>
+</div>
 
 
 
-</section>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
