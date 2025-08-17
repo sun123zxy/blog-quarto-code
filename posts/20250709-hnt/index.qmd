@@ -1,11 +1,13 @@
 ---
 title: 零点定理乱炖
 subtitle: Suspicious Nullstellensatz Soup
-abstract: On Hilbert's Nullstellensatz theorem and the ideal--variety correspondence.
+abstract: On Hilbert's Nullstellensatz and the ideal--variety correspondence.
 author: sun123zxy
 date: 2025/08/12
+date-modified: 2025/08/18
 lang: zh
 bibliography: index.bib
+draft: true
 
 categories:
   - math
@@ -26,17 +28,17 @@ format:
 \newcommand{\Specmax}{\operatorname{Specmax}}
 \newcommand{\ev}{\operatorname{ev}}
 
-我们在代数闭域 $K = \overline K$ 中工作．环均为含幺交换环．
+本文所指环均为含幺交换环．
 
 记号上我们用正体大写字母 $\X$ 标记多项式不定元，用粗体 $\vec x$ 标记向量．记 $K[\vec\X]$ 为 $K$ 上的 $n$ 元多项式环——这个记号可以有两种理解方式：一种是认为 $\vec \X$ 是不定元的向量，另一种是就认为 $\vec\X$ 就是 $n$ 维仿射空间 $K^n$，而 $K[\vec\X]$ 是它的坐标环．
 
-我们记 $\Spec R$ 为环 $R$ 的全体素理想，$\Specmax R$ 为环 $R$ 的全体极大理想．
+我们记 $\Spec R$ 为环 $R$ 的全体素理想，$\Specmax R$ 为环 $R$ 的全体极大理想．对任意 $R$ 的理想 $\mathfrak a$，记 $J(\mathfrak a)$ 是其 Jacobson radical，即全体包含 $\mathfrak a$ 的极大理想的交．记 $\sqrt{\mathfrak a}$ 为理想 $\mathfrak a$ 的根理想 / nilradical，即 $\{ f \in R : f^n \in \mathfrak a \text{ for some } n \in \mathbb N_+ \}$．[@m_f_atiyah_introduction_1969, {proposition 1.8}] 给出了 nilradical 的等价刻画：它也是全体包含 $\mathfrak a$ 的素理想的交．
 
-## Hilbert's Nullstellensatz Theorem
+## Hilbert's Nullstellensatz
 
 对任意子集 $T \subseteq K[\vec\X]$，我们记 $V(T)$ 为全体 $T$ 中函数在 $K^n$ 中零点集的交．对任意子集 $S \subseteq K^n$，记 $I(S)$ 是全体在 $S$ 上取值为 $0$ 的 $K[\vec\X]$ 中的多项式．
 
-考虑代入映射 $\ev_{\vec x}: K[\vec\X] \to K$, $f \mapsto f(\vec x)$．这映射的核 $\ker \ev_{\vec x}$ 为所有在点 $\vec x$ 处取值为零的多项式，且 $K[\vec\X] / \ker \ev_{\vec x} \cong K$，故它是极大理想．容易验证理想 $(\X_i - x_i)_{i=1}^n \subseteq \ker \ev_{\vec x}$ 且也是极大理想，故二者相等．这意味着 $\vec x \mapsto \ker \ev_{\vec x}$ 给出了一个 $K^n \to \Specmax K[\vec\X]$ 的映射——容易验证它也是单射．
+考虑代入映射 $\ev_{\vec x}: K[\vec\X] \to K$, $f \mapsto f(\vec x)$．这是一个 $K$-代数同态，其核 $\ker \ev_{\vec x}$ 为所有在点 $\vec x$ 处取值为零的多项式，且 $K[\vec\X] / \ker \ev_{\vec x} \cong K$，故它是极大理想．容易验证理想 $(\X_i - x_i)_{i=1}^n \subseteq \ker \ev_{\vec x}$ 且也是极大理想，故二者相等．这意味着 $\vec x \mapsto \ker \ev_{\vec x}$ 给出了一个 $K^n \to \Specmax K[\vec\X]$ 的映射——容易验证它也是单射．
 
 弱形式的 Hilbert 零点定理断言这个映射甚至还是满射：
 
@@ -44,20 +46,20 @@ format:
 
 ## Hilbert's Nullstellensatz (Weak Form)
 
-以下 TFAE 表述中的任意一条成立：
+以下表述等价，并在 $K$ 是代数闭域时成立：
 
 - $K[\vec\X]$ 中的极大理想都是点，即均形如 $(\X_i - x_i)_{i=1}^n$．
 
 - 对任意理想 $\mathfrak a \subseteq K[\vec\X]$，如果 $V(\mathfrak a) = \varnothing$，则必有 $\mathfrak a = K[\vec\X]$．
 :::
 
-TFAE 是显然的．来考虑怎么证明第一条．对任意 $K[\vec\X]$ 的极大理想 $\mathfrak m$，我们来想办法把它对应的点找出来．考察 $K[\vec \X] \to K[\vec \X] / \mathfrak m$，后者是一个域．如果后者同构于 $K$ 的话，那么复合映射
+TFAE 是容易的．来考虑在代数闭域情形下证明第一条．对任意 $K[\vec\X]$ 的极大理想 $\mathfrak m$，我们来想办法把它对应的点找出来．考察自然的 $K$-代数同态 $K[\vec \X] \to K[\vec \X] / \mathfrak m$，后者是一个域．如果后者作为 $K$-代数典范地同构于 $K$（或者更准确来说，其作为 $K$-线性空间维数为 $1$）的话，那么复合 $K$-代数同态
 $$
 K[\vec \X] \to K[\vec \X] / \mathfrak m \cong K
 $$
 就把 $\X_i$ 映到某一 $k_i \in K$，这样就有 $(\X_i - k_i)_{i=1}^n \subseteq \mathfrak m$ 了．考虑到前者的极大性，我们便有 $(\X_i - k_i)_{i=1}^n = \mathfrak m$．
 
-那关键在于为什么一定有 $K[\vec \X] / \mathfrak m \cong K$，而不是什么别的域．我们介绍一个极其重要的引理：
+那关键在于为什么一定有 $K$-代数同态 $K[\vec \X] / \mathfrak m \cong K$，而不是什么别的域．我们介绍一个极其重要的引理：
 
 :::{#prp-fg-algebra-fd-of-field}
 
@@ -79,17 +81,10 @@ Hilbert 零点定理还有更强的形式：
 
 ## Hilbert's Nullstellensatz (Strong Form)
 
-$R := K[\vec \X]$ 是 Jacobson 环——以下 TFAE 表述中的任意一条成立：
-
-- 对任意理想 $\mathfrak a \subseteq R$，均有 $IV(\mathfrak a) = \sqrt{\mathfrak a}$．
-- 对任意理想 $\mathfrak a \subseteq R$，$R / \mathfrak a$ 的 Jacobson radical 与其 nilradical 相等
-- 每个素理想均能写成包含它的极大理想的交
-- （Zariski's Lemma）每个有限生成 $R$-代数如果是域，则作为 $R$-模有限生成．
+当 $K$ 是代数闭域时，对任意理想 $\mathfrak a \subseteq K[\vec \X]$，均有 $IV(\mathfrak a) = \sqrt{\mathfrak a}$．
 :::
 
 为什么说它更强？因为当 $V(\mathfrak a) = \varnothing$ 时可以推出 $IV(\mathfrak a) = I(\varnothing) = R$，即弱形式的 Hilbert 零点定理．
-
-前两条的 TFAE 是平凡的．加入第三条是著名的 nilradical 等价刻画 [@m_f_atiyah_introduction_1969, {proposition 1.8}] 的简单应用．加入第四条和前面提到的 Zariski lemma 的证明有关，TODO．
 
 下面给出第一条的证明，思路来自 [MathOverflow](https://mathoverflow.net/questions/90661/the-rabinowitz-trick)：
 
@@ -119,15 +114,29 @@ $R := K[\vec \X]$ 是 Jacobson 环——以下 TFAE 表述中的任意一条成�
 注意由假设 $f \in IV(\mathfrak a)$，当 $\vec x \in V(\mathfrak a)$ 时我们有 $f(\vec x) = 0$，因此它确实是空集．
 :::
 
+:::{.remark}
+
+## Jacobson 环
+
+当 $K$ 是代数闭域时，由于弱形式的 Hilbert 零点定理，$IV(\mathfrak a) = J(\mathfrak a)$．于是定理的陈述等价于 $J(\mathfrak a) = \sqrt{\mathfrak a}$——对一般的环 $R$ 来说，这是 Jacobson 环的等价定义之一．Jacobson 环有如下等价刻画：
+
+- 对任意理想 $\mathfrak a \subseteq R$，$J(\mathfrak a) = \sqrt a$
+- 对任意理想 $\mathfrak a \subseteq R$，$R / \mathfrak a$ 的 Jacobson radical 与其 nilradical 相等
+- 每个素理想均能写成包含它的极大理想的交
+- （Zariski's Lemma）任意有限生成 $R$-代数 $A$ 如果是域，则 $A$ 作为 $R$-模有限生成．
+
+前三条的 TFAE 是平凡的．加入第四条和前面提到的 Zariski lemma 的证明有关，TODO．
+:::
+
 ## Ideal--Variety Correspondence
 
-强形式的 Hilbert 零点定理，即多项式环是 Jacobson 环，可以帮我们将 $K^n$ 上的 Zariski 拓扑和一般环上基于素理想的 Zariski 拓扑统一起来．
+强形式的 Hilbert 零点定理，可以帮我们将代数闭域上 $n$ 维仿射空间的 Zariski 拓扑和一般环上基于素理想的 Zariski 拓扑统一起来．
 
 ### World of Prime Ideals
 
 在素理想版本的 Zariski 拓扑中，我们定义了映射
 
-- $\Spec R \overset{I_p}{\underset{V_p}\rightleftarrows} \text{ideals of } R$
+- $\text{subsets of } \Spec R \overset{I_p}{\underset{V_p}\rightleftarrows} \text{ideals of } R$
 - $V_p(\mathfrak a) := \{ \mathfrak p \in \Spec R : \mathfrak a \subseteq \mathfrak p \}$ 定义了 $\Spec R$ 上的闭集
 - $I_p(S) := \bigcap_{\mathfrak p \in S} \mathfrak p$：易证它是根理想（radical ideal），对开根号封闭
 
@@ -156,7 +165,7 @@ $R := K[\vec \X]$ 是 Jacobson 环——以下 TFAE 表述中的任意一条成�
   
   这是 $VI: A \to A$ 在 Galois connection 的语境中被称为闭包算子（closure operator）的原因．
 
-- $I_p V_p (\mathfrak a) = \sqrt{\mathfrak a}$：著名的 nilradical 等价刻画 [@m_f_atiyah_introduction_1969, {proposition 1.8}]
+- $I_p V_p (\mathfrak a) = \sqrt{\mathfrak a}$：即 nilradical 的等价刻画
 
   这是 $IV: B \to B$ 在 Galois connection 的语境中被称为核算子（kernel operator）的原因．
 
@@ -170,11 +179,11 @@ $R := K[\vec \X]$ 是 Jacobson 环——以下 TFAE 表述中的任意一条成�
 
 ### World of Maximal Ideals
 
-现在来到极大理想的世界．因为 Hilbert 零点定理的存在，我们先前在多项式环上定义的 $V$ 和 $I$ 推广到环上其实是：
+现在来到极大理想的世界．因为弱形式 Hilbert 零点定理的存在，我们先前在（代数闭域上）多项式环上定义的 $V$ 和 $I$ 推广到环上其实是：
 
-- $\Specmax R \rightleftarrows \text{ideals of } R$
+- $\text{subsets of } \Specmax R \rightleftarrows \text{ideals of } R$
 
-- $V_m(\mathfrak a) = \{ \mathfrak m \in \Specmax R : \mathfrak m \supseteq \mathfrak a \} = V_p(\mathfrak a) \cap \Specmax R$：仍然作为闭集，在多项式环中它们被称为代数簇（algebraic variety）．注意现在 $\Specmax R$ 成为 $\Spec R$ 的子拓扑．
+- $V_m(\mathfrak a) = \{ \mathfrak m \in \Specmax R : \mathfrak m \supseteq \mathfrak a \} = V_p(\mathfrak a) \cap \Specmax R$：仍然作为闭集，在（代数闭域上）多项式环中它们被称为代数簇（algebraic variety）．注意现在 $\Specmax R$ 成为 $\Spec R$ 的子拓扑．
 
 - $I_m(S) = \bigcap_{\mathfrak m \in S} \mathfrak m$，所谓的 vanishing ideals．
 
@@ -182,7 +191,7 @@ $R := K[\vec \X]$ 是 Jacobson 环——以下 TFAE 表述中的任意一条成�
 
 - $V_m I_m (S) = \overline S$，但这个闭包是限制在 $\Specmax R$ 的子拓扑下取的．
 
-- $I_m V_m (\mathfrak a) = J(\mathfrak a)$，所有包含 $\mathfrak a$ 的极大理想的交．满足 $\mathfrak a = J(\mathfrak a)$ 的理想被称为 semiprimitive ideals．
+- $I_m V_m (\mathfrak a) = J(\mathfrak a)$，$\mathfrak a$ 的 Jacobson radical．满足 $\mathfrak a = J(\mathfrak a)$ 的理想被称为 semiprimitive ideals．
 
 作为推论：
 
@@ -192,22 +201,36 @@ $R := K[\vec \X]$ 是 Jacobson 环——以下 TFAE 表述中的任意一条成�
 
 也就是说，这里建立的是极大理想世界 Zariski 拓扑闭集和 semiprimitive ideals 的一一对应．
 
-也许是因为 nilradical 具有更直观的基于幂零的等价刻画，代数几何学家们更喜欢研究根理想而不是 semiprimitive ideals．但是他们又懒得素理想世界里面工作——在多项式环的语境中，极大理想就是点，$\Specmax R$ 蕴含的信息等价于仅看多项式零点可以给出的信息——比起复杂太多的素理想，谁不喜欢这种更清晰的几何直观呢！
+也许是因为 nilradical 具有更直观的基于幂零的等价刻画，代数几何学家们更喜欢研究根理想而不是 semiprimitive ideals．但是他们又懒得素理想世界里面工作——在（代数闭域上）多项式环的语境中，极大理想就是点，$\Specmax R$ 蕴含的信息等价于仅看多项式零点可以给出的信息——比起复杂太多的素理想，谁不喜欢这种更清晰的几何直观呢！
 
-固然 $\sqrt a \subseteq J(\mathfrak a)$，要是更有 $\sqrt{\mathfrak a} = J(\mathfrak a)$ 就好了——这恰是 Jacobson 环的定义．综上，可以看到 Jacobson 性使得我们可以把 Zariski 拓扑限制到极大理想上研究，而仍然获得根理想的全部信息．特别地，在多项式环上，这使得研究多项式零点成为了解多项式环性质的重要手段．
+固然 $\sqrt a \subseteq J(\mathfrak a)$，要是更有 $\sqrt{\mathfrak a} = J(\mathfrak a)$ 就好了——这恰是 Jacobson 环的定义．综上，可以看到 Jacobson 性使得我们可以把 Zariski 拓扑限制到极大理想上研究，而仍然获得根理想的全部信息．特别地，这使得研究多项式零点成为了解（代数闭域上）多项式环性质的重要手段．
+
+## A Few Remarks
 
 :::{.remark}
 
 ## Scheme
 
-值得一提，这并不是说多项式零点包含多项式环的所有信息——只看 Zariski 拓扑仍然会使我们丢失环的幂零信息——这是更精细的代数几何需要概型（scheme）的原因之一．另一个原因和从 $\mathbb R^n$ 到流形的过程很类似：为了建立 algebraic variety 和 projective variety 的统一表述．
+值得一提，这并不是说多项式零点包含（代数闭域上）多项式环的所有信息——只看 Zariski 拓扑仍然会使我们丢失环的幂零信息——这是更精细的代数几何需要概型（scheme）的原因之一．另一个原因和从 $\mathbb R^n$ 到流形的过程很类似：为了建立 algebraic variety 和 projective variety 的统一表述．
 :::
 
 :::{.remark}
 
 ## 哪些环是 Jacobson 环
 
-- 见 [Wikipedia](https://en.wikipedia.org/wiki/Jacobson_ring#Examples)
+比你想象的要多！
+
+- 域
+
+- 零维环
+
+- Jacobson radical 为零的 PID
+
+- $R[\X]$ 是 Jacobson 环当且仅当 $R$ 是 Jacobson 环
+
+  故事实上所有域上的多项式环都是 Jacobson 环！
+
+  证明 TODO
 
 - 商环保 Jacobson 性
 :::
@@ -216,13 +239,33 @@ $R := K[\vec \X]$ 是 Jacobson 环——以下 TFAE 表述中的任意一条成�
 
 ## 哪些环不是 Jacobson 环
 
-- 只看零点会丢失除了幂零之外更多信息的多项式环
-
-  例如 $\mathbb F_p [\vec \X]$，你甚至无法分辨 $\X^{p-1} - 1$ 和 $0$ 的区别
-
 - 非零维局部环，如 DVR
 
   这些环的极大理想非零唯一，但还有别的素理想
 
 - 所以局部化不一定保持 Jacobson 性
+:::
+
+:::{.remark}
+
+## 不应简单认为 Jacobson 环是强形式 Hilbert 零点定理的推广
+
+事实上域上的多项式环都是 Jacobson 环，但非代数闭域只看零点仍会丢失除了幂零之外的更多信息：
+
+- 例如 $\mathbb R [\X]$，$V(X^2 + 1) = \varnothing = V(1)$，观察零点集无法区别这两个多项式．
+
+  事实上 $\mathbb R [\X] / (X^2 + 1) \cong \mathbb C$，而不是同构于 Hilbert 零点定理会希望有的 $\mathbb R$．
+
+- 例如 $\mathbb F_p [\X]$．你甚至无法分辨 $\X^{p-1} - 1$ 和 $0$ 的区别．
+
+  这甚至是更极端的例子——即使观察全部函数值（强于观察零点集）也会丢失信息．这类多项式环与对应的其多项式函数环不同构．
+
+二者的等价性只在代数闭域上多项式环中能够得到理解，由 Hilbert 零点定理弱形式建立桥梁．因此，代数闭域和 Jacobson 环的特点都是 Hilbert 零点定理不可或缺的组成部分．
+:::
+
+:::{.remark}
+
+## Hilbert Nullstellensatz over polynomial rings of infinite variables
+
+TODO
 :::
