@@ -1,0 +1,155 @@
+---
+title: 分析力学乱炖
+author: sun123zxy
+date: 2025/09/21
+lang: zh
+# bibliography: index.bib
+
+number-sections: true
+
+draft: true
+categories:
+  - math 
+  - analysis
+  - physics
+collection:
+  - short
+
+format:
+  html:
+    include-in-header:
+      text: |
+        \(\require{physics}\)
+---
+
+## 速通
+
+Newton 力学的基本假设是质点的运动服从 *Newton 第二定律*
+$$
+m \ddot{\vb* q} = -\pdv{U}{\vb* q}
+$$
+这里 $U(\vb* q)$ 是质点在位置 $\vb* q$ 处的势能．物理学实践似乎表明这种形式下的力学方程长相往往比较丑陋，不易于守恒量的发现．考虑到光学中光路传播的最短路径原理具有优美统一的数学形式，物理学家们开始尝试将力学方程也写成某种变分原理的形式．这种尝试推动了 Lagrange 力学和 Hamilton 力学的发展，也最终将经典力学、光学和量子力学统一在同一框架下．
+
+Lagrange 力学的核心作用量是 Lagrangian
+$$
+\begin{aligned}
+L: \mathbb R \times T Q &\to \mathbb R \\
+(t, \vb* q, \dot{\vb* q}) &\mapsto L(t, \vb* q, \dot{\vb* q})
+\end{aligned}
+$$
+这里 $Q$ 是系统的*构型空间（configuration space）*，$T Q$ 是 $Q$ 的*切丛（tangent bundle）*．在 Newton 力学中，我们取 $Q = \mathbb R^3$，并构造 Lagrangian 为动能减势能 $L = \frac 1 2 m \dot{\vb* q}^2 - U(\vb* q)$，这样 Lagrangian $L$ 就是时间 $t$、位置 $\vb* q$ 和速度 $\dot{\vb* q}$ 的函数．
+
+Lagrange 力学的基本假设是，物理系统的演化满足所谓的*最小作用量原理*——即粒子的运动路径 $\vb* q(t)$ 应当使得 Lagrangian 沿其积分极小．数学上我们理解为吃进 $\vb* q: [t_1, t_2] \to Q$，吐出一个数的泛函
+$$
+J[\vb* q] = \int_{t_1}^{t_2} L(t, \vb* q, \dot{\vb* q}) \dd{t}
+$$
+的变分 $\var{J[\vb* q]}$ 应为零——即对任意路径上的扰动 $\vb* \eta$，有
+$$
+\fdv{J}{\vb* \eta} = \lim_{\varepsilon \to 0} \frac 1 \varepsilon \left( J[\vb* q + \varepsilon \vb* \eta] - J[\vb* q] \right) = 0
+$$
+使用一点分部积分和泛函分析的套话【TODO】，根据上述变分方程可以解出著名的 *Euler--Lagrange 方程*
+$$
+\pdv{t} \pdv{L}{\dot{\vb* q}} = \pdv{L}{\vb* q}
+$$
+特别地，在 Newton 力学中，Euler--Lagrange 方程恰为 Newton 第二定律，因此我们认为 Lagrange 力学是 Newton 力学的推广——这个推广的核心是通过构造恰当的 Lagrangian 将 Newton 第二定律实现为最小作用量原理．
+
+Hamilton 力学是 Lagrange 力学的某种对偶的“坐标变换”．通过对 Lagrange 量关于 $\dot{\vb* q}$ 做 *Legendre 变换*【TODO】，我们得到 Hamiltonian
+$$
+H(t, \vb* q, \vb* p) := \vb* p \vdot \dot{\vb* q} - L(t, \vb* q, \dot{\vb* q})
+$$
+这里 $\vb* p := \pdv{L}{\dot{\vb* q}}$ 是（广义）动量．重点是，我们认为 Hamiltonian $H$ 是时间 $t$、位置 $\vb* q$ 和动量 $\vb* p$ 的函数，而不再直接接受速度 $\dot{\vb* q}$ 作为参数——定义里出现的 $\dot{\vb* q}$ 应当根据 $\vb* p = \pdv{L}{\dot{\vb* q}}$ 反解出来．$\vb* q$ 和 $\vb* p$ 构成的空间一般被称为*相空间（phase space）*，数学这边则认为相空间是 $Q$ 的*余切丛（cotangent bundle）*$T^* Q$【TODO】．
+
+在 Newton 力学中，计算可得 $H = \frac{\vb* p^2}{2m} + U(\vb* q)$，即系统的总能量——事实上，Hamilton 量恰为系统的总能量的这一观察在其它系统中也往往也富有意义．
+
+利用 Euler--Lagrange 方程，容易导出 Hamilton 方程
+$$
+\left\{
+\begin{aligned}
+\dot{\vb* q} &= \pdv{H}{\vb* p} \\
+\dot{\vb* p} &= -\pdv{H}{\vb* q}
+\end{aligned}
+\right.
+$$
+对应于 Newton 力学中的 Newton 第二定律和 Lagrange 力学中的 Euler--Lagrange 方程，这是 Hamilton 力学中决定系统演化的基本方程．物理学实践似乎表明 Hamilton 方程的形式一般更简单，从而更容易发现守恒量．在 Newton 力学中，该方程写作
+$$
+\left\{
+\begin{aligned}
+\dot{\vb* q} &= \frac{\vb* p}{m} \\
+\dot{\vb* p} &= -\pdv{U}{\vb* q}
+\end{aligned}
+\right.
+$$
+
+让我们以一种更有趣的方式写出 Hamilton 方程：
+$$
+\pdv{t}
+\begin{pmatrix}
+\vb* q \\
+\vb* p 
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & I \\
+-I & 0
+\end{pmatrix}
+\begin{pmatrix}
+\pdv{H}{\vb* q} \\
+\pdv{H}{\vb* p}
+\end{pmatrix}
+$$
+这使我们看到了 Hamilton 力学的*辛结构*【TODO】．
+
+## 一些例子
+
+### Newton 力学
+
+已经平行地介绍过了．
+
+### Kepler 定律
+
+设力场中心在原点，位置用极坐标形式 $\vb* q = r \hat{\vb* r} = (r \cos \theta, r \sin \theta)$ 表达．考察质量为 $m$ 的质点在一中心力场 $\vb* F(\vb* q) = \vb* F(r) \hat{\vb* r}$ 中运动的情形．我们知道中心力场一定是保守场【TODO】，因此存在仅与 $r$ 有关的势能函数 $U(r)$．
+
+我们首先构造 Lagrangian 为极坐标形式的动能减势能
+$$
+L(t, r, \theta, \dot{r}, \dot{\theta}) := \frac 1 2 m (\dot{r}^2 + r^2 \dot{\theta}^2) - U(r)
+$$
+并写出 Euler--Lagrange 方程
+$$
+\left\{
+\begin{aligned}
+m \ddot{r} &= m r \dot{\theta}^2 - \pdv{U}{r} \\
+\dv{t} (m r^2 \dot{\theta}) &= 0
+\end{aligned}
+\right.
+$$
+我们观察到了一个守恒量 $p_\theta := m r^2 \dot{\theta}$！这正是角动量．不过另一个式子仍是一个难搞的二阶微分方程．
+
+让我们转入 Hamilton 力学．根据套路定义广义动量
+$$
+\begin{aligned}
+p_r &:= \pdv{L}{\dot{r}} = m \dot{r} \\
+p_\theta &:= \pdv{L}{\dot{\theta}} = m r^2 \dot{\theta}
+\end{aligned}
+$$
+算出 Hamiltonian
+$$
+H(t, r, \theta, p_r, p_\theta) = \frac{1}{2m} \left( p_r^2 + \frac{p_\theta^2}{r^2} \right) + U(r)
+$$
+上式与时间 $t$ 无关．根据 Hamiltonian 的在 Newton 力学中的物理意义，我们得到了极坐标形式的机械能守恒．
+
+写出 Hamilton 方程
+$$
+\left\{
+\begin{aligned}
+\dot{r} &= \frac{p_r}{m} \\
+\dot{\theta} &= \frac{p_\theta}{m r^2} \\
+\dot{p}_r &= \frac{p_\theta^2}{m r^3} - \pdv{U}{r} \\
+\dot{p}_\theta &= 0
+\end{aligned}
+\right.
+$$
+我们再次看到了角动量 $p_\theta$ 守恒，且方程变得易于求解．剩下的事情是取 $U(r) = -\frac{k}{r}$ 后嗯算积分【TODO】．
+
+### 光学
+
+光学中，光线的传播路径满足 Fermat 原理——即光线在两点间传播的路径使得光程（optical path length）极小．设空间中某点处的折射率为 $n(\vb* r)$，则光程定义为【TODO】
