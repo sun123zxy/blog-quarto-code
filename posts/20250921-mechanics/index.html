@@ -400,14 +400,49 @@ L: \mathbb R \times T Q &amp;\to \mathbb R \\
 \]</span> 这里 <span class="math inline">\(Q\)</span> 是系统的<em>构型空间（configuration space）</em>，<span class="math inline">\(T Q\)</span> 是 <span class="math inline">\(Q\)</span> 的<em>切丛（tangent bundle）</em>．在 Newton 力学中，我们取 <span class="math inline">\(Q = \mathbb R^3\)</span>，并构造 Lagrangian 为动能减势能 <span class="math inline">\(L = \frac 1 2 m \dot{\vb* q}^2 - U(\vb* q)\)</span>，这样 Lagrangian <span class="math inline">\(L\)</span> 就是时间 <span class="math inline">\(t\)</span>、位置 <span class="math inline">\(\vb* q\)</span> 和速度 <span class="math inline">\(\dot{\vb* q}\)</span> 的函数．</p>
 <p>Lagrange 力学的基本假设是，物理系统的演化满足所谓的<em>最小作用量原理</em>——即粒子的运动路径 <span class="math inline">\(\vb* q(t)\)</span> 应当使得 Lagrangian 沿其积分极小．数学上我们理解为吃进 <span class="math inline">\(\vb* q: [t_1, t_2] \to Q\)</span>，吐出一个数的泛函 <span class="math display">\[
 J[\vb* q] = \int_{t_1}^{t_2} L(t, \vb* q, \dot{\vb* q}) \dd{t}
-\]</span> 的变分 <span class="math inline">\(\var{J[\vb* q]}\)</span> 应为零——即对任意路径上的扰动 <span class="math inline">\(\vb* \eta\)</span>，有 <span class="math display">\[
+\]</span> 的变分 <span class="math inline">\(\var{J[\vb* q]}\)</span> 应为零——即对任意路径上的不改变起点和终点的扰动（perturbation）<span class="math inline">\(\vb* \eta\)</span>，有 <span class="math display">\[
 \fdv{J}{\vb* \eta} = \lim_{\varepsilon \to 0} \frac 1 \varepsilon \left( J[\vb* q + \varepsilon \vb* \eta] - J[\vb* q] \right) = 0
-\]</span> 使用一点分部积分和泛函分析的套话【TODO】，根据上述变分方程可以解出著名的 <em>Euler–Lagrange 方程</em> <span class="math display">\[
+\]</span> 使用一点分部积分和泛函分析的套话，根据上述变分方程可以解出著名的 <em>Euler–Lagrange 方程</em> <span class="math display">\[
 \pdv{t} \pdv{L}{\dot{\vb* q}} = \pdv{L}{\vb* q}
-\]</span> 特别地，在 Newton 力学中，Euler–Lagrange 方程恰为 Newton 第二定律，因此我们认为 Lagrange 力学是 Newton 力学的推广——这个推广的核心是通过构造恰当的 Lagrangian 将 Newton 第二定律实现为最小作用量原理．</p>
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof (Euler–Lagrange 方程的推导)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证</em> (Euler–Lagrange 方程的推导). </span><span class="math display">\[
+\begin{aligned}
+J[\vb* q + \varepsilon \vb* \eta] - J[\vb* q]
+&amp;= \int_{t_1}^{t_2} \left( L(t, \vb* q + \varepsilon \vb* \eta, \dot{\vb* q} + \varepsilon \dot{\vb* \eta}) - L(t, \vb* q, \dot{\vb* q}) \right) \dd{t} \\
+&amp;= \int_{t_1}^{t_2} \left( \pdv{L}{\vb* q} \vdot \varepsilon \vb* \eta + \pdv{L}{\dot{\vb* q}} \vdot \dot{\vb* \varepsilon \eta} + O(\varepsilon^2) \right) \dd{t} \\
+&amp;= \varepsilon \int_{t_1}^{t_2} \left( \pdv{L}{\vb* q} \vdot \vb* \eta + \pdv{L}{\dot{\vb* q}} \vdot \dot{\vb* \eta} \right) \dd{t} + O(\varepsilon^2) \\
+\end{aligned}
+\]</span> 按照变分要求，<span class="math inline">\(\varepsilon\)</span> 的系数应为零，即 <span class="math display">\[
+\int_{t_1}^{t_2} \left( \pdv{L}{\vb* q} \vdot \vb* \eta + \pdv{L}{\dot{\vb* q}} \vdot \dot{\vb* \eta} \right) \dd{t} = 0
+\]</span> 对第二项分部积分，并注意到微扰不改变路径端点：<span class="math inline">\(\vb* \eta(t_1) = \vb* \eta(t_2) = 0\)</span>，可得 <span class="math display">\[
+\int_{t_1}^{t_2} \left( \pdv{L}{\vb* q} - \pdv{t} \pdv{L}{\dot{\vb* q}} \right) \vdot \vb* \eta \dd{t} = 0
+\]</span> 利用 <span class="math inline">\(\vb* \eta\)</span> 的任意性和泛函分析套话，就有 <span class="math display">\[
+\pdv{t} \pdv{L}{\dot{\vb* q}} = \pdv{L}{\vb* q}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<p>特别地，在 Newton 力学中，Euler–Lagrange 方程恰为 Newton 第二定律，因此我们认为 Lagrange 力学是 Newton 力学的推广——这个推广的核心是通过构造恰当的 Lagrangian 将 Newton 第二定律实现为最小作用量原理．</p>
 <p>Hamilton 力学是 Lagrange 力学的某种对偶的“坐标变换”．通过对 Lagrange 量关于 <span class="math inline">\(\dot{\vb* q}\)</span> 做 <em>Legendre 变换</em>【TODO】，我们得到 Hamiltonian <span class="math display">\[
-H(t, \vb* q, \vb* p) := \vb* p \vdot \dot{\vb* q} - L(t, \vb* q, \dot{\vb* q})
-\]</span> 这里 <span class="math inline">\(\vb* p := \pdv{L}{\dot{\vb* q}}\)</span> 是（广义）动量．重点是，我们认为 Hamiltonian <span class="math inline">\(H\)</span> 是时间 <span class="math inline">\(t\)</span>、位置 <span class="math inline">\(\vb* q\)</span> 和动量 <span class="math inline">\(\vb* p\)</span> 的函数，而不再直接接受速度 <span class="math inline">\(\dot{\vb* q}\)</span> 作为参数——定义里出现的 <span class="math inline">\(\dot{\vb* q}\)</span> 应当根据 <span class="math inline">\(\vb* p = \pdv{L}{\dot{\vb* q}}\)</span> 反解出来．<span class="math inline">\(\vb* q\)</span> 和 <span class="math inline">\(\vb* p\)</span> 构成的空间一般被称为<em>相空间（phase space）</em>，数学这边则认为相空间是 <span class="math inline">\(Q\)</span> 的<em>余切丛（cotangent bundle）</em><span class="math inline">\(T^* Q\)</span>【TODO】．</p>
+\begin{aligned}
+H: \mathbb R \times T^* Q &amp;\to \mathbb R \\
+(t, \vb* q, \vb* p) &amp;\mapsto \vb* p \vdot \dot{\vb* q} - L(t, \vb* q, \dot{\vb* q})
+\end{aligned}
+\]</span> 这里 <span class="math inline">\(\vb* p := \pdv{L}{\dot{\vb* q}}\)</span> 是（广义）动量．重点是，我们认为 Hamiltonian <span class="math inline">\(H\)</span> 是时间 <span class="math inline">\(t\)</span>、位置 <span class="math inline">\(\vb* q\)</span> 和动量 <span class="math inline">\(\vb* p\)</span> 的函数，而不再直接接受速度 <span class="math inline">\(\dot{\vb* q}\)</span> 作为参数——定义里出现的 <span class="math inline">\(\dot{\vb* q}\)</span> 应当根据 <span class="math inline">\(\vb* p = \pdv{L}{\dot{\vb* q}}\)</span> 反解出来．<span class="math inline">\(\vb* q\)</span> 和 <span class="math inline">\(\vb* p\)</span> 构成的空间一般被称为<em>相空间（phase space）</em>，数学这边认为相空间是构型空间 <span class="math inline">\(Q\)</span> 的<em>余切丛（cotangent bundle）</em><span class="math inline">\(T^* Q\)</span>——某种程度上刻画了广义动量 <span class="math inline">\(\vb* p := \pdv{L}{\dot{\vb* q}}\)</span> 偏导的形式：它表现了 <span class="math inline">\(L\)</span> 在切空间内的微小扰动下产生的线性变化量．</p>
 <p>在 Newton 力学中，计算可得 <span class="math inline">\(H = \frac{\vb* p^2}{2m} + U(\vb* q)\)</span>，即系统的总能量——事实上，Hamilton 量恰为系统的总能量的这一观察在其它系统中也往往也富有意义．</p>
 <p>利用 Euler–Lagrange 方程，容易导出 Hamilton 方程 <span class="math display">\[
 \left\{
