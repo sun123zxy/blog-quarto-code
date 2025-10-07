@@ -1,0 +1,141 @@
+---
+title: 非结合代数括号制造艺术
+subtitle: "TAOCP: The Art of Creating Parentheses"
+author: sun123zxy
+date: 2025/10/07
+lang: zh
+# bibliography: index.bib
+
+number-sections: true
+
+draft: true
+categories:
+  - math 
+  - algebra
+  - combinatorics
+collection:
+  - short
+
+format:
+  html: default
+---
+
+二元运算接受两个输入，输出一个结果．如果我们有多个输入，就需要使用括号来明确运算顺序．例如，给定四个元素 $a, b, c, d$，可以有以下五种不同的括号方式：
+$$
+((ab)c)d \quad (a(bc))d \quad (ab)(cd) \quad a((bc)d) \quad a(b(cd))
+$$
+
+那么爱提问题的大佬就会问了：给定 $n$ 个互异元素，共多少种语义不同的括号方式？
+
+或许你觉得这个问题没什么意义，有什么运算不满足结合律呢？遗憾的是这种糟糕的情况在数学中并不少见——群论中的交换子或李代数中的李括号都是典型的例子．仔细一想发现事情更加难绷——这两个情况下幂零性和可解性的区别恰恰是由不同的括号方式引起的：你在结合代数里见过“可解理想”的说法吗——由于结合律，它和幂零理想是一个东西．^[没说清楚？我们后面细聊．]
+
+坏了，原来我不会打括号！
+
+## 结合律：左旋，右旋，二叉树！
+
+计数是理解组合结构的重要手段，让我们先数数上面那位大佬提出的问题．聪明的你可能已经注意到，$n$ 个互异元素的括号方式与具有 $n$ 个叶节点，$n-1$ 个非叶节点的非空 full binary tree 一一对应，后者的数量恰为 Catalan 数 $C_{n-1}$^[[OEIS A000108](https://oeis.org/A000108)]．
+
+:::{#fig-binary-tree}
+
+```{tikz}
+\begin{tikzcd}
+	&&& {(a(bc))d} \\
+	&& {a(bc)} \\
+	&& bc \\
+	a & b & c & d
+	\arrow[from=1-4, to=2-3]
+	\arrow[from=1-4, to=4-4]
+	\arrow[from=2-3, to=3-3]
+	\arrow[from=2-3, to=4-1]
+	\arrow[from=3-3, to=4-2]
+	\arrow[from=3-3, to=4-3]
+\end{tikzcd}
+```
+
+括号--二叉树对应
+:::
+
+:::{.remark}
+
+回忆二叉树是区分左右子节点的有根树，full binary tree 是每个非叶节点都有且仅有两个子节点的二叉树（注意和国内常说的“满二叉树”的区别）．一颗大小为 $2n-1$ 的 full binary tree 具有 $n$ 个叶节点和 $n-1$ 个非叶节点．计算具有 $n$ 个非叶节点的非空 full binary tree 的数量，可以考虑生成函数
+$$
+F(z) = 1 + z F^2(z)
+$$
+思路是填充单个叶节点，或者放置一个非叶节点后递归左右子树．大力解此方程便可得到 Catalan 数 $C_{n}={2n \choose n}-{2n \choose n+1}$．
+:::
+
+接下来考虑结合律．$(ab)c = a(bc)$，什么意思？
+
+:::{#fig-zig-zag}
+
+```{tikz}
+\begin{tikzcd}
+	&& {(ab)c} & {} && {} & {a(bc)} \\
+	& ab &&&&&& bc \\
+	a & b & c & {} && {} & a & b & c
+	\arrow[from=1-3, to=2-2]
+	\arrow[from=1-3, to=3-3]
+	\arrow["{\text{zig}}", Rightarrow, from=1-4, to=1-6]
+	\arrow[from=1-7, to=2-8]
+	\arrow[from=1-7, to=3-7]
+	\arrow[from=2-2, to=3-1]
+	\arrow[from=2-2, to=3-2]
+	\arrow[from=2-8, to=3-8]
+	\arrow[from=2-8, to=3-9]
+	\arrow["{\text{zag}}", Rightarrow, from=3-6, to=3-4]
+\end{tikzcd}
+```
+
+Zig-Zag 与结合律
+:::
+
+噢，这是 Splay！^[如果你打过 OI]
+
+结合律就是 full binary tree 上的左旋和右旋．如果一颗 full binary tree 的某一个局部出现了 [@fig-zig-zag] 左图的形状，我们就可以把它替换成右图的形状，反之亦然．这一作用是传递的——因此在结合代数中，把一堆东西乘在一起不需要指明括号方式．
+
+:::{#exr-zig-zag-transitive}
+
+开发一个 $O(n)$ 的算法，将任意一颗 full binary tree 通过 Zig-Zag 操作转换为左斜树．特别地，证明 Zig-Zag 操作的传递性．
+:::
+
+:::{.solution}
+
+在根节点一直做 zag 直到做不动，然后递归进入左子树．
+:::
+
+:::{#exr-zig-zag-4}
+
+画出 4 个叶子节点二叉树通过 Zig-Zag 转换关系连接得到的连通图．
+:::
+
+:::{#fig-zig-zag-4}
+
+```{tikz}
+\begin{tikzcd}
+	& {(A \otimes B) \otimes (C \otimes D)} \\
+	{((A \otimes B) \otimes C) \otimes D} && {A \otimes (B \otimes (C \otimes D))} \\
+	\\
+	{(A \otimes (B \otimes C)) \otimes D} && {A \otimes ((B \otimes C) \otimes D)}
+	\arrow["{\text{zag}}", from=1-2, to=2-1]
+	\arrow["{\text{zig}}", from=2-1, to=4-1]
+	\arrow["{\text{zag}}", from=2-3, to=1-2]
+	\arrow["{\text{zig}}", from=4-1, to=4-3]
+	\arrow["{\text{zig}}", from=4-3, to=2-3]
+\end{tikzcd}
+```
+
+幺半范畴五边形交换图
+:::
+
+这是传说中的幺半范畴五边形交换图．
+
+## 自由李代数和 Witt's formula
+
+TODO
+
+## Further reading
+
+群论中的 Jacobi identity: Hall--Witt identity
+
+- <https://terrytao.wordpress.com/tag/hall-witt-identity/>
+- <https://mathoverflow.net/questions/81224/motivation-for-hall-witt-identity>
