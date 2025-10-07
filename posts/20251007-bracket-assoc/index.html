@@ -337,8 +337,9 @@ window.Quarto = {
    
   <ul>
   <li><a href="#结合律左旋右旋二叉树" id="toc-结合律左旋右旋二叉树" class="nav-link active" data-scroll-target="#结合律左旋右旋二叉树"><span class="header-section-number">1</span> 结合律：左旋，右旋，二叉树！</a></li>
-  <li><a href="#自由李代数和-witts-formula" id="toc-自由李代数和-witts-formula" class="nav-link" data-scroll-target="#自由李代数和-witts-formula"><span class="header-section-number">2</span> 自由李代数和 Witt’s formula</a></li>
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">3</span> Further reading</a></li>
+  <li><a href="#一点抽象废话自由原群" id="toc-一点抽象废话自由原群" class="nav-link" data-scroll-target="#一点抽象废话自由原群"><span class="header-section-number">2</span> 一点抽象废话：自由原群</a></li>
+  <li><a href="#自由李代数的分次维数" id="toc-自由李代数的分次维数" class="nav-link" data-scroll-target="#自由李代数的分次维数"><span class="header-section-number">3</span> 自由李代数的分次维数</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">4</span> Further reading</a></li>
   </ul>
 </nav>
     </div>
@@ -387,11 +388,10 @@ window.Quarto = {
 ((ab)c)d \quad (a(bc))d \quad (ab)(cd) \quad a((bc)d) \quad a(b(cd))
 \]</span></p>
 <p>那么爱提问题的大佬就会问了：给定 <span class="math inline">\(n\)</span> 个互异元素，共多少种语义不同的括号方式？</p>
-<p>或许你觉得这个问题没什么意义，有什么运算不满足结合律呢？遗憾的是这种糟糕的情况在数学中并不少见——群论中的交换子或李代数中的李括号都是典型的例子．仔细一想发现事情更加难绷——这两个情况下幂零性和可解性的区别恰恰是由不同的括号方式引起的：你在结合代数里见过“可解理想”的说法吗——由于结合律，它和幂零理想是一个东西．<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;没说清楚？我们后面细聊．</p></div></div><p>坏了，原来我不会打括号！</p>
-<section id="结合律左旋右旋二叉树" class="level2 page-columns page-full" data-number="1">
+<p>或许你觉得这个问题没什么意义，有什么运算不满足结合律呢？遗憾的是这种糟糕的情况在数学中并不少见——群论中的交换子或李代数中的李括号都是典型的例子．仔细一想发现事情变得愈发难绷——这两个情况下幂零性和可解性的区别恰恰是由不同的括号方式引起的：你在结合代数里见过“可解理想”的说法吗——由于结合律，它和幂零理想是一个东西．因此这个问题还真不是无的放矢．<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;没说清楚？我们后面细聊．</p></div></div><section id="结合律左旋右旋二叉树" class="level2 page-columns page-full" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="结合律左旋右旋二叉树"><span class="header-section-number">1</span> 结合律：左旋，右旋，二叉树！</h2>
-<p>计数是理解组合结构的重要手段，让我们先数数上面那位大佬提出的问题．聪明的你可能已经注意到，<span class="math inline">\(n\)</span> 个互异元素的括号方式与具有 <span class="math inline">\(n\)</span> 个叶节点，<span class="math inline">\(n-1\)</span> 个非叶节点的非空 full binary tree 一一对应，后者的数量恰为 Catalan 数 <span class="math inline">\(C_{n-1}\)</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>．</p>
+<p>聪明的你可能已经注意到，<span class="math inline">\(n\)</span> 个互异元素的括号方式与具有 <span class="math inline">\(n\)</span> 个叶节点，<span class="math inline">\(n-1\)</span> 个非叶节点的非空 full binary tree 一一对应，后者的数量恰为 Catalan 数 <span class="math inline">\(C_{n-1}\)</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>．</p>
 <div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;<a href="https://oeis.org/A000108">OEIS A000108</a></p></div></div><div id="fig-binary-tree" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-binary-tree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -657,12 +657,25 @@ Solution
 </div>
 <p>这是传说中的幺半范畴五边形交换图．</p>
 </section>
-<section id="自由李代数和-witts-formula" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="自由李代数和-witts-formula"><span class="header-section-number">2</span> 自由李代数和 Witt’s formula</h2>
-<p>TODO</p>
+<section id="一点抽象废话自由原群" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="一点抽象废话自由原群"><span class="header-section-number">2</span> 一点抽象废话：自由原群</h2>
+<p>我们给上面的问题一个代数的刻画．原群（magma）是仅带有一个二元运算的代数结构，不要求结合律等任何公理．考虑集合 <span class="math inline">\(X\)</span> 上的自由原群 <span class="math inline">\(M(X)\)</span>，则它的元素是 <span class="math inline">\(X\)</span> 上所有有限长、完全打上括号的字符串，或是在叶子节点上标记上 <span class="math inline">\(X\)</span> 中元素的 full binary tree 的全体．</p>
+<p>自由原群是按元素长度分次的，即原群的乘法（即字符串拼接）把长度为 <span class="math inline">\(m\)</span> 和 <span class="math inline">\(n\)</span> 的元素送到长度为 <span class="math inline">\(m+n\)</span> 的元素．</p>
+<p>在此视角下，我们在上一节讨论括号等价于求由 <span class="math inline">\(1\)</span> 个元素生成的自由原群中长度为 <span class="math inline">\(n\)</span> 的元素的数量．</p>
+<p>自然可以问得更一般：由 <span class="math inline">\(k\)</span> 个元素生成的自由原群中长度为 <span class="math inline">\(n\)</span> 的元素的数量是多少？答案是 <span class="math inline">\(k^n C_{n-1}\)</span>，因为字符串各位置的选取和括号方式可以独立选择．</p>
 </section>
-<section id="further-reading" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">3</span> Further reading</h2>
+<section id="自由李代数的分次维数" class="level2 page-columns page-full" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="自由李代数的分次维数"><span class="header-section-number">3</span> 自由李代数的分次维数</h2>
+<p>上一节的目的是为在李代数中做括号方式计数做铺垫．李代数是一个带有李括号乘法 <span class="math inline">\([\cdot, \cdot]\)</span> 的域上线性空间，它满足双线性性、反对称性 <span class="math inline">\([x,y] = -[y,x]\)</span> 和 Jacobi identity <span class="math display">\[
+[[x,y],z] + [[y,z],x] + [[z,x],y] = 0
+\]</span></p>
+<p>考虑集合 <span class="math inline">\(X\)</span> 上的自由李代数，我们可以先用 <span class="math inline">\(X\)</span> 生成的自由原群（李括号作为形式上的乘法）作为基底得到一个大的线性空间，然后商掉李括号的反对称性和 Jacobi identity 来给出自由李代数的构造．注意商去的部分都是齐次的，因此自由李代数也是按李括号嵌套层数分次的．这样一来，按照上一小节的观点，在李代数中对括号方式“计数”，可以认为等价于考察自由李代数中的分次维数<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>，或者通过基底显式地把自由李代数构造出来．</p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;不同于原群的情况，这个问题不完全能划归到 <span class="math inline">\(k=1\)</span> 的情况——因为太平凡：反对称性导致 <span class="math inline">\([x,x] = 0\)</span> 恒成立．</p></div></div><p>这并不是那么平凡．我们事实上要找出在反对称性和 Jacobi identity 意义下的括号字符串的标准型．反对称性定死括号内的元素顺序的同时，<span class="math inline">\([x,x]=0\)</span>？</p>
+<p>而 Jacobi identity……</p>
+<p>TODO：Witt’s formula 的 PBW 基定理 + 生成函数证明</p>
+</section>
+<section id="further-reading" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">4</span> Further reading</h2>
 <p>群论中的 Jacobi identity: Hall–Witt identity</p>
 <ul>
 <li><a href="https://terrytao.wordpress.com/tag/hall-witt-identity/" class="uri">https://terrytao.wordpress.com/tag/hall-witt-identity/</a></li>

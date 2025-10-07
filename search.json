@@ -473,28 +473,35 @@
     "href": "posts/20251007-bracket-assoc/index.html",
     "title": "非结合代数括号制造艺术",
     "section": "",
-    "text": "二元运算接受两个输入，输出一个结果．如果我们有多个输入，就需要使用括号来明确运算顺序．例如，给定四个元素 \\(a, b, c, d\\)，可以有以下五种不同的括号方式： \\[\n((ab)c)d \\quad (a(bc))d \\quad (ab)(cd) \\quad a((bc)d) \\quad a(b(cd))\n\\]\n那么爱提问题的大佬就会问了：给定 \\(n\\) 个互异元素，共多少种语义不同的括号方式？\n或许你觉得这个问题没什么意义，有什么运算不满足结合律呢？遗憾的是这种糟糕的情况在数学中并不少见——群论中的交换子或李代数中的李括号都是典型的例子．仔细一想发现事情更加难绷——这两个情况下幂零性和可解性的区别恰恰是由不同的括号方式引起的：你在结合代数里见过“可解理想”的说法吗——由于结合律，它和幂零理想是一个东西．1\n坏了，原来我不会打括号！"
+    "text": "二元运算接受两个输入，输出一个结果．如果我们有多个输入，就需要使用括号来明确运算顺序．例如，给定四个元素 \\(a, b, c, d\\)，可以有以下五种不同的括号方式： \\[\n((ab)c)d \\quad (a(bc))d \\quad (ab)(cd) \\quad a((bc)d) \\quad a(b(cd))\n\\]\n那么爱提问题的大佬就会问了：给定 \\(n\\) 个互异元素，共多少种语义不同的括号方式？\n或许你觉得这个问题没什么意义，有什么运算不满足结合律呢？遗憾的是这种糟糕的情况在数学中并不少见——群论中的交换子或李代数中的李括号都是典型的例子．仔细一想发现事情变得愈发难绷——这两个情况下幂零性和可解性的区别恰恰是由不同的括号方式引起的：你在结合代数里见过“可解理想”的说法吗——由于结合律，它和幂零理想是一个东西．因此这个问题还真不是无的放矢．1"
   },
   {
     "objectID": "posts/20251007-bracket-assoc/index.html#结合律左旋右旋二叉树",
     "href": "posts/20251007-bracket-assoc/index.html#结合律左旋右旋二叉树",
     "title": "非结合代数括号制造艺术",
     "section": "1 结合律：左旋，右旋，二叉树！",
-    "text": "1 结合律：左旋，右旋，二叉树！\n计数是理解组合结构的重要手段，让我们先数数上面那位大佬提出的问题．聪明的你可能已经注意到，\\(n\\) 个互异元素的括号方式与具有 \\(n\\) 个叶节点，\\(n-1\\) 个非叶节点的非空 full binary tree 一一对应，后者的数量恰为 Catalan 数 \\(C_{n-1}\\)2．\n2 OEIS A000108\n\n\n\n\n\n\n\n\n(\na\n(\nbc\n))\nd\na\n(\nbc\n)\nbc\na\nb\nc\nd\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n图 1: 括号–二叉树对应\n\n\n\n\n\n\n\n\n\nRemark\n\n\n\n\n\n\n注记. 回忆二叉树是区分左右子节点的有根树，full binary tree 是每个非叶节点都有且仅有两个子节点的二叉树（注意和国内常说的“满二叉树”的区别）．一颗大小为 \\(2n-1\\) 的 full binary tree 具有 \\(n\\) 个叶节点和 \\(n-1\\) 个非叶节点．计算具有 \\(n\\) 个非叶节点的非空 full binary tree 的数量，可以考虑生成函数 \\[\nF(z) = 1 + z F^2(z)\n\\] 思路是填充单个叶节点，或者放置一个非叶节点后递归左右子树．大力解此方程便可得到 Catalan 数 \\(C_{n}={2n \\choose n}-{2n \\choose n+1}\\)．\n\n\n\n\n接下来考虑结合律．\\((ab)c = a(bc)\\)，什么意思？\n\n\n\n\n\n\n\n\n\n(\nab\n)\nc\na\n(\nbc\n)\nab\nbc\na\nb\nc\na\nb\nc\n\n\n\n\n\n\n\nzig\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nzag\n\n\n\n\n\n图 2: Zig-Zag 与结合律\n\n\n\n噢，这是 Splay！3\n3 如果你打过 OI结合律就是 full binary tree 上的左旋和右旋．如果一颗 full binary tree 的某一个局部出现了 图 2 左图的形状，我们就可以把它替换成右图的形状，反之亦然．这一作用是传递的——因此在结合代数中，把一堆东西乘在一起不需要指明括号方式．\n\n\n\n\n\n\n\n习题 1 开发一个 \\(O(n)\\) 的算法，将任意一颗 full binary tree 通过 Zig-Zag 操作转换为左斜树．特别地，证明 Zig-Zag 操作的传递性．\n\n\n\n\n\n\n\n\n\n\nSolution\n\n\n\n\n\n\n解. 在根节点一直做 zag 直到做不动，然后递归进入左子树．\n\n\n\n\n\n\n\n\n\n\n\n习题 2 画出 4 个叶子节点二叉树通过 Zig-Zag 转换关系连接得到的连通图．\n\n\n\n\n\n\n\n\n\n\n\n\n\n(\nA\n⊗\nB\n)\n⊗\n(\nC\n⊗\nD\n)((\nA\n⊗\nB\n)\n⊗\nC\n)\n⊗\nDA\n⊗\n(\nB\n⊗\n(\nC\n⊗\nD\n))(\nA\n⊗\n(\nB\n⊗\nC\n))\n⊗\nDA\n⊗\n((\nB\n⊗\nC\n)\n⊗\nD\n)\n\n\nzag\n\n\nzig\n\n\nzag\n\n\nzig\n\n\nzig\n\n\n\n\n\n图 3: 幺半范畴五边形交换图\n\n\n\n这是传说中的幺半范畴五边形交换图．"
+    "text": "1 结合律：左旋，右旋，二叉树！\n聪明的你可能已经注意到，\\(n\\) 个互异元素的括号方式与具有 \\(n\\) 个叶节点，\\(n-1\\) 个非叶节点的非空 full binary tree 一一对应，后者的数量恰为 Catalan 数 \\(C_{n-1}\\)2．\n2 OEIS A000108\n\n\n\n\n\n\n\n\n(\na\n(\nbc\n))\nd\na\n(\nbc\n)\nbc\na\nb\nc\nd\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n图 1: 括号–二叉树对应\n\n\n\n\n\n\n\n\n\nRemark\n\n\n\n\n\n\n注记. 回忆二叉树是区分左右子节点的有根树，full binary tree 是每个非叶节点都有且仅有两个子节点的二叉树（注意和国内常说的“满二叉树”的区别）．一颗大小为 \\(2n-1\\) 的 full binary tree 具有 \\(n\\) 个叶节点和 \\(n-1\\) 个非叶节点．计算具有 \\(n\\) 个非叶节点的非空 full binary tree 的数量，可以考虑生成函数 \\[\nF(z) = 1 + z F^2(z)\n\\] 思路是填充单个叶节点，或者放置一个非叶节点后递归左右子树．大力解此方程便可得到 Catalan 数 \\(C_{n}={2n \\choose n}-{2n \\choose n+1}\\)．\n\n\n\n\n接下来考虑结合律．\\((ab)c = a(bc)\\)，什么意思？\n\n\n\n\n\n\n\n\n\n(\nab\n)\nc\na\n(\nbc\n)\nab\nbc\na\nb\nc\na\nb\nc\n\n\n\n\n\n\n\nzig\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nzag\n\n\n\n\n\n图 2: Zig-Zag 与结合律\n\n\n\n噢，这是 Splay！3\n3 如果你打过 OI结合律就是 full binary tree 上的左旋和右旋．如果一颗 full binary tree 的某一个局部出现了 图 2 左图的形状，我们就可以把它替换成右图的形状，反之亦然．这一作用是传递的——因此在结合代数中，把一堆东西乘在一起不需要指明括号方式．\n\n\n\n\n\n\n\n习题 1 开发一个 \\(O(n)\\) 的算法，将任意一颗 full binary tree 通过 Zig-Zag 操作转换为左斜树．特别地，证明 Zig-Zag 操作的传递性．\n\n\n\n\n\n\n\n\n\n\nSolution\n\n\n\n\n\n\n解. 在根节点一直做 zag 直到做不动，然后递归进入左子树．\n\n\n\n\n\n\n\n\n\n\n\n习题 2 画出 4 个叶子节点二叉树通过 Zig-Zag 转换关系连接得到的连通图．\n\n\n\n\n\n\n\n\n\n\n\n\n\n(\nA\n⊗\nB\n)\n⊗\n(\nC\n⊗\nD\n)((\nA\n⊗\nB\n)\n⊗\nC\n)\n⊗\nDA\n⊗\n(\nB\n⊗\n(\nC\n⊗\nD\n))(\nA\n⊗\n(\nB\n⊗\nC\n))\n⊗\nDA\n⊗\n((\nB\n⊗\nC\n)\n⊗\nD\n)\n\n\nzag\n\n\nzig\n\n\nzag\n\n\nzig\n\n\nzig\n\n\n\n\n\n图 3: 幺半范畴五边形交换图\n\n\n\n这是传说中的幺半范畴五边形交换图．"
   },
   {
-    "objectID": "posts/20251007-bracket-assoc/index.html#自由李代数和-witts-formula",
-    "href": "posts/20251007-bracket-assoc/index.html#自由李代数和-witts-formula",
+    "objectID": "posts/20251007-bracket-assoc/index.html#一点抽象废话自由原群",
+    "href": "posts/20251007-bracket-assoc/index.html#一点抽象废话自由原群",
     "title": "非结合代数括号制造艺术",
-    "section": "2 自由李代数和 Witt’s formula",
-    "text": "2 自由李代数和 Witt’s formula\nTODO"
+    "section": "2 一点抽象废话：自由原群",
+    "text": "2 一点抽象废话：自由原群\n我们给上面的问题一个代数的刻画．原群（magma）是仅带有一个二元运算的代数结构，不要求结合律等任何公理．考虑集合 \\(X\\) 上的自由原群 \\(M(X)\\)，则它的元素是 \\(X\\) 上所有有限长、完全打上括号的字符串，或是在叶子节点上标记上 \\(X\\) 中元素的 full binary tree 的全体．\n自由原群是按元素长度分次的，即原群的乘法（即字符串拼接）把长度为 \\(m\\) 和 \\(n\\) 的元素送到长度为 \\(m+n\\) 的元素．\n在此视角下，我们在上一节讨论括号等价于求由 \\(1\\) 个元素生成的自由原群中长度为 \\(n\\) 的元素的数量．\n自然可以问得更一般：由 \\(k\\) 个元素生成的自由原群中长度为 \\(n\\) 的元素的数量是多少？答案是 \\(k^n C_{n-1}\\)，因为字符串各位置的选取和括号方式可以独立选择．"
+  },
+  {
+    "objectID": "posts/20251007-bracket-assoc/index.html#自由李代数的分次维数",
+    "href": "posts/20251007-bracket-assoc/index.html#自由李代数的分次维数",
+    "title": "非结合代数括号制造艺术",
+    "section": "3 自由李代数的分次维数",
+    "text": "3 自由李代数的分次维数\n上一节的目的是为在李代数中做括号方式计数做铺垫．李代数是一个带有李括号乘法 \\([\\cdot, \\cdot]\\) 的域上线性空间，它满足双线性性、反对称性 \\([x,y] = -[y,x]\\) 和 Jacobi identity \\[\n[[x,y],z] + [[y,z],x] + [[z,x],y] = 0\n\\]\n考虑集合 \\(X\\) 上的自由李代数，我们可以先用 \\(X\\) 生成的自由原群（李括号作为形式上的乘法）作为基底得到一个大的线性空间，然后商掉李括号的反对称性和 Jacobi identity 来给出自由李代数的构造．注意商去的部分都是齐次的，因此自由李代数也是按李括号嵌套层数分次的．这样一来，按照上一小节的观点，在李代数中对括号方式“计数”，可以认为等价于考察自由李代数中的分次维数4，或者通过基底显式地把自由李代数构造出来．\n4 不同于原群的情况，这个问题不完全能划归到 \\(k=1\\) 的情况——因为太平凡：反对称性导致 \\([x,x] = 0\\) 恒成立．这并不是那么平凡．我们事实上要找出在反对称性和 Jacobi identity 意义下的括号字符串的标准型．反对称性定死括号内的元素顺序的同时，\\([x,x]=0\\)？\n而 Jacobi identity……\nTODO：Witt’s formula 的 PBW 基定理 + 生成函数证明"
   },
   {
     "objectID": "posts/20251007-bracket-assoc/index.html#further-reading",
     "href": "posts/20251007-bracket-assoc/index.html#further-reading",
     "title": "非结合代数括号制造艺术",
-    "section": "3 Further reading",
-    "text": "3 Further reading\n群论中的 Jacobi identity: Hall–Witt identity\n\nhttps://terrytao.wordpress.com/tag/hall-witt-identity/\nhttps://mathoverflow.net/questions/81224/motivation-for-hall-witt-identity"
+    "section": "4 Further reading",
+    "text": "4 Further reading\n群论中的 Jacobi identity: Hall–Witt identity\n\nhttps://terrytao.wordpress.com/tag/hall-witt-identity/\nhttps://mathoverflow.net/questions/81224/motivation-for-hall-witt-identity"
   },
   {
     "objectID": "posts/20190922-muphi/index.html",
