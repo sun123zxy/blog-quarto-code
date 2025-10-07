@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.34">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="sun123zxy">
+
+<title>非结合代数括号制造艺术 – sun123zxy’s blog</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-a45597b65f5f3795ae8b140358e6d8e8.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-96de23c090fa5f90e6d2871446c09927.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-7a5db8babeb1a7d9856cc38403086896.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-815e944f2ee571f6e2e9300a7ff39b59.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+<script>
+MathJax = {
+  tex: {
+    macros: {
+        SunQuarTeX: String.raw`\phantom{}\kern-.0em\lower.0ex\hbox{$\mathbf S$}\kern-.045em\lower.0ex\hbox{$\scriptstyle \mathbf U$}\kern-.045em\hbox{$\scriptstyle \mathbb N$}\kern-.0em\hbox{$\mathbb Q$}\kern-.045em\lower.0ex\hbox{$\scriptstyle \mathbf U$}\kern-.135em\lower.0ex\hbox{$\scriptstyle \mathbf A$}\kern-.09em\lower.0ex\hbox{$\scriptstyle \mathbb R$}\kern-.072em\mathbf{\TeX}`
+    }
+  }
+};
+</script>
+<meta name="quarto:status" content="draft">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>草稿</div>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">sun123zxy’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../listings/overview.html"> 
+<span class="menu-text">Overview</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/sun123zxy/blog-quarto-code/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-bi-rss" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-bi-rss">    
+        <li>
+    <a class="dropdown-item" href="../../listings/all.xml">
+ <span class="dropdown-text">All Posts</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#结合律左旋右旋二叉树" id="toc-结合律左旋右旋二叉树" class="nav-link active" data-scroll-target="#结合律左旋右旋二叉树"><span class="header-section-number">1</span> 结合律：左旋，右旋，二叉树！</a></li>
+  <li><a href="#自由李代数和-witts-formula" id="toc-自由李代数和-witts-formula" class="nav-link" data-scroll-target="#自由李代数和-witts-formula"><span class="header-section-number">2</span> 自由李代数和 Witt’s formula</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">3</span> Further reading</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">非结合代数括号制造艺术</h1>
+<p class="subtitle lead">TAOCP: The Art of Creating Parentheses</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">algebra</div>
+    <div class="quarto-category">combinatorics</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">作者</div>
+    <div class="quarto-title-meta-contents">
+             <p>sun123zxy </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">发布于</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2025年10月7日</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>二元运算接受两个输入，输出一个结果．如果我们有多个输入，就需要使用括号来明确运算顺序．例如，给定四个元素 <span class="math inline">\(a, b, c, d\)</span>，可以有以下五种不同的括号方式： <span class="math display">\[
+((ab)c)d \quad (a(bc))d \quad (ab)(cd) \quad a((bc)d) \quad a(b(cd))
+\]</span></p>
+<p>那么爱提问题的大佬就会问了：给定 <span class="math inline">\(n\)</span> 个互异元素，共多少种语义不同的括号方式？</p>
+<p>或许你觉得这个问题没什么意义，有什么运算不满足结合律呢？遗憾的是这种糟糕的情况在数学中并不少见——群论中的交换子或李代数中的李括号都是典型的例子．仔细一想发现事情更加难绷——这两个情况下幂零性和可解性的区别恰恰是由不同的括号方式引起的：你在结合代数里见过“可解理想”的说法吗——由于结合律，它和幂零理想是一个东西．<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;没说清楚？我们后面细聊．</p></div></div><p>坏了，原来我不会打括号！</p>
+<section id="结合律左旋右旋二叉树" class="level2 page-columns page-full" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="结合律左旋右旋二叉树"><span class="header-section-number">1</span> 结合律：左旋，右旋，二叉树！</h2>
+<p>计数是理解组合结构的重要手段，让我们先数数上面那位大佬提出的问题．聪明的你可能已经注意到，<span class="math inline">\(n\)</span> 个互异元素的括号方式与具有 <span class="math inline">\(n\)</span> 个叶节点，<span class="math inline">\(n-1\)</span> 个非叶节点的非空 full binary tree 一一对应，后者的数量恰为 Catalan 数 <span class="math inline">\(C_{n-1}\)</span><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>．</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;<a href="https://oeis.org/A000108">OEIS A000108</a></p></div></div><div id="fig-binary-tree" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-binary-tree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.4.3 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="257.64pt" height="175.14pt" viewbox="0 0 171.76 116.76">
+<style type="text/css">
+@font-face{font-family:OYFEXR-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAOIAAoAAAAABngAAAM9AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqGFIRfCwwAATYCJAMUBCAFgmgHIBsIBVGUC0oP8JGQm2H9FKFS2Rmp0vOIysn2PknbicYiHAYpmalwOIfCaKzHNgd52SQVspWBE57yq/9zTf7vwO+AEsDSMgSiQGprkCHcLAMHVGCzvVGR6t4manZERCxc9Y2jJbR8TiUQgPqgZxctVFQtnwqFTEgA0A1gAW/lfMcHACEvvg2egAaRm7ieQAENuEWG6Pg4gQ6IeMpqr5W7vxbEgc0T2IE/yJOL9IunoBDog4GLTkqWIeCGlhGBPiZWW1bW2sYmvoEHnhY6ujpgbWWc1J0/Z9+85d+/t39wGBF5cJhbc3RgaWCnH5cvvhQdtaW9ZW2ckus70WjwcBy5UNi7s7u1Vb21VbmLrA4Ol5aGftLe5gYygwWyOjpH21ZG1q41gZIbmQ6Hh6x10v5TTdqA5mPS2VvRyVvI3JKrM2A4cWigq8tUreU9tb2/R9z+oL0rtsZV0uJh5qwWhpEEV8ba1mUCU7qetJe+hczB+xCuq/5rJC0bF4ybZI4SX9kYY8PGNK+4jaZptzy1iHMjX/tqSwpbftRlQiaNHcEI9VWyJqDR1bdCOW/k+GQOOYneK6A3nDdlBFTaqpgWEbZuZbnBNAK/lk1kEmckLw1dQB/1UbIR1tWzQjMN7MCIKbDWNVqHgoQnmmyf8E8ObSWNexGd2zgvNXFFJcef6rfUOjgdL3FWze+WpVCXO0vD0mmiUNrFksAjsfFtuu12UlU32LKL8dkxU6MHngVi522Iemla4nOZ6Lmhkd9UE1CiDJglSmi7agXYr9pcjgnZ0Tc8Vf3BQ/Sf15sSpdAnmsEyaa4NtpgDSP+Q6zMXmwem+psYDx/S2PWzcOgBcEA1n9Y8AXUHIXiFAwTsURI7ZQEkswzCRQtCEGAwsVRBwZQOCYAhCToK2BwfyLDiGwoCkydmsvAgnQQQ7MwBx8csFCdALx8nxKw1JCVr/kgl/JjWbOGkr+doLaZjZmYkJXlVGZUSl+QVHqDP4xsfFBMfEMYpIy4rLgM6IoSJFCeWn2iczETwxdPCWXCiT48ja2J0mDFjRIoke6lXjREkQjhOUsRJ6oCBGK4nenkDX99b0ojuK16QmC8eIAwnGeJkiZOBpwEAAA==) format('woff2');}
+@font-face{font-family:TUELZZ-CMR10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAIcAAoAAAAABAAAAAHSAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBLIExCwgAATYCJAMKBCAFgmIHIBtKAwAeBW5bA08LodAQTk84HP6NCBy6+yRtGWOp5caWCLkVuAqHR2ERBofQeE+mn/u9YSb7pk3FwKNKpNIIjZDwydEIjUSCMmQ32/Eu8AL6u0BgNhlYYIEnGEKYBAMZYqADi0Cym+EtKTk8tFr77UDNX84MKD/l+X/FqWlqhZJm8pASbMYfxRBocGy5go4qcIlb7wAKKlbUClbUOQA0TXCC1ePu8AXiAyoYouAU8ACABohsDHl2DzAjhs1iuAnHD1f6EMSAfBmGr30ookeQgwziuHEPM67cDN4eogYU1f5OrXk9ROeSafShDdxv38/rid6Af6D16d0t+iNlHuT0fc+CxY6w9Le9vnkk//n61f7I5N2zUPNqn3sACMLrCnXL1cn9naiNvEZXVJhQQKg6CndY0QMIAFAK8m2MBUK1AQJBbcqn0DzHaGbMY2DaNoZmHO6nbCGrlTYp9sgJzYYoBtbsY2jDXZ9y6fFo8sebl3qDQG61rvMUWhLxxjuRYGJqeMb08RcjuWIoMUWBqTAF8KQkpBXkBWRNUUjxc/SS9AwE5Kys1vEoaJEQGQVk5USkJE0hgRErSCTJKvFMIn8cvCqm+BVF5BSFJEyhgFHBKGoBtgAA) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="164.038179" y="-115.577829" transform="matrix(1.000261 0 0 1.000261 -31.150004 126.731)">(</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="167.911158" y="-115.577829" transform="matrix(1.000261 0 0 1.000261 -31.150004 126.731)">a</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="173.175793" y="-115.577829" transform="matrix(1.000261 0 0 1.000261 -31.150004 126.731)">(</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="177.048772" y="-115.577829" transform="matrix(1.000261 0 0 1.000261 -31.150004 126.731)">bc</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="185.634531" y="-115.577829" transform="matrix(1.000261 0 0 1.000261 -31.150004 126.731)">))</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="193.380509" y="-115.577829" transform="matrix(1.000261 0 0 1.000261 -31.150004 126.731)">d</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="103.486985" y="-80.392014" transform="matrix(1.000261 0 0 1.000261 -24.683003 126.731)">a</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="108.751611" y="-80.392014" transform="matrix(1.000261 0 0 1.000261 -24.683003 126.731)">(</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="112.6246" y="-80.392014" transform="matrix(1.000261 0 0 1.000261 -24.683003 126.731)">bc</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="121.209359" y="-80.392014" transform="matrix(1.000261 0 0 1.000261 -24.683003 126.731)">)</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="103.486985" y="-45.759055" transform="matrix(1.000261 0 0 1.000261 -18.176005 126.731)">bc</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="20.80257" y="-13.616446" transform="matrix(1.000261 0 0 1.000261 -16.515004 126.731)">a</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="58.061843" y="-13.616446" transform="matrix(1.000261 0 0 1.000261 -16.020005 126.731)">b</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="103.486985" y="-13.616446" transform="matrix(1.000261 0 0 1.000261 -16.038004 126.731)">c</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="164.038179" y="-13.616446" transform="matrix(1.000261 0 0 1.000261 -16.475005 126.731)">d</text>
+<path d="M135.00687 17.46243L105.17281 34.79678" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M107.993263 35.923103C106.945254 34.872918 105.875547 34.711029 105.000537 34.89685C105.595295 34.228692 105.984391 33.219194 105.591021 31.788645" stroke="#000" fill="none" stroke-width=".398469" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M150.20075 17.46243V101.94531" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M152.59166 100.07241C151.15708 100.45098 150.47968 101.29459 150.20075 102.14454C149.92182 101.29459 149.24442 100.45098 147.80984 100.07241" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M89.63294 52.65796V69.79397" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M92.023848 67.92109C90.589268 68.29966 89.911868 69.14327 89.632938 69.99322C89.354008 69.14327 88.676608 68.29966 87.242028 67.92109" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M78.7064 52.65796L14.22591 104.72253" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M17.185036 105.406134C15.989298 104.527819 14.90741 104.530745 14.070908 104.84767C14.556962 104.096718 14.787765 103.039732 14.181097 101.685782" stroke="#000" fill="none" stroke-width=".39847" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M80.8462 84.68571L51.15181 105.70177" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M54.061621 106.571393C52.92394 105.619141 51.844068 105.553545 50.989198 105.81685C51.52182 105.098208 51.819092 104.057989 51.299403 102.668376" stroke="#000" fill="none" stroke-width=".398459" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M89.63294 84.80928V104.57437" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M92.023848 102.701479C90.589268 103.080049 89.911868 103.923659 89.632938 104.773609C89.354008 103.923659 88.676608 103.080049 87.242028 102.701479" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-binary-tree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1: 括号–二叉树对应
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>回忆二叉树是区分左右子节点的有根树，full binary tree 是每个非叶节点都有且仅有两个子节点的二叉树（注意和国内常说的“满二叉树”的区别）．一颗大小为 <span class="math inline">\(2n-1\)</span> 的 full binary tree 具有 <span class="math inline">\(n\)</span> 个叶节点和 <span class="math inline">\(n-1\)</span> 个非叶节点．计算具有 <span class="math inline">\(n\)</span> 个非叶节点的非空 full binary tree 的数量，可以考虑生成函数 <span class="math display">\[
+F(z) = 1 + z F^2(z)
+\]</span> 思路是填充单个叶节点，或者放置一个非叶节点后递归左右子树．大力解此方程便可得到 Catalan 数 <span class="math inline">\(C_{n}={2n \choose n}-{2n \choose n+1}\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<p>接下来考虑结合律．<span class="math inline">\((ab)c = a(bc)\)</span>，什么意思？</p>
+<div id="fig-zig-zag" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-zig-zag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.4.3 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="496.335pt" height="129.585pt" viewbox="0 0 330.89 86.39">
+<style type="text/css">
+@font-face{font-family:TUELZZ-LMRoman7-Regular;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAPEAAoAAAAABlAAAAN5AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAATAqFLIQWCwwAATYCJAMUBCAFgw8HIBv+BCAehenWyMe5yc50VRV1053nRATUWLp3AQZFUERUnbiCJFLEwtRWMRtRmx/Mq5LrrIB2Jet1PwhkeHFeTDFEceCBp+FFDr6Jm3EXpRtogsCeAlG+QOPIAlnDLAysH/Y2RR6A3txVWx5qcTGdvfYh2SApvAwJUohXv70aKlbWzPCNoTcQgadCBJptPhTrB/BtkJicNvQJKwkiNCeRUEZEEnYxROA8nOGATOmiaAM/ARITCPcozTWuckYCwFIMZCIdHwgZoCXrvqIkURiWoVBKTpPBvK9dvpp2mn52lb3/Wnt75mFj653d0Rc5ePuZuK4FexrA4L3CQea2O5K3YKGDFVTf4Otro4cki8P1R7aWk5u7qPpu4jvMTQy12/IrXO3X1rOH9NX16SN8Nnefbm4Y1/7W28/cbVdyg50MTWMMq9xdd3Y3Y5bu6HpGrJvYmUd1u+dp69vp6tmYRnT6lhiauhw6dflvFxNvvwU3PhV9IdvM6IMzfcxI26A0tIv1PXKu6cOFo51jRSNe1qTVtfAigx/x7VtrYrucuh5wodib5OaLnaiTIs9sl6CEeConhX7vxeDdQVVEZoYWc5Q3cTknVJ+uiLprEFxO/Z5rV4UXCHJX9hk6gK2qt7Qhed45OUI0rGkV2XqSYPMKUdyqKbQfAOgVOC57vZPW83ynQKwwqddSczgeM6cdIdQbowUM+GRad7BqEqJndbxBoOLpggyTRrP/s3J2b3toI/VaZg51/V47kfL87fluKmVdNt/vZ0eGrz1IOyTz9YvcuMeGSI/mqBNqBKVAVcPor9jtpwCYNsnqwwq+Hz/zNPnmj5aLJIdzl9vlNRk++t/96/vhXlDvHn//ROaPpWPircFanNdEOhg8jstOuyodneoMVObg7AEICBw5vNnlRqH8Pz0pGcJERyxKV+JocaMideuI0/BjiliyOaGOIKHDAwgGIwqRUCuIFGsgIECc6QQoQDoY4mRlCF0yRZY6MlUZ4fFMlTQgQnKGIJ+TSybrEESmKNVApuowlszU52W2ybPKlJy1jY6xoyNaNfRDMu7sUUUCEycV7pafuXdsQFSsXwinFCaNSQFjJiyFCeEhlBxrNnQYc+QIJXwnUZZ8+IkRzEMkWz4iRQkQJhQnCRjxMICeEhqK7SGaD+/IU8KE7S1WgKg77icEJykYaRgpCAAAAA==) format('woff2');}
+@font-face{font-family:NQUDBD-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAANAAAoAAAAABYQAAAL2AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqEJIM0CwoAATYCJAMQBCAFgmgHIBtZBFGUC0oB8pGQk+G1UgaitRbT8tJJbL6Jh++Pfufet/ylfbVwxyyiDSyPIIoDbTyggAJs0v8G8rQ0JQY4SyeQRz2F/7kZf8A20ASwaXMIFPhYoCGEW8OAFkge9Y7UTrdp2hkxiNDl0yEdrVDiN+qgyfe8XmyrnVZ8HRy3gYfsUMGnvLymhAIYjwKLgSKiBscAiYLtLhiCcg4VQn2OtB4H2h98tdrzKRo+AX58hyalOEKWQ4iNGdo5KTHMxevEy9vU1i42+lykk42tGeDt4pwzWrnh33sifvLM5bnrpMxz1+VtN1eeVn72GZWKO9kpJ9YnvG3zysOXuq2+bpO3qsdPnZ84aT1xItwiv1fAs7N1hDDU0Uo0XSU2s7k5dXHy9m9LVD4q9ro+z98hjFzpsYZ2XBCWnsjOPQHy9pWbTTkuXVvZmvO0mkSvnJ49QyT94zi+52vbIlRMcOd3ckxmF9AiaHPc8dDm7jQfdVrvXth8gXXfTx9XFPcuyACWtvtixIWYs3ADzDNI3QHNYmRiDwo+KospngliP6mCj4KP1Wi6gRZVH0vdsbfb5ZoE/m5YKqYtwndmnoBJBqo7ShsZ24N5ps6A+UFYk1eCIRkvkkA8wfwvZK1j8Sln854RZeBq6wT+N3xgGNIM/SFevV92VUBz0RILT5+lalU/T6qI/O7Phe4nc1pGEXb9nC8vuNp8kbYI5wAz0F/PDiVkaewNxv1Er4IcVDsQ47Slxx4AgeCrtl/6Uu//p6VC//hL+Y2pxFPuz+M8IQUZCwH8mv7JWAXHBmkIVA9nFGgy9wahsKbs6GrFGt0sOaa7FRfDc4eUIEWdCadshK4ORdHNrhK6O9SVzt1ZqVCUD8j6beydjQyM5Aytrc2ZcOXfZUKwJ/Oeu09QSnhiSmi0oCKkBCkChmJFi5MsSbAEgqzFCmrbYtiw58yIASNyDFmzZo4J5hLz1kThYsUQxASBGWCqxrBU/1wQFAdIX/lBUoRL/OGhoglSBFECUYQEAA==) format('woff2');}
+@font-face{font-family:OYFEXR-CMR10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAIoAAoAAAAABAAAAAHcAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBLIExCwgAATYCJAMKBCAFgmIHIBtKAwCeA27LDKey9u4/BhGb8PAQOeFZRODQ3SdpGWOq5caW+O3BVSjwSBzC4BAa78l84967L+G+2EAMQGOH4yqUytre8krfBm9O+3j4PNKiXewRpZtCgLs9oahgN9vxLvAC+rtAYDYZWGCBJxhCmAQDGWKgA4tAspvhLSk5PLRa++1AzV8uDCg/5euf59w0WvHEIw8pwWb0sTcPCI6YK+ioApe49Q6goGIZVrAMZx/QNMExVo+6wwvyARUMUXACeAFAA0TWs8kRv+h1FT83u2+xzPt2xL0kv91Oh53jEd433S/a36X34iTnCf9JwTpxDk0t6VMI7rYeq7pzanZGQD3e5tSfrxzE4HD6twDGjrDwafJ1yfzn7Bd+w8jWQm+lzz0ABOH9PvwyJdGfhG3kNbqiwrgCQtVRuBUKBhAAUArybSQEoloHQVCb9Ck0xzGaaXMYmLKFoWkH+0mb3LDSJsSuPKFZt4SBVScYWvfQJ134PJr88eZlqZNMtKv2WKHqct54JxdypoZnTJ+ZvcXtvflVlQd5kQfErFu1YdeOWVtUCtbNcPTWlHQkJbRV2cUUVLk4Nc3asm3RujUqLoizglKyViWTSTQThymHVGbsWbRtz7xVKh6IF+KBBdgCAAAA) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="OYFEXR-CMR10" font-size="9.96" x="188.296846" y="-96.090916" transform="matrix(1.000261 0 0 1.000261 -104.250019 109.13699)">(</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="192.170835" y="-96.090916" transform="matrix(1.000261 0 0 1.000261 -104.250019 109.13699)">ab</text>
+<text font-family="OYFEXR-CMR10" font-size="9.96" x="201.709345" y="-96.090916" transform="matrix(1.000261 0 0 1.000261 -104.250019 109.13699)">)</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="205.583334" y="-96.090916" transform="matrix(1.000261 0 0 1.000261 -104.250019 109.13699)">c</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="331.266525" y="-96.090916" transform="matrix(1.000261 0 0 1.000261 -104.25001 109.13699)">a</text>
+<text font-family="OYFEXR-CMR10" font-size="9.96" x="336.531151" y="-96.090916" transform="matrix(1.000261 0 0 1.000261 -104.25001 109.13699)">(</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="340.404129" y="-96.090916" transform="matrix(1.000261 0 0 1.000261 -104.25001 109.13699)">bc</text>
+<text font-family="OYFEXR-CMR10" font-size="9.96" x="348.988898" y="-96.090916" transform="matrix(1.000261 0 0 1.000261 -104.25001 109.13699)">)</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="140.239391" y="-61.458956" transform="matrix(1.000261 0 0 1.000261 -98.22002 109.13699)">ab</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="378.846104" y="-61.458956" transform="matrix(1.000261 0 0 1.000261 -97.743007 109.13699)">bc</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="100.347805" y="-29.316347" transform="matrix(1.000261 0 0 1.000261 -96.082019 109.13699)">a</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="140.239391" y="-29.316347" transform="matrix(1.000261 0 0 1.000261 -95.58701 109.13699)">b</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="188.296846" y="-29.316347" transform="matrix(1.000261 0 0 1.000261 -95.60501 109.13699)">c</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="331.266525" y="-29.316347" transform="matrix(1.000261 0 0 1.000261 -96.08201 109.13699)">a</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="378.846104" y="-29.316347" transform="matrix(1.000261 0 0 1.000261 -95.587009 109.13699)">b</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="417.78294" y="-29.316347" transform="matrix(1.000261 0 0 1.000261 -95.605 109.13699)">c</text>
+<path d="M82.64793 19.35918L56.41457 38.2629" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M59.331692 39.107672C58.185918 38.165167 57.105523 38.108794 56.25293 38.37939C56.779398 37.656224 57.067777 36.613503 56.53624 35.228373" stroke="#000" fill="none" stroke-width=".39846" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M94.89767 19.35918V71.2756" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M97.288588 69.4027C95.854008 69.78127 95.176608 70.62488 94.897678 71.47483C94.618748 70.62488 93.941348 69.78127 92.506768 69.4027" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M142.69044 10.52868H187.92367" stroke="#000" fill="none" stroke-width="2.33075" stroke-miterlimit="10"></path>
+<path d="M142.69044 10.52868H187.92367" stroke="#fff" fill="none" stroke-width="1.53377" stroke-miterlimit="10"></path>
+<path d="M186.62909 7.968499C187.25705 9.321039 188.94774 10.480379 189.91385 10.528679C188.94774 10.576979 187.25705 11.736319 186.62909 13.088859" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="TUELZZ-LMRoman7-Regular" font-size="6.97" x="93.396081" y="-29.308021" transform="matrix(1.000545 0 0 1.000545 68.07299 36.077)">zig</text>
+<path d="M250.03487 19.35918L276.39007 38.54472" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M276.282956 35.509532C275.744768 36.892136 276.028151 37.936258 276.55116 38.66196C275.699851 38.387271 274.619167 38.438464 273.468855 39.375491" stroke="#000" fill="none" stroke-width=".398471" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M237.90585 19.35918V71.2756" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M240.29677 69.4027C238.86219 69.78127 238.18479 70.62488 237.90586 71.47483C237.62693 70.62488 236.94953 69.78127 235.51495 69.4027" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M38.96005 51.5105L14.24174 71.42411" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M17.200051 72.110972C16.005304 71.231353 14.923431 71.233084 14.086594 71.54908C14.573469 70.798678 14.805435 69.741965 14.200272 68.387369" stroke="#000" fill="none" stroke-width=".398463" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M46.82716 51.5105V68.64654" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M49.218075 66.77364C47.783495 67.15221 47.106095 67.99582 46.827165 68.84577C46.548235 67.99582 45.870835 67.15221 44.436255 66.77364" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M285.49898 51.5105V68.64654" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M287.88988 66.77364C286.4553 67.15221 285.7779 67.99582 285.49897 68.84577C285.22004 67.99582 284.54264 67.15221 283.10806 66.77364" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M293.17639 51.5105L317.49054 71.581" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M317.568239 68.545022C316.946962 69.892285 317.1663 70.951678 317.64418 71.707828C316.811183 71.381872 315.72942 71.367232 314.524275 72.232522" stroke="#000" fill="none" stroke-width=".398459" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M190.11308 77.32201H144.87987" stroke="#000" fill="none" stroke-width="2.33075" stroke-miterlimit="10"></path>
+<path d="M190.11308 77.32201H144.87987" stroke="#fff" fill="none" stroke-width="1.53377" stroke-miterlimit="10"></path>
+<path d="M146.17446 79.88219C145.5465 78.52965 143.85581 77.37031 142.8897 77.32201C143.85581 77.27371 145.5465 76.11437 146.17446 74.76183" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="TUELZZ-LMRoman7-Regular" font-size="6.97" x="93.396081" y="-29.308021" transform="matrix(1.000545 0 0 1.000545 67.215 112.13699)">zag</text>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-zig-zag-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;2: Zig-Zag 与结合律
+</figcaption>
+</figure>
+</div>
+<p>噢，这是 Splay！<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;如果你打过 OI</p></div></div><p>结合律就是 full binary tree 上的左旋和右旋．如果一颗 full binary tree 的某一个局部出现了 <a href="#fig-zig-zag" class="quarto-xref">图&nbsp;2</a> 左图的形状，我们就可以把它替换成右图的形状，反之亦然．这一作用是传递的——因此在结合代数中，把一堆东西乘在一起不需要指明括号方式．</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="exr-zig-zag-transitive" class="theorem exercise">
+<p><span class="theorem-title"><strong>习题 1</strong></span> 开发一个 <span class="math inline">\(O(n)\)</span> 的算法，将任意一颗 full binary tree 通过 Zig-Zag 操作转换为左斜树．特别地，证明 Zig-Zag 操作的传递性．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof solution">
+<p><span class="proof-title"><em>解</em>. </span>在根节点一直做 zag 直到做不动，然后递归进入左子树．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="exr-zig-zag-4" class="theorem exercise">
+<p><span class="theorem-title"><strong>习题 2</strong></span> 画出 4 个叶子节点二叉树通过 Zig-Zag 转换关系连接得到的连通图．</p>
+</div>
+</div>
+</div>
+</div>
+<div id="fig-zig-zag-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-zig-zag-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.4.3 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="487.98pt" height="158.385pt" viewbox="0 0 325.32 105.59">
+<style type="text/css">
+@font-face{font-family:TUELZZ-LMRoman7-Regular;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAPEAAoAAAAABlAAAAN5AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAATAqFLIQWCwwAATYCJAMUBCAFgw8HIBv+BCAehenWyMe5yc50VRV1053nRATUWLp3AQZFUERUnbiCJFLEwtRWMRtRmx/Mq5LrrIB2Jet1PwhkeHFeTDFEceCBp+FFDr6Jm3EXpRtogsCeAlG+QOPIAlnDLAysH/Y2RR6A3txVWx5qcTGdvfYh2SApvAwJUohXv70aKlbWzPCNoTcQgadCBJptPhTrB/BtkJicNvQJKwkiNCeRUEZEEnYxROA8nOGATOmiaAM/ARITCPcozTWuckYCwFIMZCIdHwgZoCXrvqIkURiWoVBKTpPBvK9dvpp2mn52lb3/Wnt75mFj653d0Rc5ePuZuK4FexrA4L3CQea2O5K3YKGDFVTf4Otro4cki8P1R7aWk5u7qPpu4jvMTQy12/IrXO3X1rOH9NX16SN8Nnefbm4Y1/7W28/cbVdyg50MTWMMq9xdd3Y3Y5bu6HpGrJvYmUd1u+dp69vp6tmYRnT6lhiauhw6dflvFxNvvwU3PhV9IdvM6IMzfcxI26A0tIv1PXKu6cOFo51jRSNe1qTVtfAigx/x7VtrYrucuh5wodib5OaLnaiTIs9sl6CEeConhX7vxeDdQVVEZoYWc5Q3cTknVJ+uiLprEFxO/Z5rV4UXCHJX9hk6gK2qt7Qhed45OUI0rGkV2XqSYPMKUdyqKbQfAOgVOC57vZPW83ynQKwwqddSczgeM6cdIdQbowUM+GRad7BqEqJndbxBoOLpggyTRrP/s3J2b3toI/VaZg51/V47kfL87fluKmVdNt/vZ0eGrz1IOyTz9YvcuMeGSI/mqBNqBKVAVcPor9jtpwCYNsnqwwq+Hz/zNPnmj5aLJIdzl9vlNRk++t/96/vhXlDvHn//ROaPpWPircFanNdEOhg8jstOuyodneoMVObg7AEICBw5vNnlRqH8Pz0pGcJERyxKV+JocaMideuI0/BjiliyOaGOIKHDAwgGIwqRUCuIFGsgIECc6QQoQDoY4mRlCF0yRZY6MlUZ4fFMlTQgQnKGIJ+TSybrEESmKNVApuowlszU52W2ybPKlJy1jY6xoyNaNfRDMu7sUUUCEycV7pafuXdsQFSsXwinFCaNSQFjJiyFCeEhlBxrNnQYc+QIJXwnUZZ8+IkRzEMkWz4iRQkQJhQnCRjxMICeEhqK7SGaD+/IU8KE7S1WgKg77icEJykYaRgpCAAAAA==) format('woff2');}
+@font-face{font-family:XDTRFF-CMSY10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJQAAoAAAAABCQAAAIFAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBUIFQCwYAATYCJAMIBCAFgmgHIBttA2COw7jhK7Es0cpVeRHx8M/h7773x5rt42Xb4HPTA0wXcSIZZGv+19WfXaejNVz5qNeZoAS7uQ3SOSlEHZyLDxc40MK1+MyzfSAFOrCiGSbGJ9DrAz3p63SbTjxFusxGUEfR0QMK+QL1gRL5wXr4M9cbYXw7w2kIUZQhbgDW7qlFD3j7rzW27Y8P4F8sMAgA/v8BJAoYYgsMcWwBRUXB/uv/v7QfK+hOAoo/VsI5YAeAIqA0bvArzTsSHjInYRr1pVEG82MwChm2oGoQjKbdyWzza3McQ0l4ktLDCINN0zgKU5QXk2d1ZzXy9p8dsHT1WIp0szpYUrgblrA6+8xWg65cBh+f4S57+PaWpJJjWu2uJOzahSS+2SfVJoolUBvkcfvXQmYTJRLQ1va/Te25GwspyJb0L4L4HgAEguOvnw+5Ufy3gF2kb/2v5HsiAKhKECytfClaTL4LnCyVhRDSOe5A0KLuGQToqAlZ1NIhSxqWZFnLyX7dXDi2KNaEtUIhi+aqyJKxTrJsbrSsO7N/aKt/cm3j6XBpZmZAWkEZERJ8GR6HBAYXGk+cn9G0lDe26KudwwLDA8NAmlrV6jRrotXAWYFaGlzfGrh0sFKZMgVIU6AMIUQwlFaDRuVq1XAWIlAwAbKcGpKjnAo010GlnTONFuUatdCr5ixMoHCBwrABNgIAAA==) format('woff2');}
+@font-face{font-family:NQUDBD-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAO0AAoAAAAABhwAAANpAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqFOIQ9CwwAATYCJAMUBCAFgmgHIBvmBFGUq00G8LEY26phY4mhDOVEsZQlvoiH6p693b378+c4wMY/aDNpk0CBZRaGGkia0P70nfZmKngvuVQM6k3qTW0exV984eJUfo4nQBMkzGPs8+AEjAU0hrNraa01LfVqxYJZ31QPTcRQimhcPXqMozeofIz6QAjkG9/6p6j3dNHPgwKMEANAN4AFeCvPV0kqCPPALviPguKOdgMkUMAJWaAL0gUGIOMa6156dc9WMKYG6/gOfEEcAGCQkTUfjA+BER1JaQc1JSpz1KRzWCm6bllidXxIOSxEeUS5flRp+YpGWJhkyFjdstGo0pCPx0GJI3coiQgqtl7cdimwLvXoETx8GKKpeqgqTl1y/9SlzUiJJ0+o2cdh4itLqlH2Rr6q4pBEJX9oSFx5RFlFp36xyao7paoPtbhOHXrCu/NEY6ZKw8Pb6klWH0f4TyhZe+RySokadeVU7GhYUzUUk7P+/fzYqNpqKKgW1NB5ov34cQj/o4eLk0JjaVJ8aZdaZefEWDElD7sX4lqc5yEic3lO18lYNFmYjcjGC4ZndM8RUpfcUzCF94rJHBKTvT925YduICzyuuzlNOLPa35+y49E8QGO2Kc2JUjaVyyIFEW+nh5//V2KBLL3az2+23d/hj0SgwvzEUfAisVETW8J7+yQrkhcXIJIxV08L3yeo0kXEpMG2ueqm6BVmHidh7C2UERoOhfYmph/OJR6DKUUKSlQXBnnjfJi9MJdLCMpx7o4DwvLLI5HU95uJpTmxHDW4ragQoaPD6MgsBEHCTQWRXtxX6H9sMDrspdh4vtav97yC3BlH+RkCzd3qio9uBYHn9f+dLfv/jtmJ/06fk87RFcpL8chQCUiTy5MGCWlhZOQ8yMAIIAAt8dvXqyM8y/REgSx2P+yw68A7HCmBbcy8w6GfbfsACFYc3zJuUTBIl8Ao3hgBgGTAwGAAMVSA0WAjGjjgxQZfJKgiW+kmBxf1FkTgIYYINq4Ni5IXRYuRFkLLkzdVCnO2uEHJvF/aMvcwFA2k23FIkkfOu1FpE8naL7W5+XnJJWkF5akZusyCGuCASy5suUpViRZAV2kXEn2fTm4AoViY2KzwkIi+aCjCYt61ULpcuXQRUeg5YCXkZNnxHeDpCxBuUZPUiJd4QdPlU0XA8EagUGAAAAA) format('woff2');}
+@font-face{font-family:OYFEXR-CMR10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAIoAAoAAAAABAAAAAHcAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBLIExCwgAATYCJAMKBCAFgmIHIBtKAwCeA27LDKey9u4/BhGb8PAQOeFZRODQ3SdpGWOq5caW+O3BVSjwSBzC4BAa78l84967L+G+2EAMQGOH4yqUytre8krfBm9O+3j4PNKiXewRpZtCgLs9oahgN9vxLvAC+rtAYDYZWGCBJxhCmAQDGWKgA4tAspvhLSk5PLRa++1AzV8uDCg/5euf59w0WvHEIw8pwWb0sTcPCI6YK+ioApe49Q6goGIZVrAMZx/QNMExVo+6wwvyARUMUXACeAFAA0TWs8kRv+h1FT83u2+xzPt2xL0kv91Oh53jEd433S/a36X34iTnCf9JwTpxDk0t6VMI7rYeq7pzanZGQD3e5tSfrxzE4HD6twDGjrDwafJ1yfzn7Bd+w8jWQm+lzz0ABOH9PvwyJdGfhG3kNbqiwrgCQtVRuBUKBhAAUArybSQEoloHQVCb9Ck0xzGaaXMYmLKFoWkH+0mb3LDSJsSuPKFZt4SBVScYWvfQJ134PJr88eZlqZNMtKv2WKHqct54JxdypoZnTJ+ZvcXtvflVlQd5kQfErFu1YdeOWVtUCtbNcPTWlHQkJbRV2cUUVLk4Nc3asm3RujUqLoizglKyViWTSTQThymHVGbsWbRtz7xVKh6IF+KBBdgCAAAA) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="OYFEXR-CMR10" font-size="9.96" x="253.258888" y="-107.501937" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">(</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="257.131877" y="-107.501937" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">A</text>
+<text font-family="XDTRFF-CMSY10" font-size="9.96" x="266.815349" y="-107.501937" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">⊗</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="276.775779" y="-107.501937" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">B</text>
+<text font-family="OYFEXR-CMR10" font-size="9.96" x="284.829677" y="-107.501937" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">)</text>
+<text font-family="XDTRFF-CMSY10" font-size="9.96" x="290.916108" y="-107.501937" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">⊗</text>
+<text font-family="OYFEXR-CMR10" font-size="9.96" x="300.876518" y="-107.501937" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">(</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="304.749497" y="-107.501937" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">C</text>
+<text font-family="XDTRFF-CMSY10" font-size="9.96" x="314.793875" y="-107.501937" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">⊗</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="324.754285" y="-107.501937" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">D</text>
+<text font-family="OYFEXR-CMR10" font-size="9.96" x="333.27705" y="-107.501937" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">)<tspan x="136.877269" y="-72.316122">((</tspan></text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="144.624237" y="-72.316122" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">A</text>
+<text font-family="XDTRFF-CMSY10" font-size="9.96" x="154.307709" y="-72.316122" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">⊗</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="164.267119" y="-72.316122" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">B</text>
+<text font-family="OYFEXR-CMR10" font-size="9.96" x="172.322016" y="-72.316122" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">)</text>
+<text font-family="XDTRFF-CMSY10" font-size="9.96" x="178.408428" y="-72.316122" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">⊗</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="188.368827" y="-72.316122" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">C</text>
+<text font-family="OYFEXR-CMR10" font-size="9.96" x="196.199783" y="-72.316122" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">)</text>
+<text font-family="XDTRFF-CMSY10" font-size="9.96" x="202.286194" y="-72.316122" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">⊗</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="212.246594" y="-72.316122" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">D<tspan x="369.639508">A</tspan></text>
+<text font-family="XDTRFF-CMSY10" font-size="9.96" x="379.32298" y="-72.316122" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">⊗</text>
+<text font-family="OYFEXR-CMR10" font-size="9.96" x="389.28338" y="-72.316122" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">(</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="393.156369" y="-72.316122" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">B</text>
+<text font-family="XDTRFF-CMSY10" font-size="9.96" x="403.424688" y="-72.316122" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">⊗</text>
+<text font-family="OYFEXR-CMR10" font-size="9.96" x="413.384088" y="-72.316122" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">(</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="417.258077" y="-72.316122" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">C</text>
+<text font-family="XDTRFF-CMSY10" font-size="9.96" x="427.302455" y="-72.316122" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">⊗</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="437.261855" y="-72.316122" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">D</text>
+<text font-family="OYFEXR-CMR10" font-size="9.96" x="445.784631" y="-72.316122" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">))<tspan x="136.877269" y="-19.201987">(</tspan></text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="140.750248" y="-19.201987" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">A</text>
+<text font-family="XDTRFF-CMSY10" font-size="9.96" x="150.43372" y="-19.201987" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">⊗</text>
+<text font-family="OYFEXR-CMR10" font-size="9.96" x="160.39412" y="-19.201987" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">(</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="164.267099" y="-19.201987" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">B</text>
+<text font-family="XDTRFF-CMSY10" font-size="9.96" x="174.535419" y="-19.201987" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">⊗</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="184.494829" y="-19.201987" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">C</text>
+<text font-family="OYFEXR-CMR10" font-size="9.96" x="192.325774" y="-19.201987" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">))</text>
+<text font-family="XDTRFF-CMSY10" font-size="9.96" x="202.286174" y="-19.201987" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">⊗</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="212.246564" y="-19.201987" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">D<tspan x="369.639508">A</tspan></text>
+<text font-family="XDTRFF-CMSY10" font-size="9.96" x="379.32298" y="-19.201987" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">⊗</text>
+<text font-family="OYFEXR-CMR10" font-size="9.96" x="389.28338" y="-19.201987" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">((</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="397.030358" y="-19.201987" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">B</text>
+<text font-family="XDTRFF-CMSY10" font-size="9.96" x="407.297677" y="-19.201987" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">⊗</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="417.258077" y="-19.201987" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">C</text>
+<text font-family="OYFEXR-CMR10" font-size="9.96" x="425.089033" y="-19.201987" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">)</text>
+<text font-family="XDTRFF-CMSY10" font-size="9.96" x="431.175484" y="-19.201987" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">⊗</text>
+<text font-family="NQUDBD-CMMI10" font-size="9.96" x="441.135894" y="-19.201987" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">D</text>
+<text font-family="OYFEXR-CMR10" font-size="9.96" x="449.658659" y="-19.201987" transform="matrix(1.000261 0 0 1.000261 -132.621 118.658)">)</text>
+<path d="M133.45892 17.466488L75.83616 34.885688" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M78.320637 36.632295C77.543199 35.368694 76.539722 34.964397 75.64547 34.943338C76.378311 34.43043 76.98979 33.537953 76.937065 32.055281" stroke="#000" fill="none" stroke-width=".398458" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="TUELZZ-LMRoman7-Regular" font-size="6.97" x="90.612599" y="-19.196534" transform="matrix(1.000545 0 0 1.000545 16.140999 50.932)">zag</text>
+<path d="M46.24884 52.662008V87.731038" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M48.63975 85.858148C47.20517 86.236718 46.52777 87.080328 46.24884 87.930278C45.96991 87.080328 45.29251 86.236718 43.85793 85.858148" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="TUELZZ-LMRoman7-Regular" font-size="6.97" x="90.612599" y="-19.196534" transform="matrix(1.000545 0 0 1.000545 -42.067 91.188999)">zig</text>
+<path d="M249.87207 35.000988L192.24931 17.581768" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M193.350225 20.412174C193.40295 18.929502 192.791471 18.037025 192.05863 17.524117C192.952882 17.503058 193.956359 17.098761 194.733797 15.83516" stroke="#000" fill="none" stroke-width=".398458" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="TUELZZ-LMRoman7-Regular" font-size="6.97" x="90.612599" y="-19.196534" transform="matrix(1.000545 0 0 1.000545 116.382999 50.932)">zag</text>
+<path d="M92.69938 96.960028H232.22613" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M230.35326 94.56911C230.73183 96.00369 231.57544 96.68109 232.42539 96.96002C231.57544 97.23895 230.73183 97.91635 230.35326 99.35093" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="TUELZZ-LMRoman7-Regular" font-size="6.97" x="90.612599" y="-19.196534" transform="matrix(1.000545 0 0 1.000545 67.118 112.391)">zig</text>
+<path d="M279.07516 88.129508V53.060468" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M276.68427 54.933357C278.11885 54.554787 278.79625 53.711177 279.07518 52.861227C279.35411 53.711177 280.03151 54.554787 281.46609 54.933357" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="TUELZZ-LMRoman7-Regular" font-size="6.97" x="90.612599" y="-19.196534" transform="matrix(1.000545 0 0 1.000545 176.30301 91.188999)">zig</text>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-zig-zag-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;3: 幺半范畴五边形交换图
+</figcaption>
+</figure>
+</div>
+<p>这是传说中的幺半范畴五边形交换图．</p>
+</section>
+<section id="自由李代数和-witts-formula" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="自由李代数和-witts-formula"><span class="header-section-number">2</span> 自由李代数和 Witt’s formula</h2>
+<p>TODO</p>
+</section>
+<section id="further-reading" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">3</span> Further reading</h2>
+<p>群论中的 Jacobi identity: Hall–Witt identity</p>
+<ul>
+<li><a href="https://terrytao.wordpress.com/tag/hall-witt-identity/" class="uri">https://terrytao.wordpress.com/tag/hall-witt-identity/</a></li>
+<li><a href="https://mathoverflow.net/questions/81224/motivation-for-hall-witt-identity" class="uri">https://mathoverflow.net/questions/81224/motivation-for-hall-witt-identity</a></li>
+</ul>
+
+
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
+<input type="hidden" id="giscus-alt-theme" value="light">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "sun123zxy/blog-quarto-code";
+    script.dataset.repoId = "R_kgDOIrPs5w";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOIrPs584CV4gd";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Proudly powered by <a href="https://quarto.org/">Quarto</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>sun123zxy’s blog</p>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="../../thanks.html">
+<p>Thanks</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
