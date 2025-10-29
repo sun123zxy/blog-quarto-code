@@ -80,6 +80,7 @@ MathJax = {
   }
 };
 </script>
+<meta name="quarto:status" content="draft">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -276,7 +277,7 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>草稿</div>
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -363,7 +364,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">代数批如何理解 Einstein 求和约定</h1>
-<p class="subtitle lead">Einstein summation convention for confused algebraists</p>
+<p class="subtitle lead">Einstein summation for confused algebraists</p>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
     <div class="quarto-category">algebra</div>
@@ -404,16 +405,16 @@ window.Quarto = {
 <h2 data-number="1" class="anchored" data-anchor-id="张量缩并的坐标无关记法"><span class="header-section-number">1</span> 张量缩并的坐标无关记法</h2>
 <section id="逆变" class="level3 page-columns page-full" data-number="1.1">
 <h3 data-number="1.1" class="anchored" data-anchor-id="逆变"><span class="header-section-number">1.1</span> 逆变</h3>
-<p>首先约定本文中出现的上标默认均不代表乘法幂．考虑一组维度分别为 <span class="math inline">\(n_i\)</span> 的域 <span class="math inline">\(K\)</span> 上的线性空间 <span class="math inline">\(V^i\)</span>, 这里 <span class="math inline">\(i \in \Sigma\)</span> 是一组<em>抽象指标</em>．设他们分别有自然基底 <span class="math inline">\(\left( \boldsymbol e^i_{\alpha_i} \right)_{1 \leq \alpha_i \leq n_i}\)</span> <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>．此时，对任意向量 <span class="math inline">\(\boldsymbol v^i \in V^i\)</span> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>，都有坐标表示 <span id="eq-contra-coord"><span class="math display">\[
-\boldsymbol v^i = \sum_{\alpha_i = 1}^{n_i} \boldsymbol e^i_{\alpha_i} v^{\alpha_i}
+<p>首先约定本文中出现的上标默认均不代表乘法幂．考虑一组维度分别为 <span class="math inline">\(n_i\)</span> 的域 <span class="math inline">\(K\)</span> 上的线性空间 <span class="math inline">\(V^i\)</span>, 这里 <span class="math inline">\(i \in \Sigma\)</span> 是一组<em>抽象指标</em>．设他们分别有自然基底 <span class="math inline">\(\left( \boldsymbol e^i_{\alpha_i} \right)_{1 \leq \alpha_i \leq n_i}\)</span> <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>．此时，对任意向量 <span class="math inline">\(\boldsymbol a^i \in V^i\)</span> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>，都有坐标表示 <span id="eq-contra-coord"><span class="math display">\[
+\boldsymbol a^i = \sum_{\alpha_i = 1}^{n_i} \boldsymbol e^i_{\alpha_i} a^{\alpha_i}
 \tag{1}\]</span></span></p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;不少文献会在这里省去 <span class="math inline">\(\boldsymbol e\)</span> 的上标 <span class="math inline">\(i\)</span>．这是一种记号滥用：即通过 <span class="math inline">\(\alpha_i\)</span> 里面的 <span class="math inline">\(i\)</span> 来区分是哪个模的基底．</p></div><div id="fn2"><p><sup>2</sup>&nbsp;这里 <span class="math inline">\(v^i\)</span> 上的 <span class="math inline">\(i\)</span> 仅作标识 <span class="math inline">\(\boldsymbol v^i \in V^i\)</span> 使用，类似多项式环的 <span class="math inline">\(f(\mathrm x) \in K[\mathrm x]\)</span>．后面将看到这种记法的妙处．少数（记号过于复杂的）情况下，也可能省略这一标识不写．</p></div></div></section>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;不少文献会在这里省去 <span class="math inline">\(\boldsymbol e\)</span> 的上标 <span class="math inline">\(i\)</span>．这是一种记号滥用：即通过 <span class="math inline">\(\alpha_i\)</span> 里面的 <span class="math inline">\(i\)</span> 来区分是哪个模的基底．</p></div><div id="fn2"><p><sup>2</sup>&nbsp;这里 <span class="math inline">\(a^i\)</span> 上的 <span class="math inline">\(i\)</span> 仅作标识 <span class="math inline">\(\boldsymbol a^i \in V^i\)</span> 使用，类似多项式环的 <span class="math inline">\(f(\mathrm x) \in K[\mathrm x]\)</span>．后面将看到这种记法的妙处．少数（记号过于复杂的）情况下，也可能省略这一标识不写．</p></div></div></section>
 <section id="协变" class="level3" data-number="1.2">
 <h3 data-number="1.2" class="anchored" data-anchor-id="协变"><span class="header-section-number">1.2</span> 协变</h3>
 <p>接下来，我们考虑这些线性空间的对偶．对每个 <span class="math inline">\(V^i\)</span>，记其对偶空间 <span class="math inline">\(V_i := \left( V^i \right)^*\)</span>，其有自然对偶基底 <span class="math inline">\(\left( \boldsymbol e_i^{\alpha_i} \right)_{1 \leq \alpha_i \leq n_i}\)</span>，满足 <span id="eq-dual-base"><span class="math display">\[
 \boldsymbol e_i^{\alpha_i} \left( \boldsymbol e^i_{\beta_i} \right) = \delta^{\alpha_i}_{\beta_i} = \begin{cases} 1 &amp; \text{if } \alpha_i = \beta_i \\ 0 &amp; \text{otherwise} \end{cases}
-\tag{2}\]</span></span> 后者是 Kronecker delta 符号．此时，对任意 <span class="math inline">\(\boldsymbol v_i \in V_i\)</span>，都有坐标表示 <span id="eq-covar-coord"><span class="math display">\[
-\boldsymbol v_i = \sum_{\alpha_i = 1}^{n_i} v_{\alpha_i} \boldsymbol e_i^{\alpha_i}
+\tag{2}\]</span></span> 后者是 Kronecker delta 符号．此时，对任意 <span class="math inline">\(\boldsymbol a_i \in V_i\)</span>，都有坐标表示 <span id="eq-covar-coord"><span class="math display">\[
+\boldsymbol a_i = \sum_{\alpha_i = 1}^{n_i} a_{\alpha_i} \boldsymbol e_i^{\alpha_i}
 \tag{3}\]</span></span></p>
 </section>
 <section id="混合张量积" class="level3 page-columns page-full" data-number="1.3">
@@ -471,7 +472,7 @@ Remark
 \boldsymbol a_I^J = \sum_{\alpha_I, \alpha_J} a_{\alpha_I}^{\alpha_J} \boldsymbol e_{\alpha_J}^{\alpha_I}
 \tag{4}\]</span></span> 这里的 <span class="math inline">\(a_{\alpha_I}^{\alpha_J}\)</span> 是张量 <span class="math inline">\(\boldsymbol a_I^J\)</span> 在基底 <span class="math inline">\(\boldsymbol e_{\alpha_J}^{\alpha_I}\)</span> 下的坐标．</p>
 </section>
-<section id="张量缩并" class="level3 page-columns page-full" data-number="1.4">
+<section id="张量缩并" class="level3" data-number="1.4">
 <h3 data-number="1.4" class="anchored" data-anchor-id="张量缩并"><span class="header-section-number">1.4</span> 张量缩并</h3>
 <p>定义张量间的<em>缩并</em>运算（tensor contraction）：设 <span class="math inline">\(\boldsymbol a_I^J \in V_I^J, \boldsymbol b_J^K \in V_J^K\)</span>，定义它们的乘积 <span class="math inline">\(\boldsymbol c_I^K := \boldsymbol b_J^K \boldsymbol a_I^J \in V_I^K\)</span> 为张量积后对抽象指标 <span class="math inline">\(J\)</span> 进行自然配对得到的张量，即线性映射理解下的复合映射 <span class="math inline">\(V_I \to V_J \to V_K\)</span>．当参与乘法的张量的抽象指标 <span class="math inline">\(J\)</span> 左下右上不匹配时，定义它们的乘积为 <span class="math inline">\(0\)</span>．</p>
 <p>考察自然基底间的缩并．根据前述对偶基的关系，有 <span class="math display">\[
@@ -480,10 +481,10 @@ Remark
 \boldsymbol c_I^K
 = \left( \sum_{\alpha_J, \alpha_K} b_{\alpha_J}^{\alpha_K} \boldsymbol e_{\alpha_K}^{\alpha_J} \right) \left( \sum_{\alpha_I, \alpha_J} a_{\alpha_I}^{\alpha_J} \boldsymbol e_{\alpha_J}^{\alpha_I} \right)
 = \sum_{\alpha_I, \alpha_K} \left( \sum_{\alpha_J} b_{\alpha_J}^{\alpha_K} a_{\alpha_I}^{\alpha_J} \right) \boldsymbol e_{\alpha_K}^{\alpha_I}
-\]</span> 这里的内层求和正是 Einstein 求和约定下省略的求和符号．写作分量形式即 <span class="math display">\[
+\]</span> 这里的内层求和正是 Einstein 求和约定下省略的求和符号．写作分量形式即 <span id="eq-contraction-coord"><span class="math display">\[
 c_{\alpha_I}^{\alpha_K} = \sum_{\alpha_J} b_{\alpha_J}^{\alpha_K} a_{\alpha_I}^{\alpha_J}
-\]</span> 注意分量形式的缩并，形状上恰好可以看成张量形式缩并 <span class="math inline">\(\boldsymbol c_I^K := \boldsymbol b_J^K \boldsymbol a_I^J\)</span> 还原粗体为斜体，添加 “<span class="math inline">\(\alpha\)</span>” 和求和符号的结果．这就是 Einstein 求和约定的核心观点：<strong>不写求和号事实上就是 coordinate-free 的张量缩并写法，左下右上抽象指标自动配对，在坐标形式下按对应具体指标求和．</strong><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
-<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;尽管前面直接扔掉坐标表示求和号的野蛮行径仍然无法使用此观点解释．</p></div></div><div class="callout callout-style-default callout-tip callout-titled">
+\tag{5}\]</span></span> 注意分量形式的缩并，形状上恰好可以看成张量形式缩并 <span class="math inline">\(\boldsymbol c_I^K := \boldsymbol b_J^K \boldsymbol a_I^J\)</span> 还原粗体为斜体，添加 “<span class="math inline">\(\alpha\)</span>” 和求和符号的结果．<strong>这就是 Einstein 求和约定的坐标无关视角：它是混合张量缩并运算的抽象张量写法．左下右上抽象指标自动配对，在坐标形式下按对应具体指标求和．</strong></p>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -526,21 +527,110 @@ Remark
 </section>
 <section id="坐标表示的-einstein-求和" class="level3" data-number="1.5">
 <h3 data-number="1.5" class="anchored" data-anchor-id="坐标表示的-einstein-求和"><span class="header-section-number">1.5</span> 坐标表示的 Einstein 求和</h3>
-<p>我们现在在这里回头，用这套记号体系解释对偶关系 <a href="#eq-dual-base" class="quarto-xref">式&nbsp;2</a>，并尝试去掉坐标表示 <a href="#eq-contra-coord" class="quarto-xref">式&nbsp;1</a>, <a href="#eq-covar-coord" class="quarto-xref">式&nbsp;3</a>, <a href="#eq-mixed-coord" class="quarto-xref">式&nbsp;4</a> 的求和号．</p>
-<p>什么是 <span class="math inline">\(\boldsymbol e_{\alpha_J}^{\alpha_I}\)</span>？它是个向量，但这里的 <span class="math inline">\(\alpha_I, \alpha_J\)</span> 是一组具体指标．想要获得坐标无关的表达，我们需要“用抽象指标替换具体指标”，i.e.&nbsp;找到映射 <span class="math display">\[
+<p>坐标无关的 Einstein 求和约定并不能解释所有物理学家使用的记号——物理学家完全没有 coordinate-free 的概念，他们的张量总是由具体的坐标组成．换言之，他们不在 <span class="math inline">\(V_I^J\)</span> 中操作张量，而是选定基底后在 <span class="math display">\[
+K_{n_I}^{n_J} := \left( \bigotimes_{i \in I} \left( K^{\oplus n_i} \right)^* \right) \otimes \left( \bigotimes_{j \in J} K^{\oplus n_j} \right)
+\]</span> 中工作．因此我们现在在这里回头，建立从抽象张量到坐标张量的范畴等价．</p>
+<p>既然要选定基底，我们的函子必然与基底 <span class="math inline">\(\boldsymbol e_{\alpha_J}^{\alpha_I}\)</span> 有关．它是什么？</p>
+<p>它是个向量，但这里的 <span class="math inline">\(\alpha_I, \alpha_J\)</span> 是一组具体指标．我们需要“用抽象指标替换具体指标”，i.e.&nbsp;找到映射 <span class="math display">\[
 (\alpha_I, \alpha_J) \mapsto \boldsymbol e_{\alpha_J}^{\alpha_I}
-\]</span> （线性扩张后）所在的线性空间．自然地，考虑 <span class="math display">\[
-K{_{n_I}}{_{n_J}} \otimes V_I^J := \left( \bigotimes_{i \in I} \left( K^{\oplus n_i} \right)^* \right) \otimes \left( \bigotimes_{j \in J} \left( K^{\oplus n_j} \right)^* \right) \otimes V_I^J
-\]</span> 不妨将抽象指标写作 <span class="math inline">\(n_I\)</span>, <span class="math inline">\(n_J\)</span>，则我们得到基底的张量表达 <span class="math inline">\(\boldsymbol E_{n_I \ n_J}{_I^J} \in K{_{n_I}}{_{n_J}} \otimes V_I^J\)</span>．</p>
+\]</span> （线性扩张后）所在的线性空间．自然地，考虑 <span class="math inline">\(K_{n_I n_J} \otimes V_I^J\)</span>，将抽象指标写作 <span class="math inline">\(n_I\)</span>, <span class="math inline">\(n_J\)</span>，则我们得到基底的张量表达 <span class="math inline">\(\boldsymbol E_{n_I n_J}{_I^J} \in K_{n_I n_J} \otimes V_I^J\)</span>．</p>
 <p>最后，我们还需要将 <span class="math inline">\(a_{\alpha_I}^{\alpha_J}\)</span> 视为取坐标映射 <span class="math display">\[
 (\alpha_I, \alpha_J) \mapsto a_{\alpha_I}^{\alpha_J}
-\]</span> 的线性扩张并完成张量化：仍然使用抽象指标 <span class="math inline">\(n_I, n_J\)</span>，我们现在记张量 <span class="math inline">\(\boldsymbol a_{n_I \ n_J} \in K_{n_I \ n_J}\)</span> 实现了上述线性映射．</p>
-<p>现在：</p>
+\]</span> 的线性扩张并完成张量化：仍然使用抽象指标 <span class="math inline">\(n_I, n_J\)</span>，我们现在记张量 <span class="math inline">\(\boldsymbol A_{n_I n_J} \in K_{n_I n_J}\)</span> 实现了上述线性映射．现在：</p>
 <ul>
-<li>混合张量积坐标表示 <a href="#eq-mixed-coord" class="quarto-xref">式&nbsp;4</a> 有张量形式 <span class="math inline">\(\boldsymbol a_I^J = \boldsymbol a_{n_I \ n_J} \boldsymbol E^{n_I \ n_J}{_I^J}\)</span></li>
-<li>逆变张量坐标表示 <a href="#eq-contra-coord" class="quarto-xref">式&nbsp;1</a> 有张量形式 <span class="math inline">\(\boldsymbol v^i = \boldsymbol E_{n_i}{^i} \boldsymbol v^{n_i}\)</span></li>
-<li>协变张量坐标表示 <a href="#eq-covar-coord" class="quarto-xref">式&nbsp;3</a> 有张量形式 <span class="math inline">\(\boldsymbol v_i = \boldsymbol v_{n_i} \boldsymbol E^{n_i}{_i}\)</span></li>
-<li>对偶关系 <a href="#eq-dual-base" class="quarto-xref">式&nbsp;2</a> 有张量形式 <span class="math inline">\(\boldsymbol E^{n_i}{_i} \boldsymbol E_{n_i}{^i} = \boldsymbol\delta_{n_i}^{n_i}\)</span>．</li>
+<li><p>混合张量积坐标表示 <a href="#eq-mixed-coord" class="quarto-xref">式&nbsp;4</a> 有张量形式 <span class="math inline">\(\boldsymbol a_I^J = \boldsymbol A_{n_I n_J} \boldsymbol E^{n_I n_J}{_I^J}\)</span>．</p></li>
+<li><p>逆变向量坐标表示 <a href="#eq-contra-coord" class="quarto-xref">式&nbsp;1</a> 有张量形式 <span class="math inline">\(\boldsymbol a^i = \boldsymbol E_{n_i}{^i} \boldsymbol A^{n_i}\)</span>．（<span class="math inline">\(I := \{ i \}\)</span>, <span class="math inline">\(J := \varnothing\)</span>）</p></li>
+<li><p>协变向量坐标表示 <a href="#eq-covar-coord" class="quarto-xref">式&nbsp;3</a> 有张量形式 <span class="math inline">\(\boldsymbol a_i = \boldsymbol A_{n_i} \boldsymbol E^{n_i}{_i}\)</span>．（<span class="math inline">\(I := \{ i \}\)</span>, <span class="math inline">\(J := \varnothing\)</span>）</p></li>
+</ul>
+<div id="fig-abstract-coord-cd" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-abstract-coord-cd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.4.3 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="383.115pt" height="118.56pt" viewbox="0 0 255.41 79.04">
+<style type="text/css">
+@font-face{font-family:PCPXEO-CMMIB7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAOQAAoAAAAABfgAAANGAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAARAqFCIQECwoAATYCJAMQBCAFgmgHIBu5BFFULEIgHwm5adSjiUqBGwZ23sZD/onv7q4/TaHUpKZNQQc6sJl91AEORtiD9/Qv6Sh3nZiBwJP+QHTqVP6LBSRAE8DX1L1bkCkYwuLcGuqVqF7KldSqTrdBtx0TCagmQY8e6uETKr8itUAKcqJX/rOoWTXk7ZKBclACEAMSoFfen+QQIGPEv4AIFER18SECJFDAEc8dSCgAKwoocCPwVzP784g7xC1iHyAAt89XYABfgCjulRQEuosv0dgLckRg1PfuIf1aYssiVCzNbnfuCOZijSy3MZrGYS72lqm5tAzfp4XN5IzXMcJKK/Gdcm8Hmvy7Ws1sbY9riCv1nXsuHS2sLUOsLGa9UYwugrwRUfW+MI9KbXAYyetgbxGlV3hYayNVz9j4793FEFIfXRM2WpxNHFQ3Lm7ujnWqCKzlQv3enTtYq8htrPyuMze/i4tws8gdDFO7DLXlelbEv40w+wB/9zbV8G2dRhaMp7MTGnm77iZovd8IR8NCtDT9yMoUz2PtiawYla8ZtRHeeP2XvX4X7tb1YODlKGays4LdYq4KJcS+dzcZyOf1zQTItgK8flKohEU4GhZmjMMnDs+P2z8j8ECzpTHTdgpkuskH5Z09jE2mJ414bNmam7kbDBztsR93k7nKpUnIrxssM1DYObrEhc06adPtot2suc70KFhZqXkju6Dzw/J6wTOFF9djg10Bd6ncEJhgiU0G55OVRB1Up+arn0967SDxha7rOz/it7EsxjlHOSEuZIayK1LTD1gf9gYzsKdT15JDLaVioZixlKQDkfM9A+eyMKMF+wSjNL3B9EAoK9/eTQABBPgpRX7xodf5RoEjAYw8P2sfPQHIrZoA+Zn9wQjCtwEBS2fts3l1ASFdwAgCNHu4rGdQb7IhPKCHom606I/QBTUedKAlfnnDRQUO0pSA4GNTUBJcIlFSbIpRMlw6Gyoqlp+AqB+cbbbD27kSbGXx1tbmRupvFm1FOQVm5nvxewKTwxKSQ6IElOVU5JQBL0aUWEkSBYknwFqMwNotmh08O64IbMnCs2bNnBF1zppvTRAmRjQBiuQoOICpGO0S/a4FAnV/aVtyoGRhEn54iCgClMlRIUcZDgAA) format('woff2');}
+@font-face{font-family:FBIPCW-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHwAAoAAAAAA8QAAAGnAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPApoZAsIAAE2AiQDDAQgBYJiByAbBwNgLgbsdmJ6htLJntxZKtqw5y82iHj42u/13N0XYFCfx4dYsst8FRtNrTDg0vpW11UrgoF5znWhKi+vA0oA/4FzTkdVtraBFOp0uGm2xqP4By+QonfCYyKW2L/ljp9f+IDacspeAkueA4kCjsIMwqQtoCjQTOttInoPvNx4FR1NyOksEijpQzr+G/ZGfPzpGvUAoRWAhA0A0Lx/OwDzhUcz96dGXsgnBAD/g4SMYVlgWGEdrQohtdD/web/0RWzfL4VCeOYBhSAEN3dFy9r0Tuw/U7x91Zv8cmdEVD90Rle27wdMbvonaOqn0+P6ObiMj0HAAgE70P7IcP1r+25oAt5MTS0SyBY235nt2VeMGlOiBtXigki6xaFgKHTY1j7YKDQrQ8tukyhVbfVcadJNVkUHcKsEwOFcXdoMeo1Wo17iZ0aPh+q7s+srsSpDh8z26afsnfVqlqq+LMHyD3Nd7jebiHqpUapbttmsXvcGifCqU0Nv7eScFQOXoyxzeRLsc41TpfBZkWoKqmk076sJVKMofrDb/0Rml6Dy6uzINSVNJTUZQoAAA==) format('woff2');}
+@font-face{font-family:XDTRFF-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAALIAAoAAAAABPgAAAJ/AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqDGIJKCwgAATYCJAMMBCAFgmgHIBvzAwCOw7jhm8pkchUfdBbZmHN7j7hqVKXoSGVSQUIku9sKwAKOwkijwOT/53L83+HRGngb5JzmaNPW4jTgKIx8bqAJmnAvwCzdZkZ0VQxFV0ePdHQCeC+xeYgAfXrxTxlzK2WfhwZOJQHQosAw+CgU39YyiIqSOvAfwLG4rf//AwACcIByW6VMYA4QJWBol04C+tj/izk+UXAQBer2AHZ4EeE1AMOWZVPGliNSKitYXlZNTVZdVR3YdOCSlmpmcrL6yoVHmx39Kg+OaeVtSt2/zVqYkrZpy7Lpw8Pq6WWbjqltMw3xN9UrV5T7lyUn3ycnK7eVbzbdr5k7cFBy/wBlgup75JxNaltdl/ubT0H5KR98LL5jIW7rW93XBRIyH+2LqJvqA8TkHipsUZEcsN7UanvFSDpkSPph/hAN0IC/uNza6/m3MdPucoH0VvpB/BAN0m2Nv/r+9z0Twmcdi67rCN9PS8g8jK+ncDojLnNRVDVCM9Tx4ebNGAytj2yyV7KKb1PysxjU4WO11PsnPu0OZTohOoEsW8ruzBsbmQ/+xZREMtLqagO31wEAGIDBpn/KL/LkvP+IcwEw/f8an6PrAMQRpnW/xg2zBPI5MBQo8Y4QOgWeIpeEDWGgLqlXQM60ZYEMOVmEFG1ZlAyz7ZI0OePYlACjK7bIAk3VsghVo7IoTdt7kpxdzB7Mz8GmpwcnJ4aG2gTFxEQ42Gflow629r6Bt9bbFLdWNLWW1eg72TrbOiFInRr1WjQr0UhfjDrF8vvWShcsWaJQoWwEiREjggN7qUo0alKhTi19DmzZcyAsqOUFBadBca1Qh6Yv1qpC0xcvU0OfE1vObDnhAA==) format('woff2');}
+@font-face{font-family:NQUDBD-CMMI5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAQkAAoAAAAABuQAAAPZAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqGfIUzCwwAATYCJAMUBCAFgmIHIBteBVGUi00N8OPAbvhqdADNxcmPRVOERRgUk3Ajuowuw4qgWrae3b0naHxSqPuoicF9Ick6C0X5JCmMCtnhLMZwxy6jhA8kDKR+ThtrD/+79081Ik1qUAPo7vXz5ifzC+DIqdzzqT/eD4CP+rXU+LlULHCpWIPOvm068AvYjJaJDcRm7tpaIkmLdjNPPJwg55mYJEp6Spf+Ufc9jjdNpx+SCC3E4KOcXj8twjYtWYMscG5jokl4lk3IQozFLFrdkGxb0O4mz5rvhr0OpQLGtxdiktiHQGEv9E1Gpz7zx+jDDMvAjjMHuLN4fHxs7LBq14LBqRW1DE4Xm9qNMvOQYAGLi0tImAOds9TpxYbEmzelbt/WXXNkZEmFt9F26RYxcichhQN14fNS9rMup7Ew7iy+e7YmibdLmjOHder7+8fGAlaY20PgyXyADhmgPSTjE/M4PrJQEdA8Ra1npguwTpRBpU4vkokFxALBYVNsNsE3jNsVMBLsP0jdDJwNjTVCExK0tASQYDM1e1OdYaRwNs62FJhuCVi4pbPlTsLILSCk0a3qJAOEdnvuaHE40hgL66S55MHY3Zc1BWpb7mjdib8ZuWh0lCRjSe7s8LKq2vPsQUqU8dz21E9GxCgyCA4Tzj8pKGCBnluvOvXhJtIMDa/9YCeLIIDwV/RLOvJoEn30KDjZ1t0ko7gJ8WEgZQ5W+0mfFUf+NcIAuaM26cFKPjUXXCWkJ5V1aG0/WcQxMgqO1ZafaSJBv53hYJl/KWS9uWYnJq1Wtb4yAPgkXTkRI8hOU3QFX4ecWV/wQvQenlIu2qO97anB9s4KgIOF8E2wLJZIO16h+khTWYTeSmOyCFnpEEFPspUykh1VjCQrtwaGOjy1PierCuc7FkMS3d2Iti3CloQlpTwr8v+pn9rJ++BMqT1wRRgnC5CHjwb+h1QGZY5VSYrICUwf93yMMy7bkOnhBwXtejqpRTiXXRU4KyjBkXNe79wbob9GCj264+P4MvL0PUl2WZh1aEIBG1BIVqgT97nON1oa7z6sFgWlARCAAD7G88oy5F2/SmQRoDY2f6UmHQTAKNhztew/yi1Ibd6WGhC5FbiXbkBNJoCwSI25D6RKlXLQSJB0XDsCkIeiKGTIz5WKNDWlRQa1fZwqawioSAKIplBSRJCKFVG4bkUMSfCxHDfwfFxzfmNbtNxQYAJZNk2V3oIm3bpjGjxtX+f06c+nnaFfD+q+ZavZ5napHcCuVcXHLCyukIAREMtMyVTUXn63U2+1AF21jgew7i1eXh4JqJJj/8h46tE7v3hrBvpqA7W+TAEAAA==) format('woff2');}
+@font-face{font-family:OYFEXR-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAP4AAoAAAAABqAAAAOsAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqGOIR9CwwAATYCJAMUBCAFgmIHIBsoBVGUC04H8CMhO8W8sAiGEDZpkdWDY8ezjnsE1bL1bPpIjJIskWT3hbBIhMNjsa/ROJFVcpIbyrMmzVKZBYm0167gn3RfwIX7///fO77n0z+fxpgANltDo3QtevgEw4gnbdAAE406gVKgmrnLslJCi3YbH4WHB+T0ElPUpOf09c+luXXjfYlQD3qEhhh8lPuHrGhAYyIp6wBZ4OqdiiZNM5Zz0o9TOQC09ZDcSkLXJ7TVLj+UCsPzhWjENQAKNUK+ZJwo3SLAJT6Ap6NTUnO0pAN6eXl0QVg6Klk/yR+MIziDFMNSL455anp7d5KGpE7Gsn1ubjzu7sR6dxnrx3k75zSmb7lP78X9uRG8S0qKoW4EwU2qOO+GK2PpvqRl7vpOUMLg+yQZxzpH+aGfhwcFm5XwoHHsWOfHu2DC0nDJEER4fKLxSe4uCWAdV/1w9aQOhqMbDw8Zb29hYTJS+kRqaE+A2AFhV9e9PHn3/lZ09t569daTosI1x0OhAIpk/bU6mRHrJCkQZbYs6s6ESrn5e73vxckLWkc3exQeDw9ix9DQCN9IbLWAFk0UmP8m/tLFkmAFatE+SchOo6KzoFMjrE8vKFTGwon8NIkhqFgCc8JnJimRkEMQlpD5FDrUejsBU+CqT+A7guzH1KwX82YWHHui7s7/Mq+N6OlWXAf4ICcjy0+XHEJIIrqnRNNS4gJsyTMe93EX9M8YIRaOlqFzmBT4WfL5ES1JfjxbEh8n0ESB0G/iP03C0UjEDFmR9fNiui+LatJkflbjRJGX6v9HFGKKAEGpuZIDHRezCYWR/4LKIX0YZP1pko9aEhj57uk1sq3CrKJtXECBidzM7rQXG/ZO5EJ42jyupd+VhdOEuSzcDDGXjQjx0vsy76lIsBHUx+Q29lrYRedFZgTY2VtdaZJHqBWvZYromOR2n2GmmBkbu9pAqZ3+9EWCgJoMTmfzJsc5YwAEgtck5y/Bc2c/6HIhDnfv89u0BehLLEtbYvBHpTtGYJWkXhlJzU16EoN0rdM3lVl1B/GEC9AfekTAHBHTYmxu7FcjW34ztnd+aJMaVJSBsMsh+MW6OL9aVeY364izoVNzB6/iX7WDzr5Wlj5uiuaOjrba95kNVSUVFfZI/ZyIrNj0rOhEEXUlDSV1YC5ZohSZMkRKI8JRsgi6J4kzX1Ys+XCjyJxjHNvS5pXeLV2sZElEqFKiYgHWjSSrRuhMENELk9uLR8gSK/2LR0skQp0SDUrUoQQAAAA=) format('woff2');}
+@font-face{font-family:TUELZZ-CMMIB10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAQEAAoAAAAABogAAAO4AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqGFIRhCwwAATYCJAMUBCAFgm4HIBsYBVGUDEoI4GOh3LiytCRJGHcj+CODx7N+XtJUTrPrnJRNF2SKA+HipA8wPLzd3v1/dsQHBW1BS8JvlrVFEvY/N+P/wk3FYwLYtDkskDZGiWYR9rxuAwV2wkf3jthO9bSNeEQWrHA4cLgDdBwni8AA9VH3/7djYQ7It0mBuKYBaCUwBL4K3e4RPaGUo0tCBtAIbleWAQAFoAF2r4laoSlAOSYoubqgixydaSVfkreMg4IBLWjqHyGbFVGcD1BoFGqhG5pMoq0+O7L98uWTdQk7t2PVNodb2hY2eSfbZCfn1kvbGzVauZ21UDsca2+4eZbru3LnyeWSV+fpuEO7bQeBdw1+Pzb7pFLll5bZY6Bfxs9yKznOs3JlX0kXzOOu1t+S6DjRUFrRrqUMpK4I7671DpUiIpZh0nJu+8UG4StZdjk76VDLQ/nLAsIyX74v4A561oYHPcdvs3ubzN0dOinE25abfCHxhE9cJYX4IlYdTjgZ7CvtvJsU9Lt80qqmPulawB29Nrrt0QY7Gi5b8r8EnWdnaLvtwbi1DcK3Rq89knjMZ5f4VVh/funpTsMiCjWDxAID03TSfGoVxdd3eH/8kf/gWM62X8iRSZ1YPZPcaRDViapvZIo3VbsHLOmxMZR/OWrPpcbfY0f+4sLHfKcEI+v9cU0/9CvLYbt7Pnh0SLGyYx6Zmp5/9u+ycxF95FKBPkI9fXIFHo2w5Wb+s6Ur/YXnlCotZmkpOYrBb4dtPegXc+bqqby8us5ta26WNIPx4mc+3B+jD309SWz+zXjXu/eDNapW4peLNpeav3hV3GRwDvoX1Q6dD/eTH0trFH2ofF/Rj5anarX7mCUTUWPcFeTMGQ/N2aIpW20d8aQ6tzGi//Rftcuyc9GvqHZot7t/jy0uG0Nf7ldEd7JYdhWEGU50EasTDHSJbo5KbJC5YlBh071vZaesto148nPxWlV/7pY2IcYVAAAQAIFTDeSYjqb039S0Auol+ffsRz0HoEYBAALbfvygJV32izNOmEAUQo5ETWImhLAjAalm5KFhmYDUWhMQAZNVFxWMTCJDJ1JUMmq6rxUmEY10DYgo1U5UiDBAZDjMEZUibGq04p07XFl/p+1IroLyNm1a5VVUlOQ6xVvLglMQjbPH6HO6jeg9dETP/nycEC/EIc9A/Q0y3DDdDcGrMFA32hpA4lKgXBvNtpKnYloil5PIjfv0oXobaACek0DsBUX2gJ525xmhW9nF6JK6mxF6G/rDe+qPF0cQTxCHpgAAAAA=) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="TUELZZ-CMMIB10" font-size="9.96" x="79.954128" y="-86.282476" transform="matrix(1.000261 0 0 1.000261 -65.16 102.380008)">A</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="88.588702" y="-90.62759" transform="matrix(1.000545 0 0 1.000545 -65.16 102.380008)">n</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="93.53759" y="-89.652597" transform="matrix(1.000261 0 0 1.000261 -65.16 102.380008)">J</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="88.588702" y="-83.796315" transform="matrix(1.000545 0 0 1.000545 -65.16 102.380008)">n</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="93.53759" y="-82.818388" transform="matrix(1.000261 0 0 1.000261 -65.16 102.380008)">I</text>
+<text font-family="XDTRFF-CMMI10" font-size="9.96" x="142.966679" y="-86.282476" transform="matrix(1.000261 0 0 1.000261 -65.416 102.380008)">K</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="152.095079" y="-89.871003" transform="matrix(1.000545 0 0 1.000545 -65.416 102.380008)">n</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="157.062" y="-88.894795" transform="matrix(1.000261 0 0 1.000261 -65.416 102.380008)">J</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="151.382467" y="-83.796314" transform="matrix(1.000545 0 0 1.000545 -65.416 102.380008)">n</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="156.349186" y="-82.818381" transform="matrix(1.000261 0 0 1.000261 -65.416 102.380008)">I</text>
+<text font-family="XDTRFF-CMMI10" font-size="9.96" x="241.665915" y="-86.282476" transform="matrix(1.000261 0 0 1.000261 -62.50099 102.380008)">V</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="249.618909" y="-89.871003" transform="matrix(1.000545 0 0 1.000545 -62.50099 102.380008)">J<tspan x="247.406116" y="-83.515468">I</tspan></text>
+<text font-family="TUELZZ-CMMIB10" font-size="9.96" x="294.373156" y="-86.282476" transform="matrix(1.000261 0 0 1.000261 -61.640996 102.380008)">a</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="300.59112" y="-89.871003" transform="matrix(1.000545 0 0 1.000545 -61.640996 102.380008)">J<tspan x="300.59112" y="-83.515468">I</tspan></text>
+<text font-family="TUELZZ-CMMIB10" font-size="9.96" x="79.954128" y="-30.446052" transform="matrix(1.000261 0 0 1.000261 -75.683 102.380008)">B</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="89.040456" y="-34.808023" transform="matrix(1.000545 0 0 1.000545 -75.683 102.380008)">n</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="93.988465" y="-33.816172" transform="matrix(1.000261 0 0 1.000261 -75.683 102.380008)">K</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="89.040464" y="-27.97575" transform="matrix(1.000545 0 0 1.000545 -75.683 102.380008)">n</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="93.988465" y="-26.981957" transform="matrix(1.000261 0 0 1.000261 -75.683 102.380008)">J</text>
+<text font-family="TUELZZ-CMMIB10" font-size="9.96" x="100.995636" y="-30.446052" transform="matrix(1.000261 0 0 1.000261 -75.683 102.380008)">A</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="109.624243" y="-34.807023" transform="matrix(1.000545 0 0 1.000545 -75.683 102.380008)">n</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="114.5791" y="-33.816172" transform="matrix(1.000261 0 0 1.000261 -75.683 102.380008)">J</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="109.624243" y="-27.97575" transform="matrix(1.000545 0 0 1.000545 -75.683 102.380008)">n</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="114.5791" y="-26.981957" transform="matrix(1.000261 0 0 1.000261 -75.683 102.380008)">I</text>
+<text font-family="XDTRFF-CMMI10" font-size="9.96" x="142.966679" y="-30.446052" transform="matrix(1.000261 0 0 1.000261 -66.26 102.380008)">K</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="152.095079" y="-34.050436" transform="matrix(1.000545 0 0 1.000545 -66.26 102.380008)">n</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="157.062" y="-33.05937" transform="matrix(1.000261 0 0 1.000261 -66.26 102.380008)">K</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="151.382467" y="-27.97575" transform="matrix(1.000545 0 0 1.000545 -66.26 102.380008)">n</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="156.349186" y="-26.981957" transform="matrix(1.000261 0 0 1.000261 -66.26 102.380008)">I</text>
+<text font-family="XDTRFF-CMMI10" font-size="9.96" x="241.665915" y="-30.446052" transform="matrix(1.000261 0 0 1.000261 -63.558996 102.380008)">V</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="249.618909" y="-34.050436" transform="matrix(1.000545 0 0 1.000545 -63.558996 102.380008)">K<tspan x="247.406116" y="-27.694901">I</tspan></text>
+<text font-family="TUELZZ-CMMIB10" font-size="9.96" x="294.373156" y="-30.446052" transform="matrix(1.000261 0 0 1.000261 -68.075 102.380008)">b</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="299.475728" y="-34.890978" transform="matrix(1.000545 0 0 1.000545 -68.075 102.380008)">K<tspan x="299.475728" y="-27.975748">J</tspan></text>
+<text font-family="TUELZZ-CMMIB10" font-size="9.96" x="307.239797" y="-30.446051" transform="matrix(1.000261 0 0 1.000261 -68.075 102.380008)">a</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="313.454107" y="-34.050436" transform="matrix(1.000545 0 0 1.000545 -68.075 102.380008)">J<tspan x="313.454107" y="-27.694901">I</tspan></text>
+<path d="M101.501438 13.58356H174.338858" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M172.46596 11.192649C172.84453 12.627229 173.68814 13.304629 174.53809 13.583559C173.68814 13.862489 172.84453 14.539889 172.46596 15.974469" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="FBIPCW-CMSY7" font-size="6.97" x="55.673647" y="-30.437406" transform="matrix(1.000545 0 0 1.000545 54.281999 39.007005)">−</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="61.914837" y="-29.450312" transform="matrix(1.000261 0 0 1.000261 54.281999 39.007005)">n<tspan y="-27.762753">I</tspan><tspan x="70.302648" y="-29.450312">n</tspan><tspan y="-27.762753">J</tspan></text>
+<text font-family="FBIPCW-CMSY7" font-size="6.97" x="79.985392" y="-30.437406" transform="matrix(1.000545 0 0 1.000545 54.281999 39.007005)">·</text>
+<text font-family="PCPXEO-CMMIB7" font-size="6.97" x="82.350103" y="-30.437406" transform="matrix(1.000545 0 0 1.000545 54.281999 39.007005)">E</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="89.026759" y="-33.452267" transform="matrix(1.000261 0 0 1.000261 54.281999 39.007005)">n<tspan y="-31.763708">I</tspan><tspan x="97.414568" y="-33.452267">n</tspan><tspan y="-31.763708">J</tspan><tspan x="107.120035" y="-33.452267">J</tspan><tspan x="107.120035" y="-28.453571">I</tspan></text>
+<path d="M87.298538 23.38816V60.87045" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M89.68945 58.99755C88.25487 59.37612 87.57747 60.21973 87.29854 61.06968C87.01961 60.21973 86.34221 59.37612 84.90763 58.99755" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="PCPXEO-CMMIB7" font-size="6.97" x="55.673647" y="-30.437406" transform="matrix(1.000545 0 0 1.000545 33.941 74.507)">B</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="62.767613" y="-34.534985" transform="matrix(1.000261 0 0 1.000261 33.941 74.507)">n<tspan y="-32.847425">K</tspan><tspan x="62.767613" y="-29.349338">n</tspan><tspan y="-27.660779">J</tspan></text>
+<text font-family="FBIPCW-CMSY7" font-size="6.97" x="74.13958" y="-30.437405" transform="matrix(1.000545 0 0 1.000545 33.941 74.507)">·−</text>
+<path d="M186.025268 22.66746V59.29737" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M188.41618 57.424469C186.9816 57.803039 186.3042 58.646649 186.02527 59.496599C185.74634 58.646649 185.06894 57.803039 183.63436 57.424469" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="PCPXEO-CMMIB7" font-size="6.97" x="55.673647" y="-30.437406" transform="matrix(1.000545 0 0 1.000545 132.66699 73.845)">b</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="59.774395" y="-33.452267" transform="matrix(1.000261 0 0 1.000261 132.66699 73.845)">K<tspan x="59.774395" y="-28.453571">J</tspan></text>
+<text font-family="FBIPCW-CMSY7" font-size="6.97" x="66.264871" y="-30.437405" transform="matrix(1.000545 0 0 1.000545 132.66699 73.845)">·−</text>
+<path d="M102.345528 69.43522H173.280278" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M171.4074 67.04431C171.78597 68.47889 172.62958 69.15629 173.47953 69.43522C172.62958 69.71415 171.78597 70.39155 171.4074 71.82613" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="FBIPCW-CMSY7" font-size="6.97" x="55.673647" y="-30.437406" transform="matrix(1.000545 0 0 1.000545 51.642999 94.859)">−</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="61.914837" y="-29.450312" transform="matrix(1.000261 0 0 1.000261 51.642999 94.859)">n<tspan y="-27.762753">I</tspan><tspan x="70.302648" y="-29.450312">n</tspan><tspan y="-27.762753">K</tspan></text>
+<text font-family="FBIPCW-CMSY7" font-size="6.97" x="81.672473" y="-30.437406" transform="matrix(1.000545 0 0 1.000545 51.642999 94.859)">·</text>
+<text font-family="PCPXEO-CMMIB7" font-size="6.97" x="84.037183" y="-30.437406" transform="matrix(1.000545 0 0 1.000545 51.642999 94.859)">E</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="90.71432" y="-33.452267" transform="matrix(1.000261 0 0 1.000261 51.642999 94.859)">n<tspan y="-31.763708">I</tspan><tspan x="99.10213" y="-33.452267">n</tspan><tspan y="-31.763708">K</tspan><tspan x="110.495156" y="-33.452267">K</tspan><tspan x="110.495156" y="-28.453571">I</tspan></text>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abstract-coord-cd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1: 混合张量积的坐标表示
+</figcaption>
+</figure>
+</div>
+<ul>
+<li><p>混合张量缩并运算的坐标表达 <a href="#eq-contraction-coord" class="quarto-xref">式&nbsp;5</a> 升级为坐标张量的缩并形式 <span class="math inline">\(\boldsymbol C_{n_I}^{n_K} = \boldsymbol B_{n_J}^{n_K} \boldsymbol A_{n_I}^{n_J}\)</span>．<strong>这是 Einstein 求和约定的坐标张量视角．</strong></p></li>
+<li><p>对偶关系 <a href="#eq-dual-base" class="quarto-xref">式&nbsp;2</a> 有张量形式 <span class="math inline">\(\boldsymbol E^{n_i}{_i} \boldsymbol E_{n_i}{^i} = \boldsymbol\delta_{n_i}^{n_i}\)</span>．</p></li>
+<li><p>反过来写的结果是 <span class="math inline">\(V^i \to V^i\)</span> 上的恒同映射 <span class="math inline">\(\boldsymbol E_{n_i}{^i} \boldsymbol E^{n_i}{_i} = \mathbf{id}_{i}^{i}\)</span>．</p></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
@@ -555,7 +645,7 @@ Remark
 <div id="callout-5" class="callout-5-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>值得注意的是，物理学家并不区分抽象指标和具体指标：他们不区分具体指标 <span class="math inline">\(\alpha_I\)</span> 和抽象指标 <span class="math inline">\(I\)</span>，也不区分坐标空间 <span class="math inline">\(K^I\)</span> 的抽象指标 <span class="math inline">\(n_I\)</span> 和抽象线性空间 <span class="math inline">\(V\)</span> 的抽象指标 <span class="math inline">\(I\)</span>：实践中往往会看到他们直接去掉 <a href="#eq-contra-coord" class="quarto-xref">式&nbsp;1</a>, <a href="#eq-covar-coord" class="quarto-xref">式&nbsp;3</a>, <a href="#eq-mixed-coord" class="quarto-xref">式&nbsp;4</a> 的求和号，并认为左上和右下也可以缩并——遇到例如 <a href="#eq-dual-base" class="quarto-xref">式&nbsp;2</a> 左上右下不应该缩并的情况，他们会手动更换记号区分两个 <span class="math inline">\(n_i\)</span>．笔者暂时无力为这种记号完成善后工作，上述解释仅供参考．</p>
+<p><span class="proof-title"><em>注记</em>. </span>值得注意的是，物理学家并不区分抽象指标和具体指标：他们不区分具体指标 <span class="math inline">\(\alpha_I\)</span> 和抽象指标 <span class="math inline">\(I\)</span>，也不区分坐标空间 <span class="math inline">\(K^{n_I}\)</span> 的抽象指标 <span class="math inline">\(n_I\)</span> 和抽象线性空间 <span class="math inline">\(V\)</span> 的抽象指标 <span class="math inline">\(I\)</span>：实践中往往会看到他们直接去掉 <a href="#eq-contra-coord" class="quarto-xref">式&nbsp;1</a>, <a href="#eq-covar-coord" class="quarto-xref">式&nbsp;3</a>, <a href="#eq-mixed-coord" class="quarto-xref">式&nbsp;4</a> 的求和号，并认为左上和右下也可以缩并——遇到例如 <a href="#eq-dual-base" class="quarto-xref">式&nbsp;2</a> 左上右下不应该缩并的情况，他们会手动更换记号区分两个 <span class="math inline">\(n_i\)</span>，例如写作 <span class="math inline">\(\boldsymbol E^{n_i^2}{_i} \boldsymbol E_{n_i^1}{^i} = \boldsymbol\delta_{n_i^1}^{n_i^2}\)</span>．笔者暂时无力为这种记号完成善后工作，上述解释仅供参考．</p>
 </div>
 </div>
 </div>
@@ -566,7 +656,7 @@ Remark
 <h2 data-number="2" class="anchored" data-anchor-id="使用例"><span class="header-section-number">2</span> 使用例</h2>
 <section id="内积" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="内积"><span class="header-section-number">2.1</span> 内积</h3>
-<p>设 <span class="math inline">\(V^i\)</span> 上有双线性型 <span class="math inline">\(\langle \bullet, \bullet \rangle\)</span>，<span class="math inline">\(\boldsymbol a^i, \boldsymbol b^i \in V^i\)</span>．Recall 张量积泛性质，全体双线性型与 <span class="math inline">\(\mathrm{Hom}(V^i \otimes V^i, K) \cong V_i \otimes V^i\)</span> 自然同构，故可用张量 <span class="math inline">\(\boldsymbol g_i^i \in V_i^i\)</span> 表征该双线性型，则内积可写作张量缩并形式 <span class="math display">\[
+<p>设 <span class="math inline">\(V^i\)</span> 上有双线性型 <span class="math inline">\(\langle -, - \rangle\)</span>，<span class="math inline">\(\boldsymbol a^i, \boldsymbol b^i \in V^i\)</span>．Recall 张量积泛性质，全体双线性型与 <span class="math inline">\(\mathrm{Hom}(V^i \otimes V^i, K) \cong V_i \otimes V^i\)</span> 自然同构，故可用张量 <span class="math inline">\(\boldsymbol g_i^i \in V_i^i\)</span> 表征该双线性型，则内积可写作张量缩并形式 <span class="math display">\[
 \langle \boldsymbol a^i, \boldsymbol b^i \rangle = \boldsymbol a_i \boldsymbol g_i^i \boldsymbol b^i
 \]</span> 特别地，若该内积使得 <span class="math inline">\(\langle \boldsymbol e^{\alpha_i}, \boldsymbol e^{\beta_i} \rangle = \delta^{\alpha_i}_{\beta_i}\)</span>，即 <span class="math inline">\(\boldsymbol g_i^i = \boldsymbol\delta_i^i\)</span>，则有 <span class="math display">\[
 \langle \boldsymbol a^i, \boldsymbol b^i \rangle = \boldsymbol a_i \boldsymbol b^i
