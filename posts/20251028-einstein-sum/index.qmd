@@ -1,11 +1,11 @@
 ---
 title: 代数批如何理解 Einstein 求和约定
-subtitle: Einstein summation convention for confused algebraists
+subtitle: Einstein summation for confused algebraists
 author: sun123zxy
 date: 2025/10/29
 lang: zh
 # bibliography: index.bib
-
+draft: true
 number-sections: true
 
 categories:
@@ -31,9 +31,9 @@ format:
 
 ### 逆变
 
-首先约定本文中出现的上标默认均不代表乘法幂．考虑一组维度分别为 $n_i$ 的域 $K$ 上的线性空间 $V^i$, 这里 $i \in \Sigma$ 是一组*抽象指标*．设他们分别有自然基底 $\left( \vec e^i_{\alpha_i} \right)_{1 \leq \alpha_i \leq n_i}$ ^[不少文献会在这里省去 $\vec e$ 的上标 $i$．这是一种记号滥用：即通过 $\alpha_i$ 里面的 $i$ 来区分是哪个模的基底．]．此时，对任意向量 $\vec v^i \in V^i$ ^[这里 $v^i$ 上的 $i$ 仅作标识 $\vec v^i \in V^i$ 使用，类似多项式环的 $f(\rm x) \in K[\rm x]$．后面将看到这种记法的妙处．少数（记号过于复杂的）情况下，也可能省略这一标识不写．]，都有坐标表示
+首先约定本文中出现的上标默认均不代表乘法幂．考虑一组维度分别为 $n_i$ 的域 $K$ 上的线性空间 $V^i$, 这里 $i \in \Sigma$ 是一组*抽象指标*．设他们分别有自然基底 $\left( \vec e^i_{\alpha_i} \right)_{1 \leq \alpha_i \leq n_i}$ ^[不少文献会在这里省去 $\vec e$ 的上标 $i$．这是一种记号滥用：即通过 $\alpha_i$ 里面的 $i$ 来区分是哪个模的基底．]．此时，对任意向量 $\vec a^i \in V^i$ ^[这里 $a^i$ 上的 $i$ 仅作标识 $\vec a^i \in V^i$ 使用，类似多项式环的 $f(\rm x) \in K[\rm x]$．后面将看到这种记法的妙处．少数（记号过于复杂的）情况下，也可能省略这一标识不写．]，都有坐标表示
 $$
-\vec v^i = \sum_{\alpha_i = 1}^{n_i} \vec e^i_{\alpha_i} v^{\alpha_i}
+\vec a^i = \sum_{\alpha_i = 1}^{n_i} \vec e^i_{\alpha_i} a^{\alpha_i}
 $${#eq-contra-coord}
 
 ### 协变
@@ -42,9 +42,9 @@ $${#eq-contra-coord}
 $$
 \vec e_i^{\alpha_i} \left( \vec e^i_{\beta_i} \right) = \delta^{\alpha_i}_{\beta_i} = \begin{cases} 1 & \text{if } \alpha_i = \beta_i \\ 0 & \text{otherwise} \end{cases}
 $${#eq-dual-base}
-后者是 Kronecker delta 符号．此时，对任意 $\vec v_i \in V_i$，都有坐标表示
+后者是 Kronecker delta 符号．此时，对任意 $\vec a_i \in V_i$，都有坐标表示
 $$
-\vec v_i = \sum_{\alpha_i = 1}^{n_i} v_{\alpha_i} \vec e_i^{\alpha_i}
+\vec a_i = \sum_{\alpha_i = 1}^{n_i} a_{\alpha_i} \vec e_i^{\alpha_i}
 $${#eq-covar-coord}
 
 ### 混合张量积
@@ -104,8 +104,8 @@ $$
 这里的内层求和正是 Einstein 求和约定下省略的求和符号．写作分量形式即
 $$
 c_{\alpha_I}^{\alpha_K} = \sum_{\alpha_J} b_{\alpha_J}^{\alpha_K} a_{\alpha_I}^{\alpha_J}
-$$
-注意分量形式的缩并，形状上恰好可以看成张量形式缩并 $\vec c_I^K := \vec b_J^K \vec a_I^J$ 还原粗体为斜体，添加 "$\alpha$" 和求和符号的结果．这就是 Einstein 求和约定的核心观点：**不写求和号事实上就是 coordinate-free 的张量缩并写法，左下右上抽象指标自动配对，在坐标形式下按对应具体指标求和．**^[尽管前面直接扔掉坐标表示求和号的野蛮行径仍然无法使用此观点解释．]
+$${#eq-contraction-coord}
+注意分量形式的缩并，形状上恰好可以看成张量形式缩并 $\vec c_I^K := \vec b_J^K \vec a_I^J$ 还原粗体为斜体，添加 "$\alpha$" 和求和符号的结果．**这就是 Einstein 求和约定的坐标无关视角：它是混合张量缩并运算的抽象张量写法．左下右上抽象指标自动配对，在坐标形式下按对应具体指标求和．**
 
 :::{.remark}
 
@@ -126,41 +126,65 @@ $$
 
 ### 坐标表示的 Einstein 求和
 
-我们现在在这里回头，用这套记号体系解释对偶关系 [@eq-dual-base]，并尝试去掉坐标表示 [@eq-contra-coord], [@eq-covar-coord], [@eq-mixed-coord] 的求和号．
+坐标无关的 Einstein 求和约定并不能解释所有物理学家使用的记号——物理学家完全没有 coordinate-free 的概念，他们的张量总是由具体的坐标组成．换言之，他们不在 $V_I^J$ 中操作张量，而是选定基底后在
+$$
+K_{n_I}^{n_J} := \left( \bigotimes_{i \in I} \left( K^{\oplus n_i} \right)^* \right) \otimes \left( \bigotimes_{j \in J} K^{\oplus n_j} \right)
+$$
+中工作．因此我们现在在这里回头，建立从抽象张量到坐标张量的范畴等价．
 
-什么是 $\vec e_{\alpha_J}^{\alpha_I}$？它是个向量，但这里的 $\alpha_I, \alpha_J$ 是一组具体指标．想要获得坐标无关的表达，我们需要“用抽象指标替换具体指标”，i.e. 找到映射
+既然要选定基底，我们的函子必然与基底 $\vec e_{\alpha_J}^{\alpha_I}$ 有关．它是什么？
+
+它是个向量，但这里的 $\alpha_I, \alpha_J$ 是一组具体指标．我们需要“用抽象指标替换具体指标”，i.e. 找到映射
 $$
 (\alpha_I, \alpha_J) \mapsto \vec e_{\alpha_J}^{\alpha_I}
 $$
-（线性扩张后）所在的线性空间．自然地，考虑
-$$
-K{_{n_I}}{_{n_J}} \otimes V_I^J := \left( \bigotimes_{i \in I} \left( K^{\oplus n_i} \right)^* \right) \otimes \left( \bigotimes_{j \in J} \left( K^{\oplus n_j} \right)^* \right) \otimes V_I^J
-$$
-不妨将抽象指标写作 $n_I$, $n_J$，则我们得到基底的张量表达 $\vec E_{n_I \ n_J}{_I^J} \in K{_{n_I}}{_{n_J}} \otimes V_I^J$．
+（线性扩张后）所在的线性空间．自然地，考虑 $K_{n_I n_J} \otimes V_I^J$，将抽象指标写作 $n_I$, $n_J$，则我们得到基底的张量表达 $\vec E_{n_I n_J}{_I^J} \in K_{n_I n_J} \otimes V_I^J$．
 
 最后，我们还需要将 $a_{\alpha_I}^{\alpha_J}$ 视为取坐标映射
 $$
 (\alpha_I, \alpha_J) \mapsto a_{\alpha_I}^{\alpha_J}
 $$
-的线性扩张并完成张量化：仍然使用抽象指标 $n_I, n_J$，我们现在记张量 $\vec a_{n_I \ n_J} \in K_{n_I \ n_J}$ 实现了上述线性映射．
+的线性扩张并完成张量化：仍然使用抽象指标 $n_I, n_J$，我们现在记张量 $\vec A_{n_I n_J} \in K_{n_I n_J}$ 实现了上述线性映射．现在：
 
-现在：
+- 混合张量积坐标表示 [@eq-mixed-coord] 有张量形式 $\vec a_I^J = \vec A_{n_I n_J} \vec E^{n_I n_J}{_I^J}$．
 
-- 混合张量积坐标表示 [@eq-mixed-coord] 有张量形式 $\vec a_I^J = \vec a_{n_I \ n_J} \vec E^{n_I \ n_J}{_I^J}$
-- 逆变张量坐标表示 [@eq-contra-coord] 有张量形式 $\vec v^i = \vec E_{n_i}{^i} \vec v^{n_i}$
-- 协变张量坐标表示 [@eq-covar-coord] 有张量形式 $\vec v_i = \vec v_{n_i} \vec E^{n_i}{_i}$
+- 逆变向量坐标表示 [@eq-contra-coord] 有张量形式 $\vec a^i = \vec E_{n_i}{^i} \vec A^{n_i}$．（$I := \{ i \}$, $J := \varnothing$）
+
+- 协变向量坐标表示 [@eq-covar-coord] 有张量形式 $\vec a_i = \vec A_{n_i} \vec E^{n_i}{_i}$．（$I := \{ i \}$, $J := \varnothing$）
+
+:::{#fig-abstract-coord-cd}
+
+```{tikz}
+\begin{tikzcd}
+	{\boldsymbol A_{n_I}^{n_J}} & {K_{n_I}^{n_J}} &&& {V_I^J} & {\boldsymbol a_I^J} \\
+	\\
+	{\boldsymbol B_{n_J}^{n_K} \boldsymbol A_{n_I}^{n_J}} & {K_{n_I}^{n_K}} &&& {V_I^K} & {\boldsymbol b_J^K \boldsymbol a_I^J}
+	\arrow["{-_{n_I n_J} \cdot \boldsymbol E^{n_I n_J}{_I^J}}", from=1-2, to=1-5]
+	\arrow["{\boldsymbol B_{n_J}^{n_K} \cdot -}", from=1-2, to=3-2]
+	\arrow["{\boldsymbol b_J^K \cdot -}", from=1-5, to=3-5]
+	\arrow["{-_{n_I n_K} \cdot \boldsymbol E^{n_I n_K}{_I^K}}", from=3-2, to=3-5]
+\end{tikzcd}
+```
+
+混合张量积的坐标表示
+:::
+
+- 混合张量缩并运算的坐标表达 [@eq-contraction-coord] 升级为坐标张量的缩并形式 $\vec C_{n_I}^{n_K} = \vec B_{n_J}^{n_K} \vec A_{n_I}^{n_J}$．**这是 Einstein 求和约定的坐标张量视角．**
+
 - 对偶关系 [@eq-dual-base] 有张量形式 $\vec E^{n_i}{_i} \vec E_{n_i}{^i} = \vec \delta_{n_i}^{n_i}$．
+  
+- 反过来写的结果是 $V^i \to V^i$ 上的恒同映射 $\vec E_{n_i}{^i} \vec E^{n_i}{_i} = \mathbf{id}_{i}^{i}$．
 
 :::{.remark}
 
-值得注意的是，物理学家并不区分抽象指标和具体指标：他们不区分具体指标 $\alpha_I$ 和抽象指标 $I$，也不区分坐标空间 $K^I$ 的抽象指标 $n_I$ 和抽象线性空间 $V$ 的抽象指标 $I$：实践中往往会看到他们直接去掉 [@eq-contra-coord], [@eq-covar-coord], [@eq-mixed-coord] 的求和号，并认为左上和右下也可以缩并——遇到例如 [@eq-dual-base] 左上右下不应该缩并的情况，他们会手动更换记号区分两个 $n_i$．笔者暂时无力为这种记号完成善后工作，上述解释仅供参考．
+值得注意的是，物理学家并不区分抽象指标和具体指标：他们不区分具体指标 $\alpha_I$ 和抽象指标 $I$，也不区分坐标空间 $K^{n_I}$ 的抽象指标 $n_I$ 和抽象线性空间 $V$ 的抽象指标 $I$：实践中往往会看到他们直接去掉 [@eq-contra-coord], [@eq-covar-coord], [@eq-mixed-coord] 的求和号，并认为左上和右下也可以缩并——遇到例如 [@eq-dual-base] 左上右下不应该缩并的情况，他们会手动更换记号区分两个 $n_i$，例如写作 $\vec E^{n_i^2}{_i} \vec E_{n_i^1}{^i} = \vec \delta_{n_i^1}^{n_i^2}$．笔者暂时无力为这种记号完成善后工作，上述解释仅供参考．
 :::
 
 ## 使用例
 
 ### 内积
 
-设 $V^i$ 上有双线性型 $\langle \bullet, \bullet \rangle$，$\vec a^i, \vec b^i \in V^i$．Recall 张量积泛性质，全体双线性型与 $\rm{Hom}(V^i \otimes V^i, K) \cong V_i \otimes V^i$ 自然同构，故可用张量 $\vec g_i^i \in V_i^i$ 表征该双线性型，则内积可写作张量缩并形式
+设 $V^i$ 上有双线性型 $\langle -, - \rangle$，$\vec a^i, \vec b^i \in V^i$．Recall 张量积泛性质，全体双线性型与 $\rm{Hom}(V^i \otimes V^i, K) \cong V_i \otimes V^i$ 自然同构，故可用张量 $\vec g_i^i \in V_i^i$ 表征该双线性型，则内积可写作张量缩并形式
 $$
 \langle \vec a^i, \vec b^i \rangle = \vec a_i \vec g_i^i \vec b^i
 $$
