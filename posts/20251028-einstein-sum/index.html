@@ -339,8 +339,20 @@ window.Quarto = {
     <h2 id="toc-title">该页面内容</h2>
    
   <ul>
-  <li><a href="#坐标无关张量缩并" id="toc-坐标无关张量缩并" class="nav-link active" data-scroll-target="#坐标无关张量缩并"><span class="header-section-number">1</span> 坐标无关张量缩并</a></li>
-  <li><a href="#使用例" id="toc-使用例" class="nav-link" data-scroll-target="#使用例"><span class="header-section-number">2</span> 使用例</a></li>
+  <li><a href="#张量缩并的坐标无关记法" id="toc-张量缩并的坐标无关记法" class="nav-link active" data-scroll-target="#张量缩并的坐标无关记法"><span class="header-section-number">1</span> 张量缩并的坐标无关记法</a>
+  <ul class="collapse">
+  <li><a href="#逆变" id="toc-逆变" class="nav-link" data-scroll-target="#逆变"><span class="header-section-number">1.1</span> 逆变</a></li>
+  <li><a href="#协变" id="toc-协变" class="nav-link" data-scroll-target="#协变"><span class="header-section-number">1.2</span> 协变</a></li>
+  <li><a href="#混合张量积" id="toc-混合张量积" class="nav-link" data-scroll-target="#混合张量积"><span class="header-section-number">1.3</span> 混合张量积</a></li>
+  <li><a href="#张量缩并" id="toc-张量缩并" class="nav-link" data-scroll-target="#张量缩并"><span class="header-section-number">1.4</span> 张量缩并</a></li>
+  <li><a href="#坐标表示的-einstein-求和" id="toc-坐标表示的-einstein-求和" class="nav-link" data-scroll-target="#坐标表示的-einstein-求和"><span class="header-section-number">1.5</span> 坐标表示的 Einstein 求和</a></li>
+  </ul></li>
+  <li><a href="#使用例" id="toc-使用例" class="nav-link" data-scroll-target="#使用例"><span class="header-section-number">2</span> 使用例</a>
+  <ul class="collapse">
+  <li><a href="#内积" id="toc-内积" class="nav-link" data-scroll-target="#内积"><span class="header-section-number">2.1</span> 内积</a></li>
+  <li><a href="#指标翻转" id="toc-指标翻转" class="nav-link" data-scroll-target="#指标翻转"><span class="header-section-number">2.2</span> 指标翻转</a></li>
+  <li><a href="#叉积" id="toc-叉积" class="nav-link" data-scroll-target="#叉积"><span class="header-section-number">2.3</span> 叉积</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -388,41 +400,49 @@ window.Quarto = {
 
 <p>统一、自洽与简洁的记号体系是数批的床前明月光．大部分数学方向都已经发展出了一套相对完备的记号体系——但遗憾的是，有的方向的记号非常不巧地和其他学科的外来物种杂交在了一起，使得不同背景的使用者对同一记号的理解大相径庭．我们今天辨析的 Einstein 求和约定（Einstein summation convention）似乎就深受其害：物理学家们习惯于使用 Einstein 求和约定来简化张量矩阵运算中的求和符号，和物理学家纠缠不清的微分几何学家们也纷纷采用这一记号，并在教学时自豪的向学生介绍这一记号对求和的简化作用．一眼看上去，在 Einstein 求和约定下，你不再显式地写出求和符号和求和指标：每个乘法中左侧的下标和右侧的上标自动配对作为求和指标．例如，两个向量 <span class="math inline">\(\boldsymbol a\)</span> 和 <span class="math inline">\(\boldsymbol b\)</span> 的内积将被写作 <span class="math inline">\(a_i b^i\)</span>．然而，大部分教学实践中仅仅将 Einstein 求和约定理解为一种“省略求和符号的记号简化”，忽视其背后的代数结构，并不能说服困惑的学生接受这一记号．纯坐标化的理解也往往掩盖了 Einstein 求和约定的内在含义——这是将抽象线性空间张量积和其在基底下的坐标矩阵运算联系起来的桥梁．</p>
 <p>我们今天来捅破这层窗户纸．</p>
-<section id="坐标无关张量缩并" class="level2 page-columns page-full" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="坐标无关张量缩并"><span class="header-section-number">1</span> 坐标无关张量缩并</h2>
-<p>首先约定本文中出现的上标默认均不代表乘法幂．考虑一组维度分别为 <span class="math inline">\(n_i\)</span> 的域 <span class="math inline">\(K\)</span> 上的线性空间 <span class="math inline">\(V^i\)</span>, 这里 <span class="math inline">\(1 \leq i \leq m\)</span>．设他们分别有自然基底 <span class="math inline">\(\left( \boldsymbol e_{\alpha_i} \right)_{1 \leq \alpha_i \leq n_i}\)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>．此时，对任意向量 <span class="math inline">\(\boldsymbol v \in V^i\)</span>，都有坐标表示<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <span class="math display">\[
-\boldsymbol v = \sum_{\alpha_i = 1}^{n_i} \boldsymbol e_{\alpha_i} v^{\alpha_i}
-\]</span></p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;这里做记号滥用：我们通过 <span class="math inline">\(\alpha_i\)</span> 里面的 <span class="math inline">\(i\)</span> 来区分是哪个模的基底．</p></div><div id="fn2"><p><sup>2</sup>&nbsp;野蛮的物理学家会直接去掉坐标表示的求和符号．</p></div><div id="fn3"><p><sup>3</sup>&nbsp;野蛮的物理学家会直接去掉坐标表示的求和符号．</p></div></div><p>接下来，我们考虑这些线性空间的对偶．对每个 <span class="math inline">\(V^i\)</span>，记其对偶空间 <span class="math inline">\(V_i := \left( V^i \right)^*\)</span>，其有自然对偶基底 <span class="math inline">\(\left( \boldsymbol e^{\alpha_i} \right)_{1 \leq \alpha_i \leq n_i}\)</span>，满足 <span class="math display">\[
-\boldsymbol e^{\alpha_i} \left( \boldsymbol e_{\beta_i} \right) = \delta{^{\alpha_i}}{_{\beta_i}} = \begin{cases} 1 &amp; \text{if } \alpha_i = \beta_i \\ 0 &amp; \text{otherwise} \end{cases}
-\]</span> 后者是 Kronecker delta 符号．此时，对任意 <span class="math inline">\(\boldsymbol v \in V_i\)</span>，都有坐标表示<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> <span class="math display">\[
-\boldsymbol v = \sum_{\alpha_i = 1}^{n_i} v_{\alpha_i} \boldsymbol e^{\alpha_i}
-\]</span></p>
-<p>我们研究的对象是这些 <span class="math inline">\(V^i\)</span> 和 <span class="math inline">\(V_i\)</span> 的张量积．注意交换张量积顺序是一个自然同构，故我们总可以事先确定一个张量积的顺序——例如，按指标 <span class="math inline">\(i\)</span> 升序排列，<span class="math inline">\(V_i\)</span> 排在 <span class="math inline">\(V^i\)</span> 前．<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> 设 <span class="math inline">\(I,J \subset \{1,\dots,m\}\)</span> 为指标集，可记 <span class="math inline">\(V_I^J\)</span> 为按如此顺序排列做张量积得到的线性空间．</p>
-<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;方便起见，以后书写张量积时的顺序有时会和上述顺序不符，实际上均理解为按上述约定顺序排列．</p></div></div><div class="callout callout-style-default callout-tip callout-titled">
+<section id="张量缩并的坐标无关记法" class="level2 page-columns page-full" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="张量缩并的坐标无关记法"><span class="header-section-number">1</span> 张量缩并的坐标无关记法</h2>
+<section id="逆变" class="level3 page-columns page-full" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="逆变"><span class="header-section-number">1.1</span> 逆变</h3>
+<p>首先约定本文中出现的上标默认均不代表乘法幂．考虑一组维度分别为 <span class="math inline">\(n_i\)</span> 的域 <span class="math inline">\(K\)</span> 上的线性空间 <span class="math inline">\(V^i\)</span>, 这里 <span class="math inline">\(i \in \Sigma\)</span> 是一组<em>抽象指标</em>．设他们分别有自然基底 <span class="math inline">\(\left( \boldsymbol e^i_{\alpha_i} \right)_{1 \leq \alpha_i \leq n_i}\)</span> <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>．此时，对任意向量 <span class="math inline">\(\boldsymbol v^i \in V^i\)</span> <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>，都有坐标表示 <span id="eq-contra-coord"><span class="math display">\[
+\boldsymbol v^i = \sum_{\alpha_i = 1}^{n_i} \boldsymbol e^i_{\alpha_i} v^{\alpha_i}
+\tag{1}\]</span></span></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;不少文献会在这里省去 <span class="math inline">\(\boldsymbol e\)</span> 的上标 <span class="math inline">\(i\)</span>．这是一种记号滥用：即通过 <span class="math inline">\(\alpha_i\)</span> 里面的 <span class="math inline">\(i\)</span> 来区分是哪个模的基底．</p></div><div id="fn2"><p><sup>2</sup>&nbsp;这里 <span class="math inline">\(v^i\)</span> 上的 <span class="math inline">\(i\)</span> 仅作标识 <span class="math inline">\(\boldsymbol v^i \in V^i\)</span> 使用，类似多项式环的 <span class="math inline">\(f(\mathrm x) \in K[\mathrm x]\)</span>．后面将看到这种记法的妙处．少数（记号过于复杂的）情况下，也可能省略这一标识不写．</p></div></div></section>
+<section id="协变" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="协变"><span class="header-section-number">1.2</span> 协变</h3>
+<p>接下来，我们考虑这些线性空间的对偶．对每个 <span class="math inline">\(V^i\)</span>，记其对偶空间 <span class="math inline">\(V_i := \left( V^i \right)^*\)</span>，其有自然对偶基底 <span class="math inline">\(\left( \boldsymbol e_i^{\alpha_i} \right)_{1 \leq \alpha_i \leq n_i}\)</span>，满足 <span id="eq-dual-base"><span class="math display">\[
+\boldsymbol e_i^{\alpha_i} \left( \boldsymbol e^i_{\beta_i} \right) = \delta^{\alpha_i}_{\beta_i} = \begin{cases} 1 &amp; \text{if } \alpha_i = \beta_i \\ 0 &amp; \text{otherwise} \end{cases}
+\tag{2}\]</span></span> 后者是 Kronecker delta 符号．此时，对任意 <span class="math inline">\(\boldsymbol v_i \in V_i\)</span>，都有坐标表示 <span id="eq-covar-coord"><span class="math display">\[
+\boldsymbol v_i = \sum_{\alpha_i = 1}^{n_i} v_{\alpha_i} \boldsymbol e_i^{\alpha_i}
+\tag{3}\]</span></span></p>
+</section>
+<section id="混合张量积" class="level3 page-columns page-full" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="混合张量积"><span class="header-section-number">1.3</span> 混合张量积</h3>
+<p>我们研究的对象是这些 <span class="math inline">\(V^i\)</span> 和 <span class="math inline">\(V_i\)</span> 的张量积．注意交换张量积顺序是一个自然同构，故我们总可以事先确定一个张量积的顺序——例如，按抽象指标 <span class="math inline">\(i \in \Sigma\)</span> 的字典序排列，<span class="math inline">\(V_i\)</span> 排在 <span class="math inline">\(V^i\)</span> 前<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>．设 <span class="math inline">\(I,J \subseteq \Sigma\)</span> 为两组抽象指标，可记 <span class="math inline">\(V_I^J\)</span> 为按如此顺序排列做张量积得到的线性空间．</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;方便起见，以后书写张量积时的顺序有时会和上述顺序不符，实际上均理解为按上述约定顺序排列．</p></div></div><div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Remark
+Remark (张量积与线性映射)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>回忆张量积泛性质 <span class="math display">\[
+<p><span class="proof-title"><em>注记</em> (张量积与线性映射). </span>回忆张量积泛性质 <span class="math display">\[
 \mathrm{Hom}(V, W^*) \cong (V \otimes W)^* \quad\text{or}\quad \mathrm{Hom}(V, W) \cong V^* \otimes W
 \]</span> 故有自然同构 <span class="math inline">\(V_I^J \cong V_I \otimes V^J \cong \mathrm{Hom}(V^I, V^J)\)</span>，即 <span class="math inline">\(V_I^J\)</span> 中的张量也可理解为 <span class="math inline">\(V^I \to V^J\)</span> 的线性映射．</p>
 </div>
 </div>
 </div>
 </div>
-<p>考察 <span class="math inline">\(V_I^J\)</span> 的自然基底： <span class="math display">\[
+<p>考察 <span class="math inline">\(V_I^J\)</span> 的自然基底：<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> <span class="math display">\[
 \boldsymbol e_{\alpha_J}^{\alpha_I} := \left( \otimes_{i \in I} \boldsymbol e^{\alpha_i} \right) \otimes \left( \otimes_{j \in J} \boldsymbol e_{\alpha_j} \right) \in V_I^J
-\]</span> 其中 <span class="math inline">\(\alpha_I := (\alpha_i)_{i \in I}\)</span>，<span class="math inline">\(\alpha_J := (\alpha_j)_{j \in J}\)</span>．</p>
-<div class="callout callout-style-default callout-tip callout-titled">
+\]</span> 其中<em>具体指标</em> <span class="math inline">\(\alpha_I := (\alpha_i)_{i \in I}\)</span>，<span class="math inline">\(\alpha_J := (\alpha_j)_{j \in J}\)</span>．</p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>&nbsp;这里 <span class="math inline">\(\boldsymbol e_{\alpha_J}^{\alpha_I}\)</span> 完整的写法是 <span class="math inline">\(\left(\boldsymbol e_{\alpha_J}^{\alpha_I} \right)_I^J\)</span>，简洁起见我们做省略．</p></div></div><div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -435,7 +455,7 @@ Remark
 <div id="callout-2" class="callout-2-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>实际操作时，通常将各个 <span class="math inline">\(\alpha_i\)</span> 用单个字母（例如 <span class="math inline">\(i, j, k, l\)</span>）替换表示，此时用 <span class="math inline">\(V^\mathrm i, V^\mathrm j, V^\mathrm k, V^\mathrm l\)</span> 或 <span class="math inline">\(V_{\mathrm i}, V_{\mathrm j}, V_{\mathrm k}, V_{\mathrm l}\)</span> 区分不同的空间．如取 <span class="math inline">\(I = \{\mathrm i,\mathrm k\}\)</span>, <span class="math inline">\(J = \{\mathrm j,\mathrm l\}\)</span>，则有 <span class="math display">\[
+<p><span class="proof-title"><em>注记</em>. </span>实际操作时，通常将抽象指标集 <span class="math inline">\(\Sigma\)</span> 取做正体字母的集合，例如 <span class="math inline">\(\Sigma = \{\mathrm i, \mathrm j, \mathrm k, \mathrm l\}\)</span>．此时各个具体指标 <span class="math inline">\(\alpha_i\)</span> 用单个斜体字母（例如 <span class="math inline">\(i, j, k, l\)</span>）替换表示．如取 <span class="math inline">\(I = \{\mathrm i,\mathrm k\}\)</span>, <span class="math inline">\(J = \{\mathrm j,\mathrm l\}\)</span>，则有 <span class="math display">\[
 \boldsymbol e{^i}{_j}{^k}{_l} := \boldsymbol e^i \otimes \boldsymbol e_j \otimes \boldsymbol e^k \otimes \boldsymbol e_l \in V{_\mathrm i}{^\mathrm j}{_\mathrm k}{^\mathrm l}
 \]</span></p>
 </div>
@@ -447,10 +467,13 @@ Remark
 <li><span class="math inline">\(\mathrm x, \mathrm y\)</span> 明确了多项式（函数）<span class="math inline">\(f\)</span> 的自变量，而 <span class="math inline">\(I,J\)</span> 明确了张量 <span class="math inline">\(\boldsymbol a\)</span> 的协变和逆变空间 <span class="math inline">\(V_J\)</span>, <span class="math inline">\(V^I\)</span>．</li>
 <li><span class="math inline">\(f(\mathrm y, \mathrm x)\)</span> 代表多项式 <span class="math inline">\(f(\mathrm x, \mathrm y)\)</span> 交换自变量顺序后得到的多项式，而 <span class="math inline">\(\boldsymbol a_{I'}^{J'}\)</span> 代表通过对偶同构 <span class="math inline">\(V \cong V^*\)</span> 将张量 <span class="math inline">\(\boldsymbol a_I^J\)</span> 放入 <span class="math inline">\(V_{I'}^{J'}\)</span> 中得到的张量．</li>
 </ul>
-<p>需要注意的是，基底 <span class="math inline">\(\boldsymbol e_{\alpha_J}^{\alpha_I}\)</span> 和张量 <span class="math inline">\(\boldsymbol a_I^J\)</span> 的指标位置恰好相反——这一设计与张量的坐标表示密切相关：<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> <span class="math display">\[
+<p>需要注意的是，基底 <span class="math inline">\(\boldsymbol e_{\alpha_J}^{\alpha_I}\)</span> 的具体指标和张量 <span class="math inline">\(\boldsymbol a_I^J\)</span> 的抽象指标位置恰好相反——这一设计与张量的坐标表示密切相关： <span id="eq-mixed-coord"><span class="math display">\[
 \boldsymbol a_I^J = \sum_{\alpha_I, \alpha_J} a_{\alpha_I}^{\alpha_J} \boldsymbol e_{\alpha_J}^{\alpha_I}
-\]</span> 这里的 <span class="math inline">\(a_{\alpha_I}^{\alpha_J}\)</span> 是张量 <span class="math inline">\(\boldsymbol a_I^J\)</span> 在基底 <span class="math inline">\(\boldsymbol e_{\alpha_J}^{\alpha_I}\)</span> 下的坐标．</p>
-<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;野蛮的物理学家还是会去掉坐标表示的求和符号．</p></div></div><p>定义张量间的缩并运算（tensor contraction）：设 <span class="math inline">\(\boldsymbol a_I^J \in V_I^J, \boldsymbol b_J^K \in V_J^K\)</span>，定义它们的乘积 <span class="math inline">\(\boldsymbol c_I^K := \boldsymbol b_J^K \boldsymbol a_I^J \in V_I^K\)</span> 为张量积后对 <span class="math inline">\(J\)</span> 指标进行自然配对得到的张量，即线性映射理解下的复合映射 <span class="math inline">\(V_I \to V_J \to V_K\)</span>．当参与乘法的张量的指标 <span class="math inline">\(J\)</span> 左下右上不匹配时，定义它们的乘积为 <span class="math inline">\(0\)</span>．</p>
+\tag{4}\]</span></span> 这里的 <span class="math inline">\(a_{\alpha_I}^{\alpha_J}\)</span> 是张量 <span class="math inline">\(\boldsymbol a_I^J\)</span> 在基底 <span class="math inline">\(\boldsymbol e_{\alpha_J}^{\alpha_I}\)</span> 下的坐标．</p>
+</section>
+<section id="张量缩并" class="level3 page-columns page-full" data-number="1.4">
+<h3 data-number="1.4" class="anchored" data-anchor-id="张量缩并"><span class="header-section-number">1.4</span> 张量缩并</h3>
+<p>定义张量间的<em>缩并</em>运算（tensor contraction）：设 <span class="math inline">\(\boldsymbol a_I^J \in V_I^J, \boldsymbol b_J^K \in V_J^K\)</span>，定义它们的乘积 <span class="math inline">\(\boldsymbol c_I^K := \boldsymbol b_J^K \boldsymbol a_I^J \in V_I^K\)</span> 为张量积后对抽象指标 <span class="math inline">\(J\)</span> 进行自然配对得到的张量，即线性映射理解下的复合映射 <span class="math inline">\(V_I \to V_J \to V_K\)</span>．当参与乘法的张量的抽象指标 <span class="math inline">\(J\)</span> 左下右上不匹配时，定义它们的乘积为 <span class="math inline">\(0\)</span>．</p>
 <p>考察自然基底间的缩并．根据前述对偶基的关系，有 <span class="math display">\[
 \boldsymbol e_{\beta_J}^{\beta_K} \boldsymbol e_{\alpha_I}^{\alpha_J} = \begin{cases} \boldsymbol e_{\alpha_I}^{\beta_K} &amp; \beta_{J} = \alpha_{J} \\ 0 &amp; \text{otherwise} \end{cases}
 \]</span> 利用这一自然基底的缩并关系，我们考察一般张量间的缩并的分量形式： <span class="math display">\[
@@ -459,8 +482,8 @@ Remark
 = \sum_{\alpha_I, \alpha_K} \left( \sum_{\alpha_J} b_{\alpha_J}^{\alpha_K} a_{\alpha_I}^{\alpha_J} \right) \boldsymbol e_{\alpha_K}^{\alpha_I}
 \]</span> 这里的内层求和正是 Einstein 求和约定下省略的求和符号．写作分量形式即 <span class="math display">\[
 c_{\alpha_I}^{\alpha_K} = \sum_{\alpha_J} b_{\alpha_J}^{\alpha_K} a_{\alpha_I}^{\alpha_J}
-\]</span> 注意分量形式的缩并，形状上恰好可以看成张量形式缩并 <span class="math inline">\(\boldsymbol c_I^K := \boldsymbol b_J^K \boldsymbol a_I^J\)</span> 粗体还原并添加求和符号后的结果．这就是 Einstein 求和约定的核心观点：<strong>不写求和号的记号事实上是 coordinate-free 的张量缩并写法，左下右上指标自动配对求和．</strong><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
-<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>&nbsp;尽管前面直接扔掉坐标表示求和号的野蛮行径仍然无法使用此观点解释．</p></div></div><div class="callout callout-style-default callout-tip callout-titled">
+\]</span> 注意分量形式的缩并，形状上恰好可以看成张量形式缩并 <span class="math inline">\(\boldsymbol c_I^K := \boldsymbol b_J^K \boldsymbol a_I^J\)</span> 还原粗体为斜体，添加 “<span class="math inline">\(\alpha\)</span>” 和求和符号的结果．这就是 Einstein 求和约定的核心观点：<strong>不写求和号事实上就是 coordinate-free 的张量缩并写法，左下右上抽象指标自动配对，在坐标形式下按对应具体指标求和．</strong><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;尽管前面直接扔掉坐标表示求和号的野蛮行径仍然无法使用此观点解释．</p></div></div><div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -501,11 +524,64 @@ Remark
 </div>
 </div>
 </section>
+<section id="坐标表示的-einstein-求和" class="level3" data-number="1.5">
+<h3 data-number="1.5" class="anchored" data-anchor-id="坐标表示的-einstein-求和"><span class="header-section-number">1.5</span> 坐标表示的 Einstein 求和</h3>
+<p>我们现在在这里回头，用这套记号体系解释对偶关系 <a href="#eq-dual-base" class="quarto-xref">式&nbsp;2</a>，并尝试去掉坐标表示 <a href="#eq-contra-coord" class="quarto-xref">式&nbsp;1</a>, <a href="#eq-covar-coord" class="quarto-xref">式&nbsp;3</a>, <a href="#eq-mixed-coord" class="quarto-xref">式&nbsp;4</a> 的求和号．</p>
+<p>什么是 <span class="math inline">\(\boldsymbol e_{\alpha_J}^{\alpha_I}\)</span>？它是个向量，但这里的 <span class="math inline">\(\alpha_I, \alpha_J\)</span> 是一组具体指标．想要获得坐标无关的表达，我们需要“用抽象指标替换具体指标”，i.e.&nbsp;找到映射 <span class="math display">\[
+(\alpha_I, \alpha_J) \mapsto \boldsymbol e_{\alpha_J}^{\alpha_I}
+\]</span> （线性扩张后）所在的线性空间．自然地，考虑 <span class="math display">\[
+K{_{n_I}}{_{n_J}} \otimes V_I^J := \left( \bigotimes_{i \in I} \left( K^{\oplus n_i} \right)^* \right) \otimes \left( \bigotimes_{j \in J} \left( K^{\oplus n_j} \right)^* \right) \otimes V_I^J
+\]</span> 不妨将抽象指标写作 <span class="math inline">\(n_I\)</span>, <span class="math inline">\(n_J\)</span>，则我们得到基底的张量表达 <span class="math inline">\(\boldsymbol E_{n_I \ n_J}{_I^J} \in K{_{n_I}}{_{n_J}} \otimes V_I^J\)</span>．</p>
+<p>最后，我们还需要将 <span class="math inline">\(a_{\alpha_I}^{\alpha_J}\)</span> 视为取坐标映射 <span class="math display">\[
+(\alpha_I, \alpha_J) \mapsto a_{\alpha_I}^{\alpha_J}
+\]</span> 的线性扩张并完成张量化：仍然使用抽象指标 <span class="math inline">\(n_I, n_J\)</span>，我们现在记张量 <span class="math inline">\(\boldsymbol a_{n_I \ n_J} \in K_{n_I \ n_J}\)</span> 实现了上述线性映射．</p>
+<p>现在：</p>
+<ul>
+<li>混合张量积坐标表示 <a href="#eq-mixed-coord" class="quarto-xref">式&nbsp;4</a> 有张量形式 <span class="math inline">\(\boldsymbol a_I^J = \boldsymbol a_{n_I \ n_J} \boldsymbol E^{n_I \ n_J}{_I^J}\)</span></li>
+<li>逆变张量坐标表示 <a href="#eq-contra-coord" class="quarto-xref">式&nbsp;1</a> 有张量形式 <span class="math inline">\(\boldsymbol v^i = \boldsymbol E_{n_i}{^i} \boldsymbol v^{n_i}\)</span></li>
+<li>协变张量坐标表示 <a href="#eq-covar-coord" class="quarto-xref">式&nbsp;3</a> 有张量形式 <span class="math inline">\(\boldsymbol v_i = \boldsymbol v_{n_i} \boldsymbol E^{n_i}{_i}\)</span></li>
+<li>对偶关系 <a href="#eq-dual-base" class="quarto-xref">式&nbsp;2</a> 有张量形式 <span class="math inline">\(\boldsymbol E^{n_i}{_i} \boldsymbol E_{n_i}{^i} = \boldsymbol\delta_{n_i}^{n_i}\)</span>．</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>值得注意的是，物理学家并不区分抽象指标和具体指标：他们不区分具体指标 <span class="math inline">\(\alpha_I\)</span> 和抽象指标 <span class="math inline">\(I\)</span>，也不区分坐标空间 <span class="math inline">\(K^I\)</span> 的抽象指标 <span class="math inline">\(n_I\)</span> 和抽象线性空间 <span class="math inline">\(V\)</span> 的抽象指标 <span class="math inline">\(I\)</span>：实践中往往会看到他们直接去掉 <a href="#eq-contra-coord" class="quarto-xref">式&nbsp;1</a>, <a href="#eq-covar-coord" class="quarto-xref">式&nbsp;3</a>, <a href="#eq-mixed-coord" class="quarto-xref">式&nbsp;4</a> 的求和号，并认为左上和右下也可以缩并——遇到例如 <a href="#eq-dual-base" class="quarto-xref">式&nbsp;2</a> 左上右下不应该缩并的情况，他们会手动更换记号区分两个 <span class="math inline">\(n_i\)</span>．笔者暂时无力为这种记号完成善后工作，上述解释仅供参考．</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
 <section id="使用例" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="使用例"><span class="header-section-number">2</span> 使用例</h2>
+<section id="内积" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="内积"><span class="header-section-number">2.1</span> 内积</h3>
+<p>设 <span class="math inline">\(V^i\)</span> 上有双线性型 <span class="math inline">\(\langle \bullet, \bullet \rangle\)</span>，<span class="math inline">\(\boldsymbol a^i, \boldsymbol b^i \in V^i\)</span>．Recall 张量积泛性质，全体双线性型与 <span class="math inline">\(\mathrm{Hom}(V^i \otimes V^i, K) \cong V_i \otimes V^i\)</span> 自然同构，故可用张量 <span class="math inline">\(\boldsymbol g_i^i \in V_i^i\)</span> 表征该双线性型，则内积可写作张量缩并形式 <span class="math display">\[
+\langle \boldsymbol a^i, \boldsymbol b^i \rangle = \boldsymbol a_i \boldsymbol g_i^i \boldsymbol b^i
+\]</span> 特别地，若该内积使得 <span class="math inline">\(\langle \boldsymbol e^{\alpha_i}, \boldsymbol e^{\beta_i} \rangle = \delta^{\alpha_i}_{\beta_i}\)</span>，即 <span class="math inline">\(\boldsymbol g_i^i = \boldsymbol\delta_i^i\)</span>，则有 <span class="math display">\[
+\langle \boldsymbol a^i, \boldsymbol b^i \rangle = \boldsymbol a_i \boldsymbol b^i
+\]</span></p>
+</section>
+<section id="指标翻转" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="指标翻转"><span class="header-section-number">2.2</span> 指标翻转</h3>
+<p>物理学家会写出形如 <span class="math inline">\(\boldsymbol a_i = g{_i}{_j} \boldsymbol a^j\)</span> 的式子，我们来试着帮他们做一下善后工作．【TODO】</p>
+</section>
+<section id="叉积" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="叉积"><span class="header-section-number">2.3</span> 叉积</h3>
 <p>【TODO】</p>
 
 
+</section>
 </section>
 
 
