@@ -1,0 +1,158 @@
+---
+title: On Different Ranks of a Module
+author: sun123zxy
+date: 2025/11/17
+lang: en
+
+bibliography: index.bib
+
+categories:
+  - math
+  - algebra
+collection:
+  - short
+
+format:
+  html: default
+---
+
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\spanrank}{\operatorname{spanrank}}
+
+We work over a commutative ring $R$ with unity. The rank $\rank_R M$ of a module $R$-module $M$ is defined as the maximal cardinality of a $R$-linearly independent subset of $M$. A homologist might write this as
+$$
+0 \longrightarrow R^{\oplus n} \longrightarrow M
+$$
+where $n$ is as large as possible.
+
+It's also tempting to define the rank in other ways. For example, if $R$ is an integral domain with field of fractions $k$, one might define the rank of an $R$-module $M$ as the dimension of the $K$-vector space $M \otimes_R K$. Are these two definitions equivalent?
+
+:::{#prp-rank-eq-fraction-dim}
+
+Let $R$ be an integral domain with field of fractions $k$. For any $R$-module $M$, $\rank_R M = \dim_k (k \otimes_R M)$.
+:::
+
+:::{.proof}
+
+To see this, consider the following commutative diagram, where downward arrows are given by tensoring with $k$:
+
+:::{#fig-rank-fraction}
+```{tikz}
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJSXm4iXSxbMSwwLCJNIl0sWzAsMSwia15uIl0sWzEsMSwiayBcXG90aW1lc19SIE0iXSxbMCwyXSxbMiwzXSxbMSwzXSxbMCwxXV0=
+\begin{tikzcd}
+	{R^{\oplus n}} & M \\
+	{k^{\oplus n}} & {k \otimes_R M}
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}
+```
+:::
+
+It suffices to show that the top arrow is injective if and only if the bottom arrow is injective.
+
+For the downward direction, note that $k$ is a flat $R$-module, so tensoring with $k$ preserves injections.
+
+For the upward direction, suppose the bottom arrow is injective. Consider an element $(a_i)_{i=1}^n \in R^{\oplus n}$ that maps to zero in $M$. Its image in $k^{\oplus n}$ also maps to zero in $k \otimes_R M$. Since the bottom arrow is injective, the image in $k^{\oplus n}$ must be zero, which means each $a_i$ is zero in $k$. Since $R$ is an integral domain, the localization $R \to k$ is injective, hence each $a_i$ is zero in $R$, indicating that the the top arrow is injective.
+:::
+
+:::{.remark}
+
+## Generalizing to localizations
+
+Note that we have only used the flatness of $k$ and that $R$ is an integral domain. Since every localization of a ring is flat, the same proof shows that as long as $R$ is an integral domain, localzation does not change the rank of a module.
+
+[TODO] It's interesting to ask if the integral domain condition is necessary. At least, the one side inequality $\rank_R M \leq \dim_k (k \otimes_R M)$ is always true.
+:::
+
+Another possible definition of rank is the minimal number of generators of a module. We call this the span rank $\spanrank_R M$ of an $R$-module $M$. A homologist might write this as
+$$
+R^{\oplus m} \longrightarrow M \longrightarrow 0
+$$
+where $m$ is as small as possible.
+
+Clearly, $\rank$ and $\spanrank$ are equal for free modules, since the definition of a basis requires both linear independence and spanning. For finitely generated modules over a PID, having the structure theorem in hand, the $\rank$ is exactly the free rank, while the $\spanrank$ is the number of the direct summands in the decomposition. We see that $\spanrank M \geq \rank M$ in this case. This is in general true:
+
+:::{#prp-rank-leq-spanrank}
+
+For any $R$-module $M$, we have $\rank_R M \leq \spanrank_R M$.
+:::
+
+:::{.proof}
+
+Consider the following commutative diagram with exact rows:
+
+:::{#fig-rank-leq-spanrank}
+```{tikz}
+% https://q.uiver.app/#q=WzAsNixbMCwwLCIwIl0sWzEsMCwiUl5uIl0sWzIsMCwiTSJdLFsyLDEsIk0iXSxbMSwxLCJSXm0iXSxbMywxLCIwIl0sWzAsMV0sWzEsMl0sWzQsM10sWzMsNV0sWzIsMywiIiwwLHsibGV2ZWwiOjIsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMSw0LCIiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+\begin{tikzcd}
+	0 & {R^n} & M \\
+	& {R^m} & M & 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[dashed, from=1-2, to=2-2]
+	\arrow[equals, from=1-3, to=2-3]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-3, to=2-4]
+\end{tikzcd}
+```
+:::
+
+where $R^n \to R^m$ is constructed by the projective nature of $R^n$. $R^n \to M$ is injective, hence so do $R^n \to R^m \to M$ and in turn $R^n \to R^m$. Thus, we have an injection $R^n \to R^m$. Tensoring with any residue field of $R$, we get an injection of vector spaces over that field, which implies $n \leq m$.
+:::
+
+Regarding [@prp-rank-eq-fraction-dim], one might wonder if there is an analogous result for $\spanrank$. Let's say $\mathfrak m$ is a maximal ideal of $R$ and the residue field $k := R/\mathfrak m$. Tensoring
+$$
+R^{\oplus m} \to M \longrightarrow 0
+$$
+with $k$, we get
+$$
+k^{\oplus m} \longrightarrow k \otimes_R M \longrightarrow 0
+$$
+So indeed $\spanrank_R M \geq \dim_k (k \otimes_R M)$. Sadly the converse is not true in general. For example:
+
+- An arithmetic example: Let $R = \mathbb Z$ and $M = \mathbb Z/2\mathbb Z$. Then $\spanrank_{\mathbb Z} M = 1$ but $\mathbb Z/2\mathbb Z \otimes_{\mathbb Z} \mathbb Z/3\mathbb Z \cong 0$.
+
+- An geometric example: Let $R = \mathbb R[x]$ and $M = \mathbb R[x]$. Then $\spanrank M = 1$. But $\mathbb R[x] / (x) \cong \mathbb R$ while $\mathbb R[x] / (x^2 + 1) \cong \mathbb C$. We see that different residue fields give different dimensions. Blame the failure of Hilbert's Nullstellensatz over non-algebraically closed fields for this irregularity!
+
+Luckily, it turns out that this irregularity is completely caused by the arbitrariness of residue fields. Once we restrict ourselves to a local ring, the world becomes much nicer:
+
+:::{#prp-spanrank-eq-residue-dim-of-local-of-fg}
+
+Let $(R, \mathfrak m)$ be a local ring with residue field $k = R/\mathfrak m$. For any finitely generated $R$-module $M$, we have $\spanrank_R M = \dim_k (k \otimes_R M)$.
+:::
+
+:::{.proof}
+
+$$
+k^{\oplus m} \longrightarrow k \otimes_R M \longrightarrow 0
+$$
+lifting to
+$$
+R^{\oplus m} \to M \longrightarrow 0
+$$
+is a direct consequence of Nakayama's lemma. cf. [@AM1969, {theorem 2.8}] for example.
+:::
+
+:::{.remark}
+
+## Necessity of finite generation
+
+At most of the time, we work in Noetherian rings, hence the finitely generated condition is rather mild.
+
+Nevertheless, it is indeed necessary. Consider the following example:
+
+Let $M = k[[x]]$ be the formal power series ring over a field $k$, regarded as a module over $R = k[x]$. Then as $k[x]$-modules,
+$$
+k[x] / (x) \otimes_{k[x]} k[[x]] \cong k[[x]] / x k[[x]]
+$$
+has dimension $1$ over $k$, while $\spanrank_{k[x]} k[[x]]$ is infinite.
+
+Localizing $R = k[x]$ at the maximal ideal $(x)$ does not change any statements above, providing an counterexample over a local ring.
+:::
+
+:::{.remark}
+
+[TODO] What can we say about modules $M$ if $\rank_R M = \spanrank_R M$?
+:::
