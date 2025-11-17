@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="sun123zxy">
-<meta name="dcterms.date" content="2025-06-02">
+<meta name="dcterms.date" content="2025-11-17">
 
-<title>神奇流形在哪里 – sun123zxy’s blog</title>
+<title>On Different Ranks of a Module – sun123zxy’s blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,41 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -136,7 +101,6 @@ MathJax = {
   }
 };
 </script>
-<meta name="quarto:status" content="draft">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -333,7 +297,7 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -391,15 +355,8 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#a-dense-curve-on-the-torus" id="toc-a-dense-curve-on-the-torus" class="nav-link active" data-scroll-target="#a-dense-curve-on-the-torus">A dense curve on the torus</a></li>
-  <li><a href="#hopf-fibration" id="toc-hopf-fibration" class="nav-link" data-scroll-target="#hopf-fibration">Hopf fibration</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -407,11 +364,10 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">神奇流形在哪里</h1>
-<p class="subtitle lead">Fantastic Manifolds and Where to Find Them</p>
+<h1 class="title">On Different Ranks of a Module</h1>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
-    <div class="quarto-category">geometry</div>
+    <div class="quarto-category">algebra</div>
   </div>
   </div>
 
@@ -429,7 +385,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 2, 2025</p>
+      <p class="date">November 17, 2025</p>
     </div>
   </div>
   
@@ -441,107 +397,275 @@ window.Quarto = {
 </header>
 
 
-<div id="b0aff755" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.cm <span class="im">import</span> hsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<p>We work over a commutative ring <span class="math inline">\(R\)</span> with unity. The rank <span class="math inline">\(\operatorname{rank}_R M\)</span> of a module <span class="math inline">\(R\)</span>-module <span class="math inline">\(M\)</span> is defined as the maximal cardinality of a <span class="math inline">\(R\)</span>-linearly independent subset of <span class="math inline">\(M\)</span>. A homologist might write this as <span class="math display">\[
+0 \longrightarrow R^{\oplus n} \longrightarrow M
+\]</span> where <span class="math inline">\(n\)</span> is as large as possible.</p>
+<p>It’s also tempting to define the rank in other ways. For example, if <span class="math inline">\(R\)</span> is an integral domain with field of fractions <span class="math inline">\(k\)</span>, one might define the rank of an <span class="math inline">\(R\)</span>-module <span class="math inline">\(M\)</span> as the dimension of the <span class="math inline">\(K\)</span>-vector space <span class="math inline">\(M \otimes_R K\)</span>. Are these two definitions equivalent?</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
 </div>
-<section id="a-dense-curve-on-the-torus" class="level2">
-<h2 class="anchored" data-anchor-id="a-dense-curve-on-the-torus">A dense curve on the torus</h2>
-<p><span class="math display">\[
-\gamma(t) := (e^{2\pi i t}, e^{2 \pi i \alpha t})
-\]</span> is an <span class="math inline">\(\mathbb R \to \mathbb T^2 \subset \mathbb C^2\)</span> immersion (Note that it’s injective!). The corresponding immersed <span class="math inline">\(1\)</span>-submanifold is a Lie subgroup that is dense in <span class="math inline">\(\mathbb T^2\)</span> (by Dirichlet’s approximation theorem), which confirms that it is not an embedded submanifold. For more information, see <span class="citation" data-cites="lee_introduction_2012"><a href="#ref-lee_introduction_2012" role="doc-biblioref">[1, Example 4.20]</a></span>.</p>
-<p>Below is a plot of this curve taking <span class="math inline">\(\alpha = \sqrt 2\)</span>. The torus is embedded in <span class="math inline">\(\mathbb R^3\)</span>. <span class="math display">\[
-\Phi(t) := \left( \cos( \alpha t ) \left( 1 + \frac{1}{2} \cos t \right), \sin( \alpha t ) \left( 1 + \frac{1}{2} \cos t \right), \frac{1}{2} \sin t \right)
-\]</span></p>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the parametric equations</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> phi(t):</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.cos(np.sqrt(<span class="dv">2</span>) <span class="op">*</span> t) <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> np.cos(t))</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.sin(np.sqrt(<span class="dv">2</span>) <span class="op">*</span> t) <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> np.cos(t))</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> np.sin(t)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x, y, z</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate t values</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">10000</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>x, y, z <span class="op">=</span> phi(t)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create figure with transparent background</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(facecolor<span class="op">=</span><span class="st">'none'</span>)  <span class="co"># &lt;-- Transparent figure</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>, facecolor<span class="op">=</span><span class="st">'none'</span>)  <span class="co"># &lt;-- Transparent axes</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the curve</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>ax.plot(x, y, z)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Manually set equal aspect ratio</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>max_range <span class="op">=</span> np.array([x.<span class="bu">max</span>()<span class="op">-</span>x.<span class="bu">min</span>(), y.<span class="bu">max</span>()<span class="op">-</span>y.<span class="bu">min</span>(), z.<span class="bu">max</span>()<span class="op">-</span>z.<span class="bu">min</span>()]).<span class="bu">max</span>() <span class="op">*</span> <span class="fl">0.5</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>mid_x <span class="op">=</span> (x.<span class="bu">max</span>() <span class="op">+</span> x.<span class="bu">min</span>()) <span class="op">*</span> <span class="fl">0.5</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>mid_y <span class="op">=</span> (y.<span class="bu">max</span>() <span class="op">+</span> y.<span class="bu">min</span>()) <span class="op">*</span> <span class="fl">0.5</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>mid_z <span class="op">=</span> (z.<span class="bu">max</span>() <span class="op">+</span> z.<span class="bu">min</span>()) <span class="op">*</span> <span class="fl">0.5</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(mid_x <span class="op">-</span> max_range, mid_x <span class="op">+</span> max_range)</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(mid_y <span class="op">-</span> max_range, mid_y <span class="op">+</span> max_range)</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>ax.set_zlim(mid_z <span class="op">-</span> max_range, mid_z <span class="op">+</span> max_range)</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels and title (customize colors for visibility)</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'X'</span>)  <span class="co"># Ensure labels are visible</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Y'</span>)</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="st">'Z'</span>)</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust view</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>ax.view_init(elev<span class="op">=</span><span class="dv">30</span>, azim<span class="op">=</span><span class="dv">45</span>)</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div id="fig-dense-curve-on-torus" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div class="callout-body-container">
+<div id="prp-rank-eq-fraction-dim" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1</strong></span> Let <span class="math inline">\(R\)</span> be an integral domain with field of fractions <span class="math inline">\(k\)</span>. For any <span class="math inline">\(R\)</span>-module <span class="math inline">\(M\)</span>, <span class="math inline">\(\operatorname{rank}_R M = \dim_k (k \otimes_R M)\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>To see this, consider the following commutative diagram, where downward arrows are given by tensoring with <span class="math inline">\(k\)</span>:</p>
+<div id="fig-rank-fraction" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-dense-curve-on-torus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="7fac4f9e" class="cell" data-execution_count="2">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/cell-3-output-1.png" width="485" height="480" class="figure-img"></p>
-</figure>
+<div aria-describedby="fig-rank-fraction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.4.3 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="143.01pt" height="74.835pt" viewbox="0 0 95.34 49.89">
+<style type="text/css">
+@font-face{font-family:XDTRFF-CMSY10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJQAAoAAAAABCQAAAIFAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBUIFQCwYAATYCJAMIBCAFgmgHIBttA2COw7jhK7Es0cpVeRHx8M/h7773x5rt42Xb4HPTA0wXcSIZZGv+19WfXaejNVz5qNeZoAS7uQ3SOSlEHZyLDxc40MK1+MyzfSAFOrCiGSbGJ9DrAz3p63SbTjxFusxGUEfR0QMK+QL1gRL5wXr4M9cbYXw7w2kIUZQhbgDW7qlFD3j7rzW27Y8P4F8sMAgA/v8BJAoYYgsMcWwBRUXB/uv/v7QfK+hOAoo/VsI5YAeAIqA0bvArzTsSHjInYRr1pVEG82MwChm2oGoQjKbdyWzza3McQ0l4ktLDCINN0zgKU5QXk2d1ZzXy9p8dsHT1WIp0szpYUrgblrA6+8xWg65cBh+f4S57+PaWpJJjWu2uJOzahSS+2SfVJoolUBvkcfvXQmYTJRLQ1va/Te25GwspyJb0L4L4HgAEguOvnw+5Ufy3gF2kb/2v5HsiAKhKECytfClaTL4LnCyVhRDSOe5A0KLuGQToqAlZ1NIhSxqWZFnLyX7dXDi2KNaEtUIhi+aqyJKxTrJsbrSsO7N/aKt/cm3j6XBpZmZAWkEZERJ8GR6HBAYXGk+cn9G0lDe26KudwwLDA8NAmlrV6jRrotXAWYFaGlzfGrh0sFKZMgVIU6AMIUQwlFaDRuVq1XAWIlAwAbKcGpKjnAo010GlnTONFuUatdCr5ixMoHCBwrABNgIAAA==) format('woff2');}
+@font-face{font-family:NQUDBD-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAM4AAoAAAAABWwAAALvAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqEEIMuCwgAATYCJAMMBCAFgmIHIBtRBECOxHR7g2yThONNVzptT3IUJLADxA4RO4TYAf/03yFUb57P3bt/zUMMtWXSEmzkJvcor3kfwK79O/+gLaEwg/CDJhZw1CK1dJupQU+EEOFmT0d0dALwnKN2YADYw27/82kbJvrUWaBbzAAYAXAEXgXUkxsHBC+pDXQAOIRapNMBAGAAcAB8lTcuiRIAIkawHCJW1gl9lU7LggKOEPUyADzEINJtADBounokBbA2+R++Q29OCjc+LFO0wG3j+WE+8LlQPq+4+yw5KNjdDeVqNL4lytWbTIW/5CCqePJjCRCidfPr7wrRaAJ+PpTGgVn+60XRcNHeHgEFlqmRWX7211fflxd/f0lGZ0Bh6kysD/ufEejpeac6ePruVXr1nf3uq++QFt+a0NAQDMk3PesOsvJ396v1KR1RGu8kKgRFR/3fyQ5uGFy9nA0J+fj00aamZkRmsqyJ6lQbLTVJD2nMtlP/EwVZw/KWqhOnQT8LN4uPJZ/SoBbIfK5vY0E4V7997r+f4wH6omyc5Doym/y2NTRZYgZEzPdIWYzzj1UNbgM/ODmIs/Zz4zpJfaLmWyXHeyTwYJqOGvyRDWZbQ4XipbJyuuzHxf9R6kFymZzYPu7JwWvFXhltg8jK1Ag/k+/rvuqYg7gpv8rBWTu39LrUihg3d4cnkTbDoP6sVMrEpnL6nt+a34aLW2eiwsl0+SFZLJvXndzqumYJAAAACAAC4x89xMM5zX4z4STwefoHPAY7AgAmGJ58gjr4Bi1s8SkgoC4eIRzzDFoFLpQ/4DWLUkgBTnlFkbDhpBiwEqUIbBSWWYjQgUODGRAJLoUiEZJIMRBQSRGE9DUs9KzdT+Tvx2bdPH0pNhR1squro+G1f6StoRXoveVeQ81NyMqNS5HS1dDT0AWyNCnS5cgWI5MUV2mociSVG0++KGxQqCNztdKRIb/2tCwJ0qSSok2DFh6wV1I5SuQ+ADWKUjBzqXIlyPrwOCmk6NKgR4MunAM=) format('woff2');}
+@font-face{font-family:OYFEXR-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJAAAoAAAAABAgAAAH1AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBOIE5CwYAATYCJAMIBCAFgmIHIBtQAwCOwnEv2jKY3Dyi7BGSzPLAc7l/Y3KLDzTKEgkssLDn0doIvSgam/iMGmt7d6hYezFH1JpaJIqWztBeSkG0MQzdjM/DCbKwLZ75WWODjwkacBR5uvb/AyX8Zm9fjKXbdHv8RFCNoAiirxui8EL24Q/hiT7/x2HPbPKChW5QgCoFtA+c4Wi6BwHVSYll/9UAHmFXEABAXYMQRKCBIeT4yQKxkEC1vZD5fxCE+8YQEIMEdMEAQAwg6QRlaTp2ay+L3Fqv/rrEq/cZbkp9Bo/uqtgzGM5u2uM4dwcNf+gTvFYWdtd5esLo0+CrqwabGrriO7oMu3SPdhnUccYuuk/z2B7d5Twtc3kboTrDH1FZXM88nv+00vKm099c8HmBa0ar0fzd4/M3Q41mkxWAAARw/i3sOSLbfoNYDB/VE8ah84AcBQSwjMolFOQRBwQhCHWICQjV8q8JMCstIwCRMKZiYSKpRKhUKhWmYLuUogZD4gKRQSqUnyT9lL8E61SAJOd5iDqPBxR+v7lTYeLzjOpyjkxjarz3NqorqkqVx8xnOqf7JqZ7hrJqK+oqasExYsioKZO6jMsiM6ITU8MUTPh4jNTKv1hGw6SRnpzQp71hWapVqFIg0IZHaa6ZQOfv0G5Olk7T+kyY1mNIlloV6lSoxQDYBQAA) format('woff2');}
+@font-face{font-family:TUELZZ-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAPYAAoAAAAABngAAAOOAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAARAqGCIRNCwoAATYCJAMQBCAFgmgHIBsCBQgehXGbE3KhCJXvTtt5CcF/bnsfDsZwjOIMzFmtBks1NGeyZENt5jtgmx1oI2tcRLKIrAf1I7oJ0vP6X8ISNKk0PrLN4DPQyXhmm7gmf+R5UyTrA1dsGAUUEUIDHOAwsQE309FuRCPSmbusLa+lSdK1kJ+n5OsBYuxHJoGFcKNn/ynAREojb1QHNo0HUBm08FG8Z30BsF1KEhwQCT3r/wEQQASzCDOmI1cUpIVLtBKPXdn2f4u/XiAMaeJCmz8awPNBAm3ZkKiWVCUFeutxCSWMjxWKhF1i4uhq1YxCSk+EpKdSIFlpR9BAQT4V8eP7s+L4JdyPLaeV00rEYn35DWZSBsdWlCRi16+brr6OXAs2OObrS0mSll7V7lTSmgOStdjS8zZiRYImOs2U1vhS9ssMdsV3qWrOno/MPhTPT1Sitx7vXCPXxbcf9pcCv3o17krslZLE5ZdNL1/X37oXJDu2rZq13kFosOWK64o9elevaoNSKS08fl13NkHQoFZmB+y3XdLQFAsXOe8yiF2gINEbXqYiUs1QFYv4S2aJsYDtGE24eJcNaJNsgV+P4JhnB9qOTnlypb8emLwUNhU8dzCN8YhIbBo2d+OhKxYciOLh16wK0Xz0gOoxq0M7M/pUpb3RS+pfH4xqbYOIVRvQdlVmYBH2TCbzCHRc3liNL8QO/fsqsWoMb9J/xOvCw6lxk35fexNFxyJSWSCjpBXvj22K8uLiSRePUxtn6qn0MTxlAtdG9+NqZ32RZm8pbYFfj/qxyi60E6304khfuzB5KWzUUVYt6pDatQ+6+dB0IN6MUD8bf2vQ/4rX3+ldUxKoFSVjoIxrTipwC4jl3pEB9kHyJ8e8OTEkgnuV4HKfjX1vKGys9OJ2T+gKH3Ta4TauHHJq4QWDuTccN2dyg4E1qTBdzk+9auwa+1kP0SkPACAgPA/re4a061duMsFM+PNujh4H2NUKCPue+cFETZg5IIgCypglD+RDARzK5u60wlSqD8JAh1QxTa8pyWRVsmY/Xw22GNR5IJvwoJihVEkW/Uo2zKlWp20HlfUv7XRsnF9ocrK5T1hYEGl1qayTFlbthffza3Lri2rqC8q0bCxsLWzAR4UylerUylNNS5gKubSrXKw4fkIlZ4I5H2GtQUhW4sF3rVGkQjktJAtWPiAgLPeGWROB3Gy2psKYq16Rmi9eoIwWGxZsWbDBYAAA) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="-10.387288" y="-80.198065" transform="matrix(1.000261 0 0 1.000261 14.682999 91.801)">R</text>
+<text font-family="OYFEXR-CMSY7" font-size="6.97" x="-2.747503" y="-83.789319" transform="matrix(1.000545 0 0 1.000545 14.682999 91.801)">⊕</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="3.476105" y="-83.789319" transform="matrix(1.000545 0 0 1.000545 14.682999 91.801)">n</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="49.222151" y="-80.198065" transform="matrix(1.000261 0 0 1.000261 18.952996 91.801)">M</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="-10.387288" y="-47.04172" transform="matrix(1.000261 0 0 1.000261 15.753999 91.801)">k</text>
+<text font-family="OYFEXR-CMSY7" font-size="6.97" x="-4.887336" y="-50.642393" transform="matrix(1.000545 0 0 1.000545 15.753999 91.801)">⊕</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="1.336271" y="-50.642393" transform="matrix(1.000545 0 0 1.000545 15.753999 91.801)">n</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="49.222151" y="-47.04172" transform="matrix(1.000261 0 0 1.000261 6.846995 91.801)">k</text>
+<text font-family="XDTRFF-CMSY10" font-size="9.96" x="56.934138" y="-47.04172" transform="matrix(1.000261 0 0 1.000261 6.846995 91.801)">⊗</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="64.662746" y="-45.535175" transform="matrix(1.000545 0 0 1.000545 6.846995 91.801)">R</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="73.428832" y="-47.04172" transform="matrix(1.000261 0 0 1.000261 6.846995 91.801)">M</text>
+<path d="M28.07764 9.09074H63.29752" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M61.42462 6.699829C61.80319 8.134409 62.6468 8.811809 63.49675 9.090739C62.6468 9.369669 61.80319 10.047069 61.42462 11.481649" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M13.93874 15.43057V32.56658" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M16.32965 30.69369C14.89507 31.07226 14.21767 31.91587 13.93874 32.76582C13.65981 31.91587 12.98241 31.07226 11.54783 30.69369" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M73.56494 15.43057V33.5806" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M75.95585 31.70771C74.52127 32.08628 73.84387 32.92989 73.56494 33.77984C73.28601 32.92989 72.60861 32.08628 71.17403 31.70771" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M27.00698 42.2561H51.19122" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M49.318329 39.86519C49.696899 41.29977 50.540509 41.97717 51.390459 42.2561C50.540509 42.53503 49.696899 43.21243 49.318329 44.64701" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+</g>
+</svg>
 </div>
 </div>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dense-curve-on-torus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: a dense curve on the torus
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-rank-fraction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
 </figcaption>
 </figure>
 </div>
-</section>
-<section id="hopf-fibration" class="level2">
-<h2 class="anchored" data-anchor-id="hopf-fibration">Hopf fibration</h2>
-<p>Recommended online meterials:</p>
+<p>It suffices to show that the top arrow is injective if and only if the bottom arrow is injective.</p>
+<p>For the downward direction, note that <span class="math inline">\(k\)</span> is a flat <span class="math inline">\(R\)</span>-module, so tensoring with <span class="math inline">\(k\)</span> preserves injections.</p>
+<p>For the upward direction, suppose the bottom arrow is injective. Consider an element <span class="math inline">\((a_i)_{i=1}^n \in R^{\oplus n}\)</span> that maps to zero in <span class="math inline">\(M\)</span>. Its image in <span class="math inline">\(k^{\oplus n}\)</span> also maps to zero in <span class="math inline">\(k \otimes_R M\)</span>. Since the bottom arrow is injective, the image in <span class="math inline">\(k^{\oplus n}\)</span> must be zero, which means each <span class="math inline">\(a_i\)</span> is zero in <span class="math inline">\(k\)</span>. Since <span class="math inline">\(R\)</span> is an integral domain, the localization <span class="math inline">\(R \to k\)</span> is injective, hence each <span class="math inline">\(a_i\)</span> is zero in <span class="math inline">\(R\)</span>, indicating that the the top arrow is injective.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark (Generalizing to localizations)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>Remark</em> (Generalizing to localizations). </span>Note that we have only used the flatness of <span class="math inline">\(k\)</span> and that <span class="math inline">\(R\)</span> is an integral domain. Since every localization of a ring is flat, the same proof shows that as long as <span class="math inline">\(R\)</span> is an integral domain, localzation does not change the rank of a module.</p>
+<p>[TODO] It’s interesting to ask if the integral domain condition is necessary. At least, the one side inequality <span class="math inline">\(\operatorname{rank}_R M \leq \dim_k (k \otimes_R M)\)</span> is always true.</p>
+</div>
+</div>
+</div>
+</div>
+<p>Another possible definition of rank is the minimal number of generators of a module. We call this the span rank <span class="math inline">\(\operatorname{spanrank}_R M\)</span> of an <span class="math inline">\(R\)</span>-module <span class="math inline">\(M\)</span>. A homologist might write this as <span class="math display">\[
+R^{\oplus m} \longrightarrow M \longrightarrow 0
+\]</span> where <span class="math inline">\(m\)</span> is as small as possible.</p>
+<p>Clearly, <span class="math inline">\(\operatorname{rank}\)</span> and <span class="math inline">\(\operatorname{spanrank}\)</span> are equal for free modules, since the definition of a basis requires both linear independence and spanning. For finitely generated modules over a PID, having the structure theorem in hand, the <span class="math inline">\(\operatorname{rank}\)</span> is exactly the free rank, while the <span class="math inline">\(\operatorname{spanrank}\)</span> is the number of the direct summands in the decomposition. We see that <span class="math inline">\(\operatorname{spanrank}M \geq \operatorname{rank}M\)</span> in this case. This is in general true:</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-rank-leq-spanrank" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2</strong></span> For any <span class="math inline">\(R\)</span>-module <span class="math inline">\(M\)</span>, we have <span class="math inline">\(\operatorname{rank}_R M \leq \operatorname{spanrank}_R M\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Consider the following commutative diagram with exact rows:</p>
+<div id="fig-rank-leq-spanrank" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rank-leq-spanrank-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.4.3 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="213.015pt" height="69.225pt" viewbox="0 0 142.01 46.15">
+<style type="text/css">
+@font-face{font-family:NQUDBD-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAALwAAoAAAAABYwAAAKmAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqEOINOCwgAATYCJAMMBCAFgmIHIBtpBFGU6kEO8MWBbcxsuEFo8nNxdYVHRDdCp5xVBoVBEXkSAf1+rH2CqYRGFg0Jqnjy0EkMmY43hlKuXynS7k/K5VMVleTpqTZHYYZv7/hTdXKcUIcg8CQQyThoHhQmWho3s+cAJPf8X46/3dlaeBvA9m5Q2gZfVhaFULY1K0s060W9CDVbU+XUqWJ7BLckQ66Q4p+QEuJj7L+p0ZqHs8pSIKhS6MBX2T+rycWQHChJCiQBd7AoQERCc9C9lqAfRgYhOsTmBwWTHgRaiQEgSt/4nWWLnhIOH21k6l0WVy/Cn/fnqV2jmZva2tqxdtA7OCxi7x/dt+5t56bMzWdmfn0W736/B05/+V+je+l/Teyvmy4Fmp5ZLi1hlkYGP0MW6S0x7zvneY0GXuzbLWz0v0OLR+vL2Vzy29vyZX3tqfFqnLX2L+hK5X1ocDYO3mgXxRy/FXVXmcjhiPQsATM/eXJ3rOOYGfDGx7BgbF3JMnFmxx7AwomsNF30//2m12qFHiAsL9d8bTJ6zMz74G2swekBK7ZGxu1KUuoncaZ0hFLt3ZJtCjimie3nMtD7tX9gU2Uqhy3Ja3JMCXCVqG34suuHE+iAL++Rc8cTyGgcKn1GR1v6+WeWZBZXGN3EZnHoX/Kv/bQ8lR375Yoy2lv8dYByUfJtSYFcY15QOsE1KSL4OOaF5BB2Q8B6lW4oq8NNsmp1c6lElS6pVLXRw5U6BcMLuULQS+KkrF2BVKJVh1Sq3dy00rKzJxf7x2Q7ZUotAshvZVUqjHgh2FqYnd+a+cr7mP3L/Mqa3GLHpdnl2SVQqWJlqlXJVsGRVKksuqWEjJIWAiB+ICkpoQg6zKdVyleqhKMg/gIlAD8qkYrSNYGsbob6kTZLjXyVPzxXMUch/IXyFwKPAQA=) format('woff2');}
+@font-face{font-family:OYFEXR-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAMcAAoAAAAABWgAAALTAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqECIMeCwgAATYCJAMMBCAFgmgHIBtHBFGUCkZK8DMhmwNX1xKi1uWy0crgxSlGpX0eD88f/s4d/zfG0MVhoIGFgeURxHH0RRKM4rGoN//XvBb+XAF2VYvEiASZbs8nvCG9DF6s5UnypSInYYRmZ0sz+8Tl+Mf2fx4T5B32rg30cdolFGawtmZlGnUJRaSZu2zJS1pp6bpGnp4efu5Q+RdfE/Ix+9/2aWlcFVSQoacwwUe5u78vDM+NVhkogfbGoGyi+G22UDvOGaa9kEE6YerSmI35KEoh0/YJLwDQPcjzjtmxHXOC+LiwlbN2wOPjxdPKU9TGfTIlGBoJpFrhkCAAtU9oc2MQgDxQ8LO9bpvPsDNNHcP4g2Pa2qTz1g4gczoe40d9fFSceoQfHNxfYGUF2v1H7sUL+cS6ofYZ6silZhsvN8ZdqMQ3bQV0RmU2fYoERbv64K5DH4ofH7ZyVrhHr4iiM+1vgn5/733ndWdoEVchrk6gWZfQTs0KkHykyYzE/N9vvHFucuipDEZfuf2yqpWNych4/747mf6gFomEI/uCp2qHG6FlgkwL5Eb4/7lWbBVytUy1zbtnVQxSP1lhx1BBqgU1xQrykpJ+EvASQi3UbWrMr16a6hXKrXQUePWi1PlpLD4xHxvqors5ie5/fQYWOqQEylAzlt2MRzld6NwKzrZgiNOsS4RPE4uQQiTRnMh8uGq8ca7VYwu5Hwo9fEmGQ1lesAXqJCVUkTQMCATfps/voWvX3/N2MyvHW8tdzEu6VGejfQXHrDEpykqIx0V2OS63IXNMu+iBqcCa6YltxZo4seRYnFpxdnrRIc0WvSCcqpLYDm3FiV1vcerQb7Loyv8qMb+Ora6HUThoEb8sU8Gv/UVB+Xjmhfua6X11uS92QFFNleE72Dm6uZo5A0oHU3lsrzYUCQ20EL5SKSVwPfBdL1YO9gCB4hwQB3s2GC0Ept2xV6eeulu5fPGFHUChNEqxGQ==) format('woff2');}
+@font-face{font-family:TUELZZ-CMR10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAIUAAoAAAAAA/AAAAHLAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBIIEnCwYAATYCJAMGBCAFgmIHIBs8AwCO0UtPOGWKJgmndDxE9+ab2d1/l9I6dqEIB6xTgMMBayYRClA0ezWXmyJbxDyhYrg8IKuir31b1IDG1IVkdadmO57IBvR33U0CgGwSUQEnGGkeTrrAYh0Z9U0TpyhCDint24GS4s0o+Z4//ytwIzX+OSGISXhAgtzdfScLYy7WCnQUkef2DhIFy3SzbMQ+UFWBi96tv73/wAAkqEicA7cAVECurWdvSS5Jit9p1St9wQgYRvRFoRfK98F4GYK4W6PpnSfpyreHROh2laJo/czcQ3tbl+DdxiLHJ3/z5y9z7daGNi783Uyd7OoH8z32mquVzupnY0MNSK8UFw0m7qsbubyLaBJhaShunc0bdAIACAQnH6pkdF75NzFcAQDQfxPyGxhLEBQdyZmDYGEAgEg4gyGdGwLVMOm1E+ZQV9PmBJopWxhMO/UnbeIbFnVC2GXxUa0roFl1icG6QZt043kZy1ebtx6ktQQCp2qri8e9cScezg0ND5dvUp18s5MtbwhwIS4AtaqymraWtIYNVlUpiF6FB6JlERBwSs3KhYeLkNbQlFdVsYEHx60gvVWqLN6JUnFI6NuQ0pHX1JFVtkEAJ4QTGAaYAg==) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="5.78549" y="-80.94487" transform="matrix(1.000261 0 0 1.000261 -1.494998 91.425998)">0</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="48.367374" y="-80.94487" transform="matrix(1.000261 0 0 1.000261 -5.535998 91.425998)">R</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="55.991479" y="-84.535912" transform="matrix(1.000545 0 0 1.000545 -5.535998 91.425998)">n</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="93.834505" y="-80.94487" transform="matrix(1.000261 0 0 1.000261 -4.379998 91.425998)">M</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="48.367374" y="-48.913231" transform="matrix(1.000261 0 0 1.000261 -6.608998 91.425998)">R</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="55.991479" y="-52.51337" transform="matrix(1.000545 0 0 1.000545 -6.608998 91.425998)">m</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="93.834505" y="-48.913231" transform="matrix(1.000261 0 0 1.000261 -4.379998 91.425998)">M</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="134.187971" y="-48.913231" transform="matrix(1.000261 0 0 1.000261 -1.494998 91.425998)">0</text>
+<path d="M13.76803 7.96893H37.95403" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M36.081138 5.57802C36.459708 7.0126 37.303318 7.69 38.153268 7.96893C37.303318 8.24786 36.459708 8.92526 36.081138 10.35984" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M60.40354 7.96893H84.58953" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M82.71664 5.57802C83.09521 7.0126 83.93882 7.69 84.78877 7.96893C83.93882 8.24786 83.09521 8.92526 82.71664 10.35984" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M49.37803 14.30876V31.44477" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M51.76894 29.57188C50.33436 29.95045 49.65696 30.79406 49.37803 31.64401C49.0991 30.79406 48.4217 29.95045 46.98712 29.57188" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M94.85694 14.30876V31.84324" stroke="#000" fill="none" stroke-width="2.33075" stroke-miterlimit="10"></path>
+<path d="M94.85694 14.30876V31.84324" stroke="#fff" fill="none" stroke-width="1.53377" stroke-miterlimit="10"></path>
+<path d="M61.47595 40.00955H84.58953" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M82.71664 37.618643C83.09521 39.053223 83.93882 39.730623 84.78877 40.009553C83.93882 40.288483 83.09521 40.965883 82.71664 42.400463" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M104.72589 40.00955H127.8395" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M125.96661 37.618643C126.34518 39.053223 127.18879 39.730623 128.03874 40.009553C127.18879 40.288483 126.34518 40.965883 125.96661 42.400463" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-rank-leq-spanrank-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2
+</figcaption>
+</figure>
+</div>
+<p>where <span class="math inline">\(R^n \to R^m\)</span> is constructed by the projective nature of <span class="math inline">\(R^n\)</span>. <span class="math inline">\(R^n \to M\)</span> is injective, hence so do <span class="math inline">\(R^n \to R^m \to M\)</span> and in turn <span class="math inline">\(R^n \to R^m\)</span>. Thus, we have an injection <span class="math inline">\(R^n \to R^m\)</span>. Tensoring with any residue field of <span class="math inline">\(R\)</span>, we get an injection of vector spaces over that field, which implies <span class="math inline">\(n \leq m\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<p>Regarding <a href="#prp-rank-eq-fraction-dim" class="quarto-xref">Proposition&nbsp;1</a>, one might wonder if there is an analogous result for <span class="math inline">\(\operatorname{spanrank}\)</span>. Let’s say <span class="math inline">\(\mathfrak m\)</span> is a maximal ideal of <span class="math inline">\(R\)</span> and the residue field <span class="math inline">\(k := R/\mathfrak m\)</span>. Tensoring <span class="math display">\[
+R^{\oplus m} \to M \longrightarrow 0
+\]</span> with <span class="math inline">\(k\)</span>, we get <span class="math display">\[
+k^{\oplus m} \longrightarrow k \otimes_R M \longrightarrow 0
+\]</span> So indeed <span class="math inline">\(\operatorname{spanrank}_R M \geq \dim_k (k \otimes_R M)\)</span>. Sadly the converse is not true in general. For example:</p>
 <ul>
-<li><a href="https://zhuanlan.zhihu.com/p/112985074">Hopf纤维化</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/51684298">MP69：典型群(3)：三维空间的旋转，Pauli矩阵、四元数、SO(3)~RP3、SU(2)~S3</a></li>
+<li><p>An arithmetic example: Let <span class="math inline">\(R = \mathbb Z\)</span> and <span class="math inline">\(M = \mathbb Z/2\mathbb Z\)</span>. Then <span class="math inline">\(\operatorname{spanrank}_{\mathbb Z} M = 1\)</span> but <span class="math inline">\(\mathbb Z/2\mathbb Z \otimes_{\mathbb Z} \mathbb Z/3\mathbb Z \cong 0\)</span>.</p></li>
+<li><p>An geometric example: Let <span class="math inline">\(R = \mathbb R[x]\)</span> and <span class="math inline">\(M = \mathbb R[x]\)</span>. Then <span class="math inline">\(\operatorname{spanrank}M = 1\)</span>. But <span class="math inline">\(\mathbb R[x] / (x) \cong \mathbb R\)</span> while <span class="math inline">\(\mathbb R[x] / (x^2 + 1) \cong \mathbb C\)</span>. We see that different residue fields give different dimensions. Blame the failure of Hilbert’s Nullstellensatz over non-algebraically closed fields for this irregularity!</p></li>
 </ul>
-<p>Recall the three equivalent descriptions of <span class="math inline">\(\mathrm{SU}(2)\)</span>: <span class="math display">\[
-\begin{matrix}
-\mathbb T^3           &amp; \to &amp; \mathbb S^3 \subset \mathbb H &amp; \to   &amp; \mathrm{SU}(2) \\
-(\theta,\varphi,\psi) &amp; \substack{ a = \cos \theta \cos \varphi \\ b = \cos \theta \sin \varphi \\ c = \sin \theta \cos \psi \\ d = \sin \theta \sin \psi}  &amp; a \boldsymbol 1 + b \boldsymbol i + c \boldsymbol j + d \boldsymbol k &amp;              \substack{z=a+bi \\ w=c+di}  &amp; \begin{bmatrix}z &amp; w \\ -\bar w &amp; \bar z\end{bmatrix} \\
-                      &amp;     &amp;  a^2+b^2+c^2+d^2 = 1  &amp;       &amp; |z|^2 + |w|^2 = 1 \\
-\end{matrix}
-\]</span> More of these relationships can be found in <span class="citation" data-cites="stillwell_naive_2008"><a href="#ref-stillwell_naive_2008" role="doc-biblioref">[2, Ch. 1–2]</a></span>. A nice figure of the Hopf fibration can be found in <span class="citation" data-cites="stillwell_naive_2008"><a href="#ref-stillwell_naive_2008" role="doc-biblioref">[2, Secs. 2.2, figure 2.2]</a></span>. The circle decomposition of <span class="math inline">\(\mathbb S^3\)</span> is just the coset partition of <span class="math inline">\(\mathbb S^3 \subset \mathbb H\)</span> by the subgroup <span class="math inline">\(\langle a + b \boldsymbol i : a^2+b^2=1 \rangle\)</span>.</p>
-<p>Fibre bundle description: TODO</p>
+<p>Luckily, it turns out that this irregularity is completely caused by the arbitrariness of residue fields. Once we restrict ourselves to a local ring, the world becomes much nicer:</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-spanrank-eq-residue-dim-of-local-of-fg" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 3</strong></span> Let <span class="math inline">\((R, \mathfrak m)\)</span> be a local ring with residue field <span class="math inline">\(k = R/\mathfrak m\)</span>. For any finitely generated <span class="math inline">\(R\)</span>-module <span class="math inline">\(M\)</span>, we have <span class="math inline">\(\operatorname{spanrank}_R M = \dim_k (k \otimes_R M)\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span><span class="math display">\[
+k^{\oplus m} \longrightarrow k \otimes_R M \longrightarrow 0
+\]</span> lifting to <span class="math display">\[
+R^{\oplus m} \to M \longrightarrow 0
+\]</span> is a direct consequence of Nakayama’s lemma. cf. <span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, theorem 2.8]</a></span> for example.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark (Necessity of finite generation)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>Remark</em> (Necessity of finite generation). </span>At most of the time, we work in Noetherian rings, hence the finitely generated condition is rather mild.</p>
+<p>Nevertheless, it is indeed necessary. Consider the following example:</p>
+<p>Let <span class="math inline">\(M = k[[x]]\)</span> be the formal power series ring over a field <span class="math inline">\(k\)</span>, regarded as a module over <span class="math inline">\(R = k[x]\)</span>. Then as <span class="math inline">\(k[x]\)</span>-modules, <span class="math display">\[
+k[x] / (x) \otimes_{k[x]} k[[x]] \cong k[[x]] / x k[[x]]
+\]</span> has dimension <span class="math inline">\(1\)</span> over <span class="math inline">\(k\)</span>, while <span class="math inline">\(\operatorname{spanrank}_{k[x]} k[[x]]\)</span> is infinite.</p>
+<p>Localizing <span class="math inline">\(R = k[x]\)</span> at the maximal ideal <span class="math inline">\((x)\)</span> does not change any statements above, providing an counterexample over a local ring.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>Remark</em>. </span>[TODO] What can we say about modules <span class="math inline">\(M\)</span> if <span class="math inline">\(\operatorname{rank}_R M = \operatorname{spanrank}_R M\)</span>?</p>
+</div>
+</div>
+</div>
+</div>
 
 
 
-</section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
-<div id="ref-lee_introduction_2012" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline">J. M. Lee, <em>Introduction to smooth manifolds</em>, vol. 218. in Graduate texts in mathematics, vol. 218. New York, <span>NY</span>: Springer, 2012. doi: <a href="https://doi.org/10.1007/978-1-4419-9982-5">10.1007/978-1-4419-9982-5</a>.</div>
-</div>
-<div id="ref-stillwell_naive_2008" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">J. Stillwell, <em>Naive lie theory</em>. in Undergraduate texts in mathematics. New York, <span>NY</span>: Springer, 2008. doi: <a href="https://doi.org/10.1007/978-0-387-78214-0">10.1007/978-0-387-78214-0</a>.</div>
+<div id="ref-AM1969" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">M. F. Atiyah and I.G. Macdonald, <em>Introduction to commutative algebra</em>. Addison-Wesley Publishing Company, Inc., 1969.</div>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
