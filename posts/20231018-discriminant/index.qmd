@@ -15,7 +15,6 @@ collection:
 
 bibliography: index.bib
 number-sections: true
-number-depth: 2
   
 format:
   html: default
@@ -23,11 +22,11 @@ format:
     toc: true
 ---
 
-# $e$-基、$m$-基与 $p$-基
-
-## 整数分拆
+## $e$-基、$m$-基与 $p$-基
 
 ### 整数分拆
+
+#### 整数分拆
 
 \renewcommand\vec\boldsymbol
 
@@ -43,9 +42,9 @@ Ferrers diagram 和 Young diagram 是图示分拆的常见方法．
 
 通过沿主对角线翻转分拆的 Ferrers diagram 或 Young diagram，可以定义*分拆的转置*．分拆 $\lambda$ 的转置记为 $\lambda^\T$．转置后分拆的长度变为原分拆的首项，而首项变为原分拆的长度．
 
-## 单项对称多项式
-
 ### 单项对称多项式
+
+#### 单项对称多项式
 
 设 $n$ 是正整数，$K$ 是一个域．记 $\vec x := (x_1,\dots,x_n)$．设 $\vec \lambda := (\lambda_1, \lambda_2, \dots \lambda_n)$ 是长度不超过 $n$ 的一个分拆．
 
@@ -56,7 +55,7 @@ Ferrers diagram 和 Young diagram 是图示分拆的常见方法．
 
 易见 $m_{\vec \lambda}(\vec x)$ 是次数为 $\mathcal S(\vec \lambda)$ 的齐次（homogeneous）多项式．全体单项对称多项式构成 $n$ 元对称多项式环 $\Lambda_n \subset K[\vec x]$ 作为 $K$ 上线性空间的一组基底．
 
-### 来数数
+#### 来数数
 
 :::{#exr-mono-term-count}
 对一给定的长度不超过 $n$ 的分拆 $\vec \lambda := (\lambda_1, \lambda_2, \dots \lambda_n)$，$n$ 元单项对称多项式 $m_\lambda(\vec x)$ 共有多少项？
@@ -70,9 +69,9 @@ $n$ 元 $d$ 次单项对称多项式共有多少种可能的构型？设 $\Lambd
 
 该问题等价于求满足 $\mathcal S(\vec \lambda) = d$，$\mathcal L(\vec \lambda) \leq n$ 的所有可能分拆 $\vec \lambda$ 的数量，也即“将 $d$ 个无标号球放入 $n$ 个可空置的无标号盒”的可行方案数．
 
-## 基本对称多项式
-
 ### 基本对称多项式
+
+#### 基本对称多项式
 
 $n$ 元多项式环 $K[\vec x]$ 上的 $n$ 个*基本对称多项式*（elementary symmetric polynomial）定义为
 $$
@@ -86,14 +85,14 @@ $$
 
 方便起见，定义 $\vec e_0 = 1$，定义 $k>n$ 和 $k<0$ 的 $e_k = 0$．设分拆 $\vec \lambda := (\lambda_1,\lambda_2,\dots)$ 满足 $\lambda_i \leq n, \quad \forall i \in \mathbb N_+$．我们记 $e_{\vec \lambda}(\vec x) := e_{\lambda_1}(\vec x) e_{\lambda_2}(\vec x) \dots e_{\lambda_{\mathcal L(\vec \lambda)}}(\vec x)$．
 
-### 生成函数
+#### 生成函数
 
 基本对称多项式有生成函数
 $$
 E(s) := \sum_{k \in \mathbb Z} e_k s^k = \prod_{i=1}^m (1 + x_i s)
 $$
 
-### 对称多项式基本定理
+#### 对称多项式基本定理
 
 :::{#thm-e-decomp}
 
@@ -111,9 +110,9 @@ $$
 
 考察全体满足 $\lambda_i \leq n, \quad \forall i \in \mathbb N_+$ 的分拆 $\vec \lambda$ 对应的 $e_{\vec \lambda}(\vec x)$，它们构成了 $n$ 元对称多项式环 $\Lambda_n$ 作为 $K$ 上线性空间的另一组基底．
 
-## 幂和对称多项式
-
 ### 幂和对称多项式
+
+#### 幂和对称多项式
 
 $n$ 元多项式环 $K[\vec x]$ 上的*幂和对称多项式*（power sum symmetric polynomial）定义为
 $$
@@ -131,14 +130,14 @@ $$
 
 一般地，结论对特征为 $0$ 的域 $K$ 也成立．
 
-### 生成函数
+#### 生成函数
 
 幂和对称多项式有生成函数
 $$
 P(s) := \sum_{k \in \mathbb Z} p_k s^k = \sum_{k=0}^{+\infty} s^k \sum_{i=1}^m x_i^k = \sum_{i=1}^m \sum_{k=0}^{+\infty} (x_i s)^k = \sum_{i=1}^m \frac{1}{1-x_i s}
 $$
 
-### Newton 公式
+#### Newton 公式
 
 以下定理递推地给出了幂和对称多项式 $p_1,\dots,p_n$ 与基本对称多项式 $e_1,\dots,e_n$ 间的关系．[@thm-p-decomp] 的存在性部分可由这一定理给出．
 
@@ -156,14 +155,14 @@ k e_k &= \sum_{i=1}^k (-1)^{i-1} p_{i} e_{k-i} & k &= 1,2,\dots,n \\
 $$
 :::
 
-### 更简单的写法
+#### 更简单的写法
 
 $$
 \sum_{\substack{i+j=k}} (-1)^i e_i p_j = 0,\quad k \in \mathbb N_{\geq 0}
 $$
 但在求和中“认为” $p_0 = k$．
 
-### 一个基于生成函数的证明
+#### 一个基于生成函数的证明
 
 $$
 \frac{s E'(s)}{E(s)} =  s \frac{\diff}{\diff s} \left( \ln E(s) \right) = \sum_{i=1}^m \frac{x_i s}{1+x_i s} = m - \sum_{i=1}^m \frac{1}{1+x_i s} = m - P(-s)
@@ -174,17 +173,17 @@ $$
 $$
 对比各项即得 Newton 公式．
 
-## 其它基底
-
 ### 其它基底
+
+#### 其它基底
 
 完全齐次对称多项式（Complete homogeneous symmetric polynomials）、Schur 多项式……
 
 本节主要参考 [@wp_sympoly; @wp_e-basis; @wp_p-basis; @wp_newton]．
 
-# Delta 判别式
+## Delta 判别式
 
-### Vieta's formulas
+#### Vieta's formulas
 
 :::{#thm-vieta}
 
@@ -207,7 +206,7 @@ a_{n-1} &= e_1(-\vec c) = -(c_1 + c_2 + \dots + c_n)
 $$
 :::
 
-### Vieta 定理与对称多项式基本定理
+#### Vieta 定理与对称多项式基本定理
 
 - 即使尚未获知多项式 $n$ 个复根 $c_1,\dots,c_n$ 的具体取值，我们也能通过已知的多项式系数 $a_0,\dots,a_{n-1}$ 获知 $n$ 个 $n$ 元基本对称多项式在根处的取值．
 
@@ -217,7 +216,7 @@ $$
 
 - 目标：构造一个（数域 $K \subset \mathbb C$ 上的）$n$ 元对称多项式，使得能通过代入求值的方式，快速检测 $n$ 个复数是否两两不同．
 
-### Vandermonde 行列式
+#### Vandermonde 行列式
 
 考察作为（数域 $K \subset \mathbb C$ 上）$n$ 元多项式的 Vandermonde 行列式
 $$
@@ -238,7 +237,7 @@ $$
 $\det V$ 是一个斜对称多项式．事实上，$\det V$ 与所有对称多项式的乘积构成了全体斜对称多项式（alternating polynomials）．
 :::
 
-### 判别式
+#### 判别式
 
 设（数域 $K \subset \mathbb C$ 上的）$n$ 元对称多项式
 $$
@@ -257,7 +256,7 @@ $$
 D(-\vec c) = d(e_1(-\vec c),\dots,e_n(-\vec c)) = d(a_{n-1},\dots,a_0)
 $$
 
-### 判别式
+#### 判别式
 
 :::{#exr-2-discriminant}
 写出数域 $K \subset \mathbb C$ 上一元二次多项式 $x^2 + bx + c$ 的判别式．
@@ -265,7 +264,7 @@ $$
 
 对次数更高的方程，直接使用消首项方法求解判别式 $D(\vec x)$ 在基本对称多项式下的表示 $d(e_1,\dots,e_n)$ 将变得相当繁琐．下面利用判别式与 Vandermonde 行列式的关系得到另一种分解方法．
 
-### 另一分解方法
+#### 另一分解方法
 
 $$
 \begin{aligned}
@@ -292,7 +291,7 @@ p_{n-1}(\vec x) & p_n(\vec x)   & \dots     & p_{2n-2}(\vec x)
 $$
 而由 Newton's Identities，幂和对称多项式 $p_k(\vec x)$ 可较容易地递推分解为基本对称多项式的多项式组合，故我们找到了分解 $D(\vec x)$ 的一种更易操作的方法．
 
-### 另一分解方法
+#### 另一分解方法
 
 :::{#exr-3-discriminant}
 写出数域 $K \subset \mathbb C$ 上不完全三次多项式 $x^3 + bx + c$ 的判别式．
