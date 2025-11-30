@@ -1,10 +1,21 @@
 # --- format defaults ---
 csl: _assets/ieee.csl
+syntax-definitions: 
+  - _assets/lean.xml
+
+shift-heading-level-by: -1 # so that h2 matches section, h3 matches subsection, and h1 becomes title
+number-depth: 3
+toc-depth: 3
+
+cap-location: bottom
+fig-align: center
+
 format:
   html:
     theme:
       dark: [darkly, "./_assets/listing-custom.scss", "./_assets/custom.scss", "./_assets/darkly-custom.scss"]
       light: [cosmo, "./_assets/listing-custom.scss", "./_assets/custom.scss"] # see issue #3705
+    shift-heading-level-by: 0 # HTML headings should be as-is. Maybe we write a filter to retrieve h1
     linestretch: 1.7
     code-fold: true
     html-math-method: mathjax
@@ -29,15 +40,15 @@ format:
     include-in-header:
       text: ""
     # toc: true
-    # custom-theorem:
-      # numbered-within: section
-      # numbered-alike: true
+    custom-theorem:
+#     numbered-within: section
+      numbered-alike: true
   docx:
     reference-doc: _assets/suntemp-art.docx
   gfm:
     wrap: preserve
   beamer:
-    # slide-level: # left default to handle automatically, see Pandoc manual
+    slide-level: 4
     pdf-engine: xelatex
     theme: madrid
     cite-method: biblatex # override the default csl cite method

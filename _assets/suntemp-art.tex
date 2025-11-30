@@ -1,38 +1,99 @@
-% --- lang test ---
+\RequirePackage{xstring}
+\RequirePackage{etoolbox}
+
+% --- test ---
 
 \newif\ifzh
-\RequirePackage{xstring}
-\IfBeginWith{$lang$}{zh}{
-    \zhtrue
-    \documentclass[fontset=fandol,$if(fontsize)$ $fontsize$,$endif$]{ctexart}
-    \def\transmodified{最后更新于}
-    \def\transtoc{目录}
-}{
-    \zhfalse
-    \documentclass[$if(fontsize)$ $fontsize$,$endif$]{article}
-    \usepackage{xeCJK}
-    \def\transmodified{Last modified on}
-    \def\transtoc{Table of Contents}
-}
+\IfBeginWith{$lang$}{zh}{\zhtrue}{\zhfalse}
 
-% --- beginning ---
+\ifzh
+  $if(documentclass)$
+  \IfBeginWith{$documentclass$}{book}{
+    \def\mydocumentclass{ctexbook}
+  }{\IfBeginWith{$documentclass$}{report}{
+    \def\mydocumentclass{ctexrep}
+  }{
+    \def\mydocumentclass{ctexart}
+  }}
+  $else$
+  \def\mydocumentclass{ctexart}
+  $endif$
+\else
+  $if(documentclass)$
+  \def\mydocumentclass{$documentclass$}
+  $else$
+  \def\mydocumentclass{article}
+  $endif$
+\fi
 
-$if(numbersections)$
-\setcounter{secnumdepth}{$if(secnumdepth)$$secnumdepth$$else$5$endif$}
-$else$
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
-$endif$
+\ifzh
+  \def\transmodified{最后更新于}
+  \def\transtoc{目录}
+\else
+  \def\transmodified{Last modified on}
+  \def\transtoc{Table of Contents}
+\fi
 
-\usepackage[a4paper,top=2.75cm,bottom=2.25cm,left=2.75cm,right=2.75cm,marginparwidth=1.75cm]{geometry}
+% --- documentclass ---
+
+\ifzh
+  \documentclass[fontset=fandol,$if(fontsize)$$fontsize$$endif$]{\mydocumentclass}
+\else
+  \documentclass[$if(fontsize)$$fontsize$$else$11pt$endif$]{\mydocumentclass}
+\fi
+
+% --- book ---
+
+\usepackage{bookmark}
+
+% --- fonts ---
+
+\usepackage[Medium, Scale=MatchLowercase]{juliamono} % change code font to support Unicode, e.g. Lean code
+
 \ifzh
     \setCJKmainfont{FandolSong-Regular.otf}[BoldFont = FandolHei-Regular.otf, ItalicFont = FandolKai-Regular.otf] % Hei represents bold, Kai represents italic
     \ctexset{
         section/format              += \zihao{-4}\raggedright,
         subsection/format           += \zihao{5}\raggedright,
         subsubsection/format        += \zihao{5}\raggedright,
-        subsubsection/numbering      = false
     }
+\else
+    % for XeLaTeX
+
+    \usepackage{xeCJK}
+
+    % \usepackage{fontspec}
+    % \setmonofont{...}
+
+    % for LuaLaTeX font fallback
+
+    % \usepackage{fontspec}
+    % \usepackage{luaotfload} % for LuaLaTeX font fallback
+    
+    % \directlua{luaotfload.add_fallback("monofontfallback",{"FandolHei:mode=harf;", "Linux Libertine O:mode=harf;"})}
+    % \setmonofont{Latin Modern Mono}[RawFeature={fallback=monofontfallback}]
+
+    % \directlua{luaotfload.add_fallback("mainfontfallback",{"FandolSong:mode=harf;", "Linux Libertine O:mode=harf;"})}
+    % \setmainfont{Latin Modern Roman}[RawFeature={fallback=mainfontfallback}]
+
+    % \directlua{luaotfload.add_fallback("sansfontfallback",{"FandolHei:mode=harf;", "Linux Libertine O:mode=harf;"})}
+    % \setsansfont{Latin Modern Sans}[RawFeature={fallback=sansfontfallback}]
 \fi
+
+% --- section numbering ---
+
+$if(numbersections)$
+$if(secnumdepth)$
+\usepackage{calc}
+\setcounter{secnumdepth}{$secnumdepth$ - 1} % Quarto passes this wrongly. It actually counts from chapter level.
+$endif$
+$else$
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+$endif$
+
+% --- page layout ---
+
+\usepackage[a4paper,top=2.75cm,bottom=2.25cm,left=2.75cm,right=2.75cm,marginparwidth=1.75cm]{geometry}
 
 % --- pandoc ---
 
@@ -46,10 +107,10 @@ $tightlist.tex()$
 $tables.tex()$
 $graphics.tex()$
 
-% --- adjust code font size ---
+% --- code font size ---
 
 $if(highlighting-macros)$
-\renewenvironment{Shaded} {\begin{snugshade}\small} {\end{snugshade}}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}, fontsize=\normalsize}
 $endif$
 
 % --- bibliography ---
@@ -76,7 +137,7 @@ $endif$
     \usepackage{titling}
     \pretitle{\begin{center} \zihao{-2} \bfseries}
     \posttitle{\par\end{center}\vskip 0.5em}
-    \usepackage{etoolbox}
+    
     \makeatletter
     \providecommand{\subtitle}[1]{
         \apptocmd{\@title}{\vskip 0.5em \par {\zihao{4} \kaishu #1 \par}}{}{}
@@ -91,7 +152,6 @@ $endif$
     \predate{\begin{center} \zihao{-4} \kaishu}
     \postdate{\par\end{center}}
 \else
-    \usepackage{etoolbox}
     \makeatletter
     \providecommand{\subtitle}[1]{
         \apptocmd{\@title}{\vskip 0.5em \par {\large #1 \par}}{}{}
@@ -102,8 +162,11 @@ $endif$
 % --- abstract ---
 
 \ifzh
+
+  \ifcsdef{myenvironment}{%
     \renewenvironment{abstract}{\subparagraph{摘要}\kaishu}{}
-    % \newenvironment{keywords}{\subparagraph{关键词}\kaishu}{}
+  }{}
+
 \fi
 
 % -- math --
@@ -233,7 +296,7 @@ $if(toc-title)$
 \renewcommand*\contentsname{\transtoc}
 $endif$
 {
-\setcounter{tocdepth}{$toc-depth$}
+\setcounter{tocdepth}{$toc-depth$ - 1} % Quarto passes this wrongly. It actually counts from chapter level.
 \tableofcontents
 }
 $endif$
