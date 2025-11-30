@@ -1,2 +1,1226 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"></html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.34">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="sun123zxy">
+
+<title>零点定理乱炖 – sun123zxy’s blog</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-a45597b65f5f3795ae8b140358e6d8e8.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-96de23c090fa5f90e6d2871446c09927.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-7a5db8babeb1a7d9856cc38403086896.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-815e944f2ee571f6e2e9300a7ff39b59.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+<script>
+MathJax = {
+  tex: {
+    macros: {
+        SunQuarTeX: String.raw`\mathrm{\mathbf S \;\!\! {\scriptstyle \mathbf U \;\!\! \mathbb N} \mathbb Q \;\!\! {\scriptstyle \mathbf U \;\!\! \;\!\! \mathbf A \;\!\! \mathbb R} \;\!\! \;\!\! \mathbf{\TeX}}`
+    }
+  }
+};
+</script>
+<meta name="quarto:status" content="draft">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>草稿</div>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">sun123zxy’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../listings/overview.html"> 
+<span class="menu-text">Overview</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../listings/projects/index.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/sun123zxy/blog-quarto-code/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-bi-rss" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-bi-rss">    
+        <li>
+    <a class="dropdown-item" href="../../listings/all.xml">
+ <span class="dropdown-text">All Posts</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#hilberts-nullstellensatz" id="toc-hilberts-nullstellensatz" class="nav-link active" data-scroll-target="#hilberts-nullstellensatz"><span class="header-section-number">1</span> Hilbert’s Nullstellensatz</a></li>
+  <li><a href="#idealvariety-correspondence" id="toc-idealvariety-correspondence" class="nav-link" data-scroll-target="#idealvariety-correspondence"><span class="header-section-number">2</span> Ideal–Variety Correspondence</a>
+  <ul class="collapse">
+  <li><a href="#world-of-prime-ideals" id="toc-world-of-prime-ideals" class="nav-link" data-scroll-target="#world-of-prime-ideals"><span class="header-section-number">2.1</span> World of Prime Ideals</a></li>
+  <li><a href="#world-of-maximal-ideals" id="toc-world-of-maximal-ideals" class="nav-link" data-scroll-target="#world-of-maximal-ideals"><span class="header-section-number">2.2</span> World of Maximal Ideals</a></li>
+  </ul></li>
+  <li><a href="#a-few-remarks" id="toc-a-few-remarks" class="nav-link" data-scroll-target="#a-few-remarks"><span class="header-section-number">3</span> A Few Remarks</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">零点定理乱炖</h1>
+<p class="subtitle lead">Suspicious Nullstellensatz Soup</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">algebra</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">作者</div>
+    <div class="quarto-title-meta-contents">
+             <p>sun123zxy </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">发布于</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2025年8月12日</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">修改于</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">2025年8月18日</p>
+    </div>
+  </div>
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="block-title">摘要</div>
+    On Hilbert’s Nullstellensatz and the ideal–variety correspondence.
+  </div>
+</div>
+
+
+</header>
+
+
+<p>本文所指环均为含幺交换环．</p>
+<p>记号上我们用正体大写字母 <span class="math inline">\(\mathrm{X}\)</span> 标记多项式不定元，用粗体 <span class="math inline">\(\boldsymbol{x}\)</span> 标记向量．记 <span class="math inline">\(K[\boldsymbol{\mathrm{X}}]\)</span> 为 <span class="math inline">\(K\)</span> 上的 <span class="math inline">\(n\)</span> 元多项式环——这个记号可以有两种理解方式：一种是认为 <span class="math inline">\(\boldsymbol{\mathrm{X}}\)</span> 是不定元的向量，另一种是就认为 <span class="math inline">\(\boldsymbol{\mathrm{X}}\)</span> 就是 <span class="math inline">\(n\)</span> 维仿射空间 <span class="math inline">\(K^n\)</span>，而 <span class="math inline">\(K[\boldsymbol{\mathrm{X}}]\)</span> 是它的坐标环．</p>
+<p>我们记 <span class="math inline">\(\operatorname{Spec}R\)</span> 为环 <span class="math inline">\(R\)</span> 的全体素理想，<span class="math inline">\(\operatorname{Specmax}R\)</span> 为环 <span class="math inline">\(R\)</span> 的全体极大理想．对任意 <span class="math inline">\(R\)</span> 的理想 <span class="math inline">\(\mathfrak a\)</span>，记 <span class="math inline">\(J(\mathfrak a)\)</span> 是其 Jacobson radical，即全体包含 <span class="math inline">\(\mathfrak a\)</span> 的极大理想的交．记 <span class="math inline">\(\sqrt{\mathfrak a}\)</span> 为理想 <span class="math inline">\(\mathfrak a\)</span> 的根理想 / nilradical，即 <span class="math inline">\(\{ f \in R : f^n \in \mathfrak a \text{ for some } n \in \mathbb N_+ \}\)</span>．<span class="citation" data-cites="m_f_atiyah_introduction_1969"><a href="#ref-m_f_atiyah_introduction_1969" role="doc-biblioref">[1, proposition 1.8]</a></span> 给出了 nilradical 的等价刻画：它也是全体包含 <span class="math inline">\(\mathfrak a\)</span> 的素理想的交．</p>
+<section id="hilberts-nullstellensatz" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="hilberts-nullstellensatz"><span class="header-section-number">1</span> Hilbert’s Nullstellensatz</h2>
+<p>对任意子集 <span class="math inline">\(T \subseteq K[\boldsymbol{\mathrm{X}}]\)</span>，我们记 <span class="math inline">\(V(T)\)</span> 为全体 <span class="math inline">\(T\)</span> 中函数在 <span class="math inline">\(K^n\)</span> 中零点集的交．对任意子集 <span class="math inline">\(S \subseteq K^n\)</span>，记 <span class="math inline">\(I(S)\)</span> 是全体在 <span class="math inline">\(S\)</span> 上取值为 <span class="math inline">\(0\)</span> 的 <span class="math inline">\(K[\boldsymbol{\mathrm{X}}]\)</span> 中的多项式．</p>
+<p>考虑代入映射 <span class="math inline">\(\operatorname{ev}_{\boldsymbol{x}}: K[\boldsymbol{\mathrm{X}}] \to K\)</span>, <span class="math inline">\(f \mapsto f(\boldsymbol{x})\)</span>．这是一个 <span class="math inline">\(K\)</span>-代数同态，其核 <span class="math inline">\(\ker \operatorname{ev}_{\boldsymbol{x}}\)</span> 为所有在点 <span class="math inline">\(\boldsymbol{x}\)</span> 处取值为零的多项式，且 <span class="math inline">\(K[\boldsymbol{\mathrm{X}}] / \ker \operatorname{ev}_{\boldsymbol{x}} \cong K\)</span>，故它是极大理想．容易验证理想 <span class="math inline">\((\mathrm{X}_i - x_i)_{i=1}^n \subseteq \ker \operatorname{ev}_{\boldsymbol{x}}\)</span> 且也是极大理想，故二者相等．这意味着 <span class="math inline">\(\boldsymbol{x} \mapsto \ker \operatorname{ev}_{\boldsymbol{x}}\)</span> 给出了一个 <span class="math inline">\(K^n \to \operatorname{Specmax}K[\boldsymbol{\mathrm{X}}]\)</span> 的映射——容易验证它也是单射．</p>
+<p>弱形式的 Hilbert 零点定理断言这个映射甚至还是满射：</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-hnt-weak" class="theorem">
+<p><span class="theorem-title"><strong>定理 1 (Hilbert’s Nullstellensatz (Weak Form))</strong></span> 以下表述等价，并在 <span class="math inline">\(K\)</span> 是代数闭域时成立：</p>
+<ul>
+<li><p><span class="math inline">\(K[\boldsymbol{\mathrm{X}}]\)</span> 中的极大理想都是点，即均形如 <span class="math inline">\((\mathrm{X}_i - x_i)_{i=1}^n\)</span>．</p></li>
+<li><p>对任意理想 <span class="math inline">\(\mathfrak a \subseteq K[\boldsymbol{\mathrm{X}}]\)</span>，如果 <span class="math inline">\(V(\mathfrak a) = \varnothing\)</span>，则必有 <span class="math inline">\(\mathfrak a = K[\boldsymbol{\mathrm{X}}]\)</span>．</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<p>TFAE 是容易的．来考虑在代数闭域情形下证明第一条．对任意 <span class="math inline">\(K[\boldsymbol{\mathrm{X}}]\)</span> 的极大理想 <span class="math inline">\(\mathfrak m\)</span>，我们来想办法把它对应的点找出来．考察自然的 <span class="math inline">\(K\)</span>-代数同态 <span class="math inline">\(K[\boldsymbol{\mathrm{X}}] \to K[\boldsymbol{\mathrm{X}}] / \mathfrak m\)</span>，后者是一个域．如果后者作为 <span class="math inline">\(K\)</span>-代数典范地同构于 <span class="math inline">\(K\)</span>（或者更准确来说，其作为 <span class="math inline">\(K\)</span>-线性空间维数为 <span class="math inline">\(1\)</span>）的话，那么复合 <span class="math inline">\(K\)</span>-代数同态 <span class="math display">\[
+K[\boldsymbol{\mathrm{X}}] \to K[\boldsymbol{\mathrm{X}}] / \mathfrak m \cong K
+\]</span> 就把 <span class="math inline">\(\mathrm{X}_i\)</span> 映到某一 <span class="math inline">\(k_i \in K\)</span>，这样就有 <span class="math inline">\((\mathrm{X}_i - k_i)_{i=1}^n \subseteq \mathfrak m\)</span> 了．考虑到前者的极大性，我们便有 <span class="math inline">\((\mathrm{X}_i - k_i)_{i=1}^n = \mathfrak m\)</span>．</p>
+<p>那关键在于为什么一定有 <span class="math inline">\(K\)</span>-代数同态 <span class="math inline">\(K[\boldsymbol{\mathrm{X}}] / \mathfrak m \cong K\)</span>，而不是什么别的域．我们介绍一个极其重要的引理：</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-fg-algebra-fd-of-field" class="theorem proposition">
+<p><span class="theorem-title"><strong>命题 1 (<a href="https://en.wikipedia.org/wiki/Zariski%27s_lemma">Zariski’s Lemma</a>)</strong></span> 有限生成 <span class="math inline">\(K\)</span>-代数 <span class="math inline">\(A\)</span> 如果是一个域，则作为 <span class="math inline">\(K\)</span>-线性空间是有限维的．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证</em>. </span>TODO，并不容易．有多种证明路径，光 <span class="citation" data-cites="m_f_atiyah_introduction_1969"><a href="#ref-m_f_atiyah_introduction_1969" role="doc-biblioref">[1, exercise 5.18]</a></span> 就提了基于整性的 Noether normalization lemma 和 Artin–Tate lemma 两种路径．和 Noetherian 性有紧密联系．</p>
+</div>
+</div>
+</div>
+</div>
+<p>那么作为推论，对任意 <span class="math inline">\(A\)</span> 的极大理想 <span class="math inline">\(\mathfrak m\)</span>，<span class="math inline">\(A / \mathfrak m\)</span> 都是 <span class="math inline">\(K\)</span> 的有限维扩张，因此也是代数扩张．当 <span class="math inline">\(K\)</span> 是代数闭域的时候，我们就有 <span class="math inline">\(A / \mathfrak m \cong K\)</span>．特别地取 <span class="math inline">\(A = K[\boldsymbol{\mathrm{X}}]\)</span> 就补全了 <a href="#thm-hnt-weak" class="quarto-xref">定理&nbsp;1</a> 证明缺失的步骤．</p>
+<p>Hilbert 零点定理还有更强的形式：</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-hnt-strong" class="theorem">
+<p><span class="theorem-title"><strong>定理 2 (Hilbert’s Nullstellensatz (Strong Form))</strong></span> 当 <span class="math inline">\(K\)</span> 是代数闭域时，对任意理想 <span class="math inline">\(\mathfrak a \subseteq K[\boldsymbol{\mathrm{X}}]\)</span>，均有 <span class="math inline">\(IV(\mathfrak a) = \sqrt{\mathfrak a}\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<p>为什么说它更强？因为当 <span class="math inline">\(V(\mathfrak a) = \varnothing\)</span> 时可以推出 <span class="math inline">\(IV(\mathfrak a) = I(\varnothing) = R\)</span>，即弱形式的 Hilbert 零点定理．</p>
+<p>下面给出第一条的证明，思路来自 <a href="https://mathoverflow.net/questions/90661/the-rabinowitz-trick">MathOverflow</a>：</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证</em>. </span>对任意理想 <span class="math inline">\(\mathfrak a \subseteq K[\boldsymbol{\mathrm{X}}]\)</span>，对任意元素 <span class="math inline">\(f(\boldsymbol{\mathrm{X}}) \in IV(\mathfrak a)\)</span>，我们有如下等价链：</p>
+<ul>
+<li><p><span class="math inline">\(f \in \sqrt{\mathfrak a}\)</span></p></li>
+<li><p><span class="math inline">\(\bar f \in \sqrt{0} \subseteq K[\boldsymbol{\mathrm{X}}] / \mathfrak a\)</span></p></li>
+<li><p><span class="math inline">\(K[\boldsymbol{\mathrm{X}}] / \mathfrak a\)</span> 在 <span class="math inline">\(\bar f\)</span> 处的局部化 <span class="math inline">\(\left(K[\boldsymbol{\mathrm{X}}] / \mathfrak a \right)_{\bar f} \cong K[\boldsymbol{\mathrm{X}}, \mathrm{Y}] / (\mathfrak a, \mathrm{Y}f(\boldsymbol{\mathrm{X}}) - 1)\)</span> 是零环</p>
+<ul>
+<li>这一步往往被称为 <a href="https://en.wikipedia.org/wiki/Rabinowitsch_trick">Rabinowitsch trick</a></li>
+</ul></li>
+<li><p><span class="math inline">\((\mathfrak a, \mathrm{Y}f(\boldsymbol{\mathrm{X}}) - 1) = K[\boldsymbol{\mathrm{X}}, \mathrm{Y}]\)</span></p></li>
+<li><p><span class="math inline">\(\begin{aligned}
+V_{K[\boldsymbol{\mathrm{X}}, \mathrm{Y}]}(\mathfrak a, y f(\boldsymbol{\mathrm{X}}) - 1) &amp;=
+V_{K[\boldsymbol{\mathrm{X}}, \mathrm{Y}]}(\mathfrak a) \cap V_{K[\boldsymbol{\mathrm{X}}, \mathrm{Y}]}(\mathrm{Y}f(\boldsymbol{\mathrm{X}}) - 1) \\
+&amp;= \{(\boldsymbol{x}, y) : \boldsymbol{x} \in V(\mathfrak a) ,\, y f(\boldsymbol{x}) = 1 \}
+\end{aligned}\)</span> 是空集</p>
+<ul>
+<li>等价性由 <a href="#thm-hnt-weak" class="quarto-xref">定理&nbsp;1</a> 得到</li>
+</ul></li>
+</ul>
+<p>注意由假设 <span class="math inline">\(f \in IV(\mathfrak a)\)</span>，当 <span class="math inline">\(\boldsymbol{x} \in V(\mathfrak a)\)</span> 时我们有 <span class="math inline">\(f(\boldsymbol{x}) = 0\)</span>，因此它确实是空集．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark (Jacobson 环)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em> (Jacobson 环). </span>当 <span class="math inline">\(K\)</span> 是代数闭域时，由于弱形式的 Hilbert 零点定理，<span class="math inline">\(IV(\mathfrak a) = J(\mathfrak a)\)</span>．于是定理的陈述等价于 <span class="math inline">\(J(\mathfrak a) = \sqrt{\mathfrak a}\)</span>——对一般的环 <span class="math inline">\(R\)</span> 来说，这是 Jacobson 环的等价定义之一．Jacobson 环有如下等价刻画：</p>
+<ul>
+<li>对任意理想 <span class="math inline">\(\mathfrak a \subseteq R\)</span>，<span class="math inline">\(J(\mathfrak a) = \sqrt a\)</span></li>
+<li>对任意理想 <span class="math inline">\(\mathfrak a \subseteq R\)</span>，<span class="math inline">\(R / \mathfrak a\)</span> 的 Jacobson radical 与其 nilradical 相等</li>
+<li>每个素理想均能写成包含它的极大理想的交</li>
+<li>（Zariski’s Lemma）任意有限生成 <span class="math inline">\(R\)</span>-代数 <span class="math inline">\(A\)</span> 如果是域，则 <span class="math inline">\(A\)</span> 作为 <span class="math inline">\(R\)</span>-模有限生成．</li>
+</ul>
+<p>前三条的 TFAE 是平凡的．加入第四条和前面提到的 Zariski lemma 的证明有关，TODO．</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="idealvariety-correspondence" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="idealvariety-correspondence"><span class="header-section-number">2</span> Ideal–Variety Correspondence</h2>
+<p>强形式的 Hilbert 零点定理，可以帮我们将代数闭域上 <span class="math inline">\(n\)</span> 维仿射空间的 Zariski 拓扑和一般环上基于素理想的 Zariski 拓扑统一起来．</p>
+<section id="world-of-prime-ideals" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="world-of-prime-ideals"><span class="header-section-number">2.1</span> World of Prime Ideals</h3>
+<p>在素理想版本的 Zariski 拓扑中，我们定义了映射</p>
+<ul>
+<li><span class="math inline">\(\text{subsets of } \operatorname{Spec}R \overset{I_p}{\underset{V_p}\rightleftarrows} \text{ideals of } R\)</span></li>
+<li><span class="math inline">\(V_p(\mathfrak a) := \{ \mathfrak p \in \operatorname{Spec}R : \mathfrak a \subseteq \mathfrak p \}\)</span> 定义了 <span class="math inline">\(\operatorname{Spec}R\)</span> 上的闭集</li>
+<li><span class="math inline">\(I_p(S) := \bigcap_{\mathfrak p \in S} \mathfrak p\)</span>：易证它是根理想（radical ideal），对开根号封闭</li>
+</ul>
+<p>注意它们满足性质</p>
+<ul>
+<li><span class="math inline">\(V_p(\mathfrak a) \subseteq S \iff \mathfrak a \supseteq I_p(S)\)</span></li>
+</ul>
+<p>让我们暂时忘记这个对应的具体形式，搞点被称为所谓 <a href="https://en.wikipedia.org/wiki/Galois_connection">Galois Connections</a> 的抽象以获得更清晰的推导．设 <span class="math inline">\((A,\leq)\)</span> 和 <span class="math inline">\((B,\leq)\)</span> 为两个偏序集，<span class="math inline">\(V: A \to B\)</span> 和 <span class="math inline">\(I: B \to A\)</span> 是两个满足 <span class="math inline">\(V(a) \leq b \iff a \geq I(b)\)</span> 的反序（antitone）映射．倒定义获得如下两个消去关系:</p>
+<ul>
+<li><p><span class="math inline">\(V(a) = V I V (a)\)</span>：</p>
+<ul>
+<li><span class="math inline">\(V(a) \leq VIV(a) \impliedby a \geq IV(a) \impliedby V(a) \leq V(a)\)</span></li>
+<li><span class="math inline">\(VIV(a) \leq V(a) \impliedby IV(a) \geq IV(a)\)</span></li>
+</ul></li>
+<li><p><span class="math inline">\(I (b) = I V I (b)\)</span>：</p>
+<ul>
+<li><span class="math inline">\(I(a) \geq IVI(a) \impliedby VI(a) \leq VI(a)\)</span></li>
+<li><span class="math inline">\(IVI(a) \geq I(a) \impliedby VI(a) \leq a \impliedby I(a) \leq I(a)\)</span></li>
+</ul></li>
+</ul>
+<p>这诱导出所谓的 Galois correspondence：<span class="math inline">\(IV(A) \cong VI(B)\)</span>，并立即应用在素理想 Zariski 拓扑的世界中得到 <span class="math inline">\(I_p V_p(\{ \text{ideals of } R \} ) \cong V_p I_p(\operatorname{Spec}R)\)</span>．什么和什么的一一对应呢？让我们做分析：</p>
+<ul>
+<li><p><span class="math inline">\(V_p I_p (S) = \overline S\)</span>：拆定义 <span class="math display">\[
+\overline S = \bigcap_{S \subseteq V_p(\mathfrak a)} V_p(\mathfrak a) = \bigcap_{a \subseteq I_p(S)} V_p(\mathfrak a) = V_p I_p (S)
+\]</span></p>
+<p>这是 <span class="math inline">\(VI: A \to A\)</span> 在 Galois connection 的语境中被称为闭包算子（closure operator）的原因．</p></li>
+<li><p><span class="math inline">\(I_p V_p (\mathfrak a) = \sqrt{\mathfrak a}\)</span>：即 nilradical 的等价刻画</p>
+<p>这是 <span class="math inline">\(IV: B \to B\)</span> 在 Galois connection 的语境中被称为核算子（kernel operator）的原因．</p></li>
+</ul>
+<p>作为推论：</p>
+<ul>
+<li><p><span class="math inline">\(V_p(\mathfrak a) = V_p I_p V_p (\mathfrak a) = V(\sqrt a)\)</span>．</p></li>
+<li><p><span class="math inline">\(I_p (S) = I_p V_p I_p (S) = I(\overline S)\)</span></p></li>
+</ul>
+<p>也就是说，我们刚刚建立起的是素理想世界 Zariski 拓扑闭集和根理想的一一对应．</p>
+</section>
+<section id="world-of-maximal-ideals" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="world-of-maximal-ideals"><span class="header-section-number">2.2</span> World of Maximal Ideals</h3>
+<p>现在来到极大理想的世界．因为弱形式 Hilbert 零点定理的存在，我们先前在（代数闭域上）多项式环上定义的 <span class="math inline">\(V\)</span> 和 <span class="math inline">\(I\)</span> 推广到环上其实是：</p>
+<ul>
+<li><p><span class="math inline">\(\text{subsets of } \operatorname{Specmax}R \rightleftarrows \text{ideals of } R\)</span></p></li>
+<li><p><span class="math inline">\(V_m(\mathfrak a) = \{ \mathfrak m \in \operatorname{Specmax}R : \mathfrak m \supseteq \mathfrak a \} = V_p(\mathfrak a) \cap \operatorname{Specmax}R\)</span>：仍然作为闭集，在（代数闭域上）多项式环中它们被称为代数簇（algebraic variety）．注意现在 <span class="math inline">\(\operatorname{Specmax}R\)</span> 成为 <span class="math inline">\(\operatorname{Spec}R\)</span> 的子拓扑．</p></li>
+<li><p><span class="math inline">\(I_m(S) = \bigcap_{\mathfrak m \in S} \mathfrak m\)</span>，所谓的 vanishing ideals．</p></li>
+</ul>
+<p>上述 Galois connection 仍然完全适用于极大理想的这个世界，故我们仍然有对应 <span class="math inline">\(I_m V_m(\{ \text{ideals of } R \}) \cong V_m I_m(\operatorname{Specmax}R)\)</span>．但是一一对应的对象有细微的变化：</p>
+<ul>
+<li><p><span class="math inline">\(V_m I_m (S) = \overline S\)</span>，但这个闭包是限制在 <span class="math inline">\(\operatorname{Specmax}R\)</span> 的子拓扑下取的．</p></li>
+<li><p><span class="math inline">\(I_m V_m (\mathfrak a) = J(\mathfrak a)\)</span>，<span class="math inline">\(\mathfrak a\)</span> 的 Jacobson radical．满足 <span class="math inline">\(\mathfrak a = J(\mathfrak a)\)</span> 的理想被称为 semiprimitive ideals．</p></li>
+</ul>
+<p>作为推论：</p>
+<ul>
+<li><p><span class="math inline">\(V_m(\mathfrak a) = V_m I_m V_m (\mathfrak a) = V(J(a))\)</span>．</p></li>
+<li><p><span class="math inline">\(I_m (S) = I_m V_m I_m (S) = I(\overline S)\)</span></p></li>
+</ul>
+<p>也就是说，这里建立的是极大理想世界 Zariski 拓扑闭集和 semiprimitive ideals 的一一对应．</p>
+<p>也许是因为 nilradical 具有更直观的基于幂零的等价刻画，代数几何学家们更喜欢研究根理想而不是 semiprimitive ideals．但是他们又懒得素理想世界里面工作——在（代数闭域上）多项式环的语境中，极大理想就是点，<span class="math inline">\(\operatorname{Specmax}R\)</span> 蕴含的信息等价于仅看多项式零点可以给出的信息——比起复杂太多的素理想，谁不喜欢这种更清晰的几何直观呢！</p>
+<p>固然 <span class="math inline">\(\sqrt a \subseteq J(\mathfrak a)\)</span>，要是更有 <span class="math inline">\(\sqrt{\mathfrak a} = J(\mathfrak a)\)</span> 就好了——这恰是 Jacobson 环的定义．综上，可以看到 Jacobson 性使得我们可以把 Zariski 拓扑限制到极大理想上研究，而仍然获得根理想的全部信息．特别地，这使得研究多项式零点成为了解（代数闭域上）多项式环性质的重要手段．</p>
+</section>
+</section>
+<section id="a-few-remarks" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="a-few-remarks"><span class="header-section-number">3</span> A Few Remarks</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark (Scheme)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em> (Scheme). </span>值得一提，这并不是说多项式零点包含（代数闭域上）多项式环的所有信息——只看 Zariski 拓扑仍然会使我们丢失环的幂零信息——这是更精细的代数几何需要概型（scheme）的原因之一．另一个原因和从 <span class="math inline">\(\mathbb R^n\)</span> 到流形的过程很类似：为了建立 algebraic variety 和 projective variety 的统一表述．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark (哪些环是 Jacobson 环)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em> (哪些环是 Jacobson 环). </span>比你想象的要多！</p>
+<ul>
+<li><p>域</p></li>
+<li><p>零维环</p></li>
+<li><p>Jacobson radical 为零的 PID</p></li>
+<li><p><span class="math inline">\(R[\mathrm{X}]\)</span> 是 Jacobson 环当且仅当 <span class="math inline">\(R\)</span> 是 Jacobson 环</p>
+<p>故事实上所有域上的多项式环都是 Jacobson 环！</p>
+<p>证明 TODO</p></li>
+<li><p>商环保 Jacobson 性</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark (哪些环不是 Jacobson 环)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em> (哪些环不是 Jacobson 环). </span></p>
+<ul>
+<li><p>非零维局部环，如 DVR</p>
+<p>这些环的极大理想非零唯一，但还有别的素理想</p></li>
+<li><p>所以局部化不一定保持 Jacobson 性</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark (不应简单认为 Jacobson 环是强形式 Hilbert 零点定理的推广)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em> (不应简单认为 Jacobson 环是强形式 Hilbert 零点定理的推广). </span>事实上域上的多项式环都是 Jacobson 环，但非代数闭域只看零点仍会丢失除了幂零之外的更多信息：</p>
+<ul>
+<li><p>例如 <span class="math inline">\(\mathbb R [\mathrm{X}]\)</span>，<span class="math inline">\(V(\mathrm{X}^2 + 1) = \varnothing = V(1)\)</span>，观察零点集无法区别这两个多项式．</p>
+<p>事实上 <span class="math inline">\(\mathbb R [\mathrm{X}] / (\mathrm{X}^2 + 1) \cong \mathbb C\)</span>，而不是同构于 Hilbert 零点定理会希望有的 <span class="math inline">\(\mathbb R\)</span>．</p></li>
+<li><p>例如 <span class="math inline">\(\mathbb F_p [\mathrm{X}]\)</span>．你甚至无法分辨 <span class="math inline">\(\mathrm{X}^{p-1} - 1\)</span> 和 <span class="math inline">\(0\)</span> 的区别．</p>
+<p>这甚至是更极端的例子——即使观察全部函数值（强于观察零点集）也会丢失信息．这类多项式环与对应的其多项式函数环不同构．</p></li>
+</ul>
+<p>二者的等价性只在代数闭域上多项式环中能够得到理解，由 Hilbert 零点定理弱形式建立桥梁．因此，代数闭域和 Jacobson 环的特点都是 Hilbert 零点定理不可或缺的组成部分．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark (Hilbert Nullstellensatz over polynomial rings of infinite variables)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em> (Hilbert Nullstellensatz over polynomial rings of infinite variables). </span>TODO</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-m_f_atiyah_introduction_1969" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">M. F. Atiyah 和 I.G. Macdonald, <em>Introduction To Commutative Algebra</em>. Addison-Wesley Publishing Company, Inc., 1969.</div>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
+<input type="hidden" id="giscus-alt-theme" value="light">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "sun123zxy/blog-quarto-code";
+    script.dataset.repoId = "R_kgDOIrPs5w";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOIrPs584CV4gd";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Proudly powered by <a href="https://quarto.org/">Quarto</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>sun123zxy’s blog</p>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="../../thanks.html">
+<p>Thanks</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
