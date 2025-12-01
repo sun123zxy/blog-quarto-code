@@ -491,7 +491,7 @@ Remark (Generalizing to localizations)
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>Remark</em> (Generalizing to localizations). </span>Note that we have only used the flatness of <span class="math inline">\(k\)</span> and that <span class="math inline">\(R\)</span> is an integral domain. Since every localization of a ring is flat, the same proof shows that as long as <span class="math inline">\(R\)</span> is an integral domain, localzation does not change the rank of a module.</p>
-<p>[TODO] It’s interesting to ask if the integral domain condition is necessary. At least, the one side inequality <span class="math inline">\(\operatorname{rank}_R M \leq \dim_k (k \otimes_R M)\)</span> is always true.</p>
+<p>Indeed, <span class="math inline">\(\operatorname{rank}\)</span>, as a function over <span class="math inline">\(\operatorname{Spec}R\)</span>, is locally constant. [TODO]</p>
 </div>
 </div>
 </div>
@@ -578,12 +578,19 @@ Figure&nbsp;2
 R^{\oplus m} \longrightarrow M \longrightarrow 0
 \]</span> with <span class="math inline">\(k\)</span>, we get an exact sequence <span class="math display">\[
 k^{\oplus m} \longrightarrow k \otimes_R M \longrightarrow 0
-\]</span> So indeed <span class="math inline">\(\operatorname{spanrank}_R M \geq \dim_k (k \otimes_R M)\)</span>. Sadly the converse is not true in general. For example:</p>
+\]</span> Geometrically, if <span class="math inline">\(M\)</span> is a ring, then <span class="math inline">\(\dim_k (k \otimes_R M)\)</span> corresponds to the dimension of the fiber of the morphism <span class="math inline">\(\operatorname{Spec}M \to \operatorname{Spec}R\)</span> at the point <span class="math inline">\(\mathfrak m\)</span>.</p>
+<p>Above derivation of exact sequence shows that <span class="math inline">\(\operatorname{spanrank}_R M \geq \dim_k (k \otimes_R M)\)</span>. Sadly the reversed inequality is not true in general. For example:</p>
 <ul>
 <li><p>An arithmetic example: Let <span class="math inline">\(R = \mathbb Z\)</span> and <span class="math inline">\(M = \mathbb Z/2\mathbb Z\)</span>. Then <span class="math inline">\(\operatorname{spanrank}_{\mathbb Z} M = 1\)</span> but <span class="math inline">\(\mathbb Z/2\mathbb Z \otimes_{\mathbb Z} \mathbb Z/3\mathbb Z \cong 0\)</span>.</p></li>
-<li><p>An geometric example: Let <span class="math inline">\(R = \mathbb R[x]\)</span> and <span class="math inline">\(M = \mathbb R[x]\)</span>. Then <span class="math inline">\(\operatorname{spanrank}M = 1\)</span>. But <span class="math inline">\(\mathbb R[x] / (x) \cong \mathbb R\)</span> while <span class="math inline">\(\mathbb R[x] / (x^2 + 1) \cong \mathbb C\)</span>. We see that different residue fields give different dimensions. Blame the failure of Hilbert’s Nullstellensatz over non-algebraically closed fields for this irregularity!</p></li>
+<li><p>A geometric example: Let <span class="math inline">\(R = \mathbb C[x]\)</span> and <span class="math inline">\(M = \mathbb C[x] / (x)\)</span>. Then <span class="math inline">\(\operatorname{spanrank}M = 1\)</span>. But the <span class="math inline">\(\mathbb C\)</span>-dimension of <span class="math inline">\(\mathbb C[x] / (x) \otimes_{\mathbb C[x]} \mathbb C[x] / (x - a)\)</span> is <span class="math inline">\(0\)</span> for any <span class="math inline">\(a \neq 0\)</span>.</p></li>
+<li><p>Another geometric example: Let <span class="math inline">\(R = k[x]\)</span> and <span class="math inline">\(M = k[x,y]/(xy)\)</span>, action induced by ring multiplication. <span class="math inline">\(1, y, y^2, \dots\)</span> generates <span class="math inline">\(M\)</span> via <span class="math inline">\(R\)</span>-linear combination, hence <span class="math inline">\(\operatorname{spanrank}_R M = + \infty\)</span>.</p>
+<p>Geometrically this represents the projection from <span class="math inline">\(xy=0\)</span> to <span class="math inline">\(x=0\)</span>. Consider the fibers of this projection. The fiber at <span class="math inline">\(y=0\)</span> is a line, while for <span class="math inline">\(y \neq 0\)</span> it is a point. Let’s see this algebraically:</p>
+<ul>
+<li><span class="math inline">\(k[x] / (x) \otimes_R M \cong k[x,y] / (x,y) \cong k\)</span></li>
+<li><span class="math inline">\(k[x] / (x-a) \otimes_R M \cong k[x,y] / (x-a, xy) \cong 0\)</span> for <span class="math inline">\(a \neq 0\)</span>.</li>
+</ul></li>
 </ul>
-<p>Luckily, it turns out that this irregularity is completely caused by the arbitrariness of residue fields. Once we restrict ourselves to a local ring, the world becomes much nicer:</p>
+<p>From the above examples, one might notice that this irregularity is mostly constituted from the choice of residue fields, i.e.&nbsp;the choice of fibers over different maximal ideals. Luckily, it turns out that this is almost the only obstruction. Once we restrict ourselves to a local ring, the world becomes much nicer:</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -655,6 +662,54 @@ Remark
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>Remark</em>. </span>[TODO] What can we say about the module <span class="math inline">\(M\)</span> given that <span class="math inline">\(\operatorname{rank}_R M = \operatorname{spanrank}_R M\)</span>?</p>
+</div>
+</div>
+</div>
+</div>
+<p>We close our discussion with some well-known observations:</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-various" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 4</strong></span> Let <span class="math inline">\(R\)</span> be a ring, then:</p>
+<ol type="1">
+<li><p>Any <span class="math inline">\(R^{\oplus n} \to R^{\oplus n}\)</span> epimorphism <span class="math inline">\(\varphi\)</span> must be an isomorphism. <span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, exercise 3.15]</a></span></p></li>
+<li><p>An <span class="math inline">\(R^{\oplus n} \to R^{\oplus n}\)</span> monomorphism <span class="math inline">\(\varphi\)</span> may not be an isomorphism in general.</p>
+<p>Is it true when <span class="math inline">\(R\)</span> is a local ring? [TODO]</p></li>
+<li><p>An <span class="math inline">\(R^{\oplus n} \to R^{\oplus m}\)</span> epimorphism <span class="math inline">\(\varphi\)</span> implies <span class="math inline">\(n \geq m\)</span>. <span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, exercise 2.11]</a></span></p></li>
+<li><p>An <span class="math inline">\(R^{\oplus n} \to R^{\oplus m}\)</span> isomorphism <span class="math inline">\(\varphi\)</span> implies <span class="math inline">\(n = m\)</span>. <span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, exercise 2.11]</a></span></p></li>
+<li><p>An <span class="math inline">\(R^{\oplus n} \to R^{\oplus m}\)</span> monomorphism <span class="math inline">\(\varphi\)</span>? [TODO] <span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, exercise 2.11]</a></span></p>
+<p>It is at least true for <span class="math inline">\(R\)</span> an integral domain.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span></p>
+<ol type="1">
+<li><p>Obtain a split monomorphism (a right inverse of <span class="math inline">\(\varphi\)</span>) from the fact that <span class="math inline">\(R^{\oplus n}\)</span> is projective. Use the determinant to conclude.</p>
+<p>[TODO] There is also a proof using residue fields and Nakayama’s lemma. See <span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, exercise 3.15]</a></span>.</p></li>
+<li><p>Consider <span class="math inline">\(\varphi: \mathbb Z \to \mathbb Z\)</span>, <span class="math inline">\(z \mapsto 2z\)</span>.</p></li>
+<li><p>Tensor with any residue field of <span class="math inline">\(R\)</span>. Right side is still exact, hence a vector space epimorphism.</p></li>
+<li><p>Do the same as (3) again with the inverse map.</p></li>
+<li><p>When <span class="math inline">\(R\)</span> is an integral domain, tensoring with the field of fractions of <span class="math inline">\(R\)</span> does not destroy the injectivity, hence (5) holds in this case.</p></li>
+</ol>
 </div>
 </div>
 </div>
