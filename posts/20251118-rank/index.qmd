@@ -18,6 +18,8 @@ format:
 
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\spanrank}{\operatorname{spanrank}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\coker}{\operatorname{coker}}
 
 We work over a commutative ring $R$ with unity. The rank $\rank_R M$ of a module $R$-module $M$ is defined as the maximal cardinality of a $R$-linearly independent subset of $M$. A homologist might write this as an exact sequence
 $$
@@ -63,7 +65,7 @@ For the upward direction, suppose the bottom arrow is injective. Consider an ele
 
 Note that we have only used the flatness of $k$ and that $R$ is an integral domain. Since every localization of a ring is flat, the same proof shows that as long as $R$ is an integral domain, localzation does not change the rank of a module.
 
-[TODO] It's interesting to ask if the integral domain condition is necessary. At least, the one side inequality $\rank_R M \leq \dim_k (k \otimes_R M)$ is always true.
+Indeed, $\rank$, as a function over $\Spec R$, is locally constant. [TODO]
 :::
 
 Another possible definition of rank is the minimal number of generators of a module. We call this the span rank $\spanrank_R M$ of an $R$-module $M$. A homologist might write this as an exact sequence
@@ -110,13 +112,22 @@ with $k$, we get an exact sequence
 $$
 k^{\oplus m} \longrightarrow k \otimes_R M \longrightarrow 0
 $$
-So indeed $\spanrank_R M \geq \dim_k (k \otimes_R M)$. Sadly the converse is not true in general. For example:
+Geometrically, if $M$ is a ring, then $\dim_k (k \otimes_R M)$ corresponds to the dimension of the fiber of the morphism $\Spec M \to \Spec R$ at the point $\mathfrak m$.
+
+Above derivation of exact sequence shows that $\spanrank_R M \geq \dim_k (k \otimes_R M)$. Sadly the reversed inequality is not true in general. For example:
 
 - An arithmetic example: Let $R = \mathbb Z$ and $M = \mathbb Z/2\mathbb Z$. Then $\spanrank_{\mathbb Z} M = 1$ but $\mathbb Z/2\mathbb Z \otimes_{\mathbb Z} \mathbb Z/3\mathbb Z \cong 0$.
 
-- An geometric example: Let $R = \mathbb R[x]$ and $M = \mathbb R[x]$. Then $\spanrank M = 1$. But $\mathbb R[x] / (x) \cong \mathbb R$ while $\mathbb R[x] / (x^2 + 1) \cong \mathbb C$. We see that different residue fields give different dimensions. Blame the failure of Hilbert's Nullstellensatz over non-algebraically closed fields for this irregularity!
+- A geometric example: Let $R = \mathbb C[x]$ and $M = \mathbb C[x] / (x)$. Then $\spanrank M = 1$. But the $\mathbb C$-dimension of $\mathbb C[x] / (x) \otimes_{\mathbb C[x]} \mathbb C[x] / (x - a)$ is $0$ for any $a \neq 0$.
 
-Luckily, it turns out that this irregularity is completely caused by the arbitrariness of residue fields. Once we restrict ourselves to a local ring, the world becomes much nicer:
+- Another geometric example: Let $R = k[x]$ and $M = k[x,y]/(xy)$, action induced by ring multiplication. $1, y, y^2, \dots$ generates $M$ via $R$-linear combination, hence $\spanrank_R M = + \infty$.
+  
+  Geometrically this represents the projection from $xy=0$ to $x=0$. Consider the fibers of this projection. The fiber at $y=0$ is a line, while for $y \neq 0$ it is a point. Let's see this algebraically:
+
+  - $k[x] / (x) \otimes_R M \cong k[x,y] / (x,y) \cong k$
+  - $k[x] / (x-a) \otimes_R M \cong k[x,y] / (x-a, xy) \cong 0$ for $a \neq 0$.
+
+From the above examples, one might notice that this irregularity is mostly constituted from the choice of residue fields, i.e. the choice of fibers over different maximal ideals. Luckily, it turns out that this is almost the only obstruction. Once we restrict ourselves to a local ring, the world becomes much nicer:
 
 :::{#prp-spanrank-eq-residue-dim-of-local-of-fg}
 
@@ -156,4 +167,40 @@ Localizing $R = k[x]$ at the maximal ideal $(x)$ does not change any statements 
 :::{.remark}
 
 [TODO] What can we say about the module $M$ given that $\rank_R M = \spanrank_R M$?
+:::
+
+We close our discussion with some well-known observations:
+
+:::{#prp-various}
+
+Let $R$ be a ring, then:
+
+1. Any $R^{\oplus n} \to R^{\oplus n}$ epimorphism $\varphi$ must be an isomorphism. [@AM1969, {exercise 3.15}]
+
+2. An $R^{\oplus n} \to R^{\oplus n}$ monomorphism $\varphi$ may not be an isomorphism in general.
+
+   Is it true when $R$ is a local ring? [TODO]
+
+3. An $R^{\oplus n} \to R^{\oplus m}$ epimorphism $\varphi$ implies $n \geq m$. [@AM1969, {exercise 2.11}]
+
+4. An $R^{\oplus n} \to R^{\oplus m}$ isomorphism $\varphi$ implies $n = m$. [@AM1969, {exercise 2.11}]
+
+5. An $R^{\oplus n} \to R^{\oplus m}$ monomorphism $\varphi$? [TODO] [@AM1969, {exercise 2.11}]
+
+   It is at least true for $R$ an integral domain.
+:::
+
+:::{.proof}
+
+1. Obtain a split monomorphism (a right inverse of $\varphi$) from the fact that $R^{\oplus n}$ is projective. Use the determinant to conclude.
+
+   [TODO] There is also a proof using residue fields and Nakayama's lemma. See [@AM1969, {exercise 3.15}].
+
+2. Consider $\varphi: \mathbb Z \to \mathbb Z$, $z \mapsto 2z$. 
+
+3. Tensor with any residue field of $R$. Right side is still exact, hence a vector space epimorphism.
+
+4. Do the same as (3) again with the inverse map.
+
+5. When $R$ is an integral domain, tensoring with the field of fractions of $R$ does not destroy the injectivity, hence (5) holds in this case.
 :::
