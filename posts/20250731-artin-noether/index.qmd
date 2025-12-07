@@ -1,13 +1,12 @@
 ---
-title: "Artin--Noether 乱炖"
-subtitle: "On the commutative Akizuki--Hopkins--Levitzki Theorem"
-abstract: "交换幺环 Artinian 等价于零维 Noetherian．"
-author: "sun123zxy"
+title: Artin--Noether 乱炖
+subtitle: On the Equivalence of Artinian and Zero-Dimensional Noetherian Rings
+author: sun123zxy
 date: 2025/08/01
+date-modified: 2025/12/07
 lang: zh
 bibliography: index.bib
 
-draft: true
 categories:
   - math 
   - algebra
@@ -90,6 +89,11 @@ $$
   容易利用生成元有限和鸽巢原理得证．
   :::
 
+  :::{.remark}
+
+  一个常见变体是，Noether 环中任意理想的 radical 的自乘若干次幂一定落入该理想中．
+  :::
+
 - $A$ 是 Artin 环蕴含了 $A$ 是零维的——我们直接给出一般情况的证明：
 
   :::{#prp-artin-zero-dim}
@@ -135,7 +139,7 @@ $$
 
 - $A$ 作为 $A$-模具有有限合成列；
 - $A$ 是 Artin 环；
-- $A$ 的 Jacobson radical $\mathfrak J$ 是幂零理想；
+- $A$ 的极大理想 $\mathfrak m$ 幂零；
 - $A$ 的 Krull 维度为零．
 :::
 
@@ -156,12 +160,29 @@ A
 &\cong \prod_i A / \mathfrak m_i^k & \text{by Chinese Remainder Theorem}
 \end{aligned}
 $$
-注意 $A / \mathfrak m_i^k$ 都是极大理想为 $\mathfrak m_i$ 的局部环．于是 $A$ 被拆分为有限个局部环的直积．Artinian、Noetherian、零维的性质都因此在 $A$ 及其局部环间双向传播．这样
+
+:::{.remark}
+
+最后一步需要用到 $\mathfrak m_i^k$ 两两 comaximal 的性质．事实上，comaximal 的性质关于取 radical 保持：理想 $\mathfrak a, \mathfrak b$ 满足 $\mathfrak a + \mathfrak b = A$ 当且仅当 $\sqrt{\mathfrak a} + \sqrt{\mathfrak b} = A$：
+
+$$
+\begin{aligned}
+\mathfrak a + \mathfrak b = A
+&\iff \sqrt{\mathfrak a + \mathfrak b} = A \\
+&\iff \sqrt{\sqrt{\mathfrak a} + \sqrt{\mathfrak b}} = A \\
+&\iff \sqrt{\mathfrak a} + \sqrt{\mathfrak b} = A
+\end{aligned}
+$$
+
+此外，可见对非局部环的情况，任何极大理想 $\mathfrak m$ 都不可能幂零：否则 $\mathfrak m \subseteq \mathfrak R \subset \mathfrak J \subseteq \mathfrak m$，局部环．
+:::
+
+注意 $A / \mathfrak m_i^k \cong A_{\mathfrak m_i} / \mathfrak m_i^k A_{\mathfrak m_i}$ 都是极大理想为 $\mathfrak m_i$ 的局部环．于是 $A$ 被拆分为有限个局部环的直积．Artinian、Noetherian、零维的性质因此在 $A$ 及其局部环间双向传播．这样
 $$
 \begin{aligned}
 A \text{ is Artinian}
-&\iff A / m_i^k \text{ is Artinian for each } i \\
-&\iff A / m_i^k \text{ is Noetherian and of Krull dimension $0$ for each } i \\
+&\iff A / \mathfrak m_i^k \text{ is Artinian for each } i \\
+&\iff A / \mathfrak m_i^k \text{ is Noetherian and of Krull dimension $0$ for each } i \\
 &\iff A \text{ is Noetherian and of Krull dimension $0$}
 \end{aligned}
 $$
@@ -197,7 +218,11 @@ $$
 
 - 零维 Noether 环：
 
-  TODO：准素分解
+  Noether 环的任意理想都有准素分解 [@m_f_atiyah_introduction_1969, {theorem 7.13}]，特别地，考虑零理想的准素分解，取 radical 得到 nilradical $\mathfrak R$ 的素理想分解 $\mathfrak R = \bigcap_i \mathfrak p_i$．
+  
+  我们指出，其它 $A$ 的素理想都至少包含某个 $\mathfrak p_i$：对任意素理想 $\mathfrak p$，$\prod_i \mathfrak p_i \subseteq \bigcap_i \mathfrak p_i = \mathfrak R \subseteq \mathfrak p$，再用素理想等价刻画 [@m_f_atiyah_introduction_1969, {theorem 1.11 (ii)}] 就存在特定 $i$ 使得 $\mathfrak p_i \subseteq \mathfrak p$．
+
+  现在使用 $A$ 的零维性，立得 $\mathfrak p_i$ 组成 $A$ 的所有极大理想，故 $A$ 的极大理想数量有限．
 
 至此我们完成了 Artin 环等价于零维 Noether 环的证明．既然已经知道 Artinian 强于 Noetherian，让我们把定理改写成更加令人印象深刻的形式：
 
@@ -212,6 +237,45 @@ $$
 :::
 
 TODO：[@altman_term_2013] 提供了证明的另一条路径．
+
+## 后记
+
+除环的 Krull 维数外，刻画局部 Noether 环的另一重要参数是 $\dim_k (\mathfrak m / \mathfrak m^2)$：$\mathfrak m / \mathfrak m^2$ 作为 $k := A / \mathfrak m$-线性空间的维数．由 Nakayama 引理 [@m_f_atiyah_introduction_1969, {proposition 2.8}]，$\dim_k (\mathfrak m / \mathfrak m^2)$ 恰为 $\mathfrak m$ 的最小生成元个数．
+
+$\dim_k \mathfrak m / \mathfrak m^2 = 0$ 时，$\mathfrak m = 0$，故 $A$ 是域．现在来看第二简单的情况：$\dim_k \mathfrak m / \mathfrak m^2 = 1$．使用 Krull 交定理可以证明，如下条件对局部 Noether 环 $A$ 等价：
+
+- $A$ 是 PIR，即所有理想都是主理想．
+
+- $A$ 的极大理想 $\mathfrak m$ 是主理想．
+
+- $\dim_{k} \mathfrak m / \mathfrak m^2 = 1$．
+
+- 每个非零理想都是 $\mathfrak m$ 的某个幂次．
+
+考虑到 [@thm-artin-noether-local-ex]，当 $\mathfrak m$ 不稳定时，任意非零理想都是 $\mathfrak m$ 的某个幂次，故任意非零素理想都是 $\mathfrak m$，即 $A$ 至多一维．当 $\mathfrak m$ 稳定（即幂零），我们得到 Artin 的零维局部 PIR．否则 $A$ 是维度为 $1$ 的整环，此时这种环被称为离散赋值环（Discrete Valuation Ring, DVR），典型的例子有
+
+- $k[x]_{(x)}$：一元多项式环在素理想 $(x)$ 处的局部化是 DVR．
+- $k[[x]]$：一元多项式环在 $(x)$ 处的完备化是 DVR．
+- $k[x,y]_{(x)}$：整闭的 Noether 整环在高度为 $1$ 的素理想处的局部化是 DVR．人话：不可约代数超曲面（余维为 $1$）附近的函数芽是 DVR．
+
+一般地，满足 Krull 维数等于 $\dim_k (\mathfrak m / \mathfrak m^2)$ 的局部 Noether 环被称为是正则的 [@m_f_atiyah_introduction_1969, {theorem 11.22}]．DVR 恰是一维正则局部环．
+
+来看整体．之前看到，零维 Noether 环是若干局部 Artin 环的直积，故零维 Noether 环是 PIR 当且仅当每个局部环都是 PIR．现在来看一维 Noether 环，我们希望将局部正则性翻译到整体上．事实是：
+
+- 对一维局部诺特环，DVR 等价于整闭性．[@m_f_atiyah_introduction_1969, {proposition 9.2}]
+- 整闭是局部性质．[@m_f_atiyah_introduction_1969, {proposition 5.13}]
+
+故一维 Noether 环整闭当且仅当它的每个局部化是 DVR．这种环被称为 Dedekind 整环．典型的例子有:
+
+- 代数数域的整数环，即 $\mathbb Z$ 在 $\mathbb Q$ 的某一有限域扩张中的整闭包．[@m_f_atiyah_introduction_1969, {theorem 9.5}]
+- non-singular 的不可约代数曲线（一维代数簇）的函数环．注意曲线的 non-singularity 恰为每点局部化的正则性要求．
+
+Dedekind 整环有很多数论上的好性质，例如
+
+- 所有准素理想都是某个素理想的幂次 [@m_f_atiyah_introduction_1969, {theorem 9.3}]
+- 所有理想都有唯一素理想乘积分解 [@m_f_atiyah_introduction_1969, {theorem 9.4}]
+
+等．这里就不展开了．
 
 ## Acknowledgement {.appendix}
 
