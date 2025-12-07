@@ -8,8 +8,6 @@ categories:
   - math
   - combinatorics
   - algebra
-collection:
-  - dedicated
 
 format:
   html: default
