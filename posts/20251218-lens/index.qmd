@@ -1,0 +1,95 @@
+---
+title: 透镜成像乱炖
+author: sun123zxy
+date: 2025/11/18
+lang: zh
+
+bibliography: index.bib
+
+categories:
+  - math
+  - physics
+
+collection:
+  - short
+
+format:
+  html: default
+---
+
+光学中，光线的传播路径满足 Fermat 原理——即光线在两点间传播的路径使得光程（optical path length）极小．折射定律（Snell's Law）可以由同介质中光线直线传播，并移动交界点求导算得
+$$
+n_1 \sin \theta_1 = n_2 \sin \theta_2
+$$
+这里 $n_1, n_2$ 分别是两介质的折射率，$\theta_1, \theta_2$ 分别是入射角和折射角．
+
+下面解析薄透镜的成像原理．先做单面的情形．假设透镜是一个球面半径为 $R$ 的球面，折射率为 $n_1$，球面外折射率为 $n_0$，光线只进不出．连接物点和球心作为 $x$ 轴，考察与 $x$ 轴夹角为 $\alpha$ 的入射光线从物点出发，到达球面交点，再折射进入球内与 $x$ 轴以 $\gamma$ 角重新相交与的路径，设折射面入射角为 $\theta_1$，折射角为 $\theta_2$，折射点与球心连线与 $x$ 轴夹角为 $\beta$，与 $x$ 轴距离为 $h$，与物点 $x$ 轴投影距离为 $u$，与最终交点 $x$ 轴投影距离为 $v$．可列方程组
+$$
+\begin{aligned}
+\tan \alpha &= \frac{h}{u} \\
+\sin \beta &= \frac{h}{R} \\
+\theta_1 &= \alpha + \beta \\
+n_0 \sin \theta_1 &= n_1 \sin \theta_2 \\
+\gamma &= \beta - \theta_2 \\
+\tan \gamma &= \frac{h}{v} \\
+\end{aligned}
+$$
+
+![单面透镜成像](img/optic-image.svg){#fig-optic-image}
+
+我们考虑近轴情形，即认为 $h$ 很小，这样 $\alpha, \beta, \gamma$ 也很小，可以一阶近似，算得
+$$
+\frac{n_0}{u} + \frac{n_1}{v} = \frac{n_1 - n_0}{R}
+$$
+这里 $v$ 与真实像点相差一个 $o(h)$．当 $h$ 很小时，可以认为 $v$ 只与 $u$ 有关，从而所有从物点光线聚焦于一处，故在此处成像清晰．不可忽略的 $h$ 会导致球面像差．
+
+现在考虑双面薄透镜．双面，是指光线还会第二次折射离开透镜，球面半径先后为 $R_1, R_2$；薄，是指忽略不计透镜厚度，假装光线在透镜中传播时与主光轴距离不发生变化．设经过第一次折射，像点在折射点右侧 $v_1$ 处，第二次折射时可反向考虑为从像点 $v$ 处出发的光线入射到第二个折射面在 $-v_1$ 处成虚像，故
+$$
+\begin{aligned}
+\frac {n_0} {u} + \frac {n_1}{v_1} &= \frac{n_1 - n_0}{R_1} \\
+\frac{n_0}{v} + \frac {n_1} {-v_1} &= \frac{n_1 - n_0}{R_2}
+\end{aligned}
+$$
+两式相加得制镜公式（Lensmaker's equation）
+$$
+\frac 1 {u} + \frac 1 {v} = (n_1 - n_0) \left( \frac{1}{R_1} + \frac{1}{R_2} \right)
+$$
+我们如果定义 $f$ 满足 $1 / f = (n_1 - n_0) \left( \frac{1}{R_1} + \frac{1}{R_2} \right)$，便得到薄透镜成像公式
+$$
+\frac 1 u + \frac 1 v = \frac 1 f
+$$
+虽然现在 $f$ 的物理意义还不明确，马上会看到它是其实是焦距．
+
+前面的双面薄透镜成像公式仅适用于主光轴上点的成像问题，尚需处理不在主光轴上点的成像问题．单面球面透镜额可以由对称性恰当选取主光轴穿过物点，故已经知道透镜确能将物点发出的光线聚焦于某一像点．我们只需要确定像点的位置．
+
+考虑通过两条光线的交点确定像点：这需要我们了解平行光和过光心光线的成像性质．
+
+过光心的光线，两球面法向均与主光轴一致，因此不发生折射，继续沿直线传播．平行光入射单面透镜时，仍列出方程组
+$$
+\begin{aligned}
+\sin \theta_1 = \frac{h}{R} \\
+n_0 \sin \theta_1 &= n_1 \sin \theta_2 \\
+\gamma &= \theta_1 - \theta_2 \\
+\tan \gamma &= \frac{h}{f}
+\end{aligned}
+$$
+
+![单面透镜平行光聚焦](img/optic-parallel.svg){#fig-optic-parallel}
+
+作近轴近似解得
+$$
+\frac 1 f = \frac {n_1 - n_0} {n_1 R}
+$$
+故在无视 $o(h)$ 意义下，平行光经过单面透镜后聚焦于距透镜 $f$ 处．双面时，焦点成为虚像点，故
+$$
+\begin{aligned}
+\frac 1 {f_1} &= \frac {n_1 - n_0} {n_1 R_1} \\
+\frac{n_0}{f} + \frac {n_1} {-f_1} &= \frac{n_1 - n_0}{R_2}
+\end{aligned}
+$$
+解得薄透镜焦距公式
+$$
+\frac 1 f = (n_1 - n_0) \left( \frac{1}{R_1} + \frac{1}{R_2} \right)
+$$
+
+综上，我们可以通过两条光线的交点确定像点位置：一条过光心不折射，另一条平行光经过透镜后聚于焦点处．简单几何推演可再次得薄透镜成像公式 $\frac 1 u + \frac 1 v = \frac 1 f$——这次的公式足以描述所有靠近主光轴的物点的成像规律．
