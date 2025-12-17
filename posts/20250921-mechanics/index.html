@@ -345,7 +345,9 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#newton-力学" id="toc-newton-力学" class="nav-link" data-scroll-target="#newton-力学"><span class="header-section-number">2.1</span> Newton 力学</a></li>
   <li><a href="#kepler-定律" id="toc-kepler-定律" class="nav-link" data-scroll-target="#kepler-定律"><span class="header-section-number">2.2</span> Kepler 定律</a></li>
-  <li><a href="#光学" id="toc-光学" class="nav-link" data-scroll-target="#光学"><span class="header-section-number">2.3</span> 光学</a></li>
+  <li><a href="#能量小寄巧" id="toc-能量小寄巧" class="nav-link" data-scroll-target="#能量小寄巧"><span class="header-section-number">2.3</span> 能量小寄巧</a></li>
+  <li><a href="#测地线" id="toc-测地线" class="nav-link" data-scroll-target="#测地线"><span class="header-section-number">2.4</span> 测地线</a></li>
+  <li><a href="#光学" id="toc-光学" class="nav-link" data-scroll-target="#光学"><span class="header-section-number">2.5</span> 光学</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -382,6 +384,12 @@ window.Quarto = {
     </div>
   </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">修改于</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">2025年12月18日</p>
+    </div>
+  </div>
     
   </div>
   
@@ -515,13 +523,116 @@ H(t, r, \theta, p_r, p_\theta) = \frac{1}{2m} \left( p_r^2 + \frac{p_\theta^2}{r
 \dot{p}_\theta &amp;= 0
 \end{aligned}
 \right.
-\]</span> 我们再次看到了角动量 <span class="math inline">\(p_\theta\)</span> 守恒，且方程变得易于求解．剩下的事情是取 <span class="math inline">\(U(r) = -\frac{k}{r}\)</span> 后嗯算积分【TODO】．</p>
+\]</span> 我们再次看到了角动量 <span class="math inline">\(p_\theta\)</span> 守恒，且方程变得易于求解．剩下的事情是取 <span class="math inline">\(U(r) = -\frac{k}{r}\)</span> 后嗯算积分，我们不再赘述【TODO】．</p>
 </section>
-<section id="光学" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="光学"><span class="header-section-number">2.3</span> 光学</h3>
-<p>光学中，光线的传播路径满足 Fermat 原理——即光线在两点间传播的路径使得光程（optical path length）极小．设空间中某点处的折射率为 <span class="math inline">\(n(\vb* r)\)</span>，则光程定义为【TODO】</p>
+<section id="能量小寄巧" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="能量小寄巧"><span class="header-section-number">2.3</span> 能量小寄巧</h3>
+<p>当 Lagrangian <span class="math inline">\(L\)</span> 与时间 <span class="math inline">\(t\)</span> 无关时，最小化 <span class="math inline">\(L\)</span> 的路径积分与最小化 <span class="math inline">\(L^2\)</span> 的路径积分等价： <span class="math display">\[
+\begin{aligned}
+\pdv{L^2}{\vb* q} &amp;= 2 L \pdv{L}{\vb* q} \\
+\pdv{t}\pdv{L^2}{\dot{\vb* q}} &amp;= 2 L \pdv{t} \pdv{L}{\dot{\vb* q}} \\
+\pdv{t} \pdv{L^2}{\dot{\vb* q}} = \pdv{L^2}{\vb* q}
+&amp;\iff \pdv{t} \pdv{L}{\dot{\vb* q}} = \pdv{L}{\vb* q}
+\end{aligned}
+\]</span> 于是往往取 <span class="math inline">\(L^2 / 2\)</span>（或类似物）作为新的 Lagrangian 简化运算，并称其为某种能量．</p>
+</section>
+<section id="测地线" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="测地线"><span class="header-section-number">2.4</span> 测地线</h3>
+<p>测地线，即曲面上连接两点的最短路径，在微分几何和广义相对论中均有大量应用．下面假设读者具有识别微分几何黑话和记号系统的能力．以下来自 Gemini 2.5 Flash，不代表本人观点．</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution (E-L 方程导出测地线方程)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof solution">
+<p><span class="proof-title"><em>解</em> (E-L 方程导出测地线方程). </span>假设曲面 <span class="math inline">\(S\)</span> 的参数方程为 <span class="math inline">\(\vb*{r}(u^1, u^2)\)</span>．曲面上的第一基本形式为： <span class="math display">\[
+\dd{s}^2 = g_{ij} \dd{u}^i \dd{u}^j
+\]</span> 其中 <span class="math inline">\(g_{ij} = \pdv{\vb*{r}}{u^i} \cdot \pdv{\vb*{r}}{u^j}\)</span> 是度量张量．</p>
+<p>为了简化计算，我们在弧长参数化下最小化曲线的能量．定义拉格朗日函数 <span class="math inline">\(L\)</span> 为： <span class="math display">\[
+L(u^k, \dot{u}^k) = \frac{1}{2} g_{ij}(u^k) \dot{u}^i \dot{u}^j
+\]</span> 其中 <span class="math inline">\(\dot{u}^i = \dv{u^i}{t}\)</span>．我们要找的是使泛函 <span class="math inline">\(J = \int L \dd{t}\)</span> 取极值的曲线．</p>
+<p>对于坐标 <span class="math inline">\(u^k\)</span> (<span class="math inline">\(k=1,2\)</span>)，其对应的 E-L 方程为： <span class="math display">\[
+\dv{t} \qty(\pdv{L}{\dot{u}^k}) = \pdv{L}{u^k}
+\]</span></p>
+<ol type="1">
+<li><p>对速度的偏导： 由于 <span class="math inline">\(g_{ij}\)</span> 对 <span class="math inline">\(\dot{u}^k\)</span> 是常数且具有对称性： <span class="math display">\[\pdv{L}{\dot{u}^k} = \frac{1}{2} g_{kj} \dot{u}^j + \frac{1}{2} g_{ik} \dot{u}^i = g_{kj} \dot{u}^j\]</span></p></li>
+<li><p>对时间的全导数： 根据链式法则（注意 <span class="math inline">\(g_{kj}\)</span> 是坐标 <span class="math inline">\(u^i\)</span> 的函数）： <span class="math display">\[\dv{t} (g_{kj} \dot{u}^j) = \pdv{g_{kj}}{u^i} \dot{u}^i \dot{u}^j + g_{kj} \ddot{u}^j\]</span></p></li>
+<li><p>对坐标的偏导： <span class="math display">\[\pdv{L}{u^k} = \frac{1}{2} \pdv{g_{ij}}{u^k} \dot{u}^i \dot{u}^j\]</span></p></li>
+</ol>
+<p>将上述结果代入 E-L 方程： <span class="math display">\[
+g_{kj} \ddot{u}^j + \pdv{g_{kj}}{u^i} \dot{u}^i \dot{u}^j - \frac{1}{2} \pdv{g_{ij}}{u^k} \dot{u}^i \dot{u}^j = 0
+\]</span> 利用指标对称性 <span class="math inline">\(\pdv{g_{kj}}{u^i} \dot{u}^i \dot{u}^j = \frac{1}{2} \qty( \pdv{g_{kj}}{u^i} + \pdv{g_{ki}}{u^j} ) \dot{u}^i \dot{u}^j\)</span>，我们可以将方程改写为： <span class="math display">\[
+g_{kj} \ddot{u}^j + \frac{1}{2} \qty( \pdv{g_{kj}}{u^i} + \pdv{g_{ki}}{u^j} - \pdv{g_{ij}}{u^k} ) \dot{u}^i \dot{u}^j = 0
+\]</span> 引入第一类 Christoffel 符号 <span class="math inline">\([ij, k] = \frac{1}{2} (g_{kj,i} + g_{ki,j} - g_{ij,k})\)</span>，上式即为： <span class="math display">\[
+g_{kj} \ddot{u}^j + [ij, k] \dot{u}^i \dot{u}^j = 0
+\]</span></p>
+<p>两边同时乘以逆度量张量 <span class="math inline">\(g^{mk}\)</span>，得到标准的测地线微分方程： <span class="math display">\[
+\ddot{u}^m + \Gamma^m_{ij} \dot{u}^i \dot{u}^j = 0
+\]</span> 其中 <span class="math inline">\(\Gamma^m_{ij}\)</span> 是第二类 Christoffel 符号．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution (与测地曲率的联系)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof solution">
+<p><span class="proof-title"><em>解</em> (与测地曲率的联系). </span>回忆测地曲率的出处：曲线 <span class="math inline">\(\gamma(s)\)</span> 的加速度向量 <span class="math inline">\(\ddot{\vb*{r}}\)</span>（弧长参数化下）可以分解为： <span class="math display">\[
+\ddot{\vb*{r}} = \vb*{k}_g + \vb*{k}_n = \kappa_g \vb*{g} + \kappa_n \vb*{n}
+\]</span></p>
+<ol type="1">
+<li><p>曲线的二阶导数可以展开为： <span class="math display">\[
+\ddot{\vb*{r}} = \dv{s} \qty( \pdv{\vb*{r}}{u^i} \dot{u}^i ) = \pdv{\vb*{r}}{u^i}{u^j} \dot{u}^i \dot{u}^j + \pdv{\vb*{r}}{u^i} \ddot{u}^i
+\]</span></p></li>
+<li><p>用活动标架分解 <span class="math inline">\(\pdv{\vb*{r}}{u^i}{u^j} = \Gamma^k_{ij} \pdv{\vb*{r}}{u^k} + b_{ij} \vb*{n}\)</span> 代入上式： <span class="math display">\[
+\ddot{\vb*{r}} = \qty( \ddot{u}^k + \Gamma^k_{ij} \dot{u}^i \dot{u}^j ) \pdv{\vb*{r}}{u^k} + (b_{ij} \dot{u}^i \dot{u}^j) \vb*{n}\]</span></p></li>
+<li><p>由 E-L 方程导出的测地线方程正是要求上式中切平面分量（即 <span class="math inline">\(\pdv{\vb*{r}}{u^k}\)</span> 的系数）为 <span class="math inline">\(0\)</span>： <span class="math display">\[
+\ddot{u}^k + \Gamma^k_{ij} \dot{u}^i \dot{u}^j = 0
+\]</span></p></li>
+<li><p>因此，满足 E-L 方程的曲线，其加速度向量 <span class="math inline">\(\ddot{\vb*{r}}\)</span> 只有法向分量 <span class="math inline">\(\vb*{k}_n\)</span>，而切向分量 <span class="math inline">\(\vb*{k}_g = \vb*{0}\)</span>．根据定义，测地曲率是加速度向量在切平面投影的长度，故：<span class="math inline">\(\kappa_g = 0\)</span></p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="光学" class="level3" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="光学"><span class="header-section-number">2.5</span> 光学</h3>
+<p>光学中，光线的传播路径满足 Fermat 原理——即光线在两点间传播的路径使得光程（optical path length）极小．设空间中某点处的折射率为 <span class="math inline">\(n(\vb* r)\)</span>，则光程定义为路径积分【TODO】 <span class="math display">\[
+\int n(\vb* r) \dd{s} = \int n(\vb* r) \abs{\dot{\vb* r}} \dd{t}
+\]</span> 这里 <span class="math inline">\(\dd{s}\)</span> 是路径元．</p>
+<section id="折射定律" class="level4">
+<h4 class="anchored" data-anchor-id="折射定律">折射定律</h4>
+<p>可以由同介质中光线直线传播，并移动交界点求导算得 <span class="math display">\[
+n_1 \sin \theta_1 = n_2 \sin \theta_2
+\]</span></p>
+</section>
+<section id="透镜成像" class="level4">
+<h4 class="anchored" data-anchor-id="透镜成像">透镜成像</h4>
+<p>【TODO】</p>
+<p><img src="img/optic-sphere.svg" class="img-fluid"></p>
+<p><span class="math display">\[
+\frac 1 {u} + \frac 1 {v} = \frac{1}{f}
+\]</span></p>
 
 
+</section>
 </section>
 </section>
 
