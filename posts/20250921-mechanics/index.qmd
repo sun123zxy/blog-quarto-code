@@ -2,6 +2,7 @@
 title: 分析力学乱炖
 author: sun123zxy
 date: 2025/09/21
+date-modified: 2025/12/18
 lang: zh
 # bibliography: index.bib
 
@@ -176,8 +177,124 @@ $$
 \end{aligned}
 \right.
 $$
-我们再次看到了角动量 $p_\theta$ 守恒，且方程变得易于求解．剩下的事情是取 $U(r) = -\frac{k}{r}$ 后嗯算积分【TODO】．
+我们再次看到了角动量 $p_\theta$ 守恒，且方程变得易于求解．剩下的事情是取 $U(r) = -\frac{k}{r}$ 后嗯算积分，我们不再赘述【TODO】．
+
+### 能量小寄巧
+
+当 Lagrangian $L$ 与时间 $t$ 无关时，最小化 $L$ 的路径积分与最小化 $L^2$ 的路径积分等价：
+$$
+\begin{aligned}
+\pdv{L^2}{\vb* q} &= 2 L \pdv{L}{\vb* q} \\
+\pdv{t}\pdv{L^2}{\dot{\vb* q}} &= 2 L \pdv{t} \pdv{L}{\dot{\vb* q}} \\
+\pdv{t} \pdv{L^2}{\dot{\vb* q}} = \pdv{L^2}{\vb* q}
+&\iff \pdv{t} \pdv{L}{\dot{\vb* q}} = \pdv{L}{\vb* q}
+\end{aligned}
+$$
+于是往往取 $L^2 / 2$（或类似物）作为新的 Lagrangian 简化运算，并称其为某种能量．
+
+### 测地线
+
+测地线，即曲面上连接两点的最短路径，在微分几何和广义相对论中均有大量应用．下面假设读者具有识别微分几何黑话和记号系统的能力．以下来自 Gemini 2.5 Flash，不代表本人观点．
+
+:::{.solution}
+
+## E-L 方程导出测地线方程
+
+假设曲面 $S$ 的参数方程为 $\vb*{r}(u^1, u^2)$．曲面上的第一基本形式为：
+$$
+\dd{s}^2 = g_{ij} \dd{u}^i \dd{u}^j
+$$
+其中 $g_{ij} = \pdv{\vb*{r}}{u^i} \cdot \pdv{\vb*{r}}{u^j}$ 是度量张量．
+
+为了简化计算，我们在弧长参数化下最小化曲线的能量．定义拉格朗日函数 $L$ 为：
+$$
+L(u^k, \dot{u}^k) = \frac{1}{2} g_{ij}(u^k) \dot{u}^i \dot{u}^j
+$$
+其中 $\dot{u}^i = \dv{u^i}{t}$．我们要找的是使泛函 $J = \int L \dd{t}$ 取极值的曲线．
+
+对于坐标 $u^k$ ($k=1,2$)，其对应的 E-L 方程为：
+$$
+\dv{t} \qty(\pdv{L}{\dot{u}^k}) = \pdv{L}{u^k}
+$$
+
+1. 对速度的偏导：
+   由于 $g_{ij}$ 对 $\dot{u}^k$ 是常数且具有对称性：
+   $$\pdv{L}{\dot{u}^k} = \frac{1}{2} g_{kj} \dot{u}^j + \frac{1}{2} g_{ik} \dot{u}^i = g_{kj} \dot{u}^j$$
+
+2. 对时间的全导数：
+   根据链式法则（注意 $g_{kj}$ 是坐标 $u^i$ 的函数）：
+   $$\dv{t} (g_{kj} \dot{u}^j) = \pdv{g_{kj}}{u^i} \dot{u}^i \dot{u}^j + g_{kj} \ddot{u}^j$$
+
+3. 对坐标的偏导：
+   $$\pdv{L}{u^k} = \frac{1}{2} \pdv{g_{ij}}{u^k} \dot{u}^i \dot{u}^j$$
+
+将上述结果代入 E-L 方程：
+$$
+g_{kj} \ddot{u}^j + \pdv{g_{kj}}{u^i} \dot{u}^i \dot{u}^j - \frac{1}{2} \pdv{g_{ij}}{u^k} \dot{u}^i \dot{u}^j = 0
+$$
+利用指标对称性 $\pdv{g_{kj}}{u^i} \dot{u}^i \dot{u}^j = \frac{1}{2} \qty( \pdv{g_{kj}}{u^i} + \pdv{g_{ki}}{u^j} ) \dot{u}^i \dot{u}^j$，我们可以将方程改写为：
+$$
+g_{kj} \ddot{u}^j + \frac{1}{2} \qty( \pdv{g_{kj}}{u^i} + \pdv{g_{ki}}{u^j} - \pdv{g_{ij}}{u^k} ) \dot{u}^i \dot{u}^j = 0
+$$
+引入第一类 Christoffel 符号 $[ij, k] = \frac{1}{2} (g_{kj,i} + g_{ki,j} - g_{ij,k})$，上式即为：
+$$
+g_{kj} \ddot{u}^j + [ij, k] \dot{u}^i \dot{u}^j = 0
+$$
+
+两边同时乘以逆度量张量 $g^{mk}$，得到标准的测地线微分方程：
+$$
+\ddot{u}^m + \Gamma^m_{ij} \dot{u}^i \dot{u}^j = 0
+$$
+其中 $\Gamma^m_{ij}$ 是第二类 Christoffel 符号．
+:::
+
+:::{.solution}
+
+## 与测地曲率的联系
+
+回忆测地曲率的出处：曲线 $\gamma(s)$ 的加速度向量 $\ddot{\vb*{r}}$（弧长参数化下）可以分解为：
+$$
+\ddot{\vb*{r}} = \vb*{k}_g + \vb*{k}_n = \kappa_g \vb*{g} + \kappa_n \vb*{n}
+$$
+
+1. 曲线的二阶导数可以展开为：
+   $$
+   \ddot{\vb*{r}} = \dv{s} \qty( \pdv{\vb*{r}}{u^i} \dot{u}^i ) = \pdv{\vb*{r}}{u^i}{u^j} \dot{u}^i \dot{u}^j + \pdv{\vb*{r}}{u^i} \ddot{u}^i
+   $$
+
+2. 用活动标架分解 $\pdv{\vb*{r}}{u^i}{u^j} = \Gamma^k_{ij} \pdv{\vb*{r}}{u^k} + b_{ij} \vb*{n}$ 代入上式：
+   $$
+   \ddot{\vb*{r}} = \qty( \ddot{u}^k + \Gamma^k_{ij} \dot{u}^i \dot{u}^j ) \pdv{\vb*{r}}{u^k} + (b_{ij} \dot{u}^i \dot{u}^j) \vb*{n}$$
+
+3. 由 E-L 方程导出的测地线方程正是要求上式中切平面分量（即 $\pdv{\vb*{r}}{u^k}$ 的系数）为 $0$：
+   $$
+   \ddot{u}^k + \Gamma^k_{ij} \dot{u}^i \dot{u}^j = 0
+   $$
+
+4. 因此，满足 E-L 方程的曲线，其加速度向量 $\ddot{\vb*{r}}$ 只有法向分量 $\vb*{k}_n$，而切向分量 $\vb*{k}_g = \vb*{0}$．根据定义，测地曲率是加速度向量在切平面投影的长度，故：$\kappa_g = 0$
+:::
 
 ### 光学
 
-光学中，光线的传播路径满足 Fermat 原理——即光线在两点间传播的路径使得光程（optical path length）极小．设空间中某点处的折射率为 $n(\vb* r)$，则光程定义为【TODO】
+光学中，光线的传播路径满足 Fermat 原理——即光线在两点间传播的路径使得光程（optical path length）极小．设空间中某点处的折射率为 $n(\vb* r)$，则光程定义为路径积分【TODO】
+$$
+\int n(\vb* r) \dd{s} = \int n(\vb* r) \abs{\dot{\vb* r}} \dd{t}
+$$
+这里 $\dd{s}$ 是路径元．
+
+#### 折射定律
+
+可以由同介质中光线直线传播，并移动交界点求导算得
+$$
+n_1 \sin \theta_1 = n_2 \sin \theta_2
+$$
+
+#### 透镜成像
+
+【TODO】
+
+![](img/optic-sphere.svg)
+
+$$
+\frac 1 {u} + \frac 1 {v} = \frac{1}{f}
+$$
