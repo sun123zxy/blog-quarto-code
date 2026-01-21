@@ -1299,7 +1299,7 @@
     "href": "posts/20251028-einstein-sum/index.html#使用例",
     "title": "代数批如何理解 Einstein 求和约定",
     "section": "3 使用例",
-    "text": "3 使用例\n【TODO】"
+    "text": "3 使用例\nPython 的 numpy / torch 库均有 \\(\\mathbb R^n\\) 标准内积下的 Einstein 求和实现．\n\n\n代码\nimport numpy as np\na = np.array([[1, 2, 3],\n              [4, 5, 6]])\nb = np.array([[7, 8],\n              [9, 10],\n              [11, 12]])\nc = np.einsum('ik,kj-&gt;ij', a, b)\nprint(\"a = \\n\",a)\nprint(\"b = \\n\",b)\nprint(\"c = \\n\",c)\n\n\na = \n [[1 2 3]\n [4 5 6]]\nb = \n [[ 7  8]\n [ 9 10]\n [11 12]]\nc = \n [[ 58  64]\n [139 154]]\n\n\n由于我们在标准内积下工作，故可以无视协变反变 / 上下标的区别．ik,kj-&gt;ij 是 \\(c_i^j = a_i^k b_k^j\\) 的更紧凑写法．上述代码实现了矩阵乘法．也可以直接使用 np.dot 或 np.matmul 完成．一般来说，np.dot(a, b) 会缩并 a 最后一个指标（k）和倒数第二个指标（k）．但直接使用 Einstein 求和约定显然降低了背诵 API 的负担．"
   },
   {
     "objectID": "posts/20251028-einstein-sum/index.html#抽象废话",

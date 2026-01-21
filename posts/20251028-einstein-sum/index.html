@@ -21,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -571,7 +606,35 @@ a^i = e_\alpha^i a^\alpha \iff a_j = e_j^\beta a_\beta
 </section>
 <section id="使用例" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="使用例"><span class="header-section-number">3</span> 使用例</h2>
-<p>【TODO】</p>
+<p>Python 的 numpy / torch 库均有 <span class="math inline">\(\mathbb R^n\)</span> 标准内积下的 Einstein 求和实现．</p>
+<div id="95fdb2ef" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]])</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([[<span class="dv">7</span>, <span class="dv">8</span>],</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">9</span>, <span class="dv">10</span>],</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>              [<span class="dv">11</span>, <span class="dv">12</span>]])</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.einsum(<span class="st">'ik,kj-&gt;ij'</span>, a, b)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"a = </span><span class="ch">\n</span><span class="st">"</span>,a)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"b = </span><span class="ch">\n</span><span class="st">"</span>,b)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"c = </span><span class="ch">\n</span><span class="st">"</span>,c)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>a = 
+ [[1 2 3]
+ [4 5 6]]
+b = 
+ [[ 7  8]
+ [ 9 10]
+ [11 12]]
+c = 
+ [[ 58  64]
+ [139 154]]</code></pre>
+</div>
+</div>
+<p>由于我们在标准内积下工作，故可以无视协变反变 / 上下标的区别．<code>ik,kj-&gt;ij</code> 是 <span class="math inline">\(c_i^j = a_i^k b_k^j\)</span> 的更紧凑写法．上述代码实现了矩阵乘法．也可以直接使用 <code>np.dot</code> 或 <code>np.matmul</code> 完成．一般来说，<code>np.dot(a, b)</code> 会缩并 <code>a</code> 最后一个指标（<code>k</code>）和倒数第二个指标（<code>k</code>）．但直接使用 Einstein 求和约定显然降低了背诵 API 的负担．</p>
 </section>
 <section id="抽象废话" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="抽象废话"><span class="header-section-number">4</span> 抽象废话</h2>
