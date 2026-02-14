@@ -119,9 +119,9 @@ TinyTeX 安装需要畅通的外网环境．如果您使用 Clash 作为代理�
 
 若您不需要使用部分功能，也可以参考 `pyproject.toml` 文件改动所需依赖．
 
-#### 使用
-
 Quarto 的 VSCode 插件支持类似 Jupyter Notebook 的图文混排编辑体验．您可以通过在 Markdown 中嵌入 Python 代码块来动态生成数据图表（参见 [Quarto 文档](https://quarto.org/docs/computations/python.html)）．
+
+#### 使用
 
 使用例：
 
@@ -146,11 +146,31 @@ ax.grid(True)
 plt.show()
 ```
 
-对于计算密集的文稿，您可能希望直接编写 `.ipynb` 文件固定执行结果．Quarto 也支持直接渲染 `.ipynb` 文件，其中的 Markdown 块内仍可使用 Quarto 特性．（参见 [示例文件](examples/jupyter.ipynb)）
+#### 切换 Jupyter 内核（以 SageMath 为例）
+
+```
+jupyter:
+  kernel: sagemath
+```
+
+并使用 `{sage}` 作为代码块标签，参见 [Quarto Discussion #4231](https://github.com/orgs/quarto-dev/discussions/4231)．
+
+需要注意的是，需要确保当前环境的 `jupyter kernelspec list` 中已经正确安装了对应内核．
 
 :::{.remark}
 
-VSCode 有官方支持的 [Jupyter 插件](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) 用于编辑 `.ipynb` 文件．
+SageMath 在 Windows 原生环境下安装极为困难，我们建议通过直接编写 `.ipynb` 在 VSCode 中通过插件远程连接 WSL 中的 Jupyter 服务器使用 SageMath 内核．
+:::
+
+#### Computation 功能（使用 `.ipynb`）
+
+对于计算密集的文稿，您可能希望直接编写 `.ipynb` 文件固定执行结果．Quarto 也支持直接渲染 `.ipynb` 文件，其中的 Markdown 块内仍可使用 Quarto 特性．
+
+参见 [示例文件](examples/jupyter.ipynb)．建议您阅读 [Quarto 的 Jupyter Lab 使用介绍](https://quarto.org/docs/tools/jupyter-lab.html)．
+
+:::{.remark}
+
+除了直接使用使用 Jupyter Lab / Notebook 编辑 `.ipynb` 文件外，也可以使用 VSCode 官方支持的 [Jupyter 插件](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) 获得编辑器内的 Notebook 编辑体验．该插件还支持远程 Jupyter 服务器连接，您可以在本地使用 VSCode 编辑器连接远程服务器上的 Jupyter 内核进行计算．例如：您可以在 WSL 环境中安装 Jupyter 和 SageMath 内核，在 Windows 原生环境中使用 VSCode 编辑器连接 WSL 中的 Jupyter 服务器进行计算．
 :::
 
 ### 表格
