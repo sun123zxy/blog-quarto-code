@@ -312,37 +312,43 @@ Let $R$ be a nonzero ring, then:
 
 1. Any $R^{\oplus n} \to R^{\oplus n}$ epimorphism $\varphi$ must be an isomorphism. [@AM1969, {exercise 3.15}]
 
+   Obtain a split monomorphism (a right inverse of $\varphi$) from the fact that $R^{\oplus n}$ is projective. Use the determinant to conclude.
+
+   There's actually a more general result: for any finitely-generated $R$-module $M$, every epimorphism $M \to M$ is an isomorphism. To show this, view $M$ as an $R[x]$-module via the action $x \cdot m = \varphi(m)$, then $(x) \cdot M = x \cdot M = M$ by the surjectivity of $\varphi$. By Nakayama's lemma, there exists $sx = r \in (x) \subseteq R[x]$ such that $(1-sx) \cdot M = (1-r) \cdot M = 0$, i.e. $sx \cdot m = m$ for all $m \in M$, that is, $m \mapsto s \cdot m$ is an inverse of $\varphi$. Hence $\varphi$ is an isomorphism.
+   
+   Above result is due to [@vasconcelos_finitely_1969]. We also referred to [Math StackExchange](https://math.stackexchange.com/questions/239364/surjective-endomorphisms-of-finitely-generated-modules-are-isomorphisms).
+
 2. An $R^{\oplus n} \to R^{\oplus n}$ monomorphism $\varphi$ may not be an isomorphism in general.
 
-   Is it true when $R$ is a local ring? [TODO]
+   Consider $\varphi: \mathbb Z \to \mathbb Z$, $z \mapsto 2z$. 
+
+   [TODO] Is it true when $R$ is a local ring?
 
 3. An $R^{\oplus n} \to R^{\oplus m}$ epimorphism $\varphi$ implies $n \geq m$. [@AM1969, {exercise 2.11}]
 
+   Tensor with any residue field of $R$. Right side is still exact, hence a vector space epimorphism.
+
 4. An $R^{\oplus n} \to R^{\oplus m}$ isomorphism $\varphi$ implies $n = m$. [@AM1969, {exercise 2.11}]
+
+   Do the same as (3) again with the inverse map.
 
 5. An $R^{\oplus n} \to R^{\oplus m}$ monomorphism $\varphi$ implies $n \leq m$. [@AM1969, {exercise 2.11}]
 
    $R$ is said to satisfy the *strong rank condition* if the above statement always holds.
 
-   It's easy to see that this is true for $R$ an integral domain. The general case (of arbitrary commutative rings) is hard and left [TODO].
-:::
+   It's easy to see that this is true for $R$ an integral domain: tensoring with the field of fractions of $R$ does not destroy the injectivity.
+   
+   For the general case of arbitrary nonzero commutative rings, we provide some references:
 
-:::{.proof}
+   - [@orzech_onto_1971]. This paper proves a general result that for any finitely-generated $R$-module $M$ and its submodule $N$, every epimorphism $N \to M$ is an isomorphism.
+   
+     The strong rank condition follows immediately from this result: view $R^n$ as a submodule of $R^m$ via the monomorphism $\varphi$, assume otherwise that $n > m$, then we have an epimorphism $R^m \to R^n$ by projection, hence an isomorphism $R^m \to R^n$ by the result of [@orzech_onto_1971]. This contradicts (4).
 
-1. Obtain a split monomorphism (a right inverse of $\varphi$) from the fact that $R^{\oplus n}$ is projective. Use the determinant to conclude.
-
-   [TODO] There is also a proof using residue fields and Nakayama's lemma. See [@AM1969, {exercise 3.15}].
-
-2. Consider $\varphi: \mathbb Z \to \mathbb Z$, $z \mapsto 2z$. 
-
-3. Tensor with any residue field of $R$. Right side is still exact, hence a vector space epimorphism.
-
-4. Do the same as (3) again with the inverse map.
-
-5. When $R$ is an integral domain, tensoring with the field of fractions of $R$ does not destroy the injectivity, hence (5) holds in this case.
-
-   For the general case, we provide some references:
+     Note that [@vasconcelos_finitely_1969]'s result stated in (1) is a special case of this result by taking $N = M$.
 
    - [Strong rank condition for commutative rings - Mathlib 4 Docs](https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/FreeModule/StrongRankCondition.html)
+
    - Search Keyword: McCoy's Rank Theorem
+
+   - Another proof seems to make use of the exterior algebra.
 :::
