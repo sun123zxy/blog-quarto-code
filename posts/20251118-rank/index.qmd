@@ -102,7 +102,7 @@ Consider the following commutative diagram with exact rows:
 
 where $R^n \to R^m$ is constructed by the projective nature of $R^n$. $R^n \to M$ is injective, hence so do $R^n \to R^m \to M$ and in turn $R^n \to R^m$. Thus, we have an injection $R^n \to R^m$. 
 
-It remains to show that this implies $n \leq m$. This is called the *strong rank condition* for $R$. It is known that any nonzero commutative ring satisfies the strong rank condition, but proving this requires a lot of machinery. Proving the case when $R$ is an integral domain is much easier. We left this part of proof to [@prp-various, (5)].
+It remains to show that this implies $n \leq m$. This is called the *strong rank condition* for $R$. It is known that any nonzero commutative ring satisfies the strong rank condition, but proving this requires a lot of machinery. Proving the case when $R$ is an integral domain is much easier. We left this part of proof to [@prp-free-cmp-5].
 :::
 
 Regarding [@prp-rank-eq-fraction-dim], one might wonder if there is an analogous result for $\spanrank$. Let's say $\mathfrak m$ is a maximal ideal of $R$ and the residue field $k := R/\mathfrak m$. Tensoring the exact sequence
@@ -304,51 +304,67 @@ Here are some exercises:
   Let $M$ be a flat $R$-module. Is it true that for any maximal ideal $\mathfrak m$ of $R$ with residue field $k = R/\mathfrak m$, we have $\spanrank_R M = \dim_k (k \otimes_R M)$?
 :::
 
-We close our discussion with some well-known properties of homomorphisms between finitely generated free modules:
+We close our discussion with some well-known properties of homomorphisms between finitely generated free modules. From now on we assume $R$ is a nonzero.
 
-:::{#prp-various}
+:::{#prp-free-cmp-1}
 
-Let $R$ be a nonzero ring, then:
+## [@AM1969, {exercise 3.15}]
 
-1. Any $R^{\oplus n} \to R^{\oplus n}$ epimorphism $\varphi$ must be an isomorphism. [@AM1969, {exercise 3.15}]
-
-   Obtain a split monomorphism (a right inverse of $\varphi$) from the fact that $R^{\oplus n}$ is projective. Use the determinant to conclude.
-
-   There's actually a more general result: for any finitely-generated $R$-module $M$, every epimorphism $M \to M$ is an isomorphism. To show this, view $M$ as an $R[x]$-module via the action $x \cdot m = \varphi(m)$, then $(x) \cdot M = x \cdot M = M$ by the surjectivity of $\varphi$. By Nakayama's lemma, there exists $sx = r \in (x) \subseteq R[x]$ such that $(1-sx) \cdot M = (1-r) \cdot M = 0$, i.e. $sx \cdot m = m$ for all $m \in M$, that is, $m \mapsto s \cdot m$ is an inverse of $\varphi$. Hence $\varphi$ is an isomorphism.
-   
-   Above result is due to [@vasconcelos_finitely_1969]. We also referred to [Math StackExchange](https://math.stackexchange.com/questions/239364/surjective-endomorphisms-of-finitely-generated-modules-are-isomorphisms).
-
-2. An $R^{\oplus n} \to R^{\oplus n}$ monomorphism $\varphi$ may not be an isomorphism in general.
-
-   Consider $\varphi: \mathbb Z \to \mathbb Z$, $z \mapsto 2z$. 
-
-   [TODO] Is it true when $R$ is a local ring?
-
-3. An $R^{\oplus n} \to R^{\oplus m}$ epimorphism $\varphi$ implies $n \geq m$. [@AM1969, {exercise 2.11}]
-
-   Tensor with any residue field of $R$. Right side is still exact, hence a vector space epimorphism.
-
-4. An $R^{\oplus n} \to R^{\oplus m}$ isomorphism $\varphi$ implies $n = m$. [@AM1969, {exercise 2.11}]
-
-   Do the same as (3) again with the inverse map.
-
-5. An $R^{\oplus n} \to R^{\oplus m}$ monomorphism $\varphi$ implies $n \leq m$. [@AM1969, {exercise 2.11}]
-
-   $R$ is said to satisfy the *strong rank condition* if the above statement always holds.
-
-   It's easy to see that this is true for $R$ an integral domain: tensoring with the field of fractions of $R$ does not destroy the injectivity.
-   
-   For the general case of arbitrary nonzero commutative rings, we provide some references:
-
-   - [@orzech_onto_1971]. This paper proves a general result that for any finitely-generated $R$-module $M$ and its submodule $N$, every epimorphism $N \to M$ is an isomorphism.
-   
-     The strong rank condition follows immediately from this result: view $R^n$ as a submodule of $R^m$ via the monomorphism $\varphi$, assume otherwise that $n > m$, then we have an epimorphism $R^m \to R^n$ by projection, hence an isomorphism $R^m \to R^n$ by the result of [@orzech_onto_1971]. This contradicts (4).
-
-     Note that [@vasconcelos_finitely_1969]'s result stated in (1) is a special case of this result by taking $N = M$.
-
-   - [Strong rank condition for commutative rings - Mathlib 4 Docs](https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/FreeModule/StrongRankCondition.html)
-
-   - Search Keyword: McCoy's Rank Theorem
-
-   - Another proof seems to make use of the exterior algebra.
+Any $R^{\oplus n} \to R^{\oplus n}$ epimorphism $\varphi$ must be an isomorphism.
 :::
+
+Obtain a split monomorphism (a right inverse of $\varphi$) from the fact that $R^{\oplus n}$ is projective. Use the determinant to conclude.
+
+There's actually a more general result: for any finitely-generated $R$-module $M$, every epimorphism $M \to M$ is an isomorphism. To show this, view $M$ as an $R[x]$-module via the action $x \cdot m = \varphi(m)$, then $(x) \cdot M = x \cdot M = M$ by the surjectivity of $\varphi$. By Nakayama's lemma, there exists $sx = r \in (x) \subseteq R[x]$ such that $(1-sx) \cdot M = (1-r) \cdot M = 0$, i.e. $sx \cdot m = m$ for all $m \in M$, that is, $m \mapsto s \cdot m$ is an inverse of $\varphi$. Hence $\varphi$ is an isomorphism.
+
+Above result is due to [@vasconcelos_finitely_1969]. We also referred to [Math StackExchange](https://math.stackexchange.com/questions/239364/surjective-endomorphisms-of-finitely-generated-modules-are-isomorphisms).
+
+:::{#prp-free-cmp-2}
+
+An $R^{\oplus n} \to R^{\oplus n}$ monomorphism $\varphi$ may not be an isomorphism in general.
+:::
+
+Consider $\varphi: \mathbb Z \to \mathbb Z$, $z \mapsto 2z$. 
+
+[TODO] Is it true when $R$ is a local ring?
+
+:::{#prp-free-cmp-3}
+
+## [@AM1969, {exercise 2.11}]
+
+An $R^{\oplus n} \to R^{\oplus m}$ epimorphism $\varphi$ implies $n \geq m$.
+:::
+
+Tensor with any residue field of $R$. Right side is still exact, hence a vector space epimorphism.
+
+:::{#prp-free-cmp-4}
+
+An $R^{\oplus n} \to R^{\oplus m}$ isomorphism $\varphi$ implies $n = m$. [@AM1969, {exercise 2.11}]
+:::
+
+Do the same as (3) again with the inverse map.
+
+:::{#prp-free-cmp-5}
+
+## [@AM1969, {exercise 2.11}]
+
+An $R^{\oplus n} \to R^{\oplus m}$ monomorphism $\varphi$ implies $n \leq m$. 
+:::
+
+$R$ is said to satisfy the *strong rank condition* if the above statement always holds.
+
+It's easy to see that this is true for $R$ an integral domain: tensoring with the field of fractions of $R$ does not destroy the injectivity.
+
+For the general case of arbitrary nonzero commutative rings, we provide some references:
+
+- [@orzech_onto_1971]. This paper proves a general result that for any finitely-generated $R$-module $M$ and its submodule $N$, every epimorphism $N \to M$ is an isomorphism.
+
+  The strong rank condition follows immediately from this result: view $R^n$ as a submodule of $R^m$ via the monomorphism $\varphi$, assume otherwise that $n > m$, then we have an epimorphism $R^m \to R^n$ by projection, hence an isomorphism $R^m \to R^n$ by the result of [@orzech_onto_1971]. This contradicts (4).
+
+  Note that [@vasconcelos_finitely_1969]'s result stated in (1) is a special case of this result by taking $N = M$.
+
+- [Strong rank condition for commutative rings - Mathlib 4 Docs](https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/FreeModule/StrongRankCondition.html)
+
+- Search Keyword: McCoy's Rank Theorem
+
+- Another proof seems to make use of the exterior algebra.
