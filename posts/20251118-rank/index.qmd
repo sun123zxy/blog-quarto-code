@@ -100,7 +100,9 @@ Consider the following commutative diagram with exact rows:
 ```
 :::
 
-where $R^n \to R^m$ is constructed by the projective nature of $R^n$. $R^n \to M$ is injective, hence so do $R^n \to R^m \to M$ and in turn $R^n \to R^m$. Thus, we have an injection $R^n \to R^m$. Tensoring with any residue field of $R$, we get an injection of vector spaces over that field, which implies $n \leq m$.
+where $R^n \to R^m$ is constructed by the projective nature of $R^n$. $R^n \to M$ is injective, hence so do $R^n \to R^m \to M$ and in turn $R^n \to R^m$. Thus, we have an injection $R^n \to R^m$. 
+
+It remains to show that this implies $n \leq m$. This is called the *strong rank condition* for $R$. It is known that any nonzero commutative ring satisfies the strong rank condition, but proving this requires a lot of machinery. Proving the case when $R$ is an integral domain is much easier. We left this part of proof to [@prp-various, (5)].
 :::
 
 Regarding [@prp-rank-eq-fraction-dim], one might wonder if there is an analogous result for $\spanrank$. Let's say $\mathfrak m$ is a maximal ideal of $R$ and the residue field $k := R/\mathfrak m$. Tensoring the exact sequence
@@ -306,7 +308,7 @@ We close our discussion with some well-known properties of homomorphisms between
 
 :::{#prp-various}
 
-Let $R$ be a ring, then:
+Let $R$ be a nonzero ring, then:
 
 1. Any $R^{\oplus n} \to R^{\oplus n}$ epimorphism $\varphi$ must be an isomorphism. [@AM1969, {exercise 3.15}]
 
@@ -318,9 +320,11 @@ Let $R$ be a ring, then:
 
 4. An $R^{\oplus n} \to R^{\oplus m}$ isomorphism $\varphi$ implies $n = m$. [@AM1969, {exercise 2.11}]
 
-5. An $R^{\oplus n} \to R^{\oplus m}$ monomorphism $\varphi$? [TODO] [@AM1969, {exercise 2.11}]
+5. An $R^{\oplus n} \to R^{\oplus m}$ monomorphism $\varphi$ implies $n \leq m$. [@AM1969, {exercise 2.11}]
 
-   It is at least true for $R$ an integral domain.
+   $R$ is said to satisfy the *strong rank condition* if the above statement always holds.
+
+   It's easy to see that this is true for $R$ an integral domain. The general case (of arbitrary commutative rings) is hard and left [TODO].
 :::
 
 :::{.proof}
@@ -336,4 +340,9 @@ Let $R$ be a ring, then:
 4. Do the same as (3) again with the inverse map.
 
 5. When $R$ is an integral domain, tensoring with the field of fractions of $R$ does not destroy the injectivity, hence (5) holds in this case.
+
+   For the general case, we provide some references:
+
+   - [Strong rank condition for commutative rings - Mathlib 4 Docs](https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/FreeModule/StrongRankCondition.html)
+   - Search Keyword: McCoy's Rank Theorem
 :::
