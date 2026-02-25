@@ -576,7 +576,7 @@ Figure&nbsp;2
 </figure>
 </div>
 <p>where <span class="math inline">\(R^n \to R^m\)</span> is constructed by the projective nature of <span class="math inline">\(R^n\)</span>. <span class="math inline">\(R^n \to M\)</span> is injective, hence so do <span class="math inline">\(R^n \to R^m \to M\)</span> and in turn <span class="math inline">\(R^n \to R^m\)</span>. Thus, we have an injection <span class="math inline">\(R^n \to R^m\)</span>.</p>
-<p>It remains to show that this implies <span class="math inline">\(n \leq m\)</span>. This is called the <em>strong rank condition</em> for <span class="math inline">\(R\)</span>. It is known that any nonzero commutative ring satisfies the strong rank condition, but proving this requires a lot of machinery. Proving the case when <span class="math inline">\(R\)</span> is an integral domain is much easier. We left this part of proof to <a href="#prp-various" class="quarto-xref">Proposition&nbsp;4</a>.</p>
+<p>It remains to show that this implies <span class="math inline">\(n \leq m\)</span>. This is called the <em>strong rank condition</em> for <span class="math inline">\(R\)</span>. It is known that any nonzero commutative ring satisfies the strong rank condition, but proving this requires a lot of machinery. Proving the case when <span class="math inline">\(R\)</span> is an integral domain is much easier. We left this part of proof to <a href="#prp-free-cmp-5" class="quarto-xref">Proposition&nbsp;8</a>.</p>
 </div>
 </div>
 </div>
@@ -842,28 +842,74 @@ k[x] / (x) \otimes_{k[x]} k[[x]] \cong k[[x]] / x k[[x]]
 </div>
 </div>
 </div>
-<p>We close our discussion with some well-known properties of homomorphisms between finitely generated free modules:</p>
+<p>We close our discussion with some well-known properties of homomorphisms between finitely generated free modules. From now on we assume <span class="math inline">\(R\)</span> is a nonzero.</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<div id="prp-various" class="theorem proposition">
-<p><span class="theorem-title"><strong>Proposition 4</strong></span> Let <span class="math inline">\(R\)</span> be a nonzero ring, then:</p>
-<ol type="1">
-<li><p>Any <span class="math inline">\(R^{\oplus n} \to R^{\oplus n}\)</span> epimorphism <span class="math inline">\(\varphi\)</span> must be an isomorphism. <span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, exercise 3.15]</a></span></p>
+<div id="prp-free-cmp-1" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 4 (<span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, exercise 3.15]</a></span>)</strong></span> Any <span class="math inline">\(R^{\oplus n} \to R^{\oplus n}\)</span> epimorphism <span class="math inline">\(\varphi\)</span> must be an isomorphism.</p>
+</div>
+</div>
+</div>
+</div>
 <p>Obtain a split monomorphism (a right inverse of <span class="math inline">\(\varphi\)</span>) from the fact that <span class="math inline">\(R^{\oplus n}\)</span> is projective. Use the determinant to conclude.</p>
 <p>There’s actually a more general result: for any finitely-generated <span class="math inline">\(R\)</span>-module <span class="math inline">\(M\)</span>, every epimorphism <span class="math inline">\(M \to M\)</span> is an isomorphism. To show this, view <span class="math inline">\(M\)</span> as an <span class="math inline">\(R[x]\)</span>-module via the action <span class="math inline">\(x \cdot m = \varphi(m)\)</span>, then <span class="math inline">\((x) \cdot M = x \cdot M = M\)</span> by the surjectivity of <span class="math inline">\(\varphi\)</span>. By Nakayama’s lemma, there exists <span class="math inline">\(sx = r \in (x) \subseteq R[x]\)</span> such that <span class="math inline">\((1-sx) \cdot M = (1-r) \cdot M = 0\)</span>, i.e.&nbsp;<span class="math inline">\(sx \cdot m = m\)</span> for all <span class="math inline">\(m \in M\)</span>, that is, <span class="math inline">\(m \mapsto s \cdot m\)</span> is an inverse of <span class="math inline">\(\varphi\)</span>. Hence <span class="math inline">\(\varphi\)</span> is an isomorphism.</p>
-<p>Above result is due to <span class="citation" data-cites="vasconcelos_finitely_1969"><a href="#ref-vasconcelos_finitely_1969" role="doc-biblioref">[2]</a></span>. We also referred to <a href="https://math.stackexchange.com/questions/239364/surjective-endomorphisms-of-finitely-generated-modules-are-isomorphisms">Math StackExchange</a>.</p></li>
-<li><p>An <span class="math inline">\(R^{\oplus n} \to R^{\oplus n}\)</span> monomorphism <span class="math inline">\(\varphi\)</span> may not be an isomorphism in general.</p>
+<p>Above result is due to <span class="citation" data-cites="vasconcelos_finitely_1969"><a href="#ref-vasconcelos_finitely_1969" role="doc-biblioref">[2]</a></span>. We also referred to <a href="https://math.stackexchange.com/questions/239364/surjective-endomorphisms-of-finitely-generated-modules-are-isomorphisms">Math StackExchange</a>.</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-free-cmp-2" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 5</strong></span> An <span class="math inline">\(R^{\oplus n} \to R^{\oplus n}\)</span> monomorphism <span class="math inline">\(\varphi\)</span> may not be an isomorphism in general.</p>
+</div>
+</div>
+</div>
+</div>
 <p>Consider <span class="math inline">\(\varphi: \mathbb Z \to \mathbb Z\)</span>, <span class="math inline">\(z \mapsto 2z\)</span>.</p>
-<p>[TODO] Is it true when <span class="math inline">\(R\)</span> is a local ring?</p></li>
-<li><p>An <span class="math inline">\(R^{\oplus n} \to R^{\oplus m}\)</span> epimorphism <span class="math inline">\(\varphi\)</span> implies <span class="math inline">\(n \geq m\)</span>. <span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, exercise 2.11]</a></span></p>
-<p>Tensor with any residue field of <span class="math inline">\(R\)</span>. Right side is still exact, hence a vector space epimorphism.</p></li>
-<li><p>An <span class="math inline">\(R^{\oplus n} \to R^{\oplus m}\)</span> isomorphism <span class="math inline">\(\varphi\)</span> implies <span class="math inline">\(n = m\)</span>. <span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, exercise 2.11]</a></span></p>
-<p>Do the same as (3) again with the inverse map.</p></li>
-<li><p>An <span class="math inline">\(R^{\oplus n} \to R^{\oplus m}\)</span> monomorphism <span class="math inline">\(\varphi\)</span> implies <span class="math inline">\(n \leq m\)</span>. <span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, exercise 2.11]</a></span></p>
+<p>[TODO] Is it true when <span class="math inline">\(R\)</span> is a local ring?</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-free-cmp-3" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 6 (<span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, exercise 2.11]</a></span>)</strong></span> An <span class="math inline">\(R^{\oplus n} \to R^{\oplus m}\)</span> epimorphism <span class="math inline">\(\varphi\)</span> implies <span class="math inline">\(n \geq m\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<p>Tensor with any residue field of <span class="math inline">\(R\)</span>. Right side is still exact, hence a vector space epimorphism.</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-free-cmp-4" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 7</strong></span> An <span class="math inline">\(R^{\oplus n} \to R^{\oplus m}\)</span> isomorphism <span class="math inline">\(\varphi\)</span> implies <span class="math inline">\(n = m\)</span>. <span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, exercise 2.11]</a></span></p>
+</div>
+</div>
+</div>
+</div>
+<p>Do the same as (3) again with the inverse map.</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-free-cmp-5" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 8 (<span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, exercise 2.11]</a></span>)</strong></span> An <span class="math inline">\(R^{\oplus n} \to R^{\oplus m}\)</span> monomorphism <span class="math inline">\(\varphi\)</span> implies <span class="math inline">\(n \leq m\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
 <p><span class="math inline">\(R\)</span> is said to satisfy the <em>strong rank condition</em> if the above statement always holds.</p>
 <p>It’s easy to see that this is true for <span class="math inline">\(R\)</span> an integral domain: tensoring with the field of fractions of <span class="math inline">\(R\)</span> does not destroy the injectivity.</p>
 <p>For the general case of arbitrary nonzero commutative rings, we provide some references:</p>
@@ -874,12 +920,7 @@ k[x] / (x) \otimes_{k[x]} k[[x]] \cong k[[x]] / x k[[x]]
 <li><p><a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/FreeModule/StrongRankCondition.html">Strong rank condition for commutative rings - Mathlib 4 Docs</a></p></li>
 <li><p>Search Keyword: McCoy’s Rank Theorem</p></li>
 <li><p>Another proof seems to make use of the exterior algebra.</p></li>
-</ul></li>
-</ol>
-</div>
-</div>
-</div>
-</div>
+</ul>
 
 
 
