@@ -335,8 +335,24 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <div class="quarto-other-links"><h2>其他链接</h2><ul><li><a href="https://zhuanlan.zhihu.com/p/2010371614227846452"><i class="bi bi-question-circle"></i>在知乎上阅读</a></li></ul></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#单面透镜" id="toc-单面透镜" class="nav-link active" data-scroll-target="#单面透镜"><span class="header-section-number">1</span> 单面透镜</a>
+  <ul class="collapse">
+  <li><a href="#单点成像" id="toc-单点成像" class="nav-link" data-scroll-target="#单点成像"><span class="header-section-number">1.1</span> 单点成像</a></li>
+  <li><a href="#焦距" id="toc-焦距" class="nav-link" data-scroll-target="#焦距"><span class="header-section-number">1.2</span> 焦距</a></li>
+  </ul></li>
+  <li><a href="#双面薄透镜" id="toc-双面薄透镜" class="nav-link" data-scroll-target="#双面薄透镜"><span class="header-section-number">2</span> 双面薄透镜</a>
+  <ul class="collapse">
+  <li><a href="#焦距-1" id="toc-焦距-1" class="nav-link" data-scroll-target="#焦距-1"><span class="header-section-number">2.1</span> 焦距</a></li>
+  <li><a href="#单点成像-1" id="toc-单点成像-1" class="nav-link" data-scroll-target="#单点成像-1"><span class="header-section-number">2.2</span> 单点成像</a></li>
+  <li><a href="#成像位置" id="toc-成像位置" class="nav-link" data-scroll-target="#成像位置"><span class="header-section-number">2.3</span> 成像位置</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-other-links"><h2>其他链接</h2><ul><li><a href="https://zhuanlan.zhihu.com/p/2010371614227846452"><i class="bi bi-question-circle"></i>在知乎上阅读</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -385,7 +401,20 @@ window.Quarto = {
 <p>光学中，光线的传播路径满足 Fermat 原理——即光线在两点间传播的路径使得光程（optical path length）极小．折射定律（Snell’s Law）可以由同介质中光线直线传播，并移动交界点求导算得 <span class="math display">\[
 n_1 \sin \theta_1 = n_2 \sin \theta_2
 \]</span> 这里 <span class="math inline">\(n_1, n_2\)</span> 分别是两介质的折射率，<span class="math inline">\(\theta_1, \theta_2\)</span> 分别是入射角和折射角．</p>
-<p>下面解析薄透镜的成像原理．先做单面的情形．假设透镜是一个球面半径为 <span class="math inline">\(R\)</span> 的球面，折射率为 <span class="math inline">\(n_1\)</span>，球面外折射率为 <span class="math inline">\(n_0\)</span>，光线只进不出．连接物点和球心作为 <span class="math inline">\(x\)</span> 轴，考察与 <span class="math inline">\(x\)</span> 轴夹角为 <span class="math inline">\(\alpha\)</span> 的入射光线从物点出发，到达球面交点，再折射进入球内与 <span class="math inline">\(x\)</span> 轴以 <span class="math inline">\(\gamma\)</span> 角重新相交与的路径，设折射面入射角为 <span class="math inline">\(\theta_1\)</span>，折射角为 <span class="math inline">\(\theta_2\)</span>，折射点与球心连线与 <span class="math inline">\(x\)</span> 轴夹角为 <span class="math inline">\(\beta\)</span>，与 <span class="math inline">\(x\)</span> 轴距离为 <span class="math inline">\(h\)</span>，与物点 <span class="math inline">\(x\)</span> 轴投影距离为 <span class="math inline">\(u\)</span>，与最终交点 <span class="math inline">\(x\)</span> 轴投影距离为 <span class="math inline">\(v\)</span>．可列方程组</p>
+<p>下面仅依赖 Fermat 原理和 Snell 定律解析薄透镜的成像原理．策略上，我们首先证明单面透镜单点成像清晰（所有从物点发出的光线均汇于一点），再通过过光心光线和平行光交叉得到成像位置，最后推广到双面薄透镜．</p>
+<section id="单面透镜" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="单面透镜"><span class="header-section-number">1</span> 单面透镜</h2>
+<p>假设单面球面透镜是一个球面半径为 <span class="math inline">\(R\)</span> 的球面，折射率为 <span class="math inline">\(n_1\)</span>，球面外折射率为 <span class="math inline">\(n_0\)</span>，光线只进不出．</p>
+<section id="单点成像" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="单点成像"><span class="header-section-number">1.1</span> 单点成像</h3>
+<p>因为单面球面透镜具有旋转对称性，不失一般性，可以选取物点在主光轴上．设：</p>
+<ul>
+<li>物点与入射点距离为 <span class="math inline">\(u\)</span>，射出方向与主光轴夹角为 <span class="math inline">\(\alpha\)</span></li>
+<li>折射点与主光轴距离为 <span class="math inline">\(h\)</span>，与球心连线与主光轴夹角为 <span class="math inline">\(\beta\)</span></li>
+<li>折射面入射角为 <span class="math inline">\(\theta_1\)</span>，折射角为 <span class="math inline">\(\theta_2\)</span></li>
+<li>出射光线与主光轴夹角为 <span class="math inline">\(\gamma\)</span>，与主光轴的交点与入射点水平距离为 <span class="math inline">\(v\)</span></li>
+</ul>
+<p>则可列方程组</p>
 <div class="quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
@@ -414,22 +443,31 @@ n_0 \sin \theta_1 &amp;= n_1 \sin \theta_2 \\
 </div>
 </div>
 </div>
-<p>我们考虑近轴情形，即认为 <span class="math inline">\(h\)</span> 很小，这样 <span class="math inline">\(\alpha, \beta, \gamma\)</span> 也很小，可以一阶近似，算得 <span class="math display">\[
+<p>考虑近轴情形，即认为 <span class="math inline">\(h\)</span> 很小，这样 <span class="math inline">\(\alpha, \beta, \gamma\)</span> 也很小，可以一阶近似，算得 <span class="math display">\[
 \frac{n_0}{u} + \frac{n_1}{v} = \frac{n_1 - n_0}{R}
-\]</span> 这里 <span class="math inline">\(v\)</span> 与真实像点相差一个 <span class="math inline">\(o(h)\)</span>．当 <span class="math inline">\(h\)</span> 很小时，可以认为 <span class="math inline">\(v\)</span> 只与 <span class="math inline">\(u\)</span> 有关，从而所有从物点光线聚焦于一处，故在此处成像清晰．不可忽略的 <span class="math inline">\(h\)</span> 会导致球面像差．</p>
-<p>现在考虑双面薄透镜．双面，是指光线还会第二次折射离开透镜，球面半径先后为 <span class="math inline">\(R_1, R_2\)</span>；薄，是指忽略不计透镜厚度，假装光线在透镜中传播时与主光轴距离不发生变化．设经过第一次折射，像点在折射点右侧 <span class="math inline">\(v_1\)</span> 处，第二次折射时可反向考虑为从像点 <span class="math inline">\(v\)</span> 处出发的光线入射到第二个折射面在 <span class="math inline">\(-v_1\)</span> 处成虚像，故 <span class="math display">\[
-\begin{aligned}
-\frac {n_0} {u} + \frac {n_1}{v_1} &amp;= \frac{n_1 - n_0}{R_1} \\
-\frac{n_0}{v} + \frac {n_1} {-v_1} &amp;= \frac{n_1 - n_0}{R_2}
-\end{aligned}
-\]</span> 两式相加得制镜公式（Lensmaker’s equation） <span class="math display">\[
-\frac 1 {u} + \frac 1 {v} = (n_1 - n_0) \left( \frac{1}{R_1} + \frac{1}{R_2} \right)
-\]</span> 我们如果定义 <span class="math inline">\(f\)</span> 满足 <span class="math inline">\(1 / f = (n_1 - n_0) \left( \frac{1}{R_1} + \frac{1}{R_2} \right)\)</span>，便得到薄透镜成像公式 <span class="math display">\[
-\frac 1 u + \frac 1 v = \frac 1 f
-\]</span> 虽然现在 <span class="math inline">\(f\)</span> 的物理意义还不明确，马上会看到它是其实是焦距．</p>
-<p>前面的双面薄透镜成像公式仅适用于主光轴上点的成像问题，尚需处理不在主光轴上点的成像问题．单面球面透镜额可以由对称性恰当选取主光轴穿过物点，故已经知道透镜确能将物点发出的光线聚焦于某一像点．我们只需要确定像点的位置．</p>
-<p>考虑通过两条光线的交点确定像点：这需要我们了解平行光和过光心光线的成像性质．</p>
-<p>过光心的光线，两球面法向均与主光轴一致，因此不发生折射，继续沿直线传播．平行光入射单面透镜时，仍列出方程组</p>
+\]</span> 这里 <span class="math inline">\(v\)</span> 与真实像点相差一个 <span class="math inline">\(o(h)\)</span>．当 <span class="math inline">\(h\)</span> 很小时，可以认为 <span class="math inline">\(v\)</span> 只与 <span class="math inline">\(u\)</span> 有关，从而所有从物点光线聚焦于一处，故在此处成像清晰．</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>不可忽略的 <span class="math inline">\(h\)</span> 会导致球面像差．</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="焦距" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="焦距"><span class="header-section-number">1.2</span> 焦距</h3>
+<p>平行光入射单面透镜时，设折射点与主光轴距离为 <span class="math inline">\(h\)</span>，出射光线与主光轴夹角为 <span class="math inline">\(\gamma\)</span>，与主光轴的交点与入射点水平距离为 <span class="math inline">\(f\)</span>，折射面入射角为 <span class="math inline">\(\theta_1\)</span>，折射角为 <span class="math inline">\(\theta_2\)</span>，如图列出方程组</p>
 <div class="quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
@@ -456,19 +494,62 @@ n_0 \sin \theta_1 &amp;= n_1 \sin \theta_2 \\
 </div>
 </div>
 </div>
-<p>作近轴近似解得 <span class="math display">\[
+<p>同样作关于 <span class="math inline">\(h\)</span> 的近轴一阶近似解得 <span class="math display">\[
 \frac 1 f = \frac {n_1 - n_0} {n_1 R}
-\]</span> 故在无视 <span class="math inline">\(o(h)\)</span> 意义下，平行光经过单面透镜后聚焦于距透镜 <span class="math inline">\(f\)</span> 处．双面时，焦点成为虚像点，故 <span class="math display">\[
+\]</span> 故在无视 <span class="math inline">\(o(h)\)</span> 意义下，平行光经过单面透镜后与主光轴交点与 <span class="math inline">\(h\)</span> 无关，聚焦于距透镜 <span class="math inline">\(f = \frac {n_1 R}{n_1 - n_0}\)</span> 处．</p>
+</section>
+</section>
+<section id="双面薄透镜" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="双面薄透镜"><span class="header-section-number">2</span> 双面薄透镜</h2>
+<p>现在考虑双面薄透镜．双面，是指光线还会第二次折射离开透镜，球面半径先后为 <span class="math inline">\(R_1, R_2\)</span>；薄，是指忽略不计透镜厚度，假装光线在透镜中传播时与主光轴距离不发生变化．</p>
+<section id="焦距-1" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="焦距-1"><span class="header-section-number">2.1</span> 焦距</h3>
+<p>来计算双面薄透镜的焦距．设经过第一次折射，焦点在折射点右侧 <span class="math inline">\(f_1\)</span> 处，第二次折射时可反向考虑为从焦点 <span class="math inline">\(f\)</span> 处出发的光线入射到第二个折射面在 <span class="math inline">\(-f_1\)</span> 处成虚像，故 <span class="math display">\[
 \begin{aligned}
 \frac 1 {f_1} &amp;= \frac {n_1 - n_0} {n_1 R_1} \\
 \frac{n_0}{f} + \frac {n_1} {-f_1} &amp;= \frac{n_1 - n_0}{R_2}
 \end{aligned}
-\]</span> 解得薄透镜焦距公式 <span class="math display">\[
+\]</span> 解得双面薄透镜焦距 / 制镜公式（Lensmaker’s equation） <span class="math display">\[
 \frac 1 f = (n_1 - n_0) \left( \frac{1}{R_1} + \frac{1}{R_2} \right)
 \]</span></p>
-<p>综上，我们可以通过两条光线的交点确定像点位置：一条过光心不折射，另一条平行光经过透镜后聚于焦点处．简单几何推演可再次得薄透镜成像公式 <span class="math inline">\(\frac 1 u + \frac 1 v = \frac 1 f\)</span>——这次的公式足以描述所有靠近主光轴的物点的成像规律．</p>
+</section>
+<section id="单点成像-1" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="单点成像-1"><span class="header-section-number">2.2</span> 单点成像</h3>
+<p>已经知道单面透镜能将物点发出的光线聚焦于某一像点，将双面薄透镜的第二次折射反向视为虚像的入射，可知双面薄透镜同样能将物点发出的光线聚焦于某一像点．</p>
+</section>
+<section id="成像位置" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="成像位置"><span class="header-section-number">2.3</span> 成像位置</h3>
+<p>设物点与入射点距离为 <span class="math inline">\(u\)</span>，与主光轴距离为 <span class="math inline">\(h\)</span>，成像位置与主光轴交点与入射点水平距离为 <span class="math inline">\(v\)</span>，与主光轴距离为 <span class="math inline">\(h'\)</span>．</p>
+<p>由于已经证明了成像的清晰性，我们可以通过两条光线的交点确定像点位置．过光心的光线入射出射时法向均与垂直于折射面，故沿直线传播．平行光入射时，经过透镜后聚于距透镜 <span class="math inline">\(f\)</span> 处．简单几何推演</p>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p><span class="math display">\[
+\frac {v-f} {f} = \frac {h'} {h} = \frac v u
+\]</span></p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-optic-position" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-optic-position-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/optic-position.svg" id="fig-optic-position" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-optic-position-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;3
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>可得单面薄透镜成像公式 <span class="math display">\[
+\frac{1}{u} + \frac{1}{v} = \frac{1}{f}
+\]</span></p>
+<p>这一公式描述了所有靠近主光轴的物点的成像规律．</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
