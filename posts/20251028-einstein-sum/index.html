@@ -389,7 +389,7 @@ window.Quarto = {
   <li><a href="#使用例" id="toc-使用例" class="nav-link" data-scroll-target="#使用例"><span class="header-section-number">3</span> 使用例</a></li>
   <li><a href="#抽象废话" id="toc-抽象废话" class="nav-link" data-scroll-target="#抽象废话"><span class="header-section-number">4</span> 抽象废话</a></li>
   </ul>
-</nav>
+<div class="quarto-other-links"><h2>其他链接</h2><ul><li><a href="https://zhuanlan.zhihu.com/p/2010361438884106334"><i class="bi bi-question-circle"></i>在知乎上阅读</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -434,7 +434,7 @@ window.Quarto = {
 
 
 <p>统一、自洽与简洁的记号体系是数学的应有之义．大部分数学方向都已经发展出了一套相对完备的记号体系——但遗憾的是，有的方向的记号非常不巧地和其他学科的外来物种杂交在了一起，使得不同背景的使用者对同一记号的理解大相径庭．我们今天辨析的 <a href="https://en.wikipedia.org/wiki/Einstein_notation">Einstein 求和约定（Einstein summation convention）</a> 就似乎深受其害：物理学家们习惯于使用 Einstein 求和约定来简化张量矩阵运算中的求和符号，和他们纠缠不清的微分几何学家们也纷纷采用这一记号，并在教学时自豪的向学生介绍这一记号对求和的简化作用．一眼看上去，在 Einstein 求和约定下，你不再显式地写出求和符号和求和指标：每个乘法中左侧的下标和右侧的上标自动配对作为求和指标．例如，两个向量 <span class="math inline">\(\boldsymbol a\)</span> 和 <span class="math inline">\(\boldsymbol b\)</span> 的内积将被写作 <span class="math inline">\(a_i b^i\)</span>．然而，大部分教学实践中仅仅将 Einstein 求和约定理解为一种“省略求和符号的记号简化”，忽视其背后的代数结构，并不能说服困惑的学生接受这一记号．纯坐标化的理解也往往掩盖了 Einstein 求和约定的内在含义——这是将抽象线性空间张量积和其在基底下的坐标矩阵运算联系起来的桥梁．</p>
-<p>今天我们来捅破这层窗户纸．</p>
+<p>本文中，我们尝试改装出一套代数批友好的 Einstein 求和记号体系．这套语言是纯代数的：仅依赖对偶空间和张量积的泛性质，并使 Einstein 求和、指标升降的记号获得更自然的解释．注意笔者没有物理 / 微分几何背景，和标准处理手段可能会有出入，欢迎指正．</p>
 <section id="抽象张量" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="抽象张量"><span class="header-section-number">1</span> 抽象张量</h2>
 <section id="张量缩并" class="level3" data-number="1.1">
@@ -607,7 +607,7 @@ a^i = e_\alpha^i a^\alpha \iff a_j = e_j^\beta a_\beta
 <section id="使用例" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="使用例"><span class="header-section-number">3</span> 使用例</h2>
 <p>Python 的 numpy / torch 库均有 <span class="math inline">\(\mathbb R^n\)</span> 标准内积下的 Einstein 求和实现．</p>
-<div id="6c5f0ab9" class="cell" data-execution_count="1">
+<div id="489e6642" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -635,6 +635,7 @@ c =
 </div>
 </div>
 <p>由于我们在标准内积下工作，故可以无视协变反变 / 上下标的区别．<code>ik,kj-&gt;ij</code> 是 <span class="math inline">\(c_i^j = a_i^k b_k^j\)</span> 的更紧凑写法．上述代码实现了矩阵乘法．也可以直接使用 <code>np.dot</code> 或 <code>np.matmul</code> 完成．一般来说，<code>np.dot(a, b)</code> 会缩并 <code>a</code> 最后一个指标（<code>k</code>）和倒数第二个指标（<code>k</code>）．但直接使用 Einstein 求和约定显然降低了背诵 API 的负担．</p>
+<p><del>是不是和你以为的使用例不太一样 :p</del>，这里暂时标个 TODO，将来有机会再补充这套记号搬到物理 / 微分几何背景下的使用例．</p>
 </section>
 <section id="抽象废话" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="抽象废话"><span class="header-section-number">4</span> 抽象废话</h2>
