@@ -1530,7 +1530,28 @@
     "href": "posts/20260228-spec-connect/index.html",
     "title": "Spec，可约与连通性",
     "section": "",
-    "text": "本文中环均为交换幺环．\n性质：\n\nSpec 不可约 =&gt; Spec 连通．\n代数集的坐标环是整环 &lt;=&gt; 代数集不可约．\n环侧的 \\(\\times\\) / 直积 对应 Spec 侧的无交并 / 直和 —— 典型的不连通．\n局部环的 Spec 连通：因为极大理想只有一个，闭集都包含它．\n局部环的 Spec 什么时候可约？\n幂等元与 Spec 连通性．\nf.g. 连通的话，是不是会导致 fiber dimension 恒定？\n环侧的 \\(\\otimes\\) / push-out 对应 Spec 侧的纤维积 / pull-back\n\n例子：\n\n\\(V(xy)\\)\n\n\n对代数集来讲，不可约和坐标环是整环等价：\n\n如果可约，你手持两个并起来是整个的非空闭集 \\(V(I)\\), \\(V(J)\\)，任选非零的 \\(f \\in I\\) 和 \\(g \\in J\\) 就有 \\(fg = 0\\)，破坏了整环．\n如果坐标环不是整环，你就有非平凡的 \\(fg = 0\\)，所以 \\(V(f)\\) 和 \\(V(g)\\) 是两个非空闭集，且 \\(V(f) \\cup V(g) = V(fg) = V(0)\\) 整个，导致可约．\n\n不可约是比连通更强的性质：不可约的判否不要求两个闭集的交集非空，而连通的判否额外要求两个闭集的交集非空．\n来考察二维仿射平面上的 \\(V(xy)\\)．它的坐标环是 \\(k[x,y]/(xy)\\)，不是整环，因此可约——但 \\(V(xy)\\) 连通：\n\n直观来看，\\(V(xy)\\) 是 \\(x\\) 轴和 \\(y\\) 轴的并集，所以可约；它们在原点相交，所以连通．\n严格来看，\\(V(xy) = V(x) \\cup V(y)\\)，所以可约；\\(V(x)\\) 和 \\(V(y)\\) 都是不可约代数集，因此各自连通，它们交集还非空，纯点集拓扑论证（用连通性等价于所有到 \\(\\{0, 1\\}\\) 连续函数常值的等价刻画）可以保证并集也连通．\n\n以防你想歪，别以为可以用中国剩余定理把坐标环分解成 \\(k[x] \\times k[y]\\)：\\((x)\\) 和 \\((y)\\) 根本不是 comaximal 的——这俩一加等于 \\((x,y)\\)——恰好也对应了 Spec 那一侧交点．\n这不是奇怪的事情，因为 \\(\\times\\) 这个事情基本上是不连通的同义词：对非零环 \\(A\\), \\(B\\)，\\(A \\times B\\) 的 Spec 可以认为恰好是 \\(\\operatorname{Spec}A \\sqcup \\operatorname{Spec}B\\)：\n\n它的理想都形如 \\(I \\times J\\)：总可以通过乘 \\((1, 0)\\) 和 \\((0, 1)\\) 来得到 \\(I\\) 和 \\(J\\)．\n它的素理想都形如 \\(\\mathfrak p \\times B\\) 或 \\(A \\times \\mathfrak q\\)：如果 \\(I \\times J\\) 是素理想，那么 \\(I\\) 或 \\(J\\) 必须是素理想，因为两侧的乘法互不干扰；也不能是 \\(\\mathfrak p \\times \\mathfrak q\\)，否则可取 \\(p \\notin \\mathfrak p\\) 和 \\(q \\notin \\mathfrak q\\) 使得 \\((p, *) (*, q) \\in \\mathfrak p \\times \\mathfrak q\\)．\n\\(V(I \\times J) = \\{ \\mathfrak p \\times B : \\mathfrak p \\in V(I) \\} \\cup \\{ A \\times \\mathfrak q : \\mathfrak q \\in V(J) \\}\\)，这就把 \\(\\operatorname{Spec}(A \\times B)\\) 和 \\(\\operatorname{Spec}A \\sqcup \\operatorname{Spec}B\\) 两个拓扑空间的闭集对应上了．"
+    "text": "本文中环均为交换幺环．"
+  },
+  {
+    "objectID": "posts/20260228-spec-connect/index.html#定义",
+    "href": "posts/20260228-spec-connect/index.html#定义",
+    "title": "Spec，可约与连通性",
+    "section": "1 定义",
+    "text": "1 定义\n环的 Spec 是由它的素理想配备 Zariski 拓扑构成的拓扑空间，Zariski 拓扑的闭集由 \\(V(I) = \\{ \\mathfrak p : I \\subseteq \\mathfrak p \\}\\) 组成，其中 \\(I\\) 是环的任意理想．\n不可约是指 Spec 不能写成两个非空闭集的并．连通是指 Spec 不能写成两个非空不交闭集的并．\n有一类特殊的环，它们是有限生成的 \\(k\\)-代数（\\(k\\) 是域），也即坐标环，总可以写成 \\(k[x_1, \\dots, x_n]/I\\)．它们的 Spec 叫做代数集．"
+  },
+  {
+    "objectID": "posts/20260228-spec-connect/index.html#性质",
+    "href": "posts/20260228-spec-connect/index.html#性质",
+    "title": "Spec，可约与连通性",
+    "section": "2 性质",
+    "text": "2 性质\n\n2.1 Spec 不可约 =&gt; Spec 连通\n不可约是比连通更强的性质：不可约的判否不要求两个闭集的交集非空，而连通的判否额外要求两个闭集的交集非空．\n\n\n2.2 CRing \\(\\times\\) &lt;=&gt; Spec \\(\\sqcup\\)\n环侧的 \\(\\times\\) / 直积 对应 Spec 侧的无交并 / 直和．环的直积导致典型的不连通．\n对非零环 \\(A\\), \\(B\\)，\\(A \\times B\\) 的 Spec 与 \\(\\operatorname{Spec}A \\sqcup \\operatorname{Spec}B\\) 同胚：\n\n它的理想都形如 \\(I \\times J\\)：总可以通过乘 \\((1, 0)\\) 和 \\((0, 1)\\) 来得到 \\(I\\) 和 \\(J\\)．\n它的素理想都形如 \\(\\mathfrak p \\times B\\) 或 \\(A \\times \\mathfrak q\\)：如果 \\(I \\times J\\) 是素理想，那么 \\(I\\) 或 \\(J\\) 必须是素理想，因为两侧的乘法互不干扰；也不能是 \\(\\mathfrak p \\times \\mathfrak q\\)，否则可取 \\(p \\notin \\mathfrak p\\) 和 \\(q \\notin \\mathfrak q\\) 使得 \\((p, *) (*, q) \\in \\mathfrak p \\times \\mathfrak q\\)．\n\\(V(I \\times J) = \\{ \\mathfrak p \\times B : \\mathfrak p \\in V(I) \\} \\cup \\{ A \\times \\mathfrak q : \\mathfrak q \\in V(J) \\}\\)，这就把 \\(\\operatorname{Spec}(A \\times B)\\) 和 \\(\\operatorname{Spec}A \\sqcup \\operatorname{Spec}B\\) 两个拓扑空间的闭集对应上了．\n\n\n\n2.3 代数集：整环 &lt;=&gt; 不可约\n对代数集（不限定基域）来讲，不可约性和坐标环的整环性等价：\n\n如果可约，你手持两个并起来是整个的非空闭集 \\(V(I)\\), \\(V(J)\\)，任选非零的 \\(f \\in I\\) 和 \\(g \\in J\\) 就有 \\(fg = 0\\)，破坏了整环．\n如果坐标环不是整环，你就有非平凡的 \\(fg = 0\\)，所以 \\(V(f)\\) 和 \\(V(g)\\) 是两个非空闭集，且 \\(V(f) \\cup V(g) = V(fg) = V(0)\\) 整个，导致可约．\n\n\n\n2.4 幂等元与 Spec 连通性\n环 \\(R\\) 内每个幂等元 \\(e\\) 都对应一个 Spec 上的开闭集 \\(V(e)\\)：\n\n\\(V(e)\\) 也是开集：\\(V(e) = D(1-e)\\)．\n单射性：假如 \\(V(e_1) = V(e_2)\\)，那么 \\(\\sqrt{(e_1)} = \\sqrt{(e_2)}\\)，不妨设 \\(e_1^n = r e_2\\)，但是 \\(e_1\\) 幂等，即 \\(e_1 = re_2\\)．同乘 \\(e_2\\) 得 \\(e_1 e_2 = r e_2^2 = r e_2 = e_1\\)．同理也有 \\(e_2 = e_1 e_2\\)，所以 \\(e_1 = e_2\\)．\n满射性：对于任意开闭集 \\(V(I)\\)，令与它互补的开闭集为 \\(V(J)\\)，则 \\[\n\\begin{aligned}\nV(I \\cap J) &= V(I) \\cup V(J) = \\operatorname{Spec}R \\\\\nV(I + J) &= V(I) \\cap V(J) = \\emptyset\n\\end{aligned}\n\\] 推得 \\(I \\cap J\\) 落在 nilradical \\(\\mathcal N(R)\\) 中，且 \\(I + J = R\\)——comaximal．中国剩余定理告诉我们 \\(R/(I \\cap J) \\cong R/I \\times R/J\\)，这样就找到了模 \\(I \\cap J\\) 意义下的幂等元 \\(e\\) 满足 \\(e(1-e) \\in I \\cap J \\subseteq \\mathcal N(R)\\)．[TODO]\n\n因此 Spec 连通当且仅当环内没有非平凡的幂等元．\n\n\n2.5 f.g. 连通的话，是不是会导致 fiber dimension 恒定？\n\n\n2.6 环侧的 \\(\\otimes\\) / push-out 对应 Spec 侧的纤维积 / pull-back"
+  },
+  {
+    "objectID": "posts/20260228-spec-connect/index.html#使用例",
+    "href": "posts/20260228-spec-connect/index.html#使用例",
+    "title": "Spec，可约与连通性",
+    "section": "3 使用例",
+    "text": "3 使用例\n\n3.1 \\(V(xy)\\)\n来考察二维仿射平面上的 \\(V(xy)\\)．它的坐标环是 \\(k[x,y]/(xy)\\)，不是整环，因此可约——但 \\(V(xy)\\) 连通：\n\n直观来看，\\(V(xy)\\) 是 \\(x\\) 轴和 \\(y\\) 轴的并集，所以可约；它们在原点相交，所以连通．\n严格来看，\\(V(xy) = V(x) \\cup V(y)\\)，所以可约；\\(V(x)\\) 和 \\(V(y)\\) 都是不可约代数集，因此各自连通，它们交集还非空，纯点集拓扑论证（用连通性等价于所有到 \\(\\{0, 1\\}\\) 连续函数常值的等价刻画）可以保证并集也连通．\n\n以防你想歪，别以为可以用中国剩余定理把坐标环分解成 \\(k[x] \\times k[y]\\)：\\((x)\\) 和 \\((y)\\) 根本不是 comaximal 的——这俩一加等于 \\((x,y)\\)——恰好也对应了 Spec 那一侧交点．\n\n\n3.2 局部环的 Spec 连通\n因为极大理想只有一个，而 Zariski 拓扑的非空闭集都包含它，没法做不交的划分．\n\n\n3.3 局部环的 Spec 什么时候可约？"
   },
   {
     "objectID": "posts/20230213-strwithmath/index.html",
