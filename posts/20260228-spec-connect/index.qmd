@@ -37,6 +37,13 @@ format:
 
 不可约是比连通更强的性质：不可约的判否不要求两个闭集的交集非空，而连通的判否额外要求两个闭集的交集非空．
 
+### 代数集：整环 <=> 不可约
+
+对代数集（不限定基域）来讲，不可约性和坐标环的整环性等价：
+
+- 如果可约，你手持两个并起来是整个的非空闭集 $V(I)$, $V(J)$，任选非零的 $f \in I$ 和 $g \in J$ 就有 $fg = 0$，破坏了整环．
+- 如果坐标环不是整环，你就有非平凡的 $fg = 0$，所以 $V(f)$ 和 $V(g)$ 是两个非空闭集，且 $V(f) \cup V(g) = V(fg) = V(0)$ 整个，导致可约．
+
 ### CRing $\times$ <=> Spec $\sqcup$
 
 环侧的 $\times$ / 直积 对应 Spec 侧的无交并 / 直和．环的直积导致典型的不连通．
@@ -46,13 +53,6 @@ format:
 - 它的理想都形如 $I \times J$：总可以通过乘 $(1, 0)$ 和 $(0, 1)$ 来得到 $I$ 和 $J$．
 - 它的素理想都形如 $\mathfrak p \times B$ 或 $A \times \mathfrak q$：如果 $I \times J$ 是素理想，那么 $I$ 或 $J$ 必须是素理想，因为两侧的乘法互不干扰；也不能是 $\mathfrak p \times \mathfrak q$，否则可取 $p \notin \mathfrak p$ 和 $q \notin \mathfrak q$ 使得 $(p, *) (*, q) \in \mathfrak p \times \mathfrak q$．
 - $V(I \times J) = \{ \mathfrak p \times B : \mathfrak p \in V(I) \} \cup \{ A \times \mathfrak q : \mathfrak q \in V(J) \}$，这就把 $\Spec(A \times B)$ 和 $\Spec A \sqcup \Spec B$ 两个拓扑空间的闭集对应上了．
-
-### 代数集：整环 <=> 不可约
-
-对代数集（不限定基域）来讲，不可约性和坐标环的整环性等价：
-
-- 如果可约，你手持两个并起来是整个的非空闭集 $V(I)$, $V(J)$，任选非零的 $f \in I$ 和 $g \in J$ 就有 $fg = 0$，破坏了整环．
-- 如果坐标环不是整环，你就有非平凡的 $fg = 0$，所以 $V(f)$ 和 $V(g)$ 是两个非空闭集，且 $V(f) \cup V(g) = V(fg) = V(0)$ 整个，导致可约．
 
 ### 幂等元与 Spec 连通性
 
@@ -65,11 +65,23 @@ format:
 - 满射性：对于任意开闭集 $V(I)$，令与它互补的开闭集为 $V(J)$，则
   $$
   \begin{aligned}
-  V(I \cap J) &= V(I) \cup V(J) = \Spec R \\
+  V(I \cap J) = V(IJ) &= V(I) \cup V(J) = \Spec R \\
   V(I + J) &= V(I) \cap V(J) = \emptyset
   \end{aligned}
   $$
-  推得 $I \cap J$ 落在 nilradical $\mathcal N(R)$ 中，且 $I + J = R$——comaximal．中国剩余定理告诉我们 $R/(I \cap J) \cong R/I \times R/J$，这样就找到了模 $I \cap J$ 意义下的幂等元 $e$ 满足 $e(1-e) \in I \cap J \subseteq \mathcal N(R)$．[TODO]
+  推得 $I \cap J \subseteq IJ$ 落在 nilradical $\mathcal N(R)$ 中，且 $I + J = R$——comaximal．
+
+  下面是一个类似中国剩余定理的小技巧．使用 comaximal 取出 $x \in I$ 和 $y \in J$ 使得 $x + y = 1$，因为 $xy \in IJ \subseteq \mathcal N(R)$，不妨设 $(xy)^n = 0$，考察
+  $$
+  \begin{aligned}
+  1 &= (x + y)^{2n} \\
+    &= \sum_{i=0}^{2n} \binom{2n}{i} x^i y^{2n-i} \\
+    &= \sum_{i=0}^{n-1} \binom{2n}{i} x^i y^{2n-i} + \sum_{i=n+1}^{2n} \binom{2n}{i} x^i y^{2n-i}
+  \end{aligned}
+  $$
+  设后两项分别为 $d$ 和 $e$，则 $d \in J$, $e \in I$, $d + e = 1$, $de = 0$，这样就证明了 $d$ 和 $e$ 是幂等元．
+
+  现在注意以下关系：$V(e) \subseteq V(I)$, $V(d) \subseteq V(J)$ 且 $V(e) \sqcup V(d) = \Spec R = V(I) \sqcup V(J)$，即可迫使 $V(e) = V(I)$ 和 $V(d) = V(J)$．
 
 因此 Spec 连通当且仅当环内没有非平凡的幂等元．
 
