@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.34">
@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="sun123zxy">
+<meta name="dcterms.date" content="2026-02-25">
 
-<title>Spec，可约与连通性 – sun123zxy’s blog</title>
+<title>Comparing Free Modules via Homomorphisms – sun123zxy’s blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -78,17 +79,17 @@ div.csl-indent {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "没有结果",
-    "search-matching-documents-text": "匹配的文档",
-    "search-copy-link-title": "复制搜索链接",
-    "search-hide-matches-text": "隐藏其它匹配结果",
-    "search-more-match-text": "更多匹配结果",
-    "search-more-matches-text": "更多匹配结果",
-    "search-clear-button-title": "清除",
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "取消",
-    "search-submit-button-title": "提交",
-    "search-label": "搜索"
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script>
@@ -100,7 +101,6 @@ MathJax = {
   }
 };
 </script>
-<meta name="quarto:status" content="draft">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -297,7 +297,7 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>草稿</div>
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -305,8 +305,8 @@ window.Quarto = {
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="搜索"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -346,7 +346,7 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -355,30 +355,8 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">该页面内容</h2>
-   
-  <ul>
-  <li><a href="#定义" id="toc-定义" class="nav-link active" data-scroll-target="#定义"><span class="header-section-number">1</span> 定义</a></li>
-  <li><a href="#性质" id="toc-性质" class="nav-link" data-scroll-target="#性质"><span class="header-section-number">2</span> 性质</a>
-  <ul class="collapse">
-  <li><a href="#spec-不可约-implies-spec-连通" id="toc-spec-不可约-implies-spec-连通" class="nav-link" data-scroll-target="#spec-不可约-implies-spec-连通"><span class="header-section-number">2.1</span> Spec 不可约 <span class="math inline">\(\implies\)</span> Spec 连通</a></li>
-  <li><a href="#spec-不可约-iff-nilradical-是素理想" id="toc-spec-不可约-iff-nilradical-是素理想" class="nav-link" data-scroll-target="#spec-不可约-iff-nilradical-是素理想"><span class="header-section-number">2.2</span> Spec 不可约 <span class="math inline">\(\iff\)</span> nilradical 是素理想</a></li>
-  <li><a href="#既约环整环-iff-不可约" id="toc-既约环整环-iff-不可约" class="nav-link" data-scroll-target="#既约环整环-iff-不可约"><span class="header-section-number">2.3</span> 既约环：整环 <span class="math inline">\(\iff\)</span> 不可约</a></li>
-  <li><a href="#cring-times-iff-spec-sqcup" id="toc-cring-times-iff-spec-sqcup" class="nav-link" data-scroll-target="#cring-times-iff-spec-sqcup"><span class="header-section-number">2.4</span> CRing <span class="math inline">\(\times\)</span> <span class="math inline">\(\iff\)</span> Spec <span class="math inline">\(\sqcup\)</span></a></li>
-  <li><a href="#幂等元与-spec-连通性" id="toc-幂等元与-spec-连通性" class="nav-link" data-scroll-target="#幂等元与-spec-连通性"><span class="header-section-number">2.5</span> 幂等元与 Spec 连通性</a></li>
-  <li><a href="#f.g.-连通的话是不是会导致-module-rank-of-fiber-恒定" id="toc-f.g.-连通的话是不是会导致-module-rank-of-fiber-恒定" class="nav-link" data-scroll-target="#f.g.-连通的话是不是会导致-module-rank-of-fiber-恒定"><span class="header-section-number">2.6</span> f.g. 连通的话，是不是会导致 module rank of fiber 恒定？</a></li>
-  <li><a href="#环侧的-otimes-push-out-对应-spec-侧的纤维积-pull-back" id="toc-环侧的-otimes-push-out-对应-spec-侧的纤维积-pull-back" class="nav-link" data-scroll-target="#环侧的-otimes-push-out-对应-spec-侧的纤维积-pull-back"><span class="header-section-number">2.7</span> 环侧的 <span class="math inline">\(\otimes\)</span> / push-out 对应 Spec 侧的纤维积 / pull-back</a></li>
-  </ul></li>
-  <li><a href="#使用例" id="toc-使用例" class="nav-link" data-scroll-target="#使用例"><span class="header-section-number">3</span> 使用例</a>
-  <ul class="collapse">
-  <li><a href="#vxy" id="toc-vxy" class="nav-link" data-scroll-target="#vxy"><span class="header-section-number">3.1</span> <span class="math inline">\(V(xy)\)</span></a></li>
-  <li><a href="#局部环的-spec-连通" id="toc-局部环的-spec-连通" class="nav-link" data-scroll-target="#局部环的-spec-连通"><span class="header-section-number">3.2</span> 局部环的 Spec 连通</a></li>
-  <li><a href="#局部环的-spec-什么时候可约" id="toc-局部环的-spec-什么时候可约" class="nav-link" data-scroll-target="#局部环的-spec-什么时候可约"><span class="header-section-number">3.3</span> 局部环的 Spec 什么时候可约？</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -386,7 +364,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Spec，可约与连通性</h1>
+<h1 class="title">Comparing Free Modules via Homomorphisms</h1>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
     <div class="quarto-category">algebra</div>
@@ -399,16 +377,16 @@ window.Quarto = {
 <div class="quarto-title-meta">
 
     <div>
-    <div class="quarto-title-meta-heading">作者</div>
+    <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
              <p>sun123zxy </p>
           </div>
   </div>
     
     <div>
-    <div class="quarto-title-meta-heading">发布于</div>
+    <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026年2月27日</p>
+      <p class="date">February 25, 2026</p>
     </div>
   </div>
   
@@ -420,80 +398,20 @@ window.Quarto = {
 </header>
 
 
-<p>本文中环均为交换幺环．</p>
-<section id="定义" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="定义"><span class="header-section-number">1</span> 定义</h2>
-<p>环的 Spec 是由它的素理想配备 Zariski 拓扑构成的拓扑空间，Zariski 拓扑的闭集由 <span class="math inline">\(V(I) = \{ \mathfrak p : I \subseteq \mathfrak p \}\)</span> 组成，其中 <span class="math inline">\(I\)</span> 是环的任意理想．</p>
-<p>不可约是指 Spec 不能写成两个非空闭集的并．连通是指 Spec 不能写成两个非空不交闭集的并．</p>
-<p>有一类特殊的环：</p>
-<ul>
-<li><p>它们是有限生成的 <span class="math inline">\(k\)</span>-代数（<span class="math inline">\(k\)</span> 是域），总可以写成 <span class="math inline">\(k[x_1, \dots, x_n]/I\)</span>．它们的 Spec 叫做代数集．</p></li>
-<li><p>如果（nilradical 意义下）此环既约 / <span class="math inline">\(I\)</span> 是既约的，就叫这个环是代数集的坐标环，或者仿射 <span class="math inline">\(k\)</span>-代数．</p></li>
-<li><p>在此基础上，如果 TFAE 地 <a href="#prp-irr-iff-rad-prime" class="quarto-xref">命题&nbsp;1</a>：Spec 不可约 / <span class="math inline">\(I\)</span> 是素理想 / 坐标环是整环，则称这个代数集是一个代数簇．</p></li>
-</ul>
-</section>
-<section id="性质" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="性质"><span class="header-section-number">2</span> 性质</h2>
-<section id="spec-不可约-implies-spec-连通" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="spec-不可约-implies-spec-连通"><span class="header-section-number">2.1</span> Spec 不可约 <span class="math inline">\(\implies\)</span> Spec 连通</h3>
-<p>不可约是比连通更强的性质：不可约的判否不要求两闭集的交集非空，而连通的判否额外要求两个闭集的交集非空．</p>
-</section>
-<section id="spec-不可约-iff-nilradical-是素理想" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="spec-不可约-iff-nilradical-是素理想"><span class="header-section-number">2.2</span> Spec 不可约 <span class="math inline">\(\iff\)</span> nilradical 是素理想</h3>
+<p>We discuss some well-known results that compare finitely-generated free modules via homomorphisms. Let <span class="math inline">\(R\)</span> be a nonzero commutative ring with <span class="math inline">\(1\)</span>.</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<div id="prp-irr-iff-rad-prime" class="theorem proposition">
-<p><span class="theorem-title"><strong>命题 1 (<span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, exercise 1.19]</a></span>)</strong></span> 环 <span class="math inline">\(R\)</span> 的 Spec 不可约当且仅当 <span class="math inline">\(R\)</span> 的 nilradical <span class="math inline">\(\mathcal N(R)\)</span> 是素理想．</p>
+<div id="prp-free-cmp-1" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 1 (<span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, exercise 3.15]</a></span>)</strong></span> Any <span class="math inline">\(R^{\oplus n} \to R^{\oplus n}\)</span> epimorphism <span class="math inline">\(\varphi\)</span> must be an isomorphism.</p>
 </div>
 </div>
 </div>
 </div>
-<p>这是因为对任意理想 <span class="math inline">\(I\)</span>, <span class="math inline">\(J\)</span>： <span class="math display">\[
-V(I) \cup V(J) = \operatorname{Spec}R
-\iff V(IJ) = \operatorname{Spec}R
-\iff IJ \subseteq \mathcal N(R)
-\]</span> 不失一般性，可以选取既约的理想 <span class="math inline">\(I\)</span> 和 <span class="math inline">\(J\)</span>，这样后者就意味着对 <span class="math inline">\(\mathcal N(R)\)</span> 是素理想的否定．</p>
-</section>
-<section id="既约环整环-iff-不可约" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="既约环整环-iff-不可约"><span class="header-section-number">2.3</span> 既约环：整环 <span class="math inline">\(\iff\)</span> 不可约</h3>
-<p>整环的 Spec 是不可约的，反之未必：<span class="math inline">\(k[x]/(x^2)\)</span> 的 Spec 是单点 <span class="math inline">\((x)\)</span>，但 <span class="math inline">\(k[x]/(x^2)\)</span> 不是整环．这完全是 nilradical 的锅——如果环既约 <span class="math inline">\(\mathcal N(R) = (0)\)</span>，则 Spec 不可约当且仅当坐标环是整环．这也是仿射 <span class="math inline">\(k\)</span>-代数的情况．</p>
-</section>
-<section id="cring-times-iff-spec-sqcup" class="level3" data-number="2.4">
-<h3 data-number="2.4" class="anchored" data-anchor-id="cring-times-iff-spec-sqcup"><span class="header-section-number">2.4</span> CRing <span class="math inline">\(\times\)</span> <span class="math inline">\(\iff\)</span> Spec <span class="math inline">\(\sqcup\)</span></h3>
-<p>环侧的 <span class="math inline">\(\times\)</span> / 直积 对应 Spec 侧的无交并 / 直和．环的直积导致典型的不连通．</p>
-<p>对非零环 <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>，<span class="math inline">\(A \times B\)</span> 的 Spec 与 <span class="math inline">\(\operatorname{Spec}A \sqcup \operatorname{Spec}B\)</span> 同胚：</p>
-<ul>
-<li>它的理想都形如 <span class="math inline">\(I \times J\)</span>：总可以通过乘 <span class="math inline">\((1, 0)\)</span> 和 <span class="math inline">\((0, 1)\)</span> 来得到 <span class="math inline">\(I\)</span> 和 <span class="math inline">\(J\)</span>．</li>
-<li>它的素理想都形如 <span class="math inline">\(\mathfrak p \times B\)</span> 或 <span class="math inline">\(A \times \mathfrak q\)</span>：如果 <span class="math inline">\(I \times J\)</span> 是素理想，那么 <span class="math inline">\(I\)</span> 或 <span class="math inline">\(J\)</span> 必须是素理想，因为两侧的乘法互不干扰；也不能是 <span class="math inline">\(\mathfrak p \times \mathfrak q\)</span>，否则可取 <span class="math inline">\(p \notin \mathfrak p\)</span> 和 <span class="math inline">\(q \notin \mathfrak q\)</span> 使得 <span class="math inline">\((p, *) (*, q) \in \mathfrak p \times \mathfrak q\)</span>．</li>
-<li><span class="math inline">\(V(I \times J) = \{ \mathfrak p \times B : \mathfrak p \in V(I) \} \cup \{ A \times \mathfrak q : \mathfrak q \in V(J) \}\)</span>，这就把 <span class="math inline">\(\operatorname{Spec}(A \times B)\)</span> 和 <span class="math inline">\(\operatorname{Spec}A \sqcup \operatorname{Spec}B\)</span> 两个拓扑空间的闭集对应上了．</li>
-</ul>
-</section>
-<section id="幂等元与-spec-连通性" class="level3" data-number="2.5">
-<h3 data-number="2.5" class="anchored" data-anchor-id="幂等元与-spec-连通性"><span class="header-section-number">2.5</span> 幂等元与 Spec 连通性</h3>
-<p>环 <span class="math inline">\(R\)</span> 内每个幂等元 <span class="math inline">\(e\)</span> 都对应一个 Spec 上的开闭集 <span class="math inline">\(V(e)\)</span>：</p>
-<ul>
-<li><p><span class="math inline">\(V(e)\)</span> 也是开集：<span class="math inline">\(V(e) = D(1-e)\)</span>．</p></li>
-<li><p>单射性：假如 <span class="math inline">\(V(e_1) = V(e_2)\)</span>，那么 <span class="math inline">\(\sqrt{(e_1)} = \sqrt{(e_2)}\)</span>，不妨设 <span class="math inline">\(e_1^n = r e_2\)</span>，但是 <span class="math inline">\(e_1\)</span> 幂等，即 <span class="math inline">\(e_1 = re_2\)</span>．同乘 <span class="math inline">\(e_2\)</span> 得 <span class="math inline">\(e_1 e_2 = r e_2^2 = r e_2 = e_1\)</span>．同理也有 <span class="math inline">\(e_2 = e_1 e_2\)</span>，所以 <span class="math inline">\(e_1 = e_2\)</span>．</p></li>
-<li><p>满射性：对于任意开闭集 <span class="math inline">\(V(I)\)</span>，令与它互补的开闭集为 <span class="math inline">\(V(J)\)</span>，则 <span class="math display">\[
-\begin{aligned}
-V(I \cap J) = V(IJ) &amp;= V(I) \cup V(J) = \operatorname{Spec}R \\
-V(I + J) &amp;= V(I) \cap V(J) = \emptyset
-\end{aligned}
-\]</span> 推得 <span class="math inline">\(I \cap J \subseteq IJ\)</span> 落在 nilradical <span class="math inline">\(\mathcal N(R)\)</span> 中，且 <span class="math inline">\(I + J = R\)</span>——comaximal．</p>
-<p>如果是 Noether 环的话，<span class="math inline">\(IJ\)</span> 会幂零，中国剩余定理就可以直接收工．一般情况则需要一些技巧．使用 comaximal 取出 <span class="math inline">\(x \in I\)</span> 和 <span class="math inline">\(y \in J\)</span> 使得 <span class="math inline">\(x + y = 1\)</span>，因为 <span class="math inline">\(xy \in IJ \subseteq \mathcal N(R)\)</span>，不妨设 <span class="math inline">\((xy)^n = 0\)</span>，考察 <span class="math display">\[
-\begin{aligned}
-1 &amp;= (x + y)^{2n} \\
-  &amp;= \sum_{i=0}^{2n} \binom{2n}{i} x^i y^{2n-i} \\
-  &amp;= \sum_{i=0}^{n-1} \binom{2n}{i} x^i y^{2n-i} + \sum_{i=n+1}^{2n} \binom{2n}{i} x^i y^{2n-i}
-\end{aligned}
-\]</span> 设后两项分别为 <span class="math inline">\(d\)</span> 和 <span class="math inline">\(e\)</span>，则 <span class="math inline">\(d \in J\)</span>, <span class="math inline">\(e \in I\)</span>, <span class="math inline">\(d + e = 1\)</span>, <span class="math inline">\(de = 0\)</span>，这样就证明了 <span class="math inline">\(d\)</span> 和 <span class="math inline">\(e\)</span> 是幂等元．</p>
-<p>现在注意以下关系：<span class="math inline">\(V(e) \subseteq V(I)\)</span>, <span class="math inline">\(V(d) \subseteq V(J)\)</span> 且 <span class="math inline">\(V(e) \sqcup V(d) = \operatorname{Spec}R = V(I) \sqcup V(J)\)</span>，即可迫使 <span class="math inline">\(V(e) = V(I)\)</span> 和 <span class="math inline">\(V(d) = V(J)\)</span>．</p></li>
-</ul>
-<p>因此 Spec 连通当且仅当环内没有非平凡的幂等元．</p>
+<p>Obtain a split monomorphism (a right inverse of <span class="math inline">\(\varphi\)</span>) from the fact that <span class="math inline">\(R^{\oplus n}\)</span> is projective. Use the determinant to conclude.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -507,67 +425,88 @@ Remark
 <div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>这个二项式展开的技巧也可以用来证明：comaximal 的理想 <span class="math inline">\(I\)</span> 和 <span class="math inline">\(J\)</span> 的任意幂次 <span class="math inline">\(I^m\)</span> 和 <span class="math inline">\(J^n\)</span> 也是 comaximal 的．</p>
+<p><span class="proof-title"><em>Remark</em>. </span>There’s actually a more general result: for any finitely-generated <span class="math inline">\(R\)</span>-module <span class="math inline">\(M\)</span>, every epimorphism <span class="math inline">\(M \to M\)</span> is an isomorphism. To show this, view <span class="math inline">\(M\)</span> as an <span class="math inline">\(R[x]\)</span>-module via the action <span class="math inline">\(x \cdot m = \varphi(m)\)</span>, then <span class="math inline">\((x) \cdot M = x \cdot M = M\)</span> by the surjectivity of <span class="math inline">\(\varphi\)</span>. By Nakayama’s lemma, there exists <span class="math inline">\(sx = r \in (x) \subseteq R[x]\)</span> such that <span class="math inline">\((1-sx) \cdot M = (1-r) \cdot M = 0\)</span>, i.e.&nbsp;<span class="math inline">\(sx \cdot m = m\)</span> for all <span class="math inline">\(m \in M\)</span>, that is, <span class="math inline">\(m \mapsto s \cdot m\)</span> is an inverse of <span class="math inline">\(\varphi\)</span>. Hence <span class="math inline">\(\varphi\)</span> is an isomorphism.</p>
+<p>This result is due to <span class="citation" data-cites="vasconcelos_finitely_1969"><a href="#ref-vasconcelos_finitely_1969" role="doc-biblioref">[2]</a></span>. We also referred to <a href="https://math.stackexchange.com/questions/239364/surjective-endomorphisms-of-finitely-generated-modules-are-isomorphisms">Math StackExchange</a>.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
-<i class="callout-icon"></i>
+<i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-Remark
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>注意 Noether 环中，Spec 的连通分支有限：否则这些闭集对应的理想形成无限升链．有限性导致连通分支既开又闭——此时开闭集与连通分支的各种取并一一对应，进而可以使用幂等元完整刻画连通分支，此时可以把环分解成与连通分支对应的有限直积．</p>
-<p><strong>Takeaway:</strong> 看上去不连通就可以拆，拆完后的环没有非平凡幂等元．</p>
-<p>作为推论之一，Artin 环可以被分解成有限个局部 Artin 环的直积 <span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, theorem 8.7]</a></span>，一个证明可以参考<a href="../../posts/20250731-artin-noether/">这里</a>，可以看到证明几乎和上面满射性 Noether 环的 if 线一致．</p>
-<p>还想继续拆？请见准素分解．既约理想结果好，作为素理想的交分解唯一．</p>
+<div class="callout-body-container">
+<div id="prp-free-cmp-2" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 2</strong></span> An <span class="math inline">\(R^{\oplus n} \to R^{\oplus n}\)</span> monomorphism <span class="math inline">\(\varphi\)</span> may not be an isomorphism in general.</p>
 </div>
 </div>
 </div>
 </div>
-</section>
-<section id="f.g.-连通的话是不是会导致-module-rank-of-fiber-恒定" class="level3" data-number="2.6">
-<h3 data-number="2.6" class="anchored" data-anchor-id="f.g.-连通的话是不是会导致-module-rank-of-fiber-恒定"><span class="header-section-number">2.6</span> f.g. 连通的话，是不是会导致 module rank of fiber 恒定？</h3>
-</section>
-<section id="环侧的-otimes-push-out-对应-spec-侧的纤维积-pull-back" class="level3" data-number="2.7">
-<h3 data-number="2.7" class="anchored" data-anchor-id="环侧的-otimes-push-out-对应-spec-侧的纤维积-pull-back"><span class="header-section-number">2.7</span> 环侧的 <span class="math inline">\(\otimes\)</span> / push-out 对应 Spec 侧的纤维积 / pull-back</h3>
-</section>
-</section>
-<section id="使用例" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="使用例"><span class="header-section-number">3</span> 使用例</h2>
-<section id="vxy" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="vxy"><span class="header-section-number">3.1</span> <span class="math inline">\(V(xy)\)</span></h3>
-<p>来考察二维仿射平面上的 <span class="math inline">\(V(xy)\)</span>．它的坐标环是 <span class="math inline">\(k[x,y]/(xy)\)</span>，不是整环，因此可约——但 <span class="math inline">\(V(xy)\)</span> 连通：</p>
+<p>Consider <span class="math inline">\(\varphi: \mathbb Z \to \mathbb Z\)</span>, <span class="math inline">\(z \mapsto 2z\)</span>.</p>
+<p>[TODO] Is it true when <span class="math inline">\(R\)</span> is a local ring?</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-free-cmp-3" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 3 (<span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, exercise 2.11]</a></span>)</strong></span> An <span class="math inline">\(R^{\oplus n} \to R^{\oplus m}\)</span> epimorphism <span class="math inline">\(\varphi\)</span> implies <span class="math inline">\(n \geq m\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<p>Tensor with any residue field of <span class="math inline">\(R\)</span>. Right side is still exact, hence a vector space epimorphism.</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-free-cmp-4" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 4</strong></span> An <span class="math inline">\(R^{\oplus n} \to R^{\oplus m}\)</span> isomorphism <span class="math inline">\(\varphi\)</span> implies <span class="math inline">\(n = m\)</span>. <span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, exercise 2.11]</a></span></p>
+</div>
+</div>
+</div>
+</div>
+<p>Do the same as (3) again with the inverse map.</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-free-cmp-5" class="theorem proposition">
+<p><span class="theorem-title"><strong>Proposition 5 (<span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, exercise 2.11]</a></span>)</strong></span> An <span class="math inline">\(R^{\oplus n} \to R^{\oplus m}\)</span> monomorphism <span class="math inline">\(\varphi\)</span> implies <span class="math inline">\(n \leq m\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<p><span class="math inline">\(R\)</span> is said to satisfy the <em>strong rank condition</em> if the above statement always holds.</p>
+<p>It’s easy to see that this is true for <span class="math inline">\(R\)</span> an integral domain: tensoring with the field of fractions of <span class="math inline">\(R\)</span> does not destroy the injectivity.</p>
+<p>For the general case of arbitrary nonzero commutative rings, we provide some references:</p>
 <ul>
-<li>直观来看，<span class="math inline">\(V(xy)\)</span> 是 <span class="math inline">\(x\)</span> 轴和 <span class="math inline">\(y\)</span> 轴的并集，所以可约；它们在原点相交，所以连通．</li>
-<li>严格来看，<span class="math inline">\(V(xy) = V(x) \cup V(y)\)</span>，所以可约；<span class="math inline">\(V(x)\)</span> 和 <span class="math inline">\(V(y)\)</span> 都是不可约代数集，因此各自连通，它们交集还非空，纯点集拓扑论证（用连通性等价于所有到 <span class="math inline">\(\{0, 1\}\)</span> 连续函数常值的等价刻画）可以保证并集也连通．</li>
+<li><p><span class="citation" data-cites="orzech_onto_1971"><a href="#ref-orzech_onto_1971" role="doc-biblioref">[3]</a></span>. This paper proves a general result that for any finitely-generated <span class="math inline">\(R\)</span>-module <span class="math inline">\(M\)</span> and its submodule <span class="math inline">\(N\)</span>, every epimorphism <span class="math inline">\(N \to M\)</span> is an isomorphism.</p>
+<p>The strong rank condition follows immediately from this result: view <span class="math inline">\(R^n\)</span> as a submodule of <span class="math inline">\(R^m\)</span> via the monomorphism <span class="math inline">\(\varphi\)</span>, assume otherwise that <span class="math inline">\(n &gt; m\)</span>, then we have an epimorphism <span class="math inline">\(R^m \to R^n\)</span> by projection, hence an isomorphism <span class="math inline">\(R^m \to R^n\)</span> by the result of <span class="citation" data-cites="orzech_onto_1971"><a href="#ref-orzech_onto_1971" role="doc-biblioref">[3]</a></span>. This contradicts (4).</p>
+<p>Note that <span class="citation" data-cites="vasconcelos_finitely_1969"><a href="#ref-vasconcelos_finitely_1969" role="doc-biblioref">[2]</a></span>’s result stated in <a href="#prp-free-cmp-1" class="quarto-xref">Proposition&nbsp;1</a> is a special case of this result by taking <span class="math inline">\(N = M\)</span>.</p></li>
+<li><p><a href="https://leanprover-community.github.io/mathlib4_docs/Mathlib/LinearAlgebra/FreeModule/StrongRankCondition.html">Strong rank condition for commutative rings - Mathlib 4 Docs</a></p></li>
+<li><p>Search Keyword: McCoy’s Rank Theorem</p></li>
+<li><p>Another proof seems to make use of the exterior algebra.</p></li>
 </ul>
-<p>以防你想歪，别以为可以用中国剩余定理把坐标环分解成 <span class="math inline">\(k[x] \times k[y]\)</span>：<span class="math inline">\((x)\)</span> 和 <span class="math inline">\((y)\)</span> 根本不是 comaximal 的——这俩一加等于 <span class="math inline">\((x,y)\)</span>——恰好也对应了 Spec 那一侧交点．</p>
-</section>
-<section id="局部环的-spec-连通" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="局部环的-spec-连通"><span class="header-section-number">3.2</span> 局部环的 Spec 连通</h3>
-<p>因为极大理想只有一个，而 Zariski 拓扑的非空闭集都包含它，没法做不交的划分．</p>
-</section>
-<section id="局部环的-spec-什么时候可约" class="level3" data-number="3.3">
-<h3 data-number="3.3" class="anchored" data-anchor-id="局部环的-spec-什么时候可约"><span class="header-section-number">3.3</span> 局部环的 Spec 什么时候可约？</h3>
-<p>TODO</p>
 
 
 
-</section>
-</section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
 <div id="ref-AM1969" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline">Atiyah, M. F. 和 Macdonald, I. G., <em>Introduction To Commutative Algebra</em>. Addison-Wesley Publishing Company, Inc., 1969.</div>
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">M. F. Atiyah and I. G. Macdonald, <em>Introduction to commutative algebra</em>. Addison-Wesley Publishing Company, Inc., 1969.</div>
+</div>
+<div id="ref-vasconcelos_finitely_1969" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">W. V. Vasconcelos, <span>“On finitely generated flat modules,”</span> <em>Trans. Amer. Math. Soc.</em>, vol. 138, pp. 505–512, 1969, doi: <a href="https://doi.org/10.1090/S0002-9947-1969-0238839-5">10.1090/S0002-9947-1969-0238839-5</a>.</div>
+</div>
+<div id="ref-orzech_onto_1971" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">M. Orzech, <span>“Onto endomorphisms are isomorphisms,”</span> <em>The American Mathematical Monthly</em>, vol. 78, no. 4, pp. 357–362, Apr. 1971, doi: <a href="https://doi.org/10.1080/00029890.1971.11992759">10.1080/00029890.1971.11992759</a>.</div>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -608,12 +547,12 @@ Remark
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "已复制");
+      button.setAttribute("title", "Copied!");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "已复制");
+        button.setAttribute("data-bs-title", "Copied!");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",
