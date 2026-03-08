@@ -21,7 +21,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -343,11 +363,11 @@ window.Quarto = {
   <li><a href="#定义" id="toc-定义" class="nav-link active" data-scroll-target="#定义"><span class="header-section-number">1</span> 定义</a></li>
   <li><a href="#性质" id="toc-性质" class="nav-link" data-scroll-target="#性质"><span class="header-section-number">2</span> 性质</a>
   <ul class="collapse">
-  <li><a href="#spec-不可约-spec-连通" id="toc-spec-不可约-spec-连通" class="nav-link" data-scroll-target="#spec-不可约-spec-连通"><span class="header-section-number">2.1</span> Spec 不可约 =&gt; Spec 连通</a></li>
-  <li><a href="#代数集整环-不可约" id="toc-代数集整环-不可约" class="nav-link" data-scroll-target="#代数集整环-不可约"><span class="header-section-number">2.2</span> 代数集：整环 &lt;=&gt; 不可约</a></li>
-  <li><a href="#cring-times-spec-sqcup" id="toc-cring-times-spec-sqcup" class="nav-link" data-scroll-target="#cring-times-spec-sqcup"><span class="header-section-number">2.3</span> CRing <span class="math inline">\(\times\)</span> &lt;=&gt; Spec <span class="math inline">\(\sqcup\)</span></a></li>
+  <li><a href="#spec-不可约-implies-spec-连通" id="toc-spec-不可约-implies-spec-连通" class="nav-link" data-scroll-target="#spec-不可约-implies-spec-连通"><span class="header-section-number">2.1</span> Spec 不可约 <span class="math inline">\(\implies\)</span> Spec 连通</a></li>
+  <li><a href="#代数集整环-iff-不可约" id="toc-代数集整环-iff-不可约" class="nav-link" data-scroll-target="#代数集整环-iff-不可约"><span class="header-section-number">2.2</span> 代数集：整环 <span class="math inline">\(\iff\)</span> 不可约</a></li>
+  <li><a href="#cring-times-iff-spec-sqcup" id="toc-cring-times-iff-spec-sqcup" class="nav-link" data-scroll-target="#cring-times-iff-spec-sqcup"><span class="header-section-number">2.3</span> CRing <span class="math inline">\(\times\)</span> <span class="math inline">\(\iff\)</span> Spec <span class="math inline">\(\sqcup\)</span></a></li>
   <li><a href="#幂等元与-spec-连通性" id="toc-幂等元与-spec-连通性" class="nav-link" data-scroll-target="#幂等元与-spec-连通性"><span class="header-section-number">2.4</span> 幂等元与 Spec 连通性</a></li>
-  <li><a href="#f.g.-连通的话是不是会导致-fiber-dimension-恒定" id="toc-f.g.-连通的话是不是会导致-fiber-dimension-恒定" class="nav-link" data-scroll-target="#f.g.-连通的话是不是会导致-fiber-dimension-恒定"><span class="header-section-number">2.5</span> f.g. 连通的话，是不是会导致 fiber dimension 恒定？</a></li>
+  <li><a href="#f.g.-连通的话是不是会导致-module-rank-of-fiber-恒定" id="toc-f.g.-连通的话是不是会导致-module-rank-of-fiber-恒定" class="nav-link" data-scroll-target="#f.g.-连通的话是不是会导致-module-rank-of-fiber-恒定"><span class="header-section-number">2.5</span> f.g. 连通的话，是不是会导致 module rank of fiber 恒定？</a></li>
   <li><a href="#环侧的-otimes-push-out-对应-spec-侧的纤维积-pull-back" id="toc-环侧的-otimes-push-out-对应-spec-侧的纤维积-pull-back" class="nav-link" data-scroll-target="#环侧的-otimes-push-out-对应-spec-侧的纤维积-pull-back"><span class="header-section-number">2.6</span> 环侧的 <span class="math inline">\(\otimes\)</span> / push-out 对应 Spec 侧的纤维积 / pull-back</a></li>
   </ul></li>
   <li><a href="#使用例" id="toc-使用例" class="nav-link" data-scroll-target="#使用例"><span class="header-section-number">3</span> 使用例</a>
@@ -403,24 +423,42 @@ window.Quarto = {
 <h2 data-number="1" class="anchored" data-anchor-id="定义"><span class="header-section-number">1</span> 定义</h2>
 <p>环的 Spec 是由它的素理想配备 Zariski 拓扑构成的拓扑空间，Zariski 拓扑的闭集由 <span class="math inline">\(V(I) = \{ \mathfrak p : I \subseteq \mathfrak p \}\)</span> 组成，其中 <span class="math inline">\(I\)</span> 是环的任意理想．</p>
 <p>不可约是指 Spec 不能写成两个非空闭集的并．连通是指 Spec 不能写成两个非空不交闭集的并．</p>
-<p>有一类特殊的环，它们是有限生成的 <span class="math inline">\(k\)</span>-代数（<span class="math inline">\(k\)</span> 是域），也即坐标环，总可以写成 <span class="math inline">\(k[x_1, \dots, x_n]/I\)</span>．它们的 Spec 叫做代数集．</p>
+<p>有一类特殊的环：</p>
+<ul>
+<li><p>它们是有限生成的 <span class="math inline">\(k\)</span>-代数（<span class="math inline">\(k\)</span> 是域），总可以写成 <span class="math inline">\(k[x_1, \dots, x_n]/I\)</span>．它们的 Spec 叫做代数集．</p></li>
+<li><p>如果（nilradical 意义下）此环既约 / <span class="math inline">\(I\)</span> 是既约的，就叫这个环是代数集的坐标环，或者仿射 <span class="math inline">\(k\)</span>-代数．</p></li>
+<li><p>如果 TFAE 地 <a href="#prp-irr-iff-rad-prime" class="quarto-xref">命题&nbsp;1</a>：Spec 不可约 / <span class="math inline">\(I\)</span> 是素理想 / 坐标环是整环，则称这个代数集是一个代数簇．</p></li>
+</ul>
 </section>
 <section id="性质" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="性质"><span class="header-section-number">2</span> 性质</h2>
-<section id="spec-不可约-spec-连通" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="spec-不可约-spec-连通"><span class="header-section-number">2.1</span> Spec 不可约 =&gt; Spec 连通</h3>
+<section id="spec-不可约-implies-spec-连通" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="spec-不可约-implies-spec-连通"><span class="header-section-number">2.1</span> Spec 不可约 <span class="math inline">\(\implies\)</span> Spec 连通</h3>
 <p>不可约是比连通更强的性质：不可约的判否不要求两个闭集的交集非空，而连通的判否额外要求两个闭集的交集非空．</p>
 </section>
-<section id="代数集整环-不可约" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="代数集整环-不可约"><span class="header-section-number">2.2</span> 代数集：整环 &lt;=&gt; 不可约</h3>
-<p>对代数集（不限定基域）来讲，不可约性和坐标环的整环性等价：</p>
-<ul>
-<li>如果可约，你手持两个并起来是整个的非空闭集 <span class="math inline">\(V(I)\)</span>, <span class="math inline">\(V(J)\)</span>，任选非零的 <span class="math inline">\(f \in I\)</span> 和 <span class="math inline">\(g \in J\)</span> 就有 <span class="math inline">\(fg = 0\)</span>，破坏了整环．</li>
-<li>如果坐标环不是整环，你就有非平凡的 <span class="math inline">\(fg = 0\)</span>，所以 <span class="math inline">\(V(f)\)</span> 和 <span class="math inline">\(V(g)\)</span> 是两个非空闭集，且 <span class="math inline">\(V(f) \cup V(g) = V(fg) = V(0)\)</span> 整个，导致可约．</li>
-</ul>
+<section id="代数集整环-iff-不可约" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="代数集整环-iff-不可约"><span class="header-section-number">2.2</span> 代数集：整环 <span class="math inline">\(\iff\)</span> 不可约</h3>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-irr-iff-rad-prime" class="theorem proposition">
+<p><span class="theorem-title"><strong>命题 1 (<span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, exercise 1.19]</a></span>)</strong></span> 环 <span class="math inline">\(R\)</span> 的 Spec 不可约当且仅当 <span class="math inline">\(R\)</span> 的 nilradical <span class="math inline">\(\mathcal N(R)\)</span> 是素理想．</p>
+</div>
+</div>
+</div>
+</div>
+<p>这是因为对任意理想 <span class="math inline">\(I\)</span>, <span class="math inline">\(J\)</span>： <span class="math display">\[
+V(I) \cup V(J) = \operatorname{Spec}R
+\iff V(IJ) = \operatorname{Spec}R
+\iff IJ \subseteq \mathcal N(R)
+\]</span> 不失一般性，可以选取既约的理想 <span class="math inline">\(I\)</span> 和 <span class="math inline">\(J\)</span>，这样后者就意味着对 <span class="math inline">\(\mathcal N(R)\)</span> 是素理想的否定．</p>
+<p>对代数集来说，由于 <span class="math inline">\(\mathcal N(R) = (0)\)</span>，所以 Spec 不可约当且仅当坐标环是整环．</p>
 </section>
-<section id="cring-times-spec-sqcup" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="cring-times-spec-sqcup"><span class="header-section-number">2.3</span> CRing <span class="math inline">\(\times\)</span> &lt;=&gt; Spec <span class="math inline">\(\sqcup\)</span></h3>
+<section id="cring-times-iff-spec-sqcup" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="cring-times-iff-spec-sqcup"><span class="header-section-number">2.3</span> CRing <span class="math inline">\(\times\)</span> <span class="math inline">\(\iff\)</span> Spec <span class="math inline">\(\sqcup\)</span></h3>
 <p>环侧的 <span class="math inline">\(\times\)</span> / 直积 对应 Spec 侧的无交并 / 直和．环的直积导致典型的不连通．</p>
 <p>对非零环 <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>，<span class="math inline">\(A \times B\)</span> 的 Spec 与 <span class="math inline">\(\operatorname{Spec}A \sqcup \operatorname{Spec}B\)</span> 同胚：</p>
 <ul>
@@ -483,13 +521,15 @@ Remark
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>注记</em>. </span>注意 Noether 环中，Spec 的连通分支有限：否则这些闭集对应的理想形成无限升链．有限性导致连通分支既开又闭——此时开闭集与连通分支的各种取并一一对应，进而可以使用幂等元完整刻画连通分支，此时可以把环分解成与连通分支对应的有限直积．</p>
+<p>Takeaway：看上去不连通就可以拆，拆完后的环没有非平凡幂等元．</p>
+<p>还想继续拆？请见准素分解．既约理想结果好，作为素理想的交分解唯一．</p>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="f.g.-连通的话是不是会导致-fiber-dimension-恒定" class="level3" data-number="2.5">
-<h3 data-number="2.5" class="anchored" data-anchor-id="f.g.-连通的话是不是会导致-fiber-dimension-恒定"><span class="header-section-number">2.5</span> f.g. 连通的话，是不是会导致 fiber dimension 恒定？</h3>
+<section id="f.g.-连通的话是不是会导致-module-rank-of-fiber-恒定" class="level3" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="f.g.-连通的话是不是会导致-module-rank-of-fiber-恒定"><span class="header-section-number">2.5</span> f.g. 连通的话，是不是会导致 module rank of fiber 恒定？</h3>
 </section>
 <section id="环侧的-otimes-push-out-对应-spec-侧的纤维积-pull-back" class="level3" data-number="2.6">
 <h3 data-number="2.6" class="anchored" data-anchor-id="环侧的-otimes-push-out-对应-spec-侧的纤维积-pull-back"><span class="header-section-number">2.6</span> 环侧的 <span class="math inline">\(\otimes\)</span> / push-out 对应 Spec 侧的纤维积 / pull-back</h3>
@@ -512,12 +552,18 @@ Remark
 </section>
 <section id="局部环的-spec-什么时候可约" class="level3" data-number="3.3">
 <h3 data-number="3.3" class="anchored" data-anchor-id="局部环的-spec-什么时候可约"><span class="header-section-number">3.3</span> 局部环的 Spec 什么时候可约？</h3>
+<p>TODO</p>
+
 
 
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-AM1969" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">Atiyah, M. F. 和 Macdonald, I. G., <em>Introduction To Commutative Algebra</em>. Addison-Wesley Publishing Company, Inc., 1969.</div>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
