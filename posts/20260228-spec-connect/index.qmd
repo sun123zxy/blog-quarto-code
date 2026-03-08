@@ -4,6 +4,8 @@ date: 2026/02/27
 author: sun123zxy
 lang: zh
 
+bibliography: index.bib
+
 draft: true
 
 categories:
@@ -29,22 +31,40 @@ format:
 
 不可约是指 Spec 不能写成两个非空闭集的并．连通是指 Spec 不能写成两个非空不交闭集的并．
 
-有一类特殊的环，它们是有限生成的 $k$-代数（$k$ 是域），也即坐标环，总可以写成 $k[x_1, \dots, x_n]/I$．它们的 Spec 叫做代数集．
+有一类特殊的环：
+
+- 它们是有限生成的 $k$-代数（$k$ 是域），总可以写成 $k[x_1, \dots, x_n]/I$．它们的 Spec 叫做代数集．
+
+- 如果（nilradical 意义下）此环既约 / $I$ 是既约的，就叫这个环是代数集的坐标环，或者仿射 $k$-代数．
+
+- 如果 TFAE 地 [@prp-irr-iff-rad-prime]：Spec 不可约 / $I$ 是素理想 / 坐标环是整环，则称这个代数集是一个代数簇．
 
 ## 性质
 
-### Spec 不可约 => Spec 连通
+### Spec 不可约 $\implies$ Spec 连通
 
 不可约是比连通更强的性质：不可约的判否不要求两个闭集的交集非空，而连通的判否额外要求两个闭集的交集非空．
 
-### 代数集：整环 <=> 不可约
+### 代数集：整环 $\iff$ 不可约
 
-对代数集（不限定基域）来讲，不可约性和坐标环的整环性等价：
+::: {#prp-irr-iff-rad-prime}
 
-- 如果可约，你手持两个并起来是整个的非空闭集 $V(I)$, $V(J)$，任选非零的 $f \in I$ 和 $g \in J$ 就有 $fg = 0$，破坏了整环．
-- 如果坐标环不是整环，你就有非平凡的 $fg = 0$，所以 $V(f)$ 和 $V(g)$ 是两个非空闭集，且 $V(f) \cup V(g) = V(fg) = V(0)$ 整个，导致可约．
+## [@AM1969, {exercise 1.19}]
 
-### CRing $\times$ <=> Spec $\sqcup$
+环 $R$ 的 Spec 不可约当且仅当 $R$ 的 nilradical $\mathcal N(R)$ 是素理想．
+:::
+
+这是因为对任意理想 $I$, $J$：
+$$
+V(I) \cup V(J) = \Spec R
+\iff V(IJ) = \Spec R
+\iff IJ \subseteq \mathcal N(R)
+$$
+不失一般性，可以选取既约的理想 $I$ 和 $J$，这样后者就意味着对 $\mathcal N(R)$ 是素理想的否定．
+
+对代数集来说，由于 $\mathcal N(R) = (0)$，所以 Spec 不可约当且仅当坐标环是整环．
+
+### CRing $\times$ $\iff$ Spec $\sqcup$
 
 环侧的 $\times$ / 直积 对应 Spec 侧的无交并 / 直和．环的直积导致典型的不连通．
 
@@ -93,9 +113,13 @@ format:
 :::{.remark}
 
 注意 Noether 环中，Spec 的连通分支有限：否则这些闭集对应的理想形成无限升链．有限性导致连通分支既开又闭——此时开闭集与连通分支的各种取并一一对应，进而可以使用幂等元完整刻画连通分支，此时可以把环分解成与连通分支对应的有限直积．
+
+Takeaway：看上去不连通就可以拆，拆完后的环没有非平凡幂等元．
+
+还想继续拆？请见准素分解．既约理想结果好，作为素理想的交分解唯一．
 :::
 
-### f.g. 连通的话，是不是会导致 fiber dimension 恒定？
+### f.g. 连通的话，是不是会导致 module rank of fiber 恒定？
 
 ### 环侧的 $\otimes$ / push-out 对应 Spec 侧的纤维积 / pull-back
 
@@ -115,3 +139,5 @@ format:
 因为极大理想只有一个，而 Zariski 拓扑的非空闭集都包含它，没法做不交的划分． 
 
 ### 局部环的 Spec 什么时候可约？
+
+TODO
