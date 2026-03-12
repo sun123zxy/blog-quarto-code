@@ -154,6 +154,53 @@ $$
 关于数乘，无妨设 $W=V$．对任意 $V$ 上的 $G$-自同态 $f$，它在 $V$ 中至少有一个非空的特征子空间——一个 $G$-子模．由于 $V$ 不可约，这个特征子空间只能是 $V$，因此 $f$ 是数乘．
 :::
 
+## 群代数
+
+群代数 $\mathbb C[G]$ 是一组形式基底 $(e_g)_{g \in G}$ 生成的线性空间，乘法由 $e_{g_1} e_{g_2} := e_{g_1 g_2}$ 定义．通过将 $e_g$ 实现为函数 $h \mapsto \delta_{h = g}$，$\mathbb C[G]$ 的实体可以认为是 $G \to \mathbb C$ 的全体函数构成的 $|G|$ 维线性空间，也记作 $L^2 (G)$．
+
+$\mathbb C[G]$ 作为环，其自带的 $G$-模结构导致 $L^2(G)$ 上也产生一个对应的 $G$-模结构 $g \cdot f := (h \mapsto f(g^{-1} h))$——特别地：
+$$
+g_1 \cdot e_{g_2} = g \cdot \left( h \mapsto \delta_{h = g_2} \right) = \left( h \mapsto \delta_{h = g_1 g_2} \right) = e_{g_1 g_2}
+$$
+这解释了我们配备的 $G$-模结构的合理性．
+
+记号都这么写了，自然要定义内积
+$$
+\langle f_1, f_2 \rangle := \frac 1 {|G|} \sum_{g \in G} f_1(g) \overline{f_2(g)}
+$$
+
+考虑 $L^2(G)$ 的 $G$-不变子空间 $H := \left( L^2(G) \right)^G$【TODO】
+
 ## 特征标
 
-表示 $\varphi : G \to \GL(V)$ 的特征标定义为函数 $\chi_\varphi : G \to \mathbb C$, $g \mapsto \tr(\rho(g))$．
+表示 $\varphi : G \to \GL(V)$ 的特征标定义为函数 $\chi_\varphi : G \to \mathbb C$, $g \mapsto \tr(\rho(g))$，在模的记号下亦写作 $\chi_V$．
+
+特征标们构成 $L^2(G)$ 的一个子空间——特征标空间．但是特征标其实更加特殊
+
+特征标满足以下性质：
+
+- $\chi_V(1) = \dim V$
+
+  对角线全一．
+
+- $\chi_V(g^{-1}) = \overline{\chi_V(g)}$
+
+  注意 trace 是特征值的和，特征值都是单位根，单位根取逆就是共轭，$g^{-1}$ 的特征值是 $g$ 的特征值的逆即可．
+
+- $\chi_V(hgh^{-1}) = \chi_V(g)$，即在共轭类上取值相同．
+
+- $\chi_{V \oplus W}(g) = \chi_V(g) + \chi_W(g)$
+
+  矩阵分块即可．
+
+- $\chi_{V \otimes W}(g) = \chi_V(g) \chi_W(g)$
+
+  矩阵分一堆块即可．
+
+- $\chi_{V^*}(g) = \overline{\chi_V(g)}$
+  
+  也就是算 $\rho_{V^*}(g) \in \GL(V^*)$ 的 trace，按照 $V^*$ 定义它恰好是 $\rho_V(g^{-1}) \in \GL(V)$ 的对偶映射．
+
+- $\frac 1 {|G|} \sum_{g \in G} \chi_V(g) = \dim V^G$
+
+  这是平均化投影 $V \to V^G$ 的 trace．
