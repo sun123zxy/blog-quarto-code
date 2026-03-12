@@ -8,7 +8,7 @@
 
 <meta name="author" content="sun123zxy">
 
-<title>有限群复表示论速通 – sun123zxy’s blog</title>
+<title>有限群表示论速通 – sun123zxy’s blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,7 +21,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -343,8 +363,8 @@ window.Quarto = {
   <li><a href="#构造" id="toc-构造" class="nav-link active" data-scroll-target="#构造"><span class="header-section-number">1</span> 构造</a></li>
   <li><a href="#内积" id="toc-内积" class="nav-link" data-scroll-target="#内积"><span class="header-section-number">2</span> 内积</a></li>
   <li><a href="#不可约表示" id="toc-不可约表示" class="nav-link" data-scroll-target="#不可约表示"><span class="header-section-number">3</span> 不可约表示</a></li>
-  <li><a href="#群代数" id="toc-群代数" class="nav-link" data-scroll-target="#群代数"><span class="header-section-number">4</span> 群代数</a></li>
-  <li><a href="#特征标" id="toc-特征标" class="nav-link" data-scroll-target="#特征标"><span class="header-section-number">5</span> 特征标</a></li>
+  <li><a href="#特征标" id="toc-特征标" class="nav-link" data-scroll-target="#特征标"><span class="header-section-number">4</span> 特征标</a></li>
+  <li><a href="#正则表示" id="toc-正则表示" class="nav-link" data-scroll-target="#正则表示"><span class="header-section-number">5</span> 正则表示</a></li>
   </ul>
 </nav>
     </div>
@@ -354,7 +374,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">有限群复表示论速通</h1>
+<h1 class="title">有限群表示论速通</h1>
+<p class="subtitle lead">A Quick Tour of the Representation Theory of Finite Groups</p>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
     <div class="quarto-category">algebra</div>
@@ -376,6 +397,12 @@ window.Quarto = {
     
   </div>
   
+<div>
+  <div class="abstract">
+    <div class="block-title">摘要</div>
+    我们参考 Fulton–Harris <span class="citation" data-cites="fulton_representation_2004"><a href="#ref-fulton_representation_2004" role="doc-biblioref">[1]</a>，{chapter 1–2}</span> 优雅迅速地完成有限群复表示论的入门．
+  </div>
+</div>
 
 
 </header>
@@ -400,12 +427,12 @@ v \mapsto \tilde v := \frac 1 {|G|} \sum_{g \in G} g \cdot v
 <li><p>对偶空间 <span class="math inline">\(V^* := \operatorname{Hom}(V, \mathbb C)\)</span>：</p>
 <p>线性空间对偶配备 <span class="math inline">\(g \cdot f := (v \mapsto f(g^{-1} \cdot v))\)</span>．</p></li>
 <li><p>线性映射空间 <span class="math inline">\(\operatorname{Hom}(V, W)\)</span>：</p>
-<p>线性空间 <span class="math inline">\(\operatorname{Hom}(V, W)\)</span> 配备 <span class="math inline">\(g \cdot f := (v \mapsto g \cdot f(g^{-1} \cdot v))\)</span>．</p>
+<p>线性空间 <span class="math inline">\(\operatorname{Hom}(V, W)\)</span> 配备 <span class="math inline">\(g \cdot \varphi := (v \mapsto g \cdot \varphi(g^{-1} \cdot v))\)</span>．</p>
 <p>注意线性空间有自然同构 <span class="math inline">\(\operatorname{Hom}(V, W) \cong V^* \otimes W\)</span>．我们设计的定义使得这一同构相容地提升到 <span class="math inline">\(G\)</span>-模之上．</p></li>
 <li><p><span class="math inline">\(G\)</span>-模同态空间 <span class="math inline">\(\operatorname{Hom}_G(V, W)\)</span>：</p>
-<p>保持 <span class="math inline">\(G\)</span>-模结构的所有线性映射同态，其中的同态 <span class="math inline">\(f\)</span> 满足 <span class="math inline">\(f(g \cdot v) = g \cdot f(v)\)</span>．</p>
+<p>保持 <span class="math inline">\(G\)</span>-模结构的所有线性映射同态，其中的同态 <span class="math inline">\(\varphi\)</span> 满足 <span class="math inline">\(\varphi(g \cdot v) = g \cdot \varphi(v)\)</span>．</p>
 <p>注意我们设计的定义使得 <span class="math inline">\(\operatorname{Hom}_G(V, W) = \left(\operatorname{Hom}(V, W) \right)^G\)</span>．<span class="math inline">\(\operatorname{Hom}(V, W) \to \operatorname{Hom}_G(V, W)\)</span> 的平均化投影是 <span class="math display">\[
-f \mapsto \tilde f := \left( v \mapsto \frac 1 {|G|} \sum_{g \in G} g \cdot f(g^{-1} \cdot v) \right)
+\varphi \mapsto \tilde \varphi := \left( v \mapsto \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(g^{-1} \cdot v) \right)
 \]</span></p></li>
 </ul>
 </section>
@@ -547,28 +574,13 @@ Proof
 </div>
 </div>
 </section>
-<section id="群代数" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="群代数"><span class="header-section-number">4</span> 群代数</h2>
-<p>群代数 <span class="math inline">\(\mathbb C[G]\)</span> 是一组形式基底 <span class="math inline">\((e_g)_{g \in G}\)</span> 生成的线性空间，乘法由 <span class="math inline">\(e_{g_1} e_{g_2} := e_{g_1 g_2}\)</span> 定义．通过将 <span class="math inline">\(e_g\)</span> 实现为函数 <span class="math inline">\(h \mapsto \delta_{h = g}\)</span>，<span class="math inline">\(\mathbb C[G]\)</span> 的实体可以认为是 <span class="math inline">\(G \to \mathbb C\)</span> 的全体函数构成的 <span class="math inline">\(|G|\)</span> 维线性空间，也记作 <span class="math inline">\(L^2 (G)\)</span>．</p>
-<p><span class="math inline">\(\mathbb C[G]\)</span> 作为环，其自带的 <span class="math inline">\(G\)</span>-模结构导致 <span class="math inline">\(L^2(G)\)</span> 上也产生一个对应的 <span class="math inline">\(G\)</span>-模结构 <span class="math inline">\(g \cdot f := (h \mapsto f(g^{-1} h))\)</span>——特别地： <span class="math display">\[
-g_1 \cdot e_{g_2} = g \cdot \left( h \mapsto \delta_{h = g_2} \right) = \left( h \mapsto \delta_{h = g_1 g_2} \right) = e_{g_1 g_2}
-\]</span> 这解释了我们配备的 <span class="math inline">\(G\)</span>-模结构的合理性．</p>
-<p>记号都这么写了，自然要定义内积 <span class="math display">\[
-\langle f_1, f_2 \rangle := \frac 1 {|G|} \sum_{g \in G} f_1(g) \overline{f_2(g)}
-\]</span></p>
-<p>考虑 <span class="math inline">\(L^2(G)\)</span> 的 <span class="math inline">\(G\)</span>-不变子空间 <span class="math inline">\(H := \left( L^2(G) \right)^G\)</span>【TODO】</p>
-</section>
-<section id="特征标" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="特征标"><span class="header-section-number">5</span> 特征标</h2>
+<section id="特征标" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="特征标"><span class="header-section-number">4</span> 特征标</h2>
 <p>表示 <span class="math inline">\(\varphi : G \to \operatorname{GL}(V)\)</span> 的特征标定义为函数 <span class="math inline">\(\chi_\varphi : G \to \mathbb C\)</span>, <span class="math inline">\(g \mapsto \operatorname{tr}(\rho(g))\)</span>，在模的记号下亦写作 <span class="math inline">\(\chi_V\)</span>．</p>
-<p>特征标们构成 <span class="math inline">\(L^2(G)\)</span> 的一个子空间——特征标空间．但是特征标其实更加特殊</p>
-<p>特征标满足以下性质：</p>
+<p>记 <span class="math inline">\(L^2(G)\)</span> 是 <span class="math inline">\(G \to \mathbb C\)</span> 的全体函数构成的线性空间，配备内积 <span class="math inline">\(\langle f_1, f_2 \rangle := \frac 1 {|G|} \sum_{g \in G} f_1(g) \overline{f_2(g)}\)</span>．特征标们构成 <span class="math inline">\(L^2(G)\)</span> 的一个子空间，但我们还可以做的更好：由于 trace 的相似不变性，<span class="math inline">\(\chi_V(hgh^{-1}) = \chi_V(g)\)</span>，故特征标函数在共轭类上取值相同．我们将这种 <span class="math inline">\(G \to \mathbb C\)</span> 的函数称为类函数，于是特征标都是类函数．</p>
+<p>特征标还满足以下性质：</p>
+<p><span class="math inline">\(G\)</span>-module-wise properties：</p>
 <ul>
-<li><p><span class="math inline">\(\chi_V(1) = \dim V\)</span></p>
-<p>对角线全一．</p></li>
-<li><p><span class="math inline">\(\chi_V(g^{-1}) = \overline{\chi_V(g)}\)</span></p>
-<p>注意 trace 是特征值的和，特征值都是单位根，单位根取逆就是共轭，<span class="math inline">\(g^{-1}\)</span> 的特征值是 <span class="math inline">\(g\)</span> 的特征值的逆即可．</p></li>
-<li><p><span class="math inline">\(\chi_V(hgh^{-1}) = \chi_V(g)\)</span>，即在共轭类上取值相同．</p></li>
 <li><p><span class="math inline">\(\chi_{V \oplus W}(g) = \chi_V(g) + \chi_W(g)\)</span></p>
 <p>矩阵分块即可．</p></li>
 <li><p><span class="math inline">\(\chi_{V \otimes W}(g) = \chi_V(g) \chi_W(g)\)</span></p>
@@ -597,14 +609,190 @@ Remark
 </div>
 </div>
 </div></li>
-<li><p><span class="math inline">\(\frac 1 {|G|} \sum_{g \in G} \chi_V(g) = \dim V^G\)</span></p>
+</ul>
+<p><span class="math inline">\(G\)</span>-wise properties：</p>
+<ul>
+<li><p><span class="math inline">\(\chi_V(1) = \dim V\)</span></p>
+<p>对角线全一．</p></li>
+<li><p><span class="math inline">\(\chi_V(g^{-1}) = \overline{\chi_V(g)}\)</span></p>
+<p>注意 trace 是特征值的和，特征值都是单位根，单位根取逆就是共轭，<span class="math inline">\(g^{-1}\)</span> 的特征值是 <span class="math inline">\(g\)</span> 的特征值的逆即可．</p></li>
+<li><p><span class="math inline">\(\langle \chi_V, 1_G \rangle = \frac 1 {|G|} \sum_{g \in G} \chi_V(g) = \dim V^G\)</span></p>
 <p>这是平均化投影 <span class="math inline">\(V \to V^G\)</span> 的 trace．</p></li>
 </ul>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-ortho" class="theorem">
+<p><span class="theorem-title"><strong>定理 3</strong></span> &nbsp;</p>
+<ul>
+<li><p><span class="math inline">\(\dim \operatorname{Hom}_G(V, W) = \langle \chi_V, \chi_W \rangle\)</span></p></li>
+<li><p>不可约表示的特征标两两正交，模长为 <span class="math inline">\(1\)</span>．</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证</em>. </span>注意 <span class="math display">\[
+\begin{aligned}
+\dim \operatorname{Hom}_G(V, W) &amp;= \dim (V^* \otimes W)^G \\
+&amp;= \langle \chi_{V^* \otimes W}, 1_G \rangle \\
+&amp;= \langle \overline{\chi_{V}} \chi_W, 1_G \rangle \\
+&amp;= \langle \chi_V, \chi_W \rangle
+\end{aligned}
+\]</span></p>
+<p>当不可约时，前者 <a href="#thm-schur" class="quarto-xref">定理&nbsp;2</a> 确定 <span class="math inline">\(0\)</span> / <span class="math inline">\(1\)</span> 情况，立得正交性．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="cor-char-corresp" class="theorem corollary">
+<p><span class="theorem-title"><strong>推论 1</strong></span> &nbsp;</p>
+<ul>
+<li><p>表示不可约分解的写法唯一，不同的写法对应不同的同构类．</p></li>
+<li><p>表示的同构类与特征标一一对应．</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证</em>. </span></p>
+<ul>
+<li><p>由 <a href="#thm-semisimp" class="quarto-xref">定理&nbsp;1</a>，任意表示都可以写成不可约表示的直和，而特征标与直和相容良好．结合 <a href="#thm-ortho" class="quarto-xref">定理&nbsp;3</a> 的正交性，故对任意表示 <span class="math inline">\(V\)</span>，通过将它的特征标和某一不可约表示 <span class="math inline">\(V_i\)</span> 的特征标做内积，就可以确定这一表示包含了多少份 <span class="math inline">\(V_i\)</span>．</p></li>
+<li><p>表示固然给出了特征标．反过来，可以通过上述特征标内积方法确定表示的同构类．</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-conj" class="theorem">
+<p><span class="theorem-title"><strong>定理 4</strong></span> &nbsp;</p>
+<ul>
+<li><p>特征标在 <span class="math inline">\(L^2(G)\)</span> 中生成的子空间，恰好是类函数空间．</p></li>
+<li><p>不可约表示的同构类数量等于 <span class="math inline">\(G\)</span> 的共轭类数量．</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证</em>. </span>假如类函数 <span class="math inline">\(\chi\)</span> 与所有不可约表示的特征标都正交，则 <span class="math inline">\(\chi\)</span> 与所有表示的特征标都正交．由 <a href="#cor-char-corresp" class="quarto-xref">推论&nbsp;1</a>，<span class="math inline">\(\chi\)</span> 与所有类函数都正交．矛盾．</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="正则表示" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="正则表示"><span class="header-section-number">5</span> 正则表示</h2>
+<p>群代数 <span class="math inline">\(\mathbb C[G]\)</span> 是一组形式基底 <span class="math inline">\((e_g)_{g \in G}\)</span> 生成的线性空间，乘法由 <span class="math inline">\(e_{g_1} e_{g_2} := e_{g_1 g_2}\)</span> 定义．作为环，其自带一个左作用得到的 <span class="math inline">\(G\)</span>-模结构，称之为正则表示．</p>
+<p>通过将 <span class="math inline">\(e_g\)</span> 实现为函数 <span class="math inline">\(h \mapsto \delta_{h = g}\)</span>，<span class="math inline">\(\mathbb C[G]\)</span> 的实体可以认为是 <span class="math inline">\(G \to \mathbb C\)</span> 的全体函数构成的 <span class="math inline">\(|G|\)</span> 维线性空间，于是也可写作 <span class="math inline">\(L^2 (G)\)</span>．上述 <span class="math inline">\(\mathbb C[G]\)</span> 的左作用对应 <span class="math inline">\(L^2(G)\)</span> 的 <span class="math inline">\(G\)</span>-模结构 <span class="math inline">\(g \cdot \chi := (h \mapsto \chi (g^{-1} h))\)</span>——特别地： <span class="math display">\[
+g_1 \cdot e_{g_2} = g \cdot \left( h \mapsto \delta_{h = g_2} \right) = \left( h \mapsto \delta_{h = g_1 g_2} \right) = e_{g_1 g_2}
+\]</span> 这解释了我们配备的 <span class="math inline">\(G\)</span>-模结构的合理性．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-reg" class="theorem">
+<p><span class="theorem-title"><strong>定理 5</strong></span> &nbsp;</p>
+<ul>
+<li><p><span class="math display">\[
+\chi_{\mathbb C[G]}(g) = \begin{cases}
+|G| &amp; g = 1 \\
+0 &amp; \text{otherwise}
+\end{cases}
+\]</span></p></li>
+<li><p>对任意 <span class="math inline">\(G\)</span>-表示 <span class="math inline">\(V\)</span>，<span class="math inline">\(\langle \chi_{\mathbb C[G]}, \chi_V \rangle = \chi_V (1) = \dim V\)</span>．</p></li>
+<li><p><span class="math inline">\(\mathbb C[G]\)</span> 的不可约表示分解中，每个不可约表示 <span class="math inline">\(V_i\)</span> 恰好出现 <span class="math inline">\(\dim V_i\)</span> 份．</p></li>
+<li><p><span class="math display">\[
+\sum_i (\dim V_i)^2 = |G|
+\]</span></p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证</em>. </span>平凡．</p>
+</div>
+</div>
+</div>
+</div>
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-fulton_representation_2004" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">W. Fulton 和 J. Harris, <em>Representation Theory</em>, 卷 129. 收入 Graduate Texts in Mathematics, vol. 129. New York, <span>NY</span>: Springer, 2004. doi: <a href="https://doi.org/10.1007/978-1-4612-0979-9">10.1007/978-1-4612-0979-9</a>.</div>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
