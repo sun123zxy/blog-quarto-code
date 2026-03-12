@@ -343,7 +343,8 @@ window.Quarto = {
   <li><a href="#构造" id="toc-构造" class="nav-link active" data-scroll-target="#构造"><span class="header-section-number">1</span> 构造</a></li>
   <li><a href="#内积" id="toc-内积" class="nav-link" data-scroll-target="#内积"><span class="header-section-number">2</span> 内积</a></li>
   <li><a href="#不可约表示" id="toc-不可约表示" class="nav-link" data-scroll-target="#不可约表示"><span class="header-section-number">3</span> 不可约表示</a></li>
-  <li><a href="#特征标" id="toc-特征标" class="nav-link" data-scroll-target="#特征标"><span class="header-section-number">4</span> 特征标</a></li>
+  <li><a href="#群代数" id="toc-群代数" class="nav-link" data-scroll-target="#群代数"><span class="header-section-number">4</span> 群代数</a></li>
+  <li><a href="#特征标" id="toc-特征标" class="nav-link" data-scroll-target="#特征标"><span class="header-section-number">5</span> 特征标</a></li>
   </ul>
 </nav>
     </div>
@@ -546,9 +547,37 @@ Proof
 </div>
 </div>
 </section>
-<section id="特征标" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="特征标"><span class="header-section-number">4</span> 特征标</h2>
-<p>表示 <span class="math inline">\(\varphi : G \to \operatorname{GL}(V)\)</span> 的特征标定义为函数 <span class="math inline">\(\chi_\varphi : G \to \mathbb C\)</span>, <span class="math inline">\(g \mapsto \operatorname{tr}(\rho(g))\)</span>．</p>
+<section id="群代数" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="群代数"><span class="header-section-number">4</span> 群代数</h2>
+<p>群代数 <span class="math inline">\(\mathbb C[G]\)</span> 是一组形式基底 <span class="math inline">\((e_g)_{g \in G}\)</span> 生成的线性空间，乘法由 <span class="math inline">\(e_{g_1} e_{g_2} := e_{g_1 g_2}\)</span> 定义．通过将 <span class="math inline">\(e_g\)</span> 实现为函数 <span class="math inline">\(h \mapsto \delta_{h = g}\)</span>，<span class="math inline">\(\mathbb C[G]\)</span> 的实体可以认为是 <span class="math inline">\(G \to \mathbb C\)</span> 的全体函数构成的 <span class="math inline">\(|G|\)</span> 维线性空间，也记作 <span class="math inline">\(L^2 (G)\)</span>．</p>
+<p><span class="math inline">\(\mathbb C[G]\)</span> 作为环，其自带的 <span class="math inline">\(G\)</span>-模结构导致 <span class="math inline">\(L^2(G)\)</span> 上也产生一个对应的 <span class="math inline">\(G\)</span>-模结构 <span class="math inline">\(g \cdot f := (h \mapsto f(g^{-1} h))\)</span>——特别地： <span class="math display">\[
+g_1 \cdot e_{g_2} = g \cdot \left( h \mapsto \delta_{h = g_2} \right) = \left( h \mapsto \delta_{h = g_1 g_2} \right) = e_{g_1 g_2}
+\]</span> 这解释了我们配备的 <span class="math inline">\(G\)</span>-模结构的合理性．</p>
+<p>记号都这么写了，自然要定义内积 <span class="math display">\[
+\langle f_1, f_2 \rangle := \frac 1 {|G|} \sum_{g \in G} f_1(g) \overline{f_2(g)}
+\]</span></p>
+<p>考虑 <span class="math inline">\(L^2(G)\)</span> 的 <span class="math inline">\(G\)</span>-不变子空间 <span class="math inline">\(H := \left( L^2(G) \right)^G\)</span>【TODO】</p>
+</section>
+<section id="特征标" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="特征标"><span class="header-section-number">5</span> 特征标</h2>
+<p>表示 <span class="math inline">\(\varphi : G \to \operatorname{GL}(V)\)</span> 的特征标定义为函数 <span class="math inline">\(\chi_\varphi : G \to \mathbb C\)</span>, <span class="math inline">\(g \mapsto \operatorname{tr}(\rho(g))\)</span>，在模的记号下亦写作 <span class="math inline">\(\chi_V\)</span>．</p>
+<p>特征标们构成 <span class="math inline">\(L^2(G)\)</span> 的一个子空间——特征标空间．但是特征标其实更加特殊</p>
+<p>特征标满足以下性质：</p>
+<ul>
+<li><p><span class="math inline">\(\chi_V(1) = \dim V\)</span></p>
+<p>对角线全一．</p></li>
+<li><p><span class="math inline">\(\chi_V(g^{-1}) = \overline{\chi_V(g)}\)</span></p>
+<p>注意 trace 是特征值的和，特征值都是单位根，单位根取逆就是共轭，<span class="math inline">\(g^{-1}\)</span> 的特征值是 <span class="math inline">\(g\)</span> 的特征值的逆即可．</p></li>
+<li><p><span class="math inline">\(\chi_V(hgh^{-1}) = \chi_V(g)\)</span>，即在共轭类上取值相同．</p></li>
+<li><p><span class="math inline">\(\chi_{V \oplus W}(g) = \chi_V(g) + \chi_W(g)\)</span></p>
+<p>矩阵分块即可．</p></li>
+<li><p><span class="math inline">\(\chi_{V \otimes W}(g) = \chi_V(g) \chi_W(g)\)</span></p>
+<p>矩阵分一堆块即可．</p></li>
+<li><p><span class="math inline">\(\chi_{V^*}(g) = \overline{\chi_V(g)}\)</span></p>
+<p>也就是算 <span class="math inline">\(\rho_{V^*}(g) \in \operatorname{GL}(V^*)\)</span> 的 trace，按照 <span class="math inline">\(V^*\)</span> 定义它恰好是 <span class="math inline">\(\rho_V(g^{-1}) \in \operatorname{GL}(V)\)</span> 的对偶映射．</p></li>
+<li><p><span class="math inline">\(\frac 1 {|G|} \sum_{g \in G} \chi_V(g) = \dim V^G\)</span></p>
+<p>这是平均化投影 <span class="math inline">\(V \to V^G\)</span> 的 trace．</p></li>
+</ul>
 
 
 </section>
