@@ -1,8 +1,11 @@
 ---
-title: 有限群复表示论速通
-
+title: 有限群表示论速通
+subtitle: A Quick Tour of the Representation Theory of Finite Groups
+abstract: 我们参考 Fulton--Harris [@fulton_representation_2004，{chapter 1--2}] 优雅迅速地完成有限群复表示论的入门．
 author: sun123zxy
 lang: zh
+
+bibliography: index.bib
 
 draft: true
 
@@ -56,17 +59,17 @@ $G$ 是有限群，$V$ 是有限维的 $\mathbb C$-线性空间，则群同态 $
 
 - 线性映射空间 $\Hom(V, W)$：
 
-  线性空间 $\Hom(V, W)$ 配备 $g \cdot f := (v \mapsto g \cdot f(g^{-1} \cdot v))$．
+  线性空间 $\Hom(V, W)$ 配备 $g \cdot \varphi := (v \mapsto g \cdot \varphi(g^{-1} \cdot v))$．
 
   注意线性空间有自然同构 $\Hom(V, W) \cong V^* \otimes W$．我们设计的定义使得这一同构相容地提升到 $G$-模之上．
 
 - $G$-模同态空间 $\Hom_G(V, W)$：
 
-  保持 $G$-模结构的所有线性映射同态，其中的同态 $f$ 满足 $f(g \cdot v) = g \cdot f(v)$．
+  保持 $G$-模结构的所有线性映射同态，其中的同态 $\varphi$ 满足 $\varphi(g \cdot v) = g \cdot \varphi(v)$．
 
   注意我们设计的定义使得 $\Hom_G(V, W) = \left(\Hom(V, W) \right)^G$．$\Hom(V, W) \to \Hom_G(V, W)$ 的平均化投影是
   $$
-  f \mapsto \tilde f := \left( v \mapsto \frac 1 {|G|} \sum_{g \in G} g \cdot f(g^{-1} \cdot v) \right)
+  \varphi \mapsto \tilde \varphi := \left( v \mapsto \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(g^{-1} \cdot v) \right)
   $$
 
 ## 内积
@@ -154,40 +157,15 @@ $$
 关于数乘，无妨设 $W=V$．对任意 $V$ 上的 $G$-自同态 $f$，它在 $V$ 中至少有一个非空的特征子空间——一个 $G$-子模．由于 $V$ 不可约，这个特征子空间只能是 $V$，因此 $f$ 是数乘．
 :::
 
-## 群代数
-
-群代数 $\mathbb C[G]$ 是一组形式基底 $(e_g)_{g \in G}$ 生成的线性空间，乘法由 $e_{g_1} e_{g_2} := e_{g_1 g_2}$ 定义．通过将 $e_g$ 实现为函数 $h \mapsto \delta_{h = g}$，$\mathbb C[G]$ 的实体可以认为是 $G \to \mathbb C$ 的全体函数构成的 $|G|$ 维线性空间，也记作 $L^2 (G)$．
-
-$\mathbb C[G]$ 作为环，其自带的 $G$-模结构导致 $L^2(G)$ 上也产生一个对应的 $G$-模结构 $g \cdot f := (h \mapsto f(g^{-1} h))$——特别地：
-$$
-g_1 \cdot e_{g_2} = g \cdot \left( h \mapsto \delta_{h = g_2} \right) = \left( h \mapsto \delta_{h = g_1 g_2} \right) = e_{g_1 g_2}
-$$
-这解释了我们配备的 $G$-模结构的合理性．
-
-记号都这么写了，自然要定义内积
-$$
-\langle f_1, f_2 \rangle := \frac 1 {|G|} \sum_{g \in G} f_1(g) \overline{f_2(g)}
-$$
-
-考虑 $L^2(G)$ 的 $G$-不变子空间 $H := \left( L^2(G) \right)^G$【TODO】
-
 ## 特征标
 
 表示 $\varphi : G \to \GL(V)$ 的特征标定义为函数 $\chi_\varphi : G \to \mathbb C$, $g \mapsto \tr(\rho(g))$，在模的记号下亦写作 $\chi_V$．
 
-特征标们构成 $L^2(G)$ 的一个子空间——特征标空间．但是特征标其实更加特殊
+记 $L^2(G)$ 是 $G \to \mathbb C$ 的全体函数构成的线性空间，配备内积 $\langle f_1, f_2 \rangle := \frac 1 {|G|} \sum_{g \in G} f_1(g) \overline{f_2(g)}$．特征标们构成 $L^2(G)$ 的一个子空间，但我们还可以做的更好：由于 trace 的相似不变性，$\chi_V(hgh^{-1}) = \chi_V(g)$，故特征标函数在共轭类上取值相同．我们将这种 $G \to \mathbb C$ 的函数称为类函数，于是特征标都是类函数．
 
-特征标满足以下性质：
+特征标还满足以下性质：
 
-- $\chi_V(1) = \dim V$
-
-  对角线全一．
-
-- $\chi_V(g^{-1}) = \overline{\chi_V(g)}$
-
-  注意 trace 是特征值的和，特征值都是单位根，单位根取逆就是共轭，$g^{-1}$ 的特征值是 $g$ 的特征值的逆即可．
-
-- $\chi_V(hgh^{-1}) = \chi_V(g)$，即在共轭类上取值相同．
+$G$-module-wise properties：
 
 - $\chi_{V \oplus W}(g) = \chi_V(g) + \chi_W(g)$
 
@@ -210,6 +188,97 @@ $$
   - 或者直接坐标计算．嗯算就知道矩阵表示成转置关系．
   :::
 
-- $\frac 1 {|G|} \sum_{g \in G} \chi_V(g) = \dim V^G$
+$G$-wise properties：
+
+- $\chi_V(1) = \dim V$
+
+  对角线全一．
+
+- $\chi_V(g^{-1}) = \overline{\chi_V(g)}$
+
+  注意 trace 是特征值的和，特征值都是单位根，单位根取逆就是共轭，$g^{-1}$ 的特征值是 $g$ 的特征值的逆即可．
+
+- $\langle \chi_V, 1_G \rangle = \frac 1 {|G|} \sum_{g \in G} \chi_V(g) = \dim V^G$
 
   这是平均化投影 $V \to V^G$ 的 trace．
+
+:::{#thm-ortho}
+
+- $\dim \Hom_G(V, W) = \langle \chi_V, \chi_W \rangle$
+
+- 不可约表示的特征标两两正交，模长为 $1$．
+:::
+
+:::{.proof}
+
+注意
+$$
+\begin{aligned}
+\dim \Hom_G(V, W) &= \dim (V^* \otimes W)^G \\
+&= \langle \chi_{V^* \otimes W}, 1_G \rangle \\
+&= \langle \overline{\chi_{V}} \chi_W, 1_G \rangle \\
+&= \langle \chi_V, \chi_W \rangle
+\end{aligned}
+$$
+
+当不可约时，前者 [@thm-schur] 确定 $0$ / $1$ 情况，立得正交性．
+:::
+
+:::{#cor-char-corresp}
+
+- 表示不可约分解的写法唯一，不同的写法对应不同的同构类．
+
+- 表示的同构类与特征标一一对应．
+:::
+
+:::{.proof}
+
+- 由 [@thm-semisimp]，任意表示都可以写成不可约表示的直和，而特征标与直和相容良好．结合 [@thm-ortho] 的正交性，故对任意表示 $V$，通过将它的特征标和某一不可约表示 $V_i$ 的特征标做内积，就可以确定这一表示包含了多少份 $V_i$．
+
+- 表示固然给出了特征标．反过来，可以通过上述特征标内积方法确定表示的同构类．
+:::
+
+:::{#thm-conj}
+
+- 特征标在 $L^2(G)$ 中生成的子空间，恰好是类函数空间．
+
+- 不可约表示的同构类数量等于 $G$ 的共轭类数量．
+:::
+
+:::{.proof}
+
+假如类函数 $\chi$ 与所有不可约表示的特征标都正交，则 $\chi$ 与所有表示的特征标都正交．由 [@cor-char-corresp]，$\chi$ 与所有类函数都正交．矛盾．
+:::
+
+## 正则表示
+
+群代数 $\mathbb C[G]$ 是一组形式基底 $(e_g)_{g \in G}$ 生成的线性空间，乘法由 $e_{g_1} e_{g_2} := e_{g_1 g_2}$ 定义．作为环，其自带一个左作用得到的 $G$-模结构，称之为正则表示．
+
+通过将 $e_g$ 实现为函数 $h \mapsto \delta_{h = g}$，$\mathbb C[G]$ 的实体可以认为是 $G \to \mathbb C$ 的全体函数构成的 $|G|$ 维线性空间，于是也可写作 $L^2 (G)$．上述 $\mathbb C[G]$ 的左作用对应 $L^2(G)$ 的 $G$-模结构 $g \cdot \chi := (h \mapsto \chi (g^{-1} h))$——特别地：
+$$
+g_1 \cdot e_{g_2} = g \cdot \left( h \mapsto \delta_{h = g_2} \right) = \left( h \mapsto \delta_{h = g_1 g_2} \right) = e_{g_1 g_2}
+$$
+这解释了我们配备的 $G$-模结构的合理性．
+
+:::{#thm-reg}
+- $$
+  \chi_{\mathbb C[G]}(g) = \begin{cases}
+  |G| & g = 1 \\
+  0 & \text{otherwise}
+  \end{cases}
+  $$
+
+- 对任意 $G$-表示 $V$，$\langle \chi_{\mathbb C[G]}, \chi_V \rangle = \chi_V (1) = \dim V$．
+
+- $\mathbb C[G]$ 的不可约表示分解中，每个不可约表示 $V_i$ 恰好出现 $\dim V_i$ 份．
+
+- $$
+  \sum_i (\dim V_i)^2 = |G|
+  $$
+:::
+
+:::{.proof}
+
+平凡．
+:::
+
