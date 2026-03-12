@@ -1,0 +1,159 @@
+---
+title: 有限群复表示论速通
+
+author: sun123zxy
+lang: zh
+
+draft: true
+
+categories:
+  - math
+  - algebra
+
+number-sections: true
+
+format:
+  html: default
+---
+
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\tr}{\operatorname{tr}}
+
+$G$ 是有限群，$V$ 是有限维的 $\mathbb C$-线性空间，则群同态 $\rho: G \to \GL(V)$ 规定了一个 $G$ 的（复）表示．等价地，这为 $V$ 配备了一个 $G$-模结构——$\mathbb C[G]$-模结构的简写．
+
+## 构造
+
+给定 $G$-表示 $V$, $W$，我们有若干标准的构造表示的手段：
+
+- $V^G$：$G$-不变子空间，即 $V^G := \{ v \in V : \forall g \in G,\, g \cdot v = v \}$．
+
+  注意通过平均化手段，可以获得 $V \to V^G$ 的一个投影
+  $$
+  v \mapsto \tilde v := \frac 1 {|G|} \sum_{g \in G} g \cdot v
+  $$
+  使得 $G$-模正合列
+  $$
+  0 \longrightarrow V^G \longrightarrow V \longrightarrow V / V^G \longrightarrow 0 
+  $$
+  左侧分裂——人话是，它是 $G$-模同态，是满射，且保持 $V^G$ 不变．
+
+- 直和 $V \oplus W$：
+
+  线性空间直和配备 $g \cdot (v,w) := (g \cdot v, g \cdot w)$．
+
+  注意 $(V \oplus W)^G = V^G \oplus W^G$．
+
+- 张量积 $V \otimes W$：
+
+  线性空间张量积配备 $g \cdot (v \otimes w) := (g \cdot v) \otimes (g \cdot w)$．
+
+- 对偶空间 $V^* := \Hom(V, \mathbb C)$：
+
+  线性空间对偶配备 $g \cdot f := (v \mapsto f(g^{-1} \cdot v))$．
+
+- 线性映射空间 $\Hom(V, W)$：
+
+  线性空间 $\Hom(V, W)$ 配备 $g \cdot f := (v \mapsto g \cdot f(g^{-1} \cdot v))$．
+
+  注意线性空间有自然同构 $\Hom(V, W) \cong V^* \otimes W$．我们设计的定义使得这一同构相容地提升到 $G$-模之上．
+
+- $G$-模同态空间 $\Hom_G(V, W)$：
+
+  保持 $G$-模结构的所有线性映射同态，其中的同态 $f$ 满足 $f(g \cdot v) = g \cdot f(v)$．
+
+  注意我们设计的定义使得 $\Hom_G(V, W) = \left(\Hom(V, W) \right)^G$．$\Hom(V, W) \to \Hom_G(V, W)$ 的平均化投影是
+  $$
+  f \mapsto \tilde f := \left( v \mapsto \frac 1 {|G|} \sum_{g \in G} g \cdot f(g^{-1} \cdot v) \right)
+  $$
+
+## 内积
+
+下面为 $G$-模配备内积．对 $G$-模 $V$，给定线性空间同构 $\varphi \in \Hom(V, V^*)$，根据自然同构 $V^* \otimes V^* \cong \Hom(V, V^*)$，这事实上等价于这任取 $V$ 上的一个线性空间意义下的内积 $\langle \cdot, \cdot \rangle_\varphi$，即 $\varphi(\cdot)(\cdot) = \langle \cdot, \cdot \rangle_\varphi$．
+
+现在对 $\varphi$ 平均化得到 $G$-模同态 $\tilde \varphi \in \Hom_G(V, V^*)$．则平均化可翻译为内积形式 $\langle v, w \rangle_{\tilde \varphi} = \frac 1 {|G|} \sum_{g \in G} \langle g \cdot v, g \cdot w \rangle_{\tilde \varphi}$：
+
+:::{.proof}
+
+$$
+\begin{aligned}
+\langle v, w \rangle_{\tilde \varphi}
+&= \tilde \varphi(v)(w) & \text{by natural isomorphism} \\
+&= \frac 1 {|G|} \sum_{g \in G} (g \cdot \varphi)(v)(w) & \text{by definition of } \tilde\varphi \\
+&= \frac 1 {|G|} \sum_{g \in G} \left( g \cdot \varphi(g^{-1} \cdot v) \right) (w) & \text{by } G\text{-module structure of } \Hom(V, V^*) \\
+&= \frac 1 {|G|} \sum_{g \in G} \varphi(g^{-1} \cdot v)(g^{-1} \cdot w) & \text{by } G\text{-module structure of } V^* \\
+&= \frac 1 {|G|} \sum_{g \in G} \varphi(g \cdot v)(g \cdot w) \\
+&= \frac 1 {|G|} \sum_{g \in G} \langle g \cdot v, g \cdot w \rangle_{\tilde \varphi} & \text{by natural isomorphism}
+\end{aligned}
+$$
+:::
+
+$\tilde \varphi$ 的 $G$-模同态性质可以翻译为内积形式 $\langle g \cdot v, g \cdot w \rangle_{\tilde\varphi} = \langle v, w \rangle_{\tilde\varphi}$：
+
+:::{.proof}
+
+$$
+\begin{aligned}
+\langle g \cdot v, g \cdot w \rangle_{\tilde\varphi}
+&= \tilde \varphi (g \cdot v) (g \cdot w) & \text{by natural isomorphism} \\
+&= (g \cdot \tilde \varphi)(v)(g \cdot w) & \text{by } \tilde\varphi \text{ is } G\text{-homomorphism} \\
+&= (g^{-1} \cdot g \cdot \tilde \varphi)(v)(w) & \text{by } G\text{-module structure of } V^* \\ 
+&= \tilde \varphi(v)(w) & \text{by module axiom} \\
+&= \langle v, w \rangle_{\tilde \varphi} & \text{by natural isomorphism}
+\end{aligned}
+$$
+:::
+
+因此，$G$-模 $V$ 上的 $G$-不变内积就是 $V \to V^*$ 的 $G$-模同态．构造手段上，可以通过任取线性空间意义下的内积做平均化得到．
+
+## 不可约表示
+
+不可约表示是没有非平凡子表示的表示．
+
+:::{#thm-semisimp}
+
+## Maschke
+
+有限群的复表示论是半单的．即：
+
+- （半单观点）任意 $G$-模 $V$ 都可以写成不可约表示的直和．
+
+- （不变内积观点）对任意 $G$-模 $V$ 和任意子模 $U \subseteq V$, 固定 $V$ 的一个 $G$-不变内积，则存在 $G$-模补空间 $U^\perp$ 使得在保 $G$-模内积意义下 $V = U \oplus U^\perp$．
+
+- （分裂同态观点）设线性空间正合列
+  $$
+  0 \longrightarrow U \longrightarrow V \longrightarrow W \longrightarrow 0
+  $$
+  有左分裂同态 $\varphi \in \Hom(V, U)$，则 $\tilde \varphi \in \Hom_G(V, U)$ 使得上述正合列提升为左分裂的 $G$-模正合列．
+:::
+
+:::{.proof}
+
+定义验证．
+:::
+
+:::{#thm-schur}
+
+## Schur
+
+设 $V$, $W$ 是不可约 $G$-模，则
+$$
+\Hom_G(V, W) = \begin{cases}
+\mathbb C & V \cong W \\ 0 & \text{otherwise}
+\end{cases}
+$$
+即同构的不可约表示之间的 $G$-同态无非是数乘，不同构的不可约表示之间没有非零的 $G$-同态．
+:::
+
+:::{.proof}
+
+注意任何 $G$-同态的 $\ker$, $\im$ 都是 $G$-子模．
+
+关于数乘，无妨设 $W=V$．对任意 $V$ 上的 $G$-自同态 $f$，它在 $V$ 中至少有一个非空的特征子空间——一个 $G$-子模．由于 $V$ 不可约，这个特征子空间只能是 $V$，因此 $f$ 是数乘．
+:::
+
+## 特征标
+
+表示 $\varphi : G \to \GL(V)$ 的特征标定义为函数 $\chi_\varphi : G \to \mathbb C$, $g \mapsto \tr(\rho(g))$．
