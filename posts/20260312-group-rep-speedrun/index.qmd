@@ -112,9 +112,11 @@ format:
 
   保持 $G$-模结构的所有线性映射同态，其中的同态 $\varphi$ 满足 $\varphi(g \cdot v) = g \cdot \varphi(v)$．
 
-  注意我们设计的定义使得 $\Hom_G(V, W) = \left(\Hom(V, W) \right)^G$．$\Hom(V, W) \to \Hom_G(V, W)$ 的平均化投影是
+  注意我们设计的定义使得 $\Hom_G(V, W) = \left(\Hom(V, W) \right)^G$．
+  
+  计算 $\Hom(V, W) \to \Hom_G(V, W)$ 的平均化投影 $\varphi \mapsto \tilde\varphi$：
   $$
-  \varphi \mapsto \tilde \varphi := \left( v \mapsto \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(g^{-1} \cdot v) \right)
+  \tilde\varphi(v) := \frac 1 {|G|} \sum_{g \in G} (g \cdot \varphi)(v) = \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(g^{-1} \cdot v)
   $$
 
 ## 不可约表示
@@ -135,7 +137,7 @@ format:
   $$
   任取其作为线性空间时的一个左分裂同态 $\varphi \in \Hom(V, U)$ 使得 $\varphi \circ \iota = \id_U$，我们可以将这一线性映射通过 $G$-模 $\Hom(V,U)$ 上的平均化投影提升为 $G$-模同态 $\tilde \varphi \in \Hom_G(V, U)$：
   $$
-  \tilde\varphi (v) = \frac 1 {|G|} \sum_{g \in G} (g \cdot \varphi) (v) = \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(g^{-1} \cdot v)
+  \tilde\varphi (v) = \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(g^{-1} \cdot v)
   $$
   这一提升同态仍保持左分裂性 $\tilde \varphi \circ \iota = \id_U$，从而将上述线性空间上左分裂的正合列提升为左分裂的 $G$-模正合列．
 :::
@@ -147,8 +149,9 @@ format:
 $$
 \begin{aligned}
 \tilde \varphi \circ \iota (u) &= \left(\frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(g^{-1} \cdot \iota(u)) \right) & \\
-&= \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(\iota(g^{-1} \cdot u)) \\
-&= \frac 1 {|G|} \sum_{g \in G} g \cdot (g^{-1} \cdot u) \\
+&= \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(\iota(g^{-1} \cdot u)) & \text{by }\iota \in \Hom_G(U,V) \\
+&= \frac 1 {|G|} \sum_{g \in G} g \cdot (\varphi \circ \iota) (g^{-1} \cdot u) \\
+&= \frac 1 {|G|} \sum_{g \in G} g \cdot (g^{-1} \cdot u) & \text{by split property of } \varphi \\
 &= u
 \end{aligned}
 $$
