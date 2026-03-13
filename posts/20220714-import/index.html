@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.9.34">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,6 +10,9 @@
 
 <title>关于 Python 的 import – sun123zxy’s blog</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -73,12 +76,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-a45597b65f5f3795ae8b140358e6d8e8.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-96de23c090fa5f90e6d2871446c09927.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5d10e83519a74e789e6bb4496f75c4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-723530320b8f33b049ef21af632b9e12.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-1925420af0bd4350769d4d9ba097a0b5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-13131c0cbfd767dd1b48fb0d502872d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-bc02861c18602d2a9ecc612939fb595c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-df36c1f51131d4fc0abb9d63bd22fde7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -438,7 +441,7 @@ MathJax = {
 <p><code>sys.path</code> 有优先级，排在前面的优先级高。</p>
 <hr>
 <p>需要特别注意的是，<strong>script 的所在目录不是当前工作目录</strong>。例如，在 <code>D:\test</code> 下执行</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> path/to/file.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> path/to/file.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>时，<code>sys.path[0]</code> 为 <code>D:\test\path\to\file.py</code>，而当前工作目录则是 <code>D:\test</code>（也即 <code>os.getcwd()</code>）。</p>
 <p>当前工作目录是 Python 寻找其他文件时的基准路径，而所有绝对导入操作都只与 <code>sys.path</code> 有关，两者是完全不同的。</p>
 <p><code>python -m</code> 的情况稍有不同，参见后文。</p>
@@ -456,8 +459,8 @@ MathJax = {
 <p>If this option is given, the first element of <a href="https://docs.python.org/3/library/sys.html#sys.argv" title="sys.argv"><code>sys.argv</code></a> will be the full path to the module file (while the module file is being located, the first element will be set to <code>"-m"</code>). As with the <a href="https://docs.python.org/3/using/cmdline.html#cmdoption-c"><code>-c</code></a> option, the current directory will be added to the start of <a href="https://docs.python.org/3/library/sys.html#sys.path" title="sys.path"><code>sys.path</code></a>.</p>
 <p><a href="https://docs.python.org/3/using/cmdline.html#cmdoption-I"><code>-I</code></a> option can be used to run the script in isolated mode where <a href="https://docs.python.org/3/library/sys.html#sys.path" title="sys.path"><code>sys.path</code></a> contains neither the current directory nor the user’s site-packages directory. All <code>PYTHON*</code> environment variables are ignored, too.</p>
 <p>Many standard library modules contain code that is invoked on their execution as a script. An example is the <a href="https://docs.python.org/3/library/timeit.html#module-timeit" title="timeit: Measure the execution time of small code snippets."><code>timeit</code></a> module:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> timeit <span class="at">-s</span> <span class="st">'setup here'</span> <span class="st">'benchmarked code here'</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> timeit <span class="at">-h</span> <span class="co"># for details</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> timeit <span class="at">-s</span> <span class="st">'setup here'</span> <span class="st">'benchmarked code here'</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> timeit <span class="at">-h</span> <span class="co"># for details</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Raises an <a href="https://docs.python.org/3/library/sys.html#auditing">auditing event</a> <code>cpython.run_module</code> with argument <code>module-name</code>.</p>
 <blockquote class="blockquote">
 <p>See also</p>
@@ -476,9 +479,9 @@ MathJax = {
 <hr>
 <p><code>python -m A.B.module</code> 将顺次执行 <code>A</code>、<code>A.B</code> 的 <code>__init__.py</code>，即使该 module 没有任何导入行为。</p>
 <p><code>python -m</code> 对于直接执行 package 内部的代码是必要的。若直接以 script 方式运行，一旦涉及到任何高于该 script 所在目录（含该目录）的相对导入，Python 就会抛出如下错误：</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ImportError: attempted relative import with no known parent package</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ImportError: attempted relative import with no known parent package</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>而一个 module 也不能导入超过 <code>python -m</code> 参数指定的最顶层结构的 module，否则会抛出错误：</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ImportError: attempted relative import beyond top-level package</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ImportError: attempted relative import beyond top-level package</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="sys.modules" class="level2">
 <h2 class="anchored" data-anchor-id="sys.modules">sys.modules</h2>
@@ -569,13 +572,14 @@ MathJax = {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

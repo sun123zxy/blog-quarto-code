@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.9.34">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,6 +10,9 @@
 
 <title>树上差分的两种形式（相遇 or 行程的交集 题解） – sun123zxy’s blog</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -73,12 +76,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-a45597b65f5f3795ae8b140358e6d8e8.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-96de23c090fa5f90e6d2871446c09927.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5d10e83519a74e789e6bb4496f75c4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-723530320b8f33b049ef21af632b9e12.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-1925420af0bd4350769d4d9ba097a0b5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-13131c0cbfd767dd1b48fb0d502872d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-bc02861c18602d2a9ecc612939fb595c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-df36c1f51131d4fc0abb9d63bd22fde7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -397,7 +400,7 @@ MathJax = {
 <h2 class="anchored" data-anchor-id="树上差分的两种形式">树上差分的两种形式</h2>
 <ul>
 <li><p><strong>单点修改&amp;链查询</strong>用差分转化为<strong>单点修改&amp;树上前缀和</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MPQU<span class="op">{</span><span class="kw">public</span><span class="op">:</span> <span class="co">//单点修改 &amp; 树上前缀和 (Modify Point Query Up)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MPQU<span class="op">{</span><span class="kw">public</span><span class="op">:</span> <span class="co">//单点修改 &amp; 树上前缀和 (Modify Point Query Up)</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  BIT bit<span class="op">;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  MPQU<span class="op">(</span><span class="dt">bool</span> typ<span class="op">=</span><span class="dv">0</span><span class="op">){</span><span class="cf">if</span><span class="op">(</span>typ<span class="op">==</span><span class="dv">1</span><span class="op">)</span> bit<span class="op">=</span>BIT<span class="op">(</span>dN<span class="op">);}</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> Add<span class="op">(</span>ll u<span class="op">,</span>ll w<span class="op">){</span>bit<span class="op">.</span>Add<span class="op">(</span>st<span class="op">[</span>u<span class="op">],</span>w<span class="op">);</span> bit<span class="op">.</span>Add<span class="op">(</span>ed<span class="op">[</span>u<span class="op">],-</span>w<span class="op">);}</span></span>
@@ -408,9 +411,9 @@ MathJax = {
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  MPQL<span class="op">(</span><span class="dt">bool</span> typ<span class="op">=</span><span class="dv">0</span><span class="op">){</span><span class="cf">if</span><span class="op">(</span>typ<span class="op">==</span><span class="dv">1</span><span class="op">)</span> mpqu<span class="op">=</span>MPQU<span class="op">(</span><span class="dv">1</span><span class="op">);}</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> Add<span class="op">(</span>ll u<span class="op">,</span>ll w<span class="op">){</span>mpqu<span class="op">.</span>Add<span class="op">(</span>u<span class="op">,</span>w<span class="op">);}</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  ll Query<span class="op">(</span>ll u<span class="op">,</span>ll v<span class="op">){</span>ll lca<span class="op">=</span>LCA<span class="op">(</span>u<span class="op">,</span>v<span class="op">);</span> <span class="cf">return</span> mpqu<span class="op">.</span>Query<span class="op">(</span>u<span class="op">)+</span>mpqu<span class="op">.</span>Query<span class="op">(</span>v<span class="op">)-</span>mpqu<span class="op">.</span>Query<span class="op">(</span>lca<span class="op">)-</span>mpqu<span class="op">.</span>Query<span class="op">(</span>fa<span class="op">[</span>lca<span class="op">]);}</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span>mpql<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span>mpql<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 <li><p><strong>链修改&amp;单点查询</strong>用差分转化为<strong>单点修改&amp;子树和</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MPQD<span class="op">{</span><span class="kw">public</span><span class="op">:</span> <span class="co">//单点修改 &amp; 子树和 (Modify Point Query Down)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MPQD<span class="op">{</span><span class="kw">public</span><span class="op">:</span> <span class="co">//单点修改 &amp; 子树和 (Modify Point Query Down)</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  BIT bit<span class="op">;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  MPQD<span class="op">(</span><span class="dt">bool</span> typ<span class="op">=</span><span class="dv">0</span><span class="op">){</span><span class="cf">if</span><span class="op">(</span>typ<span class="op">==</span><span class="dv">1</span><span class="op">)</span> bit<span class="op">=</span>BIT<span class="op">(</span>dN<span class="op">);}</span> </span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> Add<span class="op">(</span>ll u<span class="op">,</span>ll w<span class="op">){</span>bit<span class="op">.</span>Add<span class="op">(</span>st<span class="op">[</span>u<span class="op">],</span>w<span class="op">);}</span></span>
@@ -421,7 +424,7 @@ MathJax = {
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  MLQP<span class="op">(</span><span class="dt">bool</span> typ<span class="op">=</span><span class="dv">0</span><span class="op">){</span><span class="cf">if</span><span class="op">(</span>typ<span class="op">==</span><span class="dv">1</span><span class="op">)</span> mpqd<span class="op">=</span>MPQD<span class="op">(</span><span class="dv">1</span><span class="op">);}</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> Add<span class="op">(</span>ll u<span class="op">,</span>ll v<span class="op">){</span>ll lca<span class="op">=</span>LCA<span class="op">(</span>u<span class="op">,</span>v<span class="op">);</span> mpqd<span class="op">.</span>Add<span class="op">(</span>u<span class="op">,</span><span class="dv">1</span><span class="op">);</span> mpqd<span class="op">.</span>Add<span class="op">(</span>v<span class="op">,</span><span class="dv">1</span><span class="op">);</span> mpqd<span class="op">.</span>Add<span class="op">(</span>lca<span class="op">,-</span><span class="dv">1</span><span class="op">);</span> mpqd<span class="op">.</span>Add<span class="op">(</span>fa<span class="op">[</span>lca<span class="op">],-</span><span class="dv">1</span><span class="op">);}</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  ll Query<span class="op">(</span>ll u<span class="op">){</span><span class="cf">return</span> mpqd<span class="op">.</span>Query<span class="op">(</span>u<span class="op">);}</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span>mlqp<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span>mlqp<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
 </ul>
 <p><del>三重封装</del></p>
 <p>转化后的问题都能用<strong>DFS序+树状数组</strong>解决。（在上文代码中，树状数组用<code>BIT</code>封装，<code>st, ed</code>是DFS序）</p>
@@ -476,7 +479,7 @@ MathJax = {
 <p>主要要想到把<strong>两条树上路径有交集</strong>转换为<strong>其中某条路径的LCA被另一条路径所覆盖</strong>。</p>
 <p>于是对于当前输入的路径，分<strong>当前路径覆盖了多少个之前路径的LCA</strong>和<strong>当前路径的LCA被之前多少个路径覆盖</strong>讨论即可。前者是<strong>单点修改&amp;链查询</strong>，后者是<strong>链修改&amp;单点查询</strong>，按前文的方法做就可以了。</p>
 <p>注意特判LCA重叠的情况，见代码。</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;cstdio&gt;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;cmath&gt;</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;cstring&gt;</span></span>
@@ -596,7 +599,7 @@ MathJax = {
 <span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a>        mlqp<span class="op">.</span>Add<span class="op">(</span>u<span class="op">,</span>v<span class="op">);</span></span>
 <span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>
@@ -666,13 +669,14 @@ MathJax = {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

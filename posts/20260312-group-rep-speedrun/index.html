@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.9.34">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,6 +10,9 @@
 
 <title>有限群表示论速通 – sun123zxy’s blog</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -58,12 +61,12 @@ div.csl-indent {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-a45597b65f5f3795ae8b140358e6d8e8.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-96de23c090fa5f90e6d2871446c09927.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5d10e83519a74e789e6bb4496f75c4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-723530320b8f33b049ef21af632b9e12.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-1925420af0bd4350769d4d9ba097a0b5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-13131c0cbfd767dd1b48fb0d502872d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-bc02861c18602d2a9ecc612939fb595c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-df36c1f51131d4fc0abb9d63bd22fde7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -103,7 +106,7 @@ MathJax = {
 <meta name="quarto:status" content="draft">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -116,7 +119,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -473,8 +476,9 @@ v \mapsto \tilde v := \frac 1 {|G|} \sum_{g \in G} g \cdot v
 <p>注意线性空间有自然同构 <span class="math inline">\(\operatorname{Hom}(V, W) \cong V^* \otimes W\)</span>．我们设计的定义使得这一同构相容地提升到 <span class="math inline">\(G\)</span>-模之上．</p></li>
 <li><p><span class="math inline">\(G\)</span>-模同态空间 <span class="math inline">\(\operatorname{Hom}_G(V, W)\)</span>：</p>
 <p>保持 <span class="math inline">\(G\)</span>-模结构的所有线性映射同态，其中的同态 <span class="math inline">\(\varphi\)</span> 满足 <span class="math inline">\(\varphi(g \cdot v) = g \cdot \varphi(v)\)</span>．</p>
-<p>注意我们设计的定义使得 <span class="math inline">\(\operatorname{Hom}_G(V, W) = \left(\operatorname{Hom}(V, W) \right)^G\)</span>．<span class="math inline">\(\operatorname{Hom}(V, W) \to \operatorname{Hom}_G(V, W)\)</span> 的平均化投影是 <span class="math display">\[
-\varphi \mapsto \tilde \varphi := \left( v \mapsto \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(g^{-1} \cdot v) \right)
+<p>注意我们设计的定义使得 <span class="math inline">\(\operatorname{Hom}_G(V, W) = \left(\operatorname{Hom}(V, W) \right)^G\)</span>．</p>
+<p>计算 <span class="math inline">\(\operatorname{Hom}(V, W) \to \operatorname{Hom}_G(V, W)\)</span> 的平均化投影 <span class="math inline">\(\varphi \mapsto \tilde\varphi\)</span>： <span class="math display">\[
+\tilde\varphi(v) := \frac 1 {|G|} \sum_{g \in G} (g \cdot \varphi)(v) = \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(g^{-1} \cdot v)
 \]</span></p></li>
 </ul>
 </section>
@@ -494,7 +498,7 @@ v \mapsto \tilde v := \frac 1 {|G|} \sum_{g \in G} g \cdot v
 <li><p>（分裂同态观点）考虑 <span class="math inline">\(G\)</span>-模正合列 <span class="math display">\[
 0 \longrightarrow U \xrightarrow{\iota} V \xrightarrow{\pi} W \longrightarrow 0
 \]</span> 任取其作为线性空间时的一个左分裂同态 <span class="math inline">\(\varphi \in \operatorname{Hom}(V, U)\)</span> 使得 <span class="math inline">\(\varphi \circ \iota = \operatorname{id}_U\)</span>，我们可以将这一线性映射通过 <span class="math inline">\(G\)</span>-模 <span class="math inline">\(\operatorname{Hom}(V,U)\)</span> 上的平均化投影提升为 <span class="math inline">\(G\)</span>-模同态 <span class="math inline">\(\tilde \varphi \in \operatorname{Hom}_G(V, U)\)</span>： <span class="math display">\[
-\tilde\varphi (v) = \frac 1 {|G|} \sum_{g \in G} (g \cdot \varphi) (v) = \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(g^{-1} \cdot v)
+\tilde\varphi (v) = \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(g^{-1} \cdot v)
 \]</span> 这一提升同态仍保持左分裂性 <span class="math inline">\(\tilde \varphi \circ \iota = \operatorname{id}_U\)</span>，从而将上述线性空间上左分裂的正合列提升为左分裂的 <span class="math inline">\(G\)</span>-模正合列．</p></li>
 </ul>
 </div>
@@ -502,24 +506,25 @@ v \mapsto \tilde v := \frac 1 {|G|} \sum_{g \in G} g \cdot v
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Proof
+<span class="screen-reader-only">注记</span>Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
-<p><span class="proof-title"><em>证</em>. </span>分裂同态与直和的联系是模正合列的标准内容，我们此处略过．提升同态已经是平均化投影的结果，自然是 <span class="math inline">\(G\)</span>-模同态．则只需证明提升后同态的分裂性：</p>
+<p><span class="proof-title"><em>证明</em>. </span>分裂同态与直和的联系是模正合列的标准内容，我们此处略过．提升同态已经是平均化投影的结果，自然是 <span class="math inline">\(G\)</span>-模同态．则只需证明提升后同态的分裂性：</p>
 <p><span class="math display">\[
 \begin{aligned}
 \tilde \varphi \circ \iota (u) &amp;= \left(\frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(g^{-1} \cdot \iota(u)) \right) &amp; \\
-&amp;= \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(\iota(g^{-1} \cdot u)) \\
-&amp;= \frac 1 {|G|} \sum_{g \in G} g \cdot (g^{-1} \cdot u) \\
+&amp;= \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(\iota(g^{-1} \cdot u)) &amp; \text{by }\iota \in \operatorname{Hom}_G(U,V) \\
+&amp;= \frac 1 {|G|} \sum_{g \in G} g \cdot (\varphi \circ \iota) (g^{-1} \cdot u) \\
+&amp;= \frac 1 {|G|} \sum_{g \in G} g \cdot (g^{-1} \cdot u) &amp; \text{by split property of } \varphi \\
 &amp;= u
 \end{aligned}
 \]</span></p>
@@ -534,7 +539,7 @@ Proof
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Remark (不变内积观点)
+<span class="screen-reader-only">提示</span>Remark (不变内积观点)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -569,19 +574,19 @@ Remark (不变内积观点)
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Proof
+<span class="screen-reader-only">注记</span>Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
-<p><span class="proof-title"><em>证</em>. </span>注意任何 <span class="math inline">\(G\)</span>-同态的 <span class="math inline">\(\ker\)</span>, <span class="math inline">\(\operatorname{im}\)</span> 都是 <span class="math inline">\(G\)</span>-子模．</p>
+<p><span class="proof-title"><em>证明</em>. </span>注意任何 <span class="math inline">\(G\)</span>-同态的 <span class="math inline">\(\ker\)</span>, <span class="math inline">\(\operatorname{im}\)</span> 都是 <span class="math inline">\(G\)</span>-子模．</p>
 <p>关于数乘，无妨设 <span class="math inline">\(W=V\)</span>．对任意 <span class="math inline">\(V\)</span> 上的 <span class="math inline">\(G\)</span>-自同态 <span class="math inline">\(f\)</span>，它在 <span class="math inline">\(V\)</span> 中至少有一个非空的特征子空间——一个 <span class="math inline">\(G\)</span>-子模．由于 <span class="math inline">\(V\)</span> 不可约，这个特征子空间只能是 <span class="math inline">\(V\)</span>，因此 <span class="math inline">\(f\)</span> 是数乘．</p>
 </div>
 </div>
@@ -615,7 +620,7 @@ Proof
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Remark
+<span class="screen-reader-only">提示</span>Remark
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -653,19 +658,19 @@ Remark
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Proof
+<span class="screen-reader-only">注记</span>Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
-<p><span class="proof-title"><em>证</em>. </span>注意 <span class="math display">\[
+<p><span class="proof-title"><em>证明</em>. </span>注意 <span class="math display">\[
 \begin{aligned}
 \dim \operatorname{Hom}_G(V, W) &amp;= \dim (V^* \otimes W)^G \\
 &amp;= \langle \chi_{V^* \otimes W}, 1_G \rangle \\
@@ -687,34 +692,36 @@ Proof
 <div id="cor-char-corresp" class="theorem corollary">
 <p><span class="theorem-title"><strong>推论 1</strong></span> &nbsp;</p>
 <ul>
-<li><p>可以通过特征标内积计算任意表示每个不可约成分的组成情况： <span class="math display">\[
+<li><p>可以通过特征标内积 <span class="math inline">\(\langle \chi_V, \chi_{V_i} \rangle\)</span> 计算表示 <span class="math inline">\(V\)</span> 中不可约成分 <span class="math inline">\(V_i\)</span> 出现了几次： <span class="math display">\[
 V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 \]</span></p></li>
 <li><p>表示不可约分解的写法唯一：不同写法对应不同的同构类．</p></li>
 <li><p>表示的同构类与特征标一一对应．</p></li>
+<li><p>表示 <span class="math inline">\(V\)</span> 不可约当且仅当 <span class="math inline">\(\langle \chi_V, \chi_V \rangle = 1\)</span>．</p></li>
 </ul>
 </div>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Proof
+<span class="screen-reader-only">注记</span>Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
-<p><span class="proof-title"><em>证</em>. </span></p>
+<p><span class="proof-title"><em>证明</em>. </span></p>
 <ul>
 <li><p>由 <a href="#thm-semisimp" class="quarto-xref">定理&nbsp;1</a>，任意表示都可以写成不可约表示的直和，而特征标与直和相容良好．结合 <a href="#thm-ortho" class="quarto-xref">定理&nbsp;3</a> 的正交性，故对任意表示 <span class="math inline">\(V\)</span>，通过将它的特征标和某一不可约表示 <span class="math inline">\(V_i\)</span> 的特征标做内积，就可以确定这一表示包含了多少份 <span class="math inline">\(V_i\)</span>．</p></li>
 <li><p>唯一性由上述计算保证．</p></li>
 <li><p>表示固然给出了特征标．反过来，可以通过上述特征标内积方法确定表示的同构类．</p></li>
+<li><p>只需证 <span class="math inline">\(\impliedby\)</span>：结合正交性，我们有若干平方和为 <span class="math inline">\(1\)</span> 的非负整数 <span class="math inline">\(\langle \chi_V, \chi_{V_i} \rangle\)</span>，因此有且只有其中一个为 <span class="math inline">\(1\)</span>，其余为 <span class="math inline">\(0\)</span>．</p></li>
 </ul>
 </div>
 </div>
@@ -737,19 +744,19 @@ Proof
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Proof
+<span class="screen-reader-only">注记</span>Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
-<p><span class="proof-title"><em>证</em>. </span>假如类函数 <span class="math inline">\(\chi\)</span> 与所有不可约表示的特征标都正交，[TODO]</p>
+<p><span class="proof-title"><em>证明</em>. </span>假如类函数 <span class="math inline">\(\chi\)</span> 与所有不可约表示的特征标都正交，[TODO]</p>
 </div>
 </div>
 </div>
@@ -764,7 +771,7 @@ Proof
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Remark
+<span class="screen-reader-only">提示</span>Remark
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -806,19 +813,19 @@ g_1 \cdot e_{g_2} = g \cdot \left( h \mapsto \delta_{h = g_2} \right) = \left( h
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Proof
+<span class="screen-reader-only">注记</span>Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
-<p><span class="proof-title"><em>证</em>. </span>推导路线已经给出，不再赘述．</p>
+<p><span class="proof-title"><em>证明</em>. </span>推导路线已经给出，不再赘述．</p>
 </div>
 </div>
 </div>
@@ -900,13 +907,14 @@ Proof
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

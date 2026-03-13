@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.9.34">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,6 +10,9 @@
 
 <title>算法 &amp; 数学碎碎念 – sun123zxy’s blog</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -73,12 +76,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-a45597b65f5f3795ae8b140358e6d8e8.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-96de23c090fa5f90e6d2871446c09927.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5d10e83519a74e789e6bb4496f75c4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-723530320b8f33b049ef21af632b9e12.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-1925420af0bd4350769d4d9ba097a0b5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-13131c0cbfd767dd1b48fb0d502872d8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-bc02861c18602d2a9ecc612939fb595c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-df36c1f51131d4fc0abb9d63bd22fde7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -117,7 +120,7 @@ MathJax = {
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -130,7 +133,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -539,7 +542,7 @@ x \equiv \sum_{i=1}^n a_i M_i \operatorname{inv}_{m_i}(M_i) \pmod M
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Remark
+<span class="screen-reader-only">提示</span>Remark
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -580,7 +583,7 @@ x \equiv k_1 m_1 + a_1 \pmod{\operatorname{lcm}(m_1, m_2)}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Remark
+<span class="screen-reader-only">提示</span>Remark
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -759,28 +762,28 @@ a^{-1} = - q r^{-1} = - \left\lfloor \frac p a \right\rfloor \cdot (p \bmod a)^{
 <h2 data-number="2" class="anchored" data-anchor-id="积性函数"><span class="header-section-number">2</span> 积性函数</h2>
 <section id="整除分块" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="整除分块"><span class="header-section-number">2.1</span> 整除分块</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ll ans<span class="op">=</span><span class="dv">0</span><span class="op">;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ll ans<span class="op">=</span><span class="dv">0</span><span class="op">;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span>ll l<span class="op">=</span><span class="dv">1</span><span class="op">,</span>r<span class="op">,</span>d<span class="op">;</span>l<span class="op">&lt;=</span>N<span class="op">;</span>l<span class="op">=</span>r<span class="op">+</span><span class="dv">1</span><span class="op">){</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    d<span class="op">=</span>N<span class="op">/</span>l<span class="op">,</span> r<span class="op">=</span>N<span class="op">/</span>d<span class="op">;</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    ans<span class="op">+=(</span>S_mu<span class="op">(</span>r<span class="op">)-</span>S_mu<span class="op">(</span>l<span class="op">-</span><span class="dv">1</span><span class="op">))*</span>d<span class="op">;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <p>此 <span class="math inline">\(O(\sqrt n)\)</span> 较满，极大劣于因子个数的 <span class="math inline">\(O(\sqrt n)\)</span>．</p>
 <p>另有变种枚举 <span class="math inline">\(\left\lfloor \frac n {d^2} \right\rfloor\)</span> 的整除分块如下，复杂度为 <span class="math inline">\(O(n^{1/3})\)</span>．</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ll ans<span class="op">=</span><span class="dv">0</span><span class="op">;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ll ans<span class="op">=</span><span class="dv">0</span><span class="op">;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span>ll l<span class="op">=</span><span class="dv">1</span><span class="op">,</span>r<span class="op">,</span>d<span class="op">;</span>l<span class="op">*</span>l<span class="op">&lt;=</span>N<span class="op">;</span>l<span class="op">=</span>r<span class="op">+</span><span class="dv">1</span><span class="op">){</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    d<span class="op">=</span>N<span class="op">/(</span>l<span class="op">*</span>l<span class="op">),</span>r<span class="op">=</span>sqrt<span class="op">(</span>N<span class="op">/</span>d<span class="op">);</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    ans<span class="op">+=(</span>S_mu<span class="op">(</span>r<span class="op">)-</span>S_mu<span class="op">(</span>l<span class="op">-</span><span class="dv">1</span><span class="op">))*</span>d<span class="op">;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <section id="上取整整除分块" class="level4">
 <h4 class="anchored" data-anchor-id="上取整整除分块">上取整整除分块</h4>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ll cdiv<span class="op">(</span>ll a<span class="op">,</span>ll b<span class="op">){</span> <span class="co">//ceil(a/b)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ll cdiv<span class="op">(</span>ll a<span class="op">,</span>ll b<span class="op">){</span> <span class="co">//ceil(a/b)</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">(</span>a<span class="op">&lt;</span><span class="dv">0</span><span class="op">||</span>a<span class="op">%</span>b<span class="op">==</span><span class="dv">0</span><span class="op">)?</span>a<span class="op">/</span>b<span class="op">:</span>a<span class="op">/</span>b<span class="op">+</span><span class="dv">1</span><span class="op">;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ll ans<span class="op">=</span><span class="dv">0</span><span class="op">;</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span>ll l<span class="op">,</span>r<span class="op">=</span>N<span class="op">,</span>d<span class="op">;</span>r<span class="op">&gt;=</span><span class="dv">1</span><span class="op">;</span>r<span class="op">=</span>l<span class="op">-</span><span class="dv">1</span><span class="op">){</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    d<span class="op">=</span>cdiv<span class="op">(</span>N<span class="op">,</span>r<span class="op">),</span> l<span class="op">=</span>cdiv<span class="op">(</span>N<span class="op">,</span>d<span class="op">);</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    ans<span class="op">+=(</span>S_mu<span class="op">(</span>r<span class="op">)-</span>S_mu<span class="op">(</span>l<span class="op">-</span><span class="dv">1</span><span class="op">))*</span>d<span class="op">;</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="杜教筛" class="level3" data-number="2.2">
@@ -815,7 +818,7 @@ f = \operatorname{id}^k \varphi, g = \operatorname{id}^k, h = \operatorname{id}^
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Remark
+<span class="screen-reader-only">提示</span>Remark
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -829,7 +832,7 @@ Remark
 </div>
 </div>
 </div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>unordered_map<span class="op">&lt;</span>ll<span class="op">,</span>ll<span class="op">&gt;</span> <span class="va">s_mu</span><span class="op">;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>unordered_map<span class="op">&lt;</span>ll<span class="op">,</span>ll<span class="op">&gt;</span> <span class="va">s_mu</span><span class="op">;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ll S_mu<span class="op">(</span>ll n<span class="op">){</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>n<span class="op">&lt;=</span>MXG<span class="op">){</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> mu<span class="op">[</span>n<span class="op">];</span> <span class="co">// already accumulated</span></span>
@@ -842,7 +845,7 @@ Remark
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        ans<span class="op">+=</span>S_mu<span class="op">(</span>d<span class="op">)*(</span>r<span class="op">-</span>l<span class="op">+</span><span class="dv">1</span><span class="op">);</span></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">s_mu</span><span class="op">[</span>n<span class="op">]=</span><span class="dv">1</span><span class="op">-</span>ans<span class="op">;</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="杂式" class="level3" data-number="2.3">
 <h3 data-number="2.3" class="anchored" data-anchor-id="杂式"><span class="header-section-number">2.3</span> 杂式</h3>
@@ -960,19 +963,19 @@ g(n) = \sum_{k=0}^{N-n} \binom {N-n} k f(n+k) \iff f(n) = \sum_{k=0}^{N-n} (-1)^
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Proof
+<span class="screen-reader-only">注记</span>Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
-<p><span class="proof-title"><em>证</em>. </span>令 <span class="math inline">\(f(S)\)</span> 为恰好只满足 <span class="math inline">\(S\)</span> 中各性质的元素数量，<span class="math inline">\(g(S)\)</span> 为至多只满足 <span class="math inline">\(S\)</span> 中各性质的元素数量，即 <span class="math display">\[
+<p><span class="proof-title"><em>证明</em>. </span>令 <span class="math inline">\(f(S)\)</span> 为恰好只满足 <span class="math inline">\(S\)</span> 中各性质的元素数量，<span class="math inline">\(g(S)\)</span> 为至多只满足 <span class="math inline">\(S\)</span> 中各性质的元素数量，即 <span class="math display">\[
 \begin{gathered}
 f(S) := \operatorname{card}\left( \left( A \cap \bigcap_{i \in S} A_i \right) - \bigcup_{i \in U-S} A_i \right) \\
 g(S) := \operatorname{card}\left( A - \bigcup_{i \in U-S} A_i \right)
@@ -1011,19 +1014,19 @@ g(S) := \operatorname{card}\left( A - \bigcup_{i \in U-S} A_i \right)
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Proof
+<span class="screen-reader-only">注记</span>Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
-<p><span class="proof-title"><em>证</em>. </span>令 <span class="math inline">\(f(S)\)</span> 为恰好只满足 <span class="math inline">\(S\)</span> 中各性质的元素数量，<span class="math inline">\(g(S)\)</span> 为至少满足 <span class="math inline">\(S\)</span> 中各性质的元素数量，即 <span class="math display">\[
+<p><span class="proof-title"><em>证明</em>. </span>令 <span class="math inline">\(f(S)\)</span> 为恰好只满足 <span class="math inline">\(S\)</span> 中各性质的元素数量，<span class="math inline">\(g(S)\)</span> 为至少满足 <span class="math inline">\(S\)</span> 中各性质的元素数量，即 <span class="math display">\[
 \begin{gathered}
 f(S) := \operatorname{card}\left( \left( A \cap \bigcap_{i \in S} A_i \right) - \bigcup_{i \in U-S} A_i \right) \\
 g(S) := \operatorname{card}\left( A \cap \bigcap_{i \in S} A_i \right)
@@ -1050,12 +1053,12 @@ g(S) := \operatorname{card}\left( A \cap \bigcap_{i \in S} A_i \right)
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Solution
+<span class="screen-reader-only">注记</span>Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1094,19 +1097,19 @@ Solution
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Proof
+<span class="screen-reader-only">注记</span>Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
-<p><span class="proof-title"><em>证</em>. </span>对 <a href="#exm-inex-ordinary-out" class="quarto-xref">例&nbsp;2</a> 做简单移项即得．</p>
+<p><span class="proof-title"><em>证明</em>. </span>对 <a href="#exm-inex-ordinary-out" class="quarto-xref">例&nbsp;2</a> 做简单移项即得．</p>
 </div>
 </div>
 </div>
@@ -1369,7 +1372,7 @@ B(n) = \sum_{r=0}^n {n \brace r}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Remark
+<span class="screen-reader-only">提示</span>Remark
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1756,7 +1759,7 @@ A(\omega_{2n}^{n+k}) &amp;= A_0 (\omega_n^k) - \omega_{2n}^k A_1(\omega_n^k)
 <section id="蝶形运算与迭代算法" class="level4">
 <h4 class="anchored" data-anchor-id="蝶形运算与迭代算法">蝶形运算与迭代算法</h4>
 <p>为使用迭代算法，需要快速得到递归算法向下深入过程中 <span class="math inline">\(\{ a_n \}\)</span> 置换后的最终结果．观察知该置换是位逆序置换，可按如下方法线性求出．</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rev<span class="op">[</span><span class="dv">0</span><span class="op">]=</span><span class="dv">0</span><span class="op">;</span> <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">1</span><span class="op">;</span>i<span class="op">&lt;(</span><span class="dv">1</span><span class="op">&lt;&lt;</span>n<span class="op">);</span>i<span class="op">++)</span> rev<span class="op">[</span>i<span class="op">]=(</span>rev<span class="op">[</span>i<span class="op">&gt;&gt;</span><span class="dv">1</span><span class="op">]&gt;&gt;</span><span class="dv">1</span><span class="op">)+((</span>i<span class="op">&amp;</span><span class="dv">1</span><span class="op">)&lt;&lt;(</span>n<span class="op">-</span><span class="dv">1</span><span class="op">));</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rev<span class="op">[</span><span class="dv">0</span><span class="op">]=</span><span class="dv">0</span><span class="op">;</span> <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">1</span><span class="op">;</span>i<span class="op">&lt;(</span><span class="dv">1</span><span class="op">&lt;&lt;</span>n<span class="op">);</span>i<span class="op">++)</span> rev<span class="op">[</span>i<span class="op">]=(</span>rev<span class="op">[</span>i<span class="op">&gt;&gt;</span><span class="dv">1</span><span class="op">]&gt;&gt;</span><span class="dv">1</span><span class="op">)+((</span>i<span class="op">&amp;</span><span class="dv">1</span><span class="op">)&lt;&lt;(</span>n<span class="op">-</span><span class="dv">1</span><span class="op">));</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="多项式方程求解newton-迭代法todo" class="level3" data-number="4.3">
@@ -1914,7 +1917,7 @@ A^k(x) = (a_t x^t)^k \left( \frac{A(x)}{a_t x^t} \right)^k
 <h3 data-number="9.1" class="anchored" data-anchor-id="表"><span class="header-section-number">9.1</span> 表</h3>
 <section id="质数表" class="level4">
 <h4 class="anchored" data-anchor-id="质数表">质数表</h4>
-<div class="sourceCode" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>1e2     1e3     1e4       1e5       1e6</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>1e2     1e3     1e4       1e5       1e6</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>101         1009        10007       100003      1000003</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>1e7       1e8         1e9         1e10        1e11          </span>
@@ -1924,16 +1927,16 @@ A^k(x) = (a_t x^t)^k \left( \frac{A(x)}{a_t x^t} \right)^k
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>1000000000039   10000000000037  100000000000031 1000000000000037</span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>1e16              1e17                1e18</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>10000000000000061   100000000000000003  1000000000000000003</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>10000000000000061   100000000000000003  1000000000000000003</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="典列" class="level4">
 <h4 class="anchored" data-anchor-id="典列">典列</h4>
-<div class="sourceCode" id="cb7"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>index         0   1   2   3   4   5   6   7   8     9     10</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>index         0   1   2   3   4   5   6   7   8     9     10</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Catalan       1   1   2   5   14  42  132 429 1430  4862  16796</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>Bell          1   1   2   5   15  52  203 877 4140  21147 115975</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>partition     1   1   2   3   5   7   11  15  22    30    42</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>group         0   1   1   1   2   1   2   1   5     2     2</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>binomial</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>group         0   1   1   1   2   1   2   1   5     2     2</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>binomial</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>x   0   1   2   3   4   5</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>0 | 1</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>1 | 1   1</span>
@@ -1976,7 +1979,7 @@ A^k(x) = (a_t x^t)^k \left( \frac{A(x)}{a_t x^t} \right)^k
 <span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>2 |     1   1</span>
 <span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>3 |     1   1   1</span>
 <span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>4 |     1   2   1   1</span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>5 |     1   2   2   1   1</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>5 |     1   2   2   1   1</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="对拍" class="level3" data-number="9.2">
@@ -1993,7 +1996,7 @@ pause</code></pre>
 </section>
 <section id="linux-shell" class="level4">
 <h4 class="anchored" data-anchor-id="linux-shell">Linux Shell</h4>
-<div class="sourceCode" id="cb10"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="fu">true</span><span class="kw">;</span> <span class="cf">do</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="fu">true</span><span class="kw">;</span> <span class="cf">do</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">./gen</span><span class="op">&gt;</span>dat.in</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">./std</span><span class="op">&lt;</span>dat.in<span class="op">&gt;</span>std.out</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">./my</span><span class="op">&lt;</span>dat.in<span class="op">&gt;</span>my.out</span>
@@ -2003,7 +2006,7 @@ pause</code></pre>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">printf</span> DIFF</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">exit</span> 0</span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="模板" class="level3" data-number="9.3">
@@ -2011,7 +2014,7 @@ pause</code></pre>
 <p>见 <a href="code/model.cpp">model.cpp</a>, <a href="code/model_temp.cpp">model_temp.cpp</a>．</p>
 <section id="model.cpp" class="level4">
 <h4 class="anchored" data-anchor-id="model.cpp">model.cpp</h4>
-<div class="sourceCode" id="cb11"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="dt">unsigned</span> <span class="dt">int</span> <span class="ex">uint</span><span class="op">;</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll<span class="op">;</span></span>
@@ -2485,11 +2488,11 @@ pause</code></pre>
 <span id="cb11-472"><a href="#cb11-472" aria-hidden="true" tabindex="-1"></a>        entry<span class="op">();</span></span>
 <span id="cb11-473"><a href="#cb11-473" aria-hidden="true" tabindex="-1"></a>    <span class="co">//}</span></span>
 <span id="cb11-474"><a href="#cb11-474" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb11-475"><a href="#cb11-475" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-475"><a href="#cb11-475" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="model_temp.cpp" class="level4">
 <h4 class="anchored" data-anchor-id="model_temp.cpp">model_temp.cpp</h4>
-<div class="sourceCode" id="cb12"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll<span class="op">;</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">// --- </span><span class="al">CAUTION</span><span class="co"> uncensored ---</span></span>
@@ -2631,7 +2634,7 @@ pause</code></pre>
 <span id="cb12-140"><a href="#cb12-140" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span><span class="cf">while</span><span class="op">(</span>t<span class="op">!=</span>u<span class="op">);</span></span>
 <span id="cb12-141"><a href="#cb12-141" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
 <span id="cb12-142"><a href="#cb12-142" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb12-143"><a href="#cb12-143" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-143"><a href="#cb12-143" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>
@@ -2703,13 +2706,14 @@ pause</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
