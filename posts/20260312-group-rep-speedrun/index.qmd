@@ -1,8 +1,9 @@
 ---
 title: 有限群表示论速通
 subtitle: A Quick Tour of the Representation Theory of Finite Groups
-abstract: 我们参考 Fulton--Harris [@fulton_representation_2004，{chapter 1--2}] 优雅迅速地完成有限群复表示论的入门．
+abstract: 我们参考 Fulton--Harris [@fulton_representation_2004, {chapter 1--2}]，优雅、迅速、坐标无关地完成有限群有限维复表示论的入门．
 author: sun123zxy
+date: 2026-03-13
 lang: zh
 
 bibliography: index.bib
@@ -25,13 +26,57 @@ format:
 \newcommand{\id}{\operatorname{id}}
 \newcommand{\tr}{\operatorname{tr}}
 
-$G$ 是有限群，$V$ 是有限维的 $\mathbb C$-线性空间，则群同态 $\rho: G \to \GL(V)$ 规定了一个 $G$ 的（复）表示．等价地，这为 $V$ 配备了一个 $G$-模结构——$\mathbb C[G]$-模结构的简写．
+设 $G$ 是有限群，$V$ 是（有限维的）$\mathbb C$-线性空间，则群同态 $\rho: G \to \GL(V)$ 规定了一个 $G$ 的（复）表示．等价地，这为 $V$ 配备了一个 $G$-模结构——$\mathbb C[G]$-模结构的简写．以下问题将得到解答：
 
-## 构造
+- 半单性：任意有限群的有限维复表示一定分解为若干不可约表示的直和．（[@thm-semisimp]）
+
+- 特征标：证明特征标的正交性，从而通过内积计算任意表示的不可约成分组成情况：（[@cor-char-corresp]）
+  $$
+  V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
+  $$
+
+- 共轭类：不可约表示的同构类数量等于 $G$ 的共轭类数量．（[@thm-conj]）
+
+- 正则表示：群代数 $\mathbb C[G]$ 通过左作用赋予的 $G$-模结构具有不可约表示分解
+  $$
+  \mathbb C[G] \cong \bigoplus_i V_i^{\oplus \dim V_i}
+  $$
+  从而给出一个对不可约表示维数的限制 $\sum_i (\dim V_i)^2 = |G|$．（[@thm-reg]）
+
+本文的主要动机是：
+
+- 提供 Fulton--Harris [@fulton_representation_2004, {chapter 1--2}] 的一个中文速通版本
+
+  - Quantom chemists might find it better to read Serre [@serre_linear_1977, {chapter 1--2}] instead :p
+
+- 提供坐标无关、matrix-free 的定义、记号和证明路线
+
+  - 如无必要，勿增实体：减少 ad hoc 定义的使用
+  - 强调 $\otimes$-$\Hom$ 对偶关系的使用
+
+- 统一地理解有限群表示论的各种平均化构造
+
+  - 基于 $G$-不变子空间 $V^G$ 平均化投影的统一构造
+  - $G$-不变内积、分裂同态提升的视角
+
+- 为未来在高观点下介绍 Peter--Weyl 定理提供基础
+  $$
+  L^2(G) \cong \bigoplus_i V_i \otimes V_i^*
+  $$
+
+顺畅阅读本文可能需要读者熟练以下内容：
+
+- 抽象线性代数成熟度：对特征空间、对偶空间和张量积的理解
+- 模论成熟度：短正合列、分裂同态与补空间的关系，对 $\otimes$-$\Hom$ 对偶关系的理解
+- 最基本的群论：共轭类、群作用、群同态
+
+## 通用构造
 
 给定 $G$-表示 $V$, $W$，我们有若干标准的构造表示的手段：
 
-- $V^G$：$G$-不变子空间，即 $V^G := \{ v \in V : \forall g \in G,\, g \cdot v = v \}$．
+- $G$-不变子空间 $V^G$：
+
+  即 $V^G := \{ v \in V : \forall g \in G,\, g \cdot v = v \}$．
 
   注意通过平均化手段，可以获得 $V \to V^G$ 的一个投影
   $$
@@ -72,45 +117,6 @@ $G$ 是有限群，$V$ 是有限维的 $\mathbb C$-线性空间，则群同态 $
   \varphi \mapsto \tilde \varphi := \left( v \mapsto \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(g^{-1} \cdot v) \right)
   $$
 
-## 内积
-
-下面为 $G$-模配备内积．对 $G$-模 $V$，给定线性空间同构 $\varphi \in \Hom(V, V^*)$，根据自然同构 $V^* \otimes V^* \cong \Hom(V, V^*)$，这事实上等价于这任取 $V$ 上的一个线性空间意义下的内积 $\langle \cdot, \cdot \rangle_\varphi$，即 $\varphi(\cdot)(\cdot) = \langle \cdot, \cdot \rangle_\varphi$．
-
-现在对 $\varphi$ 平均化得到 $G$-模同态 $\tilde \varphi \in \Hom_G(V, V^*)$．则平均化可翻译为内积形式 $\langle v, w \rangle_{\tilde \varphi} = \frac 1 {|G|} \sum_{g \in G} \langle g \cdot v, g \cdot w \rangle_{\tilde \varphi}$：
-
-:::{.proof}
-
-$$
-\begin{aligned}
-\langle v, w \rangle_{\tilde \varphi}
-&= \tilde \varphi(v)(w) & \text{by natural isomorphism} \\
-&= \frac 1 {|G|} \sum_{g \in G} (g \cdot \varphi)(v)(w) & \text{by definition of } \tilde\varphi \\
-&= \frac 1 {|G|} \sum_{g \in G} \left( g \cdot \varphi(g^{-1} \cdot v) \right) (w) & \text{by } G\text{-module structure of } \Hom(V, V^*) \\
-&= \frac 1 {|G|} \sum_{g \in G} \varphi(g^{-1} \cdot v)(g^{-1} \cdot w) & \text{by } G\text{-module structure of } V^* \\
-&= \frac 1 {|G|} \sum_{g \in G} \varphi(g \cdot v)(g \cdot w) \\
-&= \frac 1 {|G|} \sum_{g \in G} \langle g \cdot v, g \cdot w \rangle_{\tilde \varphi} & \text{by natural isomorphism}
-\end{aligned}
-$$
-:::
-
-$\tilde \varphi$ 的 $G$-模同态性质可以翻译为内积形式 $\langle g \cdot v, g \cdot w \rangle_{\tilde\varphi} = \langle v, w \rangle_{\tilde\varphi}$：
-
-:::{.proof}
-
-$$
-\begin{aligned}
-\langle g \cdot v, g \cdot w \rangle_{\tilde\varphi}
-&= \tilde \varphi (g \cdot v) (g \cdot w) & \text{by natural isomorphism} \\
-&= (g \cdot \tilde \varphi)(v)(g \cdot w) & \text{by } \tilde\varphi \text{ is } G\text{-homomorphism} \\
-&= (g^{-1} \cdot g \cdot \tilde \varphi)(v)(w) & \text{by } G\text{-module structure of } V^* \\ 
-&= \tilde \varphi(v)(w) & \text{by module axiom} \\
-&= \langle v, w \rangle_{\tilde \varphi} & \text{by natural isomorphism}
-\end{aligned}
-$$
-:::
-
-因此，$G$-模 $V$ 上的 $G$-不变内积就是 $V \to V^*$ 的 $G$-模同态．构造手段上，可以通过任取线性空间意义下的内积做平均化得到．
-
 ## 不可约表示
 
 不可约表示是没有非平凡子表示的表示．
@@ -123,18 +129,44 @@ $$
 
 - （半单观点）任意 $G$-模 $V$ 都可以写成不可约表示的直和．
 
-- （不变内积观点）对任意 $G$-模 $V$ 和任意子模 $U \subseteq V$, 固定 $V$ 的一个 $G$-不变内积，则存在 $G$-模补空间 $U^\perp$ 使得在保 $G$-模内积意义下 $V = U \oplus U^\perp$．
-
-- （分裂同态观点）设线性空间正合列
+- （分裂同态观点）考虑 $G$-模正合列
   $$
-  0 \longrightarrow U \longrightarrow V \longrightarrow W \longrightarrow 0
+  0 \longrightarrow U \xrightarrow{\iota} V \xrightarrow{\pi} W \longrightarrow 0
   $$
-  有左分裂同态 $\varphi \in \Hom(V, U)$，则 $\tilde \varphi \in \Hom_G(V, U)$ 使得上述正合列提升为左分裂的 $G$-模正合列．
+  任取其作为线性空间时的一个左分裂同态 $\varphi \in \Hom(V, U)$ 使得 $\varphi \circ \iota = \id_U$，我们可以将这一线性映射通过 $G$-模 $\Hom(V,U)$ 上的平均化投影提升为 $G$-模同态 $\tilde \varphi \in \Hom_G(V, U)$：
+  $$
+  \tilde\varphi (v) = \frac 1 {|G|} \sum_{g \in G} (g \cdot \varphi) (v) = \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(g^{-1} \cdot v)
+  $$
+  这一提升同态仍保持左分裂性 $\tilde \varphi \circ \iota = \id_U$，从而将上述线性空间上左分裂的正合列提升为左分裂的 $G$-模正合列．
 :::
 
 :::{.proof}
 
-定义验证．
+分裂同态与直和的联系是模正合列的标准内容，我们此处略过．提升同态已经是平均化投影的结果，自然是 $G$-模同态．则只需证明提升后同态的分裂性：
+
+$$
+\begin{aligned}
+\tilde \varphi \circ \iota (u) &= \left(\frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(g^{-1} \cdot \iota(u)) \right) & \\
+&= \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(\iota(g^{-1} \cdot u)) \\
+&= \frac 1 {|G|} \sum_{g \in G} g \cdot (g^{-1} \cdot u) \\
+&= u
+\end{aligned}
+$$
+:::
+
+:::{.remark}
+
+## 不变内积观点
+
+尚有一种常见观点我们未做介绍：
+
+- 存在 $V$ 的一个 $G$-不变内积 $\langle \cdot, \cdot \rangle_G$，从而在此内积意义下的 $G$-模补空间 $U^\perp$ 使得 $V = U \oplus U^\perp$ 在 $G$-模的直和分解意义下成立．
+
+这里 $G$-不变内积是指内积满足 $\langle g \cdot v, g \cdot w \rangle_G = \langle v, w \rangle_G$．它的构造也是通过“平均化”提升任意 $V$ 作为线性空间上的内积得到：
+$$
+\langle v, w \rangle_G = \frac 1 {|G|} \sum_{g \in G} \langle g \cdot v, g \cdot w \rangle
+$$
+只要将内积视为 $G$-模 $\Hom(V, V^*)$ 中的线性映射，内积的平均化其实可以实现为 $\Hom(V, V^*) \to \Hom_G(V, V^*)$ 的平均化投影．详细分析其与分裂同态观点的关系需要过多抽象废话，简明流畅起见，我们[后日再谈](inner-product.qmd)．
 :::
 
 :::{#thm-schur}
@@ -161,7 +193,7 @@ $$
 
 表示 $\varphi : G \to \GL(V)$ 的特征标定义为函数 $\chi_\varphi : G \to \mathbb C$, $g \mapsto \tr(\rho(g))$，在模的记号下亦写作 $\chi_V$．
 
-记 $L^2(G)$ 是 $G \to \mathbb C$ 的全体函数构成的线性空间，配备内积 $\langle f_1, f_2 \rangle := \frac 1 {|G|} \sum_{g \in G} f_1(g) \overline{f_2(g)}$．特征标们构成 $L^2(G)$ 的一个子空间，但我们还可以做的更好：由于 trace 的相似不变性，$\chi_V(hgh^{-1}) = \chi_V(g)$，故特征标函数在共轭类上取值相同．我们将这种 $G \to \mathbb C$ 的函数称为类函数，于是特征标都是类函数．
+记 $L^2(G)$ 是 $G \to \mathbb C$ 的全体函数构成的线性空间，配备内积 $\langle f_1, f_2 \rangle := \frac 1 {|G|} \sum_{g \in G} f_1(g) \overline{f_2(g)}$．特征标们构成 $L^2(G)$ 的一个子空间，但我们还可以做的更好：由于迹的相似不变性，$\chi_V(hgh^{-1}) = \chi_V(g)$，故特征标函数在共轭类上取值相同．将这种 $G \to \mathbb C$ 的函数称为类函数，于是特征标都是类函数．
 
 特征标还满足以下性质：
 
@@ -177,16 +209,16 @@ $G$-module-wise properties：
 
 - $\chi_{V^*}(g) = \overline{\chi_V(g)}$
   
-  也就是算 $\rho_{V^*}(g) \in \GL(V^*)$ 的 trace，按照 $V^*$ 定义它恰好是 $\rho_V(g^{-1}) \in \GL(V)$ 的对偶映射，再注意到对偶映射的 trace 等于原映射的 trace 和 $\chi_V(g^{-1}) = \overline{\chi_V(g)}$ 即可．
+  也就是算 $\rho_{V^*}(g) \in \GL(V^*)$ 的迹，按照 $V^*$ 定义它恰好是 $\rho_V(g^{-1}) \in \GL(V)$ 的对偶映射，再注意到对偶映射的迹等于原映射的迹和 $\chi_V(g^{-1}) = \overline{\chi_V(g)}$ 即可．
   
-  :::{.remark}
-  
-  不理解为什么 $\tr(f^*) = \tr(f)$？
-  
-  - 我们有自然同构 $\Hom(V, V) \cong V^* \otimes V \cong V \otimes V^* \cong \Hom(V^*, V^*)$，中间的 $\otimes$ 两侧交换对应转置．Trace 也可以坐标无关地定义为 $V$ 和 $V^*$ 之间的缩并，从而对偶成为张量积间的交换从而变得无关紧要．
+:::{.remark}
 
-  - 或者直接坐标计算．嗯算就知道矩阵表示成转置关系．
-  :::
+不理解为什么 $\tr(f^*) = \tr(f)$？
+
+- 我们有自然同构 $\Hom(V, V) \cong V^* \otimes V \cong V \otimes V^* \cong \Hom(V^*, V^*)$，中间的 $\otimes$ 两侧交换对应转置．迹也可以坐标无关地定义为 $V$ 和 $V^*$ 之间的缩并，从而对偶成为张量积间的交换从而变得无关紧要．
+
+- 或者直接坐标计算．嗯算就知道矩阵表示成转置关系．
+:::
 
 $G$-wise properties：
 
@@ -196,11 +228,11 @@ $G$-wise properties：
 
 - $\chi_V(g^{-1}) = \overline{\chi_V(g)}$
 
-  注意 trace 是特征值的和，特征值都是单位根，单位根取逆就是共轭，$g^{-1}$ 的特征值是 $g$ 的特征值的逆即可．
+  注意迹是特征值的和，特征值都是单位根，单位根取逆就是共轭，$g^{-1}$ 的特征值是 $g$ 的特征值的逆即可．
 
 - $\langle \chi_V, 1_G \rangle = \frac 1 {|G|} \sum_{g \in G} \chi_V(g) = \dim V^G$
 
-  这是平均化投影 $V \to V^G$ 的 trace．
+  这是平均化投影 $V \to V^G$ 的迹——因为 $V^G$ 上的元素被投影保持不变．
 
 :::{#thm-ortho}
 
@@ -226,7 +258,12 @@ $$
 
 :::{#cor-char-corresp}
 
-- 表示不可约分解的写法唯一，不同的写法对应不同的同构类．
+- 可以通过特征标内积计算任意表示每个不可约成分的组成情况：
+  $$
+  V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
+  $$
+
+- 表示不可约分解的写法唯一：不同写法对应不同的同构类．
 
 - 表示的同构类与特征标一一对应．
 :::
@@ -234,6 +271,8 @@ $$
 :::{.proof}
 
 - 由 [@thm-semisimp]，任意表示都可以写成不可约表示的直和，而特征标与直和相容良好．结合 [@thm-ortho] 的正交性，故对任意表示 $V$，通过将它的特征标和某一不可约表示 $V_i$ 的特征标做内积，就可以确定这一表示包含了多少份 $V_i$．
+
+- 唯一性由上述计算保证．
 
 - 表示固然给出了特征标．反过来，可以通过上述特征标内积方法确定表示的同构类．
 :::
@@ -256,11 +295,11 @@ $$
 
 :::{.remark}
 
-通过将 $e_g$ 实现为函数 $h \mapsto \delta_{h = g}$，$\mathbb C[G]$ 的实体可以认为是 $G \to \mathbb C$ 的全体函数构成的 $|G|$ 维线性空间，于是也可写作 $L^2 (G)$．上述 $\mathbb C[G]$ 的左作用对应 $L^2(G)$ 的 $G$-模结构 $g \cdot \chi := (h \mapsto \chi (g^{-1} h))$——特别地：
+通过将 $e_g$ 实现为函数 $h \mapsto \delta_{h = g}$，$\mathbb C[G]$ 的实体可以认为是 $G \to \mathbb C$ 的全体函数构成的 $|G|$ 维线性空间．上述 $\mathbb C[G]$ 的左作用在此观点下可以基底无关地写作 $g \cdot \chi := (h \mapsto \chi (g^{-1} h))$——特别地：
 $$
 g_1 \cdot e_{g_2} = g \cdot \left( h \mapsto \delta_{h = g_2} \right) = \left( h \mapsto \delta_{h = g_1 g_2} \right) = e_{g_1 g_2}
 $$
-这解释了我们配备的 $G$-模结构的合理性．
+这解释了这种定义的合理性．
 :::
 
 :::{#thm-reg}
@@ -273,15 +312,18 @@ $$
 
 - 对任意 $G$-表示 $V$，$\langle \chi_{\mathbb C[G]}, \chi_V \rangle = \chi_V (1) = \dim V$．
 
-- $\mathbb C[G]$ 的不可约表示分解中，每个不可约表示 $V_i$ 恰好出现 $\dim V_i$ 份．
+- $\mathbb C[G]$ 的不可约表示分解中，每个不可约表示 $V_i$ 恰好出现 $\dim V_i$ 份，即
+  $$
+  \mathbb C[G] \cong \bigoplus_i V_i^{\oplus \dim V_i}
+  $$
 
-- $$
+- 不可约表示 $V_i$ 的维数满足
+  $$
   \sum_i (\dim V_i)^2 = |G|
   $$
 :::
 
 :::{.proof}
 
-平凡．
+推导路线已经给出，不再赘述．
 :::
-
