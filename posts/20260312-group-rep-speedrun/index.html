@@ -365,7 +365,8 @@ window.Quarto = {
   <li><a href="#通用构造" id="toc-通用构造" class="nav-link active" data-scroll-target="#通用构造"><span class="header-section-number">1</span> 通用构造</a></li>
   <li><a href="#不可约表示" id="toc-不可约表示" class="nav-link" data-scroll-target="#不可约表示"><span class="header-section-number">2</span> 不可约表示</a></li>
   <li><a href="#特征标" id="toc-特征标" class="nav-link" data-scroll-target="#特征标"><span class="header-section-number">3</span> 特征标</a></li>
-  <li><a href="#正则表示" id="toc-正则表示" class="nav-link" data-scroll-target="#正则表示"><span class="header-section-number">4</span> 正则表示</a></li>
+  <li><a href="#类函数投影" id="toc-类函数投影" class="nav-link" data-scroll-target="#类函数投影"><span class="header-section-number">4</span> 类函数投影</a></li>
+  <li><a href="#正则表示" id="toc-正则表示" class="nav-link" data-scroll-target="#正则表示"><span class="header-section-number">5</span> 正则表示</a></li>
   </ul>
 </nav>
     </div>
@@ -472,7 +473,8 @@ v \mapsto \tilde v := \frac 1 {|G|} \sum_{g \in G} g \cdot v
 <p>线性空间对偶配备 <span class="math inline">\(g \cdot f := (v \mapsto f(g^{-1} \cdot v))\)</span>．</p></li>
 <li><p>线性映射空间 <span class="math inline">\(\operatorname{Hom}(V, W)\)</span>：</p>
 <p>线性空间 <span class="math inline">\(\operatorname{Hom}(V, W)\)</span> 配备 <span class="math inline">\(g \cdot \varphi := (v \mapsto g \cdot \varphi(g^{-1} \cdot v))\)</span>．</p>
-<p>注意线性空间有自然同构 <span class="math inline">\(\operatorname{Hom}(V, W) \cong V^* \otimes W\)</span>．我们设计的定义使得这一同构相容地提升到 <span class="math inline">\(G\)</span>-模之上．</p></li>
+<p>注意线性空间有自然同构 <span class="math inline">\(\operatorname{Hom}(V, W) \cong V^* \otimes W\)</span>．我们设计的定义使得这一同构相容地提升到 <span class="math inline">\(G\)</span>-模之上．</p>
+<p>自同态空间 <span class="math inline">\(\operatorname{End}(V) := \operatorname{Hom}(V, V)\)</span>．</p></li>
 <li><p><span class="math inline">\(G\)</span>-模同态空间 <span class="math inline">\(\operatorname{Hom}_G(V, W)\)</span>：</p>
 <p>保持 <span class="math inline">\(G\)</span>-模结构的所有线性映射同态，其中的同态 <span class="math inline">\(\varphi\)</span> 满足 <span class="math inline">\(\varphi(g \cdot v) = g \cdot \varphi(v)\)</span>．</p>
 <p>注意我们设计的定义使得 <span class="math inline">\(\operatorname{Hom}_G(V, W) = \left(\operatorname{Hom}(V, W) \right)^G\)</span>．</p>
@@ -726,6 +728,9 @@ V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 </div>
 </div>
 </div>
+</section>
+<section id="类函数投影" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="类函数投影"><span class="header-section-number">4</span> 类函数投影</h2>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -763,8 +768,8 @@ V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 &amp;= \operatorname{tr}\left( \frac 1 {|G|} \sum_{g \in G} \chi(g) \rho_{V_i}(g) \right)
 \end{aligned}
 \]</span> 对任意表示 <span class="math inline">\(V\)</span>，让我们记 <span class="math display">\[
-\varphi_{\chi, V} := \frac 1 {|G|} \sum_{g \in G} \chi(g) \rho_{V}(g) \in \operatorname{Hom}(V, V)
-\]</span> 则则刚证明了 <span class="math inline">\(\operatorname{tr}(\varphi_{\chi, V_i}) = 0\)</span> 对所有不可约表示 <span class="math inline">\(V_i\)</span> 成立．</p>
+\varphi_{\chi, V} := \frac 1 {|G|} \sum_{g \in G} \chi(g) \rho_{V}(g) \in \operatorname{End}(V)
+\]</span> 则则刚证明了 <span class="math inline">\(\operatorname{tr}(\varphi_{\chi, V_i}) = 0\)</span> 对所有不可约表示 <span class="math inline">\(V_i\)</span> 成立．（也可立即推广到任意表示 <span class="math inline">\(V\)</span>，不过证明暂时不需要）</p>
 <p>现在更断言对任意表示 <span class="math inline">\(V\)</span>，<span class="math inline">\(\varphi_{\chi, V}\)</span> 其实是一个 <span class="math inline">\(G\)</span>-同态：对任意 <span class="math inline">\(h \in G\)</span>，<span class="math inline">\(v \in V\)</span>，我们有 <span class="math display">\[
 \begin{aligned}
 (h \cdot \varphi_{\chi, V})(v)
@@ -772,15 +777,40 @@ V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 &amp;= \frac 1 {|G|} \sum_{g \in G} \chi(h g h^{-1}) \cdot (h g h^{-1} \cdot v) &amp; \text{by } \chi \text{ is a class function} \\
 &amp;= \varphi_{\chi, V}(v)
 \end{aligned}
-\]</span> 于是 <span class="math inline">\(\varphi_{\chi, V} \in \operatorname{Hom}_G(V, V)\)</span>．由 Schur 定理 <a href="#thm-schur" class="quarto-xref">定理&nbsp;2</a>，当 <span class="math inline">\(V = V_i\)</span> 不可约时，<span class="math inline">\(\varphi_{\chi, V_i}\)</span> 是数乘．又 <span class="math inline">\(\operatorname{tr}(\varphi_{\chi, V_i}) = 0\)</span>，因此 <span class="math inline">\(\varphi_{\chi, V_i} = 0\)</span>．</p>
+\]</span> 于是 <span class="math inline">\(\varphi_{\chi, V} \in \operatorname{End}_G(V)\)</span>．由 Schur 定理（<a href="#thm-schur" class="quarto-xref">定理&nbsp;2</a>），当 <span class="math inline">\(V = V_i\)</span> 不可约时，<span class="math inline">\(\varphi_{\chi, V_i}\)</span> 是数乘．又 <span class="math inline">\(\operatorname{tr}(\varphi_{\chi, V_i}) = 0\)</span>，因此 <span class="math inline">\(\varphi_{\chi, V_i} = 0\)</span>．</p>
 <p>由于任意表示 <span class="math inline">\(V\)</span> 都可以写成不可约表示的直和，而 <span class="math inline">\(\varphi_{\chi, V}\)</span> 在每个不可约成分上都为 <span class="math inline">\(0\)</span>，因此 <span class="math inline">\(\varphi_{\chi, V} = 0\)</span> 推广到任意表示．现在特取正则表示 <span class="math inline">\(V = \mathbb C[G]\)</span>，注意此时左乘作用 <span class="math inline">\(\rho_{\mathbb C[G]}(g)\)</span> 线性无关，因此 <span class="math inline">\(\chi(g) = 0\)</span> 对任意 <span class="math inline">\(g \in G\)</span> 成立，即 <span class="math inline">\(\chi = 0\)</span>．</p>
 </div>
 </div>
 </div>
 </div>
+<p>除了证明的结论以外，在证明路线中我们还得到了一个重要的构造: <span class="math inline">\(\chi \mapsto \varphi_{\chi, V}\)</span> 给出了一个 <span class="math inline">\(L^2(G) \to \operatorname{End}(V)\)</span> 的线性映射．</p>
+<p>总结一下证明过程中得到的该构造的性质：</p>
+<ul>
+<li><span class="math inline">\(\operatorname{tr}(\varphi_{\chi, V}) = \langle \chi, \chi_{V^*} \rangle\)</span></li>
+<li>当 <span class="math inline">\(\chi\)</span> 是共轭类函数时，<span class="math inline">\(\varphi_{\chi, V}\)</span> 是 <span class="math inline">\(G\)</span>-同态</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span><span class="math inline">\(\chi \mapsto \varphi_{\chi, V}\)</span> 的构造其实是自然的：如果将 <span class="math inline">\(L^2(G)\)</span> 通过同构 <span class="math inline">\(\chi \mapsto \sum_{g \in G} \chi(g) e_g\)</span> 当作 <span class="math inline">\(\mathbb C[G]\)</span> 理解，则这一构造无非是由 <span class="math inline">\(\varphi_{e_g, V} := \rho_V(g)\)</span> 线性扩展得到——或者甚至更直接的，就是表示 <span class="math inline">\(\rho : G \to \operatorname{GL}(V)\)</span> 的线性扩展 <span class="math inline">\(\mathbb C[G] \to \operatorname{End}(V)\)</span>！</p>
+<p>还有一点词源学问题：为什么叫它投影？这是因为它是 Peter–Weyl 定理 <span class="math inline">\(L^2(G) \cong \bigoplus_i \operatorname{End}(V_i)\)</span> 直和投影的直接组成成分——我们<a href="../../posts/20260314-group-rep-peter-weyl/">后日再谈</a>．</p>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="正则表示" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="正则表示"><span class="header-section-number">4</span> 正则表示</h2>
+<section id="正则表示" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="正则表示"><span class="header-section-number">5</span> 正则表示</h2>
 <p>群代数 <span class="math inline">\(\mathbb C[G]\)</span> 是一组形式基底 <span class="math inline">\((e_g)_{g \in G}\)</span> 生成的线性空间，乘法由 <span class="math inline">\(e_{g_1} e_{g_2} := e_{g_1 g_2}\)</span> 定义．作为环，其自带一个左作用得到的 <span class="math inline">\(G\)</span>-模结构，称之为正则表示．</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
@@ -810,7 +840,7 @@ V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -819,7 +849,7 @@ V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
 <p><span class="proof-title"><em>证明</em>. </span>推导路线已经给出，不再赘述．</p>
