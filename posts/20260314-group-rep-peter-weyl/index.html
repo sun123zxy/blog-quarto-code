@@ -397,7 +397,7 @@ window.Quarto = {
 \mathbb C[G] \cong \bigoplus_i V_i^{\oplus \dim V_i}
 \]</span> 这里 <span class="math inline">\(\mathbb C[G]\)</span> 是群 <span class="math inline">\(G\)</span> 的群代数，<span class="math inline">\(V_i\)</span> 是 <span class="math inline">\(G\)</span> 的全体不可约表示．这只是个 <span class="math inline">\(G\)</span>-左模的分解：我们事实上分解的是 <span class="math inline">\(\mathbb C[G]\)</span> 通过左乘配备的 <span class="math inline">\(G\)</span>-左模结构．</p>
 <p>但是 <span class="math inline">\(\mathbb C[G]\)</span> 是个环，右边也能做乘法，完整来说我们应该研究 <span class="math inline">\(\mathbb C[G]\)</span> 的 <span class="math inline">\((G,G)\)</span>-双模结构．Peter–Weyl 定理给出了这个双模结构的分解： <span class="math display">\[
-\mathbb C[G] \cong \bigoplus_i V_i \otimes V_i^* \cong \bigoplus_i \operatorname{Hom}(V_i,V_i)
+\mathbb C[G] \cong \bigoplus_i V_i \otimes V_i^* \cong \bigoplus_i \operatorname{End}(V_i)
 \]</span></p>
 <p>这个分解并不让人意外：从维数的角度来看仍然有 <span class="math inline">\(|G| = \sum_i (\dim V_i)^2\)</span>．不过需要解释右边的 <span class="math inline">\(G\)</span>-模结构的定义情况：</p>
 <ul>
@@ -428,7 +428,7 @@ window.Quarto = {
 </section>
 <section id="一些后果" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="一些后果"><span class="header-section-number">2</span> 一些后果</h2>
-<p>我们将 Peter–Weyl 定理的证明延后，先来看看它的一些 consequence．首先，虽然有循环论证之嫌，确实可以通过维数再次看出 <span class="math display">\[
+<p>我们将 Peter–Weyl 定理的证明延后，先来看看它的一些 consequence．首先，可以通过维数再次看出 <span class="math display">\[
 |G| = \sum_i (\dim V_i)^2
 \]</span></p>
 <p>其次，分解双模结构的一个重要好处是它可以诱导出共轭作用的分解——虽然讲清楚这件事不可避免地需要一些抽象废话：</p>
@@ -456,8 +456,8 @@ window.Quarto = {
 </div>
 </div>
 <p>因此 Peter–Weyl 定理分解也给出了共轭意义下的分解．记号区分起见，我们将 <span class="math inline">\(\mathbb C[G]\)</span> 上配备共轭作用 <span class="math inline">\(g \cdot x := gxg^{-1}\)</span> 的 <span class="math inline">\(G\)</span>-左模记为 <span class="math inline">\(L^2(G)\)</span>，则 Peter–Weyl 定理特化为 <span class="math inline">\(G\)</span>-左模分解 <span class="math display">\[
-L^2(G) \cong \bigoplus_i V_i \otimes V_i^* \cong \bigoplus_i \operatorname{Hom}(V_i,V_i)
-\]</span> 这里 <span class="math inline">\(V_i^*\)</span> 和 <span class="math inline">\(\operatorname{Hom}(V_i,V_i)\)</span> 上的 <span class="math inline">\(G\)</span>-左模结构就都和经典有限群表示论中的定义一样了．</p>
+L^2(G) \cong \bigoplus_i V_i \otimes V_i^* \cong \bigoplus_i \operatorname{End}(V_i)
+\]</span> 这里 <span class="math inline">\(V_i^*\)</span> 和 <span class="math inline">\(\operatorname{End}(V_i)\)</span> 上的 <span class="math inline">\(G\)</span>-左模结构就都和经典有限群表示论中的定义一样了．</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -493,13 +493,27 @@ g \cdot \chi := (h \mapsto \chi(g^{-1} h g))
 <p>关于共轭作用的分解有什么好处呢？一下看不出来．但是让我们考虑打到左 <span class="math inline">\(G\)</span>-模 <span class="math inline">\(V\)</span> 的 <span class="math inline">\(G\)</span>-不变子空间 <span class="math inline">\(V^G\)</span> 的平均化投影 <span class="math inline">\(V \to V^G\)</span>： <span class="math display">\[
 v \mapsto \frac{1}{|G|} \sum_{g \in G} g \cdot v
 \]</span> 在 Peter–Weyl 分解上作用一下就得到 <span class="math display">\[
-(L^2(G))^G \cong \bigoplus_i \operatorname{Hom}_G(V_i,V_i)
+(L^2(G))^G \cong \bigoplus_i \operatorname{End}_G(V_i)
 \]</span></p>
 <ul>
 <li><p>左边是什么？关于共轭作用保持不变的 <span class="math inline">\(G \to \mathbb C\)</span> 的函数，这不就是类函数吗！它的维数是 <span class="math inline">\(G\)</span> 的共轭类的数量．</p></li>
-<li><p>右边是什么？<span class="math inline">\(\operatorname{Hom}_G(V_i,V_i)\)</span> 是 <span class="math inline">\(V_i\)</span> 上 <span class="math inline">\(G\)</span>-自同态的全体．还记得 Schur 定理吗？它告诉我们 <span class="math inline">\(\dim \operatorname{Hom}_G(V_i,V_i) = 1\)</span>．</p></li>
+<li><p>右边是什么？<span class="math inline">\(\operatorname{End}_G(V_i)\)</span> 是 <span class="math inline">\(V_i\)</span> 上 <span class="math inline">\(G\)</span>-自同态的全体．还记得 Schur 定理吗？它告诉我们 <span class="math inline">\(\dim \operatorname{End}_G(V_i) = 1\)</span>．</p></li>
 </ul>
 <p>连起来看：<span class="math inline">\(G\)</span> 的共轭类的数量等于 <span class="math inline">\(G\)</span> 的不可约表示的数量．</p>
+</section>
+<section id="证明" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="证明"><span class="header-section-number">3</span> 证明</h2>
+<p>以后我们都把 <span class="math inline">\(\mathbb C[G]\)</span> 看成是 <span class="math inline">\(G \to \mathbb C\)</span> 的全体函数．先来构造 <span class="math inline">\(V_i \otimes V_i^*\)</span> 到 <span class="math inline">\(\mathbb C[G]\)</span> 的 <span class="math inline">\(G\)</span>-双模同态 <span class="math inline">\(\Phi_i\)</span>： <span class="math display">\[
+\begin{aligned}
+V_i \otimes V_i^* &amp;\to \mathbb C[G] \\
+v \otimes f &amp;\mapsto \left( g \mapsto f(g^{-1} \cdot v) \right)
+\end{aligned}
+\]</span> 或者等价地： <span class="math display">\[
+\begin{aligned}
+\operatorname{End}(V_i) &amp;\to \mathbb C[G] \\
+\varphi &amp;\mapsto \left( g \mapsto \operatorname{tr}(\varphi \circ \rho_{V_i} (g^{-1})) \right)
+\end{aligned}
+\]</span></p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -511,38 +525,6 @@ v \mapsto \frac{1}{|G|} \sum_{g \in G} g \cdot v
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>将会看到，Peter–Weyl 定理的证明依赖 <span class="math inline">\(\sum_i (\dim V_i)^2 = |G|\)</span> 而不依赖不可约表示的计数定理，所以这里不会循环论证．通过 Peter–Weyl 定理导出此事实显得更加自顶向下．</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="证明" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="证明"><span class="header-section-number">3</span> 证明</h2>
-<p>以后我们都把 <span class="math inline">\(\mathbb C[G]\)</span> 看成是 <span class="math inline">\(G \to \mathbb C\)</span> 的全体函数．先来构造 <span class="math inline">\(V_i \otimes V_i^*\)</span> 到 <span class="math inline">\(\mathbb C[G]\)</span> 的 <span class="math inline">\(G\)</span>-双模同态 <span class="math inline">\(\Phi_i\)</span>： <span class="math display">\[
-\begin{aligned}
-V_i \otimes V_i^* &amp;\to \mathbb C[G] \\
-v \otimes f &amp;\mapsto \left( g \mapsto f(g \cdot v) \right)
-\end{aligned}
-\]</span> 或者等价地： <span class="math display">\[
-\begin{aligned}
-\operatorname{Hom}(V_i, V_i) &amp;\to \mathbb C[G] \\
-\varphi &amp;\mapsto \left( g \mapsto \operatorname{tr}(\varphi \circ \rho_{V_i} (g)) \right)
-\end{aligned}
-\]</span></p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>注记</em>. </span>这里两种定义的等价性：<span class="math inline">\(V\)</span> 上线性变换的 <span class="math inline">\(\operatorname{tr}\)</span> 在张量风格的记号下就是 <span class="math inline">\(V\)</span> 和 <span class="math inline">\(V^*\)</span> 张量缩并 <span class="math display">\[
@@ -557,7 +539,7 @@ v \otimes f &amp;\mapsto f(v)
 </div>
 <p>先来验证它是 <span class="math inline">\(G\)</span>-双模同态：</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -566,27 +548,96 @@ v \otimes f &amp;\mapsto f(v)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
-<p><span class="proof-title"><em>证明</em>. </span>张量风格的记号好处理一点．验证它是 <span class="math inline">\(G\)</span>-左模同态： <span class="math display">\[
+<p><span class="proof-title"><em>证明</em>. </span>张量风格的记号好处理一点．验证它是 <span class="math inline">\(G\)</span>-双模同态： <span class="math display">\[
 \begin{aligned}
-\Phi_i \left( g \cdot (v \otimes f) \right)
-&amp;= \Phi_i \left( (g \cdot v) \otimes (f \circ \rho_{V_i}(g)) \right) \\
-&amp;= \left( h \mapsto (f \circ \rho_{V_i}(g))(hg \cdot v) \right) \\
-&amp;= \left( h \mapsto f(g^{-1} h g \cdot v) \right) \\
-&amp;= g \cdot (h \mapsto f(h \cdot v)) \\
-&amp;= g \cdot \Phi_i(v \otimes f)
+\Phi_i \left( g \cdot (v \otimes f) \cdot h \right)
+&amp;= \Phi_i \left( (g \cdot v) \otimes (f \cdot h) \right) \\
+&amp;= \left( x \mapsto (f \cdot h)(x^{-1} g \cdot v) \right) \\
+&amp;= \left( x \mapsto f(h x^{-1} g \cdot v) \right) \quad \text{因为 } (f \cdot h)(u) = f(h \cdot u) \\
+&amp;= \left( x \mapsto f((g^{-1} x h^{-1})^{-1} \cdot v) \right) \\
+&amp;= g \cdot (x \mapsto f(x^{-1} \cdot v)) \cdot h \\
+&amp;= g \cdot \Phi_i(v \otimes f) \cdot h
 \end{aligned}
 \]</span></p>
-<p>右模同态的验证同理．另外，如果你想用 <span class="math inline">\(\operatorname{tr}\)</span> 风格的记号证明，可能需要知道 <span class="math inline">\(\operatorname{tr}\)</span> 的<a href="../../posts/20260314-trace-cyclic/">循环不变性</a> 才能做．</p>
+<p>另外，如果你想用 <span class="math inline">\(\operatorname{tr}\)</span> 风格的记号证明，可能需要知道 <span class="math inline">\(\operatorname{tr}\)</span> 的<a href="../../posts/20260314-trace-cyclic/">循环不变性</a> 才能做．</p>
 </div>
 </div>
 </div>
 </div>
-<p>反向地，我们构造 <span class="math inline">\(\mathbb C[G]\)</span> 到每个 <span class="math inline">\(V_i \otimes V_i^*\)</span> 的 <span class="math inline">\(G\)</span>-双模同态 <span class="math inline">\(\Psi_i\)</span>——欸，<span class="math inline">\(V_i \otimes V_i^*\)</span> 不是已经是 <span class="math inline">\((\mathbb C[G], \mathbb C[G])\)</span>-双模了吗？干脆直接摆烂规定 <span class="math display">\[
+<p>反向地，我们构造 <span class="math inline">\(\mathbb C[G]\)</span> 到每个 <span class="math inline">\(\operatorname{End}(V_i)\)</span> 的 <span class="math inline">\(G\)</span>-双模同态 <span class="math inline">\(\Psi_i\)</span>： <span class="math display">\[
 \Psi_i(e_g) := \rho_{V_i}(g)
-\]</span> 那 <span class="math inline">\(\Psi_i\)</span> 就已经是 <span class="math inline">\(G\)</span>-双模同态了．</p>
+\]</span> 那 <span class="math inline">\(\Psi_i\)</span> 就已经是 <span class="math inline">\(G\)</span>-双模同态了．这里按函数风格写一下定义： <span class="math display">\[
+\Psi_i(\chi) := \sum_{g \in G} \chi(g) \rho_{V_i}(g)
+\]</span></p>
+<p>验证 <span class="math inline">\(\Psi_i \circ \Phi_i = c \cdot \operatorname{id}_{\operatorname{End}(V_i)}\)</span>：</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span>这个恒等式可以通过 Schur 正交关系来证。任取 <span class="math inline">\(\varphi \in \operatorname{End}(V_i)\)</span>，计算复合作用： <span class="math display">\[
+\begin{aligned}
+(\Psi_i \circ \Phi_i)(\varphi) &amp;= \Psi_i\left(g \mapsto \operatorname{tr}(\varphi \circ \rho_{V_i}(g^{-1}))\right) \\
+&amp;= \sum_{g \in G} \operatorname{tr}(\varphi \circ \rho_{V_i}(g^{-1})) \rho_{V_i}(g)
+\end{aligned}
+\]</span> 任取 <span class="math inline">\(u \in V_i\)</span> 以及 <span class="math inline">\(f \in V_i^*\)</span>，我们将上式作用在 <span class="math inline">\(u\)</span> 上并在外面作用 <span class="math inline">\(f\)</span>： <span class="math display">\[
+\begin{aligned}
+f\left( (\Psi_i \circ \Phi_i)(\varphi)(u) \right) &amp;= \sum_{g \in G} \operatorname{tr}(\varphi \circ \rho_{V_i}(g^{-1})) f(\rho_{V_i}(g) u) \\
+&amp;= \sum_{g \in G} \operatorname{tr}(\varphi \circ \rho_{V_i}(g^{-1})) \operatorname{tr}\left( (u \otimes f) \circ \rho_{V_i}(g) \right)
+\end{aligned}
+\]</span> 由 Schur 正交关系（对于 <span class="math inline">\(\operatorname{End}(V_i)\)</span> 上的迹内积），我们知道对任意自同态 <span class="math inline">\(A, B\)</span>，有 <span class="math inline">\(\sum_{g \in G} \operatorname{tr}(A \rho_{V_i}(g^{-1})) \operatorname{tr}(B \rho_{V_i}(g)) = \frac{|G|}{\dim V_i} \operatorname{tr}(A B)\)</span>。</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>取 <span class="math inline">\(V_i\)</span> 的一组基将算子写成矩阵。根据经典形式的矩阵元 Schur 正交关系： <span class="math display">\[
+\sum_{g \in G} \rho_{V_i}(g)_{ij} \rho_{V_i}(g^{-1})_{kl} = \frac{|G|}{\dim V_i} \delta_{il} \delta_{jk}
+\]</span> 将左侧的两个迹展开化简即可： <span class="math display">\[
+\begin{aligned}
+\sum_{g \in G} \operatorname{tr}(A \rho_{V_i}(g^{-1})) \operatorname{tr}(B \rho_{V_i}(g))
+&amp;= \sum_{g \in G} \left( \sum_{k,l} A_{lk} \rho_{V_i}(g^{-1})_{kl} \right) \left( \sum_{i,j} B_{ji} \rho_{V_i}(g)_{ij} \right) \\
+&amp;= \sum_{i,j,k,l} A_{lk} B_{ji} \sum_{g \in G} \rho_{V_i}(g)_{ij} \rho_{V_i}(g^{-1})_{kl} \\
+&amp;= \sum_{i,j,k,l} A_{lk} B_{ji} \frac{|G|}{\dim V_i} \delta_{il} \delta_{jk} \\
+&amp;= \frac{|G|}{\dim V_i} \sum_{i,j} A_{ij} B_{ji} \\
+&amp;= \frac{|G|}{\dim V_i} \operatorname{tr}(AB)
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<p>将 <span class="math inline">\(A = \varphi\)</span>，<span class="math inline">\(B = u \otimes f\)</span> 代入该式，得到： <span class="math display">\[
+\begin{aligned}
+f\left( (\Psi_i \circ \Phi_i)(\varphi)(u) \right) &amp;= \frac{|G|}{\dim V_i} \operatorname{tr}(\varphi \circ (u \otimes f)) \\
+&amp;= \frac{|G|}{\dim V_i} f(\varphi(u))
+\end{aligned}
+\]</span> 因为对所有 <span class="math inline">\(f\)</span> 和 <span class="math inline">\(u\)</span> 成立，故有 <span class="math display">\[
+(\Psi_i \circ \Phi_i)(\varphi) = \frac{|G|}{\dim V_i} \varphi
+\]</span> 即 <span class="math inline">\(\Psi_i \circ \Phi_i = \frac{|G|}{\dim V_i} \operatorname{id}_{\operatorname{End}(V_i)}\)</span>。的确只是差一个常数 <span class="math inline">\(\frac{|G|}{\dim V_i}\)</span>。</p>
+</div>
+</div>
+</div>
+</div>
 
 
 </section>

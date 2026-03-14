@@ -103,7 +103,6 @@ MathJax = {
   }
 };
 </script>
-<meta name="quarto:status" content="draft">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -300,7 +299,7 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>草稿</div>
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -398,7 +397,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026年3月13日</p>
+      <p class="date">2026年3月15日</p>
     </div>
   </div>
   
@@ -443,7 +442,7 @@ V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 <li>基于 <span class="math inline">\(G\)</span>-不变子空间 <span class="math inline">\(V^G\)</span> 平均化投影的统一构造</li>
 <li><span class="math inline">\(G\)</span>-不变内积、分裂同态提升的视角</li>
 </ul></li>
-<li><p>为未来在高观点下介绍 Peter–Weyl 定理提供基础 <span class="math display">\[
+<li><p>为未来在高观点下介绍 <a href="../../posts/20260314-group-rep-peter-weyl/">Peter–Weyl 定理</a>提供基础 <span class="math display">\[
 L^2(G) \cong \bigoplus_i V_i \otimes V_i^*
 \]</span></p></li>
 </ul>
@@ -756,7 +755,25 @@ V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
-<p><span class="proof-title"><em>证明</em>. </span>假如类函数 <span class="math inline">\(\chi\)</span> 与所有不可约表示的特征标都正交，[TODO]</p>
+<p><span class="proof-title"><em>证明</em>. </span>假如类函数 <span class="math inline">\(\chi\)</span> 与每个不可约表示 <span class="math inline">\(V_i\)</span> 的特征标 <span class="math inline">\(\chi_{V_i}\)</span> 都正交．对偶表示 <span class="math inline">\(V_i^*\)</span> 也不可约，故 <span class="math display">\[
+\begin{aligned}
+0 &amp;= \langle \chi, \chi_{V_i^*} \rangle \\
+&amp;= \frac 1 {|G|} \sum_{g \in G} \chi(g) \overline{\chi_{V_i^*}(g)} \\
+&amp;= \frac 1 {|G|} \sum_{g \in G} \chi(g) \chi_{V_i}(g) \\
+&amp;= \operatorname{tr}\left( \frac 1 {|G|} \sum_{g \in G} \chi(g) \rho_{V_i}(g) \right)
+\end{aligned}
+\]</span> 对任意表示 <span class="math inline">\(V\)</span>，让我们记 <span class="math display">\[
+\varphi_{\chi, V} := \frac 1 {|G|} \sum_{g \in G} \chi(g) \rho_{V}(g) \in \operatorname{Hom}(V, V)
+\]</span> 则则刚证明了 <span class="math inline">\(\operatorname{tr}(\varphi_{\chi, V_i}) = 0\)</span> 对所有不可约表示 <span class="math inline">\(V_i\)</span> 成立．</p>
+<p>现在更断言对任意表示 <span class="math inline">\(V\)</span>，<span class="math inline">\(\varphi_{\chi, V}\)</span> 其实是一个 <span class="math inline">\(G\)</span>-同态：对任意 <span class="math inline">\(h \in G\)</span>，<span class="math inline">\(v \in V\)</span>，我们有 <span class="math display">\[
+\begin{aligned}
+(h \cdot \varphi_{\chi, V})(v)
+&amp;= \frac 1 {|G|} \sum_{g \in G} \chi(g) \cdot (h g h^{-1} \cdot v) \\
+&amp;= \frac 1 {|G|} \sum_{g \in G} \chi(h g h^{-1}) \cdot (h g h^{-1} \cdot v) &amp; \text{by } \chi \text{ is a class function} \\
+&amp;= \varphi_{\chi, V}(v)
+\end{aligned}
+\]</span> 于是 <span class="math inline">\(\varphi_{\chi, V} \in \operatorname{Hom}_G(V, V)\)</span>．由 Schur 定理 <a href="#thm-schur" class="quarto-xref">定理&nbsp;2</a>，当 <span class="math inline">\(V = V_i\)</span> 不可约时，<span class="math inline">\(\varphi_{\chi, V_i}\)</span> 是数乘．又 <span class="math inline">\(\operatorname{tr}(\varphi_{\chi, V_i}) = 0\)</span>，因此 <span class="math inline">\(\varphi_{\chi, V_i} = 0\)</span>．</p>
+<p>由于任意表示 <span class="math inline">\(V\)</span> 都可以写成不可约表示的直和，而 <span class="math inline">\(\varphi_{\chi, V}\)</span> 在每个不可约成分上都为 <span class="math inline">\(0\)</span>，因此 <span class="math inline">\(\varphi_{\chi, V} = 0\)</span> 推广到任意表示．现在特取正则表示 <span class="math inline">\(V = \mathbb C[G]\)</span>，注意此时左乘作用 <span class="math inline">\(\rho_{\mathbb C[G]}(g)\)</span> 线性无关，因此 <span class="math inline">\(\chi(g) = 0\)</span> 对任意 <span class="math inline">\(g \in G\)</span> 成立，即 <span class="math inline">\(\chi = 0\)</span>．</p>
 </div>
 </div>
 </div>
