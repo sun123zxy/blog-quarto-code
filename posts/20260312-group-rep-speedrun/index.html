@@ -365,7 +365,7 @@ window.Quarto = {
   <li><a href="#通用构造" id="toc-通用构造" class="nav-link active" data-scroll-target="#通用构造"><span class="header-section-number">1</span> 通用构造</a></li>
   <li><a href="#不可约表示" id="toc-不可约表示" class="nav-link" data-scroll-target="#不可约表示"><span class="header-section-number">2</span> 不可约表示</a></li>
   <li><a href="#特征标" id="toc-特征标" class="nav-link" data-scroll-target="#特征标"><span class="header-section-number">3</span> 特征标</a></li>
-  <li><a href="#类函数投影" id="toc-类函数投影" class="nav-link" data-scroll-target="#类函数投影"><span class="header-section-number">4</span> 类函数投影</a></li>
+  <li><a href="#直和分解的典范投影" id="toc-直和分解的典范投影" class="nav-link" data-scroll-target="#直和分解的典范投影"><span class="header-section-number">4</span> 直和分解的典范投影</a></li>
   <li><a href="#正则表示" id="toc-正则表示" class="nav-link" data-scroll-target="#正则表示"><span class="header-section-number">5</span> 正则表示</a></li>
   </ul>
 </nav>
@@ -729,8 +729,8 @@ V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 </div>
 </div>
 </section>
-<section id="类函数投影" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="类函数投影"><span class="header-section-number">4</span> 类函数投影</h2>
+<section id="直和分解的典范投影" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="直和分解的典范投影"><span class="header-section-number">4</span> 直和分解的典范投影</h2>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -784,11 +784,6 @@ V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 </div>
 </div>
 <p>除了证明的结论以外，在证明路线中我们还得到了一个重要的构造: <span class="math inline">\(\chi \mapsto \varphi_{\chi, V}\)</span> 给出了一个 <span class="math inline">\(L^2(G) \to \operatorname{End}(V)\)</span> 的线性映射．</p>
-<p>总结一下证明过程中得到的该构造的性质：</p>
-<ul>
-<li><span class="math inline">\(\operatorname{tr}(\varphi_{\chi, V}) = \langle \chi, \chi_{V^*} \rangle\)</span></li>
-<li>当 <span class="math inline">\(\chi\)</span> 是共轭类函数时，<span class="math inline">\(\varphi_{\chi, V}\)</span> 是 <span class="math inline">\(G\)</span>-同态</li>
-</ul>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -802,8 +797,41 @@ V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 <div id="callout-8" class="callout-8-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span><span class="math inline">\(\chi \mapsto \varphi_{\chi, V}\)</span> 的构造其实是自然的：如果将 <span class="math inline">\(L^2(G)\)</span> 通过同构 <span class="math inline">\(\chi \mapsto \sum_{g \in G} \chi(g) e_g\)</span> 当作 <span class="math inline">\(\mathbb C[G]\)</span> 理解，则这一构造无非是由 <span class="math inline">\(\varphi_{e_g, V} := \rho_V(g)\)</span> 线性扩展得到——或者甚至更直接的，就是表示 <span class="math inline">\(\rho : G \to \operatorname{GL}(V)\)</span> 的线性扩展 <span class="math inline">\(\mathbb C[G] \to \operatorname{End}(V)\)</span>！</p>
-<p>还有一点词源学问题：为什么叫它投影？这是因为它是 Peter–Weyl 定理 <span class="math inline">\(L^2(G) \cong \bigoplus_i \operatorname{End}(V_i)\)</span> 直和投影的直接组成成分——我们<a href="../../posts/20260314-group-rep-peter-weyl/">后日再谈</a>．</p>
+<p><span class="proof-title"><em>注记</em>. </span>这个构造其实是自然的：如果将 <span class="math inline">\(L^2(G)\)</span> 通过同构 <span class="math inline">\(\chi \mapsto \sum_{g \in G} \chi(g) e_g\)</span> 当作 <span class="math inline">\(\mathbb C[G]\)</span> 理解，则 <span class="math inline">\(\chi \mapsto |G| \cdot \varphi_{\chi, V}\)</span> 无非是由 <span class="math inline">\(\varphi_{e_g, V} := \rho_V(g)\)</span> 线性扩展得到——或者甚至更直接的，就是表示 <span class="math inline">\(\rho : G \to \operatorname{GL}(V)\)</span> 的线性扩展 <span class="math inline">\(\mathbb C[G] \to \operatorname{End}(V)\)</span>！</p>
+</div>
+</div>
+</div>
+</div>
+<p>总结并推广证明过程中得到的该构造的若干性质：</p>
+<ul>
+<li><p><span class="math inline">\(\varphi_{\chi, V}\)</span> 关于 <span class="math inline">\(\chi \in L^2(G)\)</span> 的加法和表示 <span class="math inline">\(V\)</span> 的直和都是线性的．</p></li>
+<li><p><span class="math inline">\(\operatorname{tr}(\varphi_{\chi, V}) = \langle \chi, \chi_{V^*} \rangle = \langle \overline{\chi}, \chi_V \rangle\)</span></p></li>
+<li><p>当 <span class="math inline">\(\chi\)</span> 是共轭类函数时：<span class="math inline">\(\varphi_{\chi, V}\)</span> 是 <span class="math inline">\(G\)</span>-同态．</p></li>
+<li><p>追加 <span class="math inline">\(V = V_i\)</span> 不可约的条件：此时 <span class="math inline">\(\varphi_{\chi, V_i}\)</span> 是系数为 <span class="math inline">\(\langle \overline{\chi}, \chi_{V_i} \rangle / \dim V_i\)</span> 的数乘．</p></li>
+<li><p>再追加设 <span class="math inline">\(V_j\)</span> 也是不可约表示，取 <span class="math inline">\(\chi = \overline{\chi_{V_j}}\)</span>，则 <span class="math display">\[
+\varphi_{\overline{\chi_{V_j}}, V} = \begin{cases}
+(1 / \dim V_j) \cdot \operatorname{id}_{V_i} &amp; i = j \\
+0 &amp; \text{otherwise}
+\end{cases}
+\]</span></p></li>
+<li><p>现在考虑将 <span class="math inline">\(V\)</span> 放松为任意表示，<span class="math inline">\(V_j\)</span> 仍不可约，定义 <span class="math display">\[
+\pi_j := \dim V_j \cdot \varphi_{\overline{\chi_{V_j}}, V} = \frac{\dim V_j}{|G|} \sum_{g \in G} \overline{\chi_{V_j}(g)} \rho_V(g)
+\]</span> 由于 <span class="math inline">\(V\)</span> 可以写成不可约表示的直和，又结合 <span class="math inline">\(\varphi_{\overline{\chi_{V_j}}, V}\)</span> 关于 <span class="math inline">\(V\)</span> 的直和线性性，使用上一条的结果就有：<span class="math inline">\(\pi_j\)</span> 就是 <span class="math inline">\(V\)</span> 到其全体 <span class="math inline">\(V_j\)</span> 成分的 <span class="math inline">\(G\)</span>-同态投影．</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span><span class="math inline">\(\chi \mapsto \varphi_{\chi, V}\)</span> 也是 Peter–Weyl 定理 <span class="math inline">\(L^2(G) \cong \bigoplus_i \operatorname{End}(V_i)\)</span> 直和投影的重要组成成分——我们<a href="../../posts/20260314-group-rep-peter-weyl/">后日再谈</a>．</p>
 </div>
 </div>
 </div>
@@ -840,7 +868,7 @@ V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -849,7 +877,7 @@ V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
 <p><span class="proof-title"><em>证明</em>. </span>推导路线已经给出，不再赘述．</p>
