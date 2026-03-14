@@ -9,7 +9,7 @@ categories:
   - music
   - technical
   - Python
-collection:
+collections:
   - casual
   
 format:

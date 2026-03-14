@@ -9,7 +9,7 @@ categories:
   - technical
   - web
   - memories
-collection:
+collections:
   - casual
 format:
   html: default

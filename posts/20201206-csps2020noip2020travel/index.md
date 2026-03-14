@@ -6,7 +6,7 @@ categories:
   - algorithm
   - tour
   - memories
-collection:
+collections:
   - casual
 
 format:
