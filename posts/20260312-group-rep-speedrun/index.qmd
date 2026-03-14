@@ -3,12 +3,10 @@ title: 有限群表示论速通
 subtitle: A Quick Tour of the Representation Theory of Finite Groups
 abstract: 参考 Fulton--Harris [@fulton_representation_2004, {chapter 1--2}]，优雅、迅速、坐标无关地完成有限群有限维复表示论的入门．
 author: sun123zxy
-date: 2026-03-13
+date: 2026-03-15
 lang: zh
 
 bibliography: index.bib
-
-draft: true
 
 categories:
   - math
@@ -59,7 +57,7 @@ format:
   - 基于 $G$-不变子空间 $V^G$ 平均化投影的统一构造
   - $G$-不变内积、分裂同态提升的视角
 
-- 为未来在高观点下介绍 Peter--Weyl 定理提供基础
+- 为未来在高观点下介绍 [Peter--Weyl 定理](/posts/20260314-group-rep-peter-weyl/)提供基础
   $$
   L^2(G) \cong \bigoplus_i V_i \otimes V_i^*
   $$
@@ -297,7 +295,33 @@ $$
 
 :::{.proof}
 
-假如类函数 $\chi$ 与所有不可约表示的特征标都正交，[TODO]
+假如类函数 $\chi$ 与每个不可约表示 $V_i$ 的特征标 $\chi_{V_i}$ 都正交．对偶表示 $V_i^*$ 也不可约，故
+$$
+\begin{aligned}
+0 &= \langle \chi, \chi_{V_i^*} \rangle \\
+&= \frac 1 {|G|} \sum_{g \in G} \chi(g) \overline{\chi_{V_i^*}(g)} \\
+&= \frac 1 {|G|} \sum_{g \in G} \chi(g) \chi_{V_i}(g) \\
+&= \tr \left( \frac 1 {|G|} \sum_{g \in G} \chi(g) \rho_{V_i}(g) \right)
+\end{aligned}
+$$
+对任意表示 $V$，让我们记
+$$
+\varphi_{\chi, V} := \frac 1 {|G|} \sum_{g \in G} \chi(g) \rho_{V}(g) \in \Hom(V, V)
+$$
+则则刚证明了 $\tr(\varphi_{\chi, V_i}) = 0$ 对所有不可约表示 $V_i$ 成立．
+
+现在更断言对任意表示 $V$，$\varphi_{\chi, V}$ 其实是一个 $G$-同态：对任意 $h \in G$，$v \in V$，我们有
+$$
+\begin{aligned}
+(h \cdot \varphi_{\chi, V})(v)
+&= \frac 1 {|G|} \sum_{g \in G} \chi(g) \cdot (h g h^{-1} \cdot v) \\
+&= \frac 1 {|G|} \sum_{g \in G} \chi(h g h^{-1}) \cdot (h g h^{-1} \cdot v) & \text{by } \chi \text{ is a class function} \\
+&= \varphi_{\chi, V}(v)
+\end{aligned}
+$$
+于是 $\varphi_{\chi, V} \in \Hom_G(V, V)$．由 Schur 定理 [@thm-schur]，当 $V = V_i$ 不可约时，$\varphi_{\chi, V_i}$ 是数乘．又 $\tr(\varphi_{\chi, V_i}) = 0$，因此 $\varphi_{\chi, V_i} = 0$．
+
+由于任意表示 $V$ 都可以写成不可约表示的直和，而 $\varphi_{\chi, V}$ 在每个不可约成分上都为 $0$，因此 $\varphi_{\chi, V} = 0$ 推广到任意表示．现在特取正则表示 $V = \mathbb C[G]$，注意此时左乘作用 $\rho_{\mathbb C[G]}(g)$ 线性无关，因此 $\chi(g) = 0$ 对任意 $g \in G$ 成立，即 $\chi = 0$．
 :::
 
 ## 正则表示

@@ -21,6 +21,7 @@ format:
 \newcommand{\im}{\operatorname{im}}
 \newcommand{\id}{\operatorname{id}}
 \newcommand{\tr}{\operatorname{tr}}
+\newcommand{\End}{\operatorname{End}}
 
 - 本文前置：[有限群表示论速通](/posts/20260312-group-rep-speedrun/)
 
@@ -34,7 +35,7 @@ $$
 
 但是 $\mathbb C[G]$ 是个环，右边也能做乘法，完整来说我们应该研究 $\mathbb C[G]$ 的 $(G,G)$-双模结构．Peter--Weyl 定理给出了这个双模结构的分解：
 $$
-\mathbb C[G] \cong \bigoplus_i V_i \otimes V_i^* \cong \bigoplus_i \Hom(V_i,V_i)
+\mathbb C[G] \cong \bigoplus_i V_i \otimes V_i^* \cong \bigoplus_i \End(V_i)
 $$
 
 这个分解并不让人意外：从维数的角度来看仍然有 $|G| = \sum_i (\dim V_i)^2$．不过需要解释右边的 $G$-模结构的定义情况：
@@ -56,7 +57,7 @@ $$
 
 ## 一些后果
 
-我们将 Peter--Weyl 定理的证明延后，先来看看它的一些 consequence．首先，虽然有循环论证之嫌，确实可以通过维数再次看出
+我们将 Peter--Weyl 定理的证明延后，先来看看它的一些 consequence．首先，可以通过维数再次看出
 $$
 |G| = \sum_i (\dim V_i)^2
 $$
@@ -74,9 +75,9 @@ $$
 
 因此 Peter--Weyl 定理分解也给出了共轭意义下的分解．记号区分起见，我们将 $\mathbb C[G]$ 上配备共轭作用 $g \cdot x := gxg^{-1}$ 的 $G$-左模记为 $L^2(G)$，则 Peter--Weyl 定理特化为 $G$-左模分解
 $$
-L^2(G) \cong \bigoplus_i V_i \otimes V_i^* \cong \bigoplus_i \Hom(V_i,V_i)
+L^2(G) \cong \bigoplus_i V_i \otimes V_i^* \cong \bigoplus_i \End(V_i)
 $$
-这里 $V_i^*$ 和 $\Hom(V_i,V_i)$ 上的 $G$-左模结构就都和经典有限群表示论中的定义一样了．
+这里 $V_i^*$ 和 $\End(V_i)$ 上的 $G$-左模结构就都和经典有限群表示论中的定义一样了．
 
 :::{.remark}
 
@@ -110,19 +111,14 @@ v \mapsto \frac{1}{|G|} \sum_{g \in G} g \cdot v
 $$
 在 Peter--Weyl 分解上作用一下就得到
 $$
-(L^2(G))^G \cong \bigoplus_i \Hom_G(V_i,V_i)
+(L^2(G))^G \cong \bigoplus_i \End_G(V_i)
 $$
 
 - 左边是什么？关于共轭作用保持不变的 $G \to \mathbb C$ 的函数，这不就是类函数吗！它的维数是 $G$ 的共轭类的数量．
 
-- 右边是什么？$\Hom_G(V_i,V_i)$ 是 $V_i$ 上 $G$-自同态的全体．还记得 Schur 定理吗？它告诉我们 $\dim \Hom_G(V_i,V_i) = 1$．
+- 右边是什么？$\End_G(V_i)$ 是 $V_i$ 上 $G$-自同态的全体．还记得 Schur 定理吗？它告诉我们 $\dim \End_G(V_i) = 1$．
 
 连起来看：$G$ 的共轭类的数量等于 $G$ 的不可约表示的数量．
-
-:::{.remark}
-
-将会看到，Peter--Weyl 定理的证明依赖 $\sum_i (\dim V_i)^2 = |G|$ 而不依赖不可约表示的计数定理，所以这里不会循环论证．通过 Peter--Weyl 定理导出此事实显得更加自顶向下．
-:::
 
 ## 证明
 
@@ -130,14 +126,14 @@ $$
 $$
 \begin{aligned}
 V_i \otimes V_i^* &\to \mathbb C[G] \\
-v \otimes f &\mapsto \left( g \mapsto f(g \cdot v) \right)
+v \otimes f &\mapsto \left( g \mapsto f(g^{-1} \cdot v) \right)
 \end{aligned}
 $$
 或者等价地：
 $$
 \begin{aligned}
-\Hom(V_i, V_i) &\to \mathbb C[G] \\
-\varphi &\mapsto \left( g \mapsto \tr(\varphi \circ \rho_{V_i} (g)) \right)
+\End(V_i) &\to \mathbb C[G] \\
+\varphi &\mapsto \left( g \mapsto \tr(\varphi \circ \rho_{V_i} (g^{-1})) \right)
 \end{aligned}
 $$
 
@@ -156,23 +152,80 @@ $$
 
 :::{.proof}
 
-张量风格的记号好处理一点．验证它是 $G$-左模同态：
+张量风格的记号好处理一点．验证它是 $G$-双模同态：
 $$
 \begin{aligned}
-\Phi_i \left( g \cdot (v \otimes f) \right)
-&= \Phi_i \left( (g \cdot v) \otimes (f \circ \rho_{V_i}(g)) \right) \\
-&= \left( h \mapsto (f \circ \rho_{V_i}(g))(hg \cdot v) \right) \\
-&= \left( h \mapsto f(g^{-1} h g \cdot v) \right) \\ 
-&= g \cdot (h \mapsto f(h \cdot v)) \\
-&= g \cdot \Phi_i(v \otimes f)
+\Phi_i \left( g \cdot (v \otimes f) \cdot h \right)
+&= \Phi_i \left( (g \cdot v) \otimes (f \cdot h) \right) \\
+&= \left( x \mapsto (f \cdot h)(x^{-1} g \cdot v) \right) \\
+&= \left( x \mapsto f(h x^{-1} g \cdot v) \right) \quad \text{因为 } (f \cdot h)(u) = f(h \cdot u) \\ 
+&= \left( x \mapsto f((g^{-1} x h^{-1})^{-1} \cdot v) \right) \\ 
+&= g \cdot (x \mapsto f(x^{-1} \cdot v)) \cdot h \\
+&= g \cdot \Phi_i(v \otimes f) \cdot h
 \end{aligned}
 $$
 
-右模同态的验证同理．另外，如果你想用 $\tr$ 风格的记号证明，可能需要知道 $\tr$ 的[循环不变性](/posts/20260314-trace-cyclic/) 才能做．
+另外，如果你想用 $\tr$ 风格的记号证明，可能需要知道 $\tr$ 的[循环不变性](/posts/20260314-trace-cyclic/) 才能做．
 :::
 
-反向地，我们构造 $\mathbb C[G]$ 到每个 $V_i \otimes V_i^*$ 的 $G$-双模同态 $\Psi_i$——欸，$V_i \otimes V_i^*$ 不是已经是 $(\mathbb C[G], \mathbb C[G])$-双模了吗？干脆直接摆烂规定
+反向地，我们构造 $\mathbb C[G]$ 到每个 $\End(V_i)$ 的 $G$-双模同态 $\Psi_i$：
 $$
 \Psi_i(e_g) := \rho_{V_i}(g)
 $$
-那 $\Psi_i$ 就已经是 $G$-双模同态了．
+那 $\Psi_i$ 就已经是 $G$-双模同态了．这里按函数风格写一下定义：
+$$
+\Psi_i(\chi) := \sum_{g \in G} \chi(g) \rho_{V_i}(g)
+$$
+
+验证 $\Psi_i \circ \Phi_i = c \cdot \id_{\End(V_i)}$：
+
+:::::{.proof}
+
+这个恒等式可以通过 Schur 正交关系来证。任取 $\varphi \in \End(V_i)$，计算复合作用：
+$$
+\begin{aligned}
+(\Psi_i \circ \Phi_i)(\varphi) &= \Psi_i\left(g \mapsto \tr(\varphi \circ \rho_{V_i}(g^{-1}))\right) \\
+&= \sum_{g \in G} \tr(\varphi \circ \rho_{V_i}(g^{-1})) \rho_{V_i}(g)
+\end{aligned}
+$$
+任取 $u \in V_i$ 以及 $f \in V_i^*$，我们将上式作用在 $u$ 上并在外面作用 $f$：
+$$
+\begin{aligned}
+f\left( (\Psi_i \circ \Phi_i)(\varphi)(u) \right) &= \sum_{g \in G} \tr(\varphi \circ \rho_{V_i}(g^{-1})) f(\rho_{V_i}(g) u) \\
+&= \sum_{g \in G} \tr(\varphi \circ \rho_{V_i}(g^{-1})) \tr\left( (u \otimes f) \circ \rho_{V_i}(g) \right)
+\end{aligned}
+$$
+由 Schur 正交关系（对于 $\End(V_i)$ 上的迹内积），我们知道对任意自同态 $A, B$，有 $\sum_{g \in G} \tr(A \rho_{V_i}(g^{-1})) \tr(B \rho_{V_i}(g)) = \frac{|G|}{\dim V_i} \tr(A B)$。
+
+:::{.remark}
+
+取 $V_i$ 的一组基将算子写成矩阵。根据经典形式的矩阵元 Schur 正交关系：
+$$
+\sum_{g \in G} \rho_{V_i}(g)_{ij} \rho_{V_i}(g^{-1})_{kl} = \frac{|G|}{\dim V_i} \delta_{il} \delta_{jk}
+$$
+将左侧的两个迹展开化简即可：
+$$
+\begin{aligned}
+\sum_{g \in G} \tr(A \rho_{V_i}(g^{-1})) \tr(B \rho_{V_i}(g)) 
+&= \sum_{g \in G} \left( \sum_{k,l} A_{lk} \rho_{V_i}(g^{-1})_{kl} \right) \left( \sum_{i,j} B_{ji} \rho_{V_i}(g)_{ij} \right) \\
+&= \sum_{i,j,k,l} A_{lk} B_{ji} \sum_{g \in G} \rho_{V_i}(g)_{ij} \rho_{V_i}(g^{-1})_{kl} \\
+&= \sum_{i,j,k,l} A_{lk} B_{ji} \frac{|G|}{\dim V_i} \delta_{il} \delta_{jk} \\
+&= \frac{|G|}{\dim V_i} \sum_{i,j} A_{ij} B_{ji} \\
+&= \frac{|G|}{\dim V_i} \tr(AB)
+\end{aligned}
+$$
+:::
+
+将 $A = \varphi$，$B = u \otimes f$ 代入该式，得到：
+$$
+\begin{aligned}
+f\left( (\Psi_i \circ \Phi_i)(\varphi)(u) \right) &= \frac{|G|}{\dim V_i} \tr(\varphi \circ (u \otimes f)) \\
+&= \frac{|G|}{\dim V_i} f(\varphi(u))
+\end{aligned}
+$$
+因为对所有 $f$ 和 $u$ 成立，故有
+$$
+(\Psi_i \circ \Phi_i)(\varphi) = \frac{|G|}{\dim V_i} \varphi
+$$
+即 $\Psi_i \circ \Phi_i = \frac{|G|}{\dim V_i} \id_{\End(V_i)}$。的确只是差一个常数 $\frac{|G|}{\dim V_i}$。
+:::::
