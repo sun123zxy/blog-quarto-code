@@ -1,0 +1,12 @@
+{
+  "hash": "bb69575b8a03006625ead91b6c58c3d5",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: 三句话解释迹的循环性质\nauthor: sun123zxy\ndate: 2026-03-14\nlang: zh\n\ncategories:\n  - math\n  - algebra\n\ncollections:\n  - short\n\nformat:\n  html:\n    other-links:\n      - text: \"在知乎上阅读\"\n        icon: \"question-circle\"\n        href: \"https://zhuanlan.zhihu.com/p/2016161983246918000\"\n---\n\n\\newcommand{\\tr}{\\operatorname{tr}}\n\\newcommand{\\Hom}{\\operatorname{Hom}}\n\n如题，今天是 $\\pi$ day，我们三句话为迹的循环性质\n$$\n\\tr(ABC) = \\tr(BCA) = \\tr(CAB)\n$$\n提供一种圆润的理解．接受这一理解的前置条件是掌握自然同构 $\\Hom(V,W) \\cong W \\otimes V^* \\cong V^* \\otimes W$．\n\n- $\\tr : \\Hom(V,V) \\to \\mathbb C$ 的坐标无关定义是 $V^* \\otimes V$ 上的缩并运算\n  $$\n  \\begin{aligned}\n  \\tr: V^* \\otimes V &\\to \\mathbb C \\\\\n  f \\otimes v &\\mapsto f(v)\n  \\end{aligned}\n  $$\n\n- 线性变换复合的张量风格定义是对关于中转空间 $V$ 的缩并：\n  $$\n  \\begin{aligned}\n  \\circ: (U^* \\otimes V) \\otimes (V^* \\otimes W) &\\to U^* \\otimes W \\\\\n  (f \\otimes v) \\otimes (g \\otimes w) &\\mapsto g(v) (f \\otimes w)\n  \\end{aligned}\n  $$\n\n- 因此 $\\Hom(V,V) \\ni A,B,C \\mapsto \\tr(ABC)$ 是 $(V^* \\otimes V) \\otimes (V^* \\otimes V) \\otimes (V^* \\otimes V)$ 上三次首尾相连的缩并的结果，自然具有循环对称性．\n\n:::{#fig-trace-cyclic}\n```{tikz}\n\\begin{tikzcd}\n\t& {V^*} & V & \\\\\n\tV &&& {V^*} \\\\\n\t& {V^*} & V\n\t\\arrow[\"A\", no head, from=1-2, to=1-3]\n\t\\arrow[\"\\circ\", squiggly, no head, from=1-3, to=2-4]\n\t\\arrow[\"{\\operatorname{tr}}\", squiggly, no head, from=2-1, to=1-2]\n\t\\arrow[\"C\", no head, from=3-2, to=2-1]\n\t\\arrow[\"B\"', no head, from=3-3, to=2-4]\n\t\\arrow[\"\\circ\", squiggly, no head, from=3-3, to=3-2]\n\\end{tikzcd}\n```\n:::\n\n上述论证不作任何修改就自然地推广到任意 $n$ 个线性变换 $\\tr(A_1 A_2 \\cdots A_n) = \\tr(A_n A_1 \\cdots A_{n-1})$ 的情况．特别地，当 $n=2$ 时，$\\tr(AB)= \\tr(BA)$．\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
