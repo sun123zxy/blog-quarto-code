@@ -23,6 +23,7 @@ format:
 \newcommand{\im}{\operatorname{im}}
 \newcommand{\id}{\operatorname{id}}
 \newcommand{\tr}{\operatorname{tr}}
+\newcommand{\End}{\operatorname{End}}
 
 设 $G$ 是有限群，$V$ 是（有限维的）$\mathbb C$-线性空间，则群同态 $\rho: G \to \GL(V)$ 规定了一个 $G$ 的（复）表示．等价地，这为 $V$ 配备了一个 $G$-模结构——$\mathbb C[G]$-模结构的简写．以下问题将得到解答：
 
@@ -105,6 +106,8 @@ format:
   线性空间 $\Hom(V, W)$ 配备 $g \cdot \varphi := (v \mapsto g \cdot \varphi(g^{-1} \cdot v))$．
 
   注意线性空间有自然同构 $\Hom(V, W) \cong V^* \otimes W$．我们设计的定义使得这一同构相容地提升到 $G$-模之上．
+
+  自同态空间 $\End(V) := \Hom(V, V)$．
 
 - $G$-模同态空间 $\Hom_G(V, W)$：
 
@@ -286,6 +289,8 @@ $$
 - 只需证 $\impliedby$：结合正交性，我们有若干平方和为 $1$ 的非负整数 $\langle \chi_V, \chi_{V_i} \rangle$，因此有且只有其中一个为 $1$，其余为 $0$．
 :::
 
+## 类函数投影
+
 :::{#thm-conj}
 
 - 特征标在 $L^2(G)$ 中生成的子空间，恰好是类函数空间．
@@ -306,9 +311,9 @@ $$
 $$
 对任意表示 $V$，让我们记
 $$
-\varphi_{\chi, V} := \frac 1 {|G|} \sum_{g \in G} \chi(g) \rho_{V}(g) \in \Hom(V, V)
+\varphi_{\chi, V} := \frac 1 {|G|} \sum_{g \in G} \chi(g) \rho_{V}(g) \in \End(V)
 $$
-则则刚证明了 $\tr(\varphi_{\chi, V_i}) = 0$ 对所有不可约表示 $V_i$ 成立．
+则则刚证明了 $\tr(\varphi_{\chi, V_i}) = 0$ 对所有不可约表示 $V_i$ 成立．（也可立即推广到任意表示 $V$，不过证明暂时不需要）
 
 现在更断言对任意表示 $V$，$\varphi_{\chi, V}$ 其实是一个 $G$-同态：对任意 $h \in G$，$v \in V$，我们有
 $$
@@ -319,9 +324,23 @@ $$
 &= \varphi_{\chi, V}(v)
 \end{aligned}
 $$
-于是 $\varphi_{\chi, V} \in \Hom_G(V, V)$．由 Schur 定理 [@thm-schur]，当 $V = V_i$ 不可约时，$\varphi_{\chi, V_i}$ 是数乘．又 $\tr(\varphi_{\chi, V_i}) = 0$，因此 $\varphi_{\chi, V_i} = 0$．
+于是 $\varphi_{\chi, V} \in \End_G(V)$．由 Schur 定理（[@thm-schur]），当 $V = V_i$ 不可约时，$\varphi_{\chi, V_i}$ 是数乘．又 $\tr(\varphi_{\chi, V_i}) = 0$，因此 $\varphi_{\chi, V_i} = 0$．
 
 由于任意表示 $V$ 都可以写成不可约表示的直和，而 $\varphi_{\chi, V}$ 在每个不可约成分上都为 $0$，因此 $\varphi_{\chi, V} = 0$ 推广到任意表示．现在特取正则表示 $V = \mathbb C[G]$，注意此时左乘作用 $\rho_{\mathbb C[G]}(g)$ 线性无关，因此 $\chi(g) = 0$ 对任意 $g \in G$ 成立，即 $\chi = 0$．
+:::
+
+除了证明的结论以外，在证明路线中我们还得到了一个重要的构造: $\chi \mapsto \varphi_{\chi, V}$ 给出了一个 $L^2(G) \to \End(V)$ 的线性映射．
+
+总结一下证明过程中得到的该构造的性质：
+
+- $\tr(\varphi_{\chi, V}) = \langle \chi, \chi_{V^*} \rangle$
+- 当 $\chi$ 是共轭类函数时，$\varphi_{\chi, V}$ 是 $G$-同态
+
+:::{.remark}
+
+$\chi \mapsto \varphi_{\chi, V}$ 的构造其实是自然的：如果将 $L^2(G)$ 通过同构 $\chi \mapsto \sum_{g \in G} \chi(g) e_g$ 当作 $\mathbb C[G]$ 理解，则这一构造无非是由 $\varphi_{e_g, V} := \rho_V(g)$ 线性扩展得到——或者甚至更直接的，就是表示 $\rho : G \to \GL(V)$ 的线性扩展 $\mathbb C[G] \to \End(V)$！
+
+还有一点词源学问题：为什么叫它投影？这是因为它是 Peter--Weyl 定理 $L^2(G) \cong \bigoplus_i \End(V_i)$ 直和投影的直接组成成分——我们[后日再谈](/posts/20260314-group-rep-peter-weyl/)．
 :::
 
 ## 正则表示
