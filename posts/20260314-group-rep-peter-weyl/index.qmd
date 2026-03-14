@@ -1,0 +1,178 @@
+---
+title: 有限群表示论：Peter--Weyl 定理
+author: sun123zxy
+date: 2026-03-14
+lang: zh
+
+draft: true
+
+categories:
+  - math
+  - algebra
+
+number-sections: true
+
+format:
+  html: default
+---
+
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\tr}{\operatorname{tr}}
+
+- 本文前置：[有限群表示论速通](/posts/20260312-group-rep-speedrun/)
+
+## 从左模到双模
+
+有限群表示论的一个经典结果是正则表示的分解：
+$$
+\mathbb C[G] \cong \bigoplus_i V_i^{\oplus \dim V_i}
+$$
+这里 $\mathbb C[G]$ 是群 $G$ 的群代数，$V_i$ 是 $G$ 的全体不可约表示．这只是个 $G$-左模的分解：我们事实上分解的是 $\mathbb C[G]$ 通过左乘配备的 $G$-左模结构．
+
+但是 $\mathbb C[G]$ 是个环，右边也能做乘法，完整来说我们应该研究 $\mathbb C[G]$ 的 $(G,G)$-双模结构．Peter--Weyl 定理给出了这个双模结构的分解：
+$$
+\mathbb C[G] \cong \bigoplus_i V_i \otimes V_i^* \cong \bigoplus_i \Hom(V_i,V_i)
+$$
+
+这个分解并不让人意外：从维数的角度来看仍然有 $|G| = \sum_i (\dim V_i)^2$．不过需要解释右边的 $G$-模结构的定义情况：
+
+- $V_i$ 是 $G$ 的不可约表示，自然配备的是 $G$-左模结构．
+
+- $V_i^*$ 是 $V_i$ 的对偶空间，配备的是 $G$-右模结构 $(f \cdot g)(v) := f(g \cdot v)$．
+
+  在经典的有限群表示论中，那时我们希望 $V_i^*$ 是 $G$-左模，所以当时配备的是 $(f \cdot g)(v) := f(g^{-1} \cdot v)$，与这里的情况并不矛盾．
+
+- $V_i \otimes V_i^*$ 通过 $(\mathbb C[G], \mathbb C)$-双模和 $(\mathbb C, \mathbb C[G])$-双模的张量积获得一个 $(G,G)$-双模结构：$g \cdot (v \otimes f) \cdot h := (g \cdot v) \otimes (f \cdot h)$．
+
+- 对 $G$-左模 $U$, $W$，当然希望对双模仍然有自然同构 $W \otimes U^* \cong \Hom(U,W)$ 成立，所以 $\Hom(U,W)$ 配备的 $(G,G)$-双模结构是 $(g \cdot \varphi \cdot h)(u) := g \cdot \varphi(h \cdot u)$．
+
+:::{.remark}
+
+平时仅考虑左模结构时，为使记号对齐，通常喜欢写 $\Hom(V,W) \cong V^* \otimes W$——这无伤大雅，反正 $V^*$ 强行通过 $g^{-1}$ 获得了 $G$-左模结构．但对双模的情况，$G$-左作用是由 $W$ 负责，$G$-右作用是由 $V^*$ 负责，我们就最好不要交换它们了．
+:::
+
+## 一些后果
+
+我们将 Peter--Weyl 定理的证明延后，先来看看它的一些 consequence．首先，虽然有循环论证之嫌，确实可以通过维数再次看出
+$$
+|G| = \sum_i (\dim V_i)^2
+$$
+
+其次，分解双模结构的一个重要好处是它可以诱导出共轭作用的分解——虽然讲清楚这件事不可避免地需要一些抽象废话：
+
+:::{.proof}
+
+- 首先，总可以把 $(G,G)$-双模看成 $G \times G$-左模：$(g,h) \cdot m = g \cdot m \cdot h^{-1}$：这是个范畴等价．
+
+- 其次，考虑对角嵌入 $\Delta : G \to G \times G$，$\Delta(g) = (g,g)$，这反过来让我们可以将 $G \times G$-左模限制成 $G$-左模，从而其上的 $G$-左作用就变成 $g \cdot m := (g,g) \cdot m = g \cdot m \cdot g^{-1}$，恰好是共轭作用．因为模的限制函子都是正合函子——即保持正合列——即保持 $\ker$ 和 $\im$——后者应该足以使你相信它，所以每个 $G \times G$-左模的直和分解将自动导出一个 $G$-左模的分解．
+
+- 二者结合起来就说明：$(G,G)$-双模结构将诱导出一个由共轭作用实现的 $G$-左模结构，且每个 $(G,G)$-双模意义下的分解都将导出一个 $G$-左模意义下的分解．
+:::
+
+因此 Peter--Weyl 定理分解也给出了共轭意义下的分解．记号区分起见，我们将 $\mathbb C[G]$ 上配备共轭作用 $g \cdot x := gxg^{-1}$ 的 $G$-左模记为 $L^2(G)$，则 Peter--Weyl 定理特化为 $G$-左模分解
+$$
+L^2(G) \cong \bigoplus_i V_i \otimes V_i^* \cong \bigoplus_i \Hom(V_i,V_i)
+$$
+这里 $V_i^*$ 和 $\Hom(V_i,V_i)$ 上的 $G$-左模结构就都和经典有限群表示论中的定义一样了．
+
+:::{.remark}
+
+这个 $L^2(G)$ 的记号不是随便写的——你真的可以认为 $\mathbb C[G]$ 里面装的都是 $G \to \mathbb C$ 的函数：将基底 $e_g$ 实现为函数 $h \mapsto \delta_{h = g}$ 即可．
+
+注意 $\mathbb C[G]$ 上左乘、右乘给出的作用在此观点下可以基底无关地写作
+$$
+\begin{aligned}
+g \cdot \chi &:= (h \mapsto \chi (g^{-1} h)) \\
+\chi \cdot g &:= (h \mapsto \chi (h g^{-1}))
+\end{aligned}
+$$
+特别地：
+$$
+\begin{aligned}
+g_1 \cdot e_{g_2} = g \cdot \left( h \mapsto \delta_{h = g_2} \right) &= \left( h \mapsto \delta_{h = g_1 g_2} \right) = e_{g_1 g_2} \\
+e_{g_2} \cdot g_1 = \left( h \mapsto \delta_{h = g_2 g_1} \right) &= \left( h \mapsto \delta_{h = g_2 g_1} \right) = e_{g_2 g_1}
+\end{aligned}
+$$
+这解释了定义的合理性．
+
+我们刚刚要求 $L^2(G)$ 上配备的 $G$-左模结构是由 $\mathbb C[G]$ 的共轭作用给出，这就写作：
+$$
+g \cdot \chi := (h \mapsto \chi(g^{-1} h g))
+$$
+:::
+
+关于共轭作用的分解有什么好处呢？一下看不出来．但是让我们考虑打到左 $G$-模 $V$ 的 $G$-不变子空间 $V^G$ 的平均化投影 $V \to V^G$：
+$$
+v \mapsto \frac{1}{|G|} \sum_{g \in G} g \cdot v
+$$
+在 Peter--Weyl 分解上作用一下就得到
+$$
+(L^2(G))^G \cong \bigoplus_i \Hom_G(V_i,V_i)
+$$
+
+- 左边是什么？关于共轭作用保持不变的 $G \to \mathbb C$ 的函数，这不就是类函数吗！它的维数是 $G$ 的共轭类的数量．
+
+- 右边是什么？$\Hom_G(V_i,V_i)$ 是 $V_i$ 上 $G$-自同态的全体．还记得 Schur 定理吗？它告诉我们 $\dim \Hom_G(V_i,V_i) = 1$．
+
+连起来看：$G$ 的共轭类的数量等于 $G$ 的不可约表示的数量．
+
+:::{.remark}
+
+将会看到，Peter--Weyl 定理的证明依赖 $\sum_i (\dim V_i)^2 = |G|$ 而不依赖不可约表示的计数定理，所以这里不会循环论证．通过 Peter--Weyl 定理导出此事实显得更加自顶向下．
+:::
+
+## 证明
+
+以后我们都把 $\mathbb C[G]$ 看成是 $G \to \mathbb C$ 的全体函数．先来构造 $V_i \otimes V_i^*$ 到 $\mathbb C[G]$ 的 $G$-双模同态 $\Phi_i$：
+$$
+\begin{aligned}
+V_i \otimes V_i^* &\to \mathbb C[G] \\
+v \otimes f &\mapsto \left( g \mapsto f(g \cdot v) \right)
+\end{aligned}
+$$
+或者等价地：
+$$
+\begin{aligned}
+\Hom(V_i, V_i) &\to \mathbb C[G] \\
+\varphi &\mapsto \left( g \mapsto \tr(\varphi \circ \rho_{V_i} (g)) \right)
+\end{aligned}
+$$
+
+:::{.remark}
+
+这里两种定义的等价性：$V$ 上线性变换的 $\tr$ 在张量风格的记号下就是 $V$ 和 $V^*$ 张量缩并
+$$
+\begin{aligned}
+\tr: V \otimes V^* &\to \mathbb C \\
+v \otimes f &\mapsto f(v)
+\end{aligned}
+$$
+:::
+
+先来验证它是 $G$-双模同态：
+
+:::{.proof}
+
+张量风格的记号好处理一点．验证它是 $G$-左模同态：
+$$
+\begin{aligned}
+\Phi_i \left( g \cdot (v \otimes f) \right)
+&= \Phi_i \left( (g \cdot v) \otimes (f \circ \rho_{V_i}(g)) \right) \\
+&= \left( h \mapsto (f \circ \rho_{V_i}(g))(hg \cdot v) \right) \\
+&= \left( h \mapsto f(g^{-1} h g \cdot v) \right) \\ 
+&= g \cdot (h \mapsto f(h \cdot v)) \\
+&= g \cdot \Phi_i(v \otimes f)
+\end{aligned}
+$$
+
+右模同态的验证同理．另外，如果你想用 $\tr$ 风格的记号证明，可能需要知道 $\tr$ 的[循环不变性](/posts/20260314-trace-cyclic/) 才能做．
+:::
+
+反向地，我们构造 $\mathbb C[G]$ 到每个 $V_i \otimes V_i^*$ 的 $G$-双模同态 $\Psi_i$——欸，$V_i \otimes V_i^*$ 不是已经是 $(\mathbb C[G], \mathbb C[G])$-双模了吗？干脆直接摆烂规定
+$$
+\Psi_i(e_g) := \rho_{V_i}(g)
+$$
+那 $\Psi_i$ 就已经是 $G$-双模同态了．
