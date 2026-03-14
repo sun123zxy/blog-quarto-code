@@ -289,7 +289,7 @@ $$
 - 只需证 $\impliedby$：结合正交性，我们有若干平方和为 $1$ 的非负整数 $\langle \chi_V, \chi_{V_i} \rangle$，因此有且只有其中一个为 $1$，其余为 $0$．
 :::
 
-## 类函数投影
+## 直和分解的典范投影
 
 :::{#thm-conj}
 
@@ -331,16 +331,38 @@ $$
 
 除了证明的结论以外，在证明路线中我们还得到了一个重要的构造: $\chi \mapsto \varphi_{\chi, V}$ 给出了一个 $L^2(G) \to \End(V)$ 的线性映射．
 
-总结一下证明过程中得到的该构造的性质：
+:::{.remark}
 
-- $\tr(\varphi_{\chi, V}) = \langle \chi, \chi_{V^*} \rangle$
-- 当 $\chi$ 是共轭类函数时，$\varphi_{\chi, V}$ 是 $G$-同态
+这个构造其实是自然的：如果将 $L^2(G)$ 通过同构 $\chi \mapsto \sum_{g \in G} \chi(g) e_g$ 当作 $\mathbb C[G]$ 理解，则 $\chi \mapsto |G| \cdot \varphi_{\chi, V}$ 无非是由 $\varphi_{e_g, V} := \rho_V(g)$ 线性扩展得到——或者甚至更直接的，就是表示 $\rho : G \to \GL(V)$ 的线性扩展 $\mathbb C[G] \to \End(V)$！
+:::
+
+总结并推广证明过程中得到的该构造的若干性质：
+
+- $\varphi_{\chi, V}$ 关于 $\chi \in L^2(G)$ 的加法和表示 $V$ 的直和都是线性的．
+
+- $\tr(\varphi_{\chi, V}) = \langle \chi, \chi_{V^*} \rangle = \langle \overline{\chi}, \chi_V \rangle$
+
+- 当 $\chi$ 是共轭类函数时：$\varphi_{\chi, V}$ 是 $G$-同态．
+
+- 追加 $V = V_i$ 不可约的条件：此时 $\varphi_{\chi, V_i}$ 是系数为 $\langle \overline{\chi}, \chi_{V_i} \rangle / \dim V_i$ 的数乘．
+
+- 再追加设 $V_j$ 也是不可约表示，取 $\chi = \overline{\chi_{V_j}}$，则
+  $$
+  \varphi_{\overline{\chi_{V_j}}, V} = \begin{cases}
+  (1 / \dim V_j) \cdot \id_{V_i} & i = j \\
+  0 & \text{otherwise}
+  \end{cases}
+  $$
+
+- 现在考虑将 $V$ 放松为任意表示，$V_j$ 仍不可约，定义
+  $$
+  \pi_j := \dim V_j \cdot \varphi_{\overline{\chi_{V_j}}, V} = \frac{\dim V_j}{|G|} \sum_{g \in G} \overline{\chi_{V_j}(g)} \rho_V(g)
+  $$
+  由于 $V$ 可以写成不可约表示的直和，又结合 $\varphi_{\overline{\chi_{V_j}}, V}$ 关于 $V$ 的直和线性性，使用上一条的结果就有：$\pi_j$ 就是 $V$ 到其全体 $V_j$ 成分的 $G$-同态投影．
 
 :::{.remark}
 
-$\chi \mapsto \varphi_{\chi, V}$ 的构造其实是自然的：如果将 $L^2(G)$ 通过同构 $\chi \mapsto \sum_{g \in G} \chi(g) e_g$ 当作 $\mathbb C[G]$ 理解，则这一构造无非是由 $\varphi_{e_g, V} := \rho_V(g)$ 线性扩展得到——或者甚至更直接的，就是表示 $\rho : G \to \GL(V)$ 的线性扩展 $\mathbb C[G] \to \End(V)$！
-
-还有一点词源学问题：为什么叫它投影？这是因为它是 Peter--Weyl 定理 $L^2(G) \cong \bigoplus_i \End(V_i)$ 直和投影的直接组成成分——我们[后日再谈](/posts/20260314-group-rep-peter-weyl/)．
+$\chi \mapsto \varphi_{\chi, V}$ 也是 Peter--Weyl 定理 $L^2(G) \cong \bigoplus_i \End(V_i)$ 直和投影的重要组成成分——我们[后日再谈](/posts/20260314-group-rep-peter-weyl/)．
 :::
 
 ## 正则表示
