@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.34">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Short expository notes to capture insights.">
+<meta name="author" content="sun123zxy">
 
-<title>Shorts – sun123zxy’s blog</title>
+<title>有限群表示论：Peter–Weyl 定理 – sun123zxy's blog</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -27,28 +27,26 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="..//assets/images/avatar.png" rel="icon" type="image/png">
-<script src="../site_libs/quarto-listing/list.min.js"></script>
-<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5d10e83519a74e789e6bb4496f75c4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-723530320b8f33b049ef21af632b9e12.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-bc02861c18602d2a9ecc612939fb595c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-df36c1f51131d4fc0abb9d63bd22fde7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5d10e83519a74e789e6bb4496f75c4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-723530320b8f33b049ef21af632b9e12.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-bc02861c18602d2a9ecc612939fb595c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-df36c1f51131d4fc0abb9d63bd22fde7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -63,47 +61,19 @@ ul.task-list li input[type="checkbox"] {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
   }
-}</script><script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-subtitle','listing-lang','listing-categories','listing-description','listing-date','listing-image','listing-collections',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
+}</script>
 <script>
 MathJax = {
   tex: {
@@ -113,6 +83,7 @@ MathJax = {
   }
 };
 </script>
+<meta name="quarto:status" content="draft">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -144,7 +115,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="alternate" type="application/rss+xml" title="sun123zxy's blog" href="short.xml" data-external="1"></head>
+</head>
 
 <body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
@@ -309,30 +280,30 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>草稿</div>
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../listings/overview.html"> 
+    <a class="nav-link" href="../../listings/overview.html"> 
 <span class="menu-text">Overview</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../listings/projects/index.html"> 
+    <a class="nav-link" href="../../listings/projects/index.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -350,7 +321,7 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-bi-rss">    
         <li>
-    <a class="dropdown-item" href="../listings/all.xml">
+    <a class="dropdown-item" href="../../listings/all.xml">
  <span class="dropdown-text">All Posts</span></a>
   </li>  
     </ul>
@@ -358,37 +329,56 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(7)</span></div><div class="category" data-category="YWxnZWJyYQ==">algebra <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Y29tYmluYXRvcmljcw==">combinatorics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y29tbWFsZw==">commalg <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWF0aA==">math <span class="quarto-category-count">(7)</span></div><div class="category" data-category="cGh5c2ljcw==">physics <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#从左模到双模" id="toc-从左模到双模" class="nav-link active" data-scroll-target="#从左模到双模"><span class="header-section-number">1</span> 从左模到双模</a></li>
+  <li><a href="#一些后果" id="toc-一些后果" class="nav-link" data-scroll-target="#一些后果"><span class="header-section-number">2</span> 一些后果</a></li>
+  <li><a href="#证明" id="toc-证明" class="nav-link" data-scroll-target="#证明"><span class="header-section-number">3</span> 证明</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Shorts</h1>
-</div>
-
-<div>
-  <div class="description">
-    Short expository notes to capture insights.
+<h1 class="title">有限群表示论：Peter–Weyl 定理</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">algebra</div>
   </div>
-</div>
+  </div>
 
 
-<div class="quarto-title-meta column-page-left">
 
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">作者</div>
+    <div class="quarto-title-meta-contents">
+             <p>sun123zxy </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">发布于</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2026年3月14日</p>
+    </div>
+  </div>
   
     
   </div>
@@ -398,308 +388,210 @@ window.Quarto = {
 </header>
 
 
+<ul>
+<li>本文前置：<a href="../../posts/20260312-group-rep-speedrun/">有限群表示论速通</a></li>
+</ul>
+<section id="从左模到双模" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="从左模到双模"><span class="header-section-number">1</span> 从左模到双模</h2>
+<p>有限群表示论的一个经典结果是正则表示的分解： <span class="math display">\[
+\mathbb C[G] \cong \bigoplus_i V_i^{\oplus \dim V_i}
+\]</span> 这里 <span class="math inline">\(\mathbb C[G]\)</span> 是群 <span class="math inline">\(G\)</span> 的群代数，<span class="math inline">\(V_i\)</span> 是 <span class="math inline">\(G\)</span> 的全体不可约表示．这只是个 <span class="math inline">\(G\)</span>-左模的分解：我们事实上分解的是 <span class="math inline">\(\mathbb C[G]\)</span> 通过左乘配备的 <span class="math inline">\(G\)</span>-左模结构．</p>
+<p>但是 <span class="math inline">\(\mathbb C[G]\)</span> 是个环，右边也能做乘法，完整来说我们应该研究 <span class="math inline">\(\mathbb C[G]\)</span> 的 <span class="math inline">\((G,G)\)</span>-双模结构．Peter–Weyl 定理给出了这个双模结构的分解： <span class="math display">\[
+\mathbb C[G] \cong \bigoplus_i V_i \otimes V_i^* \cong \bigoplus_i \operatorname{Hom}(V_i,V_i)
+\]</span></p>
+<p>这个分解并不让人意外：从维数的角度来看仍然有 <span class="math inline">\(|G| = \sum_i (\dim V_i)^2\)</span>．不过需要解释右边的 <span class="math inline">\(G\)</span>-模结构的定义情况：</p>
+<ul>
+<li><p><span class="math inline">\(V_i\)</span> 是 <span class="math inline">\(G\)</span> 的不可约表示，自然配备的是 <span class="math inline">\(G\)</span>-左模结构．</p></li>
+<li><p><span class="math inline">\(V_i^*\)</span> 是 <span class="math inline">\(V_i\)</span> 的对偶空间，配备的是 <span class="math inline">\(G\)</span>-右模结构 <span class="math inline">\((f \cdot g)(v) := f(g \cdot v)\)</span>．</p>
+<p>在经典的有限群表示论中，那时我们希望 <span class="math inline">\(V_i^*\)</span> 是 <span class="math inline">\(G\)</span>-左模，所以当时配备的是 <span class="math inline">\((f \cdot g)(v) := f(g^{-1} \cdot v)\)</span>，与这里的情况并不矛盾．</p></li>
+<li><p><span class="math inline">\(V_i \otimes V_i^*\)</span> 通过 <span class="math inline">\((\mathbb C[G], \mathbb C)\)</span>-双模和 <span class="math inline">\((\mathbb C, \mathbb C[G])\)</span>-双模的张量积获得一个 <span class="math inline">\((G,G)\)</span>-双模结构：<span class="math inline">\(g \cdot (v \otimes f) \cdot h := (g \cdot v) \otimes (f \cdot h)\)</span>．</p></li>
+<li><p>对 <span class="math inline">\(G\)</span>-左模 <span class="math inline">\(U\)</span>, <span class="math inline">\(W\)</span>，当然希望对双模仍然有自然同构 <span class="math inline">\(W \otimes U^* \cong \operatorname{Hom}(U,W)\)</span> 成立，所以 <span class="math inline">\(\operatorname{Hom}(U,W)\)</span> 配备的 <span class="math inline">\((G,G)\)</span>-双模结构是 <span class="math inline">\((g \cdot \varphi \cdot h)(u) := g \cdot \varphi(h \cdot u)\)</span>．</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>平时仅考虑左模结构时，为使记号对齐，通常喜欢写 <span class="math inline">\(\operatorname{Hom}(V,W) \cong V^* \otimes W\)</span>——这无伤大雅，反正 <span class="math inline">\(V^*\)</span> 强行通过 <span class="math inline">\(g^{-1}\)</span> 获得了 <span class="math inline">\(G\)</span>-左模结构．但对双模的情况，<span class="math inline">\(G\)</span>-左作用是由 <span class="math inline">\(W\)</span> 负责，<span class="math inline">\(G\)</span>-右作用是由 <span class="math inline">\(V^*\)</span> 负责，我们就最好不要交换它们了．</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="一些后果" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="一些后果"><span class="header-section-number">2</span> 一些后果</h2>
+<p>我们将 Peter–Weyl 定理的证明延后，先来看看它的一些 consequence．首先，虽然有循环论证之嫌，确实可以通过维数再次看出 <span class="math display">\[
+|G| = \sum_i (\dim V_i)^2
+\]</span></p>
+<p>其次，分解双模结构的一个重要好处是它可以诱导出共轭作用的分解——虽然讲清楚这件事不可避免地需要一些抽象废话：</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span></p>
+<ul>
+<li><p>首先，总可以把 <span class="math inline">\((G,G)\)</span>-双模看成 <span class="math inline">\(G \times G\)</span>-左模：<span class="math inline">\((g,h) \cdot m = g \cdot m \cdot h^{-1}\)</span>：这是个范畴等价．</p></li>
+<li><p>其次，考虑对角嵌入 <span class="math inline">\(\Delta : G \to G \times G\)</span>，<span class="math inline">\(\Delta(g) = (g,g)\)</span>，这反过来让我们可以将 <span class="math inline">\(G \times G\)</span>-左模限制成 <span class="math inline">\(G\)</span>-左模，从而其上的 <span class="math inline">\(G\)</span>-左作用就变成 <span class="math inline">\(g \cdot m := (g,g) \cdot m = g \cdot m \cdot g^{-1}\)</span>，恰好是共轭作用．因为模的限制函子都是正合函子——即保持正合列——即保持 <span class="math inline">\(\ker\)</span> 和 <span class="math inline">\(\operatorname{im}\)</span>——后者应该足以使你相信它，所以每个 <span class="math inline">\(G \times G\)</span>-左模的直和分解将自动导出一个 <span class="math inline">\(G\)</span>-左模的分解．</p></li>
+<li><p>二者结合起来就说明：<span class="math inline">\((G,G)\)</span>-双模结构将诱导出一个由共轭作用实现的 <span class="math inline">\(G\)</span>-左模结构，且每个 <span class="math inline">\((G,G)\)</span>-双模意义下的分解都将导出一个 <span class="math inline">\(G\)</span>-左模意义下的分解．</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<p>因此 Peter–Weyl 定理分解也给出了共轭意义下的分解．记号区分起见，我们将 <span class="math inline">\(\mathbb C[G]\)</span> 上配备共轭作用 <span class="math inline">\(g \cdot x := gxg^{-1}\)</span> 的 <span class="math inline">\(G\)</span>-左模记为 <span class="math inline">\(L^2(G)\)</span>，则 Peter–Weyl 定理特化为 <span class="math inline">\(G\)</span>-左模分解 <span class="math display">\[
+L^2(G) \cong \bigoplus_i V_i \otimes V_i^* \cong \bigoplus_i \operatorname{Hom}(V_i,V_i)
+\]</span> 这里 <span class="math inline">\(V_i^*\)</span> 和 <span class="math inline">\(\operatorname{Hom}(V_i,V_i)\)</span> 上的 <span class="math inline">\(G\)</span>-左模结构就都和经典有限群表示论中的定义一样了．</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>这个 <span class="math inline">\(L^2(G)\)</span> 的记号不是随便写的——你真的可以认为 <span class="math inline">\(\mathbb C[G]\)</span> 里面装的都是 <span class="math inline">\(G \to \mathbb C\)</span> 的函数：将基底 <span class="math inline">\(e_g\)</span> 实现为函数 <span class="math inline">\(h \mapsto \delta_{h = g}\)</span> 即可．</p>
+<p>注意 <span class="math inline">\(\mathbb C[G]\)</span> 上左乘、右乘给出的作用在此观点下可以基底无关地写作 <span class="math display">\[
+\begin{aligned}
+g \cdot \chi &amp;:= (h \mapsto \chi (g^{-1} h)) \\
+\chi \cdot g &amp;:= (h \mapsto \chi (h g^{-1}))
+\end{aligned}
+\]</span> 特别地： <span class="math display">\[
+\begin{aligned}
+g_1 \cdot e_{g_2} = g \cdot \left( h \mapsto \delta_{h = g_2} \right) &amp;= \left( h \mapsto \delta_{h = g_1 g_2} \right) = e_{g_1 g_2} \\
+e_{g_2} \cdot g_1 = \left( h \mapsto \delta_{h = g_2 g_1} \right) &amp;= \left( h \mapsto \delta_{h = g_2 g_1} \right) = e_{g_2 g_1}
+\end{aligned}
+\]</span> 这解释了定义的合理性．</p>
+<p>我们刚刚要求 <span class="math inline">\(L^2(G)\)</span> 上配备的 <span class="math inline">\(G\)</span>-左模结构是由 <span class="math inline">\(\mathbb C[G]\)</span> 的共轭作用给出，这就写作： <span class="math display">\[
+g \cdot \chi := (h \mapsto \chi(g^{-1} h g))
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<p>关于共轭作用的分解有什么好处呢？一下看不出来．但是让我们考虑打到左 <span class="math inline">\(G\)</span>-模 <span class="math inline">\(V\)</span> 的 <span class="math inline">\(G\)</span>-不变子空间 <span class="math inline">\(V^G\)</span> 的平均化投影 <span class="math inline">\(V \to V^G\)</span>： <span class="math display">\[
+v \mapsto \frac{1}{|G|} \sum_{g \in G} g \cdot v
+\]</span> 在 Peter–Weyl 分解上作用一下就得到 <span class="math display">\[
+(L^2(G))^G \cong \bigoplus_i \operatorname{Hom}_G(V_i,V_i)
+\]</span></p>
+<ul>
+<li><p>左边是什么？关于共轭作用保持不变的 <span class="math inline">\(G \to \mathbb C\)</span> 的函数，这不就是类函数吗！它的维数是 <span class="math inline">\(G\)</span> 的共轭类的数量．</p></li>
+<li><p>右边是什么？<span class="math inline">\(\operatorname{Hom}_G(V_i,V_i)\)</span> 是 <span class="math inline">\(V_i\)</span> 上 <span class="math inline">\(G\)</span>-自同态的全体．还记得 Schur 定理吗？它告诉我们 <span class="math inline">\(\dim \operatorname{Hom}_G(V_i,V_i) = 1\)</span>．</p></li>
+</ul>
+<p>连起来看：<span class="math inline">\(G\)</span> 的共轭类的数量等于 <span class="math inline">\(G\)</span> 的不可约表示的数量．</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>将会看到，Peter–Weyl 定理的证明依赖 <span class="math inline">\(\sum_i (\dim V_i)^2 = |G|\)</span> 而不依赖不可约表示的计数定理，所以这里不会循环论证．通过 Peter–Weyl 定理导出此事实显得更加自顶向下．</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="证明" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="证明"><span class="header-section-number">3</span> 证明</h2>
+<p>以后我们都把 <span class="math inline">\(\mathbb C[G]\)</span> 看成是 <span class="math inline">\(G \to \mathbb C\)</span> 的全体函数．先来构造 <span class="math inline">\(V_i \otimes V_i^*\)</span> 到 <span class="math inline">\(\mathbb C[G]\)</span> 的 <span class="math inline">\(G\)</span>-双模同态 <span class="math inline">\(\Phi_i\)</span>： <span class="math display">\[
+\begin{aligned}
+V_i \otimes V_i^* &amp;\to \mathbb C[G] \\
+v \otimes f &amp;\mapsto \left( g \mapsto f(g \cdot v) \right)
+\end{aligned}
+\]</span> 或者等价地： <span class="math display">\[
+\begin{aligned}
+\operatorname{Hom}(V_i, V_i) &amp;\to \mathbb C[G] \\
+\varphi &amp;\mapsto \left( g \mapsto \operatorname{tr}(\varphi \circ \rho_{V_i} (g)) \right)
+\end{aligned}
+\]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>这里两种定义的等价性：<span class="math inline">\(V\)</span> 上线性变换的 <span class="math inline">\(\operatorname{tr}\)</span> 在张量风格的记号下就是 <span class="math inline">\(V\)</span> 和 <span class="math inline">\(V^*\)</span> 张量缩并 <span class="math display">\[
+\begin{aligned}
+\operatorname{tr}: V \otimes V^* &amp;\to \mathbb C \\
+v \otimes f &amp;\mapsto f(v)
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<p>先来验证它是 <span class="math inline">\(G\)</span>-双模同态：</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span>张量风格的记号好处理一点．验证它是 <span class="math inline">\(G\)</span>-左模同态： <span class="math display">\[
+\begin{aligned}
+\Phi_i \left( g \cdot (v \otimes f) \right)
+&amp;= \Phi_i \left( (g \cdot v) \otimes (f \circ \rho_{V_i}(g)) \right) \\
+&amp;= \left( h \mapsto (f \circ \rho_{V_i}(g))(hg \cdot v) \right) \\
+&amp;= \left( h \mapsto f(g^{-1} h g \cdot v) \right) \\
+&amp;= g \cdot (h \mapsto f(h \cdot v)) \\
+&amp;= g \cdot \Phi_i(v \otimes f)
+\end{aligned}
+\]</span></p>
+<p>右模同态的验证同理．另外，如果你想用 <span class="math inline">\(\operatorname{tr}\)</span> 风格的记号证明，可能需要知道 <span class="math inline">\(\operatorname{tr}\)</span> 的<a href="../../posts/20260314-trace-cyclic/">循环不变性</a> 才能做．</p>
+</div>
+</div>
+</div>
+</div>
+<p>反向地，我们构造 <span class="math inline">\(\mathbb C[G]\)</span> 到每个 <span class="math inline">\(V_i \otimes V_i^*\)</span> 的 <span class="math inline">\(G\)</span>-双模同态 <span class="math inline">\(\Psi_i\)</span>——欸，<span class="math inline">\(V_i \otimes V_i^*\)</span> 不是已经是 <span class="math inline">\((\mathbb C[G], \mathbb C[G])\)</span>-双模了吗？干脆直接摆烂规定 <span class="math display">\[
+\Psi_i(e_g) := \rho_{V_i}(g)
+\]</span> 那 <span class="math inline">\(\Psi_i\)</span> 就已经是 <span class="math inline">\(G\)</span>-双模同态了．</p>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-    <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-    <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-      <option value="" disabled="" selected="" hidden="">Order By</option>
-      <option value="index" data-direction="asc">Default</option>
-      <option value="listing-title" data-direction="asc">
-        Title
-      </option>
-      <option value="listing-date-sort" data-direction="asc">
-        Date - Oldest
-      </option>
-      <option value="listing-date-sort" data-direction="desc">
-        Date - Newest
-      </option>
-    </select>
-  </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
-</div>
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="bWF0aCUyQ2FsZ2VicmE=" data-listing-date-sort="1773446400000" data-listing-file-modified-sort="1773492669849" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="171">
-<div class="thumbnail"><a href="../posts/20260314-trace-cyclic/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20260314-trace-cyclic/index.html" class="no-external">三句话证明迹的循环不变性</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20260314-trace-cyclic/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20260314-trace-cyclic/index.html" class="no-external">
-如题，今天是 <span class="math inline">\(\pi\)</span> day，我们三句话为迹的循环不变性 <span class="math display">\[
-\operatorname{tr}(ABC) = \operatorname{tr}(BCA) = \operatorname{tr}(CAB)
-\]</span> 提供一种圆润的理解．接受这一理解的前置条件是掌握自然同构 <span class="math inline">\(\operatorname{Hom}(V,W) \cong…</span>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20260314-trace-cyclic/index.html" class="no-external">
-<div class="listing-date">
-2026/03/14
-</div>
-<div class="metadata-value listing-lang">
-zh
-</div>
-<div class="metadata-value listing-collections">
-short
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="bWF0aCUyQ2FsZ2VicmElMkNjb21tYWxn" data-listing-date-sort="1771977600000" data-listing-file-modified-sort="1773492669848" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="437">
-<div class="thumbnail"><a href="../posts/20260225-free-module-cmp/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20260225-free-module-cmp/index.html" class="no-external">Comparing Free Modules via Homomorphisms</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20260225-free-module-cmp/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y29tbWFsZw=='); return false;">commalg</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20260225-free-module-cmp/index.html" class="no-external">
-We discuss some well-known results that compare finitely-generated free modules via homomorphisms. Let <span class="math inline">\(R\)</span> be a nonzero commutative ring with <span class="math inline">\(1\)</span>.
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20260225-free-module-cmp/index.html" class="no-external">
-<div class="listing-date">
-2026/02/25
-</div>
-<div class="metadata-value listing-lang">
-en
-</div>
-<div class="metadata-value listing-collections">
-short
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="bWF0aCUyQ3BoeXNpY3M=" data-listing-date-sort="1766016000000" data-listing-file-modified-sort="1773492669848" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="202">
-<div class="thumbnail"><a href="../posts/20251218-lens/index.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="../posts/20251218-lens/img/optic-image.svg"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20251218-lens/index.html" class="no-external">透镜成像乱炖</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20251218-lens/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cGh5c2ljcw=='); return false;">physics</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20251218-lens/index.html" class="no-external">
-<p>基于 Fermat 原理和 Snell 定律的双面薄透镜成像公式推导．</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20251218-lens/index.html" class="no-external">
-<div class="listing-date">
-2025/12/18
-</div>
-<div class="metadata-value listing-lang">
-zh
-</div>
-<div class="metadata-value listing-collections">
-short
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="bWF0aCUyQ2NvbWJpbmF0b3JpY3M=" data-listing-date-sort="1749945600000" data-listing-file-modified-sort="1773492669846" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="388">
-<div class="thumbnail"><a href="../posts/20250615-partorial/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20250615-partorial/index.html" class="no-external">Factorials and Integer Partitions</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20250615-partorial/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y29tYmluYXRvcmljcw=='); return false;">combinatorics</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20250615-partorial/index.html" class="no-external">
-Factorials are commonly seen in combinatorics, and today we talk about some variants of them related to integer partitions. Recall that if one wish to count the number of…<span class="math inline"></span><span class="math inline"></span><span class="math display"></span><span class="math inline"></span><span class="math inline"></span><span class="math display"></span><span class="math display"></span>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20250615-partorial/index.html" class="no-external">
-<div class="listing-date">
-2025/06/15
-</div>
-<div class="metadata-value listing-lang">
-en
-</div>
-<div class="metadata-value listing-collections">
-short
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="bWF0aCUyQ2FsZ2VicmE=" data-listing-date-sort="1749254400000" data-listing-file-modified-sort="1773492669846" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="280">
-<div class="thumbnail"><a href="../posts/20250606-indrep/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20250606-indrep/index.html" class="no-external">诱导表示乱炖</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20250606-indrep/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20250606-indrep/index.html" class="no-external">
-在日常生产生活中，我们经常需要将一个群表示从一个子群扩展到整个群．在所有可能的选择中，诱导表示是最自然的一种．<span class="citation" data-cites="serre_linear_1977">[1]</span>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20250606-indrep/index.html" class="no-external">
-<div class="listing-date">
-2025/06/07
-</div>
-<div class="metadata-value listing-lang">
-zh
-</div>
-<div class="metadata-value listing-collections">
-short
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="bWF0aCUyQ2FsZ2VicmE=" data-listing-date-sort="1748995200000" data-listing-file-modified-sort="1773492669846" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="200">
-<div class="thumbnail"><a href="../posts/20250604-cayley-hamilton/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20250604-cayley-hamilton/index.html" class="no-external">推广的 Cayley-Hamilton 定理及其应用</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20250604-cayley-hamilton/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20250604-cayley-hamilton/index.html" class="no-external">
-线性代数中的 Cayley-Hamilton 定理指出，域 <span class="math inline">\(K\)</span> 上线性变换 <span class="math inline">\(\varphi\)</span> 的特征多项式 <span class="math inline">\(f(\lambda) = \det(\lambda I_n - \Phi)\)</span> 是它的一个零化多项式，这里 <span class="math inline">\(\Phi \in \operatorname{Mat}_{n \times n}(K)\)</span> 是 <span class="math inline">\(\varp…</span>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20250604-cayley-hamilton/index.html" class="no-external">
-<div class="listing-date">
-2025/06/04
-</div>
-<div class="metadata-value listing-lang">
-zh
-</div>
-<div class="metadata-value listing-collections">
-short
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="bWF0aCUyQ2FsZ2VicmE=" data-listing-date-sort="1748131200000" data-listing-file-modified-sort="1773492669846" data-listing-date-modified-sort="1748131200000" data-listing-reading-time-sort="1" data-listing-word-count-sort="68">
-<div class="thumbnail"><a href="../posts/20250525-maschke/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20250525-maschke/index.html" class="no-external">有限群表示的 Maschke 定理是分裂模正合列的提升</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20250525-maschke/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20250525-maschke/index.html" class="no-external">
-所谓 Maschke 定理，是指有限群表示的半单（可完全分解）性．可以考虑如下正合列风格的理解．设 <span class="math inline">\(G\)</span> 是有限群，<span class="math inline">\(K\)</span> 是特征不为 <span class="math inline">\(|G|\)</span> 的域，<span class="math inline">\(K[G]\)</span> 是 <span class="math inline">\(G\)</span> 的群代数；<span class="math inline">\(V\)</span> 是 <span class="math inline">\(K[G]\)</span>-模，<span class="math inline">\(U\)</span> 为 <span class="math inline">\(V\)</span> 的子模．我们有 <span class="math inline">\(K[G]\)</span>-模正合列 <span class="math display">\[
-0 \to U…</span><span class="math inline"></span><span class="math inline"></span><span class="math inline"></span><span class="math inline"></span><span class="math display"></span><span class="math inline"></span><span class="math inline"></span><span class="math inline"></span><span class="math inline"></span>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20250525-maschke/index.html" class="no-external">
-<div class="listing-date">
-2025/05/25
-</div>
-<div class="metadata-value listing-lang">
-zh
-</div>
-<div class="metadata-value listing-collections">
-short
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -738,12 +630,12 @@ short
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
+      button.setAttribute("title", "已复制");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
+        button.setAttribute("data-bs-title", "已复制");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",
@@ -1120,6 +1012,38 @@ short
     }
   });
   </script>
+<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
+<input type="hidden" id="giscus-alt-theme" value="light">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "sun123zxy/blog-quarto-code";
+    script.dataset.repoId = "R_kgDOIrPs5w";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOIrPs584CV4gd";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1132,7 +1056,7 @@ short
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="../thanks.html">
+    <a class="nav-link" href="../../thanks.html">
 <p>Thanks</p>
 </a>
   </li>  
