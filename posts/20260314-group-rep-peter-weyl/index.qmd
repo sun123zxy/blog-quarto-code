@@ -31,24 +31,27 @@ format:
 $$
 \mathbb C[G] \cong \bigoplus_i V_i^{\oplus \dim V_i}
 $$
-这里 $\mathbb C[G]$ 是群 $G$ 的群代数，$V_i$ 是 $G$ 的全体不可约表示．这只是个 $G$-左模的分解：我们事实上分解的是 $\mathbb C[G]$ 通过左乘配备的 $G$-左模结构．
-
-但是 $\mathbb C[G]$ 是个环，右边也能做乘法，完整来说我们应该研究 $\mathbb C[G]$ 的 $(G,G)$-双模结构．Peter--Weyl 定理给出了这个双模结构的分解：
+这里 $\mathbb C[G]$ 是群 $G$ 的群代数，$V_i$ 是 $G$ 的全体不可约表示．这只是个 $G$-左模的分解：$\mathbb C[G]$ 被分解成了单左理想的直和．但是 $\mathbb C[G]$ 是个环，完整来说我们应该研究其作为 $\mathbb C$-代数的分解．Peter--Weyl / Wedderburn--Artin 定理给出了它的分解：
 $$
-\mathbb C[G] \cong \bigoplus_i V_i \otimes V_i^* \cong \bigoplus_i \End(V_i)
+\mathbb C[G] \cong \bigoplus_i \End(V_i) \cong \bigoplus_i V_i \otimes V_i^*
 $$
+可见其结构确实变得更加丰富．稍做辨析：
 
-这个分解并不让人意外：从维数的角度来看仍然有 $|G| = \sum_i (\dim V_i)^2$．不过需要解释右边的 $G$-模结构的定义情况：
+- 所谓代数的（有限）直和，是指作为线性空间是直和 / 直积，作为环是直积，按分量进行加乘的结构．
 
-- $V_i$ 是 $G$ 的不可约表示，自然配备的是 $G$-左模结构．
+- 所谓 $G$-左模结构，实指 $\mathbb C[G]$-左模结构．
 
-- $V_i^*$ 是 $V_i$ 的对偶空间，配备的是 $G$-右模结构 $(f \cdot g)(v) := f(g \cdot v)$．
+- $V_i$ 是 $G$ 的不可约表示，配备 $G$-左模结构．
+
+- $V_i^*$ 是 $V_i$ 的对偶空间，配备 $G$-右模结构 $(f \cdot g)(v) := f(g \cdot v)$．
 
   在经典的有限群表示论中，那时我们希望 $V_i^*$ 是 $G$-左模，所以当时配备的是 $(f \cdot g)(v) := f(g^{-1} \cdot v)$，与这里的情况并不矛盾．
 
-- $V_i \otimes V_i^*$ 通过 $(\mathbb C[G], \mathbb C)$-双模和 $(\mathbb C, \mathbb C[G])$-双模的张量积获得一个 $(G,G)$-双模结构：$g \cdot (v \otimes f) \cdot h := (g \cdot v) \otimes (f \cdot h)$．
+- $V_i \otimes V_i^*$ 通过 $(\mathbb C[G], \mathbb C)$-双模和 $(\mathbb C, \mathbb C[G])$-双模的张量积获得一个 $(G,G)$-双模结构：$g \cdot (v \otimes f) \cdot h := (g \cdot v) \otimes (f \cdot h)$．其内部乘法是缩并运算．
 
-- 对 $G$-左模 $U$, $W$，当然希望对双模仍然有自然同构 $W \otimes U^* \cong \Hom(U,W)$ 成立，所以 $\Hom(U,W)$ 配备的 $(G,G)$-双模结构是 $(g \cdot \varphi \cdot h)(u) := g \cdot \varphi(h \cdot u)$．
+- 对 $G$-左模 $U$, $W$，为了使自然同构 $W \otimes U^* \cong \Hom(U,W)$ 成立，为 $\Hom(U,W)$ 配备 $(G,G)$-双模结构是 $(g \cdot \varphi \cdot h)(u) := g \cdot \varphi(h \cdot u)$．特别地，$\End(V_i) = \Hom(V_i, V_i)$ 是环，其内部乘法是函数复合．
+
+- $V_i \otimes V_i^*$ 和 $\End(V_i)$ 上的环结构均与双模结构兼容．在此同构下，可以认为 $\mathbb C[G]$ 被分解为双边理想的直和．
 
 :::{.remark}
 
@@ -57,68 +60,27 @@ $$
 
 ## 一些后果
 
-我们将 Peter--Weyl 定理的证明延后，先来看看它的一些 consequence．首先，可以通过维数再次看出
+我们暂时延后证明，先来看看上述结构的一些推论．首先，可以通过维数再次看出
 $$
 |G| = \sum_i (\dim V_i)^2
 $$
 
-其次，分解双模结构的一个重要好处是它可以诱导出共轭作用的分解——虽然讲清楚这件事不可避免地需要一些抽象废话：
-
-:::{.proof}
-
-- 首先，总可以把 $(G,G)$-双模看成 $G \times G$-左模：$(g,h) \cdot m = g \cdot m \cdot h^{-1}$：这是个范畴等价．
-
-- 其次，考虑对角嵌入 $\Delta : G \to G \times G$，$\Delta(g) = (g,g)$，这反过来让我们可以将 $G \times G$-左模限制成 $G$-左模，从而其上的 $G$-左作用就变成 $g \cdot m := (g,g) \cdot m = g \cdot m \cdot g^{-1}$，恰好是共轭作用．因为模的限制函子都是正合函子——即保持正合列——即保持 $\ker$ 和 $\im$——后者应该足以使你相信它，所以每个 $G \times G$-左模的直和分解将自动导出一个 $G$-左模的分解．
-
-- 二者结合起来就说明：$(G,G)$-双模结构将诱导出一个由共轭作用实现的 $G$-左模结构，且每个 $(G,G)$-双模意义下的分解都将导出一个 $G$-左模意义下的分解．
-:::
-
-因此 Peter--Weyl 定理分解也给出了共轭意义下的分解．记号区分起见，我们将 $\mathbb C[G]$ 上配备共轭作用 $g \cdot x := gxg^{-1}$ 的 $G$-左模记为 $L^2(G)$，则 Peter--Weyl 定理特化为 $G$-左模分解
+其次，对这分解取中心：
 $$
-L^2(G) \cong \bigoplus_i V_i \otimes V_i^* \cong \bigoplus_i \End(V_i)
-$$
-这里 $V_i^*$ 和 $\End(V_i)$ 上的 $G$-左模结构就都和经典有限群表示论中的定义一样了．
-
-:::{.remark}
-
-这个 $L^2(G)$ 的记号不是随便写的——你真的可以认为 $\mathbb C[G]$ 里面装的都是 $G \to \mathbb C$ 的函数：将基底 $e_g$ 实现为函数 $h \mapsto \delta_{h = g}$ 即可．
-
-注意 $\mathbb C[G]$ 上左乘、右乘给出的作用在此观点下可以基底无关地写作
-$$
-\begin{aligned}
-g \cdot \chi &:= (h \mapsto \chi (g^{-1} h)) \\
-\chi \cdot g &:= (h \mapsto \chi (h g^{-1}))
-\end{aligned}
-$$
-特别地：
-$$
-\begin{aligned}
-g_1 \cdot e_{g_2} = g \cdot \left( h \mapsto \delta_{h = g_2} \right) &= \left( h \mapsto \delta_{h = g_1 g_2} \right) = e_{g_1 g_2} \\
-e_{g_2} \cdot g_1 = \left( h \mapsto \delta_{h = g_2 g_1} \right) &= \left( h \mapsto \delta_{h = g_2 g_1} \right) = e_{g_2 g_1}
-\end{aligned}
-$$
-这解释了定义的合理性．
-
-我们刚刚要求 $L^2(G)$ 上配备的 $G$-左模结构是由 $\mathbb C[G]$ 的共轭作用给出，这就写作：
-$$
-g \cdot \chi := (h \mapsto \chi(g^{-1} h g))
-$$
-:::
-
-关于共轭作用的分解有什么好处呢？一下看不出来．但是让我们考虑打到左 $G$-模 $V$ 的 $G$-不变子空间 $V^G$ 的平均化投影 $V \to V^G$：
-$$
-v \mapsto \frac{1}{|G|} \sum_{g \in G} g \cdot v
-$$
-在 Peter--Weyl 分解上作用一下就得到
-$$
-(L^2(G))^G \cong \bigoplus_i \End_G(V_i)
+Z(\mathbb C[G]) \cong \bigoplus_i Z(\End(V_i))
 $$
 
-- 左边是什么？关于共轭作用保持不变的 $G \to \mathbb C$ 的函数，这不就是类函数吗！它的维数是 $G$ 的共轭类的数量．
+- $Z(\End(V_i))$ 是 $\End(V_i)$ 的中心，既是 $V_i$ 上 $G$-自同态的全体 $\End_G(V_i)$．回忆 Schur 引理，$V_i$ 是不可约表示，所以 $Z(\End(V_i)) = \End_G(V_i) = \mathbb C \id_{V_i}$，维数为 $1$．
 
-- 右边是什么？$\End_G(V_i)$ 是 $V_i$ 上 $G$-自同态的全体．还记得 Schur 定理吗？它告诉我们 $\dim \End_G(V_i) = 1$．
+- $Z(\mathbb C[G])$ 是什么？
 
-连起来看：$G$ 的共轭类的数量等于 $G$ 的不可约表示的数量．
+  设 $\sum_{h \in G} \chi(h) e_h \in Z(\mathbb C[G])$，这即是要求对任意 $g \in G$，有
+  $$
+  (\sum_{h \in G} \chi(h) e_h) = e_g (\sum_{h \in G} \chi(h) e_h) e_g^{-1} = \sum_{h \in G} \chi(h) e_{g h g^{-1}} = \sum_{h \in G} \chi(g^{-1} h g) e_h
+  $$
+  即 $\chi(g^{-1} h g) = \chi(h)$——在共轭类上取常值——$Z(\mathbb C[G])$ 就是类函数全体！其维数等于 $G$ 的共轭类的数量．
+
+两条连起来看立得：$G$ 的共轭类的数量等于 $G$ 的不可约表示的数量．
 
 ## 证明
 
