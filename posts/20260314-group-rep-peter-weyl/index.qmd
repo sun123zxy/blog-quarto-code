@@ -23,44 +23,81 @@ format:
 \newcommand{\tr}{\operatorname{tr}}
 \newcommand{\End}{\operatorname{End}}
 
-- 本文前置：[有限群表示论速通](/posts/20260312-group-rep-speedrun/)
-
-## 从左模到双模
+## 从左模到代数
 
 有限群表示论的一个经典结果是正则表示的分解：
 $$
 \mathbb C[G] \cong \bigoplus_i V_i^{\oplus \dim V_i}
 $$
-这里 $\mathbb C[G]$ 是群 $G$ 的群代数，$V_i$ 是 $G$ 的全体不可约表示．这只是个 $G$-左模的分解：$\mathbb C[G]$ 被分解成了单左理想的直和．但是 $\mathbb C[G]$ 是个环，完整来说我们应该研究其作为 $\mathbb C$-代数的分解．Peter--Weyl / Wedderburn--Artin 定理给出了它的分解：
+这里 $\mathbb C[G]$ 是群 $G$ 的群代数，$V_i$ 是 $G$ 的全体不可约表示．这只是个左 $\mathbb C[G]$-模的分解：$\mathbb C[G]$ 被分解成了其单左理想的直和．但是 $\mathbb C[G]$ 是个环，完整来说我们应该研究其作为 $\mathbb C$-代数的分解．Peter--Weyl / Wedderburn--Artin 定理给出了它的分解：
 $$
 \mathbb C[G] \cong \bigoplus_i \End(V_i) \cong \bigoplus_i V_i \otimes V_i^*
 $$
 可见其结构确实变得更加丰富．稍做辨析：
 
-- 所谓代数的（有限）直和，是指作为线性空间是直和 / 直积，作为环是直积，按分量进行加乘的结构．
+- 这里每份投影 $\pi_i: \mathbb C[G] \to \End(V_i)$ 都是表示 $\rho_{V_i} : G \to \GL(V_i)$ 直接线性扩张得到——定理表明，$\mathbb C[G]$ 可以完全由其每个不可约表示上的作用描述．
 
-- 所谓 $G$-左模结构，实指 $\mathbb C[G]$-左模结构．
+- 容易验证每个 $\pi_i$ 都是 $(\mathbb C[G], \mathbb C[G])$-代数同态——保加法，保乘法，保数乘，保左、右 $G$-作用．这里的分解是在此意义下的同构．
 
-- $V_i$ 是 $G$ 的不可约表示，配备 $G$-左模结构．
+- $V_i$ 是 $G$ 的不可约表示，配备左 $\mathbb C[G]$-模结构．
 
-- $V_i^*$ 是 $V_i$ 的对偶空间，配备 $G$-右模结构 $(f \cdot g)(v) := f(g \cdot v)$．
-
-  在经典的有限群表示论中，那时我们希望 $V_i^*$ 是 $G$-左模，所以当时配备的是 $(f \cdot g)(v) := f(g^{-1} \cdot v)$，与这里的情况并不矛盾．
-
-- $V_i \otimes V_i^*$ 通过 $(\mathbb C[G], \mathbb C)$-双模和 $(\mathbb C, \mathbb C[G])$-双模的张量积获得一个 $(G,G)$-双模结构：$g \cdot (v \otimes f) \cdot h := (g \cdot v) \otimes (f \cdot h)$．其内部乘法是缩并运算．
-
-- 对 $G$-左模 $U$, $W$，为了使自然同构 $W \otimes U^* \cong \Hom(U,W)$ 成立，为 $\Hom(U,W)$ 配备 $(G,G)$-双模结构是 $(g \cdot \varphi \cdot h)(u) := g \cdot \varphi(h \cdot u)$．特别地，$\End(V_i) = \Hom(V_i, V_i)$ 是环，其内部乘法是函数复合．
-
-- $V_i \otimes V_i^*$ 和 $\End(V_i)$ 上的环结构均与双模结构兼容．在此同构下，可以认为 $\mathbb C[G]$ 被分解为双边理想的直和．
+- $V_i^*$ 是 $V_i$ 的对偶空间，配备右 $\mathbb C[G]$-模结构 $(f \cdot g)(v) := f(g \cdot v)$．
 
 :::{.remark}
 
-平时仅考虑左模结构时，为使记号对齐，通常喜欢写 $\Hom(V,W) \cong V^* \otimes W$——这无伤大雅，反正 $V^*$ 强行通过 $g^{-1}$ 获得了 $G$-左模结构．但对双模的情况，$G$-左作用是由 $W$ 负责，$G$-右作用是由 $V^*$ 负责，我们就最好不要交换它们了．
+在经典的有限群表示论中，那时我们希望 $V_i^*$ 是左 $\mathbb C[G]$-模，所以当时配备的是 $(f \cdot g)(v) := f(g^{-1} \cdot v)$，与这里的情况并不矛盾．
 :::
 
-## 一些后果
+- $V_i \otimes V_i^*$ 通过 $(\mathbb C[G], \mathbb C)$-双模和 $(\mathbb C, \mathbb C[G])$-双模的张量积获得一个 $(\mathbb C[G],\mathbb C[G])$-双模结构：
+  $$
+  g \cdot (v \otimes f) \cdot h := (g \cdot v) \otimes (f \cdot h)
+  $$
+  其内部乘法是缩并运算．这使得其成为一个 $(\mathbb C[G], \mathbb C[G])$-代数．
 
-我们暂时延后证明，先来看看上述结构的一些推论．首先，可以通过维数再次看出
+- 对左 $\mathbb C[G]$-模 $U$, $W$，为了使自然同构 $W \otimes U^* \cong \Hom(U,W)$ 成立，为 $\Hom(U,W)$ 配备 $(\mathbb C[G],\mathbb C[G])$-双模结构
+  $$
+  (g \cdot \varphi \cdot h)(u) := g \cdot \varphi(h \cdot u)
+  $$
+  特别地，在 $\End(V_i) = \Hom(V_i, V_i)$ 定义内部乘法是函数复合，则 $\End(V_i)$ 也获得 $(\mathbb C[G], \mathbb C[G])$-代数结构．
+
+:::{.remark}
+
+平时仅考虑左模结构时，为使记号对齐，通常喜欢写 $\Hom(V,W) \cong V^* \otimes W$——这无伤大雅，反正 $V^*$ 强行通过 $g^{-1}$ 获得了左 $\mathbb C[G]$-模结构．但对双模的情况，左 $\mathbb C[G]$-作用是由 $W$ 负责，右 $\mathbb C[G]$-作用是由 $V^*$ 负责，我们就最好不要交换它们了．
+:::
+
+- 不会因为仅将此分解视为环的分解受到任何处分——通过表示诱导的映射表示诱导的 $\pi_i : \mathbb C[G] \to \End(V_i)$ 足以将 $\End(V_i)$ 上的乘法结构拉回得到其 $(\mathbb C[G], \mathbb C[G])$-双模结构．
+
+- 反过来，仅考虑 $(\mathbb C[G], \mathbb C[G])$-双模结构也没有问题：将会证明 $\pi_i$ 是满射，即每个 $\End(V_i)$ 都是可以写作某一 $\mathbb C[G]$-左作用．
+
+## 证明
+
+我们提供几条依赖不同工具的证明路线，读者可按前置情况任选．
+
+- 有关有限群表示论的基础内容可参见[有限群表示论速通](/posts/20260312-group-rep-speedrun/)．
+
+先证 $\pi$ 是单射：
+
+- 这里的证明依赖有限群表示论的 Maschke 定理（半单性）．
+
+  若一 $\mathbb C[G]$ 元素在每个不可约表示上作用均为 $0$，由半单性，$\mathbb C[G]$ 自己分解成若干不可约表示的直和，所以该元素在 $\mathbb C[G]$ 上作用也为 $0$．$\mathbb C[G]$ 在自己上作用当然是忠实的，所以该元素只能是 $0$．
+
+则只需证 $\pi$ 是满射．这里有多种可供选择的路线：
+
+- 依赖有限群表示论的维数平方和公式 $\sum_i (\dim V_i)^2 = |G|$：
+  
+  $\dim \End(V_i) = (\dim V_i)^2$，$\dim \mathbb C[G] = |G|$ 维数逼迫单射 $\pi$ 也是满射．
+
+- 依赖 [矩阵代数的 Burnside 定理](/posts/20240121-burnside/)，该定理的证明可以仅依赖初等线性代数：
+
+  考察 $\pi_i(\mathbb C[G]) \subseteq \End(V_i)$，注意到它是 $\End(V_i)$ 的非零含幺子结合代数．根据 Burnside 定理，$\pi(\mathbb C[G])$ 在每个 $\End(V_i)$ 上都必须是全体．
+
+我们还可以显式构造 $\pi$ 的逆来获得一个构造性的证明：
+
+- TODO
+
+## 推论
+
+来看上述分解导致的事实．首先，如果你选择的证明路线没有，可以通过维数再次看出维数平方和公式
 $$
 |G| = \sum_i (\dim V_i)^2
 $$
@@ -70,7 +107,7 @@ $$
 Z(\mathbb C[G]) \cong \bigoplus_i Z(\End(V_i))
 $$
 
-- $Z(\End(V_i))$ 是 $\End(V_i)$ 的中心，既是 $V_i$ 上 $G$-自同态的全体 $\End_G(V_i)$．回忆 Schur 引理，$V_i$ 是不可约表示，所以 $Z(\End(V_i)) = \End_G(V_i) = \mathbb C \id_{V_i}$，维数为 $1$．
+- $Z(\End(V_i))$ 是 $\End(V_i)$ 的中心，既是 $V_i$ 上左 $\mathbb C[G]$-自同态的全体 $\End_{\mathbb C[G]}(V_i)$．回忆 Schur 引理，$V_i$ 是不可约表示，所以 $Z(\End(V_i)) = \End_{\mathbb C[G]}(V_i) = \mathbb C \id_{V_i}$，维数为 $1$．
 
 - $Z(\mathbb C[G])$ 是什么？
 
@@ -82,7 +119,7 @@ $$
 
 两条连起来看立得：$G$ 的共轭类的数量等于 $G$ 的不可约表示的数量．
 
-## 证明
+## 证明（废液缸）
 
 以后我们都把 $\mathbb C[G]$ 看成是 $G \to \mathbb C$ 的全体函数．先来构造 $V_i \otimes V_i^*$ 到 $\mathbb C[G]$ 的 $G$-双模同态 $\Phi_i$：
 $$
