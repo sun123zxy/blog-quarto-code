@@ -395,17 +395,18 @@ window.Quarto = {
 <h2 data-number="1" class="anchored" data-anchor-id="从左模到双模"><span class="header-section-number">1</span> 从左模到双模</h2>
 <p>有限群表示论的一个经典结果是正则表示的分解： <span class="math display">\[
 \mathbb C[G] \cong \bigoplus_i V_i^{\oplus \dim V_i}
-\]</span> 这里 <span class="math inline">\(\mathbb C[G]\)</span> 是群 <span class="math inline">\(G\)</span> 的群代数，<span class="math inline">\(V_i\)</span> 是 <span class="math inline">\(G\)</span> 的全体不可约表示．这只是个 <span class="math inline">\(G\)</span>-左模的分解：我们事实上分解的是 <span class="math inline">\(\mathbb C[G]\)</span> 通过左乘配备的 <span class="math inline">\(G\)</span>-左模结构．</p>
-<p>但是 <span class="math inline">\(\mathbb C[G]\)</span> 是个环，右边也能做乘法，完整来说我们应该研究 <span class="math inline">\(\mathbb C[G]\)</span> 的 <span class="math inline">\((G,G)\)</span>-双模结构．Peter–Weyl 定理给出了这个双模结构的分解： <span class="math display">\[
-\mathbb C[G] \cong \bigoplus_i V_i \otimes V_i^* \cong \bigoplus_i \operatorname{End}(V_i)
-\]</span></p>
-<p>这个分解并不让人意外：从维数的角度来看仍然有 <span class="math inline">\(|G| = \sum_i (\dim V_i)^2\)</span>．不过需要解释右边的 <span class="math inline">\(G\)</span>-模结构的定义情况：</p>
+\]</span> 这里 <span class="math inline">\(\mathbb C[G]\)</span> 是群 <span class="math inline">\(G\)</span> 的群代数，<span class="math inline">\(V_i\)</span> 是 <span class="math inline">\(G\)</span> 的全体不可约表示．这只是个 <span class="math inline">\(G\)</span>-左模的分解：<span class="math inline">\(\mathbb C[G]\)</span> 被分解成了单左理想的直和．但是 <span class="math inline">\(\mathbb C[G]\)</span> 是个环，完整来说我们应该研究其作为 <span class="math inline">\(\mathbb C\)</span>-代数的分解．Peter–Weyl / Wedderburn–Artin 定理给出了它的分解： <span class="math display">\[
+\mathbb C[G] \cong \bigoplus_i \operatorname{End}(V_i) \cong \bigoplus_i V_i \otimes V_i^*
+\]</span> 可见其结构确实变得更加丰富．稍做辨析：</p>
 <ul>
-<li><p><span class="math inline">\(V_i\)</span> 是 <span class="math inline">\(G\)</span> 的不可约表示，自然配备的是 <span class="math inline">\(G\)</span>-左模结构．</p></li>
-<li><p><span class="math inline">\(V_i^*\)</span> 是 <span class="math inline">\(V_i\)</span> 的对偶空间，配备的是 <span class="math inline">\(G\)</span>-右模结构 <span class="math inline">\((f \cdot g)(v) := f(g \cdot v)\)</span>．</p>
+<li><p>所谓代数的（有限）直和，是指作为线性空间是直和 / 直积，作为环是直积，按分量进行加乘的结构．</p></li>
+<li><p>所谓 <span class="math inline">\(G\)</span>-左模结构，实指 <span class="math inline">\(\mathbb C[G]\)</span>-左模结构．</p></li>
+<li><p><span class="math inline">\(V_i\)</span> 是 <span class="math inline">\(G\)</span> 的不可约表示，配备 <span class="math inline">\(G\)</span>-左模结构．</p></li>
+<li><p><span class="math inline">\(V_i^*\)</span> 是 <span class="math inline">\(V_i\)</span> 的对偶空间，配备 <span class="math inline">\(G\)</span>-右模结构 <span class="math inline">\((f \cdot g)(v) := f(g \cdot v)\)</span>．</p>
 <p>在经典的有限群表示论中，那时我们希望 <span class="math inline">\(V_i^*\)</span> 是 <span class="math inline">\(G\)</span>-左模，所以当时配备的是 <span class="math inline">\((f \cdot g)(v) := f(g^{-1} \cdot v)\)</span>，与这里的情况并不矛盾．</p></li>
-<li><p><span class="math inline">\(V_i \otimes V_i^*\)</span> 通过 <span class="math inline">\((\mathbb C[G], \mathbb C)\)</span>-双模和 <span class="math inline">\((\mathbb C, \mathbb C[G])\)</span>-双模的张量积获得一个 <span class="math inline">\((G,G)\)</span>-双模结构：<span class="math inline">\(g \cdot (v \otimes f) \cdot h := (g \cdot v) \otimes (f \cdot h)\)</span>．</p></li>
-<li><p>对 <span class="math inline">\(G\)</span>-左模 <span class="math inline">\(U\)</span>, <span class="math inline">\(W\)</span>，当然希望对双模仍然有自然同构 <span class="math inline">\(W \otimes U^* \cong \operatorname{Hom}(U,W)\)</span> 成立，所以 <span class="math inline">\(\operatorname{Hom}(U,W)\)</span> 配备的 <span class="math inline">\((G,G)\)</span>-双模结构是 <span class="math inline">\((g \cdot \varphi \cdot h)(u) := g \cdot \varphi(h \cdot u)\)</span>．</p></li>
+<li><p><span class="math inline">\(V_i \otimes V_i^*\)</span> 通过 <span class="math inline">\((\mathbb C[G], \mathbb C)\)</span>-双模和 <span class="math inline">\((\mathbb C, \mathbb C[G])\)</span>-双模的张量积获得一个 <span class="math inline">\((G,G)\)</span>-双模结构：<span class="math inline">\(g \cdot (v \otimes f) \cdot h := (g \cdot v) \otimes (f \cdot h)\)</span>．其内部乘法是缩并运算．</p></li>
+<li><p>对 <span class="math inline">\(G\)</span>-左模 <span class="math inline">\(U\)</span>, <span class="math inline">\(W\)</span>，为了使自然同构 <span class="math inline">\(W \otimes U^* \cong \operatorname{Hom}(U,W)\)</span> 成立，为 <span class="math inline">\(\operatorname{Hom}(U,W)\)</span> 配备 <span class="math inline">\((G,G)\)</span>-双模结构是 <span class="math inline">\((g \cdot \varphi \cdot h)(u) := g \cdot \varphi(h \cdot u)\)</span>．特别地，<span class="math inline">\(\operatorname{End}(V_i) = \operatorname{Hom}(V_i, V_i)\)</span> 是环，其内部乘法是函数复合．</p></li>
+<li><p><span class="math inline">\(V_i \otimes V_i^*\)</span> 和 <span class="math inline">\(\operatorname{End}(V_i)\)</span> 上的环结构均与双模结构兼容．在此同构下，可以认为 <span class="math inline">\(\mathbb C[G]\)</span> 被分解为双边理想的直和．</p></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
@@ -428,78 +429,20 @@ window.Quarto = {
 </section>
 <section id="一些后果" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="一些后果"><span class="header-section-number">2</span> 一些后果</h2>
-<p>我们将 Peter–Weyl 定理的证明延后，先来看看它的一些 consequence．首先，可以通过维数再次看出 <span class="math display">\[
+<p>我们暂时延后证明，先来看看上述结构的一些推论．首先，可以通过维数再次看出 <span class="math display">\[
 |G| = \sum_i (\dim V_i)^2
 \]</span></p>
-<p>其次，分解双模结构的一个重要好处是它可以诱导出共轭作用的分解——虽然讲清楚这件事不可避免地需要一些抽象废话：</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">注记</span>Proof
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="proof">
-<p><span class="proof-title"><em>证明</em>. </span></p>
-<ul>
-<li><p>首先，总可以把 <span class="math inline">\((G,G)\)</span>-双模看成 <span class="math inline">\(G \times G\)</span>-左模：<span class="math inline">\((g,h) \cdot m = g \cdot m \cdot h^{-1}\)</span>：这是个范畴等价．</p></li>
-<li><p>其次，考虑对角嵌入 <span class="math inline">\(\Delta : G \to G \times G\)</span>，<span class="math inline">\(\Delta(g) = (g,g)\)</span>，这反过来让我们可以将 <span class="math inline">\(G \times G\)</span>-左模限制成 <span class="math inline">\(G\)</span>-左模，从而其上的 <span class="math inline">\(G\)</span>-左作用就变成 <span class="math inline">\(g \cdot m := (g,g) \cdot m = g \cdot m \cdot g^{-1}\)</span>，恰好是共轭作用．因为模的限制函子都是正合函子——即保持正合列——即保持 <span class="math inline">\(\ker\)</span> 和 <span class="math inline">\(\operatorname{im}\)</span>——后者应该足以使你相信它，所以每个 <span class="math inline">\(G \times G\)</span>-左模的直和分解将自动导出一个 <span class="math inline">\(G\)</span>-左模的分解．</p></li>
-<li><p>二者结合起来就说明：<span class="math inline">\((G,G)\)</span>-双模结构将诱导出一个由共轭作用实现的 <span class="math inline">\(G\)</span>-左模结构，且每个 <span class="math inline">\((G,G)\)</span>-双模意义下的分解都将导出一个 <span class="math inline">\(G\)</span>-左模意义下的分解．</p></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<p>因此 Peter–Weyl 定理分解也给出了共轭意义下的分解．记号区分起见，我们将 <span class="math inline">\(\mathbb C[G]\)</span> 上配备共轭作用 <span class="math inline">\(g \cdot x := gxg^{-1}\)</span> 的 <span class="math inline">\(G\)</span>-左模记为 <span class="math inline">\(L^2(G)\)</span>，则 Peter–Weyl 定理特化为 <span class="math inline">\(G\)</span>-左模分解 <span class="math display">\[
-L^2(G) \cong \bigoplus_i V_i \otimes V_i^* \cong \bigoplus_i \operatorname{End}(V_i)
-\]</span> 这里 <span class="math inline">\(V_i^*\)</span> 和 <span class="math inline">\(\operatorname{End}(V_i)\)</span> 上的 <span class="math inline">\(G\)</span>-左模结构就都和经典有限群表示论中的定义一样了．</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>这个 <span class="math inline">\(L^2(G)\)</span> 的记号不是随便写的——你真的可以认为 <span class="math inline">\(\mathbb C[G]\)</span> 里面装的都是 <span class="math inline">\(G \to \mathbb C\)</span> 的函数：将基底 <span class="math inline">\(e_g\)</span> 实现为函数 <span class="math inline">\(h \mapsto \delta_{h = g}\)</span> 即可．</p>
-<p>注意 <span class="math inline">\(\mathbb C[G]\)</span> 上左乘、右乘给出的作用在此观点下可以基底无关地写作 <span class="math display">\[
-\begin{aligned}
-g \cdot \chi &amp;:= (h \mapsto \chi (g^{-1} h)) \\
-\chi \cdot g &amp;:= (h \mapsto \chi (h g^{-1}))
-\end{aligned}
-\]</span> 特别地： <span class="math display">\[
-\begin{aligned}
-g_1 \cdot e_{g_2} = g \cdot \left( h \mapsto \delta_{h = g_2} \right) &amp;= \left( h \mapsto \delta_{h = g_1 g_2} \right) = e_{g_1 g_2} \\
-e_{g_2} \cdot g_1 = \left( h \mapsto \delta_{h = g_2 g_1} \right) &amp;= \left( h \mapsto \delta_{h = g_2 g_1} \right) = e_{g_2 g_1}
-\end{aligned}
-\]</span> 这解释了定义的合理性．</p>
-<p>我们刚刚要求 <span class="math inline">\(L^2(G)\)</span> 上配备的 <span class="math inline">\(G\)</span>-左模结构是由 <span class="math inline">\(\mathbb C[G]\)</span> 的共轭作用给出，这就写作： <span class="math display">\[
-g \cdot \chi := (h \mapsto \chi(g^{-1} h g))
-\]</span></p>
-</div>
-</div>
-</div>
-</div>
-<p>关于共轭作用的分解有什么好处呢？一下看不出来．但是让我们考虑打到左 <span class="math inline">\(G\)</span>-模 <span class="math inline">\(V\)</span> 的 <span class="math inline">\(G\)</span>-不变子空间 <span class="math inline">\(V^G\)</span> 的平均化投影 <span class="math inline">\(V \to V^G\)</span>： <span class="math display">\[
-v \mapsto \frac{1}{|G|} \sum_{g \in G} g \cdot v
-\]</span> 在 Peter–Weyl 分解上作用一下就得到 <span class="math display">\[
-(L^2(G))^G \cong \bigoplus_i \operatorname{End}_G(V_i)
+<p>其次，对这分解取中心： <span class="math display">\[
+Z(\mathbb C[G]) \cong \bigoplus_i Z(\operatorname{End}(V_i))
 \]</span></p>
 <ul>
-<li><p>左边是什么？关于共轭作用保持不变的 <span class="math inline">\(G \to \mathbb C\)</span> 的函数，这不就是类函数吗！它的维数是 <span class="math inline">\(G\)</span> 的共轭类的数量．</p></li>
-<li><p>右边是什么？<span class="math inline">\(\operatorname{End}_G(V_i)\)</span> 是 <span class="math inline">\(V_i\)</span> 上 <span class="math inline">\(G\)</span>-自同态的全体．还记得 Schur 定理吗？它告诉我们 <span class="math inline">\(\dim \operatorname{End}_G(V_i) = 1\)</span>．</p></li>
+<li><p><span class="math inline">\(Z(\operatorname{End}(V_i))\)</span> 是 <span class="math inline">\(\operatorname{End}(V_i)\)</span> 的中心，既是 <span class="math inline">\(V_i\)</span> 上 <span class="math inline">\(G\)</span>-自同态的全体 <span class="math inline">\(\operatorname{End}_G(V_i)\)</span>．回忆 Schur 引理，<span class="math inline">\(V_i\)</span> 是不可约表示，所以 <span class="math inline">\(Z(\operatorname{End}(V_i)) = \operatorname{End}_G(V_i) = \mathbb C \operatorname{id}_{V_i}\)</span>，维数为 <span class="math inline">\(1\)</span>．</p></li>
+<li><p><span class="math inline">\(Z(\mathbb C[G])\)</span> 是什么？</p>
+<p>设 <span class="math inline">\(\sum_{h \in G} \chi(h) e_h \in Z(\mathbb C[G])\)</span>，这即是要求对任意 <span class="math inline">\(g \in G\)</span>，有 <span class="math display">\[
+(\sum_{h \in G} \chi(h) e_h) = e_g (\sum_{h \in G} \chi(h) e_h) e_g^{-1} = \sum_{h \in G} \chi(h) e_{g h g^{-1}} = \sum_{h \in G} \chi(g^{-1} h g) e_h
+\]</span> 即 <span class="math inline">\(\chi(g^{-1} h g) = \chi(h)\)</span>——在共轭类上取常值——<span class="math inline">\(Z(\mathbb C[G])\)</span> 就是类函数全体！其维数等于 <span class="math inline">\(G\)</span> 的共轭类的数量．</p></li>
 </ul>
-<p>连起来看：<span class="math inline">\(G\)</span> 的共轭类的数量等于 <span class="math inline">\(G\)</span> 的不可约表示的数量．</p>
+<p>两条连起来看立得：<span class="math inline">\(G\)</span> 的共轭类的数量等于 <span class="math inline">\(G\)</span> 的不可约表示的数量．</p>
 </section>
 <section id="证明" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="证明"><span class="header-section-number">3</span> 证明</h2>
@@ -515,7 +458,7 @@ v \otimes f &amp;\mapsto \left( g \mapsto f(g^{-1} \cdot v) \right)
 \end{aligned}
 \]</span></p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -524,7 +467,7 @@ v \otimes f &amp;\mapsto \left( g \mapsto f(g^{-1} \cdot v) \right)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>注记</em>. </span>这里两种定义的等价性：<span class="math inline">\(V\)</span> 上线性变换的 <span class="math inline">\(\operatorname{tr}\)</span> 在张量风格的记号下就是 <span class="math inline">\(V\)</span> 和 <span class="math inline">\(V^*\)</span> 张量缩并 <span class="math display">\[
@@ -539,7 +482,7 @@ v \otimes f &amp;\mapsto f(v)
 </div>
 <p>先来验证它是 <span class="math inline">\(G\)</span>-双模同态：</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -548,7 +491,7 @@ v \otimes f &amp;\mapsto f(v)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
 <p><span class="proof-title"><em>证明</em>. </span>张量风格的记号好处理一点．验证它是 <span class="math inline">\(G\)</span>-双模同态： <span class="math display">\[
@@ -574,7 +517,7 @@ v \otimes f &amp;\mapsto f(v)
 \]</span></p>
 <p>验证 <span class="math inline">\(\Psi_i \circ \Phi_i = c \cdot \operatorname{id}_{\operatorname{End}(V_i)}\)</span>：</p>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -583,7 +526,7 @@ v \otimes f &amp;\mapsto f(v)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
 <p><span class="proof-title"><em>证明</em>. </span>这个恒等式可以通过 Schur 正交关系来证。任取 <span class="math inline">\(\varphi \in \operatorname{End}(V_i)\)</span>，计算复合作用： <span class="math display">\[
@@ -598,7 +541,7 @@ f\left( (\Psi_i \circ \Phi_i)(\varphi)(u) \right) &amp;= \sum_{g \in G} \operato
 \end{aligned}
 \]</span> 由 Schur 正交关系（对于 <span class="math inline">\(\operatorname{End}(V_i)\)</span> 上的迹内积），我们知道对任意自同态 <span class="math inline">\(A, B\)</span>，有 <span class="math inline">\(\sum_{g \in G} \operatorname{tr}(A \rho_{V_i}(g^{-1})) \operatorname{tr}(B \rho_{V_i}(g)) = \frac{|G|}{\dim V_i} \operatorname{tr}(A B)\)</span>。</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -607,7 +550,7 @@ f\left( (\Psi_i \circ \Phi_i)(\varphi)(u) \right) &amp;= \sum_{g \in G} \operato
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>注记</em>. </span>取 <span class="math inline">\(V_i\)</span> 的一组基将算子写成矩阵。根据经典形式的矩阵元 Schur 正交关系： <span class="math display">\[
