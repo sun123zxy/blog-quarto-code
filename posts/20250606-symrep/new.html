@@ -398,8 +398,11 @@ window.Quarto = {
    
   <ul>
   <li><a href="#速览" id="toc-速览" class="nav-link active" data-scroll-target="#速览"><span class="header-section-number">1</span> 速览</a></li>
-  <li><a href="#specht-模的不可约性" id="toc-specht-模的不可约性" class="nav-link" data-scroll-target="#specht-模的不可约性"><span class="header-section-number">2</span> Specht 模的不可约性</a></li>
-  <li><a href="#sec-classification" id="toc-sec-classification" class="nav-link" data-scroll-target="#sec-classification"><span class="header-section-number">3</span> 复不可约表示的分类</a></li>
+  <li><a href="#schur-引理" id="toc-schur-引理" class="nav-link" data-scroll-target="#schur-引理"><span class="header-section-number">2</span> Schur 引理</a></li>
+  <li><a href="#hom-的新刻画" id="toc-hom-的新刻画" class="nav-link" data-scroll-target="#hom-的新刻画"><span class="header-section-number">3</span> Hom 的新刻画</a></li>
+  <li><a href="#同形状的情形" id="toc-同形状的情形" class="nav-link" data-scroll-target="#同形状的情形"><span class="header-section-number">4</span> 同形状的情形</a></li>
+  <li><a href="#不同形状的情形" id="toc-不同形状的情形" class="nav-link" data-scroll-target="#不同形状的情形"><span class="header-section-number">5</span> 不同形状的情形</a></li>
+  
   </ul>
 <div class="quarto-other-links"><h2>其他链接</h2><ul><li><a href="https://zhuanlan.zhihu.com/p/1915153242335216846"><i class="bi bi-question-circle"></i>在知乎上阅读</a></li></ul></div></nav>
     </div>
@@ -438,7 +441,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">修改于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年6月10日</p>
+      <p class="date-modified">2026年3月20日</p>
     </div>
   </div>
     
@@ -449,10 +452,7 @@ window.Quarto = {
 </header>
 
 
-<p>我们尽可能简明快速地完成对称群的复不可约表示的分类．本文主要微调自 <span class="citation" data-cites="fulton_representation_2004"><a href="#ref-fulton_representation_2004" role="doc-biblioref">[1, section 4.2]</a></span>，亦少量参考 <span class="citation" data-cites="sagan_symmetric_2001"><a href="#ref-sagan_symmetric_2001" role="doc-biblioref">[2, chapter 2]</a></span>．推荐读者阅读前熟悉群的复表示的基本常识 <span class="citation" data-cites="serre_linear_1977"><a href="#ref-serre_linear_1977" role="doc-biblioref">[3, chapter 1–2]</a></span> 和群代数模的观点．</p>
-<ul>
-<li>我们正在重构此文．v2 见 <a href="../../posts/20250606-symrep/new.html">此处</a>．</li>
-</ul>
+<p>我们简明快速地完成对称群的复不可约表示的分类．本文主要微调自 <span class="citation" data-cites="fulton_representation_2004"><a href="#ref-fulton_representation_2004" role="doc-biblioref">[1, section 4.2]</a></span>，亦少量参考 <span class="citation" data-cites="sagan_symmetric_2001"><a href="#ref-sagan_symmetric_2001" role="doc-biblioref">[2, chapter 2]</a></span>．推荐读者阅读前熟悉群的复表示的基本常识 <span class="citation" data-cites="fulton_representation_2004"><a href="#ref-fulton_representation_2004" role="doc-biblioref">[1, chapter 1–2]</a></span> 和群代数模的观点．</p>
 <section id="速览" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="速览"><span class="header-section-number">1</span> 速览</h2>
 <p>一个 Young 图由一个整数分拆 <span class="math inline">\(\lambda \vdash n\)</span> 唯一确定，一个 Young 表将一个 <span class="math inline">\(n\)</span> 元置换填入 Young 图——本质上是一组信息 <span class="math inline">\(T = (\lambda \vdash n, \sigma \in \mathcal S_n)\)</span>．如果 <span class="math inline">\(T\)</span> 的各行各列均严格单增，则称 <span class="math inline">\(T\)</span> 是标准 Young 表．</p>
@@ -503,8 +503,32 @@ window.Quarto = {
 </figcaption>
 </figure>
 </div>
-<p>置换 <span class="math inline">\(g \in \mathcal S_n\)</span> 作用在全体形状为 <span class="math inline">\(\lambda\)</span> 的 Young 表 <span class="math inline">\(T\)</span> 上的方式为将数字 <span class="math inline">\(i\)</span> 替换为 <span class="math inline">\(g(i)\)</span>，即 <span class="math inline">\(gT := (\lambda, g \sigma)\)</span>．易见对称群在固定形状 Young 表上的作用传递．作用在给定 Young 表 <span class="math inline">\(T\)</span> 上的效果表现为对同行元素的置换的那些置换构成的群记为 <span class="math inline">\(P_T\)</span>，置换同列元素的记为 <span class="math inline">\(Q_T\)</span>．易见 <span class="math inline">\(P_T\)</span> 和 <span class="math inline">\(Q_T\)</span> 交平凡，两群之并生成整个 <span class="math inline">\(\mathcal S_n\)</span>．</p>
-<p>我们来刻画不同 Young 表行、列置换之间的关系．注意 <span class="math inline">\(gT \to gpT\)</span> 的过程可以理解为在 <span class="math inline">\(gT\)</span> 上做“效果”相当于 <span class="math inline">\(T\)</span> 上 <span class="math inline">\(p \in P_T\)</span> 的行置换，故</p>
+<p>置换 <span class="math inline">\(g \in \mathcal S_n\)</span> 作用在全体形状为 <span class="math inline">\(\lambda\)</span> 的 Young 表 <span class="math inline">\(T\)</span> 上的方式为将数字 <span class="math inline">\(i\)</span> 替换为 <span class="math inline">\(g(i)\)</span>，即 <span class="math inline">\(gT := (\lambda, g \sigma)\)</span>．易见对称群在固定形状 Young 表上的作用忠实且传递．作用在给定 Young 表 <span class="math inline">\(T\)</span> 上的效果表现为对同行元素的置换的那些置换构成的群记为 <span class="math inline">\(P_T\)</span>，置换同列元素的记为 <span class="math inline">\(Q_T\)</span>．易见 <span class="math inline">\(P_T\)</span> 和 <span class="math inline">\(Q_T\)</span> 交平凡，两群之并生成整个 <span class="math inline">\(\mathcal S_n\)</span>．</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark (置换计算速记)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em> (置换计算速记). </span></p>
+<ul>
+<li><p><span class="math inline">\(\sigma \mapsto g \sigma\)</span>：对数字做置换，<span class="math inline">\((12)(23)\)</span> 是先交换数字 <span class="math inline">\((2, 3)\)</span>，再交换数字 <span class="math inline">\((1, 2)\)</span>．</p></li>
+<li><p><span class="math inline">\(\sigma \mapsto \sigma g\)</span>：对位置做置换，<span class="math inline">\((12)(23)\)</span> 是先交换位置 <span class="math inline">\((1,2)\)</span> 上的数字，再交换位置 <span class="math inline">\((2,3)\)</span> 上的数字．</p></li>
+<li><p><span class="math inline">\(\sigma \mapsto g \sigma g^{-1}\)</span>：对 <span class="math inline">\(\sigma\)</span> 做字面上 <span class="math inline">\(g\)</span> 的重标号．<span class="math inline">\((123)(1234)(123)^{-1} = (2314)\)</span></p></li>
+<li><p>轮换计算技巧：<span class="math inline">\((2341) = (1234)=(12)(23)(34)\)</span>，数字无交集可交换．</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<p>来刻画不同 Young 表行、列置换之间的关系：</p>
 <ul>
 <li><span class="math inline">\(P_{gT} = g P_T g^{-1}\)</span></li>
 <li><span class="math inline">\(Q_{gT} = g Q_T g^{-1}\)</span></li>
@@ -516,7 +540,7 @@ window.Quarto = {
 <li>Young 对称化子 <span class="math inline">\(c_T := a_T b_T\)</span></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -525,7 +549,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>注记</em>. </span>将 Young 对称化子定义为 <span class="math inline">\(b_T a_T\)</span> 也是可以的，请参考 <span class="citation" data-cites="fulton_representation_2004"><a href="#ref-fulton_representation_2004" role="doc-biblioref">[1, exercise 4.4]</a></span>．</p>
@@ -533,75 +557,90 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>易见对任意 <span class="math inline">\(p \in P_T\)</span>, <span class="math inline">\(q \in Q_T\)</span>，有：</p>
+<p>容易验证对称化子满足如下性质：</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-c-prop" class="theorem proposition">
+<p><span class="theorem-title"><strong>命题 1</strong></span> 对任意 <span class="math inline">\(p \in P_T\)</span>, <span class="math inline">\(q \in Q_T\)</span>,</p>
 <ul>
 <li><span class="math inline">\(p a_T = a_T p = a_T\)</span></li>
 <li><span class="math inline">\(q b_T = b_T q = \operatorname{sgn}(q) b_T\)</span></li>
 <li><span class="math inline">\(p c_T q = \operatorname{sgn}(q) c_T\)</span></li>
 </ul>
-<p>最后一条性质对 <span class="math inline">\(c_T\)</span> 成立固然是显然的事实，但满足此条件的群代数元素的唯一性就不平凡了：</p>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<div id="prp-c-unique" class="theorem proposition">
-<p><span class="theorem-title"><strong>命题 1 (Young 对称化子的唯一性)</strong></span> 设 <span class="math inline">\(c \in \mathbb C[\mathcal S_n]\)</span> 满足对任意 <span class="math inline">\(p \in P_T\)</span>, <span class="math inline">\(q \in Q_T\)</span>，有 <span class="math inline">\(p c q = \operatorname{sgn}(q) c\)</span>，则 <span class="math inline">\(c \in \mathbb C c_T\)</span>，即 <span class="math inline">\(c\)</span> 在模掉标量乘法意义下唯一．</p>
+<p>对任意 <span class="math inline">\(g \in \mathcal S_n\)</span>，有：</p>
+<ul>
+<li><span class="math inline">\(a_{gT} = g a_T g^{-1}\)</span></li>
+<li><span class="math inline">\(b_{gT} = g b_T g^{-1}\)</span></li>
+<li><span class="math inline">\(c_{gT} = g c_T g^{-1}\)</span></li>
+</ul>
 </div>
 </div>
 </div>
 </div>
-<p>我们之后证明这一结果．</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark (对称化子的组合观点)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (对称化子的组合观点). </span>组合上来讲，行对称化后的 Young 表 <span class="math inline">\(a_T T\)</span> 可以认为是 Young 表 <span class="math inline">\(T\)</span> 无视行内数字排列得到的行等价类，即我们可以认为 <span class="citation" data-cites="sagan_symmetric_2001"><a href="#ref-sagan_symmetric_2001" role="doc-biblioref">[2, Definition 2.1.4]</a></span> 书中定义的“tabloid” <span class="math inline">\(\{ T \} := a_T T\)</span>．此时 <span class="math inline">\(\mathcal S_n\)</span> 作用在全体形状为 <span class="math inline">\(\lambda\)</span> 的 tabloid 上形成的表示即是 <span class="citation" data-cites="sagan_symmetric_2001"><a href="#ref-sagan_symmetric_2001" role="doc-biblioref">[2, Definition 2.1.5]</a></span> 定义的 <span class="math inline">\(M^T\)</span>．这些 tabloid 构成该表示的一组基，故 <span class="math inline">\(M^\lambda\)</span> 的维数为 <span class="math inline">\(n! / \lambda ! := n! / \prod_i \lambda_i !\)</span>．（书中将 <span class="math inline">\(M^T\)</span> 写作 <span class="math inline">\(M^\lambda\)</span> 其实不甚严谨：作为集合 <span class="math inline">\(M^T\)</span> 对所有形状相同的 <span class="math inline">\(T\)</span> 相等，但其上的模作用是不同的！）</p>
-<p>由行对称化子的性质，<span class="math inline">\(P_T \leq \mathcal S_n\)</span> 作用在 tabloid <span class="math inline">\(\{ T \}\)</span> 上不会有任何效果．事实上，<span class="math inline">\(M^T\)</span> 恰为从 <span class="math inline">\(P_T\)</span> 的平凡表示提升到 <span class="math inline">\(\mathcal S_n\)</span> 得到的诱导表示 <span class="math inline">\(1\uparrow_{P_T}^{\mathcal S_n}\)</span>．</p>
-<p>除考虑符号问题外，<span class="math inline">\(b_T T\)</span> 的看法类似可得——即 <span class="math inline">\(Q_T\)</span> 的交错表示提升到 <span class="math inline">\(\mathcal S_n\)</span> 的诱导表示．但，如何看待 <span class="math inline">\(c_T T\)</span> 呢？<span class="citation" data-cites="sagan_symmetric_2001"><a href="#ref-sagan_symmetric_2001" role="doc-biblioref">[2, Definition 2.3.2]</a></span> 生造的“polytabloid” <span class="math inline">\(\boldsymbol e_t\)</span> 看上去也十分生硬．但至少 <a href="#prp-c-unique" class="quarto-xref">命题&nbsp;1</a> 指出，做一次 Young 对称化和做很多次 Young 对称化没有区别．</p>
-</div>
-</div>
-</div>
-</div>
-<p>Young 表 <span class="math inline">\(T\)</span> 诱导得到的 Specht 模 <span class="math inline">\(V_T := \mathbb C[\mathcal S_n] c_T\)</span>．我们将以迅捷速度完成 <span class="math inline">\(\mathcal S_n\)</span> 复表示的分类：</p>
+<p>Young 表 <span class="math inline">\(T\)</span> 诱导得到的 Specht 模 <span class="math inline">\(V_T\)</span> 定义为 <span class="math inline">\(\mathbb C[\mathcal S_n] c_T\)</span>，于是 <span class="math inline">\(\mathcal S_n\)</span> 复不可约表示分类描述如下：</p>
 <ul>
 <li>每个 Specht 模都是 <span class="math inline">\(\mathcal S_n\)</span> 的不可约表示</li>
 <li>两个 Specht 模同构当且仅当诱导它们的 Young 表具有相同的形状</li>
 <li><span class="math inline">\(\mathcal S_n\)</span> 的每个不可约表示都同构于某一 Specht 模</li>
 </ul>
-<p>并计划在未来填坑如下内容：</p>
-<ul>
-<li>每个 Specht 模 <span class="math inline">\(V_T\)</span> 的维数恰为形状同 <span class="math inline">\(T\)</span> 的标准 Young 表的个数</li>
-<li>Specht 模对应的特征标</li>
-</ul>
 </section>
-<section id="specht-模的不可约性" class="level2 page-columns page-full" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="specht-模的不可约性"><span class="header-section-number">2</span> Specht 模的不可约性</h2>
-<p>首先介绍一个必要的组合结果．</p>
+<section id="schur-引理" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="schur-引理"><span class="header-section-number">2</span> Schur 引理</h2>
+<p>我们关心的所有 Specht 模的性质可以紧凑地写为如下命题：</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<div id="prp-srdc" class="theorem proposition">
-<p><span class="theorem-title"><strong>命题 2 (同形状 Young 表的 S.R.D.C.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>)</strong></span> 设 <span class="math inline">\(T, S\)</span> 是形状为 <span class="math inline">\(\lambda\)</span> 的两个 Young 表，若任意一对 <span class="math inline">\(T\)</span> 中同行的数字均落在 <span class="math inline">\(S\)</span> 中的不同列，则存在 <span class="math inline">\(p \in P_T,q' \in Q_S\)</span> 使得 <span class="math inline">\(pT = q'S\)</span>．</p>
-<p>作为推论，考虑 <span class="math inline">\(T,S\)</span> 间的作用转移关系．令 <span class="math inline">\(S = gT\)</span>，<span class="math inline">\(q' = g q g^{-1}\)</span>，这里 <span class="math inline">\(q \in Q_T\)</span>，则 <span class="math inline">\(pT = q'S = gqT\)</span>，于是 <span class="math inline">\(g=p q^{-1} \in P_T Q_T\)</span>．</p>
+<div id="thm-specht-hom" class="theorem">
+<p><span class="theorem-title"><strong>定理 1</strong></span> 设 <span class="math inline">\(T,S\)</span> 是大小均为 <span class="math inline">\(n\)</span> 的 Young 表，则 Specht 模 <span class="math inline">\(V_T, V_S\)</span> 间的全体 <span class="math inline">\(\mathbb C[\mathcal S_n]\)</span>-同态 <span class="math inline">\(\operatorname{Hom}_{\mathcal S_n} (V_T, V_S)\)</span> 维数为 <span class="math inline">\(1\)</span> 当且仅当 Young 表 <span class="math inline">\(T\)</span>, <span class="math inline">\(S\)</span> 形状相同，否则为 <span class="math inline">\(0\)</span>．</p>
 </div>
 </div>
 </div>
 </div>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Same row, different column</p></div></div><div class="callout callout-style-default callout-note callout-titled">
+<p>即要求我们验证 Specht 模们满足 Schur 引理——根据有限群表示论的基本结果，这将自动导出每个 Specht 特征标的不可约性和它们之间的同构情况．再利用对称群的共轭类数等于整数分拆数等于 Young 表形状数的事实，我们就完成了 <span class="math inline">\(\mathcal S_n\)</span> 的复不可约表示的分类．</p>
+</section>
+<section id="hom-的新刻画" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="hom-的新刻画"><span class="header-section-number">3</span> Hom 的新刻画</h2>
+<p>假定我们已经证明 <span class="math inline">\(c_T\)</span> 是 <span class="math inline">\(\mathbb C[\mathcal S_n]\)</span> 中的幂等元（或其常数倍），则上述 Hom 空间有更好的刻画：</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-hom-iso" class="theorem proposition">
+<p><span class="theorem-title"><strong>命题 2</strong></span> 作为 <span class="math inline">\(\mathbb C\)</span>-线性空间： <span class="math display">\[
+\operatorname{Hom}_{\mathcal S_n} (V_T, V_S) \cong c_T \mathbb C[\mathcal S_n] c_S
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<p>这一结果由如下一般的命题提供：</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-hom-idem" class="theorem proposition">
+<p><span class="theorem-title"><strong>命题 3</strong></span> 对任意含幺环 <span class="math inline">\(R\)</span>，<span class="math inline">\(R\)</span>-模 <span class="math inline">\(M\)</span> 和幂等元 <span class="math inline">\(e \in R\)</span>，我们有典范的 <span class="math inline">\(C_R(e)\)</span>-模同构 <span class="math display">\[
+\begin{aligned}
+e M &amp;\cong \operatorname{Hom}_R(Re, M) \\
+e m &amp;\mapsto (re \mapsto rem)
+\end{aligned}
+\]</span> 这里 <span class="math inline">\(C_R(e)\)</span> 是环 <span class="math inline">\(R\)</span> 中所有与 <span class="math inline">\(e\)</span> 交换的元素构成的子环．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -614,7 +653,50 @@ window.Quarto = {
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
-<p><span class="proof-title"><em>证明</em>. </span>如图所示，将 <span class="math inline">\(T\)</span> 中第一行全体元素取出，其在 <span class="math inline">\(S\)</span> 中的对应元素必然在不同列．因此，可以通过 <span class="math inline">\(S\)</span> 上的列置换将其移至 <span class="math inline">\(S\)</span> 的第一行．随后对 <span class="math inline">\(T\)</span> 的第一行元素做行置换即可使得 <span class="math inline">\(T\)</span> 的第一行与 <span class="math inline">\(S\)</span> 的第一行相同．顺次对第二行，第三行完成上述操作即可． <span class="math display">\[
+<p><span class="proof-title"><em>证明</em>. </span>这是因为每个 <span class="math inline">\(R e \to M\)</span> 的 <span class="math inline">\(R\)</span>-同态 <span class="math inline">\(\varphi\)</span> 都由 <span class="math inline">\(e \mapsto \varphi(e)\)</span> 唯一确定，且 <span class="math inline">\(\varphi(e) = \varphi (e^2) = e \varphi(e) \in e M\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<p>于是 <span class="math display">\[
+\operatorname{Hom}_{\mathcal S_n}(V_T, V_S) = \operatorname{Hom}_{\mathcal S_n}(\mathbb C[\mathcal S_n] c_T, \mathbb C[\mathcal S_n] c_S) \cong c_T \mathbb C[\mathcal S_n] c_S
+\]</span></p>
+<p>根据上述讨论，接下来的首要任务是研究 <span class="math inline">\(c_T\)</span> 的幂等性和 <span class="math inline">\(c_T \mathbb C[\mathcal S_n] c_S\)</span> 的维数．注意 <span class="math inline">\(c_T = a_T b_T\)</span> 且 <span class="math inline">\(c_T x c_S = a_T (b_T x a_S) b_S\)</span>，故两个问题都需要我们更详细地研究 <span class="math inline">\(a_T x b_S\)</span> 的性质．</p>
+</section>
+<section id="同形状的情形" class="level2 page-columns page-full" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="同形状的情形"><span class="header-section-number">4</span> 同形状的情形</h2>
+<p>首先介绍一个必要的组合结果．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-srdc" class="theorem proposition">
+<p><span class="theorem-title"><strong>命题 4 (同形状 Young 表的 S.R.D.C.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>)</strong></span> 设 <span class="math inline">\(T, S\)</span> 是形状为 <span class="math inline">\(\lambda\)</span> 的两个 Young 表，则以下条件等价：</p>
+<ul>
+<li>任意一对 <span class="math inline">\(T\)</span> 中同行的数字均落在 <span class="math inline">\(S\)</span> 中的不同列</li>
+<li>存在 <span class="math inline">\(p \in P_T,q' \in Q_S\)</span> 使得 <span class="math inline">\(pT = q'S\)</span></li>
+<li>存在 <span class="math inline">\(p \in P_T\)</span>, <span class="math inline">\(q \in Q_T\)</span> 使得 <span class="math inline">\(S = pqT\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Same row, different column</p></div></div><div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span><strong>(1) =&gt; (2):</strong> 如图所示，将 <span class="math inline">\(T\)</span> 中第一行全体元素取出，其在 <span class="math inline">\(S\)</span> 中的对应元素必然在不同列．因此，可以通过 <span class="math inline">\(S\)</span> 上的列置换将其移至 <span class="math inline">\(S\)</span> 的第一行．随后对 <span class="math inline">\(T\)</span> 的第一行元素做行置换即可使得 <span class="math inline">\(T\)</span> 的第一行与 <span class="math inline">\(S\)</span> 的第一行相同．顺次对第二行，第三行完成上述操作即可． <span class="math display">\[
 \begin{matrix}
 T &amp;
 \begin{matrix}
@@ -646,12 +728,14 @@ l &amp; k &amp; i &amp; j \\
 &amp; \xrightarrow{q'_2 \in Q_S} &amp; \dots
 \end{matrix}
 \]</span></p>
+<p><strong>(2) =&gt; (3):</strong> 设 <span class="math inline">\(S = gT\)</span>，则存在 <span class="math inline">\(q \in Q_T\)</span> 使得 <span class="math inline">\(q' = g q g^{-1}\)</span>，则 <span class="math inline">\(pT = q'S = (g q g^{-1}) (gT) = gq T\)</span>，即 <span class="math inline">\(p = gq\)</span> 或 <span class="math inline">\(g = p q^{-1}\)</span>．</p>
+<p><strong>(3) =&gt; (1):</strong> 考虑 <span class="math inline">\(T\)</span> 中的某一行的数字．<span class="math inline">\(q\)</span> 对 <span class="math inline">\(T\)</span> 的作用将它们上下平移．<span class="math inline">\(p\)</span> 对 <span class="math inline">\(qT\)</span> 的作用再对它们做一个内部的置换．操作结束后，它们仍在不同列．</p>
 </div>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -660,17 +744,28 @@ l &amp; k &amp; i &amp; j \\
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>这个条件甚至是当且仅当的：对任意 <span class="math inline">\(p \in P_T\)</span>, <span class="math inline">\(q \in Q_T\)</span>，<span class="math inline">\(pT\)</span> 的同行元素确落在 <span class="math inline">\(qT\)</span> 的不同列．<a href="#prp-srdc" class="quarto-xref">命题&nbsp;2</a> 事实上给出了 <span class="math inline">\(S = g T \in P_T Q_T T\)</span>，或者说 <span class="math inline">\(g \in P_T Q_T\)</span> 的充要条件．值得一提——这一关系既不对称，也不传递．</p>
+<p><span class="proof-title"><em>注记</em>. </span>值得一提，<span class="math inline">\(P_T\)</span>, <span class="math inline">\(Q_T\)</span> 并不互相交换，二者的乘积也不构成群．</p>
 </div>
 </div>
 </div>
 </div>
-<p>下面证明 <a href="#prp-c-unique" class="quarto-xref">命题&nbsp;1</a>．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-c-unique" class="theorem proposition">
+<p><span class="theorem-title"><strong>命题 5 (Young 对称化子的唯一性)</strong></span> 设 <span class="math inline">\(c \in \mathbb C[\mathcal S_n]\)</span> 满足对任意 <span class="math inline">\(p \in P_T\)</span>, <span class="math inline">\(q \in Q_T\)</span>，有 <span class="math inline">\(p c q = \operatorname{sgn}(q) c\)</span>，则 <span class="math inline">\(c \in \mathbb C c_T\)</span>，即 <span class="math inline">\(c\)</span> 在模掉标量乘法意义下唯一．</p>
+</div>
+</div>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -679,7 +774,7 @@ l &amp; k &amp; i &amp; j \\
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
 <p><span class="proof-title"><em>证明</em>. </span>不妨设 <span class="math inline">\(c = \sum_{g \in \mathcal S_n} n_g g\)</span> 是满足对任意 <span class="math inline">\(p \in P_T\)</span>, <span class="math inline">\(q \in Q_T\)</span>，有 <span class="math inline">\(p c q = \operatorname{sgn}(q) c\)</span> 的某一 <span class="math inline">\(\mathbb C[\mathcal S_n]\)</span> 中元素．注意我们已经知道满足这条件的 Young 对称化子 <span class="math display">\[
@@ -694,7 +789,7 @@ c_T = a_T b_T = \sum_{p \in P_T} \sum_{Q \in Q_T} \operatorname{sgn}(q) pq
 <ul>
 <li>对所有 <span class="math inline">\(g \notin P_T Q_T\)</span>，有 <span class="math inline">\(n_g = 0\)</span> 成立．</li>
 </ul>
-<p>由 <a href="#prp-srdc" class="quarto-xref">命题&nbsp;2</a>，此时存在一对数字 <span class="math inline">\((i,j)\)</span> 落在 <span class="math inline">\(T\)</span> 上同行 <span class="math inline">\(S:=gT\)</span> 上同列的位置，翻译过来便是对换 <span class="math inline">\(p := (i,j) \in P_T \cap Q_S = P_T \cap g Q_T g^{-1}\)</span>．于是可取对换 <span class="math inline">\(q := g^{-1} p g \in Q_T\)</span>，这样就有 <span class="math display">\[
+<p>由 <a href="#prp-srdc" class="quarto-xref">命题&nbsp;4</a>，此时存在一对数字 <span class="math inline">\((i,j)\)</span> 落在 <span class="math inline">\(T\)</span> 上同行 <span class="math inline">\(S:=gT\)</span> 上同列的位置，翻译过来便是对换 <span class="math inline">\(p := (i,j) \in P_T \cap Q_S = P_T \cap g Q_T g^{-1}\)</span>．于是可取对换 <span class="math inline">\(q := g^{-1} p g \in Q_T\)</span>，这样就有 <span class="math display">\[
 n_g = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 \]</span> 因此 <span class="math inline">\(n_g = 0\)</span>．</p>
 </div>
@@ -708,13 +803,184 @@ n_g = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 </div>
 <div class="callout-body-container">
 <div id="cor-cxc" class="theorem corollary">
-<p><span class="theorem-title"><strong>推论 1</strong></span> <span class="math inline">\(c_T x c_T \in \mathbb C c_T\)</span> 对任意 <span class="math inline">\(x \in \mathbb C[\mathcal S_n]\)</span> 成立．</p>
+<p><span class="theorem-title"><strong>推论 1</strong></span> <span class="math inline">\(c_T x c_T \in \mathbb C c_T\)</span> 对任意 <span class="math inline">\(x \in \mathbb C[\mathcal S_n]\)</span> 成立．特别地，<span class="math inline">\(c_T^2 \in \mathbb C c_T\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="cor-cxc-dim" class="theorem corollary">
+<p><span class="theorem-title"><strong>推论 2</strong></span> 对同形状 Young 表 <span class="math inline">\(T\)</span>, <span class="math inline">\(S\)</span>，<span class="math inline">\(\dim c_S \mathbb C[\mathcal S_n] c_T = 1\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span>设 <span class="math inline">\(S = gT\)</span>，则 <span class="math inline">\(c_S \mathbb C[\mathcal S_n] c_T = g c_T \mathbb C[\mathcal S_n] c_T\)</span>，因此只需考察 <span class="math inline">\(c_T \mathbb C[\mathcal S_n] c_T\)</span> 的维数．由 <a href="#cor-cxc-dim" class="quarto-xref">推论&nbsp;2</a>，只需证其中存在非零元．直接用 <span class="math inline">\(V_T \to V_T\)</span> 的恒等映射即可断言确有非零元．</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="不同形状的情形" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="不同形状的情形"><span class="header-section-number">5</span> 不同形状的情形</h2>
+<p>受之前 <a href="#prp-srdc" class="quarto-xref">命题&nbsp;4</a> 刻画同形状 Young 表间群作用关系的启发，我们可能也需要从组合上对 Young 表形状不同一事做一点文章．以后设 <span class="math inline">\(T,S\)</span> 为形状分别为 <span class="math inline">\(\lambda, \mu \vdash n\)</span> 的 Young 表，不妨设 <span class="math inline">\(\lambda &gt; \mu\)</span>（这里全序取为 <span class="math inline">\(n\)</span> 的整数划分的字典序）．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-srdc-diff" class="theorem proposition">
+<p><span class="theorem-title"><strong>命题 6 (不同形状 Young 表的 S.R.D.C.)</strong></span> 存在一对互异数字 <span class="math inline">\((i,j)\)</span> 既落在 <span class="math inline">\(T\)</span> 中同一行，也落在 <span class="math inline">\(S\)</span> 中同一列．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span>若不然，设第 <span class="math inline">\(i\)</span> 行是第一个 <span class="math inline">\(\lambda_i &gt; \mu_i\)</span> 的行．在此行之前，使用与 <a href="#prp-srdc" class="quarto-xref">命题&nbsp;4</a> 一样的方法，可以在对 <span class="math inline">\(T\)</span> 做行置换和对 <span class="math inline">\(S\)</span> 做列置换后使得 <span class="math inline">\(T\)</span> 与 <span class="math inline">\(S\)</span> 的前 <span class="math inline">\(i-1\)</span> 行相同．考察 <span class="math inline">\(T\)</span> 的第 <span class="math inline">\(i\)</span> 行的 <span class="math inline">\(\lambda_i\)</span> 个元素，它们应落在 <span class="math inline">\(S\)</span> 的第 <span class="math inline">\(i\)</span> 行及其下方，且列号互不相同．但这些行的长度 <span class="math inline">\(\mu_j \leq \mu_i &lt; \lambda\)</span>，根本装不下 <span class="math inline">\(\lambda_i\)</span> 个元素，矛盾．</p>
 </div>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>会问在何种程度上此命题的否命题成立．事实上有：若每个落在 <span class="math inline">\(T\)</span> 中同行的互异数对均落在 <span class="math inline">\(S\)</span> 中的不同列，则 <span class="math inline">\(\lambda\)</span> 的每个前缀和均小于等于 <span class="math inline">\(\mu\)</span> 的对应前缀和（此偏序记为 <span class="math inline">\(\lambda \trianglelefteq \mu\)</span>，字典序是它的细化版本）．仿照 <a href="#prp-srdc" class="quarto-xref">命题&nbsp;4</a> 读者自证不难，亦可见 <span class="citation" data-cites="sagan_symmetric_2001"><a href="#ref-sagan_symmetric_2001" role="doc-biblioref">[2, lemma 2.2.4]</a></span>．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="cor-axb" class="theorem corollary">
+<p><span class="theorem-title"><strong>推论 3</strong></span> 对任意 <span class="math inline">\(x \in \mathbb C[\mathcal S_n]\)</span> 都有 <span class="math inline">\(a_T x b_S = 0\)</span>．特别地，<span class="math inline">\(c_T c_S = 0\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span>不妨设这 <span class="math inline">\(\lambda &gt; \mu\)</span>．由线性性可以只考虑 <span class="math inline">\(x = g \in \mathcal S_n\)</span> 的情况．由<a href="#prp-srdc-diff" class="quarto-xref">命题&nbsp;6</a>，存在一对互异数字 <span class="math inline">\((i,j)\)</span> 既落在 <span class="math inline">\(T\)</span> 中同一行，也落在 <span class="math inline">\(gS\)</span> 中同一列，翻译过来就是对换 <span class="math inline">\(p := (i,j) \in P_T \cap Q_{gS}\)</span>．于是 <span class="math display">\[
+a_T g b_S = a_T (g b_S g^{-1}) g = a_T b_{gS} g = a_T p p b_{gS} g = \operatorname{sgn}(p) a_T b_{gS} g = -a_T b_{gS} g = -a_T g b_S
+\]</span> 故 <span class="math inline">\(a_T g b_S = 0\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>在 <span class="math inline">\(\lambda &lt; \mu\)</span> 时是否也有 <span class="math inline">\(a_T x b_S = 0\)</span> 呢？答案是肯定的．请参考 <span class="citation" data-cites="fulton_representation_2004"><a href="#ref-fulton_representation_2004" role="doc-biblioref">[1, Exercise 4.24]</a></span>．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="cor-cxc-diff-dim" class="theorem corollary">
+<p><span class="theorem-title"><strong>推论 4</strong></span> 对不同形状 Young 表 <span class="math inline">\(T\)</span>, <span class="math inline">\(S\)</span>，<span class="math inline">\(\dim c_S \mathbb C[\mathcal S_n] c_T = 0\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<p>综上，我们完成了 <span class="math inline">\(\mathcal S_n\)</span> 的复不可约表示的分类：它们恰为全体 Specht 模 <span class="math inline">\(V_T\)</span>，其中 <span class="math inline">\(T\)</span> 是形状为 <span class="math inline">\(\lambda \vdash n\)</span> 的 Young 表．两个 Specht 模同构当且仅当诱导它们的 Young 表具有相同的形状．</p>
+</section>
+
+
+
+<div id="quarto-appendix" class="default"><section id="附录" class="level2 appendix unnumbered"><h2 class="anchored quarto-appendix-heading">附录</h2><div class="quarto-appendix-contents">
+
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark (对称化子的组合观点)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em> (对称化子的组合观点). </span>组合上来讲，行对称化后的 Young 表 <span class="math inline">\(a_T T\)</span> 可以认为是 Young 表 <span class="math inline">\(T\)</span> 无视行内数字排列得到的行等价类，即我们可以认为 <span class="citation" data-cites="sagan_symmetric_2001"><a href="#ref-sagan_symmetric_2001" role="doc-biblioref">[2, Definition 2.1.4]</a></span> 书中定义的“tabloid” <span class="math inline">\(\{ T \} := a_T T\)</span>．此时 <span class="math inline">\(\mathcal S_n\)</span> 作用在全体形状为 <span class="math inline">\(\lambda\)</span> 的 tabloid 上形成的表示即是 <span class="citation" data-cites="sagan_symmetric_2001"><a href="#ref-sagan_symmetric_2001" role="doc-biblioref">[2, Definition 2.1.5]</a></span> 定义的 <span class="math inline">\(M^T\)</span>．这些 tabloid 构成该表示的一组基，故 <span class="math inline">\(M^\lambda\)</span> 的维数为 <span class="math inline">\(n! / \lambda ! := n! / \prod_i \lambda_i !\)</span>．（书中将 <span class="math inline">\(M^T\)</span> 写作 <span class="math inline">\(M^\lambda\)</span> 其实不甚严谨：作为集合 <span class="math inline">\(M^T\)</span> 对所有形状相同的 <span class="math inline">\(T\)</span> 相等，但其上的模作用是不同的！）</p>
+<p>由行对称化子的性质，<span class="math inline">\(P_T \leq \mathcal S_n\)</span> 作用在 tabloid <span class="math inline">\(\{ T \}\)</span> 上不会有任何效果．事实上，<span class="math inline">\(M^T\)</span> 恰为从 <span class="math inline">\(P_T\)</span> 的平凡表示提升到 <span class="math inline">\(\mathcal S_n\)</span> 得到的诱导表示 <span class="math inline">\(1\uparrow_{P_T}^{\mathcal S_n}\)</span>．</p>
+<p>除考虑符号问题外，<span class="math inline">\(b_T T\)</span> 的看法类似可得——即 <span class="math inline">\(Q_T\)</span> 的交错表示提升到 <span class="math inline">\(\mathcal S_n\)</span> 的诱导表示．但，如何看待 <span class="math inline">\(c_T T\)</span> 呢？<span class="citation" data-cites="sagan_symmetric_2001"><a href="#ref-sagan_symmetric_2001" role="doc-biblioref">[2, Definition 2.3.2]</a></span> 生造的“polytabloid” <span class="math inline">\(\boldsymbol e_t\)</span> 看上去也十分生硬．但至少 <a href="#prp-c-unique" class="quarto-xref">命题&nbsp;5</a> 指出，做一次 Young 对称化和做很多次 Young 对称化没有区别．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -723,7 +989,7 @@ n_g = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>注记</em> (<span class="math inline">\(c_T\)</span> 的“幂等系数”). </span>可设 <span class="math inline">\(c_T^2 = \alpha c_T\)</span>，<span class="math inline">\(\alpha \in \mathbb C\)</span>．将 <span class="math inline">\(c_T\)</span> 看作左乘在 <span class="math inline">\(\mathbb C[\mathcal S_n]\)</span> 上的线性变换，它几乎是幂等变换，此时 <span class="math inline">\(\ker c_T \oplus \operatorname{im}c_T = \mathbb C[\mathcal S_n]\)</span>．这里 <span class="math inline">\(\operatorname{im}c_T\)</span> 就是 <span class="math inline">\(V_T\)</span>，因此 <span class="math inline">\(c_T\)</span> 的迹 <span class="math inline">\(\operatorname{tr}c_T = \alpha \dim V_T\)</span>．注意 <span class="math inline">\(c_T\)</span> 左作用在 <span class="math inline">\(g\)</span> 上得到向量的 <span class="math inline">\(g\)</span> 分量对应系数（记为 <span class="math inline">\([g] (c_T g)\)</span>）恰为 <span class="math inline">\(1\)</span>，故 <span class="math inline">\(\operatorname{tr}c_T = n!\)</span>．综上 <span class="math inline">\(\alpha = n! / \dim V_T\)</span>．</p>
@@ -732,7 +998,7 @@ n_g = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -741,7 +1007,7 @@ n_g = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="hidden proof remark">
 <p><span class="proof-title"><em>注记</em> (关于 <span class="math inline">\(P_T Q_T \cap Q_T P_T\)</span> 的一个错误猜想，已隐藏). </span><span class="math inline">\(\alpha\)</span> 也应等于 <span class="math inline">\(c_T^2\)</span> 在单位元处的系数 <span class="math display">\[
@@ -788,194 +1054,8 @@ n_g = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 </div>
 </div>
 </div>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<div id="prp-specht-irr" class="theorem proposition">
-<p><span class="theorem-title"><strong>命题 3 (Specht 模的不可约性)</strong></span> Specht 模 <span class="math inline">\(V_T := \mathbb C[\mathcal S_n] c_T\)</span> 是 <span class="math inline">\(\mathcal S_n\)</span> 的复不可约表示．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">注记</span>Proof
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="proof">
-<p><span class="proof-title"><em>证明</em>. </span>设 <span class="math inline">\(V_T\)</span> 有子表示 <span class="math inline">\(W \subseteq V_T\)</span>，则子空间 <span class="math display">\[
-c_T W \subset c_T V_T = c_T \mathbb C[\mathcal S_n] c_T \subset \mathbb C c_T
-\]</span> 后者是一维子空间，故分以下两种情况讨论：</p>
-<ul>
-<li><p><span class="math inline">\(c_T W = \mathbb C c_T\)</span>． 此时 <span class="math display">\[
-V_T = \mathbb C[\mathcal S_n] c_T = \mathbb C[\mathcal S_n] (\mathbb C c_T) = \mathbb C[\mathcal S_n] W = W
-\]</span></p></li>
-<li><p><span class="math inline">\(c_T W = 0\)</span>．此时对任意 <span class="math inline">\(w = x c_T \in W\)</span> 都有 <span class="math inline">\(w^2 = x c_T w = 0\)</span>，即 <span class="math inline">\(W^2 = 0\)</span>．我们知道有限维半单群代数 <span class="math inline">\(\mathbb C[\mathcal S_n]\)</span> 中没有非零幂零左理想，故 <span class="math inline">\(w=0\)</span>，<span class="math inline">\(W=0\)</span>．</p>
-<blockquote class="blockquote">
-<p>啊这可能有点 fancy，我们也给出一个来自 <a href="https://math.stackexchange.com/questions/4329256/about-young-symmetrizer-c-lambda">Math StackExchange</a> 的直接证明：</p>
-<p>由群表示的完全可约性，存在子表示 <span class="math inline">\(U\)</span> 使得 <span class="math inline">\(U \oplus W = \mathbb C[\mathcal S_n]\)</span>．故可记 <span class="math inline">\(1 = u + w\)</span>，这里 <span class="math inline">\(u \in U\)</span>, <span class="math inline">\(v \in V\)</span>．于是 <span class="math inline">\(W \ni w = w (u+w) = wu + w^2 = wu \in U\)</span>，故 <span class="math inline">\(w=0\)</span>，<span class="math inline">\(1 \in U\)</span>，<span class="math inline">\(U=\mathbb C[\mathcal S_n]\)</span>，<span class="math inline">\(W=0\)</span>．</p>
-</blockquote></li>
-</ul>
-<p>综上，<span class="math inline">\(V_T\)</span> 是 <span class="math inline">\(\mathcal S_n\)</span> 的复不可约表示．</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="sec-classification" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="sec-classification"><span class="header-section-number">3</span> 复不可约表示的分类</h2>
-<p>已经找到了一大类 <span class="math inline">\(\mathcal S_n\)</span> 的复不可约表示——Specht 模 <span class="math inline">\(V_T\)</span>．下面我们证明事实上只有这些复不可约表示．回忆本质不同复不可约表示的数量等于群的共轭类的数量，而 <span class="math inline">\(\mathcal S_n\)</span> 的共轭类数恰为 <span class="math inline">\(n\)</span> 的整数拆分的数量，故只要证明</p>
-<ul>
-<li>两个 Specht 模同构当且仅当诱导它们的 Young 表具有相同的形状</li>
-</ul>
-<p>就完成了 <span class="math inline">\(\mathcal S_n\)</span> 的复不可约表示的分类．</p>
-<p>首先处理同形状 <span class="math inline">\(\lambda \vdash n\)</span> Young 表 <span class="math inline">\(T, S:=gT\)</span> 诱导的 Specht 模 <span class="math inline">\(V_T\)</span>, <span class="math inline">\(V_S\)</span> 之间的同构问题．这个只需注意到 <span class="math inline">\(c_{gT} = g c_T g^{-1}\)</span> 便可嗯造如下： <span class="math display">\[
-\begin{aligned}
-\varphi: V_T &amp;\to V_S \\
-x &amp;\mapsto x g^{-1}
-\end{aligned}
-\]</span> 那下面来处理形状不同的情况．受之前 <a href="#prp-srdc" class="quarto-xref">命题&nbsp;2</a> 刻画同形状 Young 表间群作用关系的启发，我们可能也需要从组合上对 Young 表形状不同一事做一点文章．以后设 <span class="math inline">\(T,S\)</span> 为形状分别为 <span class="math inline">\(\lambda, \mu \vdash n\)</span> 的 Young 表，不妨设 <span class="math inline">\(\lambda &gt; \mu\)</span>（这里全序取为 <span class="math inline">\(n\)</span> 的整数划分的字典序）．</p>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<div id="prp-srdc-diff" class="theorem proposition">
-<p><span class="theorem-title"><strong>命题 4 (不同形状 Young 表的 S.R.D.C.)</strong></span> 存在一对互异数字 <span class="math inline">\((i,j)\)</span> 既落在 <span class="math inline">\(T\)</span> 中同一行，也落在 <span class="math inline">\(S\)</span> 中同一列．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">注记</span>Proof
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="proof">
-<p><span class="proof-title"><em>证明</em>. </span>若不然，设第 <span class="math inline">\(i\)</span> 行是第一个 <span class="math inline">\(\lambda_i &gt; \mu_i\)</span> 的行．在此行之前，使用与 <a href="#prp-srdc" class="quarto-xref">命题&nbsp;2</a> 一样的方法，可以在对 <span class="math inline">\(T\)</span> 做行置换和对 <span class="math inline">\(S\)</span> 做列置换后使得 <span class="math inline">\(T\)</span> 与 <span class="math inline">\(S\)</span> 的前 <span class="math inline">\(i-1\)</span> 行相同．考察 <span class="math inline">\(T\)</span> 的第 <span class="math inline">\(i\)</span> 行的 <span class="math inline">\(\lambda_i\)</span> 个元素，它们应落在 <span class="math inline">\(S\)</span> 的第 <span class="math inline">\(i\)</span> 行及其下方，且列号互不相同．但这些行的长度 <span class="math inline">\(\mu_j \leq \mu_i &lt; \lambda\)</span>，根本装不下 <span class="math inline">\(\lambda_i\)</span> 个元素，矛盾．</p>
-</div>
-</div>
-</div>
-</div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>会问在何种程度上此命题的否命题成立．事实上有：若每个落在 <span class="math inline">\(T\)</span> 中同行的互异数对均落在 <span class="math inline">\(S\)</span> 中的不同列，则 <span class="math inline">\(\lambda\)</span> 的每个前缀和均小于等于 <span class="math inline">\(\mu\)</span> 的对应前缀和（此偏序记为 <span class="math inline">\(\lambda \trianglelefteq \mu\)</span>，字典序是它的细化版本）．仿照 <a href="#prp-srdc" class="quarto-xref">命题&nbsp;2</a> 读者自证不难，亦可见 <span class="citation" data-cites="sagan_symmetric_2001"><a href="#ref-sagan_symmetric_2001" role="doc-biblioref">[2, lemma 2.2.4]</a></span>．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<div id="cor-axb" class="theorem corollary">
-<p><span class="theorem-title"><strong>推论 2</strong></span> 对任意 <span class="math inline">\(x \in \mathbb C[\mathcal S_n]\)</span> 都有 <span class="math inline">\(a_T x b_S = 0\)</span>．特别地，<span class="math inline">\(c_T c_S = 0\)</span>．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">注记</span>Proof
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="proof">
-<p><span class="proof-title"><em>证明</em>. </span>不妨设这 <span class="math inline">\(\lambda &gt; \mu\)</span>．由线性性可以只考虑 <span class="math inline">\(x = g \in \mathcal S_n\)</span> 的情况．由<a href="#prp-srdc-diff" class="quarto-xref">命题&nbsp;4</a>，存在一对互异数字 <span class="math inline">\((i,j)\)</span> 既落在 <span class="math inline">\(T\)</span> 中同一行，也落在 <span class="math inline">\(gS\)</span> 中同一列，翻译过来就是对换 <span class="math inline">\(p := (i,j) \in P_T \cap Q_{gS}\)</span>．于是 <span class="math display">\[
-a_T g b_S = a_T (g b_S g^{-1}) g = a_T b_{gS} g = a_T p p b_{gS} g = \operatorname{sgn}(p) a_T b_{gS} g = -a_T b_{gS} g = -a_T g b_S
-\]</span> 故 <span class="math inline">\(a_T g b_S = 0\)</span>．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>在 <span class="math inline">\(\lambda &lt; \mu\)</span> 时是否也有 <span class="math inline">\(a_T x b_S = 0\)</span> 呢？答案是肯定的．请参考 <span class="citation" data-cites="fulton_representation_2004"><a href="#ref-fulton_representation_2004" role="doc-biblioref">[1, Exercise 4.24]</a></span>．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<div id="prp-specht-diff" class="theorem proposition">
-<p><span class="theorem-title"><strong>命题 5</strong></span> <span class="math inline">\(V_T\)</span>, <span class="math inline">\(V_S\)</span> 不同构．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">注记</span>Proof
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="proof">
-<p><span class="proof-title"><em>证明</em>. </span>由 <a href="#cor-cxc" class="quarto-xref">推论&nbsp;1</a> 和 <a href="#cor-axb" class="quarto-xref">推论&nbsp;2</a>，注意 <span class="math inline">\(c_T V_T = c_T \mathbb C[\mathcal S_n] c_T = \mathbb C c_T\)</span> 但 <span class="math inline">\(c_T V_S = c_T \mathbb C[\mathcal S_n] c_S = 0\)</span>，故它们不可能同构．</p>
-</div>
-</div>
-</div>
-</div>
-<p>综上，我们完成了 <span class="math inline">\(\mathcal S_n\)</span> 的复不可约表示的分类：它们恰为全体 Specht 模 <span class="math inline">\(V_T\)</span>，其中 <span class="math inline">\(T\)</span> 是形状为 <span class="math inline">\(\lambda \vdash n\)</span> 的 Young 表．两个 Specht 模同构当且仅当诱导它们的 Young 表具有相同的形状．</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -984,34 +1064,33 @@ a_T g b_S = a_T (g b_S g^{-1}) g = a_T b_{gS} g = a_T p p b_{gS} g = \operatorna
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse show">
+<div id="callout-15" class="callout-15-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>注记</em> (关于使用到的复数域 <span class="math inline">\(\mathbb C\)</span> 的特殊性质). </span></p>
 <ul>
-<li>在 <a href="#prp-specht-irr" class="quarto-xref">命题&nbsp;3</a> 中，我们使用了 <span class="math inline">\(\mathbb C\)</span> 特征不整除 <span class="math inline">\(n!\)</span> 导致的群代数 <span class="math inline">\(\mathbb C[\mathcal S_n]\)</span> 的半单性．</li>
-<li>在 <a href="#sec-classification" class="quarto-xref">小节&nbsp;3</a> 开头，我们使用了群的复不可约表示数量等于群的共轭类的数量的结果．</li>
+<li>我们使用了 <span class="math inline">\(\mathbb C\)</span> 特征不整除 <span class="math inline">\(n!\)</span> 导致的群代数 <span class="math inline">\(\mathbb C[\mathcal S_n]\)</span> 的半单性．</li>
+<li>我们使用了群的复不可约表示数量等于群的共轭类的数量的结果．</li>
 <li>其它论证没有用到 <span class="math inline">\(\mathbb C\)</span> 的特殊性质．</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
+<p>未来填坑选项：</p>
+<ul>
+<li>每个 Specht 模 <span class="math inline">\(V_T\)</span> 的维数恰为形状同 <span class="math inline">\(T\)</span> 的标准 Young 表的个数</li>
+<li>Specht 模对应的特征标</li>
+</ul>
 
 
 
-</section>
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+</div></section><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
 <div id="ref-fulton_representation_2004" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[1] </div><div class="csl-right-inline">W. Fulton 和 J. Harris, <em>Representation Theory</em>, 卷 129. 收入 Graduate Texts in Mathematics, vol. 129. New York, <span>NY</span>: Springer, 2004. doi: <a href="https://doi.org/10.1007/978-1-4612-0979-9">10.1007/978-1-4612-0979-9</a>.</div>
 </div>
 <div id="ref-sagan_symmetric_2001" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[2] </div><div class="csl-right-inline">B. E. Sagan, <em>The Symmetric Group: Representations, Combinatorial Algorithms, and Symmetric Functions</em>, Second Edition., 卷 203. 收入 Graduate Texts in Mathematics, vol. 203. New York, <span>NY</span>: Springer, 2001. doi: <a href="https://doi.org/10.1007/978-1-4757-6804-6">10.1007/978-1-4757-6804-6</a>.</div>
-</div>
-<div id="ref-serre_linear_1977" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[3] </div><div class="csl-right-inline">J.-P. Serre, <em>Linear Representations of Finite Groups</em>, 卷 42. 收入 Graduate Texts in Mathematics, vol. 42. New York, <span>NY</span>: Springer, 1977. doi: <a href="https://doi.org/10.1007/978-1-4684-9458-7">10.1007/978-1-4684-9458-7</a>.</div>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
