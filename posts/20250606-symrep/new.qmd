@@ -1,0 +1,409 @@
+---
+title: "对称群的复不可约表示"
+author: "sun123zxy"
+date: 2025/06/08
+date-modified: 2026/03/20
+lang: zh
+bibliography: index.bib
+
+categories:
+  - math
+  - algebra
+  - combinatorics
+
+number-sections: true
+
+format:
+  html:
+    other-links:
+      - text: "在知乎上阅读"
+        icon: "question-circle"
+        href: "https://zhuanlan.zhihu.com/p/1915153242335216846"
+---
+
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\Hom}{\operatorname{Hom}}
+
+我们简明快速地完成对称群的复不可约表示的分类．本文主要微调自 [@fulton_representation_2004, {section 4.2}]，亦少量参考 [@sagan_symmetric_2001, {chapter 2}]．推荐读者阅读前熟悉群的复表示的基本常识 [@fulton_representation_2004, {chapter 1--2}] 和群代数模的观点．
+
+## 速览
+
+一个 Young 图由一个整数分拆 $\lambda \vdash n$ 唯一确定，一个 Young 表将一个 $n$ 元置换填入 Young 图——本质上是一组信息 $T = (\lambda \vdash n, \sigma \in \mathcal S_n)$．如果 $T$ 的各行各列均严格单增，则称 $T$ 是标准 Young 表．
+
+:::::{#fig-y layout-ncol="2"}
+
+:::{#fig-yd}
+$$
+\begin{matrix}
+\bullet & \bullet & \bullet & \bullet \\
+\bullet & \bullet & \bullet \\
+\bullet & \bullet
+\end{matrix}
+$$
+
+形状 $\lambda = (4, 3, 2)$ 的 Young 图
+:::
+
+:::{#fig-yt}
+$$
+\begin{matrix}
+2 & 3 & 9 & 8 \\
+5 & 4 & 6 \\
+7 & 1
+\end{matrix}
+$$
+
+Young 表 $T = (\lambda \vdash n, \sigma \in \mathcal S_n)$，其形状为 $\lambda = (4, 3, 2)$，内容为 $\sigma=239854671$
+:::
+
+Young 图、Young 表例
+:::::
+
+置换 $g \in \mathcal S_n$ 作用在全体形状为 $\lambda$ 的 Young 表 $T$ 上的方式为将数字 $i$ 替换为 $g(i)$，即 $gT := (\lambda, g \sigma)$．易见对称群在固定形状 Young 表上的作用忠实且传递．作用在给定 Young 表 $T$ 上的效果表现为对同行元素的置换的那些置换构成的群记为 $P_T$，置换同列元素的记为 $Q_T$．易见 $P_T$ 和 $Q_T$ 交平凡，两群之并生成整个 $\mathcal S_n$．
+
+:::{.remark}
+
+## 置换计算速记
+
+- $\sigma \mapsto g \sigma$：对数字做置换，$(12)(23)$ 是先交换数字 $(2, 3)$，再交换数字 $(1, 2)$．
+
+- $\sigma \mapsto \sigma g$：对位置做置换，$(12)(23)$ 是先交换位置 $(1,2)$ 上的数字，再交换位置 $(2,3)$ 上的数字．
+
+- $\sigma \mapsto g \sigma g^{-1}$：对 $\sigma$ 做字面上 $g$ 的重标号．$(123)(1234)(123)^{-1} = (2314)$
+
+- 轮换计算技巧：$(2341) = (1234)=(12)(23)(34)$，数字无交集可交换．
+:::
+
+来刻画不同 Young 表行、列置换之间的关系：
+
+- $P_{gT} = g P_T g^{-1}$
+- $Q_{gT} = g Q_T g^{-1}$
+
+设 $\mathbb C[\mathcal S_n]$ 是 $S_n$ 的复群代数，即其复正则表示．定义：
+
+- 行对称化子 $a_T := \sum_{g \in P_T} g \in \mathbb C[\mathcal S_n]$
+- 列对称化子 $b_T := \sum_{g \in Q_T} \sgn(g) g \in \mathbb C[\mathcal S_n]$
+- Young 对称化子 $c_T := a_T b_T$
+
+:::{.remark}
+
+将 Young 对称化子定义为 $b_T a_T$ 也是可以的，请参考 [@fulton_representation_2004, {exercise 4.4}]．
+:::
+
+容易验证对称化子满足如下性质：
+
+:::{#prp-c-prop}
+
+对任意 $p \in P_T$, $q \in Q_T$, 
+
+- $p a_T = a_T p = a_T$
+- $q b_T = b_T q = \sgn(q) b_T$
+- $p c_T q = \sgn(q) c_T$
+
+对任意 $g \in \mathcal S_n$，有：
+
+- $a_{gT} = g a_T g^{-1}$
+- $b_{gT} = g b_T g^{-1}$
+- $c_{gT} = g c_T g^{-1}$
+:::
+
+Young 表 $T$ 诱导得到的 Specht 模 $V_T$ 定义为 $\mathbb C[\mathcal S_n] c_T$，于是 $\mathcal S_n$ 复不可约表示分类描述如下：
+
+- 每个 Specht 模都是 $\mathcal S_n$ 的不可约表示
+- 两个 Specht 模同构当且仅当诱导它们的 Young 表具有相同的形状
+- $\mathcal S_n$ 的每个不可约表示都同构于某一 Specht 模
+
+## Schur 引理
+
+我们关心的所有 Specht 模的性质可以紧凑地写为如下命题：
+
+:::{#thm-specht-hom}
+
+设 $T,S$ 是大小均为 $n$ 的 Young 表，则 Specht 模 $V_T, V_S$ 间的全体 $\mathbb C[\mathcal S_n]$-同态 $\Hom_{\mathcal S_n} (V_T, V_S)$ 维数为 $1$ 当且仅当 Young 表 $T$, $S$ 形状相同，否则为 $0$．
+:::
+
+即要求我们验证 Specht 模们满足 Schur 引理——根据有限群表示论的基本结果，这将自动导出每个 Specht 特征标的不可约性和它们之间的同构情况．再利用对称群的共轭类数等于整数分拆数等于 Young 表形状数的事实，我们就完成了 $\mathcal S_n$ 的复不可约表示的分类．
+
+## Hom 的新刻画
+
+假定我们已经证明 $c_T$ 是 $\mathbb C[\mathcal S_n]$ 中的幂等元（或其常数倍），则上述 Hom 空间有更好的刻画：
+
+:::{#prp-hom-iso}
+
+作为 $\mathbb C$-线性空间：
+$$
+\Hom_{\mathcal S_n} (V_T, V_S) \cong c_T \mathbb C[\mathcal S_n] c_S
+$$
+:::
+
+这一结果由如下一般的命题提供：
+
+:::{#prp-hom-idem}
+
+对任意含幺环 $R$，$R$-模 $M$ 和幂等元 $e \in R$，我们有典范的 $C_R(e)$-模同构
+$$
+\begin{aligned}
+e M &\cong \Hom_R(Re, M) \\
+e m &\mapsto (re \mapsto rem)
+\end{aligned}
+$$
+这里 $C_R(e)$ 是环 $R$ 中所有与 $e$ 交换的元素构成的子环．
+:::
+
+:::{.proof}
+
+这是因为每个 $R e \to M$ 的 $R$-同态 $\varphi$ 都由 $e \mapsto \varphi(e)$ 唯一确定，且 $\varphi(e) = \varphi (e^2) = e \varphi(e) \in e M$．
+:::
+
+于是
+$$
+\Hom_{\mathcal S_n}(V_T, V_S) = \Hom_{\mathcal S_n}(\mathbb C[\mathcal S_n] c_T, \mathbb C[\mathcal S_n] c_S) \cong c_T \mathbb C[\mathcal S_n] c_S
+$$
+
+根据上述讨论，接下来的首要任务是研究 $c_T$ 的幂等性和 $c_T \mathbb C[\mathcal S_n] c_S$ 的维数．注意 $c_T = a_T b_T$ 且 $c_T x c_S = a_T (b_T x a_S) b_S$，故两个问题都需要我们更详细地研究 $a_T x b_S$ 的性质．
+
+## 同形状的情形
+
+首先介绍一个必要的组合结果．
+
+:::{#prp-srdc}
+
+## 同形状 Young 表的 S.R.D.C.^[Same row, different column]
+
+设 $T, S$ 是形状为 $\lambda$ 的两个 Young 表，则以下条件等价：
+
+- 任意一对 $T$ 中同行的数字均落在 $S$ 中的不同列
+- 存在 $p \in P_T,q' \in Q_S$ 使得 $pT = q'S$
+- 存在 $p \in P_T$, $q \in Q_T$ 使得 $S = pqT$
+:::
+
+:::{.proof}
+
+**(1) => (2):** 如图所示，将 $T$ 中第一行全体元素取出，其在 $S$ 中的对应元素必然在不同列．因此，可以通过 $S$ 上的列置换将其移至 $S$ 的第一行．随后对 $T$ 的第一行元素做行置换即可使得 $T$ 的第一行与 $S$ 的第一行相同．顺次对第二行，第三行完成上述操作即可．
+$$
+\begin{matrix}
+T &
+\begin{matrix}
+i & j & k & l \\
+* & * & * \\
+* & *
+\end{matrix}
+& \xrightarrow{p_1 \in P_T} &
+\begin{matrix}
+l & k & i & j \\
+* & * & * \\
+* & *
+\end{matrix}
+& \xrightarrow{p_2 \in P_T} & \dots
+\\
+\\
+S &
+\begin{matrix}
+l & * & * & j \\
+* & * & i \\
+* & k
+\end{matrix}
+& \xrightarrow{q'_1 \in Q_S} &
+\begin{matrix}
+l & k & i & j \\
+* & * & * \\
+* & *
+\end{matrix}
+& \xrightarrow{q'_2 \in Q_S} & \dots
+\end{matrix}
+$$
+
+**(2) => (3):** 设 $S = gT$，则存在 $q \in Q_T$ 使得 $q' = g q g^{-1}$，则 $pT = q'S = (g q g^{-1}) (gT) = gq T$，即 $p = gq$ 或 $g = p q^{-1}$．
+
+**(3) => (1):** 考虑 $T$ 中的某一行的数字．$q$ 对 $T$ 的作用将它们上下平移．$p$ 对 $qT$ 的作用再对它们做一个内部的置换．操作结束后，它们仍在不同列．
+:::
+
+:::{.remark}
+
+值得一提，$P_T$, $Q_T$ 并不互相交换，二者的乘积也不构成群．
+:::
+
+:::{#prp-c-unique}
+
+## Young 对称化子的唯一性
+
+设 $c \in \mathbb C[\mathcal S_n]$ 满足对任意 $p \in P_T$, $q \in Q_T$，有 $p c q = \sgn(q) c$，则 $c \in \mathbb C c_T$，即 $c$ 在模掉标量乘法意义下唯一．
+:::
+
+:::{.proof}
+
+不妨设 $c = \sum_{g \in \mathcal S_n} n_g g$ 是满足对任意 $p \in P_T$, $q \in Q_T$，有 $p c q = \sgn(q) c$ 的某一 $\mathbb C[\mathcal S_n]$ 中元素．注意我们已经知道满足这条件的 Young 对称化子
+$$
+c_T = a_T b_T = \sum_{p \in P_T} \sum_{Q \in Q_T} \sgn(q) pq
+$$
+所以我们应当指望，也只需证明如下两个事实：
+
+- 对任意 $p \in P_T$, $q \in Q_T$，$n_{pq} = \sgn(q)$ 乘上某个常数．
+
+只需利用
+$$
+\sgn(q) \sum_{g \in \mathcal S_n} n_g g = \sgn(q) c = pcq = \sum_{g \in \mathcal S_n} n_g pgq
+$$
+便得到 $n_{pgq} = \sgn(q) n_g$．特取 $g=1$ 得 $n_{pq} = \sgn(q) n_1$，相对 $n_1$ 唯一．
+
+- 对所有 $g \notin P_T Q_T$，有 $n_g = 0$ 成立．
+
+由 [@prp-srdc]，此时存在一对数字 $(i,j)$ 落在 $T$ 上同行 $S:=gT$ 上同列的位置，翻译过来便是对换 $p := (i,j) \in P_T \cap Q_S = P_T \cap g Q_T g^{-1}$．于是可取对换 $q := g^{-1} p g \in Q_T$，这样就有
+$$
+n_g = n_{pgq} = \sgn(q) n_g = - n_g
+$$
+因此 $n_g = 0$．
+:::
+
+:::{#cor-cxc}
+
+$c_T x c_T \in \mathbb C c_T$ 对任意 $x \in \mathbb C[\mathcal S_n]$ 成立．特别地，$c_T^2 \in \mathbb C c_T$．
+:::
+
+:::{#cor-cxc-dim}
+
+对同形状 Young 表 $T$, $S$，$\dim c_S \mathbb C[\mathcal S_n] c_T = 1$．
+:::
+
+:::{.proof}
+
+设 $S = gT$，则 $c_S \mathbb C[\mathcal S_n] c_T = g c_T \mathbb C[\mathcal S_n] c_T$，因此只需考察 $c_T \mathbb C[\mathcal S_n] c_T$ 的维数．由 [@cor-cxc-dim]，只需证其中存在非零元．直接用 $V_T \to V_T$ 的恒等映射即可断言确有非零元．
+:::
+
+## 不同形状的情形
+
+受之前 [@prp-srdc] 刻画同形状 Young 表间群作用关系的启发，我们可能也需要从组合上对 Young 表形状不同一事做一点文章．以后设 $T,S$ 为形状分别为 $\lambda, \mu \vdash n$ 的 Young 表，不妨设 $\lambda > \mu$（这里全序取为 $n$ 的整数划分的字典序）．
+
+:::{#prp-srdc-diff}
+
+## 不同形状 Young 表的 S.R.D.C.
+
+存在一对互异数字 $(i,j)$ 既落在 $T$ 中同一行，也落在 $S$ 中同一列． 
+:::
+
+:::{.proof}
+
+若不然，设第 $i$ 行是第一个 $\lambda_i > \mu_i$ 的行．在此行之前，使用与 [@prp-srdc] 一样的方法，可以在对 $T$ 做行置换和对 $S$ 做列置换后使得 $T$ 与 $S$ 的前 $i-1$ 行相同．考察 $T$ 的第 $i$ 行的 $\lambda_i$ 个元素，它们应落在 $S$ 的第 $i$ 行及其下方，且列号互不相同．但这些行的长度 $\mu_j \leq \mu_i < \lambda$，根本装不下 $\lambda_i$ 个元素，矛盾．
+:::
+
+:::{.remark}
+
+会问在何种程度上此命题的否命题成立．事实上有：若每个落在 $T$ 中同行的互异数对均落在 $S$ 中的不同列，则 $\lambda$ 的每个前缀和均小于等于 $\mu$ 的对应前缀和（此偏序记为 $\lambda \trianglelefteq \mu$，字典序是它的细化版本）．仿照 [@prp-srdc] 读者自证不难，亦可见 [@sagan_symmetric_2001, {lemma 2.2.4}]．
+:::
+
+:::{#cor-axb}
+
+对任意 $x \in \mathbb C[\mathcal S_n]$ 都有 $a_T x b_S = 0$．特别地，$c_T c_S = 0$．
+:::
+
+:::{.proof}
+
+不妨设这 $\lambda > \mu$．由线性性可以只考虑 $x = g \in \mathcal S_n$ 的情况．由[@prp-srdc-diff]，存在一对互异数字 $(i,j)$ 既落在 $T$ 中同一行，也落在 $gS$ 中同一列，翻译过来就是对换 $p := (i,j) \in P_T \cap Q_{gS}$．于是
+$$
+a_T g b_S = a_T (g b_S g^{-1}) g = a_T b_{gS} g = a_T p p b_{gS} g = \sgn(p) a_T b_{gS} g = -a_T b_{gS} g = -a_T g b_S
+$$
+故 $a_T g b_S = 0$．
+:::
+
+:::{.remark}
+
+在 $\lambda < \mu$ 时是否也有 $a_T x b_S = 0$ 呢？答案是肯定的．请参考 [@fulton_representation_2004, {Exercise 4.24}]．
+:::
+
+:::{#cor-cxc-diff-dim}
+
+对不同形状 Young 表 $T$, $S$，$\dim c_S \mathbb C[\mathcal S_n] c_T = 0$．
+:::
+
+综上，我们完成了 $\mathcal S_n$ 的复不可约表示的分类：它们恰为全体 Specht 模 $V_T$，其中 $T$ 是形状为 $\lambda \vdash n$ 的 Young 表．两个 Specht 模同构当且仅当诱导它们的 Young 表具有相同的形状．
+
+## 附录 {.appendix .unnumbered}
+
+:::{.remark}
+
+## 对称化子的组合观点
+
+组合上来讲，行对称化后的 Young 表 $a_T T$ 可以认为是 Young 表 $T$ 无视行内数字排列得到的行等价类，即我们可以认为 [@sagan_symmetric_2001, {Definition 2.1.4}] 书中定义的“tabloid” $\{ T \} := a_T T$．此时 $\mathcal S_n$ 作用在全体形状为 $\lambda$ 的 tabloid 上形成的表示即是 [@sagan_symmetric_2001, {Definition 2.1.5}] 定义的 $M^T$．这些 tabloid 构成该表示的一组基，故 $M^\lambda$ 的维数为 $n! / \lambda ! := n! / \prod_i \lambda_i !$．（书中将 $M^T$ 写作 $M^\lambda$ 其实不甚严谨：作为集合 $M^T$ 对所有形状相同的 $T$ 相等，但其上的模作用是不同的！）
+
+由行对称化子的性质，$P_T \leq \mathcal S_n$ 作用在 tabloid $\{ T \}$ 上不会有任何效果．事实上，$M^T$ 恰为从 $P_T$ 的平凡表示提升到 $\mathcal S_n$ 得到的诱导表示 $1\uparrow_{P_T}^{\mathcal S_n}$．
+
+除考虑符号问题外，$b_T T$ 的看法类似可得——即 $Q_T$ 的交错表示提升到 $\mathcal S_n$ 的诱导表示．但，如何看待 $c_T T$ 呢？[@sagan_symmetric_2001, {Definition 2.3.2}] 生造的“polytabloid” $\boldsymbol e_t$ 看上去也十分生硬．但至少 [@prp-c-unique] 指出，做一次 Young 对称化和做很多次 Young 对称化没有区别．
+:::
+
+
+:::{.remark}
+
+## $c_T$ 的“幂等系数”
+
+可设 $c_T^2 = \alpha c_T$，$\alpha \in \mathbb C$．将 $c_T$ 看作左乘在 $\mathbb C[\mathcal S_n]$ 上的线性变换，它几乎是幂等变换，此时 $\ker c_T \oplus \im c_T = \mathbb C[\mathcal S_n]$．这里 $\im c_T$ 就是 $V_T$，因此 $c_T$ 的迹 $\tr c_T = \alpha \dim V_T$．注意 $c_T$ 左作用在 $g$ 上得到向量的 $g$ 分量对应系数（记为 $[g] (c_T g)$）恰为 $1$，故 $\tr c_T = n!$．综上 $\alpha = n! / \dim V_T$．
+:::
+
+::: {.remark .hidden}
+
+## 关于 $P_T Q_T \cap Q_T P_T$ 的一个错误猜想，已隐藏
+
+$\alpha$ 也应等于 $c_T^2$ 在单位元处的系数
+$$
+[\id_{\mathcal S_n}] c_T^2 = \sum_{\substack{p_1,p_2 \in P_T \\ q_1, q_2 \in Q_T \\ p_1 q_1 p_2 q_2 = \id_{\mathcal S_n}}} \sgn(q_1) \sgn(q_2) 
+$$
+
+猜想求和中的每一项都满足 $\sgn(q_1) = \sgn(q_2)$，这样就有
+$$
+\alpha = |P_T Q_T \cap Q_T P_T|
+$$
+然而这并不正确．使用如下 Sage 代码可以验证：
+
+```python
+# Define the symmetric group
+S = SymmetricGroup(8)
+
+"""
+1 2 3
+4 5 6
+7 8
+"""
+
+P_gens = [S((1,2)), S((2,3)),
+          S((4,5)), S((5,6)),
+          S((7,8))]
+Q_gens = [S((1,4)),S((4,7)),
+          S((2,5)),S((5,8)),
+          S((3,6))]
+
+# Create the subgroups P and Q
+P = S.subgroup(P_gens)
+Q = S.subgroup(Q_gens)
+
+print("P", len(P))
+print("Q", len(Q))
+
+PQ = Set([p * q for p in P for q in Q])
+QP = Set([q * p for q in Q for p in P])
+
+print("PQ:", len(PQ))
+print("QP:", len(QP))
+
+# Compute the intersection of P and Q
+cap = PQ.intersection(QP)
+
+# Display the intersection
+print("PQ cap QP:", len(cap))
+```
+:::
+
+:::{.remark}
+
+## 关于使用到的复数域 $\mathbb C$ 的特殊性质
+
+- 我们使用了 $\mathbb C$ 特征不整除 $n!$ 导致的群代数 $\mathbb C[\mathcal S_n]$ 的半单性．
+- 我们使用了群的复不可约表示数量等于群的共轭类的数量的结果．
+- 其它论证没有用到 $\mathbb C$ 的特殊性质．
+:::
+
+未来填坑选项：
+
+- 每个 Specht 模 $V_T$ 的维数恰为形状同 $T$ 的标准 Young 表的个数
+- Specht 模对应的特征标
