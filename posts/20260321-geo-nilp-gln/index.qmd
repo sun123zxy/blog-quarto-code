@@ -1,5 +1,5 @@
 ---
-title: 幂零锥和其上的几何：以 $\gl_n$ 为例
+title: 幂零锥和其上的几何：以 gl_n 为例
 author: sun123zxy
 date: 2026-03-21
 lang: zh
@@ -40,7 +40,7 @@ $\gl_n$ 是全体 $n$ 阶复方阵组成的李代数，一个 $n^2$ 维的仿射
 
 ## $\gl_n$ vs. $\sl_n$
 
-$\gl_n$ 是[约化李代数](https://en.wikipedia.org/wiki/Reductive_Lie_algebra)．这个概念比半单的 $\sl_n$ 稍微广一点：约化李代数是半单李代数和一个 Abel 李代数的直和．例如，$\gl_n = \sl_n \oplus \mathbb{C}$．大量半单李代数的性质都可以推广到约化李代数．
+$\gl_n$ 是[约化李代数（reductive Lie algebra）](https://en.wikipedia.org/wiki/Reductive_Lie_algebra)．这个概念比半单的 $\sl_n$ 稍微广一点：约化李代数是半单李代数和一个 Abel 李代数的直和．例如，$\gl_n = \sl_n \oplus \mathbb{C}$．大量半单李代数的性质都可以推广到约化李代数．
 :::
 
 行列式 $\det : \gl_n \to \mathbb{C}$ 是连续映射，定义 $\GL_n$ 是 $V$ 上的全体可逆线性变换组成的群——满足 $\det X \neq 0$ 的 $\gl_n$ 开子集．
@@ -90,13 +90,15 @@ $\gl_n$ 是[约化李代数](https://en.wikipedia.org/wiki/Reductive_Lie_algebra
 - 易见约化李代数的幂零锥就是半单部分的幂零锥直和上 Abel 的部分．例如 $\mathcal N(\gl_n) = \mathcal N(\sl_n) \oplus \mathbb{C}$．
 
 - 对半单的线性李代数来说，因为抽象 Jordan 分解和具体 Jordan 分解的一致性，$\ad$-幂零和幂零可以不做区分．
+
+Boilerplate？我知道我知道，抽象 Jordan 分解是个很长的故事——但 $\sl_n$ 的情形不需要这些废话：
 :::
 
-:::{.remark}
+:::{.proof}
 
-## Boilerplate?
+## $\sl_n$ / $\gl_n$ 上的 $\ad$-幂零
 
-我知道我知道，抽象 Jordan 分解是个很长的故事——但 $\sl_n$ 的情形不需要这些废话．回忆线性李代数中 $\ad$-幂零和幂零关系的基本处理方法：
+回忆线性李代数中 $\ad$-幂零和幂零关系的基本处理方法：
 
 - 幂零推 $\ad$-幂零是标准的左乘减右乘高次幂二项式定理论证，全球通用．
 
@@ -121,9 +123,95 @@ $\gl_n$ 是[约化李代数](https://en.wikipedia.org/wiki/Reductive_Lie_algebra
 $\mathcal N$ 不可约，是 $\gl_n$ 的一个闭子簇．
 :::
 
-我们断言，任取一个 $\mathcal N$ 中幂零指数为 $n$ 的幂零元素 $X$，其共轭轨道 $\mathcal O_X$ 是 $\mathcal N$ 中的一个稠密开集，从而由轨道的不可约性，$\mathcal N = \overline{\mathcal O_X}$ 不可约．
+我们作如下断言：任取一个 $\mathcal N$ 中幂零指数为 $n$ 的幂零元素 $X$，其幂零轨道 $\mathcal O_X$ 是 $\mathcal N$ 中的一个稠密开集，从而由轨道的不可约性，$\mathcal N = \overline{\mathcal O_X}$ 不可约．
+
+要求幂零指数恰为 $n$，就是要求幂零的同时，$X^{n-1} \neq 0$．这相当于从幂零锥中挖走了一个闭集，当然剩下一个相对幂零锥的开集．至于其稠密性，在后面给出全体轨道上的几何后就会明朗．
 
 :::{.remark}
 
-一般来说，约化 / 半单李代数的幂零锥都不可约，是李代数的闭子簇．证明方法类似：此类李代数的幂零锥中存在元素 $X$，使得其关于其 $\Ad$-群作用的幂零轨道 $\mathcal O_X$ 是幂零锥中的一个稠密开集．这种元素被称为 regular / principal nilpotent element，并有诸如中心化子维数最小等其它刻画．
+一般来说，约化 / 半单李代数的幂零锥都不可约，是李代数的闭子簇．证明路径也是类似的：此类李代数的幂零锥中存在元素 $X$，使得其关于其 $\Ad$-群作用的幂零轨道 $\mathcal O_X$ 是幂零锥中的一个稠密开集．这种元素被称为 regular / principal nilpotent element，并有诸如中心化子维数最小等其它刻画．
 :::
+
+## 幂零锥上的轨道与几何
+
+Jordan 标准型理论告诉我们，幂零轨道完全由幂零元素的 Jordan 型决定，后者与 $n$ 的整数分拆（partition）或 Young 图（Young diagram）一一对应．故以后也用 $\mathcal O_\lambda$ 的记号表示 Jordan 型为 $\lambda$ 的元素生成的幂零轨道．
+
+我们关心其上的几何，例如幂零轨道的维数和闭包关系．
+
+### 轨道的支配序
+
+先谈闭包关系．所谓闭包关系，是幂零轨道上的一个偏序关系：如果 $\mathcal O_1 \subseteq \overline{\mathcal O_2}$，就定义 $\mathcal O_1 \trianglelefteq \mathcal O_2$，称为幂零轨道上的支配序关系（dominance order）．
+
+:::{.remark}
+
+## Specialization Order
+
+一般来讲，任何拓扑空间都可以通过取闭包包含的关系定义出一个 preorder（不保证反对称性的偏序关系），名曰 [specialization order](https://en.wikipedia.org/wiki/Specialization_preorder)）．
+:::
+
+名字不是白起的，分拆上也有同名的偏序关系：如果分拆 $\lambda$ 的每个前缀和都大于等于 $\mu$ 的对应前缀和，则定义 $\lambda \trianglerighteq \mu$．形象地，利用 Young 图，这可以想象为：
+
+> 考虑 $\lambda$ 对应 Young 图中那些比下一行至少多两个方块的行，让这一行最右侧方块“掉落”到下一行．如此操作构成支配序的 covering relation．如果操作若干次可以变成 $\mu$ 的 Young 图，则 $\lambda \trianglerighteq \mu$．例如，$(4,2)$ covers $(3,3)$ 的图示如下：
+  $$
+  \begin{array}{cccc}
+  \bullet & \bullet & \bullet & \boxed\bullet \\
+  \bullet & \bullet
+  \end{array}
+  \quad\longrightarrow\quad
+  \begin{array}{ccc}
+  \bullet & \bullet & \bullet \\
+  \bullet & \bullet & \boxed\bullet
+  \end{array}
+  $$
+
+下面的命题说明两种序其实没有区别：
+
+:::{#prp-closure-dominance}
+
+$\lambda \trianglelefteq \mu$ 当且仅当 $\mathcal O_\lambda \trianglelefteq \mathcal O_\mu$．
+:::
+
+:::{.proof}
+
+这里提供一个纯组合证明．
+
+先找感觉．考虑 running example $\lambda = (4,2)$, $\mu = (3,3)$，$\lambda \trianglerighteq \mu$．如何连续地把幂零 Jordan 标准型矩阵 $J_{(4,2)}$ 变成 $J_\mu$ 呢？这样做：
+$$
+\begin{pmatrix}
+0 & 1 &   &   &   &  \\
+  & 0 & 1 &   &   &  \\
+  &   & 0 &1-t&   &  \\
+  &   &   & 0 &   &  \\
+  &   &   &   & 0 & 1 \\
+  &   &   & t & 0 & 0
+\end{pmatrix}
+$$
+这里列出标准基底 $e_4$ 在上述矩阵多次作用下的变化情况：
+$$
+e_4 \longrightarrow \begin{cases}
+t e_6 &\longrightarrow& t e_5 &\longrightarrow& 0 \\
+(1-t) e_3 &\longrightarrow& (1-t) e_2 &\longrightarrow& (1-t) e_1 &\longrightarrow& 0
+\end{cases}
+$$
+故可以看到：
+
+- 当 $t=0$ 时，就是 $J_{(4,2)}$；
+- 当 $t \neq 1$ 时，Jordan 型为 $(4,2)$．
+- 当 $t=1$ 时，Jordan 型突变为 $(3,3)$．
+
+这就是一条从 $\mathcal O_{(4,2)}$ 内部移动到 $\mathcal O_{(3,3)}$ 边缘的一条“连续路径”！
+
+抛开例子，上述论证对任意 covering relation 都适用——关注具体相邻两行之间的掉落即可！多做几次就可以证明两种序的等价．
+
+现在严格化“连续路径”的概念．仍以 $(4,2)$, $(3,3)$ 为例，我们取的这条路径 $\Gamma$，可以看作是要求矩阵的 $x_{3,4} + x_{6,4} = 1$，其它 entry 定死——因此 $\Gamma$ 是 $\mathcal N$ 的一个闭子集，除了 $t=1$ 一点之外全都落在 $\mathcal O_{(4,2)}$ 中．故
+$$
+\Gamma \cap \overline{\mathcal O_{(4,2)}} \supseteq \overline{\Gamma \cap \mathcal O_{(4,2)}} = \Gamma
+$$
+因此 $\Gamma \subseteq \overline{\mathcal O_{(4,2)}}$，$t=1$ 这个点也落在 $\overline{\mathcal O_{(4,2)}}$ 中．
+:::
+
+特别地，$\mathcal O_{(n)}$ 支配所有其它幂零轨道，故其在幂零锥中稠密．
+
+## 轨道的维数
+
+sorry
