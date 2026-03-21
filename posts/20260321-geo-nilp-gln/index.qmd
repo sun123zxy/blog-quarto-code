@@ -1,0 +1,130 @@
+---
+title: $\mathfrak{gl}_n$，幂零锥和其上的几何
+subtitle: The geometry of the nilpotent cone in $\mathfrak{gl}_n$
+author: sun123zxy
+date: 2026-03-21
+lang: zh
+
+draft: true
+
+categories:
+  - math
+  - algebra
+
+number-sections: true
+
+format:
+  html: default
+---
+
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\sl}{\mathfrak{sl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Ad}{\operatorname{Ad}}
+
+:::{#def-irr}
+
+不可约的拓扑空间不能以非平凡的方式写成两个闭子集或两个开子集的并．等价地，其任意非空开子集稠密．
+
+仿射空间是配备 Zariski 拓扑的线性空间．仿射集是仿射空间的闭子集．不可约的仿射集称为仿射簇．
+:::
+
+本文下文所用关于不可约性的纯拓扑的命题，证明均可参考 [Spec，可约与连通性](/posts/20260228-spec-connect/)．
+
+## $\gl_n$，$\GL_n$ 和共轭轨道
+
+$\gl_n$ 是全体 $n$ 阶复方阵组成的李代数，一个 $n^2$ 维的仿射空间．不妨用 $X = (x_{ij})$ 来标识其不定元．如果你更喜欢半单李代数，$\sl_n$ 是 $\gl_n$ 的一个 $n^2-1$ 维子李代数、理想和闭子簇．
+
+:::{.remark}
+
+## $\gl_n$ vs. $\sl_n$
+
+$\gl_n$ 是[约化李代数](https://en.wikipedia.org/wiki/Reductive_Lie_algebra)．这个概念比半单的 $\sl_n$ 稍微广一点：约化李代数是半单李代数和一个 Abel 李代数的直和．例如，$\gl_n = \sl_n \oplus \mathbb{C}$．大量半单李代数的性质都可以推广到约化李代数．
+:::
+
+行列式 $\det : \gl_n \to \mathbb{C}$ 是连续映射，定义 $\GL_n$ 是 $V$ 上的全体可逆线性变换组成的群——满足 $\det X \neq 0$ 的 $\gl_n$ 开子集．
+
+:::{#prp-irr-of-open}
+
+不可约空间 $X$ 的任意非空开子集 $U$ 也不可约．
+:::
+
+所以 $\GL_n$ 也不可约．
+
+有办法把 $\GL_n$ 实现成一个真正的仿射簇：关于 $\gl_n$ 的函数环在 $\det X$ 做局部化，或者更具体地，考虑 $n^2 + 1$ 维仿射空间的闭子簇 $\{(X, t) : \det X \cdot t = 1\} \subseteq \gl_n \times \mathbb{C}$．
+
+:::{.remark}
+
+存在 sheaf 啊 scheme 啊之类的抽象废话证明其与局部化观点，或与作为 $\gl_n$ 开子集的 $\GL_n$ 别无二致．
+:::
+
+那么 $\GL_n$ 现在既是个群，又是个仿射簇，群的乘法和取逆运算还都是代数的（可由多项式定义的），这使得 $\GL_n$ 成为一个仿射代数群．
+
+考虑 $\GL_n$ 在 $\gl_n$ 上的共轭作用 $g \cdot X := g X g^{-1}$．这个作用作为 $\GL_n \times \gl_n \to \gl_n$ 的映射是代数的．考虑某元素 $X \in \gl_n$ 在共轭作用下的轨道 $\mathcal O_X$，则它是上述映射的一部分 $\GL_n \to \gl_n$ 的像．
+
+:::{#prp-irr-image-irr}
+
+不可约空间的在连续映射下的像也不可约．
+:::
+
+故由于 $\GL_n$ 不可约，轨道 $\mathcal O_X$ 也不可约．
+
+:::{#prp-irr-closure}
+
+不可约集合 $S$ 的闭包 $\overline{S}$ 也不可约．
+:::
+
+因此 $\mathcal O_X$ 的闭包 $\overline{\mathcal O_X}$ 也不可约．
+
+## 幂零锥
+
+考虑 $\gl_n$ 中的所有幂零矩阵的集合，我们称它为幂零锥，记作 $\mathcal N$．如果你更喜欢半单李代数，限制在 $\sl_n$ 中考虑没有区别．此时 $\mathcal N$ 就是 $\sl_n$ 的幂零锥．
+
+:::{.remark}
+
+## 幂零与 $\ad$-幂零
+
+对一般的李代数，因为其上没有定义结合乘法，幂零锥定义为 $\ad$-幂零元素的集合．
+
+- 易见约化李代数的幂零锥就是半单部分的幂零锥直和上 Abel 的部分．例如 $\mathcal N(\gl_n) = \mathcal N(\sl_n) \oplus \mathbb{C}$．
+
+- 对半单的线性李代数来说，因为抽象 Jordan 分解和具体 Jordan 分解的一致性，$\ad$-幂零和幂零可以不做区分．
+:::
+
+:::{.remark}
+
+## Boilerplate?
+
+我知道我知道，抽象 Jordan 分解是个很长的故事——但 $\sl_n$ 的情形不需要这些废话．回忆线性李代数中 $\ad$-幂零和幂零关系的基本处理方法：
+
+- 幂零推 $\ad$-幂零是标准的左乘减右乘高次幂二项式定理论证，全球通用．
+
+- $\ad$-幂零推幂零，设 $x \in \mathfrak g$ $\ad$-幂零，考察具体 Jordan 分解 $x = x_s + x_n$，其中 $x_s$ 半单，$x_n$ 幂零，$[s, n] = 0$．现在假定 $x_s$ 和 $x_n$ 还落在 $\mathfrak g$ 中，用 $\ad$ 线性性把此式推到 $\End_{\mathbb C}(\mathfrak g)$ 得 $\ad x = \ad x_s + \ad x_n$．取基本矩阵容易验证 $\ad x_s$ 半单；前面已经证明 $x_n$ 幂零导致 $\ad x_n$ 幂零；Jacobi identity 嗯拆算得 $[\ad x_s, \ad x_n] = 0$．所以这是 $\ad x \in \End_{\mathbb C}(\mathfrak g)$ 的具体 Jordan 分解．由具体 Jordan 分解的唯一性和 $\ad x$ 幂零立得 $\ad x_s = 0$．$\mathfrak g$ 半单导致 $\ad$ 单，所以 $x_s = 0$．
+
+可以看到唯一的堵点在于证明 $x_s$ 和 $x_n$ 落在 $\mathfrak g$ 中——但这在 $\sl_n$ 的情形是显然的——所以 QED．
+
+另外，上面半单性其实只有 $\ad$ 单的最后一步用到．同样的证明适用于证明 $\gl_n$ 上 $\ad$-幂零就是差一个数乘的幂幺（形如 $\lambda I + N$，$N$ 幂零）——只需注意最后一步 $\ad x_s$ 就是 $\gl_n$ 的中心即可．注意这与我们之前讨论的约化李代数的幂零锥的结果一致．
+:::
+
+幂零性质可以转写其特征多项式满足 $\det(tI - X) = t^n$．注意特征多项式的各系数都是 $X$ 上的多项式函数，所以 $\mathcal N$ 是 $\gl_n$ 的一个闭子集．
+
+:::{.remark}
+
+## 一般李代数幂零锥上的几何
+
+对一般的 $n$ 维李代数 $\mathfrak g$，固定 $\mathfrak g$ 的一组基 $(e_i)$．取每个元素 $x$ 在这组基下的坐标 $x_i$ 作为多项式的不定元，这将 $\mathfrak g$ 实现成一个 $n$ 维仿射空间．现在每个 $\ad x = \sum_i x_i \ad e_i$．注意 $\ad e_i$ 都完全由 $\mathfrak g$ 的结构决定，因此 $\ad x$ 的特征多项式的系数都是 $x_i$ 的多项式函数．这样就将一般李代数的幂零锥实现为了 $n$ 维仿射空间的一个闭子集．
+:::
+
+:::{#prp-irr-nilp}
+
+$\mathcal N$ 不可约，是 $\gl_n$ 的一个闭子簇．
+:::
+
+我们断言，任取一个 $\mathcal N$ 中幂零指数为 $n$ 的幂零元素 $X$，其共轭轨道 $\mathcal O_X$ 是 $\mathcal N$ 中的一个稠密开集，从而由轨道的不可约性，$\mathcal N = \overline{\mathcal O_X}$ 不可约．
+
+:::{.remark}
+
+一般来说，约化 / 半单李代数的幂零锥都不可约，是李代数的闭子簇．证明方法类似：此类李代数的幂零锥中存在元素 $X$，使得其关于其 $\Ad$-群作用的幂零轨道 $\mathcal O_X$ 是幂零锥中的一个稠密开集．这种元素被称为 regular / principal nilpotent element，并有诸如中心化子维数最小等其它刻画．
+:::
