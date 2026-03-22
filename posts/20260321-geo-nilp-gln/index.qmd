@@ -153,7 +153,7 @@ Jordan 标准型理论告诉我们，幂零轨道完全由幂零元素的 Jordan
 
 ## Specialization Order
 
-一般来讲，任何拓扑空间都可以通过取闭包包含的关系定义出一个预序（不保证反对称性的偏序关系），名曰 [specialization preorder](https://en.wikipedia.org/wiki/Specialization_preorder)）．
+一般来讲，任何拓扑空间都可以通过取闭包包含的关系定义出一个预序（不保证反对称性的偏序关系），名曰 [specialization preorder](https://en.wikipedia.org/wiki/Specialization_preorder)．
 :::
 
 名字不是白起的，分拆上也有同名的偏序关系：如果分拆 $\lambda$ 的每个前缀和都大于等于 $\mu$ 的对应前缀和，则定义 $\lambda \trianglerighteq \mu$．形象地，利用 Young 图，这可以想象为：
@@ -175,12 +175,14 @@ Jordan 标准型理论告诉我们，幂零轨道完全由幂零元素的 Jordan
 
 :::{#prp-closure-dominance}
 
-$\lambda \trianglelefteq \mu$ 当且仅当 $\mathcal O_\lambda \trianglelefteq \mathcal O_\mu$．
+$\lambda \trianglerighteq \mu$ 当且仅当 $\mathcal O_\lambda \trianglerighteq \mathcal O_\mu$．
 :::
 
 :::{.proof}
 
-这里提供一个纯组合证明．
+## \implies
+
+这里提供一种基于“连续路径”的证明．
 
 先找感觉．考虑 running example $\lambda = (4,2)$, $\mu = (3,3)$，$\lambda \trianglerighteq \mu$．如何连续地把幂零 Jordan 标准型矩阵 $J_{(4,2)}$ 变成 $J_\mu$ 呢？这样做：
 $$
@@ -200,7 +202,7 @@ t e_6 &\longrightarrow& t e_5 &\longrightarrow& 0& \\
 (1-t) e_3 &\longrightarrow& (1-t) e_2 &\longrightarrow& (1-t) e_1 &\longrightarrow& 0
 \end{aligned}\right.
 $$
-故可以看到：
+可以看到：
 
 - 当 $t=0$ 时，就是 $J_{(4,2)}$；
 - 当 $t \neq 1$ 时，Jordan 型为 $(4,2)$；
@@ -215,6 +217,13 @@ $$
 \Gamma \cap \overline{\mathcal O_{(4,2)}} \supseteq \overline{\Gamma \cap \mathcal O_{(4,2)}} = \Gamma
 $$
 因此 $\Gamma \subseteq \overline{\mathcal O_{(4,2)}}$，$t=1$ 这个点也落在 $\overline{\mathcal O_{(4,2)}}$ 中．
+:::
+
+:::{.proof}
+
+## $\impliedby$
+
+sorry（rank 的下连续性）
 :::
 
 特别地，$\mathcal O_{(n)}$ 支配所有其它幂零轨道，故其在幂零锥中稠密．
