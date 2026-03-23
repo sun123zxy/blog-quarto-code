@@ -103,7 +103,6 @@ MathJax = {
   }
 };
 </script>
-<meta name="quarto:status" content="draft">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -300,7 +299,7 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>草稿</div>
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -633,7 +632,7 @@ window.Quarto = {
 <div id="callout-7" class="callout-7-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (Specialization Order). </span>一般来讲，任何拓扑空间都可以通过取闭包包含的关系定义出一个预序（不保证反对称性的偏序关系），名曰 <a href="https://en.wikipedia.org/wiki/Specialization_preorder">specialization preorder</a>）．</p>
+<p><span class="proof-title"><em>注记</em> (Specialization Order). </span>一般来讲，任何拓扑空间都可以通过取闭包包含的关系定义出一个预序（不保证反对称性的偏序关系），名曰 <a href="https://en.wikipedia.org/wiki/Specialization_preorder">specialization preorder</a>．</p>
 </div>
 </div>
 </div>
@@ -660,7 +659,7 @@ window.Quarto = {
 </div>
 <div class="callout-body-container">
 <div id="prp-closure-dominance" class="theorem proposition">
-<p><span class="theorem-title"><strong>命题 5</strong></span> <span class="math inline">\(\lambda \trianglelefteq \mu\)</span> 当且仅当 <span class="math inline">\(\mathcal O_\lambda \trianglelefteq \mathcal O_\mu\)</span>．</p>
+<p><span class="theorem-title"><strong>命题 5</strong></span> <span class="math inline">\(\lambda \trianglerighteq \mu\)</span> 当且仅当 <span class="math inline">\(\mathcal O_\lambda \trianglerighteq \mathcal O_\mu\)</span>．</p>
 </div>
 </div>
 </div>
@@ -671,14 +670,14 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">注记</span>Proof
+<span class="screen-reader-only">注记</span>Proof (<span class="math inline">\(\implies\)</span> 侧的证明)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
-<p><span class="proof-title"><em>证明</em>. </span>这里提供一个纯组合证明．</p>
+<p><span class="proof-title"><em>证明</em> (<span class="math inline">\(\implies\)</span> 侧的证明). </span>这里提供一种基于“连续路径”的证明．</p>
 <p>先找感觉．考虑 running example <span class="math inline">\(\lambda = (4,2)\)</span>, <span class="math inline">\(\mu = (3,3)\)</span>，<span class="math inline">\(\lambda \trianglerighteq \mu\)</span>．如何连续地把幂零 Jordan 标准型矩阵 <span class="math inline">\(J_{(4,2)}\)</span> 变成 <span class="math inline">\(J_\mu\)</span> 呢？这样做： <span class="math display">\[
 \begin{pmatrix}
 0 &amp; 1 &amp;   &amp;   &amp;   &amp;  \\
@@ -693,7 +692,7 @@ e_4 \longrightarrow \left\{\begin{aligned}
 t e_6 &amp;\longrightarrow&amp; t e_5 &amp;\longrightarrow&amp; 0&amp; \\
 (1-t) e_3 &amp;\longrightarrow&amp; (1-t) e_2 &amp;\longrightarrow&amp; (1-t) e_1 &amp;\longrightarrow&amp; 0
 \end{aligned}\right.
-\]</span> 故可以看到：</p>
+\]</span> 可以看到：</p>
 <ul>
 <li>当 <span class="math inline">\(t=0\)</span> 时，就是 <span class="math inline">\(J_{(4,2)}\)</span>；</li>
 <li>当 <span class="math inline">\(t \neq 1\)</span> 时，Jordan 型为 <span class="math inline">\((4,2)\)</span>；</li>
@@ -704,6 +703,35 @@ t e_6 &amp;\longrightarrow&amp; t e_5 &amp;\longrightarrow&amp; 0&amp; \\
 <p>现在严格化“连续路径”的概念．仍以 <span class="math inline">\((4,2)\)</span>, <span class="math inline">\((3,3)\)</span> 为例，我们取的这条路径 <span class="math inline">\(\Gamma\)</span>，可以看作是要求矩阵的 <span class="math inline">\(x_{3,4} + x_{6,4} = 1\)</span>，其它 entry 定死——因此 <span class="math inline">\(\Gamma\)</span> 是 <span class="math inline">\(\mathcal N\)</span> 的一个闭子集，除了 <span class="math inline">\(t=1\)</span> 一点之外全都落在 <span class="math inline">\(\mathcal O_{(4,2)}\)</span> 中．故 <span class="math display">\[
 \Gamma \cap \overline{\mathcal O_{(4,2)}} \supseteq \overline{\Gamma \cap \mathcal O_{(4,2)}} = \Gamma
 \]</span> 因此 <span class="math inline">\(\Gamma \subseteq \overline{\mathcal O_{(4,2)}}\)</span>，<span class="math inline">\(t=1\)</span> 这个点也落在 <span class="math inline">\(\overline{\mathcal O_{(4,2)}}\)</span> 中．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof (<span class="math inline">\(\impliedby\)</span> 侧的证明)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em> (<span class="math inline">\(\impliedby\)</span> 侧的证明). </span>注意如下若干事实：</p>
+<ul>
+<li><p>秩函数具有下半连续性（lower semicontinuity）：秩不大于某数 <span class="math inline">\(k\)</span> 的矩阵是闭集．秩的子式定义可以为此提供一个一句话证明：对这些矩阵的要求等价于大于 <span class="math inline">\(k\)</span> 阶的子式全为零．</p>
+<p>此性质使得当我们对幂零轨道取闭包时，元素的秩只能变小．</p></li>
+<li><p>Jordan 型为 <span class="math inline">\(\lambda\)</span> 的幂零矩阵 <span class="math inline">\(X\)</span> 满足其 <span class="math inline">\(i\)</span> 次幂的秩就是 Young 图 <span class="math inline">\(\lambda\)</span> 去掉前 <span class="math inline">\(i\)</span> 列剩下的方块数： <span class="math display">\[
+\operatorname{rk}X^k = n - \sum_{i=1}^n (\lambda^T)_i, \quad k = 0, 1, \dots
+\]</span> 这里 <span class="math inline">\(\lambda^T\)</span> 是分拆 <span class="math inline">\(\lambda\)</span> 的转置，即 Young 图沿主对角线的翻转．反过来这为我们提供了计算 Jordan 型的秩方法： <span class="math display">\[
+(\lambda^T)_i = \operatorname{rk}X^{i-1} - \operatorname{rk}X^i
+\]</span></p></li>
+<li><p><span class="math inline">\(\lambda \trianglerighteq \mu\)</span> 当且仅当 <span class="math inline">\(\lambda^T \trianglelefteq \mu^T\)</span>．可以通过 Young 图的掉落操作直观感受和证明这一点．</p></li>
+</ul>
+<p>现在设 <span class="math inline">\(\mathcal O_\lambda \trianglerighteq \mathcal O_\mu\)</span>．不妨任取 <span class="math inline">\(X \in \mathcal O_\lambda\)</span>, <span class="math inline">\(Y \in \mathcal O_\mu\)</span>．注意 <span class="math inline">\(\mu^T\)</span> 的第 <span class="math inline">\(k\)</span> 个前缀和是 <span class="math inline">\(n - \operatorname{rk}Y^k\)</span>，根据秩的下半连续性，它不小于 <span class="math inline">\(\lambda^T\)</span> 的第 <span class="math inline">\(k\)</span> 个前缀和．因此 <span class="math inline">\(\mu^T \trianglerighteq \lambda^T\)</span>，故 <span class="math inline">\(\lambda \trianglerighteq \mu\)</span>．</p>
 </div>
 </div>
 </div>
