@@ -6,8 +6,6 @@ date: 2026-03-21
 lang: zh
 bibliography: index.bib
 
-draft: true
-
 categories:
   - math
   - algebra
@@ -30,6 +28,7 @@ format:
 \newcommand{\ad}{\operatorname{ad}}
 \newcommand{\End}{\operatorname{End}}
 \newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\rk}{\operatorname{rk}}
 
 我们面向了解仿射簇、代数群、李代数但尚不熟练的读者，从相对具体的 $\gl_n$ 或 $\sl_n$ 切入，入门友好地为李代数上幂零锥的几何提供一些感觉．
 
@@ -180,7 +179,7 @@ $\lambda \trianglerighteq \mu$ 当且仅当 $\mathcal O_\lambda \trianglerighteq
 
 :::{.proof}
 
-## \implies
+## $\implies$ 侧的证明
 
 这里提供一种基于“连续路径”的证明．
 
@@ -221,9 +220,26 @@ $$
 
 :::{.proof}
 
-## $\impliedby$
+## $\impliedby$ 侧的证明
 
-sorry（rank 的下连续性）
+注意如下若干事实：
+
+- 秩函数具有下半连续性（lower semicontinuity）：秩不大于某数 $k$ 的矩阵是闭集．秩的子式定义可以为此提供一个一句话证明：对这些矩阵的要求等价于大于 $k$ 阶的子式全为零．
+
+  此性质使得当我们对幂零轨道取闭包时，元素的秩只能变小．
+
+- Jordan 型为 $\lambda$ 的幂零矩阵 $X$ 满足其 $i$ 次幂的秩就是 Young 图 $\lambda$ 去掉前 $i$ 列剩下的方块数：
+  $$
+  \rk X^k = n - \sum_{i=1}^n (\lambda^T)_i, \quad k = 0, 1, \dots
+  $$
+  这里 $\lambda^T$ 是分拆 $\lambda$ 的转置，即 Young 图沿主对角线的翻转．反过来这为我们提供了计算 Jordan 型的秩方法：
+  $$
+  (\lambda^T)_i = \rk X^{i-1} - \rk X^i
+  $$
+
+- $\lambda \trianglerighteq \mu$ 当且仅当 $\lambda^T \trianglelefteq \mu^T$．可以通过 Young 图的掉落操作直观感受和证明这一点．
+
+现在设 $\mathcal O_\lambda \trianglerighteq \mathcal O_\mu$．不妨任取 $X \in \mathcal O_\lambda$, $Y \in \mathcal O_\mu$．注意 $\mu^T$ 的第 $k$ 个前缀和是 $n - \rk Y^k$，根据秩的下半连续性，它不小于 $\lambda^T$ 的第 $k$ 个前缀和．因此 $\mu^T \trianglerighteq \lambda^T$，故 $\lambda \trianglerighteq \mu$．
 :::
 
 特别地，$\mathcal O_{(n)}$ 支配所有其它幂零轨道，故其在幂零锥中稠密．
