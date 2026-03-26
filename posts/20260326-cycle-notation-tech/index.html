@@ -8,7 +8,7 @@
 
 <meta name="author" content="sun123zxy">
 
-<title>Spec，可约与连通性 – sun123zxy’s blog</title>
+<title>置换速算技巧 – sun123zxy’s blog</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -24,27 +24,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -103,7 +83,6 @@ MathJax = {
   }
 };
 </script>
-<meta name="quarto:status" content="draft">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -300,7 +279,7 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>草稿</div>
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -363,22 +342,8 @@ window.Quarto = {
     <h2 id="toc-title">该页面内容</h2>
    
   <ul>
-  <li><a href="#定义" id="toc-定义" class="nav-link active" data-scroll-target="#定义"><span class="header-section-number">1</span> 定义</a></li>
-  <li><a href="#性质" id="toc-性质" class="nav-link" data-scroll-target="#性质"><span class="header-section-number">2</span> 性质</a>
-  <ul class="collapse">
-  <li><a href="#纯拓扑性质" id="toc-纯拓扑性质" class="nav-link" data-scroll-target="#纯拓扑性质"><span class="header-section-number">2.1</span> 纯拓扑性质</a></li>
-  <li><a href="#spec-不可约-implies-spec-连通" id="toc-spec-不可约-implies-spec-连通" class="nav-link" data-scroll-target="#spec-不可约-implies-spec-连通"><span class="header-section-number">2.2</span> Spec 不可约 <span class="math inline">\(\implies\)</span> Spec 连通</a></li>
-  <li><a href="#spec-不可约-iff-nilradical-是素理想" id="toc-spec-不可约-iff-nilradical-是素理想" class="nav-link" data-scroll-target="#spec-不可约-iff-nilradical-是素理想"><span class="header-section-number">2.3</span> Spec 不可约 <span class="math inline">\(\iff\)</span> nilradical 是素理想</a></li>
-  <li><a href="#既约环整环-iff-不可约" id="toc-既约环整环-iff-不可约" class="nav-link" data-scroll-target="#既约环整环-iff-不可约"><span class="header-section-number">2.4</span> 既约环：整环 <span class="math inline">\(\iff\)</span> 不可约</a></li>
-  <li><a href="#cring-times-iff-spec-sqcup" id="toc-cring-times-iff-spec-sqcup" class="nav-link" data-scroll-target="#cring-times-iff-spec-sqcup"><span class="header-section-number">2.5</span> CRing <span class="math inline">\(\times\)</span> <span class="math inline">\(\iff\)</span> Spec <span class="math inline">\(\sqcup\)</span></a></li>
-  <li><a href="#幂等元与-spec-连通性" id="toc-幂等元与-spec-连通性" class="nav-link" data-scroll-target="#幂等元与-spec-连通性"><span class="header-section-number">2.6</span> 幂等元与 Spec 连通性</a></li>
-  </ul></li>
-  <li><a href="#使用例" id="toc-使用例" class="nav-link" data-scroll-target="#使用例"><span class="header-section-number">3</span> 使用例</a>
-  <ul class="collapse">
-  <li><a href="#vxy" id="toc-vxy" class="nav-link" data-scroll-target="#vxy"><span class="header-section-number">3.1</span> <span class="math inline">\(V(xy)\)</span></a></li>
-  <li><a href="#局部环的-spec-连通" id="toc-局部环的-spec-连通" class="nav-link" data-scroll-target="#局部环的-spec-连通"><span class="header-section-number">3.2</span> 局部环的 Spec 连通</a></li>
-  <li><a href="#局部环的-spec-什么时候可约" id="toc-局部环的-spec-什么时候可约" class="nav-link" data-scroll-target="#局部环的-spec-什么时候可约"><span class="header-section-number">3.3</span> 局部环的 Spec 什么时候可约？</a></li>
-  </ul></li>
+  <li><a href="#置换观点速记" id="toc-置换观点速记" class="nav-link active" data-scroll-target="#置换观点速记">置换观点速记</a></li>
+  <li><a href="#轮换速算技巧" id="toc-轮换速算技巧" class="nav-link" data-scroll-target="#轮换速算技巧">轮换速算技巧</a></li>
   </ul>
 </nav>
     </div>
@@ -388,11 +353,10 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Spec，可约与连通性</h1>
+<h1 class="title">置换速算技巧</h1>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
     <div class="quarto-category">algebra</div>
-    <div class="quarto-category">commalg</div>
   </div>
   </div>
 
@@ -410,7 +374,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026年2月27日</p>
+      <p class="date">2026年3月26日</p>
     </div>
   </div>
   
@@ -422,183 +386,42 @@ window.Quarto = {
 </header>
 
 
-<p>本文中环均为交换幺环．</p>
-<section id="定义" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="定义"><span class="header-section-number">1</span> 定义</h2>
-<p>环的 Spec 是由它的素理想配备 Zariski 拓扑构成的拓扑空间，Zariski 拓扑的闭集由 <span class="math inline">\(V(I) = \{ \mathfrak p : I \subseteq \mathfrak p \}\)</span> 组成，其中 <span class="math inline">\(I\)</span> 是环的任意理想．</p>
-<p>不可约是指 Spec 不能写成两个非空闭集的并．连通是指 Spec 不能写成两个非空不交闭集的并．</p>
-<p>有一类特殊的环：</p>
+<section id="置换观点速记" class="level2">
+<h2 class="anchored" data-anchor-id="置换观点速记">置换观点速记</h2>
 <ul>
-<li><p>它们是有限生成的 <span class="math inline">\(k\)</span>-代数（<span class="math inline">\(k\)</span> 是域），总可以写成 <span class="math inline">\(k[x_1, \dots, x_n]/I\)</span>．它们的 Spec 叫做代数集．</p></li>
-<li><p>如果（nilradical 意义下）此环既约 / <span class="math inline">\(I\)</span> 是既约的，就叫这个环是代数集的坐标环，或者仿射 <span class="math inline">\(k\)</span>-代数．</p></li>
-<li><p>在此基础上，如果 TFAE 地 <a href="#prp-irr-iff-rad-prime" class="quarto-xref">命题&nbsp;1</a>：Spec 不可约 / <span class="math inline">\(I\)</span> 是素理想 / 坐标环是整环，则称这个代数集是一个代数簇．</p></li>
+<li><p>左乘 <span class="math inline">\(\sigma \mapsto g \sigma\)</span>：对数字做置换，<span class="math inline">\((12)(23)\)</span> 是先交换数字 <span class="math inline">\((2, 3)\)</span>，再交换数字 <span class="math inline">\((1, 2)\)</span>．</p></li>
+<li><p>右乘 <span class="math inline">\(\sigma \mapsto \sigma g\)</span>：对位置做置换，<span class="math inline">\((12)(23)\)</span> 是先交换位置 <span class="math inline">\((1,2)\)</span> 上的数字，再交换位置 <span class="math inline">\((2,3)\)</span> 上的数字．</p></li>
+<li><p>共轭 <span class="math inline">\(\sigma \mapsto g \sigma g^{-1}\)</span>：对 <span class="math inline">\(\sigma\)</span> 做字面上 <span class="math inline">\(g\)</span> 的重标号．<span class="math inline">\((123)(1234)(123)^{-1} = (2314)\)</span></p></li>
 </ul>
 </section>
-<section id="性质" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="性质"><span class="header-section-number">2</span> 性质</h2>
-<section id="纯拓扑性质" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="纯拓扑性质"><span class="header-section-number">2.1</span> 纯拓扑性质</h3>
+<section id="轮换速算技巧" class="level2">
+<h2 class="anchored" data-anchor-id="轮换速算技巧">轮换速算技巧</h2>
+<p>介绍一种 inline 手算轮换复合的小技巧．基本要义为以下三点：</p>
 <ul>
-<li><p>不可约 <span class="math inline">\(\iff\)</span> 所有非空开集稠密</p>
-<p>非空开集不稠密就是其补集装得下另一个非空开集，再取补集就把全空间写成了两个非平凡闭集的并.</p></li>
-<li><p>不可约空间 <span class="math inline">\(X\)</span> 的任意非空开子集 <span class="math inline">\(U\)</span> 也不可约</p>
-<p>注意开集传递性．<span class="math inline">\(U\)</span> 的非平凡开分解 <span class="math inline">\(U = U_1 \cup U_2\)</span> 将使得 <span class="math inline">\(X\)</span> 获得非平凡闭分解 <span class="math inline">\(X = (X \setminus U_1) \cup (X \setminus U_2)\)</span>．</p></li>
-<li><p>不可约空间的在连续映射下的像也不可约</p>
-<p>和连通性一致．</p></li>
-<li><p>不可约集合 <span class="math inline">\(S\)</span> 的闭包 <span class="math inline">\(\overline{S}\)</span> 也不可约</p>
-<p>注意闭包传递性，对 <span class="math inline">\(\overline{S}\)</span> 的非平凡开集，其都与 <span class="math inline">\(S\)</span> 交非空，于是由 <span class="math inline">\(S\)</span> 的不可约性，这个开集限制在 <span class="math inline">\(S\)</span> 上稠密，故由闭包传递性在 <span class="math inline">\(\overline{S}\)</span> 上也稠密．</p></li>
-<li><p>Hausdorff 空间除了单点都可约</p>
-<p>所以不可约性的讨论在大部分常见的欧式拓扑中很少见．</p></li>
+<li><p>转动： <span class="math display">\[
+(aX)=(Xa)
+\]</span></p></li>
+<li><p>交换：当 <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span> 无交时 <span class="math display">\[
+(X)(Y)=(Y)(X)
+\]</span></p></li>
+<li><p>缩并：当 <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span> 无交时 <span class="math display">\[
+(Xa)(aY) = (XaY)
+\]</span></p></li>
 </ul>
-</section>
-<section id="spec-不可约-implies-spec-连通" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="spec-不可约-implies-spec-连通"><span class="header-section-number">2.2</span> Spec 不可约 <span class="math inline">\(\implies\)</span> Spec 连通</h3>
-<p>不可约是比连通更强的性质：不可约的判否不要求两闭集的交集非空，而连通的判否额外要求两个闭集的交集非空．</p>
-</section>
-<section id="spec-不可约-iff-nilradical-是素理想" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="spec-不可约-iff-nilradical-是素理想"><span class="header-section-number">2.3</span> Spec 不可约 <span class="math inline">\(\iff\)</span> nilradical 是素理想</h3>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<div id="prp-irr-iff-rad-prime" class="theorem proposition">
-<p><span class="theorem-title"><strong>命题 1 (<span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, exercise 1.19]</a></span>)</strong></span> 环 <span class="math inline">\(R\)</span> 的 Spec 不可约当且仅当 <span class="math inline">\(R\)</span> 的 nilradical <span class="math inline">\(\mathcal N(R)\)</span> 是素理想．</p>
-</div>
-</div>
-</div>
-</div>
-<p>这是因为对任意理想 <span class="math inline">\(I\)</span>, <span class="math inline">\(J\)</span>： <span class="math display">\[
-V(I) \cup V(J) = \operatorname{Spec}R
-\iff V(IJ) = \operatorname{Spec}R
-\iff IJ \subseteq \mathcal N(R)
-\]</span> 不失一般性，可以选取既约的理想 <span class="math inline">\(I\)</span> 和 <span class="math inline">\(J\)</span>，这样后者就意味着对 <span class="math inline">\(\mathcal N(R)\)</span> 是素理想的否定．</p>
-</section>
-<section id="既约环整环-iff-不可约" class="level3" data-number="2.4">
-<h3 data-number="2.4" class="anchored" data-anchor-id="既约环整环-iff-不可约"><span class="header-section-number">2.4</span> 既约环：整环 <span class="math inline">\(\iff\)</span> 不可约</h3>
-<p>整环的 Spec 是不可约的，反之未必：<span class="math inline">\(k[x]/(x^2)\)</span> 的 Spec 是单点 <span class="math inline">\((x)\)</span>，但 <span class="math inline">\(k[x]/(x^2)\)</span> 不是整环．这完全是 nilradical 的锅——如果环既约 <span class="math inline">\(\mathcal N(R) = (0)\)</span>，则 Spec 不可约当且仅当坐标环是整环．这也是仿射 <span class="math inline">\(k\)</span>-代数的情况．</p>
-</section>
-<section id="cring-times-iff-spec-sqcup" class="level3" data-number="2.5">
-<h3 data-number="2.5" class="anchored" data-anchor-id="cring-times-iff-spec-sqcup"><span class="header-section-number">2.5</span> CRing <span class="math inline">\(\times\)</span> <span class="math inline">\(\iff\)</span> Spec <span class="math inline">\(\sqcup\)</span></h3>
-<p>环侧的 <span class="math inline">\(\times\)</span> / 直积 对应 Spec 侧的无交并 / 直和．环的直积导致典型的不连通．</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>环侧的 <span class="math inline">\(\otimes\)</span> / push-out 对应 Spec 侧的纤维积 / pull-back．</p>
-</div>
-</div>
-</div>
-</div>
-<p>对非零环 <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>，<span class="math inline">\(A \times B\)</span> 的 Spec 与 <span class="math inline">\(\operatorname{Spec}A \sqcup \operatorname{Spec}B\)</span> 同胚：</p>
+<p>对复杂轮换间的复合，基本思路是找到两项公共元素，通过转位和反向缩并消去它们．可以通过这种方法证明切割公式 <span class="math inline">\((XaYb)(aUbV)=(Xa)(Yb)(aU)(bV)\)</span> 和 <span class="math inline">\((XaYb)(bUaV)=(Xa)(Yb)(bU)(aV)\)</span>．</p>
+<p>使用例：</p>
 <ul>
-<li>它的理想都形如 <span class="math inline">\(I \times J\)</span>：总可以通过乘 <span class="math inline">\((1, 0)\)</span> 和 <span class="math inline">\((0, 1)\)</span> 来得到 <span class="math inline">\(I\)</span> 和 <span class="math inline">\(J\)</span>．</li>
-<li>它的素理想都形如 <span class="math inline">\(\mathfrak p \times B\)</span> 或 <span class="math inline">\(A \times \mathfrak q\)</span>：如果 <span class="math inline">\(I \times J\)</span> 是素理想，那么 <span class="math inline">\(I\)</span> 或 <span class="math inline">\(J\)</span> 必须是素理想，因为两侧的乘法互不干扰；也不能是 <span class="math inline">\(\mathfrak p \times \mathfrak q\)</span>，否则可取 <span class="math inline">\(p \notin \mathfrak p\)</span> 和 <span class="math inline">\(q \notin \mathfrak q\)</span> 使得 <span class="math inline">\((p, *) (*, q) \in \mathfrak p \times \mathfrak q\)</span>．</li>
-<li><span class="math inline">\(V(I \times J) = \{ \mathfrak p \times B : \mathfrak p \in V(I) \} \cup \{ A \times \mathfrak q : \mathfrak q \in V(J) \}\)</span>，这就把 <span class="math inline">\(\operatorname{Spec}(A \times B)\)</span> 和 <span class="math inline">\(\operatorname{Spec}A \sqcup \operatorname{Spec}B\)</span> 两个拓扑空间的闭集对应上了．</li>
+<li><span class="math inline">\((12)(1423)=(14)(23)\)</span></li>
+<li><span class="math inline">\((4123)(423)=(4123)(234)=(412)(34)=(124)(43)=(1243)\)</span></li>
+<li><span class="math inline">\((1234)(1234)=(1234)(3412)=(123)(412)=(312)(124)=(31)(24)\)</span></li>
+<li><span class="math inline">\((12345)(97531)=(12345)(53197)=(123)(45)(3197)=(45)(123)(3197)=(45)(23)(197)\)</span></li>
 </ul>
-</section>
-<section id="幂等元与-spec-连通性" class="level3" data-number="2.6">
-<h3 data-number="2.6" class="anchored" data-anchor-id="幂等元与-spec-连通性"><span class="header-section-number">2.6</span> 幂等元与 Spec 连通性</h3>
-<p>环 <span class="math inline">\(R\)</span> 内每个幂等元 <span class="math inline">\(e\)</span> 都对应一个 Spec 上的开闭集 <span class="math inline">\(V(e)\)</span>：</p>
-<ul>
-<li><p><span class="math inline">\(V(e)\)</span> 也是开集：<span class="math inline">\(V(e) = D(1-e)\)</span>．</p></li>
-<li><p>单射性：假如 <span class="math inline">\(V(e_1) = V(e_2)\)</span>，那么 <span class="math inline">\(\sqrt{(e_1)} = \sqrt{(e_2)}\)</span>，不妨设 <span class="math inline">\(e_1^n = r e_2\)</span>，但是 <span class="math inline">\(e_1\)</span> 幂等，即 <span class="math inline">\(e_1 = re_2\)</span>．同乘 <span class="math inline">\(e_2\)</span> 得 <span class="math inline">\(e_1 e_2 = r e_2^2 = r e_2 = e_1\)</span>．同理也有 <span class="math inline">\(e_2 = e_1 e_2\)</span>，所以 <span class="math inline">\(e_1 = e_2\)</span>．</p></li>
-<li><p>满射性：对于任意开闭集 <span class="math inline">\(V(I)\)</span>，令与它互补的开闭集为 <span class="math inline">\(V(J)\)</span>，则 <span class="math display">\[
-\begin{aligned}
-V(I \cap J) = V(IJ) &amp;= V(I) \cup V(J) = \operatorname{Spec}R \\
-V(I + J) &amp;= V(I) \cap V(J) = \emptyset
-\end{aligned}
-\]</span> 推得 <span class="math inline">\(I \cap J \subseteq IJ\)</span> 落在 nilradical <span class="math inline">\(\mathcal N(R)\)</span> 中，且 <span class="math inline">\(I + J = R\)</span>——comaximal．</p>
-<p>如果是 Noether 环的话，<span class="math inline">\(IJ\)</span> 会幂零，中国剩余定理就可以直接收工．一般情况则需要一些技巧．使用 comaximal 取出 <span class="math inline">\(x \in I\)</span> 和 <span class="math inline">\(y \in J\)</span> 使得 <span class="math inline">\(x + y = 1\)</span>，因为 <span class="math inline">\(xy \in IJ \subseteq \mathcal N(R)\)</span>，不妨设 <span class="math inline">\((xy)^n = 0\)</span>，考察 <span class="math display">\[
-\begin{aligned}
-1 &amp;= (x + y)^{2n} \\
-  &amp;= \sum_{i=0}^{2n} \binom{2n}{i} x^i y^{2n-i} \\
-  &amp;= \sum_{i=0}^{n-1} \binom{2n}{i} x^i y^{2n-i} + \sum_{i=n+1}^{2n} \binom{2n}{i} x^i y^{2n-i}
-\end{aligned}
-\]</span> 设后两项分别为 <span class="math inline">\(d\)</span> 和 <span class="math inline">\(e\)</span>，则 <span class="math inline">\(d \in J\)</span>, <span class="math inline">\(e \in I\)</span>, <span class="math inline">\(d + e = 1\)</span>, <span class="math inline">\(de = 0\)</span>，这样就证明了 <span class="math inline">\(d\)</span> 和 <span class="math inline">\(e\)</span> 是幂等元．</p>
-<p>现在注意以下关系：<span class="math inline">\(V(e) \subseteq V(I)\)</span>, <span class="math inline">\(V(d) \subseteq V(J)\)</span> 且 <span class="math inline">\(V(e) \sqcup V(d) = \operatorname{Spec}R = V(I) \sqcup V(J)\)</span>，即可迫使 <span class="math inline">\(V(e) = V(I)\)</span> 和 <span class="math inline">\(V(d) = V(J)\)</span>．</p></li>
-</ul>
-<p>因此 Spec 连通当且仅当环内没有非平凡的幂等元．</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>这个二项式展开的技巧也可以用来证明：comaximal 的理想 <span class="math inline">\(I\)</span> 和 <span class="math inline">\(J\)</span> 的任意幂次 <span class="math inline">\(I^m\)</span> 和 <span class="math inline">\(J^n\)</span> 也是 comaximal 的．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>注意 Noether 环中，Spec 的连通分支有限：否则这些闭集对应的理想形成无限升链．有限性导致连通分支既开又闭——此时开闭集与连通分支的各种取并一一对应，进而可以使用幂等元完整刻画连通分支，此时可以把环分解成与连通分支对应的有限直积．</p>
-<p><strong>Takeaway:</strong> 看上去不连通就可以拆，拆完后的环没有非平凡幂等元．</p>
-<p>作为推论之一，Artin 环可以被分解成有限个局部 Artin 环的直积 <span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1, theorem 8.7]</a></span>，一个证明可以参考<a href="../../posts/20250731-artin-noether/">这里</a>，可以看到证明几乎和上面满射性 Noether 环的 if 线一致．</p>
-<p>还想继续拆？请见准素分解．既约理想结果好，作为素理想的交分解唯一．</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="使用例" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="使用例"><span class="header-section-number">3</span> 使用例</h2>
-<section id="vxy" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="vxy"><span class="header-section-number">3.1</span> <span class="math inline">\(V(xy)\)</span></h3>
-<p>来考察二维仿射平面上的 <span class="math inline">\(V(xy)\)</span>．它的坐标环是 <span class="math inline">\(k[x,y]/(xy)\)</span>，不是整环，因此可约——但 <span class="math inline">\(V(xy)\)</span> 连通：</p>
-<ul>
-<li>直观来看，<span class="math inline">\(V(xy)\)</span> 是 <span class="math inline">\(x\)</span> 轴和 <span class="math inline">\(y\)</span> 轴的并集，所以可约；它们在原点相交，所以连通．</li>
-<li>严格来看，<span class="math inline">\(V(xy) = V(x) \cup V(y)\)</span>，所以可约；<span class="math inline">\(V(x)\)</span> 和 <span class="math inline">\(V(y)\)</span> 都是不可约代数集，因此各自连通，它们交集还非空，纯点集拓扑论证（用连通性等价于所有到 <span class="math inline">\(\{0, 1\}\)</span> 连续函数常值的等价刻画）可以保证并集也连通．</li>
-</ul>
-<p>以防你想歪，别以为可以用中国剩余定理把坐标环分解成 <span class="math inline">\(k[x] \times k[y]\)</span>：<span class="math inline">\((x)\)</span> 和 <span class="math inline">\((y)\)</span> 根本不是 comaximal 的——这俩一加等于 <span class="math inline">\((x,y)\)</span>——恰好也对应了 Spec 那一侧交点．</p>
-</section>
-<section id="局部环的-spec-连通" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="局部环的-spec-连通"><span class="header-section-number">3.2</span> 局部环的 Spec 连通</h3>
-<p>因为极大理想只有一个，而 Zariski 拓扑的非空闭集都包含它，没法做不交的划分．</p>
-</section>
-<section id="局部环的-spec-什么时候可约" class="level3" data-number="3.3">
-<h3 data-number="3.3" class="anchored" data-anchor-id="局部环的-spec-什么时候可约"><span class="header-section-number">3.3</span> 局部环的 Spec 什么时候可约？</h3>
-<p>TODO</p>
-
+<p>这主要适用于小型轮换的计算，在轮换复杂时不一定好用．更复杂的轮换 inline 手算，推荐参考 <a href="https://math.stackexchange.com/questions/4518948/what-is-the-most-efficient-way-to-compute-cyclic-permutation-compositions">MSE</a> 上的讨论．</p>
 
 
 </section>
-</section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
-<div id="ref-AM1969" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline">Atiyah, M. F. 和 Macdonald, I. G., <em>Introduction To Commutative Algebra</em>. Addison-Wesley Publishing Company, Inc., 1969.</div>
-</div>
-</div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

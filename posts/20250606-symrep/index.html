@@ -100,8 +100,8 @@ div.csl-indent {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-723530320b8f33b049ef21af632b9e12.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-bc02861c18602d2a9ecc612939fb595c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-df36c1f51131d4fc0abb9d63bd22fde7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-cfe2a48cf9f5963499fac863b523d04f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-88f4fef2f58cb5f989f9f9c26435b78f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -402,6 +402,9 @@ window.Quarto = {
   <li><a href="#hom-的新刻画" id="toc-hom-的新刻画" class="nav-link" data-scroll-target="#hom-的新刻画"><span class="header-section-number">3</span> Hom 的新刻画</a></li>
   <li><a href="#同形状的情形" id="toc-同形状的情形" class="nav-link" data-scroll-target="#同形状的情形"><span class="header-section-number">4</span> 同形状的情形</a></li>
   <li><a href="#不同形状的情形" id="toc-不同形状的情形" class="nav-link" data-scroll-target="#不同形状的情形"><span class="header-section-number">5</span> 不同形状的情形</a></li>
+  <li><a href="#双边理想分解" id="toc-双边理想分解" class="nav-link" data-scroll-target="#双边理想分解"><span class="header-section-number">6</span> 双边理想分解</a></li>
+  <li><a href="#garnir-关系与-specht-模的基底" id="toc-garnir-关系与-specht-模的基底" class="nav-link" data-scroll-target="#garnir-关系与-specht-模的基底"><span class="header-section-number">7</span> Garnir 关系与 Specht 模的基底</a></li>
+  
   </ul>
 <div class="quarto-other-links"><h2>其他链接</h2><ul><li><a href="https://zhuanlan.zhihu.com/p/1915153242335216846"><i class="bi bi-question-circle"></i>在知乎上阅读</a></li></ul></div></nav>
     </div>
@@ -457,7 +460,7 @@ window.Quarto = {
 </ul>
 <section id="速览" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="速览"><span class="header-section-number">1</span> 速览</h2>
-<p>一个 Young 图由一个整数分拆 <span class="math inline">\(\lambda \vdash n\)</span> 唯一确定，一个 Young 表将一个 <span class="math inline">\(n\)</span> 元置换填入 Young 图——本质上是一组信息 <span class="math inline">\(T = (\lambda \vdash n, \sigma \in \mathcal S_n)\)</span>．如果 <span class="math inline">\(T\)</span> 的各行各列均严格单增，则称 <span class="math inline">\(T\)</span> 是标准 Young 表．</p>
+<p>一个 Young 图由一个整数分拆 <span class="math inline">\(\lambda \vdash n\)</span> 唯一确定，一个 Young 表将一个 <span class="math inline">\(n\)</span> 元置换填入 Young 图——本质上是一对信息 <span class="math inline">\(T = T_{\lambda, \sigma} := (\lambda \vdash n, \sigma \in \mathcal S_n)\)</span>．如果 <span class="math inline">\(T\)</span> 的各行各列均严格单增，则称 <span class="math inline">\(T\)</span> 是标准 Young 表，记为 <span class="math inline">\(T \in \operatorname{SYT}(\lambda)\)</span>．</p>
 <div id="fig-y" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-y-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -519,13 +522,7 @@ window.Quarto = {
 <div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (置换计算速记). </span></p>
-<ul>
-<li><p><span class="math inline">\(\sigma \mapsto g \sigma\)</span>：对数字做置换，<span class="math inline">\((12)(23)\)</span> 是先交换数字 <span class="math inline">\((2, 3)\)</span>，再交换数字 <span class="math inline">\((1, 2)\)</span>．</p></li>
-<li><p><span class="math inline">\(\sigma \mapsto \sigma g\)</span>：对位置做置换，<span class="math inline">\((12)(23)\)</span> 是先交换位置 <span class="math inline">\((1,2)\)</span> 上的数字，再交换位置 <span class="math inline">\((2,3)\)</span> 上的数字．</p></li>
-<li><p><span class="math inline">\(\sigma \mapsto g \sigma g^{-1}\)</span>：对 <span class="math inline">\(\sigma\)</span> 做字面上 <span class="math inline">\(g\)</span> 的重标号．<span class="math inline">\((123)(1234)(123)^{-1} = (2314)\)</span></p></li>
-<li><p>轮换计算技巧：<span class="math inline">\((2341) = (1234)=(12)(23)(34)\)</span>，数字无交集可交换．</p></li>
-</ul>
+<p><span class="proof-title"><em>注记</em> (置换计算速记). </span>见<a href="../../posts/20260326-cycle-notation-tech/">此处</a>．</p>
 </div>
 </div>
 </div>
@@ -810,7 +807,7 @@ n_g = n_{pg(g^{-1}pg)} = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 \mathbb C[\mathcal S_n] &amp;\to V_T \\
 x &amp;\mapsto x c_T
 \end{aligned}
-\]</span> 已经知道它是投影变换的常数倍，因此这线性变换的迹 <span class="math inline">\(\operatorname{tr}(x \mapsto c_T x) = \alpha \dim V_T\)</span>．考察 <span class="math inline">\(c_T g = a_T b_T g\)</span> 的 <span class="math inline">\(g\)</span> 分量对应系数，注意 <span class="math inline">\(P_T\)</span> 和 <span class="math inline">\(Q_T\)</span> 交平凡，故此系数为 <span class="math inline">\(1\)</span>，于是 <span class="math inline">\(\operatorname{tr}(x \mapsto c_T x) = n!\)</span>，因此 <span class="math inline">\(\alpha = n! / \dim V_T\)</span>．</p>
+\]</span> 已经知道它是投影变换的非零常数倍，因此这线性变换的迹 <span class="math inline">\(\operatorname{tr}(x \mapsto c_T x) = \alpha \dim V_T\)</span>．考察 <span class="math inline">\(c_T g = a_T b_T g\)</span> 的 <span class="math inline">\(g\)</span> 分量对应系数，注意 <span class="math inline">\(P_T\)</span> 和 <span class="math inline">\(Q_T\)</span> 交平凡，故此系数为 <span class="math inline">\(1\)</span>，于是 <span class="math inline">\(\operatorname{tr}(x \mapsto c_T x) = n!\)</span>，因此 <span class="math inline">\(\alpha = n! / \dim V_T\)</span>．</p>
 </div>
 </div>
 </div>
@@ -931,8 +928,81 @@ n_g = n_{pg(g^{-1}pg)} = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 </div>
 </div>
 <p>综上，我们完成了 <span class="math inline">\(\mathcal S_n\)</span> 的复不可约表示的分类：它们恰为全体 Specht 模 <span class="math inline">\(V_T\)</span>，其中 <span class="math inline">\(T\)</span> 是形状为 <span class="math inline">\(\lambda \vdash n\)</span> 的 Young 表．两个 Specht 模同构当且仅当诱导它们的 Young 表具有相同的形状．</p>
+</section>
+<section id="双边理想分解" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="双边理想分解"><span class="header-section-number">6</span> 双边理想分解</h2>
+<p>注意任何同形状 Young 表 <span class="math inline">\(T\)</span> <span class="math inline">\(S :=gT\)</span> 的 Specht 模 <span class="math inline">\(V_T\)</span> 和 <span class="math inline">\(V_S\)</span> 间有典范表示同构 <span class="math inline">\(x c_T \mapsto x c_T g^{-1}\)</span>，故 <span class="math inline">\(\mathbb C[\mathcal S_n]\)</span> 至少有如下双边理想分解： <span class="math display">\[
+\mathbb C[\mathcal S_n] = \bigoplus_{\lambda \vdash n} \mathbb C[\mathcal S_n] c_{\lambda} \mathbb C[\mathcal S_n]
+\]</span> 这里 <span class="math inline">\(c_{\lambda}\)</span> 是任意一个形状为 <span class="math inline">\(\lambda\)</span> 的 Young 表的 Young 对称化子．</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>这是 <a href="../../posts/20260314-group-rep-peter-weyl/">Peter–Weyl 定理</a> / Wedderburn–Artin 定理在 <span class="math inline">\(\mathcal S_n\)</span> 上的一个具体实例．</p>
+<p>也长得很像 Bruhat 分解．</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="garnir-关系与-specht-模的基底" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="garnir-关系与-specht-模的基底"><span class="header-section-number">7</span> Garnir 关系与 Specht 模的基底</h2>
+<p>我们为每个 Specht 模构造一个显式基底．因为同形状 Young 表诱导的 Specht 模之间有典范同构，可以只研究最标准的那个从左到右，从上到下标号的 Young 表 <span class="math inline">\(T_{\lambda, \operatorname{id}}\)</span> 诱导的 Specht 模．以后在无歧义的情况下，直接用 <span class="math inline">\(\lambda\)</span> 来代指此这个最标准的 Young 表．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-basis" class="theorem">
+<p><span class="theorem-title"><strong>定理 2</strong></span> <span class="math inline">\(V_\lambda\)</span> 的一组基底为 <span class="math inline">\(\{ g c_\lambda : T_{\lambda, g} \in \operatorname{SYT}(\lambda) \}\)</span>，即 <span class="math inline">\(g\)</span> 取遍所有标准 Young 表对应的置换．</p>
+</div>
+</div>
+</div>
+</div>
+<p>对任意 <span class="math inline">\(g \in \mathcal S_n\)</span>，我们尝试将 <span class="math inline">\(g c_\lambda\)</span> 写成上述基底的线性组合．首先可以对 <span class="math inline">\(g\)</span> 右乘 <span class="math inline">\(P_\lambda\)</span> 元素而保持 <span class="math inline">\(g c_\lambda\)</span> 不变，故问题约化为 <span class="math inline">\(g\)</span> 对应 Young 表已经按行升序排列的情形．</p>
+<p>如果 <span class="math inline">\(g\)</span> 已经对应标准 Young 表，则没有需要做的事情．否则，必然两个同列、相邻行的位置对满足靠上的数字大于靠下的数字．不妨设它们分别是第 <span class="math inline">\(i\)</span> 行第 <span class="math inline">\(j\)</span> 列的 <span class="math inline">\(r\)</span> 和第 <span class="math inline">\(i+1\)</span> 行第 <span class="math inline">\(j\)</span> 列的 <span class="math inline">\(s\)</span>： <span class="math display">\[
+\begin{matrix}
+  &amp;   &amp;   &amp;   &amp; r &amp; &lt; &amp; * &amp; &lt; &amp; * \\
+  &amp;   &amp;   &amp;   &amp; \lor &amp;   &amp;   &amp;   &amp; \\
+* &amp; &lt; &amp; * &amp; &lt; &amp; s &amp;   &amp;   &amp;   &amp;
+\end{matrix}
+\]</span></p>
+<p>sorry – this part is under construction</p>
+</section>
+
+
+
+<div id="quarto-appendix" class="default"><section id="附录" class="level2 appendix unnumbered"><h2 class="anchored quarto-appendix-heading">附录</h2><div class="quarto-appendix-contents">
+
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="exr-1" class="theorem exercise">
+<p><span class="theorem-title"><strong>习题 1</strong></span> &nbsp;</p>
+<ul>
+<li>证明通过相邻数字对换操作足以沟通所有标准 Young 表．</li>
+<li>证明 Specht 模的维数为其对应 Young 图对应标准 Young 表数量，一组显式基底为 <span class="math inline">\(\{g c_T\}\)</span>，其中 <span class="math inline">\(g\)</span> 取遍所有标准 Young 表对应的置换．</li>
+<li>确定具体对哪些 <span class="math inline">\(g \in \mathcal S_n\)</span>，作为 <span class="math inline">\(\mathbb C[\mathcal S_n]\)</span> 的子模有 <span class="math inline">\(V_T = V_{gT}\)</span>．</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -941,7 +1011,7 @@ n_g = n_{pg(g^{-1}pg)} = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>注记</em> (关于使用到的复数域 <span class="math inline">\(\mathbb C\)</span> 的特殊性质). </span></p>
@@ -955,7 +1025,7 @@ n_g = n_{pg(g^{-1}pg)} = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -964,7 +1034,7 @@ n_g = n_{pg(g^{-1}pg)} = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse show">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>注记</em> (关于对称化子的组合看法). </span><span class="math inline">\(P_T\)</span> 中的元素在左作用到 <span class="math inline">\(g \in \mathcal S_n\)</span> 时，是对 <span class="math inline">\(T\)</span> 中同行的数字做字面上的数字置换；在右作用时是将 <span class="math inline">\(\sigma\)</span>（从左到右，从上到下）排入 <span class="math inline">\(T\)</span> 后做其上的行置换．<span class="math inline">\(Q_T\)</span> 同理．</p>
@@ -980,7 +1050,7 @@ n_g = n_{pg(g^{-1}pg)} = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -989,7 +1059,7 @@ n_g = n_{pg(g^{-1}pg)} = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="hidden proof remark">
 <p><span class="proof-title"><em>注记</em> (关于 <span class="math inline">\(P_T Q_T \cap Q_T P_T\)</span> 的一个错误猜想，已隐藏). </span><span class="math inline">\(\alpha\)</span> 也应等于 <span class="math inline">\(c_T^2\)</span> 在单位元处的系数 <span class="math display">\[
@@ -1039,10 +1109,7 @@ n_g = n_{pg(g^{-1}pg)} = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 
 
 
-</section>
-
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+</div></section><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
 <div id="ref-fulton_representation_2004" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[1] </div><div class="csl-right-inline">W. Fulton 和 J. Harris, <em>Representation Theory</em>, 卷 129. 收入 Graduate Texts in Mathematics, vol. 129. New York, <span>NY</span>: Springer, 2004. doi: <a href="https://doi.org/10.1007/978-1-4612-0979-9">10.1007/978-1-4612-0979-9</a>.</div>
 </div>
