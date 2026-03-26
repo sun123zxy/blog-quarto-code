@@ -26,6 +26,7 @@ format:
 \newcommand{\tr}{\operatorname{tr}}
 \newcommand{\id}{\operatorname{id}}
 \newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\SYT}{\operatorname{SYT}}
 
 我们简明快速地完成对称群的复不可约表示的分类．本文主要微调自 [@fulton_representation_2004, {section 4.2}]，亦少量参考 [@sagan_symmetric_2001, {chapter 2}]．推荐读者阅读前熟悉群的复表示的基本常识 [@fulton_representation_2004, {chapter 1--2}] 和群代数模的观点．
 
@@ -33,7 +34,7 @@ format:
 
 ## 速览
 
-一个 Young 图由一个整数分拆 $\lambda \vdash n$ 唯一确定，一个 Young 表将一个 $n$ 元置换填入 Young 图——本质上是一组信息 $T = (\lambda \vdash n, \sigma \in \mathcal S_n)$．如果 $T$ 的各行各列均严格单增，则称 $T$ 是标准 Young 表．
+一个 Young 图由一个整数分拆 $\lambda \vdash n$ 唯一确定，一个 Young 表将一个 $n$ 元置换填入 Young 图——本质上是一对信息 $T = T_{\lambda, \sigma} := (\lambda \vdash n, \sigma \in \mathcal S_n)$．如果 $T$ 的各行各列均严格单增，则称 $T$ 是标准 Young 表，记为 $T \in \SYT(\lambda)$．
 
 :::::{#fig-y layout-ncol="2"}
 
@@ -70,13 +71,7 @@ Young 图、Young 表例
 
 ## 置换计算速记
 
-- $\sigma \mapsto g \sigma$：对数字做置换，$(12)(23)$ 是先交换数字 $(2, 3)$，再交换数字 $(1, 2)$．
-
-- $\sigma \mapsto \sigma g$：对位置做置换，$(12)(23)$ 是先交换位置 $(1,2)$ 上的数字，再交换位置 $(2,3)$ 上的数字．
-
-- $\sigma \mapsto g \sigma g^{-1}$：对 $\sigma$ 做字面上 $g$ 的重标号．$(123)(1234)(123)^{-1} = (2314)$
-
-- 轮换计算技巧：$(2341) = (1234)=(12)(23)(34)$，数字无交集可交换．
+见[此处](/posts/20260326-cycle-notation-tech/)．
 :::
 
 来刻画不同 Young 表行、列置换之间的关系：
@@ -271,7 +266,7 @@ $$
 x &\mapsto x c_T
 \end{aligned}
 $$
-已经知道它是投影变换的常数倍，因此这线性变换的迹 $\tr (x \mapsto c_T x) = \alpha \dim V_T$．考察 $c_T g = a_T b_T g$ 的 $g$ 分量对应系数，注意 $P_T$ 和 $Q_T$ 交平凡，故此系数为 $1$，于是 $\tr (x \mapsto c_T x) = n!$，因此 $\alpha = n! / \dim V_T$．
+已经知道它是投影变换的非零常数倍，因此这线性变换的迹 $\tr (x \mapsto c_T x) = \alpha \dim V_T$．考察 $c_T g = a_T b_T g$ 的 $g$ 分量对应系数，注意 $P_T$ 和 $Q_T$ 交平凡，故此系数为 $1$，于是 $\tr (x \mapsto c_T x) = n!$，因此 $\alpha = n! / \dim V_T$．
 :::
 
 :::{#cor-cxc-dim}
@@ -328,6 +323,52 @@ $$
 :::
 
 综上，我们完成了 $\mathcal S_n$ 的复不可约表示的分类：它们恰为全体 Specht 模 $V_T$，其中 $T$ 是形状为 $\lambda \vdash n$ 的 Young 表．两个 Specht 模同构当且仅当诱导它们的 Young 表具有相同的形状．
+
+## 双边理想分解
+
+注意任何同形状 Young 表 $T$ $S :=gT$ 的 Specht 模 $V_T$ 和 $V_S$ 间有典范表示同构 $x c_T \mapsto x c_T g^{-1}$，故 $\mathbb C[\mathcal S_n]$ 至少有如下双边理想分解：
+$$
+\mathbb C[\mathcal S_n] = \bigoplus_{\lambda \vdash n} \mathbb C[\mathcal S_n] c_{\lambda} \mathbb C[\mathcal S_n]
+$$
+这里 $c_{\lambda}$ 是任意一个形状为 $\lambda$ 的 Young 表的 Young 对称化子．
+
+:::{.remark}
+
+这是 [Peter--Weyl 定理](/posts/20260314-group-rep-peter-weyl/) / Wedderburn--Artin 定理在 $\mathcal S_n$ 上的一个具体实例．
+
+也长得很像 Bruhat 分解．
+:::
+
+## Garnir 关系与 Specht 模的基底
+
+我们为每个 Specht 模构造一个显式基底．因为同形状 Young 表诱导的 Specht 模之间有典范同构，可以只研究最标准的那个从左到右，从上到下标号的 Young 表 $T_{\lambda, \id}$ 诱导的 Specht 模．以后在无歧义的情况下，直接用 $\lambda$ 来代指此这个最标准的 Young 表．
+
+:::{#thm-basis}
+
+$V_\lambda$ 的一组基底为 $\{ g c_\lambda : T_{\lambda, g} \in \SYT(\lambda) \}$，即 $g$ 取遍所有标准 Young 表对应的置换．
+:::
+
+对任意 $g \in \mathcal S_n$，我们尝试将 $g c_\lambda$ 写成上述基底的线性组合．首先可以对 $g$ 右乘 $P_\lambda$ 元素而保持 $g c_\lambda$ 不变，故问题约化为 $g$ 对应 Young 表已经按行升序排列的情形．
+
+如果 $g$ 已经对应标准 Young 表，则没有需要做的事情．否则，必然两个同列、相邻行的位置对满足靠上的数字大于靠下的数字．不妨设它们分别是第 $i$ 行第 $j$ 列的 $r$ 和第 $i+1$ 行第 $j$ 列的 $s$：
+$$
+\begin{matrix}
+  &   &   &   & r & < & * & < & * \\
+  &   &   &   & \lor &   &   &   & \\
+* & < & * & < & s &   &   &   & 
+\end{matrix}
+$$
+
+sorry -- this part is under construction
+
+## 附录 {.appendix .unnumbered}
+
+:::{#exr-1}
+
+- 证明通过相邻数字对换操作足以沟通所有标准 Young 表．
+- 证明 Specht 模的维数为其对应 Young 图对应标准 Young 表数量，一组显式基底为 $\{g c_T\}$，其中 $g$ 取遍所有标准 Young 表对应的置换．
+- 确定具体对哪些 $g \in \mathcal S_n$，作为 $\mathbb C[\mathcal S_n]$ 的子模有 $V_T = V_{gT}$．
+:::
 
 :::{.remark}
 
