@@ -402,37 +402,7 @@ window.Quarto = {
 
 
 <p><a href="../../posts/20260321-geo-nilp-gln/">上篇</a> 中简单介绍了复数域上 <span class="math inline">\(\mathfrak{gl}_n\)</span> 或 <span class="math inline">\(\mathfrak{sl}_n\)</span> 的共轭 / 幂零轨道的定义．这是 ad hoc 的．一般来说，不同的群作用在李代数 <span class="math inline">\(\mathfrak{g}\)</span> 上可能导致不同的轨道．本篇介绍我们选择作用群的标准，主要参考 <span class="citation" data-cites="mcgovern_nilpotent_1993"><a href="#ref-mcgovern_nilpotent_1993" role="doc-biblioref">[1, section 1.2]</a></span>．</p>
-<p>仍然以 <span class="math inline">\(\mathfrak{gl}_n\)</span> 为例．一般来说，我们可以考虑全体 <span class="math inline">\(\mathfrak{gl}_n\)</span> 的李代数同构 <span class="math inline">\(\operatorname{Aut}_{\mathfrak{gl}_n}(\mathfrak{gl}_n)\)</span> 在 <span class="math inline">\(\mathfrak{gl}_n\)</span> 上的作用．这是个代数群，其上的几何结构由如下一般的步骤得到：</p>
-<ul>
-<li><p>设 <span class="math inline">\(\mathfrak g\)</span> 是一个 <span class="math inline">\(n\)</span> 维李代数，则选取一组基底 <span class="math inline">\((e_i)_{i=1}^n\)</span> 可获得 <span class="math inline">\(n\)</span> 维仿射空间结构</p></li>
-<li><p>全体其上的线性变换 <span class="math inline">\(\operatorname{End}_{\mathbb C}(\mathfrak g)\)</span> 是 <span class="math inline">\(n^2\)</span> 维的仿射空间，基底 <span class="math inline">\((E_{i,j})_{i=1,j=1}^{n,n}\)</span> 由 <span class="math inline">\(\mathfrak g\)</span> 的基底诱导得到</p></li>
-<li><p>在 <span class="math inline">\(\operatorname{End}_{\mathbb C}(\mathfrak g)\)</span> 上做线性同构限制，即要求行列式非零，得到开子簇 <span class="math inline">\(\operatorname{Aut}_{\mathbb C}(\mathfrak g)\)</span>．注意这个动作也可以实现为仿射簇．</p></li>
-<li><p>在 <span class="math inline">\(\operatorname{End}_{\mathbb C}(\mathfrak g)\)</span> 上做李代数同态限制得到 <span class="math inline">\(\operatorname{End}_{\mathfrak g}(\mathfrak g)\)</span>，即要求 <span class="math display">\[
-\varphi ([x, y]) = [\varphi(x), \varphi(y)], \quad \forall x, y \in \mathfrak g
-\]</span> 此式关于 <span class="math inline">\(\mathfrak g\)</span> 和 <span class="math inline">\(\operatorname{End}_{\mathbb C}(\mathfrak g)\)</span> 的基底线性展开后是若干关于 <span class="math inline">\(\varphi\)</span> 在基底 <span class="math inline">\((E_{i,j})\)</span> 下线性组合系数的多项式方程．因此 <span class="math inline">\(\operatorname{End}_{\mathfrak g}(\mathfrak g)\)</span> 是 <span class="math inline">\(\operatorname{End}_{\mathbb C}(\mathfrak g)\)</span> 的闭子集．【TODO：簇？】</p></li>
-<li><p>取 <span class="math inline">\(\operatorname{Aut}_{\mathfrak g}(\mathfrak g) := \operatorname{End}_{\mathfrak g}(\mathfrak g) \cap \operatorname{Aut}_{\mathbb C}(\mathfrak g)\)</span>，这是 <span class="math inline">\(\operatorname{End}_{\mathbb C}(\mathfrak g)\)</span> 的拟仿射子【TODO】</p></li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>TODO：看上去这个过程对一般的 <span class="math inline">\(\mathfrak g\)</span>-模也可以做．特别地，上面相当于是在对伴随表示 <span class="math inline">\(\operatorname{ad}_{\mathfrak g}\)</span> 做．</p>
-</div>
-</div>
-</div>
-</div>
-<p>——这是一个相当大的群，共轭作用 <span class="math display">\[
-\operatorname{Ad}(\mathrm{GL}_n) := \{X \mapsto A X A^{-1} : A \in \mathrm{GL}_n\} \subseteq \operatorname{Aut}(\mathfrak{gl}_n)
-\]</span> 只是其中的一小部分．</p>
+<p>仍然先以 <span class="math inline">\(\mathfrak{gl}_n\)</span> 为例．首先指出，<span class="math inline">\(\mathfrak{gl}_n\)</span> 上的共轭作用群有更精炼的表达：</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -440,13 +410,38 @@ window.Quarto = {
 </div>
 <div class="callout-body-container">
 <div id="prp-gln-diff-ad" class="theorem proposition">
-<p><span class="theorem-title"><strong>命题 1</strong></span> <span class="math inline">\(\mathrm{GL}_n\)</span>, <span class="math inline">\(\mathrm{SL}_n\)</span>, <span class="math inline">\(\mathrm{PSL}_n\)</span> 在 <span class="math inline">\(\mathfrak{gl}_n\)</span> 上的共轭作用导致相同的轨道．</p>
-<p>这里 <span class="math inline">\(\mathrm{SL}_n := \{g \in \mathrm{GL}_n : \det g = 1\}\)</span> 是 <span class="math inline">\(\mathrm{GL}_n\)</span> 的子群，<span class="math inline">\(\mathrm{PSL}_n := \mathrm{SL}_n / Z(\mathrm{SL}_n)\)</span> 是 <span class="math inline">\(\mathrm{SL}_n\)</span> 的商群，<span class="math inline">\(Z(\mathrm{SL}_n)\)</span> 是 <span class="math inline">\(\mathrm{SL}_n\)</span> 的中心．</p>
+<p><span class="theorem-title"><strong>命题 1</strong></span> &nbsp;</p>
+<ul>
+<li><span class="math inline">\(\mathrm{GL}_n\)</span>, <span class="math inline">\(\mathrm{SL}_n\)</span>, <span class="math inline">\(\mathrm{PSL}_n\)</span> 在 <span class="math inline">\(\mathfrak{gl}_n\)</span> 上的共轭作用导致相同的轨道．</li>
+<li><span class="math inline">\(\mathrm{PSL}_n\)</span> 忠实刻画了 <span class="math inline">\(\mathfrak{gl}_n\)</span> 的共轭作用群 <span class="math inline">\(\operatorname{ad}\subseteq \operatorname{Aut}(\mathfrak{gl}_n)\)</span>．</li>
+</ul>
+<p>这里 <span class="math inline">\(\mathrm{SL}_n := \{g \in \mathrm{GL}_n : \det g = 1\}\)</span> 是 <span class="math inline">\(\mathrm{GL}_n\)</span> 的子群，<span class="math inline">\(\mathrm{PSL}_n := \mathrm{SL}_n / Z(\mathrm{SL}_n)\)</span> 是 <span class="math inline">\(\mathrm{SL}_n\)</span> 的商群，<span class="math inline">\(Z(\mathrm{SL}_n)\)</span> 是 <span class="math inline">\(\mathrm{SL}_n\)</span> 的中心，<span class="math inline">\(\operatorname{Aut}(\mathfrak{gl}_n)\)</span> 是 <span class="math inline">\(\mathfrak{gl}_n\)</span> 的全体李代数同构．</p>
 </div>
 </div>
 </div>
 </div>
-<p>这是因为任意 <span class="math inline">\(A \in \mathrm{GL}_n\)</span> 的共轭作用 <span class="math inline">\(X \mapsto A X A^{-1}\)</span> 都等价于 <span class="math inline">\((\det A)^{1/n} \in \mathrm{SL}_n\)</span> 的共轭作用，而中心在共轭作用下不起作用．</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span></p>
+<ul>
+<li>这是因为任意 <span class="math inline">\(A \in \mathrm{GL}_n\)</span> 的共轭作用 <span class="math inline">\(X \mapsto A X A^{-1}\)</span> 都等价于 <span class="math inline">\((\det A)^{1/n} \in \mathrm{SL}_n\)</span> 的共轭作用，而中心在共轭作用下不起作用．</li>
+<li>对群同态 <span class="math inline">\(\mathrm{SL}_n \to \operatorname{Aut}_{\mathfrak{gl}_n}(\mathfrak{gl}_n)\)</span> 使用第一同构定理．</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -463,12 +458,35 @@ window.Quarto = {
 <p><span class="proof-title"><em>注记</em>. </span>可以看到这开始和基域的选择有关．考虑群正合列： <span class="math display">\[
 1 \longrightarrow \mathrm{SL}_n \longrightarrow \mathrm{GL}_n \xrightarrow{\det} \mathbb C^\times \longrightarrow 1
 \]</span> 右分裂同态 <span class="math inline">\(c \mapsto (\det c)^{1/n}\)</span> 使得其右侧分裂，从而 <span class="math inline">\(\mathrm{GL}_n = \mathrm{SL}_n \rtimes Z(\mathrm{GL}_n) \cong \mathrm{SL}_n \rtimes \mathbb C^\times\)</span>．但这是复数域能够开根的结果．</p>
-<p>TODO: 这也许和所谓的 split reductive group 有关．</p>
+<p>TODO: 这也许和所谓的 split-reductive group 有关．</p>
 </div>
 </div>
 </div>
 </div>
-<p>因此在 <span class="math inline">\(\mathfrak{gl}_n\)</span> 上，<span class="math inline">\(\mathrm{GL}_n\)</span>, <span class="math inline">\(\mathrm{SL}_n\)</span>, <span class="math inline">\(\mathrm{PSL}_n\)</span> 的选择是等价的．这三个群作用都是直接由共轭作用诱导的．可以认为 <span class="math inline">\(\mathrm{PSL}_n \subseteq \operatorname{Aut}(\mathfrak{gl}_n)\)</span>．</p>
+<p>现在对一般的李代数 <span class="math inline">\(\mathfrak g\)</span> 明确共轭作用群 <span class="math inline">\(G_{\operatorname{ad}}\)</span> 的定义．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-adjoint-group" class="theorem">
+<p><span class="theorem-title"><strong>定理 1</strong></span> 李代数 <span class="math inline">\(\mathfrak g\)</span> 的共轭作用群有如下多种定义：</p>
+<ul>
+<li><p>代数群 <span class="math inline">\(\mathrm{GL}(\mathfrak g)\)</span> 单位元所在的连通子群 <span class="math inline">\(\mathrm{GL}(\mathfrak g)^\circ\)</span>．</p>
+<ul>
+<li>它的李代数恰为 <span class="math inline">\(\mathfrak g\)</span> 的伴随作用们 <span class="math inline">\(\operatorname{ad}_{\mathfrak g} \subseteq \mathfrak{gl}(\mathfrak g)\)</span>．</li>
+</ul></li>
+<li><p>如果 <span class="math inline">\(\mathfrak g\)</span> 半单：<span class="math inline">\(\operatorname{Aut}(\mathfrak g)^{\circ}\)</span></p>
+<ul>
+<li><span class="math inline">\(\operatorname{Aut}(\mathfrak g) = \operatorname{Aut}(\mathfrak g)^{\circ} \rtimes \Gamma(\mathfrak g)\)</span>，这里 <span class="math inline">\(\Gamma(\mathfrak g)\)</span> 是一个有限子群．</li>
+</ul></li>
+<li><p>如果有一连通半单代数群 <span class="math inline">\(G\)</span> 使得其李代数 <span class="math inline">\(\operatorname{Lie}G\)</span> 恰为 <span class="math inline">\(\mathfrak g\)</span>：对每个 <span class="math inline">\(G \to G\)</span> 的内自同构取微分得到 <span class="math inline">\(\mathfrak g \to \mathfrak g\)</span> 的李代数自同构，据此定义出群同态 <span class="math inline">\(\operatorname{Ad}: G \to \operatorname{Aut}(\mathfrak g)\)</span>．用此同态的像 <span class="math inline">\(\operatorname{Ad}G\)</span> 作为共轭作用群的定义．</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 
 
 
