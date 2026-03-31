@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Technical posts.">
+<meta name="author" content="sun123zxy">
+<meta name="dcterms.date" content="2026-03-31">
 
-<title>Technical – sun123zxy’s blog</title>
+<title>Lie 定理 – sun123zxy’s blog</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -24,31 +25,49 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="..//assets/images/avatar.png" rel="icon" type="image/png">
-<script src="../site_libs/quarto-listing/list.min.js"></script>
-<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5d10e83519a74e789e6bb4496f75c4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-723530320b8f33b049ef21af632b9e12.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-cfe2a48cf9f5963499fac863b523d04f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-88f4fef2f58cb5f989f9f9c26435b78f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5d10e83519a74e789e6bb4496f75c4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-723530320b8f33b049ef21af632b9e12.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-cfe2a48cf9f5963499fac863b523d04f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-88f4fef2f58cb5f989f9f9c26435b78f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -75,35 +94,7 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-subtitle','listing-lang','listing-categories','listing-description','listing-date','listing-image','listing-collections',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
+}</script>
 <script>
 MathJax = {
   tex: {
@@ -144,7 +135,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="alternate" type="application/rss+xml" title="sun123zxy's blog" href="technical.xml" data-external="1"></head>
+</head>
 
 <body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
@@ -313,7 +304,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
@@ -324,15 +315,15 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../listings/overview.html"> 
+    <a class="nav-link" href="../../listings/overview.html"> 
 <span class="menu-text">Overview</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../listings/projects/index.html"> 
+    <a class="nav-link" href="../../listings/projects/index.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -350,7 +341,7 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-bi-rss">    
         <li>
-    <a class="dropdown-item" href="../listings/all.xml">
+    <a class="dropdown-item" href="../../listings/all.xml">
  <span class="dropdown-text">All Posts</span></a>
   </li>  
     </ul>
@@ -364,31 +355,42 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="YWxnb3JpdGht">algorithm <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QyUyQiUyQg==">C++ <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TGFUZVg=">LaTeX <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWVtb3JpZXM=">memories <span class="quarto-category-count">(3)</span></div><div class="category" data-category="TWluZWNyYWZ0">Minecraft <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bXVzaWM=">music <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHl0aG9u">Python <span class="quarto-category-count">(2)</span></div><div class="category" data-category="c2l0ZS1yZWxhdGVk">site-related <span class="quarto-category-count">(2)</span></div><div class="category" data-category="dGVjaG5pY2Fs">technical <span class="quarto-category-count">(6)</span></div><div class="category" data-category="d2Vi">web <span class="quarto-category-count">(3)</span></div></div></div>
+    </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Technical</h1>
-</div>
-
-<div>
-  <div class="description">
-    Technical posts.
+<h1 class="title">Lie 定理</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">algebra</div>
   </div>
-</div>
+  </div>
 
 
-<div class="quarto-title-meta column-page-left">
 
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>sun123zxy </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 31, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -398,256 +400,85 @@ window.Quarto = {
 </header>
 
 
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-    <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-    <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-      <option value="" disabled="" selected="" hidden="">Order By</option>
-      <option value="index" data-direction="asc">Default</option>
-      <option value="listing-title" data-direction="asc">
-        Title
-      </option>
-      <option value="listing-date-sort" data-direction="asc">
-        Date - Oldest
-      </option>
-      <option value="listing-date-sort" data-direction="desc">
-        Date - Newest
-      </option>
-    </select>
-  </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
+<p>关于 Lie 定理的简明证明．主要参考 <span class="citation" data-cites="bggo_2020"><a href="#ref-bggo_2020" role="doc-biblioref">[1, Sec. 1.2]</a></span>．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
 </div>
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="bWVtb3JpZXMlMkNNaW5lY3JhZnQlMkNtdXNpYyUyQ3RlY2huaWNhbCUyQ1B5dGhvbg==" data-listing-date-sort="1676592000000" data-listing-file-modified-sort="1774951010660" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="775">
-<div class="thumbnail"><a href="../posts/20230217-rmg/index.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="../posts/20230217-rmg/colorful-redstone.jpg"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20230217-rmg/index.html" class="no-external">聊聊红石音乐</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20230217-rmg/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWVtb3JpZXM='); return false;">memories</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TWluZWNyYWZ0'); return false;">Minecraft</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bXVzaWM='); return false;">music</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVjaG5pY2Fs'); return false;">technical</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20230217-rmg/index.html" class="no-external">
-<p>封存的幻想。</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20230217-rmg/index.html" class="no-external">
-<div class="listing-date">
-2023/02/17
-</div>
-<div class="metadata-value listing-collections">
-casual
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="YWxnb3JpdGhtJTJDdGVjaG5pY2FsJTJDQyUyQiUyQg==" data-listing-date-sort="1674518400000" data-listing-file-modified-sort="1774951010659" data-listing-date-modified-sort="1689206400000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1064">
-<div class="thumbnail"><a href="../posts/20230124-stl/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20230124-stl/index.html" class="no-external">算法竞赛向 C++ Standard Library 使用速查</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20230124-stl/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnb3JpdGht'); return false;">algorithm</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVjaG5pY2Fs'); return false;">technical</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('QyUyQiUyQg=='); return false;">C++</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20230124-stl/index.html" class="no-external">
-本文旨在对算法竞赛所需 C++ Standard Library 做一个全面而相对严谨的总结。
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20230124-stl/index.html" class="no-external">
-<div class="listing-date">
-2023/01/24
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="c2l0ZS1yZWxhdGVkJTJDdGVjaG5pY2FsJTJDd2ViJTJDTGFUZVglMkNtZW1vcmllcw==" data-listing-date-sort="1672012800000" data-listing-file-modified-sort="1774951010655" data-listing-date-modified-sort="1681689600000" data-listing-reading-time-sort="4" data-listing-word-count-sort="623">
-<div class="thumbnail"><a href="../posts/20221226-quarto-fantasia/index.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="../posts/20221226-quarto-fantasia/quarto-begin.jpg"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20221226-quarto-fantasia/index.html" class="no-external">Jekyll 2 Quarto: Academic Writing’s not All About PDF</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20221226-quarto-fantasia/index.html" class="no-external">博客搭建随想 Part II</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('c2l0ZS1yZWxhdGVk'); return false;">site-related</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVjaG5pY2Fs'); return false;">technical</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('d2Vi'); return false;">web</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TGFUZVg='); return false;">LaTeX</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWVtb3JpZXM='); return false;">memories</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20221226-quarto-fantasia/index.html" class="no-external">
-<p>PDF，我所欲也；HTML，亦我所欲也。二者不可得兼……</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20221226-quarto-fantasia/index.html" class="no-external">
-<div class="listing-date">
-2022/12/26
-</div>
-<div class="metadata-value listing-collections">
-casual
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="dGVjaG5pY2FsJTJDUHl0aG9u" data-listing-date-sort="1657756800000" data-listing-file-modified-sort="1774951010655" data-listing-date-modified-sort="1657756800000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1174">
-<div class="thumbnail"><a href="../posts/20220714-import/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20220714-import/index.html" class="no-external">关于 Python 的 import</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20220714-import/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVjaG5pY2Fs'); return false;">technical</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20220714-import/index.html" class="no-external">
-<p><code>__init__.py</code>, <code>sys.path</code>, <code>python -m</code> and more…</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20220714-import/index.html" class="no-external">
-<div class="listing-date">
-2022/07/14
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="dGVjaG5pY2FsJTJDd2Vi" data-listing-date-sort="1643932800000" data-listing-file-modified-sort="1774951010654" data-listing-date-modified-sort="1654041600000" data-listing-reading-time-sort="8" data-listing-word-count-sort="1480">
-<div class="thumbnail"><a href="../posts/20220204-vmagic/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20220204-vmagic/index.html" class="no-external">DockerCompose+VLESS+WS+TLS+Web 方式搭建 V2Ray 代理</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20220204-vmagic/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVjaG5pY2Fs'); return false;">technical</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('d2Vi'); return false;">web</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20220204-vmagic/index.html" class="no-external">
-<p>无懈可击的超强配置搭建教程。</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20220204-vmagic/index.html" class="no-external">
-<div class="listing-date">
-2022/02/04
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="c2l0ZS1yZWxhdGVkJTJDdGVjaG5pY2FsJTJDd2ViJTJDbWVtb3JpZXM=" data-listing-date-sort="1629158400000" data-listing-file-modified-sort="1774951010648" data-listing-date-modified-sort="1671926400000" data-listing-reading-time-sort="3" data-listing-word-count-sort="468">
-<div class="thumbnail"><a href="../posts/20210817-aboutblog/index.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="../posts/20210817-aboutblog/cnblogs-19.jpg"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20210817-aboutblog/index.html" class="no-external">Cnblogs 2 Jekyll：从寄人篱下到手撸全站</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20210817-aboutblog/index.html" class="no-external">博客搭建随想 Part I</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('c2l0ZS1yZWxhdGVk'); return false;">site-related</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVjaG5pY2Fs'); return false;">technical</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('d2Vi'); return false;">web</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWVtb3JpZXM='); return false;">memories</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20210817-aboutblog/index.html" class="no-external">
-<p>某不务正业 OIer 摸鱼日记。</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20210817-aboutblog/index.html" class="no-external">
-<div class="listing-date">
-2021/08/17
-</div>
-<div class="metadata-value listing-collections">
-casual
-</div>
-</a>
+<div class="callout-body-container">
+<div id="lem-eig-inv" class="theorem lemma">
+<p><span class="theorem-title"><strong>Lemma 1</strong></span> 设 <span class="math inline">\(V\)</span> 是一 <span class="math inline">\(\mathfrak g\)</span>-表示，<span class="math inline">\(L \subseteq \mathfrak g\)</span> 是 <span class="math inline">\(\mathfrak g\)</span> 的一个理想，定义 <span class="math inline">\(L\)</span> 关于其上线性函数 <span class="math inline">\(\lambda: L \to \mathbb C\)</span> 的特征空间为 <span class="math inline">\(V_\lambda := \{v \in V : \forall x \in L,\, x \cdot v = \lambda(x) v\}\)</span>．则 <span class="math inline">\(V_\lambda\)</span> 是 <span class="math inline">\(V\)</span> 的 <span class="math inline">\(\mathfrak g\)</span>-子表示．</p>
 </div>
 </div>
 </div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>对任意 <span class="math inline">\(g \in \mathfrak g\)</span>, <span class="math inline">\(x \in L\)</span>, 非零的 <span class="math inline">\(v \in V_\lambda\)</span>，需要验证 <span class="math inline">\(x \cdot g \cdot v = \lambda(x) \cdot g \cdot v\)</span>．注意左侧 <span class="math display">\[
+x \cdot g \cdot v = g \cdot x \cdot v + [x,g] \cdot v = \lambda(x) \cdot g \cdot v + \lambda([x,g]) v
+\]</span> 故只需证明 <span class="math inline">\(\lambda([x,g]) = 0\)</span>．</p>
+<p>这里的 idea 是考虑 <span class="math inline">\(x\)</span>, <span class="math inline">\(g\)</span> 和 <span class="math inline">\([x,g]\)</span> 在 <span class="math inline">\(\mathfrak g\)</span>-不变子空间 <span class="math inline">\(U := \mathbb Cv \oplus \mathbb C (g \cdot v) \oplus \dots \oplus \mathbb C (g^{\cdot (n-1)} \cdot v)\)</span> 上的作用，这里 <span class="math inline">\(n\)</span> 取到使得这些向量线性无关的最大值．注意任意 <span class="math inline">\(a \in L\)</span> 在此空间上上作用均为上三角阵且对角线元素均为 <span class="math inline">\(\lambda(a)\)</span>．特别地，<span class="math inline">\(a = [x,g] \in L\)</span> 限制在 <span class="math inline">\(U\)</span> 上有迹 <span class="math inline">\(n \lambda([x,g])\)</span>．但是 <span class="math inline">\([x,g]\)</span> 又是个交换子逼迫此迹为零，所以 <span class="math inline">\(\lambda([x,g]) = 0\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-lie" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Lie 定理)</strong></span> 任意复数域上有限维可解李代数的有限维表示存在非空的公共特征空间．进而，这表示可被上三角化．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>设 <span class="math inline">\(\mathfrak g\)</span> 是有限维可解李代数，<span class="math inline">\(V\)</span> 是 <span class="math inline">\(\mathfrak g\)</span> 的有限维表示．我们对 <span class="math inline">\(\mathfrak g\)</span> 的维数做归纳．</p>
+<p>考虑 <span class="math inline">\([\mathfrak g,\mathfrak g] \subsetneq \mathfrak g\)</span>，根据可解性，它是 <span class="math inline">\(\mathfrak g\)</span> 的一个真理想．由归纳假设，存在线性函数 <span class="math inline">\(\lambda: [\mathfrak g, \mathfrak g] \to \mathbb C\)</span> 使得 <span class="math inline">\([\mathfrak g,\mathfrak g]\)</span> 关于 <span class="math inline">\(\lambda\)</span> 的特征空间 <span class="math inline">\(W := V_{\lambda} = \{v \in V : \forall x \in [\mathfrak g,\mathfrak g],\, x \cdot v = \lambda(x) \cdot v \}\)</span> 非空．</p>
+<ul>
+<li><span class="math inline">\(W\)</span> 是 <span class="math inline">\(\mathfrak g\)</span>-不变子空间：由 <a href="#lem-eig-inv" class="quarto-xref">Lemma&nbsp;1</a>．</li>
+<li><span class="math inline">\([\mathfrak g, \mathfrak g]\)</span> 在 <span class="math inline">\(W\)</span> 上作用平凡：已经知道都是常数倍作用，而 <span class="math inline">\([\mathfrak g, \mathfrak g]\)</span> 中元素作用于 <span class="math inline">\(W\)</span> 取迹为 <span class="math inline">\(0\)</span>，考虑矩阵对角线就知道这些常数倍只能是 <span class="math inline">\(0\)</span>．</li>
+</ul>
+<p>故可考虑 <span class="math inline">\(\mathfrak g / [\mathfrak g, \mathfrak g]\)</span> 在 <span class="math inline">\(W\)</span> 上的作用．这是个 Abel 李代数的表示，当然有非空公共特征空间．此空间即所求．</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-bggo_2020" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">胡峻 and 周凯, <em>半单李代数与<span>BGG范畴O</span></em>. in 现代数学基础丛书. 科学出版社, 2020.</div>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -1068,6 +899,38 @@ casual
     }
   });
   </script>
+<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
+<input type="hidden" id="giscus-alt-theme" value="light">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "sun123zxy/blog-quarto-code";
+    script.dataset.repoId = "R_kgDOIrPs5w";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOIrPs584CV4gd";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1080,7 +943,7 @@ casual
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="../thanks.html">
+    <a class="nav-link" href="../../thanks.html">
 <p>Thanks</p>
 </a>
   </li>  
