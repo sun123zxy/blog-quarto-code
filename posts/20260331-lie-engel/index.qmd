@@ -1,0 +1,59 @@
+---
+title: Lie 定理
+author: sun123zxy
+date: 2026-03-31
+lang: en
+bibliography: index.bib
+
+categories:
+  - math
+  - algebra
+
+collections:
+  - short
+
+number-sections: true
+
+format:
+  html: default
+---
+
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\Tr}{\operatorname{Tr}}
+
+关于 Lie 定理的简明证明．主要参考 [@bggo_2020, {section 1.2}]．
+
+:::{#lem-eig-inv}
+
+设 $V$ 是一 $\mathfrak g$-表示，$L \subseteq \mathfrak g$ 是 $\mathfrak g$ 的一个理想，定义 $L$ 关于其上线性函数 $\lambda: L \to \mathbb C$ 的特征空间为 $V_\lambda := \{v \in V : \forall x \in L,\, x \cdot v = \lambda(x) v\}$．则 $V_\lambda$ 是 $V$ 的 $\mathfrak g$-子表示．
+:::
+
+:::{.proof}
+
+对任意 $g \in \mathfrak g$, $x \in L$, 非零的 $v \in V_\lambda$，需要验证 $x \cdot g \cdot v = \lambda(x) \cdot g \cdot v$．注意左侧
+$$
+x \cdot g \cdot v = g \cdot x \cdot v + [x,g] \cdot v = \lambda(x) \cdot g \cdot v + \lambda([x,g]) v
+$$
+故只需证明 $\lambda([x,g]) = 0$．
+
+这里的 idea 是考虑 $x$, $g$ 和 $[x,g]$ 在 $\mathfrak g$-不变子空间 $U := \mathbb Cv \oplus \mathbb C (g \cdot v) \oplus \dots \oplus \mathbb C (g^{\cdot (n-1)} \cdot v)$ 上的作用，这里 $n$ 取到使得这些向量线性无关的最大值．注意任意 $a \in L$ 在此空间上上作用均为上三角阵且对角线元素均为 $\lambda(a)$．特别地，$a = [x,g] \in L$ 限制在 $U$ 上有迹 $n \lambda([x,g])$．但是 $[x,g]$ 又是个交换子逼迫此迹为零，所以 $\lambda([x,g]) = 0$．
+:::
+
+:::{#thm-lie}
+
+## Lie 定理
+
+任意复数域上有限维可解李代数的有限维表示存在非空的公共特征空间．进而，这表示可被上三角化．
+:::
+
+:::{.proof}
+
+设 $\mathfrak g$ 是有限维可解李代数，$V$ 是 $\mathfrak g$ 的有限维表示．我们对 $\mathfrak g$ 的维数做归纳．
+
+考虑 $[\mathfrak g,\mathfrak g] \subsetneq \mathfrak g$，根据可解性，它是 $\mathfrak g$ 的一个真理想．由归纳假设，存在线性函数 $\lambda: [\mathfrak g, \mathfrak g] \to \mathbb C$ 使得 $[\mathfrak g,\mathfrak g]$ 关于 $\lambda$ 的特征空间 $W := V_{\lambda} = \{v \in V : \forall x \in [\mathfrak g,\mathfrak g],\, x \cdot v = \lambda(x) \cdot v \}$ 非空．
+
+- $W$ 是 $\mathfrak g$-不变子空间：由 [@lem-eig-inv]．
+- $[\mathfrak g, \mathfrak g]$ 在 $W$ 上作用平凡：已经知道都是常数倍作用，而 $[\mathfrak g, \mathfrak g]$ 中元素作用于 $W$ 取迹为 $0$，考虑矩阵对角线就知道这些常数倍只能是 $0$．
+
+故可考虑 $\mathfrak g / [\mathfrak g, \mathfrak g]$ 在 $W$ 上的作用．这是个 Abel 李代数的表示，当然有非空公共特征空间．此空间即所求．
+:::
