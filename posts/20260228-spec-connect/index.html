@@ -103,7 +103,6 @@ MathJax = {
   }
 };
 </script>
-<meta name="quarto:status" content="draft">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -300,7 +299,7 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>草稿</div>
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -376,8 +375,8 @@ window.Quarto = {
   <li><a href="#使用例" id="toc-使用例" class="nav-link" data-scroll-target="#使用例"><span class="header-section-number">3</span> 使用例</a>
   <ul class="collapse">
   <li><a href="#vxy" id="toc-vxy" class="nav-link" data-scroll-target="#vxy"><span class="header-section-number">3.1</span> <span class="math inline">\(V(xy)\)</span></a></li>
-  <li><a href="#局部环的-spec-连通" id="toc-局部环的-spec-连通" class="nav-link" data-scroll-target="#局部环的-spec-连通"><span class="header-section-number">3.2</span> 局部环的 Spec 连通</a></li>
-  <li><a href="#局部环的-spec-什么时候可约" id="toc-局部环的-spec-什么时候可约" class="nav-link" data-scroll-target="#局部环的-spec-什么时候可约"><span class="header-section-number">3.3</span> 局部环的 Spec 什么时候可约？</a></li>
+  <li><a href="#局部环" id="toc-局部环" class="nav-link" data-scroll-target="#局部环"><span class="header-section-number">3.2</span> 局部环</a></li>
+  <li><a href="#代数群" id="toc-代数群" class="nav-link" data-scroll-target="#代数群"><span class="header-section-number">3.3</span> 代数群</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -445,8 +444,9 @@ window.Quarto = {
 <p>注意开集传递性．<span class="math inline">\(U\)</span> 的非平凡开分解 <span class="math inline">\(U = U_1 \cup U_2\)</span> 将使得 <span class="math inline">\(X\)</span> 获得非平凡闭分解 <span class="math inline">\(X = (X \setminus U_1) \cup (X \setminus U_2)\)</span>．</p></li>
 <li><p>不可约空间的在连续映射下的像也不可约</p>
 <p>和连通性一致．</p></li>
-<li><p>不可约集合 <span class="math inline">\(S\)</span> 的闭包 <span class="math inline">\(\overline{S}\)</span> 也不可约</p>
-<p>注意闭包传递性，对 <span class="math inline">\(\overline{S}\)</span> 的非平凡开集，其都与 <span class="math inline">\(S\)</span> 交非空，于是由 <span class="math inline">\(S\)</span> 的不可约性，这个开集限制在 <span class="math inline">\(S\)</span> 上稠密，故由闭包传递性在 <span class="math inline">\(\overline{S}\)</span> 上也稠密．</p></li>
+<li><p>集合 <span class="math inline">\(S\)</span> 不可约 <span class="math inline">\(\iff\)</span> 闭包 <span class="math inline">\(\overline{S}\)</span> 不可约</p>
+<p><span class="math inline">\(\impliedby\)</span>：<span class="math inline">\(S\)</span> 的每个开分解都诱导出 <span class="math inline">\(\overline{S}\)</span> 上的一个开分解．</p>
+<p><span class="math inline">\(\implies\)</span>：注意闭包传递性，对 <span class="math inline">\(\overline{S}\)</span> 的非平凡开集，其都与 <span class="math inline">\(S\)</span> 交非空，于是由 <span class="math inline">\(S\)</span> 的不可约性，这个开集限制在 <span class="math inline">\(S\)</span> 上稠密，故由闭包传递性在 <span class="math inline">\(\overline{S}\)</span> 上也稠密．</p></li>
 <li><p>Hausdorff 空间除了单点都可约</p>
 <p>所以不可约性的讨论在大部分常见的欧式拓扑中很少见．</p></li>
 </ul>
@@ -581,13 +581,18 @@ V(I + J) &amp;= V(I) \cap V(J) = \emptyset
 </ul>
 <p>以防你想歪，别以为可以用中国剩余定理把坐标环分解成 <span class="math inline">\(k[x] \times k[y]\)</span>：<span class="math inline">\((x)\)</span> 和 <span class="math inline">\((y)\)</span> 根本不是 comaximal 的——这俩一加等于 <span class="math inline">\((x,y)\)</span>——恰好也对应了 Spec 那一侧交点．</p>
 </section>
-<section id="局部环的-spec-连通" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="局部环的-spec-连通"><span class="header-section-number">3.2</span> 局部环的 Spec 连通</h3>
-<p>因为极大理想只有一个，而 Zariski 拓扑的非空闭集都包含它，没法做不交的划分．</p>
+<section id="局部环" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="局部环"><span class="header-section-number">3.2</span> 局部环</h3>
+<ul>
+<li><p>局部环的 Spec 连通：因为极大理想只有一个，而 Zariski 拓扑的非空闭集都包含它，没法做不交的划分．</p></li>
+<li><p>局部环的 Spec 什么时候可约？TODO</p></li>
+</ul>
 </section>
-<section id="局部环的-spec-什么时候可约" class="level3" data-number="3.3">
-<h3 data-number="3.3" class="anchored" data-anchor-id="局部环的-spec-什么时候可约"><span class="header-section-number">3.3</span> 局部环的 Spec 什么时候可约？</h3>
-<p>TODO</p>
+<section id="代数群" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="代数群"><span class="header-section-number">3.3</span> 代数群</h3>
+<ul>
+<li>代数群不可约与连通等价．<span class="citation" data-cites="malle_linear_2011"><a href="#ref-malle_linear_2011" role="doc-biblioref">[2, proposition 1.13]</a></span></li>
+</ul>
 
 
 
@@ -597,6 +602,9 @@ V(I + J) &amp;= V(I) \cap V(J) = \emptyset
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
 <div id="ref-AM1969" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[1] </div><div class="csl-right-inline">Atiyah, M. F. 和 Macdonald, I. G., <em>Introduction To Commutative Algebra</em>. Addison-Wesley Publishing Company, Inc., 1969.</div>
+</div>
+<div id="ref-malle_linear_2011" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">G. Malle 和 D. Testerman, <em>Linear Algebraic Groups and Finite Groups of Lie Type</em>. 收入 Cambridge Studies in Advanced Mathematics. Cambridge: Cambridge University Press, 2011. doi: <a href="https://doi.org/10.1017/CBO9780511994777">10.1017/CBO9780511994777</a>.</div>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
