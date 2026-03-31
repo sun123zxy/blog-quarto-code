@@ -1,7 +1,7 @@
 ---
 title: An Intrinsic, Boilerplate-Free Definition of Affine Varieties
 author: sun123zxy
-date: 2026-03-31
+date: 2026-04-01
 lang: en
 bibliography: index.bib
 
@@ -11,8 +11,6 @@ categories:
 
 collections:
   - short
-
-draft: true
 
 number-sections: true
 
@@ -25,11 +23,11 @@ format:
 \newcommand{\ev}{\operatorname{ev}}
 \newcommand{\Hom}{\operatorname{Hom}}
 
-[@geck_introduction_2013, {definition 2.1.6}] gives an intrinsic, boilerplate-free definition of affine varieties as follows:
+[@geck_introduction_2013, {definition 2.1.6}] gives an intrinsic, boilerplate-free definition of affine varieties as follows (note our "variety" is not necessarily irreducible):
 
 :::{#def-variety}
 
-Let $X$ be a set and $A$ be a $k$-subalgebra of functions $X \to k$. We call the pair $(X, A)$ an *affine variety* if $A$ is a nontrivial finitely generated $k$-subalgebra with a bijective evaluation map $\ev: X \to \Hom_{k\text{-alg}}(A, k)$. More explicitly:
+Let $X$ be a set and $A$ be a $k$-subalgebra of $k$-valued functions over $X$. We call the pair $(X, A)$ an *affine variety* if $A$ is a nontrivial finitely generated $k$-subalgebra with a bijective evaluation map $\ev: X \to \Hom_{k\text{-alg}}(A, k)$. More explicitly:
 
 1. Finiteness: $A$ is finitely generated as a $k$-algebra and contains the constant functions.
 
@@ -57,34 +55,69 @@ The equivalence is given by the following correspondences:
 - Given a homomorphism $\psi: B \to A$, for every $x \in X$, $\psi \circ \ev_x \in B$, hence by condition (3) there is a $y \in Y$ such that $\psi \circ \ev_x = \ev_y$. By condition (2) this $y$ is unique, so we can define $\varphi: X \to Y$ by sending $x$ to this $y$.
 :::
 
+:::{#def-top}
+
+The Zariski topology on an affine variety $(X, A)$ is the coarsest topology such that every function in $A$ is continuous (where over $k$ we take the profinite topology). That is, the closed sets are exactly the common zero sets of functions in $A$.
+:::
+
 ## Strengths
 
 This definition is elegant because:
 
-- intrinsic: it does not explicitly rely on embedding $X$ into some ambient affine space $k^n$. The existence of such an embedding is encoded in the finiteness of $k$-algebra $A$.
+- intrinsic: it does not explicitly rely on an closed embedding $X$ into some ambient affine space $k^n$. The existence of such an closed embedding is encoded in the finiteness of $k$-algebra $A$.
+
+  This is extremely helpful for those quasi-affine varieties that arise more naturally as an principal open subset of an affine variety, while still being able to be embedded into some affine space. For example, the algebraic group $\operatorname{GL}_n$.
 
 - boilerplate-free: it is abstract enough for all use cases withing affine settings, while we don't have to invoke the machinery of schemes or sheaves.
 
 - function-oriented: it emphasizes the algebra of functions on the variety, which is also the same take adopted by the theory of differential manifolds.
 
-- We note that condition (b) and (c) together says that $\ev : X \to \Hom_{k\text{-alg}}(A, k)$ gives a bijection between $X$ and the set of $k$-algebra homomorphisms from $A$ to $k$. Somehow this may be interpreted as a canonical isomorphism between $X$ and its "double dual space". Similar statements take place everywhere in mathematics:
+- We note that condition (b) and (c) together says that $\ev : X \to \Hom_{k\text{-alg}}(A, k)$ gives a bijection between $X$ and the set of $k$-algebra homomorphisms from $A$ to $k$. Somehow this may be interpreted as a canonical isomorphism between $X$ and its "double dual space". This enables us to precisely reconstruct $X$ from those $k$-valued functions it admits (that is, $A$).
+
+  Similar statements take place everywhere in mathematics:
 
   - For a finite-dimensional vector space $V$, the evaluation map $V \to V^{**}$ is an isomorphism.
   - For a Hilbert space $H$, the evaluation map gives an isomorphism $H$ and its double dual space $H^{**}$ (dual being the continuous dual).
-  - For a compact Hausdorff space $X$, the evaluation map gives a homeomorphism between $X$ and the maximal ideals of continuous real-valued functions.
 
-Next, we connect this definition to other definitions of affine varieties.
+- Note that Hilbert's Nullstellensatz says that all maximal ideals has residue field $k$ when $k$ is algebraically closed. This extends the equivalence to $X \cong \Hom_{k\text{-alg}}(A, k) \cong \operatorname{Specmax}(A)$.
 
-## Connection to the Concrete Definition
+## Equivalence with the extrinsic definition
 
-In a standard introductory course, an affine variety is defined extrinsically: you start with $k^n$, pick a set of polynomials $f_1, \dots, f_m$, and define $V$ as their common zero set. 
+An affine variety can be defined extrinsically: start with the affine space $k^n$ and take the zero set of some polynomials.
 
-- Condition (1) gives the existence of a projection $\pi: k[x_1, \dots, x_n] \to A$, which gives an embedding of $X$ into $k^n$: say $X$ is generated by $f_1, \dots, f_n$ (correspond to $x_1, \dots, x_n$), then we have a map $X \to k^n$ sending $x$ to $(f_1(x), \dots, f_n(x))$.
+- Condition (1) gives the existence of a projection $\pi: k[x_1, \dots, x_n] \to A$, which ensures a $X \to k^n$ map: say $X$ is generated by $f_1, \dots, f_n$ (correspond to $x_1, \dots, x_n$), then we have a map $X \to k^n$ sending $x$ to $(f_1(x), \dots, f_n(x))$.
 
-- Condition (2) ensures that $X \to k^n$ is really an embedding, i.e. injective.
+- Condition (2) ensures that $X \to k^n$ is injective.
 
-- Condition (3) is essentially the weak form of Hilbert's Nullstellensatz: Every $k$-algebra homomorphism $A \to k$ corresponds to an maximal ideal in the coordinate ring, which corresponds to a point in $X$.
+[@geck_introduction_2013, {proposition 2.1.10}] Shows that this embedding is indeed a closed embedding of affine varieties when $k$ is algebraically closed.
 
-## Connection to the Scheme-Theoretic Definition
+## Operations
 
-TODO
+New affine varieties can be constructed from old ones by the following operations.
+
+### Closed subsets
+
+For any affine variety $(X, A)$ and a closed subset $V \subseteq X$, by restricting the functions in $A$ to $Y$, we get a new $k$-algebra $A \vert_V \subseteq \Hom_{k\text{-alg}}(V, k)$. We check that $(V, A \vert_V)$ is indeed an affine variety:
+
+- Analyzing the restriction map $A \to A \vert_V$ by the first isomorphism theorem gives $A \vert_V \cong A / I$. This shows that $A \vert_V$ is finitely generated as an $k$-algebra.
+
+- Seperation and completeness property is inherited from $A$ by restriction.
+
+### Principal open subsets
+
+For any affine variety $(X, A)$ and a basic open set $X_f$ for some $f \in A$, by restricting the functions in $A$ to $X_f$ and adding the function $1/f : X_f \to k$, we get a new $k$-algebra $A_f := A \vert_{X_f} [1/f] \subseteq \Hom_{k\text{-alg}}(X_f, k)$. We check that $(X_f, A_f)$ is indeed an affine variety:
+
+- $A_f$ is generated by the image of $A$ (under the restriction map) and $1/f$, hence is finitely generated as a $k$-algebra. 
+
+- Seperation: inherited from $A$ by restriction.
+
+- Completeness: Say $\varphi: A_f \to k$. Note that $\varphi(1/f)$ is completely determined by $\varphi(f)$: $1 = \varphi(1) = \varphi(1/f \cdot f) = \varphi(1/f) \varphi(f)$. So $\varphi(1/f) = 1 / \varphi(f)$ and we only need to worry about $A \vert_{X_f}$ part, which always pulls back to $A \to k$ and hence has a realization of $\ev_x : A \to k$ where $x \in X$. The validity of $\varphi(1/f)$ requires $f(x) = \varphi(f) \neq 0$, i.e. hence $x \in X_f$. So $\varphi$ can be realized as $\ev_x : X_f \to k$ for some $x \in X_f$.
+
+In fact, $A_f$ is isomorphic to the localization of $A$ at $f$.
+
+:::{.remark}
+
+For general open subsets, you may not be able to realize them as affine varieties. For example, the regular functions over $\mathbb C^2 \setminus \{(0,0)\}$ are in one-to-one correspondence with those over $\mathbb C^2$, but you can't realize the evaluation at $(0,0)$ by any point in $\mathbb C^2 \setminus \{(0,0)\}$, so the completeness condition fails.
+
+These degenerate cases are called quasi-affine varieties, which we shall not discuss here.
+:::
