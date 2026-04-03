@@ -24,7 +24,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -343,7 +363,9 @@ window.Quarto = {
     <h2 id="toc-title">该页面内容</h2>
    
   <ul>
-  <li><a href="#sorry" id="toc-sorry" class="nav-link active" data-scroll-target="#sorry"><span class="header-section-number">1</span> Sorry</a></li>
+  <li><a href="#定义维数" id="toc-定义维数" class="nav-link active" data-scroll-target="#定义维数"><span class="header-section-number">1</span> 定义维数</a></li>
+  <li><a href="#态射下的维数" id="toc-态射下的维数" class="nav-link" data-scroll-target="#态射下的维数"><span class="header-section-number">2</span> 态射下的维数</a></li>
+  <li><a href="#幂零轨道的维数" id="toc-幂零轨道的维数" class="nav-link" data-scroll-target="#幂零轨道的维数"><span class="header-section-number">3</span> 幂零轨道的维数</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>其他格式</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
@@ -375,7 +397,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026年3月22日</p>
+      <p class="date">2026年4月3日</p>
     </div>
   </div>
   
@@ -387,14 +409,69 @@ window.Quarto = {
 </header>
 
 
-<section id="sorry" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="sorry"><span class="header-section-number">1</span> Sorry</h2>
-<p>sorry</p>
+<p>本篇我们关心 <span class="math inline">\(\mathfrak{gl}_n\)</span> 幂零锥和幂零轨道的维数情况．</p>
+<section id="定义维数" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="定义维数"><span class="header-section-number">1</span> 定义维数</h2>
+<p>需要先澄清维数的定义．仿射空间的维数自然不必说，但定义仿射簇的维数则是另一个很长的故事．</p>
+<ul>
+<li><p>最方便的定义是其 Zariski 拓扑不可约闭集升链的最大长度，这等价于其函数环素理想升链的最大长度，即 Krull 维数．如果考虑拓扑空间内某一点上不可约闭集的升链最大长度，或等价地考虑函数环在这点对应极大理想处局部化的 Krull 维数，则得到局部维数．易见全局维数是局部维数取上界得到．</p></li>
+<li><p>当仿射簇不可约时，对应函数环是整环，于是有分式域，可以讨论其超越维数（transcendence degree）．Noether 正则化引理和关于整扩张下素理想升降链的 going-up / down 性质保证了超越维数和和上面定义的 Krull 维数相等．从局部化视角观察上述讨论，可知不可约代数簇的全局维数和局部维数相等．</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>可约仿射簇完全可以有不同维数的不可约分量，因此全局维数和局部维数不相等．</p>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>维数还有 Hilbert–Poincaré 多项式、准素理想的最小生成元个数等定义，这里用不到，喜欢的同学可左转 <span class="citation" data-cites="AM1969"><a href="#ref-AM1969" role="doc-biblioref">[1]</a></span>．</li>
+</ul>
+</section>
+<section id="态射下的维数" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="态射下的维数"><span class="header-section-number">2</span> 态射下的维数</h2>
+<p>维数有如下好性质 <span class="citation" data-cites="geck_introduction_2013"><a href="#ref-geck_introduction_2013" role="doc-biblioref">[2, Corollary 2.2.9]</a></span>：</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-dim-fiber" class="theorem proposition">
+<p><span class="theorem-title"><strong>命题 1</strong></span> 设 <span class="math inline">\(\varphi : X \to Y\)</span> 是仿射簇之间的态射，<span class="math inline">\(\varphi(X)\)</span> 在 <span class="math inline">\(Y\)</span> 中稠密．则存在 <span class="math inline">\(Y\)</span> 的非空开集 <span class="math inline">\(U\)</span> 使得 <span class="math inline">\(U \subseteq \varphi(X)\)</span>，且对于任意 <span class="math inline">\(y \in U\)</span>，<span class="math inline">\(\dim \varphi^{-1}(y) = \dim X - \dim Y\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<p>作为特例，考虑代数群 <span class="math inline">\(G\)</span> 作用在仿射簇 <span class="math inline">\(X\)</span> 上．固定元素 <span class="math inline">\(x\)</span>，考虑态射 <span class="math inline">\(G \to G \cdot x\)</span>，<span class="math inline">\(g \mapsto g \cdot x\)</span>，此映射的所有纤维都是 <span class="math inline">\(x^G\)</span> 的陪集，故根据上述命题，<span class="math inline">\(\dim G = \dim x^G + \dim G \cdot x\)</span>，这里 <span class="math inline">\(x^G := \{g : g \cdot x = x \}\)</span>，<span class="math inline">\(G \cdot x\)</span> 是 <span class="math inline">\(x\)</span> 的轨道．这为我们提供了轨道维数的计算手段．</p>
+</section>
+<section id="幂零轨道的维数" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="幂零轨道的维数"><span class="header-section-number">3</span> 幂零轨道的维数</h2>
+<p>现在来数 <span class="math inline">\(\mathfrak{gl}_n\)</span> 幂零轨道的维数．</p>
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-AM1969" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">Atiyah, M. F. 和 Macdonald, I. G., <em>Introduction To Commutative Algebra</em>. Addison-Wesley Publishing Company, Inc., 1969.</div>
+</div>
+<div id="ref-geck_introduction_2013" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">M. Geck, <em>An Introduction to Algebraic Geometry and Algebraic Groups</em>. 收入 Oxford Graduate Texts in Mathematics. Oxford, New York: Oxford University Press, 2013.</div>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
