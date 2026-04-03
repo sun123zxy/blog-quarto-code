@@ -2,7 +2,7 @@
 title: 幂零轨道的维数
 subtitle: 幂零锥和其上的几何：以 $\mathfrak{gl}_n$ 为例
 author: sun123zxy
-date: 2026-03-22
+date: 2026-04-03
 lang: zh
 bibliography: index.bib
 
@@ -22,12 +22,44 @@ format:
   pdf: default
 ---
 
-## Sorry
-
 \newcommand{\GL}{\mathrm{GL}}
 \newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\PSL}{\mathrm{PSL}}
 \renewcommand{\sl}{\mathfrak{sl}}
 \newcommand{\ad}{\operatorname{ad}}
 \newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\Lie}{\operatorname{Lie}}
 
-sorry
+本篇我们关心 $\mathfrak{gl}_n$ 幂零锥和幂零轨道的维数情况．
+
+## 定义维数
+
+需要先澄清维数的定义．仿射空间的维数自然不必说，但定义仿射簇的维数则是另一个很长的故事．
+
+- 最方便的定义是其 Zariski 拓扑不可约闭集升链的最大长度，这等价于其函数环素理想升链的最大长度，即 Krull 维数．如果考虑拓扑空间内某一点上不可约闭集的升链最大长度，或等价地考虑函数环在这点对应极大理想处局部化的 Krull 维数，则得到局部维数．易见全局维数是局部维数取上界得到．
+
+- 当仿射簇不可约时，对应函数环是整环，于是有分式域，可以讨论其超越维数（transcendence degree）．Noether 正则化引理和关于整扩张下素理想升降链的 going-up / down 性质保证了超越维数和和上面定义的 Krull 维数相等．从局部化视角观察上述讨论，可知不可约代数簇的全局维数和局部维数相等．
+
+:::{.remark}
+
+可约仿射簇完全可以有不同维数的不可约分量，因此全局维数和局部维数不相等．
+:::
+
+- 维数还有 Hilbert–Poincaré 多项式、准素理想的最小生成元个数等定义，这里用不到，喜欢的同学可左转 [@AM1969]．
+
+## 态射下的维数
+
+维数有如下好性质 [@geck_introduction_2013, {Corollary 2.2.9}]：
+
+:::{#prp-dim-fiber}
+
+设 $\varphi : X \to Y$ 是仿射簇之间的态射，$\varphi(X)$ 在 $Y$ 中稠密．则存在 $Y$ 的非空开集 $U$ 使得 $U \subseteq \varphi(X)$，且对于任意 $y \in U$，$\dim \varphi^{-1}(y) = \dim X - \dim Y$．
+:::
+
+作为特例，考虑代数群 $G$ 作用在仿射簇 $X$ 上．固定元素 $x$，考虑态射 $G \to G \cdot x$，$g \mapsto g \cdot x$，此映射的所有纤维都是 $x^G$ 的陪集，故根据上述命题，$\dim G = \dim x^G + \dim G \cdot x$，这里 $x^G := \{g : g \cdot x = x \}$，$G \cdot x$ 是 $x$ 的轨道．这为我们提供了轨道维数的计算手段．
+
+## 幂零轨道的维数
+
+现在来数 $\mathfrak{gl}_n$ 幂零轨道的维数．
