@@ -6,8 +6,6 @@ date: 2026-04-03
 lang: zh
 bibliography: index.bib
 
-draft: true
-
 categories:
   - math
   - algebra
@@ -31,8 +29,9 @@ format:
 \newcommand{\Ad}{\operatorname{Ad}}
 \newcommand{\Aut}{\operatorname{Aut}}
 \newcommand{\Lie}{\operatorname{Lie}}
+\newcommand{\diag}{\operatorname{diag}}
 
-本篇我们关心 $\mathfrak{gl}_n$ 幂零锥和幂零轨道的维数情况．
+[上篇](/posts/20260321-geo-nilp-gln/)介绍了幂零锥和幂零轨道的基本概念．本篇我们关心 $\mathfrak{gl}_n$ 幂零锥和幂零轨道的维数情况．
 
 ## 定义维数
 
@@ -76,4 +75,26 @@ Z_{\GL_n}(J_\lambda) = Z_{\gl_n}(J_\lambda) \cap \GL_n
 $$
 这里 $Z_{\gl_n(J_\lambda)}$ 是 $J_\lambda$ 在 $\gl_n$ 里的中心化子，它不仅是闭子簇同时还是线性空间，即仿射空间，于是 $Z_{\GL_n}(J_\lambda)$ 作为仿射空间 $Z_{\gl_n(J_\lambda)}$ 的开集共享空间维数．
 
-问题规约为计算 $Z_{\gl_n}(J_\lambda)$ 的维数．
+问题规约为计算 $Z_{\gl_n}(J_\lambda)$ 的维数．设分拆 $\lambda$ 长度为 $l$，分块矩阵 $X = (X_{i,j})_{1 \leq i,j \leq l}$ 想要和分块对角矩阵 $J_\lambda := \diag(N_1, \dots, N_l)$ 交换，需要 $X_{i,j} N_{j} = N_{i} X_{i,j}$ 对任意 $1 \leq i, j \leq l$ 成立．注意这相当于是说 $X_{i,j}$ 上移一格和右移一格（溢出不管、缺失补零）没区别——这种好事什么时候发生？
+
+这意味着左边界和下边界除左上和右下角块全零，并且左上至右下的各条对角线上元素相同．于是只有右上侧的 $\min(\lambda_i, \lambda_j)$ 条对角线具有自由选择元素的权利，因此整个 $X$ 的自由度，即
+$$
+\dim Z_{\gl_n}(J_\lambda) = \sum_{1 \leq i,j \leq l} \min(\lambda_i, \lambda_j)
+$$
+这个数不好看，大力组合重构：
+$$
+\begin{aligned}
+\dim Z_{\gl_n}(J_\lambda) &= \sum_{1 \leq i,j \leq l} \min(\lambda_i, \lambda_j) \\
+&= \sum_{i=1}^l \sum_{j=1}^l \sum_{k=1}^l \delta(k \leq \lambda_i) \delta(k \leq \lambda_j) \\ 
+&= \sum_{k=1}^l \sum_{i=1}^l \delta(k \leq \lambda_i) \sum_{j=1}^l \delta(k \leq \lambda_j) \\
+&= \sum_{k=1}^l (\lambda^T)_k^2
+\end{aligned}
+$$
+这里 Kronecker $\delta$ 函数来表达 0/1 条件，$\lambda^T$ 是分拆 $\lambda$ 的转置，$(\lambda^T)_k = \sum_{i=1}^l \delta(k \leq \lambda_i)$．它真好看！因此
+$$
+\dim \mathcal O_\lambda = n^2 - \sum_{k=1}^l (\lambda^T)_k^2
+$$
+特别地：
+
+- $\mathcal O_{(n)}$ 的维数是 $n^2 - n$，这也是整个幂零锥 $\mathcal N$ 的维数；
+- $\mathcal O_{(1,1,\dots,1)}$ 的维数是 $0$．
