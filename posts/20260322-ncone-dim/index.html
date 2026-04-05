@@ -103,7 +103,6 @@ MathJax = {
   }
 };
 </script>
-<meta name="quarto:status" content="draft">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -300,7 +299,7 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>草稿</div>
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -409,7 +408,7 @@ window.Quarto = {
 </header>
 
 
-<p>本篇我们关心 <span class="math inline">\(\mathfrak{gl}_n\)</span> 幂零锥和幂零轨道的维数情况．</p>
+<p><a href="../../posts/20260321-geo-nilp-gln/">上篇</a>介绍了幂零锥和幂零轨道的基本概念．本篇我们关心 <span class="math inline">\(\mathfrak{gl}_n\)</span> 幂零锥和幂零轨道的维数情况．</p>
 <section id="定义维数" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="定义维数"><span class="header-section-number">1</span> 定义维数</h2>
 <p>需要先澄清维数的定义．仿射空间的维数自然不必说，但定义仿射簇的维数则是另一个很长的故事．</p>
@@ -465,7 +464,23 @@ window.Quarto = {
 \]</span> 这里共轭作用的稳定核是与 <span class="math inline">\(J_\lambda\)</span> 交换的全体可逆矩阵 <span class="math inline">\(Z_{\mathrm{GL}_n}(J_\lambda)\)</span>．注意共轭群 <span class="math inline">\(\mathrm{GL}_n\)</span> 是仿射空间 <span class="math inline">\(\mathfrak{gl}_n\)</span> 的开子簇，因此共享维数 <span class="math inline">\(n^2\)</span>，计算 <span class="math inline">\(\dim \mathcal O_\lambda\)</span> 规约为计算稳定核的维数．注意 <span class="math display">\[
 Z_{\mathrm{GL}_n}(J_\lambda) = Z_{\mathfrak{gl}_n}(J_\lambda) \cap \mathrm{GL}_n
 \]</span> 这里 <span class="math inline">\(Z_{\mathfrak{gl}_n(J_\lambda)}\)</span> 是 <span class="math inline">\(J_\lambda\)</span> 在 <span class="math inline">\(\mathfrak{gl}_n\)</span> 里的中心化子，它不仅是闭子簇同时还是线性空间，即仿射空间，于是 <span class="math inline">\(Z_{\mathrm{GL}_n}(J_\lambda)\)</span> 作为仿射空间 <span class="math inline">\(Z_{\mathfrak{gl}_n(J_\lambda)}\)</span> 的开集共享空间维数．</p>
-<p>问题规约为计算 <span class="math inline">\(Z_{\mathfrak{gl}_n}(J_\lambda)\)</span> 的维数．</p>
+<p>问题规约为计算 <span class="math inline">\(Z_{\mathfrak{gl}_n}(J_\lambda)\)</span> 的维数．设分拆 <span class="math inline">\(\lambda\)</span> 长度为 <span class="math inline">\(l\)</span>，分块矩阵 <span class="math inline">\(X = (X_{i,j})_{1 \leq i,j \leq l}\)</span> 想要和分块对角矩阵 <span class="math inline">\(J_\lambda := \operatorname{diag}(N_1, \dots, N_l)\)</span> 交换，需要 <span class="math inline">\(X_{i,j} N_{j} = N_{i} X_{i,j}\)</span> 对任意 <span class="math inline">\(1 \leq i, j \leq l\)</span> 成立．注意这相当于是说 <span class="math inline">\(X_{i,j}\)</span> 上移一格和右移一格（溢出不管、缺失补零）没区别——这种好事什么时候发生？</p>
+<p>这意味着左边界和下边界除左上和右下角块全零，并且左上至右下的各条对角线上元素相同．于是只有右上侧的 <span class="math inline">\(\min(\lambda_i, \lambda_j)\)</span> 条对角线具有自由选择元素的权利，因此整个 <span class="math inline">\(X\)</span> 的自由度，即 <span class="math display">\[
+\dim Z_{\mathfrak{gl}_n}(J_\lambda) = \sum_{1 \leq i,j \leq l} \min(\lambda_i, \lambda_j)
+\]</span> 这个数不好看，大力组合重构： <span class="math display">\[
+\begin{aligned}
+\dim Z_{\mathfrak{gl}_n}(J_\lambda) &amp;= \sum_{1 \leq i,j \leq l} \min(\lambda_i, \lambda_j) \\
+&amp;= \sum_{i=1}^l \sum_{j=1}^l \sum_{k=1}^l \delta(k \leq \lambda_i) \delta(k \leq \lambda_j) \\
+&amp;= \sum_{k=1}^l \sum_{i=1}^l \delta(k \leq \lambda_i) \sum_{j=1}^l \delta(k \leq \lambda_j) \\
+&amp;= \sum_{k=1}^l (\lambda^T)_k^2
+\end{aligned}
+\]</span> 这里 Kronecker <span class="math inline">\(\delta\)</span> 函数来表达 0/1 条件，<span class="math inline">\(\lambda^T\)</span> 是分拆 <span class="math inline">\(\lambda\)</span> 的转置，<span class="math inline">\((\lambda^T)_k = \sum_{i=1}^l \delta(k \leq \lambda_i)\)</span>．它真好看！因此 <span class="math display">\[
+\dim \mathcal O_\lambda = n^2 - \sum_{k=1}^l (\lambda^T)_k^2
+\]</span> 特别地：</p>
+<ul>
+<li><span class="math inline">\(\mathcal O_{(n)}\)</span> 的维数是 <span class="math inline">\(n^2 - n\)</span>，这也是整个幂零锥 <span class="math inline">\(\mathcal N\)</span> 的维数；</li>
+<li><span class="math inline">\(\mathcal O_{(1,1,\dots,1)}\)</span> 的维数是 <span class="math inline">\(0\)</span>．</li>
+</ul>
 
 
 
