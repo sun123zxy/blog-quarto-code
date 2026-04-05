@@ -58,8 +58,22 @@ format:
 设 $\varphi : X \to Y$ 是仿射簇之间的态射，$\varphi(X)$ 在 $Y$ 中稠密．则存在 $Y$ 的非空开集 $U$ 使得 $U \subseteq \varphi(X)$，且对于任意 $y \in U$，$\dim \varphi^{-1}(y) = \dim X - \dim Y$．
 :::
 
-作为特例，考虑代数群 $G$ 作用在仿射簇 $X$ 上．固定元素 $x$，考虑态射 $G \to G \cdot x$，$g \mapsto g \cdot x$，此映射的所有纤维都是 $x^G$ 的陪集，故根据上述命题，$\dim G = \dim x^G + \dim G \cdot x$，这里 $x^G := \{g : g \cdot x = x \}$，$G \cdot x$ 是 $x$ 的轨道．这为我们提供了轨道维数的计算手段．
+作为特例，考虑代数群 $G$ 作用在仿射簇 $X$ 上．固定元素 $x$，考虑态射 $G \to G \cdot x$，$g \mapsto g \cdot x$，此映射的所有纤维都是 $x^G$ 的陪集，故根据上述命题，
+$$
+\dim G = \dim x^G + \dim G \cdot x
+$$
+这里稳定核 $x^G := \{g : g \cdot x = x \}$，$G \cdot x$ 是 $x$ 的轨道．这为我们提供了轨道维数的计算手段．
 
 ## 幂零轨道的维数
 
-现在来数 $\mathfrak{gl}_n$ 幂零轨道的维数．
+现在来数 $\mathfrak{gl}_n$ 幂零轨道的维数．考察 Jordan 型为 $\lambda \vdash n$ 的 Jordan 标准型 $J_\lambda$ 及其轨道 $\mathcal O_\lambda$，根据上述技巧
+$$
+\dim \GL_n = \dim Z_{\GL_n}(J_\lambda) + \dim \mathcal O_\lambda
+$$
+这里共轭作用的稳定核是与 $J_\lambda$ 交换的全体可逆矩阵 $Z_{\GL_n}(J_\lambda)$．注意共轭群 $\GL_n$ 是仿射空间 $\gl_n$ 的开子簇，因此共享维数 $n^2$，计算 $\dim \mathcal O_\lambda$ 规约为计算稳定核的维数．注意
+$$
+Z_{\GL_n}(J_\lambda) = Z_{\gl_n}(J_\lambda) \cap \GL_n
+$$
+这里 $Z_{\gl_n(J_\lambda)}$ 是 $J_\lambda$ 在 $\gl_n$ 里的中心化子，它不仅是闭子簇同时还是线性空间，即仿射空间，于是 $Z_{\GL_n}(J_\lambda)$ 作为仿射空间 $Z_{\gl_n(J_\lambda)}$ 的开集共享空间维数．
+
+问题规约为计算 $Z_{\gl_n}(J_\lambda)$ 的维数．
