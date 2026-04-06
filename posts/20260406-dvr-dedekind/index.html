@@ -8,7 +8,7 @@
 
 <meta name="author" content="sun123zxy">
 
-<title>\mathfrak{gl}_n，幂零轨道与支配序 – sun123zxy's blog</title>
+<title>DVR–Dedekind 乱炖 – sun123zxy's blog</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -103,6 +103,7 @@ MathJax = {
   }
 };
 </script>
+<meta name="quarto:status" content="draft">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -299,7 +300,7 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>草稿</div>
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -362,11 +363,11 @@ window.Quarto = {
     <h2 id="toc-title">该页面内容</h2>
    
   <ul>
-  <li><a href="#mathfrakgl_nmathrmgl_n-和共轭轨道" id="toc-mathfrakgl_nmathrmgl_n-和共轭轨道" class="nav-link active" data-scroll-target="#mathfrakgl_nmathrmgl_n-和共轭轨道"><span class="header-section-number">1</span> <span class="math inline">\(\mathfrak{gl}_n\)</span>，<span class="math inline">\(\mathrm{GL}_n\)</span> 和共轭轨道</a></li>
-  <li><a href="#幂零锥" id="toc-幂零锥" class="nav-link" data-scroll-target="#幂零锥"><span class="header-section-number">2</span> 幂零锥</a></li>
-  <li><a href="#幂零轨道的支配序" id="toc-幂零轨道的支配序" class="nav-link" data-scroll-target="#幂零轨道的支配序"><span class="header-section-number">3</span> 幂零轨道的支配序</a></li>
+  <li><a href="#局部" id="toc-局部" class="nav-link active" data-scroll-target="#局部"><span class="header-section-number">1</span> 局部</a></li>
+  <li><a href="#整体" id="toc-整体" class="nav-link" data-scroll-target="#整体"><span class="header-section-number">2</span> 整体</a></li>
+  <li><a href="#使用例" id="toc-使用例" class="nav-link" data-scroll-target="#使用例"><span class="header-section-number">3</span> 使用例</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>其他格式</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -374,11 +375,12 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="math inline">\(\mathfrak{gl}_n\)</span>，幂零轨道与支配序</h1>
-<p class="subtitle lead">幂零锥和其上的几何：以 <span class="math inline">\(\mathfrak{gl}_n\)</span> 为例</p>
+<h1 class="title">DVR–Dedekind 乱炖</h1>
+<p class="subtitle lead">一维 Noether 环的结构</p>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
     <div class="quarto-category">algebra</div>
+    <div class="quarto-category">commalg</div>
   </div>
   </div>
 
@@ -396,16 +398,10 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026年3月21日</p>
+      <p class="date">2026年4月7日</p>
     </div>
   </div>
   
-    <div>
-    <div class="quarto-title-meta-heading">修改于</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date-modified">2026年4月6日</p>
-    </div>
-  </div>
     
   </div>
   
@@ -414,399 +410,257 @@ window.Quarto = {
 </header>
 
 
-<p>我们面向了解仿射簇、代数群、李代数但尚不熟练的读者，从相对具体的 <span class="math inline">\(\mathfrak{gl}_n\)</span> 或 <span class="math inline">\(\mathfrak{sl}_n\)</span> 切入，入门友好地为李代数上幂零锥的几何提供一些感觉．</p>
+<p><a href="../../posts/20250731-artin-noether/">上篇</a>中对零维 Noether 环的结构做了详尽的分析，局部情形的主要结果如下：</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<div id="def-irr" class="theorem definition">
-<p><span class="theorem-title"><strong>定义 1</strong></span> 不可约的拓扑空间不能以非平凡的方式写成两个闭子集或两个开子集的并．等价地，其任意非空开子集稠密．</p>
-<p>仿射空间是配备 Zariski 拓扑的线性空间．仿射集是仿射空间的闭子集，也叫仿射簇．仿射簇的不可约性是指其作为拓扑空间的不可约性．</p>
-</div>
-</div>
-</div>
-</div>
+<div id="thm-artin-noether-local-ex" class="theorem">
+<p><span class="theorem-title"><strong>定理 1</strong></span> 以下条件对 Noether 局部环 <span class="math inline">\((A, \mathfrak m)\)</span> 等价：</p>
 <ul>
-<li>李代数幂零轨道领域结束比赛的参考书 <span class="citation" data-cites="mcgovern_nilpotent_1993"><a href="#ref-mcgovern_nilpotent_1993" role="doc-biblioref">[1]</a></span></li>
-<li>后续所用关于不可约性的纯拓扑命题，证明可见 <span class="citation" data-cites="specconn"><a href="#ref-specconn" role="doc-biblioref">[2]</a></span></li>
+<li><span class="math inline">\(A\)</span> 作为 <span class="math inline">\(A\)</span>-模具有有限合成列；</li>
+<li><span class="math inline">\(A\)</span> 是 Artin 环（满足降链条件）；</li>
+<li><span class="math inline">\(A\)</span> 的极大理想 <span class="math inline">\(\mathfrak m\)</span> 幂零；</li>
+<li><span class="math inline">\(A\)</span> 的 Krull 维度为零．</li>
 </ul>
-<section id="mathfrakgl_nmathrmgl_n-和共轭轨道" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="mathfrakgl_nmathrmgl_n-和共轭轨道"><span class="header-section-number">1</span> <span class="math inline">\(\mathfrak{gl}_n\)</span>，<span class="math inline">\(\mathrm{GL}_n\)</span> 和共轭轨道</h2>
-<p><span class="math inline">\(\mathfrak{gl}_n\)</span> 是全体 <span class="math inline">\(n\)</span> 阶复方阵组成的李代数，一个 <span class="math inline">\(n^2\)</span> 维的仿射空间．不妨用 <span class="math inline">\(X = (x_{ij})\)</span> 来标识其不定元．如果你更喜欢半单李代数，<span class="math inline">\(\mathfrak{sl}_n\)</span> 是 <span class="math inline">\(\mathfrak{gl}_n\)</span> 的一个 <span class="math inline">\(n^2-1\)</span> 维子李代数、理想和不可约闭子簇．</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+</div>
+</div>
+</div>
+</div>
+<p>本篇来处理一维 Noether 环的结构．</p>
+<section id="局部" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="局部"><span class="header-section-number">1</span> 局部</h2>
+<p>仍然延续上篇的思路，对至多一维的 Noether 局部环 <span class="math inline">\(A\)</span> 考察其极大理想 <span class="math inline">\(\mathfrak m\)</span> 的降链 <span class="math display">\[
+A \supseteq \mathfrak m \supseteq \mathfrak m^2 \supseteq \dots
+\]</span> 这个降链要么稳定，要么不稳定．如果稳定，Nakayama 引理 <span class="citation" data-cites="am69"><a href="#ref-am69" role="doc-biblioref">[1, proposition 2.6]</a></span> 分析降链尾部稳定部分立得 <span class="math inline">\(\mathfrak m\)</span> 幂零，于是由 <a href="#thm-artin-noether-local-ex" class="quarto-xref">定理&nbsp;1</a>，这是 <span class="math inline">\(A\)</span> 零维的退化情况．</p>
+<p>所以考虑降链不稳定的情况．我们指出这种情形下 <span class="math inline">\(A\)</span> 必是整环：否则结合至多一维的要求，<span class="math inline">\(A\)</span> 的幂零根（nilradical）恰为 <span class="math inline">\(\mathfrak m\)</span>．但 Noether 环的幂零根作为理想幂零（<span class="citation" data-cites="am69"><a href="#ref-am69" role="doc-biblioref">[1, proposition 7.14]</a></span>，理想有限生成+元素幂零+鸽巢原理），这样降链就稳定了，矛盾．</p>
+<p>如果 <span class="math inline">\(A\)</span> 是整环还零维的话就只能是域了，所以接下来设 <span class="math inline">\(A\)</span> 是一维局部 Noether 整环．最容易想到的一类例子是</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="exm-dvr-kx" class="theorem example">
+<p><span class="theorem-title"><strong>例 1</strong></span> <span class="math inline">\(k[x]\)</span> 是 PID．它在 <span class="math inline">\((x)\)</span> 处的局部化 <span class="math inline">\(k[x]_{(x)}\)</span> 和完备化 <span class="math inline">\(k[[x]]\)</span> 也都是 PID，特别地，是一维局部 Noether 整环．</p>
+</div>
+</div>
+</div>
+</div>
+<p>遗憾的是，不是所有的一维局部 Noether 整环都是 PID——反例稍后给出．<span class="math inline">\(k[x]_{(x)}\)</span> 凭什么被认为是性质最好的一维局部 Noether 整环？它的优良性质有如下定理刻画：</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-pir" class="theorem">
+<p><span class="theorem-title"><strong>定理 2</strong></span> 如下条件对局部 Noether 环 <span class="math inline">\(A\)</span> 等价：</p>
+<ul>
+<li><span class="math inline">\(A\)</span> 是 PIR，即所有理想都是主理想．</li>
+<li><span class="math inline">\(A\)</span> 的极大理想 <span class="math inline">\(\mathfrak m\)</span> 是主理想．</li>
+<li><span class="math inline">\(\dim_{k} (\mathfrak m / \mathfrak m^2) = 1\)</span>，这里 <span class="math inline">\(k := A / \mathfrak m\)</span> 是剩余域．</li>
+<li>每个非零理想都是 <span class="math inline">\(\mathfrak m\)</span> 的某个幂次．</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark (<span class="math inline">\(\mathfrak{gl}_n\)</span> vs.&nbsp;<span class="math inline">\(\mathfrak{sl}_n\)</span>)
+<span class="screen-reader-only">注记</span>Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (<span class="math inline">\(\mathfrak{gl}_n\)</span> vs.&nbsp;<span class="math inline">\(\mathfrak{sl}_n\)</span>). </span><span class="math inline">\(\mathfrak{gl}_n\)</span> 是<a href="https://en.wikipedia.org/wiki/Reductive_Lie_algebra">约化李代数（reductive Lie algebra）</a>．这个概念比半单的 <span class="math inline">\(\mathfrak{sl}_n\)</span> 稍微广一点：约化李代数是半单李代数和一个 Abel 李代数的直和．例如，<span class="math inline">\(\mathfrak{gl}_n = \mathfrak{sl}_n \oplus \mathbb{C}\)</span>．大量半单李代数的性质都可以推广到约化李代数．</p>
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span>TODO：<span class="citation" data-cites="am69"><a href="#ref-am69" role="doc-biblioref">[1, proposition 9.2]</a></span></p>
 </div>
 </div>
 </div>
 </div>
-<p>行列式 <span class="math inline">\(\det : \mathfrak{gl}_n \to \mathbb{C}\)</span> 是连续映射，定义 <span class="math inline">\(\mathrm{GL}_n\)</span> 是 <span class="math inline">\(V\)</span> 上的全体可逆线性变换组成的群——满足 <span class="math inline">\(\det X \neq 0\)</span> 的 <span class="math inline">\(\mathfrak{gl}_n\)</span> 开子集．</p>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<div id="prp-irr-of-open" class="theorem proposition">
-<p><span class="theorem-title"><strong>命题 1</strong></span> 不可约空间 <span class="math inline">\(X\)</span> 的任意非空开子集 <span class="math inline">\(U\)</span> 也不可约．</p>
-</div>
-</div>
-</div>
-</div>
-<p>所以 <span class="math inline">\(\mathrm{GL}_n\)</span> 也不可约．</p>
-<p>有办法把 <span class="math inline">\(\mathrm{GL}_n\)</span> 实现成一个真正的仿射簇：考虑 <span class="math inline">\(n^2 + 1\)</span> 维仿射空间的闭子簇 <span class="math inline">\(\{(X, t) : \det X \cdot t = 1\} \subseteq \mathfrak{gl}_n \times \mathbb{C}\)</span>．这也相当于是对 <span class="math inline">\(\mathfrak{gl}_n\)</span> 的函数环在 <span class="math inline">\(\det X\)</span> 做局部化（得到的代数簇）．</p>
+<p>满足任一上述条件的一维局部 Noether 整环被称为离散赋值环（Discrete Valuation Ring, DVR）．</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark
+<span class="screen-reader-only">提示</span>Remark (局部正则环)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>一般地，仿射簇的主开集仍可被实现为仿射簇，其函数环由对单个函数的局部化给出．其它开集不一定能被实现为仿射簇，这类更坏的开集被称为 quasi-affine variety．</p>
+<p><span class="proof-title"><em>注记</em> (局部正则环). </span><span class="math inline">\(\dim_k (\mathfrak m / \mathfrak m^2)\)</span> 也称为余切空间的维数．由 Nakayama 引理的推论 <span class="citation" data-cites="am69"><a href="#ref-am69" role="doc-biblioref">[1, proposition 2.8]</a></span>，它也恰好是生成 <span class="math inline">\(\mathfrak m\)</span> 的最小元素个数．</p>
+<p>一般情况下，局部 Noether 环的余切空间维数大于等于 Krull 维数 <span class="citation" data-cites="am69"><a href="#ref-am69" role="doc-biblioref">[1, corollary 11.15]</a></span>——这个事实的证明必须使用一点维数理论（如 Krull 主理想定理 <span class="citation" data-cites="am69"><a href="#ref-am69" role="doc-biblioref">[1, theorem 11.17]</a></span>），我们不在此展开．当两者相等时，则称环是正则的（regular）<span class="citation" data-cites="am69"><a href="#ref-am69" role="doc-biblioref">[1, theorem 11.22]</a></span>．DVR 恰是一维正则局部环．</p>
+<p>正则的几何含义是局部光滑、无奇点．</p>
 </div>
 </div>
 </div>
 </div>
-<p>那么 <span class="math inline">\(\mathrm{GL}_n\)</span> 现在既是个群，又是个仿射簇，群的乘法和取逆运算还都是代数的（可由多项式定义的），这使得 <span class="math inline">\(\mathrm{GL}_n\)</span> 成为一个仿射代数群．</p>
-<p>考虑 <span class="math inline">\(\mathrm{GL}_n\)</span> 在 <span class="math inline">\(\mathfrak{gl}_n\)</span> 上的共轭作用 <span class="math inline">\(g \cdot X := g X g^{-1}\)</span>．这个作用作为 <span class="math inline">\(\mathrm{GL}_n \times \mathfrak{gl}_n \to \mathfrak{gl}_n\)</span> 的映射是代数的．考虑某元素 <span class="math inline">\(X \in \mathfrak{gl}_n\)</span> 在共轭作用下的轨道 <span class="math inline">\(\mathcal O_X\)</span>，则它是上述映射的一部分 <span class="math inline">\(\mathrm{GL}_n \to \mathfrak{gl}_n\)</span> 的像．</p>
+<p>在整环的情形下，<a href="#thm-pir" class="quarto-xref">定理&nbsp;2</a> 中的等价条件还可以再添加一条：</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<div id="prp-irr-image-irr" class="theorem proposition">
-<p><span class="theorem-title"><strong>命题 2</strong></span> 不可约空间的在连续映射下的像也不可约．</p>
-</div>
-</div>
-</div>
-</div>
-<p>故由于 <span class="math inline">\(\mathrm{GL}_n\)</span> 不可约，轨道 <span class="math inline">\(\mathcal O_X\)</span> 也不可约．</p>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<div id="prp-irr-closure" class="theorem proposition">
-<p><span class="theorem-title"><strong>命题 3</strong></span> 不可约集合 <span class="math inline">\(S\)</span> 的闭包 <span class="math inline">\(\overline{S}\)</span> 也不可约．</p>
-</div>
-</div>
-</div>
-</div>
-<p>因此 <span class="math inline">\(\mathcal O_X\)</span> 的闭包 <span class="math inline">\(\overline{\mathcal O_X}\)</span> 也不可约．</p>
-</section>
-<section id="幂零锥" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="幂零锥"><span class="header-section-number">2</span> 幂零锥</h2>
-<p>考虑 <span class="math inline">\(\mathfrak{gl}_n\)</span> 中的所有幂零矩阵的集合，我们称它为幂零锥，记作 <span class="math inline">\(\mathcal N\)</span>．如果你更喜欢半单李代数，限制在 <span class="math inline">\(\mathfrak{sl}_n\)</span> 中考虑没有区别．此时 <span class="math inline">\(\mathcal N\)</span> 就是 <span class="math inline">\(\mathfrak{sl}_n\)</span> 的幂零锥．</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark (幂零与 <span class="math inline">\(\operatorname{ad}\)</span>-幂零)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (幂零与 <span class="math inline">\(\operatorname{ad}\)</span>-幂零). </span>对一般的李代数，因为其上没有定义结合乘法，幂零锥定义为 <span class="math inline">\(\operatorname{ad}\)</span>-幂零元素的集合．</p>
-<ul>
-<li><p>易见约化李代数的幂零锥就是半单部分的幂零锥直和上 Abel 的部分．例如 <span class="math inline">\(\mathcal N(\mathfrak{gl}_n) = \mathcal N(\mathfrak{sl}_n) \oplus \mathbb{C}\)</span>．</p></li>
-<li><p>对半单的线性李代数来说，因为抽象 Jordan 分解和具体 Jordan 分解的一致性，<span class="math inline">\(\operatorname{ad}\)</span>-幂零和幂零可以不做区分【TODO】．</p></li>
-</ul>
-<p>Boilerplate？我知道我知道，抽象 Jordan 分解是个很长的故事——但 <span class="math inline">\(\mathfrak{sl}_n\)</span> 的情形不需要这些废话：</p>
+<div id="thm-dvr-int-closed" class="theorem">
+<p><span class="theorem-title"><strong>定理 3</strong></span> 一维局部 Noether 整环 <span class="math inline">\(A\)</span> 是 DVR 当且仅当 <span class="math inline">\(A\)</span>（在其分式域中）整闭．</p>
 </div>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">注记</span>Proof (<span class="math inline">\(\mathfrak{sl}_n\)</span>, <span class="math inline">\(\mathfrak{gl}_n\)</span> 上的 <span class="math inline">\(\operatorname{ad}\)</span>-幂零)
+<span class="screen-reader-only">注记</span>Proof
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
-<p><span class="proof-title"><em>证明</em> (<span class="math inline">\(\mathfrak{sl}_n\)</span>, <span class="math inline">\(\mathfrak{gl}_n\)</span> 上的 <span class="math inline">\(\operatorname{ad}\)</span>-幂零). </span>回忆任意线性李代数 <span class="math inline">\(\mathfrak g\)</span> 中 <span class="math inline">\(\operatorname{ad}\)</span>-幂零和幂零关系的基本处理方法：</p>
-<ul>
-<li><p>幂零推 <span class="math inline">\(\operatorname{ad}\)</span>-幂零是标准的左乘减右乘高次幂二项式定理论证，全球通用．</p></li>
-<li><p><span class="math inline">\(\operatorname{ad}\)</span>-幂零推幂零，设 <span class="math inline">\(x \in \mathfrak g\)</span> <span class="math inline">\(\operatorname{ad}\)</span>-幂零，考察具体 Jordan 分解 <span class="math inline">\(x = x_s + x_n\)</span>，其中 <span class="math inline">\(x_s\)</span> 半单，<span class="math inline">\(x_n\)</span> 幂零，<span class="math inline">\([x_s, x_n] = 0\)</span>．现在假定 <span class="math inline">\(x_s\)</span> 和 <span class="math inline">\(x_n\)</span> 还落在 <span class="math inline">\(\mathfrak g\)</span> 中，用 <span class="math inline">\(\operatorname{ad}\)</span> 线性性把此式推到 <span class="math inline">\(\mathfrak{gl}(\mathfrak g)\)</span> 得 <span class="math inline">\(\operatorname{ad}x = \operatorname{ad}x_s + \operatorname{ad}x_n\)</span>．取基本矩阵容易验证 <span class="math inline">\(\operatorname{ad}x_s\)</span> 半单；前面已经证明 <span class="math inline">\(x_n\)</span> 幂零导致 <span class="math inline">\(\operatorname{ad}x_n\)</span> 幂零；<span class="math inline">\(\operatorname{ad}\)</span> 是李代数同态保证 <span class="math inline">\([\operatorname{ad}x_s, \operatorname{ad}x_n] = \operatorname{ad}[x_s, x_n] = 0\)</span>．所以这是 <span class="math inline">\(\operatorname{ad}x \in \mathfrak{gl}(\mathfrak g)\)</span> 的具体 Jordan 分解．由具体 Jordan 分解的唯一性和 <span class="math inline">\(\operatorname{ad}x\)</span> 幂零立得 <span class="math inline">\(\operatorname{ad}x_s = 0\)</span>，即 <span class="math inline">\(x_s\)</span> 落在 <span class="math inline">\(\mathfrak g\)</span> 的中心．</p></li>
-</ul>
-<p>可以看到唯二依赖 <span class="math inline">\(\mathfrak g\)</span> 的特殊性质的步骤是：</p>
-<ul>
-<li>证明 <span class="math inline">\(x_s\)</span> 和 <span class="math inline">\(x_n\)</span> 落在 <span class="math inline">\(\mathfrak g\)</span> 中——这是半单李代数抽象 Jordan 分解最困难的部分之一，但在 <span class="math inline">\(\mathfrak{sl}_n\)</span> 和 <span class="math inline">\(\mathfrak{gl}_n\)</span> 的情形平凡．</li>
-<li><span class="math inline">\(x_s\)</span> 在中心意味着什么．对半单李代数来说此即 <span class="math inline">\(x_s=0\)</span>，此时我们证明了 <span class="math inline">\(\operatorname{ad}\)</span>-幂零就是幂零；对 <span class="math inline">\(\mathfrak{gl}_n\)</span> 来说 <span class="math inline">\(x_s = \lambda I\)</span>，此时我们证明了 <span class="math inline">\(\operatorname{ad}\)</span>-幂零的元素形如 <span class="math inline">\(\lambda I + N\)</span>．注意这与我们之前讨论的约化李代数的幂零锥的构成一致．</li>
-</ul>
+<p><span class="proof-title"><em>证明</em>. </span>TODO：<span class="citation" data-cites="am69"><a href="#ref-am69" role="doc-biblioref">[1, proposition 9.2]</a></span></p>
 </div>
 </div>
 </div>
 </div>
-<p>幂零性质可以转写其特征多项式满足 <span class="math inline">\(\det(tI - X) = t^n\)</span>．注意特征多项式的各系数都是 <span class="math inline">\(X\)</span> 上的多项式函数，所以 <span class="math inline">\(\mathcal N\)</span> 是 <span class="math inline">\(\mathfrak{gl}_n\)</span> 的一个闭子集．</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark (一般李代数幂零锥上的几何)
+<span class="screen-reader-only">提示</span>Remark (局部正规环)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (一般李代数幂零锥上的几何). </span>对一般的 <span class="math inline">\(n\)</span> 维李代数 <span class="math inline">\(\mathfrak g\)</span>，固定 <span class="math inline">\(\mathfrak g\)</span> 的一组基 <span class="math inline">\((e_i)\)</span>．取每个元素 <span class="math inline">\(x\)</span> 在这组基下的坐标 <span class="math inline">\(x_i\)</span> 作为多项式的不定元，这将 <span class="math inline">\(\mathfrak g\)</span> 实现成一个 <span class="math inline">\(n\)</span> 维仿射空间．现在每个 <span class="math inline">\(\operatorname{ad}x = \sum_i x_i \operatorname{ad}e_i\)</span>．注意 <span class="math inline">\(\operatorname{ad}e_i\)</span> 都完全由 <span class="math inline">\(\mathfrak g\)</span> 的结构决定，因此 <span class="math inline">\(\operatorname{ad}x\)</span> 的特征多项式的系数都是 <span class="math inline">\(x_i\)</span> 的多项式函数．这样就将一般李代数的幂零锥实现为了 <span class="math inline">\(n\)</span> 维仿射空间的一个闭子集．</p>
+<p><span class="proof-title"><em>注记</em> (局部正规环). </span>整闭的 Noether 整环也被称为正规环（normal ring）．DVR 恰是一维正规局部环．</p>
 </div>
 </div>
 </div>
 </div>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="exm-dvr-kxy" class="theorem example">
+<p><span class="theorem-title"><strong>例 2</strong></span> <span class="math inline">\(k[x,y]_{(x)}\)</span>：整闭的 Noether 整环在高度为 <span class="math inline">\(1\)</span> 的素理想处的局部化是 DVR．人话：不可约代数超曲面（余维为 <span class="math inline">\(1\)</span>）附近的函数芽是 DVR．</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="整体" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="整体"><span class="header-section-number">2</span> 整体</h2>
+<p>来看整体．一般的讨论已经开始变得复杂：</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof (一些不必要的一般讨论)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em> (一些不必要的一般讨论). </span>统一考察至多一维的 Noether 环 <span class="math inline">\(A\)</span>．将极大理想换成 Jacobson radical 仍然有理想降链．类似地：</p>
+<ul>
+<li><p>稳定时 Jacobson radical 仍然幂零．不过和我们在上篇中讨论过的一致，除非 <span class="math inline">\(A\)</span> 是半局部环（极大理想数量有限），此时不一定是零维的退化情况，例如 <span class="math inline">\(k[x,y]/(xy)\)</span> 就是一维的．</p></li>
+<li><p>不稳定时 <span class="math inline">\(A\)</span> 仍然必须是整环，可以证明此时 <span class="math inline">\(A\)</span> 是半局部环：此时 <span class="math inline">\(\mathfrak J\)</span> 非零，故 <span class="math inline">\(A / \mathfrak J\)</span> 零维，极大理想数量有限，拉回 <span class="math inline">\(A\)</span> 就得到证明．看上去很奇怪，不过这种环几何上一般是通过多点局部化得到的．</p></li>
+</ul>
+<p>对零维的情况，上篇已经证明 <span class="math inline">\(A\)</span> 可以写成局部 Artin 环的直积，故整个 <span class="math inline">\(A\)</span> 是 PIR 当且仅当每个局部化都是 PIR．</p>
+</div>
+</div>
+</div>
+</div>
+<p>让我们直接给出其中最好的一类：一维整闭 Noether 整环，即 Dedekind 整环．注意整闭是局部性质 <span class="citation" data-cites="am69"><a href="#ref-am69" role="doc-biblioref">[1, proposition 5.13]</a></span>，因此对一维 Noether 整环而言，整闭即是要求它的每个素理想处局部化是 DVR．</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark (锥？)
+<span class="screen-reader-only">提示</span>Remark (全局的正则与正规)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (锥？). </span>这是得名于 <span class="math inline">\(\mathfrak{sl}_2\)</span> 幂零锥的形状．写出矩阵 <span class="math inline">\(\begin{pmatrix} h &amp; e \\ f &amp; -h \end{pmatrix}\)</span> 的特征多项式 <span class="math inline">\(f(t) = t^2 - (h^2 + ef)\)</span>，幂零即要求 <span class="math inline">\(h^2 + ef = 0\)</span>——相当经典的三维空间中的二次锥面．</p>
-<p>我们知道锥面是正规不正则——函数环整闭但有奇点、不光滑的经典案例．所谓的 Springer correspondence 就是对幂零锥进行爆破、奇点消解、上同调等操作得到的一套系统理论．</p>
+<p><span class="proof-title"><em>注记</em> (全局的正则与正规). </span>对一般的 Noether 整环：</p>
+<ul>
+<li>正则性定义为其每个素理想处的局部环均正则——by definition 的局部性质</li>
+<li>整闭的 Noether 整环也被称为正规环（normal ring）——也是局部性质 <span class="citation" data-cites="am69"><a href="#ref-am69" role="doc-biblioref">[1, proposition 5.13]</a></span></li>
+</ul>
+<p>注意在一维情形，化归到局部通过 DVR 做中转表明正则与正规等价．在高维情形，正则仍然强于正规【TODO】，但正规不一定保证正则．这里经典的例子是锥面 <span class="math inline">\(k[x,y,z]/(z^2-xy)\)</span>——它是正规环【TODO】，但在原点处有奇点．</p>
 </div>
 </div>
 </div>
 </div>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<div id="prp-irr-nilp" class="theorem proposition">
-<p><span class="theorem-title"><strong>命题 4</strong></span> <span class="math inline">\(\mathcal N\)</span> 不可约，是 <span class="math inline">\(\mathfrak{gl}_n\)</span> 的一个闭子簇．</p>
-</div>
-</div>
-</div>
-</div>
-<p>我们作如下断言：任取一个 <span class="math inline">\(\mathcal N\)</span> 中幂零指数为 <span class="math inline">\(n\)</span> 的幂零元素 <span class="math inline">\(X\)</span>，其幂零轨道 <span class="math inline">\(\mathcal O_X\)</span> 是 <span class="math inline">\(\mathcal N\)</span> 中的一个稠密开集，从而由轨道的不可约性，<span class="math inline">\(\mathcal N = \overline{\mathcal O_X}\)</span> 不可约．</p>
-<p>要求幂零指数恰为 <span class="math inline">\(n\)</span>，就是要求幂零的同时，<span class="math inline">\(X^{n-1} \neq 0\)</span>．这相当于从幂零锥中挖走了一个闭集，当然剩下一个相对幂零锥的开集．至于其稠密性，在后面给出全体轨道上的几何后就会明朗．</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>一般来说，约化 / 半单李代数的幂零锥都不可约，是李代数的闭子簇．证明路径也是类似的：此类李代数的幂零锥中存在元素 <span class="math inline">\(X\)</span>，使得其关于其 <span class="math inline">\(\operatorname{Ad}\)</span>-群作用的幂零轨道 <span class="math inline">\(\mathcal O_X\)</span> 是幂零锥中的一个稠密开集．这种元素被称为 regular / principal nilpotent element，并有诸如中心化子维数最小等其它刻画．</p>
-</div>
-</div>
-</div>
-</div>
+<p>Dedekind 整环典型的例子有:</p>
+<ul>
+<li><p>代数数域的整数环，即 <span class="math inline">\(\mathbb Z\)</span> 在 <span class="math inline">\(\mathbb Q\)</span> 的某一有限域扩张中的整闭包．<span class="citation" data-cites="am69"><a href="#ref-am69" role="doc-biblioref">[1, theorem 9.5]</a></span></p></li>
+<li><p>非奇异的不可约代数曲线（一维代数簇）的函数环．注意曲线的非奇异性恰为每点局部化的正则性要求．</p></li>
+</ul>
+<p>Dedekind 整环还有很多数论上的好性质，例如</p>
+<ul>
+<li>所有准素理想都是某个素理想的幂次 <span class="citation" data-cites="am69"><a href="#ref-am69" role="doc-biblioref">[1, theorem 9.3]</a></span></li>
+<li>所有理想都有唯一素理想乘积分解 <span class="citation" data-cites="am69"><a href="#ref-am69" role="doc-biblioref">[1, theorem 9.4]</a></span></li>
+<li>每个理想至多由两个元素生成 <span class="citation" data-cites="am69"><a href="#ref-am69" role="doc-biblioref">[1, exercise 9.7]</a></span></li>
+</ul>
+<p>等．这里就不展开了．</p>
 </section>
-<section id="幂零轨道的支配序" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="幂零轨道的支配序"><span class="header-section-number">3</span> 幂零轨道的支配序</h2>
-<p>Jordan 标准型理论告诉我们，<span class="math inline">\(\mathfrak{gl}_n\)</span> 的幂零轨道完全由幂零元的 Jordan 型决定，后者与 <span class="math inline">\(n\)</span> 的整数分拆（partition）或 Young 图（Young diagram）一一对应．故以后也用 <span class="math inline">\(\mathcal O_\lambda\)</span> 的记号表示 Jordan 型为 <span class="math inline">\(\lambda\)</span> 的元素生成的幂零轨道．</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark (一般半单李代数上的幂零轨道分类)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (一般半单李代数上的幂零轨道分类). </span>Bala-Carter 定理：半单李代数 <span class="math inline">\(\mathfrak g\)</span> 上的幂零轨道与 <span class="math inline">\(\mathfrak g\)</span> 的各 Levi 子代数上的全体 distinguished nilpotent orbit 间存在一一对应．</p>
-</div>
-</div>
-</div>
-</div>
-<p>我们关心幂零轨道上的几何，例如幂零轨道的维数和闭包关系．本篇中我们先处理闭包关系．在幂零轨道上定义偏序：如果 <span class="math inline">\(\mathcal O_1 \subseteq \overline{\mathcal O_2}\)</span>，就定义 <span class="math inline">\(\mathcal O_1 \trianglelefteq \mathcal O_2\)</span>，称为幂零轨道上的支配序关系（dominance order）．事实上只要 <span class="math inline">\(\mathcal O_1\)</span> 的任一元素落在 <span class="math inline">\(\mathcal O_2\)</span> 的闭包里，就有 <span class="math inline">\(\mathcal O_1 \subseteq \overline{\mathcal O_2}\)</span>——这是因为共轭作用作为李代数上的同胚与取闭包运算交换．</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark (Specialization Order)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (Specialization Order). </span>一般来讲，任何拓扑空间都可以通过取闭包包含的关系定义出一个预序（不保证反对称性的偏序关系），名曰 <a href="https://en.wikipedia.org/wiki/Specialization_preorder">specialization preorder</a>．</p>
-</div>
-</div>
-</div>
-</div>
-<p>分拆上也有同名的偏序关系：如果分拆 <span class="math inline">\(\lambda\)</span> 的每个部分和（前缀和）都大于等于 <span class="math inline">\(\mu\)</span> 的对应部分和，则定义 <span class="math inline">\(\lambda \trianglerighteq \mu\)</span>．支配序对应的盖住关系（covering relation）可以用 Young 图刻画：考虑 <span class="math inline">\(\lambda\)</span> 对应 Young 图中那些比下一行至少多两个方块的行，让这一行最右侧方块“掉落”到下一行．例如，<span class="math inline">\((4,2)\)</span> 盖住 <span class="math inline">\((3,3)\)</span> 的图示如下： <span class="math display">\[
-\begin{array}{cccc}
-\bullet &amp; \bullet &amp; \bullet &amp; \boxed\bullet \\
-\bullet &amp; \bullet
-\end{array}
-\quad\trianglerighteq\quad
-\begin{array}{ccc}
-\bullet &amp; \bullet &amp; \bullet \\
-\bullet &amp; \bullet &amp; \boxed\bullet
-\end{array}
-\]</span></p>
-<p>下面的命题说明两种序其实没有区别：</p>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<div id="prp-closure-dominance" class="theorem proposition">
-<p><span class="theorem-title"><strong>命题 5</strong></span> <span class="math inline">\(\lambda \trianglerighteq \mu\)</span> 当且仅当 <span class="math inline">\(\mathcal O_\lambda \trianglerighteq \mathcal O_\mu\)</span>．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">注记</span>Proof (<span class="math inline">\(\implies\)</span> 侧证明概览)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="proof">
-<p><span class="proof-title"><em>证明</em> (<span class="math inline">\(\implies\)</span> 侧证明概览). </span>这里提供一种基于“连续路径”的证明．考虑 running example <span class="math inline">\(\lambda = (4,2)\)</span>, <span class="math inline">\(\mu = (3,3)\)</span>，<span class="math inline">\(\lambda \trianglerighteq \mu\)</span>．如何连续地把幂零 Jordan 标准型矩阵 <span class="math inline">\(J_{(4,2)}\)</span> 变成 <span class="math inline">\(J_{(3,3)}\)</span> 呢？这样做： <span class="math display">\[
-\begin{pmatrix}
-0 &amp; 1 &amp;   &amp;   &amp;   &amp;  \\
-  &amp; 0 &amp; 1 &amp;   &amp;   &amp;  \\
-  &amp;   &amp; 0 &amp;1-t&amp;   &amp;  \\
-  &amp;   &amp;   &amp; 0 &amp;   &amp;  \\
-  &amp;   &amp;   &amp;   &amp; 0 &amp; 1 \\
-  &amp;   &amp;   &amp; t &amp; 0 &amp; 0
-\end{pmatrix}
-\]</span> 这里列出标准基底 <span class="math inline">\(e_4\)</span> 在上述矩阵多次作用下的变化情况： <span class="math display">\[
-e_4 \longrightarrow \left\{\begin{aligned}
-t e_6 &amp;\longrightarrow&amp; t e_5 &amp;\longrightarrow&amp; 0&amp; \\
-(1-t) e_3 &amp;\longrightarrow&amp; (1-t) e_2 &amp;\longrightarrow&amp; (1-t) e_1 &amp;\longrightarrow&amp; 0
-\end{aligned}\right.
-\]</span> 可以看到：</p>
-<ul>
-<li>当 <span class="math inline">\(t=0\)</span> 时，就是 <span class="math inline">\(J_{(4,2)}\)</span>；</li>
-<li>当 <span class="math inline">\(t \neq 1\)</span> 时，Jordan 型为 <span class="math inline">\((4,2)\)</span>；</li>
-<li>当 <span class="math inline">\(t=1\)</span> 时，Jordan 型突变为 <span class="math inline">\((3,3)\)</span>．</li>
-</ul>
-<p>这是一条从 <span class="math inline">\(\mathcal O_{(4,2)}\)</span> 内部移动到 <span class="math inline">\(\mathcal O_{(3,3)}\)</span> 边缘的一条“连续路径”．抛开例子，上述论证对任意盖住关系都适用——只需关注 Young 图相邻两行之间的掉落，即可将这一保序映射扩展到任意 <span class="math inline">\(\lambda \trianglerighteq \mu\)</span>．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">注记</span>Proof (<span class="math inline">\(\implies\)</span> 侧的证明)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="proof">
-<p><span class="proof-title"><em>证明</em> (<span class="math inline">\(\implies\)</span> 侧的证明). </span>只需证明 <span class="math inline">\(\lambda\)</span> 盖住 <span class="math inline">\(\mu\)</span> 的情形，即 <span class="math inline">\(\lambda\)</span> 的 Young 图通过掉落一个方块变成 <span class="math inline">\(\mu\)</span> 的 Young 图．设是从 <span class="math inline">\(\lambda\)</span> 的第 <span class="math inline">\(i\)</span> 行掉到第 <span class="math inline">\(i+1\)</span> 行．记 <span class="math inline">\(l(\lambda)\)</span> 是 <span class="math inline">\(\lambda\)</span> 的长度，部分和 <span class="math inline">\(S_i(\lambda) := \sum_{k=1}^i \lambda_k\)</span>，<span class="math inline">\(J_\lambda\)</span> 是 <span class="math inline">\(\lambda\)</span> 对应的 Jordan 标准型，<span class="math inline">\(E_{i,j}\)</span> 是基本矩阵，定义矩阵系列 <span class="math inline">\(\Gamma_\lambda := \{\Gamma_\lambda(t) : t \in \mathbb{C}\}\)</span>： <span class="math display">\[
-\Gamma_\lambda(t) := J_\lambda - t E_{ S_i(\lambda) - 1, S_i(\lambda)} + t E_{ S_{i+1}(\lambda), S_i(\lambda)}\qquad t \in \mathbb{C}
-\]</span> 它是 <span class="math inline">\(\mathcal N\)</span> 的满足多项式方程 <span class="math inline">\(x_{S_i(\lambda)-1,S_i(\lambda)} + x_{S_{i+1}(\lambda),S_i(\lambda)} = 1\)</span> 的闭子集．考察标准基 <span class="math inline">\((e_1, e_2, \dots, e_n)\)</span> 在 <span class="math inline">\(\Gamma_\lambda(t)\)</span> 的作用下的变化情况： <span class="math display">\[
+<section id="使用例" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="使用例"><span class="header-section-number">3</span> 使用例</h2>
+<p>有一类经典的考题就是给一条上面有一个奇点的不可约代数曲线，求它函数环的整闭包．例如：</p>
+<blockquote class="blockquote">
+<p>求 <span class="math inline">\(k[x,y] / (y^2 - x^2 - x^3)\)</span> 的整闭包．</p>
+<p>—— Yau Contest 2020 Algebra and Number Theory P3</p>
+</blockquote>
+<p>这是一条形如 <span class="math inline">\(\propto\)</span>，原点是奇点的不可约代数曲线．一般的处理手段是考虑参数化将曲线实现为参数曲线，即构造环同态 <span class="math display">\[
 \begin{aligned}
-\Gamma_\lambda(t) e_{S_k(\lambda) + 1} &amp;= 0 &amp; k = 0, 1, \dots, l(\lambda) - 1 \\
-\Gamma_\lambda(t) e_{S_i(\lambda)} &amp;= (1-t) e_{S_i(\lambda) - 1} - t e_{S_{i+1}(\lambda)} \\
-\Gamma_\lambda(t) e_{s} &amp;= e_{s-1} &amp; \text{for all other } s
+k[x,y] / (y^2 - x^2 - x^3) &amp;\to k[t] \\
+x \mapsto t^2 - 1, \quad y &amp;\mapsto t^3 - t
 \end{aligned}
-\]</span> 只有 <span class="math inline">\(e_{S_i(\lambda)}\)</span> 的变化情况依赖于 <span class="math inline">\(t\)</span>．注意 <span class="math inline">\(\lambda_i \geq \lambda_{i-1}\)</span>，故当 <span class="math inline">\(t \neq 1\)</span>，<span class="math inline">\(e_{S_i(\lambda)}\)</span> 恰需 <span class="math inline">\(\lambda_i\)</span> 次 <span class="math inline">\(\Gamma_\lambda(t)\)</span> 作用变为 <span class="math inline">\(0\)</span>；当 <span class="math inline">\(t=1\)</span> 时，<span class="math inline">\(e_{S_i(\lambda)}\)</span> 恰需 <span class="math inline">\(\lambda_{i+1}\)</span> 次 <span class="math inline">\(\Gamma_\lambda(t)\)</span> 作用变为 <span class="math inline">\(0\)</span>．故当 <span class="math inline">\(t \neq 1\)</span> 时 <span class="math inline">\(\Gamma_\lambda(t) \in \mathcal O_\lambda\)</span>；当 <span class="math inline">\(t=1\)</span> 时 <span class="math inline">\(\Gamma_\lambda(1) \in \mathcal O_\mu\)</span>．于是 <span class="math inline">\(\Gamma_\lambda \cap \overline{\mathcal O_\lambda} \supseteq \overline{\Gamma_\lambda \cap \mathcal O_\lambda} = \Gamma_\lambda\)</span>，即 <span class="math inline">\(\Gamma_\lambda \subseteq \overline{\mathcal O_\lambda}\)</span>．故 <span class="math inline">\(\Gamma_\lambda(1) \in \overline{\mathcal O_\lambda}\)</span>，<span class="math inline">\(\mathcal O_\mu \subseteq \overline{\mathcal O_\lambda}\)</span>．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">注记</span>Proof (<span class="math inline">\(\impliedby\)</span> 侧的证明)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="proof">
-<p><span class="proof-title"><em>证明</em> (<span class="math inline">\(\impliedby\)</span> 侧的证明). </span>注意如下若干事实：</p>
+\]</span> 这个环同态单且将后者实现为前者的有限生成模，即将前者实现为后者的整扩张，几何上就是在说这参数曲线是满射 <span class="citation" data-cites="am69"><a href="#ref-am69" role="doc-biblioref">[1, theorem 5.10]</a></span>．</p>
+<p>这对找整闭包有什么好处呢？好处是现在问题变成研究同态像 <span class="math inline">\(k[t^2-1,t^3-t] \subseteq k[t]\)</span> 的整闭包了，可以在分式域 <span class="math inline">\(k(t)\)</span> 里工作了．注意 <span class="math inline">\(t\)</span> 满足关于 <span class="math inline">\(x = t^2-1\)</span>, <span class="math inline">\(y=t^3-t\)</span> 的多项式 <span class="math inline">\(xt-y=0\)</span>，所以整闭包至少包含 <span class="math inline">\(k[t]\)</span>，再考虑到 <span class="math inline">\(k[t]\)</span> 是 DVR，整闭的，我们所求就是 <span class="math inline">\(k[t]\)</span>——即 <span class="math inline">\(k[x,y] / (y^2 - x^2 - x^3)\)</span> 的整闭包可通过在其分式域添加函数 <span class="math inline">\(y/x\)</span> 得到．</p>
 <ul>
-<li><p>秩函数具有下半连续性（lower semicontinuity）：秩不大于某数 <span class="math inline">\(k\)</span> 的矩阵是闭集．秩的子式定义可以为此提供一个一句话证明：对这些矩阵的要求等价于大于 <span class="math inline">\(k\)</span> 阶的子式全为零．此性质使得当我们对幂零轨道取闭包时，元素的秩只能变小．</p></li>
-<li><p>Jordan 型为 <span class="math inline">\(\lambda\)</span> 的幂零矩阵 <span class="math inline">\(X\)</span> 满足其 <span class="math inline">\(i\)</span> 次幂的秩就是 Young 图 <span class="math inline">\(\lambda\)</span> 去掉前 <span class="math inline">\(i\)</span> 列剩下的方块数： <span class="math display">\[
-\operatorname{rk}X^i = n - \sum_{k=1}^i (\lambda^T)_k, \quad i = 0, 1, \dots
-\]</span> 这里 <span class="math inline">\(\lambda^T\)</span> 是分拆 <span class="math inline">\(\lambda\)</span> 的转置，即 Young 图沿主对角线的翻转．反过来这为我们提供了计算 Jordan 型的秩方法： <span class="math display">\[
-(\lambda^T)_k = \operatorname{rk}X^{k-1} - \operatorname{rk}X^k, \quad k = 1, 2, \dots
-\]</span></p></li>
-<li><p><span class="math inline">\(\lambda \trianglerighteq \mu\)</span> 当且仅当 <span class="math inline">\(\lambda^T \trianglelefteq \mu^T\)</span>．可以通过 Young 图的掉落操作直观感受和证明这一点．</p></li>
+<li>更多习题：Yau Contest 2021 Algebra and Number Theory P3</li>
+<li>更多感觉：<span class="citation" data-cites="eisenbud_commutative_1995"><a href="#ref-eisenbud_commutative_1995" role="doc-biblioref">[2, section 4.3]</a></span></li>
 </ul>
-<p>现在设 <span class="math inline">\(\mathcal O_\lambda \trianglerighteq \mathcal O_\mu\)</span>．不妨任取 <span class="math inline">\(X \in \mathcal O_\lambda\)</span>, <span class="math inline">\(Y \in \mathcal O_\mu\)</span>．注意 <span class="math inline">\(\mu^T\)</span> 的第 <span class="math inline">\(i\)</span> 个部分和是 <span class="math inline">\(n - \operatorname{rk}Y^i\)</span>，根据秩的下半连续性，它不小于 <span class="math inline">\(\lambda^T\)</span> 的第 <span class="math inline">\(i\)</span> 个前缀和．因此 <span class="math inline">\(\mu^T \trianglerighteq \lambda^T\)</span>，故 <span class="math inline">\(\lambda \trianglerighteq \mu\)</span>．</p>
-</div>
-</div>
-</div>
-</div>
-<p>特别地，<span class="math inline">\(\mathcal O_{(n)}\)</span> 支配所有其它幂零轨道，故其在幂零锥中稠密．</p>
 
 
 
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
-<div id="ref-mcgovern_nilpotent_1993" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline">W. M. McGovern, <em>Nilpotent Orbits In Semisimple Lie Algebra: An Introduction</em>. New York: Routledge, 1993. doi: <a href="https://doi.org/10.1201/9780203745809">10.1201/9780203745809</a>.</div>
+<div id="ref-am69" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">M. F. Atiyah 和 I.G. Macdonald, <em>Introduction To Commutative Algebra</em>. Addison-Wesley Publishing Company, Inc., 1969.</div>
 </div>
-<div id="ref-specconn" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline"><span class="nocase">sun123zxy</span>, <span>《Spec，可约与连通性》</span>, 2026年. <a href="https://blog.sun123zxy.top/posts/20260228-spec-connect/">https://blog.sun123zxy.top/posts/20260228-spec-connect/</a> (见于 2026年3月22日).</div>
+<div id="ref-eisenbud_commutative_1995" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">D. Eisenbud, <em>Commutative Algebra with a View Toward Algebraic Geometry</em>, 卷 150. 收入 Graduate Texts in Mathematics, vol. 150. New York, <span>NY</span>: Springer, 1995. doi: <a href="https://doi.org/10.1007/978-1-4612-5350-1">10.1007/978-1-4612-5350-1</a>.</div>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
