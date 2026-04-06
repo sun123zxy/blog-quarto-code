@@ -1,0 +1,173 @@
+---
+title: DVR--Dedekind 乱炖
+subtitle: 一维 Noether 环的结构
+author: sun123zxy
+date: 2026-04-07
+lang: zh
+bibliography: index.bib
+image: "/assets/images/am69.jpg"
+
+categories:
+  - math
+  - algebra
+  - commalg
+
+draft: true
+
+number-sections: true
+
+format:
+  html: default
+---
+
+[上篇](/posts/20250731-artin-noether/)中对零维 Noether 环的结构做了详尽的分析，局部情形的主要结果如下：
+
+:::{#thm-artin-noether-local-ex}
+
+以下条件对 Noether 局部环 $(A, \mathfrak m)$ 等价：
+
+- $A$ 作为 $A$-模具有有限合成列；
+- $A$ 是 Artin 环（满足降链条件）；
+- $A$ 的极大理想 $\mathfrak m$ 幂零；
+- $A$ 的 Krull 维度为零．
+:::
+
+本篇来处理一维 Noether 环的结构．
+
+## 局部
+
+仍然延续上篇的思路，对至多一维的 Noether 局部环 $A$ 考察其极大理想 $\mathfrak m$ 的降链
+$$
+A \supseteq \mathfrak m \supseteq \mathfrak m^2 \supseteq \dots
+$$
+这个降链要么稳定，要么不稳定．如果稳定，Nakayama 引理 [@am69, {proposition 2.6}] 分析降链尾部稳定部分立得 $\mathfrak m$ 幂零，于是由 [@thm-artin-noether-local-ex]，这是 $A$ 零维的退化情况．
+
+所以考虑降链不稳定的情况．我们指出这种情形下 $A$ 必是整环：否则结合至多一维的要求，$A$ 的幂零根（nilradical）恰为 $\mathfrak m$．但 Noether 环的幂零根作为理想幂零（[@am69, {proposition 7.14}]，理想有限生成+元素幂零+鸽巢原理），这样降链就稳定了，矛盾．
+
+如果 $A$ 是整环还零维的话就只能是域了，所以接下来设 $A$ 是一维局部 Noether 整环．最容易想到的一类例子是
+
+:::{#exm-dvr-kx}
+
+$k[x]$ 是 PID．它在 $(x)$ 处的局部化 $k[x]_{(x)}$ 和完备化 $k[[x]]$ 也都是 PID，特别地，是一维局部 Noether 整环．
+:::
+
+遗憾的是，不是所有的一维局部 Noether 整环都是 PID——反例稍后给出．$k[x]_{(x)}$ 凭什么被认为是性质最好的一维局部 Noether 整环？它的优良性质有如下定理刻画：
+
+:::{#thm-pir}
+
+如下条件对局部 Noether 环 $A$ 等价：
+
+- $A$ 是 PIR，即所有理想都是主理想．
+- $A$ 的极大理想 $\mathfrak m$ 是主理想．
+- $\dim_{k} (\mathfrak m / \mathfrak m^2) = 1$，这里 $k := A / \mathfrak m$ 是剩余域．
+- 每个非零理想都是 $\mathfrak m$ 的某个幂次．
+:::
+
+:::{.proof}
+
+TODO：[@am69, {proposition 9.2}]
+:::
+
+满足任一上述条件的一维局部 Noether 整环被称为离散赋值环（Discrete Valuation Ring, DVR）．
+
+:::{.remark}
+
+## 局部正则环
+
+$\dim_k (\mathfrak m / \mathfrak m^2)$ 也称为余切空间的维数．由 Nakayama 引理的推论 [@am69, {proposition 2.8}]，它也恰好是生成 $\mathfrak m$ 的最小元素个数．
+
+一般情况下，局部 Noether 环的余切空间维数大于等于 Krull 维数 [@am69, {corollary 11.15}]——这个事实的证明必须使用一点维数理论（如 Krull 主理想定理 [@am69, {theorem 11.17}]），我们不在此展开．当两者相等时，则称环是正则的（regular）[@am69, {theorem 11.22}]．DVR 恰是一维正则局部环．
+
+正则的几何含义是局部光滑、无奇点．
+:::
+
+在整环的情形下，[@thm-pir] 中的等价条件还可以再添加一条：
+
+:::{#thm-dvr-int-closed}
+
+一维局部 Noether 整环 $A$ 是 DVR 当且仅当 $A$（在其分式域中）整闭．
+:::
+
+:::{.proof}
+
+TODO：[@am69, {proposition 9.2}]
+:::
+
+:::{.remark}
+
+## 局部正规环
+
+整闭的 Noether 整环也被称为正规环（normal ring）．DVR 恰是一维正规局部环．
+:::
+
+:::{#exm-dvr-kxy}
+
+$k[x,y]_{(x)}$：整闭的 Noether 整环在高度为 $1$ 的素理想处的局部化是 DVR．人话：不可约代数超曲面（余维为 $1$）附近的函数芽是 DVR．
+:::
+
+## 整体
+
+来看整体．一般的讨论已经开始变得复杂：
+
+:::{.proof}
+
+## 一些不必要的一般讨论
+
+统一考察至多一维的 Noether 环 $A$．将极大理想换成 Jacobson radical 仍然有理想降链．类似地：
+
+- 稳定时 Jacobson radical 仍然幂零．不过和我们在上篇中讨论过的一致，除非 $A$ 是半局部环（极大理想数量有限），此时不一定是零维的退化情况，例如 $k[x,y]/(xy)$ 就是一维的．
+
+- 不稳定时 $A$ 仍然必须是整环，可以证明此时 $A$ 是半局部环：此时 $\mathfrak J$ 非零，故 $A / \mathfrak J$ 零维，极大理想数量有限，拉回 $A$ 就得到证明．看上去很奇怪，不过这种环几何上一般是通过多点局部化得到的．
+
+对零维的情况，上篇已经证明 $A$ 可以写成局部 Artin 环的直积，故整个 $A$ 是 PIR 当且仅当每个局部化都是 PIR．
+:::
+
+让我们直接给出其中最好的一类：一维整闭 Noether 整环，即 Dedekind 整环．注意整闭是局部性质 [@am69, {proposition 5.13}]，因此对一维 Noether 整环而言，整闭即是要求它的每个素理想处局部化是 DVR．
+
+:::{.remark}
+
+## 全局的正则与正规
+
+对一般的 Noether 整环：
+
+- 正则性定义为其每个素理想处的局部环均正则——by definition 的局部性质
+- 整闭的 Noether 整环也被称为正规环（normal ring）——也是局部性质 [@am69, {proposition 5.13}]
+
+注意在一维情形，化归到局部通过 DVR 做中转表明正则与正规等价．在高维情形，正则仍然强于正规【TODO】，但正规不一定保证正则．这里经典的例子是锥面 $k[x,y,z]/(z^2-xy)$——它是正规环【TODO】，但在原点处有奇点．
+:::
+
+Dedekind 整环典型的例子有:
+
+- 代数数域的整数环，即 $\mathbb Z$ 在 $\mathbb Q$ 的某一有限域扩张中的整闭包．[@am69, {theorem 9.5}]
+
+- 非奇异的不可约代数曲线（一维代数簇）的函数环．注意曲线的非奇异性恰为每点局部化的正则性要求．
+
+Dedekind 整环还有很多数论上的好性质，例如
+
+- 所有准素理想都是某个素理想的幂次 [@am69, {theorem 9.3}]
+- 所有理想都有唯一素理想乘积分解 [@am69, {theorem 9.4}]
+- 每个理想至多由两个元素生成 [@am69, {exercise 9.7}]
+
+等．这里就不展开了．
+
+## 使用例
+
+有一类经典的考题就是给一条上面有一个奇点的不可约代数曲线，求它函数环的整闭包．例如：
+
+> 求 $k[x,y] / (y^2 - x^2 - x^3)$ 的整闭包．
+> 
+> —— Yau Contest 2020 Algebra and Number Theory P3
+
+这是一条形如 $\propto$，原点是奇点的不可约代数曲线．一般的处理手段是考虑参数化将曲线实现为参数曲线，即构造环同态
+$$
+\begin{aligned}
+k[x,y] / (y^2 - x^2 - x^3) &\to k[t] \\
+x \mapsto t^2 - 1, \quad y &\mapsto t^3 - t
+\end{aligned}
+$$
+这个环同态单且将后者实现为前者的有限生成模，即将前者实现为后者的整扩张，几何上就是在说这参数曲线是满射 [@am69, {theorem 5.10}]．
+
+这对找整闭包有什么好处呢？好处是现在问题变成研究同态像 $k[t^2-1,t^3-t] \subseteq k[t]$ 的整闭包了，可以在分式域 $k(t)$ 里工作了．注意 $t$ 满足关于 $x = t^2-1$, $y=t^3-t$ 的多项式 $xt-y=0$，所以整闭包至少包含 $k[t]$，再考虑到 $k[t]$ 是 DVR，整闭的，我们所求就是 $k[t]$——即 $k[x,y] / (y^2 - x^2 - x^3)$ 的整闭包可通过在其分式域添加函数 $y/x$ 得到．
+
+- 更多习题：Yau Contest 2021 Algebra and Number Theory P3
+- 更多感觉：[@eisenbud_commutative_1995, {section 4.3}]
