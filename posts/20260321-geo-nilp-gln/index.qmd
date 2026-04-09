@@ -27,6 +27,7 @@ format:
 \newcommand{\ad}{\operatorname{ad}}
 \newcommand{\Ad}{\operatorname{Ad}}
 \newcommand{\rk}{\operatorname{rk}}
+\newcommand{\type}{\operatorname{type}}
 
 我们面向了解仿射簇、代数群、李代数但尚不熟练的读者，从相对具体的 $\gl_n$ 或 $\sl_n$ 切入，入门友好地为李代数上幂零锥的几何提供一些感觉．
 
@@ -207,7 +208,7 @@ $$
 $$
 这里列出标准基底 $e_4$ 在上述矩阵多次作用下的变化情况：
 $$
-e_4 \longrightarrow \left\{\begin{aligned}
+e_4 \longrightarrow +\left\{\begin{aligned}
 t e_6 &\longrightarrow& t e_5 &\longrightarrow& 0& \\
 (1-t) e_3 &\longrightarrow& (1-t) e_2 &\longrightarrow& (1-t) e_1 &\longrightarrow& 0
 \end{aligned}\right.
@@ -237,7 +238,21 @@ $$
 \Gamma_\lambda(t) e_{s} &= e_{s-1} & \text{for all other } s
 \end{aligned}
 $$
-只有 $e_{S_i(\lambda)}$ 的变化情况依赖于 $t$．注意 $\lambda_i \geq \lambda_{i-1}$，故当 $t \neq 1$，$e_{S_i(\lambda)}$ 恰需 $\lambda_i$ 次 $\Gamma_\lambda(t)$ 作用变为 $0$；当 $t=1$ 时，$e_{S_i(\lambda)}$ 恰需 $\lambda_{i+1}$ 次 $\Gamma_\lambda(t)$ 作用变为 $0$．故当 $t \neq 1$ 时 $\Gamma_\lambda(t) \in \mathcal O_\lambda$；当 $t=1$ 时 $\Gamma_\lambda(1) \in \mathcal O_\mu$．于是 $\Gamma_\lambda \cap \overline{\mathcal O_\lambda} \supseteq \overline{\Gamma_\lambda \cap \mathcal O_\lambda} = \Gamma_\lambda$，即 $\Gamma_\lambda \subseteq \overline{\mathcal O_\lambda}$．故 $\Gamma_\lambda(1) \in \overline{\mathcal O_\lambda}$，$\mathcal O_\mu \subseteq \overline{\mathcal O_\lambda}$．
+只有 $e_{S_i(\lambda)}$ 的变化情况依赖于 $t$．注意 $\lambda_i \geq \lambda_{i-1}$，故
+
+- 当 $t \neq 1$，$e_{S_i(\lambda)}$ 恰需 $\lambda_i$ 次 $\Gamma_\lambda(t)$ 作用变为 $0$．取基底
+  $$
+  \{ e_k \}_{1 \leq k \leq S_{i-1}(\lambda)} \sqcup \{\Gamma_\lambda(t)^k e_{S_i(\lambda)} \}_{0 \leq k < \lambda_i} \sqcup \{ e_k \}_{S_i(\lambda) < k \leq n}
+  $$
+  可知 $\Gamma_\lambda(t) \in \mathcal O_\lambda$．
+
+- 当 $t=1$ 时，$e_{S_i(\lambda)}$ 恰需 $\lambda_{i+1} + 1$ 次 $\Gamma_\lambda(t)$ 作用变为 $0$，取基底
+  $$
+  \{ e_k \}_{1 \leq k < S_{i}(\lambda)} \sqcup \{\Gamma_\lambda(1)^k e_{S_i(\lambda)} \}_{0 \leq k \leq \lambda_{i+1}} \sqcup \{ e_k \}_{S_{i+1}(\lambda) < k \leq n}
+  $$
+  可知 $\Gamma_\lambda(1) \in \mathcal O_\mu$．
+
+于是 $\Gamma_\lambda$ 只有一点不在 $\mathcal O_\lambda$ 中，$\Gamma_\lambda \cap \overline{\mathcal O_\lambda} \supseteq \overline{\Gamma_\lambda \cap \mathcal O_\lambda} = \Gamma_\lambda$，即 $\Gamma_\lambda \subseteq \overline{\mathcal O_\lambda}$．故 $\Gamma_\lambda(1) \in \overline{\mathcal O_\lambda}$，$\mathcal O_\mu \subseteq \overline{\mathcal O_\lambda}$．
 :::
 
 :::{.proof}
@@ -246,9 +261,11 @@ $$
 
 注意如下若干事实：
 
-- 秩函数具有下半连续性（lower semicontinuity）：秩不大于某数 $k$ 的矩阵是闭集．秩的子式定义可以为此提供一个一句话证明：对这些矩阵的要求等价于大于 $k$ 阶的子式全为零．此性质使得当我们对幂零轨道取闭包时，元素的秩只能变小．
+- $\lambda \trianglerighteq \mu$ 当且仅当 $\lambda^T \trianglelefteq \mu^T$．可以通过 Young 图的掉落操作直观感受和证明这一点．
 
-- Jordan 型为 $\lambda$ 的幂零矩阵 $X$ 满足其 $i$ 次幂的秩就是 Young 图 $\lambda$ 去掉前 $i$ 列剩下的方块数：
+- 秩函数具有下半连续性（lower semicontinuity）：秩不大于某数 $k$ 的矩阵是闭集．秩的子式定义可以为此提供一个一句话证明：对这些矩阵的要求等价于大于 $k$ 阶的子式全为零．更一般地，对任意 $i \in \mathbb N$，函数 $A \mapsto \rk(A^i)$ 也是下半连续的．此性质使得当我们对幂零轨道取闭包时，元素及其幂次的秩都不会增加．
+
+- 基于秩的 Jordan 型计算：Jordan 型为 $\lambda$ 的幂零矩阵 $X$ 满足其 $i$ 次幂的秩就是 Young 图 $\lambda$ 去掉前 $i$ 列剩下的方块数：
   $$
   \rk X^i = n - \sum_{k=1}^i (\lambda^T)_k, \quad i = 0, 1, \dots
   $$
@@ -256,10 +273,13 @@ $$
   $$
   (\lambda^T)_k = \rk X^{k-1} - \rk X^k, \quad k = 1, 2, \dots
   $$
+  此外，$X^i$ 的 Jordan 型的转置为 $(n - \rk X^i, \rk X^i - \rk X^{i-1}, \rk X^{i+1} - \rk X^i, \dots)$．
 
-- $\lambda \trianglerighteq \mu$ 当且仅当 $\lambda^T \trianglelefteq \mu^T$．可以通过 Young 图的掉落操作直观感受和证明这一点．
-
-现在设 $\mathcal O_\lambda \trianglerighteq \mathcal O_\mu$．不妨任取 $X \in \mathcal O_\lambda$, $Y \in \mathcal O_\mu$．注意 $\mu^T$ 的第 $i$ 个部分和是 $n - \rk Y^i$，根据秩的下半连续性，它不小于 $\lambda^T$ 的第 $i$ 个前缀和．因此 $\mu^T \trianglerighteq \lambda^T$，故 $\lambda \trianglerighteq \mu$．
+现在设 $\overline{\mathcal O_\lambda} \supseteq \mathcal O_\mu$．不妨任取代表元 $X \in \mathcal O_\lambda$, $Y \in \mathcal O_\mu$．对任意 $i \geq 1$，由 $A \mapsto \rk(A^i)$ 的下半连续性。$\rk Y^i \leq \rk X^i$，故
+$$
+n - \sum_{k=1}^i (\mu^T)_k = \rk Y^i \leq \rk X^i = n - \sum_{k=1}^i (\lambda^T)_k
+$$
+即 $\mu^T$ 的第 $i$ 个部分和大于等于 $\lambda^T$ 的第 $i$ 个部分和，故 $\mu^T \trianglerighteq \lambda^T$，$\lambda \trianglerighteq \mu$．
 :::
 
 特别地，$\mathcal O_{(n)}$ 支配所有其它幂零轨道，故其在幂零锥中稠密．
