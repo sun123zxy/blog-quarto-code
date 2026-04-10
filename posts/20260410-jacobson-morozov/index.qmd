@@ -1,5 +1,5 @@
 ---
-title: Jacobson--Morozov：复半单李代数中的 sl_2 三元组
+title: Jacobson--Morozov：$\mathfrak{sl}_2$ 在复半单李代数中的嵌入
 subtitle: 幂零锥和其上的几何：以 $\mathfrak{gl}_n$ 为例
 author: sun123zxy
 date: 2026-04-10
@@ -29,18 +29,45 @@ format:
 \newcommand{\diag}{\operatorname{diag}}
 \newcommand{\Tr}{\operatorname{Tr}}
 
-我们在复半单李代数 $\mathfrak g$ 中工作，并假设抽象 Jordan 分解和 Killing 型理论已建立完毕．这一部分的标准参考是 [@mcgovern_nilpotent_1993, {section 3.2--3.3}]．
+我们在复半单李代数 $\mathfrak g$ 中工作，并假设抽象 Jordan 分解、Killing 型和 Cartan 根空间分解理论已建立完毕．这一部分的标准参考是 [@mcgovern_nilpotent_1993, {section 3.2--3.3}]．
 
 :::{#thm-jacobson-morozov}
 
 ## Jacobson--Morozov
 
-[@mcgovern_nilpotent_1993, {theorem 3.3.1}] 对任意幂零元 $e \in \mathfrak g$，存在 $h, f \in \mathfrak g$ 使得 $e$, $h$, $f$ 满足 $\sl_2$ 的 Lie 括号关系 $[h,e] = 2e$, $[h,f] = -2f$, $[e,f] = h$．
+[@mcgovern_nilpotent_1993, {theorem 3.3.1}] 设 $\mathfrak g$ 为一复半单李代数，对任意幂零元 $e \in \mathfrak g$，存在 $h, f \in \mathfrak g$ 使得 $e$, $h$, $f$ 满足 $\sl_2$ 的 Lie 括号关系 $[h,e] = 2e$, $[h,f] = -2f$, $[e,f] = h$．
 :::
 
-:::{.proof}
+完整证明很长，先来看一些结果．
 
-证明很长．对维数 $\mathfrak g$ 做归纳，则可以先假设 $e$ 不落在 $\mathfrak g$ 任何真半单子李代数中——否则直接在那个更小的半单李代数中构造 $h$ 和 $f$ 即可．这会帮我们在后面排除一大类讨论情况．
+## $\sl_n$ 的特例
+
+首先，此定理在 $\sl_n$ 的情形下有一个显式的构造 [@mcgovern_nilpotent_1993, {corollary 3.2.7}]：对任意幂零元 $e \in \mathfrak{sl}_n$，适当共轭可将其化为 Jordan 标准型 $J_\lambda$，于是可以分块考虑．在每个大小为 $m+1$ 的小块中，熟记 $\sl_2$ 的标准 $m+1$ 维不可约表示
+$$
+e = \begin{pmatrix}
+0 & m & & & \\
+  & 0 & m-1 & & \\
+  &   & \ddots & \ddots & \\
+  &   &   & 0 & 1 \\
+  &   &   &   & 0
+\end{pmatrix} \quad
+f = \begin{pmatrix}
+0 &   &   &   & \\
+1 & 0 &   &   & \\
+  & 2 & 0 &   & \\
+  &   & \ddots & \ddots & \\
+  &   &   & m & 0
+\end{pmatrix}
+$$
+
+$$
+h = \diag(m, m-2, \dots, -m+2, -m)
+$$
+故适当放缩基向量就可对齐 $e$ 并拼出 $h$ 和 $f$．
+
+## Jacbobson--Morozov 定理的证明
+
+这里给出的证明跟随 [@mcgovern_nilpotent_1993, {theorem 3.3.1}]．对维数 $\mathfrak g$ 做归纳，则可以先假设 $e$ 不落在 $\mathfrak g$ 任何真半单子李代数中——否则直接在那个更小的半单李代数中构造 $h$ 和 $f$ 即可．这会帮我们在后面排除一大类讨论情况．
 
 下面开始构造．先构造 $h \in \mathfrak g$ 使得 $[h,e] = 2e$，为此只需证明 $e \in [e, \mathfrak g]$．注意
 
@@ -77,4 +104,3 @@ $$
 - 约化李代数任意半单元的中心化子是也是约化李代数 [@mcgovern_nilpotent_1993, {lemma 2.1.2}]．
 
 于是 $\mathfrak z(z_0)$ 是约化李代数．$\mathfrak g$ 半单中心平凡保证 $\mathfrak z(z_0)$ 比 $\mathfrak g$ 严格更小．注意 $e, h \in \mathfrak z(z_0)$，于是 $2e = [h,e] \in [\mathfrak z(z_0), \mathfrak z(z_0)]$，后者是一个半单李代数．终于，我们把 $e$ 放到了一个比 $\mathfrak g$ 严格更小的半单李代数 $[\mathfrak z(z_0), \mathfrak z(z_0)]$ 中，但是这与整个证明一开始的假设冲突．因此 $z_0 = 0$，$h$ 与 $\mathfrak z(e)$ 正交，断言得证．
-:::
