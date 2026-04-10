@@ -1,0 +1,80 @@
+---
+title: Jacobson--Morozov：复半单李代数中的 sl_2 三元组
+subtitle: 幂零锥和其上的几何：以 $\mathfrak{gl}_n$ 为例
+author: sun123zxy
+date: 2026-04-10
+lang: zh
+bibliography: index.bib
+
+categories:
+  - math
+  - algebra
+  - lie
+
+collections:
+  - nilpcone
+
+draft: true
+
+number-sections: true
+
+format:
+  html: default
+  pdf: default
+---
+
+\newcommand{\gl}{\mathfrak{gl}}
+\renewcommand{\sl}{\mathfrak{sl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Tr}{\operatorname{Tr}}
+
+我们在复半单李代数 $\mathfrak g$ 中工作，并假设抽象 Jordan 分解和 Killing 型理论已建立完毕．这一部分的标准参考是 [@mcgovern_nilpotent_1993, {section 3.2--3.3}]．
+
+:::{#thm-jacobson-morozov}
+
+## Jacobson--Morozov
+
+[@mcgovern_nilpotent_1993, {theorem 3.3.1}] 对任意幂零元 $e \in \mathfrak g$，存在 $h, f \in \mathfrak g$ 使得 $e$, $h$, $f$ 满足 $\sl_2$ 的 Lie 括号关系 $[h,e] = 2e$, $[h,f] = -2f$, $[e,f] = h$．
+:::
+
+:::{.proof}
+
+证明很长．对维数 $\mathfrak g$ 做归纳，则可以先假设 $e$ 不落在 $\mathfrak g$ 任何真半单子李代数中——否则直接在那个更小的半单李代数中构造 $h$ 和 $f$ 即可．这会帮我们在后面排除一大类讨论情况．
+
+下面开始构造．先构造 $h \in \mathfrak g$ 使得 $[h,e] = 2e$，为此只需证明 $e \in [e, \mathfrak g]$．注意
+
+- $e$ 的中心化子 $\mathfrak z(e)$ 和 $[e,\mathfrak g]$ 互为（Killing 型意义下的）正交补：
+  $$
+  \kappa(\mathfrak z(e), [e,\mathfrak g]) = \kappa([\mathfrak z(e), e], \mathfrak g) = 0
+  $$
+  故 $\mathfrak z(e)$ 与 $[e,\mathfrak g]$ 正交．又由正合列
+  $$
+  0 \longrightarrow \mathfrak z(e) \longrightarrow \mathfrak g \xrightarrow{\ad e} [e,\mathfrak g] \longrightarrow 0
+  $$
+  考察维数并使用 Killing 型在半单李代数中的非退化性就有正交补关系．注意此部分证明与 $e$ 的幂零性无关．
+
+- $e \in \mathfrak z(e)^\perp$：对任意与 $e$ 交换的 $x \in \mathfrak z(e)$，$\ad x$ 也与 $\ad e$ 交换，故 $e$ 幂零即是 $\ad e$ 幂零进而导致 $\ad e \circ \ad x$ 幂零．因此 $\kappa(e,x) = \Tr(\ad e \circ \ad x) = 0$．
+
+综上 $e \in [e,\mathfrak g]$，于是存在 $h \in \mathfrak g$ 使得 $[h,e] = 2e$．
+
+再修改 $h$ 使其半单．考虑 $h$ 的抽象 Jordan 分解 $h = h_s + h_n$，其中 $h_s$ 半单，$h_n$ 幂零．注意 $h_s$, $h_n$ 均与 $h$ 交换，故共享特征向量 $e$，因此 $[h_n, e] = 0$ 导致 $[h_s, e] = 2e$．取新的 $h := h_s$ 即可．
+
+半单的 $h$ 使得可以关于它将 $\mathfrak g$ 做权空间分解 $\mathfrak g = \bigoplus_{i \in \mathbb Z} \mathfrak g_i$，于是 $h \in \mathfrak g_0$，$e \in \mathfrak g_2$，且容易验证 $[e, \mathfrak g_i] \subseteq \mathfrak g_{i+2}$．现在来构造 $f$．它需要满足 $[h,f]=-2f$，故应当在 $\mathfrak g_{-2}$ 中寻找．它还需满足 $[e,f]=h$，故只需证 $h \in [e, \mathfrak g_{-2}]$．如果我们**暂时断言 $h \in [e,\mathfrak g]$**，则 $h \in \bigoplus_i [e, \mathfrak g_i]$．但 $h \in \mathfrak g_0$，逼迫 $h \in [e, \mathfrak g_{-2}]$，证毕．
+
+现在来证明断言 $h \in [e,\mathfrak g]$，已有的条件是 $[h,e] = 2e$ 及 $h$ 半单．仍然用关系 $[e,\mathfrak g] = \mathfrak z(e)^\perp$，只需证 $h$ 与 $\mathfrak z(e)$ 正交．注意 $h$ 在 $\mathfrak z(e)$ 上的伴随作用稳定且半单，因此可对 $\mathfrak z(e)$ 做权空间分解 $\mathfrak z(e) = \bigoplus_i \mathfrak z(e)_i$．于是对任意 $z_i \in \mathfrak z(e)_i$，
+$$
+0 = \kappa([h,h],z_i) = \kappa(h, [h, z_i]) = i \cdot \kappa(h, z_i)
+$$
+故 $h$ 与 $\mathfrak z(e)_i$ 正交对任意 $i \neq 0$ 成立．
+
+现在只需证 $h$ 与 $\mathfrak z(e)_0$ 正交．对任意 $z_0 \in \mathfrak z(e)_0$，注意 $z_0$ 与 $e$ 和 $h$ 交换．不失一般性，可设 $z_0$ 半单：
+
+- 因为其半单部分 $(z_0)_s$ 与 $h$ 正交当且仅当 $z_0$ 与 $h$ 正交：为此只需证幂零部分 $(z_0)_n$ 与 $h$ 正交，这是因为 $(z_0)_n$ 与 $z_0$ 交换进而与 $h$ 交换，故 $\ad h \circ \ad (z_0)_n$ 是幂零，因此 $\kappa(h, (z_0)_n) = \Tr(\ad h \circ \ad (z_0)_n) = 0$．
+
+下面证明在上述限制下只能有 $z_0 = 0$，从而 $h$ 与 $\mathfrak z(e)_0$ 的正交性平凡．为此反设 $z_0 \neq 0$，需要使用一个结论：
+
+- 约化李代数任意半单元的中心化子是也是约化李代数 [@mcgovern_nilpotent_1993, {lemma 2.1.2}]．
+
+于是 $\mathfrak z(z_0)$ 是约化李代数．$\mathfrak g$ 半单中心平凡保证 $\mathfrak z(z_0)$ 比 $\mathfrak g$ 严格更小．注意 $e, h \in \mathfrak z(z_0)$，于是 $2e = [h,e] \in [\mathfrak z(z_0), \mathfrak z(z_0)]$，后者是一个半单李代数．终于，我们把 $e$ 放到了一个比 $\mathfrak g$ 严格更小的半单李代数 $[\mathfrak z(z_0), \mathfrak z(z_0)]$ 中，但是这与整个证明一开始的假设冲突．因此 $z_0 = 0$，$h$ 与 $\mathfrak z(e)$ 正交，断言得证．
+:::
