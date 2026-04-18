@@ -290,7 +290,7 @@ $$
 
 ## 直和分解的典范投影
 
-已经能够计算表示的不可约成分组成情况了，但尚不清楚如何构造从全空间到其某一不可约成分的显式投影．本节先开门见山提供不可约表示计数定理的证明，而一个典范的投影将在证明中浮现．
+已经能够计算表示的不可约成分组成情况了，但尚不清楚如何构造从全空间到其某一不可约成分的显式投影．本节先直接提供一个不可约表示计数的紧凑证明，而一个典范的投影将在证明中浮现．
 
 :::{#thm-conj}
 
@@ -314,20 +314,21 @@ $$
 $$
 \varphi_{\chi, V} := \frac 1 {|G|} \sum_{g \in G} \chi(g) \rho_{V}(g) \in \End(V)
 $$
-则则刚证明了 $\tr(\varphi_{\chi, V_i}) = 0$ 对所有不可约表示 $V_i$ 成立．（也可立即推广到任意表示 $V$，不过证明暂时不需要）
+则刚刚的讨论是在说 $\tr(\varphi_{\chi, V_i}) = 0$ 对所有不可约表示 $V_i$ 成立．
 
-现在更断言对任意表示 $V$，$\varphi_{\chi, V}$ 其实是一个 $G$-同态：对任意 $h \in G$，$v \in V$，我们有
+现在进一步断言对任意表示 $V$，$\varphi_{\chi, V}$ 其实是一个 $G$-同态：对任意 $h \in G$，$v \in V$，我们有
 $$
 \begin{aligned}
 (h \cdot \varphi_{\chi, V})(v)
 &= \frac 1 {|G|} \sum_{g \in G} \chi(g) \cdot (h g h^{-1} \cdot v) \\
 &= \frac 1 {|G|} \sum_{g \in G} \chi(h g h^{-1}) \cdot (h g h^{-1} \cdot v) & \text{by } \chi \text{ is a class function} \\
+&= \frac 1 {|G|} \sum_{g \in G} \chi(g) \cdot (g \cdot v) & \text{by changing summation order} \\
 &= \varphi_{\chi, V}(v)
 \end{aligned}
 $$
 于是 $\varphi_{\chi, V} \in \End_G(V)$．由 Schur 定理（[@thm-schur]），当 $V = V_i$ 不可约时，$\varphi_{\chi, V_i}$ 是数乘．又 $\tr(\varphi_{\chi, V_i}) = 0$，因此 $\varphi_{\chi, V_i} = 0$．
 
-由于任意表示 $V$ 都可以写成不可约表示的直和，而 $\varphi_{\chi, V}$ 在每个不可约成分上都为 $0$，因此 $\varphi_{\chi, V} = 0$ 推广到任意表示．现在特取正则表示 $V = \mathbb C[G]$，注意此时左乘作用 $\rho_{\mathbb C[G]}(g)$ 线性无关，因此 $\chi(g) = 0$ 对任意 $g \in G$ 成立，即 $\chi = 0$．
+由于 $V \mapsto \varphi_{\chi, V}$ 是 $\oplus$-$+$ 线性的，因此使用半单性即可将 $\varphi_{\chi, V} = 0$ 推广到任意表示 $V$．现在特取正则表示 $V = \mathbb C[G]$，注意此时各左乘作用 $\rho_{\mathbb C[G]}(g)$ 线性无关，又 $0 = \varphi_{\chi, V} = \frac 1 {|G|} \sum_{g \in G} \chi(g) \rho_{V}(g)$，因此 $\chi(g) = 0$ 对任意 $g \in G$ 成立，即 $\chi = 0$．
 :::
 
 除了证明的结论以外，在证明路线中我们还得到了一个重要的构造: $\chi \mapsto \varphi_{\chi, V}$ 给出了一个 $L^2(G) \to \End(V)$ 的线性映射．
