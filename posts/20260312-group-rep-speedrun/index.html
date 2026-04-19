@@ -416,13 +416,29 @@ window.Quarto = {
 </header>
 
 
-<p>设 <span class="math inline">\(G\)</span> 是有限群，<span class="math inline">\(V\)</span> 是（有限维的）<span class="math inline">\(\mathbb C\)</span>-线性空间，则群同态 <span class="math inline">\(\rho: G \to \operatorname{GL}(V)\)</span> 规定了一个 <span class="math inline">\(G\)</span> 的（复）表示．等价地，这为 <span class="math inline">\(V\)</span> 配备了一个 <span class="math inline">\(G\)</span>-模结构——<span class="math inline">\(\mathbb C[G]\)</span>-模结构的简写．以下问题将得到解答：</p>
+<p>设 <span class="math inline">\(G\)</span> 是有限群，<span class="math inline">\(V\)</span> 是（有限维的）<span class="math inline">\(\mathbb C\)</span>-线性空间，则群同态 <span class="math inline">\(\rho: G \to \operatorname{GL}(V)\)</span> 规定了一个 <span class="math inline">\(G\)</span> 的（复）表示．等价地，这为 <span class="math inline">\(V\)</span> 配备了一个 <span class="math inline">\(G\)</span>-模结构——<span class="math inline">\(\mathbb C[G]\)</span>-模结构的简写．</p>
+<p>有限群有限维复表示论完成了分类有限群有限维复表示的一般工作，其主要结果可概括为：</p>
 <ul>
-<li><p>半单性：任意有限群的有限维复表示一定分解为若干不可约表示的直和．（<a href="#thm-semisimp" class="quarto-xref">定理&nbsp;1</a>）</p></li>
-<li><p>特征标：证明特征标的正交性，从而通过内积计算任意表示的不可约成分组成情况：（<a href="#cor-char-corresp" class="quarto-xref">推论&nbsp;1</a>） <span class="math display">\[
+<li><p>半单性：任意有限群的有限维复表示一定分解为若干不可约表示的直和．（<a href="#thm-semisimp" class="quarto-xref">定理&nbsp;1</a>）</p>
+<ul>
+<li>高观点：表示环 <span class="math inline">\(R(G)\)</span> 是自由 <span class="math inline">\(\mathbb Z\)</span>-模．</li>
+</ul></li>
+<li><p>正交性：不可约表示什么时候同构，什么时候不同构，有哪些同构．</p>
+<ul>
+<li><p><a href="#thm-schur" class="quarto-xref">定理&nbsp;2</a>：同态要么为零，要么同构，同构只有数乘．</p></li>
+<li><p>高观点：<span class="math inline">\((V,W) \mapsto \dim \operatorname{Hom}_G(V, W)\)</span> 给出了表示环作为自由 <span class="math inline">\(\mathbb Z\)</span> 模的标准内积．</p></li>
+</ul></li>
+<li><p>特征标：表示的同构类和正交关系可以通过特征标完全刻画．</p>
+<ul>
+<li><p><a href="#cor-char-corresp" class="quarto-xref">推论&nbsp;1</a>：通过内积可以计算任意表示的不可约成分组成情况： <span class="math display">\[
 V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 \]</span></p></li>
-<li><p>共轭类：不可约表示的同构类数量等于 <span class="math inline">\(G\)</span> 的共轭类数量．（<a href="#thm-conj" class="quarto-xref">定理&nbsp;4</a>）</p></li>
+<li><p>高观点：特征标给出了表示环的复化 <span class="math inline">\(\mathbb C \otimes_{\mathbb Z} R(G)\)</span> 到全体 <span class="math inline">\(G\)</span> 的类函数 <span class="math inline">\(L^2_{\text{class}}(G)\)</span> 的环同态．</p></li>
+</ul></li>
+<li><p>共轭类：不可约表示的同构类数量等于 <span class="math inline">\(G\)</span> 的共轭类数量．（<a href="#thm-conj" class="quarto-xref">定理&nbsp;4</a>）</p>
+<ul>
+<li>高观点：上述同态其实是环同构 <span class="math inline">\(\mathbb C \otimes_{\mathbb Z} R(G) \cong L^2_{\text{class}}(G)\)</span>；表示环是秩为共轭类数的自由 <span class="math inline">\(\mathbb Z\)</span>-模，进而（由 Hilbert 基定理，整性等交换代数废话）是一维 Noether 环．</li>
+</ul></li>
 <li><p>正则表示：群代数 <span class="math inline">\(\mathbb C[G]\)</span> 通过左作用赋予的 <span class="math inline">\(G\)</span>-模结构具有不可约表示分解 <span class="math display">\[
 \mathbb C[G] \cong \bigoplus_i V_i^{\oplus \dim V_i}
 \]</span> 从而给出一个对不可约表示维数的限制 <span class="math inline">\(\sum_i (\dim V_i)^2 = |G|\)</span>．（<a href="#thm-reg" class="quarto-xref">定理&nbsp;5</a>）</p></li>
@@ -442,7 +458,7 @@ V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 <li><span class="math inline">\(G\)</span>-不变子空间投影 <span class="math inline">\(V \to V^G\)</span>、<span class="math inline">\(G\)</span>-不变内积和分裂同态提升</li>
 </ul></li>
 <li><p>为 Peter–Weyl / Wedderburn–Artin 定理 <span class="math display">\[
-\mathbb C[G] \cong \bigoplus_i \operatorname{End}(V_i) \cong \bigoplus_i V_i^* \otimes V_i
+\mathbb C[G] \cong \bigoplus_i \operatorname{End}(V_i) \cong \bigoplus_i V_i^* \otimes_{\mathbb C} V_i
 \]</span> 的<a href="../../posts/20260314-group-rep-peter-weyl/">自顶向下方法</a>做好铺垫．</p></li>
 </ul>
 <p>顺畅阅读本文可能需要读者熟练以下内容：</p>
@@ -465,18 +481,18 @@ v \mapsto \tilde v := \frac 1 {|G|} \sum_{g \in G} g \cdot v
 <li><p>直和 <span class="math inline">\(V \oplus W\)</span>：</p>
 <p>线性空间直和配备 <span class="math inline">\(g \cdot (v,w) := (g \cdot v, g \cdot w)\)</span>．</p>
 <p>注意 <span class="math inline">\((V \oplus W)^G = V^G \oplus W^G\)</span>．</p></li>
-<li><p>张量积 <span class="math inline">\(V \otimes W\)</span>：</p>
+<li><p>张量积 <span class="math inline">\(V \otimes_{\mathbb C} W\)</span>：</p>
 <p>线性空间张量积配备 <span class="math inline">\(g \cdot (v \otimes w) := (g \cdot v) \otimes (g \cdot w)\)</span>．</p></li>
-<li><p>对偶空间 <span class="math inline">\(V^* := \operatorname{Hom}(V, \mathbb C)\)</span>：</p>
+<li><p>对偶空间 <span class="math inline">\(V^* := \operatorname{Hom}_{\mathbb C}(V, \mathbb C)\)</span>：</p>
 <p>线性空间对偶配备 <span class="math inline">\(g \cdot f := (v \mapsto f(g^{-1} \cdot v))\)</span>．</p></li>
-<li><p>线性映射空间 <span class="math inline">\(\operatorname{Hom}(V, W)\)</span>：</p>
-<p>线性空间 <span class="math inline">\(\operatorname{Hom}(V, W)\)</span> 配备 <span class="math inline">\(g \cdot \varphi := (v \mapsto g \cdot \varphi(g^{-1} \cdot v))\)</span>．</p>
-<p>注意线性空间有自然同构 <span class="math inline">\(\operatorname{Hom}(V, W) \cong V^* \otimes W\)</span>．我们设计的定义使得这一同构相容地提升到 <span class="math inline">\(G\)</span>-模之上．</p>
-<p>自同态空间 <span class="math inline">\(\operatorname{End}(V) := \operatorname{Hom}(V, V)\)</span>．</p></li>
+<li><p>线性映射空间 <span class="math inline">\(\operatorname{Hom}_{\mathbb C}(V, W)\)</span>：</p>
+<p>线性空间 <span class="math inline">\(\operatorname{Hom}_{\mathbb C}(V, W)\)</span> 配备 <span class="math inline">\(g \cdot \varphi := (v \mapsto g \cdot \varphi(g^{-1} \cdot v))\)</span>．</p>
+<p>注意线性空间有自然同构 <span class="math inline">\(\operatorname{Hom}_{\mathbb C}(V, W) \cong V^* \otimes_{\mathbb C} W\)</span>．我们设计的定义使得这一同构相容地提升到 <span class="math inline">\(G\)</span>-模之上．</p>
+<p>自同态空间 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V) := \operatorname{Hom}_{\mathbb C}(V, V)\)</span>．</p></li>
 <li><p><span class="math inline">\(G\)</span>-模同态空间 <span class="math inline">\(\operatorname{Hom}_G(V, W)\)</span>：</p>
 <p>保持 <span class="math inline">\(G\)</span>-模结构的所有线性映射同态，其中的同态 <span class="math inline">\(\varphi\)</span> 满足 <span class="math inline">\(\varphi(g \cdot v) = g \cdot \varphi(v)\)</span>．</p>
-<p>注意我们设计的定义使得 <span class="math inline">\(\operatorname{Hom}_G(V, W) = \left(\operatorname{Hom}(V, W) \right)^G\)</span>．</p>
-<p>计算 <span class="math inline">\(\operatorname{Hom}(V, W) \to \operatorname{Hom}_G(V, W)\)</span> 的平均化投影 <span class="math inline">\(\varphi \mapsto \tilde\varphi\)</span>： <span class="math display">\[
+<p>注意我们设计的定义使得 <span class="math inline">\(\operatorname{Hom}_G(V, W) = \left(\operatorname{Hom}_{\mathbb C}(V, W) \right)^G\)</span>．</p>
+<p>计算 <span class="math inline">\(\operatorname{Hom}_{\mathbb C}(V, W) \to \operatorname{Hom}_G(V, W)\)</span> 的平均化投影 <span class="math inline">\(\varphi \mapsto \tilde\varphi\)</span>： <span class="math display">\[
 \tilde\varphi(v) := \frac 1 {|G|} \sum_{g \in G} (g \cdot \varphi)(v) = \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(g^{-1} \cdot v)
 \]</span></p></li>
 </ul>
@@ -496,7 +512,7 @@ v \mapsto \tilde v := \frac 1 {|G|} \sum_{g \in G} g \cdot v
 <li><p>（半单观点）任意 <span class="math inline">\(G\)</span>-模 <span class="math inline">\(V\)</span> 都可以写成不可约表示的直和．</p></li>
 <li><p>（分裂同态观点）考虑 <span class="math inline">\(G\)</span>-模正合列 <span class="math display">\[
 0 \longrightarrow U \xrightarrow{\iota} V \xrightarrow{\pi} W \longrightarrow 0
-\]</span> 任取其作为线性空间时的一个左分裂同态 <span class="math inline">\(\varphi \in \operatorname{Hom}(V, U)\)</span> 使得 <span class="math inline">\(\varphi \circ \iota = \operatorname{id}_U\)</span>，我们可以将这一线性映射通过 <span class="math inline">\(G\)</span>-模 <span class="math inline">\(\operatorname{Hom}(V,U)\)</span> 上的平均化投影提升为 <span class="math inline">\(G\)</span>-模同态 <span class="math inline">\(\tilde \varphi \in \operatorname{Hom}_G(V, U)\)</span>： <span class="math display">\[
+\]</span> 任取其作为线性空间时的一个左分裂同态 <span class="math inline">\(\varphi \in \operatorname{Hom}_{\mathbb C}(V, U)\)</span> 使得 <span class="math inline">\(\varphi \circ \iota = \operatorname{id}_U\)</span>，我们可以将这一线性映射通过 <span class="math inline">\(G\)</span>-模 <span class="math inline">\(\operatorname{Hom}_{\mathbb C}(V,U)\)</span> 上的平均化投影提升为 <span class="math inline">\(G\)</span>-模同态 <span class="math inline">\(\tilde \varphi \in \operatorname{Hom}_G(V, U)\)</span>： <span class="math display">\[
 \tilde\varphi (v) = \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(g^{-1} \cdot v)
 \]</span> 这一提升同态仍保持左分裂性 <span class="math inline">\(\tilde \varphi \circ \iota = \operatorname{id}_U\)</span>，从而将上述线性空间上左分裂的正合列提升为左分裂的 <span class="math inline">\(G\)</span>-模正合列．</p></li>
 </ul>
@@ -551,7 +567,9 @@ v \mapsto \tilde v := \frac 1 {|G|} \sum_{g \in G} g \cdot v
 </ul>
 <p>这里 <span class="math inline">\(G\)</span>-不变内积是指内积满足 <span class="math inline">\(\langle g \cdot v, g \cdot w \rangle_G = \langle v, w \rangle_G\)</span>．它的构造也是通过“平均化”提升任意 <span class="math inline">\(V\)</span> 作为线性空间上的内积得到： <span class="math display">\[
 \langle v, w \rangle_G = \frac 1 {|G|} \sum_{g \in G} \langle g \cdot v, g \cdot w \rangle
-\]</span> 只要将内积视为 <span class="math inline">\(G\)</span>-模 <span class="math inline">\(\operatorname{Hom}(V, V^*)\)</span> 中的线性映射，内积的平均化其实可以实现为 <span class="math inline">\(\operatorname{Hom}(V, V^*) \to \operatorname{Hom}_G(V, V^*)\)</span> 的平均化投影．详细分析其与分裂同态观点的关系需要过多抽象废话，简明流畅起见，我们<a href="../../posts/20260312-group-rep-speedrun/inner-product.html">后日再谈</a>．</p>
+\]</span></p>
+<p>平均化内积的操作也可以实现为平均化投影：注意 <span class="math inline">\(\mathbb C\)</span> 上的内积是共轭双线性的，因此先填入第二个向量可将其视为 <span class="math inline">\(V \to V^*\)</span> 的共轭线性映射．记全体共轭线性映射 <span class="math inline">\(\operatorname{Hom}_{\overline{\mathbb C}}(V, V^*)\)</span>，它也有 <span class="math inline">\(G\)</span>-模结构．在此模上做平均化投影就对应了平均化内积的动作．</p>
+<p>【TODO】带共轭的内积观点笔者尚不熟悉，且详细分析其与分裂同态观点的关系需要过多抽象废话，简明流畅起见，我们<a href="../../posts/20260312-group-rep-speedrun/inner-product.html">后日再谈</a>．</p>
 </div>
 </div>
 </div>
@@ -610,7 +628,7 @@ v \mapsto \tilde v := \frac 1 {|G|} \sum_{g \in G} g \cdot v
 <ul>
 <li><p><span class="math inline">\(\chi_{V \oplus W}(g) = \chi_V(g) + \chi_W(g)\)</span></p>
 <p>矩阵分块即可．</p></li>
-<li><p><span class="math inline">\(\chi_{V \otimes W}(g) = \chi_V(g) \chi_W(g)\)</span></p>
+<li><p><span class="math inline">\(\chi_{V \otimes_{\mathbb C} W}(g) = \chi_V(g) \chi_W(g)\)</span></p>
 <p>矩阵分一堆块即可．</p></li>
 <li><p><span class="math inline">\(\chi_{V^*}(g) = \overline{\chi_V(g)}\)</span></p>
 <p>也就是算 <span class="math inline">\(\rho_{V^*}(g) \in \operatorname{GL}(V^*)\)</span> 的迹，按照 <span class="math inline">\(V^*\)</span> 定义它恰好是 <span class="math inline">\(\rho_V(g^{-1}) \in \operatorname{GL}(V)\)</span> 的对偶映射，再注意到对偶映射的迹等于原映射的迹和 <span class="math inline">\(\chi_V(g^{-1}) = \overline{\chi_V(g)}\)</span> 即可．</p></li>
@@ -630,7 +648,7 @@ v \mapsto \tilde v := \frac 1 {|G|} \sum_{g \in G} g \cdot v
 <div class="proof remark">
 <p><span class="proof-title"><em>注记</em>. </span>不理解为什么 <span class="math inline">\(\operatorname{tr}(f^*) = \operatorname{tr}(f)\)</span>？</p>
 <ul>
-<li><p>我们有自然同构 <span class="math inline">\(\operatorname{Hom}(V, V) \cong V^* \otimes V \cong V \otimes V^* \cong \operatorname{Hom}(V^*, V^*)\)</span>，中间的 <span class="math inline">\(\otimes\)</span> 两侧交换对应转置．迹也可以坐标无关地定义为 <span class="math inline">\(V\)</span> 和 <span class="math inline">\(V^*\)</span> 之间的缩并，从而对偶成为张量积间的交换从而变得无关紧要．</p></li>
+<li><p>我们有自然同构 <span class="math inline">\(\operatorname{Hom}_{\mathbb C}(V, V) \cong V^* \otimes_{\mathbb C} V \cong V \otimes_{\mathbb C} V^* \cong \operatorname{Hom}_{\mathbb C}(V^*, V^*)\)</span>，中间的 <span class="math inline">\(\otimes_{\mathbb C}\)</span> 两侧交换对应转置．迹也可以坐标无关地定义为 <span class="math inline">\(V\)</span> 和 <span class="math inline">\(V^*\)</span> 之间的缩并，从而对偶成为张量积间的交换从而变得无关紧要．</p></li>
 <li><p>或者直接坐标计算．嗯算就知道矩阵表示成转置关系．</p></li>
 </ul>
 </div>
@@ -673,8 +691,8 @@ v \mapsto \tilde v := \frac 1 {|G|} \sum_{g \in G} g \cdot v
 <div class="proof">
 <p><span class="proof-title"><em>证明</em>. </span>注意 <span class="math display">\[
 \begin{aligned}
-\dim \operatorname{Hom}_G(V, W) &amp;= \dim (V^* \otimes W)^G \\
-&amp;= \langle \chi_{V^* \otimes W}, 1_G \rangle \\
+\dim \operatorname{Hom}_G(V, W) &amp;= \dim (V^* \otimes_{\mathbb C} W)^G \\
+&amp;= \langle \chi_{V^* \otimes_{\mathbb C} W}, 1_G \rangle \\
 &amp;= \langle \overline{\chi_{V}} \chi_W, 1_G \rangle \\
 &amp;= \langle \chi_V, \chi_W \rangle
 \end{aligned}
@@ -797,24 +815,24 @@ V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 <div id="callout-8" class="callout-8-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>这个构造其实是自然的：如果将 <span class="math inline">\(L^2(G)\)</span> 通过同构 <span class="math inline">\(\chi \mapsto \sum_{g \in G} \chi(g) e_g\)</span> 当作 <span class="math inline">\(\mathbb C[G]\)</span> 理解，则 <span class="math inline">\(\chi \mapsto |G| \cdot \varphi_{\chi, V}\)</span> 无非是由 <span class="math inline">\(\varphi_{e_g, V} := \rho_V(g)\)</span> 线性扩展得到——或者甚至更直接的，就是表示 <span class="math inline">\(\rho : G \to \operatorname{GL}(V)\)</span> 的线性扩展 <span class="math inline">\(\mathbb C[G] \to \operatorname{End}(V)\)</span>！</p>
+<p><span class="proof-title"><em>注记</em>. </span>这个构造其实是自然的：如果将 <span class="math inline">\(L^2(G)\)</span> 通过同构 <span class="math inline">\(\chi \mapsto \sum_{g \in G} \chi(g) g\)</span> 当作 <span class="math inline">\(\mathbb C[G]\)</span> 理解，则 <span class="math inline">\(\chi \mapsto |G| \cdot \varphi_{\chi, V}\)</span> 无非是由 <span class="math inline">\(\varphi_{g, V} := \rho_V(g)\)</span> 线性扩展得到——或者甚至更直接的，就是表示 <span class="math inline">\(\rho : G \to \operatorname{GL}(V)\)</span> 的线性扩展 <span class="math inline">\(\mathbb C[G] \to \operatorname{End}(V)\)</span>！</p>
 </div>
 </div>
 </div>
 </div>
-<p>总结并推广证明过程中得到的该构造的若干性质：</p>
+<p>总结并推广证明过程中得到的该构造的若干性质：<span class="citation" data-cites="fulton_representation_2004"><a href="#ref-fulton_representation_2004" role="doc-biblioref">[1, page 22–23]</a></span></p>
 <ul>
 <li><p><span class="math inline">\((\chi, V) \mapsto \varphi_{\chi, V}\)</span> 关于 <span class="math inline">\(\chi \in L^2(G)\)</span> 的加法和表示 <span class="math inline">\(V\)</span> 的直和都是线性的．</p></li>
 <li><p><span class="math inline">\(\operatorname{tr}(\varphi_{\chi, V}) = \langle \chi, \chi_{V^*} \rangle = \langle \overline{\chi}, \chi_V \rangle\)</span></p></li>
 <li><p>当 <span class="math inline">\(\chi\)</span> 是共轭类函数时：<span class="math inline">\(\varphi_{\chi, V}\)</span> 是 <span class="math inline">\(G\)</span>-同态．</p></li>
 <li><p>追加 <span class="math inline">\(V = V_i\)</span> 不可约的条件：此时 <span class="math inline">\(\varphi_{\chi, V_i}\)</span> 是系数为 <span class="math inline">\(\langle \overline{\chi}, \chi_{V_i} \rangle / \dim V_i\)</span> 的数乘．</p></li>
 <li><p>再追加设 <span class="math inline">\(V_j\)</span> 也是不可约表示，取 <span class="math inline">\(\chi = \overline{\chi_{V_j}}\)</span>，则 <span class="math display">\[
-\varphi_{\overline{\chi_{V_j}}, V} = \begin{cases}
+\varphi_{\overline{\chi_{V_j}}, V_i} = \begin{cases}
 (1 / \dim V_j) \cdot \operatorname{id}_{V_i \cong V_j} &amp; V_i \cong V_j \\
 0 &amp; \text{otherwise}
 \end{cases}
 \]</span></p></li>
-<li><p>现在考虑将 <span class="math inline">\(V\)</span> 放松为任意表示，<span class="math inline">\(V_j\)</span> 仍不可约，定义 <span class="math display">\[
+<li><p>现在考虑将 <span class="math inline">\(V_i\)</span> 放松为任意表示，<span class="math inline">\(V_j\)</span> 仍不可约，定义 <span class="math display">\[
 \pi_j := \dim V_j \cdot \varphi_{\overline{\chi_{V_j}}, V} = \frac{\dim V_j}{|G|} \sum_{g \in G} \overline{\chi_{V_j}(g)} \rho_V(g)
 \]</span> 由于 <span class="math inline">\(V\)</span> 可以写成不可约表示的直和，又结合 <span class="math inline">\(\varphi_{\overline{\chi_{V_j}}, V}\)</span> 关于 <span class="math inline">\(V\)</span> 的直和线性性，使用上一条的结果就有：<span class="math inline">\(\pi_j\)</span> 就是 <span class="math inline">\(V\)</span> 到其全体 <span class="math inline">\(V_j\)</span> 成分的 <span class="math inline">\(G\)</span>-同态投影．</p></li>
 </ul>
@@ -831,7 +849,7 @@ V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 <div id="callout-9" class="callout-9-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span><span class="math inline">\(\chi \mapsto \varphi_{\chi, V}\)</span> 也是 Peter–Weyl 定理 <span class="math inline">\(L^2(G) \cong \bigoplus_i \operatorname{End}(V_i)\)</span> 直和投影的重要组成成分，其也将为我们提供不可约表示计数的一种更自顶向下的证明．我们<a href="../../posts/20260314-group-rep-peter-weyl/">后日再谈</a>．</p>
+<p><span class="proof-title"><em>注记</em>. </span><span class="math inline">\(\chi \mapsto \varphi_{\chi, V}\)</span> 也是 Peter–Weyl 定理 <span class="math inline">\(L^2(G) \cong \mathbb C[G] \cong \bigoplus_i \operatorname{End}(V_i)\)</span> 直和投影的重要组成成分，其也将为我们提供不可约表示计数的一种更自顶向下的证明．我们<a href="../../posts/20260314-group-rep-peter-weyl/">后日再谈</a>．</p>
 </div>
 </div>
 </div>
@@ -840,7 +858,7 @@ V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 <section id="正则表示" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="正则表示"><span class="header-section-number">5</span> 正则表示</h2>
 <p>正则表示将为我们提供对不可约表示维数的平方和限制．</p>
-<p>群代数 <span class="math inline">\(\mathbb C[G]\)</span> 是一组形式基底 <span class="math inline">\((e_g)_{g \in G}\)</span> 生成的线性空间，乘法由 <span class="math inline">\(e_{g_1} e_{g_2} := e_{g_1 g_2}\)</span> 定义．作为环，其自带一个左作用得到的 <span class="math inline">\(G\)</span>-模结构，称之为正则表示．</p>
+<p>群代数 <span class="math inline">\(\mathbb C[G]\)</span> 是一组形式基底 <span class="math inline">\((e_g)_{g \in G}\)</span> 生成的线性空间，乘法由 <span class="math inline">\(e_{g_1} e_{g_2} := e_{g_1 g_2}\)</span> 定义．作为环，其自带一个左作用得到的 <span class="math inline">\(G\)</span>-模结构，称之为正则表示．不妨以后把每个 <span class="math inline">\(e_g\)</span> 直接写成 <span class="math inline">\(g\)</span>．</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
