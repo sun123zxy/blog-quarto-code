@@ -25,16 +25,32 @@ format:
 \newcommand{\tr}{\operatorname{tr}}
 \newcommand{\End}{\operatorname{End}}
 
-设 $G$ 是有限群，$V$ 是（有限维的）$\mathbb C$-线性空间，则群同态 $\rho: G \to \GL(V)$ 规定了一个 $G$ 的（复）表示．等价地，这为 $V$ 配备了一个 $G$-模结构——$\mathbb C[G]$-模结构的简写．以下问题将得到解答：
+设 $G$ 是有限群，$V$ 是（有限维的）$\mathbb C$-线性空间，则群同态 $\rho: G \to \GL(V)$ 规定了一个 $G$ 的（复）表示．等价地，这为 $V$ 配备了一个 $G$-模结构——$\mathbb C[G]$-模结构的简写．
+
+有限群有限维复表示论完成了分类有限群有限维复表示的一般工作，其主要结果可概括为：
 
 - 半单性：任意有限群的有限维复表示一定分解为若干不可约表示的直和．（[@thm-semisimp]）
 
-- 特征标：证明特征标的正交性，从而通过内积计算任意表示的不可约成分组成情况：（[@cor-char-corresp]）
-  $$
-  V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
-  $$
+  - 高观点：表示环是自由 $\mathbb Z$-模．
+
+- 正交性：不可约表示什么时候同构，什么时候不同构，有哪些同构．
+
+  - [@thm-schur]：同态要么为零，要么同构，同构只有数乘．
+
+  - 高观点：$(V,W) \mapsto \dim \Hom_G(V, W)$ 给出了表示环作为自由 $\mathbb Z$ 模的标准内积．
+
+- 特征标：表示的同构类和正交关系可以通过特征标完全刻画．
+
+  - [@cor-char-corresp]：通过内积可以计算任意表示的不可约成分组成情况：
+    $$
+    V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
+    $$
+
+  - 高观点：特征标给出了表示环的复化 $\mathbb C \otimes_{\mathbb Z} R(G)$ 到全体 $G$ 的类函数 $L^2_{\text{class}}(G)$ 的环同态．
 
 - 共轭类：不可约表示的同构类数量等于 $G$ 的共轭类数量．（[@thm-conj]）
+
+  - 高观点：上述同态其实是环同构 $\mathbb C \otimes_{\mathbb Z} R(G) \cong L^2_{\text{class}}(G)$；表示环是有限生成的自由 $\mathbb Z$-模，进而（由 Hilbert 基定理，整性等交换代数废话）是一维 Noether 环．
 
 - 正则表示：群代数 $\mathbb C[G]$ 通过左作用赋予的 $G$-模结构具有不可约表示分解
   $$
@@ -58,7 +74,7 @@ format:
 
 - 为 Peter--Weyl / Wedderburn--Artin 定理
   $$
-  \mathbb C[G] \cong \bigoplus_i \End(V_i) \cong \bigoplus_i V_i^* \otimes V_i
+  \mathbb C[G] \cong \bigoplus_i \End(V_i) \cong \bigoplus_i V_i^* \otimes_{\mathbb C} V_i
   $$
   的[自顶向下方法](/posts/20260314-group-rep-peter-weyl/)做好铺垫．
 
@@ -92,29 +108,29 @@ format:
 
   注意 $(V \oplus W)^G = V^G \oplus W^G$．
 
-- 张量积 $V \otimes W$：
+- 张量积 $V \otimes_{\mathbb C} W$：
 
   线性空间张量积配备 $g \cdot (v \otimes w) := (g \cdot v) \otimes (g \cdot w)$．
 
-- 对偶空间 $V^* := \Hom(V, \mathbb C)$：
+- 对偶空间 $V^* := \Hom_{\mathbb C}(V, \mathbb C)$：
 
   线性空间对偶配备 $g \cdot f := (v \mapsto f(g^{-1} \cdot v))$．
 
-- 线性映射空间 $\Hom(V, W)$：
+- 线性映射空间 $\Hom_{\mathbb C}(V, W)$：
 
-  线性空间 $\Hom(V, W)$ 配备 $g \cdot \varphi := (v \mapsto g \cdot \varphi(g^{-1} \cdot v))$．
+  线性空间 $\Hom_{\mathbb C}(V, W)$ 配备 $g \cdot \varphi := (v \mapsto g \cdot \varphi(g^{-1} \cdot v))$．
 
-  注意线性空间有自然同构 $\Hom(V, W) \cong V^* \otimes W$．我们设计的定义使得这一同构相容地提升到 $G$-模之上．
+  注意线性空间有自然同构 $\Hom_{\mathbb C}(V, W) \cong V^* \otimes_{\mathbb C} W$．我们设计的定义使得这一同构相容地提升到 $G$-模之上．
 
-  自同态空间 $\End(V) := \Hom(V, V)$．
+  自同态空间 $\End_{\mathbb C}(V) := \Hom_{\mathbb C}(V, V)$．
 
 - $G$-模同态空间 $\Hom_G(V, W)$：
 
   保持 $G$-模结构的所有线性映射同态，其中的同态 $\varphi$ 满足 $\varphi(g \cdot v) = g \cdot \varphi(v)$．
 
-  注意我们设计的定义使得 $\Hom_G(V, W) = \left(\Hom(V, W) \right)^G$．
+  注意我们设计的定义使得 $\Hom_G(V, W) = \left(\Hom_{\mathbb C}(V, W) \right)^G$．
   
-  计算 $\Hom(V, W) \to \Hom_G(V, W)$ 的平均化投影 $\varphi \mapsto \tilde\varphi$：
+  计算 $\Hom_{\mathbb C}(V, W) \to \Hom_G(V, W)$ 的平均化投影 $\varphi \mapsto \tilde\varphi$：
   $$
   \tilde\varphi(v) := \frac 1 {|G|} \sum_{g \in G} (g \cdot \varphi)(v) = \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(g^{-1} \cdot v)
   $$
@@ -135,7 +151,7 @@ format:
   $$
   0 \longrightarrow U \xrightarrow{\iota} V \xrightarrow{\pi} W \longrightarrow 0
   $$
-  任取其作为线性空间时的一个左分裂同态 $\varphi \in \Hom(V, U)$ 使得 $\varphi \circ \iota = \id_U$，我们可以将这一线性映射通过 $G$-模 $\Hom(V,U)$ 上的平均化投影提升为 $G$-模同态 $\tilde \varphi \in \Hom_G(V, U)$：
+  任取其作为线性空间时的一个左分裂同态 $\varphi \in \Hom_{\mathbb C}(V, U)$ 使得 $\varphi \circ \iota = \id_U$，我们可以将这一线性映射通过 $G$-模 $\Hom_{\mathbb C}(V,U)$ 上的平均化投影提升为 $G$-模同态 $\tilde \varphi \in \Hom_G(V, U)$：
   $$
   \tilde\varphi (v) = \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(g^{-1} \cdot v)
   $$
@@ -171,7 +187,10 @@ $$
 $$
 \langle v, w \rangle_G = \frac 1 {|G|} \sum_{g \in G} \langle g \cdot v, g \cdot w \rangle
 $$
-只要将内积视为 $G$-模 $\Hom(V, V^*)$ 中的线性映射，内积的平均化其实可以实现为 $\Hom(V, V^*) \to \Hom_G(V, V^*)$ 的平均化投影．详细分析其与分裂同态观点的关系需要过多抽象废话，简明流畅起见，我们[后日再谈](inner-product.qmd)．
+
+平均化内积的操作也可以实现为平均化投影：注意 $\mathbb C$ 上的内积是共轭双线性的，因此先填入第二个向量可将其视为 $V \to V^*$ 的共轭线性映射．记全体共轭线性映射 $\Hom_{\overline{\mathbb C}}(V, V^*)$，它也有 $G$-模结构．在此模上做平均化投影就对应了平均化内积的动作．
+
+【TODO】带共轭的内积观点笔者尚不熟悉，且详细分析其与分裂同态观点的关系需要过多抽象废话，简明流畅起见，我们[后日再谈](inner-product.qmd)．
 :::
 
 :::{#thm-schur}
@@ -222,7 +241,7 @@ $G$-module-wise properties:
 
   矩阵分块即可．
 
-- $\chi_{V \otimes W}(g) = \chi_V(g) \chi_W(g)$
+- $\chi_{V \otimes_{\mathbb C} W}(g) = \chi_V(g) \chi_W(g)$
 
   矩阵分一堆块即可．
 
@@ -234,7 +253,7 @@ $G$-module-wise properties:
 
 不理解为什么 $\tr(f^*) = \tr(f)$？
 
-- 我们有自然同构 $\Hom(V, V) \cong V^* \otimes V \cong V \otimes V^* \cong \Hom(V^*, V^*)$，中间的 $\otimes$ 两侧交换对应转置．迹也可以坐标无关地定义为 $V$ 和 $V^*$ 之间的缩并，从而对偶成为张量积间的交换从而变得无关紧要．
+- 我们有自然同构 $\Hom_{\mathbb C}(V, V) \cong V^* \otimes_{\mathbb C} V \cong V \otimes_{\mathbb C} V^* \cong \Hom_{\mathbb C}(V^*, V^*)$，中间的 $\otimes_{\mathbb C}$ 两侧交换对应转置．迹也可以坐标无关地定义为 $V$ 和 $V^*$ 之间的缩并，从而对偶成为张量积间的交换从而变得无关紧要．
 
 - 或者直接坐标计算．嗯算就知道矩阵表示成转置关系．
 :::
@@ -257,8 +276,8 @@ Averaging properties:
 注意
 $$
 \begin{aligned}
-\dim \Hom_G(V, W) &= \dim (V^* \otimes W)^G \\
-&= \langle \chi_{V^* \otimes W}, 1_G \rangle \\
+\dim \Hom_G(V, W) &= \dim (V^* \otimes_{\mathbb C} W)^G \\
+&= \langle \chi_{V^* \otimes_{\mathbb C} W}, 1_G \rangle \\
 &= \langle \overline{\chi_{V}} \chi_W, 1_G \rangle \\
 &= \langle \chi_V, \chi_W \rangle
 \end{aligned}
@@ -335,10 +354,10 @@ $$
 
 :::{.remark}
 
-这个构造其实是自然的：如果将 $L^2(G)$ 通过同构 $\chi \mapsto \sum_{g \in G} \chi(g) e_g$ 当作 $\mathbb C[G]$ 理解，则 $\chi \mapsto |G| \cdot \varphi_{\chi, V}$ 无非是由 $\varphi_{e_g, V} := \rho_V(g)$ 线性扩展得到——或者甚至更直接的，就是表示 $\rho : G \to \GL(V)$ 的线性扩展 $\mathbb C[G] \to \End(V)$！
+这个构造其实是自然的：如果将 $L^2(G)$ 通过同构 $\chi \mapsto \sum_{g \in G} \chi(g) g$ 当作 $\mathbb C[G]$ 理解，则 $\chi \mapsto |G| \cdot \varphi_{\chi, V}$ 无非是由 $\varphi_{g, V} := \rho_V(g)$ 线性扩展得到——或者甚至更直接的，就是表示 $\rho : G \to \GL(V)$ 的线性扩展 $\mathbb C[G] \to \End(V)$！
 :::
 
-总结并推广证明过程中得到的该构造的若干性质：
+总结并推广证明过程中得到的该构造的若干性质：[@fulton_representation_2004, {page 22--23}]
 
 - $(\chi, V) \mapsto \varphi_{\chi, V}$ 关于 $\chi \in L^2(G)$ 的加法和表示 $V$ 的直和都是线性的．
 
@@ -350,13 +369,13 @@ $$
 
 - 再追加设 $V_j$ 也是不可约表示，取 $\chi = \overline{\chi_{V_j}}$，则
   $$
-  \varphi_{\overline{\chi_{V_j}}, V} = \begin{cases}
+  \varphi_{\overline{\chi_{V_j}}, V_i} = \begin{cases}
   (1 / \dim V_j) \cdot \id_{V_i \cong V_j} & V_i \cong V_j \\
   0 & \text{otherwise}
   \end{cases}
   $$
 
-- 现在考虑将 $V$ 放松为任意表示，$V_j$ 仍不可约，定义
+- 现在考虑将 $V_i$ 放松为任意表示，$V_j$ 仍不可约，定义
   $$
   \pi_j := \dim V_j \cdot \varphi_{\overline{\chi_{V_j}}, V} = \frac{\dim V_j}{|G|} \sum_{g \in G} \overline{\chi_{V_j}(g)} \rho_V(g)
   $$
@@ -364,14 +383,14 @@ $$
 
 :::{.remark}
 
-$\chi \mapsto \varphi_{\chi, V}$ 也是 Peter--Weyl 定理 $L^2(G) \cong \bigoplus_i \End(V_i)$ 直和投影的重要组成成分，其也将为我们提供不可约表示计数的一种更自顶向下的证明．我们[后日再谈](/posts/20260314-group-rep-peter-weyl/)．
+$\chi \mapsto \varphi_{\chi, V}$ 也是 Peter--Weyl 定理 $L^2(G) \cong \mathbb C[G] \cong \bigoplus_i \End(V_i)$ 直和投影的重要组成成分，其也将为我们提供不可约表示计数的一种更自顶向下的证明．我们[后日再谈](/posts/20260314-group-rep-peter-weyl/)．
 :::
 
 ## 正则表示
 
 正则表示将为我们提供对不可约表示维数的平方和限制．
 
-群代数 $\mathbb C[G]$ 是一组形式基底 $(e_g)_{g \in G}$ 生成的线性空间，乘法由 $e_{g_1} e_{g_2} := e_{g_1 g_2}$ 定义．作为环，其自带一个左作用得到的 $G$-模结构，称之为正则表示．
+群代数 $\mathbb C[G]$ 是一组形式基底 $(e_g)_{g \in G}$ 生成的线性空间，乘法由 $e_{g_1} e_{g_2} := e_{g_1 g_2}$ 定义．作为环，其自带一个左作用得到的 $G$-模结构，称之为正则表示．不妨以后把每个 $e_g$ 直接写成 $g$．
 
 :::{#thm-reg}
 - $$

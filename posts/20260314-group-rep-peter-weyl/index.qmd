@@ -3,7 +3,7 @@ title: 有限群表示论：Peter--Weyl 定理
 author: sun123zxy
 date: 2026-03-14
 lang: zh
-
+bibliography: index.bib
 draft: true
 
 categories:
@@ -20,7 +20,7 @@ format:
 \newcommand{\GL}{\operatorname{GL}}
 \newcommand{\im}{\operatorname{im}}
 \newcommand{\id}{\operatorname{id}}
-\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Tr}{\operatorname{Tr}}
 \newcommand{\End}{\operatorname{End}}
 
 ## 从左模到代数
@@ -31,11 +31,11 @@ $$
 $$
 这里 $\mathbb C[G]$ 是群 $G$ 的群代数，$V_i$ 是 $G$ 的全体不可约表示．这只是个左 $\mathbb C[G]$-模的分解：$\mathbb C[G]$ 被分解成了其单左理想的直和．但是 $\mathbb C[G]$ 是个环，完整来说我们应该研究其作为 $\mathbb C$-代数的分解．Peter--Weyl / Wedderburn--Artin 定理给出了它的分解：
 $$
-\mathbb C[G] \cong \bigoplus_i \End(V_i) \cong \bigoplus_i V_i \otimes V_i^*
+\mathbb C[G] \cong \bigoplus_i \End_{\mathbb C}(V_i) \cong \bigoplus_i V_i \otimes_{\mathbb C} V_i^*
 $$
 可见其结构确实变得更加丰富．稍做辨析：
 
-- 这里每份投影 $\pi_i: \mathbb C[G] \to \End(V_i)$ 都是表示 $\rho_{V_i} : G \to \GL(V_i)$ 直接线性扩张得到——定理表明，$\mathbb C[G]$ 可以完全由其每个不可约表示上的作用描述．
+- 这里每份投影 $\pi_i: \mathbb C[G] \to \End_{\mathbb C}(V_i)$ 都是表示 $\rho_{V_i} : G \to \GL(V_i)$ 直接线性扩张得到——定理表明，$\mathbb C[G]$ 可以完全由其每个不可约表示上的作用描述．
 
 - 容易验证每个 $\pi_i$ 都是 $(\mathbb C[G], \mathbb C[G])$-代数同态——保加法，保乘法，保数乘，保左、右 $G$-作用．这里的分解是在此意义下的同构．
 
@@ -48,26 +48,26 @@ $$
 在经典的有限群表示论中，那时我们希望 $V_i^*$ 是左 $\mathbb C[G]$-模，所以当时配备的是 $(f \cdot g)(v) := f(g^{-1} \cdot v)$，与这里的情况并不矛盾．
 :::
 
-- $V_i \otimes V_i^*$ 通过 $(\mathbb C[G], \mathbb C)$-双模和 $(\mathbb C, \mathbb C[G])$-双模的张量积获得一个 $(\mathbb C[G],\mathbb C[G])$-双模结构：
+- $V_i \otimes_{\mathbb C} V_i^*$ 通过 $(\mathbb C[G], \mathbb C)$-双模和 $(\mathbb C, \mathbb C[G])$-双模的张量积获得一个 $(\mathbb C[G],\mathbb C[G])$-双模结构：
   $$
   g \cdot (v \otimes f) \cdot h := (g \cdot v) \otimes (f \cdot h)
   $$
   其内部乘法是缩并运算．这使得其成为一个 $(\mathbb C[G], \mathbb C[G])$-代数．
 
-- 对左 $\mathbb C[G]$-模 $U$, $W$，为了使自然同构 $W \otimes U^* \cong \Hom(U,W)$ 成立，为 $\Hom(U,W)$ 配备 $(\mathbb C[G],\mathbb C[G])$-双模结构
+- 对左 $\mathbb C[G]$-模 $U$, $W$，为了使自然同构 $W \otimes_{\mathbb C} U^* \cong \Hom_{\mathbb C}(U,W)$ 成立，为 $\Hom_{\mathbb C}(U,W)$ 配备 $(\mathbb C[G],\mathbb C[G])$-双模结构
   $$
   (g \cdot \varphi \cdot h)(u) := g \cdot \varphi(h \cdot u)
   $$
-  特别地，在 $\End(V_i) = \Hom(V_i, V_i)$ 定义内部乘法是函数复合，则 $\End(V_i)$ 也获得 $(\mathbb C[G], \mathbb C[G])$-代数结构．
+  特别地，在 $\End_{\mathbb C}(V_i) = \Hom_{\mathbb C}(V_i, V_i)$ 定义内部乘法是函数复合，则 $\End_{\mathbb C}(V_i)$ 也获得 $(\mathbb C[G], \mathbb C[G])$-代数结构．
 
 :::{.remark}
 
-平时仅考虑左模结构时，为使记号对齐，通常喜欢写 $\Hom(V,W) \cong V^* \otimes W$——这无伤大雅，反正 $V^*$ 强行通过 $g^{-1}$ 获得了左 $\mathbb C[G]$-模结构．但对双模的情况，左 $\mathbb C[G]$-作用是由 $W$ 负责，右 $\mathbb C[G]$-作用是由 $V^*$ 负责，我们就最好不要交换它们了．
+平时仅考虑左模结构时，为使记号对齐，通常喜欢写 $\Hom_{\mathbb C}(V,W) \cong V^* \otimes_{\mathbb C} W$——这无伤大雅，反正 $V^*$ 强行通过 $g^{-1}$ 获得了左 $\mathbb C[G]$-模结构．但对双模的情况，左 $\mathbb C[G]$-作用是由 $W$ 负责，右 $\mathbb C[G]$-作用是由 $V^*$ 负责，我们就最好不要交换它们了．
 :::
 
-- 不会因为仅将此分解视为环的分解受到任何处分——通过表示诱导的映射表示诱导的 $\pi_i : \mathbb C[G] \to \End(V_i)$ 足以将 $\End(V_i)$ 上的乘法结构拉回得到其 $(\mathbb C[G], \mathbb C[G])$-双模结构．
+- 不会因为仅将此分解视为环的分解受到任何处分——通过表示诱导的映射 $\pi_i : \mathbb C[G] \to \End_{\mathbb C}(V_i)$ 足以将 $\End_{\mathbb C}(V_i)$ 上的乘法结构拉回得到其 $(\mathbb C[G], \mathbb C[G])$-双模结构．
 
-- 反过来，仅考虑 $(\mathbb C[G], \mathbb C[G])$-双模结构也没有问题：将会证明 $\pi_i$ 是满射，即每个 $\End(V_i)$ 都是可以写作某一 $\mathbb C[G]$-左作用．
+- 反过来，仅考虑 $(\mathbb C[G], \mathbb C[G])$-双模结构也没有问题：将会证明 $\pi_i$ 是满射，即每个 $\End_{\mathbb C}(V_i)$ 都是可以写作某一 $\mathbb C[G]$-左作用．
 
 ## 证明
 
@@ -83,13 +83,13 @@ $$
 
 则只需证 $\pi$ 是满射．这里有多种可供选择的路线：
 
-- 依赖有限群表示论的维数平方和公式 $\sum_i (\dim V_i)^2 = |G|$：
+- 依赖有限群表示论的维数平方和公式 $\sum_i (\dim V_i)^2 = |G|$：[@fulton_representation_2004, {Proposition 3.29}]
   
-  $\dim \End(V_i) = (\dim V_i)^2$，$\dim \mathbb C[G] = |G|$ 维数逼迫单射 $\pi$ 也是满射．
+  $\dim \End_{\mathbb C}(V_i) = (\dim V_i)^2$，$\dim \mathbb C[G] = |G|$ 维数逼迫单射 $\pi$ 也是满射．
 
 - 依赖 [矩阵代数的 Burnside 定理](/posts/20240121-burnside/)，该定理的证明可以仅依赖初等线性代数：
 
-  考察 $\pi_i(\mathbb C[G]) \subseteq \End(V_i)$，注意到它是 $\End(V_i)$ 的不可约含幺子结合代数．根据 Burnside 定理，$\pi(\mathbb C[G])$ 在每个 $\End(V_i)$ 上都必须是全体．
+  考察 $\pi_i(\mathbb C[G]) \subseteq \End_{\mathbb C}(V_i)$，注意到它是 $\End_{\mathbb C}(V_i)$ 的不可约含幺子结合代数．根据 Burnside 定理，$\pi(\mathbb C[G])$ 在每个 $\End_{\mathbb C}(V_i)$ 上都必须是全体．
 
 :::{.remark}
 
@@ -98,142 +98,86 @@ $$
 
 我们还可以显式构造 $\pi$ 的逆 $\iota$ 来获得一个构造性的证明：
 
-- 先来构造 $(\mathbb C[G], \mathbb C[G])$ 双模同态 $\iota_i: \End(V_i) \to \mathbb C[G]$：
+- 先来构造 $(\mathbb C[G], \mathbb C[G])$ 双模同态 $\iota_i: \End_{\mathbb C}(V_i) \to \mathbb C[G]$：
   $$
-  \varphi \mapsto \sum_{g \in G} \tr(\varphi \circ \rho_{V_i}(g^{-1})) e_g
+  \varphi \mapsto \frac{\dim V_i}{|G|} \sum_{g \in G} \Tr(\varphi \circ \rho_{V_i}(g^{-1})) g
   $$
-  验证 $\iota_i$ 是双模同态：[TODO]
+  等价地，$V_i \otimes_{\mathbb C} V_i^* \to \mathbb C[G]$ 的版本是
+  $$
+  v \otimes f \mapsto \frac{\dim V_i}{|G|} \sum_{g \in G} f(g^{-1} \cdot v) g
+  $$
+  固定 $V_i$ 一组基 $(e_i^k)$ 并生成 $V_i^*$ 上的对偶基 $(f_i^j)$，则此映射有矩阵风格的解读：将 $g \in G$ 映射到 $\rho_{V_i}(g^{-1})$ 的第 $j$ 行第 $k$ 列元素取出得到一 $L^2(G)$ 内函数
+  $$
+  \rho_{V_i}^{j, k}(g) := f_i^j(\rho_{V_i}(g^{-1}) \cdot e_i^k)
+  $$
+  再等价地看作 $\mathbb C[G]$ 的元素，最后适当归一化．
+
+- $L^2(G)$ 上有函数空间的标准内积．考虑 $e_{i_2}^{k_2} \otimes f_{i_1}^{j_1} \in V_{i_2} \otimes_{\mathbb C} V_{i_1}^* \cong \Hom_{\mathbb C}(V_{i_1}, V_{i_2})$，对其平均化得
+  $$
+  \frac 1 {|G|} \sum_{g \in G} \rho_{V_{i_2}}(g) \circ \left( e_{i_2}^{k_2} \otimes f_{i_1}^{j_1} \right) \circ \rho_{V_{i_1}}(g^{-1}) \in \Hom_G(V_{i_1}, V_{i_2})
+  $$
+  再对此 $\Hom_G(V_{i_1}, V_{i_2})$ 中映射取第 $j_2$ 行第 $k_1$ 列元素得
+  $$
+  \begin{aligned}
+  &\phantom{=} \frac 1 {|G|} \sum_{g \in G} f_{i_2}^{j_2} \left( \rho_{V_{i_2}}(g) \circ \left( e_{i_2}^{k_2} \otimes f_{i_1}^{j_1} \right) \circ \rho_{V_{i_1}}(g^{-1}) \cdot e_{i_1}^{k_1} \right) \\
+  &= \frac 1 {|G|} \sum_{g \in G} \rho_{V_{i_2}}^{j_2, k_2}(g) \cdot \rho_{V_{i_1}}^{j_1, k_1}(g^{-1}) \\
+  &= \langle \rho_{V_{i_2}}^{j_2, k_2}, \rho_{V_{i_1}}^{j_1, k_1} \rangle
+  \end{aligned}
+  $$
+  回忆 Schur 引理对 $\Hom_G (V_{i_1}, V_{i_2})$ 的刻画，这恰是在说此内积非零当且仅当 $i_1 = i_2$ 且 $j_1 = j_2$ 且 $k_1 = k_2$．因此 $\rho_{V_{i}}^{j, k}$ 两两正交．当 $i=i_1=i_2$, $j=j_1=j_2=k=k_1=k_2$ 时，$e_i^j \otimes f_i^j \in \End_{\mathbb C}(V_i)$ 的迹为 $1$，而平均化不改变迹并将其变为 $V_i$ 上的数乘，因此 $\langle \rho_{V_i}^{j, k}, \rho_{V_i}^{j, k} \rangle = 1 / \dim V_i$．这说明 $\iota_i$ 是单射．
 
 ## 推论
 
-来看上述分解导致的事实．首先，如果你选择的证明路线没有循环论证之嫌，可以通过维数再次看出维数平方和公式
+来看上述分解导致的事实．
+
+### 维数平方和
+
+首先，如果你选择的证明路线没有循环论证之嫌，可以通过维数再次看出维数平方和公式
 $$
 |G| = \sum_i (\dim V_i)^2
 $$
 
+### 共轭类计数
+
 其次，对这分解取中心：
 $$
-Z(\mathbb C[G]) \cong \bigoplus_i Z(\End(V_i))
+Z(\mathbb C[G]) \cong \bigoplus_i Z(\End_{\mathbb C}(V_i))
 $$
 
-- $Z(\End(V_i))$ 是 $\End(V_i)$ 的中心，既是 $V_i$ 上左 $\mathbb C[G]$-自同态的全体 $\End_{\mathbb C[G]}(V_i)$．回忆 Schur 引理，$V_i$ 是不可约表示，所以 $Z(\End(V_i)) = \End_{\mathbb C[G]}(V_i) = \mathbb C \id_{V_i}$，维数为 $1$．
+- $Z(\End_{\mathbb C}(V_i))$ 是 $\End_{\mathbb C}(V_i)$ 的中心，而（根据满射性）所有 $\End_{\mathbb C}(V_i)$ 都可实现为 $V_i$ 上的 $G$-左作用，因此这中心恰为 $\End_{\mathbb C[G]}(V_i)$．回忆 Schur 引理，$V_i$ 是不可约表示，所以 $Z(\End_{\mathbb C}(V_i)) = \End_{\mathbb C[G]}(V_i) = \mathbb C \id_{V_i}$，维数为 $1$．
 
 - $Z(\mathbb C[G])$ 是什么？
 
-  设 $\sum_{h \in G} \chi(h) e_h \in Z(\mathbb C[G])$，这即是要求对任意 $g \in G$，有
+  设 $\sum_{h \in G} \chi(h) h \in Z(\mathbb C[G])$，这即是要求对任意 $g \in G$，有
   $$
-  (\sum_{h \in G} \chi(h) e_h) = e_g (\sum_{h \in G} \chi(h) e_h) e_g^{-1} = \sum_{h \in G} \chi(h) e_{g h g^{-1}} = \sum_{h \in G} \chi(g^{-1} h g) e_h
+  \sum_{h \in G} \chi(h) h = g \left( \sum_{h \in G} \chi(h) h \right) g^{-1} = \sum_{h \in G} \chi(h) g h g^{-1} = \sum_{h \in G} \chi(g^{-1} h g) h
   $$
   即 $\chi(g^{-1} h g) = \chi(h)$——在共轭类上取常值——$Z(\mathbb C[G])$ 就是类函数全体！其维数等于 $G$ 的共轭类的数量．
 
 两条连起来看立得：$G$ 的共轭类的数量等于 $G$ 的不可约表示的数量．
 
-## 证明（废液缸）
+### 直和分解的典范投影
 
-以后我们都把 $\mathbb C[G]$ 看成是 $G \to \mathbb C$ 的全体函数．先来构造 $V_i \otimes V_i^*$ 到 $\mathbb C[G]$ 的 $G$-双模同态 $\Phi_i$：
+对任意 $G$-表示 $V$，大力自然同构
 $$
 \begin{aligned}
-V_i \otimes V_i^* &\to \mathbb C[G] \\
-v \otimes f &\mapsto \left( g \mapsto f(g^{-1} \cdot v) \right)
+V &\cong \mathbb C[G] \otimes_{\mathbb C[G]} V \\
+&\cong \bigoplus_i \End(V_i) \otimes_{\mathbb C[G]} V \\
+&\cong \bigoplus_i V_i \otimes_{\mathbb C} V_i^* \otimes_{\mathbb C[G]} V \\
+&\cong \bigoplus_i V_i \otimes_{\mathbb C} \Hom_G(V_i, V)
 \end{aligned}
 $$
-或者等价地：
+注意 $\dim \Hom_G(V_i, V)$ 就是 $V_i$ 在 $V$ 中的重数，因此 $V_i \otimes_{\mathbb C} \Hom_G(V_i, V)$ 就是 $V$ 的各不可约成分，上述同构给出了 $V$ 的不可约成分的自然拆解——不同于证明半单性时对补空间的依赖，这里的拆解是完全构造性的，我们可以直接写出典范嵌入
 $$
 \begin{aligned}
-\End(V_i) &\to \mathbb C[G] \\
-\varphi &\mapsto \left( g \mapsto \tr(\varphi \circ \rho_{V_i} (g^{-1})) \right)
+\iota_i: V_i \otimes_{\mathbb C} \Hom_G(V_i, V) &\to V \\
+v \otimes \varphi &\mapsto \varphi(v)
 \end{aligned}
 $$
-
-:::{.remark}
-
-这里两种定义的等价性：$V$ 上线性变换的 $\tr$ 在张量风格的记号下就是 $V$ 和 $V^*$ 张量缩并
+和典范投影
 $$
 \begin{aligned}
-\tr: V \otimes V^* &\to \mathbb C \\
-v \otimes f &\mapsto f(v)
+\pi_i : V \to \bigoplus_i V_i \otimes_{\mathbb C} \Hom_G(V_i, V) \\
+\iota_i \circ \pi_i = \frac{\dim V_i}{|G|} \sum_{g \in G} \overline{\chi_{V_i}(g)} \rho_V(g)
 \end{aligned}
 $$
-:::
-
-先来验证它是 $G$-双模同态：
-
-:::{.proof}
-
-张量风格的记号好处理一点．验证它是 $G$-双模同态：
-$$
-\begin{aligned}
-\Phi_i \left( g \cdot (v \otimes f) \cdot h \right)
-&= \Phi_i \left( (g \cdot v) \otimes (f \cdot h) \right) \\
-&= \left( x \mapsto (f \cdot h)(x^{-1} g \cdot v) \right) \\
-&= \left( x \mapsto f(h x^{-1} g \cdot v) \right) \quad \text{因为 } (f \cdot h)(u) = f(h \cdot u) \\ 
-&= \left( x \mapsto f((g^{-1} x h^{-1})^{-1} \cdot v) \right) \\ 
-&= g \cdot (x \mapsto f(x^{-1} \cdot v)) \cdot h \\
-&= g \cdot \Phi_i(v \otimes f) \cdot h
-\end{aligned}
-$$
-
-另外，如果你想用 $\tr$ 风格的记号证明，可能需要知道 $\tr$ 的[循环不变性](/posts/20260314-trace-cyclic/) 才能做．
-:::
-
-反向地，我们构造 $\mathbb C[G]$ 到每个 $\End(V_i)$ 的 $G$-双模同态 $\Psi_i$：
-$$
-\Psi_i(e_g) := \rho_{V_i}(g)
-$$
-那 $\Psi_i$ 就已经是 $G$-双模同态了．这里按函数风格写一下定义：
-$$
-\Psi_i(\chi) := \sum_{g \in G} \chi(g) \rho_{V_i}(g)
-$$
-
-验证 $\Psi_i \circ \Phi_i = c \cdot \id_{\End(V_i)}$：
-
-:::::{.proof}
-
-这个恒等式可以通过 Schur 正交关系来证。任取 $\varphi \in \End(V_i)$，计算复合作用：
-$$
-\begin{aligned}
-(\Psi_i \circ \Phi_i)(\varphi) &= \Psi_i\left(g \mapsto \tr(\varphi \circ \rho_{V_i}(g^{-1}))\right) \\
-&= \sum_{g \in G} \tr(\varphi \circ \rho_{V_i}(g^{-1})) \rho_{V_i}(g)
-\end{aligned}
-$$
-任取 $u \in V_i$ 以及 $f \in V_i^*$，我们将上式作用在 $u$ 上并在外面作用 $f$：
-$$
-\begin{aligned}
-f\left( (\Psi_i \circ \Phi_i)(\varphi)(u) \right) &= \sum_{g \in G} \tr(\varphi \circ \rho_{V_i}(g^{-1})) f(\rho_{V_i}(g) u) \\
-&= \sum_{g \in G} \tr(\varphi \circ \rho_{V_i}(g^{-1})) \tr\left( (u \otimes f) \circ \rho_{V_i}(g) \right)
-\end{aligned}
-$$
-由 Schur 正交关系（对于 $\End(V_i)$ 上的迹内积），我们知道对任意自同态 $A, B$，有 $\sum_{g \in G} \tr(A \rho_{V_i}(g^{-1})) \tr(B \rho_{V_i}(g)) = \frac{|G|}{\dim V_i} \tr(A B)$。
-
-:::{.remark}
-
-取 $V_i$ 的一组基将算子写成矩阵。根据经典形式的矩阵元 Schur 正交关系：
-$$
-\sum_{g \in G} \rho_{V_i}(g)_{ij} \rho_{V_i}(g^{-1})_{kl} = \frac{|G|}{\dim V_i} \delta_{il} \delta_{jk}
-$$
-将左侧的两个迹展开化简即可：
-$$
-\begin{aligned}
-\sum_{g \in G} \tr(A \rho_{V_i}(g^{-1})) \tr(B \rho_{V_i}(g)) 
-&= \sum_{g \in G} \left( \sum_{k,l} A_{lk} \rho_{V_i}(g^{-1})_{kl} \right) \left( \sum_{i,j} B_{ji} \rho_{V_i}(g)_{ij} \right) \\
-&= \sum_{i,j,k,l} A_{lk} B_{ji} \sum_{g \in G} \rho_{V_i}(g)_{ij} \rho_{V_i}(g^{-1})_{kl} \\
-&= \sum_{i,j,k,l} A_{lk} B_{ji} \frac{|G|}{\dim V_i} \delta_{il} \delta_{jk} \\
-&= \frac{|G|}{\dim V_i} \sum_{i,j} A_{ij} B_{ji} \\
-&= \frac{|G|}{\dim V_i} \tr(AB)
-\end{aligned}
-$$
-:::
-
-将 $A = \varphi$，$B = u \otimes f$ 代入该式，得到：
-$$
-\begin{aligned}
-f\left( (\Psi_i \circ \Phi_i)(\varphi)(u) \right) &= \frac{|G|}{\dim V_i} \tr(\varphi \circ (u \otimes f)) \\
-&= \frac{|G|}{\dim V_i} f(\varphi(u))
-\end{aligned}
-$$
-因为对所有 $f$ 和 $u$ 成立，故有
-$$
-(\Psi_i \circ \Phi_i)(\varphi) = \frac{|G|}{\dim V_i} \varphi
-$$
-即 $\Psi_i \circ \Phi_i = \frac{|G|}{\dim V_i} \id_{\End(V_i)}$。的确只是差一个常数 $\frac{|G|}{\dim V_i}$。
-:::::

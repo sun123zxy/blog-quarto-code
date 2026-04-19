@@ -1,0 +1,93 @@
+---
+title: Schur--Weyl 对偶
+author: sun123zxy
+date: 2026-04-19
+lang: zh
+
+draft: true
+
+categories:
+  - math
+  - algebra
+
+number-sections: true
+
+format:
+  html: default
+  pdf: default
+---
+
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+\def\bbinom#1#2{{\left(\kern-.3em\left(\genfrac{}{}{0pt}{}{#1}{#2}\right)\kern-.3em\right)}}
+\newcommand{\sgn}{\operatorname{sgn}}
+
+## 从 Sym 和 Alt 谈起
+
+众所周知，设 $G$ 是群，则对任意 $G$ 的 $n$ 维表示 $V$，$V \otimes_{\mathbb C} V$ 都可以分解为子表示 $\Sym^2 V$ 和 $\Alt^2 V$ 的直和，其中
+
+- $\Sym^2 V$ 由 $v \otimes w + w \otimes v$ 生成，在交换 $V \otimes V$ 的作用下稳定，是左作用 $G$ 的不变子空间，维数为 $\bbinom{n}{2} = \frac{n(n+1)}{2}$．
+
+- $\Alt^2 V$ 由 $v \otimes w - w \otimes v$ 生成，在交换 $V \otimes V$ 的作用下变号，是左作用 $G$ 的不变子空间，维数为 $\binom{n}{2} = \frac{n(n-1)}{2}$．
+
+对一般的 $T^d V := V^{\otimes d}$，也会想要获得类似的分解．当然还是先类似定义子表示 $\Sym^d V$ 和 $\Alt^d V$．此时考虑 $d$ 阶置换群 $\mathcal S_d$ 在 $V^{\otimes d}$ 上的作用变得有益：定义
+$$
+(v_1 \otimes \cdots \otimes v_d) \cdot \sigma := v_{\sigma(1)} \otimes \cdots \otimes v_{\sigma(d)}
+$$
+为什么是右作用？因为这是对多重张量位置的置换，而位置的置换是右作用．线性扩展后这将 $V^{\otimes d}$ 做成右 $\mathbb C[\mathcal S_d]$-模．于是
+
+:::{.list-table}
+
+- - 
+  - $\Sym^d V$
+  - $\Alt^d V$
+
+- - 作为右作用 $\mathcal S_d$ 的像
+  - $V^{\otimes d}$ 在右作用 $\sum_{\sigma \in \mathcal S_d} \sigma \in \mathbb C[\mathcal S_d]$ 下的像
+  - $V^{\otimes d}$ 在右作用 $\sum_{\sigma \in \mathcal S_d} \sgn(\sigma) \sigma \in \mathbb C[\mathcal S_d]$ 下的像
+
+- - 作为右作用 $\mathcal S_d$ 的核
+  - 全体在 $\mathcal S_d$ 右作用下稳定的元素构成的不变子空间
+  - 全体在 $\mathcal S_d$ 右作用下按置换的 $\sgn$ 变号的元素构成的不变子空间
+
+- - 关于左作用 $G$
+  - $G$ 的子表示
+  - $G$ 的子表示
+
+- - 维数
+  - $\bbinom{n}{d} = \frac{n(n+1)\cdots(n+d-1)}{d!}$
+  - $\binom{n}{d} = \frac{n(n-1)\cdots(n-d+1)}{d!}$
+:::
+
+这两个空间还是无交，但它们不再张成整个 $V^{\otimes d}$ 了——对 $d \geq 3$ 的情况 $n^d > \bbinom{n}{d} + \binom{n}{d}$．$V^{\otimes d}$ 中还藏有其它 $\mathcal S_d$ 或 $G$ 的不变子空间．
+
+## Schur--Weyl 对偶
+
+Schur--Weyl 对偶对此给出了一个非常漂亮的答案：作为 $(\GL(V), \mathcal S_d)$-双模，
+$$
+V^{\otimes d} \cong \bigoplus_\lambda \mathbb S_\lambda V \otimes_{\mathbb C} V_\lambda
+$$
+这里 $\lambda \vdash d$ 取遍所有 $d$ 长度不超过 $n$ 的分拆，$V_\lambda$ 是 $\mathcal S_d$ 的不可约表示，$\mathbb S_\lambda V$ 是 $\GL(V)$ 的不可约代数表示．
+
+这里做一些讨论．
+
+首先，之前讨论的是任意群 $G$ 左作用在 $V$ 上的情况，而根据群同态 $G \to \GL(V)$，每个 $(G, \mathcal S_d)$-双模自动成为一个 $(\GL(V), \mathcal S_d)$-双模，故 Schur--Weyl 对偶给出的分解适用于任意群 $G$ 左作用在 $V$ 上的情况．
+
+其次来指明 $V_\lambda$ 和 $\mathbb S_\lambda V$ 的定义：
+
+- $\mathbb C[\mathcal S_d]$-右模 $V_\lambda := c_\lambda \cdot \mathbb C[\mathcal S_d]$，其中 $c_\lambda$ 是 $\mathcal S_d$ 中的 Young 对称化子．注意这里的 $c_\lambda$ 乘在左边，与我们平时习惯的左作用情形对偶．
+
+:::{.remark}
+
+$V_\lambda$ 的记号里虽然有 $V$，实际上和 $V$ 没有联系．要怪就怪 Fulton--Harris 是这么写的吧．
+:::
+
+- $\GL(V)$-左模 $\mathbb S_\lambda V := V^{\otimes d} \cdot c_\lambda$．
+
+  注意在此记号下，$\Sym^d V$ 和 $\Alt^d V$ 恰好分别是 $\lambda = (d)$ 和 $\lambda = (1, \dots, 1)$ 的 $\mathbb S_\lambda V$．
