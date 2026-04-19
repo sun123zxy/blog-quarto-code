@@ -2,6 +2,7 @@
 title: 有限群表示论：Peter--Weyl 定理
 author: sun123zxy
 date: 2026-03-14
+last-modified: 2026-04-20
 lang: zh
 bibliography: index.bib
 draft: true
@@ -23,7 +24,7 @@ format:
 \newcommand{\Tr}{\operatorname{Tr}}
 \newcommand{\End}{\operatorname{End}}
 
-## 从左模到代数
+## 从左模到双模
 
 有限群表示论的一个经典结果是正则表示的分解：
 $$
@@ -112,7 +113,9 @@ $$
   $$
   再等价地看作 $\mathbb C[G]$ 的元素，最后适当归一化．
 
-- $L^2(G)$ 上有函数空间的标准内积．考虑 $e_{i_2}^{k_2} \otimes f_{i_1}^{j_1} \in V_{i_2} \otimes_{\mathbb C} V_{i_1}^* \cong \Hom_{\mathbb C}(V_{i_1}, V_{i_2})$，对其平均化得
+- 我们可以证明 $\iota_i$ 是单射，且每个 $\iota_i$ 的像之间两两正交．
+
+  $L^2(G)$ 上有函数空间的标准内积．考虑 $e_{i_2}^{k_2} \otimes f_{i_1}^{j_1} \in V_{i_2} \otimes_{\mathbb C} V_{i_1}^* \cong \Hom_{\mathbb C}(V_{i_1}, V_{i_2})$，对其平均化得
   $$
   \frac 1 {|G|} \sum_{g \in G} \rho_{V_{i_2}}(g) \circ \left( e_{i_2}^{k_2} \otimes f_{i_1}^{j_1} \right) \circ \rho_{V_{i_1}}(g^{-1}) \in \Hom_G(V_{i_1}, V_{i_2})
   $$
@@ -124,7 +127,9 @@ $$
   &= \langle \rho_{V_{i_2}}^{j_2, k_2}, \rho_{V_{i_1}}^{j_1, k_1} \rangle
   \end{aligned}
   $$
-  回忆 Schur 引理对 $\Hom_G (V_{i_1}, V_{i_2})$ 的刻画，这恰是在说此内积非零当且仅当 $i_1 = i_2$ 且 $j_1 = j_2$ 且 $k_1 = k_2$．因此 $\rho_{V_{i}}^{j, k}$ 两两正交．当 $i=i_1=i_2$, $j=j_1=j_2=k=k_1=k_2$ 时，$e_i^j \otimes f_i^j \in \End_{\mathbb C}(V_i)$ 的迹为 $1$，而平均化不改变迹并将其变为 $V_i$ 上的数乘，因此 $\langle \rho_{V_i}^{j, k}, \rho_{V_i}^{j, k} \rangle = 1 / \dim V_i$．这说明 $\iota_i$ 是单射．
+  回忆 Schur 引理对 $\Hom_G (V_{i_1}, V_{i_2})$ 的刻画，这恰是在说此内积非零当且仅当 $i_1 = i_2$ 且 $j_1 = j_2$ 且 $k_1 = k_2$．因此 $\rho_{V_{i}}^{j, k}$ 两两正交．当 $i=i_1=i_2$, $j=j_1=j_2=k=k_1=k_2$ 时，$e_i^j \otimes f_i^j \in \End_{\mathbb C}(V_i)$ 的迹为 $1$，而平均化不改变迹并将其变为 $V_i$ 上的数乘，因此 $\langle \rho_{V_i}^{j, k}, \rho_{V_i}^{j, k} \rangle = 1 / \dim V_i$．因此 $\iota_i$ 是单射，且每个 $\iota_i$ 的像之间两两正交．
+
+- 最后验证 $\iota_i \circ \pi_i = \id_{\End_{\mathbb C}(V_i)}$ 结束讨论．【TODO】
 
 ## 推论
 
@@ -167,7 +172,7 @@ V &\cong \mathbb C[G] \otimes_{\mathbb C[G]} V \\
 &\cong \bigoplus_i V_i \otimes_{\mathbb C} \Hom_G(V_i, V)
 \end{aligned}
 $$
-注意 $\dim \Hom_G(V_i, V)$ 就是 $V_i$ 在 $V$ 中的重数，因此 $V_i \otimes_{\mathbb C} \Hom_G(V_i, V)$ 就是 $V$ 的各不可约成分，上述同构给出了 $V$ 的不可约成分的自然拆解——不同于证明半单性时对补空间的依赖，这里的拆解是完全构造性的，我们可以直接写出典范嵌入
+注意 $\dim \Hom_G(V_i, V)$ 就是 $V_i$ 在 $V$ 中的重数，因此 $V_i \otimes_{\mathbb C} \Hom_G(V_i, V)$ 就是 $V$ 的各不可约成分，上述同构给出了 $V$ 的不可约成分的自然拆解——不同于证明半单性时对补空间的依赖，由于之前在 Peter--Weyl 的证明中给出了完全构造性的同构，这里的拆解也是完全构造性的，可以直接写出典范嵌入
 $$
 \begin{aligned}
 \iota_i: V_i \otimes_{\mathbb C} \Hom_G(V_i, V) &\to V \\
