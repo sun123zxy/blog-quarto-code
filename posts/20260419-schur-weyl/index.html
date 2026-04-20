@@ -24,7 +24,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -344,7 +364,13 @@ window.Quarto = {
    
   <ul>
   <li><a href="#从-sym-和-alt-谈起" id="toc-从-sym-和-alt-谈起" class="nav-link active" data-scroll-target="#从-sym-和-alt-谈起"><span class="header-section-number">1</span> 从 Sym 和 Alt 谈起</a></li>
-  <li><a href="#schurweyl-对偶" id="toc-schurweyl-对偶" class="nav-link" data-scroll-target="#schurweyl-对偶"><span class="header-section-number">2</span> Schur–Weyl 对偶</a></li>
+  <li><a href="#schurweyl-对偶" id="toc-schurweyl-对偶" class="nav-link" data-scroll-target="#schurweyl-对偶"><span class="header-section-number">2</span> Schur–Weyl 对偶</a>
+  <ul class="collapse">
+  <li><a href="#v_lambda-和-mathbb-s_lambda-v" id="toc-v_lambda-和-mathbb-s_lambda-v" class="nav-link" data-scroll-target="#v_lambda-和-mathbb-s_lambda-v"><span class="header-section-number">2.1</span> <span class="math inline">\(V_\lambda\)</span> 和 <span class="math inline">\(\mathbb S_\lambda V\)</span></a></li>
+  <li><a href="#operatornameglv-与-g" id="toc-operatornameglv-与-g" class="nav-link" data-scroll-target="#operatornameglv-与-g"><span class="header-section-number">2.2</span> <span class="math inline">\(\operatorname{GL}(V)\)</span> 与 <span class="math inline">\(G\)</span></a></li>
+  </ul></li>
+  <li><a href="#分解" id="toc-分解" class="nav-link" data-scroll-target="#分解"><span class="header-section-number">3</span> 分解</a></li>
+  <li><a href="#代数表示operatornameglv-和-mathfrakglv" id="toc-代数表示operatornameglv-和-mathfrakglv" class="nav-link" data-scroll-target="#代数表示operatornameglv-和-mathfrakglv"><span class="header-section-number">4</span> 代数表示，<span class="math inline">\(\operatorname{GL}(V)\)</span> 和 <span class="math inline">\(\mathfrak{gl}(V)\)</span></a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>其他格式</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
@@ -432,15 +458,14 @@ window.Quarto = {
 </section>
 <section id="schurweyl-对偶" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="schurweyl-对偶"><span class="header-section-number">2</span> Schur–Weyl 对偶</h2>
-<p>Schur–Weyl 对偶对此给出了一个非常漂亮的答案：作为 <span class="math inline">\((\operatorname{GL}(V), \mathcal S_d)\)</span>-双模， <span class="math display">\[
+<p>Schur–Weyl 对偶对此给出了一个非常漂亮的答案：作为 <span class="math inline">\((\operatorname{GL}(V), \mathcal S_d)\)</span>-双边表示， <span class="math display">\[
 V^{\otimes d} \cong \bigoplus_\lambda \mathbb S_\lambda V \otimes_{\mathbb C} V_\lambda
 \]</span> 这里 <span class="math inline">\(\lambda \vdash d\)</span> 取遍所有 <span class="math inline">\(d\)</span> 长度不超过 <span class="math inline">\(n\)</span> 的分拆，<span class="math inline">\(V_\lambda\)</span> 是 <span class="math inline">\(\mathcal S_d\)</span> 的不可约表示，<span class="math inline">\(\mathbb S_\lambda V\)</span> 是 <span class="math inline">\(\operatorname{GL}(V)\)</span> 的不可约代数表示．</p>
-<p>这里做一些讨论．</p>
-<p>首先，之前讨论的是任意群 <span class="math inline">\(G\)</span> 左作用在 <span class="math inline">\(V\)</span> 上的情况，而根据群同态 <span class="math inline">\(G \to \operatorname{GL}(V)\)</span>，每个 <span class="math inline">\((G, \mathcal S_d)\)</span>-双模自动成为一个 <span class="math inline">\((\operatorname{GL}(V), \mathcal S_d)\)</span>-双模，故 Schur–Weyl 对偶给出的分解适用于任意群 <span class="math inline">\(G\)</span> 左作用在 <span class="math inline">\(V\)</span> 上的情况．</p>
-<p>其次来指明 <span class="math inline">\(V_\lambda\)</span> 和 <span class="math inline">\(\mathbb S_\lambda V\)</span> 的定义：</p>
-<ul>
-<li><span class="math inline">\(\mathbb C[\mathcal S_d]\)</span>-右模 <span class="math inline">\(V_\lambda := c_\lambda \cdot \mathbb C[\mathcal S_d]\)</span>，其中 <span class="math inline">\(c_\lambda\)</span> 是 <span class="math inline">\(\mathcal S_d\)</span> 中的 Young 对称化子．注意这里的 <span class="math inline">\(c_\lambda\)</span> 乘在左边，与我们平时习惯的左作用情形对偶．</li>
-</ul>
+<p>这里做一些讨论．关于什么是不可约代数表示，我们稍微延后讨论．</p>
+<section id="v_lambda-和-mathbb-s_lambda-v" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="v_lambda-和-mathbb-s_lambda-v"><span class="header-section-number">2.1</span> <span class="math inline">\(V_\lambda\)</span> 和 <span class="math inline">\(\mathbb S_\lambda V\)</span></h3>
+<p>来指明 <span class="math inline">\(V_\lambda\)</span> 和 <span class="math inline">\(\mathbb S_\lambda V\)</span> 的定义．</p>
+<p><span class="math inline">\(\mathbb C[\mathcal S_d]\)</span>-右模 <span class="math inline">\(V_\lambda := c_\lambda \cdot \mathbb C[\mathcal S_d]\)</span>，其中 <span class="math inline">\(c_\lambda\)</span> 是 <span class="math inline">\(\mathcal S_d\)</span> 中的 Young 对称化子．注意这里的 <span class="math inline">\(c_\lambda\)</span> 乘在左边，与我们平时习惯的左作用情形对偶．</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -454,21 +479,105 @@ V^{\otimes d} \cong \bigoplus_\lambda \mathbb S_\lambda V \otimes_{\mathbb C} V_
 <div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span><span class="math inline">\(V_\lambda\)</span> 的记号里虽然有 <span class="math inline">\(V\)</span>，实际上和 <span class="math inline">\(V\)</span> 没有联系．要怪就怪 Fulton–Harris 是这么写的吧．</p>
+<p><span class="proof-title"><em>注记</em>. </span><span class="math inline">\(V_\lambda\)</span> 的记号里虽然有 <span class="math inline">\(V\)</span>，实际上和 <span class="math inline">\(V\)</span> 没有联系．要怪就怪 <span class="citation" data-cites="fulton_representation_2004"><a href="#ref-fulton_representation_2004" role="doc-biblioref">[1, Chapter 6]</a></span> 是这么写的吧．</p>
 </div>
 </div>
 </div>
 </div>
-<ul>
-<li><p><span class="math inline">\(\operatorname{GL}(V)\)</span>-左模 <span class="math inline">\(\mathbb S_\lambda V := V^{\otimes d} \cdot c_\lambda\)</span>．</p>
-<p>注意在此记号下，<span class="math inline">\(\operatorname{Sym}^d V\)</span> 和 <span class="math inline">\(\operatorname{Alt}^d V\)</span> 恰好分别是 <span class="math inline">\(\lambda = (d)\)</span> 和 <span class="math inline">\(\lambda = (1, \dots, 1)\)</span> 的 <span class="math inline">\(\mathbb S_\lambda V\)</span>．</p>
-<p><span class="math inline">\(\mathbb S_\lambda\)</span> 其实是个函子：定义 <span class="math inline">\(\mathbb S_\lambda\)</span> 在线性映射 <span class="math inline">\(f: V \to W\)</span> 上的作用 <span class="math inline">\(\mathbb S_\lambda f\)</span> 为 <span class="math inline">\(f^{\otimes d} : V^{\otimes d} \to W^{\otimes d}\)</span> 限制到 <span class="math inline">\(\mathbb S_\lambda V \to \mathbb S_\lambda W\)</span> 上．容易验证 <span class="math inline">\(\mathbb S_\lambda W\)</span> 一侧是良定的．<span class="math inline">\(\mathbb S_\lambda\)</span> 就是所谓的 Schur 函子．</p></li>
-</ul>
+<p><span class="math inline">\(\operatorname{GL}(V)\)</span>-左模 <span class="math inline">\(\mathbb S_\lambda V := V^{\otimes d} \cdot c_\lambda\)</span>．注意在此记号下，<span class="math inline">\(\operatorname{Sym}^d V\)</span> 和 <span class="math inline">\(\operatorname{Alt}^d V\)</span> 恰好分别是 <span class="math inline">\(\lambda = (d)\)</span> 和 <span class="math inline">\(\lambda = (1, \dots, 1)\)</span> 的 <span class="math inline">\(\mathbb S_\lambda V\)</span>．</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark (Schur 函子)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em> (Schur 函子). </span><span class="math inline">\(\mathbb S_\lambda\)</span> 其实是个函子：定义 <span class="math inline">\(\mathbb S_\lambda\)</span> 在线性映射 <span class="math inline">\(f: V \to W\)</span> 上的作用 <span class="math inline">\(\mathbb S_\lambda f\)</span> 为 <span class="math inline">\(f^{\otimes d} : V^{\otimes d} \to W^{\otimes d}\)</span> 限制到 <span class="math inline">\(\mathbb S_\lambda V \to \mathbb S_\lambda W\)</span> 上．容易验证 <span class="math inline">\(\mathbb S_\lambda W\)</span> 一侧是良定的．</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="operatornameglv-与-g" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="operatornameglv-与-g"><span class="header-section-number">2.2</span> <span class="math inline">\(\operatorname{GL}(V)\)</span> 与 <span class="math inline">\(G\)</span></h3>
+<p>首先，之前讨论的是任意群 <span class="math inline">\(G\)</span> 左作用在 <span class="math inline">\(V\)</span> 上的情况，而根据群同态 <span class="math inline">\(G \to \operatorname{GL}(V)\)</span>，每个 <span class="math inline">\((G, \mathcal S_d)\)</span>-双模自动成为一个 <span class="math inline">\((\operatorname{GL}(V), \mathcal S_d)\)</span>-双模，故 Schur–Weyl 对偶给出的分解适用于任意群 <span class="math inline">\(G\)</span> 左作用在 <span class="math inline">\(V\)</span> 上的情况．</p>
+</section>
+</section>
+<section id="分解" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="分解"><span class="header-section-number">3</span> 分解</h2>
+<p>在 Peter–Weyl 定理的加持下，拿到 Schur–Weyl 对偶分解其实并不困难：</p>
+<p>【TODO】</p>
+</section>
+<section id="代数表示operatornameglv-和-mathfrakglv" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="代数表示operatornameglv-和-mathfrakglv"><span class="header-section-number">4</span> 代数表示，<span class="math inline">\(\operatorname{GL}(V)\)</span> 和 <span class="math inline">\(\mathfrak{gl}(V)\)</span></h2>
+<p>所谓 <span class="math inline">\(\operatorname{GL}(V)\)</span> 的代数表示 <span class="math inline">\(W\)</span>，即是 <span class="math inline">\(\operatorname{GL}(V) \to \operatorname{GL}(W)\)</span> 的代数群同态．话都说到这个份上了，立刻 <span class="math inline">\(d\)</span> 一下研究其诱导的李代数同态 <span class="math inline">\(\mathfrak{gl}(V) \to \mathfrak{gl}(W)\)</span>，即 <span class="math inline">\(\mathfrak{gl}(V)\)</span> 的李代数表示．</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark (为什么不是 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V)\)</span>)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em> (为什么不是 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V)\)</span>). </span><span class="math inline">\(\operatorname{GL}(V)\)</span> 在 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V)\)</span> 稠密，为什么不直接研究结合代数 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V)\)</span> 的代数表示呢？</p>
+<p>因为不少 <span class="math inline">\(\operatorname{GL}(V)\)</span> 的代数表示无法延拓为 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V)\)</span> 的代数表示——更精确地，能延拓至 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V)\)</span> 的 <span class="math inline">\(\operatorname{GL}(V)\)</span> 的代数表示 <span class="math inline">\(W\)</span> 必须是线性的——但许多 <span class="math inline">\(\operatorname{GL}(V)\)</span> 的代数表示，如 <span class="math inline">\(\operatorname{Sym}^2 V\)</span>，将 <span class="math inline">\(g \in \operatorname{GL}(V)\)</span> 映至 <span class="math inline">\(g \otimes g \in \operatorname{End}_{\mathbb C}(V) \otimes \operatorname{End}_{\mathbb C}(V) \subseteq \operatorname{End}_{\mathbb C}(V^{\otimes 2})\)</span>，非常不线性【TODO】．</p>
+</div>
+</div>
+</div>
+</div>
+<p>现在断言 Schur–Weyl 对偶其实也给出了一个 <span class="math inline">\((\mathfrak{gl}(V), \mathcal S_d)\)</span>-双边表示的分解，这里左边是 <span class="math inline">\(\mathfrak{gl}(V)\)</span> 的李代数表示，右边是 <span class="math inline">\(\mathcal S_d\)</span> 的代数表示．下面给出的引理使得这一分解诱导处我们想要的 <span class="math inline">\((\operatorname{GL}(V), \mathcal S_d)\)</span>-双边表示的分解．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="lem-gl-symm" class="theorem lemma">
+<p><span class="theorem-title"><strong>引理 1</strong></span> <span class="math inline">\(\mathfrak{gl}(V)\)</span> 在 <span class="math inline">\(V^{\otimes d}\)</span> 上的作用完全由 <span class="math inline">\(\operatorname{GL}(V)\)</span> 的作用决定．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span>TODO</p>
+</div>
+</div>
+</div>
+</div>
+<p>故问题规约为证明 <span class="math inline">\((\mathfrak{gl}(V), \mathcal S_d)\)</span> 版本的 Schur–Weyl 对偶．</p>
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-fulton_representation_2004" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">W. Fulton 和 J. Harris, <em>Representation Theory</em>, 卷 129. 收入 Graduate Texts in Mathematics, vol. 129. New York, <span>NY</span>: Springer, 2004. doi: <a href="https://doi.org/10.1007/978-1-4612-0979-9">10.1007/978-1-4612-0979-9</a>.</div>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
