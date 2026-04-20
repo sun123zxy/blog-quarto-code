@@ -1,0 +1,82 @@
+---
+title: Representations of an associative algebra cannot be tensored without a comultiplication
+author: Gemini 3 Flash
+date: 2026-04-20
+lang: en
+
+categories:
+  - math
+  - algebra
+
+collections:
+  - short
+
+number-sections: true
+
+format:
+  html: default
+---
+
+In general, unlike group representations or Lie algebra representations, **the tensor product of two representations of a generic associative algebra is not naturally a representation.**
+
+To define a representation on the tensor product $V \otimes W$, the algebra $A$ must possess additional structure—specifically, it must be a **Bialgebra** (or a Hopf Algebra).
+
+Here is the breakdown of why this is the case and how the construction works.
+
+---
+
+### 1. The Problem
+Suppose $(V, \rho_V)$ and $(W, \rho_W)$ are two representations (modules) of an associative algebra $A$. To make $V \otimes W$ a representation, we need a map:
+$$\rho_{V \otimes W} : A \to \text{End}(V \otimes W)$$
+that is an **algebra homomorphism**. 
+
+If we try to define the action "element-wise" (like we do in linear algebra), we run into a problem. For an element $a \in A$, how should it act on $v \otimes w$? 
+*   If we try $a(v \otimes w) = (av) \otimes (aw)$, this is generally **not linear** in $a$. For example, $(a+b)(v \otimes w)$ would not equal $a(v \otimes w) + b(v \otimes w)$.
+*   If we try $a(v \otimes w) = (av) \otimes w$, we are ignoring the $W$ structure.
+
+### 2. The Solution: The Comultiplication
+To properly distribute the action of $A$ across a tensor product, we need a way to "split" an element $a \in A$ into two parts. This is provided by a **comultiplication** map:
+$$\Delta: A \to A \otimes A$$
+For $V \otimes W$ to be an $A$-module, we define the action as:
+$$a \cdot (v \otimes w) = \Delta(a)(v \otimes w)$$
+
+Using **Sweedler notation**, we write $\Delta(a) = \sum a_{(1)} \otimes a_{(2)}$. Then the action is:
+$$a \cdot (v \otimes w) = \sum (a_{(1)} v) \otimes (a_{(2)} w)$$
+
+### 3. Required Properties
+For this tensor product to satisfy the axioms of a representation, $A$ must be a **Bialgebra**, meaning:
+1.  **$\Delta$ is an algebra homomorphism:** This ensures that $ab \cdot (v \otimes w) = a \cdot (b \cdot (v \otimes w))$.
+2.  **$\Delta$ is coassociative:** $(\Delta \otimes \text{id})\Delta = (\text{id} \otimes \Delta)\Delta$. This ensures that the tensor product of three representations $(V \otimes W) \otimes U$ is isomorphic to $V \otimes (W \otimes U)$.
+
+---
+
+### 4. Important Examples
+Most "standard" algebras used in physics and representation theory are bialgebras, which is why we often take the tensor product for granted.
+
+#### A. Group Algebras ($k[G]$)
+For a group $G$, the algebra $A = k[G]$ has a comultiplication defined by:
+$$\Delta(g) = g \otimes g \quad \text{for all } g \in G$$
+This leads to the familiar rule for group representations:
+$$g \cdot (v \otimes w) = (gv) \otimes (gw)$$
+
+#### B. Universal Enveloping Algebras of Lie Algebras ($U(\mathfrak{g})$)
+For a Lie algebra $\mathfrak{g}$, an element $x \in \mathfrak{g}$ acts on the tensor product of two $\mathfrak{g}$-modules as:
+$$x \cdot (v \otimes w) = (xv) \otimes w + v \otimes (xw)$$
+This corresponds to the comultiplication:
+$$\Delta(x) = x \otimes 1 + 1 \otimes x$$
+This is essentially the **Leibniz rule** (the product rule for derivatives).
+
+#### C. Quantum Groups ($U_q(\mathfrak{g})$)
+Quantum groups are non-commutative, non-cocommutative Hopf algebras. They have more complex comultiplication rules (e.g., $\Delta(K) = K \otimes K$ and $\Delta(E) = E \otimes 1 + K \otimes E$), which allow for the study of "braided" tensor categories.
+
+---
+
+### 5. Summary Table
+| Structure | Algebra | Comultiplication $\Delta(a)$ | Tensor Action $a(v \otimes w)$ |
+| :--- | :--- | :--- | :--- |
+| **Group** | $k[G]$ | $g \otimes g$ | $(gv) \otimes (gw)$ |
+| **Lie Algebra** | $U(\mathfrak{g})$ | $x \otimes 1 + 1 \otimes x$ | $(xv) \otimes w + v \otimes (xw)$ |
+| **General Bialgebra** | $A$ | $\sum a_{(1)} \otimes a_{(2)}$ | $\sum (a_{(1)}v) \otimes (a_{(2)}w)$ |
+
+### Conclusion
+If you are working with a plain associative algebra that has no defined comultiplication, you **cannot** tensor two representations. If you find yourself needing to tensor representations, you are likely working in the category of modules over a **Bialgebra** or **Hopf Algebra**.

@@ -72,41 +72,112 @@ $$
 
 Schur--Weyl 对偶对此给出了一个非常漂亮的答案：作为 $(\GL(V), \mathcal S_d)$-双边表示，
 $$
-V^{\otimes d} \cong \bigoplus_\lambda \mathbb S_\lambda V \otimes_{\mathbb C} V_\lambda
+V^{\otimes d} \cong \bigoplus_\lambda \Hom_\mathbb C(V_\lambda, \mathbb S_\lambda V)
 $$
-这里 $\lambda \vdash d$ 取遍所有 $d$ 长度不超过 $n$ 的分拆，$V_\lambda$ 是 $\mathcal S_d$ 的不可约表示，$\mathbb S_\lambda V$ 是 $\GL(V)$ 的不可约代数表示．
-
-这里做一些讨论．关于什么是不可约代数表示，我们稍微延后讨论．
-
-### $V_\lambda$ 和 $\mathbb S_\lambda V$
-
-来指明 $V_\lambda$ 和 $\mathbb S_\lambda V$ 的定义．
-
-$\mathbb C[\mathcal S_d]$-右模 $V_\lambda := c_\lambda \cdot \mathbb C[\mathcal S_d]$，其中 $c_\lambda$ 是 $\mathcal S_d$ 中的 Young 对称化子．注意这里的 $c_\lambda$ 乘在左边，与我们平时习惯的左作用情形对偶．
+这里 $\lambda \vdash d$ 取遍所有 $d$ 长度不超过 $n$ 的分拆，$V_\lambda := \mathbb C[\mathcal S_d] c_\lambda$ 是通常的 $\mathcal S_d$ 的不可约（左）表示，$\mathbb S_\lambda V := V^{\otimes d} \cdot c_\lambda$ 是 $\GL(V)$ 的不可约代数表示．
 
 :::{.remark}
 
-$V_\lambda$ 的记号里虽然有 $V$，实际上和 $V$ 没有联系．要怪就怪 [@fulton_representation_2004, {Chapter 6}] 是这么写的吧．
+## Abuse of Notation
+
+$V_\lambda$ 的记号里虽然有 $V$，其实和 $V$ 没有联系．要怪就怪 [@fulton_representation_2004, {Chapter 6}] 是这么写的吧．
 :::
 
-$\GL(V)$-左模 $\mathbb S_\lambda V := V^{\otimes d} \cdot c_\lambda$．注意在此记号下，$\Sym^d V$ 和 $\Alt^d V$ 恰好分别是 $\lambda = (d)$ 和 $\lambda = (1, \dots, 1)$ 的 $\mathbb S_\lambda V$．
+:::{.remark}
+
+## Sym and Alt
+
+注意在此记号下，$\Sym^d V$ 和 $\Alt^d V$ 恰好分别是 $\lambda = (d)$ 和 $\lambda = (1, \dots, 1)$ 的 $\mathbb S_\lambda V$．
+:::
 
 :::{.remark}
 
-## Schur 函子
+## 下标取值范围
+
+不会因为认为 $\lambda \vdash n$ 受到任何处分——我们去掉 $\lambda$ 的长度超过 $n$ 的部分只是因为此时 $\mathbb S_\lambda V = V^{\otimes d} \cdot c_\lambda$ 退化为 $0$．
+
+退化在 $\Alt^d V$ 上其实已经初见端倪：当 $d > n$ 时，$\Alt^d V$ 退化为 $0$，这是因为 $V$ 中基底数量不足以让楔积的各位置线性无关．同样的事情发生在 $\mathbb S_\lambda V$ 上：当 $\lambda$ 的长度超过 $n$ 时，$\mathbb S_\lambda V$ 退化为 $0$．这是因为 $b_\lambda$ 交错化使得 $\lambda$ 第一列对应的张量位置一旦线性相关就退化为 $0$，而 $\lambda$ 的第一列长度大于 $n = \dim V$ 使得这一情况必然发生．
+:::
+
+:::{.remark}
+
+## Schur Functor
 
 $\mathbb S_\lambda$ 其实是个函子：定义 $\mathbb S_\lambda$ 在线性映射 $f: V \to W$ 上的作用 $\mathbb S_\lambda f$ 为 $f^{\otimes d} : V^{\otimes d} \to W^{\otimes d}$ 限制到 $\mathbb S_\lambda V \to \mathbb S_\lambda W$ 上．容易验证 $\mathbb S_\lambda W$ 一侧是良定的．
 :::
 
-### $\GL(V)$ 与 $G$
+现在还有两个问题：
 
-首先，之前讨论的是任意群 $G$ 左作用在 $V$ 上的情况，而根据群同态 $G \to \GL(V)$，每个 $(G, \mathcal S_d)$-双模自动成为一个 $(\GL(V), \mathcal S_d)$-双模，故 Schur--Weyl 对偶给出的分解适用于任意群 $G$ 左作用在 $V$ 上的情况．
+- 我没见过长这样的 Schur--Weyl 对偶
 
-## 分解
+- “$\mathbb S_\lambda V$ 是 $\GL(V)$ 的不可约代数表示”意欲何为
 
-在 Peter--Weyl 定理的加持下，拿到 Schur--Weyl 对偶分解其实并不困难：
+暂时留作后续讨论．
 
-【TODO】
+## 典范分解
+
+利用 $\mathbb C[\mathcal S_d]$ 的 Peter--Weyl 定理
+$$
+\mathbb C[\mathcal S_d] \cong \bigoplus_\lambda V_\lambda \otimes_\mathbb C V_\lambda^*
+$$
+Schur--Weyl 对偶分解本体并不难获得：
+$$
+\begin{aligned}
+V^{\otimes d}
+&\cong V^{\otimes d} \otimes_{\mathbb C[\mathcal S_d]} \mathbb C[\mathcal S_d] \\
+&\cong V^{\otimes d} \otimes_{\mathbb C[\mathcal S_d]} \left( \bigoplus_\lambda V_\lambda \otimes_\mathbb C V_\lambda^* \right) \\
+&\cong \bigoplus_\lambda V^{\otimes d} \otimes_{\mathbb C[\mathcal S_d]} V_\lambda \otimes_\mathbb C V_\lambda^* \\
+&\cong \bigoplus_\lambda V^{\otimes d} \otimes_{\mathbb C[\mathcal S_d]} \mathbb C[\mathcal S_n] c_\lambda \otimes_\mathbb C V_\lambda \\
+&\cong \bigoplus_\lambda \left( V^{\otimes d} \cdot c_\lambda \right) \otimes_\mathbb C V_\lambda^* \\
+&\cong \bigoplus_\lambda \mathbb S_\lambda V \otimes_\mathbb C V_\lambda^* \\
+&\cong \bigoplus_\lambda \Hom_\mathbb C(V_\lambda, \mathbb S_\lambda V)
+\end{aligned}
+$$
+上述推导的每个同构都是典的，这是我们推荐这种形式的 Schur--Weyl 对偶的主要缘由．
+
+:::{.remark}
+
+## $\GL(V)$ 不特别
+
+提请读者注意，上述同构中我们从来没有使用过 $\GL(V)$ 在 $V^{\otimes d}$ 上作用的任何性质，故任何使得 $V^{\otimes d}$ 成为 $(A, \mathcal S_d)$-双模的代数 $A$ 都会给出同样的分解．特别地，它可以是：
+
+- 群 $G$ 左作用在 $V$ 上，这里代数取群代数 $\mathbb C[G]$．
+
+  $G$ 在 $V^\otimes d$ 上的作用由 $g \mapsto g \otimes g \otimes \dots \otimes g$ 给出．
+
+- 李代数 $\mathfrak{g}$ 左作用在 $V$ 上，这里代数取李代数的普遍包络代数 $U(\mathfrak{g})$．
+
+  $\mathfrak{g}$ 在 $V^\otimes d$ 上的作用由 $x \mapsto x \otimes 1 \otimes \dots \otimes 1 + 1 \otimes x \otimes \dots \otimes 1 + \dots + 1 \otimes 1 \otimes \dots \otimes x$ 给出．  
+
+特别地，我们尤其关注一般线性群 $\GL(V)$ 和一般线性李代数 $\gl(V)$ 作用在 $V$ 上的情形：
+
+- 在此情形下 $\mathbb S_\lambda V$ 是 $\GL(V)$ 的不可约代数表示
+- $\gl(V)$ 是 $\GL(V)$ 作为代数群的李代数
+- Schur--Weyl 对偶刻画了 $\GL(V)$ 和 $\mathcal S_d$ 不可约表示间的对偶关系，真正使得 Schur--Weyl 对偶的“对偶”二字名副其实的部分．
+
+如上所述，我们后面讨论．
+:::
+
+## 补充讨论【废液缸】
+
+### $V_\lambda$
+
+$V_\lambda := \mathbb C[\mathcal S_d] c_\lambda$ 是通常的 $\mathcal S_d$ 的不可约表示．它自然的是 $\mathcal S_d$-左模，但我们在 Schur--Weyl 对偶中需要它是 $\mathcal S_d$-右模，故需要再为其配备右作用 $v \cdot \sigma := \sigma^{-1} \cdot v$ 使其成为 $\mathcal S_d$-右模．
+
+为后续方便，再定义 $V_\lambda^*$ 为 $V_\lambda$ 的对偶空间，配备自然的 $\mathbb S_d$-右作用 $(f \cdot \sigma)(v) := f(\sigma \cdot v)$ 和构造的 $\mathbb S_d$-左作用 $(\sigma \cdot f)(v) := f(\sigma^{-1} \cdot v)$．
+
+:::{.remark}
+
+## 不是双模
+
+注意 $V_\lambda$ 和 $V_\lambda^*$ 都不是 $(\mathcal S_d, \mathcal S_d)$-双模：左作用和右作用并不兼容．遗憾的是在后续推导中我们两边的作用都需要用到，需要读者注意区分．
+:::
+
+$\mathcal S_n$ 表示论的一个重要结果是所有 $\mathcal S_n$ 的表示都是自对偶的，用在这里就是说
+$$
+V_\lambda \cong V_\lambda^*
+$$
+这个同构在 $\mathcal S_n$-左模和 $\mathcal S_n$-右模意义下均成立．证明可以考虑特征标：$\mathcal S_n$ 的共轭类由置换的轮换型给出，而 $\sigma$ 和 $\sigma^{-1}$ 由相同轮换型，故在同一共轭类，于是 $V_\lambda$ 和 $V_\lambda^*$ 的特征标相同，进而同构．
 
 ## 代数表示，$\GL(V)$ 和 $\gl(V)$
 
