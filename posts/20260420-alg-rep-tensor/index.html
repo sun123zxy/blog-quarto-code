@@ -9,7 +9,7 @@
 <meta name="author" content="Gemini 3 Flash">
 <meta name="dcterms.date" content="2026-04-20">
 
-<title>Representations of an associative algebra cannot be tensored without a comultiplication – sun123zxy’s blog</title>
+<title>\Delta \implies \otimes – sun123zxy's blog</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -343,12 +343,17 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-problem" id="toc-the-problem" class="nav-link active" data-scroll-target="#the-problem"><span class="header-section-number">0.1</span> 1. The Problem</a></li>
-  <li><a href="#the-solution-the-comultiplication" id="toc-the-solution-the-comultiplication" class="nav-link" data-scroll-target="#the-solution-the-comultiplication"><span class="header-section-number">0.2</span> 2. The Solution: The Comultiplication</a></li>
-  <li><a href="#required-properties" id="toc-required-properties" class="nav-link" data-scroll-target="#required-properties"><span class="header-section-number">0.3</span> 3. Required Properties</a></li>
-  <li><a href="#important-examples" id="toc-important-examples" class="nav-link" data-scroll-target="#important-examples"><span class="header-section-number">0.4</span> 4. Important Examples</a></li>
-  <li><a href="#summary-table" id="toc-summary-table" class="nav-link" data-scroll-target="#summary-table"><span class="header-section-number">0.5</span> 5. Summary Table</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">0.6</span> Conclusion</a></li>
+  <li><a href="#the-problem" id="toc-the-problem" class="nav-link active" data-scroll-target="#the-problem"><span class="header-section-number">1</span> The Problem</a></li>
+  <li><a href="#the-solution-the-comultiplication" id="toc-the-solution-the-comultiplication" class="nav-link" data-scroll-target="#the-solution-the-comultiplication"><span class="header-section-number">2</span> The Solution: The Comultiplication</a></li>
+  <li><a href="#required-properties" id="toc-required-properties" class="nav-link" data-scroll-target="#required-properties"><span class="header-section-number">3</span> Required Properties</a></li>
+  <li><a href="#important-examples" id="toc-important-examples" class="nav-link" data-scroll-target="#important-examples"><span class="header-section-number">4</span> Important Examples</a>
+  <ul class="collapse">
+  <li><a href="#group-algebras-kg" id="toc-group-algebras-kg" class="nav-link" data-scroll-target="#group-algebras-kg"><span class="header-section-number">4.1</span> Group Algebras (<span class="math inline">\(k[G]\)</span>)</a></li>
+  <li><a href="#universal-enveloping-algebras-of-lie-algebras-umathfrakg" id="toc-universal-enveloping-algebras-of-lie-algebras-umathfrakg" class="nav-link" data-scroll-target="#universal-enveloping-algebras-of-lie-algebras-umathfrakg"><span class="header-section-number">4.2</span> Universal Enveloping Algebras of Lie Algebras (<span class="math inline">\(U(\mathfrak{g})\)</span>)</a></li>
+  <li><a href="#quantum-groups-u_qmathfrakg" id="toc-quantum-groups-u_qmathfrakg" class="nav-link" data-scroll-target="#quantum-groups-u_qmathfrakg"><span class="header-section-number">4.3</span> Quantum Groups (<span class="math inline">\(U_q(\mathfrak{g})\)</span>)</a></li>
+  <li><a href="#summary-table" id="toc-summary-table" class="nav-link" data-scroll-target="#summary-table"><span class="header-section-number">4.4</span> 5. Summary Table</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">4.5</span> Conclusion</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -358,7 +363,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Representations of an associative algebra cannot be tensored without a comultiplication</h1>
+<h1 class="title"><span class="math inline">\(\Delta \implies \otimes\)</span></h1>
+<p class="subtitle lead">Comultiplication makes tensor product possible</p>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
     <div class="quarto-category">algebra</div>
@@ -394,41 +400,38 @@ window.Quarto = {
 <p>In general, unlike group representations or Lie algebra representations, <strong>the tensor product of two representations of a generic associative algebra is not naturally a representation.</strong></p>
 <p>To define a representation on the tensor product <span class="math inline">\(V \otimes W\)</span>, the algebra <span class="math inline">\(A\)</span> must possess additional structure—specifically, it must be a <strong>Bialgebra</strong> (or a Hopf Algebra).</p>
 <p>Here is the breakdown of why this is the case and how the construction works.</p>
-<hr>
-<section id="the-problem" class="level3" data-number="0.1">
-<h3 data-number="0.1" class="anchored" data-anchor-id="the-problem"><span class="header-section-number">0.1</span> 1. The Problem</h3>
+<section id="the-problem" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="the-problem"><span class="header-section-number">1</span> The Problem</h2>
 <p>Suppose <span class="math inline">\((V, \rho_V)\)</span> and <span class="math inline">\((W, \rho_W)\)</span> are two representations (modules) of an associative algebra <span class="math inline">\(A\)</span>. To make <span class="math inline">\(V \otimes W\)</span> a representation, we need a map: <span class="math display">\[\rho_{V \otimes W} : A \to \text{End}(V \otimes W)\]</span> that is an <strong>algebra homomorphism</strong>.</p>
 <p>If we try to define the action “element-wise” (like we do in linear algebra), we run into a problem. For an element <span class="math inline">\(a \in A\)</span>, how should it act on <span class="math inline">\(v \otimes w\)</span>? * If we try <span class="math inline">\(a(v \otimes w) = (av) \otimes (aw)\)</span>, this is generally <strong>not linear</strong> in <span class="math inline">\(a\)</span>. For example, <span class="math inline">\((a+b)(v \otimes w)\)</span> would not equal <span class="math inline">\(a(v \otimes w) + b(v \otimes w)\)</span>. * If we try <span class="math inline">\(a(v \otimes w) = (av) \otimes w\)</span>, we are ignoring the <span class="math inline">\(W\)</span> structure.</p>
 </section>
-<section id="the-solution-the-comultiplication" class="level3" data-number="0.2">
-<h3 data-number="0.2" class="anchored" data-anchor-id="the-solution-the-comultiplication"><span class="header-section-number">0.2</span> 2. The Solution: The Comultiplication</h3>
+<section id="the-solution-the-comultiplication" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="the-solution-the-comultiplication"><span class="header-section-number">2</span> The Solution: The Comultiplication</h2>
 <p>To properly distribute the action of <span class="math inline">\(A\)</span> across a tensor product, we need a way to “split” an element <span class="math inline">\(a \in A\)</span> into two parts. This is provided by a <strong>comultiplication</strong> map: <span class="math display">\[\Delta: A \to A \otimes A\]</span> For <span class="math inline">\(V \otimes W\)</span> to be an <span class="math inline">\(A\)</span>-module, we define the action as: <span class="math display">\[a \cdot (v \otimes w) = \Delta(a)(v \otimes w)\]</span></p>
 <p>Using <strong>Sweedler notation</strong>, we write <span class="math inline">\(\Delta(a) = \sum a_{(1)} \otimes a_{(2)}\)</span>. Then the action is: <span class="math display">\[a \cdot (v \otimes w) = \sum (a_{(1)} v) \otimes (a_{(2)} w)\]</span></p>
 </section>
-<section id="required-properties" class="level3" data-number="0.3">
-<h3 data-number="0.3" class="anchored" data-anchor-id="required-properties"><span class="header-section-number">0.3</span> 3. Required Properties</h3>
+<section id="required-properties" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="required-properties"><span class="header-section-number">3</span> Required Properties</h2>
 <p>For this tensor product to satisfy the axioms of a representation, <span class="math inline">\(A\)</span> must be a <strong>Bialgebra</strong>, meaning: 1. <strong><span class="math inline">\(\Delta\)</span> is an algebra homomorphism:</strong> This ensures that <span class="math inline">\(ab \cdot (v \otimes w) = a \cdot (b \cdot (v \otimes w))\)</span>. 2. <strong><span class="math inline">\(\Delta\)</span> is coassociative:</strong> <span class="math inline">\((\Delta \otimes \text{id})\Delta = (\text{id} \otimes \Delta)\Delta\)</span>. This ensures that the tensor product of three representations <span class="math inline">\((V \otimes W) \otimes U\)</span> is isomorphic to <span class="math inline">\(V \otimes (W \otimes U)\)</span>.</p>
 <hr>
 </section>
-<section id="important-examples" class="level3" data-number="0.4">
-<h3 data-number="0.4" class="anchored" data-anchor-id="important-examples"><span class="header-section-number">0.4</span> 4. Important Examples</h3>
+<section id="important-examples" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="important-examples"><span class="header-section-number">4</span> Important Examples</h2>
 <p>Most “standard” algebras used in physics and representation theory are bialgebras, which is why we often take the tensor product for granted.</p>
-<section id="a.-group-algebras-kg" class="level4">
-<h4 class="anchored" data-anchor-id="a.-group-algebras-kg">A. Group Algebras (<span class="math inline">\(k[G]\)</span>)</h4>
+<section id="group-algebras-kg" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="group-algebras-kg"><span class="header-section-number">4.1</span> Group Algebras (<span class="math inline">\(k[G]\)</span>)</h3>
 <p>For a group <span class="math inline">\(G\)</span>, the algebra <span class="math inline">\(A = k[G]\)</span> has a comultiplication defined by: <span class="math display">\[\Delta(g) = g \otimes g \quad \text{for all } g \in G\]</span> This leads to the familiar rule for group representations: <span class="math display">\[g \cdot (v \otimes w) = (gv) \otimes (gw)\]</span></p>
 </section>
-<section id="b.-universal-enveloping-algebras-of-lie-algebras-umathfrakg" class="level4">
-<h4 class="anchored" data-anchor-id="b.-universal-enveloping-algebras-of-lie-algebras-umathfrakg">B. Universal Enveloping Algebras of Lie Algebras (<span class="math inline">\(U(\mathfrak{g})\)</span>)</h4>
+<section id="universal-enveloping-algebras-of-lie-algebras-umathfrakg" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="universal-enveloping-algebras-of-lie-algebras-umathfrakg"><span class="header-section-number">4.2</span> Universal Enveloping Algebras of Lie Algebras (<span class="math inline">\(U(\mathfrak{g})\)</span>)</h3>
 <p>For a Lie algebra <span class="math inline">\(\mathfrak{g}\)</span>, an element <span class="math inline">\(x \in \mathfrak{g}\)</span> acts on the tensor product of two <span class="math inline">\(\mathfrak{g}\)</span>-modules as: <span class="math display">\[x \cdot (v \otimes w) = (xv) \otimes w + v \otimes (xw)\]</span> This corresponds to the comultiplication: <span class="math display">\[\Delta(x) = x \otimes 1 + 1 \otimes x\]</span> This is essentially the <strong>Leibniz rule</strong> (the product rule for derivatives).</p>
 </section>
-<section id="c.-quantum-groups-u_qmathfrakg" class="level4">
-<h4 class="anchored" data-anchor-id="c.-quantum-groups-u_qmathfrakg">C. Quantum Groups (<span class="math inline">\(U_q(\mathfrak{g})\)</span>)</h4>
+<section id="quantum-groups-u_qmathfrakg" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="quantum-groups-u_qmathfrakg"><span class="header-section-number">4.3</span> Quantum Groups (<span class="math inline">\(U_q(\mathfrak{g})\)</span>)</h3>
 <p>Quantum groups are non-commutative, non-cocommutative Hopf algebras. They have more complex comultiplication rules (e.g., <span class="math inline">\(\Delta(K) = K \otimes K\)</span> and <span class="math inline">\(\Delta(E) = E \otimes 1 + K \otimes E\)</span>), which allow for the study of “braided” tensor categories.</p>
-<hr>
 </section>
-</section>
-<section id="summary-table" class="level3" data-number="0.5">
-<h3 data-number="0.5" class="anchored" data-anchor-id="summary-table"><span class="header-section-number">0.5</span> 5. Summary Table</h3>
+<section id="summary-table" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="summary-table"><span class="header-section-number">4.4</span> 5. Summary Table</h3>
 <table class="table">
 <colgroup>
 <col style="width: 25%">
@@ -466,11 +469,12 @@ window.Quarto = {
 </tbody>
 </table>
 </section>
-<section id="conclusion" class="level3" data-number="0.6">
-<h3 data-number="0.6" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">0.6</span> Conclusion</h3>
+<section id="conclusion" class="level3" data-number="4.5">
+<h3 data-number="4.5" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">4.5</span> Conclusion</h3>
 <p>If you are working with a plain associative algebra that has no defined comultiplication, you <strong>cannot</strong> tensor two representations. If you find yourself needing to tensor representations, you are likely working in the category of modules over a <strong>Bialgebra</strong> or <strong>Hopf Algebra</strong>.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
