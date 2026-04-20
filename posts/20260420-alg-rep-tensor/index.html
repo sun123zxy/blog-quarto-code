@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.34">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="sun123zxy">
+<meta name="author" content="Gemini 3 Flash">
+<meta name="dcterms.date" content="2026-04-20">
 
-<title>Schur–Weyl 对偶 – sun123zxy's blog</title>
+<title>Representations of an associative algebra cannot be tensored without a comultiplication – sun123zxy’s blog</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -24,27 +25,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -81,17 +62,17 @@ div.csl-indent {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "没有结果",
-    "search-matching-documents-text": "匹配的文档",
-    "search-copy-link-title": "复制搜索链接",
-    "search-hide-matches-text": "隐藏其它匹配结果",
-    "search-more-match-text": "更多匹配结果",
-    "search-more-matches-text": "更多匹配结果",
-    "search-clear-button-title": "清除",
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "取消",
-    "search-submit-button-title": "提交",
-    "search-label": "搜索"
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script>
@@ -103,7 +84,6 @@ MathJax = {
   }
 };
 </script>
-<meta name="quarto:status" content="draft">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -300,7 +280,7 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>草稿</div>
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -308,8 +288,8 @@ window.Quarto = {
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="搜索"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -349,7 +329,7 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -360,19 +340,17 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">该页面内容</h2>
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#从-sym-和-alt-谈起" id="toc-从-sym-和-alt-谈起" class="nav-link active" data-scroll-target="#从-sym-和-alt-谈起"><span class="header-section-number">1</span> 从 Sym 和 Alt 谈起</a></li>
-  <li><a href="#schurweyl-对偶" id="toc-schurweyl-对偶" class="nav-link" data-scroll-target="#schurweyl-对偶"><span class="header-section-number">2</span> Schur–Weyl 对偶</a></li>
-  <li><a href="#典范分解" id="toc-典范分解" class="nav-link" data-scroll-target="#典范分解"><span class="header-section-number">3</span> 典范分解</a></li>
-  <li><a href="#补充讨论废液缸" id="toc-补充讨论废液缸" class="nav-link" data-scroll-target="#补充讨论废液缸"><span class="header-section-number">4</span> 补充讨论【废液缸】</a>
-  <ul class="collapse">
-  <li><a href="#v_lambda" id="toc-v_lambda" class="nav-link" data-scroll-target="#v_lambda"><span class="header-section-number">4.1</span> <span class="math inline">\(V_\lambda\)</span></a></li>
-  </ul></li>
-  <li><a href="#代数表示operatornameglv-和-mathfrakglv" id="toc-代数表示operatornameglv-和-mathfrakglv" class="nav-link" data-scroll-target="#代数表示operatornameglv-和-mathfrakglv"><span class="header-section-number">5</span> 代数表示，<span class="math inline">\(\operatorname{GL}(V)\)</span> 和 <span class="math inline">\(\mathfrak{gl}(V)\)</span></a></li>
+  <li><a href="#the-problem" id="toc-the-problem" class="nav-link active" data-scroll-target="#the-problem"><span class="header-section-number">0.1</span> 1. The Problem</a></li>
+  <li><a href="#the-solution-the-comultiplication" id="toc-the-solution-the-comultiplication" class="nav-link" data-scroll-target="#the-solution-the-comultiplication"><span class="header-section-number">0.2</span> 2. The Solution: The Comultiplication</a></li>
+  <li><a href="#required-properties" id="toc-required-properties" class="nav-link" data-scroll-target="#required-properties"><span class="header-section-number">0.3</span> 3. Required Properties</a></li>
+  <li><a href="#important-examples" id="toc-important-examples" class="nav-link" data-scroll-target="#important-examples"><span class="header-section-number">0.4</span> 4. Important Examples</a></li>
+  <li><a href="#summary-table" id="toc-summary-table" class="nav-link" data-scroll-target="#summary-table"><span class="header-section-number">0.5</span> 5. Summary Table</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">0.6</span> Conclusion</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>其他格式</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -380,7 +358,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Schur–Weyl 对偶</h1>
+<h1 class="title">Representations of an associative algebra cannot be tensored without a comultiplication</h1>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
     <div class="quarto-category">algebra</div>
@@ -392,16 +370,16 @@ window.Quarto = {
 <div class="quarto-title-meta">
 
     <div>
-    <div class="quarto-title-meta-heading">作者</div>
+    <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>sun123zxy </p>
+             <p>Gemini 3 Flash </p>
           </div>
   </div>
     
     <div>
-    <div class="quarto-title-meta-heading">发布于</div>
+    <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026年4月19日</p>
+      <p class="date">April 20, 2026</p>
     </div>
   </div>
   
@@ -413,275 +391,89 @@ window.Quarto = {
 </header>
 
 
-<section id="从-sym-和-alt-谈起" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="从-sym-和-alt-谈起"><span class="header-section-number">1</span> 从 Sym 和 Alt 谈起</h2>
-<p>众所周知，设 <span class="math inline">\(G\)</span> 是群，则对任意 <span class="math inline">\(G\)</span> 的 <span class="math inline">\(n\)</span> 维表示 <span class="math inline">\(V\)</span>，<span class="math inline">\(V \otimes_{\mathbb C} V\)</span> 都可以分解为子表示 <span class="math inline">\(\operatorname{Sym}^2 V\)</span> 和 <span class="math inline">\(\operatorname{Alt}^2 V\)</span> 的直和，其中</p>
-<ul>
-<li><p><span class="math inline">\(\operatorname{Sym}^2 V\)</span> 由 <span class="math inline">\(v \otimes w + w \otimes v\)</span> 生成，在交换 <span class="math inline">\(V \otimes V\)</span> 的作用下稳定，是左作用 <span class="math inline">\(G\)</span> 的不变子空间，维数为 <span class="math inline">\({\left(\kern-.3em\left(\genfrac{}{}{0pt}{}{n}{2}\right)\kern-.3em\right)} = \frac{n(n+1)}{2}\)</span>．</p></li>
-<li><p><span class="math inline">\(\operatorname{Alt}^2 V\)</span> 由 <span class="math inline">\(v \otimes w - w \otimes v\)</span> 生成，在交换 <span class="math inline">\(V \otimes V\)</span> 的作用下变号，是左作用 <span class="math inline">\(G\)</span> 的不变子空间，维数为 <span class="math inline">\(\binom{n}{2} = \frac{n(n-1)}{2}\)</span>．</p></li>
-</ul>
-<p>对一般的 <span class="math inline">\(T^d V := V^{\otimes d}\)</span>，也会想要获得类似的分解．当然还是先类似定义子表示 <span class="math inline">\(\operatorname{Sym}^d V\)</span> 和 <span class="math inline">\(\operatorname{Alt}^d V\)</span>．此时考虑 <span class="math inline">\(d\)</span> 阶置换群 <span class="math inline">\(\mathcal S_d\)</span> 在 <span class="math inline">\(V^{\otimes d}\)</span> 上的作用变得有益：定义 <span class="math display">\[
-(v_1 \otimes \cdots \otimes v_d) \cdot \sigma := v_{\sigma(1)} \otimes \cdots \otimes v_{\sigma(d)}
-\]</span> 为什么是右作用？因为这是对多重张量位置的置换，而位置的置换是右作用．线性扩展后这将 <span class="math inline">\(V^{\otimes d}\)</span> 做成右 <span class="math inline">\(\mathbb C[\mathcal S_d]\)</span>-模．于是</p>
+<p>In general, unlike group representations or Lie algebra representations, <strong>the tensor product of two representations of a generic associative algebra is not naturally a representation.</strong></p>
+<p>To define a representation on the tensor product <span class="math inline">\(V \otimes W\)</span>, the algebra <span class="math inline">\(A\)</span> must possess additional structure—specifically, it must be a <strong>Bialgebra</strong> (or a Hopf Algebra).</p>
+<p>Here is the breakdown of why this is the case and how the construction works.</p>
+<hr>
+<section id="the-problem" class="level3" data-number="0.1">
+<h3 data-number="0.1" class="anchored" data-anchor-id="the-problem"><span class="header-section-number">0.1</span> 1. The Problem</h3>
+<p>Suppose <span class="math inline">\((V, \rho_V)\)</span> and <span class="math inline">\((W, \rho_W)\)</span> are two representations (modules) of an associative algebra <span class="math inline">\(A\)</span>. To make <span class="math inline">\(V \otimes W\)</span> a representation, we need a map: <span class="math display">\[\rho_{V \otimes W} : A \to \text{End}(V \otimes W)\]</span> that is an <strong>algebra homomorphism</strong>.</p>
+<p>If we try to define the action “element-wise” (like we do in linear algebra), we run into a problem. For an element <span class="math inline">\(a \in A\)</span>, how should it act on <span class="math inline">\(v \otimes w\)</span>? * If we try <span class="math inline">\(a(v \otimes w) = (av) \otimes (aw)\)</span>, this is generally <strong>not linear</strong> in <span class="math inline">\(a\)</span>. For example, <span class="math inline">\((a+b)(v \otimes w)\)</span> would not equal <span class="math inline">\(a(v \otimes w) + b(v \otimes w)\)</span>. * If we try <span class="math inline">\(a(v \otimes w) = (av) \otimes w\)</span>, we are ignoring the <span class="math inline">\(W\)</span> structure.</p>
+</section>
+<section id="the-solution-the-comultiplication" class="level3" data-number="0.2">
+<h3 data-number="0.2" class="anchored" data-anchor-id="the-solution-the-comultiplication"><span class="header-section-number">0.2</span> 2. The Solution: The Comultiplication</h3>
+<p>To properly distribute the action of <span class="math inline">\(A\)</span> across a tensor product, we need a way to “split” an element <span class="math inline">\(a \in A\)</span> into two parts. This is provided by a <strong>comultiplication</strong> map: <span class="math display">\[\Delta: A \to A \otimes A\]</span> For <span class="math inline">\(V \otimes W\)</span> to be an <span class="math inline">\(A\)</span>-module, we define the action as: <span class="math display">\[a \cdot (v \otimes w) = \Delta(a)(v \otimes w)\]</span></p>
+<p>Using <strong>Sweedler notation</strong>, we write <span class="math inline">\(\Delta(a) = \sum a_{(1)} \otimes a_{(2)}\)</span>. Then the action is: <span class="math display">\[a \cdot (v \otimes w) = \sum (a_{(1)} v) \otimes (a_{(2)} w)\]</span></p>
+</section>
+<section id="required-properties" class="level3" data-number="0.3">
+<h3 data-number="0.3" class="anchored" data-anchor-id="required-properties"><span class="header-section-number">0.3</span> 3. Required Properties</h3>
+<p>For this tensor product to satisfy the axioms of a representation, <span class="math inline">\(A\)</span> must be a <strong>Bialgebra</strong>, meaning: 1. <strong><span class="math inline">\(\Delta\)</span> is an algebra homomorphism:</strong> This ensures that <span class="math inline">\(ab \cdot (v \otimes w) = a \cdot (b \cdot (v \otimes w))\)</span>. 2. <strong><span class="math inline">\(\Delta\)</span> is coassociative:</strong> <span class="math inline">\((\Delta \otimes \text{id})\Delta = (\text{id} \otimes \Delta)\Delta\)</span>. This ensures that the tensor product of three representations <span class="math inline">\((V \otimes W) \otimes U\)</span> is isomorphic to <span class="math inline">\(V \otimes (W \otimes U)\)</span>.</p>
+<hr>
+</section>
+<section id="important-examples" class="level3" data-number="0.4">
+<h3 data-number="0.4" class="anchored" data-anchor-id="important-examples"><span class="header-section-number">0.4</span> 4. Important Examples</h3>
+<p>Most “standard” algebras used in physics and representation theory are bialgebras, which is why we often take the tensor product for granted.</p>
+<section id="a.-group-algebras-kg" class="level4">
+<h4 class="anchored" data-anchor-id="a.-group-algebras-kg">A. Group Algebras (<span class="math inline">\(k[G]\)</span>)</h4>
+<p>For a group <span class="math inline">\(G\)</span>, the algebra <span class="math inline">\(A = k[G]\)</span> has a comultiplication defined by: <span class="math display">\[\Delta(g) = g \otimes g \quad \text{for all } g \in G\]</span> This leads to the familiar rule for group representations: <span class="math display">\[g \cdot (v \otimes w) = (gv) \otimes (gw)\]</span></p>
+</section>
+<section id="b.-universal-enveloping-algebras-of-lie-algebras-umathfrakg" class="level4">
+<h4 class="anchored" data-anchor-id="b.-universal-enveloping-algebras-of-lie-algebras-umathfrakg">B. Universal Enveloping Algebras of Lie Algebras (<span class="math inline">\(U(\mathfrak{g})\)</span>)</h4>
+<p>For a Lie algebra <span class="math inline">\(\mathfrak{g}\)</span>, an element <span class="math inline">\(x \in \mathfrak{g}\)</span> acts on the tensor product of two <span class="math inline">\(\mathfrak{g}\)</span>-modules as: <span class="math display">\[x \cdot (v \otimes w) = (xv) \otimes w + v \otimes (xw)\]</span> This corresponds to the comultiplication: <span class="math display">\[\Delta(x) = x \otimes 1 + 1 \otimes x\]</span> This is essentially the <strong>Leibniz rule</strong> (the product rule for derivatives).</p>
+</section>
+<section id="c.-quantum-groups-u_qmathfrakg" class="level4">
+<h4 class="anchored" data-anchor-id="c.-quantum-groups-u_qmathfrakg">C. Quantum Groups (<span class="math inline">\(U_q(\mathfrak{g})\)</span>)</h4>
+<p>Quantum groups are non-commutative, non-cocommutative Hopf algebras. They have more complex comultiplication rules (e.g., <span class="math inline">\(\Delta(K) = K \otimes K\)</span> and <span class="math inline">\(\Delta(E) = E \otimes 1 + K \otimes E\)</span>), which allow for the study of “braided” tensor categories.</p>
+<hr>
+</section>
+</section>
+<section id="summary-table" class="level3" data-number="0.5">
+<h3 data-number="0.5" class="anchored" data-anchor-id="summary-table"><span class="header-section-number">0.5</span> 5. Summary Table</h3>
 <table class="table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
 <thead>
 <tr class="header">
-<th></th>
-<th><span class="math inline">\(\operatorname{Sym}^d V\)</span></th>
-<th><span class="math inline">\(\operatorname{Alt}^d V\)</span></th>
+<th style="text-align: left;">Structure</th>
+<th style="text-align: left;">Algebra</th>
+<th style="text-align: left;">Comultiplication <span class="math inline">\(\Delta(a)\)</span></th>
+<th style="text-align: left;">Tensor Action <span class="math inline">\(a(v \otimes w)\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>作为右作用 <span class="math inline">\(\mathcal S_d\)</span> 的像</td>
-<td><span class="math inline">\(V^{\otimes d}\)</span> 在右作用 <span class="math inline">\(\sum_{\sigma \in \mathcal S_d} \sigma \in \mathbb C[\mathcal S_d]\)</span> 下的像</td>
-<td><span class="math inline">\(V^{\otimes d}\)</span> 在右作用 <span class="math inline">\(\sum_{\sigma \in \mathcal S_d} \operatorname{sgn}(\sigma) \sigma \in \mathbb C[\mathcal S_d]\)</span> 下的像</td>
+<td style="text-align: left;"><strong>Group</strong></td>
+<td style="text-align: left;"><span class="math inline">\(k[G]\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(g \otimes g\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((gv) \otimes (gw)\)</span></td>
 </tr>
 <tr class="even">
-<td>作为右作用 <span class="math inline">\(\mathcal S_d\)</span> 的核</td>
-<td>全体在 <span class="math inline">\(\mathcal S_d\)</span> 右作用下稳定的元素构成的不变子空间</td>
-<td>全体在 <span class="math inline">\(\mathcal S_d\)</span> 右作用下按置换的 <span class="math inline">\(\operatorname{sgn}\)</span> 变号的元素构成的不变子空间</td>
+<td style="text-align: left;"><strong>Lie Algebra</strong></td>
+<td style="text-align: left;"><span class="math inline">\(U(\mathfrak{g})\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(x \otimes 1 + 1 \otimes x\)</span></td>
+<td style="text-align: left;"><span class="math inline">\((xv) \otimes w + v \otimes (xw)\)</span></td>
 </tr>
 <tr class="odd">
-<td>关于左作用 <span class="math inline">\(G\)</span></td>
-<td><span class="math inline">\(G\)</span> 的子表示</td>
-<td><span class="math inline">\(G\)</span> 的子表示</td>
-</tr>
-<tr class="even">
-<td>维数</td>
-<td><span class="math inline">\({\left(\kern-.3em\left(\genfrac{}{}{0pt}{}{n}{d}\right)\kern-.3em\right)} = \frac{n(n+1)\cdots(n+d-1)}{d!}\)</span></td>
-<td><span class="math inline">\(\binom{n}{d} = \frac{n(n-1)\cdots(n-d+1)}{d!}\)</span></td>
+<td style="text-align: left;"><strong>General Bialgebra</strong></td>
+<td style="text-align: left;"><span class="math inline">\(A\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\sum a_{(1)} \otimes a_{(2)}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\sum (a_{(1)}v) \otimes (a_{(2)}w)\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>这两个空间还是无交，但它们不再张成整个 <span class="math inline">\(V^{\otimes d}\)</span> 了——对 <span class="math inline">\(d \geq 3\)</span> 的情况 <span class="math inline">\(n^d &gt; {\left(\kern-.3em\left(\genfrac{}{}{0pt}{}{n}{d}\right)\kern-.3em\right)} + \binom{n}{d}\)</span>．<span class="math inline">\(V^{\otimes d}\)</span> 中还藏有其它 <span class="math inline">\(\mathcal S_d\)</span> 或 <span class="math inline">\(G\)</span> 的不变子空间．</p>
 </section>
-<section id="schurweyl-对偶" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="schurweyl-对偶"><span class="header-section-number">2</span> Schur–Weyl 对偶</h2>
-<p>Schur–Weyl 对偶对此给出了一个非常漂亮的答案：作为 <span class="math inline">\((\operatorname{GL}(V), \mathcal S_d)\)</span>-双边表示， <span class="math display">\[
-V^{\otimes d} \cong \bigoplus_\lambda \operatorname{Hom}_\mathbb C(V_\lambda, \mathbb S_\lambda V)
-\]</span> 这里 <span class="math inline">\(\lambda \vdash d\)</span> 取遍所有 <span class="math inline">\(d\)</span> 长度不超过 <span class="math inline">\(n\)</span> 的分拆，<span class="math inline">\(V_\lambda := \mathbb C[\mathcal S_d] c_\lambda\)</span> 是通常的 <span class="math inline">\(\mathcal S_d\)</span> 的不可约（左）表示，<span class="math inline">\(\mathbb S_\lambda V := V^{\otimes d} \cdot c_\lambda\)</span> 是 <span class="math inline">\(\operatorname{GL}(V)\)</span> 的不可约代数表示．</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark (Abuse of Notation)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (Abuse of Notation). </span><span class="math inline">\(V_\lambda\)</span> 的记号里虽然有 <span class="math inline">\(V\)</span>，其实和 <span class="math inline">\(V\)</span> 没有联系．要怪就怪 <span class="citation" data-cites="fulton_representation_2004"><a href="#ref-fulton_representation_2004" role="doc-biblioref">[1, Chapter 6]</a></span> 是这么写的吧．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark (Sym and Alt)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (Sym and Alt). </span>注意在此记号下，<span class="math inline">\(\operatorname{Sym}^d V\)</span> 和 <span class="math inline">\(\operatorname{Alt}^d V\)</span> 恰好分别是 <span class="math inline">\(\lambda = (d)\)</span> 和 <span class="math inline">\(\lambda = (1, \dots, 1)\)</span> 的 <span class="math inline">\(\mathbb S_\lambda V\)</span>．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark (下标取值范围)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (下标取值范围). </span>不会因为认为 <span class="math inline">\(\lambda \vdash n\)</span> 受到任何处分——我们去掉 <span class="math inline">\(\lambda\)</span> 的长度超过 <span class="math inline">\(n\)</span> 的部分只是因为此时 <span class="math inline">\(\mathbb S_\lambda V = V^{\otimes d} \cdot c_\lambda\)</span> 退化为 <span class="math inline">\(0\)</span>．</p>
-<p>退化在 <span class="math inline">\(\operatorname{Alt}^d V\)</span> 上其实已经初见端倪：当 <span class="math inline">\(d &gt; n\)</span> 时，<span class="math inline">\(\operatorname{Alt}^d V\)</span> 退化为 <span class="math inline">\(0\)</span>，这是因为 <span class="math inline">\(V\)</span> 中基底数量不足以让楔积的各位置线性无关．同样的事情发生在 <span class="math inline">\(\mathbb S_\lambda V\)</span> 上：当 <span class="math inline">\(\lambda\)</span> 的长度超过 <span class="math inline">\(n\)</span> 时，<span class="math inline">\(\mathbb S_\lambda V\)</span> 退化为 <span class="math inline">\(0\)</span>．这是因为 <span class="math inline">\(b_\lambda\)</span> 交错化使得 <span class="math inline">\(\lambda\)</span> 第一列对应的张量位置一旦线性相关就退化为 <span class="math inline">\(0\)</span>，而 <span class="math inline">\(\lambda\)</span> 的第一列长度大于 <span class="math inline">\(n = \dim V\)</span> 使得这一情况必然发生．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark (Schur Functor)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (Schur Functor). </span><span class="math inline">\(\mathbb S_\lambda\)</span> 其实是个函子：定义 <span class="math inline">\(\mathbb S_\lambda\)</span> 在线性映射 <span class="math inline">\(f: V \to W\)</span> 上的作用 <span class="math inline">\(\mathbb S_\lambda f\)</span> 为 <span class="math inline">\(f^{\otimes d} : V^{\otimes d} \to W^{\otimes d}\)</span> 限制到 <span class="math inline">\(\mathbb S_\lambda V \to \mathbb S_\lambda W\)</span> 上．容易验证 <span class="math inline">\(\mathbb S_\lambda W\)</span> 一侧是良定的．</p>
-</div>
-</div>
-</div>
-</div>
-<p>现在还有两个问题：</p>
-<ul>
-<li><p>我没见过长这样的 Schur–Weyl 对偶</p></li>
-<li><p>“<span class="math inline">\(\mathbb S_\lambda V\)</span> 是 <span class="math inline">\(\operatorname{GL}(V)\)</span> 的不可约代数表示”意欲何为</p></li>
-</ul>
-<p>暂时留作后续讨论．</p>
-</section>
-<section id="典范分解" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="典范分解"><span class="header-section-number">3</span> 典范分解</h2>
-<p>利用 <span class="math inline">\(\mathbb C[\mathcal S_d]\)</span> 的 Peter–Weyl 定理 <span class="math display">\[
-\mathbb C[\mathcal S_d] \cong \bigoplus_\lambda V_\lambda \otimes_\mathbb C V_\lambda^*
-\]</span> Schur–Weyl 对偶分解本体并不难获得： <span class="math display">\[
-\begin{aligned}
-V^{\otimes d}
-&amp;\cong V^{\otimes d} \otimes_{\mathbb C[\mathcal S_d]} \mathbb C[\mathcal S_d] \\
-&amp;\cong V^{\otimes d} \otimes_{\mathbb C[\mathcal S_d]} \left( \bigoplus_\lambda V_\lambda \otimes_\mathbb C V_\lambda^* \right) \\
-&amp;\cong \bigoplus_\lambda V^{\otimes d} \otimes_{\mathbb C[\mathcal S_d]} V_\lambda \otimes_\mathbb C V_\lambda^* \\
-&amp;\cong \bigoplus_\lambda V^{\otimes d} \otimes_{\mathbb C[\mathcal S_d]} \mathbb C[\mathcal S_n] c_\lambda \otimes_\mathbb C V_\lambda \\
-&amp;\cong \bigoplus_\lambda \left( V^{\otimes d} \cdot c_\lambda \right) \otimes_\mathbb C V_\lambda^* \\
-&amp;\cong \bigoplus_\lambda \mathbb S_\lambda V \otimes_\mathbb C V_\lambda^* \\
-&amp;\cong \bigoplus_\lambda \operatorname{Hom}_\mathbb C(V_\lambda, \mathbb S_\lambda V)
-\end{aligned}
-\]</span> 上述推导的每个同构都是典的，这是我们推荐这种形式的 Schur–Weyl 对偶的主要缘由．</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark (<span class="math inline">\(\operatorname{GL}(V)\)</span> 不特别)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (<span class="math inline">\(\operatorname{GL}(V)\)</span> 不特别). </span>提请读者注意，上述同构中我们从来没有使用过 <span class="math inline">\(\operatorname{GL}(V)\)</span> 在 <span class="math inline">\(V^{\otimes d}\)</span> 上作用的任何性质，故任何使得 <span class="math inline">\(V^{\otimes d}\)</span> 成为 <span class="math inline">\((A, \mathcal S_d)\)</span>-双模的代数 <span class="math inline">\(A\)</span> 都会给出同样的分解．特别地，它可以是：</p>
-<ul>
-<li><p>群 <span class="math inline">\(G\)</span> 左作用在 <span class="math inline">\(V\)</span> 上，这里代数取群代数 <span class="math inline">\(\mathbb C[G]\)</span>．</p>
-<p><span class="math inline">\(G\)</span> 在 <span class="math inline">\(V^\otimes d\)</span> 上的作用由 <span class="math inline">\(g \mapsto g \otimes g \otimes \dots \otimes g\)</span> 给出．</p></li>
-<li><p>李代数 <span class="math inline">\(\mathfrak{g}\)</span> 左作用在 <span class="math inline">\(V\)</span> 上，这里代数取李代数的普遍包络代数 <span class="math inline">\(U(\mathfrak{g})\)</span>．</p>
-<p><span class="math inline">\(\mathfrak{g}\)</span> 在 <span class="math inline">\(V^\otimes d\)</span> 上的作用由 <span class="math inline">\(x \mapsto x \otimes 1 \otimes \dots \otimes 1 + 1 \otimes x \otimes \dots \otimes 1 + \dots + 1 \otimes 1 \otimes \dots \otimes x\)</span> 给出．</p></li>
-</ul>
-<p>特别地，我们尤其关注一般线性群 <span class="math inline">\(\operatorname{GL}(V)\)</span> 和一般线性李代数 <span class="math inline">\(\mathfrak{gl}(V)\)</span> 作用在 <span class="math inline">\(V\)</span> 上的情形：</p>
-<ul>
-<li>在此情形下 <span class="math inline">\(\mathbb S_\lambda V\)</span> 是 <span class="math inline">\(\operatorname{GL}(V)\)</span> 的不可约代数表示</li>
-<li><span class="math inline">\(\mathfrak{gl}(V)\)</span> 是 <span class="math inline">\(\operatorname{GL}(V)\)</span> 作为代数群的李代数</li>
-<li>Schur–Weyl 对偶刻画了 <span class="math inline">\(\operatorname{GL}(V)\)</span> 和 <span class="math inline">\(\mathcal S_d\)</span> 不可约表示间的对偶关系，真正使得 Schur–Weyl 对偶的“对偶”二字名副其实的部分．</li>
-</ul>
-<p>如上所述，我们后面讨论．</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="补充讨论废液缸" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="补充讨论废液缸"><span class="header-section-number">4</span> 补充讨论【废液缸】</h2>
-<section id="v_lambda" class="level3" data-number="4.1">
-<h3 data-number="4.1" class="anchored" data-anchor-id="v_lambda"><span class="header-section-number">4.1</span> <span class="math inline">\(V_\lambda\)</span></h3>
-<p><span class="math inline">\(V_\lambda := \mathbb C[\mathcal S_d] c_\lambda\)</span> 是通常的 <span class="math inline">\(\mathcal S_d\)</span> 的不可约表示．它自然的是 <span class="math inline">\(\mathcal S_d\)</span>-左模，但我们在 Schur–Weyl 对偶中需要它是 <span class="math inline">\(\mathcal S_d\)</span>-右模，故需要再为其配备右作用 <span class="math inline">\(v \cdot \sigma := \sigma^{-1} \cdot v\)</span> 使其成为 <span class="math inline">\(\mathcal S_d\)</span>-右模．</p>
-<p>为后续方便，再定义 <span class="math inline">\(V_\lambda^*\)</span> 为 <span class="math inline">\(V_\lambda\)</span> 的对偶空间，配备自然的 <span class="math inline">\(\mathbb S_d\)</span>-右作用 <span class="math inline">\((f \cdot \sigma)(v) := f(\sigma \cdot v)\)</span> 和构造的 <span class="math inline">\(\mathbb S_d\)</span>-左作用 <span class="math inline">\((\sigma \cdot f)(v) := f(\sigma^{-1} \cdot v)\)</span>．</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark (不是双模)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (不是双模). </span>注意 <span class="math inline">\(V_\lambda\)</span> 和 <span class="math inline">\(V_\lambda^*\)</span> 都不是 <span class="math inline">\((\mathcal S_d, \mathcal S_d)\)</span>-双模：左作用和右作用并不兼容．遗憾的是在后续推导中我们两边的作用都需要用到，需要读者注意区分．</p>
-</div>
-</div>
-</div>
-</div>
-<p><span class="math inline">\(\mathcal S_n\)</span> 表示论的一个重要结果是所有 <span class="math inline">\(\mathcal S_n\)</span> 的表示都是自对偶的，用在这里就是说 <span class="math display">\[
-V_\lambda \cong V_\lambda^*
-\]</span> 这个同构在 <span class="math inline">\(\mathcal S_n\)</span>-左模和 <span class="math inline">\(\mathcal S_n\)</span>-右模意义下均成立．证明可以考虑特征标：<span class="math inline">\(\mathcal S_n\)</span> 的共轭类由置换的轮换型给出，而 <span class="math inline">\(\sigma\)</span> 和 <span class="math inline">\(\sigma^{-1}\)</span> 由相同轮换型，故在同一共轭类，于是 <span class="math inline">\(V_\lambda\)</span> 和 <span class="math inline">\(V_\lambda^*\)</span> 的特征标相同，进而同构．</p>
-</section>
-</section>
-<section id="代数表示operatornameglv-和-mathfrakglv" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="代数表示operatornameglv-和-mathfrakglv"><span class="header-section-number">5</span> 代数表示，<span class="math inline">\(\operatorname{GL}(V)\)</span> 和 <span class="math inline">\(\mathfrak{gl}(V)\)</span></h2>
-<p>所谓 <span class="math inline">\(\operatorname{GL}(V)\)</span> 的代数表示 <span class="math inline">\(W\)</span>，即是 <span class="math inline">\(\operatorname{GL}(V) \to \operatorname{GL}(W)\)</span> 的代数群同态．话都说到这个份上了，立刻 <span class="math inline">\(d\)</span> 一下研究其诱导的李代数同态 <span class="math inline">\(\mathfrak{gl}(V) \to \mathfrak{gl}(W)\)</span>，即 <span class="math inline">\(\mathfrak{gl}(V)\)</span> 的李代数表示．</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark (为什么不是 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V)\)</span>)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (为什么不是 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V)\)</span>). </span><span class="math inline">\(\operatorname{GL}(V)\)</span> 在 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V)\)</span> 稠密，为什么不直接研究结合代数 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V)\)</span> 的代数表示呢？</p>
-<p>因为不少 <span class="math inline">\(\operatorname{GL}(V)\)</span> 的代数表示无法延拓为 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V)\)</span> 的代数表示——更精确地，能延拓至 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V)\)</span> 的 <span class="math inline">\(\operatorname{GL}(V)\)</span> 的代数表示 <span class="math inline">\(W\)</span> 必须是线性的——但许多 <span class="math inline">\(\operatorname{GL}(V)\)</span> 的代数表示，如 <span class="math inline">\(\operatorname{Sym}^2 V\)</span>，将 <span class="math inline">\(g \in \operatorname{GL}(V)\)</span> 映至 <span class="math inline">\(g \otimes g \in \operatorname{End}_{\mathbb C}(V) \otimes \operatorname{End}_{\mathbb C}(V) \subseteq \operatorname{End}_{\mathbb C}(V^{\otimes 2})\)</span>，非常不线性【TODO】．</p>
-</div>
-</div>
-</div>
-</div>
-<p>现在断言 Schur–Weyl 对偶其实也给出了一个 <span class="math inline">\((\mathfrak{gl}(V), \mathcal S_d)\)</span>-双边表示的分解，这里左边是 <span class="math inline">\(\mathfrak{gl}(V)\)</span> 的李代数表示，右边是 <span class="math inline">\(\mathcal S_d\)</span> 的代数表示．下面给出的引理使得这一分解诱导处我们想要的 <span class="math inline">\((\operatorname{GL}(V), \mathcal S_d)\)</span>-双边表示的分解．</p>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<div id="lem-gl-symm" class="theorem lemma">
-<p><span class="theorem-title"><strong>引理 1</strong></span> <span class="math inline">\(\mathfrak{gl}(V)\)</span> 在 <span class="math inline">\(V^{\otimes d}\)</span> 上的作用完全由 <span class="math inline">\(\operatorname{GL}(V)\)</span> 的作用决定．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">注记</span>Proof
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="proof">
-<p><span class="proof-title"><em>证明</em>. </span>TODO</p>
-</div>
-</div>
-</div>
-</div>
-<p>故问题规约为证明 <span class="math inline">\((\mathfrak{gl}(V), \mathcal S_d)\)</span> 版本的 Schur–Weyl 对偶．</p>
-
+<section id="conclusion" class="level3" data-number="0.6">
+<h3 data-number="0.6" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">0.6</span> Conclusion</h3>
+<p>If you are working with a plain associative algebra that has no defined comultiplication, you <strong>cannot</strong> tensor two representations. If you find yourself needing to tensor representations, you are likely working in the category of modules over a <strong>Bialgebra</strong> or <strong>Hopf Algebra</strong>.</p>
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
-<div id="ref-fulton_representation_2004" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline">W. Fulton 和 J. Harris, <em>Representation Theory</em>, 卷 129. 收入 Graduate Texts in Mathematics, vol. 129. New York, <span>NY</span>: Springer, 2004. doi: <a href="https://doi.org/10.1007/978-1-4612-0979-9">10.1007/978-1-4612-0979-9</a>.</div>
-</div>
-</div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -720,12 +512,12 @@ V_\lambda \cong V_\lambda^*
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "已复制");
+      button.setAttribute("title", "Copied!");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "已复制");
+        button.setAttribute("data-bs-title", "Copied!");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",
