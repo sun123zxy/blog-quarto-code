@@ -49,17 +49,17 @@ $$
   - $\Sym^d V$
   - $\Alt^d V$
 
-- - 作为右作用 $\mathcal S_d$ 的像
-  - $V^{\otimes d}$ 在右作用 $\sum_{\sigma \in \mathcal S_d} \sigma \in \mathbb C[\mathcal S_d]$ 下的像
-  - $V^{\otimes d}$ 在右作用 $\sum_{\sigma \in \mathcal S_d} \sgn(\sigma) \sigma \in \mathbb C[\mathcal S_d]$ 下的像
+- - $V^{\otimes d}$ 在右作用……下的像
+  - $\sum_{\sigma \in \mathcal S_d} \sigma \in \mathbb C[\mathcal S_d]$
+  - $\sum_{\sigma \in \mathcal S_d} \sgn(\sigma) \sigma \in \mathbb C[\mathcal S_d]$
 
-- - 作为右作用 $\mathcal S_d$ 的核
-  - 全体在 $\mathcal S_d$ 右作用下稳定的元素构成的不变子空间
-  - 全体在 $\mathcal S_d$ 右作用下按置换的 $\sgn$ 变号的元素构成的不变子空间
+- - 作为右作用 $\mathcal S_d$-不变子空间
+  - 作用下稳定
+  - 按置换的 $\sgn$ 变号
 
 - - 关于左作用 $G$
-  - $G$ 的子表示
-  - $G$ 的子表示
+  - 不变子空间
+  - 不变子空间
 
 - - 维数
   - $\bbinom{n}{d} = \frac{n(n+1)\cdots(n+d-1)}{d!}$
@@ -68,13 +68,18 @@ $$
 
 这两个空间还是无交，但它们不再张成整个 $V^{\otimes d}$ 了——对 $d \geq 3$ 的情况 $n^d > \bbinom{n}{d} + \binom{n}{d}$．$V^{\otimes d}$ 中还藏有其它 $\mathcal S_d$ 或 $G$ 的不变子空间．
 
-## Schur--Weyl 对偶
+## Hom 形式的 Schur--Weyl 对偶
 
 Schur--Weyl 对偶对此给出了一个非常漂亮的答案：作为 $(\GL(V), \mathcal S_d)$-双边表示，
 $$
 V^{\otimes d} \cong \bigoplus_\lambda \Hom_\mathbb C(V_\lambda, \mathbb S_\lambda V)
 $$
-这里 $\lambda \vdash d$ 取遍所有 $d$ 的长度不超过 $n$ 的分拆，$V_\lambda := \mathbb C[\mathcal S_d] c_\lambda$ 是通常的 $\mathcal S_d$ 的不可约（左）表示，$\mathbb S_\lambda V := V^{\otimes d} \cdot c_\lambda$ 是 $\GL(V)$ 的不可约代数表示．
+这里
+
+- $\lambda \vdash d$ 取遍所有 $d$ 的长度不超过 $n$ 的分拆
+- $V_\lambda := \mathbb C[\mathcal S_d] c_\lambda$ 是通常的 $\mathcal S_d$ 的不可约（左）表示
+- $\mathbb S_\lambda V := V^{\otimes d} \cdot c_\lambda$ 是 $\GL(V)$ 的不可约代数表示
+- $\Hom_\mathbb C(V_\lambda, \mathbb S_\lambda V)$ 上的左作用由 $\GL(V)$ 左作用在 $\mathbb S_\lambda V$ 上负责，右作用由 $\mathcal S_d$ 左作用在 $V_\lambda$ 上负责．
 
 :::{.remark}
 
@@ -137,7 +142,7 @@ $$
 
 :::{.remark}
 
-## $\GL(V)$ 不特别
+## $\GL(V)$：特别又不特别
 
 提请读者注意，上述同构中我们从来没有使用过 $\GL(V)$ 在 $V^{\otimes d}$ 上作用的任何性质，故任何使得 $V^{\otimes d}$ 成为 $(A, \mathcal S_d)$-双模的代数 $A$ 都会给出同样的分解．特别地，它可以是：
 
@@ -155,29 +160,68 @@ $$
 - $\gl(V)$ 是 $\GL(V)$ 作为代数群的李代数
 - Schur--Weyl 对偶刻画了 $\GL(V)$ 和 $\mathcal S_d$ 不可约表示间的对偶关系，真正使得 Schur--Weyl 对偶的“对偶”二字名副其实的部分．
 
-如上所述，我们后面讨论．
+我们后面细作讨论．
 :::
 
-## 补充讨论【废液缸】
+## 更常见形式的 Schur--Weyl
 
-### $V_\lambda$
+### 自对偶
 
-$V_\lambda := \mathbb C[\mathcal S_d] c_\lambda$ 是通常的 $\mathcal S_d$ 的不可约表示．它自然的是 $\mathcal S_d$-左模，但我们在 Schur--Weyl 对偶中需要它是 $\mathcal S_d$-右模，故需要再为其配备右作用 $v \cdot \sigma := \sigma^{-1} \cdot v$ 使其成为 $\mathcal S_d$-右模．
+$\mathcal S_n$ 表示论的一个重要结果是所有 $\mathcal S_n$ 的表示都是自对偶的，即对任意 $\mathcal S_n$ 的表示 $V$，有
+$$
+V \cong V^*
+$$
+这同构有两种理解方式：
 
-为后续方便，再定义 $V_\lambda^*$ 为 $V_\lambda$ 的对偶空间，配备自然的 $\mathbb S_d$-右作用 $(f \cdot \sigma)(v) := f(\sigma \cdot v)$ 和构造的 $\mathbb S_d$-左作用 $(\sigma \cdot f)(v) := f(\sigma^{-1} \cdot v)$．
+- 作为左模的同构：$V$ 上左作用 $g \cdot v$ 自然，$V^*$ 上配备 $(\sigma \cdot f)(v) := f(\sigma^{-1} \cdot v)$．
+- 作为右模的同构：$V$ 上右作用 $v \cdot \sigma := \sigma^{-1} \cdot v$，$V^*$ 上右作用 $(f \cdot \sigma)(v) := f(\sigma \cdot v)$ 自然．
+
+两侧是对偶的，只需证明一侧．可以考虑特征标：$\mathcal S_n$ 的共轭类由置换的轮换型给出，而 $\sigma$ 和 $\sigma^{-1}$ 有相同轮换型，故在同一共轭类，故 $V$ 和 $V^*$ 的特征标相同，进而同构．
 
 :::{.remark}
 
-## 不是双模
+## 自对偶、特征标与双线性型
 
-注意 $V_\lambda$ 和 $V_\lambda^*$ 都不是 $(\mathcal S_d, \mathcal S_d)$-双模：左作用和右作用并不兼容．遗憾的是在后续推导中我们两边的作用都需要用到，需要读者注意区分．
+一般来说：
+
+- 有限群复表示自对偶当且仅当特征标是实函数
+- 自对偶相当于保证 $V$ 上有一个非退化的 $\mathcal S_n$-不变双线性型
+- 群代数上总有标准的非退化 $G$-不变双线性型，从而自对偶
+
+一般来说，怎样显式构造这个双线性型呢？
+
+可以考虑随意取一 $V$ 上双线性型做平均化得到不变双线性型．如果 $V$ 不可约，Schur 引理保证平均化后的双线性型要么是零，要么非退化．于是可以取 $V^*$ 一组基底 $(f_i)$ 并遍历 $f_i \otimes f_j$ 实验平均化后是否非退化．对可约的情况，可以分解成不可约成分后做．
+
+总之，使用这个对偶会带来不少很难直接构造的同构，这是我们推荐 $\Hom$ 形式的 Schur--Weyl 对偶的主要缘由——它不需要用到自对偶性．
 :::
 
-$\mathcal S_n$ 表示论的一个重要结果是所有 $\mathcal S_n$ 的表示都是自对偶的，用在这里就是说
+### 张量形式的 Schur--Weyl 对偶
+
+于是 $V_\lambda$ 有非退化的 $\mathcal S_n$-不变双线性型，进而有机会将之前分解中的 $\Hom_\mathbb C(V_\lambda, \mathbb S_\lambda V)$ 写成矩阵，形式化地：
 $$
-V_\lambda \cong V_\lambda^*
+\Hom_\mathbb C(V_\lambda, \mathbb S_\lambda V) \cong \mathbb S_\lambda V \otimes_\mathbb C V_\lambda^* \cong \mathbb S_\lambda V \otimes_\mathbb C V_\lambda
 $$
-这个同构在 $\mathcal S_n$-左模和 $\mathcal S_n$-右模意义下均成立．证明可以考虑特征标：$\mathcal S_n$ 的共轭类由置换的轮换型给出，而 $\sigma$ 和 $\sigma^{-1}$ 由相同轮换型，故在同一共轭类，于是 $V_\lambda$ 和 $V_\lambda^*$ 的特征标相同，进而同构．
+这里 $V_\lambda^* \cong V_\lambda$ 是作为右模的同构．于是得到更常见的 Schur--Weyl 对偶形式
+$$
+V^{\otimes d} \cong \bigoplus_\lambda \mathbb S_\lambda V \otimes_\mathbb C V_\lambda
+$$
+
+### 群表示形式的 Schur--Weyl 对偶
+
+可能还是会觉得取逆嗯造的右模 $V_\lambda$ 有点膈应，我们可以通过对上述 $(\GL(V), \mathcal S_d)$-双边表示通过群元素取逆倒成 $\GL(V) \times \mathcal S_d$ 的纯左模结构——这个过程中 $V^{\otimes d}$ 上 $\mathcal S_d$ 从右作用变为左作用
+$$
+\sigma \cdot (v_1 \otimes \cdots \otimes v_d) := v_{\sigma^{-1}(1)} \otimes \cdots \otimes v_{\sigma^{-1}(d)}
+$$
+$V_\lambda$ 从取逆嗯造的 $\mathcal S_d$-右模变为自然的 $\mathcal S_d$-左模．不妨
+
+- 将 $V_\lambda$ 升级为 $\GL(V) \times \mathcal S_d$ 的表示，其中 $\GL(V)$ 作用平凡，$\mathcal S_d$ 作用自然；
+- 将 $\mathbb S_\lambda V$ 升级为 $\GL(V) \times \mathcal S_d$ 的表示，其中 $\GL(V)$ 作用自然，$\mathcal S_d$ 作用平凡；
+- 将 $\otimes_\mathbb C$ 按照 $\GL(V) \times \mathcal S_d$-群表示的张量积理解
+
+就得到大家最喜欢的纯群表示形式的 Schur--Weyl 对偶
+$$
+V^{\otimes d} \cong \bigoplus_\lambda \mathbb S_\lambda V \otimes_\mathbb C V_\lambda
+$$
 
 ## 代数表示，$\GL(V)$ 和 $\gl(V)$
 
