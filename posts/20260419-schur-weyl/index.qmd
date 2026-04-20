@@ -3,7 +3,7 @@ title: Schur--Weyl 对偶
 author: sun123zxy
 date: 2026-04-19
 lang: zh
-
+bibliography: index.bib
 draft: true
 
 categories:
@@ -27,6 +27,7 @@ format:
 \newcommand{\Alt}{\operatorname{Alt}}
 \def\bbinom#1#2{{\left(\kern-.3em\left(\genfrac{}{}{0pt}{}{#1}{#2}\right)\kern-.3em\right)}}
 \newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\gl}{\mathfrak{gl}}
 
 ## 从 Sym 和 Alt 谈起
 
@@ -69,27 +70,67 @@ $$
 
 ## Schur--Weyl 对偶
 
-Schur--Weyl 对偶对此给出了一个非常漂亮的答案：作为 $(\GL(V), \mathcal S_d)$-双模，
+Schur--Weyl 对偶对此给出了一个非常漂亮的答案：作为 $(\GL(V), \mathcal S_d)$-双边表示，
 $$
 V^{\otimes d} \cong \bigoplus_\lambda \mathbb S_\lambda V \otimes_{\mathbb C} V_\lambda
 $$
 这里 $\lambda \vdash d$ 取遍所有 $d$ 长度不超过 $n$ 的分拆，$V_\lambda$ 是 $\mathcal S_d$ 的不可约表示，$\mathbb S_\lambda V$ 是 $\GL(V)$ 的不可约代数表示．
 
-这里做一些讨论．
+这里做一些讨论．关于什么是不可约代数表示，我们稍微延后讨论．
 
-首先，之前讨论的是任意群 $G$ 左作用在 $V$ 上的情况，而根据群同态 $G \to \GL(V)$，每个 $(G, \mathcal S_d)$-双模自动成为一个 $(\GL(V), \mathcal S_d)$-双模，故 Schur--Weyl 对偶给出的分解适用于任意群 $G$ 左作用在 $V$ 上的情况．
+### $V_\lambda$ 和 $\mathbb S_\lambda V$
 
-其次来指明 $V_\lambda$ 和 $\mathbb S_\lambda V$ 的定义：
+来指明 $V_\lambda$ 和 $\mathbb S_\lambda V$ 的定义．
 
-- $\mathbb C[\mathcal S_d]$-右模 $V_\lambda := c_\lambda \cdot \mathbb C[\mathcal S_d]$，其中 $c_\lambda$ 是 $\mathcal S_d$ 中的 Young 对称化子．注意这里的 $c_\lambda$ 乘在左边，与我们平时习惯的左作用情形对偶．
+$\mathbb C[\mathcal S_d]$-右模 $V_\lambda := c_\lambda \cdot \mathbb C[\mathcal S_d]$，其中 $c_\lambda$ 是 $\mathcal S_d$ 中的 Young 对称化子．注意这里的 $c_\lambda$ 乘在左边，与我们平时习惯的左作用情形对偶．
 
 :::{.remark}
 
-$V_\lambda$ 的记号里虽然有 $V$，实际上和 $V$ 没有联系．要怪就怪 Fulton--Harris 是这么写的吧．
+$V_\lambda$ 的记号里虽然有 $V$，实际上和 $V$ 没有联系．要怪就怪 [@fulton_representation_2004, {Chapter 6}] 是这么写的吧．
 :::
 
-- $\GL(V)$-左模 $\mathbb S_\lambda V := V^{\otimes d} \cdot c_\lambda$．
+$\GL(V)$-左模 $\mathbb S_\lambda V := V^{\otimes d} \cdot c_\lambda$．注意在此记号下，$\Sym^d V$ 和 $\Alt^d V$ 恰好分别是 $\lambda = (d)$ 和 $\lambda = (1, \dots, 1)$ 的 $\mathbb S_\lambda V$．
 
-  注意在此记号下，$\Sym^d V$ 和 $\Alt^d V$ 恰好分别是 $\lambda = (d)$ 和 $\lambda = (1, \dots, 1)$ 的 $\mathbb S_\lambda V$．
+:::{.remark}
 
-  $\mathbb S_\lambda$ 其实是个函子：定义 $\mathbb S_\lambda$ 在线性映射 $f: V \to W$ 上的作用 $\mathbb S_\lambda f$ 为 $f^{\otimes d} : V^{\otimes d} \to W^{\otimes d}$ 限制到 $\mathbb S_\lambda V \to \mathbb S_\lambda W$ 上．容易验证 $\mathbb S_\lambda W$ 一侧是良定的．$\mathbb S_\lambda$ 就是所谓的 Schur 函子．
+## Schur 函子
+
+$\mathbb S_\lambda$ 其实是个函子：定义 $\mathbb S_\lambda$ 在线性映射 $f: V \to W$ 上的作用 $\mathbb S_\lambda f$ 为 $f^{\otimes d} : V^{\otimes d} \to W^{\otimes d}$ 限制到 $\mathbb S_\lambda V \to \mathbb S_\lambda W$ 上．容易验证 $\mathbb S_\lambda W$ 一侧是良定的．
+:::
+
+### $\GL(V)$ 与 $G$
+
+首先，之前讨论的是任意群 $G$ 左作用在 $V$ 上的情况，而根据群同态 $G \to \GL(V)$，每个 $(G, \mathcal S_d)$-双模自动成为一个 $(\GL(V), \mathcal S_d)$-双模，故 Schur--Weyl 对偶给出的分解适用于任意群 $G$ 左作用在 $V$ 上的情况．
+
+## 分解
+
+在 Peter--Weyl 定理的加持下，拿到 Schur--Weyl 对偶分解其实并不困难：
+
+【TODO】
+
+## 代数表示，$\GL(V)$ 和 $\gl(V)$
+
+所谓 $\GL(V)$ 的代数表示 $W$，即是 $\GL(V) \to \GL(W)$ 的代数群同态．话都说到这个份上了，立刻 $d$ 一下研究其诱导的李代数同态 $\gl(V) \to \gl(W)$，即 $\gl(V)$ 的李代数表示．
+
+:::{.remark}
+
+## 为什么不是 $\End_{\mathbb C}(V)$
+
+$\GL(V)$ 在 $\End_{\mathbb C}(V)$ 稠密，为什么不直接研究结合代数 $\End_{\mathbb C}(V)$ 的代数表示呢？
+
+因为不少 $\GL(V)$ 的代数表示无法延拓为 $\End_{\mathbb C}(V)$ 的代数表示——更精确地，能延拓至 $\End_{\mathbb C}(V)$ 的 $\GL(V)$ 的代数表示 $W$ 必须是线性的——但许多 $\GL(V)$ 的代数表示，如 $\Sym^2 V$，将 $g \in \GL(V)$ 映至 $g \otimes g \in \End_{\mathbb C}(V) \otimes \End_{\mathbb C}(V) \subseteq \End_{\mathbb C}(V^{\otimes 2})$，非常不线性【TODO】．
+:::
+
+现在断言 Schur--Weyl 对偶其实也给出了一个 $(\gl(V), \mathcal S_d)$-双边表示的分解，这里左边是 $\gl(V)$ 的李代数表示，右边是 $\mathcal S_d$ 的代数表示．下面给出的引理使得这一分解诱导处我们想要的 $(\GL(V), \mathcal S_d)$-双边表示的分解．
+
+:::{#lem-gl-symm}
+
+$\gl(V)$ 在 $V^{\otimes d}$ 上的作用完全由 $\GL(V)$ 的作用决定．
+:::
+
+:::{.proof}
+
+TODO
+:::
+
+故问题规约为证明 $(\gl(V), \mathcal S_d)$ 版本的 Schur--Weyl 对偶．
