@@ -36,6 +36,8 @@ $$
 $$
 可见其结构确实变得更加丰富．稍做辨析：
 
+### 双模观点
+
 - 这里每份投影 $\pi_i: \mathbb C[G] \to \End_{\mathbb C}(V_i)$ 都是表示 $\rho_{V_i} : G \to \GL(V_i)$ 直接线性扩张得到——定理表明，$\mathbb C[G]$ 可以完全由其每个不可约表示上的作用描述．
 
 - 容易验证每个 $\pi_i$ 都是 $(\mathbb C[G], \mathbb C[G])$-代数同态——保加法，保乘法，保数乘，保左、右 $G$-作用．这里的分解是在此意义下的同构．
@@ -70,6 +72,28 @@ $$
 
 - 反过来，仅考虑 $(\mathbb C[G], \mathbb C[G])$-双模结构也没有问题：将会证明 $\pi_i$ 是满射，即每个 $\End_{\mathbb C}(V_i)$ 都是可以写作某一 $\mathbb C[G]$-左作用．
 
+### 左模观点
+
+考虑到群代数有对极映射 $g \mapsto g^{-1}$，这使得可以将任何 $V$ 上的 $(G,H)$-双边表示结构强行翻成 $G \times H$-群表示结构研究：
+$$
+(g,h) \cdot v := g \cdot v \cdot h^{-1}
+$$
+或在模的语言下：任何 $(\mathbb C[G], \mathbb C[H])$ 双模结构可被强行翻成 $(\mathbb C[G] \otimes_{\mathbb C} \mathbb C[H])$ 结构．这样的好处是可以直接套用之前对群表示的语言来表达双模．例如，在此风格表述下的 Peter--Weyl 定理
+$$
+\mathbb C[G] \cong \End_{\mathbb C}(V_i) \cong \bigoplus_i V_i \otimes_{\mathbb C} V_i^*
+$$
+应当理解为 $\mathbb C[G]$ 作为 $G \times G$-群表示的分解，其中
+
+- $\otimes_{\mathbb C}$ 是 $G \times G$-群表示的张量积
+- $\End_{\mathbb C}(V_i)$ 是 $G \times G$-表示，其上第一个 $G$-自然作用在值域 $V_i$，第二个 $G$-作用取逆作用在定义域 $V_i$
+- $V_i$ 是 $G \times G$-表示，其上第一个 $G$-作用自然，第二个 $G$-作用平凡
+- $V_i^*$ 是 $G \times G$-表示，其上第一个 $G$-作用平凡，第二个 $G$-作用取逆作用在定义域 $V_i$
+
+:::{.remark}
+
+这似乎只是把双边代数表示翻译到 Hopf 代数表示的抽象废话，但在如 Schur--Weyl 对偶中，会看到这种翻译能有效简化表述．
+:::
+
 ## 证明
 
 我们提供几条依赖不同工具的证明路线，读者可按前置情况任选．
@@ -90,7 +114,9 @@ $$
 
 - 依赖 [矩阵代数的 Burnside 定理](/posts/20240121-burnside/)，该定理的证明可以仅依赖初等线性代数：
 
-  考察 $\pi_i(\mathbb C[G]) \subseteq \End_{\mathbb C}(V_i)$，注意到它是 $\End_{\mathbb C}(V_i)$ 的不可约含幺子结合代数．根据 Burnside 定理，$\pi(\mathbb C[G])$ 在每个 $\End_{\mathbb C}(V_i)$ 上都必须是全体．
+  - 复数域上矩阵代数的含幺子结合代数如果不可约，则一定是整个．
+
+  则考察含幺结合代数 $\mathbb C[G]$ 在 $\End_{\mathbb C}(V_i)$ 上的像，确为 $\End_{\mathbb C}(V_i)$ 的不可约含幺子结合代数．故根据 Burnside 定理，$\mathbb C[G]$ 在每个 $\End_{\mathbb C}(V_i)$ 上的像都必须是全体．
 
 :::{.remark}
 
@@ -159,7 +185,22 @@ $$
   $$
   即 $\chi(g^{-1} h g) = \chi(h)$——在共轭类上取常值——$Z(\mathbb C[G])$ 就是类函数全体！其维数等于 $G$ 的共轭类的数量．
 
-两条连起来看立得：$G$ 的共轭类的数量等于 $G$ 的不可约表示的数量．
+两条连起来看：$G$ 的共轭类的数量等于 $G$ 的不可约表示的数量．
+
+:::{.remark}
+
+## 左模观点
+
+回忆 $\mathbb C[G]$ 也作为 $G \times G$-群表示分解．让我们使用对角映射 $g \mapsto (g,g)$ 将 Peter--Weyl 分解
+$$
+\mathbb C[G] \cong \bigoplus_i \End_{\mathbb C}(V_i)
+$$
+看成 $G$-表示的分解，于是 $\mathbb C[G]$ 上的 $G$-作用是共轭 $g \cdot x := g x g^{-1}$，$\End_{\mathbb C}(V_i)$ 上的 $G$-作用也是共轭 $(g \cdot \varphi) (v) := g \cdot \varphi (g^{-1} \cdot v)$．两边同时取 $G$-不变子空间，得到
+$$
+\mathbb C[G]^G \cong \bigoplus_i \End_{G}(V_i)
+$$
+左边是 $G$ 的类函数空间，右边又使用 Schur 引理，我们再次得到共轭类计数的结论．
+:::
 
 ### 直和分解的典范投影
 
