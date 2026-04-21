@@ -363,7 +363,11 @@ window.Quarto = {
     <h2 id="toc-title">该页面内容</h2>
    
   <ul>
-  <li><a href="#从左模到双模" id="toc-从左模到双模" class="nav-link active" data-scroll-target="#从左模到双模"><span class="header-section-number">1</span> 从左模到双模</a></li>
+  <li><a href="#从左模到双模" id="toc-从左模到双模" class="nav-link active" data-scroll-target="#从左模到双模"><span class="header-section-number">1</span> 从左模到双模</a>
+  <ul class="collapse">
+  <li><a href="#双模观点" id="toc-双模观点" class="nav-link" data-scroll-target="#双模观点"><span class="header-section-number">1.1</span> 双模观点</a></li>
+  <li><a href="#左模观点" id="toc-左模观点" class="nav-link" data-scroll-target="#左模观点"><span class="header-section-number">1.2</span> 左模观点</a></li>
+  </ul></li>
   <li><a href="#证明" id="toc-证明" class="nav-link" data-scroll-target="#证明"><span class="header-section-number">2</span> 证明</a></li>
   <li><a href="#推论" id="toc-推论" class="nav-link" data-scroll-target="#推论"><span class="header-section-number">3</span> 推论</a>
   <ul class="collapse">
@@ -420,6 +424,8 @@ window.Quarto = {
 \]</span> 这里 <span class="math inline">\(\mathbb C[G]\)</span> 是群 <span class="math inline">\(G\)</span> 的群代数，<span class="math inline">\(V_i\)</span> 是 <span class="math inline">\(G\)</span> 的全体不可约表示．这只是个左 <span class="math inline">\(\mathbb C[G]\)</span>-模的分解：<span class="math inline">\(\mathbb C[G]\)</span> 被分解成了其单左理想的直和．但是 <span class="math inline">\(\mathbb C[G]\)</span> 是个环，完整来说我们应该研究其作为 <span class="math inline">\(\mathbb C\)</span>-代数的分解．Peter–Weyl / Wedderburn–Artin 定理给出了它的分解： <span class="math display">\[
 \mathbb C[G] \cong \bigoplus_i \operatorname{End}_{\mathbb C}(V_i) \cong \bigoplus_i V_i \otimes_{\mathbb C} V_i^*
 \]</span> 可见其结构确实变得更加丰富．稍做辨析：</p>
+<section id="双模观点" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="双模观点"><span class="header-section-number">1.1</span> 双模观点</h3>
 <ul>
 <li><p>这里每份投影 <span class="math inline">\(\pi_i: \mathbb C[G] \to \operatorname{End}_{\mathbb C}(V_i)\)</span> 都是表示 <span class="math inline">\(\rho_{V_i} : G \to \operatorname{GL}(V_i)\)</span> 直接线性扩张得到——定理表明，<span class="math inline">\(\mathbb C[G]\)</span> 可以完全由其每个不可约表示上的作用描述．</p></li>
 <li><p>容易验证每个 <span class="math inline">\(\pi_i\)</span> 都是 <span class="math inline">\((\mathbb C[G], \mathbb C[G])\)</span>-代数同态——保加法，保乘法，保数乘，保左、右 <span class="math inline">\(G\)</span>-作用．这里的分解是在此意义下的同构．</p></li>
@@ -475,6 +481,39 @@ g \cdot (v \otimes f) \cdot h := (g \cdot v) \otimes (f \cdot h)
 <li><p>反过来，仅考虑 <span class="math inline">\((\mathbb C[G], \mathbb C[G])\)</span>-双模结构也没有问题：将会证明 <span class="math inline">\(\pi_i\)</span> 是满射，即每个 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V_i)\)</span> 都是可以写作某一 <span class="math inline">\(\mathbb C[G]\)</span>-左作用．</p></li>
 </ul>
 </section>
+<section id="左模观点" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="左模观点"><span class="header-section-number">1.2</span> 左模观点</h3>
+<p>考虑到群代数有对极映射 <span class="math inline">\(g \mapsto g^{-1}\)</span>，这使得可以将任何 <span class="math inline">\(V\)</span> 上的 <span class="math inline">\((G,H)\)</span>-双边表示结构强行翻成 <span class="math inline">\(G \times H\)</span>-群表示结构研究： <span class="math display">\[
+(g,h) \cdot v := g \cdot v \cdot h^{-1}
+\]</span> 或在模的语言下：任何 <span class="math inline">\((\mathbb C[G], \mathbb C[H])\)</span> 双模结构可被强行翻成 <span class="math inline">\((\mathbb C[G] \otimes_{\mathbb C} \mathbb C[H])\)</span> 结构．这样的好处是可以直接套用之前对群表示的语言来表达双模．例如，在此风格表述下的 Peter–Weyl 定理 <span class="math display">\[
+\mathbb C[G] \cong \operatorname{End}_{\mathbb C}(V_i) \cong \bigoplus_i V_i \otimes_{\mathbb C} V_i^*
+\]</span> 应当理解为 <span class="math inline">\(\mathbb C[G]\)</span> 作为 <span class="math inline">\(G \times G\)</span>-群表示的分解，其中</p>
+<ul>
+<li><span class="math inline">\(\otimes_{\mathbb C}\)</span> 是 <span class="math inline">\(G \times G\)</span>-群表示的张量积</li>
+<li><span class="math inline">\(\operatorname{End}_{\mathbb C}(V_i)\)</span> 是 <span class="math inline">\(G \times G\)</span>-表示，其上第一个 <span class="math inline">\(G\)</span>-自然作用在值域 <span class="math inline">\(V_i\)</span>，第二个 <span class="math inline">\(G\)</span>-作用取逆作用在定义域 <span class="math inline">\(V_i\)</span></li>
+<li><span class="math inline">\(V_i\)</span> 是 <span class="math inline">\(G \times G\)</span>-表示，其上第一个 <span class="math inline">\(G\)</span>-作用自然，第二个 <span class="math inline">\(G\)</span>-作用平凡</li>
+<li><span class="math inline">\(V_i^*\)</span> 是 <span class="math inline">\(G \times G\)</span>-表示，其上第一个 <span class="math inline">\(G\)</span>-作用平凡，第二个 <span class="math inline">\(G\)</span>-作用取逆作用在定义域 <span class="math inline">\(V_i\)</span></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>这似乎只是把双边代数表示翻译到 Hopf 代数表示的抽象废话，但在如 Schur–Weyl 对偶中，会看到这种翻译能有效简化表述．</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
 <section id="证明" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="证明"><span class="header-section-number">2</span> 证明</h2>
 <p>我们提供几条依赖不同工具的证明路线，读者可按前置情况任选．</p>
@@ -491,10 +530,13 @@ g \cdot (v \otimes f) \cdot h := (g \cdot v) \otimes (f \cdot h)
 <li><p>依赖有限群表示论的维数平方和公式 <span class="math inline">\(\sum_i (\dim V_i)^2 = |G|\)</span>：<span class="citation" data-cites="fulton_representation_2004"><a href="#ref-fulton_representation_2004" role="doc-biblioref">[1, Proposition 3.29]</a></span></p>
 <p><span class="math inline">\(\dim \operatorname{End}_{\mathbb C}(V_i) = (\dim V_i)^2\)</span>，<span class="math inline">\(\dim \mathbb C[G] = |G|\)</span> 维数逼迫单射 <span class="math inline">\(\pi\)</span> 也是满射．</p></li>
 <li><p>依赖 <a href="../../posts/20240121-burnside/">矩阵代数的 Burnside 定理</a>，该定理的证明可以仅依赖初等线性代数：</p>
-<p>考察 <span class="math inline">\(\pi_i(\mathbb C[G]) \subseteq \operatorname{End}_{\mathbb C}(V_i)\)</span>，注意到它是 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V_i)\)</span> 的不可约含幺子结合代数．根据 Burnside 定理，<span class="math inline">\(\pi(\mathbb C[G])\)</span> 在每个 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V_i)\)</span> 上都必须是全体．</p></li>
+<ul>
+<li>复数域上矩阵代数的含幺子结合代数如果不可约，则一定是整个．</li>
+</ul>
+<p>则考察含幺结合代数 <span class="math inline">\(\mathbb C[G]\)</span> 在 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V_i)\)</span> 上的像，确为 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V_i)\)</span> 的不可约含幺子结合代数．故根据 Burnside 定理，<span class="math inline">\(\mathbb C[G]\)</span> 在每个 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V_i)\)</span> 上的像都必须是全体．</p></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -503,7 +545,7 @@ g \cdot (v \otimes f) \cdot h := (g \cdot v) \otimes (f \cdot h)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>注记</em>. </span>依赖 Burnside 定理的满射性证明甚至不需要 <span class="math inline">\(G\)</span> 是有限群，</p>
@@ -554,7 +596,29 @@ Z(\mathbb C[G]) \cong \bigoplus_i Z(\operatorname{End}_{\mathbb C}(V_i))
 \sum_{h \in G} \chi(h) h = g \left( \sum_{h \in G} \chi(h) h \right) g^{-1} = \sum_{h \in G} \chi(h) g h g^{-1} = \sum_{h \in G} \chi(g^{-1} h g) h
 \]</span> 即 <span class="math inline">\(\chi(g^{-1} h g) = \chi(h)\)</span>——在共轭类上取常值——<span class="math inline">\(Z(\mathbb C[G])\)</span> 就是类函数全体！其维数等于 <span class="math inline">\(G\)</span> 的共轭类的数量．</p></li>
 </ul>
-<p>两条连起来看立得：<span class="math inline">\(G\)</span> 的共轭类的数量等于 <span class="math inline">\(G\)</span> 的不可约表示的数量．</p>
+<p>两条连起来看：<span class="math inline">\(G\)</span> 的共轭类的数量等于 <span class="math inline">\(G\)</span> 的不可约表示的数量．</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark (左模观点)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em> (左模观点). </span>回忆 <span class="math inline">\(\mathbb C[G]\)</span> 也作为 <span class="math inline">\(G \times G\)</span>-群表示分解．让我们使用对角映射 <span class="math inline">\(g \mapsto (g,g)\)</span> 将 Peter–Weyl 分解 <span class="math display">\[
+\mathbb C[G] \cong \bigoplus_i \operatorname{End}_{\mathbb C}(V_i)
+\]</span> 看成 <span class="math inline">\(G\)</span>-表示的分解，于是 <span class="math inline">\(\mathbb C[G]\)</span> 上的 <span class="math inline">\(G\)</span>-作用是共轭 <span class="math inline">\(g \cdot x := g x g^{-1}\)</span>，<span class="math inline">\(\operatorname{End}_{\mathbb C}(V_i)\)</span> 上的 <span class="math inline">\(G\)</span>-作用也是共轭 <span class="math inline">\((g \cdot \varphi) (v) := g \cdot \varphi (g^{-1} \cdot v)\)</span>．两边同时取 <span class="math inline">\(G\)</span>-不变子空间，得到 <span class="math display">\[
+\mathbb C[G]^G \cong \bigoplus_i \operatorname{End}_{G}(V_i)
+\]</span> 左边是 <span class="math inline">\(G\)</span> 的类函数空间，右边又使用 Schur 引理，我们再次得到共轭类计数的结论．</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="直和分解的典范投影" class="level3" data-number="3.3">
 <h3 data-number="3.3" class="anchored" data-anchor-id="直和分解的典范投影"><span class="header-section-number">3.3</span> 直和分解的典范投影</h3>
