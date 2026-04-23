@@ -716,7 +716,7 @@ V^{\otimes d} \cong \bigoplus_{\lambda \vdash d} V_\lambda \otimes_{\mathbb C} \
 <p>刚刚做的太急，甚至没来得及考虑 <span class="math inline">\(\operatorname{End}_{\mathbb C[\mathcal S_d]}(V^{\otimes d})\)</span> 里面具体装了些什么．第一个重要观察是</p>
 <ul>
 <li><p><span class="math inline">\(\operatorname{End}_{\mathbb C[\mathcal S_d]}(V^{\otimes d}) = \operatorname{Sym}^d \operatorname{End}_{\mathbb C}(V)\)</span></p>
-<p>这是因为交换性实质要求变换作用效果无关于张量位置——即在每个位置作用效果相同．【TODO】</p></li>
+<p>这是因为 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V^{\otimes d}) = (\operatorname{End}_{\mathbb C}V)^{\otimes d}\)</span>，且交换性实质要求变换作用效果无关于张量位置——即在每个位置作用效果相同．</p></li>
 </ul>
 <p>这是有趣的事情——研究张量积 <span class="math inline">\(V^{\otimes d}\)</span> 的分解最终引导我们去研究一个更大的张量积 <span class="math inline">\((\operatorname{End}_{\mathbb C} V)^{\otimes d}\)</span> 的对称部分．现在考察 <span class="math inline">\(\mathfrak{gl}(V)\)</span> 和 <span class="math inline">\(\operatorname{GL}(V)\)</span> 作为 <span class="math inline">\(V^{\otimes d}\)</span> 上的作用在其中扮演的角色．</p>
 <section id="群-operatornamegl" class="level4">
@@ -731,9 +731,9 @@ V^{\otimes d} \cong \bigoplus_{\lambda \vdash d} V_\lambda \otimes_{\mathbb C} \
 <div id="prp-group-span" class="theorem proposition">
 <p><span class="theorem-title"><strong>命题 1</strong></span> &nbsp;</p>
 <ul>
-<li>任何有限维线性空间 <span class="math inline">\(V\)</span> 上的齐次对称部分 <span class="math inline">\(\operatorname{Sym}^d \operatorname{End}_{\mathbb C}(V)\)</span> 作为 <span class="math inline">\(\operatorname{GL}(V)\)</span> 模都不可约；</li>
-<li>全体 <span class="math inline">\(\{\Delta^d(g) : g \in \operatorname{GL}(V) \}\)</span> 结合代数地生成了 <span class="math inline">\(\operatorname{Sym}^d \operatorname{End}_{\mathbb C}(V)\)</span>．</li>
+<li>全体 <span class="math inline">\(\{\Delta_{\operatorname{GL}}^d(g) : g \in \operatorname{GL}(V) \}\)</span> 线性生成了 <span class="math inline">\(\operatorname{Sym}^d \operatorname{End}_{\mathbb C}(V)\)</span>．</li>
 <li>群代数 <span class="math inline">\(\mathbb C[\operatorname{GL}(V)]\)</span> 在 <span class="math inline">\(V^{\otimes d}\)</span> 上的像恰好是 <span class="math inline">\(\operatorname{End}_{\mathbb C[\mathcal S_d]}(V^{\otimes d})\)</span>．</li>
+<li>Schur–Weyl 系列定理描述了 <span class="math inline">\(\operatorname{GL}(V)\)</span> 和 <span class="math inline">\(\mathcal S_d\)</span> 在 <span class="math inline">\(V^{\otimes d}\)</span> 上的对偶关系．</li>
 </ul>
 </div>
 </div>
@@ -752,7 +752,28 @@ V^{\otimes d} \cong \bigoplus_{\lambda \vdash d} V_\lambda \otimes_{\mathbb C} \
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
-<p><span class="proof-title"><em>证明</em>. </span>TODO</p>
+<p><span class="proof-title"><em>证明</em>. </span>只需证第一条．考虑多重线性版本的极化恒等式 <span class="math display">\[
+x_1 \dots x_d = \frac{1}{d!} \sum_{S \subseteq \{ 1, \dots, d \}} (-1)^{d - |S|} \left( \sum_{i \in S} x_i \right)^d
+\]</span> 这意味着全体线性多项式的 <span class="math inline">\(d\)</span> 次幂足以线性生成全体 <span class="math inline">\(d\)</span> 次多项式．熟记对称代数的全体线性泛函就是多项式环，故这等价于说 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V)\)</span> 在 <span class="math inline">\(\Delta_{\operatorname{GL}}^d\)</span> 下的像为 <span class="math inline">\(\operatorname{Sym}^d \operatorname{End}_{\mathbb C}(V)\)</span>．</p>
+<p>假如 <span class="math inline">\(\operatorname{GL}(V)\)</span> 在 <span class="math inline">\(\Delta_{\operatorname{GL}}^d\)</span> 的像没有线性生成 <span class="math inline">\(\operatorname{Sym}^d \operatorname{End}_{\mathbb C}(V)\)</span>，则应存在 <span class="math inline">\(\operatorname{Sym}^d \operatorname{End}_{\mathbb C}(V)\)</span> 上的非零线性泛函（即 <span class="math inline">\(d\)</span> 次齐次多项式）<span class="math inline">\(h\)</span> 使得这像在 <span class="math inline">\(h\)</span> 下被消灭，即 <span class="math inline">\(h \circ \Delta_{\operatorname{GL}}^d\)</span> 消灭 <span class="math inline">\(\operatorname{GL}(V)\)</span>．注意 <span class="math inline">\(h : \operatorname{Sym}^d \operatorname{End}_{\mathbb C}(V) \to \mathbb C\)</span> 和 <span class="math inline">\(\Delta_{\operatorname{GL}}^d : \operatorname{End}_{\mathbb C}(V) \to \operatorname{Sym}^d \operatorname{End}_{\mathbb C}V\)</span> 都是纯代数映射，Zariski 拓扑意义下连续，又 <span class="math inline">\(\operatorname{GL}(V)\)</span> 在 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V)\)</span> 中 Zariski 稠密，故 <span class="math inline">\(h \circ \Delta_{\operatorname{GL}}^d\)</span> 的消灭性从 <span class="math inline">\(\operatorname{GL}(V)\)</span> 扩展到 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V)\)</span>．于是 <span class="math inline">\(\operatorname{End}_{\mathbb C}(V)\)</span> 在 <span class="math inline">\(\Delta_{\operatorname{GL}}^d\)</span> 下的像 <span class="math inline">\(\operatorname{Sym}^d \operatorname{End}_{\mathbb C}(V)\)</span> 被 <span class="math inline">\(h\)</span> 消灭——但 <span class="math inline">\(h\)</span> 非零，这不可能发生．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>另一条路线是直接证明任何有限维线性空间 <span class="math inline">\(V\)</span> 上的齐次对称部分 <span class="math inline">\(\operatorname{Sym}^d \operatorname{End}_{\mathbb C}(V)\)</span> 作为 <span class="math inline">\(\operatorname{GL}(V)\)</span> 模都不可约．</p>
 </div>
 </div>
 </div>
@@ -772,13 +793,14 @@ V^{\otimes d} \cong \bigoplus_{\lambda \vdash d} V_\lambda \otimes_{\mathbb C} \
 <ul>
 <li>全体 <span class="math inline">\(\{\Delta_{\mathfrak{gl}}^d(x) : x \in \mathfrak{gl}(V) \}\)</span> 结合代数地生成出 <span class="math inline">\(\{\Delta_{\operatorname{GL}}^d(g) : g \in \operatorname{GL}(V) \}\)</span>，进而由 <a href="#prp-group-span" class="quarto-xref">命题&nbsp;1</a> 结合代数地生成整个 <span class="math inline">\(\operatorname{Sym}^d \operatorname{End}_{\mathbb C}(V)\)</span>．</li>
 <li>泛包络代数 <span class="math inline">\(U(\mathfrak{gl}(V))\)</span> 在 <span class="math inline">\(V^{\otimes d}\)</span> 上的像恰好是 <span class="math inline">\(\operatorname{End}_{\mathbb C[\mathcal S_d]}(V^{\otimes d})\)</span>．</li>
+<li>Schur–Weyl 系列定理描述了 <span class="math inline">\(\mathfrak{gl}(V)\)</span> 和 <span class="math inline">\(\mathcal S_d\)</span> 在 <span class="math inline">\(V^{\otimes d}\)</span> 上的对偶关系．</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -787,7 +809,7 @@ V^{\otimes d} \cong \bigoplus_{\lambda \vdash d} V_\lambda \otimes_{\mathbb C} \
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
 <p><span class="proof-title"><em>证明</em>. </span>对任意 <span class="math inline">\(x \in \mathfrak{gl}(V)\)</span>，考虑记 <span class="math display">\[
@@ -811,7 +833,7 @@ x_i := \operatorname{id}_V \otimes \dots \otimes \rho_{V}(x) \otimes \dots \otim
 <p>关于 <span class="math inline">\(\mathbb S_\lambda V\)</span> 的故事还没有讲完．我们刚刚建立的对偶确实完整刻画了 <span class="math inline">\(\operatorname{GL}(V)\)</span> 和 <span class="math inline">\(\mathcal S_d\)</span> 在 <span class="math inline">\(V^{\otimes d}\)</span> 上作用的关系，并分类了 <span class="math inline">\(\operatorname{GL}(V)\)</span> 作用在 <span class="math inline">\(V^{\otimes d}\)</span> 上的不可约子表示——但这都是作为 <span class="math inline">\(\operatorname{End}_{\mathbb C} (V^{\otimes d})\)</span> 的子代数在研究，而 <span class="math inline">\(\operatorname{GL}(V)\)</span> 完全可能作用更多的空间上，进而产生更多的不可约表示．</p>
 <p>在每个 <span class="math inline">\(V^{\otimes d}\)</span> 上的讨论已经证明全体 <span class="math inline">\(\mathbb S_\lambda V\)</span> 确为 <span class="math inline">\(\operatorname{GL}(V)\)</span> 的不可约表示，但这就是全部了吗？还会有其它 <span class="math inline">\(\operatorname{GL}(V)\)</span> 的不可约表示吗？</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -820,12 +842,12 @@ x_i := \operatorname{id}_V \otimes \dots \otimes \rho_{V}(x) \otimes \dots \otim
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse show">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (约化代数群和半单李代数的表示论). </span>答案是如果考虑 <span class="math inline">\(\operatorname{GL}(V)\)</span> 的代数表示的话，<span class="math inline">\(\mathbb S_\lambda V\)</span> 就是全部了．这是 A 型约化代数群的表示论．</p>
+<p><span class="proof-title"><em>注记</em> (约化代数群和半单李代数的表示论). </span>答案是：如果考虑 <span class="math inline">\(\operatorname{GL}(V)\)</span> 的代数表示的话，<span class="math inline">\(\mathbb S_\lambda V\)</span> 就几乎是全部了．这是 A 型约化代数群的表示论．</p>
 <p><span class="math inline">\(\operatorname{GL}(V)\)</span> 的代数表示即是研究代数群同态 <span class="math inline">\(\operatorname{GL}(V) \to \operatorname{GL}(W)\)</span>．<span class="math inline">\(d\)</span> 一下立刻会获得李代数同态 <span class="math inline">\(\mathfrak{gl}(V) \to \mathfrak{gl}(W)\)</span>，因此代数群的表示论和其对应李代数的表示论联系密切．这就又涉及 <span class="math inline">\(A\)</span> 型李代数 <span class="math inline">\(\mathfrak{gl}_n\)</span> 或 <span class="math inline">\(\mathfrak{sl}_n\)</span> 的表示论．</p>
-<p>这个天坑就不在这里继续挖了，TODO．</p>
+<p>这个天坑就不在这里继续挖了．</p>
 </div>
 </div>
 </div>
