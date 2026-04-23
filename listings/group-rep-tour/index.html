@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Atiyah–Macdonald affairs.">
+<meta name="description" content="有限群表示论，Peter–Weyl 分解，对称群表示论和 Schur–Weyl 对偶．">
 
-<title>交换代数 – sun123zxy’s blog</title>
+<title>漫步有限群表示论 – sun123zxy’s blog</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -24,31 +24,51 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="..//assets/images/avatar.png" rel="icon" type="image/png">
-<script src="../site_libs/quarto-listing/list.min.js"></script>
-<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5d10e83519a74e789e6bb4496f75c4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-723530320b8f33b049ef21af632b9e12.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-649bae6cd8a131598b54c5176f742eb8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-52e355439b6e6686537b1193409af538.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-listing/list.min.js"></script>
+<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5d10e83519a74e789e6bb4496f75c4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-723530320b8f33b049ef21af632b9e12.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-649bae6cd8a131598b54c5176f742eb8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-52e355439b6e6686537b1193409af538.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -78,7 +98,7 @@ ul.task-list li input[type="checkbox"] {
 }</script><script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    const listingTargetEl = window.document.querySelector('#listing-lst1 .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
@@ -91,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+    window['quarto-listings']['listing-lst1'] = new List('listing-lst1', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -144,7 +164,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="alternate" type="application/rss+xml" title="sun123zxy's blog" href="commalg.xml" data-external="1"></head>
+<link rel="alternate" type="application/rss+xml" title="sun123zxy's blog" href="index.xml" data-external="1"></head>
 
 <body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
@@ -313,7 +333,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
@@ -324,15 +344,15 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../listings/overview.html"> 
+    <a class="nav-link" href="../../listings/overview.html"> 
 <span class="menu-text">Overview</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../listings/projects/index.html"> 
+    <a class="nav-link" href="../../listings/projects/index.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -350,7 +370,7 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-bi-rss">    
         <li>
-    <a class="dropdown-item" href="../listings/all.xml">
+    <a class="dropdown-item" href="../../listings/all.xml">
  <span class="dropdown-text">All Posts</span></a>
   </li>  
     </ul>
@@ -368,21 +388,27 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(7)</span></div><div class="category" data-category="YWxnZWJyYQ==">algebra <span class="quarto-category-count">(7)</span></div><div class="category" data-category="Y29tbWFsZw==">commalg <span class="quarto-category-count">(7)</span></div><div class="category" data-category="bWF0aA==">math <span class="quarto-category-count">(7)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#acknowledgement" id="toc-acknowledgement" class="nav-link active" data-scroll-target="#acknowledgement">Acknowledgement</a></li>
+  </ul>
+</nav>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="YWxnZWJyYQ==">algebra <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Y29tYmluYXRvcmljcw==">combinatorics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWF0aA==">math <span class="quarto-category-count">(4)</span></div></div></div>
 <!-- main -->
 <main class="content column-page-left" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">交换代数</h1>
-<p class="subtitle lead">Commutative Algebra</p>
+<h1 class="title">漫步有限群表示论</h1>
+<p class="subtitle lead">A Tour of Representation Theory of Finite Groups</p>
 </div>
 
 <div>
   <div class="description">
-    Atiyah–Macdonald affairs.
+    有限群表示论，Peter–Weyl 分解，对称群表示论和 Schur–Weyl 对偶．
   </div>
 </div>
 
@@ -399,15 +425,19 @@ window.Quarto = {
 </header>
 
 
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<p>这是若干篇相互关联的短文合集，主要目标是开辟一条有限群表示论到 Schur–Weyl 对偶的路线．内容包括</p>
+<ul>
+<li><p>有限群表示论基础．这一部分是 <span class="citation" data-cites="fulton_representation_2004"><a href="#ref-fulton_representation_2004" role="doc-biblioref">[1, Ch. 1–2]</a></span> 和课堂内容的整理．不同点是证明群表示半单性时强调了分裂同态的观点．</p></li>
+<li><p>有限群的 Peter–Weyl 定理．这里部分参考 <span class="citation" data-cites="fulton_representation_2004"><a href="#ref-fulton_representation_2004" role="doc-biblioref">[1, Sec. 3.4]</a></span>，强调定理双边表示版本，并给出了多种路线的证明．</p></li>
+<li><p>对称群 <span class="math inline">\(\mathcal S_n\)</span> 的表示论．这里主要参考 <span class="citation" data-cites="fulton_representation_2004"><a href="#ref-fulton_representation_2004" role="doc-biblioref">[1, Ch. 4.2]</a></span> 和课堂内容．不同点是我们在记号上不偷懒直接用一个分拆 <span class="math inline">\(\lambda\)</span> 定义 Young 对称化子 <span class="math inline">\(c_\lambda\)</span>，而是更细的为每个 Young 表 <span class="math inline">\(T\)</span> 定义 Young 对称化子 <span class="math inline">\(c_T\)</span>．会看到在组合部分钟这种记号的优势．在建立 Specht 模的正交关系时，比起直接使用分拆上的字典序，我们更细的考虑分拆上的支配序和其与 Young 表的组合联系．</p></li>
+<li><p>Schur–Weyl 对偶．这一部分是 <span class="citation" data-cites="etingof_introduction_2011"><a href="#ref-etingof_introduction_2011" role="doc-biblioref">[2, Secs. 5.18–5.19]</a></span> 的整理，强调 Peter–Weyl 定理在其中的作用．</p></li>
+</ul>
+<p>时间有限，文章各处散落着一些 TODO，敬请谅解．</p>
+<div id="listing-lst1" class="quarto-listing quarto-listing-container-default">
 <div class="listing-actions-group">
    <div class="input-group input-group-sm quarto-listing-sort">
     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-    <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+    <select id="listing-lst1-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-lst1'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
       <option value="" disabled="" selected="" hidden="">Order By</option>
       <option value="index" data-direction="asc">Default</option>
       <option value="listing-title" data-direction="asc">
@@ -427,55 +457,18 @@ window.Quarto = {
     </div>
 </div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="bWF0aCUyQ2FsZ2VicmElMkNjb21tYWxn" data-listing-date-sort="1775520000000" data-listing-file-modified-sort="1776785368798" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="359">
-<div class="thumbnail"><a href="../posts/20260406-dvr-dedekind/index.html" class="no-external">
-
-<img loading="lazy" src="../assets/images/am69.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20260406-dvr-dedekind/index.html" class="no-external">DVR–Dedekind 乱炖</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20260406-dvr-dedekind/index.html" class="no-external">一维 Noether 环的结构</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y29tbWFsZw=='); return false;">commalg</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20260406-dvr-dedekind/index.html" class="no-external">
-上篇中对零维 Noether 环的结构做了详尽的分析，局部情形的主要结果如下：
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20260406-dvr-dedekind/index.html" class="no-external">
-<div class="listing-date">
-2026/04/07
-</div>
-<div class="metadata-value listing-lang">
-zh
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="bWF0aCUyQ2FsZ2VicmElMkNjb21tYWxn" data-listing-date-sort="1772150400000" data-listing-file-modified-sort="1776785368797" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="595">
-<div class="thumbnail"><a href="../posts/20260228-spec-connect/index.html" class="no-external">
+<div class="quarto-post image-right" data-index="0" data-categories="bWF0aCUyQ2FsZ2VicmE=" data-listing-date-sort="1776556800000" data-listing-file-modified-sort="1776943507015" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1385">
+<div class="thumbnail"><a href="../../posts/20260419-schur-weyl/index.html" class="no-external">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="../posts/20260228-spec-connect/index.html" class="no-external">Spec，可约与连通性</a>
+<a href="../../posts/20260419-schur-weyl/index.html" class="no-external">Schur–Weyl 对偶</a>
 </h3>
 <div class="listing-subtitle">
-<a href="../posts/20260228-spec-connect/index.html" class="no-external"></a>
+<a href="../../posts/20260419-schur-weyl/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 
@@ -483,39 +476,37 @@ zh
 
 <div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
 
-<div class="listing-category" onclick="window.quartoListingCategory('Y29tbWFsZw=='); return false;">commalg</div>
-
 </div>
-<div class="delink listing-description"><a href="../posts/20260228-spec-connect/index.html" class="no-external">
-本文中环均为交换幺环．
+<div class="delink listing-description"><a href="../../posts/20260419-schur-weyl/index.html" class="no-external">
+众所周知，设 <span class="math inline">\(G\)</span> 是群，则对任意 <span class="math inline">\(G\)</span> 的 <span class="math inline">\(n\)</span> 维表示 <span class="math inline">\(V\)</span>，<span class="math inline">\(V \otimes_{\mathbb C} V\)</span> 都可以分解为子表示 <span class="math inline">\(\operatorname{Sym}^2 V\)</span> 和 <span class="math inline">\(\operatorname{Alt}^2 V\)</span> 的直和，其中
 </a></div>
 </div>
 <div class="metadata">
-<a href="../posts/20260228-spec-connect/index.html" class="no-external">
+<a href="../../posts/20260419-schur-weyl/index.html" class="no-external">
 <div class="listing-date">
-2026/02/27
+2026/04/19
 </div>
 <div class="metadata-value listing-lang">
 zh
 </div>
 <div class="metadata-value listing-collections">
-short
+group-rep-tour
 </div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="bWF0aCUyQ2FsZ2VicmElMkNjb21tYWxn" data-listing-date-sort="1771977600000" data-listing-file-modified-sort="1776785368797" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="437">
-<div class="thumbnail"><a href="../posts/20260225-free-module-cmp/index.html" class="no-external">
+<div class="quarto-post image-right" data-index="1" data-categories="bWF0aCUyQ2FsZ2VicmE=" data-listing-date-sort="1773532800000" data-listing-file-modified-sort="1776943507014" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1393">
+<div class="thumbnail"><a href="../../posts/20260312-group-rep-speedrun/index.html" class="no-external">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="../posts/20260225-free-module-cmp/index.html" class="no-external">Comparing Free Modules via Homomorphisms</a>
+<a href="../../posts/20260312-group-rep-speedrun/index.html" class="no-external">有限群表示论速通</a>
 </h3>
 <div class="listing-subtitle">
-<a href="../posts/20260225-free-module-cmp/index.html" class="no-external"></a>
+<a href="../../posts/20260312-group-rep-speedrun/index.html" class="no-external">A Quick Tour of the Representation Theory of Finite Groups</a>
 </div>
 <div class="listing-categories">
 
@@ -523,76 +514,37 @@ short
 
 <div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
 
-<div class="listing-category" onclick="window.quartoListingCategory('Y29tbWFsZw=='); return false;">commalg</div>
-
 </div>
-<div class="delink listing-description"><a href="../posts/20260225-free-module-cmp/index.html" class="no-external">
-We discuss some well-known results that compare finitely-generated free modules via homomorphisms. Let <span class="math inline">\(R\)</span> be a nonzero commutative ring with <span class="math inline">\(1\)</span>.
-</a></div>
+<div class="delink listing-description"><a href="../../posts/20260312-group-rep-speedrun/index.html" class="no-external">
+</a><p><a href="../../posts/20260312-group-rep-speedrun/index.html" class="no-external">参考 Fulton–Harris <span class="citation" data-cites="fulton_representation_2004"></span></a><a href="#ref-fulton_representation_2004" role="doc-biblioref">[1, Ch. 1–2]</a>，优雅、迅速、坐标无关地完成有限群有限维复表示论的入门．</p>
+</div>
 </div>
 <div class="metadata">
-<a href="../posts/20260225-free-module-cmp/index.html" class="no-external">
+<a href="../../posts/20260312-group-rep-speedrun/index.html" class="no-external">
 <div class="listing-date">
-2026/02/25
+2026/03/15
 </div>
 <div class="metadata-value listing-lang">
-en
+zh
 </div>
 <div class="metadata-value listing-collections">
-short
+group-rep-tour
 </div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="bWF0aCUyQ2FsZ2VicmElMkNjb21tYWxn" data-listing-date-sort="1766016000000" data-listing-file-modified-sort="1776785368796" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="53" data-listing-word-count-sort="10522">
-<div class="thumbnail"><a href="../posts/20251218-atiyah/index.html" class="no-external">
-
-<img loading="lazy" src="../assets/images/am69.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20251218-atiyah/index.html" class="no-external">Selected solutions to Atiyah-Macdonald’s exercises</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20251218-atiyah/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y29tbWFsZw=='); return false;">commalg</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20251218-atiyah/index.html" class="no-external">
-<p>A non-comprehensive collection of solutions to Atiyah-Macdonald’s exercises, with some additional comments and discussions. There may be errors, for reference only.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20251218-atiyah/index.html" class="no-external">
-<div class="listing-date">
-2025/12/18
-</div>
-<div class="metadata-value listing-lang">
-en
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="bWF0aCUyQ2FsZ2VicmElMkNjb21tYWxn" data-listing-date-sort="1754956800000" data-listing-file-modified-sort="1776785368796" data-listing-date-modified-sort="1755475200000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1004">
-<div class="thumbnail"><a href="../posts/20250709-hnt/index.html" class="no-external">
+<div class="quarto-post image-right" data-index="2" data-categories="bWF0aCUyQ2FsZ2VicmE=" data-listing-date-sort="1773446400000" data-listing-file-modified-sort="1776943507014" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="894">
+<div class="thumbnail"><a href="../../posts/20260314-group-rep-peter-weyl/index.html" class="no-external">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="../posts/20250709-hnt/index.html" class="no-external">零点定理乱炖</a>
+<a href="../../posts/20260314-group-rep-peter-weyl/index.html" class="no-external">有限群表示论：Peter–Weyl 定理</a>
 </h3>
 <div class="listing-subtitle">
-<a href="../posts/20250709-hnt/index.html" class="no-external">Suspicious Nullstellensatz Soup</a>
+<a href="../../posts/20260314-group-rep-peter-weyl/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 
@@ -600,73 +552,39 @@ en
 
 <div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
 
-<div class="listing-category" onclick="window.quartoListingCategory('Y29tbWFsZw=='); return false;">commalg</div>
-
 </div>
-<div class="delink listing-description"><a href="../posts/20250709-hnt/index.html" class="no-external">
-<p>On Hilbert’s Nullstellensatz and the ideal–variety correspondence.</p>
+<div class="delink listing-description"><a href="../../posts/20260314-group-rep-peter-weyl/index.html" class="no-external">
+有限群表示论的一个经典结果是正则表示的分解： <span class="math display">\[
+\mathbb C[G] \cong \bigoplus_i V_i^{\oplus \dim V_i}
+\]</span> 这里 <span class="math inline">\(\mathbb C[G]\)</span> 是群 <span class="math inline">\(G\)</span> 的群代数，<span class="math inline">\(V_i\)</span> 是 <span class="math inline">\(G\)</span> 的全体不可约表示．这只是个左 <span class="math inline">\(\mathbb C[G]\)</span>-模的分解：<span class="math inline">\(\ma…</span><span class="math inline"></span><span class="math inline"></span><span class="math display"></span>
 </a></div>
 </div>
 <div class="metadata">
-<a href="../posts/20250709-hnt/index.html" class="no-external">
+<a href="../../posts/20260314-group-rep-peter-weyl/index.html" class="no-external">
 <div class="listing-date">
-2025/08/12
+2026/03/14
 </div>
 <div class="metadata-value listing-lang">
 zh
 </div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="bWF0aCUyQ2FsZ2VicmElMkNjb21tYWxn" data-listing-date-sort="1754006400000" data-listing-file-modified-sort="1776785368796" data-listing-date-modified-sort="1775433600000" data-listing-reading-time-sort="5" data-listing-word-count-sort="941">
-<div class="thumbnail"><a href="../posts/20250731-artin-noether/index.html" class="no-external">
-
-<img loading="lazy" src="../assets/images/am69.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../posts/20250731-artin-noether/index.html" class="no-external">Artin–Noether 乱炖</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../posts/20250731-artin-noether/index.html" class="no-external">零维 Noether 环的结构</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y29tbWFsZw=='); return false;">commalg</div>
-
-</div>
-<div class="delink listing-description"><a href="../posts/20250731-artin-noether/index.html" class="no-external">
-本文所指环均为交换幺环．我们重新编排一下 <span class="citation" data-cites="m_f_atiyah_introduction_1969">[1, chapter 8]</span> 的顺序，开发以下著名的 Artin 环等价刻画的证明：
-</a></div>
-</div>
-<div class="metadata">
-<a href="../posts/20250731-artin-noether/index.html" class="no-external">
-<div class="listing-date">
-2025/08/01
-</div>
-<div class="metadata-value listing-lang">
-zh
+<div class="metadata-value listing-collections">
+group-rep-tour
 </div>
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="bWF0aCUyQ2FsZ2VicmElMkNjb21tYWxn" data-listing-date-sort="1747353600000" data-listing-file-modified-sort="1776785368795" data-listing-date-modified-sort="1747353600000" data-listing-reading-time-sort="15" data-listing-word-count-sort="2861">
-<div class="thumbnail"><a href="../posts/20250509-spec/index.html" class="no-external">
+<div class="quarto-post image-right" data-index="3" data-categories="bWF0aCUyQ2FsZ2VicmElMkNjb21iaW5hdG9yaWNz" data-listing-date-sort="1749340800000" data-listing-file-modified-sort="1776943507011" data-listing-date-modified-sort="1774051200000" data-listing-reading-time-sort="9" data-listing-word-count-sort="1618">
+<div class="thumbnail"><a href="../../posts/20250606-symrep/index.html" class="no-external">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
 
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="../posts/20250509-spec/index.html" class="no-external">On Determining Prime Spectra of Some Coordinate Rings</a>
+<a href="../../posts/20250606-symrep/index.html" class="no-external">对称群的复不可约表示</a>
 </h3>
 <div class="listing-subtitle">
-<a href="../posts/20250509-spec/index.html" class="no-external">with Applications to the Two Squares Theorem</a>
+<a href="../../posts/20250606-symrep/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 
@@ -674,27 +592,47 @@ zh
 
 <div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
 
-<div class="listing-category" onclick="window.quartoListingCategory('Y29tbWFsZw=='); return false;">commalg</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Y29tYmluYXRvcmljcw=='); return false;">combinatorics</div>
 
 </div>
-<div class="delink listing-description"><a href="../posts/20250509-spec/index.html" class="no-external">
-<p>Thanks to the powerful tools borrowed from commutative algebra, we show a general approach to determine the prime spectra of some coordinate rings by examples. As we determine the spectrum of the Gaussian integers, a proof of the famous two squares theorem emerges without tricky techniques.</p>
+<div class="delink listing-description"><a href="../../posts/20250606-symrep/index.html" class="no-external">
+我们简明快速地完成对称群的复不可约表示的分类．本文主要微调自 <span class="citation" data-cites="fulton_representation_2004">[1, section 4.2]</span>，亦少量参考 <span class="citation" data-cites="sagan_symmetric_2001">[2, chapter 2]</span>．推荐读者阅读前熟悉群的复表示的基本常识 <span class="citation" data-cites="fulton_representation_2004">[1, chapter 1–2]</span> 和群代数模的观点．
 </a></div>
 </div>
 <div class="metadata">
-<a href="../posts/20250509-spec/index.html" class="no-external">
+<a href="../../posts/20250606-symrep/index.html" class="no-external">
 <div class="listing-date">
-2025/05/16
+2025/06/08
 </div>
 <div class="metadata-value listing-lang">
-en
+zh
+</div>
+<div class="metadata-value listing-collections">
+group-rep-tour
 </div>
 </a>
 </div>
 </div>
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</div>
+<section id="acknowledgement" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgement">Acknowledgement</h2>
+<p>The author would like to thank Prof.&nbsp;Yu Zhao for his wonderful lectures on representation theory.</p>
+
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-fulton_representation_2004" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">W. Fulton and J. Harris, <em>Representation theory</em>, vol. 129. in Graduate texts in mathematics, vol. 129. New York, <span>NY</span>: Springer, 2004. doi: <a href="https://doi.org/10.1007/978-1-4612-0979-9">10.1007/978-1-4612-0979-9</a>.</div>
+</div>
+<div id="ref-etingof_introduction_2011" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">P. I. Etingof <em>et al.</em>, <em>Introduction to representation theory</em>, vol. 59. American Mathematical Soc., 2011. Accessed: Apr. 20, 2026. [Online]. Available: <a href="https://books.google.com/books?hl=en&amp;lr=&amp;id=RS6IAwAAQBAJ&amp;oi=fnd&amp;pg=PA1&amp;dq=Introduction+to+Representation+Theory&amp;ots=aH2Z8oz0Dz&amp;sig=XSulCecbHulkoPMxGjwVhcVhkvw">https://books.google.com/books?hl=en&amp;lr=&amp;id=RS6IAwAAQBAJ&amp;oi=fnd&amp;pg=PA1&amp;dq=Introduction+to+Representation+Theory&amp;ots=aH2Z8oz0Dz&amp;sig=XSulCecbHulkoPMxGjwVhcVhkvw</a></div>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -1127,7 +1065,7 @@ en
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="../thanks.html">
+    <a class="nav-link" href="../../thanks.html">
 <p>Thanks</p>
 </a>
   </li>  

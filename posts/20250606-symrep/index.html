@@ -403,7 +403,8 @@ window.Quarto = {
   <li><a href="#同形状的情形" id="toc-同形状的情形" class="nav-link" data-scroll-target="#同形状的情形"><span class="header-section-number">4</span> 同形状的情形</a></li>
   <li><a href="#不同形状的情形" id="toc-不同形状的情形" class="nav-link" data-scroll-target="#不同形状的情形"><span class="header-section-number">5</span> 不同形状的情形</a></li>
   <li><a href="#双边理想分解" id="toc-双边理想分解" class="nav-link" data-scroll-target="#双边理想分解"><span class="header-section-number">6</span> 双边理想分解</a></li>
-  <li><a href="#garnir-关系与-specht-模的基底" id="toc-garnir-关系与-specht-模的基底" class="nav-link" data-scroll-target="#garnir-关系与-specht-模的基底"><span class="header-section-number">7</span> Garnir 关系与 Specht 模的基底</a></li>
+  <li><a href="#自对偶" id="toc-自对偶" class="nav-link" data-scroll-target="#自对偶"><span class="header-section-number">7</span> 自对偶</a></li>
+  <li><a href="#garnir-关系与-specht-模的基底" id="toc-garnir-关系与-specht-模的基底" class="nav-link" data-scroll-target="#garnir-关系与-specht-模的基底"><span class="header-section-number">8</span> Garnir 关系与 Specht 模的基底</a></li>
   
   </ul>
 <div class="quarto-alternate-formats"><h2>其他格式</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div><div class="quarto-other-links"><h2>其他链接</h2><ul><li><a href="https://zhuanlan.zhihu.com/p/1915153242335216846"><i class="bi bi-question-circle"></i>在知乎上阅读</a></li></ul></div></nav>
@@ -956,8 +957,44 @@ n_g = n_{pg(g^{-1}pg)} = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 </div>
 </div>
 </section>
-<section id="garnir-关系与-specht-模的基底" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="garnir-关系与-specht-模的基底"><span class="header-section-number">7</span> Garnir 关系与 Specht 模的基底</h2>
+<section id="自对偶" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="自对偶"><span class="header-section-number">7</span> 自对偶</h2>
+<p><span class="math inline">\(\mathcal S_n\)</span> 表示论的一个重要结果是所有 <span class="math inline">\(\mathcal S_n\)</span> 的表示都是自对偶的，即对任意 <span class="math inline">\(\mathcal S_n\)</span> 的表示 <span class="math inline">\(V\)</span>，有 <span class="math display">\[
+V \cong V^*
+\]</span> 这同构有两种理解方式：</p>
+<ul>
+<li>作为左模的同构：<span class="math inline">\(V\)</span> 上左作用 <span class="math inline">\(g \cdot v\)</span> 自然，<span class="math inline">\(V^*\)</span> 上配备 <span class="math inline">\((\sigma \cdot f)(v) := f(\sigma^{-1} \cdot v)\)</span>．</li>
+<li>作为右模的同构：<span class="math inline">\(V\)</span> 上右作用 <span class="math inline">\(v \cdot \sigma := \sigma^{-1} \cdot v\)</span>，<span class="math inline">\(V^*\)</span> 上右作用 <span class="math inline">\((f \cdot \sigma)(v) := f(\sigma \cdot v)\)</span> 自然．</li>
+</ul>
+<p>两侧是对偶的，只需证明一侧．可以考虑特征标：<span class="math inline">\(\mathcal S_n\)</span> 的共轭类由置换的轮换型给出，而 <span class="math inline">\(\sigma\)</span> 和 <span class="math inline">\(\sigma^{-1}\)</span> 有相同轮换型，故在同一共轭类，故 <span class="math inline">\(V\)</span> 和 <span class="math inline">\(V^*\)</span> 的特征标相同，进而同构．</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark (自对偶、特征标与双线性型)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em> (自对偶、特征标与双线性型). </span>一般来说：</p>
+<ul>
+<li>有限群复表示自对偶当且仅当特征标是实函数</li>
+<li>自对偶相当于保证 <span class="math inline">\(V\)</span> 上有一个非退化的 <span class="math inline">\(\mathcal S_n\)</span>-不变双线性型</li>
+<li>群代数上总有标准的非退化 <span class="math inline">\(G\)</span>-不变双线性型，从而自对偶</li>
+</ul>
+<p>一般来说，怎样显式构造这个双线性型呢？</p>
+<p>可以考虑随意取一 <span class="math inline">\(V\)</span> 上双线性型做平均化得到不变双线性型．如果 <span class="math inline">\(V\)</span> 不可约，Schur 引理保证平均化后的双线性型要么是零，要么非退化．于是可以取 <span class="math inline">\(V^*\)</span> 一组基底 <span class="math inline">\((f_i)\)</span> 并遍历 <span class="math inline">\(f_i \otimes f_j\)</span> 实验平均化后是否非退化．对可约的情况，可以分解成不可约成分后做．</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="garnir-关系与-specht-模的基底" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="garnir-关系与-specht-模的基底"><span class="header-section-number">8</span> Garnir 关系与 Specht 模的基底</h2>
 <p>我们为每个 Specht 模构造一个显式基底．因为同形状 Young 表诱导的 Specht 模之间有典范同构，可以只研究最标准的那个从左到右，从上到下标号的 Young 表 <span class="math inline">\(T_{\lambda, \operatorname{id}}\)</span> 诱导的 Specht 模．以后在无歧义的情况下，直接用 <span class="math inline">\(\lambda\)</span> 来代指此这个最标准的 Young 表．</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
@@ -1004,7 +1041,7 @@ n_g = n_{pg(g^{-1}pg)} = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1013,7 +1050,7 @@ n_g = n_{pg(g^{-1}pg)} = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse show">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>注记</em> (关于使用到的复数域 <span class="math inline">\(\mathbb C\)</span> 的特殊性质). </span></p>
@@ -1027,7 +1064,7 @@ n_g = n_{pg(g^{-1}pg)} = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1036,7 +1073,7 @@ n_g = n_{pg(g^{-1}pg)} = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>注记</em> (关于对称化子的组合看法). </span><span class="math inline">\(P_T\)</span> 中的元素在左作用到 <span class="math inline">\(g \in \mathcal S_n\)</span> 时，是对 <span class="math inline">\(T\)</span> 中同行的数字做字面上的数字置换；在右作用时是将 <span class="math inline">\(\sigma\)</span>（从左到右，从上到下）排入 <span class="math inline">\(T\)</span> 后做其上的行置换．<span class="math inline">\(Q_T\)</span> 同理．</p>
@@ -1052,7 +1089,7 @@ n_g = n_{pg(g^{-1}pg)} = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1061,7 +1098,7 @@ n_g = n_{pg(g^{-1}pg)} = n_{pgq} = \operatorname{sgn}(q) n_g = - n_g
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse show">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="hidden proof remark">
 <p><span class="proof-title"><em>注记</em> (关于 <span class="math inline">\(P_T Q_T \cap Q_T P_T\)</span> 的一个错误猜想，已隐藏). </span><span class="math inline">\(\alpha\)</span> 也应等于 <span class="math inline">\(c_T^2\)</span> 在单位元处的系数 <span class="math display">\[

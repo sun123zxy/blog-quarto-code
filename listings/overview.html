@@ -78,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
 }</script><script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    const listingTargetEl = window.document.querySelector('#listing-lst-general .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
@@ -91,7 +91,35 @@ ul.task-list li input[type="checkbox"] {
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+    window['quarto-listings']['listing-lst-general'] = new List('listing-lst-general', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-lst-specialized .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-subtitle','listing-description','listing-image',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-title","listing-author","listing-image","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-lst-specialized'] = new List('listing-lst-specialized', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -367,9 +395,7 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
-    </div>
+    
 <!-- main -->
 <main class="content column-page" id="quarto-document-content">
 
@@ -398,17 +424,15 @@ window.Quarto = {
 </header>
 
 
-
-
-
-
-<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
+<section id="general" class="level2">
+<h2 class="anchored" data-anchor-id="general">General</h2>
+<div id="listing-lst-general" class="listing quarto-float quarto-figure quarto-figure-left quarto-listing quarto-listing-container-grid anchored">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1776785368732" data-listing-reading-time-sort="1" data-listing-word-count-sort="5">
-<a href="../listings/math.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1776943506938" data-listing-reading-time-sort="1" data-listing-word-count-sort="5">
+<a href="../listings/math/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img loading="lazy" src="../assets/images/kourindou.jpg" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="../listings/math/kourindou.jpg" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -423,11 +447,11 @@ Kourindou of Mathematics
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1776785368732" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<a href="../listings/cp.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1776943506936" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<a href="../listings/cp/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img loading="lazy" src="../assets/images/icpc.jpg" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="../listings/cp/icpc.jpg" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -442,11 +466,11 @@ OI / ICPC / CCPC
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1776785368736" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<a href="../listings/technical.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1776943506946" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<a href="../listings/technical/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img loading="lazy" src="../assets/images/nitori-sunquartex.jpg" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="../listings/technical/nitori-sunquartex.jpg" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -458,15 +482,15 @@ Technical
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="3" data-listing-file-modified-sort="1776785368736" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<a href="../listings/short.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="3" data-listing-file-modified-sort="1776943506946" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<a href="../listings/short/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img loading="lazy" src="../assets/images/alice-gtm.jpg" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="../listings/short/alice-gtm.jpg" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
-Shorts
+Short
 </h5>
 <div class="card-text listing-description delink">
 <p>Short expository notes to capture insights.</p>
@@ -474,49 +498,11 @@ Shorts
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="4" data-listing-file-modified-sort="1776785368732" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<a href="../listings/commalg.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="4" data-listing-file-modified-sort="1776943506935" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<a href="../listings/casual/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img loading="lazy" src="../assets/images/am69.jpg" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-交换代数
-</h5>
-<div class="card-subtitle listing-subtitle">
-Commutative Algebra
-</div>
-<div class="card-text listing-description delink">
-<p>Atiyah–Macdonald affairs.</p>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="5" data-listing-file-modified-sort="1776785368732" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<a href="../listings/nilpcone.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="../assets/images/marisa-hat.jpg" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-幂零锥和其上的几何
-</h5>
-<div class="card-subtitle listing-subtitle">
-以 <span class="math inline">\(\mathfrak{gl}_n\)</span> 为例
-</div>
-<div class="card-text listing-description delink">
-<p>The geometry of the nilpotent cone of <span class="math inline">\(\mathfrak{gl}_n\)</span>.</p>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="6" data-listing-file-modified-sort="1776785368732" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<a href="../listings/casual.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="../assets/images/sleep.jpg" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="../listings/casual/sleep.jpg" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -528,11 +514,11 @@ Casual
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="7" data-listing-file-modified-sort="1776785368736" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<a href="../listings/solution.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="5" data-listing-file-modified-sort="1776943506946" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<a href="../listings/solution/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img loading="lazy" src="../assets/images/ran.jpg" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="../listings/solution/ran.jpg" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -544,11 +530,11 @@ Solutions
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="8" data-listing-file-modified-sort="1776785368732" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<a href="../listings/draft.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="6" data-listing-file-modified-sort="1776943506938" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<a href="../listings/draft/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img loading="lazy" src="../assets/images/cirno-academic-waste.jpg" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="../listings/draft/cirno-academic-waste.jpg" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -563,11 +549,11 @@ Academic Waste
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="9" data-listing-file-modified-sort="1776785368732" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<a href="../listings/all.html" class="quarto-grid-link">
+<div class="g-col-1" data-index="7" data-listing-file-modified-sort="1776943506935" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<a href="../listings/all/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img loading="lazy" src="../assets/images/asterisk.png" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" src="../listings/all/asterisk.png" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -581,7 +567,76 @@ All Posts
 </div>
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</div>
+</section>
+<section id="specialized" class="level2">
+<h2 class="anchored" data-anchor-id="specialized">Specialized</h2>
+<div id="listing-lst-specialized" class="listing quarto-float quarto-figure quarto-figure-left quarto-listing quarto-listing-container-grid anchored">
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1776943506936" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<a href="../listings/commalg/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../listings/commalg/am69.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+交换代数
+</h5>
+<div class="card-subtitle listing-subtitle">
+Commutative Algebra
+</div>
+<div class="card-text listing-description delink">
+<p>Atiyah–Macdonald affairs.</p>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1776943506939" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<a href="../listings/nilpcone/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../listings/nilpcone/marisa-hat.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+幂零锥和其上的几何
+</h5>
+<div class="card-subtitle listing-subtitle">
+以 <span class="math inline">\(\mathfrak{gl}_n\)</span> 为例
+</div>
+<div class="card-text listing-description delink">
+<p>The geometry of the nilpotent cone of <span class="math inline">\(\mathfrak{gl}_n\)</span>.</p>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1776943506938" data-listing-reading-time-sort="1" data-listing-word-count-sort="62">
+<a href="../listings/group-rep-tour/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+漫步有限群表示论
+</h5>
+<div class="card-subtitle listing-subtitle">
+A Tour of Representation Theory of Finite Groups
+</div>
+<div class="card-text listing-description delink">
+<p>有限群表示论，Peter–Weyl 分解，对称群表示论和 Schur–Weyl 对偶．</p>
+</div>
+</div>
+</div></a>
+</div>
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
+
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
