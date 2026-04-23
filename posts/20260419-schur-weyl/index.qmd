@@ -269,7 +269,7 @@ $A := \End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$ 与 $B := \text{image of } 
 
 - $\End_{\mathbb C[\mathcal S_d]}(V^{\otimes d}) = \Sym^d \End_{\mathbb C}(V)$
 
-  这是因为交换性实质要求变换作用效果无关于张量位置——即在每个位置作用效果相同．【TODO】
+  这是因为 $\End_{\mathbb C}(V^{\otimes d}) = (\End_{\mathbb C}V)^{\otimes d}$，且交换性实质要求变换作用效果无关于张量位置——即在每个位置作用效果相同．
 
 这是有趣的事情——研究张量积 $V^{\otimes d}$ 的分解最终引导我们去研究一个更大的张量积 $(\End_{\mathbb C} V)^{\otimes d}$ 的对称部分．现在考察 $\gl(V)$ 和 $\GL(V)$ 作为 $V^{\otimes d}$ 上的作用在其中扮演的角色．
 
@@ -279,14 +279,25 @@ $A := \End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$ 与 $B := \text{image of } 
 
 :::{#prp-group-span}
 
-- 任何有限维线性空间 $V$ 上的齐次对称部分 $\Sym^d \End_{\mathbb C}(V)$ 作为 $\GL(V)$ 模都不可约；
-- 全体 $\{\Delta^d(g) : g \in \GL(V) \}$ 结合代数地生成了 $\Sym^d \End_{\mathbb C}(V)$．
+- 全体 $\{\Delta_{\GL}^d(g) : g \in \GL(V) \}$ 线性生成了 $\Sym^d \End_{\mathbb C}(V)$．
 - 群代数 $\mathbb C[\GL(V)]$ 在 $V^{\otimes d}$ 上的像恰好是 $\End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$．
+- Schur--Weyl 系列定理描述了 $\GL(V)$ 和 $\mathcal S_d$ 在 $V^{\otimes d}$ 上的对偶关系．
 :::
 
 :::{.proof}
 
-TODO
+只需证第一条．考虑多重线性版本的极化恒等式
+$$
+x_1 \dots x_d = \frac{1}{d!} \sum_{S \subseteq \{ 1, \dots, d \}} (-1)^{d - |S|} \left( \sum_{i \in S} x_i \right)^d
+$$
+这意味着全体线性多项式的 $d$ 次幂足以线性生成全体 $d$ 次多项式．熟记对称代数的全体线性泛函就是多项式环，故这等价于说 $\End_{\mathbb C}(V)$ 在 $\Delta_{\GL}^d$ 下的像为 $\Sym^d \End_{\mathbb C}(V)$．
+
+假如 $\GL(V)$ 在 $\Delta_{\GL}^d$ 的像没有线性生成 $\Sym^d \End_{\mathbb C}(V)$，则应存在 $\Sym^d \End_{\mathbb C}(V)$ 上的非零线性泛函（即 $d$ 次齐次多项式）$h$ 使得这像在 $h$ 下被消灭，即 $h \circ \Delta_{\GL}^d$ 消灭 $\GL(V)$．注意 $h : \Sym^d \End_{\mathbb C}(V) \to \mathbb C$ 和 $\Delta_{\GL}^d : \End_{\mathbb C}(V) \to \Sym^d \End_{\mathbb C}V$ 都是纯代数映射，Zariski 拓扑意义下连续，又 $\GL(V)$ 在 $\End_{\mathbb C}(V)$ 中 Zariski 稠密，故 $h \circ \Delta_{\GL}^d$ 的消灭性从 $\GL(V)$ 扩展到 $\End_{\mathbb C}(V)$．于是 $\End_{\mathbb C}(V)$ 在 $\Delta_{\GL}^d$ 下的像 $\Sym^d \End_{\mathbb C}(V)$ 被 $h$ 消灭——但 $h$ 非零，这不可能发生．
+:::
+
+:::{.remark}
+
+另一条路线是直接证明任何有限维线性空间 $V$ 上的齐次对称部分 $\Sym^d \End_{\mathbb C}(V)$ 作为 $\GL(V)$ 模都不可约．
 :::
 
 #### 李代数 $\gl$
@@ -297,6 +308,7 @@ TODO
 
 - 全体 $\{\Delta_{\gl}^d(x) : x \in \gl(V) \}$ 结合代数地生成出 $\{\Delta_{\GL}^d(g) : g \in \GL(V) \}$，进而由 [@prp-group-span] 结合代数地生成整个 $\Sym^d \End_{\mathbb C}(V)$．
 - 泛包络代数 $U(\gl(V))$ 在 $V^{\otimes d}$ 上的像恰好是 $\End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$．
+- Schur--Weyl 系列定理描述了 $\gl(V)$ 和 $\mathcal S_d$ 在 $V^{\otimes d}$ 上的对偶关系．
 :::
 
 :::{.proof}
@@ -326,9 +338,9 @@ $$
 
 ## 约化代数群和半单李代数的表示论
 
-答案是如果考虑 $\GL(V)$ 的代数表示的话，$\mathbb S_\lambda V$ 就是全部了．这是 A 型约化代数群的表示论．
+答案是：如果考虑 $\GL(V)$ 的代数表示的话，$\mathbb S_\lambda V$ 就几乎是全部了．这是 A 型约化代数群的表示论．
 
 $\GL(V)$ 的代数表示即是研究代数群同态 $\GL(V) \to \GL(W)$．$d$ 一下立刻会获得李代数同态 $\gl(V) \to \gl(W)$，因此代数群的表示论和其对应李代数的表示论联系密切．这就又涉及 $A$ 型李代数 $\gl_n$ 或 $\sl_n$ 的表示论．
 
-这个天坑就不在这里继续挖了，TODO．
+这个天坑就不在这里继续挖了．
 :::
