@@ -78,11 +78,11 @@ $$
 
 Schur--Weyl 对偶对此给出了一个非常漂亮的答案：作为 $\GL(V) \times \mathcal S_d$-表示，
 $$
-V^{\otimes d} \cong \bigoplus_\lambda V_\lambda \otimes_{\mathbb C} \mathbb S_\lambda V
+V^{\otimes d} \cong \bigoplus_{\lambda \vdash d} V_\lambda \otimes_{\mathbb C} \mathbb S_\lambda V
 $$
 这里
 
-- $\lambda \vdash d$ 取遍所有 $d$ 的长度不超过 $n$ 的分拆
+- $\lambda \vdash d$ 取遍所有 $d$ 的分拆，但分拆长度超过 $n$ 时是退化情况
 - $V_\lambda := \mathbb C[\mathcal S_d] c_\lambda$ 是通常的 $\mathcal S_d$ 的不可约表示，再补充上 $\GL(V)$ 的平凡作用后升级为 $\GL(V) \times \mathcal S_d$ 的表示
 - $\mathbb S_\lambda V := V^{\otimes d} \cdot c_\lambda$ 是 $\GL(V)$ 的不可约代数表示，再补充上 $\mathcal S_d$ 的平凡作用后升级为 $\GL(V) \times \mathcal S_d$ 的表示
 - $\otimes_{\mathbb C}$ 是 $\GL(V) \times \mathcal S_d$-表示的张量积
@@ -123,7 +123,7 @@ $\mathbb S_\lambda$ 其实是个函子：定义 $\mathbb S_\lambda$ 在线性映
 
 You are absolutely right to question this! 本来 $V^{\otimes d}$ 上的自然的 $\mathcal S_d$ 作用就应该右边．那能不能考虑把 $V^\otimes d$ 做成 $(G, \mathcal S_d)$-双边表示分解？答案是能，分解会变成
 $$
-V^{\otimes d} \cong \bigoplus_\lambda \Hom_{\mathbb C}(V_\lambda, V^{\otimes d} \cdot c_\lambda)
+V^{\otimes d} \cong \bigoplus_{\lambda \vdash d} \Hom_{\mathbb C}(V_\lambda, V^{\otimes d} \cdot c_\lambda)
 $$
 这里 $\Hom_{\mathbb C}$ 上的左作用是 $V^{\otimes d} \cdot c_\lambda$ 上的 $\GL(V)$-左作用，右作用是 $V_\lambda$ 的 $\mathcal S_d$-左作用．
 
@@ -148,19 +148,19 @@ $$
 
 利用 $\mathbb C[\mathcal S_d]$ 左模版本的 Peter--Weyl 定理
 $$
-\mathbb C[\mathcal S_d] \cong \bigoplus_\lambda V_\lambda \otimes_\mathbb C V_\lambda^*
+\mathbb C[\mathcal S_d] \cong \bigoplus_{\lambda \vdash d} V_\lambda \otimes_\mathbb C V_\lambda^*
 $$
 直接对 $V^{\otimes d}$ 左侧张量积就得到 Schur--Weyl 对偶的分解
 $$
 \begin{aligned}
 V^{\otimes d}
 &\cong \mathbb C[\mathcal S_d] \otimes_{\mathbb C[\mathcal S_d]} V^{\otimes d} \\
-&\cong \left( \bigoplus_\lambda V_\lambda \otimes_\mathbb C V_\lambda^* \right) \otimes_{\mathbb C[\mathcal S_d]} V^{\otimes d} \\
-&\cong \bigoplus_\lambda V_\lambda \otimes_\mathbb C \left( V_\lambda^* \otimes_{\mathbb C[\mathcal S_d]} V^{\otimes d} \right) \\
-&\cong \bigoplus_\lambda V_\lambda \otimes_\mathbb C \Hom_{\mathbb C[\mathcal S_d]}(V_\lambda, V^{\otimes d}) \\
-&=     \bigoplus_\lambda V_\lambda \otimes_\mathbb C \Hom_{\mathbb C[\mathcal S_d]}(\mathbb C[\mathcal S_d] c_\lambda, V^{\otimes d}) \\
-&\cong \bigoplus_\lambda V_\lambda \otimes_\mathbb C \left( c_\lambda \cdot V^{\otimes d} \right) \\
-&=     \bigoplus_\lambda V_\lambda \otimes_\mathbb C \mathbb S_\lambda V
+&\cong \left( \bigoplus_{\lambda \vdash d} V_\lambda \otimes_\mathbb C V_\lambda^* \right) \otimes_{\mathbb C[\mathcal S_d]} V^{\otimes d} \\
+&\cong \bigoplus_{\lambda \vdash d} V_\lambda \otimes_\mathbb C \left( V_\lambda^* \otimes_{\mathbb C[\mathcal S_d]} V^{\otimes d} \right) \\
+&\cong \bigoplus_{\lambda \vdash d} V_\lambda \otimes_\mathbb C \Hom_{\mathbb C[\mathcal S_d]}(V_\lambda, V^{\otimes d}) \\
+&=     \bigoplus_{\lambda \vdash d} V_\lambda \otimes_\mathbb C \Hom_{\mathbb C[\mathcal S_d]}(\mathbb C[\mathcal S_d] c_\lambda, V^{\otimes d}) \\
+&\cong \bigoplus_{\lambda \vdash d} V_\lambda \otimes_\mathbb C \left( c_\lambda \cdot V^{\otimes d} \right) \\
+&=     \bigoplus_{\lambda \vdash d} V_\lambda \otimes_\mathbb C \mathbb S_\lambda V
 \end{aligned}
 $$
 这相当于用已经清楚的 $\mathcal S_d$-表示论将 $V^{\otimes d}$ 先分解成 $\mathcal S_d$-不可约成分．
@@ -174,11 +174,11 @@ $$
 \begin{aligned}
 V^{\otimes d}
 &\cong V^{\otimes d} \otimes_{\mathbb C[\mathcal S_d]} \mathbb C[\mathcal S_d] \\
-&\cong V^{\otimes d} \otimes_{\mathbb C[\mathcal S_d]} \left( \bigoplus_\lambda V_\lambda \otimes_\mathbb C V_\lambda^* \right) \\
-&\cong \bigoplus_\lambda V^{\otimes d} \otimes_{\mathbb C[\mathcal S_d]} V_\lambda \otimes_\mathbb C V_\lambda^* \\
-&\cong \bigoplus_\lambda V^{\otimes d} \otimes_{\mathbb C[\mathcal S_d]} \mathbb C[\mathcal S_d] c_\lambda \otimes_\mathbb C V_\lambda \\
-&\cong \bigoplus_\lambda \left( V^{\otimes d} \cdot c_\lambda \right) \otimes_\mathbb C V_\lambda^* \\
-&\cong \bigoplus_\lambda \Hom_\mathbb C(V_\lambda, V^{\otimes d} \cdot c_\lambda)
+&\cong V^{\otimes d} \otimes_{\mathbb C[\mathcal S_d]} \left( \bigoplus_{\lambda \vdash d} V_\lambda \otimes_\mathbb C V_\lambda^* \right) \\
+&\cong \bigoplus_{\lambda \vdash d} V^{\otimes d} \otimes_{\mathbb C[\mathcal S_d]} V_\lambda \otimes_\mathbb C V_\lambda^* \\
+&\cong \bigoplus_{\lambda \vdash d} V^{\otimes d} \otimes_{\mathbb C[\mathcal S_d]} \mathbb C[\mathcal S_d] c_\lambda \otimes_\mathbb C V_\lambda \\
+&\cong \bigoplus_{\lambda \vdash d} \left( V^{\otimes d} \cdot c_\lambda \right) \otimes_\mathbb C V_\lambda^* \\
+&\cong \bigoplus_{\lambda \vdash d} \Hom_\mathbb C(V_\lambda, V^{\otimes d} \cdot c_\lambda)
 \end{aligned}
 $$
 :::
@@ -219,32 +219,32 @@ $$
 $$
 \begin{aligned}
 \End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})
-&\cong \End_{\mathbb C[\mathcal S_d]} \left( \bigoplus_\lambda V_\lambda \otimes_{\mathbb C} \mathbb S_\lambda V \right) \\
-&\cong \bigoplus_\lambda \End_{\mathbb C[\mathcal S_d]}(V_\lambda \otimes_{\mathbb C} \mathbb S_\lambda V) & \text{by Schur's lemma} \\
-&\cong \bigoplus_\lambda (\mathbb S_\lambda V)^* \otimes_{\mathbb C} V_\lambda^* \otimes_{\mathbb C[\mathcal S_d]} V_\lambda \otimes \mathbb S_\lambda V \\
-&\cong \bigoplus_\lambda (\mathbb S_\lambda V)^* \otimes_{\mathbb C} \End_{\mathbb C[\mathcal S_d]}(V_\lambda) \otimes \mathbb S_\lambda V \\
+&\cong \End_{\mathbb C[\mathcal S_d]} \left( \bigoplus_{\lambda \vdash d} V_\lambda \otimes_{\mathbb C} \mathbb S_\lambda V \right) \\
+&\cong \bigoplus_{\lambda \vdash d} \End_{\mathbb C[\mathcal S_d]}(V_\lambda \otimes_{\mathbb C} \mathbb S_\lambda V) & \text{by Schur's lemma} \\
+&\cong \bigoplus_{\lambda \vdash d} (\mathbb S_\lambda V)^* \otimes_{\mathbb C} V_\lambda^* \otimes_{\mathbb C[\mathcal S_d]} V_\lambda \otimes \mathbb S_\lambda V \\
+&\cong \bigoplus_{\lambda \vdash d} (\mathbb S_\lambda V)^* \otimes_{\mathbb C} \End_{\mathbb C[\mathcal S_d]}(V_\lambda) \otimes \mathbb S_\lambda V \\
 &\cong (\mathbb S_\lambda V)^* \otimes_{\mathbb C} \mathbb S_\lambda V & \text{by Schur's lemma} \\
-&\cong \bigoplus_\lambda \End_{\mathbb C}(\mathbb S_\lambda V)
+&\cong \bigoplus_{\lambda \vdash d} \End_{\mathbb C}(\mathbb S_\lambda V)
 \end{aligned}
 $$
 上述分解每一步都在 $\mathbb C$-代数意义下成立（中间几步中环内部的乘法是在对偶空间配对意义下定义）．竟然直接把 $\End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$ 分解干净了：
 
 :::{.remark}
 
-## 半单结合代数的表示论
+## 一点有限维半单结合代数表示论
 
-记 $A = \bigoplus_i A_i$，这里 $A := \End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$，$A_i := \End_{\mathbb C}(\mathbb S_\lambda V)$．
+记 $A = \bigoplus_{\lambda \vdash d} A_\lambda$，这里 $A := \End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$，$A_\lambda := \End_{\mathbb C}(\mathbb S_\lambda V)$．
 
-- 矩阵代数 $A_i$ 单：即无非平凡双边理想，使用基本矩阵转移行列论证即可
+- 矩阵代数 $A_\lambda$ 单：即无非平凡双边理想，使用基本矩阵转移行列论证即可．
 
-- 任何 $A$-表示 $V$ 半单：对 $V$ 左侧 $A \otimes_A -$ 后分配律变成一系列 $A_i \otimes_A V$ 的直和，这是矩阵代数 $A_i$ 的表示，由矩阵代数的表示论知道 $A_i \otimes_A V$ 是 $A_i$ 的唯一的不可约表示 $\mathbb S_\lambda V$ 的若干份直和．
+- 任何 $A$-表示 $V$ 半单：对 $V$ 左侧 $A \otimes_A -$ 后分配律变成一系列 $A_\lambda \otimes_A V$ 的直和，这是矩阵代数 $A_\lambda$ 的表示，由矩阵代数的表示论知道 $A_\lambda \otimes_A V$ 是 $A_\lambda$ 的唯一的不可约表示 $\mathbb S_\lambda V$ 的若干份直和．
 
 - $A$ 的不可约表示全体恰为 $\mathbb S_\lambda V$：这是上一条的副产物．
 :::
 
 因此要是取 $A = \End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$ 作用在 $V^{\otimes d}$ 上，Schur--Weyl 分解
 $$
-V^{\otimes d} \cong \bigoplus_\lambda V_\lambda \otimes_{\mathbb C} \mathbb S_\lambda V
+V^{\otimes d} \cong \bigoplus_{\lambda \vdash d} V_\lambda \otimes_{\mathbb C} \mathbb S_\lambda V
 $$
 就真的体现出对偶：作为 $A \otimes \mathbb C[\mathcal S_d]$-模分解将 $V^{\otimes d}$ 分解成 $A$ 的不可约表示 $\mathbb S_\lambda V$ 和 $\mathcal S_d$ 的不可约表示 $V_\lambda$ 的张量积．
 
