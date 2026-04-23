@@ -28,6 +28,7 @@ format:
 \def\bbinom#1#2{{\left(\kern-.3em\left(\genfrac{}{}{0pt}{}{#1}{#2}\right)\kern-.3em\right)}}
 \newcommand{\sgn}{\operatorname{sgn}}
 \newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\sl}{\mathfrak{sl}}
 
 - 路线主要参考 [@etingof_introduction_2011, {section 5.18--5.19}]．
 
@@ -187,19 +188,29 @@ $$
 
 再将这里的讨论推进一步，没有使用 $\GL(V)$ 的性质意味着，对任何作用在 $V^{\otimes d}$ 上的结合代数 $A$，只要它与 $\mathcal S_d$ 在 $V^{\otimes d}$ 上的作用交换，上述分解同样提供了 $A \otimes_{\mathbb C} \mathbb C[\mathcal S_d]$-左模意义下的分解．特别地，$A$ 可以是：
 
-- 群 $G$ 左作用在 $V$ 上，这里代数取群代数 $\mathbb C[G]$，分解是 $G \times \mathcal S_d$-表示的分解．
+- 群 $G$ 左作用在 $V$ 上，这里代数取群代数 $\mathbb C[G]$．$G$ 在 $V^{\otimes d}$ 上的作用由如下对角映射给出：
+  $$
+  \begin{aligned}
+  \Delta^d : G &\to \End_{\mathbb C}(V^{\otimes d}) \\
+  g &\mapsto \rho_{V}(g) \otimes \dots \otimes \rho_{V}(g)
+  \end{aligned}
+  $$
+  Schur--Weyl 分解在 $G \times \mathcal S_d$-表示意义下成立．
 
-  $G$ 在 $V^{\otimes d}$ 上的作用由 $\Delta^d : g \mapsto g \otimes g \otimes \dots \otimes g$ 给出．
-
-- 李代数 $\mathfrak{g}$ 左作用在 $V$ 上，这里代数取李代数的泛包络代数 $U(\mathfrak{g})$．
-
-  $\mathfrak{g}$ 在 $V^{\otimes d}$ 上的作用由 $\Delta^d : x \mapsto x \otimes 1 \otimes \dots \otimes 1 + 1 \otimes x \otimes \dots \otimes 1 + \dots + 1 \otimes 1 \otimes \dots \otimes x$ 给出．  
+- 李代数 $\mathfrak{g}$ 左作用在 $V$ 上，这里代数取李代数的泛包络代数 $U(\mathfrak{g})$．$\mathfrak{g}$ 在 $V^{\otimes d}$ 上的作用由如下对角映射给出：
+  $$
+  \begin{aligned}
+  \Delta^d : \mathfrak{g} &\to \End_{\mathbb C}(V^{\otimes d}) \\
+  x &\mapsto \rho_V(x) \otimes \id_V \otimes \dots \otimes \id_V + \dots + \id_V \otimes \id_V \otimes \dots \otimes \rho_V(x)
+  \end{aligned}
+  $$
+  Schur--Weyl 分解在 $U(\mathfrak{g}) \otimes \mathbb C[\mathcal S_d]$-模意义下成立．
 
 我们尤其关注一般线性群 $\GL(V)$ 和一般线性李代数 $\gl(V)$ 作用在 $V$ 上的情形．这两个情形将反映出 $\GL(V)$ 和 $\mathcal S_d$ 不可约表示间的对偶关系——真正使得 Schur--Weyl 对偶的“对偶”二字名副其实．
 
-## $\GL(V)$--$\gl(V)$--$\mathcal S_d$ 对偶
+## $\GL$--$\gl$--$\mathcal S_d$ 对偶
 
-### $\End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$ 的结构
+### 双交换化结构
 
 如上所述，我们关心任何作用在 $V^{\otimes}$ 上与 $\mathbb C[\mathcal S_d]$ 作用交换的结合代数 $A$——即要求 $A$ 在 $\End_{\mathbb C}(V^{\otimes d})$ 的像落在 $\End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$ 中．
 
@@ -236,7 +247,22 @@ V^{\otimes d} \cong \bigoplus_\lambda V_\lambda \otimes_{\mathbb C} \mathbb S_\l
 $$
 就真的体现出对偶：作为 $A \otimes \mathbb C[\mathcal S_d]$-模分解将 $V^{\otimes d}$ 分解成 $A$ 的不可约表示 $\mathbb S_\lambda V$ 和 $\mathcal S_d$ 的不可约表示 $V_\lambda$ 的张量积．
 
-### $\End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$ 与 $\gl(V)$
+:::{.remark}
+
+## 双交换化结构
+
+$A := \End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$ 与 $B := \text{image of } \mathbb C[\mathcal S_d] \text{ in } \End_{\mathbb C}(V^{\otimes d})$ 的对偶关系有如下一般的表述：
+
+设 $V$ 是有限维线性空间，$B$ 是 $\End_{\mathbb C}{V}$ 的半单结合子代数，半单分解 $B = \bigoplus_i \End(W_i)$，其中 $W_i$ 是 $B$ 的全体不可约表示．记 $A := \End_B V$，则
+
+- $A$ 也是半单结合代数，具有分解 $A = \bigoplus_i \End(V_i)$，其中 $U_i := \Hom(W_i, V)$ 是 $A$ 的全体不可约表示；
+- $V$ 作为 $A \otimes_{\mathbb C} B$-模分解为 $\bigoplus_i U_i \otimes_{\mathbb C} W_i$，其中 $V_i$ 是 $A$ 的不可约表示，$W_i$ 是 $B$ 的不可约表示；
+- $B = \End_A V$，即 $A$ 与 $B$ 作为 $\End_{\mathbb C} V$ 的子代数互为交换子．
+
+其中第一条和第二条使用与前面类似方法已经完成证明；第三条是 Schur--Weyl 对偶的的另一核心表述，对 $\End_A V$ 重新用 $V$ 的分解和 Schur 引理拆掉 $\End$ 就可还原出 $\bigoplus_i \End_{\mathbb C}(W_i) = B$，请读者练习．
+:::
+
+### $\gl$ 与 $\GL$ 的作用
 
 刚刚做的太急，甚至没来得及考虑 $\End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$ 里面具体装了些什么．第一个重要观察是
 
@@ -244,41 +270,17 @@ $$
 
   这是因为交换性实质要求变换作用效果无关于张量位置——即在每个位置作用效果相同．【TODO】
 
-- 李代数 $\gl(V)$ 在 $V^{\otimes d}$ 上的作用 $\Delta^d (\gl(V))$ 结合代数地生成了 $\End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$．
-- 泛包络代数 $U(\gl(V))$ 在 $V^{\otimes d}$ 上的像恰好是 $\End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$．
+这是有趣的事情——研究张量积 $V^{\otimes d}$ 的分解最终引导我们去研究一个更大的张量积 $(\End_{\mathbb C} V)^{\otimes d}$ 的对称部分．现在考察 $\gl(V)$ 和 $\GL(V)$ 作为 $V^{\otimes d}$ 上的作用在其中扮演的角色．
 
-### $\End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$ 与 $\GL(V)$
+#### $\GL$
 
-- 群 $\GL(V)$ 在 $V^{\otimes d}$ 上的作用结合代数地生成 $\End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$．
+回忆群 $\GL(V)$ 在 $V^{\otimes d}$ 上的作用方式记作 $\Delta_{\GL}^d : \GL(V) \to \End_{\mathbb C}(V^{\otimes d})$．
 
-  即群代数 $\mathbb C[\GL(V)]$ 在 $V^{\otimes d}$ 上的像恰好是 $\End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$．
+:::{#prp-group-span}
 
-【TODO】
-
-### 双交换子结构
-
-【TODO】
-
-## 废液缸
-
-现在开始讨论 $\GL(V)$ 和 $\gl(V)$ 的特别之处：$\mathbb S_\lambda V$ 是 $\GL(V)$ 的不可约代数表示．
-
-先对 $\GL(V)$ 的代数表示做一般讨论．所谓 $\GL(V)$ 的代数表示 $W$，即是 $\GL(V) \to \GL(W)$ 的代数群同态．话都说到这个份上了，不妨立刻 $d$ 一下研究其诱导的李代数同态 $\gl(V) \to \gl(W)$，即 $\gl(V)$ 的李代数表示．
-
-:::{.remark}
-
-## 为什么不是 $\End_{\mathbb C}(V)$
-
-$\GL(V)$ 在 $\End_{\mathbb C}(V)$ 稠密，为什么不直接研究结合代数 $\End_{\mathbb C}(V)$ 的代数表示呢？
-
-因为不少 $\GL(V)$ 的代数表示无法延拓为 $\End_{\mathbb C}(V)$ 的代数表示——更精确地，能延拓至 $\End_{\mathbb C}(V)$ 的 $\GL(V)$ 的代数表示 $W$ 必须是线性的——但许多 $\GL(V)$ 的代数表示，如 $\Sym^2 V$，将 $g \in \GL(V)$ 映至 $g \otimes g \in \End_{\mathbb C}(V) \otimes \End_{\mathbb C}(V) \subseteq \End_{\mathbb C}(V^{\otimes 2})$，非常不线性【TODO】．
-:::
-
-下面给出的引理表明取微分研究没有损失信息：
-
-:::{#lem-gl-symm}
-
-$\gl(V)$ 在 $V^{\otimes d}$ 上的作用完全由 $\GL(V)$ 的作用决定．
+- 任何有限维线性空间 $V$ 上的齐次对称部分 $\Sym^d \End_{\mathbb C}(V)$ 作为 $\GL(V)$ 模都不可约；
+- 全体 $\{\Delta^d(g) : g \in \GL(V) \}$ 结合代数地生成了 $\Sym^d \End_{\mathbb C}(V)$．
+- 群代数 $\mathbb C[\GL(V)]$ 在 $V^{\otimes d}$ 上的像恰好是 $\End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$．
 :::
 
 :::{.proof}
@@ -286,32 +288,46 @@ $\gl(V)$ 在 $V^{\otimes d}$ 上的作用完全由 $\GL(V)$ 的作用决定．
 TODO
 :::
 
-### 自对偶
+#### $\gl$
 
-$\mathcal S_n$ 表示论的一个重要结果是所有 $\mathcal S_n$ 的表示都是自对偶的，即对任意 $\mathcal S_n$ 的表示 $V$，有
+回忆李代数 $\gl(V)$ 在 $V^{\otimes d}$ 上的作用方式记作 $\Delta_{\gl}^d : \gl(V) \to \End_{\mathbb C}(V^{\otimes d})$．
+
+:::{#prp-gl-span}
+
+- 全体 $\{\Delta_{\gl}^d(x) : x \in \gl(V) \}$ 结合代数地生成出 $\{\Delta_{\GL}^d(g) : g \in \GL(V) \}$，进而由 [@prp-group-span] 结合代数地生成整个 $\Sym^d \End_{\mathbb C}(V)$．
+- 泛包络代数 $U(\gl(V))$ 在 $V^{\otimes d}$ 上的像恰好是 $\End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$．
+:::
+
+:::{.proof}
+
+对任意 $x \in \gl(V)$，考虑记
 $$
-V \cong V^*
+x_i := \id_V \otimes \dots \otimes \rho_{V}(x) \otimes \dots \otimes \id_V \in (\End_{\mathbb C} V)^{\otimes d}
 $$
-这同构有两种理解方式：
+其中 $x$ 在第 $i$ 个位置，则 $x_1, \dots, x_d$ 交换且
+$$
+\begin{aligned}
+\Delta_{\gl}^d(x) &= x_1 + \dots + x_d \\
+\Delta_{\gl}^d(x^k) &= x_1^k + \dots + x_d^k \\
+\Delta_{\GL}^d(x) &= x_1 \cdots x_d
+\end{aligned}
+$$
+因此 $\Delta_{\GL}^d(x)$ 作为 $d$ 元基本对称多项式之一，可以写成关于幂和对称多项式 $\Delta_{\gl}^d(x), \dots, \Delta_{\gl}^d(x^d)$ 的多项式表达．这就是结合代数的生成．
+:::
 
-- 作为左模的同构：$V$ 上左作用 $g \cdot v$ 自然，$V^*$ 上配备 $(\sigma \cdot f)(v) := f(\sigma^{-1} \cdot v)$．
-- 作为右模的同构：$V$ 上右作用 $v \cdot \sigma := \sigma^{-1} \cdot v$，$V^*$ 上右作用 $(f \cdot \sigma)(v) := f(\sigma \cdot v)$ 自然．
+## $\GL(V)$ 的不可约代数表示
 
-两侧是对偶的，只需证明一侧．可以考虑特征标：$\mathcal S_n$ 的共轭类由置换的轮换型给出，而 $\sigma$ 和 $\sigma^{-1}$ 有相同轮换型，故在同一共轭类，故 $V$ 和 $V^*$ 的特征标相同，进而同构．
+关于 $\mathbb S_\lambda V$ 的故事还没有讲完．我们刚刚建立的对偶确实完整刻画了 $\GL(V)$ 和 $\mathcal S_d$ 在 $V^{\otimes d}$ 上作用的关系，并分类了 $\GL(V)$ 作用在 $V^{\otimes d}$ 上的不可约子表示——但这都是作为 $\End_{\mathbb C} (V^{\otimes d})$ 的子代数在研究，而 $\GL(V)$ 完全可能作用更多的空间上，进而产生更多的不可约表示．
+
+在每个 $V^{\otimes d}$ 上的讨论已经证明全体 $\mathbb S_\lambda V$ 确为 $\GL(V)$ 的不可约表示，但这就是全部了吗？还会有其它 $\GL(V)$ 的不可约表示吗？
 
 :::{.remark}
 
-## 自对偶、特征标与双线性型
+## 约化代数群和半单李代数的表示论
 
-一般来说：
+答案是如果考虑 $\GL(V)$ 的代数表示的话，$\mathbb S_\lambda V$ 就是全部了．这是 A 型约化代数群的表示论．
 
-- 有限群复表示自对偶当且仅当特征标是实函数
-- 自对偶相当于保证 $V$ 上有一个非退化的 $\mathcal S_n$-不变双线性型
-- 群代数上总有标准的非退化 $G$-不变双线性型，从而自对偶
+$\GL(V)$ 的代数表示既是研究代数群同态 $\GL(V) \to \GL(W)$，$d$ 一下立刻会获得李代数同态 $\gl(V) \to \gl(W)$，因此代数群的表示论和其对应李代数的表示论联系密切．这就又涉及 $A$ 型李代数 $\gl_n$ 或 $\sl_n$ 的表示论．
 
-一般来说，怎样显式构造这个双线性型呢？
-
-可以考虑随意取一 $V$ 上双线性型做平均化得到不变双线性型．如果 $V$ 不可约，Schur 引理保证平均化后的双线性型要么是零，要么非退化．于是可以取 $V^*$ 一组基底 $(f_i)$ 并遍历 $f_i \otimes f_j$ 实验平均化后是否非退化．对可约的情况，可以分解成不可约成分后做．
-
-总之，使用这个对偶会带来不少很难直接构造的同构，这是我们推荐 $\Hom$ 形式的 Schur--Weyl 对偶的主要缘由——它不需要用到自对偶性．
+这个天坑就不在这里继续挖了，TODO．
 :::
