@@ -614,7 +614,7 @@ v \mapsto \tilde v := \frac 1 {|G|} \sum_{g \in G} g \cdot v
 <section id="特征标" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="特征标"><span class="header-section-number">3</span> 特征标</h2>
 <p>研究特征标的主要原因是它和表示的同构类一一对应，且可以通过内积计算表示的不可约成分组成情况．</p>
-<p>表示 <span class="math inline">\(\varphi : G \to \operatorname{GL}(V)\)</span> 的特征标定义为函数 <span class="math inline">\(\chi_\varphi : G \to \mathbb C\)</span>, <span class="math inline">\(g \mapsto \operatorname{tr}(\rho(g))\)</span>，在模的记号下亦写作 <span class="math inline">\(\chi_V\)</span>．</p>
+<p>表示 <span class="math inline">\(\varphi : G \to \operatorname{GL}(V)\)</span> 的特征标定义为函数 <span class="math inline">\(\chi_\varphi : G \to \mathbb C\)</span>, <span class="math inline">\(g \mapsto \operatorname{Tr}(\rho(g))\)</span>，在模的记号下亦写作 <span class="math inline">\(\chi_V\)</span>．</p>
 <p>记 <span class="math inline">\(L^2(G)\)</span> 是 <span class="math inline">\(G \to \mathbb C\)</span> 的全体函数构成的线性空间，配备内积 <span class="math inline">\(\langle f_1, f_2 \rangle := \frac 1 {|G|} \sum_{g \in G} f_1(g) \overline{f_2(g)}\)</span>．特征标们构成 <span class="math inline">\(L^2(G)\)</span> 的一个子空间，但我们还可以做的更好：由于迹的相似不变性，<span class="math inline">\(\chi_V(hgh^{-1}) = \chi_V(g)\)</span>，故特征标函数在共轭类上取值相同．将这种 <span class="math inline">\(G \to \mathbb C\)</span> 的函数称为类函数，于是特征标都是类函数．</p>
 <p>特征标还满足以下性质：</p>
 <p><span class="math inline">\(G\)</span>-wise properties:</p>
@@ -646,7 +646,7 @@ v \mapsto \tilde v := \frac 1 {|G|} \sum_{g \in G} g \cdot v
 <div id="callout-4" class="callout-4-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>不理解为什么 <span class="math inline">\(\operatorname{tr}(f^*) = \operatorname{tr}(f)\)</span>？</p>
+<p><span class="proof-title"><em>注记</em>. </span>不理解为什么 <span class="math inline">\(\operatorname{Tr}(f^*) = \operatorname{Tr}(f)\)</span>？</p>
 <ul>
 <li><p>我们有自然同构 <span class="math inline">\(\operatorname{Hom}_{\mathbb C}(V, V) \cong V^* \otimes_{\mathbb C} V \cong V \otimes_{\mathbb C} V^* \cong \operatorname{Hom}_{\mathbb C}(V^*, V^*)\)</span>，中间的 <span class="math inline">\(\otimes_{\mathbb C}\)</span> 两侧交换对应转置．迹也可以坐标无关地定义为 <span class="math inline">\(V\)</span> 和 <span class="math inline">\(V^*\)</span> 之间的缩并，从而对偶成为张量积间的交换从而变得无关紧要．</p></li>
 <li><p>或者直接坐标计算．嗯算就知道矩阵表示成转置关系．</p></li>
@@ -782,11 +782,11 @@ V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 0 &amp;= \langle \chi, \chi_{V_i^*} \rangle \\
 &amp;= \frac 1 {|G|} \sum_{g \in G} \chi(g) \overline{\chi_{V_i^*}(g)} \\
 &amp;= \frac 1 {|G|} \sum_{g \in G} \chi(g) \chi_{V_i}(g) \\
-&amp;= \operatorname{tr}\left( \frac 1 {|G|} \sum_{g \in G} \chi(g) \rho_{V_i}(g) \right)
+&amp;= \operatorname{Tr}\left( \frac 1 {|G|} \sum_{g \in G} \chi(g) \rho_{V_i}(g) \right)
 \end{aligned}
 \]</span> 对任意表示 <span class="math inline">\(V\)</span>，让我们记 <span class="math display">\[
 \varphi_{\chi, V} := \frac 1 {|G|} \sum_{g \in G} \chi(g) \rho_{V}(g) \in \operatorname{End}(V)
-\]</span> 则刚刚的讨论是在说 <span class="math inline">\(\operatorname{tr}(\varphi_{\chi, V_i}) = 0\)</span> 对所有不可约表示 <span class="math inline">\(V_i\)</span> 成立．</p>
+\]</span> 则刚刚的讨论是在说 <span class="math inline">\(\operatorname{Tr}(\varphi_{\chi, V_i}) = 0\)</span> 对所有不可约表示 <span class="math inline">\(V_i\)</span> 成立．</p>
 <p>现在进一步断言对任意表示 <span class="math inline">\(V\)</span>，<span class="math inline">\(\varphi_{\chi, V}\)</span> 其实是一个 <span class="math inline">\(G\)</span>-同态：对任意 <span class="math inline">\(h \in G\)</span>，<span class="math inline">\(v \in V\)</span>，我们有 <span class="math display">\[
 \begin{aligned}
 (h \cdot \varphi_{\chi, V})(v)
@@ -795,7 +795,7 @@ V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 &amp;= \frac 1 {|G|} \sum_{g \in G} \chi(g) \cdot (g \cdot v) &amp; \text{by changing summation order} \\
 &amp;= \varphi_{\chi, V}(v)
 \end{aligned}
-\]</span> 于是 <span class="math inline">\(\varphi_{\chi, V} \in \operatorname{End}_G(V)\)</span>．由 Schur 定理（<a href="#thm-schur" class="quarto-xref">定理&nbsp;2</a>），当 <span class="math inline">\(V = V_i\)</span> 不可约时，<span class="math inline">\(\varphi_{\chi, V_i}\)</span> 是数乘．又 <span class="math inline">\(\operatorname{tr}(\varphi_{\chi, V_i}) = 0\)</span>，因此 <span class="math inline">\(\varphi_{\chi, V_i} = 0\)</span>．</p>
+\]</span> 于是 <span class="math inline">\(\varphi_{\chi, V} \in \operatorname{End}_G(V)\)</span>．由 Schur 定理（<a href="#thm-schur" class="quarto-xref">定理&nbsp;2</a>），当 <span class="math inline">\(V = V_i\)</span> 不可约时，<span class="math inline">\(\varphi_{\chi, V_i}\)</span> 是数乘．又 <span class="math inline">\(\operatorname{Tr}(\varphi_{\chi, V_i}) = 0\)</span>，因此 <span class="math inline">\(\varphi_{\chi, V_i} = 0\)</span>．</p>
 <p>由于 <span class="math inline">\(V \mapsto \varphi_{\chi, V}\)</span> 是 <span class="math inline">\(\oplus\)</span>-<span class="math inline">\(+\)</span> 线性的，因此使用半单性即可将 <span class="math inline">\(\varphi_{\chi, V} = 0\)</span> 推广到任意表示 <span class="math inline">\(V\)</span>．现在特取正则表示 <span class="math inline">\(V = \mathbb C[G]\)</span>，注意此时各左乘作用 <span class="math inline">\(\rho_{\mathbb C[G]}(g)\)</span> 线性无关，又 <span class="math inline">\(0 = \varphi_{\chi, V} = \frac 1 {|G|} \sum_{g \in G} \chi(g) \rho_{V}(g)\)</span>，因此 <span class="math inline">\(\chi(g) = 0\)</span> 对任意 <span class="math inline">\(g \in G\)</span> 成立，即 <span class="math inline">\(\chi = 0\)</span>．</p>
 </div>
 </div>
@@ -815,7 +815,7 @@ V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 <div id="callout-8" class="callout-8-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span>这个构造其实是自然的：如果将 <span class="math inline">\(L^2(G)\)</span> 通过同构 <span class="math inline">\(\chi \mapsto \sum_{g \in G} \chi(g) g\)</span> 当作 <span class="math inline">\(\mathbb C[G]\)</span> 理解，则 <span class="math inline">\(\chi \mapsto |G| \cdot \varphi_{\chi, V}\)</span> 无非是由 <span class="math inline">\(\varphi_{g, V} := \rho_V(g)\)</span> 线性扩展得到——或者甚至更直接的，就是表示 <span class="math inline">\(\rho : G \to \operatorname{GL}(V)\)</span> 的线性扩展 <span class="math inline">\(\mathbb C[G] \to \operatorname{End}(V)\)</span>！</p>
+<p><span class="proof-title"><em>注记</em>. </span>这个构造其实是自然的：如果将 <span class="math inline">\(L^2(G)\)</span> 通过线性空间同构 <span class="math inline">\(\chi \mapsto \sum_{g \in G} \chi(g) g\)</span> 当作 <span class="math inline">\(\mathbb C[G]\)</span> 理解，则 <span class="math inline">\(\chi \mapsto |G| \cdot \varphi_{\chi, V}\)</span> 无非是由 <span class="math inline">\(\varphi_{g, V} := \rho_V(g)\)</span> 线性扩展得到——或者甚至更直接的，就是表示 <span class="math inline">\(\rho : G \to \operatorname{GL}(V)\)</span> 的线性扩展 <span class="math inline">\(\mathbb C[G] \to \operatorname{End}(V)\)</span>！</p>
 </div>
 </div>
 </div>
@@ -823,7 +823,7 @@ V \cong \bigoplus_i V_i^{\oplus \langle \chi_V, \chi_{V_i} \rangle}
 <p>总结并推广证明过程中得到的该构造的若干性质：<span class="citation" data-cites="fulton_representation_2004"><a href="#ref-fulton_representation_2004" role="doc-biblioref">[1, page 22–23]</a></span></p>
 <ul>
 <li><p><span class="math inline">\((\chi, V) \mapsto \varphi_{\chi, V}\)</span> 关于 <span class="math inline">\(\chi \in L^2(G)\)</span> 的加法和表示 <span class="math inline">\(V\)</span> 的直和都是线性的．</p></li>
-<li><p><span class="math inline">\(\operatorname{tr}(\varphi_{\chi, V}) = \langle \chi, \chi_{V^*} \rangle = \langle \overline{\chi}, \chi_V \rangle\)</span></p></li>
+<li><p><span class="math inline">\(\operatorname{Tr}(\varphi_{\chi, V}) = \langle \chi, \chi_{V^*} \rangle = \langle \overline{\chi}, \chi_V \rangle\)</span></p></li>
 <li><p>当 <span class="math inline">\(\chi\)</span> 是共轭类函数时：<span class="math inline">\(\varphi_{\chi, V}\)</span> 是 <span class="math inline">\(G\)</span>-同态．</p></li>
 <li><p>追加 <span class="math inline">\(V = V_i\)</span> 不可约的条件：此时 <span class="math inline">\(\varphi_{\chi, V_i}\)</span> 是系数为 <span class="math inline">\(\langle \overline{\chi}, \chi_{V_i} \rangle / \dim V_i\)</span> 的数乘．</p></li>
 <li><p>再追加设 <span class="math inline">\(V_j\)</span> 也是不可约表示，取 <span class="math inline">\(\chi = \overline{\chi_{V_j}}\)</span>，则 <span class="math display">\[
