@@ -25,7 +25,7 @@ format:
 \newcommand{\GL}{\operatorname{GL}}
 \newcommand{\im}{\operatorname{im}}
 \newcommand{\id}{\operatorname{id}}
-\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Tr}{\operatorname{Tr}}
 \newcommand{\End}{\operatorname{End}}
 
 设 $G$ 是有限群，$V$ 是（有限维的）$\mathbb C$-线性空间，则群同态 $\rho: G \to \GL(V)$ 规定了一个 $G$ 的（复）表示．等价地，这为 $V$ 配备了一个 $G$-模结构——$\mathbb C[G]$-模结构的简写．
@@ -222,7 +222,7 @@ Schur 引理为表示的不可约分解提供了唯一性．
 
 研究特征标的主要原因是它和表示的同构类一一对应，且可以通过内积计算表示的不可约成分组成情况．
 
-表示 $\varphi : G \to \GL(V)$ 的特征标定义为函数 $\chi_\varphi : G \to \mathbb C$, $g \mapsto \tr(\rho(g))$，在模的记号下亦写作 $\chi_V$．
+表示 $\varphi : G \to \GL(V)$ 的特征标定义为函数 $\chi_\varphi : G \to \mathbb C$, $g \mapsto \Tr(\rho(g))$，在模的记号下亦写作 $\chi_V$．
 
 记 $L^2(G)$ 是 $G \to \mathbb C$ 的全体函数构成的线性空间，配备内积 $\langle f_1, f_2 \rangle := \frac 1 {|G|} \sum_{g \in G} f_1(g) \overline{f_2(g)}$．特征标们构成 $L^2(G)$ 的一个子空间，但我们还可以做的更好：由于迹的相似不变性，$\chi_V(hgh^{-1}) = \chi_V(g)$，故特征标函数在共轭类上取值相同．将这种 $G \to \mathbb C$ 的函数称为类函数，于是特征标都是类函数．
 
@@ -254,7 +254,7 @@ $G$-module-wise properties:
   
 :::{.remark}
 
-不理解为什么 $\tr(f^*) = \tr(f)$？
+不理解为什么 $\Tr(f^*) = \Tr(f)$？
 
 - 我们有自然同构 $\Hom_{\mathbb C}(V, V) \cong V^* \otimes_{\mathbb C} V \cong V \otimes_{\mathbb C} V^* \cong \Hom_{\mathbb C}(V^*, V^*)$，中间的 $\otimes_{\mathbb C}$ 两侧交换对应转置．迹也可以坐标无关地定义为 $V$ 和 $V^*$ 之间的缩并，从而对偶成为张量积间的交换从而变得无关紧要．
 
@@ -329,14 +329,14 @@ $$
 0 &= \langle \chi, \chi_{V_i^*} \rangle \\
 &= \frac 1 {|G|} \sum_{g \in G} \chi(g) \overline{\chi_{V_i^*}(g)} \\
 &= \frac 1 {|G|} \sum_{g \in G} \chi(g) \chi_{V_i}(g) \\
-&= \tr \left( \frac 1 {|G|} \sum_{g \in G} \chi(g) \rho_{V_i}(g) \right)
+&= \Tr \left( \frac 1 {|G|} \sum_{g \in G} \chi(g) \rho_{V_i}(g) \right)
 \end{aligned}
 $$
 对任意表示 $V$，让我们记
 $$
 \varphi_{\chi, V} := \frac 1 {|G|} \sum_{g \in G} \chi(g) \rho_{V}(g) \in \End(V)
 $$
-则刚刚的讨论是在说 $\tr(\varphi_{\chi, V_i}) = 0$ 对所有不可约表示 $V_i$ 成立．
+则刚刚的讨论是在说 $\Tr(\varphi_{\chi, V_i}) = 0$ 对所有不可约表示 $V_i$ 成立．
 
 现在进一步断言对任意表示 $V$，$\varphi_{\chi, V}$ 其实是一个 $G$-同态：对任意 $h \in G$，$v \in V$，我们有
 $$
@@ -348,7 +348,7 @@ $$
 &= \varphi_{\chi, V}(v)
 \end{aligned}
 $$
-于是 $\varphi_{\chi, V} \in \End_G(V)$．由 Schur 定理（[@thm-schur]），当 $V = V_i$ 不可约时，$\varphi_{\chi, V_i}$ 是数乘．又 $\tr(\varphi_{\chi, V_i}) = 0$，因此 $\varphi_{\chi, V_i} = 0$．
+于是 $\varphi_{\chi, V} \in \End_G(V)$．由 Schur 定理（[@thm-schur]），当 $V = V_i$ 不可约时，$\varphi_{\chi, V_i}$ 是数乘．又 $\Tr(\varphi_{\chi, V_i}) = 0$，因此 $\varphi_{\chi, V_i} = 0$．
 
 由于 $V \mapsto \varphi_{\chi, V}$ 是 $\oplus$-$+$ 线性的，因此使用半单性即可将 $\varphi_{\chi, V} = 0$ 推广到任意表示 $V$．现在特取正则表示 $V = \mathbb C[G]$，注意此时各左乘作用 $\rho_{\mathbb C[G]}(g)$ 线性无关，又 $0 = \varphi_{\chi, V} = \frac 1 {|G|} \sum_{g \in G} \chi(g) \rho_{V}(g)$，因此 $\chi(g) = 0$ 对任意 $g \in G$ 成立，即 $\chi = 0$．
 :::
@@ -357,14 +357,14 @@ $$
 
 :::{.remark}
 
-这个构造其实是自然的：如果将 $L^2(G)$ 通过同构 $\chi \mapsto \sum_{g \in G} \chi(g) g$ 当作 $\mathbb C[G]$ 理解，则 $\chi \mapsto |G| \cdot \varphi_{\chi, V}$ 无非是由 $\varphi_{g, V} := \rho_V(g)$ 线性扩展得到——或者甚至更直接的，就是表示 $\rho : G \to \GL(V)$ 的线性扩展 $\mathbb C[G] \to \End(V)$！
+这个构造其实是自然的：如果将 $L^2(G)$ 通过线性空间同构 $\chi \mapsto \sum_{g \in G} \chi(g) g$ 当作 $\mathbb C[G]$ 理解，则 $\chi \mapsto |G| \cdot \varphi_{\chi, V}$ 无非是由 $\varphi_{g, V} := \rho_V(g)$ 线性扩展得到——或者甚至更直接的，就是表示 $\rho : G \to \GL(V)$ 的线性扩展 $\mathbb C[G] \to \End(V)$！
 :::
 
 总结并推广证明过程中得到的该构造的若干性质：[@fulton_representation_2004, {page 22--23}]
 
 - $(\chi, V) \mapsto \varphi_{\chi, V}$ 关于 $\chi \in L^2(G)$ 的加法和表示 $V$ 的直和都是线性的．
 
-- $\tr(\varphi_{\chi, V}) = \langle \chi, \chi_{V^*} \rangle = \langle \overline{\chi}, \chi_V \rangle$
+- $\Tr(\varphi_{\chi, V}) = \langle \chi, \chi_{V^*} \rangle = \langle \overline{\chi}, \chi_V \rangle$
 
 - 当 $\chi$ 是共轭类函数时：$\varphi_{\chi, V}$ 是 $G$-同态．
 

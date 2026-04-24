@@ -74,18 +74,18 @@ $$
 
 这两个空间还是无交，但它们不再张成整个 $V^{\otimes d}$ 了——对 $d \geq 3$ 的情况 $n^d > \bbinom{n}{d} + \binom{n}{d}$．$V^{\otimes d}$ 中还藏有其它 $\mathcal S_d$ 和 $G$ 的不变子空间．
 
-## Schur--Weyl 对偶
+## Schur--Weyl 分解
 
-Schur--Weyl 对偶对此给出了一个非常漂亮的答案：作为 $\GL(V) \times \mathcal S_d$-表示，
+Schur--Weyl 分解对此给出了一个非常漂亮的答案：作为 $G \times \mathcal S_d$-表示，
 $$
 V^{\otimes d} \cong \bigoplus_{\lambda \vdash d} V_\lambda \otimes_{\mathbb C} \mathbb S_\lambda V
 $$
 这里
 
 - $\lambda \vdash d$ 取遍所有 $d$ 的分拆，但分拆长度超过 $n$ 时是退化情况
-- $V_\lambda := \mathbb C[\mathcal S_d] c_\lambda$ 是通常的 $\mathcal S_d$ 的不可约表示，再补充上 $\GL(V)$ 的平凡作用后升级为 $\GL(V) \times \mathcal S_d$ 的表示
-- $\mathbb S_\lambda V := V^{\otimes d} \cdot c_\lambda$ 是 $\GL(V)$ 的不可约代数表示，再补充上 $\mathcal S_d$ 的平凡作用后升级为 $\GL(V) \times \mathcal S_d$ 的表示
-- $\otimes_{\mathbb C}$ 是 $\GL(V) \times \mathcal S_d$-表示的张量积
+- $V_\lambda := \mathbb C[\mathcal S_d] c_\lambda$ 是通常的 $\mathcal S_d$ 的不可约表示，再补充上 $G$ 的平凡作用后升级为 $G \times \mathcal S_d$ 的表示
+- $\mathbb S_\lambda V := c_\lambda \cdot V^{\otimes d}$ 是 $G$ 的表示（$G$-不变性是因为 $G$ 与 $\mathcal S_d$ 作用交换），再补充上 $\mathcal S_d$ 的平凡作用后升级为 $G\times \mathcal S_d$ 的表示
+- $\otimes_{\mathbb C}$ 是 $G \times \mathcal S_d$-表示的张量积
 
 :::{.remark}
 
@@ -121,11 +121,11 @@ $\mathbb S_\lambda$ 其实是个函子：定义 $\mathbb S_\lambda$ 在线性映
 
 ## 我更喜欢 $\mathcal S_d$ 右作用
 
-You are absolutely right to question that! 本来 $V^{\otimes d}$ 上的自然的 $\mathcal S_d$ 作用就应该右边．那能不能考虑把 $V^\otimes d$ 做成 $(G, \mathcal S_d)$-双边表示分解？答案是能，分解会变成
+You are absolutely right to question that! 本来 $V^{\otimes d}$ 上的自然的 $\mathcal S_d$ 作用就应该右边．那能不能考虑把 $V^{\otimes d}$ 做成 $(G, \mathcal S_d)$-双边表示分解？答案是能，分解会变成
 $$
 V^{\otimes d} \cong \bigoplus_{\lambda \vdash d} \Hom_{\mathbb C}(V_\lambda, V^{\otimes d} \cdot c_\lambda)
 $$
-这里 $\Hom_{\mathbb C}$ 上的左作用是 $V^{\otimes d} \cdot c_\lambda$ 上的 $\GL(V)$-左作用，右作用是 $V_\lambda$ 的 $\mathcal S_d$-左作用．
+这里 $\Hom_{\mathbb C}$ 上的左作用是 $V^{\otimes d} \cdot c_\lambda$ 上的 $G$-左作用，右作用是 $V_\lambda$ 的 $\mathcal S_d$-左作用．
 
 需要注意的是在 $\mathcal S_d$-右作用风格表述，之前定义的 $\mathbb S_\lambda V$ 写作
 $$
@@ -135,22 +135,14 @@ $$
 $$
 V^{\otimes d} \cdot a_\lambda b_\lambda \xrightarrow{- \cdot a_\lambda} V^{\otimes d} \cdot b_\lambda a_\lambda \xrightarrow{- \cdot b_\lambda} V^{\otimes d} \cdot a_\lambda b_\lambda
 $$
-故这两个 $\GL(V)$-模是同构的，不小心混用了也问题不大．
+故这两个 $G$-模是同构的，不小心混用了也问题不大．
 :::
 
-现在还有一个问题：
-
-- “$\mathbb S_\lambda V$ 是 $\GL(V)$ 的不可约代数表示”意欲何为
-
-暂时留作后续讨论．
-
-## $\mathbb C[\mathcal S_d]$-分解
-
-利用 $\mathbb C[\mathcal S_d]$ 左模版本的 Peter--Weyl 定理
+现在来给出证明．利用 $\mathbb C[\mathcal S_d]$ 左模版本的 Peter--Weyl 定理
 $$
 \mathbb C[\mathcal S_d] \cong \bigoplus_{\lambda \vdash d} V_\lambda \otimes_\mathbb C V_\lambda^*
 $$
-直接对 $V^{\otimes d}$ 左侧张量积就得到 Schur--Weyl 对偶的分解
+可以借助已经清楚的 $\mathcal S_d$-表示论将 $V^{\otimes d}$ 分解成 $\mathcal S_d$-不可约成分
 $$
 \begin{aligned}
 V^{\otimes d}
@@ -163,7 +155,19 @@ V^{\otimes d}
 &=     \bigoplus_{\lambda \vdash d} V_\lambda \otimes_\mathbb C \mathbb S_\lambda V
 \end{aligned}
 $$
-这相当于用已经清楚的 $\mathcal S_d$-表示论将 $V^{\otimes d}$ 先分解成 $\mathcal S_d$-不可约成分．
+这就是 Schur--Weyl 分解．注意 $G$-表示同构 $\Hom_{\mathbb C[\mathcal S_d]}(V_\lambda, V^{\otimes d}) \cong c_\lambda \cdot V^{\otimes d}$ 是使用以下一般事实的结果：
+
+:::{#prp-hom-idem}
+
+对任意含幺环 $R$，$R$-模 $M$ 和幂等元 $e \in R$，我们有典范的 $Z_R(e)$-模同构
+$$
+\begin{aligned}
+e M &\cong \Hom_R(Re, M) \\
+e m &\mapsto (re \mapsto rem)
+\end{aligned}
+$$
+这里 $Z_R(e)$ 是环 $R$ 中所有与 $e$ 交换的元素构成的子环．
+:::
 
 :::{.remark}
 
@@ -183,11 +187,15 @@ V^{\otimes d}
 $$
 :::
 
-### 不特别的 $\GL(V)$
+## Schur--Weyl 对偶
 
-至此 Schur--Weyl 对偶纯分解的工作已经完成——甚至没有用过 $\GL(V)$ 侧的任何性质．但“对偶”的部分还没有体现出来——关于 $\GL(V)$-表示 $\mathbb S_\lambda V$ 的性质我们还一无所知．这是后面要讨论的重点．
+### 对偶何在？
 
-再将这里的讨论推进一步，没有使用 $\GL(V)$ 的性质意味着，对任何作用在 $V^{\otimes d}$ 上的结合代数 $A$，只要它与 $\mathcal S_d$ 在 $V^{\otimes d}$ 上的作用交换，上述分解同样提供了 $A \otimes_{\mathbb C} \mathbb C[\mathcal S_d]$-左模意义下的分解．特别地，$A$ 可以是：
+至此 Schur--Weyl 分解的工作已经完成——其实根本没有用到 $G$ 的任何性质．对偶何在？现在这个分解可一点都不对偶：$V_\lambda$ 是全体 $\mathcal S_d$ 的不可约表示，但对 $G$-表示 $\mathbb S_\lambda V$ 我们一无所知．
+
+事实上，对偶仅在取特殊的群或代数时体现．
+
+先再将这里的讨论推进一步，没有使用 $G$ 的性质意味着，对任何左作用在 $V^{\otimes d}$ 上的结合代数 $A$，只要它与 $\mathcal S_d$ 在 $V^{\otimes d}$ 上的作用交换，上述分解同样提供了 $A \otimes_{\mathbb C} \mathbb C[\mathcal S_d]$-左模意义下的分解．特别地，$A$ 可以是：
 
 - 群 $G$ 左作用在 $V$ 上，这里代数取群代数 $\mathbb C[G]$．$G$ 在 $V^{\otimes d}$ 上的作用由如下对角映射给出：
   $$
@@ -207,13 +215,11 @@ $$
   $$
   Schur--Weyl 分解在 $U(\mathfrak{g}) \otimes \mathbb C[\mathcal S_d]$-模意义下成立．
 
-我们尤其关注一般线性群 $\GL(V)$ 和一般线性李代数 $\gl(V)$ 作用在 $V$ 上的情形．这两个情形将反映出 $\GL(V)$ 和 $\mathcal S_d$ 不可约表示间的对偶关系——真正使得 Schur--Weyl 对偶的“对偶”二字名副其实．
-
-## $\GL$--$\gl$--$\mathcal S_d$ 对偶
+我们尤其关注一般线性群 $\GL(V)$ 和一般线性李代数 $\gl(V)$ 作用在 $V$ 上的情形．这两个情形将反映出 $\GL(V)$ 和 $\mathcal S_d$ 不可约（代数）表示间的对偶关系——真正使得 Schur--Weyl 对偶的“对偶”二字名副其实．
 
 ### 双交换化结构
 
-如上所述，我们关心任何作用在 $V^{\otimes}$ 上与 $\mathbb C[\mathcal S_d]$ 作用交换的结合代数 $A$——即要求 $A$ 在 $\End_{\mathbb C}(V^{\otimes d})$ 的像落在 $\End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$ 中．
+如上所述，我们关心任何作用在 $V^{\otimes d}$ 上与 $\mathbb C[\mathcal S_d]$ 作用交换的结合代数 $A$——即要求 $A$ 在 $\End_{\mathbb C}(V^{\otimes d})$ 的像落在 $\End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$ 中．
 
 不妨先看看 $\End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$ 是什么——我们还真能处理它：刚刚已经对 $V^{\otimes d}$ 做好了 $\mathcal S_d$-不可约成分的分解，立刻大力 Schur 引理拆掉这个 $\End$：
 $$
@@ -260,7 +266,7 @@ $A := \End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$ 与 $B := \text{image of } 
 - $V$ 作为 $A \otimes_{\mathbb C} B$-模分解为 $\bigoplus_i U_i \otimes_{\mathbb C} W_i$，其中 $V_i$ 是 $A$ 的不可约表示，$W_i$ 是 $B$ 的不可约表示；
 - $B = \End_A V$，即 $A$ 与 $B$ 作为 $\End_{\mathbb C} V$ 的子代数互为交换子．
 
-其中第一条和第二条使用与前面类似方法已经完成证明；第三条是 Schur--Weyl 对偶的的另一核心表述，对 $\End_A V$ 重新用 $V$ 的分解和 Schur 引理拆掉 $\End$ 就可还原出 $\bigoplus_i \End_{\mathbb C}(W_i) = B$，请读者练习．
+其中第一条和第二条使用与前面类似方法已经完成证明；第三条是 Schur--Weyl 对偶“对偶”二字的另一核心表述，对 $\End_A V$ 重新用 $V$ 的分解和 Schur 引理拆掉 $\End$ 就可还原出 $\bigoplus_i \End_{\mathbb C}(W_i) = B$，请读者练习．
 :::
 
 ### $\gl$ 与 $\GL$ 的作用
@@ -281,7 +287,7 @@ $A := \End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$ 与 $B := \text{image of } 
 
 - 全体 $\{\Delta_{\GL}^d(g) : g \in \GL(V) \}$ 线性生成了 $\Sym^d \End_{\mathbb C}(V)$．
 - 群代数 $\mathbb C[\GL(V)]$ 在 $V^{\otimes d}$ 上的像恰好是 $\End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$．
-- Schur--Weyl 系列定理描述了 $\GL(V)$ 和 $\mathcal S_d$ 在 $V^{\otimes d}$ 上的对偶关系．
+- $\mathbb S_\lambda V$ 作为 $\GL(V)$-表示不可约；Schur--Weyl 系列定理描述了 $\GL(V)$ 和 $\mathcal S_d$ 在 $V^{\otimes d}$ 上的对偶关系．
 :::
 
 :::{.proof}
@@ -308,12 +314,12 @@ $$
 
 - 全体 $\{\Delta_{\gl}^d(x) : x \in \gl(V) \}$ 结合代数地生成出 $\{\Delta_{\GL}^d(g) : g \in \GL(V) \}$，进而由 [@prp-group-span] 结合代数地生成整个 $\Sym^d \End_{\mathbb C}(V)$．
 - 泛包络代数 $U(\gl(V))$ 在 $V^{\otimes d}$ 上的像恰好是 $\End_{\mathbb C[\mathcal S_d]}(V^{\otimes d})$．
-- Schur--Weyl 系列定理描述了 $\gl(V)$ 和 $\mathcal S_d$ 在 $V^{\otimes d}$ 上的对偶关系．
+- $\mathbb S_\lambda V$ 作为 $\gl(V)$-表示不可约；Schur--Weyl 系列定理描述了 $\gl(V)$ 和 $\mathcal S_d$ 在 $V^{\otimes d}$ 上的对偶关系．
 :::
 
 :::{.proof}
 
-对任意 $x \in \gl(V)$，考虑记
+只需证第一条．对任意 $x \in \gl(V)$，考虑记
 $$
 x_i := \id_V \otimes \dots \otimes \rho_{V}(x) \otimes \dots \otimes \id_V \in (\End_{\mathbb C} V)^{\otimes d}
 $$
@@ -328,9 +334,9 @@ $$
 因此 $\Delta_{\GL}^d(x)$ 作为 $d$ 元基本对称多项式之一，可以写成关于幂和对称多项式 $\Delta_{\gl}^d(x), \dots, \Delta_{\gl}^d(x^d)$ 的多项式表达．这就是结合代数的生成．
 :::
 
-## $\GL(V)$ 的不可约代数表示
+## $\GL(V)$ 的代数表示
 
-关于 $\mathbb S_\lambda V$ 的故事还没有讲完．我们刚刚建立的对偶确实完整刻画了 $\GL(V)$ 和 $\mathcal S_d$ 在 $V^{\otimes d}$ 上作用的关系，并分类了 $\GL(V)$ 作用在 $V^{\otimes d}$ 上的不可约子表示——但这都是作为 $\End_{\mathbb C} (V^{\otimes d})$ 的子代数在研究，而 $\GL(V)$ 完全可能作用更多的空间上，进而产生更多的不可约表示．
+关于 $\mathbb S_\lambda V$ 的故事还没有讲完．我们刚刚建立的对偶确实完整刻画了 $\GL(V)$ 和 $\mathcal S_d$ 在 $V^{\otimes d}$ 上作用的关系，并分类了 $\GL(V)$ 作用在 $V^{\otimes d}$ 上的不可约子表示——但这都是作为 $\End_{\mathbb C} (V^{\otimes d})$ 的子代数在研究，而 $\GL(V)$（或 $\gl(V)$）完全可能作用更多的空间上，进而产生更多的不可约表示．
 
 在每个 $V^{\otimes d}$ 上的讨论已经证明全体 $\mathbb S_\lambda V$ 确为 $\GL(V)$ 的不可约表示，但这就是全部了吗？还会有其它 $\GL(V)$ 的不可约表示吗？
 
