@@ -1,0 +1,84 @@
+---
+title: 实轴可测集内的无内点有界闭子集
+author: sun123zxy
+date: 2026-04-17
+lang: zh
+
+categories:
+  - math
+  - analysis
+  - solution
+
+format:
+  html: default
+---
+
+:::{#exm-1}
+
+设 $E$ 是 $\mathbb R$ 上的 Lebesgue 可测集，若 $m(E) > a > 0$，则存在无内点的有界闭集 $F \subset E$ 使得 $m(F)=a$，其中 $m(E)$ 指集合 $E$ 的 Lebesgue 测度．
+:::
+
+:::{#lem-fat}
+
+设 $I = (c, d)$ 为开区间，其长度 $L = d - c > 0$．对于任意实数 $0 < \alpha < L$，存在一个有界闭集（紧集） $C \subset I$，使得 $C$ 无内点，$m(C) = \alpha$，且 $C$ 由 $I$ 挖去可数个开区间剩下的部分构成．
+:::
+
+:::{.proof}
+
+这里给出的构造是所谓的 fat Cantor set．由于 $\alpha < L$，我们可以先在 $I$ 内取一个闭区间 $J = [a_0, b_0] \subset (c, d)$，使得其长度 $L_0 = b_0 - a_0$ 满足 $\alpha < L_0 < L$．注意这相当于在 $I$ 的两端各挖去 $(c, a_0)$ 和 $(b_0, d)$ 两个开区间．
+
+现在需要再在 $J$ 中挖去总长度为 $\beta = L_0 - \alpha > 0$ 的开区间．
+
+- **第 1 步**：从 $J$ 的正中间挖去一个长度为 $\frac{\beta}{2}$ 的开区间．剩下两个互不相交的闭区间，记它们的并集为 $C_1$．此时 $m(C_1) = L_0 - \frac{\beta}{2}$．
+
+- **第 $n$ 步**：经过 $n-1$ 步后，剩下 $2^{n-1}$ 个互不相交的闭区间（它们的并集记为 $C_{n-1}$）．我们从这 $2^{n-1}$ 个闭区间的每一个的正中间，挖去一个长度为 $\frac{\beta}{2^n \cdot 2^{n-1}} = \frac{\beta}{2^{2n-1}}$ 的开区间．
+    在第 $n$ 步中，总共挖去的长度为 $2^{n-1} \times \frac{\beta}{2^{2n-1}} = \frac{\beta}{2^n}$．
+    记剩下的 $2^n$ 个闭区间的并集为 $C_n$．
+
+令 $C = \bigcap_{n=1}^\infty C_n$．其具有如下性质：
+
+- $C$ 是 $I$ 挖掉可数个开区间剩下的部分，包括两头挖去的开区间和每一步挖去的开区间．
+
+- **闭集且有界**：因为每一个 $C_n$ 都是有界闭集，而 $C$ 是它们的交，故为有界闭集．
+
+- **测度**：因为 $C_1 \supset C_2 \supset \cdots$，由测度连续性，$m(C) = \lim_{n\to\infty} m(C_n)$．故
+  $$
+  m(C) = L_0 - \sum_{n=1}^\infty \frac{\beta}{2^n} = L_0 - \beta \sum_{n=1}^\infty \frac{1}{2^n} = L_0 - \beta = \alpha
+  $$
+
+- **无内点**：即证明 $C$ 不能包含开区间．在第 $n$ 步后，$C_n$ 由 $2^n$ 个闭区间组成，其总长度小于 $L_0$．因此，其中每个闭区间长度都小于 $\frac{L_0}{2^n}$．随着 $n \to \infty$，构成 $C_n$ 的闭区间长度趋于 $0$．但任何开区间都有大于 $0$ 的长度，因此不可能包含在 $C$ 中．故 $C$ 无内点．
+
+故 $C$ 就是我们想要的集合．
+:::
+
+:::{.proof}
+
+## [@exm-1] 的证明
+
+已知 $E$ 是可测集，且 $m(E) > a > 0$．根据 Lebesgue 测度的内正则性，存在紧集（有界闭集） $K \subset E$，使得 $m(E) \geq m(K) > a$．由于 $K$ 有界，$m(K) < +\infty$．记 $O$ 是 $K$ 的内部，$\partial K = K \setminus O$ 是 $K$ 的边界．注意 $O$ 是开集；$\partial K$ 是有界闭集（紧集）；$\partial K$ 无内点；$m(K) = m(\partial K) + m(O)$．
+
+考虑分情况讨论如何从 $K$ 中取出测度恰好为 $a$ 的无内点闭集 $F$．
+
+**情况 1：$m(\partial K) \ge a$：**
+
+此时我们不需要使用开区间 $I_n$．定义函数 $f(x) = m(\partial K \cap [-x, x])$，则 $f(x)$ 是关于 $x$ 的连续函数，且 $f(0)=0$，$\lim_{x\to+\infty} f(x) = m(\partial K) \ge a$．
+由介值定理，必定存在 $R > 0$，使得 $f(R) = a$．
+令 **$F = \partial K \cap [-R, R]$**．
+由于 $F$ 是 $\partial K$ 的闭子集，它当然是有界闭集，且包含于 $E$ 中，测度为 $a$．又因为它包含于无内点的 $\partial K$ 中，所以 $F$ 也无内点．因此 $F$ 满足题目要求．
+
+**情况 2：$m(\partial K) < a$：**
+
+此时我们使用全部 $\partial K$ 的同时还需要从 $O$ 中借一部分测度．记需要补充的测度为 $\Delta = a - m(\partial K) > 0$．因为 $O$ 是开集，所以 $O$ 可以表示为可列个开区间的并 $O = \bigsqcup_{n=1}^\infty I_n$．记比例常数 $\rho = \frac{\Delta}{m(O)}$，它满足 $0 < \rho < 1$．对于每一个开区间 $I_n$，我们指定其目标测度为 $d_n = \rho \cdot m(I_n)$．这样就可利用 [@lem-fat]，对于每个开区间 $I_n$ 及其目标测度 $d_n$，构造出 $I_n$ 内的有界闭集 $D_n \subset I_n$ 使得 $D_n$ 无内点且测度 $m(D_n) = d_n$．取 $D = \bigsqcup_{n=1}^\infty D_n$，则
+$$
+m(D) = \sum_{n=1}^\infty m(D_n)= \sum_{n=1}^\infty \rho m(I_n)= \rho m(O)= \Delta
+$$
+取 $F = \partial K \cup D$，其满足：
+
+- 有界且包含于 $O$ 中：平凡．
+
+- 测度：$m(F) = m(\partial K) + m(D) = m(\partial K) + \Delta = a$．
+
+- 闭：考虑到 $D_n$ 在 [@lem-fat] 的构造，每个 $D_n$ 都是由 $I_n$ 挖去可数个开区间得到，故 $F$ 其实是有界闭集 $K$ 挖去可数个开区间剩下的部分（对每个 $I_n$ 都挖去了其中可数个开区间），因此 $F$ 是闭集．
+
+故 $F$ 满足题目要求．
+:::
