@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Technical posts.">
+<meta name="author" content="sun123zxy">
 
-<title>Technical – sun123zxy’s blog</title>
+<title>实轴可测集内的无内点有界闭子集 – sun123zxy’s blog</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -35,8 +35,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
-<script src="../../site_libs/quarto-listing/list.min.js"></script>
-<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -63,47 +61,19 @@ ul.task-list li input[type="checkbox"] {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
   }
-}</script><script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-subtitle','listing-lang','listing-categories','listing-description','listing-date','listing-image','listing-collections',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
+}</script>
 <script>
 MathJax = {
   tex: {
@@ -144,7 +114,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="alternate" type="application/rss+xml" title="sun123zxy's blog" href="index.xml" data-external="1"></head>
+</head>
 
 <body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
@@ -317,8 +287,8 @@ window.Quarto = {
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -358,37 +328,49 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="YWxnb3JpdGht">algorithm <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QyUyQiUyQg==">C++ <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TGFUZVg=">LaTeX <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWVtb3JpZXM=">memories <span class="quarto-category-count">(3)</span></div><div class="category" data-category="TWluZWNyYWZ0">Minecraft <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bXVzaWM=">music <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHl0aG9u">Python <span class="quarto-category-count">(2)</span></div><div class="category" data-category="c2l0ZS1yZWxhdGVk">site-related <span class="quarto-category-count">(2)</span></div><div class="category" data-category="dGVjaG5pY2Fs">technical <span class="quarto-category-count">(6)</span></div><div class="category" data-category="d2Vi">web <span class="quarto-category-count">(3)</span></div></div></div>
+    </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Technical</h1>
-</div>
-
-<div>
-  <div class="description">
-    Technical posts.
+<h1 class="title">实轴可测集内的无内点有界闭子集</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">analysis</div>
+    <div class="quarto-category">solution</div>
   </div>
-</div>
+  </div>
 
 
-<div class="quarto-title-meta column-page-left">
 
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">作者</div>
+    <div class="quarto-title-meta-contents">
+             <p>sun123zxy </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">发布于</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2026年4月17日</p>
+    </div>
+  </div>
   
     
   </div>
@@ -398,256 +380,98 @@ window.Quarto = {
 </header>
 
 
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-    <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-    <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-      <option value="" disabled="" selected="" hidden="">Order By</option>
-      <option value="index" data-direction="asc">Default</option>
-      <option value="listing-title" data-direction="asc">
-        Title
-      </option>
-      <option value="listing-date-sort" data-direction="asc">
-        Date - Oldest
-      </option>
-      <option value="listing-date-sort" data-direction="desc">
-        Date - Newest
-      </option>
-    </select>
-  </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
 </div>
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="bWVtb3JpZXMlMkNNaW5lY3JhZnQlMkNtdXNpYyUyQ3RlY2huaWNhbCUyQ1B5dGhvbg==" data-listing-date-sort="1676592000000" data-listing-file-modified-sort="1777026121904" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="775">
-<div class="thumbnail"><a href="../../posts/20230217-rmg/index.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="../../posts/20230217-rmg/colorful-redstone.jpg"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../posts/20230217-rmg/index.html" class="no-external">聊聊红石音乐</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../posts/20230217-rmg/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWVtb3JpZXM='); return false;">memories</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TWluZWNyYWZ0'); return false;">Minecraft</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bXVzaWM='); return false;">music</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVjaG5pY2Fs'); return false;">technical</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
-
-</div>
-<div class="delink listing-description"><a href="../../posts/20230217-rmg/index.html" class="no-external">
-<p>封存的幻想。</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../../posts/20230217-rmg/index.html" class="no-external">
-<div class="listing-date">
-2023/02/17
-</div>
-<div class="metadata-value listing-collections">
-casual
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="YWxnb3JpdGhtJTJDdGVjaG5pY2FsJTJDQyUyQiUyQg==" data-listing-date-sort="1674518400000" data-listing-file-modified-sort="1777026121902" data-listing-date-modified-sort="1689206400000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1064">
-<div class="thumbnail"><a href="../../posts/20230124-stl/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../posts/20230124-stl/index.html" class="no-external">算法竞赛向 C++ Standard Library 使用速查</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../posts/20230124-stl/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnb3JpdGht'); return false;">algorithm</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVjaG5pY2Fs'); return false;">technical</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('QyUyQiUyQg=='); return false;">C++</div>
-
-</div>
-<div class="delink listing-description"><a href="../../posts/20230124-stl/index.html" class="no-external">
-本文旨在对算法竞赛所需 C++ Standard Library 做一个全面而相对严谨的总结。
-</a></div>
-</div>
-<div class="metadata">
-<a href="../../posts/20230124-stl/index.html" class="no-external">
-<div class="listing-date">
-2023/01/24
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="c2l0ZS1yZWxhdGVkJTJDdGVjaG5pY2FsJTJDd2ViJTJDTGFUZVglMkNtZW1vcmllcw==" data-listing-date-sort="1672012800000" data-listing-file-modified-sort="1777026121899" data-listing-date-modified-sort="1681689600000" data-listing-reading-time-sort="4" data-listing-word-count-sort="623">
-<div class="thumbnail"><a href="../../posts/20221226-quarto-fantasia/index.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="../../posts/20221226-quarto-fantasia/quarto-begin.jpg"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../posts/20221226-quarto-fantasia/index.html" class="no-external">Jekyll 2 Quarto: Academic Writing’s not All About PDF</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../posts/20221226-quarto-fantasia/index.html" class="no-external">博客搭建随想 Part II</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('c2l0ZS1yZWxhdGVk'); return false;">site-related</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVjaG5pY2Fs'); return false;">technical</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('d2Vi'); return false;">web</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TGFUZVg='); return false;">LaTeX</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWVtb3JpZXM='); return false;">memories</div>
-
-</div>
-<div class="delink listing-description"><a href="../../posts/20221226-quarto-fantasia/index.html" class="no-external">
-<p>PDF，我所欲也；HTML，亦我所欲也。二者不可得兼……</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../../posts/20221226-quarto-fantasia/index.html" class="no-external">
-<div class="listing-date">
-2022/12/26
-</div>
-<div class="metadata-value listing-collections">
-casual
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="dGVjaG5pY2FsJTJDUHl0aG9u" data-listing-date-sort="1657756800000" data-listing-file-modified-sort="1777026121897" data-listing-date-modified-sort="1657756800000" data-listing-reading-time-sort="6" data-listing-word-count-sort="1174">
-<div class="thumbnail"><a href="../../posts/20220714-import/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../posts/20220714-import/index.html" class="no-external">关于 Python 的 import</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../posts/20220714-import/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVjaG5pY2Fs'); return false;">technical</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
-
-</div>
-<div class="delink listing-description"><a href="../../posts/20220714-import/index.html" class="no-external">
-<p><code>__init__.py</code>, <code>sys.path</code>, <code>python -m</code> and more…</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../../posts/20220714-import/index.html" class="no-external">
-<div class="listing-date">
-2022/07/14
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="dGVjaG5pY2FsJTJDd2Vi" data-listing-date-sort="1643932800000" data-listing-file-modified-sort="1777026121897" data-listing-date-modified-sort="1654041600000" data-listing-reading-time-sort="8" data-listing-word-count-sort="1480">
-<div class="thumbnail"><a href="../../posts/20220204-vmagic/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../posts/20220204-vmagic/index.html" class="no-external">DockerCompose+VLESS+WS+TLS+Web 方式搭建 V2Ray 代理</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../posts/20220204-vmagic/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVjaG5pY2Fs'); return false;">technical</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('d2Vi'); return false;">web</div>
-
-</div>
-<div class="delink listing-description"><a href="../../posts/20220204-vmagic/index.html" class="no-external">
-<p>无懈可击的超强配置搭建教程。</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../../posts/20220204-vmagic/index.html" class="no-external">
-<div class="listing-date">
-2022/02/04
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="c2l0ZS1yZWxhdGVkJTJDdGVjaG5pY2FsJTJDd2ViJTJDbWVtb3JpZXM=" data-listing-date-sort="1629158400000" data-listing-file-modified-sort="1777026121891" data-listing-date-modified-sort="1671926400000" data-listing-reading-time-sort="3" data-listing-word-count-sort="468">
-<div class="thumbnail"><a href="../../posts/20210817-aboutblog/index.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="../../posts/20210817-aboutblog/cnblogs-19.jpg"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../posts/20210817-aboutblog/index.html" class="no-external">Cnblogs 2 Jekyll：从寄人篱下到手撸全站</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../posts/20210817-aboutblog/index.html" class="no-external">博客搭建随想 Part I</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('c2l0ZS1yZWxhdGVk'); return false;">site-related</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('dGVjaG5pY2Fs'); return false;">technical</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('d2Vi'); return false;">web</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWVtb3JpZXM='); return false;">memories</div>
-
-</div>
-<div class="delink listing-description"><a href="../../posts/20210817-aboutblog/index.html" class="no-external">
-<p>某不务正业 OIer 摸鱼日记。</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../../posts/20210817-aboutblog/index.html" class="no-external">
-<div class="listing-date">
-2021/08/17
-</div>
-<div class="metadata-value listing-collections">
-casual
-</div>
-</a>
+<div class="callout-body-container">
+<div id="exm-1" class="theorem example">
+<p><span class="theorem-title"><strong>例 1</strong></span> 设 <span class="math inline">\(E\)</span> 是 <span class="math inline">\(\mathbb R\)</span> 上的 Lebesgue 可测集，若 <span class="math inline">\(m(E) &gt; a &gt; 0\)</span>，则存在无内点的有界闭集 <span class="math inline">\(F \subset E\)</span> 使得 <span class="math inline">\(m(F)=a\)</span>，其中 <span class="math inline">\(m(E)\)</span> 指集合 <span class="math inline">\(E\)</span> 的 Lebesgue 测度．</p>
 </div>
 </div>
 </div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="lem-fat" class="theorem lemma">
+<p><span class="theorem-title"><strong>引理 1</strong></span> 设 <span class="math inline">\(I = (c, d)\)</span> 为开区间，其长度 <span class="math inline">\(L = d - c &gt; 0\)</span>．对于任意实数 <span class="math inline">\(0 &lt; \alpha &lt; L\)</span>，存在一个有界闭集（紧集） <span class="math inline">\(C \subset I\)</span>，使得 <span class="math inline">\(C\)</span> 无内点，<span class="math inline">\(m(C) = \alpha\)</span>，且 <span class="math inline">\(C\)</span> 由 <span class="math inline">\(I\)</span> 挖去可数个开区间剩下的部分构成．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span>这里给出的构造是所谓的 fat Cantor set．由于 <span class="math inline">\(\alpha &lt; L\)</span>，我们可以先在 <span class="math inline">\(I\)</span> 内取一个闭区间 <span class="math inline">\(J = [a_0, b_0] \subset (c, d)\)</span>，使得其长度 <span class="math inline">\(L_0 = b_0 - a_0\)</span> 满足 <span class="math inline">\(\alpha &lt; L_0 &lt; L\)</span>．注意这相当于在 <span class="math inline">\(I\)</span> 的两端各挖去 <span class="math inline">\((c, a_0)\)</span> 和 <span class="math inline">\((b_0, d)\)</span> 两个开区间．</p>
+<p>现在需要再在 <span class="math inline">\(J\)</span> 中挖去总长度为 <span class="math inline">\(\beta = L_0 - \alpha &gt; 0\)</span> 的开区间．</p>
+<ul>
+<li><p><strong>第 1 步</strong>：从 <span class="math inline">\(J\)</span> 的正中间挖去一个长度为 <span class="math inline">\(\frac{\beta}{2}\)</span> 的开区间．剩下两个互不相交的闭区间，记它们的并集为 <span class="math inline">\(C_1\)</span>．此时 <span class="math inline">\(m(C_1) = L_0 - \frac{\beta}{2}\)</span>．</p></li>
+<li><p><strong>第 <span class="math inline">\(n\)</span> 步</strong>：经过 <span class="math inline">\(n-1\)</span> 步后，剩下 <span class="math inline">\(2^{n-1}\)</span> 个互不相交的闭区间（它们的并集记为 <span class="math inline">\(C_{n-1}\)</span>）．我们从这 <span class="math inline">\(2^{n-1}\)</span> 个闭区间的每一个的正中间，挖去一个长度为 <span class="math inline">\(\frac{\beta}{2^n \cdot 2^{n-1}} = \frac{\beta}{2^{2n-1}}\)</span> 的开区间． 在第 <span class="math inline">\(n\)</span> 步中，总共挖去的长度为 <span class="math inline">\(2^{n-1} \times \frac{\beta}{2^{2n-1}} = \frac{\beta}{2^n}\)</span>． 记剩下的 <span class="math inline">\(2^n\)</span> 个闭区间的并集为 <span class="math inline">\(C_n\)</span>．</p></li>
+</ul>
+<p>令 <span class="math inline">\(C = \bigcap_{n=1}^\infty C_n\)</span>．其具有如下性质：</p>
+<ul>
+<li><p><span class="math inline">\(C\)</span> 是 <span class="math inline">\(I\)</span> 挖掉可数个开区间剩下的部分，包括两头挖去的开区间和每一步挖去的开区间．</p></li>
+<li><p><strong>闭集且有界</strong>：因为每一个 <span class="math inline">\(C_n\)</span> 都是有界闭集，而 <span class="math inline">\(C\)</span> 是它们的交，故为有界闭集．</p></li>
+<li><p><strong>测度</strong>：因为 <span class="math inline">\(C_1 \supset C_2 \supset \cdots\)</span>，由测度连续性，<span class="math inline">\(m(C) = \lim_{n\to\infty} m(C_n)\)</span>．故 <span class="math display">\[
+m(C) = L_0 - \sum_{n=1}^\infty \frac{\beta}{2^n} = L_0 - \beta \sum_{n=1}^\infty \frac{1}{2^n} = L_0 - \beta = \alpha
+\]</span></p></li>
+<li><p><strong>无内点</strong>：即证明 <span class="math inline">\(C\)</span> 不能包含开区间．在第 <span class="math inline">\(n\)</span> 步后，<span class="math inline">\(C_n\)</span> 由 <span class="math inline">\(2^n\)</span> 个闭区间组成，其总长度小于 <span class="math inline">\(L_0\)</span>．因此，其中每个闭区间长度都小于 <span class="math inline">\(\frac{L_0}{2^n}\)</span>．随着 <span class="math inline">\(n \to \infty\)</span>，构成 <span class="math inline">\(C_n\)</span> 的闭区间长度趋于 <span class="math inline">\(0\)</span>．但任何开区间都有大于 <span class="math inline">\(0\)</span> 的长度，因此不可能包含在 <span class="math inline">\(C\)</span> 中．故 <span class="math inline">\(C\)</span> 无内点．</p></li>
+</ul>
+<p>故 <span class="math inline">\(C\)</span> 就是我们想要的集合．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof (<a href="#exm-1" class="quarto-xref">例&nbsp;1</a> 的证明)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em> (<a href="#exm-1" class="quarto-xref">例&nbsp;1</a> 的证明). </span>已知 <span class="math inline">\(E\)</span> 是可测集，且 <span class="math inline">\(m(E) &gt; a &gt; 0\)</span>．根据 Lebesgue 测度的内正则性，存在紧集（有界闭集） <span class="math inline">\(K \subset E\)</span>，使得 <span class="math inline">\(m(E) \geq m(K) &gt; a\)</span>．由于 <span class="math inline">\(K\)</span> 有界，<span class="math inline">\(m(K) &lt; +\infty\)</span>．记 <span class="math inline">\(O\)</span> 是 <span class="math inline">\(K\)</span> 的内部，<span class="math inline">\(\partial K = K \setminus O\)</span> 是 <span class="math inline">\(K\)</span> 的边界．注意 <span class="math inline">\(O\)</span> 是开集；<span class="math inline">\(\partial K\)</span> 是有界闭集（紧集）；<span class="math inline">\(\partial K\)</span> 无内点；<span class="math inline">\(m(K) = m(\partial K) + m(O)\)</span>．</p>
+<p>考虑分情况讨论如何从 <span class="math inline">\(K\)</span> 中取出测度恰好为 <span class="math inline">\(a\)</span> 的无内点闭集 <span class="math inline">\(F\)</span>．</p>
+<p><strong>情况 1：<span class="math inline">\(m(\partial K) \ge a\)</span>：</strong></p>
+<p>此时我们不需要使用开区间 <span class="math inline">\(I_n\)</span>．定义函数 <span class="math inline">\(f(x) = m(\partial K \cap [-x, x])\)</span>，则 <span class="math inline">\(f(x)\)</span> 是关于 <span class="math inline">\(x\)</span> 的连续函数，且 <span class="math inline">\(f(0)=0\)</span>，<span class="math inline">\(\lim_{x\to+\infty} f(x) = m(\partial K) \ge a\)</span>． 由介值定理，必定存在 <span class="math inline">\(R &gt; 0\)</span>，使得 <span class="math inline">\(f(R) = a\)</span>． 令 <strong><span class="math inline">\(F = \partial K \cap [-R, R]\)</span></strong>． 由于 <span class="math inline">\(F\)</span> 是 <span class="math inline">\(\partial K\)</span> 的闭子集，它当然是有界闭集，且包含于 <span class="math inline">\(E\)</span> 中，测度为 <span class="math inline">\(a\)</span>．又因为它包含于无内点的 <span class="math inline">\(\partial K\)</span> 中，所以 <span class="math inline">\(F\)</span> 也无内点．因此 <span class="math inline">\(F\)</span> 满足题目要求．</p>
+<p><strong>情况 2：<span class="math inline">\(m(\partial K) &lt; a\)</span>：</strong></p>
+<p>此时我们使用全部 <span class="math inline">\(\partial K\)</span> 的同时还需要从 <span class="math inline">\(O\)</span> 中借一部分测度．记需要补充的测度为 <span class="math inline">\(\Delta = a - m(\partial K) &gt; 0\)</span>．因为 <span class="math inline">\(O\)</span> 是开集，所以 <span class="math inline">\(O\)</span> 可以表示为可列个开区间的并 <span class="math inline">\(O = \bigsqcup_{n=1}^\infty I_n\)</span>．记比例常数 <span class="math inline">\(\rho = \frac{\Delta}{m(O)}\)</span>，它满足 <span class="math inline">\(0 &lt; \rho &lt; 1\)</span>．对于每一个开区间 <span class="math inline">\(I_n\)</span>，我们指定其目标测度为 <span class="math inline">\(d_n = \rho \cdot m(I_n)\)</span>．这样就可利用 <a href="#lem-fat" class="quarto-xref">引理&nbsp;1</a>，对于每个开区间 <span class="math inline">\(I_n\)</span> 及其目标测度 <span class="math inline">\(d_n\)</span>，构造出 <span class="math inline">\(I_n\)</span> 内的有界闭集 <span class="math inline">\(D_n \subset I_n\)</span> 使得 <span class="math inline">\(D_n\)</span> 无内点且测度 <span class="math inline">\(m(D_n) = d_n\)</span>．取 <span class="math inline">\(D = \bigsqcup_{n=1}^\infty D_n\)</span>，则 <span class="math display">\[
+m(D) = \sum_{n=1}^\infty m(D_n)= \sum_{n=1}^\infty \rho m(I_n)= \rho m(O)= \Delta
+\]</span> 取 <span class="math inline">\(F = \partial K \cup D\)</span>，其满足：</p>
+<ul>
+<li><p>有界且包含于 <span class="math inline">\(O\)</span> 中：平凡．</p></li>
+<li><p>测度：<span class="math inline">\(m(F) = m(\partial K) + m(D) = m(\partial K) + \Delta = a\)</span>．</p></li>
+<li><p>闭：考虑到 <span class="math inline">\(D_n\)</span> 在 <a href="#lem-fat" class="quarto-xref">引理&nbsp;1</a> 的构造，每个 <span class="math inline">\(D_n\)</span> 都是由 <span class="math inline">\(I_n\)</span> 挖去可数个开区间得到，故 <span class="math inline">\(F\)</span> 其实是有界闭集 <span class="math inline">\(K\)</span> 挖去可数个开区间剩下的部分（对每个 <span class="math inline">\(I_n\)</span> 都挖去了其中可数个开区间），因此 <span class="math inline">\(F\)</span> 是闭集．</p></li>
+</ul>
+<p>故 <span class="math inline">\(F\)</span> 满足题目要求．</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -686,12 +510,12 @@ casual
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
+      button.setAttribute("title", "已复制");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
+        button.setAttribute("data-bs-title", "已复制");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",
@@ -1068,6 +892,38 @@ casual
     }
   });
   </script>
+<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
+<input type="hidden" id="giscus-alt-theme" value="light">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "sun123zxy/blog-quarto-code";
+    script.dataset.repoId = "R_kgDOIrPs5w";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOIrPs584CV4gd";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
