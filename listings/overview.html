@@ -78,7 +78,7 @@ ul.task-list li input[type="checkbox"] {
 }</script><script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-lst-general .list');
+    const listingTargetEl = window.document.querySelector('#listing-lst-topic .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
@@ -91,7 +91,7 @@ ul.task-list li input[type="checkbox"] {
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-lst-general'] = new List('listing-lst-general', options);
+    window['quarto-listings']['listing-lst-topic'] = new List('listing-lst-topic', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -106,7 +106,7 @@ ul.task-list li input[type="checkbox"] {
   
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-lst-specialized .list');
+    const listingTargetEl = window.document.querySelector('#listing-lst-series .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
@@ -119,7 +119,35 @@ ul.task-list li input[type="checkbox"] {
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-lst-specialized'] = new List('listing-lst-specialized', options);
+    window['quarto-listings']['listing-lst-series'] = new List('listing-lst-series', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-lst-type .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-subtitle','listing-description','listing-image',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-title","listing-author","listing-image","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-lst-type'] = new List('listing-lst-type', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -378,8 +406,12 @@ window.Quarto = {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-bi-rss">    
         <li>
-    <a class="dropdown-item" href="../listings/all.xml">
+    <a class="dropdown-item" href="../listings/all/index.xml">
  <span class="dropdown-text">All Posts</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../listings/math/index.xml">
+ <span class="dropdown-text">Math</span></a>
   </li>  
     </ul>
   </li>
@@ -424,11 +456,11 @@ window.Quarto = {
 </header>
 
 
-<section id="general" class="level2">
-<h2 class="anchored" data-anchor-id="general">General</h2>
-<div id="listing-lst-general" class="listing quarto-float quarto-figure quarto-figure-left quarto-listing quarto-listing-container-grid anchored">
+<section id="by-topic" class="level2">
+<h2 class="anchored" data-anchor-id="by-topic">By Topic</h2>
+<div id="listing-lst-topic" class="listing quarto-float quarto-figure quarto-figure-left quarto-listing quarto-listing-container-grid anchored">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1777057394838" data-listing-reading-time-sort="1" data-listing-word-count-sort="5">
+<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1777173205531" data-listing-reading-time-sort="1" data-listing-word-count-sort="5">
 <a href="../listings/math/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -447,7 +479,7 @@ Kourindou of Mathematics
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1777057394836" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1777173205529" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
 <a href="../listings/cp/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -466,7 +498,7 @@ OI / ICPC / CCPC
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1777057394845" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1777173205538" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
 <a href="../listings/technical/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -482,7 +514,7 @@ Technical
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="3" data-listing-file-modified-sort="1777057394844" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="g-col-1" data-index="3" data-listing-file-modified-sort="1777173205537" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
 <a href="../listings/short/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -498,7 +530,7 @@ Short
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="4" data-listing-file-modified-sort="1777057394835" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="g-col-1" data-index="4" data-listing-file-modified-sort="1777173205528" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
 <a href="../listings/casual/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -514,7 +546,7 @@ Casual
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="5" data-listing-file-modified-sort="1777057394844" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="g-col-1" data-index="5" data-listing-file-modified-sort="1777173205538" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
 <a href="../listings/solution/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -530,50 +562,15 @@ Solutions
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="6" data-listing-file-modified-sort="1777057394836" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<a href="../listings/draft/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="../listings/draft/cirno-academic-waste.jpg" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-废液缸
-</h5>
-<div class="card-subtitle listing-subtitle">
-Academic Waste
-</div>
-<div class="card-text listing-description delink">
-<p>Drafts WIP and shelved writings.</p>
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="7" data-listing-file-modified-sort="1777057394835" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<a href="../listings/all/index.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<p class="card-img-top">
-<img loading="lazy" src="../listings/all/asterisk.png" class="thumbnail-image card-img" style="height: 150px;">
-</p>
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-All Posts
-</h5>
-<div class="card-text listing-description delink">
-<p>All posts hosted on this site.</p>
-</div>
-</div>
-</div></a>
-</div>
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
 </div>
 </section>
-<section id="specialized" class="level2">
-<h2 class="anchored" data-anchor-id="specialized">Specialized</h2>
-<div id="listing-lst-specialized" class="listing quarto-float quarto-figure quarto-figure-left quarto-listing quarto-listing-container-grid anchored">
+<section id="by-series" class="level2">
+<h2 class="anchored" data-anchor-id="by-series">By Series</h2>
+<div id="listing-lst-series" class="listing quarto-float quarto-figure quarto-figure-left quarto-listing quarto-listing-container-grid anchored">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1777057394836" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1777173205528" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
 <a href="../listings/commalg/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -592,7 +589,7 @@ Commutative Algebra
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1777057394838" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1777173205531" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
 <a href="../listings/nilpcone/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -611,7 +608,7 @@ Commutative Algebra
 </div>
 </div></a>
 </div>
-<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1777057394838" data-listing-reading-time-sort="1" data-listing-word-count-sort="57">
+<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1777173205531" data-listing-reading-time-sort="1" data-listing-word-count-sort="57">
 <a href="../listings/group-rep-tour/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -626,6 +623,65 @@ A Tour of Representation Theory of Finite Groups
 </div>
 <div class="card-text listing-description delink">
 <p>有限群表示论，Peter–Weyl 分解，对称群表示论和 Schur–Weyl 对偶．</p>
+</div>
+</div>
+</div></a>
+</div>
+</div>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
+</section>
+<section id="by-type" class="level2">
+<h2 class="anchored" data-anchor-id="by-type">By Type</h2>
+<div id="listing-lst-type" class="listing quarto-float quarto-figure quarto-figure-left quarto-listing quarto-listing-container-grid anchored">
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1777173205528" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<a href="../listings/all/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../listings/all/asterisk.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+All Posts
+</h5>
+<div class="card-text listing-description delink">
+<p>All posts on this site.</p>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1777173205527" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<a href="../listings/all-f/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../listings/all-f/asterisk.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+all -f
+</h5>
+<div class="card-text listing-description delink">
+<p>All posts on this site, including drafts.</p>
+</div>
+</div>
+</div></a>
+</div>
+<div class="g-col-1" data-index="2" data-listing-file-modified-sort="1777173205530" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<a href="../listings/draft/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="../listings/draft/cirno-academic-waste.jpg" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+废液缸
+</h5>
+<div class="card-subtitle listing-subtitle">
+Academic Waste
+</div>
+<div class="card-text listing-description delink">
+<p>Drafts WIP and shelved writings.</p>
 </div>
 </div>
 </div></a>
