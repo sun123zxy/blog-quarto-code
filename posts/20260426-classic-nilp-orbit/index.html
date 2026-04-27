@@ -368,7 +368,12 @@ window.Quarto = {
    
   <ul>
   <li><a href="#a-型李代数" id="toc-a-型李代数" class="nav-link active" data-scroll-target="#a-型李代数"><span class="header-section-number">1</span> A 型李代数</a></li>
-  <li><a href="#正交群" id="toc-正交群" class="nav-link" data-scroll-target="#正交群"><span class="header-section-number">2</span> 正交群</a></li>
+  <li><a href="#正交群及其李代数" id="toc-正交群及其李代数" class="nav-link" data-scroll-target="#正交群及其李代数"><span class="header-section-number">2</span> 正交群及其李代数</a>
+  <ul class="collapse">
+  <li><a href="#非退化双线性型" id="toc-非退化双线性型" class="nav-link" data-scroll-target="#非退化双线性型"><span class="header-section-number">2.1</span> 非退化双线性型</a></li>
+  <li><a href="#对称与斜对称双线性型的结构" id="toc-对称与斜对称双线性型的结构" class="nav-link" data-scroll-target="#对称与斜对称双线性型的结构"><span class="header-section-number">2.2</span> 对称与斜对称双线性型的结构</a></li>
+  </ul></li>
+  <li><a href="#基于-jordan-型的轨道分类" id="toc-基于-jordan-型的轨道分类" class="nav-link" data-scroll-target="#基于-jordan-型的轨道分类"><span class="header-section-number">3</span> 基于 Jordan 型的轨道分类</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>其他格式</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
@@ -414,6 +419,9 @@ window.Quarto = {
 
 
 <p>所谓经典李代数，即是单李代数中寄居在线性李代数 <span class="math inline">\(\mathfrak{gl}_n\)</span> 中 <span class="math inline">\(\mathfrak{sl}_n\)</span>、<span class="math inline">\(\mathfrak{so}_n\)</span> 和 <span class="math inline">\(\mathfrak{sp}_{2n}\)</span>．其中 <span class="math inline">\(A_n\)</span> 型是 <span class="math inline">\(\mathfrak{sl}_{n+1}\)</span>，<span class="math inline">\(B_n\)</span> 型是 <span class="math inline">\(\mathfrak{so}_{2n+1}\)</span>，<span class="math inline">\(C_n\)</span> 型是 <span class="math inline">\(\mathfrak{sp}_{2n}\)</span>，<span class="math inline">\(D_n\)</span> 型是 <span class="math inline">\(\mathfrak{so}_{2n}\)</span>．其中 <span class="math inline">\(\mathfrak{sl}_n\)</span> 的幂零轨道已经由 Jordan 型分类，本篇主要关心 <span class="math inline">\(\mathfrak{so}_n\)</span> 和 <span class="math inline">\(\mathfrak{sp}_{2n}\)</span> 中的幂零轨道．</p>
+<ul>
+<li>我们主要跟随 <span class="citation" data-cites="jantzen_nilpotent_2004"><a href="#ref-jantzen_nilpotent_2004" role="doc-biblioref">[1, section 1]</a></span> 的叙述．</li>
+</ul>
 <section id="a-型李代数" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="a-型李代数"><span class="header-section-number">1</span> A 型李代数</h2>
 <p>讨论幂零轨道首先需要明确作用群的选择．对 <span class="math inline">\(\mathfrak{gl}_n\)</span> 来说自然选 <span class="math inline">\(\mathrm{GL}_n\)</span> 就好，但 <span class="math inline">\(\mathfrak{sl}_n\)</span>、<span class="math inline">\(\mathfrak{so}_n\)</span> 和 <span class="math inline">\(\mathfrak{sp}_{2n}\)</span> 似乎都应该更加小心．例如，<span class="math inline">\(\mathfrak{sl}_n\)</span> 上考虑 <span class="math inline">\(\mathrm{GL}_n\)</span> 的子群 <span class="math inline">\(\mathrm{SL}_n\)</span> 的共轭作用似乎也非常合理——<span class="math inline">\(\mathfrak{sl}_n\)</span> 系由 <span class="math inline">\(\mathrm{SL}_n\)</span> 单位元处取切空间得到．更进一步地，不少矩阵产生的实际共轭效果是一致的，最有效地来说应该考虑所有可能的共轭作用构成的群——一个 <span class="math inline">\(\mathrm{GL}_n\)</span> 的商群．不过下面的结果告诉我们这其实都没有关系：不同作用群的选择在 <span class="math inline">\(\mathfrak{gl}_n\)</span> 或 <span class="math inline">\(\mathfrak{sl}_n\)</span> 上导致的轨道是一样的．</p>
@@ -477,42 +485,146 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="正交群" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="正交群"><span class="header-section-number">2</span> 正交群</h2>
-<p>下面开始考虑 B、C、D 型李代数．仍然第一个问题是作用群．当然至少仍然有 <span class="math inline">\(\mathrm{GL}_n\)</span> 的选择，即还是通过 Jordan 型来分类幂零轨道．但会希望有一个更小的作用群，不说一定恰好是共轭作用群，但至少也要足够小，例如对 <span class="math inline">\(\mathfrak{so}_n\)</span> 的 <span class="math inline">\(\operatorname{SO}_n\)</span> 或对 <span class="math inline">\(\mathfrak{sp}_{2n}\)</span> 的 <span class="math inline">\(\operatorname{Sp}_{2n}\)</span> 来得到更细的分类．为统一研究方便，来先在 <span class="math inline">\(\mathbb C\)</span> 上有限维线性空间 <span class="math inline">\(V\)</span> 上确定一个非退化双线性型 <span class="math inline">\(\langle -, - \rangle\)</span> 明确正交群及其李代数的定义．</p>
-<p>设 <span class="math inline">\(\langle -, - \rangle\)</span> 为 <span class="math inline">\(V\)</span> 上的非退化双线性型．对 <span class="math inline">\(\mathfrak{so}\)</span> 的情形，任意特征非二的域上的非退化对称双线性型都可以通过适当选取基底化为对角型，而 <span class="math inline">\(\mathbb C\)</span> 上每个元素都有平方根，因此可以进一步化为单位矩阵．同样地，对 <span class="math inline">\(\mathfrak{sp}\)</span> 的情形，任意特征非二的域上的非退化斜对称双线性型都可以通过适当选取基底化为标准辛矩阵 <span class="math inline">\(\begin{pmatrix} 0 &amp; I_n \\ -I_n &amp; 0 \end{pmatrix}\)</span>．</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark (非退化双线性型分类)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (非退化双线性型分类). </span>自然会问为什么只研究对称和斜对称两种非退化双线性型，这将我们引向非退化双线性型的分类问题．注意这些双线性型全体应被视为构成 <span class="math inline">\(\mathrm{GL}(V)\)</span>-模 <span class="math inline">\(V^* \otimes V^*\)</span>，而分类问题则是对其轨道进行分类．</p>
-<p>Schur–Weyl 对偶告诉我们 <span class="math inline">\(V^* \otimes V^*\)</span> 作为 <span class="math inline">\(\mathrm{GL}(V)\)</span>-表示分解成不可约代数表示 <span class="math inline">\(\operatorname{Sym}^2 V^*\)</span> 和 <span class="math inline">\(\operatorname{Alt}^2 V^*\)</span>，对应任何矩阵 <span class="math inline">\(X\)</span> 都有 <span class="math inline">\(X = \frac 1 2 (X+X^T) + \frac 1 2 (X-X^T)\)</span> 的分解．之前的讨论分类了这两个子表示内部的 <span class="math inline">\(\mathrm{GL}(V)\)</span>-轨道：完全由秩来分类．关于整个 <span class="math inline">\(V^* \otimes V^*\)</span> 的轨道结构则更为复杂，需要更细致的分析．</p>
-</div>
-</div>
-</div>
-</div>
-<p>对任意线性变换 <span class="math inline">\(X \in \mathfrak{gl}(V)\)</span>，规定 <span class="math inline">\(X^*\)</span> 为满足 <span class="math inline">\(\langle Xv, w \rangle = \langle v, X^*w \rangle\)</span> 的唯一映射，矩阵地来说是矩阵的转置，抽象地来说是对偶空间 <span class="math inline">\(V^*\)</span> 上的对偶映射通过这非退化双线性型拉回到 <span class="math inline">\(V\)</span> 上的结果．定义正交群 <span class="math inline">\(G\)</span> 和李代数 <span class="math inline">\(\mathfrak{g}\)</span> 如下： <span class="math display">\[
-G := \{X \in \mathrm{GL}(V) : \langle Xv, Xw \rangle = \langle v, w \rangle\} = \{X \in \mathrm{GL}(V) : X^* = X^{-1}\}
+<section id="正交群及其李代数" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="正交群及其李代数"><span class="header-section-number">2</span> 正交群及其李代数</h2>
+<p>下面开始考虑 B、C、D 型李代数．仍然第一个问题是作用群．当然至少仍然有 <span class="math inline">\(\mathrm{GL}_n\)</span> 的选择，即还是通过 Jordan 型来分类幂零轨道．但会希望有一个更小的作用群，不说一定恰好是共轭作用群，但至少也要足够小，例如对 <span class="math inline">\(\mathfrak{so}_n\)</span> 的 <span class="math inline">\(\operatorname{SO}_n\)</span> 或对 <span class="math inline">\(\mathfrak{sp}_{2n}\)</span> 的 <span class="math inline">\(\operatorname{Sp}_{2n}\)</span> 来得到更细的分类．为统一研究方便，来先在 <span class="math inline">\(\mathbb C\)</span> 上有限维线性空间 <span class="math inline">\(V\)</span> 上确定一个非退化双线性型 <span class="math inline">\(\varphi(-,-)\)</span> 明确正交群及其李代数的定义．</p>
+<section id="非退化双线性型" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="非退化双线性型"><span class="header-section-number">2.1</span> 非退化双线性型</h3>
+<p>设 <span class="math inline">\(\varphi(-,-)\)</span> 为 <span class="math inline">\(V\)</span> 上的非退化双线性型——非退化是指左根（或 / 且右根）为零，等价于其对应矩阵的可逆性．对任意线性变换 <span class="math inline">\(X \in \mathfrak{gl}(V)\)</span>，规定 <span class="math inline">\(X^*\)</span> 为满足 <span class="math inline">\(\varphi(Xv, w) = \varphi(v, X^*w)\)</span> 的唯一映射，矩阵地来说是矩阵的转置，抽象地来说是对偶空间 <span class="math inline">\(V^*\)</span> 上的对偶映射通过这非退化双线性型拉回到 <span class="math inline">\(V\)</span> 上的结果．定义正交群 <span class="math inline">\(G\)</span> 和李代数 <span class="math inline">\(\mathfrak{g}\)</span> 如下： <span class="math display">\[
+G := \{X \in \mathrm{GL}(V) : \varphi(Xv, Xw) = \varphi(v, w)\} = \{X \in \mathrm{GL}(V) : X^* = X^{-1}\}
 \]</span> <span class="math display">\[
-\mathfrak{g} := \{X \in \mathrm{GL}(V) : \langle Xv, w \rangle = -\langle v, Xw \rangle\} = \{X \in \mathrm{GL}(V) : X^* = -X\}
+\mathfrak{g} := \{X \in \mathrm{GL}(V) : \varphi(Xv, w) = -\varphi(v, Xw)\} = \{X \in \mathrm{GL}(V) : X^* = -X\}
 \]</span> 因此 <span class="math inline">\(G\)</span> 和 <span class="math inline">\(\mathfrak{g}\)</span> 是它们各自在其代数结构的对极映射下不变的元素全体．</p>
+<p>我们将来只关心两类特殊的非退化双线性型：对称的 <span class="math inline">\(\varphi(v, w) = \varphi(w, v)\)</span> 和斜对称的 <span class="math inline">\(\varphi(v, w) = -\varphi(w, v)\)</span>．前者对应正交群 <span class="math inline">\(\operatorname{SO}\)</span> 及其李代数 <span class="math inline">\(\mathfrak{so}\)</span>，后者对应正交群 <span class="math inline">\(\operatorname{Sp}\)</span> 及其李代数 <span class="math inline">\(\mathfrak{sp}\)</span>．不过在此之前，一般的非退化双线性型也有一些结论．</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<div id="thm-orbit-by-gl" class="theorem">
-<p><span class="theorem-title"><strong>定理 1</strong></span> 若 <span class="math inline">\(X, Y \in \mathfrak{g}\)</span>，则 <span class="math inline">\(X\)</span> 与 <span class="math inline">\(Y\)</span> 在 <span class="math inline">\(G\)</span> 下共轭当且仅当在 <span class="math inline">\(GL(V)\)</span> 下共轭．</p>
+<div id="prp-bilinear-prop" class="theorem proposition">
+<p><span class="theorem-title"><strong>命题 2</strong></span> 对任何域上有限维线性空间 <span class="math inline">\(V\)</span> 及其子空间 <span class="math inline">\(U\)</span>：</p>
+<ul>
+<li>定义消灭子 <span class="math inline">\(U^0 := \{f \in V^* : f(U) = 0\}\)</span>．它是 <span class="math inline">\(U \to V\)</span> 嵌入的对偶映射 <span class="math inline">\(V^* \to U^*\)</span> 的核．<span class="math inline">\(\dim U^0 = \dim V - \dim U\)</span>．</li>
+</ul>
+<p>对任意 <span class="math inline">\(V\)</span> 上双线性型 <span class="math inline">\(\varphi(-,-)\)</span>：</p>
+<ul>
+<li><p>它可通过 <span class="math inline">\(\varphi: v \mapsto \varphi(v, -)\)</span> 看成 <span class="math inline">\(V \to V^*\)</span> 的线性映射．</p></li>
+<li><p>定义正交补 <span class="math inline">\(U^\perp := \varphi^{-1}(U^0)\)</span>．等价地 <span class="math inline">\(U^\perp = \{v \in V : \varphi(v, u) = 0,\, \forall u \in U\}\)</span>．</p></li>
+</ul>
+<p>当 <span class="math inline">\(\varphi\)</span> 非退化时：</p>
+<ul>
+<li><span class="math inline">\(\dim U^\perp = \dim U^0\)</span>，<span class="math inline">\(\dim U + \dim U^\perp = \dim V\)</span>．</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<p>读者依序自证不难．更精炼地有如下正合列交换图：</p>
+<div id="fig-bilinear-prop" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bilinear-prop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.6 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="291.765pt" height="81.42pt" viewbox="0 0 194.51 54.28">
+<style type="text/css">
+@font-face{font-family:PCPXEO-CMSY5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAIkAAoAAAAAA/AAAAHZAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBKIEnCwYAATYCJAMIBCAFglwHIBs4AwAeg+NuKZS6HKVMNiWPr08jJJklKMba3r0qopq9EzqEZpYCoUSm80dj7n5DzZ8hOhNNqCYRbRYaHiFBiTTyn13dcqc9eKC3hZFm/vMkDqy1BZRghM0DaQ+WBoknWCUwekO7fFJCSin5TCjkO1oFb/KX8PkfZUV83HAS/jhl9AWwHh6dKvBZjs0KBf/14EbiMwKAEYBEAUNEgSEvi0BRUbA8MULH/SYAJCgicAbcAlAExJmKtb5wOXoSRf9inMZvXJzFMBnpG1VnV2OZLPpTzLzduaxv5lnC9vVCNIN5hMauc+/j6XMJe8Kn+MrlFuWimZlET8uZiMrRqUNxkIKTHCF94i5QMU/rJAfjjJEgVfNOHPeyKwxUkAOClyB8vi4AgEDwsk1vFYU2/fkRi5Qg79EPqhIETevkn2UrKWNGSBFXENIZBIKKdT+gDtsoauqgpGEGZU3rgrpJFYiiWBPm9SEUTVKjZNwoyiatpbpDd+PIzzYPyZjMJg0X40Eap3rLbcr3D13V6XKF3KmxOVWGtMr9c5iJgZmDnYJVmkEmcvyeERlGxkYyrBg2iIajGpOClY2GiVGaciXKMqi7NFKwklQi+R9IeaSRc9KwcVIxSFOpRA0iQP8BAAA=) format('woff2');}
+@font-face{font-family:FBIPCW-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAKkAAoAAAAABJgAAAJYAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqCRIIeCwgAATYCJAMMBCAFglwHIBu7AwCOwrZtE0NULGcy1NcUD/9/32+fc+5/DeOIcbMlkH6wvBUWpjNomlJgvZ/8y96E1F96IrmSUKWU7lxeLXab/73Fu2i+Aa0DJOabbg0sSk/qJRRm8LFTw8AmPFJL9QzEJTIaXR2exeGBygs0APLkm8zjvx70jyq+dQffUEZ0yCegj+FDdQ4o1K/sVUGPEhAA9D1AorBIVmCRnFOg04RUCdlx2Uhp0jAdrlin4RB4AaABQh55a2Bsice3VU+NW0VG70Qz+q2jhtcffaft9Uf1Rw/C3omu3qBpyzTRzMTKyprJmCX+8AG1fSTGxzkX9N5Z6S3oL74X++JlvO/5Fl9CP1cbTnMj8f+IDetv0vaG8kF0/q76naH4VB/TUzXRtqKBINYw1iFfGmT4siD9lmqP2vjKMt8j0T50sC5rw89AjBp2N5zWa/XIybx6jqYbpOdRbJ1aNz6d/eYryT4HU16cv+kapdFEqkaG1F+OFPGrRIHcAY0D5CzgimpXUsn1MnpkaClBxFdWNGI75/G4QLn3ME8HgEBw/tc0mqIZ9l+pmgb3+3kTF8Co5JncmTfc8cobiDOtRPwAi9VFKDcKCwYe9wiBMMOb0EyagV0GJmwgqjPpeH/cKh+yoo0J2xhYNaty1cCyVtVZNdaOO7MXEcQffoGUGDqPwO4Em00PDLRX3h5eW7PX0y8yq/MqqnOKrHw9AoBQokipKpWylLPCViIzvSlGEYOOh4C5I7Cx0QWScEyrkKdEMSvePHh5IGparJqmnYQy63R1K3emankqDM9RxIovDwFkGQAAAA==) format('woff2');}
+@font-face{font-family:XDTRFF-CMR7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAIcAAoAAAAAA+gAAAHRAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBJIEpCwYAATYCJAMIBCAFglYHIBs0AwCOwrZtE8eJ5VRsYhgiXhFESze7X5JQalF8jKI0VzXC4VECZxC6CYXGYrmpcbU7e3zA7SS2h52VIWTHg0u5t9zxwYMW0G9hAPCWRFIat0QizsOkAss0wcA425mqZ5KyW2OM2W8TqtyNbQ35loH/OVvuI20GVhBRLTqwPb9MdQOcrq0CBZXADUsBiQpzujMHYwtQqwW6UrKqfOjwewlqJIaACwDUgFxdGN9378XJYXfS+ZCsSdYe+A5TtJTvL0H5SvjfU77TFEzdHSQzPr7pe3HPcfVzIldbQjD31nij1CE0jGp+qr2zBHNJCcHUX+uPMeVD6POJsdFUvvy/6/YkX72CBgVoc86VVtNIeWZSxQ1mAN4d7+eYGABAILh+Z1Q254r/CKgGAED5zYK8Ql+CoFKQp4CFkwUgACATkUKk4exCCCNeQcak1FwbNYmGVtBiX2S0hA6JeiBs0BPXFnShoQW0tBtHdK4OpHy3uedXu51aLUVlcfKuuTWDSh/Jni5PdEz1jk91D9axqFygMmzQiEkTOo2pYzGsg9aH+Km5OWlpUahYOPF4EbeM6zVsSB0GKjoeOjfU0bWugo43aDOrTocpvcZN6TaoDgsVFwLYeQAA) format('woff2');}
+@font-face{font-family:NQUDBD-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAIgAAoAAAAAA/AAAAHVAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBKIEmCwYAATYCJAMIBCAFglwHIBs3A0CeBXbTB4SHqKlc0VMPo2bNsGdHSDLLQ3D4e3d/jNUYm5dAIIHlCYRpqoVLqH5Y9777IMYE6ktqt0pXtdXFheS4lbzE7MBlTwdadcsdP3igt4WRZv7zJA6stQWUYITN47YWWFpb4mGgFYChN9wunzyilIccOhTyENkHPPmGefrj2VMTl1wGGa2MuAXK03M1BoQNYYBV//SCC7HPCAD+/0GigCGswBDOGlBUFGxM/v9xyOcCQIIiAjfAAwBFQNyELCcncL51LLBa1OfXm7cSm5nHs3/jTGiznp4iV+1bfEuTVXJ1R7254JltQuGNGD3mrf5d3BY/mN71puMgtTADmqEGWO9b7gf0nc+v18mMJqVN9ypZLwRN3X+lYJ7Ku0Ag+J3o0ccc/yJhi2wgxQeqEgQdK+QjuLjjW5g2xa8gSDcQEMzVvZA67KGoqYOShgXKmnYG6qZ6YUWxJqxYBRRNxVEyhqJs6tTXnbmfxfxqq6o1WOZn5zvmNCbH0Iqb9XR2B5K75YxwNVGqxjKqvs5BmJOTkVdRFlGkopET5u9laRlYzJs1r8McDROHIVYRRSUJOVkqPTp159NSnBVRFKhD4T8IalAJq0ooqYrJUOnTaRAWoPsAAA==) format('woff2');}
+@font-face{font-family:OYFEXR-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAKcAAoAAAAABKwAAAJQAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqCWIIjCwgAATYCJAMMBCAFgmIHIBu+AyCOwnFvKpOhvOIWK//Jrnq/qgdCtGDPij6IzhldetkCQXb7Sz2jKIw0ijDzhP/3N/ld4HX+N4C1bA4KqDAPOMq8cGuYRfwpwIg03aamZ8QgcdYrHZ0AzxbaCAmwy94Nmm1YIf2bHGJDAahS0Ahehb49fQSk6jU0DAGOaItDBQAYgAPMrpso8AMEIKeBGtYXyFkEDh+cFMDAKFhNAEB4jNAIm9H09Wvd9+8Nu32Njb49tEiZcHTRDkt9o2WbZeHWoOcn7U177fZv31Q/fjS22vacTthq3cHQPbRsjSaf3p0xcmfQUWfHouPKynDHrkT3K9rXDttu9n+yBuZjPv5yVWXLGPeIg+t7eQ0mT2o3LQ8+HHH1dIPU4Op+7H5etYQtYROzZdq/YtbTlJ71k802ys7Pia/E5pmukR0zlLh98Gek5nrWKDaSLTRZNNfFyy+xuGBiyRTRFF41w5QZutjzrGo8m88eOv4eLCBPvieH2lTRlz5Far5l9bFaplHbbYse9gMAEIBg7d35lzp1af/lXAA+aehzE7sLQI4BAAJuCLCHlMrhJpClPAkoN+uRgrhMNEBQK81X0CnUCDR0IZFQcRMpjeBlJbs4HHUFiFeZEIHTaCJhtZRIOe1ulURXuwH7s6/5yuaC/KaayNzy8uKA2GWPA1Fiqvd2ekff9FFTpo8Y54+NSkCuCcaZaJqphpnMr9wEfXptvErNCuRrUiNSrnLligWIGkiyTjHKBOP5BUQRS6DQGX+w030Z9FU9Zm3EPtONMkXyEcbxixUlAQcAAAA=) format('woff2');}
+@font-face{font-family:TUELZZ-CMR10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAI8AAoAAAAABCgAAAHzAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBYIFMCwgAATYCJAMIBCAFglwHIBtdAwAehXGzcxRRbW3+fGVFPA/u9zt320fEE8T3I5oqHhqdkMnUqC3o/meu/WGmG+Lp1Heihmkn4QlvJtEj7SwijUf+12OY7XgiG9DfDQR2PqJJQAmGECaBBhxJwAMLc++bUk6hhJSHdmxCLZAXSKW8Jn3+l8CmeP5ZGUwm4AkkHOXxKWyBNAO0QkeVvGHvoKBijT61JsUR0DTBuMPQ9TdAAFQwgYor4BqABoiyUJ5jZrflrGq7ev6g/bRyy3IYQSORkbsY4Sa2Gh+Mx4cfo/h1VHofl8TF4qO6WKzlbKzkSRTB8cPaaPQ5Ufr7UdjYWIjwnBeAL2pOXjDUTNFjh1p1d89f/spMXijYQNYNfTUae1qpu/kziQ2UPJZLzdUm+cG07iikMdAbIS6QFOKZOGICx+5yPo0yCABBuP1eO9fkT52RnALmLrqiwpQCQtVRONGRBAQAkAI41Q5BNUgCATvNeIaAWERAM2dRwMisXQiYMOcYAmZsGZAsLRPiAEPRbLFiZMMKJmzZjhljFzvbvuTqinAySy7vJbIFGHoKN1gfGqreN1cYw7ZA2OJqGOwbASIPF6+QIBO/BmweRsyemwiOjEVOrhcRmwAGJWbiF2Dj4dYA0wetIGrpZuKn60TGHOjNamAUZhMQZuHSYFCfEckA8wc=) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="32.032638" y="-82.509461" transform="matrix(1.000261 0 0 1.000261 -27.748003 93.652)">0</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="73.24488" y="-82.509461" transform="matrix(1.000261 0 0 1.000261 -29.201004 93.652)">U</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="118.268127" y="-82.509461" transform="matrix(1.000261 0 0 1.000261 -29.270005 93.652)">V</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="167.503274" y="-82.509461" transform="matrix(1.000261 0 0 1.000261 -35.705 93.652)">V</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="175.52617" y="-82.509461" transform="matrix(1.000261 0 0 1.000261 -35.705 93.652)">/</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="180.50687" y="-82.509461" transform="matrix(1.000261 0 0 1.000261 -35.705 93.652)">U</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="212.927417" y="-82.509461" transform="matrix(1.000261 0 0 1.000261 -27.748003 93.652)">0<tspan x="32.032638" y="-46.685813">0</tspan></text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="73.24488" y="-46.685813" transform="matrix(1.000261 0 0 1.000261 -31.491005 93.652)">U</text>
+<text font-family="NQUDBD-CMSY7" font-size="6.97" x="81.107781" y="-50.28559" transform="matrix(1.000545 0 0 1.000545 -31.491005 93.652)">∗</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="118.268127" y="-46.685813" transform="matrix(1.000261 0 0 1.000261 -31.560004 93.652)">V</text>
+<text font-family="NQUDBD-CMSY7" font-size="6.97" x="126.255174" y="-50.28559" transform="matrix(1.000545 0 0 1.000545 -31.560004 93.652)">∗</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="167.503274" y="-46.685813" transform="matrix(1.000261 0 0 1.000261 -31.436005 93.652)">U</text>
+<text font-family="XDTRFF-CMR7" font-size="6.97" x="175.339406" y="-50.28559" transform="matrix(1.000545 0 0 1.000545 -31.436005 93.652)">0</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="212.927417" y="-46.685813" transform="matrix(1.000261 0 0 1.000261 -27.748003 93.652)">0</text>
+<path d="M13.76732 8.629769H39.17098" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M37.298076 6.238858C37.676646 7.673438 38.520256 8.350838 39.370206 8.629768C38.520256 8.908698 37.676646 9.586098 37.298076 11.020678" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M56.44442 8.629769H84.13813" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M82.26523 6.238858C82.6438 7.673438 83.48741 8.350838 84.33736 8.629768C83.48741 8.908698 82.6438 9.586098 82.26523 11.020678" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="FBIPCW-CMMI7" font-size="6.97" x="25.242238" y="-46.672554" transform="matrix(1.000545 0 0 1.000545 43.760004 52.982004)">ι</text>
+<path d="M48.00693 14.969599V35.845779" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M50.397839 33.97289C48.963259 34.35146 48.285859 35.19507 48.006929 36.04502C47.727999 35.19507 47.050599 34.35146 45.616019 33.97289" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="FBIPCW-CMMI7" font-size="6.97" x="25.242238" y="-46.672554" transform="matrix(1.000545 0 0 1.000545 15.165001 73.128)">φ</text>
+<path d="M101.54854 8.629769H126.95221" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M125.07931 6.238858C125.45788 7.673438 126.30149 8.350838 127.15144 8.629768C126.30149 8.908698 125.45788 9.586098 125.07931 11.020678" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M93.04258 14.969599V35.845779" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M95.43349 33.97289C93.99891 34.35146 93.32151 35.19507 93.04258 36.04502C92.76365 35.19507 92.08625 34.35146 90.65167 33.97289" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="FBIPCW-CMMI7" font-size="6.97" x="25.242238" y="-46.672554" transform="matrix(1.000545 0 0 1.000545 70.133 73.128)">φ</text>
+<path d="M157.23261 8.629769H180.34621" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M178.47331 6.238858C178.85188 7.673438 179.69549 8.350838 180.54544 8.629768C179.69549 8.908698 178.85188 9.586098 178.47331 11.020678" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M37.27939 44.462929H14.16579" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M16.03869 46.85384C15.66012 45.41926 14.81651 44.74186 13.96656 44.46293C14.81651 44.184 15.66012 43.5066 16.03869 42.07202" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M82.24654 44.462929H59.13294" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M61.005828 46.85384C60.627258 45.41926 59.783648 44.74186 58.933698 44.46293C59.783648 44.184 60.627258 43.5066 61.005828 42.07202" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="FBIPCW-CMMI7" font-size="6.97" x="25.242238" y="-46.672554" transform="matrix(1.000545 0 0 1.000545 41.678 98.831)">ι</text>
+<text font-family="PCPXEO-CMSY5" font-size="4.98" x="28.196639" y="-49.691032" transform="matrix(1.000261 0 0 1.000261 41.678 98.831)">∗</text>
+<path d="M131.61945 44.462929H104.23708" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M106.10998 46.85384C105.73141 45.41926 104.8878 44.74186 104.03785 44.46293C104.8878 44.184 105.73141 43.5066 106.10998 42.07202" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M180.74468 44.462929H153.3623" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M155.23519 46.85384C154.85662 45.41926 154.01301 44.74186 153.16306 44.46293C154.01301 44.184 154.85662 43.5066 155.23519 42.07202" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-bilinear-prop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark (非退化双线性型的分类)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em> (非退化双线性型的分类). </span>自然会问为什么只研究对称和斜对称两种非退化双线性型，这将我们引向非退化双线性型的分类问题．注意这些双线性型全体应被视为构成 <span class="math inline">\(\mathrm{GL}(V)\)</span>-模 <span class="math inline">\(V^* \otimes V^*\)</span>，而分类问题则是对其轨道进行分类．</p>
+<p>Schur–Weyl 对偶告诉我们 <span class="math inline">\(V^* \otimes V^*\)</span> 作为 <span class="math inline">\(\mathrm{GL}(V)\)</span>-表示分解成不可约代数表示 <span class="math inline">\(\operatorname{Sym}^2 V^*\)</span> 和 <span class="math inline">\(\operatorname{Alt}^2 V^*\)</span>，对应任何矩阵 <span class="math inline">\(X\)</span> 都有 <span class="math inline">\(X = \frac 1 2 (X+X^T) + \frac 1 2 (X-X^T)\)</span> 的分解．之前的讨论分类了这两个子表示内部的 <span class="math inline">\(\mathrm{GL}(V)\)</span>-轨道：完全由秩来分类．关于整个 <span class="math inline">\(V^* \otimes V^*\)</span> 的轨道结构则更为复杂，需要更细致的分析．</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="对称与斜对称双线性型的结构" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="对称与斜对称双线性型的结构"><span class="header-section-number">2.2</span> 对称与斜对称双线性型的结构</h3>
+<p>对 <span class="math inline">\(\mathfrak{so}\)</span> 的情形：</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-sym-diag" class="theorem proposition">
+<p><span class="theorem-title"><strong>命题 3</strong></span> 在特征非二的域上：</p>
+<ul>
+<li><p>若对称双线性型 <span class="math inline">\(\varphi(-,-)\)</span> 非零，则一定有 <span class="math inline">\(v \in V\)</span> 使得 <span class="math inline">\(\varphi(v, v) \neq 0\)</span>．</p></li>
+<li><p>对称双线性型 <span class="math inline">\(\varphi(-,-)\)</span> 都可以通过适当选取基底化为对角型．</p></li>
+</ul>
+<p>在 <span class="math inline">\(\mathbb C\)</span> 上：</p>
+<ul>
+<li>进而由 <span class="math inline">\(\mathbb C\)</span> 上每个元素都有平方根，对称双线性型完全由 <span class="math inline">\(\varphi\)</span> 的秩来分类．特别地，非退化对称双线性型都可以化为单位矩阵．</li>
+</ul>
 </div>
 </div>
 </div>
@@ -528,6 +640,91 @@ G := \{X \in \mathrm{GL}(V) : \langle Xv, Xw \rangle = \langle v, w \rangle\} = 
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span></p>
+<ul>
+<li><p>否则 <span class="math display">\[
+\varphi(v+w, v+w) = \varphi(v, v) + \varphi(w, w) + \varphi(v, w) + \varphi(w, v) = 0
+\]</span> 结合对称性和特征非二的假设，将得到 <span class="math inline">\(\varphi(v, w) = 0\)</span> 对任意 <span class="math inline">\(v, w\)</span> 成立，与 <span class="math inline">\(\varphi\)</span> 非零矛盾．</p></li>
+<li><p>归纳，取出上述 <span class="math inline">\(v \in V\)</span> 作为首个基底．考虑其正交补空间，其维数为 <span class="math inline">\(\dim V - 1\)</span>．对此空间重复上述过程，最终得到一个基底使得 <span class="math inline">\(\varphi\)</span> 的矩阵为对角型．</p></li>
+<li><p>平凡．</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<p>对 <span class="math inline">\(\mathfrak{sp}\)</span> 的情形：</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-alt-standard" class="theorem proposition">
+<p><span class="theorem-title"><strong>命题 4</strong></span> 在特征非二的域上：</p>
+<ul>
+<li><p>若斜对称双线性型 <span class="math inline">\(\varphi(-,-)\)</span> 非零，则总存在一对线性无关向量 <span class="math inline">\(v, w \in V\)</span> 使得 <span class="math inline">\(\varphi(v, w) \neq 0\)</span>．</p></li>
+<li><p><span class="math inline">\(V\)</span> 可正交分解为一系列一维和二维子空间的直和：<span class="math inline">\(\varphi\)</span> 在每个一维子空间上为零，在每个二维子空间上矩阵形如 <span class="math inline">\(\begin{pmatrix} 0 &amp; a \\ -a &amp; 0 \end{pmatrix}\)</span>．</p></li>
+</ul>
+<p>在 <span class="math inline">\(\mathbb C\)</span> 上：</p>
+<ul>
+<li>上述 <span class="math inline">\(a\)</span> 都可以化为 <span class="math inline">\(1\)</span>．斜对称双线性型完全由一维和二维子空间的数量来分类．特别地，非退化斜对称双线性型都可以化为标准辛矩阵 <span class="math inline">\(\begin{pmatrix} 0 &amp; I_n \\ -I_n &amp; 0 \end{pmatrix}\)</span>．</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span></p>
+<ul>
+<li><p>注意斜对称使得所有向量 <span class="math inline">\(v\)</span> 都有 <span class="math inline">\(\varphi(v, v) = 0\)</span>，因此 <span class="math inline">\(\varphi\)</span> 非零保证了存在 <span class="math inline">\(v, w\)</span> 使得 <span class="math inline">\(\varphi(v, w) \neq 0\)</span>．</p></li>
+<li><p>考虑 <span class="math inline">\(v\)</span> 的正交补空间 <span class="math inline">\(v^\perp\)</span>，其维数为 <span class="math inline">\(\dim V - 1\)</span>，<span class="math inline">\(v \in v^\perp\)</span> 且 <span class="math inline">\(w \notin v^\perp\)</span>．类似性质也对 <span class="math inline">\(w^\perp\)</span> 成立．因此 <span class="math inline">\(v^\perp \cap w^\perp\)</span> 与 <span class="math inline">\(v\)</span>, <span class="math inline">\(w\)</span> 正交且维数为 <span class="math inline">\(\dim V - 2\)</span>．对 <span class="math inline">\(v^\perp \cap w^\perp\)</span> 重复上述过程即可．</p></li>
+<li><p>平凡．</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="基于-jordan-型的轨道分类" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="基于-jordan-型的轨道分类"><span class="header-section-number">3</span> 基于 Jordan 型的轨道分类</h2>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-orbit-by-gl" class="theorem">
+<p><span class="theorem-title"><strong>定理 1</strong></span> 若 <span class="math inline">\(X, Y \in \mathfrak{g}\)</span>，则 <span class="math inline">\(X\)</span> 与 <span class="math inline">\(Y\)</span> 在 <span class="math inline">\(G\)</span> 下共轭当且仅当在 <span class="math inline">\(\mathrm{GL}(V)\)</span> 下共轭．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
 <p><span class="proof-title"><em>证明</em>. </span>设存在 <span class="math inline">\(g \in \mathrm{GL}(V)\)</span> 使得 <span class="math inline">\(gXg^{-1} = Y\)</span>．目标是调整 <span class="math inline">\(g\)</span> 使得它满足 <span class="math inline">\(g^*g = 1\)</span> 落入 <span class="math inline">\(G\)</span> 的同时仍然保持 <span class="math inline">\(gXg^{-1} = Y\)</span>．</p>
@@ -561,7 +758,7 @@ G := \{X \in \mathrm{GL}(V) : \langle Xv, Xw \rangle = \langle v, w \rangle\} = 
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -570,7 +767,7 @@ G := \{X \in \mathrm{GL}(V) : \langle Xv, Xw \rangle = \langle v, w \rangle\} = 
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
 <p><span class="proof-title"><em>证明</em>. </span>因为限定了在 <span class="math inline">\(g\)</span> 多项式生成的代数 <span class="math inline">\(\mathbb{C}[g]\)</span> 中寻找 <span class="math inline">\(h\)</span>，而 <span class="math inline">\(\mathbb{C}[g] \cong \mathbb{C}[t]/(f(t))\)</span>，其中 <span class="math inline">\(f(t)\)</span> 是 <span class="math inline">\(g\)</span> 的最小多项式．因此问题等价于在 <span class="math inline">\(\mathbb{C}[t]/(f(t))\)</span> 中寻找 <span class="math inline">\(t\)</span> 的平方根．注意因为 <span class="math inline">\(g\)</span> 可逆，这里 <span class="math inline">\(f(t)\)</span> 的常数项非零．</p>
@@ -587,25 +784,7 @@ G := \{X \in \mathrm{GL}(V) : \langle Xv, Xw \rangle = \langle v, w \rangle\} = 
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark (A Historical Remark)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em> (A Historical Remark). </span>这里的证明摘自 <span class="citation" data-cites="jantzen_nilpotent_2004"><a href="#ref-jantzen_nilpotent_2004" role="doc-biblioref">[1, section 1.4–1.5]</a></span>．此命题的证明大约在 1950s-1960s 之间出现，具体历史评注可见上述文献．</p>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -614,10 +793,16 @@ G := \{X \in \mathrm{GL}(V) : \langle Xv, Xw \rangle = \langle v, w \rangle\} = 
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span><span class="math inline">\(g \mapsto g g^*\)</span> 作为 <span class="math inline">\(\mathrm{GL}(V) \to G\)</span> 的映射是否给我们了任何启发？</p>
+<p><span class="proof-title"><em>注记</em>. </span></p>
+<ul>
+<li><p>此命题的证明大约在 1950s-1960s 之间出现，具体历史评注可见 <span class="citation" data-cites="jantzen_nilpotent_2004"><a href="#ref-jantzen_nilpotent_2004" role="doc-biblioref">[1, section 1.5]</a></span>．</p></li>
+<li><p>注意 <span class="math inline">\(G\)</span> 现在只是正交群，它还不是最细的作用群，甚至不见得连通，因此轨道分类的故事还没有结束．不过这至少帮助我们获得了关于 Jordan 型的较粗分类．</p></li>
+<li><p>另一件尚未完成的工作是：哪些的 Jordan 型能够出现在 <span class="math inline">\(\mathfrak{so}_n\)</span> 或 <span class="math inline">\(\mathfrak{sp}_{2n}\)</span> 中？剧透一下最终的答案：对于 <span class="math inline">\(\mathfrak{so}_n\)</span>，偶数大小的块必须出现偶数次；对于 <span class="math inline">\(\mathfrak{sp}_{2n}\)</span>，奇数大小的块必须出现偶数次．</p></li>
+<li><p><span class="math inline">\(g \mapsto g g^*\)</span> 作为 <span class="math inline">\(\mathrm{GL}(V) \to G\)</span> 的映射是否给我们了任何启发？</p></li>
+</ul>
 </div>
 </div>
 </div>
@@ -1069,9 +1254,9 @@ G := \{X \in \mathrm{GL}(V) : \langle Xv, Xw \rangle = \langle v, w \rangle\} = 
     script.src = "https://giscus.app/client.js";
     script.async = true;
     script.dataset.repo = "sun123zxy/blog-quarto-code";
-    script.dataset.repoId = "R_kgDOIrPs5w";
+    script.dataset.repoId = "";
     script.dataset.category = "General";
-    script.dataset.categoryId = "DIC_kwDOIrPs584CV4gd";
+    script.dataset.categoryId = "";
     script.dataset.mapping = "title";
     script.dataset.reactionsEnabled = "1";
     script.dataset.emitMetadata = "0";
