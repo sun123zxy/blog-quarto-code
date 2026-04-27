@@ -85,7 +85,7 @@ $$
 $$
 因此 $G$ 和 $\mathfrak{g}$ 是它们各自在其代数结构的对极映射下不变的元素全体．
 
-我们将来只关心两类特殊的非退化双线性型：对称的 $\varphi(v, w) = \varphi(w, v)$ 和斜对称的 $\varphi(v, w) = -\varphi(w, v)$．前者对应正交群 $\SO$ 及其李代数 $\so$，后者对应正交群 $\Sp$ 及其李代数 $\sp$．不过在此之前，一般的非退化双线性型也有一些结论．
+我们将来只关心两类特殊的非退化双线性型：对称的 $\varphi(v, w) = \varphi(w, v)$ 和斜对称的 $\varphi(v, w) = -\varphi(w, v)$．前者对应正交群 $O_n$ 及其李代数 $\so_n$，后者对应辛群 $\Sp_{2n}$ 和其李代数 $\sp_{2n}$．不过在此之前，可以对一般的非退化双线性型做一点讨论：
 
 :::{#prp-bilinear-prop}
 
@@ -206,6 +206,8 @@ Schur--Weyl 对偶告诉我们 $V^* \otimes V^*$ 作为 $\GL(V)$-表示分解成
 
 ## 基于 Jordan 型的轨道分类
 
+### 一致性
+
 以下定理保证在正交群 $G$ 下的共轭轨道和在 $\GL(V)$ 下的共轭轨道是一样的．
 
 :::{#thm-orbit-by-gl}
@@ -260,4 +262,35 @@ Schur--Weyl 对偶告诉我们 $V^* \otimes V^*$ 作为 $\GL(V)$-表示分解成
 - $g \mapsto g g^*$ 作为 $\GL(V) \to G$ 的映射是否给我们了任何启发？
 :::
 
-注意 $G$ 现在只是正交群，它还不是最细的作用群，甚至不见得连通，因此轨道分类的故事还没有结束．不过这至少帮助我们获得了 Jordan 型的较粗分类．另一件尚未完成的工作是：哪些的 Jordan 型能够出现在 $\so_n$ 或 $\sp_{2n}$ 中？剧透一下最终的答案：对于 $\so_n$，偶数大小的块必须出现偶数次；对于 $\sp_{2n}$，奇数大小的块必须出现偶数次．
+注意 $G$ 现在只是正交群，它可能还不足够细．对反对称的情况，正交群 $G = \Sp_{2n}$ 已经连通，因此基本上够了．但对对称的情况，正交群 $G = O_n$ 是不连通的，$\SO_n$ 才是它的连通子群．因此 $\SO_n$ 的轨道可能比 $O_n$ 的轨道更细——轨道分类的故事还没有结束．不过这至少帮助我们获得了 Jordan 型的较粗分类．
+
+### 具体分类
+
+另一件尚未完成的工作是：哪些 Jordan 型能够在 $\so_n$ 或 $\sp_{2n}$ 的幂零矩阵上产生？剧透一下最终的答案：对于 $\so_n$，偶数大小的 Jordan 块必须出现偶数次；对于 $\sp_{2n}$，奇数大小的 Jordan 块必须出现偶数次．
+
+【TODO】
+
+## 特殊正交群
+
+回到之前提到的作用群选择问题．我们提到特殊正交群 $\SO_n$ 的产生的轨道可能更细．记 $G := O(V, \varphi)$，$G^\circ := \SO(V, \varphi)$，$\mathfrak{g} := \so(V, \varphi)$．
+
+:::{#lem-special-same}
+
+设 $X \in \mathfrak{g}$，则 $X$ 在 $G$ 下的轨道在 $G^\circ$ 下分裂为两个轨道当且仅当不存在 $h \in G$ 使得 $h \cdot X = X$ 且 $\det h = -1$．
+:::
+
+:::{.proof}
+
+设 $g \in G$ 且 $\det g = -1$，则 $G = G^\circ \sqcup G^\circ g$．于是
+$$
+\begin{aligned}
+G^\circ \cdot X = G^\circ g \cdot X
+&\iff G^\circ \cdot X = \Ad(G^\circ) \cdot (g \cdot X) \\
+&\iff g \cdot  X \in G^\circ \cdot X \\
+&\iff \exists h \in G^\circ,\, hg \cdot X = X
+\end{aligned}
+$$
+注意 $\det (hg) = -1$，这完成了证明．
+:::
+
+【TODO】
