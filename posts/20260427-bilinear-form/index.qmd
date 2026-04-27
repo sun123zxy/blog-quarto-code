@@ -1,0 +1,98 @@
+---
+title: Notes on Classification of Nondegenerate Bilinear Forms
+author:
+  - DeepSeek v4 Pro
+  - sun123zxy
+date: 2026-04-27
+draft: true
+categories:
+  - math
+  - algebra
+  - lie
+
+format: html
+---
+
+## 1. Classification of nondegenerate bilinear forms over ℂ
+
+**Setting**: $V$ a finite-dimensional vector space over $\mathbb{C}$, $B: V\times V \to \mathbb{C}$ bilinear and nondegenerate (matrix $M$ is invertible).  
+**Equivalence**: congruence — $B'(x,y)=B(Px,Py)$ with $P\in\mathrm{GL}(V)$; in matrices $M' = P^{\mathsf T}M P$.
+
+**Invariant**: The **cosquare** $C = M^{-1}M^{\mathsf T}$. Under congruence, $C \mapsto P^{-1}CP$; also $C^{\mathsf T} = C^{-1}$, so $C \in \mathrm{O}_n(\mathbb{C})$.
+
+**Result**: There are nondegenerate forms that are **neither symmetric nor alternating**; the symmetric and alternating ones are only two special families.
+
+**Complete set of indecomposable canonical blocks** (orthogonal direct sum decomposition):
+
+1. **Symmetric**: $[1]$ (size $1\times1$, the standard dot product).
+2. **Alternating (symplectic)**: $\begin{pmatrix}0&1\\-1&0\end{pmatrix}$ (size $2\times2$).
+3. **Mixed (generic)**: For any $\lambda \in \mathbb{C}\setminus\{0,\pm1\}$ and integer $m\ge 1$, the $2m\times2m$ block  
+   $$
+   B_{2m}(\lambda) = \begin{pmatrix} 0 & I_m \\ J_m(\lambda) & 0 \end{pmatrix},
+   $$
+   where $J_m(\lambda)$ is the $m\times m$ Jordan block with eigenvalue $\lambda$.  
+   *Parameter identification*: $B_{2m}(\lambda) \cong B_{2m}(\lambda^{-1})$.
+4. **Mixed (exceptional)**: $B_{2m}(1)$ and $B_{2m}(-1)$ for $m\ge 2$. (The $m=1$ cases are symmetric and alternating, respectively.)
+
+Every nondegenerate bilinear form is congruent to a direct sum of such blocks. The classification is complete: two such sums are congruent iff the blocks match up to permutation and replacing some $\lambda$ with $\lambda^{-1}$.
+
+**Thus**: There is a continuous, infinite family of distinct equivalence classes, parameterized by $\lambda \in \mathbb{C}\setminus\{0,\pm1\}$ up to inversion.
+
+## 2. Representation-theoretic viewpoint: orbits in a GL(V)-module
+
+**The space of bilinear forms**:  
+$$
+\mathcal{B} = V^* \otimes V^*.
+$$
+The group $\mathrm{GL}(V)$ acts by congruence $g\cdot B = B(g^{-1}\cdot, g^{-1}\cdot)$, which on matrices is $g^{-\mathsf T} M g^{-1}$. Classifying forms = describing all orbits.
+
+**Module decomposition**:  
+$V^* \otimes V^* = \operatorname{Sym}^2(V^*) \oplus \operatorname{Alt}^2(V^*)$.  
+Both summands are **irreducible** polynomial $\mathrm{GL}(V)$-modules (highest weights $(2,0,\dots)$ and $(1,1,0,\dots)$).
+
+**Orbit structure**:
+- **Symmetric forms** ($\operatorname{Sym}^2$): Orbits are classified by rank. The nondegenerate ones form a single dense (open) orbit → $\operatorname{Sym}^2$ is a **prehomogeneous vector space**.
+- **Alternating forms** ($\operatorname{Alt}^2$): Orbits also by rank; dense orbit exists iff $\dim V$ is even (nondegenerate alternating forms).
+- **Whole $V^*\otimes V^*$**: No dense orbit. The generic form has a mixed cosquare with eigenvalues $\neq \pm1$, leading to a continuous family of orbits with no single generic equivalence class.
+
+**Key distinction**: Irreducibility of a module **does not** imply existence of a dense orbit (that’s the prehomogeneous property, which is rare). The sum $V^*\otimes V^*$ is not prehomogeneous, while its irreducible components are.
+
+## 3. Parallel with Jordan normal form
+
+**Linear operators** as elements of $\mathrm{End}(V) \cong V\otimes V^*$ under **conjugation** $X \mapsto gXg^{-1}$.  
+**Bilinear forms** as elements of $V^*\otimes V^*$ under **congruence** $B \mapsto g^{-\mathsf T}Bg^{-1}$.
+
+Both are $\mathrm{GL}(V)$-orbit problems on tensor products built from the fundamental representation and its dual.
+
+| | Endomorphisms | Bilinear forms |
+|---|---|---|
+| Space | $V\otimes V^*$ | $V^*\otimes V^*$ |
+| Action | Conjugation | Congruence |
+| Invariants | Characteristic polynomial + Jordan blocks | Cosquare + mixed blocks |
+| Continuous parameter | Eigenvalues $\lambda$ (up to order) | Pairs $\lambda, \lambda^{-1}$ (up to order) |
+| Tame classification | Yes (Jordan canonical form) | Yes (Krull–Schmidt categories) |
+
+Both are **tame** representation-theoretic problems: indecomposables form one-parameter families (discrete series + continuous series).
+
+## 4. Homological / categorical treatment
+
+**For operators**:  
+A pair $(V, T)$ is a finitely generated module over $k[t]$ (a PID). Jordan form arises from the structure theorem for modules over a PID:  
+$V \cong \bigoplus k[t]/(t-\lambda)^m$ → a cokernel of a map between free $k[t]$-modules (presentation matrix → Smith normal form).
+
+**For bilinear forms**:  
+A form $B: V\times V \to k$ gives a map $\varphi: V \to V^*$. Congruence corresponds to isomorphism of the **pair** $(V, \varphi)$.
+
+This pair is equivalent to a **self‑adjoint module** over the Kronecker algebra $\Lambda = kQ$ with an anti‑involution. The Kronecker quiver has two vertices and two parallel arrows; self‑adjoint modules encode the map $\varphi$ and a fixed isomorphism $V\cong V^{**}$.  
+$\Lambda$ is a **tame hereditary algebra**; its indecomposable modules are classified into preprojectives, preinjectives, and regular modules (parameterized by $\mathbb{P}^1$). The self‑adjoint condition selects:
+- Preprojective/preinjective blocks → symmetric and alternating forms.
+- Regular blocks → the mixed $B_{2m}(\lambda)$ (continuous parameter from the regular component).
+
+Thus, just as Jordan form comes from the module theory of a PID, the classification of bilinear forms comes from the module theory of a tame hereditary algebra with a duality.
+
+## 5. Key takeaways
+
+- There exist nondegenerate bilinear forms over $\mathbb{C}$ that are neither symmetric nor alternating; they form infinite continuous families classified by the cosquare.
+- The problem is naturally the orbit decomposition of $V^*\otimes V^*$ under $\mathrm{GL}(V)$.
+- While the irreducible submodules $\operatorname{Sym}^2$ and $\operatorname{Alt}^2$ have dense orbits (they are prehomogeneous), the full space does not.
+- The parallel with Jordan normal form is deep: both are orbit classifications on tensor spaces, and both have a homological formulation (modules over $k[t]$ vs. self‑adjoint modules over a hereditary algebra).

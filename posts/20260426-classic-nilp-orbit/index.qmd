@@ -1,0 +1,150 @@
+---
+title: 经典李代数中的幂零轨道
+subtitle: 幂零锥和其上的几何：以 $\mathfrak{gl}_n$ 为例
+author: sun123zxy
+date: 2026-04-26
+lang: zh
+bibliography: index.bib
+draft: true
+
+categories:
+  - math
+  - algebra
+  - lie
+
+collections:
+  - nilpcone
+
+number-sections: true
+
+format:
+  html: default
+  pdf: default
+---
+
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\PSL}{\mathrm{PSL}}
+\renewcommand{\sl}{\mathfrak{sl}}
+\newcommand{\so}{\mathfrak{so}}
+\renewcommand{\sp}{\mathfrak{sp}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\Lie}{\operatorname{Lie}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\Sp}{\operatorname{Sp}}
+\newcommand{\SO}{\operatorname{SO}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+所谓经典李代数，即是单李代数中寄居在线性李代数 $\gl_n$ 中 $\sl_n$、$\so_n$ 和 $\sp_{2n}$．其中 $A_n$ 型是 $\sl_{n+1}$，$B_n$ 型是 $\so_{2n+1}$，$C_n$ 型是 $\sp_{2n}$，$D_n$ 型是 $\so_{2n}$．其中 $\sl_n$ 的幂零轨道已经由 Jordan 型分类，本篇主要关心 $\so_n$ 和 $\sp_{2n}$ 中的幂零轨道．
+
+## A 型李代数
+
+讨论幂零轨道首先需要明确作用群的选择．对 $\gl_n$ 来说自然选 $\GL_n$ 就好，但 $\sl_n$、$\so_n$ 和 $\sp_{2n}$ 似乎都应该更加小心．例如，$\sl_n$ 上考虑 $\GL_n$ 的子群 $\SL_n$ 的共轭作用似乎也非常合理——$\sl_n$ 系由 $\SL_n$ 单位元处取切空间得到．更进一步地，不少矩阵产生的实际共轭效果是一致的，最有效地来说应该考虑所有可能的共轭作用构成的群——一个 $\GL_n$ 的商群．不过下面的结果告诉我们这其实都没有关系：不同作用群的选择在 $\gl_n$ 或 $\sl_n$ 上导致的轨道是一样的．
+ 
+:::{#prp-gln-diff-ad}
+
+- $\GL_n$, $\SL_n$, $\PSL_n$ 在 $\gl_n$ 上的共轭作用导致相同的轨道．
+- $\PSL_n$ 忠实刻画了 $\gl_n$ 的共轭作用群 $\ad \subseteq \Aut (\gl_n)$．
+
+这里 $\SL_n := \{g \in \GL_n : \det g = 1\}$ 是 $\GL_n$ 的子群，$\PSL_n := \SL_n / Z(\SL_n)$ 是 $\SL_n$ 的商群，$Z(\SL_n)$ 是 $\SL_n$ 的中心，$\Aut(\gl_n)$ 是 $\gl_n$ 的全体李代数同构．
+:::
+
+:::{.proof}
+
+- 这是因为任意 $A \in \GL_n$ 的共轭作用 $X \mapsto A X A^{-1}$ 都等价于 $(\det A)^{1/n} \in \SL_n$ 的共轭作用，而中心在共轭作用下不起作用．
+- 对群同态 $\SL_n \to \Aut(\gl_n)$ 使用第一同构定理．
+:::
+
+:::{.remark}
+
+可以看到这其实和基域的选择有关．考虑群正合列：
+$$
+1 \longrightarrow \SL_n \longrightarrow \GL_n \xrightarrow{\det} \mathbb C^\times \longrightarrow 1
+$$
+右分裂同态 $c \mapsto (\det c)^{1/n}$ 使得其右侧分裂，从而 $\GL_n = \SL_n \rtimes Z(\GL_n) \cong \SL_n \rtimes \mathbb C^\times$．但这是复数域能够开根的结果．TODO: 这也许和所谓的 split-reductive group 有关．
+:::
+
+## 正交群
+
+下面开始考虑 B、C、D 型李代数．仍然第一个问题是作用群．当然至少仍然有 $\GL_n$ 的选择，即还是通过 Jordan 型来分类幂零轨道．但会希望有一个更小的作用群，不说一定恰好是共轭作用群，但至少也要足够小，例如对 $\so_n$ 的 $\SO_n$ 或对 $\sp_{2n}$ 的 $\Sp_{2n}$ 来得到更细的分类．为统一研究方便，来先在 $\mathbb C$ 上有限维线性空间 $V$ 上确定一个非退化双线性型 $\langle -, - \rangle$ 明确正交群及其李代数的定义．
+
+设 $\langle -, - \rangle$ 为 $V$ 上的非退化双线性型．对 $\so$ 的情形，任意特征非二的域上的非退化对称双线性型都可以通过适当选取基底化为对角型，而 $\mathbb C$ 上每个元素都有平方根，因此可以进一步化为单位矩阵．同样地，对 $\sp$ 的情形，任意特征非二的域上的非退化斜对称双线性型都可以通过适当选取基底化为标准辛矩阵 $\begin{pmatrix} 0 & I_n \\ -I_n & 0 \end{pmatrix}$．
+
+:::{.remark}
+
+## 非退化双线性型分类
+
+自然会问为什么只研究对称和斜对称两种非退化双线性型，这将我们引向非退化双线性型的分类问题．注意这些双线性型全体应被视为构成 $\GL(V)$-模 $V^* \otimes V^*$，而分类问题则是对其轨道进行分类．
+
+Schur--Weyl 对偶告诉我们 $V^* \otimes V^*$ 作为 $\GL(V)$-表示分解成不可约代数表示 $\Sym^2 V^*$ 和 $\Alt^2 V^*$，对应任何矩阵 $X$ 都有 $X = \frac 1 2 (X+X^T) + \frac 1 2 (X-X^T)$ 的分解．之前的讨论分类了这两个子表示内部的 $\GL(V)$-轨道：完全由秩来分类．关于整个 $V^* \otimes V^*$ 的轨道结构则更为复杂，需要更细致的分析．
+:::
+
+对任意线性变换 $X \in \gl(V)$，规定 $X^*$ 为满足 $\langle Xv, w \rangle = \langle v, X^*w \rangle$ 的唯一映射，矩阵地来说是矩阵的转置，抽象地来说是对偶空间 $V^*$ 上的对偶映射通过这非退化双线性型拉回到 $V$ 上的结果．定义正交群 $G$ 和李代数 $\mathfrak{g}$ 如下：
+$$
+G := \{X \in \GL(V) : \langle Xv, Xw \rangle = \langle v, w \rangle\} = \{X \in \GL(V) : X^* = X^{-1}\}
+$$
+$$
+\mathfrak{g} := \{X \in \GL(V) : \langle Xv, w \rangle = -\langle v, Xw \rangle\} = \{X \in \GL(V) : X^* = -X\}
+$$
+因此 $G$ 和 $\mathfrak{g}$ 是它们各自在其代数结构的对极映射下不变的元素全体．
+
+:::{#thm-orbit-by-gl}
+
+若 $X, Y \in \mathfrak{g}$，则 $X$ 与 $Y$ 在 $G$ 下共轭当且仅当在 $GL(V)$ 下共轭．
+:::
+
+:::{.proof}
+
+设存在 $g \in \GL(V)$ 使得 $gXg^{-1} = Y$．目标是调整 $g$ 使得它满足 $g^*g = 1$ 落入 $G$ 的同时仍然保持 $gXg^{-1} = Y$．
+
+对式子取对偶得 $(g^*)^{-1} X^* g^* = Y^*$，又因为 $X, Y \in \mathfrak{g}$，所以 $(g^*)^{-1} X g^* = Y$．联立两式推出 $g^*g$ 与 $X$ 可交换，同时注意 $g^* g \in G$．
+
+现在做断言：存在多项式 $p(t) \in \mathbb{C}[t]$ 使得 $h := p(g^*g)$ 满足 $h^2 = g^*g$．于是 $h$ 满足以下三个条件：
+
+- $h \in \GL(V)$：因为 $h^2 = g^*g$ 可逆．
+- $h = h^*$：因为他是自伴的 $g^*g$ 的多项式．
+- $h$ 与 $X$ 可交换：因为 $h$ 是 $g^*g$ 的多项式，故和 $g^* g$ 交换，进而和 $X$ 可交换．
+
+现在考虑 $gh^{-1}$，断言它就是我们所求：
+
+- $gh^{-1} \in G$: $(gh^{-1})^* (gh^{-1}) = (h^*)^{-1} (g^* g) h^{-1} = h^{-1} (g^* g) h^{-1} = 1$
+- $(gh^{-1}) X (gh^{-1})^{-1} = g h^{-1} X h g^{-1} = g X g^{-1}$，最后一步使用了 $h$ 与 $X$ 交换．
+
+关于断言的证明见下面的引理．
+:::
+
+:::{#lem-square-root}
+
+对任意 $g \in \GL(V)$，存在多项式 $p(t) \in \mathbb{C}[t]$ 使得 $h := p(g)$ 满足 $h^2 = g$．
+:::
+
+:::{.proof}
+
+因为限定了在 $g$ 多项式生成的代数 $\mathbb{C}[g]$ 中寻找 $h$，而 $\mathbb{C}[g] \cong \mathbb{C}[t]/(f(t))$，其中 $f(t)$ 是 $g$ 的最小多项式．因此问题等价于在 $\mathbb{C}[t]/(f(t))$ 中寻找 $t$ 的平方根．注意因为 $g$ 可逆，这里 $f(t)$ 的常数项非零．
+
+由环同构版本的中国剩余定理，找平方根等价于在每个 $\mathbb{C}[t]/(t-b)^r$ 上找 $t$ 的平方根，这里 $b \neq 0$．做一下平移和缩放，等价于在 $\mathbb{C}[t]/(t^r)$ 上找 $1 + at$ 的平方根，这里 $a \neq 0$．
+
+则设 $p(t) = 1 + a_1 t + \cdots + a_{r-1} t^{r-1}$ 满足 $p(t)^2 \equiv 1 + at \pmod{t^r}$．比较系数：
+
+- 常数项：$1 = 1$
+- $t$ 的系数：$2 a_1 = a \implies a_1 = \frac{a}{2}$
+- $t^k$ 的系数：$2 a_k + \sum_{i=1}^{k-1} a_i a_{k-i} = 0 \implies a_k = -\frac{1}{2} \sum_{i=1}^{k-1} a_i a_{k-i}$
+
+这样就递归地确定了 $a_1, \ldots, a_{r-1}$，平方根存在．
+:::
+
+:::{.remark}
+
+## A Historical Remark
+
+这里的证明摘自 [@jantzen_nilpotent_2004, {section 1.4--1.5}]．此命题的证明大约在 1950s-1960s 之间出现，具体历史评注可见上述文献．
+:::
+
+:::{.remark}
+
+$g \mapsto g g^*$ 作为 $\GL(V) \to G$ 的映射是否给我们了任何启发？
+:::
