@@ -38,6 +38,8 @@ format:
 \newcommand{\SO}{\operatorname{SO}}
 \newcommand{\Sym}{\operatorname{Sym}}
 \newcommand{\Alt}{\operatorname{Alt}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
 
 所谓经典李代数，即是单李代数中寄居在线性李代数 $\gl_n$ 中 $\sl_n$、$\so_n$ 和 $\sp_{2n}$．其中 $A_n$ 型是 $\sl_{n+1}$，$B_n$ 型是 $\so_{2n+1}$，$C_n$ 型是 $\sp_{2n}$，$D_n$ 型是 $\so_{2n}$．其中 $\sl_n$ 的幂零轨道已经由 Jordan 型分类，本篇主要关心 $\so_n$ 和 $\sp_{2n}$ 中的幂零轨道．
 
@@ -84,6 +86,16 @@ $$
 \mathfrak{g} := \{X \in \GL(V) : \varphi(Xv, w) = -\varphi(v, Xw)\} = \{X \in \GL(V) : X^* = -X\}
 $$
 因此 $G$ 和 $\mathfrak{g}$ 是它们各自在其代数结构的对极映射下不变的元素全体．
+
+:::{.remark}
+
+## 表示论观点
+
+若将 $\varphi$ 视为 $V \to V^*$ 的线性映射，则
+
+- $\varphi$ 是群表示意义下的 $G$-模同态，且 $G$ 是使得 $\varphi$ 成为 $G$-模同态的最大的 $\GL(V)$ 的子群．
+- $\varphi$ 是李代数表示意义下的 $\mathfrak{g}$-模同态，且 $\mathfrak{g}$ 是使得 $\varphi$ 成为 $\mathfrak g$-模同态的最大的 $\gl(V)$ 的子李代数．我们写作 $\varphi \in \Hom_{\mathfrak g}(V, V^*)$，或等价地 $\varphi \in (V^* \otimes V^*)^{\mathfrak g}$．
+:::
 
 我们将来只关心两类特殊的非退化双线性型：对称的 $\varphi(v, w) = \varphi(w, v)$ 和斜对称的 $\varphi(v, w) = -\varphi(w, v)$．前者对应正交群 $O_n$ 及其斜自伴李代数 $\so_n$，后者对应辛群 $\Sp_{2n}$ 及其斜自伴李代数 $\sp_{2n}$．不过在此之前，可以对一般的非退化双线性型做一点讨论：
 
@@ -278,10 +290,29 @@ Schur--Weyl 对偶告诉我们 $V^* \otimes V^*$ 作为 $\GL(V)$-表示分解成
 
 :::{.remark}
 
+## 表示论观点（Early Access）
+
 这里的工作颇有表示论的风味，涉及通过同一可逆线性变换合同地调整双线性型 $\varphi \in V^* \otimes V^*$ 并相似地调整斜自伴算子 $X \in V \otimes V^*$．
+
+Jacobson--Morozov 允许我们为任何幂零元 $X \in \mathfrak g$ 补出其对应的 $\sl_2$-三元组．$\varphi$ 原来是 $V \to V^*$ 的 $\mathfrak g$-模同态，现在如果限制为 $\sl_2$-模同态考虑，这就将 $X$ 相对双线性型 $\varphi$ 的斜自伴要求编码为 $\sl_2$-模同态的要求．
+
+$\sl_2$ 的表示论是清楚的：$X$ 在 $V$ 上的作用完全 $V$ 的不可约成分确定，且在每个不可约成分上 $X$ 都实现为一个标准幂零 Jordan 块．
+
+于是可借 $V$ 的不可约分解拆解 $V^* \otimes V^*$．注意 $\sl_2$-表示都是自伴的（$V \cong V^*$，因为每个维度的不可约表示只有一个），因此 Schur 引理帮我们消化掉分配律展开后的交叉项，情况简化到 $V^*$ 的每个不可约成分 $(V_k^*)^{\oplus r_k}$ 上：
+$$
+\left((V_k^{\oplus r_k})^* \otimes (V_k^{\oplus r_k})^* \right)^{\mathfrak g} \cong \left( V_k^* \otimes (\mathbb C^{\oplus r_k})^* \otimes V_k^* \otimes (\mathbb C^{\oplus r_k})^* \right)^{\mathfrak g} \cong (V_k^* \otimes V_k^*)^{\mathfrak g} \otimes (\mathbb C^{\oplus r_k})^* \otimes (\mathbb C^{\oplus r_k})^*
+$$
+前半部分继续使用自伴性和 Schur 引理，模掉数乘其实唯一，只要找到一个就好；后半部分又是一个 $\mathbb C$ 上双线性型分类问题，对称和斜对称两种情况对角化或二维块对角化即可．
+
+注意 $V_k^* \otimes V_k^*$ 处的对称和 $\mathbb C^{\oplus r_k} \otimes \mathbb C^{\oplus r_k}$ 处的对称会共同决定了 $\varphi$ 的对称性．在最小的分块层面，会发现当 $\dim V_k$ 是偶数时，只能凑出斜对称的形式，当 $\dim V_k$ 是奇数时，只能凑出对称的形式．所以：
+
+- 如果需要最终的 $\varphi$ 对称，那么偶数维 $V_k$ 的数量 $r_k$ 必须是偶数，以使得我们可以在 $\mathbb C^{\oplus r_k}$ 侧做交错构造．
+- 如果需要最终的 $\varphi$ 斜对称，那么奇数维 $V_k$ 的数量 $r_k$ 必须是偶数，以使得我们可以在 $\mathbb C^{\oplus r_k}$ 侧做交错构造．
+
+我们用表示论风格的记号优雅地完成了分类．
 :::
 
-本节来完成凑的工作．首先指出，
+本节来完成凑的工作．首先指出，【TODO】
 
 ## 特殊正交群
 
