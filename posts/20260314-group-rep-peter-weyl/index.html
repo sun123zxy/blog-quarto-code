@@ -371,7 +371,13 @@ window.Quarto = {
   <li><a href="#双模观点" id="toc-双模观点" class="nav-link" data-scroll-target="#双模观点"><span class="header-section-number">1.1</span> 双模观点</a></li>
   <li><a href="#左模观点" id="toc-左模观点" class="nav-link" data-scroll-target="#左模观点"><span class="header-section-number">1.2</span> 左模观点</a></li>
   </ul></li>
-  <li><a href="#证明" id="toc-证明" class="nav-link" data-scroll-target="#证明"><span class="header-section-number">2</span> 证明</a></li>
+  <li><a href="#证明" id="toc-证明" class="nav-link" data-scroll-target="#证明"><span class="header-section-number">2</span> 证明</a>
+  <ul class="collapse">
+  <li><a href="#pi-单" id="toc-pi-单" class="nav-link" data-scroll-target="#pi-单"><span class="header-section-number">2.1</span> <span class="math inline">\(\pi\)</span> 单</a></li>
+  <li><a href="#pi-满" id="toc-pi-满" class="nav-link" data-scroll-target="#pi-满"><span class="header-section-number">2.2</span> <span class="math inline">\(\pi\)</span> 满</a></li>
+  <li><a href="#piiota-显式构造" id="toc-piiota-显式构造" class="nav-link" data-scroll-target="#piiota-显式构造"><span class="header-section-number">2.3</span> <span class="math inline">\(\pi\)</span>–<span class="math inline">\(\iota\)</span> 显式构造</a></li>
+  <li><a href="#正交性与泛函分析" id="toc-正交性与泛函分析" class="nav-link" data-scroll-target="#正交性与泛函分析"><span class="header-section-number">2.4</span> 正交性与泛函分析</a></li>
+  </ul></li>
   <li><a href="#推论" id="toc-推论" class="nav-link" data-scroll-target="#推论"><span class="header-section-number">3</span> 推论</a>
   <ul class="collapse">
   <li><a href="#维数平方和" id="toc-维数平方和" class="nav-link" data-scroll-target="#维数平方和"><span class="header-section-number">3.1</span> 维数平方和</a></li>
@@ -524,11 +530,16 @@ g \cdot (v \otimes f) \cdot h := (g \cdot v) \otimes (f \cdot h)
 <ul>
 <li>有关有限群表示论的基础内容可参见<a href="../../posts/20260312-group-rep-speedrun/">有限群表示论速通</a>．</li>
 </ul>
+<section id="pi-单" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="pi-单"><span class="header-section-number">2.1</span> <span class="math inline">\(\pi\)</span> 单</h3>
 <p>先证 <span class="math inline">\(\pi\)</span> 是单射：</p>
 <ul>
 <li><p>这里的证明依赖有限群表示论的 Maschke 定理（半单性）．</p>
 <p>若一 <span class="math inline">\(\mathbb C[G]\)</span> 元素在每个不可约表示上作用均为 <span class="math inline">\(0\)</span>，由半单性，<span class="math inline">\(\mathbb C[G]\)</span> 自己分解成若干不可约表示的直和，所以该元素在 <span class="math inline">\(\mathbb C[G]\)</span> 上作用也为 <span class="math inline">\(0\)</span>．<span class="math inline">\(\mathbb C[G]\)</span> 在自己上作用当然是忠实的，所以该元素只能是 <span class="math inline">\(0\)</span>．</p></li>
 </ul>
+</section>
+<section id="pi-满" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="pi-满"><span class="header-section-number">2.2</span> <span class="math inline">\(\pi\)</span> 满</h3>
 <p>则只需证 <span class="math inline">\(\pi\)</span> 是满射．这里有多种可供选择的路线：</p>
 <ul>
 <li><p>依赖有限群表示论的维数平方和公式 <span class="math inline">\(\sum_i (\dim V_i)^2 = |G|\)</span>：<span class="citation" data-cites="fulton_representation_2004"><a href="#ref-fulton_representation_2004" role="doc-biblioref">[1, Proposition 3.29]</a></span></p>
@@ -557,16 +568,54 @@ g \cdot (v \otimes f) \cdot h := (g \cdot v) \otimes (f \cdot h)
 </div>
 </div>
 </div>
-<p>我们还可以显式构造 <span class="math inline">\(\pi\)</span> 的逆 <span class="math inline">\(\iota\)</span> 来获得一个构造性的证明：</p>
+</section>
+<section id="piiota-显式构造" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="piiota-显式构造"><span class="header-section-number">2.3</span> <span class="math inline">\(\pi\)</span>–<span class="math inline">\(\iota\)</span> 显式构造</h3>
+<p>我们还可以显式构造 <span class="math inline">\(\pi\)</span> 的逆 <span class="math inline">\(\iota\)</span> 来获得构造性证明：</p>
 <ul>
 <li><p>先来构造 <span class="math inline">\((\mathbb C[G], \mathbb C[G])\)</span> 双模同态 <span class="math inline">\(\iota_i: \operatorname{End}_{\mathbb C}(V_i) \to \mathbb C[G]\)</span>： <span class="math display">\[
 \varphi \mapsto \frac{\dim V_i}{|G|} \sum_{g \in G} \operatorname{Tr}(\varphi \circ \rho_{V_i}(g^{-1})) g
 \]</span> 等价地，<span class="math inline">\(V_i \otimes_{\mathbb C} V_i^* \to \mathbb C[G]\)</span> 的版本是 <span class="math display">\[
 v \otimes f \mapsto \frac{\dim V_i}{|G|} \sum_{g \in G} f(g^{-1} \cdot v) g
-\]</span> 固定 <span class="math inline">\(V_i\)</span> 一组基 <span class="math inline">\((e_i^k)\)</span> 并生成 <span class="math inline">\(V_i^*\)</span> 上的对偶基 <span class="math inline">\((f_i^j)\)</span>，则此映射有矩阵风格的解读：将 <span class="math inline">\(g \in G\)</span> 映射到 <span class="math inline">\(\rho_{V_i}(g^{-1})\)</span> 的第 <span class="math inline">\(j\)</span> 行第 <span class="math inline">\(k\)</span> 列元素取出得到一 <span class="math inline">\(L^2(G)\)</span> 内函数 <span class="math display">\[
+\]</span></p></li>
+<li><p>下面验证 <span class="math inline">\(\pi_i \circ \iota_i = \operatorname{id}_{\operatorname{End}_{\mathbb C}(V_i)}\)</span>．对任意 <span class="math inline">\(v \in V_i\)</span>, <span class="math inline">\(f \in V_i^*\)</span>，<span class="math inline">\(w \in V_i\)</span>，有 <span class="math display">\[
+\begin{aligned}
+(\pi_i \circ \iota_i) (v \otimes f) (w)
+&amp;= \frac{\dim V_i}{|G|} \sum_{g \in G} f(g^{-1} \cdot v) \rho_{V_i}(g) (w) \\
+&amp;= \frac{\dim V_i}{|G|} \sum_{g \in G} f(g^{-1} \cdot v) (g \cdot w) \\
+&amp;= \dim V_i \cdot \left( \frac{1}{|G|} \sum_{g \in G} (g \cdot w) \otimes (g \cdot f) \right) (v) \\
+&amp;= \dim V_i \cdot \left( \frac{1}{|G|} \sum_{g \in G} g \cdot (w \otimes f) \right) (v)
+\end{aligned}
+\]</span> 注意中间的映射是 <span class="math inline">\(w \otimes f \in V_i \otimes_{\mathbb C} V_i^* \cong \operatorname{Hom}_{\mathbb C}(V_i, V_i)\)</span> 到 <span class="math inline">\(\operatorname{Hom}_G(V_i, V_i)\)</span> 的平均化投影，而 <span class="math inline">\(V_i\)</span> 是不可约表示，所以由 Schur 引理，<span class="math inline">\(\dim V_i \cdot \frac{1}{|G|} \sum_{g \in G} g \cdot (w \otimes f)\)</span> 是 <span class="math inline">\(V_i\)</span> 上的数乘．则下面关注其系数——这可以通过取迹，即取缩并计算： <span class="math display">\[
+\begin{aligned}
+\operatorname{Tr}\left( \dim V_i \cdot \frac{1}{|G|} \sum_{g \in G} g \cdot (w \otimes f) \right)
+&amp;= \frac{\dim V_i}{|G|} \sum_{g \in G} \operatorname{Tr}( (g \cdot w) \otimes (g \cdot f)) \\
+&amp;= \frac{\dim V_i}{|G|} \sum_{g \in G} (g \cdot f)(g \cdot w) \\
+&amp;= \frac{\dim V_i}{|G|} \sum_{g \in G} f(w) \\
+&amp;= \dim V_i \cdot f(w)
+\end{aligned}
+\]</span> 故数乘系数为 <span class="math inline">\(f(w)\)</span>，因此 <span class="math inline">\((\pi_i \circ \iota_i) (v \otimes f) (w) = f(w) v\)</span>．</p></li>
+<li><p>至于 <span class="math inline">\(\iota_i \circ \pi_i\)</span>，对任意 <span class="math inline">\(h \in G\)</span>， <span class="math display">\[
+\begin{aligned}
+(\iota_i \circ \pi_i)(h)
+&amp;= \frac{\dim V_i}{|G|} \sum_{g \in G} \operatorname{Tr}(\rho_{V_i}(h) \circ \rho_{V_i}(g^{-1})) g \\
+&amp;= \frac{\dim V_i}{|G|} \sum_{g \in G} \operatorname{Tr}(\rho_{V_i}(h g^{-1})) g \\
+&amp;= \frac{\dim V_i}{|G|} \sum_{g \in G} \operatorname{Tr}(\rho_{V_i}(g^{-1})) g h \\
+&amp;= \frac{\dim V_i}{|G|} \sum_{g \in G} \overline{\chi_{V_i}(g)} \rho_V(g) (h) \\
+\end{aligned}
+\]</span> 因此 <span class="math display">\[
+\iota_i \circ \pi_i = \frac{\dim V_i}{|G|} \sum_{g \in G} \overline{\chi_{V_i}(g)} \rho_V(g)
+\]</span> 我们在<a href="../../posts/20260312-group-rep-speedrun/">有限群表示论</a>中已经证明这是 <span class="math inline">\(G\)</span>-表示到其不可约成分的典范投影（这个证明当然也依赖有限群表示的半单性）．这完成了 <span class="math inline">\(\iota \circ \pi = \operatorname{id}_{\mathbb C[G]}\)</span> 一侧的证明．</p></li>
+</ul>
+</section>
+<section id="正交性与泛函分析" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="正交性与泛函分析"><span class="header-section-number">2.4</span> 正交性与泛函分析</h3>
+<p>关于 <span class="math inline">\(\iota\)</span>，还有泛函分析风格的解读：</p>
+<ul>
+<li><p>固定 <span class="math inline">\(V_i\)</span> 一组基 <span class="math inline">\((e_i^k)\)</span> 并生成 <span class="math inline">\(V_i^*\)</span> 上的对偶基 <span class="math inline">\((f_i^j)\)</span>，则此映射有矩阵风格的解读：将 <span class="math inline">\(g \in G\)</span> 映射到 <span class="math inline">\(\rho_{V_i}(g^{-1})\)</span> 的第 <span class="math inline">\(j\)</span> 行第 <span class="math inline">\(k\)</span> 列元素取出得到一 <span class="math inline">\(L^2(G)\)</span> 内函数 <span class="math display">\[
 \rho_{V_i}^{j, k}(g) := f_i^j(\rho_{V_i}(g^{-1}) \cdot e_i^k)
 \]</span> 再等价地看作 <span class="math inline">\(\mathbb C[G]\)</span> 的元素，最后适当归一化．</p></li>
-<li><p>我们可以证明 <span class="math inline">\(\iota_i\)</span> 是单射，且每个 <span class="math inline">\(\iota_i\)</span> 的像之间两两正交．</p>
+<li><p><span class="math inline">\(\iota_i\)</span> 是单射有基于正交性的证明：</p>
 <p><span class="math inline">\(L^2(G)\)</span> 上有函数空间的标准内积．考虑 <span class="math inline">\(e_{i_2}^{k_2} \otimes f_{i_1}^{j_1} \in V_{i_2} \otimes_{\mathbb C} V_{i_1}^* \cong \operatorname{Hom}_{\mathbb C}(V_{i_1}, V_{i_2})\)</span>，对其平均化得 <span class="math display">\[
 \frac 1 {|G|} \sum_{g \in G} \rho_{V_{i_2}}(g) \circ \left( e_{i_2}^{k_2} \otimes f_{i_1}^{j_1} \right) \circ \rho_{V_{i_1}}(g^{-1}) \in \operatorname{Hom}_G(V_{i_1}, V_{i_2})
 \]</span> 再对此 <span class="math inline">\(\operatorname{Hom}_G(V_{i_1}, V_{i_2})\)</span> 中映射取第 <span class="math inline">\(j_2\)</span> 行第 <span class="math inline">\(k_1\)</span> 列元素得 <span class="math display">\[
@@ -576,8 +625,8 @@ v \otimes f \mapsto \frac{\dim V_i}{|G|} \sum_{g \in G} f(g^{-1} \cdot v) g
 &amp;= \langle \rho_{V_{i_2}}^{j_2, k_2}, \rho_{V_{i_1}}^{j_1, k_1} \rangle
 \end{aligned}
 \]</span> 回忆 Schur 引理对 <span class="math inline">\(\operatorname{Hom}_G (V_{i_1}, V_{i_2})\)</span> 的刻画，这恰是在说此内积非零当且仅当 <span class="math inline">\(i_1 = i_2\)</span> 且 <span class="math inline">\(j_1 = j_2\)</span> 且 <span class="math inline">\(k_1 = k_2\)</span>．因此 <span class="math inline">\(\rho_{V_{i}}^{j, k}\)</span> 两两正交．当 <span class="math inline">\(i=i_1=i_2\)</span>, <span class="math inline">\(j=j_1=j_2=k=k_1=k_2\)</span> 时，<span class="math inline">\(e_i^j \otimes f_i^j \in \operatorname{End}_{\mathbb C}(V_i)\)</span> 的迹为 <span class="math inline">\(1\)</span>，而平均化不改变迹并将其变为 <span class="math inline">\(V_i\)</span> 上的数乘，因此 <span class="math inline">\(\langle \rho_{V_i}^{j, k}, \rho_{V_i}^{j, k} \rangle = 1 / \dim V_i\)</span>．因此 <span class="math inline">\(\iota_i\)</span> 是单射，且每个 <span class="math inline">\(\iota_i\)</span> 的像之间两两正交．</p></li>
-<li><p>最后验证 <span class="math inline">\(\iota_i \circ \pi_i = \operatorname{id}_{\operatorname{End}_{\mathbb C}(V_i)}\)</span> 结束讨论．【TODO】</p></li>
 </ul>
+</section>
 </section>
 <section id="推论" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="推论"><span class="header-section-number">3</span> 推论</h2>
