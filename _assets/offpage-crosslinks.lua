@@ -126,6 +126,10 @@ local function rewrite_target(target, base_url)
     path = pandoc.path.make_relative(resolved_path, project_root)
   end
 
+  -- Normalize path separators for URLs (Windows uses backslashes)
+  -- Also collapse "/." artifacts from pandoc.path.make_relative
+  path = path:gsub('\\', '/'):gsub('/%.$', '/'):gsub('^%.$', '')
+
   path = path:gsub('%.qmd$', '.html')
   path = path:gsub('^%./', '')
 
