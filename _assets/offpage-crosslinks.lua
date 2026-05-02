@@ -21,6 +21,9 @@
 --- @type string|nil The resolved site URL from project metadata
 local site_url = nil
 
+--- @type boolean Whether to collapse ".." segments in paths. Currently always enabled.
+local collapse_dots = true
+
 -- ============================================================================
 -- HELPER FUNCTIONS (PRIVATE)
 -- ============================================================================
@@ -100,6 +103,22 @@ local function is_rewriteable_page_link(target)
   return true
 end
 
+--- Collapse ".." segments in a path (e.g., foo/../bar → bar).
+--- @param p string The path to collapse
+--- @return string The collapsed path
+local function collapse_path_dots(p)
+  local parts = pandoc.path.split(p)
+  local out = {}
+  for _, part in ipairs(parts) do
+    if part == '..' and #out > 0 and out[#out] ~= '..' then
+      out[#out] = nil
+    else
+      out[#out + 1] = part
+    end
+  end
+  return pandoc.path.join(out)
+end
+
 --- Rewrite a relative page link target to an absolute URL.
 --- Resolves the target relative to the current input file directory,
 --- normalises .qmd extensions to .html, and prepends the site-url.
@@ -109,29 +128,32 @@ end
 local function rewrite_target(target, base_url)
   -- Keep query/fragment intact; only rewrite the path portion.
   local path, suffix = split_target(target)
-
-  -- Special handling for root-relative paths
-  if path:match('^/') then
-    path = path:gsub('^/', '')
-  else
-    -- For relative paths, resolve relative to current file
+  -- Note that prior to our script,
+  -- Quarto rewrites project-relative links to be current-file-relative,
+  -- so the else branch here won't actually happen.
+  if pandoc.path.is_relative(path) then
+    -- obtain the absolute path of the current input file directory
     local current_file = quarto.doc and quarto.doc.input_file
-    local project_offset = quarto.project and quarto.project.offset
-    if not current_file or not project_offset then return target end
-
+    if not current_file then return target end
     local current_dir = pandoc.path.directory(current_file)
-    local project_root = pandoc.path.normalize(pandoc.path.join({ current_dir, project_offset }))
-
-    local resolved_path = pandoc.path.normalize(pandoc.path.join({ current_dir, path }))
-    path = pandoc.path.make_relative(resolved_path, project_root)
+    -- obtain the absolute path of the project directory
+    local project_dir = quarto.project and quarto.project.directory
+    if not project_dir then return target end
+    -- obtain the absolute path of the target link (possibly with uncollapsed `..`)
+    local resolved_path = pandoc.path.normalize(pandoc.path.join({current_dir, path}))
+    -- subtract the project directory from the resolved path (possibly with uncollapsed `..`)
+    -- should be safe if resolved_path is within the project directory
+    path = pandoc.path.make_relative(resolved_path, project_dir)
+    -- finally, collapse any `..` segments if enabled
+    if collapse_dots then path = collapse_path_dots(path) end
+  else
+    path = path:gsub('^/', '')
+    quarto.log.warning('offpage-crosslinks: unexpected absolute path "%s" in link target "%s"; treating as project-relative', path, target)
   end
 
-  -- Normalize path separators for URLs (Windows uses backslashes)
-  -- Also collapse "/." artifacts from pandoc.path.make_relative
-  path = path:gsub('\\', '/'):gsub('/%.$', '/'):gsub('^%.$', '')
-
+  -- Normalize path separators for URLs
+  path = path:gsub('\\', '/'):gsub('/%.$', '/'):gsub('^%.$', ''):gsub('^%./', '')
   path = path:gsub('%.qmd$', '.html')
-  path = path:gsub('^%./', '')
 
   local separator = base_url:match('/$') and '' or '/'
   return base_url .. separator .. path .. suffix
@@ -141,19 +163,17 @@ end
 -- FILTER EXPORT
 -- ============================================================================
 
-if quarto.doc.is_format('html') then return nil end
+-- Skip if not in a project context
+if quarto.project.directory == nil then return nil end
 
 return {
   {
-    -- Resolve site-url from project metadata.
-    -- Skips entirely for HTML formats where cross-page links already work.
     Meta = function(meta)
-
+      -- Resolve site-url from project metadata.
       site_url = get_site_url_from_execute_info()
       if not site_url then
         site_url = get_site_url_from_meta(meta)
       end
-
       if not site_url then
         quarto.log.warning('offpage-crosslinks: site-url not found in project metadata.')
       end
