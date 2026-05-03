@@ -131,7 +131,7 @@ format:
 
   保持 $G$-模结构的所有线性映射同态，其中的同态 $\varphi$ 满足 $\varphi(g \cdot v) = g \cdot \varphi(v)$．
 
-  注意我们设计的定义使得 $\Hom_G(V, W) = \left(\Hom_{\mathbb C}(V, W) \right)^G$．
+  注意我们设计的定义使得 $\Hom_G(V, W) = \left(\Hom_{\mathbb C}(V, W) \right)^G$．此模上的 $G$-作用是平凡的，应当认为 $\Hom_G(V, W)$ 是一个纯粹的线性空间．
   
   计算 $\Hom_{\mathbb C}(V, W) \to \Hom_G(V, W)$ 的平均化投影 $\varphi \mapsto \tilde\varphi$：
   $$
@@ -246,20 +246,25 @@ $G$-module-wise properties:
 
 - $\chi_{V \otimes_{\mathbb C} W}(g) = \chi_V(g) \chi_W(g)$
 
-  矩阵分一堆块即可．
+  矩阵分一堆块即可．具体来说，取 $V$ 的一组基底 $(v_i)$ 及其对偶基 $(f_i)$，$W$ 的一组基底 $(w_j)$ 及其对偶基 $(h_j)$，则 $V \otimes W$ 的一组基底是 $v_i \otimes w_j$，其对偶基是 $f_i \otimes h_j$．对任意 $g \in G$，
+  $$
+  \begin{aligned}
+  \chi_{V \otimes_{\mathbb C} W}(g) &= \sum_{i,j} (f_i \otimes h_j)(g \cdot (v_i \otimes w_j)) \\
+  &= \sum_{i,j} (f_i \otimes h_j)((g \cdot v_i) \otimes (g \cdot w_j)) \\
+  &= \sum_{i,j} f_i(g \cdot v_i) h_j(g \cdot w_j) \\
+  &= \sum_i f_i(g \cdot v_i) \sum_j h_j(g \cdot w_j) \\
+  &= \chi_V(g) \chi_W(g)
+  \end{aligned}
+  $$
 
 - $\chi_{V^*}(g) = \overline{\chi_V(g)}$
   
   也就是算 $\rho_{V^*}(g) \in \GL(V^*)$ 的迹，按照 $V^*$ 定义它恰好是 $\rho_V(g^{-1}) \in \GL(V)$ 的对偶映射，再注意到对偶映射的迹等于原映射的迹和 $\chi_V(g^{-1}) = \overline{\chi_V(g)}$ 即可．
   
-:::{.remark}
-
-不理解为什么 $\Tr(f^*) = \Tr(f)$？
-
-- 我们有自然同构 $\Hom_{\mathbb C}(V, V) \cong V^* \otimes_{\mathbb C} V \cong V \otimes_{\mathbb C} V^* \cong \Hom_{\mathbb C}(V^*, V^*)$，中间的 $\otimes_{\mathbb C}$ 两侧交换对应转置．迹也可以坐标无关地定义为 $V$ 和 $V^*$ 之间的缩并，从而对偶成为张量积间的交换从而变得无关紧要．
-
-- 或者直接坐标计算．嗯算就知道矩阵表示成转置关系．
-:::
+  具体来说，取 $V$ 的一组基底 $(v_i)$ 及其对偶基 $(f_i)$，则对任意 $g \in G$，
+  $$
+  \chi_{V^*}(g) = \sum_i (g \cdot f_i)(e_i) = \sum_i f_i(g^{-1} \cdot e_i) = \chi_V(g^{-1})
+  $$
 
 Averaging properties:
 
