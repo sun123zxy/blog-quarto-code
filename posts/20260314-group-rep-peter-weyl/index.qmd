@@ -96,6 +96,91 @@ $$
 这似乎只是把双边代数表示翻译到 Hopf 代数表示的抽象废话，但在如 Schur--Weyl 对偶中，会看到这种翻译能有效简化表述．
 :::
 
+### 群表示观点
+
+在左模观点中，让我们使用对角映射 $g \mapsto (g,g)$ 将 Peter--Weyl 分解
+$$
+\mathbb C[G] \cong \bigoplus_i \End_{\mathbb C}(V_i)
+$$
+看成 $G$-表示的分解，于是 $\mathbb C[G]$ 上的 $G$-作用是共轭 $g \cdot x := g x g^{-1}$，$\End_{\mathbb C}(V_i)$ 上的 $G$-作用也是共轭 $(g \cdot \varphi) (v) := g \cdot \varphi (g^{-1} \cdot v)$．
+
+## 推论
+
+来看上述分解导致的事实．
+
+### 维数平方和
+
+首先，如果你选择的证明路线没有循环论证之嫌，可以通过维数再次看出维数平方和公式
+$$
+|G| = \sum_i (\dim V_i)^2
+$$
+
+### 共轭类计数
+
+其次，对这分解取中心：
+$$
+Z(\mathbb C[G]) \cong \bigoplus_i Z(\End_{\mathbb C}(V_i))
+$$
+
+- $Z(\End_{\mathbb C}(V_i))$ 是 $\End_{\mathbb C}(V_i)$ 的中心，而（根据满射性）所有 $\End_{\mathbb C}(V_i)$ 都可实现为 $V_i$ 上的 $G$-左作用，因此这中心恰为 $\End_{\mathbb C[G]}(V_i)$．回忆 Schur 引理，$V_i$ 是不可约表示，所以 $Z(\End_{\mathbb C}(V_i)) = \End_{\mathbb C[G]}(V_i) = \mathbb C \id_{V_i}$，维数为 $1$．
+
+- $Z(\mathbb C[G])$ 是什么？
+
+  设 $\sum_{h \in G} \chi(h) h \in Z(\mathbb C[G])$，这即是要求对任意 $g \in G$，有
+  $$
+  \sum_{h \in G} \chi(h) h = g \left( \sum_{h \in G} \chi(h) h \right) g^{-1} = \sum_{h \in G} \chi(h) g h g^{-1} = \sum_{h \in G} \chi(g^{-1} h g) h
+  $$
+  即 $\chi(g^{-1} h g) = \chi(h)$——在共轭类上取常值——$Z(\mathbb C[G])$ 就是类函数全体！其维数等于 $G$ 的共轭类的数量．
+
+两条连起来看：$G$ 的共轭类的数量等于 $G$ 的不可约表示的数量．
+
+:::{.remark}
+
+## 群表示观点的共轭类计数
+
+回忆 $\mathbb C[G]$ 也作为 $G$-群表示分解．两边同时取 $G$-不变子空间，得到
+$$
+\left(\mathbb C[G] \right)^G \cong \bigoplus_i \End_{G}(V_i)
+$$
+左边作为线性空间同构于 $G$ 的类函数空间，右边又使用 Schur 引理，我们再次得到共轭类计数的结论．
+:::
+
+### 交换群、循环群、DFT
+
+如果 $G$ 是交换群，则每个不可约表示 $V_i$ 都是 $1$ 维．因此在 $\mathbb C$-代数同构意义下有
+$$
+\mathbb C[G] \cong \bigoplus_i \End_{\mathbb C}(V_i) \cong \mathbb C^{\oplus |G|} \cong L^2(G)
+$$
+来考察这个同构具体是什么．每个 $\pi_i : \mathbb C[G] \to \End_{\mathbb C}(V_i) \cong \mathbb C$ 即为 $V_i$ 对应的特征标 $\chi_i : G \to \mathbb C$ 线性张成的结果．
+
+考虑到有限交换群基本定理，不妨来考虑最简单的循环群 $G = \mathbb Z / n \mathbb Z$．其第 $k$ 个不可约表示，或特征标由 $1 \mapsto \zeta_n^k$ 给出，这里 $\zeta_n = e^{2\pi i / n}$ 是 $n$-次单位根．则上述同构是在说 DFT 矩阵 $(\zeta_n^{jk})_{0 \leq j,k < n}$ 可逆——当然可逆，而且是正交的．这是所谓的离散 Fourier 变换． 
+
+### 直和分解的典范投影
+
+回忆[有限群时](/posts/20260312-group-rep-speedrun/)我们证明过线性空间同构 $\Hom_G(V, W) \cong V^* \otimes_G W$，在这里做应用．对任意 $G$-表示 $V$，大力自然同构
+$$
+\begin{aligned}
+V &\cong \mathbb C[G] \otimes_{\mathbb C[G]} V \\
+&\cong \bigoplus_i \End(V_i) \otimes_{\mathbb C[G]} V \\
+&\cong \bigoplus_i V_i \otimes_{\mathbb C} V_i^* \otimes_{\mathbb C[G]} V \\
+&\cong \bigoplus_i V_i \otimes_{\mathbb C} \Hom_G(V_i, V)
+\end{aligned}
+$$
+注意 $\dim \Hom_G(V_i, V)$ 就是 $V_i$ 在 $V$ 中的重数，因此 $V_i \otimes_{\mathbb C} \Hom_G(V_i, V)$ 就是 $V$ 的各不可约成分，上述同构给出了 $V$ 的不可约成分的自然拆解——不同于证明半单性时对补空间的依赖，由于我们将会在 Peter--Weyl 的证明中给出了完全构造性的同构，这里的拆解也是完全构造性的，可以直接写出典范嵌入
+$$
+\begin{aligned}
+\iota_i: V_i \otimes_{\mathbb C} \Hom_G(V_i, V) &\to V \\
+v \otimes \varphi &\mapsto \varphi(v)
+\end{aligned}
+$$
+和典范投影
+$$
+\begin{aligned}
+\pi_i : V \to \bigoplus_i V_i \otimes_{\mathbb C} \Hom_G(V_i, V) \\
+\iota_i \circ \pi_i = \frac{\dim V_i}{|G|} \sum_{g \in G} \overline{\chi_{V_i}(g)} \rho_V(g)
+\end{aligned}
+$$
+
 ## 证明
 
 我们提供几条依赖不同工具的证明路线，读者可按前置情况任选．
@@ -205,84 +290,3 @@ $$
   \end{aligned}
   $$
   回忆 Schur 引理对 $\Hom_G (V_{i_1}, V_{i_2})$ 的刻画，这恰是在说此内积非零当且仅当 $i_1 = i_2$ 且 $j_1 = j_2$ 且 $k_1 = k_2$．因此 $\rho_{V_{i}}^{j, k}$ 两两正交．当 $i=i_1=i_2$, $j=j_1=j_2=k=k_1=k_2$ 时，$e_i^j \otimes f_i^j \in \End_{\mathbb C}(V_i)$ 的迹为 $1$，而平均化不改变迹并将其变为 $V_i$ 上的数乘，因此 $\langle \rho_{V_i}^{j, k}, \rho_{V_i}^{j, k} \rangle = 1 / \dim V_i$．因此 $\iota_i$ 是单射，且每个 $\iota_i$ 的像之间两两正交．
-
-## 推论
-
-来看上述分解导致的事实．
-
-### 维数平方和
-
-首先，如果你选择的证明路线没有循环论证之嫌，可以通过维数再次看出维数平方和公式
-$$
-|G| = \sum_i (\dim V_i)^2
-$$
-
-### 共轭类计数
-
-其次，对这分解取中心：
-$$
-Z(\mathbb C[G]) \cong \bigoplus_i Z(\End_{\mathbb C}(V_i))
-$$
-
-- $Z(\End_{\mathbb C}(V_i))$ 是 $\End_{\mathbb C}(V_i)$ 的中心，而（根据满射性）所有 $\End_{\mathbb C}(V_i)$ 都可实现为 $V_i$ 上的 $G$-左作用，因此这中心恰为 $\End_{\mathbb C[G]}(V_i)$．回忆 Schur 引理，$V_i$ 是不可约表示，所以 $Z(\End_{\mathbb C}(V_i)) = \End_{\mathbb C[G]}(V_i) = \mathbb C \id_{V_i}$，维数为 $1$．
-
-- $Z(\mathbb C[G])$ 是什么？
-
-  设 $\sum_{h \in G} \chi(h) h \in Z(\mathbb C[G])$，这即是要求对任意 $g \in G$，有
-  $$
-  \sum_{h \in G} \chi(h) h = g \left( \sum_{h \in G} \chi(h) h \right) g^{-1} = \sum_{h \in G} \chi(h) g h g^{-1} = \sum_{h \in G} \chi(g^{-1} h g) h
-  $$
-  即 $\chi(g^{-1} h g) = \chi(h)$——在共轭类上取常值——$Z(\mathbb C[G])$ 就是类函数全体！其维数等于 $G$ 的共轭类的数量．
-
-两条连起来看：$G$ 的共轭类的数量等于 $G$ 的不可约表示的数量．
-
-:::{.remark}
-
-## 左模观点
-
-回忆 $\mathbb C[G]$ 也作为 $G \times G$-群表示分解．让我们使用对角映射 $g \mapsto (g,g)$ 将 Peter--Weyl 分解
-$$
-\mathbb C[G] \cong \bigoplus_i \End_{\mathbb C}(V_i)
-$$
-看成 $G$-表示的分解，于是 $\mathbb C[G]$ 上的 $G$-作用是共轭 $g \cdot x := g x g^{-1}$，$\End_{\mathbb C}(V_i)$ 上的 $G$-作用也是共轭 $(g \cdot \varphi) (v) := g \cdot \varphi (g^{-1} \cdot v)$．两边同时取 $G$-不变子空间，得到
-$$
-\left(\mathbb C[G] \right)^G \cong \bigoplus_i \End_{G}(V_i)
-$$
-左边作为线性空间同构于 $G$ 的类函数空间，右边又使用 Schur 引理，我们再次得到共轭类计数的结论．
-:::
-
-### 交换群、循环群、DFT
-
-如果 $G$ 是交换群，则每个不可约表示 $V_i$ 都是 $1$ 维．因此在 $\mathbb C$-代数同构意义下有
-$$
-\mathbb C[G] \cong \bigoplus_i \End_{\mathbb C}(V_i) \cong \mathbb C^{\oplus |G|} \cong L^2(G)
-$$
-来考察这个同构具体是什么．每个 $\pi_i : \mathbb C[G] \to \End_{\mathbb C}(V_i) \cong \mathbb C$ 即为 $V_i$ 对应的特征标 $\chi_i : G \to \mathbb C$ 线性张成的结果．
-
-考虑到有限交换群基本定理，不妨来考虑最简单的循环群 $G = \mathbb Z / n \mathbb Z$．其第 $k$ 个不可约表示，或特征标由 $1 \mapsto \zeta_n^k$ 给出，这里 $\zeta_n = e^{2\pi i / n}$ 是 $n$-次单位根．则上述同构是在说 DFT 矩阵 $(\zeta_n^{jk})_{0 \leq j,k < n}$ 可逆——当然可逆，而且是正交的．这是所谓的离散 Fourier 变换． 
-
-### 直和分解的典范投影
-
-对任意 $G$-表示 $V$，大力自然同构
-$$
-\begin{aligned}
-V &\cong \mathbb C[G] \otimes_{\mathbb C[G]} V \\
-&\cong \bigoplus_i \End(V_i) \otimes_{\mathbb C[G]} V \\
-&\cong \bigoplus_i V_i \otimes_{\mathbb C} V_i^* \otimes_{\mathbb C[G]} V \\
-&\cong \bigoplus_i V_i \otimes_{\mathbb C} \Hom_G(V_i, V)
-\end{aligned}
-$$
-注意 $\dim \Hom_G(V_i, V)$ 就是 $V_i$ 在 $V$ 中的重数，因此 $V_i \otimes_{\mathbb C} \Hom_G(V_i, V)$ 就是 $V$ 的各不可约成分，上述同构给出了 $V$ 的不可约成分的自然拆解——不同于证明半单性时对补空间的依赖，由于之前在 Peter--Weyl 的证明中给出了完全构造性的同构，这里的拆解也是完全构造性的，可以直接写出典范嵌入
-$$
-\begin{aligned}
-\iota_i: V_i \otimes_{\mathbb C} \Hom_G(V_i, V) &\to V \\
-v \otimes \varphi &\mapsto \varphi(v)
-\end{aligned}
-$$
-和典范投影
-$$
-\begin{aligned}
-\pi_i : V \to \bigoplus_i V_i \otimes_{\mathbb C} \Hom_G(V_i, V) \\
-\iota_i \circ \pi_i = \frac{\dim V_i}{|G|} \sum_{g \in G} \overline{\chi_{V_i}(g)} \rho_V(g)
-\end{aligned}
-$$

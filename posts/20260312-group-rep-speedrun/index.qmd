@@ -4,6 +4,7 @@ subtitle: A Quick Tour of the Representation Theory of Finite Groups
 abstract: 参考 Fulton--Harris [@fulton_representation_2004, {chapter 1--2}]，优雅、迅速、坐标无关地完成有限群有限维复表示论的入门．
 author: sun123zxy
 date: 2026-03-15
+date-modified: 2026-05-04
 lang: zh
 
 bibliography: index.bib
@@ -61,7 +62,7 @@ format:
   $$
   从而给出一个对不可约表示维数的限制 $\sum_i (\dim V_i)^2 = |G|$．（[@thm-reg]）
 
-本文的主要动机是：
+本篇不用力讨论 Hopf 代数、表示环和群上同调等高观点——废话清者自请．我们的主要动机如下：
 
 - 提供 Fulton--Harris [@fulton_representation_2004, {chapter 1--2}] 的一个中文速通版本
 
@@ -69,11 +70,15 @@ format:
 
 - 提供坐标无关、matrix-free 的定义、记号和证明路线
 
-  - 如无必要，勿增实体：减少 ad hoc 定义的使用
+  - 减少 ad hoc 操作的使用，强调对偶表示、张量积表示、平均化投影的通用构造
 
-- 统一地理解有限群表示论的各种平均化构造
+  - 喜欢矩阵和特征标表的读者请左转 [@serre_linear_1977, {chapter 1--2}]．
 
-  - $G$-不变子空间投影 $V \to V^G$、$G$-不变内积和分裂同态提升
+- 统一地理解有限群表示论的各种平均化构造：$G$-不变子空间投影 $V \to V^G$、$G$-不变内积和分裂同态提升
+
+  - 李群观点：Weyl's Unitarian Trick 的离散版本
+  
+  - 上同调观点：$V^G = H^0(G, V)$，平均化给出的分裂同态使 $H^1(G, V) = 0$，反映群代数的半单性．
 
 - 为 Peter--Weyl / Wedderburn--Artin 定理
   $$
@@ -81,7 +86,7 @@ format:
   $$
   的[自顶向下方法](/posts/20260314-group-rep-peter-weyl/)做好铺垫．
 
-顺畅阅读本文可能需要读者熟练以下内容：
+顺畅阅读本文需要读者熟练以下内容：
 
 - 抽象线性代数成熟度：对特征空间、对偶空间和张量积的理解
 - 模论成熟度：短正合列、分裂同态与补空间的关系，对 $\otimes$-$\Hom$ 对偶关系的理解
@@ -91,19 +96,7 @@ format:
 
 给定 $G$-表示 $V$, $W$，我们有若干标准的构造表示的手段：
 
-- $G$-不变子空间 $V^G$：
-
-  即 $V^G := \{ v \in V : \forall g \in G,\, g \cdot v = v \}$．
-
-  注意通过平均化手段，可以获得 $V \to V^G$ 的一个投影
-  $$
-  v \mapsto \tilde v := \frac 1 {|G|} \sum_{g \in G} g \cdot v
-  $$
-  使得 $G$-模正合列
-  $$
-  0 \longrightarrow V^G \longrightarrow V \longrightarrow V / V^G \longrightarrow 0 
-  $$
-  左侧分裂——人话是，这一投影是 $G$-模同态，是满射，且保持 $V^G$ 不变．
+### Hopf 代数结构
 
 - 直和 $V \oplus W$：
 
@@ -127,16 +120,54 @@ format:
 
   自同态空间 $\End_{\mathbb C}(V) := \Hom_{\mathbb C}(V, V)$．
 
+### 同调结构
+
+- $G$-稳定子空间 $V^G$：
+
+  即 $V^G := \{ v \in V : \forall g \in G,\, g \cdot v = v \}$，在 $G$-作用下稳定的元素．
+
+  注意通过平均化手段，可以获得 $V \to V^G$ 的一个投影
+  $$
+  v \mapsto \tilde v := \frac 1 {|G|} \sum_{g \in G} g \cdot v
+  $$
+  使得 $G$-模正合列
+  $$
+  0 \longrightarrow V^G \longrightarrow V \longrightarrow V / V^G \longrightarrow 0 
+  $$
+  左侧分裂——人话是，这一投影是 $G$-模同态，是满射，且保持 $V^G$ 不变．
+
+- $G$-余稳定子空间 $V_G$：
+
+  即 $V_G := V / \langle g \cdot v - v : g \in G, v \in V \rangle$，强行商掉所有 $G$-作用的差异得到的空间．
+
+  注意通过平均化投影，$V^G$ 和 $V_G$ 间有一典范同构 $V^G \cong V_G$：考虑自然的复合映射 $V^G \to V \to V_G$ 和平均化投影 $V \to V^G$ 下降到商表示 $V_G$ 上的映射 $V_G \to V^G$，容易证明它们互逆．
+
 - $G$-模同态空间 $\Hom_G(V, W)$：
 
   保持 $G$-模结构的所有线性映射同态，其中的同态 $\varphi$ 满足 $\varphi(g \cdot v) = g \cdot \varphi(v)$．
 
   注意我们设计的定义使得 $\Hom_G(V, W) = \left(\Hom_{\mathbb C}(V, W) \right)^G$．此模上的 $G$-作用是平凡的，应当认为 $\Hom_G(V, W)$ 是一个纯粹的线性空间．
+
+  注意自然同构 $V^G \cong \Hom_G(\mathbb C, V)$，其中 $\mathbb C$ 是 $G$ 的一维平凡表示．
   
   计算 $\Hom_{\mathbb C}(V, W) \to \Hom_G(V, W)$ 的平均化投影 $\varphi \mapsto \tilde\varphi$：
   $$
   \tilde\varphi(v) := \frac 1 {|G|} \sum_{g \in G} (g \cdot \varphi)(v) = \frac 1 {|G|} \sum_{g \in G} g \cdot \varphi(g^{-1} \cdot v)
   $$
+
+- $G$-张量积 $V \otimes_G W$：
+
+  定义为 $V \otimes_{\mathbb C} W$ 商调掉所有 $(g^{-1} \cdot v) \otimes (g \cdot w) - v \otimes w$ 的空间．这里首个 $g$ 作用掉转是因为事实上是在考虑双模张量积 $V \otimes_{\mathbb C[G]} W$，需要强行将 $V$ 上的左模结构翻转成右模结构供张量积缩并．
+
+  注意我们设计的定义使得 $V \otimes_G W = (V \otimes_{\mathbb C} W)_G$．此模上的 $G$-作用是平凡的，应当认为 $V \otimes_G W$ 是一个纯粹的线性空间．
+
+  注意自然同构 $\mathbb C \otimes_G V \cong V_G$，其中 $\mathbb C$ 是 $G$ 的一维平凡表示．
+
+  注意有典范的线性空间同构 $\Hom_G(V, W) \cong V^* \otimes_G W$：因为借助平均化投影带来的 $V^G \cong V_G$，有
+  $$
+  \Hom_G(V, W) \cong \left(\Hom(V,W) \right)^G \cong (V^* \otimes_{\mathbb C} W)^G \cong (V^* \otimes_{\mathbb C} W)_G \cong V^* \otimes_G W
+  $$
+:::
 
 ## 不可约表示
 
@@ -228,7 +259,7 @@ Schur 引理为表示的不可约分解提供了唯一性．
 
 特征标还满足以下性质：
 
-$G$-wise properties:
+考察 $g \mapsto \chi_V(g)$：
 
 - $\chi_V(1) = \dim V$
 
@@ -238,7 +269,7 @@ $G$-wise properties:
 
   注意迹是特征值的和，特征值都是单位根，单位根取逆就是共轭，$g^{-1}$ 的特征值是 $g$ 的特征值的逆即可．
 
-$G$-module-wise properties:
+考察 $V \mapsto \chi_V$：
 
 - $\chi_{V \oplus W}(g) = \chi_V(g) + \chi_W(g)$
 
@@ -266,7 +297,7 @@ $G$-module-wise properties:
   \chi_{V^*}(g) = \sum_i (g \cdot f_i)(e_i) = \sum_i f_i(g^{-1} \cdot e_i) = \chi_V(g^{-1})
   $$
 
-Averaging properties:
+考察平均化投影：
 
 - $\langle \chi_V, 1_G \rangle = \frac 1 {|G|} \sum_{g \in G} \chi_V(g) = \dim V^G$
 
