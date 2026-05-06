@@ -72,7 +72,7 @@ $$
 右分裂同态 $c \mapsto (\det c)^{1/n}$ 使得其右侧分裂，从而 $\GL_n = \SL_n \rtimes Z(\GL_n) \cong \SL_n \rtimes \mathbb C^\times$．但这是复数域能够开根的结果．TODO: 这也许和所谓的 split-reductive group 有关．
 :::
 
-## 正交群及其李代数
+## 正交群及其斜自伴李代数
 
 下面开始考虑 B、C、D 型李代数．仍然第一个问题是作用群．当然至少仍然有 $\GL_n$ 的选择，即还是通过 Jordan 型来分类幂零轨道．但会希望有一个更小的作用群，不说一定恰好是共轭作用群，但至少也要足够小，例如对 $\so_n$ 的 $\SO_n$ 或对 $\sp_{2n}$ 的 $\Sp_{2n}$ 来得到更细的分类．为统一研究方便，来先在 $\mathbb C$ 上有限维线性空间 $V$ 上确定一个非退化双线性型 $\varphi(-,-)$ 明确正交群及其斜自伴李代数的定义．
 
@@ -94,10 +94,10 @@ $$
 若将 $\varphi$ 视为 $V \to V^*$ 的线性映射，则
 
 - $\varphi$ 是群表示意义下的 $G$-模同态，且 $G$ 是使得 $\varphi$ 成为 $G$-模同态的最大的 $\GL(V)$ 的子群．
-- $\varphi$ 是李代数表示意义下的 $\mathfrak{g}$-模同态，且 $\mathfrak{g}$ 是使得 $\varphi$ 成为 $\mathfrak g$-模同态的最大的 $\gl(V)$ 的子李代数．我们写作 $\varphi \in \Hom_{\mathfrak g}(V, V^*)$，或等价地 $\varphi \in (V^* \otimes V^*)^{\mathfrak g}$．
+- $\varphi$ 是李代数表示意义下的 $\mathfrak{g}$-模同态，且 $\mathfrak{g}$ 是使得 $\varphi$ 成为 $\mathfrak g$-模同态的最大的 $\gl(V)$ 的子李代数．我们写作 $\varphi \in \Hom_{\mathfrak g}(V, V^*)$，或等价地 $\varphi \in (V^* \otimes V^*)^{\mathfrak g}$，这里 $(V^* \otimes V^*)^{\mathfrak g}$ 是 $V^* \otimes V^*$ 中全体被 $\mathfrak g$-作用消灭的元素全体．
 :::
 
-我们将来只关心两类特殊的非退化双线性型：对称的 $\varphi(v, w) = \varphi(w, v)$ 和斜对称的 $\varphi(v, w) = -\varphi(w, v)$．前者对应正交群 $O_n$ 及其斜自伴李代数 $\so_n$，后者对应辛群 $\Sp_{2n}$ 及其斜自伴李代数 $\sp_{2n}$．不过在此之前，可以对一般的非退化双线性型做一点讨论：
+将来只关心两类特殊的非退化双线性型：对称的 $\varphi(v, w) = \varphi(w, v)$ 和斜对称的 $\varphi(v, w) = -\varphi(w, v)$．前者对应正交群 $O_n$ 及其斜自伴李代数 $\so_n$，后者对应辛群 $\Sp_{2n}$ 及其斜自伴李代数 $\sp_{2n}$．不过在此之前，可以对一般的非退化双线性型做一点讨论：
 
 :::{#prp-bilinear-prop}
 
@@ -216,9 +216,7 @@ Schur--Weyl 对偶告诉我们 $V^* \otimes V^*$ 作为 $\GL(V)$-表示分解成
 - 其它【TODO】
 :::
 
-## 基于 Jordan 型的轨道分类
-
-### 一致性
+## 约化到 Jordan 型
 
 以下定理保证在正交群 $G$ 下的共轭轨道和在 $\GL(V)$ 下的共轭轨道是一样的．
 
@@ -270,31 +268,84 @@ Schur--Weyl 对偶告诉我们 $V^* \otimes V^*$ 作为 $\GL(V)$-表示分解成
 :::{.remark}
 
 - 此命题的证明大约在 1950s-1960s 之间出现，具体历史评注可见 [@jantzen_nilpotent_2004, {section 1.5}]．
-
-- $g \mapsto g g^*$ 作为 $\GL(V) \to G$ 的映射是否给我们了任何启发？
 :::
 
 注意 $G$ 现在只是正交群，它可能还不足够细．对反对称的情况，正交群 $G = \Sp_{2n}$ 已经连通，因此基本上够了．但对对称的情况，正交群 $G = O_n$ 是不连通的，$\SO_n$ 才是它的连通子群．因此 $\SO_n$ 的轨道可能比 $O_n$ 的轨道更细——轨道分类的故事还没有结束．不过这至少帮助我们获得了 Jordan 型的较粗分类．
 
-### 具体分类
+## 构造合法分拆
 
 另一件尚未完成的工作是：哪些 Jordan 型能够在 $\so_n$ 或 $\sp_{2n}$ 的幂零矩阵上产生？剧透一下最终的答案：
 
 - 对于 $\so_n$，偶数大小的 Jordan 块必须出现偶数次；
 - 对于 $\sp_{2n}$，奇数大小的 Jordan 块必须出现偶数次．
 
-讨论此事需关注两个问题：
+我们将把满足上述条件的分拆称为（对称或斜对称情形下的）合法分拆．讨论此事需关注两个问题：
 
 - 在斜自伴李代数中凑出具有上述 Jordan 型的幂零矩阵
 - 证明斜自伴李代数中的幂零矩阵的 Jordan 型必须满足上述条件
 
 :::{.remark}
 
+## 表示论观点
+
+这里的工作颇有表示论的风味．从矩阵的语言来看，我们需要通过一 $V$ 上的可逆线性变换，同时合同地调整非退化双线性型 $\varphi \in V^* \otimes V^*$ 并相似地调整斜自伴幂零算子 $X \in V \otimes V^*$，使得 $X$ 化为 Jordan 标准型．在之后处理完 Jacobson--Morozov 定理后，我们将为分类提供一个表示论风格的快速证明．
+:::
+
+我们跟随 [@jantzen_nilpotent_2004, {section 1.6--1.11}]，提供一个纯线性代数的显式证明．思路很简单：先为一个或两个相同大小的 Jordan 块构造非退化双线性型，然后正交地拼接它们，最后将任何幂零斜自伴矩阵的 Jordan 型约化到上述情况．
+
+本节先来做凑的工作．设我们在 $d$ 维线性空间 $V$ 中工作并已经选定一组基底作为矩阵记号的参考，为每个 $d$ 阶 Jordan 块 $X$ 选取双线性型 $\varphi$ 对应矩阵如下：
+$$
+X_d = \begin{pmatrix}
+0 & 1 &   &  \\
+  & 0 & \ddots &  \\
+  &   & \ddots & 1 \\
+  &   &        & 0
+\end{pmatrix}
+\quad
+\Phi_d := \begin{pmatrix}
+   &   &    & 1 \\
+   &   & -1 &  \\
+   & \dots &    &  \\
+(-1)^{d-1} &   &    & 
+\end{pmatrix}
+$$
+容易验证：
+
+- $d$ 偶数时斜对称，$d$ 为奇数时对称．
+- $X$ 关于 $\varphi$ 斜自伴．
+- $\varphi$ 非退化．
+- $d$ 为偶数时 $\varphi$ 斜对称，为 $\sp$ 提供了单个偶数阶 Jordan 块的构造．
+- $d$ 为奇数时 $\varphi$ 对称，为 $\so$ 提供了单个奇数阶 Jordan 块的构造．
+
+下面再为成对的块提供构造．设在 $2d$ 维线性空间 $V$ 中工作并已经选定一组基底作为矩阵记号的参考，对于两个 $d$ 阶 Jordan 块直和构成的矩阵 $X$，选取双线性型 $\varphi$ 对应分块矩阵如下：
+$$
+\Phi_{2d, \varepsilon} := \begin{pmatrix}
+0 & \Phi_d \\
+\varepsilon \Phi_d & 0 
+\end{pmatrix}
+$$
+这里 $\varepsilon \in \{1,-1\}$．同样容易验证：
+
+- $X$ 关于 $\varphi$ 斜自伴．
+- $\Phi$ 非退化．
+- $d$ 为偶数，$\varepsilon = -1$ 时 $\varphi$ 对称，为 $\so$ 提供了成对偶数阶 Jordan 块的构造．
+- $d$ 为奇数，$\varepsilon = 1$ 时 $\varphi$ 对称，为 $\sp$ 提供了成对奇数阶 Jordan 块的构造．
+
+注意非退化双线性型的正交直和保持其非退化性、对称或斜对称性．因此我们完成了 $\so$ 和 $\sp$ 中合法分拆的构造．
+
+## 约化到合法分拆
+
+现在证明对任意配备对称或斜对称双线性型 $\varphi$ 的线性空间 $V$ 和其上的幂零斜自伴矩阵 $X$，存在一基底使得 $X$ 的 Jordan 型为合法分拆．
+
+## 经典李代数中的 Jacobson--Morozov 定理
+
+:::{.remark}
+
 ## 表示论观点（Early Access）
 
-这里的工作颇有表示论的风味，涉及通过同一可逆线性变换合同地调整双线性型 $\varphi \in V^* \otimes V^*$ 并相似地调整斜自伴算子 $X \in V \otimes V^*$．
+这里的工作颇有表示论的风味．从矩阵的语言来看，我们需要通过一 $V$ 上的可逆线性变换，同时合同地调整非退化双线性型 $\varphi \in V^* \otimes V^*$ 并相似地调整斜自伴幂零算子 $X \in V \otimes V^*$，使得 $X$ 化为 Jordan 标准型．
 
-Jacobson--Morozov 允许我们为任何幂零元 $X \in \mathfrak g$ 补出其对应的 $\sl_2$-三元组．$\varphi$ 原来是 $V \to V^*$ 的 $\mathfrak g$-模同态，现在如果限制为 $\sl_2$-模同态考虑，这就将 $X$ 相对双线性型 $\varphi$ 的斜自伴要求编码为 $\sl_2$-模同态的要求．
+[Jacobson--Morozov 定理](/posts/20260410-jacobson-morozov/)允许我们为任何幂零元 $X \in \mathfrak g$ 补出其对应的 $\sl_2$-三元组．$\varphi$ 原来是 $V \to V^*$ 的 $\mathfrak g$-模同态，现在如果限制为 $\sl_2$-模同态考虑，这就将 $X$ 相对双线性型 $\varphi$ 的斜自伴要求编码为 $\sl_2$-模同态的要求．
 
 $\sl_2$ 的表示论是清楚的：$X$ 在 $V$ 上的作用完全 $V$ 的不可约成分确定，且在每个不可约成分上 $X$ 都实现为一个标准幂零 Jordan 块．
 
@@ -314,9 +365,37 @@ $$
 - Some of the ideas from [Mathoverflow](https://mathoverflow.net/questions/9361/how-can-we-describe-the-splitting-of-nilpotent-orbit-for-very-even-partitions)
 :::
 
-本节来完成凑的工作．首先指出，【TODO】
+如果不执着于将 $X$ 实现为 Jordan 标准型，适当放缩可以获得更对称的矩阵写法：
+$$
+X := \begin{pmatrix}
+0 & m & & & \\
+  & 0 & m-1 & & \\
+  &   & \ddots & \ddots & \\
+  &   &   & 0 & 1 \\
+  &   &   &   & 0
+\end{pmatrix} \quad
+Y := \begin{pmatrix}
+0 &   &   &   & \\
+1 & 0 &   &   & \\
+  & 2 & 0 &   & \\
+  &   & \ddots & \ddots & \\
+  &   &   & m & 0
+\end{pmatrix}
+$$
+$$
+H := \diag(m, m-2, \dots, -m+2, -m)
+$$
+$$
+\Phi := \begin{pmatrix}
+   &   &    & \binom{m}{0} \\
+   &   & -\binom{m}{1} &  \\
+   & \dots &    &  \\
+(-1)^{m} \binom{m}{m} &   &    &
+\end{pmatrix}
+$$
+这里的 $\binom{m}{k}$ 是二项式系数．
 
-## 特殊正交群
+## 特殊正交群 $\SO_{2n}$ 与轨道分支现象
 
 回到之前提到的作用群选择问题．我们提到特殊正交群 $\SO_n$ 的产生的轨道可能更细．记 $G := O(V, \varphi)$，$G^\circ := \SO(V, \varphi)$，$\mathfrak{g} := \so(V, \varphi)$．
 
