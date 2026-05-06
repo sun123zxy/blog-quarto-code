@@ -321,21 +321,31 @@ $$
 $$
 \Phi_{2d, \varepsilon} := \begin{pmatrix}
 0 & \Phi_d \\
-\varepsilon \Phi_d & 0 
+\varepsilon \Phi_d^T & 0 
 \end{pmatrix}
 $$
 这里 $\varepsilon \in \{1,-1\}$．同样容易验证：
 
 - $X$ 关于 $\varphi$ 斜自伴．
 - $\Phi$ 非退化．
-- $d$ 为偶数，$\varepsilon = -1$ 时 $\varphi$ 对称，为 $\so$ 提供了成对偶数阶 Jordan 块的构造．
-- $d$ 为奇数，$\varepsilon = 1$ 时 $\varphi$ 对称，为 $\sp$ 提供了成对奇数阶 Jordan 块的构造．
+- $\varepsilon = -1$ 时 $\varphi$ 对称．$d$ 为偶数时为 $\so$ 提供了成对偶数阶 Jordan 块的构造．
+- $\varepsilon = 1$ 时 $\varphi$ 对称．$d$ 为奇数时为 $\sp$ 提供了成对奇数阶 Jordan 块的构造．
 
 注意非退化双线性型的正交直和保持其非退化性、对称或斜对称性．因此我们完成了 $\so$ 和 $\sp$ 中合法分拆的构造．
 
 ## 约化到合法分拆
 
-现在证明对任意配备对称或斜对称双线性型 $\varphi$ 的线性空间 $V$ 和其上的幂零斜自伴矩阵 $X$，存在一基底使得 $X$ 的 Jordan 型为合法分拆．
+现在证明对任意配备对称或斜对称双线性型 $\varphi$ 的线性空间 $V$ 和其上的幂零斜自伴矩阵 $X$，存在一基底使得 $X$ 的 Jordan 型为合法分拆．考虑 $X$ 的幂零指数 $d$ 使得 $X^d = 0$ 且 $X^{d-1} \neq 0$．任取 $u_d \in V$ 使得 $X^{d-1} u_d \neq 0$ 并定义 $v_{d-k} := X^k u_d$，记 $U := \mathbb C u_1 \oplus \dots \oplus \mathbb C u_d$，这是 $X$ 的一个 $d$ 维不变子空间，且 $X$ 在 $U$ 上实现为一个 $d$ 阶 Jordan 块．
+
+现在考虑 $U$ 关于 $\varphi$ 的正交补 $U^\perp$，由 $X$ 关于 $\varphi$ 的斜自伴性，它也是 $X$ 的不变子空间．现在有两种情况需要讨论．
+
+如果 $U^\perp \cap U = \{0\}$．此时在 $U^\perp$ 上重复上述过程归纳即可．
+
+如果 $U^\perp \cap U \neq \{0\}$．取一 $u \in U^\perp \cap U$，不妨设 $u = \sum_{k=s}^d c_k u_k$，这里 $c_k \in \mathbb C$，$s$ 是使得 $c_s \neq 0$ 的第一个正整数．则
+$$
+0 = \varphi(u_i, u) = \sum_{k=s}^d c_k \varphi(u_i, u_k) = (-1)^{i-1} \sum_{k=s}^{d-i+1} c_k \varphi(u_1, u_{i+k-1})
+$$
+于是当 $i=d-s+1$ 时后面的求和只有一项，故 $0 = \varphi(u_{d-s+1}, u) = (-1)^{d-s} c_s \varphi(u_1, u_d)$，因此 $\varphi(u_1, u_d) = 0$．
 
 ## 经典李代数中的 Jacobson--Morozov 定理
 
