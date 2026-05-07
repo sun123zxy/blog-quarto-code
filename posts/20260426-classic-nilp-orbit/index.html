@@ -745,7 +745,6 @@ G := O(V, \varphi) := \{X \in \mathrm{GL}(V) : \varphi(Xv, Xw) = \varphi(v, w)\}
 <li><p>高等代数的惯性定理告诉我们 <span class="math inline">\(\mathbb R\)</span> 上的对称双线性型完全由秩和正负惯性指数分类．</p></li>
 <li><p><span class="math inline">\(\mathbb Q\)</span> 上对称双线性型（二次型）的分类是经典代数数论主题．Hasse–Minkowski 定理将其分类问题化归到局部域 <span class="math inline">\(\mathbb R\)</span> 或 <span class="math inline">\(\mathbb Q_p\)</span> 上分类，后者的分类由秩、判别式和 Hilbert 符号决定．参见 <span class="citation" data-cites="serre_course_1973"><a href="#ref-serre_course_1973" role="doc-biblioref">[2]</a></span> 及其<a href="../../posts/20250416-q-quadratic-form-classification/">导读</a>．</p></li>
 <li><p>针对一般对称双线性型的分类，<a href="https://en.wikipedia.org/wiki/Witt%27s_theorem">Witt 定理系列</a>为我们提供了一些分解的工具．</p></li>
-<li><p>其它【TODO】</p></li>
 </ul>
 </div>
 </div>
@@ -892,15 +891,15 @@ G := O(V, \varphi) := \{X \in \mathrm{GL}(V) : \varphi(Xv, Xw) = \varphi(v, w)\}
 </div>
 </div>
 <p>我们跟随 <span class="citation" data-cites="jantzen_nilpotent_2004"><a href="#ref-jantzen_nilpotent_2004" role="doc-biblioref">[1, section 1.6–1.11]</a></span>，提供一个纯线性代数的显式证明．思路很简单：先为一个或两个相同大小的 Jordan 块构造非退化双线性型，然后正交地拼接它们，最后将任何幂零斜自伴矩阵的 Jordan 型约化到上述情况．</p>
-<p>本节先来做凑的工作．设我们在 <span class="math inline">\(d\)</span> 维线性空间 <span class="math inline">\(V\)</span> 中工作并已经选定一组基底作为矩阵记号的参考，为每个 <span class="math inline">\(d\)</span> 阶 Jordan 块 <span class="math inline">\(X\)</span> 选取双线性型 <span class="math inline">\(\varphi\)</span> 对应矩阵如下： <span class="math display">\[
-X_d = \begin{pmatrix}
+<p>本节先来做凑的工作．设我们在 <span class="math inline">\(d\)</span> 维线性空间 <span class="math inline">\(V\)</span> 中工作并已经选定一组基底作为矩阵记号的参考，为每个 <span class="math inline">\(d\)</span> 阶 Jordan 块 <span class="math inline">\(X\)</span> 选取双线性型 <span class="math inline">\(\varphi\)</span> 对应矩阵 <span class="math inline">\(\Phi\)</span> 如下： <span class="math display">\[
+X := J_d := \begin{pmatrix}
 0 &amp; 1 &amp;   &amp;  \\
   &amp; 0 &amp; \ddots &amp;  \\
   &amp;   &amp; \ddots &amp; 1 \\
   &amp;   &amp;        &amp; 0
 \end{pmatrix}
 \quad
-\Phi_d := \begin{pmatrix}
+\Phi := \Phi_d := \begin{pmatrix}
    &amp;   &amp;    &amp; 1 \\
    &amp;   &amp; -1 &amp;  \\
    &amp; \dots &amp;    &amp;  \\
@@ -914,25 +913,52 @@ X_d = \begin{pmatrix}
 <li><span class="math inline">\(d\)</span> 为偶数时 <span class="math inline">\(\varphi\)</span> 斜对称，为 <span class="math inline">\(\mathfrak{sp}\)</span> 提供了单个偶数阶 Jordan 块的构造．</li>
 <li><span class="math inline">\(d\)</span> 为奇数时 <span class="math inline">\(\varphi\)</span> 对称，为 <span class="math inline">\(\mathfrak{so}\)</span> 提供了单个奇数阶 Jordan 块的构造．</li>
 </ul>
-<p>下面再为成对的块提供构造．设在 <span class="math inline">\(2d\)</span> 维线性空间 <span class="math inline">\(V\)</span> 中工作并已经选定一组基底作为矩阵记号的参考，对于两个 <span class="math inline">\(d\)</span> 阶 Jordan 块直和构成的矩阵 <span class="math inline">\(X\)</span>，选取双线性型 <span class="math inline">\(\varphi\)</span> 对应分块矩阵如下： <span class="math display">\[
-\Phi_{2d, \varepsilon} := \begin{pmatrix}
+<p>下面再为成对的块提供构造．设在 <span class="math inline">\(2d\)</span> 维线性空间 <span class="math inline">\(V\)</span> 中工作并已经选定一组基底作为矩阵记号的参考，对于两个 <span class="math inline">\(d\)</span> 阶 Jordan 块直和构成的矩阵 <span class="math inline">\(X\)</span>，选取双线性型 <span class="math inline">\(\varphi\)</span> 对应分块矩阵 <span class="math inline">\(\Phi\)</span> 如下： <span class="math display">\[
+X := \begin{pmatrix}
+J_d &amp;   \\
+   &amp; J_d
+\end{pmatrix}
+\quad
+\Phi := \begin{pmatrix}
 0 &amp; \Phi_d \\
 \varepsilon \Phi_d^T &amp; 0
 \end{pmatrix}
 \]</span> 这里 <span class="math inline">\(\varepsilon \in \{1,-1\}\)</span>．同样容易验证：</p>
 <ul>
 <li><span class="math inline">\(X\)</span> 关于 <span class="math inline">\(\varphi\)</span> 斜自伴．</li>
-<li><span class="math inline">\(\Phi\)</span> 非退化．</li>
-<li><span class="math inline">\(\varepsilon = -1\)</span> 时 <span class="math inline">\(\varphi\)</span> 对称．<span class="math inline">\(d\)</span> 为偶数时为 <span class="math inline">\(\mathfrak{so}\)</span> 提供了成对偶数阶 Jordan 块的构造．</li>
-<li><span class="math inline">\(\varepsilon = 1\)</span> 时 <span class="math inline">\(\varphi\)</span> 对称．<span class="math inline">\(d\)</span> 为奇数时为 <span class="math inline">\(\mathfrak{sp}\)</span> 提供了成对奇数阶 Jordan 块的构造．</li>
+<li><span class="math inline">\(\varphi\)</span> 非退化．</li>
+<li><span class="math inline">\(\varepsilon = -1\)</span> 时 <span class="math inline">\(\varphi\)</span> 斜对称，为 <span class="math inline">\(\mathfrak{sp}\)</span> 提供了成对 Jordan 块的构造．</li>
+<li><span class="math inline">\(\varepsilon = 1\)</span> 时 <span class="math inline">\(\varphi\)</span> 对称，为 <span class="math inline">\(\mathfrak{so}\)</span> 提供了成对 Jordan 块的构造．</li>
 </ul>
 <p>注意非退化双线性型的正交直和保持其非退化性、对称或斜对称性．因此我们完成了 <span class="math inline">\(\mathfrak{so}\)</span> 和 <span class="math inline">\(\mathfrak{sp}\)</span> 中合法分拆的构造．</p>
 </section>
 <section id="约化到合法分拆" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="约化到合法分拆"><span class="header-section-number">5</span> 约化到合法分拆</h2>
-<p>现在证明对任意配备对称或斜对称双线性型 <span class="math inline">\(\varphi\)</span> 的线性空间 <span class="math inline">\(V\)</span> 和其上的幂零斜自伴矩阵 <span class="math inline">\(X\)</span>，存在一基底使得 <span class="math inline">\(X\)</span> 的 Jordan 型为合法分拆．考虑 <span class="math inline">\(X\)</span> 的幂零指数 <span class="math inline">\(d\)</span> 使得 <span class="math inline">\(X^d = 0\)</span> 且 <span class="math inline">\(X^{d-1} \neq 0\)</span>．任取 <span class="math inline">\(u_0 \in V\)</span> 使得 <span class="math inline">\(X^{d-1} u_0 \neq 0\)</span> 并定义 <span class="math inline">\(u_k := X^k u_0\)</span>，记 <span class="math inline">\(U := \mathbb C u_0 \oplus \dots \oplus \mathbb C u_{d-1}\)</span>，这是 <span class="math inline">\(X\)</span> 的一个 <span class="math inline">\(d\)</span> 维不变子空间，且 <span class="math inline">\(X\)</span> 在 <span class="math inline">\(U\)</span> 上实现为一个 <span class="math inline">\(d\)</span> 阶 Jordan 块．</p>
+<p>现在证明：对任意配备对称或斜对称双线性型 <span class="math inline">\(\varphi\)</span> 的线性空间 <span class="math inline">\(V\)</span> 和其上的幂零斜自伴矩阵 <span class="math inline">\(X\)</span>，存在 <span class="math inline">\(V\)</span> 的正交分解 <span class="math inline">\(V = V_1 \oplus \dots \oplus V_r\)</span> 使得每个 <span class="math inline">\(V_i\)</span> 是 <span class="math inline">\(X\)</span> 的不变子空间，且如果记 <span class="math inline">\(d_i := \dim V_i\)</span>，有：</p>
+<ul>
+<li>若 <span class="math inline">\(\varphi\)</span> 对称，则 <span class="math inline">\(X\)</span> 在 <span class="math inline">\(V_i\)</span> 上的 Jordan 型要么是奇数阶单个 Jordan 块 <span class="math inline">\([d_i]\)</span>，要么是成对的两个 Jordan 块 <span class="math inline">\([d_i / 2, d_i / 2]\)</span>．</li>
+<li>若 <span class="math inline">\(\varphi\)</span> 斜对称，则 <span class="math inline">\(X\)</span> 在 <span class="math inline">\(V_i\)</span> 上的 Jordan 型要么是偶数阶单个 Jordan 块 <span class="math inline">\([d_i]\)</span>，要么是成对的两个 Jordan 块 <span class="math inline">\([d_i / 2, d_i / 2]\)</span>．</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span>考虑 <span class="math inline">\(X\)</span> 的幂零指数 <span class="math inline">\(d\)</span> 使得 <span class="math inline">\(X^d = 0\)</span> 且 <span class="math inline">\(X^{d-1} \neq 0\)</span>．任取 <span class="math inline">\(u_0 \in V\)</span> 使得 <span class="math inline">\(X^{d-1} u_0 \neq 0\)</span> 并定义 <span class="math inline">\(u_k := X^k u_0\)</span>，记 <span class="math inline">\(U := \mathbb C u_0 \oplus \dots \oplus \mathbb C u_{d-1}\)</span>，这是 <span class="math inline">\(X\)</span> 的一个 <span class="math inline">\(d\)</span> 维不变子空间，且 <span class="math inline">\(X\)</span> 在基底 <span class="math inline">\((u_{d-1}, \dots, u_0)\)</span> 上的矩阵实现为 Jordan 块 <span class="math inline">\(J_d\)</span>．进一步考察 <span class="math inline">\(\varphi\)</span> 限制在 <span class="math inline">\(U\)</span> 上相对基底 <span class="math inline">\((u_{d-1}, \dots, u_0)\)</span> 的矩阵： <span class="math display">\[
+\varphi(u_i, u_j) = \varphi(X^i u_0, X^j u_0) = (-1)^i \varphi(u_0, X^{i+j} u_0)
+\]</span> 这意味着矩阵在每条每个左下-右上对角线上正负交替；且当 <span class="math inline">\(i+j \geq d\)</span> 时 <span class="math inline">\(\varphi(u_i, u_j) = 0\)</span>，即矩阵在严格左上三角区域为零．</p>
 <p>现在考虑 <span class="math inline">\(U\)</span> 关于 <span class="math inline">\(\varphi\)</span> 的正交补 <span class="math inline">\(U^\perp\)</span>，有两种情况需要讨论．</p>
-<p>如果 <span class="math inline">\(U^\perp \cap U = \{0\}\)</span>．由于 <span class="math inline">\(X\)</span> 关于 <span class="math inline">\(\varphi\)</span> 的斜自伴性，<span class="math inline">\(U^\perp\)</span> 也是 <span class="math inline">\(X\)</span> 的不变子空间．此时在 <span class="math inline">\(U^\perp\)</span> 上重复上述过程归纳即可．</p>
+<p>如果 <span class="math inline">\(U^\perp \cap U = \{0\}\)</span>．由于 <span class="math inline">\(X\)</span> 关于 <span class="math inline">\(\varphi\)</span> 的斜自伴性，<span class="math inline">\(U^\perp\)</span> 也是 <span class="math inline">\(X\)</span> 的不变子空间．此时在 <span class="math inline">\(U^\perp\)</span> 上重复上述过程归纳即可．注意此时 <span class="math inline">\(\varphi\)</span> 在 <span class="math inline">\(U\)</span> 上非退化，结合之前分析 <span class="math inline">\(\varphi\)</span> 在 <span class="math inline">\(U\)</span> 上的矩阵结构知左下-右上对角线上正负交替的元素必非零： <span class="math display">\[
+\varphi(u_0，u_{d-1}) = \dots = (-1)^{d-1} \varphi(u_{d-1}, u_0) \neq 0
+\]</span> 于是当 <span class="math inline">\(\varphi\)</span> 对称时 <span class="math inline">\(d\)</span> 必须为奇数，当 <span class="math inline">\(\varphi\)</span> 斜对称时 <span class="math inline">\(d\)</span> 必须为偶数．</p>
 <p>如果 <span class="math inline">\(U^\perp \cap U \neq \{0\}\)</span>．取一 <span class="math inline">\(u \in U^\perp \cap U\)</span>，不妨设 <span class="math inline">\(u = \sum_{k=0}^{d-1} c_k u_k\)</span> 并设 <span class="math inline">\(s\)</span> 是使得 <span class="math inline">\(c_s \neq 0\)</span> 的第一个正整数．则 <span class="math inline">\(X^{d-s-1} u = c_s u_{d-1} \neq 0\)</span>，因此 <span class="math inline">\(u_{d-1} \in U \cap U^\perp\)</span>．</p>
 <p>因为 <span class="math inline">\(\varphi\)</span> 非退化，存在 <span class="math inline">\(w_0 \in V\)</span> 使得 <span class="math inline">\(\varphi(u_{d-1}, w_0) = 1\)</span>．定义 <span class="math inline">\(w_k := X^k w_0\)</span>，记 <span class="math inline">\(W := \mathbb C w_0 \oplus \dots \oplus \mathbb C w_{d-1}\)</span>，这是 <span class="math inline">\(X\)</span> 的一个 <span class="math inline">\(d\)</span> 维不变子空间．下面断言</p>
 <ul>
@@ -948,11 +974,33 @@ X_d = \begin{pmatrix}
 \]</span> 回忆 <span class="math inline">\(\pm \varphi(w_0, u_{d-1}) = \pm \varphi(u_{d-1}, w_0) = \pm 1\)</span>，因此 <span class="math inline">\(a_s = b_s = 0\)</span>，矛盾，因此 <span class="math inline">\(v = 0\)</span>．</p></li>
 </ul>
 <p>因此 <span class="math inline">\(U \oplus W\)</span> 是 <span class="math inline">\(X\)</span> 的一个 <span class="math inline">\(2d\)</span> 维不变子空间，且 <span class="math inline">\(X\)</span> 在 <span class="math inline">\(U \oplus W\)</span> 上实现为两个 <span class="math inline">\(d\)</span> 阶 Jordan 块的直和．在 <span class="math inline">\(X\)</span>-不变子空间 <span class="math inline">\((U \oplus W)^\perp\)</span> 上重复上述过程归纳即可．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>【TODO】调整上述证明，给出正交分解至两种基本型的显式构造．</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="经典李代数中的-jacobsonmorozov-定理" class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="经典李代数中的-jacobsonmorozov-定理"><span class="header-section-number">6</span> 经典李代数中的 Jacobson–Morozov 定理</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -961,7 +1009,7 @@ X_d = \begin{pmatrix}
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse show">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>注记</em> (表示论观点（Early Access）). </span>这里的工作颇有表示论的风味．从矩阵的语言来看，我们需要通过一 <span class="math inline">\(V\)</span> 上的可逆线性变换，同时合同地调整非退化双线性型 <span class="math inline">\(\varphi \in V^* \otimes V^*\)</span> 并相似地调整斜自伴幂零算子 <span class="math inline">\(X \in V \otimes V^*\)</span>，使得 <span class="math inline">\(X\)</span> 化为 Jordan 标准型．</p>
@@ -1025,7 +1073,7 @@ H := \operatorname{diag}(m, m-2, \dots, -m+2, -m)
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1034,7 +1082,7 @@ H := \operatorname{diag}(m, m-2, \dots, -m+2, -m)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
 <p><span class="proof-title"><em>证明</em>. </span>设 <span class="math inline">\(g \in G\)</span> 且 <span class="math inline">\(\det g = -1\)</span>，则 <span class="math inline">\(G = G^\circ \sqcup G^\circ g\)</span>．于是 <span class="math display">\[
