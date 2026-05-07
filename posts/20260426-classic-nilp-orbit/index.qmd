@@ -212,8 +212,6 @@ Schur--Weyl 对偶告诉我们 $V^* \otimes V^*$ 作为 $\GL(V)$-表示分解成
 - $\mathbb Q$ 上对称双线性型（二次型）的分类是经典代数数论主题．Hasse--Minkowski 定理将其分类问题化归到局部域 $\mathbb R$ 或 $\mathbb Q_p$ 上分类，后者的分类由秩、判别式和 Hilbert 符号决定．参见 [@serre_course_1973] 及其[导读](/posts/20250416-q-quadratic-form-classification/)．
 
 - 针对一般对称双线性型的分类，[Witt 定理系列](https://en.wikipedia.org/wiki/Witt%27s_theorem)为我们提供了一些分解的工具．
-
-- 其它【TODO】
 :::
 
 ## 约化到 Jordan 型
@@ -293,16 +291,16 @@ Schur--Weyl 对偶告诉我们 $V^* \otimes V^*$ 作为 $\GL(V)$-表示分解成
 
 我们跟随 [@jantzen_nilpotent_2004, {section 1.6--1.11}]，提供一个纯线性代数的显式证明．思路很简单：先为一个或两个相同大小的 Jordan 块构造非退化双线性型，然后正交地拼接它们，最后将任何幂零斜自伴矩阵的 Jordan 型约化到上述情况．
 
-本节先来做凑的工作．设我们在 $d$ 维线性空间 $V$ 中工作并已经选定一组基底作为矩阵记号的参考，为每个 $d$ 阶 Jordan 块 $X$ 选取双线性型 $\varphi$ 对应矩阵如下：
+本节先来做凑的工作．设我们在 $d$ 维线性空间 $V$ 中工作并已经选定一组基底作为矩阵记号的参考，为每个 $d$ 阶 Jordan 块 $X$ 选取双线性型 $\varphi$ 对应矩阵 $\Phi$ 如下：
 $$
-X_d = \begin{pmatrix}
+X := J_d := \begin{pmatrix}
 0 & 1 &   &  \\
   & 0 & \ddots &  \\
   &   & \ddots & 1 \\
   &   &        & 0
 \end{pmatrix}
 \quad
-\Phi_d := \begin{pmatrix}
+\Phi := \Phi_d := \begin{pmatrix}
    &   &    & 1 \\
    &   & -1 &  \\
    & \dots &    &  \\
@@ -317,9 +315,14 @@ $$
 - $d$ 为偶数时 $\varphi$ 斜对称，为 $\sp$ 提供了单个偶数阶 Jordan 块的构造．
 - $d$ 为奇数时 $\varphi$ 对称，为 $\so$ 提供了单个奇数阶 Jordan 块的构造．
 
-下面再为成对的块提供构造．设在 $2d$ 维线性空间 $V$ 中工作并已经选定一组基底作为矩阵记号的参考，对于两个 $d$ 阶 Jordan 块直和构成的矩阵 $X$，选取双线性型 $\varphi$ 对应分块矩阵如下：
+下面再为成对的块提供构造．设在 $2d$ 维线性空间 $V$ 中工作并已经选定一组基底作为矩阵记号的参考，对于两个 $d$ 阶 Jordan 块直和构成的矩阵 $X$，选取双线性型 $\varphi$ 对应分块矩阵 $\Phi$ 如下：
 $$
-\Phi_{2d, \varepsilon} := \begin{pmatrix}
+X := \begin{pmatrix}
+J_d &   \\
+   & J_d
+\end{pmatrix}
+\quad
+\Phi := \begin{pmatrix}
 0 & \Phi_d \\
 \varepsilon \Phi_d^T & 0 
 \end{pmatrix}
@@ -327,19 +330,34 @@ $$
 这里 $\varepsilon \in \{1,-1\}$．同样容易验证：
 
 - $X$ 关于 $\varphi$ 斜自伴．
-- $\Phi$ 非退化．
-- $\varepsilon = -1$ 时 $\varphi$ 对称．$d$ 为偶数时为 $\so$ 提供了成对偶数阶 Jordan 块的构造．
-- $\varepsilon = 1$ 时 $\varphi$ 对称．$d$ 为奇数时为 $\sp$ 提供了成对奇数阶 Jordan 块的构造．
+- $\varphi$ 非退化．
+- $\varepsilon = -1$ 时 $\varphi$ 斜对称，为 $\sp$ 提供了成对 Jordan 块的构造．
+- $\varepsilon = 1$ 时 $\varphi$ 对称，为 $\so$ 提供了成对 Jordan 块的构造．
 
 注意非退化双线性型的正交直和保持其非退化性、对称或斜对称性．因此我们完成了 $\so$ 和 $\sp$ 中合法分拆的构造．
 
 ## 约化到合法分拆
 
-现在证明对任意配备对称或斜对称双线性型 $\varphi$ 的线性空间 $V$ 和其上的幂零斜自伴矩阵 $X$，存在一基底使得 $X$ 的 Jordan 型为合法分拆．考虑 $X$ 的幂零指数 $d$ 使得 $X^d = 0$ 且 $X^{d-1} \neq 0$．任取 $u_0 \in V$ 使得 $X^{d-1} u_0 \neq 0$ 并定义 $u_k := X^k u_0$，记 $U := \mathbb C u_0 \oplus \dots \oplus \mathbb C u_{d-1}$，这是 $X$ 的一个 $d$ 维不变子空间，且 $X$ 在 $U$ 上实现为一个 $d$ 阶 Jordan 块．
+现在证明：对任意配备对称或斜对称双线性型 $\varphi$ 的线性空间 $V$ 和其上的幂零斜自伴矩阵 $X$，存在 $V$ 的正交分解 $V = V_1 \oplus \dots \oplus V_r$ 使得每个 $V_i$ 是 $X$ 的不变子空间，且如果记 $d_i := \dim V_i$，有：
+
+- 若 $\varphi$ 对称，则 $X$ 在 $V_i$ 上的 Jordan 型要么是奇数阶单个 Jordan 块 $[d_i]$，要么是成对的两个 Jordan 块 $[d_i / 2, d_i / 2]$．
+- 若 $\varphi$ 斜对称，则 $X$ 在 $V_i$ 上的 Jordan 型要么是偶数阶单个 Jordan 块 $[d_i]$，要么是成对的两个 Jordan 块 $[d_i / 2, d_i / 2]$．
+
+:::{.proof}
+
+考虑 $X$ 的幂零指数 $d$ 使得 $X^d = 0$ 且 $X^{d-1} \neq 0$．任取 $u_0 \in V$ 使得 $X^{d-1} u_0 \neq 0$ 并定义 $u_k := X^k u_0$，记 $U := \mathbb C u_0 \oplus \dots \oplus \mathbb C u_{d-1}$，这是 $X$ 的一个 $d$ 维不变子空间，且 $X$ 在基底 $(u_{d-1}, \dots, u_0)$ 上的矩阵实现为 Jordan 块 $J_d$．进一步考察 $\varphi$ 限制在 $U$ 上相对基底 $(u_{d-1}, \dots, u_0)$ 的矩阵：
+$$
+\varphi(u_i, u_j) = \varphi(X^i u_0, X^j u_0) = (-1)^i \varphi(u_0, X^{i+j} u_0)
+$$
+这意味着矩阵在每条每个左下-右上对角线上正负交替；且当 $i+j \geq d$ 时 $\varphi(u_i, u_j) = 0$，即矩阵在严格左上三角区域为零．
 
 现在考虑 $U$ 关于 $\varphi$ 的正交补 $U^\perp$，有两种情况需要讨论．
 
-如果 $U^\perp \cap U = \{0\}$．由于 $X$ 关于 $\varphi$ 的斜自伴性，$U^\perp$ 也是 $X$ 的不变子空间．此时在 $U^\perp$ 上重复上述过程归纳即可．
+如果 $U^\perp \cap U = \{0\}$．由于 $X$ 关于 $\varphi$ 的斜自伴性，$U^\perp$ 也是 $X$ 的不变子空间．此时在 $U^\perp$ 上重复上述过程归纳即可．注意此时 $\varphi$ 在 $U$ 上非退化，结合之前分析 $\varphi$ 在 $U$ 上的矩阵结构知左下-右上对角线上正负交替的元素必非零：
+$$
+\varphi(u_0，u_{d-1}) = \dots = (-1)^{d-1} \varphi(u_{d-1}, u_0) \neq 0
+$$
+于是当 $\varphi$ 对称时 $d$ 必须为奇数，当 $\varphi$ 斜对称时 $d$ 必须为偶数．
 
 如果 $U^\perp \cap U \neq \{0\}$．取一 $u \in U^\perp \cap U$，不妨设 $u = \sum_{k=0}^{d-1} c_k u_k$ 并设 $s$ 是使得 $c_s \neq 0$ 的第一个正整数．则 $X^{d-s-1} u = c_s u_{d-1} \neq 0$，因此 $u_{d-1} \in U \cap U^\perp$．
 
@@ -363,6 +381,12 @@ $$
   回忆 $\pm \varphi(w_0, u_{d-1}) = \pm \varphi(u_{d-1}, w_0) = \pm 1$，因此 $a_s = b_s = 0$，矛盾，因此 $v = 0$．
 
 因此 $U \oplus W$ 是 $X$ 的一个 $2d$ 维不变子空间，且 $X$ 在 $U \oplus W$ 上实现为两个 $d$ 阶 Jordan 块的直和．在 $X$-不变子空间 $(U \oplus W)^\perp$ 上重复上述过程归纳即可．
+:::
+
+:::{.remark}
+
+【TODO】调整上述证明，给出正交分解至两种基本型的显式构造．
+:::
 
 ## 经典李代数中的 Jacobson--Morozov 定理
 
