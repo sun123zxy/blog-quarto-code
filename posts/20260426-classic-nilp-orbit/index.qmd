@@ -214,7 +214,7 @@ Schur--Weyl 对偶告诉我们 $V^* \otimes V^*$ 作为 $\GL(V)$-表示分解成
 - 针对一般对称双线性型的分类，[Witt 定理系列](https://en.wikipedia.org/wiki/Witt%27s_theorem)为我们提供了一些分解的工具．
 :::
 
-## 约化到 Jordan 型
+## 约化到 Jordan 型 {#sec-reduction-to-jordan}
 
 以下定理保证在正交群 $G$ 下的共轭轨道和在 $\GL(V)$ 下的共轭轨道是一样的．
 
@@ -270,7 +270,7 @@ Schur--Weyl 对偶告诉我们 $V^* \otimes V^*$ 作为 $\GL(V)$-表示分解成
 
 注意 $G$ 现在只是正交群，它可能还不足够细．对反对称的情况，正交群 $G = \Sp_{2n}$ 已经连通，因此基本上够了．但对对称的情况，正交群 $G = O_n$ 是不连通的，$\SO_n$ 才是它的连通子群．因此 $\SO_n$ 的轨道可能比 $O_n$ 的轨道更细——轨道分类的故事还没有结束．不过这至少帮助我们获得了 Jordan 型的较粗分类．
 
-## 构造合法分拆
+## 构造合法分拆 {#sec-construction-of-partition}
 
 另一件尚未完成的工作是：哪些 Jordan 型能够在 $\so_n$ 或 $\sp_{2n}$ 的幂零矩阵上产生？剧透一下最终的答案：
 
@@ -336,7 +336,7 @@ $$
 
 注意非退化双线性型的正交直和保持其非退化性、对称或斜对称性．因此我们完成了 $\so$ 和 $\sp$ 中合法分拆的构造．
 
-## 约化到合法分拆
+## 约化到合法分拆 {#sec-reduction-to-partition}
 
 现在证明：对任意配备对称或斜对称双线性型 $\varphi$ 的线性空间 $V$ 和其上的幂零斜自伴矩阵 $X$，存在 $V$ 的正交分解 $V = V_1 \oplus \dots \oplus V_r$ 使得每个 $V_i$ 是 $X$ 的不变子空间，且如果记 $d_i := \dim V_i$，有：
 
@@ -349,11 +349,11 @@ $$
 $$
 \varphi(u_i, u_j) = \varphi(X^i u_0, X^j u_0) = (-1)^i \varphi(u_0, X^{i+j} u_0)
 $$
-这意味着矩阵在每条每个左下-右上对角线上正负交替；且当 $i+j \geq d$ 时 $\varphi(u_i, u_j) = 0$，即矩阵在严格左上三角区域为零．
+这意味着矩阵在每条反对角线上正负交替；且当 $i+j \geq d$ 时 $\varphi(u_i, u_j) = 0$，即矩阵在严格左上三角区域为零．
 
 现在考虑 $U$ 关于 $\varphi$ 的正交补 $U^\perp$，有两种情况需要讨论．
 
-如果 $U^\perp \cap U = \{0\}$．由于 $X$ 关于 $\varphi$ 的斜自伴性，$U^\perp$ 也是 $X$ 的不变子空间．此时在 $U^\perp$ 上重复上述过程归纳即可．注意此时 $\varphi$ 在 $U$ 上非退化，结合之前分析 $\varphi$ 在 $U$ 上的矩阵结构知左下-右上对角线上正负交替的元素必非零：
+如果 $U^\perp \cap U = \{0\}$．由于 $X$ 关于 $\varphi$ 的斜自伴性，$U^\perp$ 也是 $X$ 的不变子空间．此时在 $U^\perp$ 上重复上述过程归纳即可．注意此时 $\varphi$ 在 $U$ 上非退化，结合之前分析 $\varphi$ 在 $U$ 上的矩阵结构知反对角线上正负交替的元素必非零：
 $$
 \varphi(u_0，u_{d-1}) = \dots = (-1)^{d-1} \varphi(u_{d-1}, u_0) \neq 0
 $$
@@ -383,18 +383,36 @@ $$
 因此 $U \oplus W$ 是 $X$ 的一个 $2d$ 维不变子空间，且 $X$ 在 $U \oplus W$ 上实现为两个 $d$ 阶 Jordan 块的直和．在 $X$-不变子空间 $(U \oplus W)^\perp$ 上重复上述过程归纳即可．
 :::
 
+## 约化到标准型
+
+设现在有任一具有合法 Jordan 型的幂零矩阵 $X$ 相对非退化双线性型 $\varphi$ 斜自伴，我们计划选取基底使得 $X$ 的矩阵具有 Jordan 标准型，同时 $\varphi$ 的矩阵符合 [@sec-construction-of-partition] 给出的对角构造．这将 $(X, \varphi)$ 完全约化到我们之前构造的标准型．
+
+回忆 [@sec-construction-of-partition] 中我们为每个合法分拆提供了一个标准型的构造，设那里使用的基底是 $(e_i)$；非退化双线性型为 $\varphi_0$；选取的幂零元为 $X_0 \in \mathfrak{g}(V, \varphi_0)$．因为存在 $h \in \GL(V)$ 使得 $\varphi(hv, hw) = \varphi_0(v, w)$，所以可以构造 $X_1 := h X_0 h^{-1} \in \mathfrak{g}(V, \varphi)$：
+$$
+\varphi(X_1 v, w) + \varphi(v, X_1 w) = \varphi(h X_0 h^{-1} v, w) + \varphi(v, h X_0 h^{-1} w) = \varphi_0(X_0 \cdot h^{-1} v, h^{-1} w) + \varphi_0(h^{-1} v, X_0 \cdot h^{-1} w) = 0
+$$
+而且 $X_1$ 在基底 $(h e_i)$ 上的矩阵是 Jordan 标准型，$\varphi$ 在基底 $(h e_i)$ 上的矩阵是反对角的．此时使用 [@thm-orbit-by-gl]，存在 $g \in G(V,\varphi)$ 使得 $g X_1 g^{-1} = X$，现在使用基底 $(g h e_i)$，则 $X$ 的矩阵是 Jordan 标准型，而利用 $g$ 的正交性，$\varphi$ 的矩阵仍然是反对角的：
+$$
+\varphi(g h e_i, g h e_j) = \varphi(h e_i, h e_j) = \varphi_0(e_i, e_j)
+$$
+因此我们完成了约化．
+
 :::{.remark}
 
-【TODO】调整上述证明，给出正交分解至两种基本型的显式构造．
+这一步的证明在 [@jantzen_nilpotent_2004, {section 1.11}] 的第一句话处一笔带过．
 :::
 
 ## 经典李代数中的 Jacobson--Morozov 定理
 
+刚刚完成的工作颇有表示论的风味．从矩阵的语言来看，我们显式构造了一个 $V$ 上的可逆线性变换，同时合同地调整非退化双线性型 $\varphi \in V^* \otimes V^*$ 并相似地调整斜自伴幂零算子 $X \in V \otimes V^*$，使得 $X$ 化为 Jordan 标准型．本节给出这一结果的表示论风格的叙述，进而利用 Jacobson--Morozov 定理提供一个更干净整洁的非构造性证明．
+
+[Jacobson--Morozov 定理](/posts/20260410-jacobson-morozov/)允许我们为任何幂零元 $X \in \mathfrak g$ 补出其对应的 $\sl_2$-三元组．此定理在 A 型上平凡，在一般的半单李代数上也有证明，但我们刚刚的工作为 B、C、D 型提供了显式构造．
+
+$\varphi$ 原来是 $V \to V^*$ 的 $\mathfrak g$-模同态，现在如果限制为 $\sl_2$-模同态考虑，这就将 $X$ 相对双线性型 $\varphi$ 的斜自伴要求编码为 $\sl_2$-模同态的要求．
+
 :::{.remark}
 
 ## 表示论观点（Early Access）
-
-这里的工作颇有表示论的风味．从矩阵的语言来看，我们需要通过一 $V$ 上的可逆线性变换，同时合同地调整非退化双线性型 $\varphi \in V^* \otimes V^*$ 并相似地调整斜自伴幂零算子 $X \in V \otimes V^*$，使得 $X$ 化为 Jordan 标准型．
 
 [Jacobson--Morozov 定理](/posts/20260410-jacobson-morozov/)允许我们为任何幂零元 $X \in \mathfrak g$ 补出其对应的 $\sl_2$-三元组．$\varphi$ 原来是 $V \to V^*$ 的 $\mathfrak g$-模同态，现在如果限制为 $\sl_2$-模同态考虑，这就将 $X$ 相对双线性型 $\varphi$ 的斜自伴要求编码为 $\sl_2$-模同态的要求．
 
