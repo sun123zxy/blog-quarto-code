@@ -423,13 +423,17 @@ window.Quarto = {
 </header>
 
 
-<p>所谓经典李代数，即是单李代数中寄居在线性李代数 <span class="math inline">\(\mathfrak{gl}_n\)</span> 中 <span class="math inline">\(\mathfrak{sl}_n\)</span>、<span class="math inline">\(\mathfrak{so}_n\)</span> 和 <span class="math inline">\(\mathfrak{sp}_{2n}\)</span>．其中 <span class="math inline">\(A_n\)</span> 型是 <span class="math inline">\(\mathfrak{sl}_{n+1}\)</span>，<span class="math inline">\(B_n\)</span> 型是 <span class="math inline">\(\mathfrak{so}_{2n+1}\)</span>，<span class="math inline">\(C_n\)</span> 型是 <span class="math inline">\(\mathfrak{sp}_{2n}\)</span>，<span class="math inline">\(D_n\)</span> 型是 <span class="math inline">\(\mathfrak{so}_{2n}\)</span>．其中 <span class="math inline">\(\mathfrak{sl}_n\)</span> 的幂零轨道已经由 Jordan 型分类，本篇主要关心 <span class="math inline">\(\mathfrak{so}_n\)</span> 和 <span class="math inline">\(\mathfrak{sp}_{2n}\)</span> 中的幂零轨道．</p>
+<p>设 <span class="math inline">\(V\)</span> 是 <span class="math inline">\(n\)</span> 维线性空间．所谓经典李代数，即是单李代数中寄居在线性李代数 <span class="math inline">\(\mathfrak{gl}(V)\)</span> 中的：</p>
 <ul>
-<li>我们主要跟随 <span class="citation" data-cites="jantzen_nilpotent_2004"><a href="#ref-jantzen_nilpotent_2004" role="doc-biblioref">[1, section 1]</a></span> 的呈现．</li>
+<li>A 型李代数：即特殊线性李代数 <span class="math inline">\(\mathfrak{sl}(V) := \{X \in \mathfrak{gl}(V) : \operatorname{Tr}X = 0\}\)</span>，<span class="math inline">\(A_n\)</span> 型对应 <span class="math inline">\(\dim V = n+1\)</span>．</li>
+<li>C 型李代数：即辛李代数 <span class="math inline">\(\mathfrak{sp}(V)\)</span>，<span class="math inline">\(C_n\)</span> 型对应 <span class="math inline">\(\dim V = 2n\)</span>．</li>
+<li>B 型和 D 型李代数：即正交李代数 <span class="math inline">\(\mathfrak{so}(V)\)</span>，<span class="math inline">\(B_n\)</span> 型对应 <span class="math inline">\(\dim V = 2n+1\)</span>，<span class="math inline">\(D_n\)</span> 型对应 <span class="math inline">\(\dim V = 2n\)</span>．</li>
 </ul>
+<p>其中，<span class="math inline">\(\mathfrak{sl}(V)\)</span> 的幂零轨道已经由 Jordan 型（即分拆）分类，本篇主要关心 <span class="math inline">\(\mathfrak{so}(V)\)</span> 和 <span class="math inline">\(\mathfrak{sp}(V)\)</span> 中的幂零轨道．</p>
+<p>除明确说明外，本文默认在复数域 <span class="math inline">\(\mathbb C\)</span> 上工作．我们主要跟随 <span class="citation" data-cites="jantzen_nilpotent_2004"><a href="#ref-jantzen_nilpotent_2004" role="doc-biblioref">[1, section 1]</a></span> 的呈现．</p>
 <section id="a-型李代数" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="a-型李代数"><span class="header-section-number">1</span> A 型李代数</h2>
-<p>讨论幂零轨道首先需要明确作用群的选择．对 <span class="math inline">\(\mathfrak{gl}_n\)</span> 来说自然选 <span class="math inline">\(\mathrm{GL}_n\)</span> 就好，但 <span class="math inline">\(\mathfrak{sl}_n\)</span>、<span class="math inline">\(\mathfrak{so}_n\)</span> 和 <span class="math inline">\(\mathfrak{sp}_{2n}\)</span> 似乎都应该更加小心．例如，<span class="math inline">\(\mathfrak{sl}_n\)</span> 上考虑 <span class="math inline">\(\mathrm{GL}_n\)</span> 的子群 <span class="math inline">\(\mathrm{SL}_n\)</span> 的共轭作用似乎也非常合理——<span class="math inline">\(\mathfrak{sl}_n\)</span> 系由 <span class="math inline">\(\mathrm{SL}_n\)</span> 单位元处取切空间得到．更进一步地，不少矩阵产生的实际共轭效果是一致的，最有效地来说应该考虑所有可能的共轭作用构成的群——一个 <span class="math inline">\(\mathrm{GL}_n\)</span> 的商群．不过下面的结果告诉我们这其实都没有关系：不同作用群的选择在 <span class="math inline">\(\mathfrak{gl}_n\)</span> 或 <span class="math inline">\(\mathfrak{sl}_n\)</span> 上导致的轨道是一样的．</p>
+<p>讨论幂零轨道首先需要明确作用群的选择．设 <span class="math inline">\(V\)</span> 是 <span class="math inline">\(\mathbb C\)</span> 上 <span class="math inline">\(n\)</span> 维线性空间．对 <span class="math inline">\(\mathfrak{gl}(V)\)</span> 来说自然选 <span class="math inline">\(\mathrm{GL}(V)\)</span> 就好，但 <span class="math inline">\(\mathfrak{sl}(V)\)</span>、<span class="math inline">\(\mathfrak{so}(V)\)</span> 和 <span class="math inline">\(\mathfrak{sp}(V)\)</span> 似乎都应该更加小心．例如，<span class="math inline">\(\mathfrak{sl}(V)\)</span> 上考虑 <span class="math inline">\(\mathrm{GL}(V)\)</span> 的子群 <span class="math inline">\(\mathrm{SL}(V)\)</span> 的共轭作用似乎也非常合理——<span class="math inline">\(\mathfrak{sl}(V)\)</span> 系由 <span class="math inline">\(\mathrm{SL}(V)\)</span> 单位元处取切空间得到．更进一步地，不少线性变换产生的实际共轭效果是一致的，最有效地来说应该考虑所有可能的共轭作用构成的群——一个 <span class="math inline">\(\mathrm{GL}(V)\)</span> 的商群．不过下面的结果告诉我们这其实都没有关系：不同作用群的选择在 <span class="math inline">\(\mathfrak{gl}(V)\)</span> 或 <span class="math inline">\(\mathfrak{sl}(V)\)</span> 上导致的轨道是一样的．</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -439,10 +443,10 @@ window.Quarto = {
 <div id="prp-gln-diff-ad" class="theorem proposition">
 <p><span class="theorem-title"><strong>命题 1</strong></span> &nbsp;</p>
 <ul>
-<li><span class="math inline">\(\mathrm{GL}_n\)</span>, <span class="math inline">\(\mathrm{SL}_n\)</span>, <span class="math inline">\(\mathrm{PSL}_n\)</span> 在 <span class="math inline">\(\mathfrak{gl}_n\)</span> 上的共轭作用导致相同的轨道．</li>
-<li><span class="math inline">\(\mathrm{PSL}_n\)</span> 忠实刻画了 <span class="math inline">\(\mathfrak{gl}_n\)</span> 的共轭作用群 <span class="math inline">\(\operatorname{ad}\subseteq \operatorname{Aut}(\mathfrak{gl}_n)\)</span>．</li>
+<li><span class="math inline">\(\mathrm{GL}(V)\)</span>, <span class="math inline">\(\mathrm{SL}(V)\)</span>, <span class="math inline">\(\mathrm{PSL}(V)\)</span> 在 <span class="math inline">\(\mathfrak{gl}(V)\)</span> 上的共轭作用导致相同的轨道．</li>
+<li><span class="math inline">\(\mathrm{PSL}(V)\)</span> 忠实刻画了 <span class="math inline">\(\mathfrak{gl}(V)\)</span> 的共轭作用群 <span class="math inline">\(\operatorname{ad}\subseteq \operatorname{Aut}(\mathfrak{gl}(V))\)</span>．</li>
 </ul>
-<p>这里 <span class="math inline">\(\mathrm{SL}_n := \{g \in \mathrm{GL}_n : \det g = 1\}\)</span> 是 <span class="math inline">\(\mathrm{GL}_n\)</span> 的子群，<span class="math inline">\(\mathrm{PSL}_n := \mathrm{SL}_n / Z(\mathrm{SL}_n)\)</span> 是 <span class="math inline">\(\mathrm{SL}_n\)</span> 的商群，<span class="math inline">\(Z(\mathrm{SL}_n)\)</span> 是 <span class="math inline">\(\mathrm{SL}_n\)</span> 的中心，<span class="math inline">\(\operatorname{Aut}(\mathfrak{gl}_n)\)</span> 是 <span class="math inline">\(\mathfrak{gl}_n\)</span> 的全体李代数同构．</p>
+<p>这里 <span class="math inline">\(\mathrm{SL}(V) := \{g \in \mathrm{GL}(V) : \det g = 1\}\)</span> 是 <span class="math inline">\(\mathrm{GL}(V)\)</span> 的子群，<span class="math inline">\(\mathrm{PSL}(V) := \mathrm{SL}(V) / Z(\mathrm{SL}(V))\)</span> 是 <span class="math inline">\(\mathrm{SL}(V)\)</span> 的商群，<span class="math inline">\(Z(\mathrm{SL}(V))\)</span> 是 <span class="math inline">\(\mathrm{SL}(V)\)</span> 的中心，<span class="math inline">\(\operatorname{Aut}(\mathfrak{gl}(V))\)</span> 是 <span class="math inline">\(\mathfrak{gl}(V)\)</span> 的全体李代数同构．</p>
 </div>
 </div>
 </div>
@@ -462,8 +466,8 @@ window.Quarto = {
 <div class="proof">
 <p><span class="proof-title"><em>证明</em>. </span></p>
 <ul>
-<li>这是因为任意 <span class="math inline">\(A \in \mathrm{GL}_n\)</span> 的共轭作用 <span class="math inline">\(X \mapsto A X A^{-1}\)</span> 都等价于 <span class="math inline">\((\det A)^{1/n} \in \mathrm{SL}_n\)</span> 的共轭作用，而中心在共轭作用下不起作用．</li>
-<li>对群同态 <span class="math inline">\(\mathrm{SL}_n \to \operatorname{Aut}(\mathfrak{gl}_n)\)</span> 使用第一同构定理．</li>
+<li>这是因为任意 <span class="math inline">\(g \in \mathrm{GL}(V)\)</span> 的共轭作用 <span class="math inline">\(X \mapsto g X g^{-1}\)</span> 都等价于 <span class="math inline">\((\det g)^{-1/n} g \in \mathrm{SL}(V)\)</span> 的共轭作用（标量因子不改变共轭效果），而中心在共轭作用下不起作用．</li>
+<li>对群同态 <span class="math inline">\(\mathrm{SL}(V) \to \operatorname{Aut}(\mathfrak{gl}(V))\)</span> 使用第一同构定理．</li>
 </ul>
 </div>
 </div>
@@ -483,8 +487,8 @@ window.Quarto = {
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>注记</em>. </span>可以看到这其实和基域的选择有关．考虑群正合列： <span class="math display">\[
-1 \longrightarrow \mathrm{SL}_n \longrightarrow \mathrm{GL}_n \xrightarrow{\det} \mathbb C^\times \longrightarrow 1
-\]</span> 右分裂同态 <span class="math inline">\(c \mapsto (\det c)^{1/n}\)</span> 使得其右侧分裂，从而 <span class="math inline">\(\mathrm{GL}_n = \mathrm{SL}_n \rtimes Z(\mathrm{GL}_n) \cong \mathrm{SL}_n \rtimes \mathbb C^\times\)</span>．但这是复数域能够开根的结果．TODO: 这也许和所谓的 split-reductive group 有关．</p>
+1 \longrightarrow \mathrm{SL}(V) \longrightarrow \mathrm{GL}(V) \xrightarrow{\det} \mathbb C^\times \longrightarrow 1
+\]</span> 右分裂同态 <span class="math inline">\(c \mapsto (\det c)^{1/n}\)</span> 使得其右侧分裂，从而 <span class="math inline">\(\mathrm{GL}(V) = \mathrm{SL}(V) \rtimes Z(\mathrm{GL}(V)) \cong \mathrm{SL}(V) \rtimes \mathbb C^\times\)</span>．但这是复数域能够开根的结果．TODO: 这也许和所谓的 split-reductive group 有关．</p>
 </div>
 </div>
 </div>
@@ -492,13 +496,13 @@ window.Quarto = {
 </section>
 <section id="正交群及其斜自伴李代数" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="正交群及其斜自伴李代数"><span class="header-section-number">2</span> 正交群及其斜自伴李代数</h2>
-<p>下面开始考虑 B、C、D 型李代数．仍然第一个问题是作用群．当然至少仍然有 <span class="math inline">\(\mathrm{GL}_n\)</span> 的选择，即还是通过 Jordan 型来分类幂零轨道．但会希望有一个更小的作用群，不说一定恰好是共轭作用群，但至少也要足够小，例如对 <span class="math inline">\(\mathfrak{so}_n\)</span> 的 <span class="math inline">\(\operatorname{SO}_n\)</span> 或对 <span class="math inline">\(\mathfrak{sp}_{2n}\)</span> 的 <span class="math inline">\(\operatorname{Sp}_{2n}\)</span> 来得到更细的分类．为统一研究方便，来先在 <span class="math inline">\(\mathbb C\)</span> 上有限维线性空间 <span class="math inline">\(V\)</span> 上确定一个非退化双线性型 <span class="math inline">\(\varphi(-,-)\)</span> 明确正交群及其斜自伴李代数的定义．</p>
+<p>下面开始考虑 B、C、D 型李代数．仍然第一个问题是作用群．当然至少仍然有 <span class="math inline">\(\mathrm{GL}\)</span> 的选择，即还是通过 Jordan 型来分类幂零轨道．但会希望有一个更小的作用群，不说一定恰好是共轭作用群，但至少也要足够小，例如对 <span class="math inline">\(\mathfrak{so}\)</span> 的 <span class="math inline">\(\operatorname{SO}\)</span> 或对 <span class="math inline">\(\mathfrak{sp}\)</span> 的 <span class="math inline">\(\operatorname{Sp}\)</span> 来得到更细的分类．为统一研究方便，来先在 <span class="math inline">\(\mathbb C\)</span> 上有限维线性空间 <span class="math inline">\(V\)</span> 上确定一个非退化双线性型 <span class="math inline">\(\varphi(-,-)\)</span> 明确正交群及其斜自伴李代数的定义．</p>
 <section id="非退化双线性型" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="非退化双线性型"><span class="header-section-number">2.1</span> 非退化双线性型</h3>
-<p>设 <span class="math inline">\(\varphi(-,-)\)</span> 为 <span class="math inline">\(V\)</span> 上的非退化双线性型——非退化是指左根（或 / 且右根）为零，等价于其对应矩阵的可逆性．对任意线性变换 <span class="math inline">\(X \in \mathfrak{gl}(V)\)</span>，规定 <span class="math inline">\(X^*\)</span> 为满足 <span class="math inline">\(\varphi(Xv, w) = \varphi(v, X^*w)\)</span> 的唯一映射，矩阵地来说是矩阵的转置，抽象地来说是对偶空间 <span class="math inline">\(V^*\)</span> 上的对偶映射通过这非退化双线性型拉回到 <span class="math inline">\(V\)</span> 上的结果．定义正交群 <span class="math inline">\(G\)</span> 和斜自伴李代数 <span class="math inline">\(\mathfrak{g}\)</span> 如下： <span class="math display">\[
+<p>设 <span class="math inline">\(\varphi(-,-)\)</span> 为 <span class="math inline">\(V\)</span> 上的非退化双线性型——非退化是指左根（或 / 且右根）为零，等价于 <span class="math inline">\(\varphi\)</span> 作为 <span class="math inline">\(V \to V^*\)</span> 的线性映射可逆．对任意线性变换 <span class="math inline">\(X \in \mathfrak{gl}(V)\)</span>，规定 <span class="math inline">\(X^*\)</span> 为满足 <span class="math inline">\(\varphi(Xv, w) = \varphi(v, X^*w)\)</span> 的唯一映射，抽象地来说是对偶空间 <span class="math inline">\(V^*\)</span> 上的对偶映射通过非退化双线性型拉回到 <span class="math inline">\(V\)</span> 上的结果．定义正交群 <span class="math inline">\(G\)</span> 和斜自伴李代数 <span class="math inline">\(\mathfrak{g}\)</span> 如下： <span class="math display">\[
 G := O(V, \varphi) := \{X \in \mathrm{GL}(V) : \varphi(Xv, Xw) = \varphi(v, w)\} = \{X \in \mathrm{GL}(V) : X^* = X^{-1}\}
 \]</span> <span class="math display">\[
-\mathfrak{g} := \{X \in \mathrm{GL}(V) : \varphi(Xv, w) = -\varphi(v, Xw)\} = \{X \in \mathrm{GL}(V) : X^* = -X\}
+\mathfrak g := \mathfrak o(V, \varphi) := \{X \in \mathfrak{gl}(V) : \varphi(Xv, w) = -\varphi(v, Xw)\} = \{X \in \mathfrak{gl}(V) : X^* = -X\}
 \]</span> 因此 <span class="math inline">\(G\)</span> 和 <span class="math inline">\(\mathfrak{g}\)</span> 是它们各自在其代数结构的对极映射下不变的元素全体．</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
@@ -522,7 +526,7 @@ G := O(V, \varphi) := \{X \in \mathrm{GL}(V) : \varphi(Xv, Xw) = \varphi(v, w)\}
 </div>
 </div>
 </div>
-<p>将来只关心两类特殊的非退化双线性型：对称的 <span class="math inline">\(\varphi(v, w) = \varphi(w, v)\)</span> 和斜对称的 <span class="math inline">\(\varphi(v, w) = -\varphi(w, v)\)</span>．前者对应正交群 <span class="math inline">\(O_n\)</span> 及其斜自伴李代数 <span class="math inline">\(\mathfrak{so}_n\)</span>，后者对应辛群 <span class="math inline">\(\operatorname{Sp}_{2n}\)</span> 及其斜自伴李代数 <span class="math inline">\(\mathfrak{sp}_{2n}\)</span>．不过在此之前，可以对一般的非退化双线性型做一点讨论：</p>
+<p>将来只关心两类特殊的非退化双线性型：对称的 <span class="math inline">\(\varphi(v, w) = \varphi(w, v)\)</span> 和斜对称的 <span class="math inline">\(\varphi(v, w) = -\varphi(w, v)\)</span>．前者对应正交群 <span class="math inline">\(O(V, \varphi)\)</span> 及其斜自伴李代数 <span class="math inline">\(\mathfrak{so}(V, \varphi)\)</span>，后者对应辛群 <span class="math inline">\(\operatorname{Sp}(V, \varphi)\)</span> 及其斜自伴李代数 <span class="math inline">\(\mathfrak{sp}(V, \varphi)\)</span>．不过在此之前，可以对一般的非退化双线性型做一点讨论：</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -627,7 +631,7 @@ G := O(V, \varphi) := \{X \in \mathrm{GL}(V) : \varphi(Xv, Xw) = \varphi(v, w)\}
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>注记</em> (非退化双线性型的分类). </span>自然会问为什么只研究对称和斜对称两种非退化双线性型，这将我们引向非退化双线性型的分类问题．注意这些双线性型全体应被视为构成 <span class="math inline">\(\mathrm{GL}(V)\)</span>-模 <span class="math inline">\(V^* \otimes V^*\)</span>，而分类问题则是对其轨道进行分类．</p>
-<p>Schur–Weyl 对偶告诉我们 <span class="math inline">\(V^* \otimes V^*\)</span> 作为 <span class="math inline">\(\mathrm{GL}(V)\)</span>-表示分解成不可约代数表示 <span class="math inline">\(\operatorname{Sym}^2 V^*\)</span> 和 <span class="math inline">\(\operatorname{Alt}^2 V^*\)</span>，对应任何矩阵 <span class="math inline">\(X\)</span> 都有 <span class="math inline">\(X = \frac 1 2 (X+X^T) + \frac 1 2 (X-X^T)\)</span> 的分解．之前的讨论分类了这两个子表示内部的 <span class="math inline">\(\mathrm{GL}(V)\)</span>-轨道：完全由秩来分类．关于整个 <span class="math inline">\(V^* \otimes V^*\)</span> 的轨道结构则更为复杂，需要更细致的分析【TODO】．</p>
+<p>Schur–Weyl 对偶告诉我们 <span class="math inline">\(V^* \otimes V^*\)</span> 作为 <span class="math inline">\(\mathrm{GL}(V)\)</span>-表示分解成不可约代数表示 <span class="math inline">\(\operatorname{Sym}^2 V^*\)</span> 和 <span class="math inline">\(\operatorname{Alt}^2 V^*\)</span>（对应任何双线性型可唯一分解为其对称部分与斜对称部分之和）．之前的讨论分类了这两个子表示内部的 <span class="math inline">\(\mathrm{GL}(V)\)</span>-轨道：完全由秩来分类．关于整个 <span class="math inline">\(V^* \otimes V^*\)</span> 的轨道结构则更为复杂，需要更细致的分析【TODO】．</p>
 </div>
 </div>
 </div>
@@ -651,7 +655,7 @@ G := O(V, \varphi) := \{X \in \mathrm{GL}(V) : \varphi(Xv, Xw) = \varphi(v, w)\}
 </ul>
 <p>在 <span class="math inline">\(\mathbb C\)</span> 上：</p>
 <ul>
-<li>进而由 <span class="math inline">\(\mathbb C\)</span> 上每个元素都有平方根，对称双线性型完全由 <span class="math inline">\(\varphi\)</span> 的秩来分类．特别地，非退化对称双线性型都可以化为单位矩阵．</li>
+<li>进而由 <span class="math inline">\(\mathbb C\)</span> 上每个元素都有平方根，对称双线性型完全由 <span class="math inline">\(\varphi\)</span> 的秩来分类．特别地，对非退化对称双线性型 <span class="math inline">\(\varphi\)</span>，可选取基底使其在该基下的矩阵为单位矩阵．</li>
 </ul>
 </div>
 </div>
@@ -695,11 +699,11 @@ G := O(V, \varphi) := \{X \in \mathrm{GL}(V) : \varphi(Xv, Xw) = \varphi(v, w)\}
 <p><span class="theorem-title"><strong>命题 4</strong></span> 在特征非二的域上：</p>
 <ul>
 <li><p>若斜对称双线性型 <span class="math inline">\(\varphi(-,-)\)</span> 非零，则总存在一对线性无关向量 <span class="math inline">\(v, w \in V\)</span> 使得 <span class="math inline">\(\varphi(v, w) \neq 0\)</span>．</p></li>
-<li><p><span class="math inline">\(V\)</span> 可正交分解为一系列一维和二维子空间的直和：<span class="math inline">\(\varphi\)</span> 在每个一维子空间上为零，在每个二维子空间上矩阵形如 <span class="math inline">\(\begin{pmatrix} 0 &amp; a \\ -a &amp; 0 \end{pmatrix}\)</span>．</p></li>
+<li><p><span class="math inline">\(V\)</span> 可正交分解为一系列一维和二维子空间的直和：<span class="math inline">\(\varphi\)</span> 在每个一维子空间上为零，在每个二维子空间上存在基底使得 <span class="math inline">\(\varphi\)</span> 的矩阵为 <span class="math inline">\(\begin{pmatrix} 0 &amp; a \\ -a &amp; 0 \end{pmatrix}\)</span>．</p></li>
 </ul>
 <p>在 <span class="math inline">\(\mathbb C\)</span> 上：</p>
 <ul>
-<li>上述 <span class="math inline">\(a\)</span> 都可以化为 <span class="math inline">\(1\)</span>．斜对称双线性型完全由一维和二维子空间的数量来分类．特别地，非退化斜对称双线性型都可以化为标准辛矩阵 <span class="math inline">\(\begin{pmatrix} 0 &amp; I_n \\ -I_n &amp; 0 \end{pmatrix}\)</span>．</li>
+<li>上述 <span class="math inline">\(a\)</span> 都可以化为 <span class="math inline">\(1\)</span>．斜对称双线性型完全由一维和二维子空间的数量来分类．特别地，对非退化斜对称双线性型 <span class="math inline">\(\varphi\)</span>，可选取基底使其在该基下的矩阵为 <span class="math inline">\(\begin{pmatrix} 0 &amp; I_n \\ -I_n &amp; 0 \end{pmatrix}\)</span>．</li>
 </ul>
 </div>
 </div>
@@ -756,7 +760,7 @@ G := O(V, \varphi) := \{X \in \mathrm{GL}(V) : \varphi(Xv, Xw) = \varphi(v, w)\}
 </section>
 <section id="sec-reduction-to-jordan" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="sec-reduction-to-jordan"><span class="header-section-number">3</span> 约化到 Jordan 型</h2>
-<p>以下定理保证在正交群 <span class="math inline">\(G\)</span> 下的共轭轨道和在 <span class="math inline">\(\mathrm{GL}(V)\)</span> 下的共轭轨道是一样的．</p>
+<p>以下定理保证在正交群 <span class="math inline">\(G := O(V, \varphi)\)</span> 下的共轭轨道和在 <span class="math inline">\(\mathrm{GL}(V)\)</span> 下的共轭轨道是一样的．</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -782,8 +786,8 @@ G := O(V, \varphi) := \{X \in \mathrm{GL}(V) : \varphi(Xv, Xw) = \varphi(v, w)\}
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
-<p><span class="proof-title"><em>证明</em>. </span>设存在 <span class="math inline">\(g \in \mathrm{GL}(V)\)</span> 使得 <span class="math inline">\(gXg^{-1} = Y\)</span>．目标是调整 <span class="math inline">\(g\)</span> 使得它满足 <span class="math inline">\(g^*g = 1\)</span> 落入 <span class="math inline">\(G\)</span> 的同时仍然保持 <span class="math inline">\(gXg^{-1} = Y\)</span>．</p>
-<p>对式子取对偶得 <span class="math inline">\((g^*)^{-1} X^* g^* = Y^*\)</span>，又因为 <span class="math inline">\(X, Y \in \mathfrak{g}\)</span>，所以 <span class="math inline">\((g^*)^{-1} X g^* = Y\)</span>．联立两式推出 <span class="math inline">\(g^*g\)</span> 与 <span class="math inline">\(X\)</span> 可交换，同时注意 <span class="math inline">\(g^* g \in G\)</span>．</p>
+<p><span class="proof-title"><em>证明</em>. </span>设存在 <span class="math inline">\(g \in \mathrm{GL}(V)\)</span> 使得 <span class="math inline">\(gXg^{-1} = Y\)</span>．目标是调整 <span class="math inline">\(g\)</span> 使得它满足 <span class="math inline">\(g^* g = 1\)</span> 落入 <span class="math inline">\(G\)</span> 的同时仍然保持 <span class="math inline">\(gXg^{-1} = Y\)</span>．</p>
+<p>对 <span class="math inline">\(gXg^{-1} = Y\)</span> 两边取 <span class="math inline">\(\varphi\)</span>-伴随得 <span class="math inline">\((g^{-1})^* X^* g^* = Y^*\)</span>，即 <span class="math inline">\((g^*)^{-1} X^* g^* = Y^*\)</span>．又因为 <span class="math inline">\(X, Y \in \mathfrak{g}\)</span> 即 <span class="math inline">\(X^* = -X\)</span>、<span class="math inline">\(Y^* = -Y\)</span>，所以 <span class="math inline">\((g^*)^{-1} X g^* = Y\)</span>．联立两式推出 <span class="math inline">\(g^*g\)</span> 与 <span class="math inline">\(X\)</span> 可交换，同时注意 <span class="math inline">\(g^* g \in G\)</span>．</p>
 <p>现在做断言：存在多项式 <span class="math inline">\(p(t) \in \mathbb{C}[t]\)</span> 使得 <span class="math inline">\(h := p(g^*g)\)</span> 满足 <span class="math inline">\(h^2 = g^*g\)</span>．于是 <span class="math inline">\(h\)</span> 满足以下三个条件：</p>
 <ul>
 <li><span class="math inline">\(h \in \mathrm{GL}(V)\)</span>：因为 <span class="math inline">\(h^2 = g^*g\)</span> 可逆．</li>
@@ -859,30 +863,40 @@ G := O(V, \varphi) := \{X \in \mathrm{GL}(V) : \varphi(Xv, Xw) = \varphi(v, w)\}
 </div>
 </div>
 </div>
-<p>注意 <span class="math inline">\(G\)</span> 现在只是正交群，它可能还不足够细．对反对称的情况，正交群 <span class="math inline">\(G = \operatorname{Sp}_{2n}\)</span> 已经连通，因此基本上够了．但对对称的情况，正交群 <span class="math inline">\(G = O_n\)</span> 是不连通的，<span class="math inline">\(\operatorname{SO}_n\)</span> 才是它的连通子群．因此 <span class="math inline">\(\operatorname{SO}_n\)</span> 的轨道可能比 <span class="math inline">\(O_n\)</span> 的轨道更细——轨道分类的故事还没有结束．不过这至少帮助我们获得了 Jordan 型的较粗分类．</p>
+<p>注意 <span class="math inline">\(G\)</span> 现在只是正交群 <span class="math inline">\(O(V,\varphi)\)</span>，它可能还不足够细．当 <span class="math inline">\(\varphi\)</span> 斜对称时，<span class="math inline">\(G\)</span> 作为辛群是连通的，因此基本上够了．但 <span class="math inline">\(\varphi\)</span> 对称时，<span class="math inline">\(G\)</span> 作为正交群是不连通的，<span class="math inline">\(\operatorname{SO}(V, \varphi)\)</span> 才是它的连通子群．因此 <span class="math inline">\(\operatorname{SO}(V, \varphi)\)</span> 的轨道可能比 <span class="math inline">\(O(V, \varphi)\)</span> 的轨道更细——轨道分类的故事还没有结束．不过这至少帮助我们获得了 Jordan 型的较粗分类．</p>
 </section>
 <section id="sec-construction-of-partition" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="sec-construction-of-partition"><span class="header-section-number">4</span> 构造合法分拆</h2>
-<p>另一件尚未完成的工作是：哪些 Jordan 型能够在 <span class="math inline">\(\mathfrak{so}_n\)</span> 或 <span class="math inline">\(\mathfrak{sp}_{2n}\)</span> 的幂零矩阵上产生？剧透一下最终的答案：</p>
+<p>另一件尚未完成的工作是：哪些 Jordan 型能够在 <span class="math inline">\(\mathfrak{so}(V)\)</span> 或 <span class="math inline">\(\mathfrak{sp}(V)\)</span> 的幂零线性变换上产生？剧透一下最终的答案：</p>
 <ul>
-<li>对于 <span class="math inline">\(\mathfrak{so}_n\)</span>，偶数大小的 Jordan 块必须出现偶数次；</li>
-<li>对于 <span class="math inline">\(\mathfrak{sp}_{2n}\)</span>，奇数大小的 Jordan 块必须出现偶数次．</li>
+<li>对于 <span class="math inline">\(\mathfrak{so}(V)\)</span>，偶数大小的 Jordan 块必须出现偶数次；</li>
+<li>对于 <span class="math inline">\(\mathfrak{sp}(V)\)</span>，奇数大小的 Jordan 块必须出现偶数次．</li>
 </ul>
 <p>我们将把满足上述条件的分拆称为（对称或斜对称情形下的）合法分拆．讨论此事需关注两个问题：</p>
 <ul>
-<li>在斜自伴李代数中凑出具有上述 Jordan 型的幂零矩阵</li>
-<li>证明斜自伴李代数中的幂零矩阵的 Jordan 型必须满足上述条件</li>
+<li>在斜自伴李代数中凑出具有上述 Jordan 型的幂零线性变换</li>
+<li>证明斜自伴李代数中的幂零线性变换的 Jordan 型必须满足上述条件</li>
 </ul>
-<p>我们跟随 <span class="citation" data-cites="jantzen_nilpotent_2004"><a href="#ref-jantzen_nilpotent_2004" role="doc-biblioref">[1, section 1.6–1.11]</a></span>，提供一个纯线性代数的显式证明．思路很简单：先为一个或两个相同大小的 Jordan 块构造非退化双线性型，然后正交地拼接它们，最后将任何幂零斜自伴矩阵的 Jordan 型约化到上述情况．</p>
-<p>本节先来做凑的工作．设我们在 <span class="math inline">\(d\)</span> 维线性空间 <span class="math inline">\(V\)</span> 中工作并已经选定一组基底作为矩阵记号的参考，为每个 <span class="math inline">\(d\)</span> 阶 Jordan 块 <span class="math inline">\(X\)</span> 选取双线性型 <span class="math inline">\(\varphi\)</span> 对应矩阵 <span class="math inline">\(\Phi\)</span> 如下： <span class="math display">\[
-X := J_d := \begin{pmatrix}
+<p>我们跟随 <span class="citation" data-cites="jantzen_nilpotent_2004"><a href="#ref-jantzen_nilpotent_2004" role="doc-biblioref">[1, section 1.6–1.11]</a></span>，先提供一个纯线性代数的显式证明．思路很简单：先为一个或两个相同大小的 Jordan 块构造非退化双线性型，然后正交地拼接它们，最后将任何幂零斜自伴线性变换的 Jordan 型约化到上述情况．</p>
+<p>本节先来做凑的工作．设在 <span class="math inline">\(d\)</span> 维线性空间 <span class="math inline">\(V\)</span> 中取定基底 <span class="math inline">\((e_1, \dots, e_d)\)</span>，定义幂零线性变换 <span class="math inline">\(X \in \mathfrak{gl}(V)\)</span> 在此基下的矩阵为 <span class="math inline">\(d\)</span> 阶 Jordan 块 <span class="math display">\[
+X e_k = \begin{cases}
+e_{k-1} &amp; 2 \leq k \leq d \\
+0 &amp; k = 1
+\end{cases}
+\qquad
+J_d := \begin{pmatrix}
 0 &amp; 1 &amp;   &amp;  \\
   &amp; 0 &amp; \ddots &amp;  \\
   &amp;   &amp; \ddots &amp; 1 \\
   &amp;   &amp;        &amp; 0
 \end{pmatrix}
-\quad
-\Phi := \Phi_d := \begin{pmatrix}
+\]</span> 同时定义 <span class="math inline">\(V\)</span> 上的双线性型 <span class="math inline">\(\varphi\)</span> 在此基下的矩阵为 <span class="math display">\[
+\varphi(e_i, e_j) = \begin{cases}
+(-1)^i &amp; \text{if } i + j = d + 1 \\
+0 &amp; \text{otherwise}
+\end{cases}
+\qquad
+\Phi_d := \begin{pmatrix}
    &amp;   &amp;    &amp; 1 \\
    &amp;   &amp; -1 &amp;  \\
    &amp; \dots &amp;    &amp;  \\
@@ -896,12 +910,12 @@ X := J_d := \begin{pmatrix}
 <li><span class="math inline">\(d\)</span> 为偶数时 <span class="math inline">\(\varphi\)</span> 斜对称，为 <span class="math inline">\(\mathfrak{sp}\)</span> 提供了单个偶数阶 Jordan 块的构造．</li>
 <li><span class="math inline">\(d\)</span> 为奇数时 <span class="math inline">\(\varphi\)</span> 对称，为 <span class="math inline">\(\mathfrak{so}\)</span> 提供了单个奇数阶 Jordan 块的构造．</li>
 </ul>
-<p>下面再为成对的块提供构造．设在 <span class="math inline">\(2d\)</span> 维线性空间 <span class="math inline">\(V\)</span> 中工作并已经选定一组基底作为矩阵记号的参考，对于两个 <span class="math inline">\(d\)</span> 阶 Jordan 块直和构成的矩阵 <span class="math inline">\(X\)</span>，选取双线性型 <span class="math inline">\(\varphi\)</span> 对应分块矩阵 <span class="math inline">\(\Phi\)</span> 如下： <span class="math display">\[
-X := \begin{pmatrix}
+<p>下面再为成对的块提供构造．设在 <span class="math inline">\(2d\)</span> 维线性空间 <span class="math inline">\(V\)</span> 中取定基底 <span class="math inline">\((e_1, \dots, e_d, f_1, \dots, f_d)\)</span> 使得前 <span class="math inline">\(d\)</span> 个基向量张成的子空间上 <span class="math inline">\(X\)</span> 的矩阵为 <span class="math inline">\(J_d\)</span>，后 <span class="math inline">\(d\)</span> 个基向量张成的子空间上也为 <span class="math inline">\(J_d\)</span>，即 <span class="math inline">\(X\)</span> 在此基下的矩阵为 <span class="math display">\[
+\begin{pmatrix}
 J_d &amp;   \\
    &amp; J_d
 \end{pmatrix}
-\quad
+\]</span> 定义双线性型 <span class="math inline">\(\varphi\)</span> 在此基下的矩阵为 <span class="math display">\[
 \Phi := \begin{pmatrix}
 0 &amp; \Phi_d \\
 \varepsilon \Phi_d^T &amp; 0
@@ -917,11 +931,22 @@ J_d &amp;   \\
 </section>
 <section id="sec-reduction-to-partition" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="sec-reduction-to-partition"><span class="header-section-number">5</span> 约化到合法分拆</h2>
-<p>现在证明：对任意配备对称或斜对称双线性型 <span class="math inline">\(\varphi\)</span> 的线性空间 <span class="math inline">\(V\)</span> 和其上的幂零斜自伴矩阵 <span class="math inline">\(X\)</span>，存在 <span class="math inline">\(V\)</span> 的正交分解 <span class="math inline">\(V = V_1 \oplus \dots \oplus V_r\)</span> 使得每个 <span class="math inline">\(V_i\)</span> 是 <span class="math inline">\(X\)</span> 的不变子空间，且如果记 <span class="math inline">\(d_i := \dim V_i\)</span>，有：</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-reduction-to-partition" class="theorem">
+<p><span class="theorem-title"><strong>定理 2</strong></span> 设 <span class="math inline">\(V\)</span> 是配备对称或斜对称双线性型 <span class="math inline">\(\varphi\)</span> 的线性空间，<span class="math inline">\(X \in \mathfrak{g} := \mathfrak{o}(V, \varphi)\)</span> 是幂零斜自伴线性变换．则存在 <span class="math inline">\(V\)</span> 的正交分解 <span class="math inline">\(V = V_1 \oplus \dots \oplus V_r\)</span> 使得每个 <span class="math inline">\(V_i\)</span> 是 <span class="math inline">\(X\)</span> 的不变子空间，且记 <span class="math inline">\(d_i := \dim V_i\)</span> 时有：</p>
 <ul>
 <li>若 <span class="math inline">\(\varphi\)</span> 对称，则 <span class="math inline">\(X\)</span> 在 <span class="math inline">\(V_i\)</span> 上的 Jordan 型要么是奇数阶单个 Jordan 块 <span class="math inline">\([d_i]\)</span>，要么是成对的两个 Jordan 块 <span class="math inline">\([d_i / 2, d_i / 2]\)</span>．</li>
 <li>若 <span class="math inline">\(\varphi\)</span> 斜对称，则 <span class="math inline">\(X\)</span> 在 <span class="math inline">\(V_i\)</span> 上的 Jordan 型要么是偶数阶单个 Jordan 块 <span class="math inline">\([d_i]\)</span>，要么是成对的两个 Jordan 块 <span class="math inline">\([d_i / 2, d_i / 2]\)</span>．</li>
 </ul>
+</div>
+</div>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -956,7 +981,7 @@ J_d &amp;   \\
 \end{aligned}
 \]</span> 回忆 <span class="math inline">\(\pm \varphi(w_0, u_{d-1}) = \pm \varphi(u_{d-1}, w_0) = \pm 1\)</span>，因此 <span class="math inline">\(a_s = b_s = 0\)</span>，矛盾，因此 <span class="math inline">\(v = 0\)</span>．</p></li>
 </ul>
-<p>因此 <span class="math inline">\(U \oplus W\)</span> 是 <span class="math inline">\(X\)</span> 的一个 <span class="math inline">\(2d\)</span> 维不变子空间，且 <span class="math inline">\(X\)</span> 在 <span class="math inline">\(U \oplus W\)</span> 上实现为两个 <span class="math inline">\(d\)</span> 阶 Jordan 块的直和．在 <span class="math inline">\(X\)</span>-不变子空间 <span class="math inline">\((U \oplus W)^\perp\)</span> 上重复上述过程归纳即可．</p>
+<p>因此 <span class="math inline">\(U \oplus W\)</span> 是 <span class="math inline">\(X\)</span> 的一个 <span class="math inline">\(2d\)</span> 维不变子空间，且 <span class="math inline">\(X\)</span> 在 <span class="math inline">\(U \oplus W\)</span> 上实现为两个 <span class="math inline">\(d\)</span> 阶 Jordan 块的直和．由 <span class="math inline">\(X \in \mathfrak{g}\)</span> 的斜自伴性知 <span class="math inline">\((U \oplus W)^\perp\)</span> 也是 <span class="math inline">\(X\)</span>-不变子空间，在其上重复上述过程归纳即可．</p>
 </div>
 </div>
 </div>
@@ -964,7 +989,7 @@ J_d &amp;   \\
 </section>
 <section id="约化到标准型" class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="约化到标准型"><span class="header-section-number">6</span> 约化到标准型</h2>
-<p>设现在有任一具有合法 Jordan 型的幂零矩阵 <span class="math inline">\(X\)</span> 相对非退化双线性型 <span class="math inline">\(\varphi\)</span> 斜自伴，我们计划选取基底使得 <span class="math inline">\(X\)</span> 的矩阵具有 Jordan 标准型，同时 <span class="math inline">\(\varphi\)</span> 的矩阵符合 <a href="#sec-construction-of-partition" class="quarto-xref">小节&nbsp;4</a> 给出的对角构造．这将 <span class="math inline">\((X, \varphi)\)</span> 完全约化到我们之前构造的标准型．</p>
+<p>设现在有任一具有合法 Jordan 型的幂零线性变换 <span class="math inline">\(X \in \mathfrak{g}\)</span>，我们计划选取基底使得 <span class="math inline">\(X\)</span> 在此基下的矩阵为 Jordan 标准型，同时 <span class="math inline">\(\varphi\)</span> 在此基下的矩阵符合 <a href="#sec-construction-of-partition" class="quarto-xref">小节&nbsp;4</a> 给出的对角构造．这将 <span class="math inline">\((X, \varphi)\)</span> 完全约化到我们之前构造的标准型．</p>
 <p>回忆 <a href="#sec-construction-of-partition" class="quarto-xref">小节&nbsp;4</a> 中我们为每个合法分拆提供了一个标准型的构造，设那里使用的基底是 <span class="math inline">\((e_i)\)</span>；非退化双线性型为 <span class="math inline">\(\varphi_0\)</span>；选取的幂零元为 <span class="math inline">\(X_0 \in \mathfrak{g}(V, \varphi_0)\)</span>．因为存在 <span class="math inline">\(h \in \mathrm{GL}(V)\)</span> 使得 <span class="math inline">\(\varphi(hv, hw) = \varphi_0(v, w)\)</span>，所以可以构造 <span class="math inline">\(X_1 := h X_0 h^{-1} \in \mathfrak{g}(V, \varphi)\)</span>： <span class="math display">\[
 \varphi(X_1 v, w) + \varphi(v, X_1 w) = \varphi(h X_0 h^{-1} v, w) + \varphi(v, h X_0 h^{-1} w) = \varphi_0(X_0 \cdot h^{-1} v, h^{-1} w) + \varphi_0(h^{-1} v, X_0 \cdot h^{-1} w) = 0
 \]</span> 而且 <span class="math inline">\(X_1\)</span> 在基底 <span class="math inline">\((h e_i)\)</span> 上的矩阵是 Jordan 标准型，<span class="math inline">\(\varphi\)</span> 在基底 <span class="math inline">\((h e_i)\)</span> 上的矩阵是反对角的．此时使用 <a href="#thm-orbit-by-gl" class="quarto-xref">定理&nbsp;1</a>，存在 <span class="math inline">\(g \in G(V,\varphi)\)</span> 使得 <span class="math inline">\(g X_1 g^{-1} = X\)</span>，现在使用基底 <span class="math inline">\((g h e_i)\)</span>，则 <span class="math inline">\(X\)</span> 的矩阵是 Jordan 标准型，而利用 <span class="math inline">\(g\)</span> 的正交性，<span class="math inline">\(\varphi\)</span> 的矩阵仍然是反对角的： <span class="math display">\[
@@ -994,7 +1019,7 @@ J_d &amp;   \\
 <p>刚刚完成的工作颇有表示论的风味．从矩阵的语言来看，我们显式构造了一个 <span class="math inline">\(V\)</span> 上的可逆线性变换，同时合同地调整非退化双线性型 <span class="math inline">\(\varphi \in V^* \otimes V^*\)</span> 并相似地调整斜自伴幂零算子 <span class="math inline">\(X \in V \otimes V^*\)</span>，使得 <span class="math inline">\(X\)</span> 化为 Jordan 标准型，且块与块间正交．本节给出这一结果的表示论风格的叙述，进而利用 Jacobson–Morozov 定理提供一个更干净整洁的非构造性证明．</p>
 <p><a href="../../posts/20260410-jacobson-morozov/">Jacobson–Morozov 定理</a>允许我们为任何幂零元 <span class="math inline">\(X \in \mathfrak g\)</span> 补出其对应的 <span class="math inline">\(\mathfrak{sl}_2\)</span>-三元组 <span class="math inline">\((X,Y,H)\)</span>．此定理在 A 型情形的证明仅依赖于 <span class="math inline">\(\mathfrak{sl}_2\)</span> 的表示论，请参考上述链接；在 B、C、D 型情形则恰由上一节的结果完成——在单个块的情形使用 A 型的标准补法，在成对块的情形直接对两个分块使用 A 型的标准补法，可以证明补出的 <span class="math inline">\(Y\)</span> 和 <span class="math inline">\(H\)</span> 仍然满足斜自伴的要求．一般的 Jacobson–Morozov 定理的证明我们留作附录．</p>
 <p>反过来，在已经证明 Jacobson–Morozov 定理的前提下，可以为幂零轨道的分类提供一个干净整洁的非构造性证明．为 <span class="math inline">\(X\)</span> 补出 <span class="math inline">\(\mathfrak{sl}_2\)</span>-三元组 <span class="math inline">\((X,Y,H)\)</span> 后，<span class="math inline">\(V\)</span> 成为一个 <span class="math inline">\(\mathfrak{sl}_2\)</span>-模．<span class="math inline">\(\varphi\)</span> 原来是 <span class="math inline">\(V \to V^*\)</span> 的 <span class="math inline">\(\mathfrak g\)</span>-模同态，现在限制为 <span class="math inline">\(\mathfrak{sl}_2\)</span>-模同态考虑，这就将 <span class="math inline">\(X\)</span> 相对双线性型 <span class="math inline">\(\varphi\)</span> 的斜自伴要求编码为 <span class="math inline">\(\mathfrak{sl}_2\)</span>-模同态的要求．<span class="math inline">\(\mathfrak{sl}_2\)</span> 的表示论是清楚的：<span class="math inline">\(X\)</span> 在 <span class="math inline">\(V\)</span> 上的作用完全 <span class="math inline">\(V\)</span> 的不可约成分确定，且在每个不可约成分上 <span class="math inline">\(X\)</span> 都实现为一个标准幂零 Jordan 块．于是可借 <span class="math inline">\(V\)</span> 的不可约分解拆解 <span class="math inline">\(V^* \otimes V^*\)</span>．注意 <span class="math inline">\(\mathfrak{sl}_2\)</span>-表示都是自伴的（<span class="math inline">\(V \cong V^*\)</span>，因为每个维度的不可约表示只有一个），因此 Schur 引理帮我们消化掉分配律展开后的交叉项，情况简化到 <span class="math inline">\(V^*\)</span> 的每个不可约成分 <span class="math inline">\((V_k^*)^{\oplus r_k}\)</span> 上： <span class="math display">\[
-\left((V_k^{\oplus r_k})^* \otimes (V_k^{\oplus r_k})^* \right)^{\mathfrak g} \cong \left( V_k^* \otimes (\mathbb C^{\oplus r_k})^* \otimes V_k^* \otimes (\mathbb C^{\oplus r_k})^* \right)^{\mathfrak g} \cong (V_k^* \otimes V_k^*)^{\mathfrak g} \otimes (\mathbb C^{\oplus r_k})^* \otimes (\mathbb C^{\oplus r_k})^*
+\left((V_k^{\oplus r_k})^* \otimes (V_k^{\oplus r_k})^* \right)^{\mathfrak{sl}_2} \cong \left( V_k^* \otimes (\mathbb C^{\oplus r_k})^* \otimes V_k^* \otimes (\mathbb C^{\oplus r_k})^* \right)^{\mathfrak{sl}_2} \cong (V_k^* \otimes V_k^*)^{\mathfrak{sl}_2} \otimes (\mathbb C^{\oplus r_k})^* \otimes (\mathbb C^{\oplus r_k})^*
 \]</span> 前半部分继续使用自伴性和 Schur 引理，模掉数乘其实唯一，只要找到一个就好；后半部分又是一个 <span class="math inline">\(\mathbb C\)</span> 上双线性型分类问题，对称和斜对称两种情况对角化或二维块对角化即可．</p>
 <p>注意 <span class="math inline">\(V_k^* \otimes V_k^*\)</span> 处的对称和 <span class="math inline">\(\mathbb C^{\oplus r_k} \otimes \mathbb C^{\oplus r_k}\)</span> 处的对称会共同决定了 <span class="math inline">\(\varphi\)</span> 的对称性．在最小的分块层面，会发现当 <span class="math inline">\(\dim V_k\)</span> 是偶数时，只能凑出斜对称的形式，当 <span class="math inline">\(\dim V_k\)</span> 是奇数时，只能凑出对称的形式．所以：</p>
 <ul>
