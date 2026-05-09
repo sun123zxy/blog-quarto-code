@@ -1,0 +1,165 @@
+---
+title: 经典李代数中的幂零轨道：支配序
+subtitle: 幂零锥和其上的几何：以 $\mathfrak{gl}_n$ 为例
+author: sun123zxy
+date: 2026-05-09
+lang: zh
+bibliography: index.bib
+draft: true
+
+categories:
+  - math
+  - algebra
+  - lie
+
+collections:
+  - nilpcone
+
+number-sections: true
+
+format:
+  html: default
+  pdf: default
+---
+
+本章来构建经典李代数中幂零轨道的支配序．考虑到已经完成了[经典李代数中幂零轨道的分类](/posts/20260426-classic-nilp-orbit/)，可以用分拆或唯一标识幂零轨道．以后用 $\mathcal O_\lambda^{\mathfrak{sl}}$ 的记号表示 Jordan 型为 $\lambda$ 的 $\mathfrak{sl}$ 中元素在 $\SL$ 下的共轭轨道．考虑到正交群作用下的 B、C、D 型李代数 $\mathfrak g$ 的幂零轨道由 $\GL$ 作用下的轨道给出，我们用 $\mathcal O_\lambda^\mathfrak g = \mathcal O_\lambda^\mathfrak{sl} \cap \mathfrak{g}$ 来标识 B、C、D 型的幂零轨道．在上下文明确所在李代数的情况下，$O_\lambda$ 的上标可能会作省略．
+
+## Zariski 拓扑
+
+幂零轨道的支配序研究了幂零轨道之前的闭包包含关系．为此需要先明确作用群和李代数上的拓扑．
+
+【TODO】
+
+在幂零轨道上定义偏序：如果 $\mathcal O_1 \subseteq \overline{\mathcal O_2}$，就定义 $\mathcal O_1 \trianglelefteq \mathcal O_2$，称为幂零轨道上的支配序关系（dominance order．亦作闭包序，closure order）．事实上只要 $\mathcal O_1$ 的任一元素落在 $\mathcal O_2$ 的闭包里，就有 $\mathcal O_1 \subseteq \overline{\mathcal O_2}$——这是因为共轭作用作为李代数上的同胚与取闭包运算交换．
+
+:::{.remark}
+
+## Specialization Order
+
+一般来讲，任何拓扑空间都可以通过取闭包包含的关系定义出一个预序（不保证反对称性的偏序关系），名曰 [specialization preorder](https://en.wikipedia.org/wiki/Specialization_preorder)．
+:::
+
+## A 型李代数的幂零轨道支配序
+
+来看 $\mathfrak{sl}_n$ 中幂零轨道的支配序．为此在分拆上定义同名的偏序关系：如果分拆 $\lambda$ 的每个部分和（前缀和）都大于等于 $\mu$ 的对应部分和，则定义 $\lambda \trianglerighteq \mu$．支配序对应的盖住关系（covering relation）可以用 Young 图刻画：考虑 $\lambda$ 对应 Young 图中那些比下一行至少多两个方块的行，让这一行最右侧方块“掉落”到下一行．例如，$(4,2)$ 盖住 $(3,3)$ 的图示如下：
+$$
+\begin{array}{cccc}
+\bullet & \bullet & \bullet & \boxed\bullet \\
+\bullet & \bullet
+\end{array}
+\quad\trianglerighteq\quad
+\begin{array}{ccc}
+\bullet & \bullet & \bullet \\
+\bullet & \bullet & \boxed\bullet
+\end{array}
+$$
+
+下面的命题说明两种序其实没有区别 [@mcgovern_nilpotent_1993, {theorem 6.2.5}]：
+
+:::{#prp-sl-closure-dominance}
+
+$\lambda \trianglerighteq \mu$ 当且仅当 $\mathcal O_\lambda \trianglerighteq \mathcal O_\mu$．
+:::
+
+:::{.proof}
+
+## $\implies$ 侧证明概览
+
+这里提供一种基于“连续路径”的证明．考虑 running example $\lambda = (4,2)$, $\mu = (3,3)$，$\lambda \trianglerighteq \mu$．如何连续地把幂零 Jordan 标准型矩阵 $J_{(4,2)}$ 变成 $J_{(3,3)}$ 呢？这样做：
+$$
+\begin{pmatrix}
+0 & 1 &   &   &   &  \\
+  & 0 & 1 &   &   &  \\
+  &   & 0 &1-t&   &  \\
+  &   &   & 0 &   &  \\
+  &   &   &   & 0 & 1 \\
+  &   &   & t & 0 & 0
+\end{pmatrix}
+$$
+这里列出标准基底 $e_4$ 在上述矩阵多次作用下的变化情况：
+$$
+e_4 \longrightarrow +\left\{\begin{aligned}
+t e_6 &\longrightarrow& t e_5 &\longrightarrow& 0& \\
+(1-t) e_3 &\longrightarrow& (1-t) e_2 &\longrightarrow& (1-t) e_1 &\longrightarrow& 0
+\end{aligned}\right.
+$$
+可以看到：
+
+- 当 $t=0$ 时，就是 $J_{(4,2)}$；
+- 当 $t \neq 1$ 时，Jordan 型为 $(4,2)$；
+- 当 $t=1$ 时，Jordan 型突变为 $(3,3)$．
+
+这是一条从 $\mathcal O_{(4,2)}$ 内部移动到 $\mathcal O_{(3,3)}$ 边缘的一条“连续路径”．抛开例子，上述论证对任意盖住关系都适用——只需关注 Young 图相邻两行之间的掉落，即可将这一保序映射扩展到任意 $\lambda \trianglerighteq \mu$．
+:::
+
+:::{.proof}
+
+## $\implies$ 侧的证明
+
+只需证明 $\lambda$ 盖住 $\mu$ 的情形，即 $\lambda$ 的 Young 图通过掉落一个方块变成 $\mu$ 的 Young 图．设是从 $\lambda$ 的第 $i$ 行掉到第 $i+1$ 行．记 $l(\lambda)$ 是 $\lambda$ 的长度，部分和 $S_i(\lambda) := \sum_{k=1}^i \lambda_k$，$J_\lambda$ 是 $\lambda$ 对应的 Jordan 标准型，$E_{i,j}$ 是基本矩阵，定义矩阵系列 $\Gamma_\lambda := \{\Gamma_\lambda(t) : t \in \mathbb{C}\}$：
+$$
+\Gamma_\lambda(t) := J_\lambda - t E_{ S_i(\lambda) - 1, S_i(\lambda)} + t E_{ S_{i+1}(\lambda), S_i(\lambda)}\qquad t \in \mathbb{C}
+$$
+它是 $\mathcal N$ 的满足多项式方程 $x_{S_i(\lambda)-1,S_i(\lambda)} + x_{S_{i+1}(\lambda),S_i(\lambda)} = 1$ 的闭子集．考察标准基 $(e_1, e_2, \dots, e_n)$ 在 $\Gamma_\lambda(t)$ 的作用下的变化情况：
+$$
+\begin{aligned}
+\Gamma_\lambda(t) e_{S_k(\lambda) + 1} &= 0 & k = 0, 1, \dots, l(\lambda) - 1 \\
+\Gamma_\lambda(t) e_{S_i(\lambda)} &= (1-t) e_{S_i(\lambda) - 1} - t e_{S_{i+1}(\lambda)} \\
+\Gamma_\lambda(t) e_{s} &= e_{s-1} & \text{for all other } s
+\end{aligned}
+$$
+只有 $e_{S_i(\lambda)}$ 的变化情况依赖于 $t$．注意 $\lambda_i \geq \lambda_{i-1}$，故
+
+- 当 $t \neq 1$，$e_{S_i(\lambda)}$ 恰需 $\lambda_i$ 次 $\Gamma_\lambda(t)$ 作用变为 $0$．取基底
+  $$
+  \{ e_k \}_{1 \leq k \leq S_{i-1}(\lambda)} \sqcup \{\Gamma_\lambda(t)^k e_{S_i(\lambda)} \}_{0 \leq k < \lambda_i} \sqcup \{ e_k \}_{S_i(\lambda) < k \leq n}
+  $$
+  可知 $\Gamma_\lambda(t) \in \mathcal O_\lambda$．
+
+- 当 $t=1$ 时，$e_{S_i(\lambda)}$ 恰需 $\lambda_{i+1} + 1$ 次 $\Gamma_\lambda(t)$ 作用变为 $0$，取基底
+  $$
+  \{ e_k \}_{1 \leq k < S_{i}(\lambda)} \sqcup \{\Gamma_\lambda(1)^k e_{S_i(\lambda)} \}_{0 \leq k \leq \lambda_{i+1}} \sqcup \{ e_k \}_{S_{i+1}(\lambda) < k \leq n}
+  $$
+  可知 $\Gamma_\lambda(1) \in \mathcal O_\mu$．
+
+于是 $\Gamma_\lambda$ 只有一点不在 $\mathcal O_\lambda$ 中，$\Gamma_\lambda \cap \overline{\mathcal O_\lambda} \supseteq \overline{\Gamma_\lambda \cap \mathcal O_\lambda} = \Gamma_\lambda$，即 $\Gamma_\lambda \subseteq \overline{\mathcal O_\lambda}$．故 $\Gamma_\lambda(1) \in \overline{\mathcal O_\lambda}$，$\mathcal O_\mu \subseteq \overline{\mathcal O_\lambda}$．
+:::
+
+:::{.proof}
+
+## $\impliedby$ 侧的证明
+
+注意如下若干事实：
+
+- $\lambda \trianglerighteq \mu$ 当且仅当 $\lambda^T \trianglelefteq \mu^T$ [@mcgovern_nilpotent_1993, {lemma 6.3.1}]：可以通过 Young 图的掉落操作直观感受和证明这一点．
+
+- 秩函数具有下半连续性（lower semicontinuity）：秩不大于某数 $k$ 的矩阵是闭集．秩的子式定义可以为此提供一个一句话证明：对这些矩阵的要求等价于大于 $k$ 阶的子式全为零．更一般地，对任意 $i \in \mathbb N$，函数 $A \mapsto \rk(A^i)$ 也是下半连续的．此性质使得当我们对幂零轨道取闭包时，元素及其幂次的秩都不会增加．
+
+- 基于秩的 Jordan 型计算：Jordan 型为 $\lambda$ 的幂零矩阵 $X$ 满足其 $i$ 次幂的秩就是 Young 图 $\lambda$ 去掉前 $i$ 列剩下的方块数：
+  $$
+  \rk X^i = n - \sum_{k=1}^i (\lambda^T)_k, \quad i = 0, 1, \dots
+  $$
+  这里 $\lambda^T$ 是分拆 $\lambda$ 的转置，即 Young 图沿主对角线的翻转．反过来这为我们提供了计算 Jordan 型的秩方法：
+  $$
+  (\lambda^T)_k = \rk X^{k-1} - \rk X^k, \quad k = 1, 2, \dots
+  $$
+  此外，$X^i$ 的 Jordan 型的转置为 $(n - \rk X^i, \rk X^i - \rk X^{i-1}, \rk X^{i+1} - \rk X^i, \dots)$．
+
+现在设 $\overline{\mathcal O_\lambda} \supseteq \mathcal O_\mu$．不妨任取代表元 $X \in \mathcal O_\lambda$, $Y \in \mathcal O_\mu$．对任意 $i \geq 1$，由 $A \mapsto \rk(A^i)$ 的下半连续性，$\rk Y^i \leq \rk X^i$，故
+$$
+n - \sum_{k=1}^i (\mu^T)_k = \rk Y^i \leq \rk X^i = n - \sum_{k=1}^i (\lambda^T)_k
+$$
+即 $\mu^T$ 的第 $i$ 个部分和大于等于 $\lambda^T$ 的第 $i$ 个部分和，故 $\mu^T \trianglerighteq \lambda^T$，$\lambda \trianglerighteq \mu$．
+:::
+
+特别地，$\mathcal O_{(n)}$ 支配所有其它幂零轨道，故其在幂零锥中稠密．
+
+:::{.remark}
+
+- 注意 $\impliedby$ 侧的证明对所有经典李代数都适用．
+- 关于经典李代数幂零轨道支配序历史，见 [@jantzen_nilpotent_2004, {section 13.16}]
+:::
+
+## B、C、D 型李代数
+
+【TODO】
