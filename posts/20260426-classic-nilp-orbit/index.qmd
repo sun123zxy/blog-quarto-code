@@ -34,6 +34,7 @@ format:
 \newcommand{\Aut}{\operatorname{Aut}}
 \newcommand{\Lie}{\operatorname{Lie}}
 \newcommand{\diag}{\operatorname{diag}}
+\newcommand{\antidiag}{\operatorname{antidiag}}
 \newcommand{\Sp}{\operatorname{Sp}}
 \newcommand{\SO}{\operatorname{SO}}
 \newcommand{\Sym}{\operatorname{Sym}}
@@ -98,12 +99,12 @@ $$
 
 ## 矩阵记号
 
-在选定基底后，使用矩阵记号会为计算带来便利．设 $\Phi$ 是双线性型 $\varphi$ 在该基下的 Gram 矩阵，则 $\varphi(v, w) = v^T \Phi w$，非退化意味着 $\Phi$ 可逆．伴随算子 $X^*$、正交群 $G$ 和斜自伴李代数 $\mathfrak{g}$ 的定义可以用矩阵记号重写为：
+在选定基底后，使用矩阵记号会为计算带来便利．设 $\Phi$ 是双线性型 $\varphi$ 在该基下的 Gram 矩阵，则 $\varphi(v, w) = v^T \Phi w$，非退化意味着 $\Phi$ 可逆．伴随算子 $\mathrm X^*$、正交群 $G$ 和斜自伴李代数 $\mathfrak{g}$ 的定义可以用矩阵记号重写为：
 $$
 \begin{aligned}
-X^* &:= \Phi^{-1} X^T \Phi \\
-G &= \{X \in \GL_n : X^T \Phi X = \Phi\} = \{ X \in \GL_n : X^* = X^{-1} \} \\
-\mathfrak g &= \{X \in \gl_n : X^T \Phi = - \Phi X \} = \{X \in \gl_n : X^* = -X\}
+\mathrm X^* &:= \Phi^{-1} \mathrm X^T \Phi \\
+G &= \{\mathrm X \in \GL_n : \mathrm X^T \Phi \mathrm X = \Phi\} = \{ \mathrm X \in \GL_n : \mathrm X^* = \mathrm X^{-1} \} \\
+\mathfrak g &= \{\mathrm X \in \gl_n : \mathrm X^T \Phi = - \Phi \mathrm X \} = \{\mathrm X \in \gl_n : \mathrm X^* = -\mathrm X\}
 \end{aligned}
 $$
 :::
@@ -312,7 +313,7 @@ e_{k-1} & 2 \leq k \leq d \\
 0 & k = 1
 \end{cases}
 \qquad
-J_d := \begin{pmatrix}
+\mathrm J_d := \begin{pmatrix}
 0 & 1 &   &  \\
   & 0 & \ddots &  \\
   &   & \ddots & 1 \\
@@ -341,11 +342,11 @@ $${#eq-gram-std-single}
 - $d$ 为偶数时 $\varphi$ 斜对称，为 $\sp$ 提供了单个偶数阶 Jordan 块的构造．
 - $d$ 为奇数时 $\varphi$ 对称，为 $\so$ 提供了单个奇数阶 Jordan 块的构造．
 
-下面再为成对的块提供构造．设在 $2d$ 维线性空间 $V$ 中取定基底 $(e_1, \dots, e_d, f_1, \dots, f_d)$ 使得前 $d$ 个基向量张成的子空间上 $X$ 的矩阵为 $J_d$，后 $d$ 个基向量张成的子空间上也为 $J_d$，即 $X$ 在此基下的矩阵为
+下面再为成对的块提供构造．设在 $2d$ 维线性空间 $V$ 中取定基底 $(e_1, \dots, e_d, f_1, \dots, f_d)$ 使得前 $d$ 个基向量张成的子空间上 $X$ 的矩阵为 $\mathrm J_d$，后 $d$ 个基向量张成的子空间上也为 $\mathrm J_d$，即 $X$ 在此基下的矩阵为
 $$
 \begin{pmatrix}
-J_d &   \\
-   & J_d
+\mathrm J_d &   \\
+   & \mathrm J_d
 \end{pmatrix}
 $$
 定义双线性型 $\varphi$ 在此基下的矩阵为
@@ -376,7 +377,7 @@ $${#eq-gram-std-pair}
 
 :::{.proof}
 
-考虑 $X$ 的幂零指数 $d$ 使得 $X^d = 0$ 且 $X^{d-1} \neq 0$．任取 $u_0 \in V$ 使得 $X^{d-1} u_0 \neq 0$ 并定义 $u_k := X^k u_0$，记 $U := \mathbb C u_0 \oplus \dots \oplus \mathbb C u_{d-1}$，这是 $X$ 的一个 $d$ 维不变子空间，且 $X$ 在基底 $(u_{d-1}, \dots, u_0)$ 上的矩阵实现为 Jordan 块 $J_d$．进一步考察 $\varphi$ 限制在 $U$ 上相对基底 $(u_{d-1}, \dots, u_0)$ 的矩阵，多次使用 $X$ 关于 $\varphi$ 的斜自伴性
+考虑 $X$ 的幂零指数 $d$ 使得 $X^d = 0$ 且 $X^{d-1} \neq 0$．任取 $u_0 \in V$ 使得 $X^{d-1} u_0 \neq 0$ 并定义 $u_k := X^k u_0$，记 $U := \mathbb C u_0 \oplus \dots \oplus \mathbb C u_{d-1}$，这是 $X$ 的一个 $d$ 维不变子空间，且 $X$ 在基底 $(u_{d-1}, \dots, u_0)$ 上的矩阵实现为 Jordan 块 $\mathrm J_d$．进一步考察 $\varphi$ 限制在 $U$ 上相对基底 $(u_{d-1}, \dots, u_0)$ 的矩阵，多次使用 $X$ 关于 $\varphi$ 的斜自伴性
 $$
 \varphi(u_i, u_j) = \varphi(X^i u_0, X^j u_0) = (-1)^i \varphi(u_0, X^{i+j} u_0)
 $$
@@ -463,9 +464,9 @@ $$
 
 一般情况的证明需用到 Killing 型、抽象 Jordan 分解和 Cartan 根空间分解，但这里我们可以为经典李代数提供显式构造证明．
 
-先看 A 型．设 $X \in \sl(V)$ 幂零，选取基底使 $X$ 化为若干 Jordan 块 $J_d$ 的直和．不妨设单个 $d$ 维块上基底 $(e_1, \dots, e_d)$ 使得 $X e_k = e_{k-1}$（$e_0 := 0$）．则定义 $H$ 和 $Y$ 在此基下的矩阵：
+先看 A 型．设 $X \in \sl(V)$ 幂零，选取基底使 $X$ 化为若干 Jordan 块 $\mathrm J_d$ 的直和．不妨设单个 $d$ 维块上基底 $(e_1, \dots, e_d)$ 使得 $X e_k = e_{k-1}$（$e_0 := 0$）．则定义 $H$ 和 $Y$ 在此基下的矩阵：
 $$
-H e_k = (d+1-2k) e_k \qquad \diag(d-1, d-3, \dots, -(d-1))
+H e_k = (d+1-2k) e_k \qquad \mathrm H_d := \diag(d-1, d-3, \dots, -(d-1))
 $$
 $$
 Y e_k = \begin{cases}
@@ -473,6 +474,7 @@ k(d-k) e_{k+1} & \quad 1 \leq k \leq d-1 \\
 0 & \quad k = d
 \end{cases}
 \qquad
+\mathrm Y_d :=
 \begin{pmatrix}
 0 & & & & \\
 1 \cdot (d-1) & 0 & & & \\
@@ -485,23 +487,83 @@ $$
 
 现在看 B, C, D 型．设 $X \in \mathfrak g := \mathfrak o(V, \varphi)$ 幂零，非退化双线性型 $\varphi$ 对称或斜对称．由 [@thm-reduction-to-normal-form]，可选取基底使 $X$ 为 Jordan 标准型且 $\varphi$ 的矩阵为 [@sec-construction-of-partition] 中的反对角构造．现在在每个子块补出 $Y, H$：
 
-- 对单块情形 [@eq-gram-std-single]，直接沿用 A 型构造的 $Y, H$．
-- 对成对块情形 [@eq-gram-std-pair]，直接使用直和 $Y \oplus Y$ 和 $H \oplus H$．
+- 对单块情形 [@eq-gram-std-single]，直接沿用 A 型构造的 $\mathrm Y_d, \mathrm H_d$．
+- 对成对块情形 [@eq-gram-std-pair]，直接相对其基底 $(e_1, \dots, e_d, f_1, \dots, f_d)$ 使用矩阵 $\mathrm Y := \begin{pmatrix} \mathrm Y_d & 0 \\ 0 & \mathrm Y_d \end{pmatrix}$ 和 $\mathrm H := \begin{pmatrix} \mathrm H_d & 0 \\ 0 & \mathrm H_d \end{pmatrix}$ 即可．
 
-小心仔细的计算表明无论是单个块还是成对的块，$Y, H$ 仍满足斜自伴条件，即 $Y, H \in \mathfrak g$．因此我们完成了 B, C, D 型的构造．
+小心仔细的计算表明无论是单个块还是成对的块，$Y, H$ 仍满足斜自伴条件：
+
+:::{.proof}
+
+## 验证 $Y, H$ 的斜自伴性
+
+我们在矩阵记号下工作．回忆 $\mathfrak g = \{ \mathrm M : \mathrm M^T \Phi = -\Phi \mathrm M \}$．
+
+**单块情形**：设块大小为 $d$，
+$$
+\begin{aligned}
+\mathrm H_d &= \diag(d-1, d-3, \dots, -(d-1)) & \Phi_d &= \antidiag((-1)^{d-1},\dots,-1,1), \\
+\mathrm Y_d &=
+\begin{pmatrix}
+0 \\
+1(d-1) & 0 \\
+& 2(d-2) & 0 \\
+& & \ddots & \ddots \\
+& & & (d-1)\cdot 1 & 0
+\end{pmatrix}
+&
+\mathrm Y_d^T &=
+\begin{pmatrix}
+0 & 1(d-1) \\
+& 0 & 2(d-2) \\
+& & \ddots & \ddots \\
+& & & 0 & (d-1)\cdot 1 \\
+& & & & 0
+\end{pmatrix}
+\end{aligned}
+$$
+手动计算验证 $\mathrm H_d^T \Phi_d = -\Phi_d \mathrm H_d$ 和 $\mathrm Y_d^T \Phi_d = -\Phi_d \mathrm Y_d$ 即可．
+
+**成对块情形**：此时
+$$
+\Phi = \begin{pmatrix} 0 & \Phi_d \\ \varepsilon \Phi_d^T & 0 \end{pmatrix}
+\quad
+\mathrm H = \begin{pmatrix} \mathrm H_d & 0 \\ 0 & \mathrm H_d \end{pmatrix}
+\quad
+\mathrm Y = \begin{pmatrix} \mathrm Y_d & 0 \\ 0 & \mathrm Y_d \end{pmatrix}
+\quad \varepsilon = \pm 1
+$$
+
+对 $\mathrm H$：
+$$
+\mathrm H\Phi = \begin{pmatrix} 0 & \mathrm H_d \Phi_d \\ \varepsilon \mathrm H_d \Phi_d^T & 0 \end{pmatrix}
+\qquad
+-\Phi \mathrm H = \begin{pmatrix} 0 & -\Phi_d \mathrm H_d \\ -\varepsilon \Phi_d^T \mathrm H_d & 0 \end{pmatrix}
+$$
+右上块 $\mathrm H_d \Phi_d = -\Phi_d \mathrm H_d$ 即单块结论．对左下块，将单块结论取转置得 $\Phi_d^T \mathrm H_d = -\mathrm H_d \Phi_d^T$，即 $\mathrm H_d \Phi_d^T = -\Phi_d^T \mathrm H_d$，两边乘 $\varepsilon$ 即得所需．
+
+对 $\mathrm Y$：
+$$
+\mathrm Y^T \Phi = \begin{pmatrix} 0 & \mathrm Y_d^T \Phi_d \\ \varepsilon \mathrm Y_d^T \Phi_d^T & 0 \end{pmatrix}
+\qquad
+-\Phi \mathrm Y = \begin{pmatrix} 0 & -\Phi_d \mathrm Y_d \\ -\varepsilon \Phi_d^T \mathrm Y_d & 0 \end{pmatrix}
+$$
+右上块 $\mathrm Y_d^T \Phi_d = -\Phi_d \mathrm Y_d$ 即单块结论．左下块由单块结论取转置 $\Phi_d^T \mathrm Y_d = -\mathrm Y_d^T \Phi_d^T$ 即得 $\mathrm Y_d^T \Phi_d^T = -\Phi_d^T \mathrm Y_d$，两边乘 $\varepsilon$ 即得所需．
+:::
+
+因此我们完成了 B, C, D 型的构造．
 
 :::{.remark}
 
 如果不执着于将 $X$ 实现为 Jordan 标准型，适当放缩，$m+1$ 阶单块矩阵的三元组和 Gram 矩阵可以获得更对称的矩阵写法：
 $$
-X := \begin{pmatrix}
+\mathrm X := \begin{pmatrix}
 0 & m & & & \\
   & 0 & m-1 & & \\
   &   & \ddots & \ddots & \\
   &   &   & 0 & 1 \\
   &   &   &   & 0
 \end{pmatrix} \quad
-Y := \begin{pmatrix}
+\mathrm Y := \begin{pmatrix}
 0 &   &   &   & \\
 1 & 0 &   &   & \\
   & 2 & 0 &   & \\
@@ -510,7 +572,7 @@ Y := \begin{pmatrix}
 \end{pmatrix}
 $$
 $$
-H := \diag(m, m-2, \dots, -m+2, -m)
+\mathrm H := \diag(m, m-2, \dots, -m+2, -m)
 $$
 $$
 \Phi := \begin{pmatrix}
