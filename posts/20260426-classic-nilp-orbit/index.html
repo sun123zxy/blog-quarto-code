@@ -377,7 +377,7 @@ window.Quarto = {
   <li><a href="#sec-reduction-to-partition" id="toc-sec-reduction-to-partition" class="nav-link" data-scroll-target="#sec-reduction-to-partition"><span class="header-section-number">5</span> 约化到合法分拆</a></li>
   <li><a href="#约化到标准型" id="toc-约化到标准型" class="nav-link" data-scroll-target="#约化到标准型"><span class="header-section-number">6</span> 约化到标准型</a></li>
   <li><a href="#sec-jacobson-morozov-classical" id="toc-sec-jacobson-morozov-classical" class="nav-link" data-scroll-target="#sec-jacobson-morozov-classical"><span class="header-section-number">7</span> 经典李代数中的 Jacobson–Morozov 定理</a></li>
-  <li><a href="#表示论风格的分类重证" id="toc-表示论风格的分类重证" class="nav-link" data-scroll-target="#表示论风格的分类重证"><span class="header-section-number">8</span> 表示论风格的分类重证</a></li>
+  <li><a href="#sec-rep-theory-orbit-classification" id="toc-sec-rep-theory-orbit-classification" class="nav-link" data-scroll-target="#sec-rep-theory-orbit-classification"><span class="header-section-number">8</span> 表示论风格的分类重证</a></li>
   <li><a href="#特殊正交群-operatornameso_2n-与轨道分支现象" id="toc-特殊正交群-operatornameso_2n-与轨道分支现象" class="nav-link" data-scroll-target="#特殊正交群-operatornameso_2n-与轨道分支现象"><span class="header-section-number">9</span> 特殊正交群 <span class="math inline">\(\operatorname{SO}_{2n}\)</span> 与轨道分支现象</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>其他格式</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
@@ -430,7 +430,8 @@ window.Quarto = {
 <li>B 型和 D 型李代数：即正交李代数 <span class="math inline">\(\mathfrak{so}(V)\)</span>，<span class="math inline">\(B_n\)</span> 型对应 <span class="math inline">\(\dim V = 2n+1\)</span>，<span class="math inline">\(D_n\)</span> 型对应 <span class="math inline">\(\dim V = 2n\)</span>．</li>
 </ul>
 <p>其中，<span class="math inline">\(\mathfrak{sl}(V)\)</span> 的幂零轨道已经由 Jordan 型（即分拆）分类，本篇主要关心 <span class="math inline">\(\mathfrak{so}(V)\)</span> 和 <span class="math inline">\(\mathfrak{sp}(V)\)</span> 中的幂零轨道．</p>
-<p>我们主要跟随 <span class="citation" data-cites="jantzen_nilpotent_2004"><a href="#ref-jantzen_nilpotent_2004" role="doc-biblioref">[1, section 1]</a></span> 的呈现．除明确说明外，本章默认在复数域 <span class="math inline">\(\mathbb C\)</span> 上工作；为表示区分，本章中，在给定一组基的前提下，线性变换对应的矩阵通常使用其对应正体大写字母表示，例如 <span class="math inline">\(X \in \mathfrak{gl}(V)\)</span> 在某组基下的矩阵记为 <span class="math inline">\(\mathrm X\)</span>．</p>
+<p>我们主要跟随 <span class="citation" data-cites="jantzen_nilpotent_2004"><a href="#ref-jantzen_nilpotent_2004" role="doc-biblioref">[1, section 1]</a></span> 的呈现．主要的不同是，我们在 <a href="#sec-jacobson-morozov-classical" class="quarto-xref">小节&nbsp;7</a> 介绍了幂零轨道分类的结果和 Jacobson–Morozov 定理的联系，并借此在 [@#sec-rep-theory-orbit-classification] 提供了幂零轨道分类的另一表示论风格的简明证明．</p>
+<p>除明确说明外，本章默认在复数域 <span class="math inline">\(\mathbb C\)</span> 上工作；为表示区分，本章中，在给定一组基的前提下，线性变换对应的矩阵通常使用其对应正体大写字母表示，例如 <span class="math inline">\(X \in \mathfrak{gl}(V)\)</span> 在某组基下的矩阵记为 <span class="math inline">\(\mathrm X\)</span>．</p>
 <section id="a-型李代数" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="a-型李代数"><span class="header-section-number">1</span> A 型李代数</h2>
 <p>讨论幂零轨道首先需要明确作用群的选择．设 <span class="math inline">\(V\)</span> 是 <span class="math inline">\(\mathbb C\)</span> 上 <span class="math inline">\(n\)</span> 维线性空间．对 <span class="math inline">\(\mathfrak{gl}(V)\)</span> 来说自然选 <span class="math inline">\(\mathrm{GL}(V)\)</span> 就好，但 <span class="math inline">\(\mathfrak{sl}(V)\)</span>、<span class="math inline">\(\mathfrak{so}(V)\)</span> 和 <span class="math inline">\(\mathfrak{sp}(V)\)</span> 似乎都应该更加小心．例如，<span class="math inline">\(\mathfrak{sl}(V)\)</span> 上考虑 <span class="math inline">\(\mathrm{GL}(V)\)</span> 的子群 <span class="math inline">\(\mathrm{SL}(V)\)</span> 的共轭作用似乎也非常合理——<span class="math inline">\(\mathfrak{sl}(V)\)</span> 系由 <span class="math inline">\(\mathrm{SL}(V)\)</span> 单位元处取切空间得到．更进一步地，不少线性变换产生的实际共轭效果是一致的，最有效地来说应该考虑所有可能的共轭作用构成的群——一个 <span class="math inline">\(\mathrm{GL}(V)\)</span> 的商群．不过下面的结果告诉我们这其实都没有关系：不同作用群的选择在 <span class="math inline">\(\mathfrak{gl}(V)\)</span> 或 <span class="math inline">\(\mathfrak{sl}(V)\)</span> 上导致的轨道是一样的．</p>
@@ -1224,8 +1225,8 @@ k(d-k) e_{k+1} &amp; \quad 1 \leq k \leq d-1 \\
 </div>
 </div>
 </section>
-<section id="表示论风格的分类重证" class="level2" data-number="8">
-<h2 data-number="8" class="anchored" data-anchor-id="表示论风格的分类重证"><span class="header-section-number">8</span> 表示论风格的分类重证</h2>
+<section id="sec-rep-theory-orbit-classification" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="sec-rep-theory-orbit-classification"><span class="header-section-number">8</span> 表示论风格的分类重证</h2>
 <p>由于 Jacobson–Morozov 定理有完全不依赖经典李代数的抽象证明，可以考虑反过来利用它来重新为幂零轨道分类提供一个更干净整洁的非构造性证明．</p>
 <p>为幂零元 <span class="math inline">\(X \in \mathfrak g := \mathfrak{o}(V, \varphi)\)</span> 补出 <span class="math inline">\(\mathfrak{sl}_2\)</span>-三元组 <span class="math inline">\((X, Y, H)\)</span> 后，<span class="math inline">\(V\)</span> 成为一个 <span class="math inline">\(\mathfrak{sl}_2\)</span>-模．由 <span class="math inline">\(\mathfrak{sl}_2\)</span>-模的表示理论，其完全分解为 <span class="math display">\[
 V \cong \bigoplus_k V_k^{\oplus r_k} \cong \bigoplus_k (V_k \otimes \mathbb C^{\oplus r_k})

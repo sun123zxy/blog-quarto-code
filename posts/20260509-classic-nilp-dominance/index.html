@@ -416,7 +416,7 @@ window.Quarto = {
 
 <section id="支配序" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="支配序"><span class="header-section-number">1</span> 支配序</h2>
-<p>本章来构建经典李代数中幂零轨道的支配序．</p>
+<p>本章讨论经典李代数中幂零轨道的支配序，证明支配序和分拆上的支配序等价．关于幂零轨道支配序的研究历史，<span class="citation" data-cites="jantzen_nilpotent_2004"><a href="#ref-jantzen_nilpotent_2004" role="doc-biblioref">[1, section 13.16]</a></span> 给出了一些评注；标准的参考是 <span class="citation" data-cites="mcgovern_nilpotent_1993"><a href="#ref-mcgovern_nilpotent_1993" role="doc-biblioref">[2, chapter 5]</a></span>．我们选取的路线是：对 A 型李代数，基于盖住关系间连续路径的构造和秩函数的下半连续性，给出支配序和分拆上的支配序的等价性证明；对于 B、C、D 型李代数，我们选取特定方便处理的非退化双线性型，从而仔细为其上的每一类盖住关系显式构建落在斜自伴李代数中的连续路径．我们发现可以通过一类组合图示来统一紧凑地描述这些路径构造．</p>
 <p>本章默认在 <span class="math inline">\(\mathbb C\)</span> 上工作．经典李代数均认为是具体的 <span class="math inline">\(\mathbb C^n\)</span> 上的矩阵代数．A 型李代数 <span class="math inline">\(\mathfrak{sl}_n\)</span> 的作用群默认为 <span class="math inline">\(\mathrm{SL}_n\)</span>，B、C、D 型李代数的作用群默认为定义它们的非退化双线性型给出的正交群．考虑到已经完成了<a href="../../posts/20260426-classic-nilp-orbit/">经典李代数中幂零轨道的分类</a>，可以用分拆或唯一标识幂零轨道．以后用 <span class="math inline">\(\mathcal O_\lambda^{\mathfrak{sl}}\)</span> 的记号表示 Jordan 型为 <span class="math inline">\(\lambda\)</span> 的 <span class="math inline">\(\mathfrak{sl}\)</span> 中元素在 <span class="math inline">\(\mathrm{SL}\)</span> 下的共轭轨道．考虑到正交群作用下的 B、C、D 型李代数 <span class="math inline">\(\mathfrak g\)</span> 的幂零轨道由 <span class="math inline">\(\mathrm{GL}\)</span> 作用下的轨道给出，我们用 <span class="math inline">\(\mathcal O_\lambda^\mathfrak g = \mathcal O_\lambda^\mathfrak{sl}\cap \mathfrak{g}\)</span> 来标识 B、C、D 型在正交群作用下的幂零轨道．在上下文明确所在李代数的情况下，<span class="math inline">\(O_\lambda\)</span> 的上标可能会作省略．</p>
 <p>设 <span class="math inline">\(\mathfrak g\)</span> 为一经典李代数，<span class="math inline">\(\mathcal O_1\)</span> 和 <span class="math inline">\(\mathcal O_2\)</span> 为其上的两个幂零轨道．在幂零轨道上定义偏序：如果 <span class="math inline">\(\mathcal O_1 \subseteq \overline{\mathcal O_2}\)</span>，就定义 <span class="math inline">\(\mathcal O_1 \trianglelefteq \mathcal O_2\)</span>，称为幂零轨道上的支配序关系（dominance order．亦作闭包序，closure order）．这里取闭包使用的拓扑是 <span class="math inline">\(\mathfrak g\)</span> 作为仿射空间的 Zariski 拓扑．</p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -502,15 +502,15 @@ y = \operatorname{Ad}(g) x \in \operatorname{Ad}(g)(\overline{\mathcal O_2}) = \
 \bullet &amp; \bullet &amp; \boxed\bullet
 \end{array}
 \]</span></p>
-<p>下面的命题说明两种序其实没有区别 <span class="citation" data-cites="mcgovern_nilpotent_1993"><a href="#ref-mcgovern_nilpotent_1993" role="doc-biblioref">[1, theorem 6.2.5]</a></span>：</p>
+<p>下面的命题说明两种序其实没有区别 <span class="citation" data-cites="mcgovern_nilpotent_1993"><a href="#ref-mcgovern_nilpotent_1993" role="doc-biblioref">[2, theorem 6.2.5]</a></span>：</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<div id="prp-sl-closure-dominance" class="theorem proposition">
-<p><span class="theorem-title"><strong>命题 2</strong></span> 对 A 型李代数 <span class="math inline">\(\mathfrak{sl}_n\)</span> 及其上的两个幂零轨道 <span class="math inline">\(\mathcal O_\lambda\)</span>, <span class="math inline">\(\mathcal O_\mu\)</span>，<span class="math inline">\(\lambda \trianglerighteq \mu\)</span> 当且仅当 <span class="math inline">\(\mathcal O_\lambda \trianglerighteq \mathcal O_\mu\)</span>．</p>
+<div id="thm-sl-closure-dominance" class="theorem">
+<p><span class="theorem-title"><strong>定理 1</strong></span> 对 A 型李代数 <span class="math inline">\(\mathfrak{sl}_n\)</span> 及其上的两个幂零轨道 <span class="math inline">\(\mathcal O_\lambda\)</span>, <span class="math inline">\(\mathcal O_\mu\)</span>，<span class="math inline">\(\lambda \trianglerighteq \mu\)</span> 当且仅当 <span class="math inline">\(\mathcal O_\lambda \trianglerighteq \mathcal O_\mu\)</span>．</p>
 </div>
 </div>
 </div>
@@ -604,7 +604,7 @@ t e_6 &amp;\longrightarrow&amp; t e_5 &amp;\longrightarrow&amp; 0&amp; \\
 <div class="proof">
 <p><span class="proof-title"><em>证明</em> (<span class="math inline">\(\impliedby\)</span> 侧的证明). </span>注意如下若干事实：</p>
 <ul>
-<li><p><span class="math inline">\(\lambda \trianglerighteq \mu\)</span> 当且仅当 <span class="math inline">\(\lambda^T \trianglelefteq \mu^T\)</span> <span class="citation" data-cites="mcgovern_nilpotent_1993"><a href="#ref-mcgovern_nilpotent_1993" role="doc-biblioref">[1, lemma 6.3.1]</a></span>：可以通过 Young 图的掉落操作直观感受和证明这一点．</p></li>
+<li><p><span class="math inline">\(\lambda \trianglerighteq \mu\)</span> 当且仅当 <span class="math inline">\(\lambda^T \trianglelefteq \mu^T\)</span> <span class="citation" data-cites="mcgovern_nilpotent_1993"><a href="#ref-mcgovern_nilpotent_1993" role="doc-biblioref">[2, lemma 6.3.1]</a></span>：可以通过 Young 图的掉落操作直观感受和证明这一点．</p></li>
 <li><p>秩函数具有下半连续性（lower semicontinuity）：秩不大于某数 <span class="math inline">\(k\)</span> 的矩阵是闭集．秩的子式定义可以为此提供一个一句话证明：对这些矩阵的要求等价于大于 <span class="math inline">\(k\)</span> 阶的子式全为零．更一般地，对任意 <span class="math inline">\(i \in \mathbb N\)</span>，函数 <span class="math inline">\(A \mapsto \operatorname{rk}(A^i)\)</span> 也是下半连续的．此性质使得当我们对幂零轨道取闭包时，元素及其幂次的秩都不会增加．</p></li>
 <li><p>基于秩的 Jordan 型计算：Jordan 型为 <span class="math inline">\(\lambda\)</span> 的幂零矩阵 <span class="math inline">\(X\)</span> 满足其 <span class="math inline">\(i\)</span> 次幂的秩就是 Young 图 <span class="math inline">\(\lambda\)</span> 去掉前 <span class="math inline">\(i\)</span> 列剩下的方块数： <span class="math display">\[
 \operatorname{rk}X^i = n - \sum_{k=1}^i (\lambda^T)_k, \quad i = 0, 1, \dots
@@ -619,32 +619,22 @@ n - \sum_{k=1}^i (\mu^T)_k = \operatorname{rk}Y^i \leq \operatorname{rk}X^i = n 
 </div>
 </div>
 </div>
-<p>特别地，<span class="math inline">\(\mathcal O_{(n)}\)</span> 支配所有其它幂零轨道，故其在幂零锥中稠密．</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">提示</span>Remark
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
-<div class="callout-body-container callout-body">
-<div class="proof remark">
-<p><span class="proof-title"><em>注记</em>. </span></p>
-<ul>
-<li>注意 <span class="math inline">\(\impliedby\)</span> 侧的证明对所有经典李代数都适用．</li>
-<li>关于经典李代数幂零轨道支配序历史，见 <span class="citation" data-cites="jantzen_nilpotent_2004"><a href="#ref-jantzen_nilpotent_2004" role="doc-biblioref">[2, section 13.16]</a></span></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
 </section>
 <section id="bcd-型李代数" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="bcd-型李代数"><span class="header-section-number">3</span> B、C、D 型李代数</h2>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-classic-closure-dominance" class="theorem">
+<p><span class="theorem-title"><strong>定理 2</strong></span> 对任意经典李代数 <span class="math inline">\(\mathfrak g\)</span> 及其上的两个幂零轨道 <span class="math inline">\(\mathcal O_\lambda\)</span>, <span class="math inline">\(\mathcal O_\mu\)</span>，<span class="math inline">\(\lambda \trianglerighteq \mu\)</span> 当且仅当 <span class="math inline">\(\mathcal O_\lambda \trianglerighteq \mathcal O_\mu\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<p>细心的读者可能已经发现，<a href="#thm-sl-closure-dominance" class="quarto-xref">定理&nbsp;1</a> <span class="math inline">\(\impliedby\)</span> 一侧的证明对所有经典李代数都适用．本节的主要工作是证明 <span class="math inline">\(\implies\)</span> 侧．大体的思路仍然是为每个盖住关系构造一条连续路径．不同于 A 型李代数，由于 B、C、D 型李代数的幂零轨道的 Jordan 型存在额外的限制条件，需要讨论的情况更多更复杂．</p>
 <p>【TODO】</p>
 
 
@@ -652,11 +642,11 @@ n - \sum_{k=1}^i (\mu^T)_k = \operatorname{rk}Y^i \leq \operatorname{rk}X^i = n 
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
-<div id="ref-mcgovern_nilpotent_1993" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline">W. M. McGovern, <em>Nilpotent Orbits In Semisimple Lie Algebra: An Introduction</em>. New York: Routledge, 1993. doi: <a href="https://doi.org/10.1201/9780203745809">10.1201/9780203745809</a>.</div>
-</div>
 <div id="ref-jantzen_nilpotent_2004" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">J. C. Jantzen, <span>《Nilpotent Orbits in Representation Theory》</span>, 收入 <em>Lie Theory: Lie Algebras and Representations</em>, J. C. Jantzen, K.-H. Neeb, J.-P. Anker, 和 B. Orsted, 编, Boston, <span>MA</span>: Birkhäuser, 2004, 页 1～211. doi: <a href="https://doi.org/10.1007/978-0-8176-8192-0_1">10.1007/978-0-8176-8192-0_1</a>.</div>
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">J. C. Jantzen, <span>《Nilpotent Orbits in Representation Theory》</span>, 收入 <em>Lie Theory: Lie Algebras and Representations</em>, J. C. Jantzen, K.-H. Neeb, J.-P. Anker, 和 B. Orsted, 编, Boston, <span>MA</span>: Birkhäuser, 2004, 页 1～211. doi: <a href="https://doi.org/10.1007/978-0-8176-8192-0_1">10.1007/978-0-8176-8192-0_1</a>.</div>
+</div>
+<div id="ref-mcgovern_nilpotent_1993" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">W. M. McGovern, <em>Nilpotent Orbits In Semisimple Lie Algebra: An Introduction</em>. New York: Routledge, 1993. doi: <a href="https://doi.org/10.1201/9780203745809">10.1201/9780203745809</a>.</div>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
