@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Drafts WIP and shelved writings.">
+<meta name="author" content="sun123zxy">
 
-<title>废液缸 – sun123zxy’s blog</title>
+<title>经典李代数中的幂零轨道：支配序 – sun123zxy’s blog</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -24,7 +24,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -35,8 +55,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
-<script src="../../site_libs/quarto-listing/list.min.js"></script>
-<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -63,47 +81,19 @@ ul.task-list li input[type="checkbox"] {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
   }
-}</script><script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-lst1 .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-subtitle','listing-lang','listing-categories','listing-description','listing-date','listing-image','listing-collections',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-lst1'] = new List('listing-lst1', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
+}</script>
 <script>
 MathJax = {
   tex: {
@@ -113,6 +103,7 @@ MathJax = {
   }
 };
 </script>
+<meta name="quarto:status" content="draft">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -144,7 +135,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="alternate" type="application/rss+xml" title="sun123zxy's blog" href="index.xml" data-external="1"></head>
+</head>
 
 <body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
@@ -309,7 +300,7 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>草稿</div>
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -317,8 +308,8 @@ window.Quarto = {
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -362,38 +353,58 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(10)</span></div><div class="category" data-category="YWxnZWJyYQ==">algebra <span class="quarto-category-count">(9)</span></div><div class="category" data-category="Y29tYmluYXRvcmljcw==">combinatorics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y29tbWFsZw==">commalg <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z2VvbWV0cnk=">geometry <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bGll">lie <span class="quarto-category-count">(7)</span></div><div class="category" data-category="bWF0aA==">math <span class="quarto-category-count">(10)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#支配序" id="toc-支配序" class="nav-link active" data-scroll-target="#支配序"><span class="header-section-number">1</span> 支配序</a></li>
+  <li><a href="#a-型李代数" id="toc-a-型李代数" class="nav-link" data-scroll-target="#a-型李代数"><span class="header-section-number">2</span> A 型李代数</a></li>
+  <li><a href="#bcd-型李代数" id="toc-bcd-型李代数" class="nav-link" data-scroll-target="#bcd-型李代数"><span class="header-section-number">3</span> B、C、D 型李代数</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>其他格式</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+    </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">废液缸</h1>
-<p class="subtitle lead">Academic Waste</p>
-</div>
-
-<div>
-  <div class="description">
-    Drafts WIP and shelved writings.
+<h1 class="title">经典李代数中的幂零轨道：支配序</h1>
+<p class="subtitle lead">幂零锥和其上的几何：以 <span class="math inline">\(\mathfrak{gl}_n\)</span> 为例</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">algebra</div>
+    <div class="quarto-category">lie</div>
   </div>
-</div>
+  </div>
 
 
-<div class="quarto-title-meta column-page-left">
 
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">作者</div>
+    <div class="quarto-title-meta-contents">
+             <p>sun123zxy </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">发布于</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2026年5月9日</p>
+    </div>
+  </div>
   
     
   </div>
@@ -403,422 +414,251 @@ window.Quarto = {
 </header>
 
 
+<section id="支配序" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="支配序"><span class="header-section-number">1</span> 支配序</h2>
+<p>本章来构建经典李代数中幂零轨道的支配序．</p>
+<p>本章默认在 <span class="math inline">\(\mathbb C\)</span> 上工作．经典李代数均认为是具体的 <span class="math inline">\(\mathbb C^n\)</span> 上的矩阵代数．A 型李代数 <span class="math inline">\(\mathfrak{sl}_n\)</span> 的作用群默认为 <span class="math inline">\(\mathrm{SL}_n\)</span>，B、C、D 型李代数的作用群默认为定义它们的非退化双线性型给出的正交群．考虑到已经完成了<a href="../../posts/20260426-classic-nilp-orbit/">经典李代数中幂零轨道的分类</a>，可以用分拆或唯一标识幂零轨道．以后用 <span class="math inline">\(\mathcal O_\lambda^{\mathfrak{sl}}\)</span> 的记号表示 Jordan 型为 <span class="math inline">\(\lambda\)</span> 的 <span class="math inline">\(\mathfrak{sl}\)</span> 中元素在 <span class="math inline">\(\mathrm{SL}\)</span> 下的共轭轨道．考虑到正交群作用下的 B、C、D 型李代数 <span class="math inline">\(\mathfrak g\)</span> 的幂零轨道由 <span class="math inline">\(\mathrm{GL}\)</span> 作用下的轨道给出，我们用 <span class="math inline">\(\mathcal O_\lambda^\mathfrak g = \mathcal O_\lambda^\mathfrak{sl}\cap \mathfrak{g}\)</span> 来标识 B、C、D 型在正交群作用下的幂零轨道．在上下文明确所在李代数的情况下，<span class="math inline">\(O_\lambda\)</span> 的上标可能会作省略．</p>
+<p>设 <span class="math inline">\(\mathfrak g\)</span> 为一经典李代数，<span class="math inline">\(\mathcal O_1\)</span> 和 <span class="math inline">\(\mathcal O_2\)</span> 为其上的两个幂零轨道．在幂零轨道上定义偏序：如果 <span class="math inline">\(\mathcal O_1 \subseteq \overline{\mathcal O_2}\)</span>，就定义 <span class="math inline">\(\mathcal O_1 \trianglelefteq \mathcal O_2\)</span>，称为幂零轨道上的支配序关系（dominance order．亦作闭包序，closure order）．这里取闭包使用的拓扑是 <span class="math inline">\(\mathfrak g\)</span> 作为仿射空间的 Zariski 拓扑．</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark (Specialization Order)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em> (Specialization Order). </span>一般来讲，任何拓扑空间都可以通过取闭包包含的关系定义出一个预序（不保证反对称性的偏序关系），名曰 <a href="https://en.wikipedia.org/wiki/Specialization_preorder">specialization preorder</a>．</p>
+</div>
+</div>
+</div>
+</div>
+<p>下面的结果将为我们证明轨道间的支配关系提供便利：只要 <span class="math inline">\(\mathcal O_1\)</span> 的任一元素落在 <span class="math inline">\(\mathcal O_2\)</span> 的闭包里，就有 <span class="math inline">\(\mathcal O_1 \subseteq \overline{\mathcal O_2}\)</span>．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-orbit-force-dominance" class="theorem proposition">
+<p><span class="theorem-title"><strong>命题 1</strong></span> 设 <span class="math inline">\(\mathfrak g\)</span> 是经典李代数，<span class="math inline">\(G\)</span> 是其轨道作用群，<span class="math inline">\(\mathcal O_1\)</span>, <span class="math inline">\(\mathcal O_2\)</span> 为经典李代数 <span class="math inline">\(\mathfrak g\)</span> 上的共轭轨道．若 <span class="math inline">\(\mathcal O_1 \cap \overline{\mathcal O_2} \neq \varnothing\)</span>，则 <span class="math inline">\(\mathcal O_1 \subseteq \overline{\mathcal O_2}\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span>任取 <span class="math inline">\(x \in \mathcal O_1 \cap \overline{\mathcal O_2}\)</span>．对任意 <span class="math inline">\(y \in \mathcal O_1\)</span>，由轨道定义，存在 <span class="math inline">\(g \in G\)</span> 使得 <span class="math inline">\(y = \operatorname{Ad}(g) x\)</span>．注意共轭作用 <span class="math inline">\(\operatorname{Ad}(g)\)</span> 是 <span class="math inline">\(\mathfrak g\)</span> 上的自同胚（Zariski 拓扑意义下），故与取闭包运算交换，故 <span class="math display">\[
+y = \operatorname{Ad}(g) x \in \operatorname{Ad}(g)(\overline{\mathcal O_2}) = \overline{\operatorname{Ad}(g)(\mathcal O_2)} = \overline{\mathcal O_2}
+\]</span> 因此 <span class="math inline">\(\mathcal O_1 \subseteq \overline{\mathcal O_2}\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>关于共轭作用是同胚的事实涉及到轨道作用群作为代数群的性质．不熟悉代数群的读者可以暂时先承认这一命题．</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-型李代数" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="a-型李代数"><span class="header-section-number">2</span> A 型李代数</h2>
+<p>来看 A 型李代数 <span class="math inline">\(\mathfrak{sl}_n\)</span> 中幂零轨道的支配序．为此在分拆上定义同名的偏序关系：如果分拆 <span class="math inline">\(\lambda\)</span> 的每个部分和（前缀和）都大于等于 <span class="math inline">\(\mu\)</span> 的对应部分和，则定义 <span class="math inline">\(\lambda \trianglerighteq \mu\)</span>．支配序对应的盖住关系（covering relation）可以用 Young 图刻画：考虑 <span class="math inline">\(\lambda\)</span> 对应 Young 图中那些比下一行至少多两个方块的行，让这一行最右侧方块“掉落”到下一行．例如，<span class="math inline">\((4,2)\)</span> 盖住 <span class="math inline">\((3,3)\)</span> 的图示如下： <span class="math display">\[
+\begin{array}{cccc}
+\bullet &amp; \bullet &amp; \bullet &amp; \boxed\bullet \\
+\bullet &amp; \bullet
+\end{array}
+\quad\trianglerighteq\quad
+\begin{array}{ccc}
+\bullet &amp; \bullet &amp; \bullet \\
+\bullet &amp; \bullet &amp; \boxed\bullet
+\end{array}
+\]</span></p>
+<p>下面的命题说明两种序其实没有区别 <span class="citation" data-cites="mcgovern_nilpotent_1993"><a href="#ref-mcgovern_nilpotent_1993" role="doc-biblioref">[1, theorem 6.2.5]</a></span>：</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="prp-sl-closure-dominance" class="theorem proposition">
+<p><span class="theorem-title"><strong>命题 2</strong></span> 对 A 型李代数 <span class="math inline">\(\mathfrak{sl}_n\)</span> 及其上的两个幂零轨道 <span class="math inline">\(\mathcal O_\lambda\)</span>, <span class="math inline">\(\mathcal O_\mu\)</span>，<span class="math inline">\(\lambda \trianglerighteq \mu\)</span> 当且仅当 <span class="math inline">\(\mathcal O_\lambda \trianglerighteq \mathcal O_\mu\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof (<span class="math inline">\(\implies\)</span> 侧思路概览)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em> (<span class="math inline">\(\implies\)</span> 侧思路概览). </span>这里提供一种基于“连续路径”的证明．考虑 running example <span class="math inline">\(\lambda = (4,2)\)</span>, <span class="math inline">\(\mu = (3,3)\)</span>，<span class="math inline">\(\lambda \trianglerighteq \mu\)</span>．如何连续地把幂零 Jordan 标准型矩阵 <span class="math inline">\(J_{(4,2)}\)</span> 变成 <span class="math inline">\(J_{(3,3)}\)</span> 呢？这样做： <span class="math display">\[
+\begin{pmatrix}
+0 &amp; 1 &amp;   &amp;   &amp;   &amp;  \\
+  &amp; 0 &amp; 1 &amp;   &amp;   &amp;  \\
+  &amp;   &amp; 0 &amp;1-t&amp;   &amp;  \\
+  &amp;   &amp;   &amp; 0 &amp;   &amp;  \\
+  &amp;   &amp;   &amp;   &amp; 0 &amp; 1 \\
+  &amp;   &amp;   &amp; t &amp; 0 &amp; 0
+\end{pmatrix}
+\]</span> 这里列出标准基底 <span class="math inline">\(e_4\)</span> 在上述矩阵多次作用下的变化情况： <span class="math display">\[
+e_4 \longrightarrow +\left\{\begin{aligned}
+t e_6 &amp;\longrightarrow&amp; t e_5 &amp;\longrightarrow&amp; 0&amp; \\
+(1-t) e_3 &amp;\longrightarrow&amp; (1-t) e_2 &amp;\longrightarrow&amp; (1-t) e_1 &amp;\longrightarrow&amp; 0
+\end{aligned}\right.
+\]</span> 可以看到：</p>
+<ul>
+<li>当 <span class="math inline">\(t=0\)</span> 时，就是 <span class="math inline">\(J_{(4,2)}\)</span>；</li>
+<li>当 <span class="math inline">\(t \neq 1\)</span> 时，Jordan 型为 <span class="math inline">\((4,2)\)</span>；</li>
+<li>当 <span class="math inline">\(t=1\)</span> 时，Jordan 型突变为 <span class="math inline">\((3,3)\)</span>．</li>
+</ul>
+<p>这是一条从 <span class="math inline">\(\mathcal O_{(4,2)}\)</span> 内部移动到 <span class="math inline">\(\mathcal O_{(3,3)}\)</span> 边缘的一条“连续路径”．抛开例子，上述论证对任意盖住关系都适用——只需关注 Young 图相邻两行之间的掉落，即可将这一保序映射扩展到任意 <span class="math inline">\(\lambda \trianglerighteq \mu\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof (<span class="math inline">\(\implies\)</span> 侧的证明)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em> (<span class="math inline">\(\implies\)</span> 侧的证明). </span>只需证明 <span class="math inline">\(\lambda\)</span> 盖住 <span class="math inline">\(\mu\)</span> 的情形，即 <span class="math inline">\(\lambda\)</span> 的 Young 图通过掉落一个方块变成 <span class="math inline">\(\mu\)</span> 的 Young 图．设是从 <span class="math inline">\(\lambda\)</span> 的第 <span class="math inline">\(i\)</span> 行掉到第 <span class="math inline">\(i+1\)</span> 行，记 <span class="math inline">\(p = \lambda_i\)</span>, <span class="math inline">\(q = \lambda_{i+1}\)</span>（从而 <span class="math inline">\(p \geq q+2\)</span>）．其余各行均不受扰动，故问题约化为构造从 <span class="math inline">\(\mathcal O_{(p,q)}\)</span> 到 <span class="math inline">\(\mathcal O_{(p-1,q+1)}\)</span> 的路径．记 <span class="math inline">\(J_p\)</span>, <span class="math inline">\(J_q\)</span> 分别为 <span class="math inline">\(p\)</span> 阶和 <span class="math inline">\(q\)</span> 阶幂零 Jordan 块，<span class="math inline">\(E_{i,j}\)</span> 是基本矩阵，定义矩阵系列 <span class="math inline">\(\Gamma := \{\Gamma(t) : t \in \mathbb{C}\}\)</span>： <span class="math display">\[
+\Gamma(t) := (J_p \oplus J_q) - t E_{p-1,\,p} + t E_{p+q,\,p}\qquad t \in \mathbb{C}
+\]</span> 它是幂零锥内满足多项式方程 <span class="math inline">\(x_{p-1,p} + x_{p+q,p} = 1\)</span>、其它位置固定的闭子集．考察标准基 <span class="math inline">\((e_1, e_2, \dots, e_{p+q})\)</span> 在 <span class="math inline">\(\Gamma(t)\)</span> 的作用下的变化情况： <span class="math display">\[
+\begin{aligned}
+\Gamma(t) e_1 &amp;= 0 \\
+\Gamma(t) e_{p+1} &amp;= 0 \\
+\Gamma(t) e_p &amp;= (1-t) e_{p-1} - t e_{p+q} \\
+\Gamma(t) e_{k} &amp;= e_{k-1} \quad \text{for all other unspecified entry } k
+\end{aligned}
+\]</span> 只有 <span class="math inline">\(e_p\)</span> 的变化情况依赖于 <span class="math inline">\(t\)</span>．</p>
+<ul>
+<li><p>当 <span class="math inline">\(t \neq 1\)</span>，注意 <span class="math inline">\(p \geq q+2\)</span>，故 <span class="math inline">\(e_p\)</span> 恰需 <span class="math inline">\(p\)</span> 次 <span class="math inline">\(\Gamma(t)\)</span> 作用变为 <span class="math inline">\(0\)</span>．取循环基底 <span class="math display">\[
+\{\Gamma(t)^k e_p \}_{0 \leq k &lt; p} \sqcup \{ e_k \}_{p &lt; k \leq p+q}
+\]</span> 这组基在 <span class="math inline">\((e_k)_{k=1}^n\)</span> 下是对角线全一的下三角矩阵，故确实线性无关．使用该循环基底可知 <span class="math inline">\(\Gamma(t) \in \mathcal O_{(p,q)}\)</span>．</p></li>
+<li><p>当 <span class="math inline">\(t=1\)</span> 时，<span class="math inline">\(e_p\)</span> 恰需 <span class="math inline">\(q+1\)</span> 次 <span class="math inline">\(\Gamma(t)\)</span> 作用变为 <span class="math inline">\(0\)</span>，取循环基底 <span class="math display">\[
+\{ e_k \}_{1 \leq k &lt; p} \sqcup \{\Gamma(1)^k e_p \}_{0 \leq k \leq q}
+\]</span> 这组基无非是 <span class="math inline">\((e_k)_{k=1}^n\)</span> 的一个置换，故确实线性无关．使用该循环基底可知 <span class="math inline">\(\Gamma(1) \in \mathcal O_{(p-1,q+1)}\)</span>．</p></li>
+</ul>
+<p>于是 <span class="math inline">\(\Gamma\)</span> 只有一点不在 <span class="math inline">\(\mathcal O_{(p,q)}\)</span> 中，<span class="math inline">\(\Gamma \cap \overline{\mathcal O_{(p,q)}} \supseteq \overline{\Gamma \cap \mathcal O_{(p,q)}} = \Gamma\)</span>，即 <span class="math inline">\(\Gamma \subseteq \overline{\mathcal O_{(p,q)}}\)</span>．故 <span class="math inline">\(\Gamma(1) \in \overline{\mathcal O_{(p,q)}}\)</span>，结合 <a href="#prp-orbit-force-dominance" class="quarto-xref">命题&nbsp;1</a> 即得 <span class="math inline">\(\mathcal O_{(p-1,q+1)} \subseteq \overline{\mathcal O_{(p,q)}}\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof (<span class="math inline">\(\impliedby\)</span> 侧的证明)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em> (<span class="math inline">\(\impliedby\)</span> 侧的证明). </span>注意如下若干事实：</p>
+<ul>
+<li><p><span class="math inline">\(\lambda \trianglerighteq \mu\)</span> 当且仅当 <span class="math inline">\(\lambda^T \trianglelefteq \mu^T\)</span> <span class="citation" data-cites="mcgovern_nilpotent_1993"><a href="#ref-mcgovern_nilpotent_1993" role="doc-biblioref">[1, lemma 6.3.1]</a></span>：可以通过 Young 图的掉落操作直观感受和证明这一点．</p></li>
+<li><p>秩函数具有下半连续性（lower semicontinuity）：秩不大于某数 <span class="math inline">\(k\)</span> 的矩阵是闭集．秩的子式定义可以为此提供一个一句话证明：对这些矩阵的要求等价于大于 <span class="math inline">\(k\)</span> 阶的子式全为零．更一般地，对任意 <span class="math inline">\(i \in \mathbb N\)</span>，函数 <span class="math inline">\(A \mapsto \operatorname{rk}(A^i)\)</span> 也是下半连续的．此性质使得当我们对幂零轨道取闭包时，元素及其幂次的秩都不会增加．</p></li>
+<li><p>基于秩的 Jordan 型计算：Jordan 型为 <span class="math inline">\(\lambda\)</span> 的幂零矩阵 <span class="math inline">\(X\)</span> 满足其 <span class="math inline">\(i\)</span> 次幂的秩就是 Young 图 <span class="math inline">\(\lambda\)</span> 去掉前 <span class="math inline">\(i\)</span> 列剩下的方块数： <span class="math display">\[
+\operatorname{rk}X^i = n - \sum_{k=1}^i (\lambda^T)_k, \quad i = 0, 1, \dots
+\]</span> 这里 <span class="math inline">\(\lambda^T\)</span> 是分拆 <span class="math inline">\(\lambda\)</span> 的转置，即 Young 图沿主对角线的翻转．反过来这为我们提供了计算 Jordan 型的秩方法： <span class="math display">\[
+(\lambda^T)_k = \operatorname{rk}X^{k-1} - \operatorname{rk}X^k, \quad k = 1, 2, \dots
+\]</span> 此外，<span class="math inline">\(X^i\)</span> 的 Jordan 型的转置为 <span class="math inline">\((n - \operatorname{rk}X^i, \operatorname{rk}X^i - \operatorname{rk}X^{i-1}, \operatorname{rk}X^{i+1} - \operatorname{rk}X^i, \dots)\)</span>．</p></li>
+</ul>
+<p>现在设 <span class="math inline">\(\overline{\mathcal O_\lambda} \supseteq \mathcal O_\mu\)</span>．不妨任取代表元 <span class="math inline">\(X \in \mathcal O_\lambda\)</span>, <span class="math inline">\(Y \in \mathcal O_\mu\)</span>．对任意 <span class="math inline">\(i \geq 1\)</span>，由 <span class="math inline">\(A \mapsto \operatorname{rk}(A^i)\)</span> 的下半连续性，<span class="math inline">\(\operatorname{rk}Y^i \leq \operatorname{rk}X^i\)</span>，故 <span class="math display">\[
+n - \sum_{k=1}^i (\mu^T)_k = \operatorname{rk}Y^i \leq \operatorname{rk}X^i = n - \sum_{k=1}^i (\lambda^T)_k
+\]</span> 即 <span class="math inline">\(\mu^T\)</span> 的第 <span class="math inline">\(i\)</span> 个部分和大于等于 <span class="math inline">\(\lambda^T\)</span> 的第 <span class="math inline">\(i\)</span> 个部分和，故 <span class="math inline">\(\mu^T \trianglerighteq \lambda^T\)</span>，<span class="math inline">\(\lambda \trianglerighteq \mu\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<p>特别地，<span class="math inline">\(\mathcal O_{(n)}\)</span> 支配所有其它幂零轨道，故其在幂零锥中稠密．</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span></p>
+<ul>
+<li>注意 <span class="math inline">\(\impliedby\)</span> 侧的证明对所有经典李代数都适用．</li>
+<li>关于经典李代数幂零轨道支配序历史，见 <span class="citation" data-cites="jantzen_nilpotent_2004"><a href="#ref-jantzen_nilpotent_2004" role="doc-biblioref">[2, section 13.16]</a></span></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="bcd-型李代数" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="bcd-型李代数"><span class="header-section-number">3</span> B、C、D 型李代数</h2>
+<p>【TODO】</p>
 
 
 
+</section>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-lst1">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-    <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-    <select id="listing-lst1-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-lst1'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-      <option value="" disabled="" selected="" hidden="">Order By</option>
-      <option value="index" data-direction="asc">Default</option>
-      <option value="listing-title" data-direction="asc">
-        Title
-      </option>
-      <option value="listing-date-sort" data-direction="asc">
-        Date - Oldest
-      </option>
-      <option value="listing-date-sort" data-direction="desc">
-        Date - Newest
-      </option>
-    </select>
-  </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-mcgovern_nilpotent_1993" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">W. M. McGovern, <em>Nilpotent Orbits In Semisimple Lie Algebra: An Introduction</em>. New York: Routledge, 1993. doi: <a href="https://doi.org/10.1201/9780203745809">10.1201/9780203745809</a>.</div>
 </div>
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="bWF0aCUyQ2FsZ2VicmElMkNsaWU=" data-listing-date-sort="1778284800000" data-listing-file-modified-sort="1778341378229" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="743">
-<div class="thumbnail"><a href="../../posts/20260509-classic-nilp-dominance/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../posts/20260509-classic-nilp-dominance/index.html" class="no-external">经典李代数中的幂零轨道：支配序</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../posts/20260509-classic-nilp-dominance/index.html" class="no-external">幂零锥和其上的几何：以 <span class="math inline">\(\mathfrak{gl}_n\)</span> 为例</a>
+<div id="ref-jantzen_nilpotent_2004" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">J. C. Jantzen, <span>《Nilpotent Orbits in Representation Theory》</span>, 收入 <em>Lie Theory: Lie Algebras and Representations</em>, J. C. Jantzen, K.-H. Neeb, J.-P. Anker, 和 B. Orsted, 编, Boston, <span>MA</span>: Birkhäuser, 2004, 页 1～211. doi: <a href="https://doi.org/10.1007/978-0-8176-8192-0_1">10.1007/978-0-8176-8192-0_1</a>.</div>
 </div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bGll'); return false;">lie</div>
-
-</div>
-<div class="delink listing-description"><a href="../../posts/20260509-classic-nilp-dominance/index.html" class="no-external">
-本章来构建经典李代数中幂零轨道的支配序．
-</a></div>
-</div>
-<div class="metadata">
-<a href="../../posts/20260509-classic-nilp-dominance/index.html" class="no-external">
-<div class="listing-date">
-2026/05/09
-</div>
-<div class="metadata-value listing-lang">
-zh
-</div>
-<div class="metadata-value listing-collections">
-nilpcone
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="bWF0aCUyQ2FsZ2VicmElMkNsaWU=" data-listing-date-sort="1777248000000" data-listing-file-modified-sort="1778341378229" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="786">
-<div class="thumbnail"><a href="../../posts/20260427-bilinear-form/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../posts/20260427-bilinear-form/index.html" class="no-external">Notes on Classification of Nondegenerate Bilinear Forms</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../posts/20260427-bilinear-form/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bGll'); return false;">lie</div>
-
-</div>
-<div class="delink listing-description"><a href="../../posts/20260427-bilinear-form/index.html" class="no-external">
-<strong>Setting</strong>: <span class="math inline">\(V\)</span> a finite-dimensional vector space over <span class="math inline">\(\mathbb{C}\)</span>, <span class="math inline">\(B: V\times V \to \mathbb{C}\)</span> bilinear and nondegenerate (matrix <span class="math inline">\(M\)</span> is invertible).<br>
-<strong>Equivalence</strong>…<span class="math inline"></span><span class="math inline"></span><span class="math inline"></span>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../../posts/20260427-bilinear-form/index.html" class="no-external">
-<div class="listing-date">
-2026/04/27
-</div>
-<div class="metadata-value listing-lang">
-en
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="bWF0aCUyQ2FsZ2VicmElMkNsaWU=" data-listing-date-sort="1775779200000" data-listing-file-modified-sort="1778341378228" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="90">
-<div class="thumbnail"><a href="../../posts/20260409-ncone-induced-orbit/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../posts/20260409-ncone-induced-orbit/index.html" class="no-external">Lustig–Spaltenstein：分块幂零轨道的提升</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../posts/20260409-ncone-induced-orbit/index.html" class="no-external">幂零锥和其上的几何：以 <span class="math inline">\(\mathfrak{gl}_n\)</span> 为例</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bGll'); return false;">lie</div>
-
-</div>
-<div class="delink listing-description"><a href="../../posts/20260409-ncone-induced-orbit/index.html" class="no-external">
-本篇介绍 <span class="math inline">\(\mathfrak{gl}_n\)</span> 中的 Lustig–Spaltenstein 提升：使用分块对角幂零轨道拼出整个 <span class="math inline">\(\mathfrak{gl}_n\)</span> 中的幂零轨道．
-</a></div>
-</div>
-<div class="metadata">
-<a href="../../posts/20260409-ncone-induced-orbit/index.html" class="no-external">
-<div class="listing-date">
-2026/04/10
-</div>
-<div class="metadata-value listing-lang">
-zh
-</div>
-<div class="metadata-value listing-collections">
-nilpcone
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="bWF0aCUyQ2FsZ2VicmElMkNsaWU=" data-listing-date-sort="1774828800000" data-listing-file-modified-sort="1778341378227" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="77">
-<div class="thumbnail"><a href="../../posts/20260330-ncone-ad-group/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../posts/20260330-ncone-ad-group/index.html" class="no-external">作用群的选择</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../posts/20260330-ncone-ad-group/index.html" class="no-external">幂零锥和其上的几何：以 <span class="math inline">\(\mathfrak{gl}_n\)</span> 为例</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bGll'); return false;">lie</div>
-
-</div>
-<div class="delink listing-description"><a href="../../posts/20260330-ncone-ad-group/index.html" class="no-external">
-一般来说，不同的群作用在李代数 <span class="math inline">\(\mathfrak{g}\)</span> 上可能导致不同的轨道．本篇介绍我们选择作用群的一般标准，主要参考 <span class="citation" data-cites="mcgovern_nilpotent_1993">[1, section 1.2]</span>．
-</a></div>
-</div>
-<div class="metadata">
-<a href="../../posts/20260330-ncone-ad-group/index.html" class="no-external">
-<div class="listing-date">
-2026/03/30
-</div>
-<div class="metadata-value listing-lang">
-zh
-</div>
-<div class="metadata-value listing-collections">
-nilpcone
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="bWF0aCUyQ2FsZ2VicmElMkNjb21tYWxn" data-listing-date-sort="1763424000000" data-listing-file-modified-sort="1778341378226" data-listing-date-modified-sort="1772928000000" data-listing-reading-time-sort="13" data-listing-word-count-sort="2498">
-<div class="thumbnail"><a href="../../posts/20251118-rank/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../posts/20251118-rank/index.html" class="no-external">On the Rank and the Span Rank of Modules</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../posts/20251118-rank/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y29tbWFsZw=='); return false;">commalg</div>
-
-</div>
-<div class="delink listing-description"><a href="../../posts/20251118-rank/index.html" class="no-external">
-To understand this diagram:
-</a></div>
-</div>
-<div class="metadata">
-<a href="../../posts/20251118-rank/index.html" class="no-external">
-<div class="listing-date">
-2025/11/18
-</div>
-<div class="metadata-value listing-lang">
-en
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="bWF0aCUyQ2FsZ2VicmElMkNsaWU=" data-listing-date-sort="1760572800000" data-listing-file-modified-sort="1778341378225" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="141">
-<div class="thumbnail"><a href="../../posts/20251016-lie/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../posts/20251016-lie/index.html" class="no-external">A Table of Lie Groups and Lie Algebras</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../posts/20251016-lie/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bGll'); return false;">lie</div>
-
-</div>
-<div class="delink listing-description"><a href="../../posts/20251016-lie/index.html" class="no-external">
-Type
-</a></div>
-</div>
-<div class="metadata">
-<a href="../../posts/20251016-lie/index.html" class="no-external">
-<div class="listing-date">
-2025/10/16
-</div>
-<div class="metadata-value listing-lang">
-zh
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="bWF0aCUyQ2FsZ2VicmElMkNsaWUlMkNjb21iaW5hdG9yaWNz" data-listing-date-sort="1759795200000" data-listing-file-modified-sort="1778341378225" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="270">
-<div class="thumbnail"><a href="../../posts/20251007-bracket-assoc/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../posts/20251007-bracket-assoc/index.html" class="no-external">非结合代数括号制造艺术</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../posts/20251007-bracket-assoc/index.html" class="no-external">TAOCP: The Art of Creating Parentheses</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bGll'); return false;">lie</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y29tYmluYXRvcmljcw=='); return false;">combinatorics</div>
-
-</div>
-<div class="delink listing-description"><a href="../../posts/20251007-bracket-assoc/index.html" class="no-external">
-二元运算接受两个输入，输出一个结果．如果我们有多个输入，就需要使用括号来明确运算顺序．例如，给定四个元素 <span class="math inline">\(a, b, c, d\)</span>，可以有以下五种不同的括号方式： <span class="math display">\[
-((ab)c)d \quad (a(bc))d \quad (ab)(cd) \quad a((bc)d) \quad a(b(cd))
-\]</span>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../../posts/20251007-bracket-assoc/index.html" class="no-external">
-<div class="listing-date">
-2025/10/07
-</div>
-<div class="metadata-value listing-lang">
-zh
-</div>
-<div class="metadata-value listing-collections">
-short
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="bWF0aCUyQ2FsZ2VicmE=" data-listing-date-sort="1754265600000" data-listing-file-modified-sort="1778341378225" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="203">
-<div class="thumbnail"><a href="../../posts/20250804-artin-rees-krull/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../posts/20250804-artin-rees-krull/index.html" class="no-external">Artin–Rees–Krull 乱炖</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../posts/20250804-artin-rees-krull/index.html" class="no-external">Artin–Rees Lemma and Krull Intersection Theorem</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-</div>
-<div class="delink listing-description"><a href="../../posts/20250804-artin-rees-krull/index.html" class="no-external">
-本文所指环均为交换幺环．Krull 交定理刻画了 Noether 环中任意理想幂次组成的降链的极限形态：
-</a></div>
-</div>
-<div class="metadata">
-<a href="../../posts/20250804-artin-rees-krull/index.html" class="no-external">
-<div class="listing-date">
-2025/08/04
-</div>
-<div class="metadata-value listing-lang">
-zh
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-categories="bWF0aCUyQ2FsZ2VicmElMkNsaWU=" data-listing-date-sort="1752278400000" data-listing-file-modified-sort="1778341378225" data-listing-date-modified-sort="1776470400000" data-listing-reading-time-sort="5" data-listing-word-count-sort="807">
-<div class="thumbnail"><a href="../../posts/20250712-gl-sylow/index.html" class="no-external">
-
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../posts/20250712-gl-sylow/index.html" class="no-external">从一般线性群 <span class="math inline">\(\operatorname{GL}_n(\mathbb F_q)\)</span> 的 Sylow <span class="math inline">\(p\)</span>-子群谈起</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../posts/20250712-gl-sylow/index.html" class="no-external">Rambling from the Sylow <span class="math inline">\(p\)</span>-subgroups of the General Linear Group <span class="math inline">\(\operatorname{GL}_n(\mathbb F_q)\)</span></a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">algebra</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bGll'); return false;">lie</div>
-
-</div>
-<div class="delink listing-description"><a href="../../posts/20250712-gl-sylow/index.html" class="no-external">
-设 <span class="math inline">\(p\)</span> 为素数，<span class="math inline">\(q = p^\alpha\)</span>．我们引入一点先进的 <span class="math inline">\(q\)</span>-analog 记号： <span class="math display">\[
-\begin{aligned}[]
-[n]_q  &amp;:= \frac{q^n - 1}{q - 1} = q^{n-1} + q^{n-2} + \cdots + q + 1 \\
-[n]_q! &amp;:=…</span>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../../posts/20250712-gl-sylow/index.html" class="no-external">
-<div class="listing-date">
-2025/07/12
-</div>
-<div class="metadata-value listing-lang">
-zh
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="9" data-categories="bWF0aCUyQ2dlb21ldHJ5" data-listing-date-sort="1748822400000" data-listing-file-modified-sort="1778341378224" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="481">
-<div class="thumbnail"><a href="../../posts/20250602-manifold/index.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="../../posts/20250602-manifold/index_files/figure-html/cell-3-output-1.png"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../../posts/20250602-manifold/index.html" class="no-external">神奇流形在哪里</a>
-</h3>
-<div class="listing-subtitle">
-<a href="../../posts/20250602-manifold/index.html" class="no-external">Fantastic Manifolds and Where to Find Them</a>
-</div>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">math</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Z2VvbWV0cnk='); return false;">geometry</div>
-
-</div>
-<div class="delink listing-description"><a href="../../posts/20250602-manifold/index.html" class="no-external">
-<span class="math display">\[
-\gamma(t) := (e^{2\pi i t}, e^{2 \pi i \alpha t})
-\]</span> is an <span class="math inline">\(\mathbb R \to \mathbb T^2 \subset \mathbb C^2\)</span> immersion (Note that it’s injective!). The corresponding…<span class="math inline"></span><span class="math inline"></span><span class="citation" data-cites="lee_introduction_2012"></span>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../../posts/20250602-manifold/index.html" class="no-external">
-<div class="listing-date">
-2025/06/02
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -857,12 +697,12 @@ zh
       // flash "checked"
       button.classList.add('code-copy-button-checked');
       var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
+      button.setAttribute("title", "已复制");
       let tooltip;
       if (window.bootstrap) {
         button.setAttribute("data-bs-toggle", "tooltip");
         button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
+        button.setAttribute("data-bs-title", "已复制");
         tooltip = new bootstrap.Tooltip(button, 
           { trigger: "manual", 
             customClass: "code-copy-button-tooltip",
@@ -1239,6 +1079,38 @@ zh
     }
   });
   </script>
+<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
+<input type="hidden" id="giscus-alt-theme" value="light">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "sun123zxy/blog-quarto-code";
+    script.dataset.repoId = "R_kgDOIrPs5w";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOIrPs584CV4gd";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
