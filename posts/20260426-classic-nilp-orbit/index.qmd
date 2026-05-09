@@ -96,6 +96,20 @@ $$
 
 :::{.remark}
 
+## 矩阵记号
+
+在选定基底后，使用矩阵记号会为计算带来便利．设 $\Phi$ 是双线性型 $\varphi$ 在该基下的 Gram 矩阵，则 $\varphi(v, w) = v^T \Phi w$，非退化意味着 $\Phi$ 可逆．伴随算子 $X^*$、正交群 $G$ 和斜自伴李代数 $\mathfrak{g}$ 的定义可以用矩阵记号重写为：
+$$
+\begin{aligned}
+X^* &:= \Phi^{-1} X^T \Phi \\
+G &= \{X \in \GL_n : X^T \Phi X = \Phi\} = \{ X \in \GL_n : X^* = X^{-1} \} \\
+\mathfrak g &= \{X \in \gl_n : X^T \Phi = - \Phi X \} = \{X \in \gl_n : X^* = -X\}
+\end{aligned}
+$$
+:::
+
+:::{.remark}
+
 ## 表示论观点
 
 若将 $\varphi$ 视为 $V \to V^*$ 的线性映射，则
@@ -318,7 +332,7 @@ $$
    & \dots &    &  \\
 (-1)^{d-1} &   &    &
 \end{pmatrix}
-$$
+$${#eq-gram-std-single}
 容易验证：
 
 - $d$ 偶数时斜对称，$d$ 为奇数时对称．
@@ -340,7 +354,7 @@ $$
 0 & \Phi_d \\
 \varepsilon \Phi_d^T & 0
 \end{pmatrix}
-$$
+$${#eq-gram-std-pair}
 这里 $\varepsilon \in \{1,-1\}$．同样容易验证：
 
 - $X$ 关于 $\varphi$ 斜自伴．
@@ -436,8 +450,6 @@ $$
 
 [Jacobson--Morozov 定理](/posts/20260410-jacobson-morozov/)允许我们为任何幂零元 $X \in \mathfrak g$ 补出其对应的 $\sl_2$-三元组 $(X,Y,H)$：
 
-### Jacobson--Morozov 定理
-
 :::{#thm-jacobson-morozov}
 
 ## Jacobson--Morozov
@@ -471,40 +483,14 @@ k(d-k) e_{k+1} & \quad 1 \leq k \leq d-1 \\
 $$
 这就是 $\sl_2$ 的 $d$ 维不可约表示的标准构造．各块拼接即完成 A 型的构造．
 
-现在看 B, C, D 型．设 $X \in \mathfrak g := \mathfrak o(V, \varphi)$ 幂零，非退化双线性型 $\varphi$ 对称或斜对称．由 [@thm-reduction-to-normal-form]，可选取基底使 $X$ 为 Jordan 标准型且 $\varphi$ 的矩阵为 [@sec-construction-of-partition] 中的反对角构造．在每个子块上沿用 A 型的 $Y, H$．小心仔细的计算表明无论是单个块还是成对的块，$Y, H$ 仍满足斜自伴条件，即 $Y, H \in \mathfrak g$．
+现在看 B, C, D 型．设 $X \in \mathfrak g := \mathfrak o(V, \varphi)$ 幂零，非退化双线性型 $\varphi$ 对称或斜对称．由 [@thm-reduction-to-normal-form]，可选取基底使 $X$ 为 Jordan 标准型且 $\varphi$ 的矩阵为 [@sec-construction-of-partition] 中的反对角构造．现在在每个子块补出 $Y, H$：
 
-因此 $(X, Y, H)$ 确实给出 $\mathfrak g$ 中的 $\sl_2$-三元组．
+- 对单块情形 [@eq-gram-std-single]，直接沿用 A 型构造的 $Y, H$．
+- 对成对块情形 [@eq-gram-std-pair]，直接使用直和 $Y \oplus Y$ 和 $H \oplus H$．
 
-### 表示论风格的分类重证
-
-由于 Jacobson--Morozov 定理有完全不依赖经典李代数的抽象证明，可以考虑反过来利用它来重新为幂零轨道分类提供一个更干净整洁的非构造性证明．
-
-为幂零元 $X \in \mathfrak g := \mathfrak{o}(V, \varphi)$ 补出 $\sl_2$-三元组 $(X, Y, H)$ 后，$V$ 成为一个 $\sl_2$-模．由 $\sl_2$-模的表示理论，其完全分解为
-$$
-V \cong \bigoplus_k V_k^{\oplus r_k} \cong \bigoplus_k (V_k \otimes \mathbb C^{\oplus r_k})
-$$
-其中 $V_k$ 是 $k$ 维不可约表示，$X$ 在每个 $V_k$ 上的作用恰为一个 $k$ 阶幂零 Jordan 块．故 Jordan 型由重数 $r_k$ 完全确定．
-
-$X$ 的斜自伴性意味着 $\varphi$ 是 $V \to V^*$ 的 $\sl_2$-模同态，即 $\varphi \in (V^* \otimes V^*)^{\sl_2}$．在 $V^* \otimes V^*$ 上使用上面的分解：
-$$
-V^* \otimes V^* \cong \bigoplus_{i,j} (V_i^* \otimes V_j^*) \otimes (\mathbb C^{\oplus r_i} \otimes \mathbb C^{\oplus r_j})
-$$
-$\sl_2$ 只作用于 $V_i^* \otimes V_j^*$．注意 $\sl_2$-表示是自伴的 $V_k \cong V_k^*$，故由 Schur 引理，$i \neq j$ 时 $(V_i^* \otimes V_j^*)^{\sl_2} \cong \Hom_{\sl_2}(V_i, V_j) = 0$，故可不考虑交叉项，上式简化为：
-$$
-(V^* \otimes V^*)^{\sl_2} \cong \bigoplus_k (V_k^* \otimes V_k^*)^{\sl_2} \otimes (\mathbb C^{\oplus r_k} \otimes \mathbb C^{\oplus r_k})
-$$
-仍由 Schur 引理，$(V_k^* \otimes V_k^*)^{\sl_2} \cong \Hom_{\sl_2}(V_k, V_k^*)$ 是一维线性空间．我们其实在上一小节手动完成经典李代数的 Jacobson--Morozov 定理时已经构造出其中的一个非零元素（即单块情形），故 $V_k$ 是对称还是斜对称由维数 $k$ 的奇偶性决定：$k$ 偶数时斜对称，$k$ 奇数时对称．
-
-来考虑张量积右侧另一半：$\mathbb C^{\oplus r_k}$ 上的一个非退化双线性型．回忆 [@prp-sym-diag] 和 [@prp-alt-standard]，这后一个双线性型为对称时对 $r_k$ 无限制，为斜对称时 $r_k$ 必须为偶数．于是：
-
-- 若 $\varphi$ 对称：$k$ 为偶数时 $V_k$ 侧是斜对称，故 $\mathbb C^{\oplus r_k}$ 上的双线性型必须是斜对称，从而 $r_k$ 为偶数；$k$ 奇数时 $V_k$ 侧的型是对称，故 $\mathbb C^{\oplus r_k}$ 上的型也可以取对称，对 $r_k$ 无限制．
-- 若 $\varphi$ 斜对称（$\sp$ 情形）：$k$ 为奇数时 $V_k$ 侧的型是对称，故 $\mathbb C^{\oplus r_k}$ 上的双线性型必须是斜对称，从而 $r_k$ 为偶数；$k$ 偶数时 $V_k$ 侧的型是斜对称，故 $\mathbb C^{\oplus r_k}$ 上的型可以取对称，对 $r_k$ 无限制．
-
-这正好是合法分拆的条件——$\so(V)$ 中偶数大小块出现偶数次，$\sp(V)$ 中奇数大小块出现偶数次．我们重新完成了幂零轨道的分类．
+小心仔细的计算表明无论是单个块还是成对的块，$Y, H$ 仍满足斜自伴条件，即 $Y, H \in \mathfrak g$．因此我们完成了 B, C, D 型的构造．
 
 :::{.remark}
-
-- Some of the ideas from [Mathoverflow](https://mathoverflow.net/questions/9361/how-can-we-describe-the-splitting-of-nilpotent-orbit-for-very-even-partitions)
 
 如果不执着于将 $X$ 实现为 Jordan 标准型，适当放缩，$m+1$ 阶单块矩阵的三元组和 Gram 矩阵可以获得更对称的矩阵写法：
 $$
@@ -535,6 +521,38 @@ $$
 \end{pmatrix}
 $$
 这里的 $\binom{m}{k}$ 是二项式系数．
+:::
+
+## 表示论风格的分类重证
+
+由于 Jacobson--Morozov 定理有完全不依赖经典李代数的抽象证明，可以考虑反过来利用它来重新为幂零轨道分类提供一个更干净整洁的非构造性证明．
+
+为幂零元 $X \in \mathfrak g := \mathfrak{o}(V, \varphi)$ 补出 $\sl_2$-三元组 $(X, Y, H)$ 后，$V$ 成为一个 $\sl_2$-模．由 $\sl_2$-模的表示理论，其完全分解为
+$$
+V \cong \bigoplus_k V_k^{\oplus r_k} \cong \bigoplus_k (V_k \otimes \mathbb C^{\oplus r_k})
+$$
+其中 $V_k$ 是 $k$ 维不可约表示，$X$ 在每个 $V_k$ 上的作用恰为一个 $k$ 阶幂零 Jordan 块．故 Jordan 型由重数 $r_k$ 完全确定．
+
+$X$ 的斜自伴性意味着 $\varphi$ 是 $V \to V^*$ 的 $\sl_2$-模同态，即 $\varphi \in (V^* \otimes V^*)^{\sl_2}$．在 $V^* \otimes V^*$ 上使用上面的分解：
+$$
+V^* \otimes V^* \cong \bigoplus_{i,j} (V_i^* \otimes V_j^*) \otimes (\mathbb C^{\oplus r_i} \otimes \mathbb C^{\oplus r_j})
+$$
+$\sl_2$ 只作用于 $V_i^* \otimes V_j^*$．注意 $\sl_2$-表示是自伴的 $V_k \cong V_k^*$，故由 Schur 引理，$i \neq j$ 时 $(V_i^* \otimes V_j^*)^{\sl_2} \cong \Hom_{\sl_2}(V_i, V_j) = 0$，故可不考虑交叉项，上式简化为：
+$$
+(V^* \otimes V^*)^{\sl_2} \cong \bigoplus_k (V_k^* \otimes V_k^*)^{\sl_2} \otimes (\mathbb C^{\oplus r_k} \otimes \mathbb C^{\oplus r_k})
+$$
+仍由 Schur 引理，$(V_k^* \otimes V_k^*)^{\sl_2} \cong \Hom_{\sl_2}(V_k, V_k^*)$ 是一维线性空间．我们其实在上一小节手动完成经典李代数的 Jacobson--Morozov 定理时已经构造出其中的一个非零元素（即单块情形的反对角构造），故 $V_k$ 是对称还是斜对称由维数 $k$ 的奇偶性决定：$k$ 偶数时斜对称，$k$ 奇数时对称．
+
+来考虑张量积右侧另一半：$\mathbb C^{\oplus r_k}$ 上的一个非退化双线性型．回忆 [@prp-sym-diag] 和 [@prp-alt-standard]，这后一个双线性型为对称时对 $r_k$ 无限制，为斜对称时 $r_k$ 必须为偶数．于是：
+
+- 若 $\varphi$ 对称：$k$ 为偶数时 $V_k$ 侧是斜对称，故 $\mathbb C^{\oplus r_k}$ 上的双线性型必须是斜对称，从而 $r_k$ 为偶数；$k$ 奇数时 $V_k$ 侧的型是对称，故 $\mathbb C^{\oplus r_k}$ 上的型也可以取对称，对 $r_k$ 无限制．
+- 若 $\varphi$ 斜对称（$\sp$ 情形）：$k$ 为奇数时 $V_k$ 侧的型是对称，故 $\mathbb C^{\oplus r_k}$ 上的双线性型必须是斜对称，从而 $r_k$ 为偶数；$k$ 偶数时 $V_k$ 侧的型是斜对称，故 $\mathbb C^{\oplus r_k}$ 上的型可以取对称，对 $r_k$ 无限制．
+
+这正好是合法分拆的条件——$\so(V)$ 中偶数大小块出现偶数次，$\sp(V)$ 中奇数大小块出现偶数次．我们重新完成了幂零轨道的分类．
+
+:::{.remark}
+
+- Some of the ideas from [Mathoverflow](https://mathoverflow.net/questions/9361/how-can-we-describe-the-splitting-of-nilpotent-orbit-for-very-even-partitions)
 :::
 
 ## 特殊正交群 $\SO_{2n}$ 与轨道分支现象
