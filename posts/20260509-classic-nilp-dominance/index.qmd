@@ -22,15 +22,21 @@ format:
   pdf: default
 ---
 
-本章来构建经典李代数中幂零轨道的支配序．考虑到已经完成了[经典李代数中幂零轨道的分类](/posts/20260426-classic-nilp-orbit/)，可以用分拆或唯一标识幂零轨道．以后用 $\mathcal O_\lambda^{\mathfrak{sl}}$ 的记号表示 Jordan 型为 $\lambda$ 的 $\mathfrak{sl}$ 中元素在 $\SL$ 下的共轭轨道．考虑到正交群作用下的 B、C、D 型李代数 $\mathfrak g$ 的幂零轨道由 $\GL$ 作用下的轨道给出，我们用 $\mathcal O_\lambda^\mathfrak g = \mathcal O_\lambda^\mathfrak{sl} \cap \mathfrak{g}$ 来标识 B、C、D 型的幂零轨道．在上下文明确所在李代数的情况下，$O_\lambda$ 的上标可能会作省略．
+## 支配序
 
-## Zariski 拓扑
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\gl}{\mathfrak{gl}}
+\newcommand{\SL}{\mathrm{SL}}
+\renewcommand{\sl}{\mathfrak{sl}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\rk}{\operatorname{rk}}
 
-幂零轨道的支配序研究了幂零轨道之前的闭包包含关系．为此需要先明确作用群和李代数上的拓扑．
+本章来构建经典李代数中幂零轨道的支配序．
 
-【TODO】
+本章默认在 $\mathbb C$ 上工作．经典李代数均认为是具体的 $\mathbb C^n$ 上的矩阵代数．A 型李代数 $\sl_n$ 的作用群默认为 $\SL_n$，B、C、D 型李代数的作用群默认为定义它们的非退化双线性型给出的正交群．考虑到已经完成了[经典李代数中幂零轨道的分类](/posts/20260426-classic-nilp-orbit/)，可以用分拆或唯一标识幂零轨道．以后用 $\mathcal O_\lambda^{\sl}$ 的记号表示 Jordan 型为 $\lambda$ 的 $\sl$ 中元素在 $\SL$ 下的共轭轨道．考虑到正交群作用下的 B、C、D 型李代数 $\mathfrak g$ 的幂零轨道由 $\GL$ 作用下的轨道给出，我们用 $\mathcal O_\lambda^\mathfrak g = \mathcal O_\lambda^\sl \cap \mathfrak{g}$ 来标识 B、C、D 型在正交群作用下的幂零轨道．在上下文明确所在李代数的情况下，$O_\lambda$ 的上标可能会作省略．
 
-在幂零轨道上定义偏序：如果 $\mathcal O_1 \subseteq \overline{\mathcal O_2}$，就定义 $\mathcal O_1 \trianglelefteq \mathcal O_2$，称为幂零轨道上的支配序关系（dominance order．亦作闭包序，closure order）．事实上只要 $\mathcal O_1$ 的任一元素落在 $\mathcal O_2$ 的闭包里，就有 $\mathcal O_1 \subseteq \overline{\mathcal O_2}$——这是因为共轭作用作为李代数上的同胚与取闭包运算交换．
+设 $\mathfrak g$ 为一经典李代数，$\mathcal O_1$ 和 $\mathcal O_2$ 为其上的两个幂零轨道．在幂零轨道上定义偏序：如果 $\mathcal O_1 \subseteq \overline{\mathcal O_2}$，就定义 $\mathcal O_1 \trianglelefteq \mathcal O_2$，称为幂零轨道上的支配序关系（dominance order．亦作闭包序，closure order）．这里取闭包使用的拓扑是 $\mathfrak g$ 作为仿射空间的 Zariski 拓扑．
 
 :::{.remark}
 
@@ -39,9 +45,30 @@ format:
 一般来讲，任何拓扑空间都可以通过取闭包包含的关系定义出一个预序（不保证反对称性的偏序关系），名曰 [specialization preorder](https://en.wikipedia.org/wiki/Specialization_preorder)．
 :::
 
-## A 型李代数的幂零轨道支配序
+下面的结果将为我们证明轨道间的支配关系提供便利：只要 $\mathcal O_1$ 的任一元素落在 $\mathcal O_2$ 的闭包里，就有 $\mathcal O_1 \subseteq \overline{\mathcal O_2}$．
 
-来看 $\mathfrak{sl}_n$ 中幂零轨道的支配序．为此在分拆上定义同名的偏序关系：如果分拆 $\lambda$ 的每个部分和（前缀和）都大于等于 $\mu$ 的对应部分和，则定义 $\lambda \trianglerighteq \mu$．支配序对应的盖住关系（covering relation）可以用 Young 图刻画：考虑 $\lambda$ 对应 Young 图中那些比下一行至少多两个方块的行，让这一行最右侧方块“掉落”到下一行．例如，$(4,2)$ 盖住 $(3,3)$ 的图示如下：
+:::{#prp-orbit-force-dominance}
+
+设 $\mathfrak g$ 是经典李代数，$G$ 是其轨道作用群，$\mathcal O_1$, $\mathcal O_2$ 为经典李代数 $\mathfrak g$ 上的共轭轨道．若 $\mathcal O_1 \cap \overline{\mathcal O_2} \neq \varnothing$，则 $\mathcal O_1 \subseteq \overline{\mathcal O_2}$．
+:::
+
+:::{.proof}
+
+任取 $x \in \mathcal O_1 \cap \overline{\mathcal O_2}$．对任意 $y \in \mathcal O_1$，由轨道定义，存在 $g \in G$ 使得 $y = \Ad(g) x$．注意共轭作用 $\Ad(g)$ 是 $\mathfrak g$ 上的自同胚（Zariski 拓扑意义下），故与取闭包运算交换，故
+$$
+y = \Ad(g) x \in \Ad(g)(\overline{\mathcal O_2}) = \overline{\Ad(g)(\mathcal O_2)} = \overline{\mathcal O_2}
+$$
+因此 $\mathcal O_1 \subseteq \overline{\mathcal O_2}$．
+:::
+
+:::{.remark}
+
+关于共轭作用是同胚的事实涉及到轨道作用群作为代数群的性质．不熟悉代数群的读者可以暂时先承认这一命题．
+:::
+
+## A 型李代数
+
+来看 A 型李代数 $\sl_n$ 中幂零轨道的支配序．为此在分拆上定义同名的偏序关系：如果分拆 $\lambda$ 的每个部分和（前缀和）都大于等于 $\mu$ 的对应部分和，则定义 $\lambda \trianglerighteq \mu$．支配序对应的盖住关系（covering relation）可以用 Young 图刻画：考虑 $\lambda$ 对应 Young 图中那些比下一行至少多两个方块的行，让这一行最右侧方块“掉落”到下一行．例如，$(4,2)$ 盖住 $(3,3)$ 的图示如下：
 $$
 \begin{array}{cccc}
 \bullet & \bullet & \bullet & \boxed\bullet \\
@@ -58,12 +85,12 @@ $$
 
 :::{#prp-sl-closure-dominance}
 
-$\lambda \trianglerighteq \mu$ 当且仅当 $\mathcal O_\lambda \trianglerighteq \mathcal O_\mu$．
+对 A 型李代数 $\sl_n$ 及其上的两个幂零轨道 $\mathcal O_\lambda$, $\mathcal O_\mu$，$\lambda \trianglerighteq \mu$ 当且仅当 $\mathcal O_\lambda \trianglerighteq \mathcal O_\mu$．
 :::
 
 :::{.proof}
 
-## $\implies$ 侧证明概览
+## $\implies$ 侧思路概览
 
 这里提供一种基于“连续路径”的证明．考虑 running example $\lambda = (4,2)$, $\mu = (3,3)$，$\lambda \trianglerighteq \mu$．如何连续地把幂零 Jordan 标准型矩阵 $J_{(4,2)}$ 变成 $J_{(3,3)}$ 呢？这样做：
 $$
@@ -96,33 +123,34 @@ $$
 
 ## $\implies$ 侧的证明
 
-只需证明 $\lambda$ 盖住 $\mu$ 的情形，即 $\lambda$ 的 Young 图通过掉落一个方块变成 $\mu$ 的 Young 图．设是从 $\lambda$ 的第 $i$ 行掉到第 $i+1$ 行．记 $l(\lambda)$ 是 $\lambda$ 的长度，部分和 $S_i(\lambda) := \sum_{k=1}^i \lambda_k$，$J_\lambda$ 是 $\lambda$ 对应的 Jordan 标准型，$E_{i,j}$ 是基本矩阵，定义矩阵系列 $\Gamma_\lambda := \{\Gamma_\lambda(t) : t \in \mathbb{C}\}$：
+只需证明 $\lambda$ 盖住 $\mu$ 的情形，即 $\lambda$ 的 Young 图通过掉落一个方块变成 $\mu$ 的 Young 图．设是从 $\lambda$ 的第 $i$ 行掉到第 $i+1$ 行，记 $p = \lambda_i$, $q = \lambda_{i+1}$（从而 $p \geq q+2$）．其余各行均不受扰动，故问题约化为构造从 $\mathcal O_{(p,q)}$ 到 $\mathcal O_{(p-1,q+1)}$ 的路径．记 $J_p$, $J_q$ 分别为 $p$ 阶和 $q$ 阶幂零 Jordan 块，$E_{i,j}$ 是基本矩阵，定义矩阵系列 $\Gamma := \{\Gamma(t) : t \in \mathbb{C}\}$：
 $$
-\Gamma_\lambda(t) := J_\lambda - t E_{ S_i(\lambda) - 1, S_i(\lambda)} + t E_{ S_{i+1}(\lambda), S_i(\lambda)}\qquad t \in \mathbb{C}
+\Gamma(t) := (J_p \oplus J_q) - t E_{p-1,\,p} + t E_{p+q,\,p}\qquad t \in \mathbb{C}
 $$
-它是 $\mathcal N$ 的满足多项式方程 $x_{S_i(\lambda)-1,S_i(\lambda)} + x_{S_{i+1}(\lambda),S_i(\lambda)} = 1$ 的闭子集．考察标准基 $(e_1, e_2, \dots, e_n)$ 在 $\Gamma_\lambda(t)$ 的作用下的变化情况：
+它是幂零锥内满足多项式方程 $x_{p-1,p} + x_{p+q,p} = 1$、其它位置固定的闭子集．考察标准基 $(e_1, e_2, \dots, e_{p+q})$ 在 $\Gamma(t)$ 的作用下的变化情况：
 $$
 \begin{aligned}
-\Gamma_\lambda(t) e_{S_k(\lambda) + 1} &= 0 & k = 0, 1, \dots, l(\lambda) - 1 \\
-\Gamma_\lambda(t) e_{S_i(\lambda)} &= (1-t) e_{S_i(\lambda) - 1} - t e_{S_{i+1}(\lambda)} \\
-\Gamma_\lambda(t) e_{s} &= e_{s-1} & \text{for all other } s
+\Gamma(t) e_1 &= 0 \\
+\Gamma(t) e_{p+1} &= 0 \\
+\Gamma(t) e_p &= (1-t) e_{p-1} - t e_{p+q} \\
+\Gamma(t) e_{k} &= e_{k-1} \quad \text{for all other unspecified entry } k
 \end{aligned}
 $$
-只有 $e_{S_i(\lambda)}$ 的变化情况依赖于 $t$．注意 $\lambda_i \geq \lambda_{i-1}$，故
+只有 $e_p$ 的变化情况依赖于 $t$．
 
-- 当 $t \neq 1$，$e_{S_i(\lambda)}$ 恰需 $\lambda_i$ 次 $\Gamma_\lambda(t)$ 作用变为 $0$．取基底
+- 当 $t \neq 1$，注意 $p \geq q+2$，故 $e_p$ 恰需 $p$ 次 $\Gamma(t)$ 作用变为 $0$．取循环基底
   $$
-  \{ e_k \}_{1 \leq k \leq S_{i-1}(\lambda)} \sqcup \{\Gamma_\lambda(t)^k e_{S_i(\lambda)} \}_{0 \leq k < \lambda_i} \sqcup \{ e_k \}_{S_i(\lambda) < k \leq n}
+  \{\Gamma(t)^k e_p \}_{0 \leq k < p} \sqcup \{ e_k \}_{p < k \leq p+q}
   $$
-  可知 $\Gamma_\lambda(t) \in \mathcal O_\lambda$．
+  这组基在 $(e_k)_{k=1}^n$ 下是对角线全一的下三角矩阵，故确实线性无关．使用该循环基底可知 $\Gamma(t) \in \mathcal O_{(p,q)}$．
 
-- 当 $t=1$ 时，$e_{S_i(\lambda)}$ 恰需 $\lambda_{i+1} + 1$ 次 $\Gamma_\lambda(t)$ 作用变为 $0$，取基底
+- 当 $t=1$ 时，$e_p$ 恰需 $q+1$ 次 $\Gamma(t)$ 作用变为 $0$，取循环基底
   $$
-  \{ e_k \}_{1 \leq k < S_{i}(\lambda)} \sqcup \{\Gamma_\lambda(1)^k e_{S_i(\lambda)} \}_{0 \leq k \leq \lambda_{i+1}} \sqcup \{ e_k \}_{S_{i+1}(\lambda) < k \leq n}
+  \{ e_k \}_{1 \leq k < p} \sqcup \{\Gamma(1)^k e_p \}_{0 \leq k \leq q}
   $$
-  可知 $\Gamma_\lambda(1) \in \mathcal O_\mu$．
+  这组基无非是 $(e_k)_{k=1}^n$ 的一个置换，故确实线性无关．使用该循环基底可知 $\Gamma(1) \in \mathcal O_{(p-1,q+1)}$．
 
-于是 $\Gamma_\lambda$ 只有一点不在 $\mathcal O_\lambda$ 中，$\Gamma_\lambda \cap \overline{\mathcal O_\lambda} \supseteq \overline{\Gamma_\lambda \cap \mathcal O_\lambda} = \Gamma_\lambda$，即 $\Gamma_\lambda \subseteq \overline{\mathcal O_\lambda}$．故 $\Gamma_\lambda(1) \in \overline{\mathcal O_\lambda}$，$\mathcal O_\mu \subseteq \overline{\mathcal O_\lambda}$．
+于是 $\Gamma$ 只有一点不在 $\mathcal O_{(p,q)}$ 中，$\Gamma \cap \overline{\mathcal O_{(p,q)}} \supseteq \overline{\Gamma \cap \mathcal O_{(p,q)}} = \Gamma$，即 $\Gamma \subseteq \overline{\mathcal O_{(p,q)}}$．故 $\Gamma(1) \in \overline{\mathcal O_{(p,q)}}$，结合 [@prp-orbit-force-dominance] 即得 $\mathcal O_{(p-1,q+1)} \subseteq \overline{\mathcal O_{(p,q)}}$．
 :::
 
 :::{.proof}
