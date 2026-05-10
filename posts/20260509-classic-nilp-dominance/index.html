@@ -369,7 +369,20 @@ window.Quarto = {
   <ul>
   <li><a href="#支配序" id="toc-支配序" class="nav-link active" data-scroll-target="#支配序"><span class="header-section-number">1</span> 支配序</a></li>
   <li><a href="#a-型李代数" id="toc-a-型李代数" class="nav-link" data-scroll-target="#a-型李代数"><span class="header-section-number">2</span> A 型李代数</a></li>
-  <li><a href="#bcd-型李代数" id="toc-bcd-型李代数" class="nav-link" data-scroll-target="#bcd-型李代数"><span class="header-section-number">3</span> B、C、D 型李代数</a></li>
+  <li><a href="#c-型李代数" id="toc-c-型李代数" class="nav-link" data-scroll-target="#c-型李代数"><span class="header-section-number">3</span> C 型李代数</a>
+  <ul class="collapse">
+  <li><a href="#组合图示" id="toc-组合图示" class="nav-link" data-scroll-target="#组合图示"><span class="header-section-number">3.1</span> 组合图示</a></li>
+  <li><a href="#盖住关系与路径构造" id="toc-盖住关系与路径构造" class="nav-link" data-scroll-target="#盖住关系与路径构造"><span class="header-section-number">3.2</span> 盖住关系与路径构造</a></li>
+  </ul></li>
+  <li><a href="#b-型和-d-型李代数" id="toc-b-型和-d-型李代数" class="nav-link" data-scroll-target="#b-型和-d-型李代数"><span class="header-section-number">4</span> B 型和 D 型李代数</a>
+  <ul class="collapse">
+  <li><a href="#p-12q-1-to-p-1q-1" id="toc-p-12q-1-to-p-1q-1" class="nav-link" data-scroll-target="#p-12q-1-to-p-1q-1"><span class="header-section-number">4.1</span> <span class="math inline">\((2p-1,2q-1) \to (p-1,q-1)\)</span></a></li>
+  <li><a href="#pq-to-p-2q2" id="toc-pq-to-p-2q2" class="nav-link" data-scroll-target="#pq-to-p-2q2"><span class="header-section-number">4.2</span> <span class="math inline">\((p,q) \to (p-2,q+2)\)</span></a></li>
+  <li><a href="#ppq-to-p-1p-1q2" id="toc-ppq-to-p-1p-1q2" class="nav-link" data-scroll-target="#ppq-to-p-1p-1q2"><span class="header-section-number">4.3</span> <span class="math inline">\((p,p,q) \to (p-1,p-1,q+2)\)</span></a></li>
+  <li><a href="#pqq-to-p-2q1q1" id="toc-pqq-to-p-2q1q1" class="nav-link" data-scroll-target="#pqq-to-p-2q1q1"><span class="header-section-number">4.4</span> <span class="math inline">\((p,q,q) \to (p-2,q+1,q+1)\)</span></a></li>
+  <li><a href="#ppqq-to-p-1p-1q1q1" id="toc-ppqq-to-p-1p-1q1q1" class="nav-link" data-scroll-target="#ppqq-to-p-1p-1q1q1"><span class="header-section-number">4.5</span> <span class="math inline">\((p,p,q,q) \to (p-1,p-1,q+1,q+1)\)</span></a></li>
+  <li><a href="#废液缸" id="toc-废液缸" class="nav-link" data-scroll-target="#废液缸"><span class="header-section-number">4.6</span> 废液缸</a></li>
+  </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>其他格式</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
@@ -416,8 +429,8 @@ window.Quarto = {
 
 <section id="支配序" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="支配序"><span class="header-section-number">1</span> 支配序</h2>
-<p>本章讨论经典李代数中幂零轨道的支配序，证明支配序和分拆上的支配序等价．关于幂零轨道支配序的研究历史，<span class="citation" data-cites="jantzen_nilpotent_2004"><a href="#ref-jantzen_nilpotent_2004" role="doc-biblioref">[1, section 13.16]</a></span> 给出了一些评注；标准的参考是 <span class="citation" data-cites="mcgovern_nilpotent_1993"><a href="#ref-mcgovern_nilpotent_1993" role="doc-biblioref">[2, chapter 5]</a></span>．我们选取的路线是：对 A 型李代数，基于盖住关系间连续路径的构造和秩函数的下半连续性，给出支配序和分拆上的支配序的等价性证明；对于 B、C、D 型李代数，我们选取特定方便处理的非退化双线性型，从而仔细为其上的每一类盖住关系显式构建落在斜自伴李代数中的连续路径．我们发现可以通过一类组合图示来统一紧凑地描述这些路径构造．</p>
-<p>本章默认在 <span class="math inline">\(\mathbb C\)</span> 上工作．经典李代数均认为是具体的 <span class="math inline">\(\mathbb C^n\)</span> 上的矩阵代数．A 型李代数 <span class="math inline">\(\mathfrak{sl}_n\)</span> 的作用群默认为 <span class="math inline">\(\mathrm{SL}_n\)</span>，B、C、D 型李代数的作用群默认为定义它们的非退化双线性型给出的正交群．考虑到已经完成了<a href="../../posts/20260426-classic-nilp-orbit/">经典李代数中幂零轨道的分类</a>，可以用分拆或唯一标识幂零轨道．以后用 <span class="math inline">\(\mathcal O_\lambda^{\mathfrak{sl}}\)</span> 的记号表示 Jordan 型为 <span class="math inline">\(\lambda\)</span> 的 <span class="math inline">\(\mathfrak{sl}\)</span> 中元素在 <span class="math inline">\(\mathrm{SL}\)</span> 下的共轭轨道．考虑到正交群作用下的 B、C、D 型李代数 <span class="math inline">\(\mathfrak g\)</span> 的幂零轨道由 <span class="math inline">\(\mathrm{GL}\)</span> 作用下的轨道给出，我们用 <span class="math inline">\(\mathcal O_\lambda^\mathfrak g = \mathcal O_\lambda^\mathfrak{sl}\cap \mathfrak{g}\)</span> 来标识 B、C、D 型在正交群作用下的幂零轨道．在上下文明确所在李代数的情况下，<span class="math inline">\(O_\lambda\)</span> 的上标可能会作省略．</p>
+<p>本章讨论经典李代数中幂零轨道的支配序，证明支配序和分拆上的支配序等价．关于幂零轨道支配序的研究历史，<span class="citation" data-cites="jantzen_nilpotent_2004"><a href="#ref-jantzen_nilpotent_2004" role="doc-biblioref">[1, section 13.16]</a></span> 和 <span class="citation" data-cites="mcgovern_nilpotent_1993"><a href="#ref-mcgovern_nilpotent_1993" role="doc-biblioref">[2, theorem 6.2.5]</a></span> 给出了一些评注．我们选取的路线是：对 A 型李代数，基于盖住关系间连续路径的构造和秩函数的下半连续性，给出支配序和分拆上的支配序的等价性证明；对于 B、C、D 型李代数，我们选取特定方便处理的非退化双线性型，从而仔细为其上的每一类盖住关系显式构建落在斜自伴李代数中的连续路径．我们发现可以通过一类组合图示来统一紧凑地描述这些路径构造．</p>
+<p>本章默认在 <span class="math inline">\(\mathbb C\)</span> 上工作．经典李代数均认为是具体的 <span class="math inline">\(\mathbb C^n\)</span> 上的矩阵代数．A 型李代数 <span class="math inline">\(\mathfrak{sl}_n\)</span> 的作用群默认为 <span class="math inline">\(\mathrm{SL}_n\)</span>，B、C、D 型李代数的作用群默认为定义它们的非退化双线性型给出的正交群．考虑到已经完成了<a href="../../posts/20260426-classic-nilp-orbit/">经典李代数中幂零轨道的分类</a>，可以用分拆唯一标识幂零轨道．以后用 <span class="math inline">\(\mathcal O_\lambda^{\mathfrak{sl}}\)</span> 的记号表示 Jordan 型为 <span class="math inline">\(\lambda\)</span> 的 <span class="math inline">\(\mathfrak{sl}\)</span> 中元素在 <span class="math inline">\(\mathrm{SL}\)</span> 下的共轭轨道．考虑到正交群作用下的 B、C、D 型李代数 <span class="math inline">\(\mathfrak g\)</span> 的幂零轨道由 <span class="math inline">\(\mathrm{GL}\)</span> 作用下的轨道给出，我们用 <span class="math inline">\(\mathcal O_\lambda^\mathfrak g = \mathcal O_\lambda^\mathfrak{sl}\cap \mathfrak{g}\)</span> 来标识 B、C、D 型在正交群作用下的幂零轨道．在上下文明确所在李代数的情况下，<span class="math inline">\(O_\lambda\)</span> 的上标可能会作省略．</p>
 <p>设 <span class="math inline">\(\mathfrak g\)</span> 为一经典李代数，<span class="math inline">\(\mathcal O_1\)</span> 和 <span class="math inline">\(\mathcal O_2\)</span> 为其上的两个幂零轨道．在幂零轨道上定义偏序：如果 <span class="math inline">\(\mathcal O_1 \subseteq \overline{\mathcal O_2}\)</span>，就定义 <span class="math inline">\(\mathcal O_1 \trianglelefteq \mathcal O_2\)</span>，称为幂零轨道上的支配序关系（dominance order．亦作闭包序，closure order）．这里取闭包使用的拓扑是 <span class="math inline">\(\mathfrak g\)</span> 作为仿射空间的 Zariski 拓扑．</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
@@ -538,10 +551,10 @@ y = \operatorname{Ad}(g) x \in \operatorname{Ad}(g)(\overline{\mathcal O_2}) = \
   &amp;   &amp;   &amp; t &amp; 0 &amp; 0
 \end{pmatrix}
 \]</span> 这里列出标准基底 <span class="math inline">\(e_4\)</span> 在上述矩阵多次作用下的变化情况： <span class="math display">\[
-e_4 \longrightarrow +\left\{\begin{aligned}
+e_4 \longrightarrow +\left\{\begin{matrix}
 t e_6 &amp;\longrightarrow&amp; t e_5 &amp;\longrightarrow&amp; 0&amp; \\
 (1-t) e_3 &amp;\longrightarrow&amp; (1-t) e_2 &amp;\longrightarrow&amp; (1-t) e_1 &amp;\longrightarrow&amp; 0
-\end{aligned}\right.
+\end{matrix}\right.
 \]</span> 可以看到：</p>
 <ul>
 <li>当 <span class="math inline">\(t=0\)</span> 时，就是 <span class="math inline">\(J_{(4,2)}\)</span>；</li>
@@ -577,10 +590,10 @@ t e_6 &amp;\longrightarrow&amp; t e_5 &amp;\longrightarrow&amp; 0&amp; \\
 \end{aligned}
 \]</span> 只有 <span class="math inline">\(e_p\)</span> 的变化情况依赖于 <span class="math inline">\(t\)</span>．</p>
 <ul>
-<li><p>当 <span class="math inline">\(t \neq 1\)</span>，注意 <span class="math inline">\(p \geq q+2\)</span>，故 <span class="math inline">\(e_p\)</span> 恰需 <span class="math inline">\(p\)</span> 次 <span class="math inline">\(\Gamma(t)\)</span> 作用变为 <span class="math inline">\(0\)</span>．取循环基底 <span class="math display">\[
+<li><p>当 <span class="math inline">\(t \neq 1\)</span>，注意 <span class="math inline">\(p \geq q+2\)</span>，故 <span class="math inline">\(e_p\)</span> 恰需 <span class="math inline">\(p\)</span> 次 <span class="math inline">\(\Gamma(t)\)</span> 作用变为 <span class="math inline">\(0\)</span>．取 <span class="math inline">\(e_p\)</span> 和 <span class="math inline">\(e_{p+q}\)</span> 生成的循环基底 <span class="math display">\[
 \{\Gamma(t)^k e_p \}_{0 \leq k &lt; p} \sqcup \{ e_k \}_{p &lt; k \leq p+q}
-\]</span> 这组基在 <span class="math inline">\((e_k)_{k=1}^n\)</span> 下是对角线全一的下三角矩阵，故确实线性无关．使用该循环基底可知 <span class="math inline">\(\Gamma(t) \in \mathcal O_{(p,q)}\)</span>．</p></li>
-<li><p>当 <span class="math inline">\(t=1\)</span> 时，<span class="math inline">\(e_p\)</span> 恰需 <span class="math inline">\(q+1\)</span> 次 <span class="math inline">\(\Gamma(t)\)</span> 作用变为 <span class="math inline">\(0\)</span>，取循环基底 <span class="math display">\[
+\]</span> 这组基在 <span class="math inline">\((e_k)_{k=1}^n\)</span> 下可以排成对角线非零的三角矩阵，故确实线性无关．使用该循环基底可知 <span class="math inline">\(\Gamma(t) \in \mathcal O_{(p,q)}\)</span>．</p></li>
+<li><p>当 <span class="math inline">\(t=1\)</span> 时，<span class="math inline">\(e_p\)</span> 恰需 <span class="math inline">\(q+1\)</span> 次 <span class="math inline">\(\Gamma(t)\)</span> 作用变为 <span class="math inline">\(0\)</span>，取 <span class="math inline">\(e_{p-1}\)</span> 和 <span class="math inline">\(e_p\)</span> 生成的循环基底 <span class="math display">\[
 \{ e_k \}_{1 \leq k &lt; p} \sqcup \{\Gamma(1)^k e_p \}_{0 \leq k \leq q}
 \]</span> 这组基无非是 <span class="math inline">\((e_k)_{k=1}^n\)</span> 的一个置换，故确实线性无关．使用该循环基底可知 <span class="math inline">\(\Gamma(1) \in \mathcal O_{(p-1,q+1)}\)</span>．</p></li>
 </ul>
@@ -620,8 +633,9 @@ n - \sum_{k=1}^i (\mu^T)_k = \operatorname{rk}Y^i \leq \operatorname{rk}X^i = n 
 </div>
 </div>
 </section>
-<section id="bcd-型李代数" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="bcd-型李代数"><span class="header-section-number">3</span> B、C、D 型李代数</h2>
+<section id="c-型李代数" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="c-型李代数"><span class="header-section-number">3</span> C 型李代数</h2>
+<p>从此节至本章末，我们将 A 型李代数的支配序推广到所有经典李代数：</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -634,11 +648,776 @@ n - \sum_{k=1}^i (\mu^T)_k = \operatorname{rk}Y^i \leq \operatorname{rk}X^i = n 
 </div>
 </div>
 </div>
-<p>细心的读者可能已经发现，<a href="#thm-sl-closure-dominance" class="quarto-xref">定理&nbsp;1</a> <span class="math inline">\(\impliedby\)</span> 一侧的证明对所有经典李代数都适用．本节的主要工作是证明 <span class="math inline">\(\implies\)</span> 侧．大体的思路仍然是为每个盖住关系构造一条连续路径．不同于 A 型李代数，由于 B、C、D 型李代数的幂零轨道的 Jordan 型存在额外的限制条件，需要讨论的情况更多更复杂．</p>
-<p>【TODO】</p>
+<p>细心的读者可能已经发现，<a href="#thm-sl-closure-dominance" class="quarto-xref">定理&nbsp;1</a> <span class="math inline">\(\impliedby\)</span> 一侧的证明对所有经典李代数都适用．故剩下的工作是证明 <span class="math inline">\(\implies\)</span> 侧．大体思路仍然是为每个盖住关系构造一条连续路径，从支配序较大的轨道连接到支配序较小轨道的“边缘”．但不同于 A 型李代数，B、C、D 型李代数要求路径落在斜自伴李代数中；且幂零轨道的 Jordan 型存在额外的限制条件，需要讨论的盖住关系更多更复杂．为处理方便，我们将需要在不同情形 B、C、D 型李代数选取特定的非退化双线性型．</p>
+<p>本节先来处理 <span class="math inline">\(C\)</span> 型李代数 <span class="math inline">\(\mathfrak{sp}_{2n}\)</span>．</p>
+<section id="组合图示" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="组合图示"><span class="header-section-number">3.1</span> 组合图示</h3>
+<p>记 <span class="math inline">\(\mathbb C^{2n}\)</span> 上的标准基为 <span class="math inline">\((e_1,f_1,e_2,f_2,\dots,e_n,f_n)\)</span>，选取非退化对称双线性型 <span class="math display">\[
+\begin{aligned}
+\varphi(e_i, f_i) &amp;= 1 \quad \text{for } 1 \leq i \leq n \\
+\varphi(f_i, e_i) &amp;= -1 \quad \text{for } 1 \leq i \leq n \\
+\varphi(-,-) &amp;= 0 \quad \text{for all other unspecified pairs}
+\end{aligned}
+\qquad
+\Phi :=
+\begin{pmatrix}
+0 &amp; 1 &amp;   &amp;   &amp;   &amp;  \\
+-1 &amp; 0 &amp;   &amp;   &amp;     \\
+  &amp;   &amp; 0 &amp; 1 &amp;   &amp;  \\
+  &amp;   &amp; -1 &amp; 0 &amp;     \\
+  &amp;   &amp;   &amp;   &amp; \ddots &amp;
+\end{pmatrix}
+\]</span> 可见选取的 <span class="math inline">\(\varphi\)</span> 确实非退化斜对称．借此定义 <span class="math inline">\(\mathfrak{sp}_{2n}\)</span> 为满足斜自伴条件 <span class="math inline">\(X^T \Phi = -\Phi X\)</span> 的全体 <span class="math inline">\(2n\)</span> 阶矩阵．矩阵计算可得 <span class="math inline">\(\mathfrak{sp}_{2n}\)</span> 的分块矩阵描述： <span class="math display">\[
+\begin{pmatrix}
+C_{1,1} &amp; C_{1,2} &amp; \ldots \\
+C_{2,1} &amp; C_{2,2} &amp; \ldots \\
+\vdots &amp; \vdots &amp; \ddots\\
+\end{pmatrix}
+\qquad
+\begin{aligned}
+C_{i,i}
+&amp;=
+\begin{pmatrix}
+r_i &amp; \textcolor{teal}{s_i} \\
+\textcolor{blue}{t_i} &amp; -r_i
+\end{pmatrix}
+&amp; 1 \leq i = j \leq n \\
+C_{i,j}
+&amp;=
+\begin{pmatrix}
+a_{i,j} &amp; \textcolor{red}{b_{i,j}} \\
+c_{i,j} &amp; \textcolor{violet}{d_{i,j}}
+\end{pmatrix}
+&amp; 1 \leq i &lt; j \leq n \\
+C_{j,i} &amp;=
+\begin{pmatrix}
+\textcolor{violet}{-d_{i,j}} &amp; \textcolor{red}{b_{i,j}} \\
+c_{i,j} &amp; -a_{i,j}
+\end{pmatrix}
+&amp; 1 \leq i &lt; j \leq n
+\end{aligned}
+\]</span> 注意变元的数量和 <span class="math inline">\(\dim \mathfrak{sp}_{2n} = 2n^2 + n\)</span> 相符．</p>
+<p>现在考虑构造具有特定 Jordan 型的幂零斜自伴矩阵 <span class="math inline">\(X\)</span>．观察 <span class="math inline">\(\textcolor{teal}{s_i}\)</span>, <span class="math inline">\(\textcolor{blue}{t_i}\)</span>, <span class="math inline">\(\textcolor{violet}{d_{i-1,i}}\)</span>, <span class="math inline">\(\textcolor{red}{b_{i-1,i}}\)</span> 的作用：</p>
+<p><span class="math display">\[
+\begin{aligned}
+X(f_i) &amp;= \textcolor{violet}{d_{i-1,i}} f_{i-1} + \textcolor{teal}{s_i} e_i + \textcolor{red}{b_{i-1,i}} e_{i-1} + \dots \\
+X(e_i) &amp;= \textcolor{violet}{-d_{i,i+1}} e_{i+1} + \textcolor{blue}{t_i} f_i + \textcolor{red}{b_{i,i+1}} f_{i+1} + \dots
+\end{aligned}
+\]</span> 如果将来只使用这四个变元来构造所有所需的斜自伴幂零矩阵，那么 <span class="math inline">\(X\)</span> 的在基底上的作用可完全用如下组合图示来描述：先将基底 <span class="math inline">\((e_1,f_1,\dots,e_n, f_n)\)</span> 排成两行 <span class="math display">\[
+\begin{matrix}
+f_1 &amp; f_2 &amp; \dots &amp; f_{n-1} &amp; f_n \\
+e_1 &amp; e_2 &amp; \dots &amp; e_{n-1} &amp; e_n
+\end{matrix}
+\]</span> 进而在上述 <span class="math inline">\(2n\)</span> 个节点的图间连接如下四种类型的边：</p>
+<div id="fig-cover-c-arrow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cover-c-arrow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.6 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="379.23pt" height="81.675pt" viewbox="0 0 252.82 54.45">
+<style type="text/css">
+@font-face{font-family:PCPXEO-CMR5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJcAAoAAAAABDwAAAIRAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBdIFdCwgAATYCJAMKBCAFglYHIBtqAwAehXGbE4qTW6zyJ53iFUG1bD2z+/eREJIL0TgUGkchHB6h0ShBIbPHGSx7/Lj33oc5Oa0BUIQbXAGGsrTEAmKfdqa9oAX0gUD2gwVU4ImFEu4HnOFGA9yNzOZ7i9/vODNmryIi3dqhZDUaBDz5grn8X4SBSNE19kEGrIMHj/LwWJ4BBBfsCjQUgZtsDSQKFu2HughnF6iqwGVruGit/UIACuiQuAHuAaiAEDsWObjJXSoVXt0pB9eI2rMvwe88GCiIOu8hPA5YHCsIpaEmoTDi/ln79BTe/WAxvyue3KGM7imenyN6HsMeHkJ3fENTtoUTz9KJbnsnrr+95drg7eCapb0/1gC3IVQVx5LDfk367Ct8gegf9eGHEq/u/L9/981iIJ+MYF9wuDUNLmJQmLH8mx0B8m1JzUKF05mYZBSQkelh+eWe6YfgeeSMgQ0AgeCPOzOWwHT+JhUcpBfMO8wqgIEEQdGQbxAnLmMADXKJAMPXQCiOIRAkjzwxnMFRqrGZGvboOuzo0fTIKhtYUckQtnmSqJalwx6thR0driPnlo6x+aTzKNAlMNItwNLFL9jxctzbWtl0mgfPM1LLs0rKM/JU9lZO4KJAnkJlSqUppuKnQCofzxfIRaBIbgJYcuEnmKNwvUuJLAXyqdiyYoOHHjZ/Rpu0Ckz9BsmqqKQql6VEuQx5VOxZcYIF2HkAAA==) format('woff2');}
+@font-face{font-family:XDTRFF-CMR7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHcAAoAAAAAA5wAAAGSAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANApYaQsGAAE2AiQDCAQgBYJWByAb9AIAHoVN2Vc46tUxDFb1ctZkOr8RfL/fb8958hHVJhYiQygvJEKjW4XsodGCxgB34ppfIVoUTblOrcSigRcNLLEJynfD4e/a3LzkT2tkQuFoM6n4VC13fPCgBfRb2JbrzwMLLAko4CTiPHxpCacSaASW7lB0JimNiEhfC6rcBJdAQ75Dn/9TFhrjJ47jIDEtNvBdXT/GChyOVUBBJXBqKSBRYYp3piDWAGq1wGEp3h8sPwJAghqBBYANAKgBsTBCNvvBQV1Xljb9eFxo7o8QvLyT7VP3cL7vX/JsF8pZIxIsn/D3B06lPpkBx9OCtwcCwd/n9742av374Jo5kfIDoE+CoFKQFzYivgIAkIkIbaQFYCNQGnBDGJWYa4NG0dACWtrWB8yRwaLuF1bEY67N6KKhOVpa5wEHdgMl7zLPWlLmlKJQJsdraq+IcqY6Pb6Z9qw/HzODJppAyGq2uV2UA8hYScph0SJKOYpCQiI5rEo5nHqrBVCIZDxi5UI5sCqQl276gbZH7/QwZkAjMsEAOg8AAAA=) format('woff2');}
+@font-face{font-family:NQUDBD-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHYAAoAAAAAA3wAAAGOAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAo0RwsGAAE2AiQDCAQgBYJcByAb2AJgLgdsYxLl00Hs1Rw6KB/XWJqmfhiFoxFUa2TP7T4gSkBNbL/8s0NPQmFYk4vRUXFRkuBom4dGCPVCQbzDV2YSEbHUFuJShIfSKdeWNI8oxIwOeJUDPkcg2RvgCxpc/r+bW+74PQz0trCtLfHMf57EgbW2gAKOQgiTtsRSCzTrm+KUnFCilPZtQSo+RTiKN8X9M9ypj0VhRAVOKXIeaAeXawb8YGOWBv4EyMH0GQgA/gOgQEKzJNAs60eWBYON/8EP/kABKEBGoBq1gAyI6lPh97cfWsSX727e/qyPX239AQgErWVfzhX7Kma8kQajC+UKEHRkP+h1iRCEQtikUKgWjUCx0hVSHRvIqtWhRJUulKo2Oq/UbkoSuULotQnI2p2gRKsblGr3IlWa8HFX+CfMw9P1SVwief7965ygnTY24a/eFV9dvBbTmjVojM1Z0mn0FrPECO3oxBKj1snVE+EiJEt8d1+OXYnRpNBpoUljJtJprWwlRkEZii+954AOrAqTVaaBpo2ZkwAMHwAAAA==) format('woff2');}
+@font-face{font-family:OYFEXR-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAASEAAoAAAAAB4QAAAQ7AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAATAqIDIYPCw4AATYCJAMYBCAFglwHIBvIBQAeB7lp9LqoVNaPsw6+0352gzab1rGq1AhKbAqngHNWcASDrweyRLDz+vIskCTCAAcDnkx0QAMp/v/ncnqf7oDueEwA3xt4BN5LKNKha4OsCRZo0RmVa+qmh4qPSLDYJj4F3bENgBA+sh5IAP3RF//TYN30kG+HACILBQAnAwIBtQLjO9oGZE2GK8wDIED85s7PAwBAARAA0CpJQxQ3DeMOhWpi1GU4QrKRoQ7md+20btBVjwQenpvObgDkM4krE3hfCoFAJi3GH9eGdBmOuWIfOcrtZUn2MqezwizEceE2ixlbeZBhsVDxSxdoNZdcoadcyN6b2MqyzZtpZdvBdGesxgomm/yQS8i10Olb6Ca76rR2v1N92B7ldFa48G1BLvzCCzZuYUPNN8Ut6pP6g/a043benhvKS8+Y17oMh/BbrlU3YPt17KLAfEpplp23JyUdlh3QbaFfEZtoNBbLZJNfcglbRqVvwdrwrKrj2pVOiZlrYex06stE1sMrjyLcerWRbUcfylael+0/DiZd9IF4efFsYcHY9bInCHbdoq7imw7LjjioWx4pj51i7HyqeHhRYT7J2RpqUd7CHznE2y8fPLjzWLWBtyf2kitSPLQFU/zFt4IF3Gps/85DdCou3BV7gV1GXXUATPsZnod0vJZ0cX9/bQlqQNvTCtFsjQFNg9ILCnpx8OWQ87YK3lcyCoHi9YWbhnwughpzoF+bqJjjTUoJJwVJyZr3Z5P5k2Ns9QrIOmvj0tiMb0Q/SbSjk9HrNxRTSH5p3ntLGtI5Hu9lKddnQMUNudWYUvSxOFtXiaaF/xX/VZ7gLxnlF4qXS+LnZFDfi414QY3SSBt1ykCJeM6DfOO1b8pYNaSdFut3eK6xKKq8mgtho1jq2fzHe2G7C+Jbippnf0z+9Mvf4jBWcA7K+D6sNDBvk7oDW1BMIf63NfHGImVGBN0zPYTklq0Ylqz6KrxNgXrq1mmSBF+pfz24bGI/9/F6WIMN+cnXjL372P1KMu/Mg8b/+gl5eJQnImHKopnfL1bq/cTrL83/0ucp/ztc9R7/SrMHc3aX12QTEUqXmKZLq0M64Z9N2bJKmu+eTF1x3ihlQTHpgy9aTmQQQn72pOr1nMa7vowP2wXjA7ZiRKA60OhFwHyYH6bkOxBwgnbrXL130m/uBCLAwPnf0AL0EQC4QyOlpO0CfSCIXwrSDLIVGtCkAVLSC/lRQXa5AkEQAGQ4WwuoMLMQD/CWbJbIgzdLQsVlyTwo5mNYIhAgjQIIgRybJWJpZ0kYTCwZi7mBCXPyeij9/a1vYaVeZygJ0eTnZ8e+utrC1WFbTZ/Sj2Ec7RgabesRRapjQKNPj34jhrUYJJKvj9Fep1ehSno6BiVCaORjkS1WhU8+pMO/d71EwqmFdcg0e1nNRiUw5k0mVmKjUR2GPrxND5FIajEIAA==) format('woff2');}
+@font-face{font-family:FBIPCW-CMMI5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAALIAAoAAAAABMwAAAJ/AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqCeIImCwgAATYCJAMMBCAFglwHIBvDA2CeBc7pi5C6tq6Va/48j+FVHErLA7Xf/87u3ve+mFZVIOHRGt5I2q25Z7XGbySzkBkqQ+MOv+599yUOTgSionj3NyfB0XmhLW/+5zUytLn9t7S2hBMajNbB1O5dUx99DV5auMnjvIAuP+ZPX9/jQKKAozCD90EzjSLVVM81cyK9UHN4Foeg3JDiunBWAYjX4/v/jfq6Hf5UiolQBqBFAAvAp+w5sO1BBIuK5B8JJNrMcxABCdBYBKdjGABFF4IKkec5aOXf8xsiQRFi90GQo4AMf5QAat5WcLRmT9vP9DsXvq0SHHNgGOYvve9NfWXe/nS9uyb2dbOL0OU7nnwYJr34tjj8PHgT4z6oIwIH1zGp3XvvQBBy06VRi8NwHHj81w+LEd6Uz6zultl08anZlYlzxHwE5nkMz/IQPsJPQU7gUgO1+vByGs+Weyfd0Vv3fMbn9WPu1w6PZLC/0zx1N1fluQodqdD2llGbLqTfVccmf+X1xMmtn5lMZd3f6kXylo1o+Pc0W0wV6KA+3VdY+YYnu7IjPLi4iRX4xU94Q2nT0JE46UJx9eh2c+ZiD31SZ7gScbrKt4d9MklNAARAACafXN21ZvFvacqwO5+LD+I7lELZpl4cv1SrcnwgIJRTBITvHkiYMCDJBtcEjMq1LANdGeAZCjpeQCbGiyh02+UEXKBBWRmITLjhGAKlOBZPG44jABckTlbTAuXXr86wF8v6ORAQlYo52XbD2eY0X3lCfaKwebDa9iaKq80DBJiZmNtY61hSRJlpY2oqzBOT5csByikpMY5kwdtWBmamFM5snOQQok1Dao1joO3kO6AX2hpYvbxnQuHKxgMaAQ==) format('woff2');}
+@font-face{font-family:TUELZZ-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAALcAAoAAAAABNQAAAKSAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqDAII8CwgAATYCJAMMBCAFgmIHIBvXAwAuB3gyjJchVLy7hYmAAAdOtVLCuz+EjhAPT/vjO3fm/TVZ16EQ1epU3ywkMUF138S4fEIj1ZhFXmcSQlpimlOOqIRa1DygH0QP+FZcbLbXNW7F7BKhGLy+9s12PJEC+rsKgLNJGgVU4AmGEE7SMNMozSLU7GZHnpII21d7bECOn3FABelU6n8DnRZiNfSPqqhK6OAoK1bXFwBgVsrPgBJZ9IllCRIyGsh/oQGINgAKhcCqssTKsizPCAAZVELGRgCHAAUgia61xy5GjTXhnOBSL/sdndz4KmGwYX+za5/kOvbh5aLHxaudH9E9cfR5954Pen7y3c5X4p0XtgWH5H5BYixjyjB0p123PH2K9jyzf83SP08/fNwU1NzOQSp6cevHx467b3DiCMUF1sCmfGCBssfo4wgWoBdP9tEuPn1FQWr+TVp59Y2zdxff4sjpJs+XTU9k5JCIWQWIyA0T/QDuMx0RkTUibrOxTh3JVQIbqa4NUD4sw5utMXj/WQ/QcHKkL9Z73OeSj+Fju9vEgDC9G9YeG5yV4v/6LJNWoENn9I2/1/Lfk+iNg02CwvTTwmgypnXD2nMDs+bvn/uk7zPqDhvUxs1U/x0QCK6c+6q26z+54N5Q9koD03NUkUCQlUj0Lj8BCJfkhHild/xjQGRjgUCAU802QCnU5lyoqXaOCtW1QCU1dZaracICLIqqQiuhQKGZYlRopB2VNDNSquljb0/w34D1Y+P8QpOTtT5hYUFGw/7dGnv1qVWvqity64tq6gvKBOZeg/ioUKZSnVp5qgmEqZBLc+VixfETKlkyLR9hwgQxMojv2rVGkQrlBIx0DDMUwOUnc9ZtlBuzNUV2rnpFajYvUEbATMcGzAEA) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="64.916054" y="-76.409054" transform="matrix(1.000261 0 0 1.000261 -57.967004 90.222)">f</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="69.771961" y="-74.893169" transform="matrix(1.000545 0 0 1.000545 -57.967004 90.222)">k</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="107.182021" y="-76.409054" transform="matrix(1.000261 0 0 1.000261 -57.967004 90.222)">f</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="112.026924" y="-74.893169" transform="matrix(1.000545 0 0 1.000545 -57.967004 90.222)">k</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="154.546656" y="-76.409054" transform="matrix(1.000261 0 0 1.000261 -63.066 90.222)">f</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="159.377109" y="-74.893169" transform="matrix(1.000545 0 0 1.000545 -63.066 90.222)">k</text>
+<text font-family="NQUDBD-CMSY7" font-size="6.97" x="163.778719" y="-74.893169" transform="matrix(1.000545 0 0 1.000545 -63.066 90.222)">−</text>
+<text font-family="XDTRFF-CMR7" font-size="6.97" x="170.002336" y="-74.893169" transform="matrix(1.000545 0 0 1.000545 -63.066 90.222)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="201.910292" y="-76.409054" transform="matrix(1.000261 0 0 1.000261 -57.96701 90.222)">f</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="206.728293" y="-74.893169" transform="matrix(1.000545 0 0 1.000545 -57.96701 90.222)">k</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="249.273928" y="-76.409054" transform="matrix(1.000261 0 0 1.000261 -63.06601 90.222)">f</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="254.078488" y="-74.893169" transform="matrix(1.000545 0 0 1.000545 -63.06601 90.222)">k</text>
+<text font-family="NQUDBD-CMSY7" font-size="6.97" x="258.480078" y="-74.893169" transform="matrix(1.000545 0 0 1.000545 -63.06601 90.222)">−</text>
+<text font-family="XDTRFF-CMR7" font-size="6.97" x="264.702716" y="-74.893169" transform="matrix(1.000545 0 0 1.000545 -63.06601 90.222)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="296.638564" y="-76.409054" transform="matrix(1.000261 0 0 1.000261 -57.966997 90.222)">f</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="301.428693" y="-74.893169" transform="matrix(1.000545 0 0 1.000545 -57.966997 90.222)">k</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="64.916054" y="-44.570365" transform="matrix(1.000261 0 0 1.000261 -57.847005 90.222)">e</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="69.53409" y="-43.064521" transform="matrix(1.000545 0 0 1.000545 -57.847005 90.222)">k</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="107.182021" y="-44.570365" transform="matrix(1.000261 0 0 1.000261 -57.847005 90.222)">e</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="111.788054" y="-43.064521" transform="matrix(1.000545 0 0 1.000545 -57.847005 90.222)">k</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="154.546656" y="-44.570365" transform="matrix(1.000261 0 0 1.000261 -62.946004 90.222)">e</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="159.139258" y="-43.064521" transform="matrix(1.000545 0 0 1.000545 -62.946004 90.222)">k</text>
+<text font-family="NQUDBD-CMSY7" font-size="6.97" x="163.539859" y="-43.064521" transform="matrix(1.000545 0 0 1.000545 -62.946004 90.222)">−</text>
+<text font-family="XDTRFF-CMR7" font-size="6.97" x="169.763466" y="-43.064521" transform="matrix(1.000545 0 0 1.000545 -62.946004 90.222)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="201.910292" y="-44.570365" transform="matrix(1.000261 0 0 1.000261 -57.84701 90.222)">e</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="206.489413" y="-43.064521" transform="matrix(1.000545 0 0 1.000545 -57.84701 90.222)">k</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="249.273928" y="-44.570365" transform="matrix(1.000261 0 0 1.000261 -62.94601 90.222)">e</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="253.839608" y="-43.064521" transform="matrix(1.000545 0 0 1.000545 -62.94601 90.222)">k</text>
+<text font-family="NQUDBD-CMSY7" font-size="6.97" x="258.241209" y="-43.064521" transform="matrix(1.000545 0 0 1.000545 -62.94601 90.222)">−</text>
+<text font-family="XDTRFF-CMR7" font-size="6.97" x="264.464805" y="-43.064521" transform="matrix(1.000545 0 0 1.000545 -62.94601 90.222)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="296.638564" y="-44.570365" transform="matrix(1.000261 0 0 1.000261 -57.846998 90.222)">e</text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="301.190793" y="-43.064521" transform="matrix(1.000545 0 0 1.000545 -57.846998 90.222)">k</text>
+<path d="M54.13406 19.579869V37.103319" stroke="#008080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M56.524975 35.230419C55.090395 35.608989 54.412995 36.452599 54.134065 37.302549C53.855135 36.452599 53.177735 35.608989 51.743155 35.230419" stroke="#008080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="55.718623" y="-44.557707" transform="matrix(1.000545 0 0 1.000545 .731003 74.096)"><tspan fill="#008080">s</tspan></text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="59.494473" y="-43.513641" transform="matrix(1.000261 0 0 1.000261 .731003 74.096)"><tspan fill="#008080">k</tspan></text>
+<path d="M139.50503 11.302839H116.39144" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M118.26433 13.693747C117.88576 12.259167 117.04215 11.581767 116.1922 11.302837C117.04215 11.023907 117.88576 10.346507 118.26433 8.911927" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="55.718623" y="-44.557707" transform="matrix(1.000545 0 0 1.000545 65.145999 51.573999)"><tspan fill="#800080">d</tspan></text>
+<text font-family="PCPXEO-CMR5" font-size="4.98" x="59.881368" y="-43.574629" transform="matrix(1.000261 0 0 1.000261 65.145999 51.573999)"><tspan fill="#800080">1</tspan></text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="63.270484" y="-43.574629" transform="matrix(1.000261 0 0 1.000261 65.145999 51.573999)"><tspan fill="#800080">,</tspan></text>
+<text font-family="PCPXEO-CMR5" font-size="4.98" x="65.552888" y="-43.574629" transform="matrix(1.000261 0 0 1.000261 65.145999 51.573999)"><tspan fill="#800080">2</tspan></text>
+<path d="M209.15398 19.967299L234.90989 37.279529" stroke="#f00" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M234.68927 34.250524C234.203197 35.652274 234.525444 36.685046 235.07523 37.39066C234.214252 37.148019 233.136258 37.239609 232.021827 38.219004" stroke="#f00" fill="none" stroke-width=".398465" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="55.718623" y="-44.557707" transform="matrix(1.000545 0 0 1.000545 155.751 60.238)"><tspan fill="#f00">b</tspan></text>
+<text font-family="PCPXEO-CMR5" font-size="4.98" x="59.23754" y="-43.574629" transform="matrix(1.000261 0 0 1.000261 155.751 60.238)"><tspan fill="#f00">1</tspan></text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="62.626652" y="-43.574629" transform="matrix(1.000261 0 0 1.000261 155.751 60.238)"><tspan fill="#f00">,</tspan></text>
+<text font-family="PCPXEO-CMR5" font-size="4.98" x="64.909056" y="-43.574629" transform="matrix(1.000261 0 0 1.000261 155.751 60.238)"><tspan fill="#f00">2</tspan></text>
+<path d="M234.25896 17.609129L204.99696 37.279509" stroke="#f00" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M207.88503 38.218938C206.770574 37.239566 205.692575 37.147999 204.8316 37.39066C205.381372 36.685031 205.703597 35.652249 205.217492 34.250506" stroke="#f00" fill="none" stroke-width=".398466" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="55.718623" y="-44.557707" transform="matrix(1.000545 0 0 1.000545 163.099 57.879999)"><tspan fill="#f00">b</tspan></text>
+<text font-family="PCPXEO-CMR5" font-size="4.98" x="59.23754" y="-43.574629" transform="matrix(1.000261 0 0 1.000261 163.099 57.879999)"><tspan fill="#f00">1</tspan></text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="62.626652" y="-43.574629" transform="matrix(1.000261 0 0 1.000261 163.099 57.879999)"><tspan fill="#f00">,</tspan></text>
+<text font-family="PCPXEO-CMR5" font-size="4.98" x="64.909056" y="-43.574629" transform="matrix(1.000261 0 0 1.000261 163.099 57.879999)"><tspan fill="#f00">2</tspan></text>
+<path d="M11.8561 37.501789V19.978329" stroke="#00f" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M9.465192 21.851229C10.899772 21.472659 11.577172 20.629049 11.856102 19.779099C12.135032 20.629049 12.812432 21.472659 14.247012 21.851229" stroke="#00f" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="55.718623" y="-44.557707" transform="matrix(1.000545 0 0 1.000545 -53.603998 74.739)"><tspan fill="#00f">t</tspan></text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="58.743665" y="-43.513641" transform="matrix(1.000261 0 0 1.000261 -53.603998 74.739)"><tspan fill="#00f">k</tspan></text>
+<path d="M115.87362 43.149739H139.22591" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M137.35303 40.75883C137.7316 42.19341 138.57521 42.87081 139.42516 43.14974C138.57521 43.42867 137.7316 44.10607 137.35303 45.54065" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="NQUDBD-CMSY7" font-size="6.97" x="55.718623" y="-44.557707" transform="matrix(1.000545 0 0 1.000545 62.031999 94.921)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="61.942229" y="-44.557707" transform="matrix(1.000545 0 0 1.000545 62.031999 94.921)"><tspan fill="#800080">d</tspan></text>
+<text font-family="PCPXEO-CMR5" font-size="4.98" x="66.105743" y="-43.574629" transform="matrix(1.000261 0 0 1.000261 62.031999 94.921)"><tspan fill="#800080">1</tspan></text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="69.494859" y="-43.574629" transform="matrix(1.000261 0 0 1.000261 62.031999 94.921)"><tspan fill="#800080">,</tspan></text>
+<text font-family="PCPXEO-CMR5" font-size="4.98" x="71.778263" y="-43.574629" transform="matrix(1.000261 0 0 1.000261 62.031999 94.921)"><tspan fill="#800080">2</tspan></text>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-cover-c-arrow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1
+</figcaption>
+</figure>
+</div>
+<p>则 <span class="math inline">\(X\)</span> 在每个基向量的作用描述为从该节点出发的所有边的终点向量的线性组合，组合系数由边权给出．组合图示使未来在构造路径时跟踪 Jordan 型的变化情况更容易．在以后的构造中，我们便放心忘记 <span class="math inline">\(X\)</span> 的矩阵形式，直接使用图示来给出所需的幂零斜自伴矩阵．</p>
+</section>
+<section id="盖住关系与路径构造" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="盖住关系与路径构造"><span class="header-section-number">3.2</span> 盖住关系与路径构造</h3>
+<p>与 A 型类似，还是只需要考虑大小相邻的块之间的掉落．但注意 C 型李代数的分拆特别要求奇数部分必须出现偶数次，故需要讨论如下 5 种类型的掉落．对每种掉落，构造路径 <span class="math inline">\(\Gamma := \{\Gamma(t) \in \mathfrak{sp}_{2n} : t \in \mathbb C \}\)</span>，其中每个 <span class="math inline">\(\Gamma(t)\)</span> 的组合图示如下（以下默认要求非负整数 <span class="math inline">\(p\)</span>, <span class="math inline">\(q\)</span> 使得分拆中每块大小非负）：</p>
+<section id="情形一-2p2q-to-pq-pq-p-geq-q2" class="level4">
+<h4 class="anchored" data-anchor-id="情形一-2p2q-to-pq-pq-p-geq-q2">情形一 <span class="math inline">\((2p,2q) \to (p+q, p+q)\)</span>, <span class="math inline">\(p \geq q+2\)</span></h4>
+<div id="fig-cover-c-2p-2p2q-special" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cover-c-2p-2p2q-special-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.6 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="441.105pt" height="76.77pt" viewbox="0 0 294.07 51.18">
+<style type="text/css">
+@font-face{font-family:XDTRFF-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHQAAoAAAAAA3wAAAGIAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAo0RwsGAAE2AiQDCAQgBYJcByAb2AJgrgZsdxqUso7dNkYcaxTf3GFhlh0bQbSGzv5dAFECamIbC+xS8CQUkSZXo8vC1VbVElxs88EboX4oiO460mYWEbHQwkJcivBQ9gMiJqoGGIEGl//v4ZY7fg8DvS1sa0s8858ncWCtLaCAoxDCpC2x1ALN+qY4JSeUKKV9W5CK13EbQ/G0+PCvGW6pjy+i0KMCpxQ5D7Tjq0sK7GBjlgb+aEAOpo9AAPAfQIGEZkmgWdaPLAsGG/+DH/wNBIACZASqUQvIgKi+qP3FzZctPHp+49nPz8FaQTkAgeBT/8Oe0Fc+ZbyRBqML5QoQdGTf0WkTIQiFsEmgUC0agWKla0h1bCCrVocSVbpQqtrovFK7KUnkCqHXJiBrd44SrW6gVLuHqdKEV7vCP2EefpzHzfNE+3j/Hk7QTh2b8Ffviq8uWvJxSWvUx+YsadU6s0lsgHa0IrFB48PxcOPxiJYc3X0d7IoNRrlWA00aM5FOa2UjNvDLUHTpQzt0bJEbLVI1NG3MnARg+AA=) format('woff2');}
+@font-face{font-family:NQUDBD-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAANYAAoAAAAABbAAAAMNAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqEVINbCwoAATYCJAMQBCAFglwHIBt8BECO1FaxTVLmJh/6bfWGUc5FNyob/y6qG6La7V9piJE0iWWWJ97ITe1ZXkAXwC7dB3wuUEsoDCMIP9ADSwNrUbuLNiMpaZF2ffGwATQcmQgxMJc5918DE4ZB3nYa3EsBwFjACfwKFaerGqwWHQ0CgCJao4IAABgABWhklpgiNgC2SjBadehKLdgRJgkTvKAQgRJQ3N8D4I0sBBjci0xVR3XHzHx9+WyrpQcNZk7V0po+/Yb+nD3WK64ZrrnhfeJa5tWMmTZzsP28XjlRZyqmaXqOmQZ+KpeVMVVPvkJzzIr8jKmO6yJ33HDecIMs3s8tv9peoKGhiCy77fQ5MzS3rTHONl961eP69awb2XPsb2Qfu6S75oD2NPA52TOc1kctvxqy9qrBon0nbjjP0M7PMVjkveOG+4wZUs1psxxm2uzNGH3ZSK6fzy2dv0JTmm28wHubboY0woOWaiUMdFx20nxjctF4XXjdxEWpypphb7Y1X+RDDF9nxTt9ailMY3KYmpCkLypxYZnMJR1eLUwtoz6QlTxS4b5wSidH1NNsutBEmV1oqHz0tuddqUW6RUuEv9WwQZ85XW/Ex1pC8kZaBJsA9Mk3RzTQOvpI9p0/OLlHp3SzcrjlpjBkbcS3iqCUx6axkbkMCSnRfckfUpTMsXc7y3lEmJdGWtuZmQ7L2H0HQ62ejLbCnymxFrkaqouiI1MTuhTkqeIHLyrXhVHHz4rSqCi90sOqWg9rjHpaZ6USI5tlpUqUU9F+CJZJewmx33lcsXLANwkVAQwIgz7xY3gAEgy71ygBwCxBwIgfCLiiyGcZHQTVLtgjAJEkHw2ccIaQBCqLO0JERpkQk9InWDJW4xwdbijSFUAYiQNCREcNIaaFJ1g6pqccF+sPNOJ/ZYNJqZkRYRGO4YmJsd73hJark4ug9vh7RUVXbXtXdaOJu5MXwjVr1KJTh0ptTCRqVoFrmiRJlSlCmAiOwiVSFMtbVv1au1rNmphw5cRFH4yWm3zKpXHAirBM78qs0KVW+8erNTLhzokXigEAAA==) format('woff2');}
+@font-face{font-family:OYFEXR-CMR7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAKQAAoAAAAABJwAAAJFAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqCRIIRCwoAATYCJAMOBCAFglYHIBuqAyCeg3FDX8bFuDLkXIupDKWI8bmIwLWcveSRCqQInQCNRr+usKo5GJf3oAcCEXIoa05rSwJR7fZvEkw5ggILA0wTKqLn/2b81/M20HyeU9nWqLBNgXyxUOa4AzrhA4vO9LRdDk+0wq15KMnPBSVtiCHA0F3kzf/WYAvyWjRMQwBiHyn8lN9VkQlYD0wKNBShrbYG0KFgm6e20G6Bvio6EZMcPzBuaN43GSMVDKtPYO8EvhkR6UKdVOT4VM8MD0UeW2xe4lBQE7O902wkZXKhaZ6bi55aIZHgY4SFIUi9a0LM8a0G4uAhcGm8MIwsmuRFrj083Ecc3hodbLCnjoljp9KHh8i7u/DbW7+w87DII97knOjpxYZUdVlNtLHZ7lJ1bdtMMNbXVf8LRBxL7V/vG/UMZKDCco+6pvev9ngvFG+khijd6TutAPpLTxZInPT/n1XndGRrQKIfIuhdpy05jEoSsobGOOA1c5KQaTqykPHxeMteC3Mb9nf7Aqc3/cwEgCBcXo+WJ9Ls/vAFDXir/RUr5AqAoQ6EXUo2OHMhULUOSmzNO56KOEOguqeSUIjG9hEsUMpqYjEEPXIC+uRqfeyIEZQ0AsQFryBXBzJAj9SBPhmpxl4tnwLWH5/bAqM93KNC9F39Qyzv1k1jAyMH9V76ibSK7NKKzHy5qYEFuCqUr0i5MulKyPkrlGb3CwSK5sFdlBD6XPkLYSkiPaVUtkIF5IwZMKIDT7tA0E5eBKSFKao7+jQVspU+PFM+OVMGLKAAAAA=) format('woff2');}
+@font-face{font-family:TUELZZ-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAALwAAoAAAAABQwAAAKmAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqDKIJTCwoAATYCJAMQBCAFgmIHIBv6AwCOw7jhK3EWQyyegwey+3wziwOo7gJ1LK3OQpWfMjswTgfwoiepXVlMdzLSm5IQ0vPT//cW/zfwAtoFYF12a1EgC7yX0AAjGHbdmOlogBowpts06owYinO+0dEMFHFSLEEDuU7e/u/M+MnEr82QJCzA0sEWYBTDU8IWAIxYzAoGoCB4nYYBgAQUwHk5k4cQDgC9EEgVn13GYjJAfmhs7BWqXmwetecCG7MhOp8iLCLsCtoWts3bMWfn/O1tlhvcE9YkUnd3rixzu2tb7TI7mD2Tcd/85Enr07adYa9Wl++z8lH5oUetVpvLjobdBc25Sd2sybg11i5kLJcsPCXPe/Rdf2k1f7vH7Fby7Ibb6WtbF2rTnNUu6Da/16ch8x981pxZztvhObcbNrfpfMSYSUhpRm9du8L1NkX7E4N/Cmd+pe7JIXl9CzGbcmDjo33ZHXbuivv7DY81GqVKNI0COMqMkk5AU00NhxtIS/QsqB2Tm5e75u2bc/5JzvKcWtL2N+4IiKzN6cAWFv72v8kqmPQXgKzjXOwKhPdI+v/l+MFMD7q6eqbogo/pXalbdN69l1W8ksonY/xc7BqE9dS/vz7Hyz/V006dg6JVq3/vAEAAAha/T7Drs8s2mSsqoDRiZYp8BJgjKw1AwQAkxBnnZApA7LgqAeGNTLwiTphIBQioFKg0gLBkJkAG2CEhVGywi7GGFd5Yx4awbkvcqQCMUC0Q+DJgWMUTO9ZwZRTreLJUWRLP0VUi+ClMLRR1Dsjlhe0sVm9pyRVdLo2Nz9UeXt8whm2BsMWVUh6bSjseXHgJEcSEnxRYeDCOZ26EiOhkADlyCmmHBYteSilBzNI1gA0PblIopYiSGugO3cqhrhsYcz0xjzcSxkZAcwsuUiiniCrAAAA=) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="83.980077" y="-78.72145" transform="matrix(1.000261 0 0 1.000261 -79.70999 90.223)">f</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="88.83057" y="-77.205898" transform="matrix(1.000545 0 0 1.000545 -79.70999 90.223)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="125.814157" y="-78.72145" transform="matrix(1.000261 0 0 1.000261 -79.70999 90.223)">f</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="130.652769" y="-77.205898" transform="matrix(1.000545 0 0 1.000545 -79.70999 90.223)">2</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="168.785939" y="-78.72145" transform="matrix(1.000261 0 0 1.000261 -80.84799 90.223)">.<tspan x="173.198228">.</tspan><tspan x="177.620473">.</tspan></text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="211.825704" y="-78.72145" transform="matrix(1.000261 0 0 1.000261 -79.77699 90.223)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="216.639889" y="-77.205898" transform="matrix(1.000545 0 0 1.000545 -79.77699 90.223)">p</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="258.837432" y="-78.72145" transform="matrix(1.000261 0 0 1.000261 -84.821 90.223)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="263.639266" y="-77.205898" transform="matrix(1.000545 0 0 1.000545 -84.821 90.223)">p</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="267.744018" y="-77.205898" transform="matrix(1.000545 0 0 1.000545 -84.821 90.223)">+1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="306.91988" y="-78.72145" transform="matrix(1.000261 0 0 1.000261 -80.84799 90.223)">.<tspan x="311.332159">.</tspan><tspan x="315.754404">.</tspan></text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="354.966338" y="-78.72145" transform="matrix(1.000261 0 0 1.000261 -84.78598 90.223)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="359.740862" y="-77.205898" transform="matrix(1.000545 0 0 1.000545 -84.78598 90.223)">p</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="363.845624" y="-77.205898" transform="matrix(1.000545 0 0 1.000545 -84.78598 90.223)">+</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="369.958281" y="-77.205898" transform="matrix(1.000545 0 0 1.000545 -84.78598 90.223)">q</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="83.980077" y="-46.357899" transform="matrix(1.000261 0 0 1.000261 -79.59 90.223)">e</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="88.5927" y="-44.850548" transform="matrix(1.000545 0 0 1.000545 -79.59 90.223)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="125.814157" y="-46.357899" transform="matrix(1.000261 0 0 1.000261 -79.59 90.223)">e</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="130.414899" y="-44.850548" transform="matrix(1.000545 0 0 1.000545 -79.59 90.223)">2</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="168.785939" y="-46.357899" transform="matrix(1.000261 0 0 1.000261 -80.84799 90.223)">.<tspan x="173.198228">.</tspan><tspan x="177.620473">.</tspan></text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="211.825704" y="-46.357899" transform="matrix(1.000261 0 0 1.000261 -79.658 90.223)">e</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="216.402009" y="-44.850548" transform="matrix(1.000545 0 0 1.000545 -79.658 90.223)">p</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="258.837432" y="-46.357899" transform="matrix(1.000261 0 0 1.000261 -84.701999 90.223)">e</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="263.400396" y="-44.850548" transform="matrix(1.000545 0 0 1.000545 -84.701999 90.223)">p</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="267.505158" y="-44.850548" transform="matrix(1.000545 0 0 1.000545 -84.701999 90.223)">+1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="306.91988" y="-46.357899" transform="matrix(1.000261 0 0 1.000261 -80.84799 90.223)">.<tspan x="311.332159">.</tspan><tspan x="315.754404">.</tspan></text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="354.966338" y="-46.357899" transform="matrix(1.000261 0 0 1.000261 -84.66698 90.223)">e</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="359.502002" y="-44.850548" transform="matrix(1.000545 0 0 1.000545 -84.66698 90.223)">p</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="363.606764" y="-44.850548" transform="matrix(1.000545 0 0 1.000545 -84.66698 90.223)">+</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="369.719431" y="-44.850548" transform="matrix(1.000545 0 0 1.000545 -84.66698 90.223)">q</text>
+<path d="M41.64395 8.99004H18.53035" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M20.40323 11.38095C20.02466 9.94637 19.18105 9.26897 18.3311 8.99004C19.18105 8.71111 20.02466 8.03371 20.40323 6.59913" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="74.993114" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 -47.132005 53.014)"><tspan fill="#800080">1</tspan></text>
+<path d="M83.48949 8.99004H60.37589" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M62.248775 11.38095C61.870205 9.94637 61.026595 9.26897 60.176645 8.99004C61.026595 8.71111 61.870205 8.03371 62.248775 6.59913" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="74.993114" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 -5.286003 53.014)"><tspan fill="#800080">1</tspan></text>
+<path d="M127.61113 8.99004H104.49753" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M106.370427 11.38095C105.991857 9.94637 105.148247 9.26897 104.298297 8.99004C105.148247 8.71111 105.991857 8.03371 106.370427 6.59913" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="74.993114" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 38.835 53.014)"><tspan fill="#800080">1</tspan></text>
+<path d="M169.59236 8.99004H146.47876" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M148.35166 11.38095C147.97309 9.94637 147.12948 9.26897 146.27953 8.99004C147.12948 8.71111 147.97309 8.03371 148.35166 6.59913" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="74.993114" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 81.298007 53.014)"><tspan fill="#800080">t</tspan></text>
+<path d="M183.87062 18.18029V35.3163" stroke="#008080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M186.26153 33.44341C184.82695 33.82198 184.14955 34.66559 183.87062 35.51554C183.59169 34.66559 182.91429 33.82198 181.47971 33.44341" stroke="#008080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="74.993114" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 111.183 75.15)"><tspan fill="#008080">1</tspan></text>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="78.96295" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 111.183 75.15)"><tspan fill="#008080">−</tspan></text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="85.185555" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 111.183 75.15)"><tspan fill="#008080">t</tspan></text>
+<path d="M221.66095 8.99004H198.54735" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M200.42025 11.38095C200.04168 9.94637 199.19807 9.26897 198.34812 8.99004C199.19807 8.71111 200.04168 8.03371 200.42025 6.59913" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="74.993114" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 132.885 53.014)"><tspan fill="#800080">1</tspan></text>
+<path d="M265.78261 8.99004H242.669" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M244.54189 11.38095C244.16332 9.94637 243.31971 9.26897 242.46976 8.99004C243.31971 8.71111 244.16332 8.03371 244.54189 6.59913" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="74.993114" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 177.007 53.014)"><tspan fill="#800080">1</tspan></text>
+<path d="M18.01251 41.36272H41.36483" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M39.491928 38.97181C39.870498 40.40639 40.714108 41.08379 41.564058 41.36272C40.714108 41.64165 39.870498 42.31905 39.491928 43.75363" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="74.993114" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 -50.245004 94.573)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="81.216718" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 -50.245004 94.573)"><tspan fill="#800080">1</tspan></text>
+<path d="M59.85807 41.36272H83.09102" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M81.21812 38.97181C81.59669 40.40639 82.4403 41.08379 83.29025 41.36272C82.4403 41.64165 81.59669 42.31905 81.21812 43.75363" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="74.993114" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 -8.459 94.573)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="81.216718" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 -8.459 94.573)"><tspan fill="#800080">1</tspan></text>
+<path d="M104.09906 41.36272H127.33202" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M125.45912 38.97181C125.83769 40.40639 126.6813 41.08379 127.53125 41.36272C126.6813 41.64165 125.83769 42.31905 125.45912 43.75363" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="74.993114" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 35.782 94.573)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="81.216718" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 35.782 94.573)"><tspan fill="#800080">1</tspan></text>
+<path d="M136.84572 35.71477V18.57876" stroke="#00f" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M134.45481 20.45165C135.88939 20.07308 136.56679 19.22947 136.84572 18.37952C137.12465 19.22947 137.80205 20.07308 139.23663 20.45165" stroke="#00f" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="74.993114" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 46.258 75.15)"><tspan fill="#00f">1</tspan></text>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="78.96295" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 46.258 75.15)"><tspan fill="#00f">−</tspan></text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="85.185555" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 46.258 75.15)"><tspan fill="#00f">t</tspan></text>
+<path d="M145.96094 41.36272H169.31324" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M167.44034 38.97181C167.81891 40.40639 168.66252 41.08379 169.51247 41.36272C168.66252 41.64165 167.81891 42.31905 167.44034 43.75363" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="74.993114" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 78.184 94.395999)"><tspan fill="#800080">−</tspan></text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="81.216718" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 78.184 94.395999)"><tspan fill="#800080">t</tspan></text>
+<path d="M198.02953 41.36272H221.26249" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M219.38959 38.97181C219.76816 40.40639 220.61177 41.08379 221.46172 41.36272C220.61177 41.64165 219.76816 42.31905 219.38959 43.75363" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="74.993114" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 129.712 94.573)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="81.216718" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 129.712 94.573)"><tspan fill="#800080">1</tspan></text>
+<path d="M242.27053 41.36272H265.50348" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M263.63057 38.97181C264.00914 40.40639 264.85275 41.08379 265.7027 41.36272C264.85275 41.64165 264.00914 42.31905 263.63057 43.75363" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="74.993114" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 173.953 94.573)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="81.216718" y="-46.344733" transform="matrix(1.000545 0 0 1.000545 173.953 94.573)"><tspan fill="#800080">1</tspan></text>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-cover-c-2p-2p2q-special-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;2
+</figcaption>
+</figure>
+</div>
+<p>当 <span class="math inline">\(t \neq 1\)</span> 时，考察 <span class="math inline">\(e_1\)</span> 和 <span class="math inline">\((1-t) f_{p+q} + (-1)^q t e_{p-q+1}\)</span> 在 <span class="math inline">\(\Gamma(t)\)</span> 多次作用下的变化情况： <span class="math display">\[
+e_1 \longrightarrow \dots \longrightarrow \pm e_p
+\longrightarrow +\left\{\begin{matrix}
+(1-t) f_p   &amp;\longrightarrow&amp; \dots &amp;\longrightarrow&amp; (1-t) f_{p-q+1} &amp;\longrightarrow&amp; \dots &amp;\longrightarrow&amp; (1-t) f_1 \\
+\pm t e_{p+1} &amp;\longrightarrow&amp; \dots &amp;\longrightarrow&amp; \pm t e_{p+q}
+\end{matrix}\right.
+\]</span> <span class="math display">\[
+\begin{aligned}
+\left.\begin{matrix}
+(1-t) f_{p+q}      &amp;\longrightarrow&amp; \dots &amp;\longrightarrow&amp; (1-t) f_{p+1} &amp;\longrightarrow&amp; t(1-t) f_p + (1-t)^2 e_{p+1} \\
+(-1)^q t e_{p-q+1} &amp;\longrightarrow&amp; \dots &amp;\longrightarrow&amp; -t e_p        &amp;\longrightarrow&amp; -t(1-t) f_p + t^2 e_{p+1}
+\end{matrix}\right\} +
+= (t^2 + (1-t)^2) e_{p+1} \\
+\longrightarrow \dots \longrightarrow (t^2 + (1-t)^2) e_{p+q}
+\end{aligned}
+\]</span> 故取此二向量生成的循环基底，长度分别为 <span class="math inline">\(2p\)</span> 和 <span class="math inline">\(2q\)</span>．注意它们在标准基底 <span class="math inline">\((e_1,f_1,\dots,e_n,f_n)\)</span> 下可排成对角线非零的三角矩阵，确实线性无关．故此时 <span class="math inline">\(\Gamma(t)\)</span> 的 Jordan 型为 <span class="math inline">\((2p,2q)\)</span>．</p>
+<p>当 <span class="math inline">\(t = 1\)</span> 时，取 <span class="math inline">\(e_1\)</span> 和 <span class="math inline">\(f_{p+q}\)</span> 生成的循环基底，易见长度均为 <span class="math inline">\(p+q\)</span>，且它们无非是标准基底 <span class="math inline">\((e_1,f_1,\dots,e_n,f_n)\)</span> 的一个置换，确实线性无关．故此时 <span class="math inline">\(\Gamma(t)\)</span> 的 Jordan 型为 <span class="math inline">\((p+q,p+q)\)</span>．</p>
+</section>
+<section id="情形二-2p2q-to-2p-22q2-p-geq-q2" class="level4">
+<h4 class="anchored" data-anchor-id="情形二-2p2q-to-2p-22q2-p-geq-q2">情形二 <span class="math inline">\((2p,2q) \to (2p-2,2q+2)\)</span>, <span class="math inline">\(p \geq q+2\)</span></h4>
+<div id="fig-cover-c-2p2q" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cover-c-2p2q-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.6 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="456.6pt" height="84.435pt" viewbox="0 0 304.4 56.29">
+<style type="text/css">
+@font-face{font-family:XDTRFF-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHQAAoAAAAAA3wAAAGIAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAo0RwsGAAE2AiQDCAQgBYJcByAb2AJgrgZsdxqUso7dNkYcaxTf3GFhlh0bQbSGzv5dAFECamIbC+xS8CQUkSZXo8vC1VbVElxs88EboX4oiO460mYWEbHQwkJcivBQ9gMiJqoGGIEGl//v4ZY7fg8DvS1sa0s8858ncWCtLaCAoxDCpC2x1ALN+qY4JSeUKKV9W5CK13EbQ/G0+PCvGW6pjy+i0KMCpxQ5D7Tjq0sK7GBjlgb+aEAOpo9AAPAfQIGEZkmgWdaPLAsGG/+DH/wNBIACZASqUQvIgKi+qP3FzZctPHp+49nPz8FaQTkAgeBT/8Oe0Fc+ZbyRBqML5QoQdGTf0WkTIQiFsEmgUC0agWKla0h1bCCrVocSVbpQqtrovFK7KUnkCqHXJiBrd44SrW6gVLuHqdKEV7vCP2EefpzHzfNE+3j/Hk7QTh2b8Ffviq8uWvJxSWvUx+YsadU6s0lsgHa0IrFB48PxcOPxiJYc3X0d7IoNRrlWA00aM5FOa2UjNvDLUHTpQzt0bJEbLVI1NG3MnARg+AA=) format('woff2');}
+@font-face{font-family:NQUDBD-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAANYAAoAAAAABbAAAAMNAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqEVINbCwoAATYCJAMQBCAFglwHIBt8BECO1FaxTVLmJh/6bfWGUc5FNyob/y6qG6La7V9piJE0iWWWJ97ITe1ZXkAXwC7dB3wuUEsoDCMIP9ADSwNrUbuLNiMpaZF2ffGwATQcmQgxMJc5918DE4ZB3nYa3EsBwFjACfwKFaerGqwWHQ0CgCJao4IAABgABWhklpgiNgC2SjBadehKLdgRJgkTvKAQgRJQ3N8D4I0sBBjci0xVR3XHzHx9+WyrpQcNZk7V0po+/Yb+nD3WK64ZrrnhfeJa5tWMmTZzsP28XjlRZyqmaXqOmQZ+KpeVMVVPvkJzzIr8jKmO6yJ33HDecIMs3s8tv9peoKGhiCy77fQ5MzS3rTHONl961eP69awb2XPsb2Qfu6S75oD2NPA52TOc1kctvxqy9qrBon0nbjjP0M7PMVjkveOG+4wZUs1psxxm2uzNGH3ZSK6fzy2dv0JTmm28wHubboY0woOWaiUMdFx20nxjctF4XXjdxEWpypphb7Y1X+RDDF9nxTt9ailMY3KYmpCkLypxYZnMJR1eLUwtoz6QlTxS4b5wSidH1NNsutBEmV1oqHz0tuddqUW6RUuEv9WwQZ85XW/Ex1pC8kZaBJsA9Mk3RzTQOvpI9p0/OLlHp3SzcrjlpjBkbcS3iqCUx6axkbkMCSnRfckfUpTMsXc7y3lEmJdGWtuZmQ7L2H0HQ62ejLbCnymxFrkaqouiI1MTuhTkqeIHLyrXhVHHz4rSqCi90sOqWg9rjHpaZ6USI5tlpUqUU9F+CJZJewmx33lcsXLANwkVAQwIgz7xY3gAEgy71ygBwCxBwIgfCLiiyGcZHQTVLtgjAJEkHw2ccIaQBCqLO0JERpkQk9InWDJW4xwdbijSFUAYiQNCREcNIaaFJ1g6pqccF+sPNOJ/ZYNJqZkRYRGO4YmJsd73hJark4ug9vh7RUVXbXtXdaOJu5MXwjVr1KJTh0ptTCRqVoFrmiRJlSlCmAiOwiVSFMtbVv1au1rNmphw5cRFH4yWm3zKpXHAirBM78qs0KVW+8erNTLhzokXigEAAA==) format('woff2');}
+@font-face{font-family:OYFEXR-CMR7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAALAAAoAAAAABNwAAAJ1AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAARAqCeII3CwwAATYCJAMUBCAFglYHIBveA0CO0SdjLlQcIzhmPPFUBM/vj2/O05cXVoKT3eTExAQmqIJ9k5PblqK0d2JcvozZTKBDdH+w75Z2Sz9yKvdc64/3x+v2LrbUNP5Azgb8SYcX97W2THBgpYnubWLLIxCRSpM6fKSjJ+TZglgFlGS3QZ/+d1qhNP5QY3LUwVcIwU/ZdXigEQAzgjGXkAuriymBDDk625hOEBMA1KqVYSQ1Y0oYsd6VfiZPsgtMlsbVo8AeANcABSBgX+/eHFYrdet0p2MV5A7naqFNca057uVaWzK+e6vqy496OldNfZntcDzqPt2d7f6+1uVasx036LWgrd0Lt7uDG69en3nchc2vH1y81QlqunF1+kG3VsjuXUODNWvy8oDoiw+9oG8cw+Kle+nNtd3pbTuhPsoc3NoZ1AX6dmn1v/qy3dbqt7ntU8YsL0PGgDXRPWbmy9QzNqbZ6qn9wxsUp/39q9przurywb9Wppb+A+5kbw/8xAcvV7XLeX9nNZwYMowKmfV6bvDSk1lEzXw78U+suTBd6UuWSxtAmTojPqTDk33K+ue5tYYhwMNd2qg7IBBcPvq5vRIf9huRF7iTIp+Rwx0VgUuNZwGLJedBgA4CWRnvHBm9xXbikixRl1jqA7ggUFHv5D7QAkVVaNAiASXSC6iQoZfr9WAAFkWd0E9SkgvdNAAlMgZUyHpdb4LbwMH8F+xcZnFCfFGONjY9JzAc3zbqDPq5J9Z31A009w40tgvMugBArE7tuvTrU6+HQLpOdfn1DpmKJYhXJIdWrHQ5AhXUqfRq1qmDgJGOwRpIDDrOC6rvAOryGsOzvs6AZr0Tb9ROwEwnABgDAAA=) format('woff2');}
+@font-face{font-family:TUELZZ-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAALwAAoAAAAABQwAAAKmAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqDKIJTCwoAATYCJAMQBCAFgmIHIBv6AwCOw7jhK3EWQyyegwey+3wziwOo7gJ1LK3OQpWfMjswTgfwoiepXVlMdzLSm5IQ0vPT//cW/zfwAtoFYF12a1EgC7yX0AAjGHbdmOlogBowpts06owYinO+0dEMFHFSLEEDuU7e/u/M+MnEr82QJCzA0sEWYBTDU8IWAIxYzAoGoCB4nYYBgAQUwHk5k4cQDgC9EEgVn13GYjJAfmhs7BWqXmwetecCG7MhOp8iLCLsCtoWts3bMWfn/O1tlhvcE9YkUnd3rixzu2tb7TI7mD2Tcd/85Enr07adYa9Wl++z8lH5oUetVpvLjobdBc25Sd2sybg11i5kLJcsPCXPe/Rdf2k1f7vH7Fby7Ibb6WtbF2rTnNUu6Da/16ch8x981pxZztvhObcbNrfpfMSYSUhpRm9du8L1NkX7E4N/Cmd+pe7JIXl9CzGbcmDjo33ZHXbuivv7DY81GqVKNI0COMqMkk5AU00NhxtIS/QsqB2Tm5e75u2bc/5JzvKcWtL2N+4IiKzN6cAWFv72v8kqmPQXgKzjXOwKhPdI+v/l+MFMD7q6eqbogo/pXalbdN69l1W8ksonY/xc7BqE9dS/vz7Hyz/V006dg6JVq3/vAEAAAha/T7Drs8s2mSsqoDRiZYp8BJgjKw1AwQAkxBnnZApA7LgqAeGNTLwiTphIBQioFKg0gLBkJkAG2CEhVGywi7GGFd5Yx4awbkvcqQCMUC0Q+DJgWMUTO9ZwZRTreLJUWRLP0VUi+ClMLRR1Dsjlhe0sVm9pyRVdLo2Nz9UeXt8whm2BsMWVUh6bSjseXHgJEcSEnxRYeDCOZ26EiOhkADlyCmmHBYteSilBzNI1gA0PblIopYiSGugO3cqhrhsYcz0xjzcSxkZAcwsuUiiniCrAAAA=) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="89.145729" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -84.877017 91.539)">f</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="93.994755" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -84.877017 91.539)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="132.117511" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -86.01501 91.539)">.<tspan x="136.52979">.</tspan><tspan x="140.952035">.</tspan></text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="180.253946" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -90.043018 91.539)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="185.078097" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">p</text>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="189.182859" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">−</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="195.406466" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="227.321659" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -84.944019 91.539)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="232.132443" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -84.944019 91.539)">p</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="274.333387" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -89.98801 91.539)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="279.13082" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -89.98801 91.539)">p</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="283.235572" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -89.98801 91.539)">+1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="322.415835" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -86.015 91.539)">.<tspan x="326.828113">.</tspan><tspan x="331.250359">.</tspan></text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="370.463293" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -89.953 91.539)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="375.232426" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -89.953 91.539)">p</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="379.337188" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -89.953 91.539)">+</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="385.449855" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -89.953 91.539)">q</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="89.145729" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -84.75701 91.539)">e</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="93.755885" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -84.75701 91.539)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="132.117511" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -86.01501 91.539)">.<tspan x="136.52979">.</tspan><tspan x="140.952035">.</tspan></text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="180.253946" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -90.043018 91.539)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="185.078097" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">p</text>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="189.182859" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">−</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="195.406466" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="227.321659" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -84.82502 91.539)">e</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="231.893563" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -84.82502 91.539)">p</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="274.333387" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -89.869 91.539)">e</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="278.89195" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -89.869 91.539)">p</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="282.996712" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -89.869 91.539)">+1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="322.415835" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -86.015 91.539)">.<tspan x="326.828113">.</tspan><tspan x="331.250359">.</tspan></text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="370.463293" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -89.834 91.539)">e</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="374.994555" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -89.834 91.539)">p</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="379.099317" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -89.834 91.539)">+</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="385.210985" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -89.834 91.539)">q</text>
+<path d="M8.96527 18.09852V38.77683" stroke="#008080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M11.356181 36.90394C9.921601 37.28251 9.244201 38.12612 8.965271 38.97607C8.686341 38.12612 8.008941 37.28251 6.574361 36.90394" stroke="#008080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -77.553 75.109)"><tspan fill="#008080">1</tspan></text>
+<path d="M41.64407 9.82151H18.53047" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M20.403368 12.212418C20.024798 10.777838 19.181188 10.100438 18.331238 9.821508C19.181188 9.542578 20.024798 8.865178 20.403368 7.430598" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -52.29901 51.699998)"><tspan fill="#800080">1</tspan></text>
+<path d="M85.76572 9.82151H62.65212" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M64.52501 12.212418C64.14644 10.777838 63.30283 10.100438 62.45288 9.821508C63.30283 9.542578 64.14644 8.865178 64.52501 7.430598" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -8.17701 51.699998)"><tspan fill="#800080">1</tspan></text>
+<path d="M137.94499 9.82151H114.83139" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M116.70429 12.212418C116.32572 10.777838 115.48211 10.100438 114.63216 9.821508C115.48211 9.542578 116.32572 8.865178 116.70429 7.430598" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 39.38399 50.869997)"><tspan fill="#800080">1</tspan></text>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="84.126135" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 39.38399 50.869997)"><tspan fill="#800080">−</tspan></text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="90.34974" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 39.38399 50.869997)"><tspan fill="#800080">t</tspan></text>
+<path d="M156.41414 16.69248L186.29846 38.9374" stroke="#f00" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M186.223718 35.901316C185.670817 37.278058 185.943032 38.325117 186.45825 39.05634C185.609945 38.772587 184.528806 38.812241 183.368589 39.736909" stroke="#f00" fill="none" stroke-width=".39846" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 78.55899 58.571)"><tspan fill="#f00">t</tspan></text>
+<path d="M181.85859 19.01176L155.08559 38.93743" stroke="#f00" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M158.015392 39.737173C156.855241 38.81241 155.774101 38.772672 154.92577 39.05636C155.441048 38.325174 155.713345 37.278132 155.160549 35.901341" stroke="#f00" fill="none" stroke-width=".398462" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 96.301998 60.891)"><tspan fill="#f00">t</tspan></text>
+<path d="M231.99481 9.82151H208.88121" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M210.75411 12.212418C210.37554 10.777838 209.53193 10.100438 208.68198 9.821508C209.53193 9.542578 210.37554 8.865178 210.75411 7.430598" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 138.052 51.699998)"><tspan fill="#800080">1</tspan></text>
+<path d="M276.11646 9.82151H253.00285" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M254.87575 12.212418C254.49718 10.777838 253.65357 10.100438 252.80362 9.821508C253.65357 9.542578 254.49718 8.865178 254.87575 7.430598" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 182.174 51.699998)"><tspan fill="#800080">1</tspan></text>
+<path d="M18.01265 44.82325H41.24561" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M39.37271 42.43234C39.75128 43.86692 40.59489 44.54432 41.44484 44.82325C40.59489 45.10218 39.75128 45.77958 39.37271 47.21416" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -55.472009 95.889)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="86.380896" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -55.472009 95.889)"><tspan fill="#800080">1</tspan></text>
+<path d="M62.25365 44.82325H85.36725" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M83.49436 42.43234C83.87293 43.86692 84.71654 44.54432 85.56649 44.82325C84.71654 45.10218 83.87293 45.77958 83.49436 47.21416" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -11.290009 95.889)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="86.380896" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -11.290009 95.889)"><tspan fill="#800080">1</tspan></text>
+<path d="M114.43291 44.82325H137.66586" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M135.79298 42.43234C136.17155 43.86692 137.01516 44.54432 137.86511 44.82325C137.01516 45.10218 136.17155 45.77958 135.79298 47.21416" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 33.21699 96.625)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="86.380896" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 33.21699 96.625)"><tspan fill="#800080">(1</tspan></text>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="93.462035" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 33.21699 96.625)"><tspan fill="#800080">−</tspan></text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="99.684643" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 33.21699 96.625)"><tspan fill="#800080">t</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="102.693002" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 33.21699 96.625)"><tspan fill="#800080">)</tspan></text>
+<path d="M208.36339 44.82325H231.59635" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M229.72345 42.43234C230.10202 43.86692 230.94563 44.54432 231.79558 44.82325C230.94563 45.10218 230.10202 45.77958 229.72345 47.21416" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 134.879 95.889)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="86.380896" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 134.879 95.889)"><tspan fill="#800080">1</tspan></text>
+<path d="M252.60439 44.82325H275.83733" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M273.96444 42.43234C274.34301 43.86692 275.18662 44.54432 276.03657 44.82325C275.18662 45.10218 274.34301 45.77958 273.96444 47.21416" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 179.12 95.889)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="86.380896" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 179.12 95.889)"><tspan fill="#800080">1</tspan></text>
+<path d="M290.35996 39.1753V19.41023" stroke="#00f" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M287.96906 21.283119C289.40364 20.904549 290.08104 20.060939 290.35997 19.210989C290.6389 20.060939 291.3163 20.904549 292.75088 21.283119" stroke="#00f" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 212.505 75.565998)"><tspan fill="#00f">1</tspan></text>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-cover-c-2p2q-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;3
+</figcaption>
+</figure>
+</div>
+<p>当 <span class="math inline">\(t \neq 1\)</span> 时，考察 <span class="math inline">\(f_p\)</span> 和 <span class="math inline">\(e_{p+1}\)</span> 生成的循环基底，分析过程与情形一类似，最终可知 <span class="math inline">\(\Gamma(t)\)</span> 的 Jordan 型为 <span class="math inline">\((2p,2q)\)</span>．</p>
+<p>当 <span class="math inline">\(t = 1\)</span> 时，取 <span class="math inline">\(f_{p-1}\)</span> 和 <span class="math inline">\(e_{p+1}\)</span> 生成的循环基底，可知 <span class="math inline">\(\Gamma(t)\)</span> 的 Jordan 型为 <span class="math inline">\((2p-2,2q+2)\)</span>．</p>
+<p>后续情形的分析与情形二类似，我们仅给出组合图示，细节不再赘述．</p>
+</section>
+<section id="情形三-2pqq-to-2p-2q1q1-p-geq-q" class="level4">
+<h4 class="anchored" data-anchor-id="情形三-2pqq-to-2p-2q1q1-p-geq-q">情形三 <span class="math inline">\((2p,q,q) \to (2p-2,q+1,q+1)\)</span>, <span class="math inline">\(p \geq q\)</span></h4>
+<div id="fig-cover-c-2pqq" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cover-c-2pqq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.6 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="456.6pt" height="84.435pt" viewbox="0 0 304.4 56.29">
+<style type="text/css">
+@font-face{font-family:NQUDBD-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAANYAAoAAAAABbAAAAMNAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqEVINbCwoAATYCJAMQBCAFglwHIBt8BECO1FaxTVLmJh/6bfWGUc5FNyob/y6qG6La7V9piJE0iWWWJ97ITe1ZXkAXwC7dB3wuUEsoDCMIP9ADSwNrUbuLNiMpaZF2ffGwATQcmQgxMJc5918DE4ZB3nYa3EsBwFjACfwKFaerGqwWHQ0CgCJao4IAABgABWhklpgiNgC2SjBadehKLdgRJgkTvKAQgRJQ3N8D4I0sBBjci0xVR3XHzHx9+WyrpQcNZk7V0po+/Yb+nD3WK64ZrrnhfeJa5tWMmTZzsP28XjlRZyqmaXqOmQZ+KpeVMVVPvkJzzIr8jKmO6yJ33HDecIMs3s8tv9peoKGhiCy77fQ5MzS3rTHONl961eP69awb2XPsb2Qfu6S75oD2NPA52TOc1kctvxqy9qrBon0nbjjP0M7PMVjkveOG+4wZUs1psxxm2uzNGH3ZSK6fzy2dv0JTmm28wHubboY0woOWaiUMdFx20nxjctF4XXjdxEWpypphb7Y1X+RDDF9nxTt9ailMY3KYmpCkLypxYZnMJR1eLUwtoz6QlTxS4b5wSidH1NNsutBEmV1oqHz0tuddqUW6RUuEv9WwQZ85XW/Ex1pC8kZaBJsA9Mk3RzTQOvpI9p0/OLlHp3SzcrjlpjBkbcS3iqCUx6axkbkMCSnRfckfUpTMsXc7y3lEmJdGWtuZmQ7L2H0HQ62ejLbCnymxFrkaqouiI1MTuhTkqeIHLyrXhVHHz4rSqCi90sOqWg9rjHpaZ6USI5tlpUqUU9F+CJZJewmx33lcsXLANwkVAQwIgz7xY3gAEgy71ygBwCxBwIgfCLiiyGcZHQTVLtgjAJEkHw2ccIaQBCqLO0JERpkQk9InWDJW4xwdbijSFUAYiQNCREcNIaaFJ1g6pqccF+sPNOJ/ZYNJqZkRYRGO4YmJsd73hJark4ug9vh7RUVXbXtXdaOJu5MXwjVr1KJTh0ptTCRqVoFrmiRJlSlCmAiOwiVSFMtbVv1au1rNmphw5cRFH4yWm3zKpXHAirBM78qs0KVW+8erNTLhzokXigEAAA==) format('woff2');}
+@font-face{font-family:OYFEXR-CMR7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAALAAAoAAAAABNwAAAJ1AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAARAqCeII3CwwAATYCJAMUBCAFglYHIBveA0CO0SdjLlQcIzhmPPFUBM/vj2/O05cXVoKT3eTExAQmqIJ9k5PblqK0d2JcvozZTKBDdH+w75Z2Sz9yKvdc64/3x+v2LrbUNP5Azgb8SYcX97W2THBgpYnubWLLIxCRSpM6fKSjJ+TZglgFlGS3QZ/+d1qhNP5QY3LUwVcIwU/ZdXigEQAzgjGXkAuriymBDDk625hOEBMA1KqVYSQ1Y0oYsd6VfiZPsgtMlsbVo8AeANcABSBgX+/eHFYrdet0p2MV5A7naqFNca057uVaWzK+e6vqy496OldNfZntcDzqPt2d7f6+1uVasx036LWgrd0Lt7uDG69en3nchc2vH1y81QlqunF1+kG3VsjuXUODNWvy8oDoiw+9oG8cw+Kle+nNtd3pbTuhPsoc3NoZ1AX6dmn1v/qy3dbqt7ntU8YsL0PGgDXRPWbmy9QzNqbZ6qn9wxsUp/39q9przurywb9Wppb+A+5kbw/8xAcvV7XLeX9nNZwYMowKmfV6bvDSk1lEzXw78U+suTBd6UuWSxtAmTojPqTDk33K+ue5tYYhwMNd2qg7IBBcPvq5vRIf9huRF7iTIp+Rwx0VgUuNZwGLJedBgA4CWRnvHBm9xXbikixRl1jqA7ggUFHv5D7QAkVVaNAiASXSC6iQoZfr9WAAFkWd0E9SkgvdNAAlMgZUyHpdb4LbwMH8F+xcZnFCfFGONjY9JzAc3zbqDPq5J9Z31A009w40tgvMugBArE7tuvTrU6+HQLpOdfn1DpmKJYhXJIdWrHQ5AhXUqfRq1qmDgJGOwRpIDDrOC6rvAOryGsOzvs6AZr0Tb9ROwEwnABgDAAA=) format('woff2');}
+@font-face{font-family:XDTRFF-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHQAAoAAAAAA3wAAAGIAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAo0RwsGAAE2AiQDCAQgBYJcByAb2AJgrgZsdxqUso7dNkYcaxTf3GFhlh0bQbSGzv5dAFECamIbC+xS8CQUkSZXo8vC1VbVElxs88EboX4oiO460mYWEbHQwkJcivBQ9gMiJqoGGIEGl//v4ZY7fg8DvS1sa0s8858ncWCtLaCAoxDCpC2x1ALN+qY4JSeUKKV9W5CK13EbQ/G0+PCvGW6pjy+i0KMCpxQ5D7Tjq0sK7GBjlgb+aEAOpo9AAPAfQIGEZkmgWdaPLAsGG/+DH/wNBIACZASqUQvIgKi+qP3FzZctPHp+49nPz8FaQTkAgeBT/8Oe0Fc+ZbyRBqML5QoQdGTf0WkTIQiFsEmgUC0agWKla0h1bCCrVocSVbpQqtrovFK7KUnkCqHXJiBrd44SrW6gVLuHqdKEV7vCP2EefpzHzfNE+3j/Hk7QTh2b8Ffviq8uWvJxSWvUx+YsadU6s0lsgHa0IrFB48PxcOPxiJYc3X0d7IoNRrlWA00aM5FOa2UjNvDLUHTpQzt0bJEbLVI1NG3MnARg+AA=) format('woff2');}
+@font-face{font-family:TUELZZ-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAALwAAoAAAAABQwAAAKmAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqDKIJTCwoAATYCJAMQBCAFgmIHIBv6AwCOw7jhK3EWQyyegwey+3wziwOo7gJ1LK3OQpWfMjswTgfwoiepXVlMdzLSm5IQ0vPT//cW/zfwAtoFYF12a1EgC7yX0AAjGHbdmOlogBowpts06owYinO+0dEMFHFSLEEDuU7e/u/M+MnEr82QJCzA0sEWYBTDU8IWAIxYzAoGoCB4nYYBgAQUwHk5k4cQDgC9EEgVn13GYjJAfmhs7BWqXmwetecCG7MhOp8iLCLsCtoWts3bMWfn/O1tlhvcE9YkUnd3rixzu2tb7TI7mD2Tcd/85Enr07adYa9Wl++z8lH5oUetVpvLjobdBc25Sd2sybg11i5kLJcsPCXPe/Rdf2k1f7vH7Fby7Ibb6WtbF2rTnNUu6Da/16ch8x981pxZztvhObcbNrfpfMSYSUhpRm9du8L1NkX7E4N/Cmd+pe7JIXl9CzGbcmDjo33ZHXbuivv7DY81GqVKNI0COMqMkk5AU00NhxtIS/QsqB2Tm5e75u2bc/5JzvKcWtL2N+4IiKzN6cAWFv72v8kqmPQXgKzjXOwKhPdI+v/l+MFMD7q6eqbogo/pXalbdN69l1W8ksonY/xc7BqE9dS/vz7Hyz/V006dg6JVq3/vAEAAAha/T7Drs8s2mSsqoDRiZYp8BJgjKw1AwQAkxBnnZApA7LgqAeGNTLwiTphIBQioFKg0gLBkJkAG2CEhVGywi7GGFd5Yx4awbkvcqQCMUC0Q+DJgWMUTO9ZwZRTreLJUWRLP0VUi+ClMLRR1Dsjlhe0sVm9pyRVdLo2Nz9UeXt8whm2BsMWVUh6bSjseXHgJEcSEnxRYeDCOZ26EiOhkADlyCmmHBYteSilBzNI1gA0PblIopYiSGugO3cqhrhsYcz0xjzcSxkZAcwsuUiiniCrAAAA=) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="89.145729" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -84.877017 91.539)">f</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="93.994755" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -84.877017 91.539)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="132.117511" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -86.01501 91.539)">.<tspan x="136.52979">.</tspan><tspan x="140.952035">.</tspan></text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="180.253946" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -90.043018 91.539)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="185.078097" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">p</text>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="189.182859" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">−</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="195.406466" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="227.321659" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -84.944019 91.539)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="232.132443" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -84.944019 91.539)">p</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="274.333387" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -89.98801 91.539)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="279.13082" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -89.98801 91.539)">p</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="283.235572" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -89.98801 91.539)">+1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="322.415835" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -86.015 91.539)">.<tspan x="326.828113">.</tspan><tspan x="331.250359">.</tspan></text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="370.463293" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -89.953 91.539)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="375.232426" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -89.953 91.539)">p</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="379.337188" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -89.953 91.539)">+</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="385.449855" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -89.953 91.539)">q</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="89.145729" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -84.75701 91.539)">e</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="93.755885" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -84.75701 91.539)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="132.117511" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -86.01501 91.539)">.<tspan x="136.52979">.</tspan><tspan x="140.952035">.</tspan></text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="180.253946" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -90.043018 91.539)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="185.078097" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">p</text>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="189.182859" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">−</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="195.406466" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="227.321659" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -84.82502 91.539)">e</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="231.893563" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -84.82502 91.539)">p</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="274.333387" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -89.869 91.539)">e</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="278.89195" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -89.869 91.539)">p</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="282.996712" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -89.869 91.539)">+1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="322.415835" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -86.015 91.539)">.<tspan x="326.828113">.</tspan><tspan x="331.250359">.</tspan></text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="370.463293" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -89.834 91.539)">e</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="374.994555" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -89.834 91.539)">p</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="379.099317" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -89.834 91.539)">+</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="385.210985" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -89.834 91.539)">q</text>
+<path d="M8.96527 18.09852V38.77683" stroke="#008080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M11.356181 36.90394C9.921601 37.28251 9.244201 38.12612 8.965271 38.97607C8.686341 38.12612 8.008941 37.28251 6.574361 36.90394" stroke="#008080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -77.553 75.109)"><tspan fill="#008080">1</tspan></text>
+<path d="M41.64407 9.82151H18.53047" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M20.403368 12.212418C20.024798 10.777838 19.181188 10.100438 18.331238 9.821508C19.181188 9.542578 20.024798 8.865178 20.403368 7.430598" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -52.29901 51.699998)"><tspan fill="#800080">1</tspan></text>
+<path d="M85.76572 9.82151H62.65212" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M64.52501 12.212418C64.14644 10.777838 63.30283 10.100438 62.45288 9.821508C63.30283 9.542578 64.14644 8.865178 64.52501 7.430598" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -8.17701 51.699998)"><tspan fill="#800080">1</tspan></text>
+<path d="M137.94499 9.82151H114.83139" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M116.70429 12.212418C116.32572 10.777838 115.48211 10.100438 114.63216 9.821508C115.48211 9.542578 116.32572 8.865178 116.70429 7.430598" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 39.38399 50.869997)"><tspan fill="#800080">1</tspan></text>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="84.126135" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 39.38399 50.869997)"><tspan fill="#800080">−</tspan></text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="90.34974" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 39.38399 50.869997)"><tspan fill="#800080">t</tspan></text>
+<path d="M156.41414 16.69248L186.29846 38.9374" stroke="#f00" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M186.223718 35.901316C185.670817 37.278058 185.943032 38.325117 186.45825 39.05634C185.609945 38.772587 184.528806 38.812241 183.368589 39.736909" stroke="#f00" fill="none" stroke-width=".39846" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 78.55899 58.571)"><tspan fill="#f00">t</tspan></text>
+<path d="M181.85859 19.01176L155.08559 38.93743" stroke="#f00" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M158.015392 39.737173C156.855241 38.81241 155.774101 38.772672 154.92577 39.05636C155.441048 38.325174 155.713345 37.278132 155.160549 35.901341" stroke="#f00" fill="none" stroke-width=".398462" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 96.301998 60.891)"><tspan fill="#f00">t</tspan></text>
+<path d="M231.99481 9.82151H208.88121" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M210.75411 12.212418C210.37554 10.777838 209.53193 10.100438 208.68198 9.821508C209.53193 9.542578 210.37554 8.865178 210.75411 7.430598" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 138.052 51.699998)"><tspan fill="#800080">1</tspan></text>
+<path d="M276.11646 9.82151H253.00285" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M254.87575 12.212418C254.49718 10.777838 253.65357 10.100438 252.80362 9.821508C253.65357 9.542578 254.49718 8.865178 254.87575 7.430598" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 182.174 51.699998)"><tspan fill="#800080">1</tspan></text>
+<path d="M18.01265 44.82325H41.24561" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M39.37271 42.43234C39.75128 43.86692 40.59489 44.54432 41.44484 44.82325C40.59489 45.10218 39.75128 45.77958 39.37271 47.21416" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -55.472009 95.889)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="86.380896" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -55.472009 95.889)"><tspan fill="#800080">1</tspan></text>
+<path d="M62.25365 44.82325H85.36725" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M83.49436 42.43234C83.87293 43.86692 84.71654 44.54432 85.56649 44.82325C84.71654 45.10218 83.87293 45.77958 83.49436 47.21416" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -11.290009 95.889)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="86.380896" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -11.290009 95.889)"><tspan fill="#800080">1</tspan></text>
+<path d="M114.43291 44.82325H137.66586" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M135.79298 42.43234C136.17155 43.86692 137.01516 44.54432 137.86511 44.82325C137.01516 45.10218 136.17155 45.77958 135.79298 47.21416" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 33.21699 96.625)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="86.380896" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 33.21699 96.625)"><tspan fill="#800080">(1</tspan></text>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="93.462035" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 33.21699 96.625)"><tspan fill="#800080">−</tspan></text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="99.684643" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 33.21699 96.625)"><tspan fill="#800080">t</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="102.693002" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 33.21699 96.625)"><tspan fill="#800080">)</tspan></text>
+<path d="M208.36339 44.82325H231.59635" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M229.72345 42.43234C230.10202 43.86692 230.94563 44.54432 231.79558 44.82325C230.94563 45.10218 230.10202 45.77958 229.72345 47.21416" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 134.879 95.889)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="86.380896" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 134.879 95.889)"><tspan fill="#800080">1</tspan></text>
+<path d="M252.60439 44.82325H275.83733" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M273.96444 42.43234C274.34301 43.86692 275.18662 44.54432 276.03657 44.82325C275.18662 45.10218 274.34301 45.77958 273.96444 47.21416" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 179.12 95.889)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="86.380896" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 179.12 95.889)"><tspan fill="#800080">1</tspan></text>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-cover-c-2pqq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;4
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="情形四-pp2q-to-p-1p-12q2-p-geq-2q3" class="level4">
+<h4 class="anchored" data-anchor-id="情形四-pp2q-to-p-1p-12q2-p-geq-2q3">情形四 <span class="math inline">\((p,p,2q) \to (p-1,p-1,2q+2)\)</span>, <span class="math inline">\(p \geq 2q+3\)</span></h4>
+<div id="fig-cover-c-pp2q" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cover-c-pp2q-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.6 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="456.6pt" height="84.435pt" viewbox="0 0 304.4 56.29">
+<style type="text/css">
+@font-face{font-family:NQUDBD-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAANYAAoAAAAABbAAAAMNAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqEVINbCwoAATYCJAMQBCAFglwHIBt8BECO1FaxTVLmJh/6bfWGUc5FNyob/y6qG6La7V9piJE0iWWWJ97ITe1ZXkAXwC7dB3wuUEsoDCMIP9ADSwNrUbuLNiMpaZF2ffGwATQcmQgxMJc5918DE4ZB3nYa3EsBwFjACfwKFaerGqwWHQ0CgCJao4IAABgABWhklpgiNgC2SjBadehKLdgRJgkTvKAQgRJQ3N8D4I0sBBjci0xVR3XHzHx9+WyrpQcNZk7V0po+/Yb+nD3WK64ZrrnhfeJa5tWMmTZzsP28XjlRZyqmaXqOmQZ+KpeVMVVPvkJzzIr8jKmO6yJ33HDecIMs3s8tv9peoKGhiCy77fQ5MzS3rTHONl961eP69awb2XPsb2Qfu6S75oD2NPA52TOc1kctvxqy9qrBon0nbjjP0M7PMVjkveOG+4wZUs1psxxm2uzNGH3ZSK6fzy2dv0JTmm28wHubboY0woOWaiUMdFx20nxjctF4XXjdxEWpypphb7Y1X+RDDF9nxTt9ailMY3KYmpCkLypxYZnMJR1eLUwtoz6QlTxS4b5wSidH1NNsutBEmV1oqHz0tuddqUW6RUuEv9WwQZ85XW/Ex1pC8kZaBJsA9Mk3RzTQOvpI9p0/OLlHp3SzcrjlpjBkbcS3iqCUx6axkbkMCSnRfckfUpTMsXc7y3lEmJdGWtuZmQ7L2H0HQ62ejLbCnymxFrkaqouiI1MTuhTkqeIHLyrXhVHHz4rSqCi90sOqWg9rjHpaZ6USI5tlpUqUU9F+CJZJewmx33lcsXLANwkVAQwIgz7xY3gAEgy71ygBwCxBwIgfCLiiyGcZHQTVLtgjAJEkHw2ccIaQBCqLO0JERpkQk9InWDJW4xwdbijSFUAYiQNCREcNIaaFJ1g6pqccF+sPNOJ/ZYNJqZkRYRGO4YmJsd73hJark4ug9vh7RUVXbXtXdaOJu5MXwjVr1KJTh0ptTCRqVoFrmiRJlSlCmAiOwiVSFMtbVv1au1rNmphw5cRFH4yWm3zKpXHAirBM78qs0KVW+8erNTLhzokXigEAAA==) format('woff2');}
+@font-face{font-family:OYFEXR-CMR7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAALAAAoAAAAABNwAAAJ1AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAARAqCeII3CwwAATYCJAMUBCAFglYHIBveA0CO0SdjLlQcIzhmPPFUBM/vj2/O05cXVoKT3eTExAQmqIJ9k5PblqK0d2JcvozZTKBDdH+w75Z2Sz9yKvdc64/3x+v2LrbUNP5Azgb8SYcX97W2THBgpYnubWLLIxCRSpM6fKSjJ+TZglgFlGS3QZ/+d1qhNP5QY3LUwVcIwU/ZdXigEQAzgjGXkAuriymBDDk625hOEBMA1KqVYSQ1Y0oYsd6VfiZPsgtMlsbVo8AeANcABSBgX+/eHFYrdet0p2MV5A7naqFNca057uVaWzK+e6vqy496OldNfZntcDzqPt2d7f6+1uVasx036LWgrd0Lt7uDG69en3nchc2vH1y81QlqunF1+kG3VsjuXUODNWvy8oDoiw+9oG8cw+Kle+nNtd3pbTuhPsoc3NoZ1AX6dmn1v/qy3dbqt7ntU8YsL0PGgDXRPWbmy9QzNqbZ6qn9wxsUp/39q9przurywb9Wppb+A+5kbw/8xAcvV7XLeX9nNZwYMowKmfV6bvDSk1lEzXw78U+suTBd6UuWSxtAmTojPqTDk33K+ue5tYYhwMNd2qg7IBBcPvq5vRIf9huRF7iTIp+Rwx0VgUuNZwGLJedBgA4CWRnvHBm9xXbikixRl1jqA7ggUFHv5D7QAkVVaNAiASXSC6iQoZfr9WAAFkWd0E9SkgvdNAAlMgZUyHpdb4LbwMH8F+xcZnFCfFGONjY9JzAc3zbqDPq5J9Z31A009w40tgvMugBArE7tuvTrU6+HQLpOdfn1DpmKJYhXJIdWrHQ5AhXUqfRq1qmDgJGOwRpIDDrOC6rvAOryGsOzvs6AZr0Tb9ROwEwnABgDAAA=) format('woff2');}
+@font-face{font-family:XDTRFF-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHQAAoAAAAAA3wAAAGIAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAo0RwsGAAE2AiQDCAQgBYJcByAb2AJgrgZsdxqUso7dNkYcaxTf3GFhlh0bQbSGzv5dAFECamIbC+xS8CQUkSZXo8vC1VbVElxs88EboX4oiO460mYWEbHQwkJcivBQ9gMiJqoGGIEGl//v4ZY7fg8DvS1sa0s8858ncWCtLaCAoxDCpC2x1ALN+qY4JSeUKKV9W5CK13EbQ/G0+PCvGW6pjy+i0KMCpxQ5D7Tjq0sK7GBjlgb+aEAOpo9AAPAfQIGEZkmgWdaPLAsGG/+DH/wNBIACZASqUQvIgKi+qP3FzZctPHp+49nPz8FaQTkAgeBT/8Oe0Fc+ZbyRBqML5QoQdGTf0WkTIQiFsEmgUC0agWKla0h1bCCrVocSVbpQqtrovFK7KUnkCqHXJiBrd44SrW6gVLuHqdKEV7vCP2EefpzHzfNE+3j/Hk7QTh2b8Ffviq8uWvJxSWvUx+YsadU6s0lsgHa0IrFB48PxcOPxiJYc3X0d7IoNRrlWA00aM5FOa2UjNvDLUHTpQzt0bJEbLVI1NG3MnARg+AA=) format('woff2');}
+@font-face{font-family:TUELZZ-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAALwAAoAAAAABQwAAAKmAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqDKIJTCwoAATYCJAMQBCAFgmIHIBv6AwCOw7jhK3EWQyyegwey+3wziwOo7gJ1LK3OQpWfMjswTgfwoiepXVlMdzLSm5IQ0vPT//cW/zfwAtoFYF12a1EgC7yX0AAjGHbdmOlogBowpts06owYinO+0dEMFHFSLEEDuU7e/u/M+MnEr82QJCzA0sEWYBTDU8IWAIxYzAoGoCB4nYYBgAQUwHk5k4cQDgC9EEgVn13GYjJAfmhs7BWqXmwetecCG7MhOp8iLCLsCtoWts3bMWfn/O1tlhvcE9YkUnd3rixzu2tb7TI7mD2Tcd/85Enr07adYa9Wl++z8lH5oUetVpvLjobdBc25Sd2sybg11i5kLJcsPCXPe/Rdf2k1f7vH7Fby7Ibb6WtbF2rTnNUu6Da/16ch8x981pxZztvhObcbNrfpfMSYSUhpRm9du8L1NkX7E4N/Cmd+pe7JIXl9CzGbcmDjo33ZHXbuivv7DY81GqVKNI0COMqMkk5AU00NhxtIS/QsqB2Tm5e75u2bc/5JzvKcWtL2N+4IiKzN6cAWFv72v8kqmPQXgKzjXOwKhPdI+v/l+MFMD7q6eqbogo/pXalbdN69l1W8ksonY/xc7BqE9dS/vz7Hyz/V006dg6JVq3/vAEAAAha/T7Drs8s2mSsqoDRiZYp8BJgjKw1AwQAkxBnnZApA7LgqAeGNTLwiTphIBQioFKg0gLBkJkAG2CEhVGywi7GGFd5Yx4awbkvcqQCMUC0Q+DJgWMUTO9ZwZRTreLJUWRLP0VUi+ClMLRR1Dsjlhe0sVm9pyRVdLo2Nz9UeXt8whm2BsMWVUh6bSjseXHgJEcSEnxRYeDCOZ26EiOhkADlyCmmHBYteSilBzNI1gA0PblIopYiSGugO3cqhrhsYcz0xjzcSxkZAcwsuUiiniCrAAAA=) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="89.145729" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -84.877017 91.539)">f</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="93.994755" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -84.877017 91.539)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="132.117511" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -86.01501 91.539)">.<tspan x="136.52979">.</tspan><tspan x="140.952035">.</tspan></text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="180.253946" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -90.043018 91.539)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="185.078097" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">p</text>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="189.182859" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">−</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="195.406466" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="227.321659" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -84.944019 91.539)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="232.132443" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -84.944019 91.539)">p</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="274.333387" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -89.98801 91.539)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="279.13082" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -89.98801 91.539)">p</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="283.235572" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -89.98801 91.539)">+1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="322.415835" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -86.015 91.539)">.<tspan x="326.828113">.</tspan><tspan x="331.250359">.</tspan></text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="370.463293" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -89.953 91.539)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="375.232426" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -89.953 91.539)">p</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="379.337188" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -89.953 91.539)">+</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="385.449855" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -89.953 91.539)">q</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="89.145729" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -84.75701 91.539)">e</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="93.755885" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -84.75701 91.539)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="132.117511" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -86.01501 91.539)">.<tspan x="136.52979">.</tspan><tspan x="140.952035">.</tspan></text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="180.253946" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -90.043018 91.539)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="185.078097" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">p</text>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="189.182859" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">−</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="195.406466" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="227.321659" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -84.82502 91.539)">e</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="231.893563" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -84.82502 91.539)">p</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="274.333387" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -89.869 91.539)">e</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="278.89195" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -89.869 91.539)">p</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="282.996712" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -89.869 91.539)">+1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="322.415835" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -86.015 91.539)">.<tspan x="326.828113">.</tspan><tspan x="331.250359">.</tspan></text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="370.463293" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -89.834 91.539)">e</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="374.994555" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -89.834 91.539)">p</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="379.099317" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -89.834 91.539)">+</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="385.210985" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -89.834 91.539)">q</text>
+<path d="M41.64407 9.82151H18.53047" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M20.403368 12.212418C20.024798 10.777838 19.181188 10.100438 18.331238 9.821508C19.181188 9.542578 20.024798 8.865178 20.403368 7.430598" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -52.29901 51.699998)"><tspan fill="#800080">1</tspan></text>
+<path d="M85.76572 9.82151H62.65212" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M64.52501 12.212418C64.14644 10.777838 63.30283 10.100438 62.45288 9.821508C63.30283 9.542578 64.14644 8.865178 64.52501 7.430598" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -8.17701 51.699998)"><tspan fill="#800080">1</tspan></text>
+<path d="M137.94499 9.82151H114.83139" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M116.70429 12.212418C116.32572 10.777838 115.48211 10.100438 114.63216 9.821508C115.48211 9.542578 116.32572 8.865178 116.70429 7.430598" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 39.38399 50.869997)"><tspan fill="#800080">1</tspan></text>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="84.126135" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 39.38399 50.869997)"><tspan fill="#800080">−</tspan></text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="90.34974" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 39.38399 50.869997)"><tspan fill="#800080">t</tspan></text>
+<path d="M156.41414 16.69248L186.29846 38.9374" stroke="#f00" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M186.223718 35.901316C185.670817 37.278058 185.943032 38.325117 186.45825 39.05634C185.609945 38.772587 184.528806 38.812241 183.368589 39.736909" stroke="#f00" fill="none" stroke-width=".39846" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 78.55899 58.571)"><tspan fill="#f00">t</tspan></text>
+<path d="M181.85859 19.01176L155.08559 38.93743" stroke="#f00" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M158.015392 39.737173C156.855241 38.81241 155.774101 38.772672 154.92577 39.05636C155.441048 38.325174 155.713345 37.278132 155.160549 35.901341" stroke="#f00" fill="none" stroke-width=".398462" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 96.301998 60.891)"><tspan fill="#f00">t</tspan></text>
+<path d="M231.99481 9.82151H208.88121" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M210.75411 12.212418C210.37554 10.777838 209.53193 10.100438 208.68198 9.821508C209.53193 9.542578 210.37554 8.865178 210.75411 7.430598" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 138.052 51.699998)"><tspan fill="#800080">1</tspan></text>
+<path d="M276.11646 9.82151H253.00285" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M254.87575 12.212418C254.49718 10.777838 253.65357 10.100438 252.80362 9.821508C253.65357 9.542578 254.49718 8.865178 254.87575 7.430598" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 182.174 51.699998)"><tspan fill="#800080">1</tspan></text>
+<path d="M18.01265 44.82325H41.24561" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M39.37271 42.43234C39.75128 43.86692 40.59489 44.54432 41.44484 44.82325C40.59489 45.10218 39.75128 45.77958 39.37271 47.21416" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -55.472009 95.889)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="86.380896" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -55.472009 95.889)"><tspan fill="#800080">1</tspan></text>
+<path d="M62.25365 44.82325H85.36725" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M83.49436 42.43234C83.87293 43.86692 84.71654 44.54432 85.56649 44.82325C84.71654 45.10218 83.87293 45.77958 83.49436 47.21416" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -11.290009 95.889)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="86.380896" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -11.290009 95.889)"><tspan fill="#800080">1</tspan></text>
+<path d="M114.43291 44.82325H137.66586" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M135.79298 42.43234C136.17155 43.86692 137.01516 44.54432 137.86511 44.82325C137.01516 45.10218 136.17155 45.77958 135.79298 47.21416" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 33.21699 96.625)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="86.380896" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 33.21699 96.625)"><tspan fill="#800080">(1</tspan></text>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="93.462035" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 33.21699 96.625)"><tspan fill="#800080">−</tspan></text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="99.684643" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 33.21699 96.625)"><tspan fill="#800080">t</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="102.693002" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 33.21699 96.625)"><tspan fill="#800080">)</tspan></text>
+<path d="M208.36339 44.82325H231.59635" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M229.72345 42.43234C230.10202 43.86692 230.94563 44.54432 231.79558 44.82325C230.94563 45.10218 230.10202 45.77958 229.72345 47.21416" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 134.879 95.889)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="86.380896" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 134.879 95.889)"><tspan fill="#800080">1</tspan></text>
+<path d="M252.60439 44.82325H275.83733" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M273.96444 42.43234C274.34301 43.86692 275.18662 44.54432 276.03657 44.82325C275.18662 45.10218 274.34301 45.77958 273.96444 47.21416" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 179.12 95.889)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="86.380896" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 179.12 95.889)"><tspan fill="#800080">1</tspan></text>
+<path d="M290.35996 39.1753V19.41023" stroke="#00f" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M287.96906 21.283119C289.40364 20.904549 290.08104 20.060939 290.35997 19.210989C290.6389 20.060939 291.3163 20.904549 292.75088 21.283119" stroke="#00f" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 212.505 75.565998)"><tspan fill="#00f">1</tspan></text>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-cover-c-pp2q-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;5
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="情形五-ppqq-to-p-1p-1q1q1-p-geq-q2" class="level4">
+<h4 class="anchored" data-anchor-id="情形五-ppqq-to-p-1p-1q1q1-p-geq-q2">情形五 <span class="math inline">\((p,p,q,q) \to (p-1,p-1,q+1,q+1)\)</span>, <span class="math inline">\(p \geq q+2\)</span></h4>
+<div id="fig-cover-c-ppqq" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cover-c-ppqq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.6 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="456.6pt" height="84.435pt" viewbox="0 0 304.4 56.29">
+<style type="text/css">
+@font-face{font-family:NQUDBD-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAANYAAoAAAAABbAAAAMNAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqEVINbCwoAATYCJAMQBCAFglwHIBt8BECO1FaxTVLmJh/6bfWGUc5FNyob/y6qG6La7V9piJE0iWWWJ97ITe1ZXkAXwC7dB3wuUEsoDCMIP9ADSwNrUbuLNiMpaZF2ffGwATQcmQgxMJc5918DE4ZB3nYa3EsBwFjACfwKFaerGqwWHQ0CgCJao4IAABgABWhklpgiNgC2SjBadehKLdgRJgkTvKAQgRJQ3N8D4I0sBBjci0xVR3XHzHx9+WyrpQcNZk7V0po+/Yb+nD3WK64ZrrnhfeJa5tWMmTZzsP28XjlRZyqmaXqOmQZ+KpeVMVVPvkJzzIr8jKmO6yJ33HDecIMs3s8tv9peoKGhiCy77fQ5MzS3rTHONl961eP69awb2XPsb2Qfu6S75oD2NPA52TOc1kctvxqy9qrBon0nbjjP0M7PMVjkveOG+4wZUs1psxxm2uzNGH3ZSK6fzy2dv0JTmm28wHubboY0woOWaiUMdFx20nxjctF4XXjdxEWpypphb7Y1X+RDDF9nxTt9ailMY3KYmpCkLypxYZnMJR1eLUwtoz6QlTxS4b5wSidH1NNsutBEmV1oqHz0tuddqUW6RUuEv9WwQZ85XW/Ex1pC8kZaBJsA9Mk3RzTQOvpI9p0/OLlHp3SzcrjlpjBkbcS3iqCUx6axkbkMCSnRfckfUpTMsXc7y3lEmJdGWtuZmQ7L2H0HQ62ejLbCnymxFrkaqouiI1MTuhTkqeIHLyrXhVHHz4rSqCi90sOqWg9rjHpaZ6USI5tlpUqUU9F+CJZJewmx33lcsXLANwkVAQwIgz7xY3gAEgy71ygBwCxBwIgfCLiiyGcZHQTVLtgjAJEkHw2ccIaQBCqLO0JERpkQk9InWDJW4xwdbijSFUAYiQNCREcNIaaFJ1g6pqccF+sPNOJ/ZYNJqZkRYRGO4YmJsd73hJark4ug9vh7RUVXbXtXdaOJu5MXwjVr1KJTh0ptTCRqVoFrmiRJlSlCmAiOwiVSFMtbVv1au1rNmphw5cRFH4yWm3zKpXHAirBM78qs0KVW+8erNTLhzokXigEAAA==) format('woff2');}
+@font-face{font-family:OYFEXR-CMR7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAALAAAoAAAAABNwAAAJ1AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAARAqCeII3CwwAATYCJAMUBCAFglYHIBveA0CO0SdjLlQcIzhmPPFUBM/vj2/O05cXVoKT3eTExAQmqIJ9k5PblqK0d2JcvozZTKBDdH+w75Z2Sz9yKvdc64/3x+v2LrbUNP5Azgb8SYcX97W2THBgpYnubWLLIxCRSpM6fKSjJ+TZglgFlGS3QZ/+d1qhNP5QY3LUwVcIwU/ZdXigEQAzgjGXkAuriymBDDk625hOEBMA1KqVYSQ1Y0oYsd6VfiZPsgtMlsbVo8AeANcABSBgX+/eHFYrdet0p2MV5A7naqFNca057uVaWzK+e6vqy496OldNfZntcDzqPt2d7f6+1uVasx036LWgrd0Lt7uDG69en3nchc2vH1y81QlqunF1+kG3VsjuXUODNWvy8oDoiw+9oG8cw+Kle+nNtd3pbTuhPsoc3NoZ1AX6dmn1v/qy3dbqt7ntU8YsL0PGgDXRPWbmy9QzNqbZ6qn9wxsUp/39q9przurywb9Wppb+A+5kbw/8xAcvV7XLeX9nNZwYMowKmfV6bvDSk1lEzXw78U+suTBd6UuWSxtAmTojPqTDk33K+ue5tYYhwMNd2qg7IBBcPvq5vRIf9huRF7iTIp+Rwx0VgUuNZwGLJedBgA4CWRnvHBm9xXbikixRl1jqA7ggUFHv5D7QAkVVaNAiASXSC6iQoZfr9WAAFkWd0E9SkgvdNAAlMgZUyHpdb4LbwMH8F+xcZnFCfFGONjY9JzAc3zbqDPq5J9Z31A009w40tgvMugBArE7tuvTrU6+HQLpOdfn1DpmKJYhXJIdWrHQ5AhXUqfRq1qmDgJGOwRpIDDrOC6rvAOryGsOzvs6AZr0Tb9ROwEwnABgDAAA=) format('woff2');}
+@font-face{font-family:XDTRFF-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHQAAoAAAAAA3wAAAGIAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAo0RwsGAAE2AiQDCAQgBYJcByAb2AJgrgZsdxqUso7dNkYcaxTf3GFhlh0bQbSGzv5dAFECamIbC+xS8CQUkSZXo8vC1VbVElxs88EboX4oiO460mYWEbHQwkJcivBQ9gMiJqoGGIEGl//v4ZY7fg8DvS1sa0s8858ncWCtLaCAoxDCpC2x1ALN+qY4JSeUKKV9W5CK13EbQ/G0+PCvGW6pjy+i0KMCpxQ5D7Tjq0sK7GBjlgb+aEAOpo9AAPAfQIGEZkmgWdaPLAsGG/+DH/wNBIACZASqUQvIgKi+qP3FzZctPHp+49nPz8FaQTkAgeBT/8Oe0Fc+ZbyRBqML5QoQdGTf0WkTIQiFsEmgUC0agWKla0h1bCCrVocSVbpQqtrovFK7KUnkCqHXJiBrd44SrW6gVLuHqdKEV7vCP2EefpzHzfNE+3j/Hk7QTh2b8Ffviq8uWvJxSWvUx+YsadU6s0lsgHa0IrFB48PxcOPxiJYc3X0d7IoNRrlWA00aM5FOa2UjNvDLUHTpQzt0bJEbLVI1NG3MnARg+AA=) format('woff2');}
+@font-face{font-family:TUELZZ-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAALwAAoAAAAABQwAAAKmAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqDKIJTCwoAATYCJAMQBCAFgmIHIBv6AwCOw7jhK3EWQyyegwey+3wziwOo7gJ1LK3OQpWfMjswTgfwoiepXVlMdzLSm5IQ0vPT//cW/zfwAtoFYF12a1EgC7yX0AAjGHbdmOlogBowpts06owYinO+0dEMFHFSLEEDuU7e/u/M+MnEr82QJCzA0sEWYBTDU8IWAIxYzAoGoCB4nYYBgAQUwHk5k4cQDgC9EEgVn13GYjJAfmhs7BWqXmwetecCG7MhOp8iLCLsCtoWts3bMWfn/O1tlhvcE9YkUnd3rixzu2tb7TI7mD2Tcd/85Enr07adYa9Wl++z8lH5oUetVpvLjobdBc25Sd2sybg11i5kLJcsPCXPe/Rdf2k1f7vH7Fby7Ibb6WtbF2rTnNUu6Da/16ch8x981pxZztvhObcbNrfpfMSYSUhpRm9du8L1NkX7E4N/Cmd+pe7JIXl9CzGbcmDjo33ZHXbuivv7DY81GqVKNI0COMqMkk5AU00NhxtIS/QsqB2Tm5e75u2bc/5JzvKcWtL2N+4IiKzN6cAWFv72v8kqmPQXgKzjXOwKhPdI+v/l+MFMD7q6eqbogo/pXalbdN69l1W8ksonY/xc7BqE9dS/vz7Hyz/V006dg6JVq3/vAEAAAha/T7Drs8s2mSsqoDRiZYp8BJgjKw1AwQAkxBnnZApA7LgqAeGNTLwiTphIBQioFKg0gLBkJkAG2CEhVGywi7GGFd5Yx4awbkvcqQCMUC0Q+DJgWMUTO9ZwZRTreLJUWRLP0VUi+ClMLRR1Dsjlhe0sVm9pyRVdLo2Nz9UeXt8whm2BsMWVUh6bSjseXHgJEcSEnxRYeDCOZ26EiOhkADlyCmmHBYteSilBzNI1gA0PblIopYiSGugO3cqhrhsYcz0xjzcSxkZAcwsuUiiniCrAAAA=) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="89.145729" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -84.877017 91.539)">f</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="93.994755" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -84.877017 91.539)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="132.117511" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -86.01501 91.539)">.<tspan x="136.52979">.</tspan><tspan x="140.952035">.</tspan></text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="180.253946" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -90.043018 91.539)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="185.078097" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">p</text>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="189.182859" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">−</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="195.406466" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="227.321659" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -84.944019 91.539)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="232.132443" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -84.944019 91.539)">p</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="274.333387" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -89.98801 91.539)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="279.13082" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -89.98801 91.539)">p</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="283.235572" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -89.98801 91.539)">+1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="322.415835" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -86.015 91.539)">.<tspan x="326.828113">.</tspan><tspan x="331.250359">.</tspan></text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="370.463293" y="-79.205324" transform="matrix(1.000261 0 0 1.000261 -89.953 91.539)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="375.232426" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -89.953 91.539)">p</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="379.337188" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -89.953 91.539)">+</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="385.449855" y="-77.689642" transform="matrix(1.000545 0 0 1.000545 -89.953 91.539)">q</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="89.145729" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -84.75701 91.539)">e</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="93.755885" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -84.75701 91.539)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="132.117511" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -86.01501 91.539)">.<tspan x="136.52979">.</tspan><tspan x="140.952035">.</tspan></text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="180.253946" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -90.043018 91.539)">f</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="185.078097" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">p</text>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="189.182859" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">−</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="195.406466" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -90.043018 91.539)">1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="227.321659" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -84.82502 91.539)">e</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="231.893563" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -84.82502 91.539)">p</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="274.333387" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -89.869 91.539)">e</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="278.89195" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -89.869 91.539)">p</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="282.996712" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -89.869 91.539)">+1</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="322.415835" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -86.015 91.539)">.<tspan x="326.828113">.</tspan><tspan x="331.250359">.</tspan></text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="370.463293" y="-44.213458" transform="matrix(1.000261 0 0 1.000261 -89.834 91.539)">e</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="374.994555" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -89.834 91.539)">p</text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="379.099317" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -89.834 91.539)">+</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="385.210985" y="-42.707716" transform="matrix(1.000545 0 0 1.000545 -89.834 91.539)">q</text>
+<path d="M41.64407 9.82151H18.53047" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M20.403368 12.212418C20.024798 10.777838 19.181188 10.100438 18.331238 9.821508C19.181188 9.542578 20.024798 8.865178 20.403368 7.430598" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -52.29901 51.699998)"><tspan fill="#800080">1</tspan></text>
+<path d="M85.76572 9.82151H62.65212" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M64.52501 12.212418C64.14644 10.777838 63.30283 10.100438 62.45288 9.821508C63.30283 9.542578 64.14644 8.865178 64.52501 7.430598" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -8.17701 51.699998)"><tspan fill="#800080">1</tspan></text>
+<path d="M137.94499 9.82151H114.83139" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M116.70429 12.212418C116.32572 10.777838 115.48211 10.100438 114.63216 9.821508C115.48211 9.542578 116.32572 8.865178 116.70429 7.430598" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 39.38399 50.869997)"><tspan fill="#800080">1</tspan></text>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="84.126135" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 39.38399 50.869997)"><tspan fill="#800080">−</tspan></text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="90.34974" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 39.38399 50.869997)"><tspan fill="#800080">t</tspan></text>
+<path d="M156.41414 16.69248L186.29846 38.9374" stroke="#f00" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M186.223718 35.901316C185.670817 37.278058 185.943032 38.325117 186.45825 39.05634C185.609945 38.772587 184.528806 38.812241 183.368589 39.736909" stroke="#f00" fill="none" stroke-width=".39846" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 78.55899 58.571)"><tspan fill="#f00">t</tspan></text>
+<path d="M181.85859 19.01176L155.08559 38.93743" stroke="#f00" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M158.015392 39.737173C156.855241 38.81241 155.774101 38.772672 154.92577 39.05636C155.441048 38.325174 155.713345 37.278132 155.160549 35.901341" stroke="#f00" fill="none" stroke-width=".398462" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 96.301998 60.891)"><tspan fill="#f00">t</tspan></text>
+<path d="M231.99481 9.82151H208.88121" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M210.75411 12.212418C210.37554 10.777838 209.53193 10.100438 208.68198 9.821508C209.53193 9.542578 210.37554 8.865178 210.75411 7.430598" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 138.052 51.699998)"><tspan fill="#800080">1</tspan></text>
+<path d="M276.11646 9.82151H253.00285" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M254.87575 12.212418C254.49718 10.777838 253.65357 10.100438 252.80362 9.821508C253.65357 9.542578 254.49718 8.865178 254.87575 7.430598" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 182.174 51.699998)"><tspan fill="#800080">1</tspan></text>
+<path d="M18.01265 44.82325H41.24561" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M39.37271 42.43234C39.75128 43.86692 40.59489 44.54432 41.44484 44.82325C40.59489 45.10218 39.75128 45.77958 39.37271 47.21416" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -55.472009 95.889)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="86.380896" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -55.472009 95.889)"><tspan fill="#800080">1</tspan></text>
+<path d="M62.25365 44.82325H85.36725" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M83.49436 42.43234C83.87293 43.86692 84.71654 44.54432 85.56649 44.82325C84.71654 45.10218 83.87293 45.77958 83.49436 47.21416" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -11.290009 95.889)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="86.380896" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 -11.290009 95.889)"><tspan fill="#800080">1</tspan></text>
+<path d="M114.43291 44.82325H137.66586" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-dasharray="2.78941 1.59395"></path>
+<path d="M135.79298 42.43234C136.17155 43.86692 137.01516 44.54432 137.86511 44.82325C137.01516 45.10218 136.17155 45.77958 135.79298 47.21416" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 33.21699 96.625)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="86.380896" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 33.21699 96.625)"><tspan fill="#800080">(1</tspan></text>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="93.462035" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 33.21699 96.625)"><tspan fill="#800080">−</tspan></text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="99.684643" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 33.21699 96.625)"><tspan fill="#800080">t</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="102.693002" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 33.21699 96.625)"><tspan fill="#800080">)</tspan></text>
+<path d="M208.36339 44.82325H231.59635" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M229.72345 42.43234C230.10202 43.86692 230.94563 44.54432 231.79558 44.82325C230.94563 45.10218 230.10202 45.77958 229.72345 47.21416" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 134.879 95.889)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="86.380896" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 134.879 95.889)"><tspan fill="#800080">1</tspan></text>
+<path d="M252.60439 44.82325H275.83733" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M273.96444 42.43234C274.34301 43.86692 275.18662 44.54432 276.03657 44.82325C275.18662 45.10218 274.34301 45.77958 273.96444 47.21416" stroke="#800080" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMSY7" font-size="6.97" x="80.157299" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 179.12 95.889)"><tspan fill="#800080">−</tspan></text>
+<text font-family="OYFEXR-CMR7" font-size="6.97" x="86.380896" y="-44.200902" transform="matrix(1.000545 0 0 1.000545 179.12 95.889)"><tspan fill="#800080">1</tspan></text>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-cover-c-ppqq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;6
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+</section>
+<section id="b-型和-d-型李代数" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="b-型和-d-型李代数"><span class="header-section-number">4</span> B 型和 D 型李代数</h2>
+<p>B 型李代数和 D 型李代数 <span class="math inline">\(\mathfrak{so}_{n}\)</span> 的构造更加复杂．为处理方便，需要为每种盖住关系分别构造不同的对称双线性型．</p>
+<section id="p-12q-1-to-p-1q-1" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="p-12q-1-to-p-1q-1"><span class="header-section-number">4.1</span> <span class="math inline">\((2p-1,2q-1) \to (p-1,q-1)\)</span></h3>
+</section>
+<section id="pq-to-p-2q2" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="pq-to-p-2q2"><span class="header-section-number">4.2</span> <span class="math inline">\((p,q) \to (p-2,q+2)\)</span></h3>
+</section>
+<section id="ppq-to-p-1p-1q2" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="ppq-to-p-1p-1q2"><span class="header-section-number">4.3</span> <span class="math inline">\((p,p,q) \to (p-1,p-1,q+2)\)</span></h3>
+</section>
+<section id="pqq-to-p-2q1q1" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="pqq-to-p-2q1q1"><span class="header-section-number">4.4</span> <span class="math inline">\((p,q,q) \to (p-2,q+1,q+1)\)</span></h3>
+</section>
+<section id="ppqq-to-p-1p-1q1q1" class="level3" data-number="4.5">
+<h3 data-number="4.5" class="anchored" data-anchor-id="ppqq-to-p-1p-1q1q1"><span class="header-section-number">4.5</span> <span class="math inline">\((p,p,q,q) \to (p-1,p-1,q+1,q+1)\)</span></h3>
+</section>
+<section id="废液缸" class="level3" data-number="4.6">
+<h3 data-number="4.6" class="anchored" data-anchor-id="废液缸"><span class="header-section-number">4.6</span> 废液缸</h3>
+<p>对于 B 型李代数 <span class="math inline">\(\mathfrak{so}_{2n+1}\)</span>，设其标准基为 <span class="math inline">\((e_0,e_1,f_1,e_2,f_2,\dots,e_n,f_n)\)</span>，选取非退化双线性型 <span class="math display">\[
+\begin{aligned}
+\varphi(e_0, e_0) &amp;= 1 \\
+\varphi(e_i, f_i) &amp;= 1 \quad \text{for } 1 \leq i \leq n \\
+\varphi(f_i, e_i) &amp;= 1 \quad \text{for } 1 \leq i \leq n \\
+\varphi(-,-) &amp;= 0 \quad \text{for all other unspecified pairs}
+\end{aligned}
+\qquad
+\Phi :=
+\begin{pmatrix}
+1 &amp;   &amp;   &amp;   &amp;   &amp;  \\
+  &amp; 0 &amp; 1 &amp;   &amp;   &amp;  \\
+  &amp; 1 &amp; 0 &amp;   &amp;   &amp;  \\
+  &amp;   &amp;   &amp; 0 &amp; 1 &amp;  \\
+  &amp;   &amp;   &amp; 1 &amp; 0 &amp;  \\
+  &amp;   &amp;   &amp;   &amp;   &amp; \ddots
+\end{pmatrix}
+\]</span></p>
 
 
 
+</section>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
