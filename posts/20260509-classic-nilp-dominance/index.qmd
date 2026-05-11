@@ -37,7 +37,7 @@ format:
 
 本章讨论经典李代数中幂零轨道的支配序，证明幂零轨道的闭包关系和分拆上的支配序等价．
 
-关于幂零轨道支配序的研究历史，[@jantzen_nilpotent_2004, {section 13.16}] 和 [@mcgovern_nilpotent_1993, {theorem 6.2.5}] 给出了一些评注．[@gerstenhaber_dominance_1961]．最早建立了经典李代数上幂零轨道闭包关系与分拆支配序的联系，[@hesselink_singularities_1976] 修补了 Gerstenhaber 证明中的部分漏洞．
+关于幂零轨道支配序的研究历史，[@jantzen_nilpotent_2004, {section 13.16}] 和 [@mcgovern_nilpotent_1993, {theorem 6.2.5}] 给出了一些评注．[@gerstenhaber_dominance_1961] 最早建立了经典李代数上幂零轨道闭包关系与分拆支配序的联系，[@hesselink_singularities_1976] 修补了 Gerstenhaber 证明中的部分漏洞．
 
 我们选取的路线如下．对 A 型李代数，基于盖住关系间连续路径的构造和秩函数的下半连续性，给出支配序和分拆上的支配序的等价性证明；对于 B、C、D 型李代数，我们选取特定方便处理的非退化双线性型，从而仔细为其上的每一类盖住关系显式构建落在斜自伴李代数中的连续路径．我们发现可以通过一类组合图示为这些路径构造给出统一紧凑地描述．
 
@@ -319,7 +319,7 @@ $$
 ```
 :::
 
-对 $p = q+1 = 1$ 的情形，取路径 $f_1 \xrightarrow{1-t} e_1$ 即可．故设 $p \geq 2$．考察 $f_p$ 和 $e_{p+1} + t f_{p-2}$ 在 $\Gamma(t)$ 多次作用下的变化情况：
+对 $p = q+1 = 1$ 的情形，取路径 $f_1 \xrightarrow{1-t} e_1$ 即可．对 $p = q+1 = 2$ 的情形，阅读一般情况证明后补证不难．故设 $p \geq 2$．考察 $f_p$ 和 $e_{p+1} + t f_{p-2}$ 在 $\Gamma(t)$ 多次作用下的变化情况：
 $$
 \begin{aligned}
 f_p &\longrightarrow +\left\{\begin{matrix}
@@ -340,7 +340,7 @@ e_{p+1}   &\xrightarrow{\dots}& (-1)^{q-1} e_{p+q} &\xrightarrow{\dots}& (-1)^{q
 \end{matrix}\right\} += 0
 $$
 
-- 当 $t \neq 1$ 时，取 $f_p$ 和 $e_{p+1} + t f_{p-2}$（当 $q=1$ 时取 $e_{p+1} + t e_1$）在 $\Gamma(t)$ 作用下生成循环基底，长度分别为 $2p$ 和 $2q$．注意它们在标准基底 $(e_1,f_1,\dots,e_n,f_n)$ 下可排成对角线非零的三角矩阵，确实线性无关．故此时 $\Gamma(t)$ 的 Jordan 型为 $(2p,2q)$．
+- 当 $t \neq 1$ 时，取 $f_p$ 和 $e_{p+1} + t f_{p-2}$．在 $\Gamma(t)$ 作用下生成循环基底，长度分别为 $2p$ 和 $2q$．注意它们在标准基底 $(e_1,f_1,\dots,e_n,f_n)$ 下可排成对角线非零的三角矩阵，确实线性无关．故此时 $\Gamma(t)$ 的 Jordan 型为 $(2p,2q)$．
 
 - 当 $t = 1$ 时，取 $f_p$ 和 $e_{p+1}$ 在 $\Gamma(t)$ 作用下生成循环基底，长度分别为 $2p-1$ 和 $2q+1$．注意它们在标准基底 $(e_1,f_1,\dots,e_n,f_n)$ 下可排成对角线非零的三角矩阵，确实线性无关．故此时 $\Gamma(t)$ 的 Jordan 型为 $(2p-1,2q+1)$．
 
@@ -503,6 +503,8 @@ $$
 ```
 :::
 
+上述讨论完成了 [@thm-classic-closure-dominance]	$\implies$ 侧在 C 型李代数上的证明．
+
 ## B 型和 D 型李代数
 
 ### 组合图示
@@ -528,7 +530,7 @@ I_\alpha &   &   &   &   &  \\
   &   &   &   &   &   & \ddots
 \end{pmatrix}
 $$
-可见选取的 $\varphi$ 确实非退化对称．借此定义 $\so_n$ 为满足自伴条件 $X^T \Phi = -\Phi X$ 的全体 $n$ 阶矩阵．为精简记号，我们不再画出整个斜对称矩阵 $X$ 的分块表示，而是分类讨论 $g_i$, $h_j$ 和 $(e_k, f_k)$ 间的关系，并给出它们在组合图示中的表现：
+借此定义 $\so_n$ 为满足自伴条件 $X^T \Phi = -\Phi X$ 的全体 $n$ 阶矩阵．为精简记号，我们不再画出整个斜对称矩阵 $X$ 的分块表示，而是分类讨论 $g_i$, $h_j$ 和 $(e_k, f_k)$ 间的关系，并给出它们在组合图示中的表现：
 
 - $g_i$ 之间：
   $$
@@ -606,9 +608,11 @@ $$
 
 ### 盖住关系与路径构造
 
+构造手段和 C 型李代数类似，故我们也只给出构造，不再验证细节．
+
 #### 情形一 $(2p+1,2q+1) \to (2p,2q+2)$, $p = q+1$
 
-取 $\alpha = 1$, $\beta = 1$, $\gamma = 2p-1$．
+取 $\alpha = 1$, $\beta = 1$, $\gamma = p+q$．
 
 :::{#fig-cover-c-2p12q1-special}
 
@@ -622,7 +626,7 @@ $$
 	\arrow["1"', color=violet, from=1-2, to=1-1]
 	\arrow["1"', color=violet, from=1-3, to=1-2]
 	\arrow["1"', color=violet, dashed, from=1-4, to=1-3]
-	\arrow["t"{pos=0}, dashed, color=red, from=1-4, to=3-5]
+	\arrow["{-t}"{pos=0}, dashed, color=red, from=1-4, to=3-5]
 	\arrow["t"'{pos=0}, dashed, color=red, from=1-5, to=3-4]
 	\arrow["1"', color=violet, from=1-6, to=1-5]
 	\arrow["1"', color=violet, from=1-7, to=1-6]
@@ -639,9 +643,119 @@ $$
 
 #### 情形二 $(2p+1,2q+1) \to (2p-1,2q+3)$, $p \geq q+2$
 
-#### 情形三 $(p,p,2q+1) \to (p-1,p-1,2q+3)$
+取 $\alpha = 1$, $\beta = 1$, $\gamma = p+q$．
 
-#### 情形四 $(2p+1,q,q) \to (2p-1,q+1,q+1)$
+:::{#fig-cover-bd-2p12q1}
+
+```{tikz}
+\begin{tikzcd}
+	{f_1} & {\dots} & {f_{p-1}} & {f_p} & {f_{p+1}} & \dots & {f_{p+q}} \\
+	{g_1} &         & 		    &       &           &       & {h_1}      \\
+	{e_1} & {\dots} & {e_{p-1}} & {e_p} & {e_{p+1}} & \dots & {e_{p+q}}
+	\arrow["1"', color=teal, from=1-1, to=2-1]
+	\arrow["-1"', color=teal, from=2-1, to=3-1]
+	\arrow["1"', color=violet, from=1-2, to=1-1]
+	\arrow["1"', color=violet, from=1-3, to=1-2]
+	\arrow["{1-t}"', color=violet, dashed, from=1-4, to=1-3]
+	\arrow["{-t}"{pos=0}, dashed, color=red, from=1-4, to=3-5]
+	\arrow["t"'{pos=0}, dashed, color=red, from=1-5, to=3-4]
+	\arrow["1"', color=violet, from=1-6, to=1-5]
+	\arrow["1"', color=violet, from=1-7, to=1-6]
+	\arrow["{-1}"', color=violet, from=3-1, to=3-2]
+	\arrow["{-1}"', color=violet, from=3-2, to=3-3]
+	\arrow["{-(1-t)}"', color=violet, dashed, from=3-3, to=3-4]
+	\arrow["{-1}"', color=violet, from=3-5, to=3-6]
+	\arrow["{-1}"', color=violet, from=3-6, to=3-7]
+	\arrow["1"', color=blue, from=3-7, to=2-7]
+	\arrow["1"', color=blue, from=2-7, to=1-7]
+\end{tikzcd}
+```
+:::
+
+#### 情形三 $(2p+1,q,q) \to (2p-1,q+1,q+1)$
+
+取 $\alpha = 1$, $\beta = 0$, $\gamma = p+q$．
+
+:::{#fig-cover-bd-2p1qq}
+
+```{tikz}
+\begin{tikzcd}
+	{f_1} & {\dots} & {f_{p-1}} & {f_p} & {f_{p+1}} & \dots & {f_{p+q}} \\
+	{h_1} &         & 		    &       &           &       &           \\
+	{e_1} & {\dots} & {e_{p-1}} & {e_p} & {e_{p+1}} & \dots & {e_{p+q}}
+	\arrow["1"', color=teal, from=1-1, to=2-1]
+	\arrow["-1"', color=teal, from=2-1, to=3-1]
+	\arrow["1"', color=violet, from=1-2, to=1-1]
+	\arrow["1"', color=violet, from=1-3, to=1-2]
+	\arrow["{1-t}"', color=violet, dashed, from=1-4, to=1-3]
+	\arrow["{-t}"{pos=0}, dashed, color=red, from=1-4, to=3-5]
+	\arrow["t"'{pos=0}, dashed, color=red, from=1-5, to=3-4]
+	\arrow["1"', color=violet, from=1-6, to=1-5]
+	\arrow["1"', color=violet, from=1-7, to=1-6]
+	\arrow["{-1}"', color=violet, from=3-1, to=3-2]
+	\arrow["{-1}"', color=violet, from=3-2, to=3-3]
+	\arrow["{-(1-t)}"', color=violet, dashed, from=3-3, to=3-4]
+	\arrow["{-1}"', color=violet, from=3-5, to=3-6]
+	\arrow["{-1}"', color=violet, from=3-6, to=3-7]
+\end{tikzcd}
+```
+:::
+
+#### 情形四 $(p,p,2q+1) \to (p-1,p-1,2q+3)$
+
+取 $\alpha = 0$, $\beta = 1$, $\gamma = p+q$．
+
+:::{#fig-cover-bd-pp2q1}
+
+```{tikz}
+\begin{tikzcd}
+	{f_1} & {\dots} & {f_{p-1}} & {f_p} & {f_{p+1}} & \dots & {f_{p+q}} \\
+	      &         & 		    &       &           &       & {h_1}      \\
+	{e_1} & {\dots} & {e_{p-1}} & {e_p} & {e_{p+1}} & \dots & {e_{p+q}}
+	\arrow["1"', color=violet, from=1-2, to=1-1]
+	\arrow["1"', color=violet, from=1-3, to=1-2]
+	\arrow["{1-t}"', color=violet, dashed, from=1-4, to=1-3]
+	\arrow["{-t}"{pos=0}, dashed, color=red, from=1-4, to=3-5]
+	\arrow["t"'{pos=0}, dashed, color=red, from=1-5, to=3-4]
+	\arrow["1"', color=violet, from=1-6, to=1-5]
+	\arrow["1"', color=violet, from=1-7, to=1-6]
+	\arrow["{-1}"', color=violet, from=3-1, to=3-2]
+	\arrow["{-1}"', color=violet, from=3-2, to=3-3]
+	\arrow["{-(1-t)}"', color=violet, dashed, from=3-3, to=3-4]
+	\arrow["{-1}"', color=violet, from=3-5, to=3-6]
+	\arrow["{-1}"', color=violet, from=3-6, to=3-7]
+	\arrow["1"', color=blue, from=3-7, to=2-7]
+	\arrow["1"', color=blue, from=2-7, to=1-7]
+\end{tikzcd}
+```
+:::
 
 #### 情形五 $(p,p,q,q) \to (p-1,p-1,q+1,q+1)$
 
+
+取 $\alpha = 0$, $\beta = 0$, $\gamma = p+q$．
+
+:::{#fig-cover-bd-ppqq}
+
+```{tikz}
+\begin{tikzcd}
+	{f_1} & {\dots} & {f_{p-1}} & {f_p} & {f_{p+1}} & \dots & {f_{p+q}} \\
+	      &         & 		    &       &           &       &           \\
+	{e_1} & {\dots} & {e_{p-1}} & {e_p} & {e_{p+1}} & \dots & {e_{p+q}}
+	\arrow["1"', color=violet, from=1-2, to=1-1]
+	\arrow["1"', color=violet, from=1-3, to=1-2]
+	\arrow["{1-t}"', color=violet, dashed, from=1-4, to=1-3]
+	\arrow["{-t}"{pos=0}, dashed, color=red, from=1-4, to=3-5]
+	\arrow["t"'{pos=0}, dashed, color=red, from=1-5, to=3-4]
+	\arrow["1"', color=violet, from=1-6, to=1-5]
+	\arrow["1"', color=violet, from=1-7, to=1-6]
+	\arrow["{-1}"', color=violet, from=3-1, to=3-2]
+	\arrow["{-1}"', color=violet, from=3-2, to=3-3]
+	\arrow["{-(1-t)}"', color=violet, dashed, from=3-3, to=3-4]
+	\arrow["{-1}"', color=violet, from=3-5, to=3-6]
+	\arrow["{-1}"', color=violet, from=3-6, to=3-7]
+\end{tikzcd}
+```
+:::
+
+上述讨论完成了 [@thm-classic-closure-dominance]	$\implies$ 侧在 B、D 型李代数上的证明．
