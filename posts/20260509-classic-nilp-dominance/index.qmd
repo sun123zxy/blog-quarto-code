@@ -460,7 +460,7 @@ $$
 
 - 当 $t = 1$ 时，取 $f_{p-1}$, $e_1$, $f_p$ 生成的循环基底，长度分别为 $p-1$, $p-1$, $2q+2$．
 
-#### 退化情形四 $(p,p) \to (p-1,p-1,2)$, $p \geq 2$
+#### 退化情形四 $(p,p) \to (p-1,p-1,2)$, $p \geq 3$
 
 :::{#fig-cover-c-pp2q-degen}
 
@@ -651,6 +651,8 @@ $$
   $$
   我们将在组合图示中使用 $\textcolor{blue}{z}$．
 
+上述变量在组合图示中的表现如下：
+
 :::{#fig-cover-bd-arrow}
 
 ```{tikz}
@@ -674,11 +676,11 @@ $$
 
 仍然只需要考虑大小相邻的块之间的掉落．构造手段和 C 型李代数类似，故这里只给出构造，不再验证细节．
 
-#### 情形一 $(2p+1,2q+1) \to (2p,2q+2)$, $p = q+1$
+#### 情形一 $(2p+1,2q+1) \to (2p,2q+2)$, $p = q+1$, $q \geq 1$
 
 取 $\alpha = 1$, $\beta = 1$, $\gamma = p+q$．
 
-:::{#fig-cover-c-2p12q1-special}
+:::{#fig-cover-bd-2p12q1-special}
 
 ```{tikz}
 \begin{tikzcd}
@@ -705,7 +707,24 @@ $$
 ```
 :::
 
-#### 情形二 $(2p+1,2q+1) \to (2p-1,2q+3)$, $p \geq q+2$
+#### 退化情形一 $(3,1) \to (2,2)$
+
+:::{#fig-cover-bd-2p12q1-degen}
+
+```{tikz}
+\begin{tikzcd}
+	{f_1} & \\
+	{g_1} & {h_1} \\
+	{e_1}
+	\arrow["1"', color=teal, from=1-1, to=2-1]
+	\arrow["{-1}"', color=teal, from=2-1, to=3-1]
+	\arrow["t", dashed, color=teal, from=1-1, to=2-2]
+	\arrow["t", dashed, color=teal, from=2-2, to=3-1]
+\end{tikzcd}
+```
+:::
+
+#### 情形二 $(2p+1,2q+1) \to (2p-1,2q+3)$, $p \geq q+2$, $q \geq 1$
 
 取 $\alpha = 1$, $\beta = 1$, $\gamma = p+q$．
 
@@ -736,7 +755,30 @@ $$
 ```
 :::
 
-#### 情形三 $(2p+1,q,q) \to (2p-1,q+1,q+1)$, $2p \geq q+2$
+#### 退化情形二 $(2p+1) \to (2p-1,2)$, $p \geq 2$
+
+:::{#fig-cover-bd-2p12q1-degen}
+
+```{tikz}
+\begin{tikzcd}
+	{f_1} & {\dots} & {f_{p-1}} & {f_p} \\
+	{g_1} &         & 		    & {h_1}      \\
+	{e_1} & {\dots} & {e_{p-1}} & {e_p}
+	\arrow["1"', color=teal, from=1-1, to=2-1]
+	\arrow["-1"', color=teal, from=2-1, to=3-1]
+	\arrow["1"', color=violet, from=1-2, to=1-1]
+	\arrow["1"', color=violet, from=1-3, to=1-2]
+	\arrow["{1-t}"', color=violet, dashed, from=1-4, to=1-3]
+	\arrow["{-1}"', color=violet, from=3-1, to=3-2]
+	\arrow["{-1}"', color=violet, from=3-2, to=3-3]
+	\arrow["{-(1-t)}"', color=violet, dashed, from=3-3, to=3-4]
+	\arrow["t", color=teal, from=1-4, to=2-4]
+	\arrow["{-t}", color=teal, from=2-4, to=3-4]
+\end{tikzcd}
+```
+:::
+
+#### 情形三 $(2p+1,q,q) \to (2p-1,q+1,q+1)$, $2p \geq q+2$, $q \geq 1$
 
 取 $\alpha = 1$, $\beta = 0$, $\gamma = p+q$．
 
@@ -765,7 +807,11 @@ $$
 ```
 :::
 
-#### 情形四 $(p,p,2q+1) \to (p-1,p-1,2q+3)$, $p \geq 2q+4$
+#### 退化情形三 $(2p+1) \to (2p-1,1,1)$, $p \geq 2$
+
+取 [@fig-cover-bd-2p1qq] 中交叉左侧良定义部分即可．
+
+#### 情形四 $(p,p,2q+1) \to (p-1,p-1,2q+3)$, $p \geq 2q+4$, $q \geq 1$
 
 取 $\alpha = 0$, $\beta = 1$, $\gamma = p+q$．
 
@@ -794,7 +840,28 @@ $$
 ```
 :::
 
-#### 情形五 $(p,p,q,q) \to (p-1,p-1,q+1,q+1)$, $p \geq q+2$
+#### 退化情形四 $(p,p,1) \to (p-1,p-1,3)$, $p \geq 4$
+
+:::{#fig-cover-bd-pp2q1-degen}
+
+```{tikz}
+\begin{tikzcd}
+	{f_1} & {\dots} & {f_{p-1}} & {f_p} \\
+	      &         & 		    & {h_1}      \\
+	{e_1} & {\dots} & {e_{p-1}} & {e_p}
+	\arrow["1"', color=violet, from=1-2, to=1-1]
+	\arrow["1"', color=violet, from=1-3, to=1-2]
+	\arrow["{1-t}"', color=violet, dashed, from=1-4, to=1-3]
+	\arrow["{-1}"', color=violet, from=3-1, to=3-2]
+	\arrow["{-1}"', color=violet, from=3-2, to=3-3]
+	\arrow["{-(1-t)}"', color=violet, dashed, from=3-3, to=3-4]
+	\arrow["t", color=teal, from=1-4, to=2-4]
+	\arrow["{-t}", color=teal, from=2-4, to=3-4]
+\end{tikzcd}
+```
+:::
+
+#### 情形五 $(p,p,q,q) \to (p-1,p-1,q+1,q+1)$, $p \geq q+2$, $q \geq 1$
 
 取 $\alpha = 0$, $\beta = 0$, $\gamma = p+q$．
 
@@ -820,5 +887,9 @@ $$
 \end{tikzcd}
 ```
 :::
+
+#### 退化情形五 $(p,p) \to (p-1,p-1,1,1)$, $p \geq 2$
+
+取 [@fig-cover-bd-ppqq] 中交叉左侧良定义部分即可．
 
 上述讨论完成了 [@thm-classic-closure-dominance]	$\implies$ 侧在 B、D 型李代数上的证明．
