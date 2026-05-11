@@ -32,6 +32,12 @@ format:
 \newcommand{\Ad}{\operatorname{Ad}}
 \newcommand{\Aut}{\operatorname{Aut}}
 \newcommand{\Lie}{\operatorname{Lie}}
+\newcommand{\rk}{\operatorname{rk}}
+\newcommand{\SO}{\operatorname{SO}}
+\newcommand{\so}{\mathfrak{so}}
+\newcommand{\Sp}{\operatorname{Sp}}
+\renewcommand{\sp}{\mathfrak{sp}}
+\newcommand{\diag}{\operatorname{diag}}
 
 一般来说，不同的群作用在李代数 $\mathfrak{g}$ 上可能导致不同的轨道．本篇介绍我们选择作用群的一般标准，主要参考 [@mcgovern_nilpotent_1993, {section 1.2}]．
 
@@ -50,4 +56,31 @@ format:
   - $\Aut(\mathfrak g) = \Aut(\mathfrak g)^{\circ} \rtimes \Gamma(\mathfrak g)$，这里 $\Gamma(\mathfrak g)$ 是一个有限子群．
 
 - 如果有一连通半单代数群 $G$ 使得其李代数 $\Lie G$ 恰为 $\mathfrak g$：对每个 $G \to G$ 的内自同构取微分得到 $\mathfrak g \to \mathfrak g$ 的李代数自同构，据此定义出群同态 $\Ad: G \to \Aut(\mathfrak g)$．用此同态的像 $\Ad G$ 作为共轭作用群的定义．
+:::
+
+## A 型李代数
+
+讨论幂零轨道首先需要明确作用群的选择．设 $V$ 是 $\mathbb C$ 上 $n$ 维线性空间．对 $\gl(V)$ 来说自然选 $\GL(V)$ 就好，但 $\sl(V)$、$\so(V)$ 和 $\sp(V)$ 似乎都应该更加小心．例如，$\sl(V)$ 上考虑 $\GL(V)$ 的子群 $\SL(V)$ 的共轭作用似乎也非常合理——$\sl(V)$ 系由 $\SL(V)$ 单位元处取切空间得到．更进一步地，不少线性变换产生的实际共轭效果是一致的，最有效地来说应该考虑所有可能的共轭作用构成的群——一个 $\GL(V)$ 的商群．不过下面的结果告诉我们这其实都没有关系：不同作用群的选择在 $\gl(V)$ 或 $\sl(V)$ 上导致的轨道是一样的．
+ 
+:::{#prp-gln-diff-ad}
+
+- $\GL(V)$, $\SL(V)$, $\PSL(V)$ 在 $\gl(V)$ 上的共轭作用导致相同的轨道．
+- $\PSL(V)$ 忠实刻画了 $\gl(V)$ 的共轭作用群 $\Ad \subseteq \Aut (\gl(V))$．
+
+这里 $\SL(V) := \{g \in \GL(V) : \det g = 1\}$ 是 $\GL(V)$ 的子群，$\PSL(V) := \SL(V) / Z(\SL(V))$ 是 $\SL(V)$ 的商群，$Z(\SL(V))$ 是 $\SL(V)$ 的中心，$\Aut(\gl(V))$ 是 $\gl(V)$ 的全体李代数同构．
+:::
+
+:::{.proof}
+
+- 这是因为任意 $g \in \GL(V)$ 的共轭作用 $X \mapsto g X g^{-1}$ 都等价于 $(\det g)^{-1/n} g \in \SL(V)$ 的共轭作用（标量因子不改变共轭效果），而中心在共轭作用下不起作用．
+- 对群同态 $\SL(V) \to \Aut(\gl(V))$ 使用第一同构定理．
+:::
+
+:::{.remark}
+
+可以看到这其实和基域的选择有关．考虑群正合列：
+$$
+1 \longrightarrow \SL(V) \longrightarrow \GL(V) \xrightarrow{\det} \mathbb C^\times \longrightarrow 1
+$$
+右分裂同态 $c \mapsto (\det c)^{1/n}$ 使得其右侧分裂，从而 $\GL(V) = \SL(V) \rtimes Z(\GL(V)) \cong \SL(V) \rtimes \mathbb C^\times$．这是复数域能够开根的结果．
 :::

@@ -1,7 +1,5 @@
 ---
 title: 经典李代数中的幂零轨道：分类
-subtitle: 幂零锥和其上的几何：以 $\mathfrak{gl}_n$ 为例
-author: sun123zxy
 date: 2026-05-09
 lang: zh
 bibliography: index.bib
@@ -48,42 +46,15 @@ format:
 - C 型李代数：即辛李代数 $\sp(V)$，$C_n$ 型对应 $\dim V = 2n$．
 - B 型和 D 型李代数：即正交李代数 $\so(V)$，$B_n$ 型对应 $\dim V = 2n+1$，$D_n$ 型对应 $\dim V = 2n$．
 
-其中，$\sl(V)$ 的幂零轨道已经由 Jordan 型（即分拆）分类，本篇主要关心 $\so(V)$ 和 $\sp(V)$ 中的幂零轨道．
+所谓幂零轨道，是取适当作用群 $G$ 在李代数 $\mathfrak g$ 上的共轭作用下的幂零元素的轨道．在经典李代数的情形，所有经典李代数的作用群都可以取 $\GL(V)$；$\sl(V)$ 的作用群可以取 $\SL(V)$；$\so(V)$ 的作用群可以取特殊正交群 $\SO(V)$ 或正交群 $O(V)$；$\sp(V)$ 的作用群可以取 $\Sp(V)$．不同作用群的选择可能导致粒度不同的分类结果．注意 A 型 $\sl(V)$ 的幂零轨道已经由 Jordan 型（即分拆）分类，故本章主要关心 B、C、D 型，即 $\so(V)$ 和 $\sp(V)$ 中的幂零轨道分类情况．
 
 我们主要跟随 [@jantzen_nilpotent_2004, {section 1}] 的呈现．主要的不同是，我们在 [@sec-jacobson-morozov-classical] 介绍了幂零轨道分类的结果和 Jacobson--Morozov 定理的联系，并借此在 [@sec-rep-theory-orbit-classification] 提供了幂零轨道分类的另一表示论风格的简明证明．
 
 除明确说明外，本章默认在复数域 $\mathbb C$ 上工作；为表示区分，本章中，在给定一组基的前提下，线性变换对应的矩阵通常使用其对应正体大写字母表示，例如 $X \in \gl(V)$ 在某组基下的矩阵记为 $\mathrm X$．
 
-## A 型李代数
-
-讨论幂零轨道首先需要明确作用群的选择．设 $V$ 是 $\mathbb C$ 上 $n$ 维线性空间．对 $\gl(V)$ 来说自然选 $\GL(V)$ 就好，但 $\sl(V)$、$\so(V)$ 和 $\sp(V)$ 似乎都应该更加小心．例如，$\sl(V)$ 上考虑 $\GL(V)$ 的子群 $\SL(V)$ 的共轭作用似乎也非常合理——$\sl(V)$ 系由 $\SL(V)$ 单位元处取切空间得到．更进一步地，不少线性变换产生的实际共轭效果是一致的，最有效地来说应该考虑所有可能的共轭作用构成的群——一个 $\GL(V)$ 的商群．不过下面的结果告诉我们这其实都没有关系：不同作用群的选择在 $\gl(V)$ 或 $\sl(V)$ 上导致的轨道是一样的．
- 
-:::{#prp-gln-diff-ad}
-
-- $\GL(V)$, $\SL(V)$, $\PSL(V)$ 在 $\gl(V)$ 上的共轭作用导致相同的轨道．
-- $\PSL(V)$ 忠实刻画了 $\gl(V)$ 的共轭作用群 $\ad \subseteq \Aut (\gl(V))$．
-
-这里 $\SL(V) := \{g \in \GL(V) : \det g = 1\}$ 是 $\GL(V)$ 的子群，$\PSL(V) := \SL(V) / Z(\SL(V))$ 是 $\SL(V)$ 的商群，$Z(\SL(V))$ 是 $\SL(V)$ 的中心，$\Aut(\gl(V))$ 是 $\gl(V)$ 的全体李代数同构．
-:::
-
-:::{.proof}
-
-- 这是因为任意 $g \in \GL(V)$ 的共轭作用 $X \mapsto g X g^{-1}$ 都等价于 $(\det g)^{-1/n} g \in \SL(V)$ 的共轭作用（标量因子不改变共轭效果），而中心在共轭作用下不起作用．
-- 对群同态 $\SL(V) \to \Aut(\gl(V))$ 使用第一同构定理．
-:::
-
-:::{.remark}
-
-可以看到这其实和基域的选择有关．考虑群正合列：
-$$
-1 \longrightarrow \SL(V) \longrightarrow \GL(V) \xrightarrow{\det} \mathbb C^\times \longrightarrow 1
-$$
-右分裂同态 $c \mapsto (\det c)^{1/n}$ 使得其右侧分裂，从而 $\GL(V) = \SL(V) \rtimes Z(\GL(V)) \cong \SL(V) \rtimes \mathbb C^\times$．但这是复数域能够开根的结果．TODO: 这也许和所谓的 split-reductive group 有关．
-:::
-
 ## 正交群及其斜自伴李代数
 
-下面开始考虑 B、C、D 型李代数．仍然第一个问题是作用群．当然至少仍然有 $\GL$ 的选择，即还是通过 Jordan 型来分类幂零轨道．但会希望有一个更小的作用群，不说一定恰好是共轭作用群，但至少也要足够小，例如对 $\so$ 的 $\SO$ 或对 $\sp$ 的 $\Sp$ 来得到更细的分类．为统一研究方便，来先在 $\mathbb C$ 上有限维线性空间 $V$ 上确定一个非退化双线性型 $\varphi(-,-)$ 明确正交群及其斜自伴李代数的定义．
+先在 $\mathbb C$ 上有限维线性空间 $V$ 上确定一个非退化双线性型 $\varphi(-,-)$ 明确正交群及其斜自伴李代数的定义．
 
 ### 非退化双线性型
 
@@ -161,15 +132,6 @@ $$
 ```
 :::
 
-:::{.remark}
-
-## 非退化双线性型的分类
-
-自然会问为什么只研究对称和斜对称两种非退化双线性型，这将我们引向非退化双线性型的分类问题．注意这些双线性型全体应被视为构成 $\GL(V)$-模 $V^* \otimes V^*$，而分类问题则是对其轨道进行分类．
-
-Schur--Weyl 对偶告诉我们 $V^* \otimes V^*$ 作为 $\GL(V)$-表示分解成不可约代数表示 $\Sym^2 V^*$ 和 $\Alt^2 V^*$（对应任何双线性型可唯一分解为其对称部分与斜对称部分之和）．之前的讨论分类了这两个子表示内部的 $\GL(V)$-轨道：完全由秩来分类．关于整个 $V^* \otimes V^*$ 的轨道结构则更为复杂，需要更细致的分析【TODO】．
-:::
-
 ### 对称与斜对称双线性型的结构
 
 :::{#prp-sym-diag}
@@ -230,7 +192,7 @@ Schur--Weyl 对偶告诉我们 $V^* \otimes V^*$ 作为 $\GL(V)$-表示分解成
 
 在其它域上对对称和斜对称双线性型做具体分类会更加复杂．当然，通用的第一步约化是，对角线或二维子空间的变量只需在商掉平方数的 $F^{\times} / (F^{\times})^2$ 中考虑．
 
-- 高等代数的惯性定理告诉我们 $\mathbb R$ 上的对称双线性型完全由秩和正负惯性指数分类．
+- 惯性定理告诉我们 $\mathbb R$ 上的对称双线性型完全由秩和正负惯性指数分类．
 
 - $\mathbb Q$ 上对称双线性型（二次型）的分类是经典代数数论主题．Hasse--Minkowski 定理将其分类问题化归到局部域 $\mathbb R$ 或 $\mathbb Q_p$ 上分类，后者的分类由秩、判别式和 Hilbert 符号决定．参见 [@serre_course_1973] 及其[导读](/posts/20250416-q-quadratic-form-classification/)．
 
@@ -599,7 +561,7 @@ $$
 $$
 V \cong \bigoplus_k V_k^{\oplus r_k} \cong \bigoplus_k (V_k \otimes \mathbb C^{\oplus r_k})
 $$
-其中 $V_k$ 是 $k$ 维不可约表示，$X$ 在每个 $V_k$ 上的作用恰为一个 $k$ 阶幂零 Jordan 块．故 Jordan 型由重数 $r_k$ 完全确定．
+其中 $V_k$ 是 $\sl_2$ 的 $k$ 维不可约表示，$X$ 在每个 $V_k$ 上的作用恰为一个 $k$ 阶幂零 Jordan 块．故 Jordan 型由重数 $r_k$ 完全确定．
 
 $X$ 的斜自伴性意味着 $\varphi$ 是 $V \to V^*$ 的 $\sl_2$-模同态，即 $\varphi \in (V^* \otimes V^*)^{\sl_2}$．在 $V^* \otimes V^*$ 上使用上面的分解：
 $$
@@ -611,14 +573,14 @@ $$
 $$
 仍由 Schur 引理，$(V_k^* \otimes V_k^*)^{\sl_2} \cong \Hom_{\sl_2}(V_k, V_k^*)$ 是一维线性空间．我们其实在上一小节手动完成经典李代数的 Jacobson--Morozov 定理时已经构造出其中的一个非零元素（即单块情形的反对角构造），故 $V_k$ 是对称还是斜对称由维数 $k$ 的奇偶性决定：$k$ 偶数时斜对称，$k$ 奇数时对称．
 
-来考虑张量积右侧另一半：$\mathbb C^{\oplus r_k}$ 上的一个非退化双线性型．回忆 [@prp-sym-diag] 和 [@prp-alt-standard]，这后一个双线性型为对称时对 $r_k$ 无限制，为斜对称时 $r_k$ 必须为偶数．于是：
+注意直和项作为双线性型的非退化性、对称性或斜对称性与原双线性型相同．来考虑每个直和项张量积的右侧：$\mathbb C^{\oplus r_k}$ 上的一个非退化双线性型．回忆 [@prp-sym-diag] 和 [@prp-alt-standard]，这后一个双线性型为对称时对 $r_k$ 无限制，为斜对称时 $r_k$ 必须为偶数．于是：
 
 - 若 $\varphi$ 对称：$k$ 为偶数时 $V_k$ 侧是斜对称，故 $\mathbb C^{\oplus r_k}$ 上的双线性型必须是斜对称，从而 $r_k$ 为偶数；$k$ 奇数时 $V_k$ 侧的型是对称，故 $\mathbb C^{\oplus r_k}$ 上的型也可以取对称，对 $r_k$ 无限制．
 - 若 $\varphi$ 斜对称（$\sp$ 情形）：$k$ 为奇数时 $V_k$ 侧的型是对称，故 $\mathbb C^{\oplus r_k}$ 上的双线性型必须是斜对称，从而 $r_k$ 为偶数；$k$ 偶数时 $V_k$ 侧的型是斜对称，故 $\mathbb C^{\oplus r_k}$ 上的型可以取对称，对 $r_k$ 无限制．
 
 这正好是合法分拆的条件——$\so(V)$ 中偶数大小块出现偶数次，$\sp(V)$ 中奇数大小块出现偶数次．我们重新完成了幂零轨道的分类．
 
-:::{.remark}
+:::{.remark .content-visible when-format="html"}
 
 - Some of the ideas from [Mathoverflow](https://mathoverflow.net/questions/9361/how-can-we-describe-the-splitting-of-nilpotent-orbit-for-very-even-partitions)
 :::
