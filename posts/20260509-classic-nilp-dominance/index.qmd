@@ -90,9 +90,9 @@ $$
 
 :::{.proof}
 
-## $\implies$ 侧思路概览
+## $\implies$ 侧证明示例
 
-这里提供一种基于“连续路径”的证明．考虑 running example $\lambda = (4,2)$, $\mu = (3,3)$，$\lambda \trianglerighteq \mu$．如何连续地把幂零 Jordan 标准型矩阵 $J_{(4,2)}$ 变成 $J_{(3,3)}$ 呢？这样做：
+我们将提供一种基于构造连续路径的证明，为展示思路，先来看一个具体的例子．考虑 $\lambda = (4,2)$, $\mu = (3,3)$，$\lambda \trianglerighteq \mu$．为连续地将幂零 Jordan 标准型矩阵 $J_{(4,2)}$ 变成 $J_{(3,3)}$，构造如下以 $t \in \mathbb C$ 为参数的矩阵系列
 $$
 \begin{pmatrix}
 0 & 1 &   &   &   &  \\
@@ -103,7 +103,7 @@ $$
   &   &   & t & 0 & 0
 \end{pmatrix}
 $$
-这里列出标准基底 $e_4$ 在上述矩阵多次作用下的变化情况：
+列出标准基底 $e_4$ 在上述矩阵多次作用下的变化情况：
 $$
 e_4 \longrightarrow +\left\{\begin{matrix}
 t e_6 &\longrightarrow& t e_5 &\longrightarrow& 0& \\
@@ -116,7 +116,7 @@ $$
 - 当 $t \neq 1$ 时，Jordan 型为 $(4,2)$；
 - 当 $t=1$ 时，Jordan 型突变为 $(3,3)$．
 
-这是一条从 $\mathcal O_{(4,2)}$ 内部移动到 $\mathcal O_{(3,3)}$ 边缘的一条“连续路径”．抛开例子，上述论证对任意盖住关系都适用——只需关注 Young 图相邻两行之间的掉落，即可将这一保序映射扩展到任意 $\lambda \trianglerighteq \mu$．
+这是一条从 $\mathcal O_{(4,2)}$ 内部移动到 $\mathcal O_{(3,3)}$ 边缘的连续路径．注意我们只需关注 Young 图相邻两行之间的掉落，故上述论证可推广到任意盖住关系，进而将这一保序映射扩展到任意 $\lambda \trianglerighteq \mu$．
 :::
 
 :::{.proof}
@@ -270,8 +270,8 @@ $$
 	{e_k} & {e_k} & {e_{k-1}} & {e_k} & {e_{k-1}} & {e_k}
 	\arrow["{s_k}", color=teal, from=1-2, to=2-2]
 	\arrow["{d_{k-1,k}}"', color=violet, from=1-4, to=1-3]
-	\arrow["{b_{k-1,k}}"{pos=0}, color=red, from=1-5, to=2-6]
-	\arrow["{b_{k-1,k}}"'{pos=0}, color=red, from=1-6, to=2-5]
+	\arrow["{b_{k-1,k}}"'{pos=0}, color=red, from=1-5, to=2-6]
+	\arrow["{b_{k-1,k}}"{pos=0}, color=red, from=1-6, to=2-5]
 	\arrow["{t_k}", color=blue, from=2-1, to=1-1]
 	\arrow["{-d_{k-1,k}}"', color=violet, from=2-3, to=2-4]
 \end{tikzcd}
@@ -424,6 +424,8 @@ $$
 - 当 $t \neq 1$ 时，$f_p$ 生成的循环基底长度为 $2p$，$e_{p+1}$ 生成的循环基底长度为 $q$．
 
   设 $\tilde e$ 是图中左侧某一节点对应基底使得 $\Gamma(t)^q \tilde e = \pm (1-t) e_p$，它的存在性由 $2p \geq q+3$ 保证．又注意 $\Gamma(t)^{q} f_{p+q} = \pm t e_p$．故取 $(1-t) f_{p+q} \pm t \tilde e$ 生成循环基底，这里选取的正负号应恰使 $\Gamma(t)^q$ 作用其上后在 $e_p$ 处抵消为零．于是其生成循环基底长度为 $q$．
+
+- 当 $t = 1$ 时，取 $f_{p-1}$, $f_p$ 和 $f_{p+q}$ 生成的循环基底，长度分别为 $2p-2$, $q+1$, $q+1$．
 
 #### 退化情形三 $(2p) \to (2p-2,1,1)$, $p \geq 2$
 
