@@ -32,7 +32,10 @@ jobs:
       - name: Set up TinyTeX via Quarto manually
         run: |
           quarto install tinytex --update-path
-
+      - name: Update TeX packages
+        run: |
+          tlmgr update --self
+          tlmgr update --all
       # To ensure dvisvgm installed
       - name: Install dvisvgm via TinyTeX
         run: |
