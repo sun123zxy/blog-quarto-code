@@ -159,13 +159,25 @@ $$
 
 ### 交换群、循环群、DFT
 
+> 省流：Peter-Weyl 表明考虑群代数等价于考虑群代数在每个不可约上的表示，交换群时等价于考虑每个特征标，循环群时就是 DFT．
+
 如果 $G$ 是交换群，则每个不可约表示 $V_i$ 都是 $1$ 维．因此在 $\mathbb C$-代数同构意义下有
 $$
 \mathbb C[G] \cong \bigoplus_i \End_{\mathbb C}(V_i) \cong \mathbb C^{\oplus |G|} \cong L^2(G)
 $$
-来考察这个同构具体是什么．每个 $\pi_i : \mathbb C[G] \to \End_{\mathbb C}(V_i) \cong \mathbb C$ 即为 $V_i$ 对应的特征标 $\chi_i : G \to \mathbb C$ 线性张成的结果．
+来考察这个同构具体是什么．考虑到有限交换群基本定理，不妨来考虑最简单的循环群 $G = \mathbb Z / n \mathbb Z$．此时我们可以认为其群代数是配备循环卷积乘法的多项式商环 $\mathbb C[x] / (x^n-1)$．
 
-考虑到有限交换群基本定理，不妨来考虑最简单的循环群 $G = \mathbb Z / n \mathbb Z$．其第 $k$ 个不可约表示，或特征标由 $1 \mapsto \zeta_n^k$ 给出，这里 $\zeta_n = e^{2\pi i / n}$ 是 $n$-次单位根．则上述同构是在说 DFT 矩阵 $(\zeta_n^{jk})_{0 \leq j,k < n}$ 可逆——当然可逆，而且是正交的．这是所谓的离散 Fourier 变换． 
+注意交换群不可约表示均为一维，故每个投射 $\pi_k : \mathbb C[\mathbb Z / n \mathbb Z] \to \End_{\mathbb C} (V_k)$ 恰是 $V_k$ 对应的第 $k$ 个特征标 $\chi_k : \mathbb Z / n \mathbb Z \to \mathbb C$ 线性张成的结果，它给出如下环同态：
+$$
+\begin{matrix}
+\mathbb C[x] / (x^n-1) &\cong& \mathbb C[\mathbb Z / n \mathbb Z] &\to& \End_{\mathbb C} (V_k) \cong \mathbb C \\
+x &\mapsto& e_1 &\mapsto& \zeta_n^k \\
+\sum_{0 \leq i < n} a_i x^i &\mapsto& \sum_{0 \leq i < n} a_i e_i &\mapsto& \sum_{0 \leq i < n} a_i \zeta_n^{ki}
+\end{matrix}
+$$
+因此 Peter--Weyl 的第 $k$ 个分量相当于多项式在第 $k$ 个 $n$ 次单位根处求值——是谓离散 Fourier 变换（Discrete Fourier Transform, DFT），$\mathbb C[x] / (x^n-1)$ 和 $\mathbb C^{\oplus n}$ 间的 $\mathbb C$-代数同态．矩阵语言下，DFT 矩阵 $(\zeta_n^{jk})_{0 \leq j,k < n}$ 将多项式系数 $(a_i)_{0 \leq i < n}$ 变换为 $n$ 个单位根处取值的结果．
+
+我们当然还有逆 DFT 变换，请感兴趣的读者验证 [@sec-explicit] 中我们显式构造 $\iota$ 在此情形下对应逆 DFT 变换．
 
 ### 直和分解的典范投影
 
@@ -226,7 +238,7 @@ $$
 依赖 Burnside 定理的满射性证明甚至不需要 $G$ 是有限群．
 :::
 
-### $\pi$--$\iota$ 显式构造
+### $\pi$--$\iota$ 显式构造 {#sec-explicit}
 
 我们还可以显式构造 $\pi$ 的逆 $\iota$ 来获得构造性证明：
 
