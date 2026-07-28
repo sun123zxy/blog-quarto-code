@@ -253,61 +253,14 @@ $$
 
 Schur 引理为表示的不可约分解提供了唯一性．
 
-## 跑题：跳关路线一则
-
-梦得跳关解法一则，可绕过特征标于此速证 [@thm-reg] 维数平方定理，录之以飨读者．如为第一次阅读，请跳过本节．方便起见，我们证明右模版本．
-
-记 $\End \left( \mathbb C[G] \right)_{\mathbb C[G]}$ 是保右 $G$-乘法的全体 $\mathbb C[G]$ 上 $\mathbb C$-线性自同态．注意它通过 $x \mapsto (1 \mapsto x)$ 完全由 $\mathbb C[G]$ 决定，且
-$$
-(1 \mapsto x) \circ (1 \mapsto y) = (1 \mapsto xy)
-$$
-故有环同构 $\mathbb C[G] \cong \End\left(\mathbb C[G]\right)_{\mathbb C[G]}$．
-
-现在遗忘到右 $G$-模范畴，由 [@thm-semisimp]，右 $G$-模 $\mathbb C[G]$ 有分解 $\mathbb C[G] \cong \bigoplus_i V_i^{\oplus m_i}$，故
-$$
-\begin{aligned}
-\End \left( \mathbb C[G] \right)_{\mathbb C[G]}
-&\cong \End \left( \bigoplus_i V_i^{\oplus m_i} \right)_{\mathbb C[G]} \\
-&\cong \bigoplus_i \End \left( V_i^{\oplus m_i} \right)_{\mathbb C[G]} & \text{by Schur's lemma} \\
-\end{aligned}
-$$
-再遗忘至线性空间，由 Schur 引理
-$$
-\End \left( V_i^{\oplus m_i} \right)_{\mathbb C[G]} \cong \End_{\mathbb C} \left( \mathbb C^{\oplus m_i} \right)
-$$
-综上，作为 $\mathbb C$-线性空间 $\mathbb C[G] \cong \bigoplus_i \End_{\mathbb C} \left( \mathbb C^{\oplus m_i} \right)$，取维数立得 $|G| = \sum_i m_i^2$．
-
-:::{.remark}
-
-上面我们在右模侧使用了 Schur 引理 [@thm-schur]——这并不需要证明第二遍，因为左 $G^\op$-模和右 $G$-模范畴等价．
-:::
-
-注意目前得到的只是部分结果：$\dim V_i$ 和 $m_i$ 的关系还尚不明确，只知道
-$$
-|G| = \sum_i m_i \dim V_i = \sum_i m_i^2
-$$
-下面来证明 $\dim V_i = m_i$．为此，首先注意由 Schur 引理
-$$
-m_i = \dim_{\mathbb C} \Hom(V_i, \mathbb C[G])_{\mathbb C[G]}
-$$
-断言后者作为线性空间同构于 $V_i^* := \Hom_{\mathbb C}(V_i, \mathbb C)$，从而由 $\dim V_i^* = \dim V_i$ 完成证明．
-
-下面证明断言．该同构的给出方式为
-$$
-\begin{aligned}
-\Hom(V_i, \mathbb C[G])_{\mathbb C[G]} &\to \Hom_{\mathbb C} (V_i, \mathbb C) \\
-(v \mapsto \varphi(v)) &\mapsto (v \mapsto [e_1] \varphi(v))
-\end{aligned}
-$$
-这里 $[e_1] \varphi(v)$ 是指取出 $\varphi(v) \in \mathbb C[G]$ 中 $e_1$ 这一项的系数．线性性平凡，来看为何是同构——这是因为借助保右 $G$-作用的性质，其它非 $e_1$ 项的系数其实完全被 $e_1$ 的系数决定：
-$$
-[e_g] \varphi(v) = [e_1] \left( \varphi(v) \cdot g^{-1} \right) = [e_1] \varphi(v \cdot g^{-1})
-$$
-至此 $m_i = V_i$ 证明完毕，维数平方和定理成立．
-
 ## 特征标
 
 研究特征标的主要原因是它和表示的同构类一一对应，且可以通过内积计算表示的不可约成分组成情况．
+
+:::{.remark}
+
+不喜欢特征标的读者可以在 [Peter--Weyl](/posts/20260314-group-rep-peter-weyl/) 篇找到一些不依赖特征标完成后续定理证明的方法．
+:::
 
 表示 $\varphi : G \to \GL(V)$ 的特征标定义为函数 $\chi_\varphi : G \to \mathbb C$, $g \mapsto \Tr(\rho(g))$，在模的记号下亦写作 $\chi_V$．
 
