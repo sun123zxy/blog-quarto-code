@@ -384,7 +384,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#pi-单" id="toc-pi-单" class="nav-link" data-scroll-target="#pi-单"><span class="header-section-number">3.1</span> <span class="math inline">\(\pi\)</span> 单</a></li>
   <li><a href="#pi-满" id="toc-pi-满" class="nav-link" data-scroll-target="#pi-满"><span class="header-section-number">3.2</span> <span class="math inline">\(\pi\)</span> 满</a></li>
-  <li><a href="#piiota-显式构造" id="toc-piiota-显式构造" class="nav-link" data-scroll-target="#piiota-显式构造"><span class="header-section-number">3.3</span> <span class="math inline">\(\pi\)</span>–<span class="math inline">\(\iota\)</span> 显式构造</a></li>
+  <li><a href="#sec-explicit" id="toc-sec-explicit" class="nav-link" data-scroll-target="#sec-explicit"><span class="header-section-number">3.3</span> <span class="math inline">\(\pi\)</span>–<span class="math inline">\(\iota\)</span> 显式构造</a></li>
   <li><a href="#正交性与泛函分析" id="toc-正交性与泛函分析" class="nav-link" data-scroll-target="#正交性与泛函分析"><span class="header-section-number">3.4</span> 正交性与泛函分析</a></li>
   </ul></li>
   <li><a href="#附录绕过特征标的-artinwedderburn-分解速证" id="toc-附录绕过特征标的-artinwedderburn-分解速证" class="nav-link" data-scroll-target="#附录绕过特征标的-artinwedderburn-分解速证"><span class="header-section-number">4</span> 附录：绕过特征标的 Artin–Wedderburn 分解速证</a></li>
@@ -586,10 +586,20 @@ Z(\mathbb C[G]) \cong \bigoplus_i Z(\operatorname{End}_{\mathbb C}(V_i))
 </section>
 <section id="交换群循环群dft" class="level3" data-number="2.3">
 <h3 data-number="2.3" class="anchored" data-anchor-id="交换群循环群dft"><span class="header-section-number">2.3</span> 交换群、循环群、DFT</h3>
+<blockquote class="blockquote">
+<p>省流：Peter-Weyl 表明考虑群代数等价于考虑群代数在每个不可约上的表示，交换群时等价于考虑每个特征标，循环群时就是 DFT．</p>
+</blockquote>
 <p>如果 <span class="math inline">\(G\)</span> 是交换群，则每个不可约表示 <span class="math inline">\(V_i\)</span> 都是 <span class="math inline">\(1\)</span> 维．因此在 <span class="math inline">\(\mathbb C\)</span>-代数同构意义下有 <span class="math display">\[
 \mathbb C[G] \cong \bigoplus_i \operatorname{End}_{\mathbb C}(V_i) \cong \mathbb C^{\oplus |G|} \cong L^2(G)
-\]</span> 来考察这个同构具体是什么．每个 <span class="math inline">\(\pi_i : \mathbb C[G] \to \operatorname{End}_{\mathbb C}(V_i) \cong \mathbb C\)</span> 即为 <span class="math inline">\(V_i\)</span> 对应的特征标 <span class="math inline">\(\chi_i : G \to \mathbb C\)</span> 线性张成的结果．</p>
-<p>考虑到有限交换群基本定理，不妨来考虑最简单的循环群 <span class="math inline">\(G = \mathbb Z / n \mathbb Z\)</span>．其第 <span class="math inline">\(k\)</span> 个不可约表示，或特征标由 <span class="math inline">\(1 \mapsto \zeta_n^k\)</span> 给出，这里 <span class="math inline">\(\zeta_n = e^{2\pi i / n}\)</span> 是 <span class="math inline">\(n\)</span>-次单位根．则上述同构是在说 DFT 矩阵 <span class="math inline">\((\zeta_n^{jk})_{0 \leq j,k &lt; n}\)</span> 可逆——当然可逆，而且是正交的．这是所谓的离散 Fourier 变换．</p>
+\]</span> 来考察这个同构具体是什么．考虑到有限交换群基本定理，不妨来考虑最简单的循环群 <span class="math inline">\(G = \mathbb Z / n \mathbb Z\)</span>．此时我们可以认为其群代数是配备循环卷积乘法的多项式商环 <span class="math inline">\(\mathbb C[x] / (x^n-1)\)</span>．</p>
+<p>注意交换群不可约表示均为一维，故每个投射 <span class="math inline">\(\pi_k : \mathbb C[\mathbb Z / n \mathbb Z] \to \operatorname{End}_{\mathbb C} (V_k)\)</span> 恰是 <span class="math inline">\(V_k\)</span> 对应的第 <span class="math inline">\(k\)</span> 个特征标 <span class="math inline">\(\chi_k : \mathbb Z / n \mathbb Z \to \mathbb C\)</span> 线性张成的结果，它给出如下环同态： <span class="math display">\[
+\begin{matrix}
+\mathbb C[x] / (x^n-1) &amp;\cong&amp; \mathbb C[\mathbb Z / n \mathbb Z] &amp;\to&amp; \operatorname{End}_{\mathbb C} (V_k) \cong \mathbb C \\
+x &amp;\mapsto&amp; e_1 &amp;\mapsto&amp; \zeta_n^k \\
+\sum_{0 \leq i &lt; n} a_i x^i &amp;\mapsto&amp; \sum_{0 \leq i &lt; n} a_i e_i &amp;\mapsto&amp; \sum_{0 \leq i &lt; n} a_i \zeta_n^{ki}
+\end{matrix}
+\]</span> 因此 Peter–Weyl 的第 <span class="math inline">\(k\)</span> 个分量相当于多项式在第 <span class="math inline">\(k\)</span> 个 <span class="math inline">\(n\)</span> 次单位根处求值——是谓离散 Fourier 变换（Discrete Fourier Transform, DFT），<span class="math inline">\(\mathbb C[x] / (x^n-1)\)</span> 和 <span class="math inline">\(\mathbb C^{\oplus n}\)</span> 间的 <span class="math inline">\(\mathbb C\)</span>-代数同态．矩阵语言下，DFT 矩阵 <span class="math inline">\((\zeta_n^{jk})_{0 \leq j,k &lt; n}\)</span> 将多项式系数 <span class="math inline">\((a_i)_{0 \leq i &lt; n}\)</span> 变换为 <span class="math inline">\(n\)</span> 个单位根处取值的结果．</p>
+<p>我们当然还有逆 DFT 变换，请感兴趣的读者验证 <a href="#sec-explicit" class="quarto-xref">小节&nbsp;3.3</a> 中我们显式构造 <span class="math inline">\(\iota\)</span> 在此情形下对应逆 DFT 变换．</p>
 </section>
 <section id="直和分解的典范投影" class="level3" data-number="2.4">
 <h3 data-number="2.4" class="anchored" data-anchor-id="直和分解的典范投影"><span class="header-section-number">2.4</span> 直和分解的典范投影</h3>
@@ -658,8 +668,8 @@ v \otimes \varphi &amp;\mapsto \varphi(v)
 </div>
 </div>
 </section>
-<section id="piiota-显式构造" class="level3" data-number="3.3">
-<h3 data-number="3.3" class="anchored" data-anchor-id="piiota-显式构造"><span class="header-section-number">3.3</span> <span class="math inline">\(\pi\)</span>–<span class="math inline">\(\iota\)</span> 显式构造</h3>
+<section id="sec-explicit" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="sec-explicit"><span class="header-section-number">3.3</span> <span class="math inline">\(\pi\)</span>–<span class="math inline">\(\iota\)</span> 显式构造</h3>
 <p>我们还可以显式构造 <span class="math inline">\(\pi\)</span> 的逆 <span class="math inline">\(\iota\)</span> 来获得构造性证明：</p>
 <ul>
 <li><p>先来构造 <span class="math inline">\((\mathbb C[G], \mathbb C[G])\)</span> 双模同态 <span class="math inline">\(\iota_i: \operatorname{End}_{\mathbb C}(V_i) \to \mathbb C[G]\)</span>： <span class="math display">\[
