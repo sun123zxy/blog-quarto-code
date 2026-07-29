@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="sun123zxy">
+<meta name="dcterms.date" content="2026-07-29">
+
+<title>The Bicategory of Bimodules, Tensor–Hom Adjunction, and Its Application to Frobenius Reciprocity – sun123zxy's blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f81f3c79f694eaf6f88ebcce70241f9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-af64962de9348b804daa6381b125c604.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-6657e1bb1dcc81431156cd102d4ef94c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-1f77b903011450794daa57c3bd3a7161.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script>
+MathJax = {
+  tex: {
+    macros: {
+        SunQuarTeX: String.raw`\mathrm{\mathbf S \;\!\! {\scriptstyle \mathbf U \;\!\! \mathbb N} \mathbb Q \;\!\! {\scriptstyle \mathbf U \;\!\! \;\!\! \mathbf A \;\!\! \mathbb R} \;\!\! \;\!\! \mathbf{\TeX}}`
+    }
+  }
+};
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">sun123zxy’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../listings/overview.html"> 
+<span class="menu-text">Overview</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../listings/projects/index.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/sun123zxy/blog-quarto-code/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-bi-rss" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-bi-rss">    
+        <li>
+    <a class="dropdown-item" href="../../listings/all/index.xml">
+ <span class="dropdown-text">All Posts</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../listings/math/index.xml">
+ <span class="dropdown-text">Math</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-bicategory-of-bimodules" id="toc-the-bicategory-of-bimodules" class="nav-link active" data-scroll-target="#the-bicategory-of-bimodules"><span class="header-section-number">1</span> The bicategory of bimodules</a>
+  <ul class="collapse">
+  <li><a href="#internal-and-external-hom-constructions" id="toc-internal-and-external-hom-constructions" class="nav-link" data-scroll-target="#internal-and-external-hom-constructions"><span class="header-section-number">1.1</span> Internal and external hom constructions</a></li>
+  </ul></li>
+  <li><a href="#tensorhom-adjunction" id="toc-tensorhom-adjunction" class="nav-link" data-scroll-target="#tensorhom-adjunction"><span class="header-section-number">2</span> Tensor–hom adjunction</a>
+  <ul class="collapse">
+  <li><a href="#the-commutative-case" id="toc-the-commutative-case" class="nav-link" data-scroll-target="#the-commutative-case"><span class="header-section-number">2.1</span> The commutative case</a></li>
+  </ul></li>
+  <li><a href="#frobenius-reciprocity" id="toc-frobenius-reciprocity" class="nav-link" data-scroll-target="#frobenius-reciprocity"><span class="header-section-number">3</span> Frobenius reciprocity</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The Bicategory of Bimodules, Tensor–Hom Adjunction, and Its Application to Frobenius Reciprocity</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">algebra</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>sun123zxy </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 29, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="the-bicategory-of-bimodules" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="the-bicategory-of-bimodules"><span class="header-section-number">1</span> The bicategory of bimodules</h2>
+<p>The bicategory <span class="math inline">\(\mathsf{Bimod}\)</span> consists of the following data:</p>
+<ul>
+<li><strong>Objects:</strong> unital rings <span class="math inline">\(A,B,C,\ldots\)</span>.</li>
+<li><strong>Hom-categories:</strong> <span class="math inline">\(\mathsf{Bimod}(A,B)\)</span> is the category whose objects are <span class="math inline">\((B,A)\)</span>-bimodules and whose morphisms are bimodule homomorphisms. Thus its objects are the <span class="math inline">\(1\)</span>-morphisms <span class="math inline">\(A\to B\)</span>, and its morphisms are the <span class="math inline">\(2\)</span>-morphisms.</li>
+<li><strong>Horizontal composition:</strong> the functor <span class="math display">\[
+\mathsf{Bimod}(B,C)\times\mathsf{Bimod}(A,B)
+\longrightarrow\mathsf{Bimod}(A,C)
+\]</span> sends <span class="math inline">\(({}_C N_B,{}_B M_A)\)</span> to <span class="math inline">\({}_C(N\otimes_B M)_A\)</span> and sends a pair of <span class="math inline">\(2\)</span>-morphisms <span class="math inline">\((g,f)\)</span> to <span class="math inline">\(g\otimes_B f\)</span>.</li>
+<li><strong>Identity <span class="math inline">\(1\)</span>-morphisms:</strong> the identity on <span class="math inline">\(A\)</span> is the regular bimodule <span class="math inline">\({}_A A_A\)</span>.</li>
+<li><strong>Associator:</strong> for composable bimodules <span class="math inline">\(M\)</span>, <span class="math inline">\(N\)</span>, and <span class="math inline">\(L\)</span>, there is a bimodule isomorphism <span class="math display">\[
+\alpha_{L,N,M}:(L\otimes_C N)\otimes_B M
+\xrightarrow{\sim}L\otimes_C(N\otimes_B M),
+\qquad
+(\ell\otimes n)\otimes m\longmapsto\ell\otimes(n\otimes m).
+\]</span> Its components are natural in all three bimodules, so <span class="math inline">\(\alpha\)</span> is a natural isomorphism between the two threefold-composition functors.</li>
+<li><strong>Unitors:</strong> for each <span class="math inline">\({}_B M_A\)</span>, multiplication defines bimodule isomorphisms <span class="math display">\[
+\lambda_M:B\otimes_B M\xrightarrow{\sim}M,\quad b\otimes m\longmapsto b m,
+\qquad
+\rho_M:M\otimes_A A\xrightarrow{\sim}M,\quad m\otimes a\longmapsto m a.
+\]</span> The families <span class="math inline">\(\lambda=(\lambda_M)_M\)</span> and <span class="math inline">\(\rho=(\rho_M)_M\)</span> are natural isomorphisms from composition with the appropriate identity <span class="math inline">\(1\)</span>-morphism to the identity functor.</li>
+<li><strong>Coherence:</strong> the associator and unitors are invertible <span class="math inline">\(2\)</span>-morphisms satisfying the usual pentagon and triangle identities.</li>
+</ul>
+<p>For four composable bimodules <span class="math inline">\(M\)</span>, <span class="math inline">\(N\)</span>, <span class="math inline">\(L\)</span>, and <span class="math inline">\(K\)</span>, the pentagon identity is the commutativity of the following diagram:</p>
+<div id="fig-bimod-pentagon" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bimod-pentagon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.6 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="599.115pt" height="133.815pt" viewbox="0 0 399.41 89.21">
+<style type="text/css">
+@font-face{font-family:HJTYEB-CMR7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHcAAoAAAAAA5wAAAGTAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANApYaQsGAAE2AiQDCAQgBYJWByAb9AIAngU5GW8qIZpLZi2+Y5pSys+e4uH7/dq578siKpUtielWvRG3Mx3PhLZD9FJMStlK5Q+t825iqHOTGB+aGSIc4lb7QlwVpNTpr+WODx60gH4L23L9eWCBJQEFnESchy8t4VQCjcDSHYrOJKUREelrQZYW40pBuk7P/0NOGqMlDmu0Y0ps4DtsLCjAUx/LVMgETq0qkJBhiHeGcMwBcrlAvaq8P1i9gQASyBGYACwAIAfExBHn3ezstL1dq0Hx6c2Epy8dvP8temyfOP/Tq1qSVTSMeGhX0/8dtxttpiXYGNaHvgAEglbqcUfu+xNkOXMiSU20SSDIVEjrRrD4gQCAlBAhRDIBNgKlDseEXok516kXBU2gpGW9wxgTtsjbhRmpmHMjSBS0Q0nX3GHNZ6DkXeZZKlNrxyP6aL7iXFN7s8GUqU6PbwZfMNMF1VdYDQ4QNdQ3MjdDmFDIG8IRJgZSMmra4iL0ovIqnBoIE1OMoQEFMwMTHslygDCBVAF+adSaAm6BMbVA6VOwMnBgA+g8AAA=) format('woff2');}
+@font-face{font-family:ZVJZVP-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJIAAoAAAAABAwAAAH+AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBRIFNCwYAATYCJAMIBCAFglwHIBteAyCuCmxwTU9Ie7Ds8Vgav6HRjVHWKUZv4+HhsL3/b4/m4DGtEwvkgDpsaDRpgUSaSILZ+vn7+eeudO1ry7KMogHtjRqobVZAw4H93wUJT84Kkj0HSMovT//eKENzIcpuDVos2TL9cd5UtFOn8l80OEEWZgvEYjbPx7bE1j4vcKnkPV8bKEYFrnlrWzIxWWodEZF+vaCQnwHke37/hrBqR2M4DFGVQSaANZ1NqkDafOlh/xwAW6UwAoD/f5AoYAgvhCBYB4p5sPkCtaT9agDi3yYoooQzYAoID6E0X+X8itJpCiHldoTWxx/mfNlfJ0fPEiFaa+SJYGw8TOFPb5dYCZ30sGqQAv7+oswslqMrxLKzDDBiZdw6wyiGqzTZ/p+e/5cqP8rZMKpR4MJ7iMZgOhdOBcf/PmJMhBPjY2poaPYPgwgAgeD0o3aWbPiuKvKv/u8YcQGgKkGws/Jn8RSMgGCCBBAipDPELUGauluIQQeKpqipMyRLGpbIsqbd63XzZPCiWBNWOYgsmlcjS8aWZNm8TVu3535mrR85x4mIo136hEZ3MK6+Cu9IRZKZjffNNUqT+nBSbbPkIhUYdbX1jI2UDbC4dZVk2pEQ4egkPkK40C0oTi1CDNXtr4NFSkSiwDrtKBvILwRKScE8MUsm6oa/qGpjkRNRwXOlAAA=) format('woff2');}
+@font-face{font-family:FBIPCW-CMMI5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAWcAAoAAAAACdgAAAVQAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAARAqMWIlSCxQAATYCJAMkBCAFglwHIBuPB1GUK1IF8TPBGPehLCm/kJDVYYWO4xacwDfyWvZz+7v3GV8YiMhAMJoWVoPZEI3JEPp+es96k2kXYFZCullAPAlfvS+APOTfXncn3lYYWYKBtcACS1P/hFnbDeZVmV23u44W0ks8IZ3MAX6CP76CE4qD/IKKiWOm6/ZIG/hUMywKq7Aai2YTjejzfRUWl77IA8oryO5ywhJPgOYN1AdMkJe48Q+C3qRDbwIPmEyZAFqAcsodz1WS2p7fwEpYStVpnRnW/wokhK6AXUlNZJj0KJLIwRWr/2uCM59mPf5//P8akqOSDRtAAf4A5IEcY5QchUXQP9oW3JRlDlYW7uxdNLbOrnffH/3Q8OwT8B3pW6iUIncivorE3Pp6240d9VB2EFg+E9Bn1ZBKQ5ZoubPupLfMjCJ+NIwbrk2XZwMTdH9CCAMrXBFax3ef/SgKBJZTF0S836ERkiK0Ez5kL33WiSHi9KeCoEkTTrQp5fjL/7DRhqxaTvvMk/3JogG8VPPr0DBcsW/JuWemdtCR2qkpxtzYBc95QfDS8wAyASoZFbKuTzvgrI3jccZcPChtyagAF+7WsjiXCB2BAhrfb9LEJuIRreqVIucbrGfTJyU6axv+DHsOa4TbMEy7oJEDO9lZUZ8DL8tgP3vykl3/vNcW+5dDHClq4Oab+ITCK5fTi5Y2oWfrp6aYwr03Rh9Kls2JqaYni1Zs016dqR2YQfuXC2EIJnSrbJWCG1Foy7ISfXtKtHdPTnIpcfxb/LeFPsGfU3caGzM+ktNmmK+/n3U67jjf4zjzEPjLmqV0+JMNd5Nq/NDyw2IGNAYgx2S3Md0rP2ZoeHKl5sRaQOwL7Y68iLBqIE7cNuNDYY4Wt3bZn80iuuORY7OnnQ86xuY1y7S7kIj64rBPN+VJoV+TEspgf5x3YLalCj6L5xGG8DMnAYnsGET5K3rOoNCUwnET/UiW6jJEboj3qWX7fboTz61SWn0lzOFtow4FK/j0GqpNqovOtvUINm5hzRGJSSmjYnlu7u5HlBgPveE3erShuLMVtgaJfsY1R6XbumtX+vSgSbwLDC1vvdNr11RGt/0mLG3Ya3LRm4X02fUIX2yxxTz7N9iYuOGzoKdQJ85bkr+Q5wEuoSyQoon6FJh3JObxpYXUF8wnEpE5zEZyD1uNL0WT9iC8gQ/XIPiHX6IORJ8s1Z7oA7w+yG51Tf5TwrRU3m5PXwu28RV+GWIjOLMCcTU0YNIUK26Cm8cxVer/hSNFfU/h+bpWUhmdqapJU4sv6JxLlI923aEPka4zXDIaFKl2P54ECwTxDxHGzNV0kvB78L6TmqX1mceF9nxAWSlSdDduxwD/RrfV1RLvTwKz8t1pzdIWql6o7qup4D9wugg/U8CZeeNERX3Nrzn5II4vjBuc17xOuMPEbTXpLmFaOu402C0eHToGEwJ5z6pio2rRoDALu5FxE55mceM4mVXpbPas0IFMY4GdL5QUWiHv48Nc9PXdhbgvk0HIxLngyt0VED+D/4RPfKyg7VcuzIB8+rJiNhP/ABCJHkW72yBfoaQ/dYAElL6jBIYgB2wx1KEqh5dUHqiobijLu1DGmTVFgTJm8sI1KPdlH8S1rTOfqVot2xUnO6ju7VlnDGNxA128Cdt0aWx3qGMH3Yg/m3ZO8kX/8Jvq7uxFu4TquVCUl9m1c52RvmGbtAciN5FUkl5YkppNmuibg4tc2fIUK5KsAImSK4kuzOHOmReai1B6KqIpFC9mQjoxFkrvvHM5SEb0GWqghzJnoMr4EQGTjAnKK/iTlEhX+MtTZSOZ0GcOywEAAAA=) format('woff2');}
+@font-face{font-family:PCPXEO-CMSY5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAI8AAoAAAAABBQAAAHxAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBTIFKCwYAATYCJAMIBCAFglwHIBtbA0CeBXZbRwi9NtbbUKkhKpt+IqDfr+3Tc8U00f5cIwUSQ2kWasf/Z3/v/VDa6a6f8MxGpjlLkUhrD2kl7awJYW4HKIFs7KZkC27OWmWf/3PxB1+BpBXRzNIyBAp0b4CjEe7utJOjDc9Ot6kE7ZEQRJWCnqKjDaS6J6yiEF/8+JvDyrBDoRAHA0EFegSMlzPYBNS1XiCxfg4A8kXSOxAA+P8HiEiYIwmYIzsFsixwfv//6YmfrUAAEEFGQQM8A5ABZej0VvsViRwrGobFrngYHj9Tn4lGL7loZzSOYZZ5JBOP3SARFO2LRO9xHEvEvBXtC7g2CMT/1HVR2ZXZIW7E7hTnCWKsAuN3R////v4tzTiz2zDJTQT/tWg/jBGiELZBCQ3YcNBdy1ctMP/HqH6KCwABgU++tjpfoflup0x3+o8mNALaIgjsakveMGo0oVA5SHk+AVGDUhNo2vWBwGCkenjWN8KLnh1e9V3P71oTIQndERxzEZ6tNePF0ihera1lXQ9Oz2v1O66+AXMgYfVzzd5wUnoNbgh5gkTpbfMS9YMtfYNNHXVingzMunToNqBfg151vLrUc9IpULFhQIKVH5eZV1iSVAwlfVqqe9epjhCPAMCudc6pFdcB9UnJiKXXG9Si7zc06VBHjEeGBLD7AAA=) format('woff2');}
+@font-face{font-family:XDTRFF-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAPcAAoAAAAABlQAAAOQAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqFdIRwCwwAATYCJAMUBCAFglwHIBsVBSCOwradc5IwwggnnTLGRzz8/9Xu/29mWmgFinDjOFs23EECyiPsZN5J4+3n87L3kzpTKIWgqaxTu9BxPVgB/3NN/u/o3tE1RwJY5TqwioYHPBqOMLFxw5kesA0Ut5tKQtCjjliztE9hHH1BBIl6gBXkG3bxX093y6M3RQUGiROAqQB7ARhanYpT7Br72MXhPx6Q3RHh39IiYwP0JhHKWhaqQLWOYBxj1zkcwN7/U5+AZTAlNKHOPUGaTKGAKOpbWJ9CMZMidQRCYiSGh0hlroWpZWFuOl2ORgss+UBFDCnqWxfWIwgmM2SaEcy1NCAaKfZDBwYrTvUBLjK8LiLB0NXbaL5tY0SUJkYPooe4DYcJ4cFRdYFmbC8yQ4YB3Ur4hLBNJ3dX7KDWD6LSac8NYXgpJlJ0YJBAXyd/Oi7BFGcwArmWBnLomyKDRxK1hPCgMPWK4cIl/WNa4OLouooO+KCUnN6N4ycIFKUFBk9JzzGcl2iWp2li1KtOi8yzPs0yRmyNH+p4HiPySlECyvYnMAdqUjS/H2eELzty97SV8reqwDr3BdhOU88sO6ykYpUZYNcydPbEJx78He+8F6MRNQPz5rFyc0E33bXY9sDofc4atLeUWT8OSQqEzLLDkXuffbhHqEhIoT6PD4kXOxs46gdCrN1i+XQZvt44fs3kQx/bZqW5drQ+iWqwxpAcExdv/TKfbiwcvxawF+nmfSLuGpy54H9M0Qf9Li7P9qCoCusagPzcGJB1+3aebzOWvS/w7UrPmRdW7dpGbHNkRzRW4/LY2osM6oogPDCUXBodAvUP/tK54mEh8z16R4RAjx+ngPyZ2mtGeyX6LhCWYpKRKx7n5I3b+DokY16QOiU8xIF/ECCR5JPW0+vHIuZElXbtTcdDefTtdELPznjKe6ZIUbkMM2UfFskBQAISuF+qi4rhtfzKESzAl/+v6MOuAajDBDo3weABNv+nQ6KiRCUtn8E9XMDVUXDLP9gIJTv4loRbTdUwJ+FN0wIFryiVCBJShUL5epMofThUcAIizV2UWIhKlViRqBIbUUMzLrq2HrXsP6ldDHUM9Hd21nLw8nIzeYPZ0dPWtSQ+S38jsTitoDglS9ZA2xgc5MiSq0ihJPlkecmRCIeyhXIUyJ/zwGlx4DV2YyLYJW0F0uTIJkuPNt0AcImyF43iNoLERryyiTZRsTQFKU+RRZYBbcZwDAAAAA==) format('woff2');}
+@font-face{font-family:NQUDBD-CMSY10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJMAAoAAAAABCAAAAIAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBUIFQCwYAATYCJAMIBCAFgmIHIBtnA2COw3T7ImMuxVTcHOLFxENw7H13v2NZWtgC49HnpW9g0yKeasXw+8t3UBqtj4O8rTtJyUxQc/tIc13Iu4tT+TEDA7owWyAW87k9IAs0YItiODHtBqoWqGS9anWbTjxFvNQs6Ck6ukEh72NSiXzOtz9/ExbFnzLsBQdVGeIEYE1u3BrAXH1o0EJ/UgB9Y4FEAPDvAZAoYIgmMES3DCgqClYfPB7qvuvb3QQUP6yEfcAEAEVAadxgVZoXGDTrj0EEkkogJJpGojg8F4CbYZQg4rFm/0d/Lopg0AqugWASXSO4CITjSWRb0EvQ/I8nh09FB5cieIw6nCJoDBJSR3JWv8BoIYYub3BVOPT8jOHVJf1hD0KaZbuK5feC+0y3kDJASTj/d2PRTI8QDLTTz2vHX8ZCDXIq+oksVgIAgeDsK/NO4lX+yi4U8VP/+/mbMACqEgRbK59XrCR/BU6eykIK0j7GSOCy7hYF0NECsqilQ5Y0zJNlLVvHddPy0USxJixqJ7Jolp4sGRsiy2YtV3XbLg5t7U+u/c4euL62PqOuo4+Xk30ZnuZkZhdaT5yvULp1DrfGFJ2XWQjqWJhYuTip2EXrYKHE/2vWqQesXq16Gep06MOTIxtCxc5Bx8IsWo5M2Q3Q5JqndWVLgfJLcoOiKbnpOLhpmETLk6kQjSsFAAAA) format('woff2');}
+@font-face{font-family:OYFEXR-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAPAAAoAAAAABrwAAAN0AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqGXIUCCwwAATYCJAMUBCAFgmIHIBslBVGU60kA8GOhuq0HjDEm9r/Zr4rDoU4x8Yp4gA5/7+ZfozWtrC+QjQk6PQ84jnl7GtYN5WXT2d3KSQFlC5CTin72wBeA52XLQPP/XFPv4+H189wEpxbZGGmZoCMdpjU1JcH0aIA882I/+xG9zN62/UVRoSOk1A8vCvE1/s+v7XCGnyFDK7BAV5jAT7l9yo0DjE64JtCQhLiNrQGISFjuSsao9iFDsJzHOk+amtyuYCls6XOD0CUcY0u2ogT9gZsje9OsgAv75tgwEiCE+3rj3XhFz9SOCB7o7S1Ibt30Oi7ErhZEwnp8Jwd6MB+/nj4kfz0r6B/XsyAwIN+N97T7Sf5yxNr40NubPylYkB+x+Tzx6hG48BvASH5vhOTZJwtFK1h1JYiRWFZKvnG3aOuz3tp4JNvNEBqMQO+cDkQT8ntuTrAgFZVsM6RQSFJPj9xEg6mxKBghViQcKpyodKhHtBHvkUi3vC6v6CGxkCCBgXldBP3PYBhC+OUh81CHW/998bsIFo7HRBQshukWTFzXPH0Ya4VqT676ngy7TRX7dXgVrIAV5sxcb+/a77s063NZwvvsV+5VsBKeCv2TNL809LBv1Yw6FKP+WGXhuHZPh/ZwjZljmxF3ELbVvO7tBaVJDYp0GgtnLsiCvvuDR/yWsR1nzN6fjUjwfF3scelreEQ9ztm23etgD2y3YOb8626jDYwsU+qk6IxQ5MzLYCnsQP+eHtPhOFQfQnmF+Rc0qpmwwNnRU48TmR8PY+GpyDVxvhdWIwL2qWJ/XzRLbgM3q2y7kkfcdeNs77jDLwER6d5qoGbHMp7zP6iiVtSFBfSNSbGVSLOzck6by0n1srpnxLno4x8NP6aDX+LZ91nB/ugrNY5tc/04qIPlS9gsvli/vb7Adzy+HX4Omxj/dsvU2vaXxWN0xUzd/TDbN4W2mmEgS9nL7yjEXYeRrGrSpRgtbjJ0lqJE33OEZUIgn41M5nwxsM1XIweb+9Zpowi5J9jl3PhsUyJfrKrmq039hb6Fzacu7U/VVrsF2Nr4e6pZubg40Im3mWm6OuHr+kb9iOjchKzcuBRJLXVdYCVNinQ5ssXIJMlFmmi6LpWbALZs+POkxooLFw7oCL5RUs2SIE0qSXTqiByws6RWtkSsBtGhSAWWfLRcCbIkHieFJC3qdFEoAAAA) format('woff2');}
+@font-face{font-family:TUELZZ-CMR10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAIkAAoAAAAAA/gAAAHbAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBLIExCwgAATYCJAMKBCAFglwHIBtEAyMR5mouC/CPxNhY2lMzUgjFMIqNogkbKdxdsuaFrWqjGb/E8/9//7+5zj7vy18M37P0YoA/jh5x1sgTLZNM2hNzbcNM3xPtVTVhWiF6arQJYtctkSATfp8hbMcTWUB/FwjsPLDAkoASDCFMgkBCDHRgAUHvjKp3EjmJyH5bUPnJvhXje9z/9/iSlE+O4LND14TwQ+7hmB1Yu7qVRgkEgG4wUDgowcH0gGkKbt24dvcfEECBNQYe8QwAExC5DMSNhU1EhiDTCCpH0a2eHgiSQo/SwRMzDEkgaBPsR1FZEZEtnfafbcFSGBb97vtMRoxuQT582QI8DZ/PSjAmq6WvOa2B/ucjCTL4bv6YBuZbxE5vyxoj8z+VC9EPm9M5Deqtcw8HBOF34p/17Ru/25rUa7ShYGuAUBqDxZI3AQCMgXy6A4ugXAQE5Ld7OZJ2s5latLPSbJi1FnPzvQE41cC5AxrDAmoMcFCrT4E6A05LE4y71bSPNw8lUipHpVolc0VYzMXbYdcwruYZ84Ql5gzH7N4J/BoJIPPzCoiKsAqZwOVnQe/5SEhRcaiorCLjEsHCkLEKCXPy85mAtQaTIfTaxyrE2EksPjBJmmAR4xQWY+c1AW8NSTUAmD8=) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="327.322554" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">(</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="331.195533" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">K</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="342.580561" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="350.228048" y="-97.017107" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">D</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="359.765075" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">(</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="363.639064" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">L</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="372.630707" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="380.269649" y="-97.017107" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">C</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="389.289348" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">N</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="398.377976" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">))</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="408.338396" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="415.966188" y="-97.017107" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">B</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="425.153976" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">M</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="186.25338" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">((</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="194.000357" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">K</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="205.384376" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="213.070815" y="-61.840285" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">D</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="222.569879" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">L</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="229.34811" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">)</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="235.434511" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="243.112427" y="-61.840285" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">C</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="252.094152" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">N</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="261.1818" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">)</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="267.269201" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="274.937056" y="-61.840285" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">B</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="284.084791" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">M<tspan x="468.391729">K</tspan></text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="479.776757" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="487.385281" y="-61.840285" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">D</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="496.961271" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">((</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="504.708249" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">L</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="513.699902" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="521.298791" y="-61.840285" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">C</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="530.358553" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">N</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="539.44718" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">)</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="545.533592" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="553.123511" y="-61.840285" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">B</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="562.349262" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">M</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="573.098466" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">)<tspan x="186.25338" y="-28.166647">(</tspan></text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="190.126369" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">K</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="201.511397" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="209.198936" y="-26.664462" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">D</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="218.695901" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">L</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="225.474131" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">)</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="231.561552" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="239.239568" y="-26.664462" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">C</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="248.220194" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">(</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="252.094182" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">N</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="263.395242" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="271.065207" y="-26.664462" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">B</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="280.210853" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">M</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="290.960047" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">)</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="468.391729" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">K</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="479.776757" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="487.385281" y="-26.664462" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">D</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="496.961271" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">(</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="500.83426" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">L</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="509.825903" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="517.425903" y="-26.664462" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">C</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="526.485564" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">(</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="530.358553" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">N</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="541.660603" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="549.251552" y="-26.664462" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">B</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="558.476213" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">M</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="569.224407" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">))</text>
+<path d="M235.1019 17.464L305.02388 34.90209" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M303.785128 32.129063C303.805336 33.612606 304.45997 34.473994 305.21717 34.950288C304.324991 35.015274 303.342549 35.468422 302.628119 36.768768" stroke="#000" fill="none" stroke-width=".398478" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="127.634415" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 144.89801 49.368997)">α</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="132.848321" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 144.89801 49.368997)">K,L</text>
+<text font-family="PCPXEO-CMSY5" font-size="4.98" x="145.555004" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 144.89801 49.368997)">⊗</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="150.949595" y="-25.477349" transform="matrix(1.000261 0 0 1.000261 144.89801 49.368997)">C<tspan x="156.747082" y="-27.164908">N,M</tspan></text>
+<path d="M93.99402 34.9985L163.916 17.5604" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M161.520249 15.69372C162.234679 16.994066 163.217121 17.447214 164.1093 17.5122C163.3521 17.988494 162.697466 18.849882 162.677258 20.333425" stroke="#000" fill="none" stroke-width=".398478" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="127.634415" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 -45.108995 50.088998)">α</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="132.848321" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 -45.108995 50.088998)">K,L,N</text>
+<text font-family="ZVJZVP-CMSY7" font-size="6.97" x="154.191936" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 -45.108995 50.088998)">⊗</text>
+<text font-family="HJTYEB-CMR7" font-size="6.97" x="160.414543" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 -45.108995 50.088998)">1</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="164.430066" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 -45.108995 50.088998)">M</text>
+<path d="M58.59611 52.6595V69.79554" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M60.987027 67.92264C59.552447 68.30121 58.875047 69.14482 58.596117 69.99477C58.317187 69.14482 57.639787 68.30121 56.205207 67.92264" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="127.634415" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 -116.56199 89.756999)">α</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="132.848321" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 -116.56199 89.756999)">K</text>
+<text font-family="PCPXEO-CMSY5" font-size="4.98" x="138.859751" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 -116.56199 89.756999)">⊗</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="144.254333" y="-25.477349" transform="matrix(1.000261 0 0 1.000261 -116.56199 89.756999)">D<tspan x="150.452715" y="-27.164908">L,N,M</tspan></text>
+<path d="M340.81191 52.6595V69.79554" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M343.20281 67.92264C341.76823 68.30121 341.09083 69.14482 340.8119 69.99477C340.53297 69.14482 339.85557 68.30121 338.42099 67.92264" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="HJTYEB-CMR7" font-size="6.97" x="127.634415" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 215.45401 90.863)">1</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="131.640636" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 215.45401 90.863)">K</text>
+<text font-family="ZVJZVP-CMSY7" font-size="6.97" x="138.110703" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 215.45401 90.863)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="144.33331" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 215.45401 90.863)">α</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="149.55296" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 215.45401 90.863)">L,N,M</text>
+<path d="M117.39403 79.02453H281.61551" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M279.74264 76.63362C280.12121 78.0682 280.96482 78.7456 281.81477 79.02453C280.96482 79.30346 280.12121 79.98086 279.74264 81.41544" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="127.634415" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 49.598009 112.547)">α</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="132.848321" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 49.598009 112.547)">K,L,N</text>
+<text font-family="PCPXEO-CMSY5" font-size="4.98" x="153.736868" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 49.598009 112.547)">⊗</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="159.132459" y="-25.477349" transform="matrix(1.000261 0 0 1.000261 49.598009 112.547)">B<tspan x="165.026911" y="-27.164908">M</tspan></text>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bimod-pentagon-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: The associator pentagon in <span class="math inline">\(\mathsf{Bimod}\)</span>.
+</figcaption>
+</figure>
+</div>
+<p>For composable bimodules <span class="math inline">\({}_C N_B\)</span> and <span class="math inline">\({}_B M_A\)</span>, the triangle identity relates the associator to the left and right unitors:</p>
+<div id="fig-bimod-triangle" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bimod-triangle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.6 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="389.835pt" height="76.2pt" viewbox="0 0 259.89 50.8">
+<style type="text/css">
+@font-face{font-family:FBIPCW-CMMI5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAOYAAoAAAAABmAAAANOAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAARAqFeIRLCwwAATYCJAMUBCAFglwHIBv4BEAehXFMrItKZaXeJPJ+ei97k0kqZ5utsIUWBZSaPgKfd3+ACHJ3VcDNiyLNNLAEU48w/pL/n7imfhX/cySAV892A2uN5uFoYtOdZ+CwxadPD6jz3fUW7SRWaI9NOfAP/wrApRGNAQWIS9z6pwKjJUFvsgZESRKAFQMcArmCrF2TC2LMhRT4DwBDqIP//wMABAAMQCXxKkj8QxIkEADMeQqJfYCdF+/ZhyFCUUIpl5JXAEBnSJKPLHwFNRMZ6QjPzI28zafbzxgdOgcP3ZmTKjMzM6o7nsSmqqLNPN7Gzah9Cy376FH0w6gplYdRXUSnIDOlO2o4uCVR+smT2PbHMVKbNzJJ9ZY4pjFJZWra0GZ2E8xt5MREbebAz1NPzdvKGZjhpCQxS9Gz0/Qcz9c3qs5e3EI/OaOeaHON9JZpbnLh7BZD6dlNbSqpWery1sakqSmpqTi2YLaTyrhUB52fqD673XdKXfbxiZ2eduOPPzypLCvXdhYLybM6yzY4Nuth0dm0kzJP02xj4G9UN2Mmi/l7dQxlVew/bCiAzgjkjn08za/98Dfyl8iVS40GYoW7HHuR4NBBnLprI0PHudvd2eN6vogYTkfupv4uQejEM2mbQpdLmWgsDQcJWX8W/fLh6EHgyermWlKdCvs+0DIkEzaM+zEhS8fx7e/whh2u1wR+klvVHM7r5toZBKC2r9Ja4RNnq/BzLSxZ5kU08Fp++Ubz6Y+4vxB2eG4NOOULC3cNuUOKYdy0s+DS/QbMrBbkyg41pSa1opWY9XvJNO9KNy1MU9vhOc9WFQ4VCuVKjuhq9ULZl8ESYdiFlXiskCTU0rxwIxwTEH4D7ZNamqnyzl8lMAnS89+BMiVOAhzRvAAggP0HQA2oC5QpIMBgbkEPdpI8aMKJLZWFOpESAU9ApCSlhRoAiDzXSDLkRzJFmrosRgbvsBSGEIaqJCBaAoNMYuTJFI42WQxjpi6Fb/dlyvhX2kJfz4Awr1gLL5YNsHmjTAks+YqRD8+PyKrJr6zJLdYRWdqCl1LFylSrkq2CDlapLLqnhC9PAcJ4iWXBC4sVwEYMImuV8pUqoUPAEh8P+vkla/rpdsCsYob6Vp+lRr7KjOcqpkPEki1MAAA=) format('woff2');}
+@font-face{font-family:ZVJZVP-CMR7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHYAAoAAAAAA5wAAAGPAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANApYaQsGAAE2AiQDCAQgBYJWByAb9AJAjsK25RNjoiIuM5dbhGc8/Hf/v33OzNz3Xp/vx3pCgV2gwPL4BxZIq+WJBxpJ8/PH8v2LFImizgLPFWDZWmRWIMPhzXLHBw9aQG1hW2QZNw+zwJLWPOAk4sBfWmB5SJFZdrPIU5ILymu19tuCkpdoD438xHz8b9lZiD/VSIKMGJCB6el53gCC+VyBjiKm2N5BomBLdrbgnAFVFZj3jn+w/0IAElQEDoALACogDjq4m7tFqnGMRhH14+GgvX9y4uUn8HU5vivuzy4uu44JGIQt2FzX+X7hKTIVstBkm2e8AxAIfh5f/wqr2n9SqfxGym9gKkFQdOSjoUr8QgCAzL6NkA6gTqC04IWw6jNVLVpFowMMdM0v2COEFXUmnHBmqtpRR6MtBjrmBQ9uj5P/LHNMx92hCvIsvrDikjqK+MJ68/B4ojpvTeaNHk3Cl4PFQM/QzFTNGI3PQJXLvrQ4N74niMfCJ0whrmZsomWgj0aETzgNR9lXM1bagWosW6Ghaq5lwmnooZHgk8NycAkAAA==) format('woff2');}
+@font-face{font-family:XDTRFF-CMR10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAI8AAoAAAAAA/gAAAHzAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBLIExCwgAATYCJAMKBCAFglwHIBtEAyMRFmstwF8ncEPGsQb2hggfgXgGxxghULGLCfnIcVkc/V39tdRlEoe2L4mHr/34nbv7vpnikaHRLJp2T+rRSvDpVJpJClQ2IZvZA8Apx5LFgSaBX+DO3xs45wLXf9vCXgXSTVGFF/j42kZLu8jpb7Dq93jVFQq2OINH+2sLvSBsxxNZQH8XCOw8sMCSgBIMIUyCQEIMdGABQe+MqncSOYnIfluQ40NQQ3qV+t/9TFLMkS3RgNYSgh9y6vyls2rNW8gKsoAAoBSQkNEtC3SrjKNSCSyUgvlSyt8AkEEtEtaxD1ABQvT3hx6/vr+UpPzqyvJ3d/84BBXz5aTCCMJF3+96fi183/NHPxHFfht7Txx31eerQ7dmu4euMwfX26e7BuQjoj934wpB58OZKxE7evTzoVb8H7fvL5miuGjoqXMPCMKn10c/2oZ/9cxcUa9RJBnqJRBkBYlddsXBAACkhHjilF0CWb8AAXKjqyRtZlNp1kaNJkPUajY7b9RvUxZVgzBqL1Dpd44ava5Tq98JXxrX36tpH28e1kKlQiRi36OCe/3i7TZW113NM+aJUzPa7AczesvqdsHFbLnb9tZ0etFF781roVIhErEH0wW3q9Jbb0aLOe12uDIkWs9761Yn6fqgfaK7+9FmP5jRXkcANn8=) format('woff2');}
+@font-face{font-family:PCPXEO-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJMAAoAAAAABAwAAAICAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBRIFNCwYAATYCJAMIBCAFglwHIBteAyCuBmzXHLHsuFRErvnSfvRFisjx4XTjRhDt95u9u/cQlSza+KERtX6qRwtNk8VEIjRKpNn/jc1/WEjQ8eZ+iNrhlqgySx6StyUNaSXtUeraxQaSXQ/8lx9OtbrqbUe7GfX4iKplCQRSZp/paiCb/5vxf2k4QRa2BbLM5vPtZXNqwFEIWTcWHtih3DvRM2/dHpOY3KNriYj06w45fUQq0nv6/Rt02ew4GNajDVUN0gCs5tWyBYz5lxrOzxqID+ZPBAD/gYSMQVSBQTSzQFEE8y+F8gsgfDWBggo7QBMgN6EabbX4WtJylfjlBEL5xvnL23+a009aTaTAqc8Mxng9JX9q89eSeCxvqCpXgXq/f8Kqk/QFXibCMWaGUK6SjF7iRZgfnIzx/6VR5NGMNEg4+NsTOHZFK+HD7QRGQ7TE76ZlQ1e/MCUACASXx9aP1mP8blXwpf/BuAXQKoFgZ+XP9oQyBgQTJAlChGQHfSWwaHcHGeiBoig69XTJSocJstZp+XS7UXJUUdqEaT6Qxag2WRm2I2ujrst2K97OrPUj590IjmScYREOxrOaq/BGJpaOLN43/3WNZWe2bA3YCrEasJGBsYU5YootaKSBmBqKwCIynMJEsKC4LI0UYmqmY2SITUZMOgG4u0PEVHUh0PhSzQZbw1LHzFLLAJuCmBoVlQIA) format('woff2');}
+@font-face{font-family:NQUDBD-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAOwAAoAAAAABhQAAANmAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAATAqFJIQhCwwAATYCJAMUBCAFglwHIBvWBBEVm7MBfiTGxsoesxG5Vq4HXbbYi2T8ks9XZ/2qSnpAqGeWGi3h4O1NVyNEsrv9EowiDDnxPG5onY9ULpSHK4Bub6tlUzf5L6A20C8Af2rjZ+8NkCjBhAMOxwQpsMC6dHqAmuqZzSURKTXm2YHDALAcJyshBProw//aWFED8rYQ8CoFwODAHAemorqrtw6cSHaVQQZgCCBLsGQmGaBZBtDGkCQL+L+hSB5FRbKj7Dy7KpMB3yu7/Dfjb/zfKBCgQGieIkAecB/IBAAAAl2AoQi6lJXdNK0NtPLKjGamdW0Vd2zaraMiFluIRNm9INtaLOXxppv7i5Sk0rzNklzFXZP6xXzb+ZNTbeKDelPnjcaVdKZ0+CfeOx55XhBlSyS50rz9dtI8sThnysRCmjczo6MztTZbX5Sdu8l0myR2lyj4isiAfxqzU1pXPbljxy7D9XZ1hYf26S6eXj+jJH5oUGIw5ZTbKk6ao+ncnCKpPyHKnrVvxa1HutmEH7BenP553k5p1GGp2bZLi0XOe0TZxpMuB6+lLTDz4eZ9nFB9Q3Sf9FSR1kwlGsXXlGpkKBSly5HE5HCTzJAhuuy4JneFv7o7ak89HW5ChLp3bDLb8PJfTFvqzlLCN9FU1ZCEOPIi0YU7BrfLCvK2r/Q4r6S5MkNB0/Lq+DOfY32ecSggZbUknlXEpLKw9KhamoL6AqUkQ2jsLKOatIaVqzIEBjG8afyqRpav6hnhln9tS7Jlcp0Jr+jdbP6qxwIbrZXNNY1WllHOyUV9wMTg20fBDvZFIZWUmP9KmRxe5MmpPdM+cvrJRpME+P7yMZOW6YFURKOwkKTT2ojUzxZJkQXUo7RFv9qoyT96i0oa/tzno619FplN6OjJRNXxTIpeok7BHNXMTAAAiB7SnKbRUKYW/E2eCQAZmQ0roLeBEHSwymFhXObAi1EXBJ6TGR9JpD8RlpNIpqXwQgBCEWAAgIBE0SiIADXGoYAyNSikxAhylNnWK9LniSFDAYSpRA4F9NVDIV085OibThU5pP9hif2FVulHmSqrmOJ5lnAHKVA4aco9LK9Rv8P1dgtgcB5SbBa7x61xAjybmvdZ+SIZlUyFUXgYWQT5nLNdBpsVQMGRK4Bhr17tYidQh6Vfj669BtfJOwuAgeOhAAA=) format('woff2');}
+@font-face{font-family:OYFEXR-CMSY10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJIAAoAAAAABCAAAAH+AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBUIFQCwYAATYCJAMIBCAFgmIHIBtnA2COw7jhK7EshnJVXkQEwZi7/4k5Wi16yeR1LEOIVAstsOHXve9m8vgBbO5OUjIT1NwOaa6ra7o4lR8zMKALswViMZ/bA7JAA7YohhPTbqBqgUrWq1a36cRTxEvNgp6ioxsU8gsaBSXyz+Tp382IRfGlDNdhjaoM8Qiw9u9dcmBxNNMw9fmJBvSNpgwCgMM/gEQBQ6YCQ2a2gKKi4Oj7/5+6z6p2NwHFDyvhBrAHQBFQGttaVprPJDzpRsI0GkOjDBbLYBQy5U7pEIymw8gqt1s3HENJeIGSwwiDLdE4ClNUJFPr+eA5/fGf/TB355SLDJn0m3DhIZhjMpCzugUGCx58eoGr/OD7e5Iqyu72veGY6tcLLV3PKZ9p4kA9ULjur4uMZpo5oKcdpysZfhgLxcgh9ycSLcMBgEDw9EHz+Y5531amRfzUYTs/EwFAVYJga+VLkCU7PwVOnspCCOmG+Ujgsu4TBOhoAVnU0iFLGpZkWcv5cd1UGlNRrAlrdUQWzanIkrE+smxuvqq7cHJoa39y7TcSFeV4S3xpfSuRnHQZniYnJBVaT5yvkHQp27vk2qDUhAxQSk/LoFMHqTZB6ulJ8P/qNCJUKIdrEa9UvVaEZElQUm3aKenpBEmWIKkBKl3dtK5wKZB8SaRXEIkuSu26yGkFSZUggylXCgA=) format('woff2');}
+@font-face{font-family:TUELZZ-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAANYAAoAAAAABdQAAAMMAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqEcINrCwoAATYCJAMQBCAFgmIHIBuSBAiOxHTbg7xlSdZ408+3qe9/JBU3MjKpO1VXIFOV6/wsdmpDEDuvPggCj7zIAs0sHks+He/gcvpnP/yfxwR55j1oFMhcGnAUhglOa9MrPKUBaup04NYdMmSjjSXW4usp4usHQIQELQAF8MHPVvXMbyl6uwTWJWUAkgYUAl8FJbutHGjB4gIUAAiIvatQAADAAAgAelUtcpITALpCcJIRUBeE21PcUJzLIoAEJaAObwDAfyKA9BdRbxqR/un5gyruz6BcX/3dO3j7NkW51tXVa76a9+jekWzVDx/Sd7xPU9m/1ygHjWcY6fGq3TnqnHDuwUbeIC3FQDQIfWCaX8HbiSgvh4eNhzboC8BTHt/QBzdyeVr2uuoBwTi3Wi63N25s4h3uH+zO4XkV3iTP5LC6q/f2lIFcWqKDezkhF/Rzsw23HHbniTQ13U71eesvuHt1T/yMp7Zp4W2z7x8zslFhgjeO6i9L0ohWTuKUUHR40EqsXwtRe9r8/cuF19tDxTzc3IjCCGYGo5GP0sjalJls3NqGOL018RH4dpiZjFLWAJ9RO24to9XChtXuB/bjPrwYqKT59+bCa24xettELvFZP6NzivFTxgd33kxUVn/PVuAyfNP0Pnv7Uv6oqWYwfm3+9+OM1XmIny0Rve+0xnerftcquAvsSpjzYiKUd7euZg+OmXHKsGmXteo5HTUVjf2BUmvCzv0We9vs/Y/JH/tzPhm0vFZxeednRv18YDmeigFdffAT7OmHAAAACAACedf6d76m76dEkLBeV6yQTL4OAEqwsHULlRec/pMkAxEAASllBVeSdQt3TiwpErEFGQYq+iAKNE3Ek9Rp8hRVZjxNneN9FUbWI6CiDIiFWMSTTFTxFAMjPM3E5qEK1tlnjvmL2fWU1LDYrCwmhOOiZOz7YVcmZf2NT+HaJW2VzW3ltVbrpO4Qol6tBq1alGpiheMEJehYnRSpwsTKmmhGCG42igwrjWxqs0r16liRkWJjEBHUpQeFF0JJWaRTyUu0qdTc8HK1rKwj5Y4wAAAAAA==) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="187.840965" y="-80.778913" transform="matrix(1.000261 0 0 1.000261 -77.38501 91.261)">N</text>
+<text font-family="OYFEXR-CMSY10" font-size="9.96" x="199.143015" y="-80.778913" transform="matrix(1.000261 0 0 1.000261 -77.38501 91.261)">⊗</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="206.831237" y="-79.262786" transform="matrix(1.000545 0 0 1.000545 -77.38501 91.261)">B</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="215.958625" y="-80.778913" transform="matrix(1.000261 0 0 1.000261 -77.38501 91.261)">M</text>
+<text font-family="XDTRFF-CMR10" font-size="9.96" x="99.070138" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.805 91.261)">(</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="102.944127" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.805 91.261)">N</text>
+<text font-family="OYFEXR-CMSY10" font-size="9.96" x="114.246177" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.805 91.261)">⊗</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="121.95751" y="-45.082425" transform="matrix(1.000545 0 0 1.000545 -94.805 91.261)">B</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="131.060787" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.805 91.261)">B</text>
+<text font-family="XDTRFF-CMR10" font-size="9.96" x="139.115695" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.805 91.261)">)</text>
+<text font-family="OYFEXR-CMSY10" font-size="9.96" x="145.202096" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.805 91.261)">⊗</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="152.905637" y="-45.082425" transform="matrix(1.000545 0 0 1.000545 -94.805 91.261)">B</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="162.017706" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.805 91.261)">M</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="276.611792" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80499 91.261)">N</text>
+<text font-family="OYFEXR-CMSY10" font-size="9.96" x="287.912832" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80499 91.261)">⊗</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="295.575834" y="-45.082425" transform="matrix(1.000545 0 0 1.000545 -94.80499 91.261)">B</text>
+<text font-family="XDTRFF-CMR10" font-size="9.96" x="304.728442" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80499 91.261)">(</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="308.602431" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80499 91.261)">B</text>
+<text font-family="OYFEXR-CMSY10" font-size="9.96" x="318.869741" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80499 91.261)">⊗</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="326.523961" y="-45.082425" transform="matrix(1.000545 0 0 1.000545 -94.80499 91.261)">B</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="335.685361" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80499 91.261)">M</text>
+<text font-family="XDTRFF-CMR10" font-size="9.96" x="346.433566" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80499 91.261)">)</text>
+<path d="M64.07407 33.337998L109.23432 15.946678" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M106.627391 14.388602C107.496192 15.591266 108.526854 15.920236 109.420238 15.875087C108.727326 16.440814 108.183525 17.376103 108.345786 18.850853" stroke="#000" fill="none" stroke-width=".398469" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="57.913426" y="-46.576607" transform="matrix(1.000545 0 0 1.000545 31.241009 78.013)">ρ</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="62.061799" y="-45.588103" transform="matrix(1.000261 0 0 1.000261 31.241009 78.013)">N</text>
+<text font-family="PCPXEO-CMSY7" font-size="6.97" x="68.440687" y="-46.576607" transform="matrix(1.000545 0 0 1.000545 31.241009 78.013)">⊗</text>
+<text font-family="ZVJZVP-CMR7" font-size="6.97" x="74.664291" y="-46.576607" transform="matrix(1.000545 0 0 1.000545 31.241009 78.013)">1</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="78.655465" y="-45.588103" transform="matrix(1.000261 0 0 1.000261 31.241009 78.013)">M</text>
+<path d="M82.50149 42.168498H176.99004" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M175.11716 39.777587C175.49573 41.212167 176.33934 41.889567 177.18929 42.168497C176.33934 42.447427 175.49573 43.124827 175.11716 44.559407" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="57.913426" y="-46.576607" transform="matrix(1.000545 0 0 1.000545 57.931009 84.453998)">α</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="63.107526" y="-45.588103" transform="matrix(1.000261 0 0 1.000261 57.931009 84.453998)">N,B<tspan x="76.334403">,M</tspan></text>
+<path d="M195.81593 33.337998L150.65568 15.946678" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M151.544222 18.850853C151.706483 17.376103 151.162682 16.440814 150.46977 15.875087C151.363154 15.920236 152.393816 15.591266 153.262617 14.388602" stroke="#000" fill="none" stroke-width=".398469" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="ZVJZVP-CMR7" font-size="6.97" x="57.913426" y="-46.576607" transform="matrix(1.000545 0 0 1.000545 83.99801 78.362)">1</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="61.899841" y="-45.588103" transform="matrix(1.000261 0 0 1.000261 83.99801 78.362)">N</text>
+<text font-family="PCPXEO-CMSY7" font-size="6.97" x="68.278775" y="-46.576607" transform="matrix(1.000545 0 0 1.000545 83.99801 78.362)">⊗</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="74.502382" y="-46.576607" transform="matrix(1.000545 0 0 1.000545 83.99801 78.362)">λ</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="79.247313" y="-45.588103" transform="matrix(1.000261 0 0 1.000261 83.99801 78.362)">M</text>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bimod-triangle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: The associator–unitor triangle in <span class="math inline">\(\mathsf{Bimod}\)</span>.
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Remark (Strictness and the role of <span class="math inline">\(2\)</span>-morphisms)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>Remark</em> (Strictness and the role of <span class="math inline">\(2\)</span>-morphisms). </span>One of the main subtleties of <span class="math inline">\(\mathsf{Bimod}\)</span> is that tensor product is not strictly associative. The bimodules <span class="math inline">\((L\otimes N)\otimes M\)</span> and <span class="math inline">\(L\otimes(N\otimes M)\)</span> are canonically isomorphic, but they are not literally equal. What does <em>canonically</em> mean here?</p>
+<p>From a categorical point of view, it is not enough to choose an unrelated isomorphism for each triple <span class="math inline">\((L,N,M)\)</span>. The reassociation maps must form a natural isomorphism <span class="math display">\[
+\alpha:(-\otimes-)\otimes-\Longrightarrow-\otimes(-\otimes-)
+\]</span> between the two threefold-composition functors. Likewise, the left and right unitors form natural isomorphisms from composition with an identity <span class="math inline">\(1\)</span>-morphism to the identity functor. Their naturality says that these isomorphisms are compatible with every bimodule homomorphism.</p>
+<p>This requires a second categorical layer. The source and target of each component <span class="math inline">\(\alpha_{L,N,M}\)</span>, <span class="math inline">\(\lambda_M\)</span>, or <span class="math inline">\(\rho_M\)</span> are <span class="math inline">\(1\)</span>-morphisms, namely bimodules. A map relating them is therefore a <span class="math inline">\(2\)</span>-morphism, namely a bimodule homomorphism. The associator and unitors are invertible <span class="math inline">\(2\)</span>-morphisms of this kind. This extra layer allows the associativity and unit laws for <span class="math inline">\(1\)</span>-morphisms to hold <strong>weakly</strong>, through coherent natural isomorphisms, rather than as equalities.</p>
+<p>A strict <span class="math inline">\(2\)</span>-category, despite also having <span class="math inline">\(2\)</span>-morphisms, requires the associativity and unit laws for <span class="math inline">\(1\)</span>-morphisms to hold strictly. Its associator and unitors are therefore identity <span class="math inline">\(2\)</span>-morphisms. <span class="math inline">\(\mathsf{Cat}\)</span> is the standard example: its objects are categories, its <span class="math inline">\(1\)</span>-morphisms are functors, and its <span class="math inline">\(2\)</span>-morphisms are natural transformations.</p>
+</div>
+</div>
+</div>
+</div>
+<section id="internal-and-external-hom-constructions" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="internal-and-external-hom-constructions"><span class="header-section-number">1.1</span> Internal and external hom constructions</h3>
+<ul>
+<li><p><span class="math inline">\(\operatorname{Hom}_B(M,N)\)</span> denotes homomorphisms <span class="math inline">\(M\to N\)</span> compatible with the left <span class="math inline">\(B\)</span>-actions. <span class="math inline">\(\operatorname{Hom}_B({}_B M_A,{}_B N_C)\)</span> is an <span class="math inline">\((A,C)\)</span>-bimodule, with <span class="math display">\[
+(a\cdot\varphi\cdot c)(m):=\varphi(m\cdot a)\cdot c.
+\]</span></p></li>
+<li><p><span class="math inline">\(\operatorname{Hom}(M,N)_A\)</span> denotes homomorphisms compatible with the right <span class="math inline">\(A\)</span>-actions. <span class="math inline">\(\operatorname{Hom}({}_B M_A,{}_C N_A)_A\)</span> is a <span class="math inline">\((C,B)\)</span>-bimodule, with <span class="math display">\[
+(c\cdot\varphi\cdot b)(m):=c\cdot\varphi(b\cdot m).
+\]</span></p></li>
+<li><p><span class="math inline">\(\operatorname{Hom}_B(M,N)_A\)</span> denotes homomorphisms compatible with both actions. Taking bimodule homomorphisms defines a bifunctor <span class="math display">\[
+\operatorname{Hom}_B(-,-)_A:
+\bigl((B,A)\textsf{-Mod}\bigr)^{\mathrm{op}}
+\times (B,A)\textsf{-Mod}\longrightarrow\mathsf{Set}.
+\]</span></p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Remark (Slogan)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>Remark</em> (Slogan). </span>Tensor products contract matching middle scalars. A left-linear <span class="math inline">\(\operatorname{Hom}_A(-,-)\)</span> contracts LHS scalars, whereas a right-linear <span class="math inline">\(\operatorname{Hom}(-,-)_B\)</span> contracts RHS scalars.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="tensorhom-adjunction" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="tensorhom-adjunction"><span class="header-section-number">2</span> Tensor–hom adjunction</h2>
+<p>For <span class="math inline">\(M\in(B,A)\textsf{-Mod}\)</span>, <span class="math inline">\(N\in(C,B)\textsf{-Mod}\)</span>, and <span class="math inline">\(P\in(C,A)\textsf{-Mod}\)</span>, there are natural isomorphisms <span class="math display">\[
+\begin{matrix}
+\operatorname{Hom}_B(M, \operatorname{Hom}_C(N,P))_A &amp;\cong&amp; \operatorname{Hom}_C(N \otimes_B M, P)_A &amp;\cong&amp; \operatorname{Hom}_C(N, \operatorname{Hom}(M,P)_A)_B \\
+(m \mapsto (n \mapsto p)) &amp;\text{↤}&amp; (n \otimes m \mapsto p) &amp;\mapsto&amp; (n \mapsto (m \mapsto p))
+\end{matrix}
+\]</span></p>
+<p>Equivalently, fixing one tensor factor gives the adjunctions <span class="math display">\[
+\begin{aligned}
+N\otimes_B-
+&amp;\dashv \operatorname{Hom}_C(N,-)
+&amp;&amp;:\quad
+(B,A)\textsf{-Mod}\rightleftarrows(C,A)\textsf{-Mod},\\
+-\otimes_B M
+&amp;\dashv \operatorname{Hom}(M,-)_A
+&amp;&amp;:\quad
+(C,B)\textsf{-Mod}\rightleftarrows(C,A)\textsf{-Mod}.
+\end{aligned}
+\]</span></p>
+<p>Thus, the three <span class="math inline">\(2\)</span>-morphisms in the following diagram are naturally isomorphic:</p>
+<div id="fig-bimod-adjunction" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bimod-adjunction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.6 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="246.345pt" height="158.94pt" viewbox="0 0 164.23 105.96">
+<style type="text/css">
+@font-face{font-family:PCPXEO-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJMAAoAAAAABAwAAAICAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBRIFNCwYAATYCJAMIBCAFglwHIBteAyCuBmzXHLHsuFRErvnSfvRFisjx4XTjRhDt95u9u/cQlSza+KERtX6qRwtNk8VEIjRKpNn/jc1/WEjQ8eZ+iNrhlqgySx6StyUNaSXtUeraxQaSXQ/8lx9OtbrqbUe7GfX4iKplCQRSZp/paiCb/5vxf2k4QRa2BbLM5vPtZXNqwFEIWTcWHtih3DvRM2/dHpOY3KNriYj06w45fUQq0nv6/Rt02ew4GNajDVUN0gCs5tWyBYz5lxrOzxqID+ZPBAD/gYSMQVSBQTSzQFEE8y+F8gsgfDWBggo7QBMgN6EabbX4WtJylfjlBEL5xvnL23+a009aTaTAqc8Mxng9JX9q89eSeCxvqCpXgXq/f8Kqk/QFXibCMWaGUK6SjF7iRZgfnIzx/6VR5NGMNEg4+NsTOHZFK+HD7QRGQ7TE76ZlQ1e/MCUACASXx9aP1mP8blXwpf/BuAXQKoFgZ+XP9oQyBgQTJAlChGQHfSWwaHcHGeiBoig69XTJSocJstZp+XS7UXJUUdqEaT6Qxag2WRm2I2ujrst2K97OrPUj590IjmScYREOxrOaq/BGJpaOLN43/3WNZWe2bA3YCrEasJGBsYU5YootaKSBmBqKwCIynMJEsKC4LI0UYmqmY2SITUZMOgG4u0PEVHUh0PhSzQZbw1LHzFLLAJuCmBoVlQIA) format('woff2');}
+@font-face{font-family:FBIPCW-CMR7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAIwAAoAAAAABAgAAAHlAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBQIE7CwgAATYCJAMKBCAFglYHIBtIAwCOwrZtE0NFDDGdyVdUPP91iH/u7qb0ZqEARytYxpuHIIIRC2Dmk/93tpaz/6yQCgzoUBiW5QNbkk0duU7e4n2gG9AHAjsfbjSwN6DEQgn7AQN6xaKAszDz1mb7bGbK6oiI9GuGnn+ZRKd9t9v/QhNp8hkKm8xAJ2HhUV4/6wuA4ZpRV+iC66wCDR3rusl1NMfAMAQ3Vbiuqj9AADqYRMMd8ALAAET2FCWiuU4hFts5DI8rUyERvy4nEtxqkBmDl1mT4bGdmCeG7Uu6JAqSTCCI+Hm0sFXyf57FzfO0cSqpcKyk3Bh9+ctLXeRmnfdm2bY+HOm2omxUZdqN2XVBSvVk2dlHJBtuathllmVvsalnLzEhKV+w2a7ePvychhisBwAIwuHPxVkGx/Wb1Yfmb1SaDtMaCF2hcS8onRAAoDXkV61ACN0eBIL8rC8EWELpHuYsCZgwZ7cGk+Sie9Y2S1QZM+JQIPFhUz6YIK1gkkyHWbcOD6n+gnObv3dQpE+CmU9YtMPVt2llbjlTe85cI7e+qKa+oEzTxtwefFQoU6lOrTzVNIWpkMvLy/nzFiSSjwRmfISJ5iBe7lKjSIVymqyYs8SDgGq5PNWyVgG57yBbE0256hWpUa9AGU02zNmjAuw8AAA=) format('woff2');}
+@font-face{font-family:TUELZZ-LMRoman7-Regular;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAALsAAoAAAAABXgAAAKhAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAARAqDZIMhCwoAATYCJAMQBCAFgwkHIBt3BGCOwrblE2OiaqgnPB0iHr7fj3Xufw8RrySGSFJPDNFDo0O3bFYS1J1Nm7budE/rkX+gl5fkVYia+mMlTt7kfArwf86lf8M9356vQaDaRtO6a6oQPZADPGxriiY9K6Hk8zN3bSklwx5i1z48JFlCKp6QGqiguEb33nhVVzu+hEMnmMArIYLf4+AwPwEoFmXk4jccIB+HChCARVCWoEBCO0ygHckoUK1agUVpMsqydCtfy8ayQVAsM6q58w74aNqHEIqxGVb+Fn9fhOV0XDixFpejLCzGV1W0jzEzx+YWMJ+MCGELUjMSWh5OF1kcFo5uBuPUF1oGDbTeqXvMFgnYnCYcNnCpzi3H7YFDxumpLzbwJ4gAfOZM3QzlsX39sk3FiVM6rjSJKxA244RcG9aCyXUb1QtV+lcKPxv2ELRm9hj2C3UI90dUFmTHDQj98P8Qrjfqlm1ltQO/AjTnYc5RK/fziuO9W9wqCYlYRT1fOK5+yhlQJ9iFYTwZCZfyf8HU/p5TrokF9he9je4y3ZWfHbz1Z7wdncDmM8cuGPiERp7Tk5DkqKCjkRF9WpKKphQVJcFBJNbFcYGHdYVvuVoWz3lmp40Ge6FDD9jyYHUGEAg+sPxPRHCY/qOlTCvK/+kCXQLrniDYOxdJ7yhSSs0QSEEMgbTNCEIaFA4U/WzGRQtN1jqCmKFaGNBZFxpdoc4QXamL8uRa3axgItcIzYKIzkYk0RU6NdOVRkzm1xp16er2prHKwNfPzjU4WC0Zar+BCQf/drTUNSENF7vPOzY/KSc/IU1SR10fXLnxliFNlHQGfPmx4ypYMLXwnVTjLU6CPKmiZPMXJ1uOJBnSSdKiTtMJ4qClO+JHyRUn1otW1PFj5UuS8+AJ0kjSoU4fRgEAAA==) format('woff2');}
+@font-face{font-family:XDTRFF-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAOQAAoAAAAABkgAAANEAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAARAqFYIQoCwwAATYCJAMUBCAFglwHIBvVBFFULBIAH4np1geZxnIENOGUUdY47/v53PR9fkghtB5SUTNsZn6qyWniN7HbBvFft71/B3ZmkZ5gJE2YemBNlDX+Jq6pX8X/HAmAiyispiyhEQ4Tm380sAHt/OlFB2KzbUZgTRFX0qkODfXDPwG4dtGBDVhXLf2nzY4o+roGHBsXgCUBh4CloGhvKQWSlbgOUgBDvIvSAAAsABgALc/SCHYAODhYAKzEiEs0SvSu3LmR6xCg2EJU6XoN0ARgCAFUP4P1qhrvZSWfSguMTl7sv2R64wls+tGPaREjVt3Y6cxSEwiNnU/1CZiUpCARw/SL+S/OaeaWSYwmNHKyJHzBGWe+kC+h2AQQE68eRTXFumET6vrBU3zeKaF6dqVYbMw7pd53nHl5ujNLIKAmREyFfW1SCBITCQskeXPTcJxfnilGh1IY0eaXyalCiYB5fr80KSEsyRMS6B+S29pK3kwS0PMfzEjj7SQ+2tE4uk1RJwU7CrdO6l1+6/B9zs7bHqcETfm/PWJFJunp5IB/QdmohgtZopj/wfCzXz/2g/eHjRmlv6tzT8znAi92LTrQvOrqUb0grOn5fq2BA5/9KnEFnjNmFF7lXd0b0YecyebvDioYMW8X/W4bFPlNhB7Ytpt6xlJgvuddA+eCqGln61aezFCmRdGAbBLWjFznfqRMlTwZf6wrvxN39FT0mAHpRyBmdRpuRBIqNQ+8eSaBrHcFHIWAL7yjdvyunoUsL89vDi5kCeT/hm9cIS5GASjd8tWsEc1Ufo4B+ba0HDVlgH/Fx/uOnkjz6MK1LsH843WoPkkjl8uOtw1re/sPAAAgAAhEPRmOuQpefziYAJiRbsRsPQIn0CoACGBSgFgQmnPMQqCBlUcLGlm3o/pBofUVwiEAbPGeNkCb0gMxQAWnLhNkKchsPJoySZbJZYoaBxgaXEB0ROgyQU2ZzMbok0lqRB2KnYt3Jeev0M6mBSUlhIRYB0ZHh7s+Qbbsbey2Vr4rv6OopbyxpbRaz9HGBQLVqlanWZNiDfREq1VU9tVIEyRJghDkrQWKboZzlcIxW6NytWrosWfDzgIMDdR4DeRHAotyBdpX+iItyjWavFQ1PY5suMAAAAAA) format('woff2');}
+@font-face{font-family:NQUDBD-CMMI5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAANsAAoAAAAABbQAAAMiAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqEYIN2CwoAATYCJAMQBCAFglwHIBuPBECOwra1E8yEI0m+/Pv5uvT9mVmjjqRNFVunwt7kVNA8j93e3b+LoK0kiQMM0yyQ1jILTJq6ya+d1/mPynKcNpZlYdvDgKMAE2vb1jDRgLooUs22hVp+gihp4DWe49EBwNONuqAD7MOu/hNCZ7LRm8gB40IDoMmAQeBTEPcWJAKZI+fAfwA4hHL//3c8wADgUAiH+AQFAARAmjPSdvwVn4AARTCoW6gfAg22WwBgcGjDNZkM28Lw4XnG4LxoWMUtwM9vQTy6KOo/vyYggKnSJ/ST9gmH90pE/aKhOXGAi0nLgHhgVHJ+RT91cLC13y+IFRgpQQtqanMLqHpRxJLL/e/49Qnv+MnlCk2X2ceLqq2LoYyVlcDq5QD6wpw0LDcGSUuD+vro4gHxhuXgn7vjd6UQyP3nVeUrgdb+oEjUL4GBcIffAYOEEKPs/zNyueagJFAyyOjvf34yPx/K1ilVBr37kyN4cK5cDqGxI2vAgOnKDTZTMFT2StsdQuUFZ03HMAjqphzc4BaxsAol3QTH8W63a8pvpcPB2Y+9leGvX71Um4Ub7FBQZQktPsymQO2BHHBXJ52LPzzUPaiJ7Eh/wPbNtgdfhFjWYEdvmDJFQQ7m17fbnUrD2qORg5aHrTc6/IBhmmp7NhZ1ReHeRjIPGfrlKlYCu+uMPUk3kfMwms6D4CcjBvG36Ydt3uAxgQKJXGdjvVBflXk4FxRoqpq+8dPNaJpyYfnFIPu3tdoyWMiJJVSJVYWn27j7GzX4TmGxWIKjMMvVze2gIrHDCwAAAAFAwP5emxzJsflKDQEy+f9lnmN3AYAKG/cY7j8AYoZkojwHRHmiAgAxQTIGluUPFECCA7wE0ZSuArIDjtrDBCYOJmFYg8mY1ObppIzgUKMBsp4XYYJUEiYRq8JkUgMZnYFtZxz1C7NR383+Lk4uus4ymafp1aFiqGdgKLwHXxFXkJxbkJiuYKxnBs4ypcuSL0+8HApkMsXxmQy+NvPnwokLXc5kZDyZCkC8LVeyTBkUGNJjgAfuWsacWvQ6IM6LUVzz4xRIlvvyROkUGNNjBqcA) format('woff2');}
+@font-face{font-family:OYFEXR-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAM8AAoAAAAABXgAAALxAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqEHINHCwoAATYCJAMQBCAFgmIHIBtmBAiOw3R7I4OZcITjy1Gm+j+d+u8kE1KYFYflFJB5Kq99ndoQye7al3nsmYW5JbT/O5U/YPbzbADbgy4aX6C181IN59YxTUMl1Q7bRrWR0JNpXS8Aos6gJbAAvvjhf7nFLkO/jQJigwPAMgGHwE9BjzOqNzAVKg60AQTku7etAQBgAAQAOdEwQTIDCSgs9s8KW+FXsoQkjNmNwE78t4eV/2UEtAkTX5hJ91/tmr9S0XHKTt7utSuULU3KVcqpqxU7b+taWvhNa1zlWK1YQQ04lnf6Mc1rR3eeyk3bcborePkSXrxoWngW4slZwD86dHN/e97r1/TmVy3cXTvUHbZWptTyFbzxqRUruMpVSpVpqtISeAUcqV8YZJc++Tr5+LWOIcXKlXveBem98ipe05O/kpe5FxX0asXKUyN7NHcOC1LC3MnKToEi/qmC4XgyHlLIEt3aYs52snsySxA1/br9svlqUHCzoBem8RGO6CRH/GzN7V/metieXJAh0XW9pv/6JdUeda3LwpWTezUIqzgNFBtVlRX+q8kdQQw8Znj1ZMmzTSWrOuHhQ1EpESguQjO+BCsGNi1oj0eOQpQ8lCzH10r1EQZHCOF3J58MtHCnFDKNjHbNfWuhxIyiv6W0thOtaM8nRo7vUoGGdLK05vrb01lTuhT6/ANKC2cMiRbB6Fq3Ek/GcxqGxyorY8Pqp+MGYvqIjuW1H9ExAACAACAwj3+1ubMo5w87JJC5bT88/BEA2HB0DJ2lHdT2fhKexaBHLIXAHk/eV+8hxpMyEUOQUc01CfICkbUlkgREIgOPXmQScO3nUosjoMkBxKhmSyRp9RMZlGaITFrrGq6wE1cX62ey+cnWstJUQ6CYoioj4SfBaCQYPh746P1Gj1F9h4/qPdAcC6ZBscEGGmKkEXoaxowyWA943SBJrcqUSmkQUIxCqRQR1uLZ1+H6GmwQs4igcByUh4Oyh10rQo+ym7ELdQ+j9DW8570NZBYTlIYwAgAA) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="82.165551" y="-98.87319" transform="matrix(1.000261 0 0 1.000261 -4.412003 109.356998)">B</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="18.009299" y="-30.984912" transform="matrix(1.000261 0 0 1.000261 -4.120003 109.356998)">A</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="146.501757" y="-30.984912" transform="matrix(1.000261 0 0 1.000261 -4.301003 109.356998)">C</text>
+<path d="M87.80777 14.30674L138.1493 67.41807" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M138.596121 64.414125C137.815407 65.675716 137.90411 66.753941 138.28636 67.56266C137.499249 67.137693 136.427313 66.991435 135.125763 67.703539" stroke="#000" fill="none" stroke-width=".398461" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M101.9659 46.03764H124.26528V35.97634H101.9659Z" fill="#fff"></path>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="9.982394" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 94.128 73.882)">C</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="15.774399" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 94.128 73.882)">N</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="22.087233" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 94.128 73.882)">B</text>
+<path d="M95.57724 3.63972C136.82255 3.84253 153.52566 21.57843 151.27849 62.36393" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M153.768698 60.625476C152.315531 60.92454 151.592781 61.72957 151.26753 62.56285C151.035791 61.698882 150.405855 60.819324 148.994338 60.362429" stroke="#000" fill="none" stroke-width=".398462" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M115.23323 23.46699H164.23631V12.199108H115.23323Z" fill="#fff"></path>
+<text font-family="TUELZZ-LMRoman7-Regular" font-size="6.97" x="9.979559" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 107.395008 50.57)">Hom</text>
+<text font-family="FBIPCW-CMR7" font-size="6.97" x="26.365628" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 107.395008 50.57)">(</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="29.476929" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 107.395008 50.57)">M<tspan x="37.38091">,P</tspan></text>
+<text font-family="FBIPCW-CMR7" font-size="6.97" x="45.894978" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 107.395008 50.57)">)</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="49.021201" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 107.395008 50.57)">A</text>
+<path d="M25.34495 67.70726L75.54259 14.59631" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M72.518645 14.315168C73.821207 15.025409 74.892929 14.87762 75.67943 14.45153C75.298337 15.260792 75.211176 16.339139 75.993689 17.599609" stroke="#000" fill="none" stroke-width=".39846" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M38.85701 46.03764H62.304198V35.97634H38.85701Z" fill="#fff"></path>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="9.982394" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 31.019001 73.882)">B</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="15.872346" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 31.019001 73.882)">M</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="23.471873" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 31.019001 73.882)">A</text>
+<path d="M12.509 62.76916C10.15341 21.61854 26.80739 3.88449 67.62614 3.65556" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M65.739907 1.27534C66.126517 2.707706 66.973883 3.380324 67.82535 3.654461C66.977019 3.938151 66.137266 4.620251 65.766781 6.056873" stroke="#000" fill="none" stroke-width=".398462" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M-.00061 23.50042H47.85466V12.23254H-.00061Z" fill="#fff"></path>
+<text font-family="TUELZZ-LMRoman7-Regular" font-size="6.97" x="9.979559" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 -7.838997 50.603)">Hom</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="26.373117" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 -7.838997 50.603)">C</text>
+<text font-family="FBIPCW-CMR7" font-size="6.97" x="32.161466" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 -7.838997 50.603)">(</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="35.27277" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 -7.838997 50.603)">N<tspan x="41.887298">,P</tspan></text>
+<text font-family="FBIPCW-CMR7" font-size="6.97" x="50.40452" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 -7.838997 50.603)">)</text>
+<path d="M25.86023 81.33943C62.61638 105.76185 101.17305 105.76185 137.41676 81.67985" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M134.533769 80.724978C135.642951 81.7103 136.720435 81.80764 137.58269 81.569599C137.029149 82.272265 136.701398 83.303297 137.179981 84.707612" stroke="#000" fill="none" stroke-width=".398463" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M65.96182 104.70187H97.782501V94.640569H65.96182Z" fill="#fff"></path>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="9.979559" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 58.124 132.546)">N</text>
+<text font-family="PCPXEO-CMSY7" font-size="6.97" x="17.033713" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 58.124 132.546)">⊗</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="23.262927" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 58.124 132.546)">B</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="29.150107" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 58.124 132.546)">M</text>
+<path d="M25.86023 68.6598H137.35016" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
+<path d="M135.47727 66.26889C135.85584 67.70347 136.69945 68.38087 137.5494 68.6598C136.69945 68.93873 135.85584 69.61613 135.47727 71.05071" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M71.39227 73.69046H92.2166V63.62916H71.39227Z" fill="#fff"></path>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="9.982394" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 63.554 101.535)">C</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="15.774399" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 63.554 101.535)">P</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="20.849557" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 63.554 101.535)">A</text>
+<path d="M118.85785 36.00807L132.34123 24.26954" stroke="#000" fill="none" stroke-width="2.33075" stroke-miterlimit="10"></path>
+<path d="M118.85785 36.00807L132.34123 24.26954" stroke="#fff" fill="none" stroke-width="1.53377" stroke-miterlimit="10"></path>
+<path d="M129.683823 23.188674C131.045515 23.796455 133.081873 23.560734 133.842236 22.962814C133.1453 23.633591 132.631387 25.618083 133.045851 27.050501" stroke="#000" fill="none" stroke-width=".398471" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M44.83147 36.0157L31.32939 24.29307" stroke="#000" fill="none" stroke-width="2.33075" stroke-miterlimit="10"></path>
+<path d="M44.83147 36.0157L31.32939 24.29307" stroke="#fff" fill="none" stroke-width="1.53377" stroke-miterlimit="10"></path>
+<path d="M30.628542 27.074989C31.041068 25.642008 30.524468 23.658208 29.826623 22.988374C30.587797 23.585265 32.624477 23.81823 33.985348 23.208605" stroke="#000" fill="none" stroke-width=".398472" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M81.85771 93.0505L81.82364 77.46984" stroke="#000" fill="none" stroke-width="2.33075" stroke-miterlimit="10"></path>
+<path d="M81.85771 93.0505L81.82364 77.46984" stroke="#fff" fill="none" stroke-width="1.53377" stroke-miterlimit="10"></path>
+<path d="M79.266346 78.769974C80.617483 78.139098 81.773119 76.445943 81.819321 75.479757C81.869716 76.445733 83.03269 78.133856 84.386552 78.758863" stroke="#000" fill="none" stroke-width=".398469" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bimod-adjunction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Tensor–Hom adjunction in <span class="math inline">\(\mathsf{Bimod}\)</span>.
+</figcaption>
+</figure>
+</div>
+<p>These isomorphisms are the bimodule form of <strong>currying</strong>: a balanced bilinear map <span class="math inline">\((n,m)\mapsto p\)</span> can be curried in either variable, yielding <span class="math inline">\(m\mapsto(n\mapsto p)\)</span> or <span class="math inline">\(n\mapsto(m\mapsto p)\)</span>.</p>
+<section id="the-commutative-case" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="the-commutative-case"><span class="header-section-number">2.1</span> The commutative case</h3>
+<p>Recall that if <span class="math inline">\(A\)</span> is commutative, every left <span class="math inline">\(A\)</span>-module is canonically an <span class="math inline">\((A,A)\)</span>-bimodule. Setting <span class="math inline">\(B=C=A\)</span> above therefore recovers the familiar Tensor–Hom adjunction in <span class="math inline">\(A\textsf{-Mod}\)</span>: <span class="math display">\[
+\operatorname{Hom}_A\left(M,\operatorname{Hom}_A(N,P)\right)
+\cong \operatorname{Hom}_A\left(N\otimes_A M,P\right)
+\cong \operatorname{Hom}_A\left(N,\operatorname{Hom}_A(M,P)\right).
+\]</span> Thus ordinary currying in the closed monoidal category <span class="math inline">\(A\textsf{-Mod}\)</span> is the single-ring, commutative instance of the bimodule construction.</p>
+</section>
+</section>
+<section id="frobenius-reciprocity" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="frobenius-reciprocity"><span class="header-section-number">3</span> Frobenius reciprocity</h2>
+<p>Let <span class="math inline">\(H\leq G\)</span> be groups, let <span class="math inline">\(k\)</span> be a commutative ring, let <span class="math inline">\(V\)</span> be a left <span class="math inline">\(k[H]\)</span>-module, and let <span class="math inline">\(W\)</span> be a left <span class="math inline">\(k[G]\)</span>-module. For convenience, write <span class="math display">\[
+\operatorname{Hom}_G=\operatorname{Hom}_{k[G]},\qquad \operatorname{Hom}_H=\operatorname{Hom}_{k[H]},\qquad
+\otimes_G=\otimes_{k[G]},\qquad \otimes_H=\otimes_{k[H]}.
+\]</span> Induction, restriction, and coinduction are given by <span class="math display">\[
+\operatorname{Ind}_H^G V=k[G]\otimes_H V,\qquad
+\operatorname{Res}_H^G W={}_{k[H]}W,\qquad
+\operatorname{Coind}_H^G V=\operatorname{Hom}_H(k[G],V).
+\]</span> Here <span class="math inline">\(k[G]\)</span> in the coinduction formula is an <span class="math inline">\((H,G)\)</span>-bimodule, and the <span class="math inline">\(G\)</span>-action on coinduction is <span class="math display">\[
+(g\cdot\varphi)(x)=\varphi(xg).
+\]</span></p>
+<p>The two forms of Frobenius reciprocity are the adjunctions <span class="math display">\[
+\operatorname{Ind}_H^G\dashv\operatorname{Res}_H^G\dashv\operatorname{Coind}_H^G,
+\]</span> or, equivalently, the natural isomorphisms <span class="math display">\[
+\operatorname{Hom}_G\left(\operatorname{Ind}_H^G V,W\right)
+\cong
+\operatorname{Hom}_H\left(V,\operatorname{Res}_H^G W\right)
+\]</span> and <span class="math display">\[
+\operatorname{Hom}_H\left(\operatorname{Res}_H^G W,V\right)
+\cong
+\operatorname{Hom}_G\left(W,\operatorname{Coind}_H^G V\right).
+\]</span></p>
+<p>Both are direct instances of the Tensor–Hom adjunction. For the first, <span class="math display">\[
+\begin{aligned}
+\operatorname{Hom}_G\left(k[G]\otimes_H V,W\right)
+&amp;\cong\operatorname{Hom}_H\left(V,\operatorname{Hom}_G(k[G],W)\right)\\
+&amp;\cong\operatorname{Hom}_H\left(V,\operatorname{Res}_H^G W\right),
+\end{aligned}
+\]</span> where <span class="math inline">\(\operatorname{Hom}_G(k[G],W)\cong\operatorname{Res}_H^G W\)</span> by evaluation at <span class="math inline">\(1\)</span>. Concretely, <span class="math display">\[
+\begin{matrix}
+F &amp;\mapsto&amp; \left( v\mapsto F(1\otimes v) \right) \\
+\left( g\otimes v\mapsto g\cdot f(v) \right) &amp;\text{↤}&amp; f
+\end{matrix}
+\]</span> For the second, <span class="math display">\[
+\begin{aligned}
+\operatorname{Hom}_H\!\left(\operatorname{Res}_H^G W,V\right)
+&amp;\cong\operatorname{Hom}_H\left(k[G]\otimes_G W,V\right)\\
+&amp;\cong\operatorname{Hom}_G\left(W,\operatorname{Hom}_H(k[G],V)\right)\\
+&amp;=\operatorname{Hom}_G\left(W,\operatorname{Coind}_H^G V\right).
+\end{aligned}
+\]</span> Explicitly, <span class="math display">\[
+\begin{matrix}
+f &amp;\mapsto&amp; \left( w \mapsto \left( x\mapsto f(x\cdot w)\right) \right) \\
+\left(w\mapsto\Phi(w)(1)\right) &amp;\text{↤}&amp; \Phi
+\end{matrix}
+\]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Remark (Coind = ind? (This part is under construction))
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>Remark</em> (Coind = ind? (This part is under construction)). </span>Fix some field <span class="math inline">\(k\)</span>. For any <span class="math inline">\(k\)</span>-algebra <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> and <span class="math inline">\((B,A)\)</span>-module <span class="math inline">\(V\)</span>, let <span class="math inline">\(V^*\)</span> denote <span class="math inline">\(\operatorname{Hom}_k(V, k)\)</span>, equipped with a <span class="math inline">\((A,B)\)</span>-module struture of with <span class="math inline">\((a \cdot \varphi \cdot b) (v):= \varphi(b \cdot v \cdot a)\)</span>.</p>
+<p>When <span class="math inline">\(G\)</span> is finite, <span class="math inline">\(k\)</span> is a field with <span class="math inline">\(|G|\)</span> invertible inside, it turns out that we are enabled with two additional isomorphisms (TODO: are they natural?) (TODO: in what category?) <span class="math display">\[
+k[G] \cong k[G]^*,\qquad \operatorname{Hom}_G(V,W) \cong V^* \otimes_G W
+\]</span> where the first one is the Frobenius self-duality of finite group (that is, the inner product), and the second can be found in <a href="../../posts/20260312-group-rep-speedrun/">finite group rep speedrun</a> (slightly differs). Above two isomorphisms allow us to equalize induction and coinduction <span class="math display">\[
+\operatorname{Ind}_H^G V
+=k[G]\otimes_H V
+\cong\operatorname{Hom}_H(k[G]^*,V)
+\cong\operatorname{Hom}_H(k[G],V)
+=\operatorname{Coind}_H^G V.
+\]</span> Substituting this identification into the second reciprocity isomorphism <span class="math display">\[
+\operatorname{Hom}_H\left(\operatorname{Res}_H^G W,V\right)
+\cong
+\operatorname{Hom}_G\left(W,\operatorname{Ind}_H^G V\right),
+\]</span> so in this case, induction and restriction in this case are bi-directionally adjoint <span class="math display">\[
+\operatorname{Ind}_H^G\dashv\operatorname{Res}_H^G\dashv\operatorname{Ind}_H^G.
+\]</span> (TODO: write the correspondence explicitly)</p>
+</div>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
+<input type="hidden" id="giscus-alt-theme" value="light">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "sun123zxy/blog-quarto-code";
+    script.dataset.repoId = "R_kgDOIrPs5w";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOIrPs584CV4gd";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Proudly powered by <a href="https://quarto.org/">Quarto</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>sun123zxy’s blog</p>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="../../thanks.html">
+<p>Thanks</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
