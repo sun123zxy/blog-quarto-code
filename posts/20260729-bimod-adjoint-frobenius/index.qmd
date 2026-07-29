@@ -1,0 +1,337 @@
+---
+title: The Bicategory of Bimodules, Tensor--Hom Adjunction, and Its Application to Frobenius Reciprocity
+author: sun123zxy
+date: 2026-07-29
+lang: en
+
+categories:
+  - math
+  - algebra
+collections:
+  - group-rep-tour
+
+number-sections: true
+
+format:
+  html: default
+---
+
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Coind}{\operatorname{Coind}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\mapsfrom}{\text{↤}}
+
+## The bicategory of bimodules
+
+The bicategory $\mathsf{Bimod}$ consists of the following data:
+
+- **Objects:** unital rings $A,B,C,\ldots$.
+- **Hom-categories:** $\mathsf{Bimod}(A,B)$ is the category whose objects are
+  $(B,A)$-bimodules and whose morphisms are bimodule homomorphisms. Thus its
+  objects are the $1$-morphisms $A\to B$, and its morphisms are the
+  $2$-morphisms.
+- **Horizontal composition:** the functor
+  $$
+  \mathsf{Bimod}(B,C)\times\mathsf{Bimod}(A,B)
+  \longrightarrow\mathsf{Bimod}(A,C)
+  $$
+  sends $({}_C N_B,{}_B M_A)$ to ${}_C(N\otimes_B M)_A$ and sends a pair of
+  $2$-morphisms $(g,f)$ to $g\otimes_B f$.
+- **Identity $1$-morphisms:** the identity on $A$ is the regular bimodule
+  ${}_A A_A$.
+- **Associator:** for composable bimodules $M$, $N$, and $L$, there is a
+  bimodule isomorphism
+  $$
+  \alpha_{L,N,M}:(L\otimes_C N)\otimes_B M
+  \xrightarrow{\sim}L\otimes_C(N\otimes_B M),
+  \qquad
+  (\ell\otimes n)\otimes m\longmapsto\ell\otimes(n\otimes m).
+  $$
+  Its components are natural in all three bimodules, so $\alpha$ is a
+  natural isomorphism between the two threefold-composition functors.
+- **Unitors:** for each ${}_B M_A$, multiplication defines bimodule
+  isomorphisms
+  $$
+  \lambda_M:B\otimes_B M\xrightarrow{\sim}M,\quad b\otimes m\longmapsto b m,
+  \qquad
+  \rho_M:M\otimes_A A\xrightarrow{\sim}M,\quad m\otimes a\longmapsto m a.
+  $$
+  The families $\lambda=(\lambda_M)_M$ and $\rho=(\rho_M)_M$ are natural
+  isomorphisms from composition with the appropriate identity
+  $1$-morphism to the identity functor.
+- **Coherence:** the associator and unitors are invertible $2$-morphisms
+  satisfying the usual pentagon and triangle identities.
+
+For four composable bimodules $M$, $N$, $L$, and $K$, the pentagon identity
+is the commutativity of the following diagram:
+
+:::{#fig-bimod-pentagon}
+
+```{tikz}
+% https://q.uiver.app/#q=WzAsNSxbMCwxLCIoKEtcXG90aW1lc19EIEwpXFxvdGltZXNfQyBOKVxcb3RpbWVzX0IgTSJdLFsxLDAsIihLXFxvdGltZXNfRChMXFxvdGltZXNfQyBOKSlcXG90aW1lc19CIE0iXSxbMiwxLCJLXFxvdGltZXNfRCgoTFxcb3RpbWVzX0MgTilcXG90aW1lc19CIE0pIl0sWzAsMiwiKEtcXG90aW1lc19EIEwpXFxvdGltZXNfQyhOXFxvdGltZXNfQiBNKSJdLFsyLDIsIktcXG90aW1lc19EKExcXG90aW1lc19DKE5cXG90aW1lc19CIE0pKSJdLFswLDEsIlxcYWxwaGFfe0ssTCxOfVxcb3RpbWVzIDFfTSJdLFswLDMsIlxcYWxwaGFfe0tcXG90aW1lc19EIEwsTixNfSIsMl0sWzEsMiwiXFxhbHBoYV97SyxMXFxvdGltZXNfQyBOLE19Il0sWzIsNCwiMV9LXFxvdGltZXNcXGFscGhhX3tMLE4sTX0iXSxbMyw0LCJcXGFscGhhX3tLLEwsTlxcb3RpbWVzX0IgTX0iLDJdXQ==
+\begin{tikzcd}
+	& {(K\otimes_D(L\otimes_C N))\otimes_B M} & \\
+	{((K\otimes_D L)\otimes_C N)\otimes_B M} && {K\otimes_D((L\otimes_C N)\otimes_B M)} \\
+	{(K\otimes_D L)\otimes_C(N\otimes_B M)} && {K\otimes_D(L\otimes_C(N\otimes_B M))}
+	\arrow["{\alpha_{K,L\otimes_C N,M}}", from=1-2, to=2-3]
+	\arrow["{\alpha_{K,L,N}\otimes 1_M}", from=2-1, to=1-2]
+	\arrow["{\alpha_{K\otimes_D L,N,M}}"', from=2-1, to=3-1]
+	\arrow["{1_K\otimes\alpha_{L,N,M}}", from=2-3, to=3-3]
+	\arrow["{\alpha_{K,L,N\otimes_B M}}"', from=3-1, to=3-3]
+\end{tikzcd}
+```
+
+The associator pentagon in $\mathsf{Bimod}$.
+:::
+
+For composable bimodules ${}_C N_B$ and ${}_B M_A$, the triangle identity
+relates the associator to the left and right unitors:
+
+:::{#fig-bimod-triangle}
+
+```{tikz}
+% https://q.uiver.app/#q=WzAsMyxbMCwxLCIoTlxcb3RpbWVzX0IgQilcXG90aW1lc19CIE0iXSxbMiwxLCJOXFxvdGltZXNfQihCXFxvdGltZXNfQiBNKSJdLFsxLDAsIk5cXG90aW1lc19CIE0iXSxbMCwxLCJcXGFscGhhX3tOLEIsTX0iXSxbMCwyLCJcXHJob19OXFxvdGltZXMgMV9NIiwyXSxbMSwyLCIxX05cXG90aW1lc1xcbGFtYmRhX00iXV0=
+\begin{tikzcd}
+	& {N\otimes_B M} & \\
+	{(N\otimes_B B)\otimes_B M} && {N\otimes_B(B\otimes_B M)}
+	\arrow["{\rho_N\otimes 1_M}"', from=2-1, to=1-2]
+	\arrow["{\alpha_{N,B,M}}", from=2-1, to=2-3]
+	\arrow["{1_N\otimes\lambda_M}", from=2-3, to=1-2]
+\end{tikzcd}
+```
+
+The associator--unitor triangle in $\mathsf{Bimod}$.
+:::
+
+:::{.remark}
+
+### Strictness and the role of $2$-morphisms
+
+One of the main subtleties of $\mathsf{Bimod}$ is that tensor product is not
+strictly associative. The bimodules $(L\otimes N)\otimes M$ and
+$L\otimes(N\otimes M)$ are canonically isomorphic, but they are not
+literally equal. What does *canonically* mean here?
+
+From a categorical point of view, it is not enough to choose an unrelated
+isomorphism for each triple $(L,N,M)$. The reassociation maps must form a
+natural isomorphism
+$$
+\alpha:(-\otimes-)\otimes-\Longrightarrow-\otimes(-\otimes-)
+$$
+between the two threefold-composition functors. Likewise, the left and
+right unitors form natural isomorphisms from composition with an identity
+$1$-morphism to the identity functor. Their naturality says that these
+isomorphisms are compatible with every bimodule homomorphism.
+
+This requires a second categorical layer. The source and target of each
+component $\alpha_{L,N,M}$, $\lambda_M$, or $\rho_M$ are $1$-morphisms,
+namely bimodules. A map relating them is therefore a $2$-morphism, namely a
+bimodule homomorphism. The associator and unitors are invertible
+$2$-morphisms of this kind. This extra layer allows the associativity and
+unit laws for $1$-morphisms to hold **weakly**, through coherent natural
+isomorphisms, rather than as equalities.
+
+A strict $2$-category, despite also having $2$-morphisms, requires the
+associativity and unit laws for $1$-morphisms to hold strictly. Its
+associator and unitors are therefore identity $2$-morphisms.
+$\mathsf{Cat}$ is the standard example: its objects are categories, its
+$1$-morphisms are functors, and its $2$-morphisms are natural
+transformations.
+:::
+
+### Internal and external hom constructions
+
+- $\Hom_B(M,N)$ denotes homomorphisms $M\to N$ compatible with the left
+  $B$-actions. $\Hom_B({}_B M_A,{}_B N_C)$ is an $(A,C)$-bimodule, with
+  $$
+  (a\cdot\varphi\cdot c)(m):=\varphi(m\cdot a)\cdot c.
+  $$
+
+- $\Hom(M,N)_A$ denotes homomorphisms compatible with the right $A$-actions. $\Hom({}_B M_A,{}_C N_A)_A$ is a $(C,B)$-bimodule, with
+  $$
+  (c\cdot\varphi\cdot b)(m):=c\cdot\varphi(b\cdot m).
+  $$
+
+- $\Hom_B(M,N)_A$ denotes homomorphisms compatible with both actions. Taking bimodule homomorphisms defines a bifunctor
+  $$
+  \Hom_B(-,-)_A:
+  \bigl((B,A)\textsf{-Mod}\bigr)^{\mathrm{op}}
+  \times (B,A)\textsf{-Mod}\longrightarrow\mathsf{Set}.
+  $$
+
+:::{.remark}
+
+## Slogan
+
+Tensor products contract matching middle scalars. A left-linear $\Hom_A(-,-)$ contracts LHS scalars, whereas a right-linear $\Hom(-,-)_B$ contracts RHS scalars.
+:::
+
+## Tensor--hom adjunction
+
+For $M\in(B,A)\textsf{-Mod}$, $N\in(C,B)\textsf{-Mod}$, and
+$P\in(C,A)\textsf{-Mod}$, there are natural isomorphisms
+$$
+\begin{matrix}
+\Hom_B(M, \Hom_C(N,P))_A &\cong& \Hom_C(N \otimes_B M, P)_A &\cong& \Hom_C(N, \Hom(M,P)_A)_B \\
+(m \mapsto (n \mapsto p)) &\mapsfrom& (n \otimes m \mapsto p) &\mapsto& (n \mapsto (m \mapsto p))
+\end{matrix}
+$$
+
+Equivalently, fixing one tensor factor gives the adjunctions
+$$
+\begin{aligned}
+N\otimes_B-
+&\dashv \Hom_C(N,-)
+&&:\quad
+(B,A)\textsf{-Mod}\rightleftarrows(C,A)\textsf{-Mod},\\
+-\otimes_B M
+&\dashv \Hom(M,-)_A
+&&:\quad
+(C,B)\textsf{-Mod}\rightleftarrows(C,A)\textsf{-Mod}.
+\end{aligned}
+$$
+
+Thus, the three $2$-morphisms in the following diagram are naturally
+isomorphic:
+
+:::{#fig-bimod-adjunction}
+
+```{tikz}
+% https://q.uiver.app/#q=WzAsMyxbMCwzLCJBIl0sWzIsMCwiQiJdLFs0LDMsIkMiXSxbMCwxLCJfQiBNX0EiLDFdLFsxLDIsIl9DIE5fQiIsMV0sWzAsMiwiTiBcXG90aW1lc19CIE0iLDEseyJjdXJ2ZSI6NX1dLFswLDIsIl9DIFBfQSIsMSx7Im9mZnNldCI6LTN9XSxbMSwyLCJcXG9wZXJhdG9ybmFtZXtIb219KE0sUClfQSIsMSx7Im9mZnNldCI6LTMsImN1cnZlIjotNX1dLFswLDEsIlxcb3BlcmF0b3JuYW1le0hvbX1fQyhOLFApIiwxLHsib2Zmc2V0IjotMywiY3VydmUiOi01fV0sWzUsNiwiIiwxLHsic2hvcnRlbiI6eyJzb3VyY2UiOjIwLCJ0YXJnZXQiOjIwfX1dLFs0LDcsIiIsMSx7InNob3J0ZW4iOnsic291cmNlIjoyMCwidGFyZ2V0IjoyMH19XSxbMyw4LCIiLDEseyJzaG9ydGVuIjp7InNvdXJjZSI6MjAsInRhcmdldCI6MjB9fV1d
+\begin{tikzcd}
+	&& B && \\
+	\\
+	\\
+	A &&&& C
+	\arrow[""{name=0, anchor=center, inner sep=0}, "{_C N_B}"{description}, from=1-3, to=4-5]
+	\arrow[""{name=1, anchor=center, inner sep=0}, "{\operatorname{Hom}(M,P)_A}"{description}, shift left=3, curve={height=-30pt}, from=1-3, to=4-5]
+	\arrow[""{name=2, anchor=center, inner sep=0}, "{_B M_A}"{description}, from=4-1, to=1-3]
+	\arrow[""{name=3, anchor=center, inner sep=0}, "{\operatorname{Hom}_C(N,P)}"{description}, shift left=3, curve={height=-30pt}, from=4-1, to=1-3]
+	\arrow[""{name=4, anchor=center, inner sep=0}, "{N \otimes_B M}"{description}, curve={height=30pt}, from=4-1, to=4-5]
+	\arrow[""{name=5, anchor=center, inner sep=0}, "{_C P_A}"{description}, shift left=3, from=4-1, to=4-5]
+	\arrow[between={0.2}{0.8}, Rightarrow, from=0, to=1]
+	\arrow[between={0.2}{0.8}, Rightarrow, from=2, to=3]
+	\arrow[between={0.2}{0.8}, Rightarrow, from=4, to=5]
+\end{tikzcd}
+```
+
+Tensor--Hom adjunction in $\mathsf{Bimod}$.
+:::
+
+These isomorphisms are the bimodule form of **currying**: a balanced
+bilinear map $(n,m)\mapsto p$ can be curried in either variable, yielding
+$m\mapsto(n\mapsto p)$ or $n\mapsto(m\mapsto p)$.
+
+### The commutative case
+
+Recall that if $A$ is commutative, every left $A$-module is canonically an
+$(A,A)$-bimodule. Setting $B=C=A$ above therefore recovers the familiar
+Tensor--Hom adjunction in $A\textsf{-Mod}$:
+$$
+\Hom_A\left(M,\Hom_A(N,P)\right)
+\cong \Hom_A\left(N\otimes_A M,P\right)
+\cong \Hom_A\left(N,\Hom_A(M,P)\right).
+$$
+Thus ordinary currying in the closed monoidal category $A\textsf{-Mod}$ is
+the single-ring, commutative instance of the bimodule construction.
+
+## Frobenius reciprocity
+
+Let $H\leq G$ be groups, let $k$ be a commutative ring, let $V$ be a left
+$k[H]$-module, and let $W$ be a left $k[G]$-module. For convenience, write
+$$
+\Hom_G=\Hom_{k[G]},\qquad \Hom_H=\Hom_{k[H]},\qquad
+\otimes_G=\otimes_{k[G]},\qquad \otimes_H=\otimes_{k[H]}.
+$$
+Induction, restriction, and coinduction are given by
+$$
+\Ind_H^G V=k[G]\otimes_H V,\qquad
+\Res_H^G W={}_{k[H]}W,\qquad
+\Coind_H^G V=\Hom_H(k[G],V).
+$$
+Here $k[G]$ in the coinduction formula is an $(H,G)$-bimodule, and the
+$G$-action on coinduction is
+$$
+(g\cdot\varphi)(x)=\varphi(xg).
+$$
+
+The two forms of Frobenius reciprocity are the adjunctions
+$$
+\Ind_H^G\dashv\Res_H^G\dashv\Coind_H^G,
+$$
+or, equivalently, the natural isomorphisms
+$$
+\Hom_G\left(\Ind_H^G V,W\right)
+\cong
+\Hom_H\left(V,\Res_H^G W\right)
+$$
+and
+$$
+\Hom_H\left(\Res_H^G W,V\right)
+\cong
+\Hom_G\left(W,\Coind_H^G V\right).
+$$
+
+Both are direct instances of the Tensor--Hom adjunction. For the first,
+$$
+\begin{aligned}
+\Hom_G\left(k[G]\otimes_H V,W\right)
+&\cong\Hom_H\left(V,\Hom_G(k[G],W)\right)\\
+&\cong\Hom_H\left(V,\Res_H^G W\right),
+\end{aligned}
+$$
+where $\Hom_G(k[G],W)\cong\Res_H^G W$ by evaluation at $1$. Concretely,
+$$
+\begin{matrix}
+F &\mapsto& \left( v\mapsto F(1\otimes v) \right) \\
+\left( g\otimes v\mapsto g\cdot f(v) \right) &\mapsfrom& f
+\end{matrix}
+$$
+For the second,
+$$
+\begin{aligned}
+\Hom_H\!\left(\Res_H^G W,V\right)
+&\cong\Hom_H\left(k[G]\otimes_G W,V\right)\\
+&\cong\Hom_G\left(W,\Hom_H(k[G],V)\right)\\
+&=\Hom_G\left(W,\Coind_H^G V\right).
+\end{aligned}
+$$
+Explicitly,
+$$
+\begin{matrix}
+f &\mapsto& \left( w \mapsto \left( x\mapsto f(x\cdot w)\right) \right) \\
+\left(w\mapsto\Phi(w)(1)\right) &\mapsfrom& \Phi
+\end{matrix}
+$$
+
+:::{.remark}
+
+## Coind = ind? (This part is under construction)
+
+Fix some field $k$. For any $k$-algebra $A$, $B$ and $(B,A)$-module $V$, let $V^*$ denote $\Hom_k(V, k)$, equipped with a $(A,B)$-module struture of with $(a \cdot \varphi \cdot b) (v):= \varphi(b \cdot v \cdot a)$.
+
+When $G$ is finite, $k$ is a field with $|G|$ invertible inside, it turns out that we are enabled with two additional isomorphisms (TODO: are they natural?) (TODO: in what category?)
+$$
+k[G] \cong k[G]^*,\qquad \Hom_G(V,W) \cong V^* \otimes_G W
+$$
+where the first one is the Frobenius self-duality of finite group (that is, the inner product), and the second can be found in [finite group rep speedrun](/posts/20260312-group-rep-speedrun/) (slightly differs). Above two isomorphisms allow us to equalize induction and coinduction
+$$
+\Ind_H^G V
+=k[G]\otimes_H V
+\cong\Hom_H(k[G]^*,V)
+\cong\Hom_H(k[G],V)
+=\Coind_H^G V.
+$$
+Substituting this identification into the second reciprocity isomorphism
+$$
+\Hom_H\left(\Res_H^G W,V\right)
+\cong
+\Hom_G\left(W,\Ind_H^G V\right),
+$$
+so in this case, induction and restriction in this case are bi-directionally adjoint
+$$
+\Ind_H^G\dashv\Res_H^G\dashv\Ind_H^G.
+$$
+(TODO: write the correspondence explicitly)
+:::
