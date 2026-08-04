@@ -366,8 +366,19 @@ window.Quarto = {
     <h2 id="toc-title">该页面内容</h2>
    
   <ul>
-  <li><a href="#存在性" id="toc-存在性" class="nav-link active" data-scroll-target="#存在性">存在性</a></li>
-  <li><a href="#矩阵表示与特征标" id="toc-矩阵表示与特征标" class="nav-link" data-scroll-target="#矩阵表示与特征标">矩阵表示与特征标</a></li>
+  <li><a href="#具体记号" id="toc-具体记号" class="nav-link active" data-scroll-target="#具体记号"><span class="header-section-number">1</span> 具体记号</a>
+  <ul class="collapse">
+  <li><a href="#正规情形" id="toc-正规情形" class="nav-link" data-scroll-target="#正规情形"><span class="header-section-number">1.1</span> 正规情形</a></li>
+  </ul></li>
+  <li><a href="#诱导表示的特征标" id="toc-诱导表示的特征标" class="nav-link" data-scroll-target="#诱导表示的特征标"><span class="header-section-number">2</span> 诱导表示的特征标</a>
+  <ul class="collapse">
+  <li><a href="#正规情形-1" id="toc-正规情形-1" class="nav-link" data-scroll-target="#正规情形-1"><span class="header-section-number">2.1</span> 正规情形</a></li>
+  </ul></li>
+  <li><a href="#诱导表示的不可约成分" id="toc-诱导表示的不可约成分" class="nav-link" data-scroll-target="#诱导表示的不可约成分"><span class="header-section-number">3</span> 诱导表示的不可约成分</a></li>
+  <li><a href="#诱导表示的不可约性" id="toc-诱导表示的不可约性" class="nav-link" data-scroll-target="#诱导表示的不可约性"><span class="header-section-number">4</span> 诱导表示的不可约性</a>
+  <ul class="collapse">
+  <li><a href="#正规情形-2" id="toc-正规情形-2" class="nav-link" data-scroll-target="#正规情形-2"><span class="header-section-number">4.1</span> 正规情形</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -378,10 +389,11 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">诱导表示乱炖</h1>
+<p class="subtitle lead">Mackey 不可约性定理</p>
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
     <div class="quarto-category">algebra</div>
-    <div class="quarto-category">group-rep</div>
+    <div class="quarto-category">rep-theory</div>
   </div>
   </div>
 
@@ -399,7 +411,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2025年6月7日</p>
+      <p class="date">2026年8月5日</p>
     </div>
   </div>
   
@@ -411,47 +423,378 @@ window.Quarto = {
 </header>
 
 
-<p>在日常生产生活中，我们经常需要将一个群表示从一个子群扩展到整个群．在所有可能的选择中，诱导表示是最自然的一种．<span class="citation" data-cites="serre_linear_1977"><a href="#ref-serre_linear_1977" role="doc-biblioref">[1]</a></span></p>
-<p>具体来说，设 <span class="math inline">\(H\)</span> 是群 <span class="math inline">\(G\)</span> 的一个子群，<span class="math inline">\(\theta: H \to \operatorname{GL}(W)\)</span> 是 <span class="math inline">\(H\)</span> 的一个表示，我们希望构造的诱导表示 <span class="math inline">\(\rho := \theta \uparrow_H^G : G \to \operatorname{GL}(V)\)</span> 满足：</p>
+<p>在日常生产生活中，经常需要将一个群表示从一个子群扩展到整个群．在所有可能的选择中，诱导表示是最自然的一种．</p>
+<p>如无特殊说明，全文默认假设在特征 <span class="math inline">\(0\)</span> 的代数闭域 <span class="math inline">\(k\)</span> 和有限群 <span class="math inline">\(G\)</span> 中工作．我们尽力在合适的时候指明可以放松的条件．</p>
+<p>设子群 <span class="math inline">\(H \leq G\)</span>，则</p>
 <ul>
-<li><p><span class="math inline">\((\theta, W)\)</span> 是 <span class="math inline">\((\rho,V)\)</span> 在 <span class="math inline">\(H\)</span> 上的限制 <span class="math inline">\(\rho \downarrow_H^G\)</span> 的子表示．</p></li>
-<li><p>当无视 <span class="math inline">\(\rho\)</span> 在 <span class="math inline">\(W\)</span> 内部的置换效果时，<span class="math inline">\(\rho\)</span> “表现得就像是” <span class="math inline">\(G\)</span> 作用在左陪集族 <span class="math inline">\(G/H\)</span> 上一样．具体来说，考虑 <span class="math inline">\(V\)</span> 的如下子空间 <span class="math inline">\(\rho_\sigma W : \sigma \in G\)</span>，因为 <span class="math inline">\(W\)</span> 是 <span class="math inline">\(H\)</span>-不变子空间，事实上可以用陪集 <span class="math inline">\(G/H\)</span> 中的元素来标记这些子空间，故记 <span class="math inline">\(W_{\sigma H} := \rho_\sigma W\)</span>．这些空间自然满足 <span class="math inline">\(\rho_g W_{\sigma H} = W_{g \sigma H}\)</span>——这便是“长得像” <span class="math inline">\(G \curvearrowright G/H\)</span> 的含义；同时我们希望这些 <span class="math inline">\(W_{\sigma H}\)</span> 间两两无交，这样在线性空间意义下 <span class="math inline">\(V\)</span> 就是所有 <span class="math inline">\(W_{\sigma H}\)</span> 的直和．</p></li>
+<li>对 <span class="math inline">\(G\)</span>-表示 <span class="math inline">\(V\)</span>，定义限制表示 <span class="math inline">\(\left\downarrow \!^{G}_{H} {V} \right.\)</span> 为 <span class="math inline">\(V\)</span> 自身限制为 <span class="math inline">\(H\)</span>-表示；</li>
+<li>对 <span class="math inline">\(H\)</span>-表示 <span class="math inline">\(W\)</span>，定义诱导表示 <span class="math inline">\(\left\uparrow \!_{H}^{G} {W} \right. := {k}[{G}] \otimes_{{k}[{H}]} W\)</span>，即 <span class="math inline">\(({k}[{G}], {k}[{H}])\)</span>-双模 <span class="math inline">\({k}[{G}]\)</span> 和 <span class="math inline">\({k}[{H}]\)</span>-模 <span class="math inline">\(W\)</span> 的张量积．</li>
 </ul>
-<section id="存在性" class="level2">
-<h2 class="anchored" data-anchor-id="存在性">存在性</h2>
-<p>那么这么好的表示存不存在呢？答案是我们可以嗯造．高情商的回答是 <span class="math inline">\(k[G] \otimes_{k[H]} W\)</span>，但让我们今天笨拙一点．具体来说：</p>
-<ul>
-<li><p>取一组 <span class="math inline">\(G/H\)</span> 的代表元 <span class="math inline">\(\Sigma := \{ \sigma_1,\dots,\sigma_{|\Sigma|} \} \subset G\)</span>．</p></li>
-<li><p>令线性空间 <span class="math inline">\(V := \bigoplus_{\sigma \in \Sigma} W_{\sigma H}\)</span>，这里每个 <span class="math inline">\(W_{\sigma H}\)</span> 都是同构于 <span class="math inline">\(W\)</span> 的线性空间．我们认为 <span class="math inline">\(W_H = W\)</span>，并把这些同构写作 <span class="math inline">\(W \to W_{\sigma H}, w \mapsto w_{\to \sigma H}\)</span>．</p></li>
-<li><p>定义 <span class="math inline">\(V\)</span> 上的群作用 <span class="math inline">\(\rho\)</span>：对任意 <span class="math inline">\(g \in G\)</span>, <span class="math inline">\(\sigma_j \in \Sigma\)</span> 和 <span class="math inline">\(w \in W\)</span>，设 <span class="math inline">\(g \sigma_j\)</span> 落在 <span class="math inline">\(\sigma_i \in \Sigma\)</span> 对应陪集中，定义 <span class="math display">\[
-\rho_g (w_{\to\sigma_j H}) := (\theta_{\sigma_i^{-1} g \sigma_j}(w))_{\to \sigma_i H}
-\]</span> 最后将定义线性张成到 <span class="math inline">\(V\)</span> 即可．</p></li>
-</ul>
-<p>验证它确实满足我们的期待：</p>
-<ul>
-<li><p><span class="math inline">\((\theta,W)\)</span> 是它的子表示：对任意 <span class="math inline">\(g = h \in H\)</span>, <span class="math inline">\(w \in W\)</span>，此时 <span class="math inline">\(\sigma_j = \sigma_i = \sigma_1 \in H\)</span>，我们有： <span class="math display">\[
-\rho_h(w) = \theta_{\sigma_1^{-1}h \sigma_1}(w)
-\]</span> 好像不太妙，因为我们是希望它等于 <span class="math inline">\(\theta_h(w)\)</span> 的．但问题不大：至少 <span class="math inline">\((\theta, W)\)</span> 是同构地嵌入 <span class="math inline">\((\rho, V)\)</span> 的——只差一个共轭而已——在之前选取 <span class="math inline">\(G/H\)</span> 的代表元时强行让 <span class="math inline">\(\sigma_1=1\)</span> 也可以．</p></li>
-<li><p>“长得像” <span class="math inline">\(G \curvearrowright G/H\)</span>：对任意 <span class="math inline">\(g \in G\)</span>，<span class="math inline">\(\rho_g\)</span> 把 <span class="math inline">\(W_{\sigma_j H}\)</span> 映到 <span class="math inline">\(W_{\sigma_i H} = W_{g \sigma_j H}\)</span>，确实长得像．无交性根据构造自然成立．</p></li>
-</ul>
-</section>
-<section id="矩阵表示与特征标" class="level2">
-<h2 class="anchored" data-anchor-id="矩阵表示与特征标">矩阵表示与特征标</h2>
-<p>那么这是一个好的定义．我们来算一算它的矩阵表示．按 <span class="math inline">\(W_{\sigma H}\)</span> 分块来看，在分块矩阵的第 <span class="math inline">\(j\)</span> 列上，只有一个 <span class="math inline">\(\sigma_i\)</span> 可使得 <span class="math inline">\(g \sigma_j H = \sigma_i H\)</span>——便在这一列的第 <span class="math inline">\(i\)</span> 行放入 <span class="math inline">\(\theta(\sigma_i^{-1} g \sigma_j)\)</span> 的矩阵表示，其余位置置零．这里的描述由 <span class="citation" data-cites="sagan_symmetric_2001"><a href="#ref-sagan_symmetric_2001" role="doc-biblioref">[2, Definition 1.12.2]</a></span> 看图说话得到．</p>
-<p>下面算算它的特征标 <span class="math inline">\(\chi_\rho: G \to \mathbb C^\times\)</span>，也就是 <span class="math inline">\(\rho(g)\)</span> 对应矩阵表示的迹．想要在分块对角线上有所贡献的 <span class="math inline">\(W_{\sigma H}\)</span> 至少需要满足 <span class="math inline">\(\sigma H = g \sigma H\)</span>，即 <span class="math inline">\(\sigma^{-1} g \sigma \in H\)</span>．此时，对角线上的分块矩阵是 <span class="math inline">\(\theta(\sigma^{-1} g \sigma)\)</span> 的矩阵表示，故每个满足条件的 <span class="math inline">\(W_{\sigma H}\)</span> 为特征标贡献 <span class="math inline">\(\chi_\theta (\sigma^{-1} g \sigma)\)</span>，合计如下： <span class="math display">\[
-\chi_\rho(g) = \sum_{\substack{\sigma \in \Sigma \\ \sigma^{-1} g \sigma \in H}} \chi_\theta(\sigma^{-1} g \sigma)
+<p>特征标我们使用相同记号：<span class="math inline">\(\left\downarrow \!^{G}_{H} {\chi_V} \right. := \chi_{\left\downarrow \!^{G}_{H} {V} \right.}\)</span>; <span class="math inline">\(\left\uparrow \!_{H}^{G} {\chi_W} \right. := \chi_{\left\uparrow \!_{H}^{G} {W} \right.}\)</span>．</p>
+<section id="具体记号" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="具体记号"><span class="header-section-number">1</span> 具体记号</h2>
+<p>张量积的写法相对抽象，这里给出一种更具体的写法．固定一组 <span class="math inline">\(G/H\)</span> 的陪集代表元 <span class="math inline">\((s)_{[s] \in G/H}\)</span>，首先注意作为 <span class="math inline">\((k, {k}[{H}])\)</span>-双模 <span class="math inline">\({k}[{G}] = \bigoplus_{[s] \in G/H} e_s \cdot {k}[{H}]\)</span>，于是作为 <span class="math inline">\(k\)</span>-线性空间 <span class="math display">\[
+\begin{matrix}
+{k}[{G}] \otimes_{{k}[{H}]} W
+&amp;=&amp; \left(\bigoplus_{[s] \in G/H} e_s \cdot {k}[{H}] \right) \otimes_{{k}[{H}]} W
+&amp;\cong&amp; \bigoplus_{[s] \in G/H} (e_s \cdot {k}[{H}]) \otimes_{{k}[{H}]} W &amp;=:&amp; \bigoplus_{[s] \in G/H} s \otimes W \\
+e_g \otimes w &amp;=&amp; e_{s_g} e_{h_g} \otimes w &amp;\mapsto&amp; e_{s_g} e_{h_g} \otimes w &amp;=:&amp; s_g \otimes (h_g \cdot w)
+\end{matrix}
+\]</span> 这里映射中我们设 <span class="math inline">\(g\)</span> 有 <span class="math inline">\(G/H\)</span>-分解 <span class="math inline">\(g=s_g h_g\)</span>．注意最后一项的每个直和项 <span class="math inline">\(s \otimes W\)</span> 是我们方便起见新定义的记号．平凡可见作为线性空间 <span class="math inline">\(s \otimes W \cong W\)</span>．作为同构的副产品，我们顺路得到诱导表示的维数 <span class="math display">\[
+\dim \left\uparrow \!_{H}^{G} {W} \right. = [G : H] \dim W
 \]</span></p>
+<p>上述同构只是个线性空间同构，我们还需要明确 <span class="math inline">\(G\)</span> 应如何作用在具体记号上——方法是通过上述同构传递定义．对任意 <span class="math inline">\(g \in G\)</span>，<span class="math inline">\([s] \in G/H\)</span>，张量积定义侧有 <span class="math inline">\(g \cdot (e_s \otimes w) = e_{gs} \otimes w\)</span>，故如设 <span class="math inline">\(gs\)</span> 有 <span class="math inline">\(G/H\)</span>-分解 <span class="math inline">\(gs = s_{gs} h_{gs}\)</span>，则上式在具体记号侧的表现就是我们定义 <span class="math inline">\(G\)</span>-作用的方法： <span class="math display">\[
+g \cdot (s \otimes w) := s_{gs} \otimes (h_{gs} \cdot w)
+\]</span></p>
+<section id="正规情形" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="正规情形"><span class="header-section-number">1.1</span> 正规情形</h3>
+<p>当 <span class="math inline">\(H\)</span> 是 <span class="math inline">\(G\)</span> 的正规子群时，对任意 <span class="math inline">\(h \in H\)</span>，正规性给出 <span class="math inline">\(hs\)</span> 的 <span class="math inline">\(G/H\)</span>-分解 <span class="math inline">\(hs = s(s^{-1}hs)\)</span>，故 <span class="math display">\[
+h \cdot (s \otimes w) = s \otimes (s^{-1}hs \cdot w)
+\]</span> 此时 <span class="math inline">\(s \otimes W\)</span> 关于 <span class="math inline">\(H\)</span>-作用不变，成为一个 <span class="math inline">\(H\)</span>-表示，线性同构 <span class="math inline">\(\left\uparrow \!_{H}^{G} {W} \right. \cong \bigoplus_{[s] \in G/H} s \otimes W\)</span> 升级为 <span class="math inline">\(H\)</span>-表示同构 <span class="math display">\[
+\left\downarrow \!^{G}_{H} {\left\uparrow \!_{H}^{G} {W} \right.} \right. \cong \bigoplus_{[s] \in G/H} s \otimes W
+\]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div id="rem-shs" class="proof remark">
+<p><span class="proof-title"><em>注记 1</em>. </span>这是后续 <a href="#thm-mackey-subgroup" class="quarto-xref">定理&nbsp;2</a> 在正规情形的特例．<a href="#thm-mackey-subgroup" class="quarto-xref">定理&nbsp;2</a> 是对“诱导后限制”得到的表示结构的系统研究．</p>
+<p>此外，受此启发，可考虑在任何时候都为 <span class="math inline">\(s \otimes W\)</span> 默认配备 <span class="math inline">\(s H s^{-1}\)</span>-作用 <span class="math display">\[
+shs^{-1} \cdot (s \otimes w) := s \otimes (h \cdot w)
+\]</span> 此定义在 <span class="math inline">\(H\)</span> 正规时与我们刚才的推导一致．需要注意的是没有证据表明这种配备方式可以为非正规情况的线性同构 <span class="math inline">\(\left\uparrow \!_{H}^{G} {W} \right. \cong \bigoplus_{[s] \in G/H} s \otimes W\)</span> 升级结构．</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="诱导表示的特征标" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="诱导表示的特征标"><span class="header-section-number">2</span> 诱导表示的特征标</h2>
+<p>上节完成的关于 <span class="math inline">\(G\)</span>-作用在具体记号上作用方式的分析也使我们能更轻松的从矩阵的视角观察诱导表示的作用方式，进而得到特征标的计算方法．任意固定 <span class="math inline">\(G/H\)</span> 的一组陪集代表元 <span class="math inline">\((s)_{[s] \in G/H}\)</span>，任取 <span class="math inline">\(W\)</span> 的一组线性基底 <span class="math inline">\((w_j)_{1 \leq j \leq \dim W}\)</span>，在基底 <span class="math inline">\((s \otimes w_j)_{[s] \in G/H; 1 \leq j \leq \dim W}\)</span> 下，<span class="math inline">\(G\)</span> 在 <span class="math inline">\(\left\uparrow \!_{H}^{G} {W} \right.\)</span> 上的作用展现为每边块数量为 <span class="math inline">\([G : H]\)</span>、各块边长为 <span class="math inline">\(\dim W\)</span> 的分块矩阵．特征标是取迹，所以我们完全不关心那些 <span class="math inline">\(s_{g s} \neq s\)</span> 的偏离分块对角线的块．注意 <span class="math display">\[
+s_{gs} = s \implies H \ni h_{g s} = s_{gs}^{-1} (gs) = s^{-1} g s \implies s^{-1} g s \in H \implies gs \in sH \implies s_{gs} = s
+\]</span> 故</p>
+<ul>
+<li><p><span class="math inline">\(s_{gs} = s\)</span> 与 <span class="math inline">\(s^{-1} g s \in H\)</span> 等价．</p></li>
+<li><p>当 <span class="math inline">\(s_{gs} = s\)</span>，<span class="math inline">\(h_{g s} = s^{-1} g s\)</span>，此时 <span class="math inline">\(g \cdot (s \otimes w_j) = s \otimes (s^{-1} g s \cdot w_j)\)</span>——这个块的矩阵表示由 <span class="math inline">\(s^{-1} g s\)</span> 在 <span class="math inline">\(W\)</span> 上的作用给出，算迹交给 <span class="math inline">\(\chi_W\)</span> 打包处理即可．</p></li>
+</ul>
+<p>综上我们得到诱导表示的特征标公式 <span class="math display">\[
+\left\uparrow \!_{H}^{G} {\chi_W} \right. (g) = \sum_{\substack{[s] \in G/H \\ s^{-1} g s \in H}} \chi_W (s^{-1} g s)
+\]</span></p>
+<section id="正规情形-1" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="正规情形-1"><span class="header-section-number">2.1</span> 正规情形</h3>
+<p>特别地，当 <span class="math inline">\(H\)</span> 正规时，<span class="math inline">\(s^{-1}gs \in H\)</span> 与 <span class="math inline">\(g \in H\)</span> 等价，故上式化为 <span class="math display">\[
+\left\uparrow \!_{H}^{G} {\chi_W} \right. (g)
+= \begin{cases}
+\displaystyle \sum_{[s] \in G/H} \chi_W (s^{-1}gs) &amp; g \in H \\
+0 &amp; g \notin H
+\end{cases}
+\]</span></p>
+</section>
+</section>
+<section id="诱导表示的不可约成分" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="诱导表示的不可约成分"><span class="header-section-number">3</span> 诱导表示的不可约成分</h2>
+<p>将限制表示煞有介事的分配专有记号 <span class="math inline">\(\left\downarrow \!^{G}_{H} {} \right.\)</span> 并和诱导表示置于同等地位，一大原因是所谓的 Frobenius 互反律</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-frobenius-reciprocity" class="theorem">
+<p><span class="theorem-title"><strong>定理 1 (Frobenius 互反律)</strong></span> 设 <span class="math inline">\(G\)</span> 是任意群，<span class="math inline">\(k\)</span> 是交换环，<span class="math inline">\(H \leq G\)</span> 是其子群，<span class="math inline">\(V\)</span> 是 <span class="math inline">\(G\)</span>-表示，<span class="math inline">\(W\)</span> 是 <span class="math inline">\(H\)</span>-表示，则 <span class="math display">\[
+\operatorname{Hom}_G (\left\uparrow \!_{H}^{G} {W} \right., V) \cong \operatorname{Hom}_H (W, \left\downarrow \!^{G}_{H} {V} \right.)
+\]</span> 在要求 <span class="math inline">\(G\)</span> 有限且 <span class="math inline">\(k\)</span> 使得群 <span class="math inline">\(G\)</span> 的表示论半单（例如特征 <span class="math inline">\(0\)</span> 的域）时有 <span class="math display">\[
+\operatorname{Hom}_G (V, \left\uparrow \!_{H}^{G} {W} \right.) \cong \operatorname{Hom}_H (\left\downarrow \!^{G}_{H} {V} \right., W)
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>抽象废话来说，第一式无非是 <span class="math inline">\(2\)</span>-范畴 <span class="math inline">\(\mathsf{Bimod}\)</span> 中的一对伴随，本质是张量积的泛性质，证明几乎不需要任何 <span class="math inline">\(k\)</span> 和 <span class="math inline">\(G\)</span> 的特殊性质．第二式涉及到群代数的 Frobenius 自对偶等问题——这是额外条件的用武之地．我们不在此处展开这两个话题，请参见</p>
+<ul>
+<li><a href="../../posts/20260729-bimod-adjoint-frobenius">专门文章</a>；</li>
+<li><span class="citation" data-cites="curtis_methods_1990"><a href="#ref-curtis_methods_1990" role="doc-biblioref">[1, theorem 10.8, p.&nbsp;232]</a></span> 一个条件宽松版本的参考；</li>
+<li><span class="citation" data-cites="serre_linear_1977"><a href="#ref-serre_linear_1977" role="doc-biblioref">[2, section 7.2, theorem 13, p.&nbsp;56]</a></span> 只在有限群复数域工作．</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<p>在同构两侧取维数立得特征标版本的 Frobenius 互反律 <span class="math display">\[
+\langle \left\uparrow \!_{H}^{G} {\chi_W} \right., \chi_V \rangle_G = \langle \chi_W, \left\downarrow \!^{G}_{H} {\chi_V} \right. \rangle_H
+\]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span>第二式的特征标版本恰好是上式的对称版本，这也是 Frobenius 自对偶在特征标内积侧的一个体现．</p>
+</div>
+</div>
+</div>
+</div>
+<p>特征标版本的 Frobenius 互反律对研究诱导表示的性质很有用：例如计算诱导表示 <span class="math inline">\(\left\uparrow \!_{H}^{G} {W} \right.\)</span> 中某个不可约 <span class="math inline">\(G\)</span>-表示 <span class="math inline">\(V\)</span> 出现了多少份时，可以降到 <span class="math inline">\(H\)</span>-表示级别下计算 <span class="math inline">\(\langle \chi_W, \left\downarrow \!^{G}_{H} {\chi_V} \right. \rangle_H\)</span>——当然好算很多．</p>
+</section>
+<section id="诱导表示的不可约性" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="诱导表示的不可约性"><span class="header-section-number">4</span> 诱导表示的不可约性</h2>
+<p>下一个问题是如何判定诱导表示 <span class="math inline">\(\left\uparrow \!_{H}^{G} {W} \right.\)</span> 的不可约性．根据特征标方法，这等价于问 <span class="math display">\[
+1 = \left\langle \left\uparrow \!_{H}^{G} {\chi_W} \right., \left\uparrow \!_{H}^{G} {\chi_W} \right. \right\rangle_G = \left\langle \chi_W, \left\downarrow \!^{G}_{H} {\left\uparrow \!_{H}^{G} {\chi_W} \right.} \right. \right\rangle_H
+\]</span> 何时成立．为此有必要研究诱导后又限制回原子群后的表示 <span class="math inline">\(\left\downarrow \!^{G}_{H} {\left\uparrow \!_{H}^{G} {W} \right.} \right.\)</span> 的性质．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-mackey-subgroup" class="theorem">
+<p><span class="theorem-title"><strong>定理 2 (Mackey 子群定理)</strong></span> <span class="math inline">\(k\)</span> 是交换环，<span class="math inline">\(G\)</span> 是有限群，<span class="math inline">\(F\)</span>, <span class="math inline">\(H\)</span> 是 <span class="math inline">\(G\)</span> 的子群，<span class="math inline">\(W\)</span> 是 <span class="math inline">\(H\)</span>-表示，则 <span class="math display">\[
+\left\downarrow \!^{G}_{F} {\left\uparrow \!_{H}^{G} {W} \right.} \right. \cong \bigoplus_{[s] \in F \backslash G / H} \left\uparrow \!_{sHs^{-1} \cap F}^{F} {\left( \left\downarrow \!^{sHs^{-1}}_{sHs^{-1} \cap F} {(s \otimes W)} \right.\right)} \right.
+\]</span> 这里 <span class="math inline">\(F \backslash G / H\)</span> 是全体 <span class="math inline">\((F, H)\)</span>-双边陪集，<span class="math inline">\(s \otimes W\)</span> 上配备的 <span class="math inline">\(s H s^{-1}\)</span>-作用如 <a href="#rem-shs" class="quarto-xref">Remark&nbsp;1</a> 所述．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span>回忆我们建立诱导表示具体记号的步骤，这里要做的无非是更细的根据双边陪集 <span class="math inline">\(F \backslash G / H\)</span> 拆解．首先注意 <span class="math inline">\(({k}[{F}], {k}[{H}])\)</span>-双模分解 <span class="math display">\[
+{k}[{G}] = \bigoplus_{[s] \in F \backslash G / H} {k}[{F}] \cdot e_s \cdot {k}[{H}]
+\]</span> 继续照抄，有 <span class="math inline">\(({k}[{F}], k)\)</span>-双模同构 <span class="math display">\[
+\begin{aligned}
+\left\downarrow \!^{G}_{F} {\left\uparrow \!_{H}^{G} {W} \right.} \right.
+&amp;= \left\downarrow \!^{G}_{F} {\left( {k}[{G}] \otimes_{{k}[{H}]} W \right)} \right. \\
+&amp;= \left( \bigoplus_{[s] \in F \backslash G / H} {k}[{F}] \cdot e_s \cdot {k}[{H}] \right) \otimes_{{k}[{H}]} W \\
+&amp;\cong \bigoplus_{[s] \in F \backslash G / H} \left( {k}[{F}] \cdot e_s \cdot {k}[{H}] \right) \otimes_{{k}[{H}]} W \\
+e_g \otimes w &amp;\mapsto (e_{f_g} \cdot e_{s_g}) \otimes (h_g \cdot w)
+\end{aligned}
+\]</span> 这里是设上式中的 <span class="math inline">\(g \in G\)</span> 有 <span class="math inline">\(F \backslash G / H\)</span>-分解 <span class="math inline">\(g=f_g s_g h_g\)</span>．剩下的事情是证明 <span class="math inline">\(F\)</span>-表示同构 <span class="math display">\[
+\left( {k}[{F}] \cdot e_s \cdot {k}[{H}] \right) \otimes_{{k}[{H}]} W \cong \left\uparrow \!_{sHs^{-1} \cap F}^{F} {\left( \left\downarrow \!^{sHs^{-1}}_{sHs^{-1} \cap F} {(s \otimes W)} \right.\right)} \right.
+\]</span> 先构造一侧的 <span class="math inline">\(F\)</span>-同态 <span class="math display">\[
+\begin{aligned}
+{k}[{F}] \otimes_{{k}[{sHs^{-1} \cap F}]} \left\downarrow \!^{sHs^{-1}}_{sHs^{-1} \cap F} {(s \otimes W)} \right. &amp;\to \left( {k}[{F}] \cdot e_s \cdot {k}[{H}] \right) \otimes_{{k}[{H}]} W \\
+e_f \otimes (s \otimes w) &amp;\mapsto (e_f \cdot e_s) \otimes w
+\end{aligned}
+\]</span> 其良定性需要我们验证一下映射和左侧 <span class="math inline">\(\otimes_{{k}[{sHs^{-1} \cap F}]}\)</span> 平衡关系相容： <span class="math display">\[
+\begin{aligned}
+(e_f \cdot shs^{-1}) \otimes (s \otimes w)
+= e_{fshs^{-1}} \otimes (s \otimes w)
+&amp;\mapsto e_{fshs^{-1}} \cdot e_s \otimes w
+= e_{fsh} \otimes w \\
+e_f \otimes \left( shs^{-1} \cdot (s \otimes w) \right)
+= e_f \otimes (s \otimes (h \cdot w))
+&amp;\mapsto (e_f \cdot e_s) \otimes (h \cdot w)
+= (e_f \cdot e_s \cdot h) \otimes w
+= e_{fsh} \otimes w
+\end{aligned}
+\]</span> 再构造另一侧 <span class="math inline">\(F\)</span>-同态 <span class="math display">\[
+\begin{aligned}
+\left( {k}[{F}] \cdot e_s \cdot {k}[{H}] \right) \otimes_{{k}[{H}]} W
+&amp;\to {k}[{F}] \otimes_{{k}[{sHs^{-1} \cap F}]} \left\downarrow \!^{sHs^{-1}}_{sHs^{-1} \cap F} {(s \otimes W)} \right. \\
+(e_f \cdot e_s \cdot e_h) \otimes w &amp;\mapsto e_f \otimes (s \otimes (h \cdot w))
+\end{aligned}
+\]</span> 继续验证良定义，首先是无关 <span class="math inline">\(f\)</span>, <span class="math inline">\(h\)</span> 选取：设另有 <span class="math inline">\(f'\)</span>, <span class="math inline">\(h'\)</span> 使得 <span class="math inline">\(f' s h' = fsh\)</span>，则 <span class="math display">\[
+f^{-1}f' = shh'^{-1}s^{-1} \in F \cap sHs^{-1}
+\]</span> 因此 <span class="math display">\[
+\begin{aligned}
+(e_{f'} \cdot e_s \cdot e_{h'}) \otimes w
+&amp;\mapsto e_{f'} \otimes (s \otimes (h' \cdot w)) \\
+&amp;= (e_f \cdot f^{-1}f) \otimes (s \otimes (h' \cdot w)) \\
+&amp;= e_f \otimes \left(f^{-1}f' \cdot (s \otimes (h' \cdot w))\right) \\
+&amp;= e_f \otimes \left(shh'^{-1}s^{-1} \cdot (s \otimes (h' \cdot w))\right) \\
+&amp;= e_f \otimes \left(s \otimes (hh'^{-1}h' \cdot w)\right) \\
+&amp;= e_f \otimes (s \otimes (h \cdot w)) \\
+&amp;\leftarrow \! |(e_f \cdot e_s \cdot e_h) \otimes w
+\end{aligned}
+\]</span> 其次验证它与左侧张量积的 <span class="math inline">\({k}[{H}]\)</span>-平衡关系相容．任取 <span class="math inline">\(h' \in H\)</span>，关系两侧分别被映为 <span class="math display">\[
+\begin{aligned}
+\left((e_f \cdot e_s \cdot e_h) \cdot h' \right) \otimes w
+&amp;= (e_f \cdot e_s \cdot e_{h h'}) \otimes w
+\mapsto e_f \otimes \left(s \otimes (hh' \cdot w)\right) \\
+(e_f \cdot e_s \cdot e_h) \otimes (h' \cdot w)
+&amp;\mapsto e_f \otimes \left(s \otimes (h \cdot (h' \cdot w))\right) = e_f \otimes \left(s \otimes (hh' \cdot w)\right)
+\end{aligned}
+\]</span> 所以该 <span class="math inline">\(F\)</span>-同态良定．</p>
+<p>最后，两同态在生成元上的复合分别为 <span class="math display">\[
+\begin{aligned}
+e_f \otimes (s \otimes w)
+&amp;\mapsto (e_f \cdot e_s) \otimes w
+\mapsto e_f \otimes (s \otimes w) \\
+(e_f \cdot e_s \cdot e_h) \otimes w
+&amp;\mapsto e_f \otimes (s \otimes (h \cdot w))
+\mapsto (e_f \cdot e_s) \otimes (h \cdot w) = (e_f \cdot e_s \cdot e_h) \otimes w
+\end{aligned}
+\]</span> 因此它们互为逆映射，所需的 <span class="math inline">\(F\)</span>-表示同构得证．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em>. </span></p>
+<ul>
+<li><span class="citation" data-cites="curtis_methods_1990"><a href="#ref-curtis_methods_1990" role="doc-biblioref">[1, chapter 1, theorem 10.13, p.&nbsp;237]</a></span> 较广版本参考</li>
+<li><span class="citation" data-cites="serre_linear_1977"><a href="#ref-serre_linear_1977" role="doc-biblioref">[2, section 7.3, proposition 22, p.&nbsp;58]</a></span> 如果你喜欢自然语言的浆糊证明</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-mackey-irreducibility" class="theorem">
+<p><span class="theorem-title"><strong>定理 3 (Mackey 不可约性定理)</strong></span> 诱导表示 <span class="math inline">\(\left\uparrow \!_{H}^{G} {W} \right.\)</span> 不可约当且仅当</p>
+<ul>
+<li><span class="math inline">\(W\)</span> 不可约；</li>
+<li>对任意非平凡双边陪集 <span class="math inline">\([s] \in H \backslash G / H\)</span>，有</li>
+</ul>
+<p><span class="math display">\[
+\left\langle
+\left\downarrow \!^{H}_{H \cap sHs^{-1}} {\chi_W} \right.,
+\left\downarrow \!^{sHs^{-1}}_{H \cap sHs^{-1}} {\chi_{s \otimes W}} \right.
+\right\rangle_{H \cap sHs^{-1}} = 0
+\]</span></p>
+<p>换言之，<span class="math inline">\(W\)</span> 和 <span class="math inline">\(s \otimes W\)</span> 限制到 <span class="math inline">\(H \cap sHs^{-1}\)</span> 后没有公共的不可约成分．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span>依次使用 Frobenius 互反律、<a href="#thm-mackey-subgroup" class="quarto-xref">定理&nbsp;2</a> 和各直和项上的 Frobenius 互反律，有 <span class="math display">\[
+\begin{aligned}
+\left\langle \left\uparrow \!_{H}^{G} {\chi_W} \right., \left\uparrow \!_{H}^{G} {\chi_W} \right. \right\rangle_G
+&amp;= \left\langle \chi_W, \left\downarrow \!^{G}_{H} {\left\uparrow \!_{H}^{G} {\chi_W} \right.} \right. \right\rangle_H \\
+&amp;= \sum_{[s] \in H \backslash G / H}
+\left\langle
+\chi_W,
+\left\uparrow \!_{H \cap sHs^{-1}}^{H} {\left\downarrow \!^{sHs^{-1}}_{H \cap sHs^{-1}} {\chi_{s \otimes W}} \right.} \right.
+\right\rangle_H \\
+&amp;= \sum_{[s] \in H \backslash G / H}
+\left\langle
+\left\downarrow \!^{H}_{H \cap sHs^{-1}} {\chi_W} \right.,
+\left\downarrow \!^{sHs^{-1}}_{H \cap sHs^{-1}} {\chi_{s \otimes W}} \right.
+\right\rangle_{H \cap sHs^{-1}}
+\end{aligned}
+\]</span> 双边陪集 <span class="math inline">\([1] = H\)</span> 对应的求和项为 <span class="math display">\[
+\left\langle \left\downarrow \!^{H}_{H} {\chi_W} \right., \left\downarrow \!^{H}_{H} {\chi_W} \right. \right\rangle_H
+= \left\langle \chi_W, \chi_W \right\rangle_H
+\]</span> 所有求和项都是非负整数，所以左侧等于 <span class="math inline">\(1\)</span> 当且仅当 <span class="math inline">\([1]\)</span> 对应的求和项等于 <span class="math inline">\(1\)</span>，其余项全部等于 <span class="math inline">\(0\)</span>．前者等价于 <span class="math inline">\(W\)</span> 不可约，后者正是定理中的第二个条件，而左侧等于 <span class="math inline">\(1\)</span> 等价于 <span class="math inline">\(\left\uparrow \!_{H}^{G} {W} \right.\)</span> 不可约．</p>
+</div>
+</div>
+</div>
+</div>
+<section id="正规情形-2" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="正规情形-2"><span class="header-section-number">4.1</span> 正规情形</h3>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="cor-mackey-irreducibility-normal" class="theorem corollary">
+<p><span class="theorem-title"><strong>推论 1</strong></span> 若 <span class="math inline">\(H\)</span> 是 <span class="math inline">\(G\)</span> 的正规子群，则诱导表示 <span class="math inline">\(\left\uparrow \!_{H}^{G} {W} \right.\)</span> 不可约当且仅当 <span class="math inline">\(W\)</span> 不可约，且对任意 <span class="math inline">\(s \in G \setminus H\)</span>，<span class="math inline">\(H\)</span>-表示 <span class="math inline">\(s \otimes W\)</span> 与 <span class="math inline">\(W\)</span> 不同构．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span>此时对任意 <span class="math inline">\(s \in G\)</span> 都有 <span class="math inline">\(sHs^{-1} \cap H = H\)</span>．若 <span class="math inline">\(W\)</span> 不可约，则 <span class="math inline">\(s \otimes W\)</span> 也不可约，故特征标正交性给出 <span class="math display">\[
+\left\langle \chi_W, \chi_{s \otimes W} \right\rangle_H = 0
+\iff s \otimes W \not\cong W
+\]</span> 代入 <a href="#thm-mackey-irreducibility" class="quarto-xref">定理&nbsp;3</a> 即得结论．</p>
+</div>
+</div>
+</div>
+</div>
 
 
 
+</section>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
-<div id="ref-serre_linear_1977" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[1] </div><div class="csl-right-inline">J.-P. Serre, <em>Linear Representations of Finite Groups</em>, 卷 42. 收入 Graduate Texts in Mathematics, vol. 42. New York, <span>NY</span>: Springer, 1977. doi: <a href="https://doi.org/10.1007/978-1-4684-9458-7">10.1007/978-1-4684-9458-7</a>.</div>
+<div id="ref-curtis_methods_1990" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">C. W. Curtis 和 I. Reiner, <em>Methods of Representation Theory: With Applications to Finite Groups and Orders</em>. Wiley, 1990.</div>
 </div>
-<div id="ref-sagan_symmetric_2001" class="csl-entry" role="listitem">
-<div class="csl-left-margin">[2] </div><div class="csl-right-inline">B. E. Sagan, <em>The Symmetric Group: Representations, Combinatorial Algorithms, and Symmetric Functions</em>, Second Edition., 卷 203. 收入 Graduate Texts in Mathematics, vol. 203. New York, <span>NY</span>: Springer, 2001. doi: <a href="https://doi.org/10.1007/978-1-4757-6804-6">10.1007/978-1-4757-6804-6</a>.</div>
+<div id="ref-serre_linear_1977" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">J.-P. Serre, <em>Linear Representations of Finite Groups</em>, 卷 42. 收入 Graduate Texts in Mathematics, vol. 42. New York, <span>NY</span>: Springer, 1977. doi: <a href="https://doi.org/10.1007/978-1-4684-9458-7">10.1007/978-1-4684-9458-7</a>.</div>
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

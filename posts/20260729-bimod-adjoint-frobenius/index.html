@@ -369,6 +369,7 @@ window.Quarto = {
   <div class="quarto-categories">
     <div class="quarto-category">math</div>
     <div class="quarto-category">algebra</div>
+    <div class="quarto-category">rep-theory</div>
   </div>
   </div>
 
@@ -433,107 +434,109 @@ window.Quarto = {
 <style type="text/css">
 @font-face{font-family:HJTYEB-CMR7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHcAAoAAAAAA5wAAAGTAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANApYaQsGAAE2AiQDCAQgBYJWByAb9AIAngU5GW8qIZpLZi2+Y5pSys+e4uH7/dq578siKpUtielWvRG3Mx3PhLZD9FJMStlK5Q+t825iqHOTGB+aGSIc4lb7QlwVpNTpr+WODx60gH4L23L9eWCBJQEFnESchy8t4VQCjcDSHYrOJKUREelrQZYW40pBuk7P/0NOGqMlDmu0Y0ps4DtsLCjAUx/LVMgETq0qkJBhiHeGcMwBcrlAvaq8P1i9gQASyBGYACwAIAfExBHn3ezstL1dq0Hx6c2Epy8dvP8temyfOP/Tq1qSVTSMeGhX0/8dtxttpiXYGNaHvgAEglbqcUfu+xNkOXMiSU20SSDIVEjrRrD4gQCAlBAhRDIBNgKlDseEXok516kXBU2gpGW9wxgTtsjbhRmpmHMjSBS0Q0nX3GHNZ6DkXeZZKlNrxyP6aL7iXFN7s8GUqU6PbwZfMNMF1VdYDQ4QNdQ3MjdDmFDIG8IRJgZSMmra4iL0ovIqnBoIE1OMoQEFMwMTHslygDCBVAF+adSaAm6BMbVA6VOwMnBgA+g8AAA=) format('woff2');}
 @font-face{font-family:ZVJZVP-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJIAAoAAAAABAwAAAH+AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBRIFNCwYAATYCJAMIBCAFglwHIBteAyCuCmxwTU9Ie7Ds8Vgav6HRjVHWKUZv4+HhsL3/b4/m4DGtEwvkgDpsaDRpgUSaSILZ+vn7+eeudO1ry7KMogHtjRqobVZAw4H93wUJT84Kkj0HSMovT//eKENzIcpuDVos2TL9cd5UtFOn8l80OEEWZgvEYjbPx7bE1j4vcKnkPV8bKEYFrnlrWzIxWWodEZF+vaCQnwHke37/hrBqR2M4DFGVQSaANZ1NqkDafOlh/xwAW6UwAoD/f5AoYAgvhCBYB4p5sPkCtaT9agDi3yYoooQzYAoID6E0X+X8itJpCiHldoTWxx/mfNlfJ0fPEiFaa+SJYGw8TOFPb5dYCZ30sGqQAv7+oswslqMrxLKzDDBiZdw6wyiGqzTZ/p+e/5cqP8rZMKpR4MJ7iMZgOhdOBcf/PmJMhBPjY2poaPYPgwgAgeD0o3aWbPiuKvKv/u8YcQGgKkGws/Jn8RSMgGCCBBAipDPELUGauluIQQeKpqipMyRLGpbIsqbd63XzZPCiWBNWOYgsmlcjS8aWZNm8TVu3535mrR85x4mIo136hEZ3MK6+Cu9IRZKZjffNNUqT+nBSbbPkIhUYdbX1jI2UDbC4dZVk2pEQ4egkPkK40C0oTi1CDNXtr4NFSkSiwDrtKBvILwRKScE8MUsm6oa/qGpjkRNRwXOlAAA=) format('woff2');}
+@font-face{font-family:PCPXEO-CMSY5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAI8AAoAAAAABBQAAAHxAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBTIFKCwYAATYCJAMIBCAFglwHIBtbA0CeBXZbRwi9NtbbUKkhKpt+IqDfr+3Tc8U00f5cIwUSQ2kWasf/Z3/v/VDa6a6f8MxGpjlLkUhrD2kl7awJYW4HKIFs7KZkC27OWmWf/3PxB1+BpBXRzNIyBAp0b4CjEe7utJOjDc9Ot6kE7ZEQRJWCnqKjDaS6J6yiEF/8+JvDyrBDoRAHA0EFegSMlzPYBNS1XiCxfg4A8kXSOxAA+P8HiEiYIwmYIzsFsixwfv//6YmfrUAAEEFGQQM8A5ABZej0VvsViRwrGobFrngYHj9Tn4lGL7loZzSOYZZ5JBOP3SARFO2LRO9xHEvEvBXtC7g2CMT/1HVR2ZXZIW7E7hTnCWKsAuN3R////v4tzTiz2zDJTQT/tWg/jBGiELZBCQ3YcNBdy1ctMP/HqH6KCwABgU++tjpfoflup0x3+o8mNALaIgjsakveMGo0oVA5SHk+AVGDUhNo2vWBwGCkenjWN8KLnh1e9V3P71oTIQndERxzEZ6tNePF0ihera1lXQ9Oz2v1O66+AXMgYfVzzd5wUnoNbgh5gkTpbfMS9YMtfYNNHXVingzMunToNqBfg151vLrUc9IpULFhQIKVH5eZV1iSVAwlfVqqe9epjhCPAMCudc6pFdcB9UnJiKXXG9Si7zc06VBHjEeGBLD7AAA=) format('woff2');}
 @font-face{font-family:FBIPCW-CMMI5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAWcAAoAAAAACdgAAAVQAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAARAqMWIlSCxQAATYCJAMkBCAFglwHIBuPB1GUK1IF8TPBGPehLCm/kJDVYYWO4xacwDfyWvZz+7v3GV8YiMhAMJoWVoPZEI3JEPp+es96k2kXYFZCullAPAlfvS+APOTfXncn3lYYWYKBtcACS1P/hFnbDeZVmV23u44W0ks8IZ3MAX6CP76CE4qD/IKKiWOm6/ZIG/hUMywKq7Aai2YTjejzfRUWl77IA8oryO5ywhJPgOYN1AdMkJe48Q+C3qRDbwIPmEyZAFqAcsodz1WS2p7fwEpYStVpnRnW/wokhK6AXUlNZJj0KJLIwRWr/2uCM59mPf5//P8akqOSDRtAAf4A5IEcY5QchUXQP9oW3JRlDlYW7uxdNLbOrnffH/3Q8OwT8B3pW6iUIncivorE3Pp6240d9VB2EFg+E9Bn1ZBKQ5ZoubPupLfMjCJ+NIwbrk2XZwMTdH9CCAMrXBFax3ef/SgKBJZTF0S836ERkiK0Ez5kL33WiSHi9KeCoEkTTrQp5fjL/7DRhqxaTvvMk/3JogG8VPPr0DBcsW/JuWemdtCR2qkpxtzYBc95QfDS8wAyASoZFbKuTzvgrI3jccZcPChtyagAF+7WsjiXCB2BAhrfb9LEJuIRreqVIucbrGfTJyU6axv+DHsOa4TbMEy7oJEDO9lZUZ8DL8tgP3vykl3/vNcW+5dDHClq4Oab+ITCK5fTi5Y2oWfrp6aYwr03Rh9Kls2JqaYni1Zs016dqR2YQfuXC2EIJnSrbJWCG1Foy7ISfXtKtHdPTnIpcfxb/LeFPsGfU3caGzM+ktNmmK+/n3U67jjf4zjzEPjLmqV0+JMNd5Nq/NDyw2IGNAYgx2S3Md0rP2ZoeHKl5sRaQOwL7Y68iLBqIE7cNuNDYY4Wt3bZn80iuuORY7OnnQ86xuY1y7S7kIj64rBPN+VJoV+TEspgf5x3YLalCj6L5xGG8DMnAYnsGET5K3rOoNCUwnET/UiW6jJEboj3qWX7fboTz61SWn0lzOFtow4FK/j0GqpNqovOtvUINm5hzRGJSSmjYnlu7u5HlBgPveE3erShuLMVtgaJfsY1R6XbumtX+vSgSbwLDC1vvdNr11RGt/0mLG3Ya3LRm4X02fUIX2yxxTz7N9iYuOGzoKdQJ85bkr+Q5wEuoSyQoon6FJh3JObxpYXUF8wnEpE5zEZyD1uNL0WT9iC8gQ/XIPiHX6IORJ8s1Z7oA7w+yG51Tf5TwrRU3m5PXwu28RV+GWIjOLMCcTU0YNIUK26Cm8cxVer/hSNFfU/h+bpWUhmdqapJU4sv6JxLlI923aEPka4zXDIaFKl2P54ECwTxDxHGzNV0kvB78L6TmqX1mceF9nxAWSlSdDduxwD/RrfV1RLvTwKz8t1pzdIWql6o7qup4D9wugg/U8CZeeNERX3Nrzn5II4vjBuc17xOuMPEbTXpLmFaOu402C0eHToGEwJ5z6pio2rRoDALu5FxE55mceM4mVXpbPas0IFMY4GdL5QUWiHv48Nc9PXdhbgvk0HIxLngyt0VED+D/4RPfKyg7VcuzIB8+rJiNhP/ABCJHkW72yBfoaQ/dYAElL6jBIYgB2wx1KEqh5dUHqiobijLu1DGmTVFgTJm8sI1KPdlH8S1rTOfqVot2xUnO6ju7VlnDGNxA128Cdt0aWx3qGMH3Yg/m3ZO8kX/8Jvq7uxFu4TquVCUl9m1c52RvmGbtAciN5FUkl5YkppNmuibg4tc2fIUK5KsAImSK4kuzOHOmReai1B6KqIpFC9mQjoxFkrvvHM5SEb0GWqghzJnoMr4EQGTjAnKK/iTlEhX+MtTZSOZ0GcOywEAAAA=) format('woff2');}
 @font-face{font-family:XDTRFF-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAPcAAoAAAAABlQAAAOQAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqFdIRwCwwAATYCJAMUBCAFglwHIBsVBSCOwradc5IwwggnnTLGRzz8/9Xu/29mWmgFinDjOFs23EECyiPsZN5J4+3n87L3kzpTKIWgqaxTu9BxPVgB/3NN/u/o3tE1RwJY5TqwioYHPBqOMLFxw5kesA0Ut5tKQtCjjliztE9hHH1BBIl6gBXkG3bxX093y6M3RQUGiROAqQB7ARhanYpT7Br72MXhPx6Q3RHh39IiYwP0JhHKWhaqQLWOYBxj1zkcwN7/U5+AZTAlNKHOPUGaTKGAKOpbWJ9CMZMidQRCYiSGh0hlroWpZWFuOl2ORgss+UBFDCnqWxfWIwgmM2SaEcy1NCAaKfZDBwYrTvUBLjK8LiLB0NXbaL5tY0SUJkYPooe4DYcJ4cFRdYFmbC8yQ4YB3Ur4hLBNJ3dX7KDWD6LSac8NYXgpJlJ0YJBAXyd/Oi7BFGcwArmWBnLomyKDRxK1hPCgMPWK4cIl/WNa4OLouooO+KCUnN6N4ycIFKUFBk9JzzGcl2iWp2li1KtOi8yzPs0yRmyNH+p4HiPySlECyvYnMAdqUjS/H2eELzty97SV8reqwDr3BdhOU88sO6ykYpUZYNcydPbEJx78He+8F6MRNQPz5rFyc0E33bXY9sDofc4atLeUWT8OSQqEzLLDkXuffbhHqEhIoT6PD4kXOxs46gdCrN1i+XQZvt44fs3kQx/bZqW5drQ+iWqwxpAcExdv/TKfbiwcvxawF+nmfSLuGpy54H9M0Qf9Li7P9qCoCusagPzcGJB1+3aebzOWvS/w7UrPmRdW7dpGbHNkRzRW4/LY2osM6oogPDCUXBodAvUP/tK54mEh8z16R4RAjx+ngPyZ2mtGeyX6LhCWYpKRKx7n5I3b+DokY16QOiU8xIF/ECCR5JPW0+vHIuZElXbtTcdDefTtdELPznjKe6ZIUbkMM2UfFskBQAISuF+qi4rhtfzKESzAl/+v6MOuAajDBDo3weABNv+nQ6KiRCUtn8E9XMDVUXDLP9gIJTv4loRbTdUwJ+FN0wIFryiVCBJShUL5epMofThUcAIizV2UWIhKlViRqBIbUUMzLrq2HrXsP6ldDHUM9Hd21nLw8nIzeYPZ0dPWtSQ+S38jsTitoDglS9ZA2xgc5MiSq0ihJPlkecmRCIeyhXIUyJ/zwGlx4DV2YyLYJW0F0uTIJkuPNt0AcImyF43iNoLERryyiTZRsTQFKU+RRZYBbcZwDAAAAA==) format('woff2');}
 @font-face{font-family:NQUDBD-CMSY10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJMAAoAAAAABCAAAAIAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBUIFQCwYAATYCJAMIBCAFgmIHIBtnA2COw3T7ImMuxVTcHOLFxENw7H13v2NZWtgC49HnpW9g0yKeasXw+8t3UBqtj4O8rTtJyUxQc/tIc13Iu4tT+TEDA7owWyAW87k9IAs0YItiODHtBqoWqGS9anWbTjxFvNQs6Ck6ukEh72NSiXzOtz9/ExbFnzLsBQdVGeIEYE1u3BrAXH1o0EJ/UgB9Y4FEAPDvAZAoYIgmMES3DCgqClYfPB7qvuvb3QQUP6yEfcAEAEVAadxgVZoXGDTrj0EEkkogJJpGojg8F4CbYZQg4rFm/0d/Lopg0AqugWASXSO4CITjSWRb0EvQ/I8nh09FB5cieIw6nCJoDBJSR3JWv8BoIYYub3BVOPT8jOHVJf1hD0KaZbuK5feC+0y3kDJASTj/d2PRTI8QDLTTz2vHX8ZCDXIq+oksVgIAgeDsK/NO4lX+yi4U8VP/+/mbMACqEgRbK59XrCR/BU6eykIK0j7GSOCy7hYF0NECsqilQ5Y0zJNlLVvHddPy0USxJixqJ7Jolp4sGRsiy2YtV3XbLg5t7U+u/c4euL62PqOuo4+Xk30ZnuZkZhdaT5yvULp1DrfGFJ2XWQjqWJhYuTip2EXrYKHE/2vWqQesXq16Gep06MOTIxtCxc5Bx8IsWo5M2Q3Q5JqndWVLgfJLcoOiKbnpOLhpmETLk6kQjSsFAAAA) format('woff2');}
-@font-face{font-family:PCPXEO-CMSY5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAI8AAoAAAAABBQAAAHxAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBTIFKCwYAATYCJAMIBCAFglwHIBtbA0CeBXZbRwi9NtbbUKkhKpt+IqDfr+3Tc8U00f5cIwUSQ2kWasf/Z3/v/VDa6a6f8MxGpjlLkUhrD2kl7awJYW4HKIFs7KZkC27OWmWf/3PxB1+BpBXRzNIyBAp0b4CjEe7utJOjDc9Ot6kE7ZEQRJWCnqKjDaS6J6yiEF/8+JvDyrBDoRAHA0EFegSMlzPYBNS1XiCxfg4A8kXSOxAA+P8HiEiYIwmYIzsFsixwfv//6YmfrUAAEEFGQQM8A5ABZej0VvsViRwrGobFrngYHj9Tn4lGL7loZzSOYZZ5JBOP3SARFO2LRO9xHEvEvBXtC7g2CMT/1HVR2ZXZIW7E7hTnCWKsAuN3R////v4tzTiz2zDJTQT/tWg/jBGiELZBCQ3YcNBdy1ctMP/HqH6KCwABgU++tjpfoflup0x3+o8mNALaIgjsakveMGo0oVA5SHk+AVGDUhNo2vWBwGCkenjWN8KLnh1e9V3P71oTIQndERxzEZ6tNePF0ihera1lXQ9Oz2v1O66+AXMgYfVzzd5wUnoNbgh5gkTpbfMS9YMtfYNNHXVingzMunToNqBfg151vLrUc9IpULFhQIKVH5eZV1iSVAwlfVqqe9epjhCPAMCudc6pFdcB9UnJiKXXG9Si7zc06VBHjEeGBLD7AAA=) format('woff2');}
 @font-face{font-family:OYFEXR-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAPAAAoAAAAABrwAAAN0AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqGXIUCCwwAATYCJAMUBCAFgmIHIBslBVGU60kA8GOhuq0HjDEm9r/Zr4rDoU4x8Yp4gA5/7+ZfozWtrC+QjQk6PQ84jnl7GtYN5WXT2d3KSQFlC5CTin72wBeA52XLQPP/XFPv4+H189wEpxbZGGmZoCMdpjU1JcH0aIA882I/+xG9zN62/UVRoSOk1A8vCvE1/s+v7XCGnyFDK7BAV5jAT7l9yo0DjE64JtCQhLiNrQGISFjuSsao9iFDsJzHOk+amtyuYCls6XOD0CUcY0u2ogT9gZsje9OsgAv75tgwEiCE+3rj3XhFz9SOCB7o7S1Ibt30Oi7ErhZEwnp8Jwd6MB+/nj4kfz0r6B/XsyAwIN+N97T7Sf5yxNr40NubPylYkB+x+Tzx6hG48BvASH5vhOTZJwtFK1h1JYiRWFZKvnG3aOuz3tp4JNvNEBqMQO+cDkQT8ntuTrAgFZVsM6RQSFJPj9xEg6mxKBghViQcKpyodKhHtBHvkUi3vC6v6CGxkCCBgXldBP3PYBhC+OUh81CHW/998bsIFo7HRBQshukWTFzXPH0Ya4VqT676ngy7TRX7dXgVrIAV5sxcb+/a77s063NZwvvsV+5VsBKeCv2TNL809LBv1Yw6FKP+WGXhuHZPh/ZwjZljmxF3ELbVvO7tBaVJDYp0GgtnLsiCvvuDR/yWsR1nzN6fjUjwfF3scelreEQ9ztm23etgD2y3YOb8626jDYwsU+qk6IxQ5MzLYCnsQP+eHtPhOFQfQnmF+Rc0qpmwwNnRU48TmR8PY+GpyDVxvhdWIwL2qWJ/XzRLbgM3q2y7kkfcdeNs77jDLwER6d5qoGbHMp7zP6iiVtSFBfSNSbGVSLOzck6by0n1srpnxLno4x8NP6aDX+LZ91nB/ugrNY5tc/04qIPlS9gsvli/vb7Adzy+HX4Omxj/dsvU2vaXxWN0xUzd/TDbN4W2mmEgS9nL7yjEXYeRrGrSpRgtbjJ0lqJE33OEZUIgn41M5nwxsM1XIweb+9Zpowi5J9jl3PhsUyJfrKrmq039hb6Fzacu7U/VVrsF2Nr4e6pZubg40Im3mWm6OuHr+kb9iOjchKzcuBRJLXVdYCVNinQ5ssXIJMlFmmi6LpWbALZs+POkxooLFw7oCL5RUs2SIE0qSXTqiByws6RWtkSsBtGhSAWWfLRcCbIkHieFJC3qdFEoAAAA) format('woff2');}
 @font-face{font-family:TUELZZ-CMR10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAIkAAoAAAAAA/gAAAHbAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBLIExCwgAATYCJAMKBCAFglwHIBtEAyMR5mouC/CPxNhY2lMzUgjFMIqNogkbKdxdsuaFrWqjGb/E8/9//7+5zj7vy18M37P0YoA/jh5x1sgTLZNM2hNzbcNM3xPtVTVhWiF6arQJYtctkSATfp8hbMcTWUB/FwjsPLDAkoASDCFMgkBCDHRgAUHvjKp3EjmJyH5bUPnJvhXje9z/9/iSlE+O4LND14TwQ+7hmB1Yu7qVRgkEgG4wUDgowcH0gGkKbt24dvcfEECBNQYe8QwAExC5DMSNhU1EhiDTCCpH0a2eHgiSQo/SwRMzDEkgaBPsR1FZEZEtnfafbcFSGBb97vtMRoxuQT582QI8DZ/PSjAmq6WvOa2B/ucjCTL4bv6YBuZbxE5vyxoj8z+VC9EPm9M5Deqtcw8HBOF34p/17Ru/25rUa7ShYGuAUBqDxZI3AQCMgXy6A4ugXAQE5Ld7OZJ2s5latLPSbJi1FnPzvQE41cC5AxrDAmoMcFCrT4E6A05LE4y71bSPNw8lUipHpVolc0VYzMXbYdcwruYZ84Ql5gzH7N4J/BoJIPPzCoiKsAqZwOVnQe/5SEhRcaiorCLjEsHCkLEKCXPy85mAtQaTIfTaxyrE2EksPjBJmmAR4xQWY+c1AW8NSTUAmD8=) format('woff2');}
 
 </style>
 <g id="page1">
-<text font-family="TUELZZ-CMR10" font-size="9.96" x="327.322554" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">(</text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="331.195533" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">K</text>
-<text font-family="NQUDBD-CMSY10" font-size="9.96" x="342.580561" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="350.228048" y="-97.017107" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">D</text>
-<text font-family="TUELZZ-CMR10" font-size="9.96" x="359.765075" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">(</text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="363.639064" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">L</text>
-<text font-family="NQUDBD-CMSY10" font-size="9.96" x="372.630707" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="380.269649" y="-97.017107" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">C</text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="389.289348" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">N</text>
-<text font-family="TUELZZ-CMR10" font-size="9.96" x="398.377976" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">))</text>
-<text font-family="NQUDBD-CMSY10" font-size="9.96" x="408.338396" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="415.966188" y="-97.017107" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">B</text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="425.153976" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">M</text>
-<text font-family="TUELZZ-CMR10" font-size="9.96" x="186.25338" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">((</text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="194.000357" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">K</text>
-<text font-family="NQUDBD-CMSY10" font-size="9.96" x="205.384376" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="213.070815" y="-61.840285" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">D</text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="222.569879" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">L</text>
-<text font-family="TUELZZ-CMR10" font-size="9.96" x="229.34811" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">)</text>
-<text font-family="NQUDBD-CMSY10" font-size="9.96" x="235.434511" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="243.112427" y="-61.840285" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">C</text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="252.094152" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">N</text>
-<text font-family="TUELZZ-CMR10" font-size="9.96" x="261.1818" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">)</text>
-<text font-family="NQUDBD-CMSY10" font-size="9.96" x="267.269201" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="274.937056" y="-61.840285" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">B</text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="284.084791" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">M<tspan x="468.391729">K</tspan></text>
-<text font-family="NQUDBD-CMSY10" font-size="9.96" x="479.776757" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="487.385281" y="-61.840285" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">D</text>
-<text font-family="TUELZZ-CMR10" font-size="9.96" x="496.961271" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">((</text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="504.708249" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">L</text>
-<text font-family="NQUDBD-CMSY10" font-size="9.96" x="513.699902" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="521.298791" y="-61.840285" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">C</text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="530.358553" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">N</text>
-<text font-family="TUELZZ-CMR10" font-size="9.96" x="539.44718" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">)</text>
-<text font-family="NQUDBD-CMSY10" font-size="9.96" x="545.533592" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="553.123511" y="-61.840285" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">B</text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="562.349262" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">M</text>
-<text font-family="TUELZZ-CMR10" font-size="9.96" x="573.098466" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">)<tspan x="186.25338" y="-28.166647">(</tspan></text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="190.126369" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">K</text>
-<text font-family="NQUDBD-CMSY10" font-size="9.96" x="201.511397" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="209.198936" y="-26.664462" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">D</text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="218.695901" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">L</text>
-<text font-family="TUELZZ-CMR10" font-size="9.96" x="225.474131" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">)</text>
-<text font-family="NQUDBD-CMSY10" font-size="9.96" x="231.561552" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="239.239568" y="-26.664462" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">C</text>
-<text font-family="TUELZZ-CMR10" font-size="9.96" x="248.220194" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">(</text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="252.094182" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">N</text>
-<text font-family="NQUDBD-CMSY10" font-size="9.96" x="263.395242" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="271.065207" y="-26.664462" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">B</text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="280.210853" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">M</text>
-<text font-family="TUELZZ-CMR10" font-size="9.96" x="290.960047" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">)</text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="468.391729" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">K</text>
-<text font-family="NQUDBD-CMSY10" font-size="9.96" x="479.776757" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="487.385281" y="-26.664462" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">D</text>
-<text font-family="TUELZZ-CMR10" font-size="9.96" x="496.961271" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">(</text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="500.83426" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">L</text>
-<text font-family="NQUDBD-CMSY10" font-size="9.96" x="509.825903" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="517.425903" y="-26.664462" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">C</text>
-<text font-family="TUELZZ-CMR10" font-size="9.96" x="526.485564" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">(</text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="530.358553" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">N</text>
-<text font-family="NQUDBD-CMSY10" font-size="9.96" x="541.660603" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">⊗</text>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="549.251552" y="-26.664462" transform="matrix(1.000545 0 0 1.000545 -182.012 109.688999)">B</text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="558.476213" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">M</text>
-<text font-family="TUELZZ-CMR10" font-size="9.96" x="569.224407" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.012 109.688999)">))</text>
-<path d="M235.1019 17.464L305.02388 34.90209" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
-<path d="M303.785128 32.129063C303.805336 33.612606 304.45997 34.473994 305.21717 34.950288C304.324991 35.015274 303.342549 35.468422 302.628119 36.768768" stroke="#000" fill="none" stroke-width=".398478" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="127.634415" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 144.89801 49.368997)">α</text>
-<text font-family="FBIPCW-CMMI5" font-size="4.98" x="132.848321" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 144.89801 49.368997)">K,L</text>
-<text font-family="PCPXEO-CMSY5" font-size="4.98" x="145.555004" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 144.89801 49.368997)">⊗</text>
-<text font-family="FBIPCW-CMMI5" font-size="4.98" x="150.949595" y="-25.477349" transform="matrix(1.000261 0 0 1.000261 144.89801 49.368997)">C<tspan x="156.747082" y="-27.164908">N,M</tspan></text>
-<path d="M93.99402 34.9985L163.916 17.5604" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
-<path d="M161.520249 15.69372C162.234679 16.994066 163.217121 17.447214 164.1093 17.5122C163.3521 17.988494 162.697466 18.849882 162.677258 20.333425" stroke="#000" fill="none" stroke-width=".398478" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="127.634415" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 -45.108995 50.088998)">α</text>
-<text font-family="FBIPCW-CMMI5" font-size="4.98" x="132.848321" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 -45.108995 50.088998)">K,L,N</text>
-<text font-family="ZVJZVP-CMSY7" font-size="6.97" x="154.191936" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 -45.108995 50.088998)">⊗</text>
-<text font-family="HJTYEB-CMR7" font-size="6.97" x="160.414543" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 -45.108995 50.088998)">1</text>
-<text font-family="FBIPCW-CMMI5" font-size="4.98" x="164.430066" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 -45.108995 50.088998)">M</text>
-<path d="M58.59611 52.6595V69.79554" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
-<path d="M60.987027 67.92264C59.552447 68.30121 58.875047 69.14482 58.596117 69.99477C58.317187 69.14482 57.639787 68.30121 56.205207 67.92264" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="127.634415" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 -116.56199 89.756999)">α</text>
-<text font-family="FBIPCW-CMMI5" font-size="4.98" x="132.848321" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 -116.56199 89.756999)">K</text>
-<text font-family="PCPXEO-CMSY5" font-size="4.98" x="138.859751" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 -116.56199 89.756999)">⊗</text>
-<text font-family="FBIPCW-CMMI5" font-size="4.98" x="144.254333" y="-25.477349" transform="matrix(1.000261 0 0 1.000261 -116.56199 89.756999)">D<tspan x="150.452715" y="-27.164908">L,N,M</tspan></text>
-<path d="M340.81191 52.6595V69.79554" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
-<path d="M343.20281 67.92264C341.76823 68.30121 341.09083 69.14482 340.8119 69.99477C340.53297 69.14482 339.85557 68.30121 338.42099 67.92264" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
-<text font-family="HJTYEB-CMR7" font-size="6.97" x="127.634415" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 215.45401 90.863)">1</text>
-<text font-family="FBIPCW-CMMI5" font-size="4.98" x="131.640636" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 215.45401 90.863)">K</text>
-<text font-family="ZVJZVP-CMSY7" font-size="6.97" x="138.110703" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 215.45401 90.863)">⊗</text>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="144.33331" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 215.45401 90.863)">α</text>
-<text font-family="FBIPCW-CMMI5" font-size="4.98" x="149.55296" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 215.45401 90.863)">L,N,M</text>
-<path d="M117.39403 79.02453H281.61551" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
-<path d="M279.74264 76.63362C280.12121 78.0682 280.96482 78.7456 281.81477 79.02453C280.96482 79.30346 280.12121 79.98086 279.74264 81.41544" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="327.322554" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">(</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="331.195533" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">K</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="342.580561" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="350.228048" y="-97.017107" transform="matrix(1.000545 0 0 1.000545 -182.00798 109.688999)">D</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="359.765075" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">(</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="363.639064" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">L</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="372.630707" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="380.269649" y="-97.017107" transform="matrix(1.000545 0 0 1.000545 -182.00798 109.688999)">C</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="389.289348" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">N</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="398.377976" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">))</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="408.338396" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="415.966188" y="-97.017107" transform="matrix(1.000545 0 0 1.000545 -182.00798 109.688999)">B</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="425.153976" y="-98.538277" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">M</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="186.25338" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">((</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="194.000357" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">K</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="205.384376" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="213.070815" y="-61.840285" transform="matrix(1.000545 0 0 1.000545 -182.008 109.688999)">D</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="222.569879" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">L</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="229.34811" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">)</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="235.434511" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="243.112427" y="-61.840285" transform="matrix(1.000545 0 0 1.000545 -182.008 109.688999)">C</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="252.094152" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">N</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="261.1818" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">)</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="267.269201" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="274.937056" y="-61.840285" transform="matrix(1.000545 0 0 1.000545 -182.008 109.688999)">B</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="284.084791" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">M</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="468.391729" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">K</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="479.776757" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="487.385281" y="-61.840285" transform="matrix(1.000545 0 0 1.000545 -182.00798 109.688999)">D</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="496.961271" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">((</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="504.708249" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">L</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="513.699902" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="521.298791" y="-61.840285" transform="matrix(1.000545 0 0 1.000545 -182.00798 109.688999)">C</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="530.358553" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">N</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="539.44718" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">)</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="545.533592" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="553.123511" y="-61.840285" transform="matrix(1.000545 0 0 1.000545 -182.00798 109.688999)">B</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="562.349262" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">M</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="573.098466" y="-63.352462" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">)</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="186.25338" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">(</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="190.126369" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">K</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="201.511397" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="209.198936" y="-26.664462" transform="matrix(1.000545 0 0 1.000545 -182.008 109.688999)">D</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="218.695901" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">L</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="225.474131" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">)</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="231.561552" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="239.239568" y="-26.664462" transform="matrix(1.000545 0 0 1.000545 -182.008 109.688999)">C</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="248.220194" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">(</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="252.094182" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">N</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="263.395242" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="271.065207" y="-26.664462" transform="matrix(1.000545 0 0 1.000545 -182.008 109.688999)">B</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="280.210853" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">M</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="290.960047" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.008 109.688999)">)</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="468.391729" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">K</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="479.776757" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="487.385281" y="-26.664462" transform="matrix(1.000545 0 0 1.000545 -182.00798 109.688999)">D</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="496.961271" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">(</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="500.83426" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">L</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="509.825903" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="517.425903" y="-26.664462" transform="matrix(1.000545 0 0 1.000545 -182.00798 109.688999)">C</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="526.485564" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">(</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="530.358553" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">N</text>
+<text font-family="NQUDBD-CMSY10" font-size="9.96" x="541.660603" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="549.251552" y="-26.664462" transform="matrix(1.000545 0 0 1.000545 -182.00798 109.688999)">B</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="558.476213" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">M</text>
+<text font-family="TUELZZ-CMR10" font-size="9.96" x="569.224407" y="-28.166647" transform="matrix(1.000261 0 0 1.000261 -182.00798 109.688999)">))</text>
+<path d="M235.10146 17.46431L305.02254 34.90218" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M303.783835 32.129189C303.804046 33.612722 304.458656 34.474083 305.21586 34.950399C304.323666 35.015402 303.341258 35.468538 302.626831 36.768874" stroke="#000" fill="none" stroke-width=".398498" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="127.634415" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 144.897 49.368997)">α</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="132.848321" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 144.897 49.368997)">K,L</text>
+<text font-family="PCPXEO-CMSY5" font-size="4.98" x="145.555004" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 144.897 49.368997)">⊗</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="150.949595" y="-25.477349" transform="matrix(1.000261 0 0 1.000261 144.897 49.368997)">C<tspan x="156.747082" y="-27.164908">N,M</tspan></text>
+<path d="M93.99536 34.9986L163.91646 17.56072" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M161.520711 15.694043C162.235138 16.994379 163.217546 17.447515 164.10974 17.512518C163.352536 17.988834 162.697926 18.850195 162.677715 20.333728" stroke="#000" fill="none" stroke-width=".398498" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="127.634415" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 -45.107995 50.088998)">α</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="132.848321" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 -45.107995 50.088998)">K,L,N</text>
+<text font-family="ZVJZVP-CMSY7" font-size="6.97" x="154.191936" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 -45.107995 50.088998)">⊗</text>
+<text font-family="HJTYEB-CMR7" font-size="6.97" x="160.414543" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 -45.107995 50.088998)">1</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="164.430066" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 -45.107995 50.088998)">M</text>
+<path d="M58.59793 52.6594V69.79522" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M60.98883 67.922339C59.55426 68.300909 58.87688 69.144489 58.59793 69.994449C58.31898 69.144489 57.6416 68.300909 56.20703 67.922339" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="127.634415" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 -116.559 89.756999)">α</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="132.848321" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 -116.559 89.756999)">K</text>
+<text font-family="PCPXEO-CMSY5" font-size="4.98" x="138.859751" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 -116.559 89.756999)">⊗</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="144.254333" y="-25.477349" transform="matrix(1.000261 0 0 1.000261 -116.559 89.756999)">D<tspan x="150.452715" y="-27.164908">L,N,M</tspan></text>
+<path d="M340.81009 52.6594V69.79522" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M343.201 67.922339C341.76643 68.300909 341.08905 69.144489 340.8101 69.994449C340.53115 69.144489 339.85377 68.300909 338.4192 67.922339" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="HJTYEB-CMR7" font-size="6.97" x="127.634415" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 215.452 90.862)">1</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="131.640636" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 215.452 90.862)">K</text>
+<text font-family="ZVJZVP-CMSY7" font-size="6.97" x="138.110703" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 215.452 90.862)">⊗</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="144.33331" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 215.452 90.862)">α</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="149.55296" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 215.452 90.862)">L,N,M</text>
+<path d="M117.39508 79.02408H281.61447" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M279.74162 76.63318C280.12019 78.06775 280.96377 78.74513 281.81373 79.02408C280.96377 79.30303 280.12019 79.98041 279.74162 81.41498" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
 <text font-family="XDTRFF-CMMI7" font-size="6.97" x="127.634415" y="-28.158648" transform="matrix(1.000545 0 0 1.000545 49.598009 112.547)">α</text>
 <text font-family="FBIPCW-CMMI5" font-size="4.98" x="132.848321" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 49.598009 112.547)">K,L,N</text>
 <text font-family="PCPXEO-CMSY5" font-size="4.98" x="153.736868" y="-27.164908" transform="matrix(1.000261 0 0 1.000261 49.598009 112.547)">⊗</text>
@@ -556,8 +559,8 @@ Figure&nbsp;1: The associator pentagon in <span class="math inline">\(\mathsf{Bi
 <!-- This file was generated by dvisvgm 3.6 -->
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="389.835pt" height="76.2pt" viewbox="0 0 259.89 50.8">
 <style type="text/css">
-@font-face{font-family:FBIPCW-CMMI5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAOYAAoAAAAABmAAAANOAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAARAqFeIRLCwwAATYCJAMUBCAFglwHIBv4BEAehXFMrItKZaXeJPJ+ei97k0kqZ5utsIUWBZSaPgKfd3+ACHJ3VcDNiyLNNLAEU48w/pL/n7imfhX/cySAV892A2uN5uFoYtOdZ+CwxadPD6jz3fUW7SRWaI9NOfAP/wrApRGNAQWIS9z6pwKjJUFvsgZESRKAFQMcArmCrF2TC2LMhRT4DwBDqIP//wMABAAMQCXxKkj8QxIkEADMeQqJfYCdF+/ZhyFCUUIpl5JXAEBnSJKPLHwFNRMZ6QjPzI28zafbzxgdOgcP3ZmTKjMzM6o7nsSmqqLNPN7Gzah9Cy376FH0w6gplYdRXUSnIDOlO2o4uCVR+smT2PbHMVKbNzJJ9ZY4pjFJZWra0GZ2E8xt5MREbebAz1NPzdvKGZjhpCQxS9Gz0/Qcz9c3qs5e3EI/OaOeaHON9JZpbnLh7BZD6dlNbSqpWery1sakqSmpqTi2YLaTyrhUB52fqD673XdKXfbxiZ2eduOPPzypLCvXdhYLybM6yzY4Nuth0dm0kzJP02xj4G9UN2Mmi/l7dQxlVew/bCiAzgjkjn08za/98Dfyl8iVS40GYoW7HHuR4NBBnLprI0PHudvd2eN6vogYTkfupv4uQejEM2mbQpdLmWgsDQcJWX8W/fLh6EHgyermWlKdCvs+0DIkEzaM+zEhS8fx7e/whh2u1wR+klvVHM7r5toZBKC2r9Ja4RNnq/BzLSxZ5kU08Fp++Ubz6Y+4vxB2eG4NOOULC3cNuUOKYdy0s+DS/QbMrBbkyg41pSa1opWY9XvJNO9KNy1MU9vhOc9WFQ4VCuVKjuhq9ULZl8ESYdiFlXiskCTU0rxwIxwTEH4D7ZNamqnyzl8lMAnS89+BMiVOAhzRvAAggP0HQA2oC5QpIMBgbkEPdpI8aMKJLZWFOpESAU9ApCSlhRoAiDzXSDLkRzJFmrosRgbvsBSGEIaqJCBaAoNMYuTJFI42WQxjpi6Fb/dlyvhX2kJfz4Awr1gLL5YNsHmjTAks+YqRD8+PyKrJr6zJLdYRWdqCl1LFylSrkq2CDlapLLqnhC9PAcJ4iWXBC4sVwEYMImuV8pUqoUPAEh8P+vkla/rpdsCsYob6Vp+lRr7KjOcqpkPEki1MAAA=) format('woff2');}
 @font-face{font-family:ZVJZVP-CMR7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHYAAoAAAAAA5wAAAGPAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANApYaQsGAAE2AiQDCAQgBYJWByAb9AJAjsK25RNjoiIuM5dbhGc8/Hf/v33OzNz3Xp/vx3pCgV2gwPL4BxZIq+WJBxpJ8/PH8v2LFImizgLPFWDZWmRWIMPhzXLHBw9aQG1hW2QZNw+zwJLWPOAk4sBfWmB5SJFZdrPIU5ILymu19tuCkpdoD438xHz8b9lZiD/VSIKMGJCB6el53gCC+VyBjiKm2N5BomBLdrbgnAFVFZj3jn+w/0IAElQEDoALACogDjq4m7tFqnGMRhH14+GgvX9y4uUn8HU5vivuzy4uu44JGIQt2FzX+X7hKTIVstBkm2e8AxAIfh5f/wqr2n9SqfxGym9gKkFQdOSjoUr8QgCAzL6NkA6gTqC04IWw6jNVLVpFowMMdM0v2COEFXUmnHBmqtpRR6MtBjrmBQ9uj5P/LHNMx92hCvIsvrDikjqK+MJ68/B4ojpvTeaNHk3Cl4PFQM/QzFTNGI3PQJXLvrQ4N74niMfCJ0whrmZsomWgj0aETzgNR9lXM1bagWosW6Ghaq5lwmnooZHgk8NycAkAAA==) format('woff2');}
+@font-face{font-family:FBIPCW-CMMI5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAOYAAoAAAAABmAAAANOAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAARAqFeIRLCwwAATYCJAMUBCAFglwHIBv4BEAehXFMrItKZaXeJPJ+ei97k0kqZ5utsIUWBZSaPgKfd3+ACHJ3VcDNiyLNNLAEU48w/pL/n7imfhX/cySAV892A2uN5uFoYtOdZ+CwxadPD6jz3fUW7SRWaI9NOfAP/wrApRGNAQWIS9z6pwKjJUFvsgZESRKAFQMcArmCrF2TC2LMhRT4DwBDqIP//wMABAAMQCXxKkj8QxIkEADMeQqJfYCdF+/ZhyFCUUIpl5JXAEBnSJKPLHwFNRMZ6QjPzI28zafbzxgdOgcP3ZmTKjMzM6o7nsSmqqLNPN7Gzah9Cy376FH0w6gplYdRXUSnIDOlO2o4uCVR+smT2PbHMVKbNzJJ9ZY4pjFJZWra0GZ2E8xt5MREbebAz1NPzdvKGZjhpCQxS9Gz0/Qcz9c3qs5e3EI/OaOeaHON9JZpbnLh7BZD6dlNbSqpWery1sakqSmpqTi2YLaTyrhUB52fqD673XdKXfbxiZ2eduOPPzypLCvXdhYLybM6yzY4Nuth0dm0kzJP02xj4G9UN2Mmi/l7dQxlVew/bCiAzgjkjn08za/98Dfyl8iVS40GYoW7HHuR4NBBnLprI0PHudvd2eN6vogYTkfupv4uQejEM2mbQpdLmWgsDQcJWX8W/fLh6EHgyermWlKdCvs+0DIkEzaM+zEhS8fx7e/whh2u1wR+klvVHM7r5toZBKC2r9Ja4RNnq/BzLSxZ5kU08Fp++Ubz6Y+4vxB2eG4NOOULC3cNuUOKYdy0s+DS/QbMrBbkyg41pSa1opWY9XvJNO9KNy1MU9vhOc9WFQ4VCuVKjuhq9ULZl8ESYdiFlXiskCTU0rxwIxwTEH4D7ZNamqnyzl8lMAnS89+BMiVOAhzRvAAggP0HQA2oC5QpIMBgbkEPdpI8aMKJLZWFOpESAU9ApCSlhRoAiDzXSDLkRzJFmrosRgbvsBSGEIaqJCBaAoNMYuTJFI42WQxjpi6Fb/dlyvhX2kJfz4Awr1gLL5YNsHmjTAks+YqRD8+PyKrJr6zJLdYRWdqCl1LFylSrkq2CDlapLLqnhC9PAcJ4iWXBC4sVwEYMImuV8pUqoUPAEh8P+vkla/rpdsCsYob6Vp+lRr7KjOcqpkPEki1MAAA=) format('woff2');}
 @font-face{font-family:XDTRFF-CMR10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAI8AAoAAAAAA/gAAAHzAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBLIExCwgAATYCJAMKBCAFglwHIBtEAyMRFmstwF8ncEPGsQb2hggfgXgGxxghULGLCfnIcVkc/V39tdRlEoe2L4mHr/34nbv7vpnikaHRLJp2T+rRSvDpVJpJClQ2IZvZA8Apx5LFgSaBX+DO3xs45wLXf9vCXgXSTVGFF/j42kZLu8jpb7Dq93jVFQq2OINH+2sLvSBsxxNZQH8XCOw8sMCSgBIMIUyCQEIMdGABQe+MqncSOYnIfluQ40NQQ3qV+t/9TFLMkS3RgNYSgh9y6vyls2rNW8gKsoAAoBSQkNEtC3SrjKNSCSyUgvlSyt8AkEEtEtaxD1ABQvT3hx6/vr+UpPzqyvJ3d/84BBXz5aTCCMJF3+96fi183/NHPxHFfht7Txx31eerQ7dmu4euMwfX26e7BuQjoj934wpB58OZKxE7evTzoVb8H7fvL5miuGjoqXMPCMKn10c/2oZ/9cxcUa9RJBnqJRBkBYlddsXBAACkhHjilF0CWb8AAXKjqyRtZlNp1kaNJkPUajY7b9RvUxZVgzBqL1Dpd44ava5Tq98JXxrX36tpH28e1kKlQiRi36OCe/3i7TZW113NM+aJUzPa7AczesvqdsHFbLnb9tZ0etFF781roVIhErEH0wW3q9Jbb0aLOe12uDIkWs9761Yn6fqgfaK7+9FmP5jRXkcANn8=) format('woff2');}
 @font-face{font-family:PCPXEO-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJMAAoAAAAABAwAAAICAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBRIFNCwYAATYCJAMIBCAFglwHIBteAyCuBmzXHLHsuFRErvnSfvRFisjx4XTjRhDt95u9u/cQlSza+KERtX6qRwtNk8VEIjRKpNn/jc1/WEjQ8eZ+iNrhlqgySx6StyUNaSXtUeraxQaSXQ/8lx9OtbrqbUe7GfX4iKplCQRSZp/paiCb/5vxf2k4QRa2BbLM5vPtZXNqwFEIWTcWHtih3DvRM2/dHpOY3KNriYj06w45fUQq0nv6/Rt02ew4GNajDVUN0gCs5tWyBYz5lxrOzxqID+ZPBAD/gYSMQVSBQTSzQFEE8y+F8gsgfDWBggo7QBMgN6EabbX4WtJylfjlBEL5xvnL23+a009aTaTAqc8Mxng9JX9q89eSeCxvqCpXgXq/f8Kqk/QFXibCMWaGUK6SjF7iRZgfnIzx/6VR5NGMNEg4+NsTOHZFK+HD7QRGQ7TE76ZlQ1e/MCUACASXx9aP1mP8blXwpf/BuAXQKoFgZ+XP9oQyBgQTJAlChGQHfSWwaHcHGeiBoig69XTJSocJstZp+XS7UXJUUdqEaT6Qxag2WRm2I2ujrst2K97OrPUj590IjmScYREOxrOaq/BGJpaOLN43/3WNZWe2bA3YCrEasJGBsYU5YootaKSBmBqKwCIynMJEsKC4LI0UYmqmY2SITUZMOgG4u0PEVHUh0PhSzQZbw1LHzFLLAJuCmBoVlQIA) format('woff2');}
 @font-face{font-family:NQUDBD-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAOwAAoAAAAABhQAAANmAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAATAqFJIQhCwwAATYCJAMUBCAFglwHIBvWBBEVm7MBfiTGxsoesxG5Vq4HXbbYi2T8ks9XZ/2qSnpAqGeWGi3h4O1NVyNEsrv9EowiDDnxPG5onY9ULpSHK4Bub6tlUzf5L6A20C8Af2rjZ+8NkCjBhAMOxwQpsMC6dHqAmuqZzSURKTXm2YHDALAcJyshBProw//aWFED8rYQ8CoFwODAHAemorqrtw6cSHaVQQZgCCBLsGQmGaBZBtDGkCQL+L+hSB5FRbKj7Dy7KpMB3yu7/Dfjb/zfKBCgQGieIkAecB/IBAAAAl2AoQi6lJXdNK0NtPLKjGamdW0Vd2zaraMiFluIRNm9INtaLOXxppv7i5Sk0rzNklzFXZP6xXzb+ZNTbeKDelPnjcaVdKZ0+CfeOx55XhBlSyS50rz9dtI8sThnysRCmjczo6MztTZbX5Sdu8l0myR2lyj4isiAfxqzU1pXPbljxy7D9XZ1hYf26S6eXj+jJH5oUGIw5ZTbKk6ao+ncnCKpPyHKnrVvxa1HutmEH7BenP553k5p1GGp2bZLi0XOe0TZxpMuB6+lLTDz4eZ9nFB9Q3Sf9FSR1kwlGsXXlGpkKBSly5HE5HCTzJAhuuy4JneFv7o7ak89HW5ChLp3bDLb8PJfTFvqzlLCN9FU1ZCEOPIi0YU7BrfLCvK2r/Q4r6S5MkNB0/Lq+DOfY32ecSggZbUknlXEpLKw9KhamoL6AqUkQ2jsLKOatIaVqzIEBjG8afyqRpav6hnhln9tS7Jlcp0Jr+jdbP6qxwIbrZXNNY1WllHOyUV9wMTg20fBDvZFIZWUmP9KmRxe5MmpPdM+cvrJRpME+P7yMZOW6YFURKOwkKTT2ojUzxZJkQXUo7RFv9qoyT96i0oa/tzno619FplN6OjJRNXxTIpeok7BHNXMTAAAiB7SnKbRUKYW/E2eCQAZmQ0roLeBEHSwymFhXObAi1EXBJ6TGR9JpD8RlpNIpqXwQgBCEWAAgIBE0SiIADXGoYAyNSikxAhylNnWK9LniSFDAYSpRA4F9NVDIV085OibThU5pP9hif2FVulHmSqrmOJ5lnAHKVA4aco9LK9Rv8P1dgtgcB5SbBa7x61xAjybmvdZ+SIZlUyFUXgYWQT5nLNdBpsVQMGRK4Bhr17tYidQh6Vfj669BtfJOwuAgeOhAAA=) format('woff2');}
@@ -566,41 +569,41 @@ Figure&nbsp;1: The associator pentagon in <span class="math inline">\(\mathsf{Bi
 
 </style>
 <g id="page1">
-<text font-family="TUELZZ-CMMI10" font-size="9.96" x="187.840965" y="-80.778913" transform="matrix(1.000261 0 0 1.000261 -77.38501 91.261)">N</text>
-<text font-family="OYFEXR-CMSY10" font-size="9.96" x="199.143015" y="-80.778913" transform="matrix(1.000261 0 0 1.000261 -77.38501 91.261)">⊗</text>
-<text font-family="NQUDBD-CMMI7" font-size="6.97" x="206.831237" y="-79.262786" transform="matrix(1.000545 0 0 1.000545 -77.38501 91.261)">B</text>
-<text font-family="TUELZZ-CMMI10" font-size="9.96" x="215.958625" y="-80.778913" transform="matrix(1.000261 0 0 1.000261 -77.38501 91.261)">M</text>
-<text font-family="XDTRFF-CMR10" font-size="9.96" x="99.070138" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.805 91.261)">(</text>
-<text font-family="TUELZZ-CMMI10" font-size="9.96" x="102.944127" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.805 91.261)">N</text>
-<text font-family="OYFEXR-CMSY10" font-size="9.96" x="114.246177" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.805 91.261)">⊗</text>
-<text font-family="NQUDBD-CMMI7" font-size="6.97" x="121.95751" y="-45.082425" transform="matrix(1.000545 0 0 1.000545 -94.805 91.261)">B</text>
-<text font-family="TUELZZ-CMMI10" font-size="9.96" x="131.060787" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.805 91.261)">B</text>
-<text font-family="XDTRFF-CMR10" font-size="9.96" x="139.115695" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.805 91.261)">)</text>
-<text font-family="OYFEXR-CMSY10" font-size="9.96" x="145.202096" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.805 91.261)">⊗</text>
-<text font-family="NQUDBD-CMMI7" font-size="6.97" x="152.905637" y="-45.082425" transform="matrix(1.000545 0 0 1.000545 -94.805 91.261)">B</text>
-<text font-family="TUELZZ-CMMI10" font-size="9.96" x="162.017706" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.805 91.261)">M</text>
-<text font-family="TUELZZ-CMMI10" font-size="9.96" x="276.611792" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80499 91.261)">N</text>
-<text font-family="OYFEXR-CMSY10" font-size="9.96" x="287.912832" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80499 91.261)">⊗</text>
-<text font-family="NQUDBD-CMMI7" font-size="6.97" x="295.575834" y="-45.082425" transform="matrix(1.000545 0 0 1.000545 -94.80499 91.261)">B</text>
-<text font-family="XDTRFF-CMR10" font-size="9.96" x="304.728442" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80499 91.261)">(</text>
-<text font-family="TUELZZ-CMMI10" font-size="9.96" x="308.602431" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80499 91.261)">B</text>
-<text font-family="OYFEXR-CMSY10" font-size="9.96" x="318.869741" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80499 91.261)">⊗</text>
-<text font-family="NQUDBD-CMMI7" font-size="6.97" x="326.523961" y="-45.082425" transform="matrix(1.000545 0 0 1.000545 -94.80499 91.261)">B</text>
-<text font-family="TUELZZ-CMMI10" font-size="9.96" x="335.685361" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80499 91.261)">M</text>
-<text font-family="XDTRFF-CMR10" font-size="9.96" x="346.433566" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80499 91.261)">)</text>
-<path d="M64.07407 33.337998L109.23432 15.946678" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
-<path d="M106.627391 14.388602C107.496192 15.591266 108.526854 15.920236 109.420238 15.875087C108.727326 16.440814 108.183525 17.376103 108.345786 18.850853" stroke="#000" fill="none" stroke-width=".398469" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
-<text font-family="NQUDBD-CMMI7" font-size="6.97" x="57.913426" y="-46.576607" transform="matrix(1.000545 0 0 1.000545 31.241009 78.013)">ρ</text>
-<text font-family="FBIPCW-CMMI5" font-size="4.98" x="62.061799" y="-45.588103" transform="matrix(1.000261 0 0 1.000261 31.241009 78.013)">N</text>
-<text font-family="PCPXEO-CMSY7" font-size="6.97" x="68.440687" y="-46.576607" transform="matrix(1.000545 0 0 1.000545 31.241009 78.013)">⊗</text>
-<text font-family="ZVJZVP-CMR7" font-size="6.97" x="74.664291" y="-46.576607" transform="matrix(1.000545 0 0 1.000545 31.241009 78.013)">1</text>
-<text font-family="FBIPCW-CMMI5" font-size="4.98" x="78.655465" y="-45.588103" transform="matrix(1.000261 0 0 1.000261 31.241009 78.013)">M</text>
-<path d="M82.50149 42.168498H176.99004" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
-<path d="M175.11716 39.777587C175.49573 41.212167 176.33934 41.889567 177.18929 42.168497C176.33934 42.447427 175.49573 43.124827 175.11716 44.559407" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
-<text font-family="NQUDBD-CMMI7" font-size="6.97" x="57.913426" y="-46.576607" transform="matrix(1.000545 0 0 1.000545 57.931009 84.453998)">α</text>
-<text font-family="FBIPCW-CMMI5" font-size="4.98" x="63.107526" y="-45.588103" transform="matrix(1.000261 0 0 1.000261 57.931009 84.453998)">N,B<tspan x="76.334403">,M</tspan></text>
-<path d="M195.81593 33.337998L150.65568 15.946678" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
-<path d="M151.544222 18.850853C151.706483 17.376103 151.162682 16.440814 150.46977 15.875087C151.363154 15.920236 152.393816 15.591266 153.262617 14.388602" stroke="#000" fill="none" stroke-width=".398469" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="187.840965" y="-80.778913" transform="matrix(1.000261 0 0 1.000261 -77.382999 91.261)">N</text>
+<text font-family="OYFEXR-CMSY10" font-size="9.96" x="199.143015" y="-80.778913" transform="matrix(1.000261 0 0 1.000261 -77.382999 91.261)">⊗</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="206.831237" y="-79.262786" transform="matrix(1.000545 0 0 1.000545 -77.382999 91.261)">B</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="215.958625" y="-80.778913" transform="matrix(1.000261 0 0 1.000261 -77.382999 91.261)">M</text>
+<text font-family="XDTRFF-CMR10" font-size="9.96" x="99.070138" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.803 91.261)">(</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="102.944127" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.803 91.261)">N</text>
+<text font-family="OYFEXR-CMSY10" font-size="9.96" x="114.246177" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.803 91.261)">⊗</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="121.95751" y="-45.082425" transform="matrix(1.000545 0 0 1.000545 -94.803 91.261)">B</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="131.060787" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.803 91.261)">B</text>
+<text font-family="XDTRFF-CMR10" font-size="9.96" x="139.115695" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.803 91.261)">)</text>
+<text font-family="OYFEXR-CMSY10" font-size="9.96" x="145.202096" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.803 91.261)">⊗</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="152.905637" y="-45.082425" transform="matrix(1.000545 0 0 1.000545 -94.803 91.261)">B</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="162.017706" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.803 91.261)">M</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="276.611792" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80301 91.261)">N</text>
+<text font-family="OYFEXR-CMSY10" font-size="9.96" x="287.912832" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80301 91.261)">⊗</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="295.575834" y="-45.082425" transform="matrix(1.000545 0 0 1.000545 -94.80301 91.261)">B</text>
+<text font-family="XDTRFF-CMR10" font-size="9.96" x="304.728442" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80301 91.261)">(</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="308.602431" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80301 91.261)">B</text>
+<text font-family="OYFEXR-CMSY10" font-size="9.96" x="318.869741" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80301 91.261)">⊗</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="326.523961" y="-45.082425" transform="matrix(1.000545 0 0 1.000545 -94.80301 91.261)">B</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="335.685361" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80301 91.261)">M</text>
+<text font-family="XDTRFF-CMR10" font-size="9.96" x="346.433566" y="-46.589838" transform="matrix(1.000261 0 0 1.000261 -94.80301 91.261)">)</text>
+<path d="M64.07491 33.337898L109.23457 15.946788" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M106.627685 14.388714C107.496483 15.591369 108.527109 15.920331 109.42051 15.875197C108.727596 16.440946 108.183816 17.376206 108.346073 18.850947" stroke="#000" fill="none" stroke-width=".398489" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="57.913426" y="-46.576607" transform="matrix(1.000545 0 0 1.000545 31.242009 78.013)">ρ</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="62.061799" y="-45.588103" transform="matrix(1.000261 0 0 1.000261 31.242009 78.013)">N</text>
+<text font-family="PCPXEO-CMSY7" font-size="6.97" x="68.440687" y="-46.576607" transform="matrix(1.000545 0 0 1.000545 31.242009 78.013)">⊗</text>
+<text font-family="ZVJZVP-CMR7" font-size="6.97" x="74.664291" y="-46.576607" transform="matrix(1.000545 0 0 1.000545 31.242009 78.013)">1</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="78.655465" y="-45.588103" transform="matrix(1.000261 0 0 1.000261 31.242009 78.013)">M</text>
+<path d="M82.50208 42.168298H176.98945" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M175.11658 39.777398C175.49515 41.211968 176.33873 41.889348 177.18869 42.168298C176.33873 42.447248 175.49515 43.124628 175.11658 44.559198" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="57.913426" y="-46.576607" transform="matrix(1.000545 0 0 1.000545 57.932008 84.453998)">α</text>
+<text font-family="FBIPCW-CMMI5" font-size="4.98" x="63.107526" y="-45.588103" transform="matrix(1.000261 0 0 1.000261 57.932008 84.453998)">N,B<tspan x="76.334403">,M</tspan></text>
+<path d="M195.81509 33.337898L150.65543 15.946788" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M151.543957 18.850947C151.706214 17.376206 151.162434 16.440946 150.46952 15.875197C151.362921 15.920331 152.393547 15.591369 153.262345 14.388714" stroke="#000" fill="none" stroke-width=".398489" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
 <text font-family="ZVJZVP-CMR7" font-size="6.97" x="57.913426" y="-46.576607" transform="matrix(1.000545 0 0 1.000545 83.99801 78.362)">1</text>
 <text font-family="FBIPCW-CMMI5" font-size="4.98" x="61.899841" y="-45.588103" transform="matrix(1.000261 0 0 1.000261 83.99801 78.362)">N</text>
 <text font-family="PCPXEO-CMSY7" font-size="6.97" x="68.278775" y="-46.576607" transform="matrix(1.000545 0 0 1.000545 83.99801 78.362)">⊗</text>
@@ -702,68 +705,68 @@ N\otimes_B-
 <!-- This file was generated by dvisvgm 3.6 -->
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="246.345pt" height="158.94pt" viewbox="0 0 164.23 105.96">
 <style type="text/css">
-@font-face{font-family:PCPXEO-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJMAAoAAAAABAwAAAICAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBRIFNCwYAATYCJAMIBCAFglwHIBteAyCuBmzXHLHsuFRErvnSfvRFisjx4XTjRhDt95u9u/cQlSza+KERtX6qRwtNk8VEIjRKpNn/jc1/WEjQ8eZ+iNrhlqgySx6StyUNaSXtUeraxQaSXQ/8lx9OtbrqbUe7GfX4iKplCQRSZp/paiCb/5vxf2k4QRa2BbLM5vPtZXNqwFEIWTcWHtih3DvRM2/dHpOY3KNriYj06w45fUQq0nv6/Rt02ew4GNajDVUN0gCs5tWyBYz5lxrOzxqID+ZPBAD/gYSMQVSBQTSzQFEE8y+F8gsgfDWBggo7QBMgN6EabbX4WtJylfjlBEL5xvnL23+a009aTaTAqc8Mxng9JX9q89eSeCxvqCpXgXq/f8Kqk/QFXibCMWaGUK6SjF7iRZgfnIzx/6VR5NGMNEg4+NsTOHZFK+HD7QRGQ7TE76ZlQ1e/MCUACASXx9aP1mP8blXwpf/BuAXQKoFgZ+XP9oQyBgQTJAlChGQHfSWwaHcHGeiBoig69XTJSocJstZp+XS7UXJUUdqEaT6Qxag2WRm2I2ujrst2K97OrPUj590IjmScYREOxrOaq/BGJpaOLN43/3WNZWe2bA3YCrEasJGBsYU5YootaKSBmBqKwCIynMJEsKC4LI0UYmqmY2SITUZMOgG4u0PEVHUh0PhSzQZbw1LHzFLLAJuCmBoVlQIA) format('woff2');}
 @font-face{font-family:FBIPCW-CMR7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAIwAAoAAAAABAgAAAHlAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBQIE7CwgAATYCJAMKBCAFglYHIBtIAwCOwrZtE0NFDDGdyVdUPP91iH/u7qb0ZqEARytYxpuHIIIRC2Dmk/93tpaz/6yQCgzoUBiW5QNbkk0duU7e4n2gG9AHAjsfbjSwN6DEQgn7AQN6xaKAszDz1mb7bGbK6oiI9GuGnn+ZRKd9t9v/QhNp8hkKm8xAJ2HhUV4/6wuA4ZpRV+iC66wCDR3rusl1NMfAMAQ3Vbiuqj9AADqYRMMd8ALAAET2FCWiuU4hFts5DI8rUyERvy4nEtxqkBmDl1mT4bGdmCeG7Uu6JAqSTCCI+Hm0sFXyf57FzfO0cSqpcKyk3Bh9+ctLXeRmnfdm2bY+HOm2omxUZdqN2XVBSvVk2dlHJBtuathllmVvsalnLzEhKV+w2a7ePvychhisBwAIwuHPxVkGx/Wb1Yfmb1SaDtMaCF2hcS8onRAAoDXkV61ACN0eBIL8rC8EWELpHuYsCZgwZ7cGk+Sie9Y2S1QZM+JQIPFhUz6YIK1gkkyHWbcOD6n+gnObv3dQpE+CmU9YtMPVt2llbjlTe85cI7e+qKa+oEzTxtwefFQoU6lOrTzVNIWpkMvLy/nzFiSSjwRmfISJ5iBe7lKjSIVymqyYs8SDgGq5PNWyVgG57yBbE0256hWpUa9AGU02zNmjAuw8AAA=) format('woff2');}
 @font-face{font-family:TUELZZ-LMRoman7-Regular;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAALsAAoAAAAABXgAAAKhAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAARAqDZIMhCwoAATYCJAMQBCAFgwkHIBt3BGCOwrblE2OiaqgnPB0iHr7fj3Xufw8RrySGSFJPDNFDo0O3bFYS1J1Nm7budE/rkX+gl5fkVYia+mMlTt7kfArwf86lf8M9356vQaDaRtO6a6oQPZADPGxriiY9K6Hk8zN3bSklwx5i1z48JFlCKp6QGqiguEb33nhVVzu+hEMnmMArIYLf4+AwPwEoFmXk4jccIB+HChCARVCWoEBCO0ygHckoUK1agUVpMsqydCtfy8ayQVAsM6q58w74aNqHEIqxGVb+Fn9fhOV0XDixFpejLCzGV1W0jzEzx+YWMJ+MCGELUjMSWh5OF1kcFo5uBuPUF1oGDbTeqXvMFgnYnCYcNnCpzi3H7YFDxumpLzbwJ4gAfOZM3QzlsX39sk3FiVM6rjSJKxA244RcG9aCyXUb1QtV+lcKPxv2ELRm9hj2C3UI90dUFmTHDQj98P8Qrjfqlm1ltQO/AjTnYc5RK/fziuO9W9wqCYlYRT1fOK5+yhlQJ9iFYTwZCZfyf8HU/p5TrokF9he9je4y3ZWfHbz1Z7wdncDmM8cuGPiERp7Tk5DkqKCjkRF9WpKKphQVJcFBJNbFcYGHdYVvuVoWz3lmp40Ge6FDD9jyYHUGEAg+sPxPRHCY/qOlTCvK/+kCXQLrniDYOxdJ7yhSSs0QSEEMgbTNCEIaFA4U/WzGRQtN1jqCmKFaGNBZFxpdoc4QXamL8uRa3axgItcIzYKIzkYk0RU6NdOVRkzm1xp16er2prHKwNfPzjU4WC0Zar+BCQf/drTUNSENF7vPOzY/KSc/IU1SR10fXLnxliFNlHQGfPmx4ypYMLXwnVTjLU6CPKmiZPMXJ1uOJBnSSdKiTtMJ4qClO+JHyRUn1otW1PFj5UuS8+AJ0kjSoU4fRgEAAA==) format('woff2');}
 @font-face{font-family:XDTRFF-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAOQAAoAAAAABkgAAANEAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAARAqFYIQoCwwAATYCJAMUBCAFglwHIBvVBFFULBIAH4np1geZxnIENOGUUdY47/v53PR9fkghtB5SUTNsZn6qyWniN7HbBvFft71/B3ZmkZ5gJE2YemBNlDX+Jq6pX8X/HAmAiyispiyhEQ4Tm380sAHt/OlFB2KzbUZgTRFX0qkODfXDPwG4dtGBDVhXLf2nzY4o+roGHBsXgCUBh4CloGhvKQWSlbgOUgBDvIvSAAAsABgALc/SCHYAODhYAKzEiEs0SvSu3LmR6xCg2EJU6XoN0ARgCAFUP4P1qhrvZSWfSguMTl7sv2R64wls+tGPaREjVt3Y6cxSEwiNnU/1CZiUpCARw/SL+S/OaeaWSYwmNHKyJHzBGWe+kC+h2AQQE68eRTXFumET6vrBU3zeKaF6dqVYbMw7pd53nHl5ujNLIKAmREyFfW1SCBITCQskeXPTcJxfnilGh1IY0eaXyalCiYB5fr80KSEsyRMS6B+S29pK3kwS0PMfzEjj7SQ+2tE4uk1RJwU7CrdO6l1+6/B9zs7bHqcETfm/PWJFJunp5IB/QdmohgtZopj/wfCzXz/2g/eHjRmlv6tzT8znAi92LTrQvOrqUb0grOn5fq2BA5/9KnEFnjNmFF7lXd0b0YecyebvDioYMW8X/W4bFPlNhB7Ytpt6xlJgvuddA+eCqGln61aezFCmRdGAbBLWjFznfqRMlTwZf6wrvxN39FT0mAHpRyBmdRpuRBIqNQ+8eSaBrHcFHIWAL7yjdvyunoUsL89vDi5kCeT/hm9cIS5GASjd8tWsEc1Ufo4B+ba0HDVlgH/Fx/uOnkjz6MK1LsH843WoPkkjl8uOtw1re/sPAAAgAAhEPRmOuQpefziYAJiRbsRsPQIn0CoACGBSgFgQmnPMQqCBlUcLGlm3o/pBofUVwiEAbPGeNkCb0gMxQAWnLhNkKchsPJoySZbJZYoaBxgaXEB0ROgyQU2ZzMbok0lqRB2KnYt3Jeev0M6mBSUlhIRYB0ZHh7s+Qbbsbey2Vr4rv6OopbyxpbRaz9HGBQLVqlanWZNiDfREq1VU9tVIEyRJghDkrQWKboZzlcIxW6NytWrosWfDzgIMDdR4DeRHAotyBdpX+iItyjWavFQ1PY5suMAAAAAA) format('woff2');}
 @font-face{font-family:NQUDBD-CMMI5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAANsAAoAAAAABbQAAAMiAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqEYIN2CwoAATYCJAMQBCAFglwHIBuPBECOwra1E8yEI0m+/Pv5uvT9mVmjjqRNFVunwt7kVNA8j93e3b+LoK0kiQMM0yyQ1jILTJq6ya+d1/mPynKcNpZlYdvDgKMAE2vb1jDRgLooUs22hVp+gihp4DWe49EBwNONuqAD7MOu/hNCZ7LRm8gB40IDoMmAQeBTEPcWJAKZI+fAfwA4hHL//3c8wADgUAiH+AQFAARAmjPSdvwVn4AARTCoW6gfAg22WwBgcGjDNZkM28Lw4XnG4LxoWMUtwM9vQTy6KOo/vyYggKnSJ/ST9gmH90pE/aKhOXGAi0nLgHhgVHJ+RT91cLC13y+IFRgpQQtqanMLqHpRxJLL/e/49Qnv+MnlCk2X2ceLqq2LoYyVlcDq5QD6wpw0LDcGSUuD+vro4gHxhuXgn7vjd6UQyP3nVeUrgdb+oEjUL4GBcIffAYOEEKPs/zNyueagJFAyyOjvf34yPx/K1ilVBr37kyN4cK5cDqGxI2vAgOnKDTZTMFT2StsdQuUFZ03HMAjqphzc4BaxsAol3QTH8W63a8pvpcPB2Y+9leGvX71Um4Ub7FBQZQktPsymQO2BHHBXJ52LPzzUPaiJ7Eh/wPbNtgdfhFjWYEdvmDJFQQ7m17fbnUrD2qORg5aHrTc6/IBhmmp7NhZ1ReHeRjIPGfrlKlYCu+uMPUk3kfMwms6D4CcjBvG36Ydt3uAxgQKJXGdjvVBflXk4FxRoqpq+8dPNaJpyYfnFIPu3tdoyWMiJJVSJVYWn27j7GzX4TmGxWIKjMMvVze2gIrHDCwAAAAFAwP5emxzJsflKDQEy+f9lnmN3AYAKG/cY7j8AYoZkojwHRHmiAgAxQTIGluUPFECCA7wE0ZSuArIDjtrDBCYOJmFYg8mY1ObppIzgUKMBsp4XYYJUEiYRq8JkUgMZnYFtZxz1C7NR383+Lk4uus4ymafp1aFiqGdgKLwHXxFXkJxbkJiuYKxnBs4ypcuSL0+8HApkMsXxmQy+NvPnwokLXc5kZDyZCkC8LVeyTBkUGNJjgAfuWsacWvQ6IM6LUVzz4xRIlvvyROkUGNNjBqcA) format('woff2');}
+@font-face{font-family:PCPXEO-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJMAAoAAAAABAwAAAICAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBRIFNCwYAATYCJAMIBCAFglwHIBteAyCuBmzXHLHsuFRErvnSfvRFisjx4XTjRhDt95u9u/cQlSza+KERtX6qRwtNk8VEIjRKpNn/jc1/WEjQ8eZ+iNrhlqgySx6StyUNaSXtUeraxQaSXQ/8lx9OtbrqbUe7GfX4iKplCQRSZp/paiCb/5vxf2k4QRa2BbLM5vPtZXNqwFEIWTcWHtih3DvRM2/dHpOY3KNriYj06w45fUQq0nv6/Rt02ew4GNajDVUN0gCs5tWyBYz5lxrOzxqID+ZPBAD/gYSMQVSBQTSzQFEE8y+F8gsgfDWBggo7QBMgN6EabbX4WtJylfjlBEL5xvnL23+a009aTaTAqc8Mxng9JX9q89eSeCxvqCpXgXq/f8Kqk/QFXibCMWaGUK6SjF7iRZgfnIzx/6VR5NGMNEg4+NsTOHZFK+HD7QRGQ7TE76ZlQ1e/MCUACASXx9aP1mP8blXwpf/BuAXQKoFgZ+XP9oQyBgQTJAlChGQHfSWwaHcHGeiBoig69XTJSocJstZp+XS7UXJUUdqEaT6Qxag2WRm2I2ujrst2K97OrPUj590IjmScYREOxrOaq/BGJpaOLN43/3WNZWe2bA3YCrEasJGBsYU5YootaKSBmBqKwCIynMJEsKC4LI0UYmqmY2SITUZMOgG4u0PEVHUh0PhSzQZbw1LHzFLLAJuCmBoVlQIA) format('woff2');}
 @font-face{font-family:OYFEXR-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAM8AAoAAAAABXgAAALxAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqEHINHCwoAATYCJAMQBCAFgmIHIBtmBAiOw3R7I4OZcITjy1Gm+j+d+u8kE1KYFYflFJB5Kq99ndoQye7al3nsmYW5JbT/O5U/YPbzbADbgy4aX6C181IN59YxTUMl1Q7bRrWR0JNpXS8Aos6gJbAAvvjhf7nFLkO/jQJigwPAMgGHwE9BjzOqNzAVKg60AQTku7etAQBgAAQAOdEwQTIDCSgs9s8KW+FXsoQkjNmNwE78t4eV/2UEtAkTX5hJ91/tmr9S0XHKTt7utSuULU3KVcqpqxU7b+taWvhNa1zlWK1YQQ04lnf6Mc1rR3eeyk3bcborePkSXrxoWngW4slZwD86dHN/e97r1/TmVy3cXTvUHbZWptTyFbzxqRUruMpVSpVpqtISeAUcqV8YZJc++Tr5+LWOIcXKlXveBem98ipe05O/kpe5FxX0asXKUyN7NHcOC1LC3MnKToEi/qmC4XgyHlLIEt3aYs52snsySxA1/br9svlqUHCzoBem8RGO6CRH/GzN7V/metieXJAh0XW9pv/6JdUeda3LwpWTezUIqzgNFBtVlRX+q8kdQQw8Znj1ZMmzTSWrOuHhQ1EpESguQjO+BCsGNi1oj0eOQpQ8lCzH10r1EQZHCOF3J58MtHCnFDKNjHbNfWuhxIyiv6W0thOtaM8nRo7vUoGGdLK05vrb01lTuhT6/ANKC2cMiRbB6Fq3Ek/GcxqGxyorY8Pqp+MGYvqIjuW1H9ExAACAACAwj3+1ubMo5w87JJC5bT88/BEA2HB0DJ2lHdT2fhKexaBHLIXAHk/eV+8hxpMyEUOQUc01CfICkbUlkgREIgOPXmQScO3nUosjoMkBxKhmSyRp9RMZlGaITFrrGq6wE1cX62ey+cnWstJUQ6CYoioj4SfBaCQYPh746P1Gj1F9h4/qPdAcC6ZBscEGGmKkEXoaxowyWA943SBJrcqUSmkQUIxCqRQR1uLZ1+H6GmwQs4igcByUh4Oyh10rQo+ym7ELdQ+j9DW8570NZBYTlIYwAgAA) format('woff2');}
 
 </style>
 <g id="page1">
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="82.165551" y="-98.87319" transform="matrix(1.000261 0 0 1.000261 -4.412003 109.356998)">B</text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="18.009299" y="-30.984912" transform="matrix(1.000261 0 0 1.000261 -4.120003 109.356998)">A</text>
-<text font-family="OYFEXR-CMMI10" font-size="9.96" x="146.501757" y="-30.984912" transform="matrix(1.000261 0 0 1.000261 -4.301003 109.356998)">C</text>
-<path d="M87.80777 14.30674L138.1493 67.41807" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
-<path d="M138.596121 64.414125C137.815407 65.675716 137.90411 66.753941 138.28636 67.56266C137.499249 67.137693 136.427313 66.991435 135.125763 67.703539" stroke="#000" fill="none" stroke-width=".398461" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
-<path d="M101.9659 46.03764H124.26528V35.97634H101.9659Z" fill="#fff"></path>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="82.165551" y="-98.87319" transform="matrix(1.000261 0 0 1.000261 -4.411003 109.356998)">B</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="18.009299" y="-30.984912" transform="matrix(1.000261 0 0 1.000261 -4.119003 109.356998)">A</text>
+<text font-family="OYFEXR-CMMI10" font-size="9.96" x="146.501757" y="-30.984912" transform="matrix(1.000261 0 0 1.000261 -4.300011 109.356998)">C</text>
+<path d="M87.80772 14.30706L138.1486 67.41775" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M138.595417 64.413817C137.814711 65.675401 137.903408 66.75359 138.28565 67.56233C137.498517 67.13737 136.426617 66.99112 135.125074 67.703217" stroke="#000" fill="none" stroke-width=".398481" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M101.96565 46.0376H124.26475V35.97641H101.96565Z" fill="#fff"></path>
 <text font-family="NQUDBD-CMMI5" font-size="4.98" x="9.982394" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 94.128 73.882)">C</text>
 <text font-family="XDTRFF-CMMI7" font-size="6.97" x="15.774399" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 94.128 73.882)">N</text>
 <text font-family="NQUDBD-CMMI5" font-size="4.98" x="22.087233" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 94.128 73.882)">B</text>
-<path d="M95.57724 3.63972C136.82255 3.84253 153.52566 21.57843 151.27849 62.36393" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
-<path d="M153.768698 60.625476C152.315531 60.92454 151.592781 61.72957 151.26753 62.56285C151.035791 61.698882 150.405855 60.819324 148.994338 60.362429" stroke="#000" fill="none" stroke-width=".398462" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
-<path d="M115.23323 23.46699H164.23631V12.199108H115.23323Z" fill="#fff"></path>
+<path d="M95.57707 3.6402C136.82187 3.84298 153.52476 21.57866 151.2776 62.36367" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M153.767827 60.625236C152.31467 60.9243 151.591941 61.729301 151.26667 62.56259C151.034911 61.698611 150.404994 60.819084 148.993487 60.362189" stroke="#000" fill="none" stroke-width=".398482" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M115.23282 23.4672H164.23529V12.19945H115.23282Z" fill="#fff"></path>
 <text font-family="TUELZZ-LMRoman7-Regular" font-size="6.97" x="9.979559" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 107.395008 50.57)">Hom</text>
 <text font-family="FBIPCW-CMR7" font-size="6.97" x="26.365628" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 107.395008 50.57)">(</text>
 <text font-family="XDTRFF-CMMI7" font-size="6.97" x="29.476929" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 107.395008 50.57)">M<tspan x="37.38091">,P</tspan></text>
 <text font-family="FBIPCW-CMR7" font-size="6.97" x="45.894978" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 107.395008 50.57)">)</text>
 <text font-family="NQUDBD-CMMI5" font-size="4.98" x="49.021201" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 107.395008 50.57)">A</text>
-<path d="M25.34495 67.70726L75.54259 14.59631" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
-<path d="M72.518645 14.315168C73.821207 15.025409 74.892929 14.87762 75.67943 14.45153C75.298337 15.260792 75.211176 16.339139 75.993689 17.599609" stroke="#000" fill="none" stroke-width=".39846" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
-<path d="M38.85701 46.03764H62.304198V35.97634H38.85701Z" fill="#fff"></path>
-<text font-family="NQUDBD-CMMI5" font-size="4.98" x="9.982394" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 31.019001 73.882)">B</text>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="15.872346" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 31.019001 73.882)">M</text>
-<text font-family="NQUDBD-CMMI5" font-size="4.98" x="23.471873" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 31.019001 73.882)">A</text>
-<path d="M12.509 62.76916C10.15341 21.61854 26.80739 3.88449 67.62614 3.65556" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
-<path d="M65.739907 1.27534C66.126517 2.707706 66.973883 3.380324 67.82535 3.654461C66.977019 3.938151 66.137266 4.620251 65.766781 6.056873" stroke="#000" fill="none" stroke-width=".398462" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
-<path d="M-.00061 23.50042H47.85466V12.23254H-.00061Z" fill="#fff"></path>
-<text font-family="TUELZZ-LMRoman7-Regular" font-size="6.97" x="9.979559" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 -7.838997 50.603)">Hom</text>
-<text font-family="NQUDBD-CMMI5" font-size="4.98" x="26.373117" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 -7.838997 50.603)">C</text>
-<text font-family="FBIPCW-CMR7" font-size="6.97" x="32.161466" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 -7.838997 50.603)">(</text>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="35.27277" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 -7.838997 50.603)">N<tspan x="41.887298">,P</tspan></text>
-<text font-family="FBIPCW-CMR7" font-size="6.97" x="50.40452" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 -7.838997 50.603)">)</text>
-<path d="M25.86023 81.33943C62.61638 105.76185 101.17305 105.76185 137.41676 81.67985" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
-<path d="M134.533769 80.724978C135.642951 81.7103 136.720435 81.80764 137.58269 81.569599C137.029149 82.272265 136.701398 83.303297 137.179981 84.707612" stroke="#000" fill="none" stroke-width=".398463" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
-<path d="M65.96182 104.70187H97.782501V94.640569H65.96182Z" fill="#fff"></path>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="9.979559" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 58.124 132.546)">N</text>
-<text font-family="PCPXEO-CMSY7" font-size="6.97" x="17.033713" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 58.124 132.546)">⊗</text>
-<text font-family="NQUDBD-CMMI5" font-size="4.98" x="23.262927" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 58.124 132.546)">B</text>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="29.150107" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 58.124 132.546)">M</text>
-<path d="M25.86023 68.6598H137.35016" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10"></path>
-<path d="M135.47727 66.26889C135.85584 67.70347 136.69945 68.38087 137.5494 68.6598C136.69945 68.93873 135.85584 69.61613 135.47727 71.05071" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
-<path d="M71.39227 73.69046H92.2166V63.62916H71.39227Z" fill="#fff"></path>
-<text font-family="NQUDBD-CMMI5" font-size="4.98" x="9.982394" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 63.554 101.535)">C</text>
-<text font-family="XDTRFF-CMMI7" font-size="6.97" x="15.774399" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 63.554 101.535)">P</text>
-<text font-family="NQUDBD-CMMI5" font-size="4.98" x="20.849557" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 63.554 101.535)">A</text>
-<path d="M118.85785 36.00807L132.34123 24.26954" stroke="#000" fill="none" stroke-width="2.33075" stroke-miterlimit="10"></path>
-<path d="M118.85785 36.00807L132.34123 24.26954" stroke="#fff" fill="none" stroke-width="1.53377" stroke-miterlimit="10"></path>
-<path d="M129.683823 23.188674C131.045515 23.796455 133.081873 23.560734 133.842236 22.962814C133.1453 23.633591 132.631387 25.618083 133.045851 27.050501" stroke="#000" fill="none" stroke-width=".398471" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
-<path d="M44.83147 36.0157L31.32939 24.29307" stroke="#000" fill="none" stroke-width="2.33075" stroke-miterlimit="10"></path>
-<path d="M44.83147 36.0157L31.32939 24.29307" stroke="#fff" fill="none" stroke-width="1.53377" stroke-miterlimit="10"></path>
-<path d="M30.628542 27.074989C31.041068 25.642008 30.524468 23.658208 29.826623 22.988374C30.587797 23.585265 32.624477 23.81823 33.985348 23.208605" stroke="#000" fill="none" stroke-width=".398472" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
-<path d="M81.85771 93.0505L81.82364 77.46984" stroke="#000" fill="none" stroke-width="2.33075" stroke-miterlimit="10"></path>
-<path d="M81.85771 93.0505L81.82364 77.46984" stroke="#fff" fill="none" stroke-width="1.53377" stroke-miterlimit="10"></path>
-<path d="M79.266346 78.769974C80.617483 78.139098 81.773119 76.445943 81.819321 75.479757C81.869716 76.445733 83.03269 78.133856 84.386552 78.758863" stroke="#000" fill="none" stroke-width=".398469" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M25.34567 67.70694L75.54266 14.59663" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M72.518726 14.3155C73.821281 15.025735 74.892968 14.877953 75.67949 14.45187C75.298405 15.261153 75.211249 16.339464 75.993755 17.599927" stroke="#000" fill="none" stroke-width=".39848" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M38.85756 46.0376H62.304458V35.97641H38.85756Z" fill="#fff"></path>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="9.982394" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 31.02 73.882)">B</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="15.872346" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 31.02 73.882)">M</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="23.471873" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 31.02 73.882)">A</text>
+<path d="M12.50989 62.76889C10.15433 21.61877 26.80809 3.88496 67.62631 3.65603" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M65.740097 1.275807C66.126707 2.708164 66.974043 3.380762 67.82552 3.654919C66.977179 3.938629 66.137456 4.620709 65.766971 6.057321" stroke="#000" fill="none" stroke-width=".398482" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M.00043 23.50064H47.855104V12.232891H.00043Z" fill="#fff"></path>
+<text font-family="TUELZZ-LMRoman7-Regular" font-size="6.97" x="9.979559" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 -7.837998 50.603)">Hom</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="26.373117" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 -7.837998 50.603)">C</text>
+<text font-family="FBIPCW-CMR7" font-size="6.97" x="32.161466" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 -7.837998 50.603)">(</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="35.27277" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 -7.837998 50.603)">N<tspan x="41.887298">,P</tspan></text>
+<text font-family="FBIPCW-CMR7" font-size="6.97" x="50.40452" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 -7.837998 50.603)">)</text>
+<path d="M25.86095 81.33892C62.6166 105.76104 101.17282 105.76104 137.41606 81.67935" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M134.533092 80.724476C135.642268 81.70979 136.719716 81.80713 137.58199 81.5691C137.028452 82.271788 136.700715 83.302787 137.179292 84.707094" stroke="#000" fill="none" stroke-width=".398483" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M65.962 104.70106H97.782279V94.639875H65.962Z" fill="#fff"></path>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="9.979559" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 58.124 132.545)">N</text>
+<text font-family="PCPXEO-CMSY7" font-size="6.97" x="17.033713" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 58.124 132.545)">⊗</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="23.262927" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 58.124 132.545)">B</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="29.150107" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 58.124 132.545)">M</text>
+<path d="M25.86095 68.65947H137.34946" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M135.47658 66.26857C135.85515 67.70314 136.69873 68.38052 137.54869 68.65947C136.69873 68.93842 135.85515 69.6158 135.47658 71.05037" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M71.3924 73.69004H92.21648V63.628851H71.3924Z" fill="#fff"></path>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="9.982394" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 63.554 101.534)">C</text>
+<text font-family="XDTRFF-CMMI7" font-size="6.97" x="15.774399" y="-30.976112" transform="matrix(1.000545 0 0 1.000545 63.554 101.534)">P</text>
+<text font-family="NQUDBD-CMMI5" font-size="4.98" x="20.849557" y="-29.984173" transform="matrix(1.000261 0 0 1.000261 63.554 101.534)">A</text>
+<path d="M118.85739 36.00811L132.34059 24.26974" stroke="#000" fill="none" stroke-width="2.33073" stroke-miterlimit="10"></path>
+<path d="M118.85739 36.00811L132.34059 24.26974" stroke="#fff" fill="none" stroke-width="1.53377" stroke-miterlimit="10"></path>
+<path d="M129.68319 23.188882C131.044867 23.796662 133.081226 23.560926 133.841589 22.963021C133.144667 23.633798 132.63074 25.61829 133.045205 27.050694" stroke="#000" fill="none" stroke-width=".398491" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M44.83192 36.01574L31.33002 24.29327" stroke="#000" fill="none" stroke-width="2.33073" stroke-miterlimit="10"></path>
+<path d="M44.83192 36.01574L31.33002 24.29327" stroke="#fff" fill="none" stroke-width="1.53377" stroke-miterlimit="10"></path>
+<path d="M30.629182 27.075182C31.041708 25.642215 30.525094 23.658416 29.827263 22.988581C30.588436 23.585458 32.625117 23.818437 33.985974 23.208813" stroke="#000" fill="none" stroke-width=".398492" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M81.8577 93.04985L81.82362 77.4694" stroke="#000" fill="none" stroke-width="2.33073" stroke-miterlimit="10"></path>
+<path d="M81.8577 93.04985L81.82362 77.4694" stroke="#fff" fill="none" stroke-width="1.53377" stroke-miterlimit="10"></path>
+<path d="M79.266336 78.769507C80.617463 78.138641 81.773089 76.445476 81.819301 75.4793C81.869706 76.445266 83.03267 78.133399 84.386522 78.758396" stroke="#000" fill="none" stroke-width=".398489" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
 </g>
 </svg>
 </div>
