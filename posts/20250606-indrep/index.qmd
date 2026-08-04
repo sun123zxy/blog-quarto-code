@@ -1,5 +1,6 @@
 ---
 title: 诱导表示乱炖
+subtitle: Mackey 定理系列
 author: sun123zxy
 date: 2025-08-05
 lang: zh
@@ -37,7 +38,7 @@ format:
 
 ## 具体记号
 
-张量积的写法相对抽象，这里给出一种更具体的写法．首先注意作为 $(k, \galg H)$-双模 $\galg G = \bigoplus_{[s] \in G/H} e_s \cdot \galg H$，于是作为 $k$-线性空间
+张量积的写法相对抽象，这里给出一种更具体的写法．固定一组 $G/H$ 的陪集代表元 $(s)_{[s] \in G/H}$，首先注意作为 $(k, \galg H)$-双模 $\galg G = \bigoplus_{[s] \in G/H} e_s \cdot \galg H$，于是作为 $k$-线性空间
 $$
 \begin{matrix}
 \galg G \otimes_{\galg H} W
@@ -58,15 +59,11 @@ $$
 
 ### 正规情形
 
-当 $H$ 是 $G$ 的正规子群时，$G$-作用在具体记号侧会有更好的呈现：设 $g$ 有 $G/H$-分解 $g = s_g h_g$，则 $gs$ 的 $G/H$-分解
+当 $H$ 是 $G$ 的正规子群时，对任意 $h \in H$，正规性给出 $hs$ 的 $G/H$-分解 $hs = s(s^{-1}hs)$，故
 $$
-gs = s_g h_g s = (s_g s) (s^{-1} h_g s)
+h \cdot (s \otimes w) = s \otimes (s^{-1}hs \cdot w)
 $$
-故此时具体记号侧的 $G$-作用是好看的：
-$$
-g \cdot (s \otimes w) = s_g s \otimes (s^{-1} h_g s \cdot w)
-$$
-注意特别的当 $g \in H$ 时 $s_g = 1$，这使得 $s \otimes H$ 关于 $H$-作用不变，成为一个 $H$-表示．故正规情形线性同构 $\Ind H G W \cong \bigoplus_{[s] \in G/H} s \otimes W$ 升级为 $H$-表示同构
+此时 $s \otimes W$ 关于 $H$-作用不变，成为一个 $H$-表示，线性同构 $\Ind H G W \cong \bigoplus_{[s] \in G/H} s \otimes W$ 升级为 $H$-表示同构
 $$
 \Res G H {\Ind H G W} \cong \bigoplus_{[s] \in G/H} s \otimes W
 $$
@@ -84,7 +81,7 @@ $$
 
 ## 诱导表示的特征标
 
-上节完成的关于 $G$-作用在具体记号上作用方式的分析也使我们能更轻松的从矩阵的视角观察诱导表示的作用方式，进而得到特征标的计算方法．任意固定 $G/H$ 的一组配集代表元 $(s)_{[s] \in G/H}$，任取 $W$ 的一组线性基底 $(w_j){1 \leq j \leq \dim W}$，在基底 $(s \otimes w_j)_{[s] \in G/H; 1 \leq j \leq \dim W}$ 下，$G$ 在 $\Ind H G W$ 上的作用展现为每边块数量为 $[G : H]$、各块边长为 $\dim W$ 的分块矩阵．特征标是取迹，所以我们完全不关心那些 $s_{g s} \neq s$ 的偏离分块对角线的块．注意
+上节完成的关于 $G$-作用在具体记号上作用方式的分析也使我们能更轻松的从矩阵的视角观察诱导表示的作用方式，进而得到特征标的计算方法．任意固定 $G/H$ 的一组陪集代表元 $(s)_{[s] \in G/H}$，任取 $W$ 的一组线性基底 $(w_j)_{1 \leq j \leq \dim W}$，在基底 $(s \otimes w_j)_{[s] \in G/H; 1 \leq j \leq \dim W}$ 下，$G$ 在 $\Ind H G W$ 上的作用展现为每边块数量为 $[G : H]$、各块边长为 $\dim W$ 的分块矩阵．特征标是取迹，所以我们完全不关心那些 $s_{g s} \neq s$ 的偏离分块对角线的块．注意
 $$
 s_{gs} = s \implies H \ni h_{g s} = s_{gs}^{-1} (gs) = s^{-1} g s \implies s^{-1} g s \in H \implies gs \in sH \implies s_{gs} = s
 $$
@@ -97,6 +94,17 @@ $$
 综上我们得到诱导表示的特征标公式
 $$
 \Ind H G {\chi_W} (g) = \sum_{\substack{[s] \in G/H \\ s^{-1} g s \in H}} \chi_W (s^{-1} g s)
+$$
+
+### 正规情形
+
+特别地，当 $H$ 正规时，$s^{-1}gs \in H$ 与 $g \in H$ 等价，故上式化为
+$$
+\Ind H G {\chi_W} (g)
+= \begin{cases}
+\displaystyle \sum_{[s] \in G/H} \chi_W (s^{-1}gs) & g \in H \\
+0 & g \notin H
+\end{cases}
 $$
 
 ## 诱导表示的不可约成分
@@ -121,7 +129,7 @@ $$
 
 抽象废话来说，第一式无非是 $2$-范畴 $\mathsf{Bimod}$ 中的一对伴随，本质是张量积的泛性质，证明几乎不需要任何 $k$ 和 $G$ 的特殊性质．第二式涉及到群代数的 Frobenius 自对偶等问题——这是额外条件的用武之地．我们不在此处展开这两个话题，请参见
 
-- [专门文章](posts/20260729-bimod-adjoint-frobenius)；
+- [专门文章](/posts/20260729-bimod-adjoint-frobenius)；
 - [@curtis_methods_1990, {theorem 10.8, p. 232}] 一个条件宽松版本的参考；
 - [@serre_linear_1977, {section 7.2, theorem 13, p. 56}] 只在有限群复数域工作．
 :::
@@ -136,13 +144,13 @@ $$
 第二式的特征标版本恰好是上式的对称版本，这也是 Frobenius 自对偶在特征标内积侧的一个体现．
 :::
 
-特征标版本的 Frobenius 互反律对研究诱导表示的性质很有用：例如计算诱导表示 $\Ind H G W$ 中某个不可约 $G$-表示 $V$ 出现了多少份时，可以降到到 $H$-表示级别下计算 $\langle \chi_W, \Res G H {\chi_V} \rangle_H$——当然好算很多．
+特征标版本的 Frobenius 互反律对研究诱导表示的性质很有用：例如计算诱导表示 $\Ind H G W$ 中某个不可约 $G$-表示 $V$ 出现了多少份时，可以降到 $H$-表示级别下计算 $\langle \chi_W, \Res G H {\chi_V} \rangle_H$——当然好算很多．
 
 ## 诱导表示的不可约性
 
 下一个问题是如何判定诱导表示 $\Ind H G W$ 的不可约性．根据特征标方法，这等价于问
 $$
-1 = \langle \chi_{\Ind H G W}, \chi_{\Ind H G W} \rangle = \langle \chi_W, \chi_{\Res G H {\Ind H G W}} \rangle
+1 = \left\langle \Ind H G {\chi_W}, \Ind H G {\chi_W} \right\rangle_G = \left\langle \chi_W, \Res G H {\Ind H G {\chi_W}} \right\rangle_H
 $$
 何时成立．为此有必要研究诱导后又限制回原子群后的表示 $\Res G H {\Ind H G W}$ 的性质．
 
@@ -159,17 +167,17 @@ $$
 
 :::{.proof}
 
-回忆我们建立诱导表示具体记号的步骤，这里要做的无非是更细的根据双边陪集 $F \backslash s / H$ 拆解．首先注意 $(\galg F, \galg H)$-双模分解
+回忆我们建立诱导表示具体记号的步骤，这里要做的无非是更细的根据双边陪集 $F \backslash G / H$ 拆解．首先注意 $(\galg F, \galg H)$-双模分解
 $$
-\galg G = \bigoplus_{s \in F \backslash s / H} \galg F \cdot e_s \cdot \galg H
+\galg G = \bigoplus_{[s] \in F \backslash G / H} \galg F \cdot e_s \cdot \galg H
 $$
 继续照抄，有 $(\galg F, k)$-双模同构
 $$
 \begin{aligned}
 \Res G F {\Ind H G W}
 &= \Res G F {\left( \galg G \otimes_{\galg H} W \right)} \\
-&= \left( \bigoplus_{s \in F \backslash s / H} \galg F \cdot e_s \cdot \galg H \right) \otimes_{\galg H} W \\
-&\cong \bigoplus_{s \in F \backslash s / H} \left( \galg F \cdot e_s \cdot \galg H \right) \otimes_{\galg H} W \\
+&= \left( \bigoplus_{[s] \in F \backslash G / H} \galg F \cdot e_s \cdot \galg H \right) \otimes_{\galg H} W \\
+&\cong \bigoplus_{[s] \in F \backslash G / H} \left( \galg F \cdot e_s \cdot \galg H \right) \otimes_{\galg H} W \\
 e_g \otimes w &\mapsto (e_{f_g} \cdot e_{s_g}) \otimes (h_g \cdot w) 
 \end{aligned}
 $$
@@ -193,8 +201,8 @@ $$
 = e_{fsh} \otimes w \\
 e_f \otimes \left( shs^{-1} \cdot (s \otimes w) \right)
 = e_f \otimes (s \otimes (h \cdot w))
-&\mapsto e_f \cdot e_s \otimes (h \cdot w)
-= e_f \cdot e_s \cdot h \otimes w
+&\mapsto (e_f \cdot e_s) \otimes (h \cdot w)
+= (e_f \cdot e_s \cdot h) \otimes w
 = e_{fsh} \otimes w
 \end{aligned}
 $$
@@ -220,7 +228,7 @@ $$
 &= e_f \otimes \left(shh'^{-1}s^{-1} \cdot (s \otimes (h' \cdot w))\right) \\
 &= e_f \otimes \left(s \otimes (hh'^{-1}h' \cdot w)\right) \\
 &= e_f \otimes (s \otimes (h \cdot w)) \\
-&\mapsfrom e_f \cdot e_s \cdot e_h
+&\mapsfrom (e_f \cdot e_s \cdot e_h) \otimes w
 \end{aligned}
 $$
 其次验证它与左侧张量积的 $\galg H$-平衡关系相容．任取 $h' \in H$，关系两侧分别被映为
@@ -229,7 +237,7 @@ $$
 \left((e_f \cdot e_s \cdot e_h) \cdot h' \right) \otimes w
 &= (e_f \cdot e_s \cdot e_{h h'}) \otimes w
 \mapsto e_f \otimes \left(s \otimes (hh' \cdot w)\right) \\
-(e_f \cdot e_s \cdot e_h) \otimes (h_0 \cdot w)
+(e_f \cdot e_s \cdot e_h) \otimes (h' \cdot w)
 &\mapsto e_f \otimes \left(s \otimes (h \cdot (h' \cdot w))\right) = e_f \otimes \left(s \otimes (hh' \cdot w)\right)
 \end{aligned}
 $$
@@ -253,4 +261,51 @@ $$
 
 - [@curtis_methods_1990, {chapter 1, theorem 10.13, p. 237}] 较广版本参考
 - [@serre_linear_1977, {section 7.3, proposition 22, p. 58}] 如果你喜欢自然语言的浆糊证明
+:::
+
+:::{#thm-mackey-irreducibility}
+
+## Mackey 不可约性定理
+
+诱导表示 $\Ind H G W$ 不可约当且仅当
+
+- $W$ 不可约；
+- 对任意非平凡双边陪集 $[s] \in H \backslash G / H$，有
+
+$$
+\left\langle
+\Res H {H \cap sHs^{-1}} {\chi_W},
+\Res {sHs^{-1}} {H \cap sHs^{-1}} {\chi_{s \otimes W}}
+\right\rangle_{H \cap sHs^{-1}} = 0
+$$
+
+换言之，$W$ 和 $s \otimes W$ 限制到 $H \cap sHs^{-1}$ 后没有公共的不可约成分．
+:::
+
+:::{.proof}
+
+依次使用 Frobenius 互反律、[@thm-mackey-subgroup] 和各直和项上的 Frobenius 互反律，有
+$$
+\begin{aligned}
+\left\langle \Ind H G {\chi_W}, \Ind H G {\chi_W} \right\rangle_G
+&= \left\langle \chi_W, \Res G H {\Ind H G {\chi_W}} \right\rangle_H \\
+&= \sum_{[s] \in H \backslash G / H}
+\left\langle
+\chi_W,
+\Ind{H \cap sHs^{-1}}{H}
+{\Res{sHs^{-1}}{H \cap sHs^{-1}}{\chi_{s \otimes W}}}
+\right\rangle_H \\
+&= \sum_{[s] \in H \backslash G / H}
+\left\langle
+\Res H {H \cap sHs^{-1}} {\chi_W},
+\Res {sHs^{-1}} {H \cap sHs^{-1}} {\chi_{s \otimes W}}
+\right\rangle_{H \cap sHs^{-1}}
+\end{aligned}
+$$
+双边陪集 $[1] = H$ 对应的求和项为
+$$
+\left\langle \Res H H {\chi_W}, \Res H H {\chi_W} \right\rangle_H
+= \left\langle \chi_W, \chi_W \right\rangle_H
+$$
+所有求和项都是非负整数，所以左侧等于 $1$ 当且仅当 $[1]$ 对应的求和项等于 $1$，其余项全部等于 $0$．前者等价于 $W$ 不可约，后者正是定理中的第二个条件，而左侧等于 $1$ 等价于 $\Ind H G W$ 不可约．
 :::
