@@ -1,61 +1,256 @@
 ---
-title: "诱导表示乱炖"
-author: "sun123zxy"
-date: 2025/06/07
+title: 诱导表示乱炖
+author: sun123zxy
+date: 2025-08-05
 lang: zh
 bibliography: index.bib
 
 categories:
   - math
   - algebra
-  - group-rep
-collections:
-  - short
+  - rep-theory
+
+number-sections: true
 
 format:
   html: default
 ---
 
+\newcommand{\Hom}{\operatorname{Hom}}
 \newcommand{\GL}{\operatorname{GL}}
 \newcommand{\acts}{\curvearrowright}
+\newcommand{\Ind}[3]{\left\uparrow \!_{#1}^{#2} {#3} \right.}
+\newcommand{\Res}[3]{\left\downarrow \!^{#1}_{#2} {#3} \right.}
+\newcommand{\galg}[1]{{k}[{#1}]}
+\newcommand{\mapsfrom}{\leftarrow \! |}
 
-在日常生产生活中，我们经常需要将一个群表示从一个子群扩展到整个群．在所有可能的选择中，诱导表示是最自然的一种．[@serre_linear_1977]
+在日常生产生活中，经常需要将一个群表示从一个子群扩展到整个群．在所有可能的选择中，诱导表示是最自然的一种．
 
-具体来说，设 $H$ 是群 $G$ 的一个子群，$\theta: H \to \GL(W)$ 是 $H$ 的一个表示，我们希望构造的诱导表示 $\rho := \theta \uparrow_H^G : G \to \GL(V)$ 满足：
+如无特殊说明，全文默认假设在特征 $0$ 的代数闭域 $k$ 和有限群 $G$ 中工作．我们尽力在合适的时候指明可以放松的条件．
 
-- $(\theta, W)$ 是 $(\rho,V)$ 在 $H$ 上的限制 $\rho \downarrow_H^G$ 的子表示．
+设子群 $H \leq G$，则
 
-- 当无视 $\rho$ 在 $W$ 内部的置换效果时，$\rho$ “表现得就像是” $G$ 作用在左陪集族 $G/H$ 上一样．具体来说，考虑 $V$ 的如下子空间 $\rho_\sigma W : \sigma \in G$，因为 $W$ 是 $H$-不变子空间，事实上可以用陪集 $G/H$ 中的元素来标记这些子空间，故记 $W_{\sigma H} := \rho_\sigma W$．这些空间自然满足 $\rho_g W_{\sigma H} = W_{g \sigma H}$——这便是“长得像” $G \acts G/H$ 的含义；同时我们希望这些 $W_{\sigma H}$ 间两两无交，这样在线性空间意义下 $V$ 就是所有 $W_{\sigma H}$ 的直和．
+- 对 $G$-表示 $V$，定义限制表示 $\Res G H V$ 为 $V$ 自身限制为 $H$-表示；
+- 对 $H$-表示 $W$，定义诱导表示 $\Ind H G W := \galg G \otimes_{\galg H} W$，即 $(\galg G, \galg H)$-双模 $\galg G$ 和 $\galg H$-模 $W$ 的张量积．
 
-## 存在性
+特征标我们使用相同记号：$\Res G H {\chi_V} := \chi_{\Res G H V}$; $\Ind H G {\chi_W} := \chi_{\Ind H G W}$．
 
-那么这么好的表示存不存在呢？答案是我们可以嗯造．高情商的回答是 $k[G] \otimes_{k[H]} W$，但让我们今天笨拙一点．具体来说：
+## 具体记号
 
-- 取一组 $G/H$ 的代表元 $\Sigma := \{ \sigma_1,\dots,\sigma_{|\Sigma|} \} \subset G$．
-
-- 令线性空间 $V := \bigoplus_{\sigma \in \Sigma} W_{\sigma H}$，这里每个 $W_{\sigma H}$ 都是同构于 $W$ 的线性空间．我们认为 $W_H = W$，并把这些同构写作 $W \to W_{\sigma H}, w \mapsto w_{\to \sigma H}$．
-
-- 定义 $V$ 上的群作用 $\rho$：对任意 $g \in G$, $\sigma_j \in \Sigma$ 和 $w \in W$，设 $g \sigma_j$ 落在 $\sigma_i \in \Sigma$ 对应陪集中，定义
-  $$
-  \rho_g (w_{\to\sigma_j H}) := (\theta_{\sigma_i^{-1} g \sigma_j}(w))_{\to \sigma_i H}
-  $$
-  最后将定义线性张成到 $V$ 即可．
-
-验证它确实满足我们的期待：
-
-- $(\theta,W)$ 是它的子表示：对任意 $g = h \in H$, $w \in W$，此时 $\sigma_j = \sigma_i = \sigma_1 \in H$，我们有：
-  $$
-  \rho_h(w) = \theta_{\sigma_1^{-1}h \sigma_1}(w)
-  $$
-  好像不太妙，因为我们是希望它等于 $\theta_h(w)$ 的．但问题不大：至少 $(\theta, W)$ 是同构地嵌入 $(\rho, V)$ 的——只差一个共轭而已——在之前选取 $G/H$ 的代表元时强行让 $\sigma_1=1$ 也可以．
-
-- “长得像” $G \acts G/H$：对任意 $g \in G$，$\rho_g$ 把 $W_{\sigma_j H}$ 映到 $W_{\sigma_i H} = W_{g \sigma_j H}$，确实长得像．无交性根据构造自然成立．
-
-## 矩阵表示与特征标
-
-那么这是一个好的定义．我们来算一算它的矩阵表示．按 $W_{\sigma H}$ 分块来看，在分块矩阵的第 $j$ 列上，只有一个 $\sigma_i$ 可使得 $g \sigma_j H = \sigma_i H$——便在这一列的第 $i$ 行放入 $\theta(\sigma_i^{-1} g \sigma_j)$ 的矩阵表示，其余位置置零．这里的描述由 [@sagan_symmetric_2001, {Definition 1.12.2}] 看图说话得到．
-
-下面算算它的特征标 $\chi_\rho: G \to \mathbb C^\times$，也就是 $\rho(g)$ 对应矩阵表示的迹．想要在分块对角线上有所贡献的 $W_{\sigma H}$ 至少需要满足 $\sigma H = g \sigma H$，即 $\sigma^{-1} g \sigma \in H$．此时，对角线上的分块矩阵是 $\theta(\sigma^{-1} g \sigma)$ 的矩阵表示，故每个满足条件的 $W_{\sigma H}$ 为特征标贡献 $\chi_\theta (\sigma^{-1} g \sigma)$，合计如下：
+张量积的写法相对抽象，这里给出一种更具体的写法．首先注意作为 $(k, \galg H)$-双模 $\galg G = \bigoplus_{[s] \in G/H} e_s \cdot \galg H$，于是作为 $k$-线性空间
 $$
-\chi_\rho(g) = \sum_{\substack{\sigma \in \Sigma \\ \sigma^{-1} g \sigma \in H}} \chi_\theta(\sigma^{-1} g \sigma)
+\begin{matrix}
+\galg G \otimes_{\galg H} W
+&=& \left(\bigoplus_{[s] \in G/H} e_s \cdot \galg H \right) \otimes_{\galg H} W
+&\cong& \bigoplus_{[s] \in G/H} (e_s \cdot \galg H) \otimes_{\galg H} W &=:& \bigoplus_{[s] \in G/H} s \otimes W \\
+e_g \otimes w &=& e_{s_g} e_{h_g} \otimes w &\mapsto& e_{s_g} e_{h_g} \otimes w &=:& s_g \otimes (h_g \cdot w)
+\end{matrix}
 $$
+这里映射中我们设 $g$ 有 $G/H$-分解 $g=s_g h_g$．注意最后一项的每个直和项 $s \otimes W$ 是我们方便起见新定义的记号．平凡可见作为线性空间 $s \otimes W \cong W$．作为同构的副产品，我们顺路得到诱导表示的维数
+$$
+\dim \Ind H G W = [G : H] \dim W
+$$
+
+上述同构只是个线性空间同构，我们还需要明确 $G$ 应如何作用在具体记号上——方法是通过上述同构传递定义．对任意 $g \in G$，$[s] \in G/H$，张量积定义侧有 $g \cdot (e_s \otimes w) = e_{gs} \otimes w$，故如设 $gs$ 有 $G/H$-分解 $gs = s_{gs} h_{gs}$，则上式在具体记号侧的表现就是我们定义 $G$-作用的方法：
+$$
+g \cdot (s \otimes w) := s_{gs} \otimes (h_{gs} \cdot w)
+$$
+
+### 正规情形
+
+当 $H$ 是 $G$ 的正规子群时，$G$-作用在具体记号侧会有更好的呈现：设 $g$ 有 $G/H$-分解 $g = s_g h_g$，则 $gs$ 的 $G/H$-分解
+$$
+gs = s_g h_g s = (s_g s) (s^{-1} h_g s)
+$$
+故此时具体记号侧的 $G$-作用是好看的：
+$$
+g \cdot (s \otimes w) = s_g s \otimes (s^{-1} h_g s \cdot w)
+$$
+注意特别的当 $g \in H$ 时 $s_g = 1$，这使得 $s \otimes H$ 关于 $H$-作用不变，成为一个 $H$-表示．故正规情形线性同构 $\Ind H G W \cong \bigoplus_{[s] \in G/H} s \otimes W$ 升级为 $H$-表示同构
+$$
+\Res G H {\Ind H G W} \cong \bigoplus_{[s] \in G/H} s \otimes W
+$$
+
+:::{#rem-shs}
+
+这是后续 [@thm-mackey-subgroup] 在正规情形的特例．[@thm-mackey-subgroup] 是对“诱导后限制”得到的表示结构的系统研究．
+
+此外，受此启发，可考虑在任何时候都为 $s \otimes W$ 默认配备 $s H s^{-1}$-作用
+$$
+shs^{-1} \cdot (s \otimes w) := s \otimes (h \cdot w)
+$$
+此定义在 $H$ 正规时与我们刚才的推导一致．需要注意的是没有证据表明这种配备方式可以为非正规情况的线性同构 $\Ind H G W \cong \bigoplus_{[s] \in G/H} s \otimes W$ 升级结构．
+:::
+
+## 诱导表示的特征标
+
+上节完成的关于 $G$-作用在具体记号上作用方式的分析也使我们能更轻松的从矩阵的视角观察诱导表示的作用方式，进而得到特征标的计算方法．任意固定 $G/H$ 的一组配集代表元 $(s)_{[s] \in G/H}$，任取 $W$ 的一组线性基底 $(w_j){1 \leq j \leq \dim W}$，在基底 $(s \otimes w_j)_{[s] \in G/H; 1 \leq j \leq \dim W}$ 下，$G$ 在 $\Ind H G W$ 上的作用展现为每边块数量为 $[G : H]$、各块边长为 $\dim W$ 的分块矩阵．特征标是取迹，所以我们完全不关心那些 $s_{g s} \neq s$ 的偏离分块对角线的块．注意
+$$
+s_{gs} = s \implies H \ni h_{g s} = s_{gs}^{-1} (gs) = s^{-1} g s \implies s^{-1} g s \in H \implies gs \in sH \implies s_{gs} = s
+$$
+故
+
+- $s_{gs} = s$ 与 $s^{-1} g s \in H$ 等价．
+
+- 当 $s_{gs} = s$，$h_{g s} = s^{-1} g s$，此时 $g \cdot (s \otimes w_j) = s \otimes (s^{-1} g s \cdot w_j)$——这个块的矩阵表示由 $s^{-1} g s$ 在 $W$ 上的作用给出，算迹交给 $\chi_W$ 打包处理即可．
+
+综上我们得到诱导表示的特征标公式
+$$
+\Ind H G {\chi_W} (g) = \sum_{\substack{[s] \in G/H \\ s^{-1} g s \in H}} \chi_W (s^{-1} g s)
+$$
+
+## 诱导表示的不可约成分
+
+将限制表示煞有介事的分配专有记号 $\Res G H {}$ 并和诱导表示置于同等地位，一大原因是所谓的 Frobenius 互反律
+
+:::{#thm-frobenius-reciprocity}
+
+## Frobenius 互反律
+
+设 $G$ 是任意群，$k$ 是交换环，$H \leq G$ 是其子群，$V$ 是 $G$-表示，$W$ 是 $H$-表示，则
+$$
+\Hom_G (\Ind H G W, V) \cong \Hom_H (W, \Res G H V)
+$$
+在要求 $G$ 有限且 $k$ 使得群 $G$ 的表示论半单（例如特征 $0$ 的域）时有
+$$
+\Hom_G (V, \Ind H G W) \cong \Hom_H (\Res G H V, W)
+$$
+:::
+
+:::{.remark}
+
+抽象废话来说，第一式无非是 $2$-范畴 $\mathsf{Bimod}$ 中的一对伴随，本质是张量积的泛性质，证明几乎不需要任何 $k$ 和 $G$ 的特殊性质．第二式涉及到群代数的 Frobenius 自对偶等问题——这是额外条件的用武之地．我们不在此处展开这两个话题，请参见
+
+- [专门文章](posts/20260729-bimod-adjoint-frobenius)；
+- [@curtis_methods_1990, {theorem 10.8, p. 232}] 一个条件宽松版本的参考；
+- [@serre_linear_1977, {section 7.2, theorem 13, p. 56}] 只在有限群复数域工作．
+:::
+
+在同构两侧取维数立得特征标版本的 Frobenius 互反律
+$$
+\langle \Ind H G {\chi_W}, \chi_V \rangle_G = \langle \chi_W, \Res G H {\chi_V} \rangle_H
+$$
+
+:::{.remark}
+
+第二式的特征标版本恰好是上式的对称版本，这也是 Frobenius 自对偶在特征标内积侧的一个体现．
+:::
+
+特征标版本的 Frobenius 互反律对研究诱导表示的性质很有用：例如计算诱导表示 $\Ind H G W$ 中某个不可约 $G$-表示 $V$ 出现了多少份时，可以降到到 $H$-表示级别下计算 $\langle \chi_W, \Res G H {\chi_V} \rangle_H$——当然好算很多．
+
+## 诱导表示的不可约性
+
+下一个问题是如何判定诱导表示 $\Ind H G W$ 的不可约性．根据特征标方法，这等价于问
+$$
+1 = \langle \chi_{\Ind H G W}, \chi_{\Ind H G W} \rangle = \langle \chi_W, \chi_{\Res G H {\Ind H G W}} \rangle
+$$
+何时成立．为此有必要研究诱导后又限制回原子群后的表示 $\Res G H {\Ind H G W}$ 的性质．
+
+:::{#thm-mackey-subgroup}
+
+## Mackey 子群定理
+
+$k$ 是交换环，$G$ 是有限群，$F$, $H$ 是 $G$ 的子群，$W$ 是 $H$-表示，则
+$$
+\Res G F {\Ind H G W} \cong \bigoplus_{[s] \in F \backslash G / H} \Ind{sHs^{-1} \cap F}{F} {\left( \Res{sHs^{-1}}{sHs^{-1} \cap F} {(s \otimes W)}\right)}
+$$
+这里 $F \backslash G / H$ 是全体 $(F, H)$-双边陪集，$s \otimes W$ 上配备的 $s H s^{-1}$-作用如 [@rem-shs] 所述．
+:::
+
+:::{.proof}
+
+回忆我们建立诱导表示具体记号的步骤，这里要做的无非是更细的根据双边陪集 $F \backslash s / H$ 拆解．首先注意 $(\galg F, \galg H)$-双模分解
+$$
+\galg G = \bigoplus_{s \in F \backslash s / H} \galg F \cdot e_s \cdot \galg H
+$$
+继续照抄，有 $(\galg F, k)$-双模同构
+$$
+\begin{aligned}
+\Res G F {\Ind H G W}
+&= \Res G F {\left( \galg G \otimes_{\galg H} W \right)} \\
+&= \left( \bigoplus_{s \in F \backslash s / H} \galg F \cdot e_s \cdot \galg H \right) \otimes_{\galg H} W \\
+&\cong \bigoplus_{s \in F \backslash s / H} \left( \galg F \cdot e_s \cdot \galg H \right) \otimes_{\galg H} W \\
+e_g \otimes w &\mapsto (e_{f_g} \cdot e_{s_g}) \otimes (h_g \cdot w) 
+\end{aligned}
+$$
+这里是设上式中的 $g \in G$ 有 $F \backslash G / H$-分解 $g=f_g s_g h_g$．剩下的事情是证明 $F$-表示同构
+$$
+\left( \galg F \cdot e_s \cdot \galg H \right) \otimes_{\galg H} W \cong \Ind{sHs^{-1} \cap F}{F} {\left( \Res{sHs^{-1}}{sHs^{-1} \cap F} {(s \otimes W)}\right)}
+$$
+先构造一侧的 $F$-同态
+$$
+\begin{aligned}
+\galg F \otimes_{\galg{sHs^{-1} \cap F}} \Res{sHs^{-1}}{sHs^{-1} \cap F} {(s \otimes W)} &\to \left( \galg F \cdot e_s \cdot \galg H \right) \otimes_{\galg H} W \\
+e_f \otimes (s \otimes w) &\mapsto (e_f \cdot e_s) \otimes w
+\end{aligned}
+$$
+其良定性需要我们验证一下映射和左侧 $\otimes_{\galg{sHs^{-1} \cap F}}$ 平衡关系相容：
+$$
+\begin{aligned}
+(e_f \cdot shs^{-1}) \otimes (s \otimes w)
+= e_{fshs^{-1}} \otimes (s \otimes w)
+&\mapsto e_{fshs^{-1}} \cdot e_s \otimes w
+= e_{fsh} \otimes w \\
+e_f \otimes \left( shs^{-1} \cdot (s \otimes w) \right)
+= e_f \otimes (s \otimes (h \cdot w))
+&\mapsto e_f \cdot e_s \otimes (h \cdot w)
+= e_f \cdot e_s \cdot h \otimes w
+= e_{fsh} \otimes w
+\end{aligned}
+$$
+再构造另一侧 $F$-同态
+$$
+\begin{aligned}
+\left( \galg F \cdot e_s \cdot \galg H \right) \otimes_{\galg H} W
+&\to \galg F \otimes_{\galg{sHs^{-1} \cap F}} \Res{sHs^{-1}}{sHs^{-1} \cap F} {(s \otimes W)} \\
+(e_f \cdot e_s \cdot e_h) \otimes w &\mapsto e_f \otimes (s \otimes (h \cdot w))
+\end{aligned}
+$$
+继续验证良定义，首先是无关 $f$, $h$ 选取：设另有 $f'$, $h'$ 使得 $f' s h' = fsh$，则
+$$
+f^{-1}f' = shh'^{-1}s^{-1} \in F \cap sHs^{-1}
+$$
+因此
+$$
+\begin{aligned}
+(e_{f'} \cdot e_s \cdot e_{h'}) \otimes w
+&\mapsto e_{f'} \otimes (s \otimes (h' \cdot w)) \\
+&= (e_f \cdot f^{-1}f) \otimes (s \otimes (h' \cdot w)) \\
+&= e_f \otimes \left(f^{-1}f' \cdot (s \otimes (h' \cdot w))\right) \\
+&= e_f \otimes \left(shh'^{-1}s^{-1} \cdot (s \otimes (h' \cdot w))\right) \\
+&= e_f \otimes \left(s \otimes (hh'^{-1}h' \cdot w)\right) \\
+&= e_f \otimes (s \otimes (h \cdot w)) \\
+&\mapsfrom e_f \cdot e_s \cdot e_h
+\end{aligned}
+$$
+其次验证它与左侧张量积的 $\galg H$-平衡关系相容．任取 $h' \in H$，关系两侧分别被映为
+$$
+\begin{aligned}
+\left((e_f \cdot e_s \cdot e_h) \cdot h' \right) \otimes w
+&= (e_f \cdot e_s \cdot e_{h h'}) \otimes w
+\mapsto e_f \otimes \left(s \otimes (hh' \cdot w)\right) \\
+(e_f \cdot e_s \cdot e_h) \otimes (h_0 \cdot w)
+&\mapsto e_f \otimes \left(s \otimes (h \cdot (h' \cdot w))\right) = e_f \otimes \left(s \otimes (hh' \cdot w)\right)
+\end{aligned}
+$$
+所以该 $F$-同态良定．
+
+最后，两同态在生成元上的复合分别为
+$$
+\begin{aligned}
+e_f \otimes (s \otimes w)
+&\mapsto (e_f \cdot e_s) \otimes w
+\mapsto e_f \otimes (s \otimes w) \\
+(e_f \cdot e_s \cdot e_h) \otimes w
+&\mapsto e_f \otimes (s \otimes (h \cdot w))
+\mapsto (e_f \cdot e_s) \otimes (h \cdot w) = (e_f \cdot e_s \cdot e_h) \otimes w
+\end{aligned}
+$$
+因此它们互为逆映射，所需的 $F$-表示同构得证．
+:::
+
+:::{.remark}
+
+- [@curtis_methods_1990, {chapter 1, theorem 10.13, p. 237}] 较广版本参考
+- [@serre_linear_1977, {section 7.3, proposition 22, p. 58}] 如果你喜欢自然语言的浆糊证明
+:::
