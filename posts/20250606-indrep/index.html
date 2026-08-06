@@ -433,17 +433,17 @@ window.Quarto = {
 <p>特征标我们使用相同记号：<span class="math inline">\(\left\downarrow \!^{G}_{H} {\chi_V} \right. := \chi_{\left\downarrow \!^{G}_{H} {V} \right.}\)</span>; <span class="math inline">\(\left\uparrow \!_{H}^{G} {\chi_W} \right. := \chi_{\left\uparrow \!_{H}^{G} {W} \right.}\)</span>．</p>
 <section id="具体记号" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="具体记号"><span class="header-section-number">1</span> 具体记号</h2>
-<p>张量积的写法相对抽象，这里给出一种更具体的写法．固定一组 <span class="math inline">\(G/H\)</span> 的陪集代表元 <span class="math inline">\((s)_{[s] \in G/H}\)</span>，首先注意作为 <span class="math inline">\((k, {k}[{H}])\)</span>-双模 <span class="math inline">\({k}[{G}] = \bigoplus_{[s] \in G/H} e_s \cdot {k}[{H}]\)</span>，于是作为 <span class="math inline">\(k\)</span>-线性空间 <span class="math display">\[
+<p>张量积的写法相对抽象，这里给出一种更具体的写法．固定一组 <span class="math inline">\(G/H\)</span> 的陪集代表元 <span class="math inline">\((s)_{[s] \in G/H}\)</span>，首先注意作为 <span class="math inline">\((k, {k}[{H}])\)</span>-双模 <span class="math inline">\({k}[{G}] = \bigoplus_{[s] \in G/H} {k}[{sH}]\)</span>，于是作为 <span class="math inline">\(k\)</span>-线性空间 <span class="math display">\[
 \begin{matrix}
 {k}[{G}] \otimes_{{k}[{H}]} W
-&amp;=&amp; \left(\bigoplus_{[s] \in G/H} e_s \cdot {k}[{H}] \right) \otimes_{{k}[{H}]} W
-&amp;\cong&amp; \bigoplus_{[s] \in G/H} (e_s \cdot {k}[{H}]) \otimes_{{k}[{H}]} W &amp;=:&amp; \bigoplus_{[s] \in G/H} s \otimes W \\
-e_g \otimes w &amp;=&amp; e_{s_g} e_{h_g} \otimes w &amp;\mapsto&amp; e_{s_g} e_{h_g} \otimes w &amp;=:&amp; s_g \otimes (h_g \cdot w)
+&amp;=&amp; \left(\bigoplus_{[s] \in G/H} {k}[{sH}] \right) \otimes_{{k}[{H}]} W
+&amp;\cong&amp; \bigoplus_{[s] \in G/H} {k}[{sH}] \otimes_{{k}[{H}]} W &amp;=:&amp; \bigoplus_{[s] \in G/H} s \otimes W \\
+g \otimes w &amp;=&amp; s_g h_g \otimes w &amp;\mapsto&amp; s_g h_g \otimes w &amp;=:&amp; s_g \otimes (h_g \cdot w)
 \end{matrix}
 \]</span> 这里映射中我们设 <span class="math inline">\(g\)</span> 有 <span class="math inline">\(G/H\)</span>-分解 <span class="math inline">\(g=s_g h_g\)</span>．注意最后一项的每个直和项 <span class="math inline">\(s \otimes W\)</span> 是我们方便起见新定义的记号．平凡可见作为线性空间 <span class="math inline">\(s \otimes W \cong W\)</span>．作为同构的副产品，我们顺路得到诱导表示的维数 <span class="math display">\[
 \dim \left\uparrow \!_{H}^{G} {W} \right. = [G : H] \dim W
 \]</span></p>
-<p>上述同构只是个线性空间同构，我们还需要明确 <span class="math inline">\(G\)</span> 应如何作用在具体记号上——方法是通过上述同构传递定义．对任意 <span class="math inline">\(g \in G\)</span>，<span class="math inline">\([s] \in G/H\)</span>，张量积定义侧有 <span class="math inline">\(g \cdot (e_s \otimes w) = e_{gs} \otimes w\)</span>，故如设 <span class="math inline">\(gs\)</span> 有 <span class="math inline">\(G/H\)</span>-分解 <span class="math inline">\(gs = s_{gs} h_{gs}\)</span>，则上式在具体记号侧的表现就是我们定义 <span class="math inline">\(G\)</span>-作用的方法： <span class="math display">\[
+<p>上述同构只是个线性空间同构，我们还需要明确 <span class="math inline">\(G\)</span> 应如何作用在具体记号上——方法是通过上述同构传递定义．对任意 <span class="math inline">\(g \in G\)</span>，<span class="math inline">\([s] \in G/H\)</span>，张量积定义侧有 <span class="math inline">\(g \cdot (s \otimes w) = gs \otimes w\)</span>，故如设 <span class="math inline">\(gs\)</span> 有 <span class="math inline">\(G/H\)</span>-分解 <span class="math inline">\(gs = s_{gs} h_{gs}\)</span>，则上式在具体记号侧的表现就是我们定义 <span class="math inline">\(G\)</span>-作用的方法： <span class="math display">\[
 g \cdot (s \otimes w) := s_{gs} \otimes (h_{gs} \cdot w)
 \]</span></p>
 <section id="正规情形" class="level3" data-number="1.1">
@@ -597,70 +597,67 @@ s_{gs} = s \implies H \ni h_{g s} = s_{gs}^{-1} (gs) = s^{-1} g s \implies s^{-1
 <div class="callout-body-container callout-body">
 <div class="proof">
 <p><span class="proof-title"><em>证明</em>. </span>回忆我们建立诱导表示具体记号的步骤，这里要做的无非是更细的根据双边陪集 <span class="math inline">\(F \backslash G / H\)</span> 拆解．首先注意 <span class="math inline">\(({k}[{F}], {k}[{H}])\)</span>-双模分解 <span class="math display">\[
-{k}[{G}] = \bigoplus_{[s] \in F \backslash G / H} {k}[{F}] \cdot e_s \cdot {k}[{H}]
+{k}[{G}] = \bigoplus_{[s] \in F \backslash G / H} {k}[{FsH}]
 \]</span> 继续照抄，有 <span class="math inline">\(({k}[{F}], k)\)</span>-双模同构 <span class="math display">\[
 \begin{aligned}
 \left\downarrow \!^{G}_{F} {\left\uparrow \!_{H}^{G} {W} \right.} \right.
 &amp;= \left\downarrow \!^{G}_{F} {\left( {k}[{G}] \otimes_{{k}[{H}]} W \right)} \right. \\
-&amp;= \left( \bigoplus_{[s] \in F \backslash G / H} {k}[{F}] \cdot e_s \cdot {k}[{H}] \right) \otimes_{{k}[{H}]} W \\
-&amp;\cong \bigoplus_{[s] \in F \backslash G / H} \left( {k}[{F}] \cdot e_s \cdot {k}[{H}] \right) \otimes_{{k}[{H}]} W \\
-e_g \otimes w &amp;\mapsto (e_{f_g} \cdot e_{s_g}) \otimes (h_g \cdot w)
+&amp;= \left( \bigoplus_{[s] \in F \backslash G / H} {k}[{FsH}] \right) \otimes_{{k}[{H}]} W \\
+&amp;\cong \bigoplus_{[s] \in F \backslash G / H} {k}[{FsH}] \otimes_{{k}[{H}]} W \\
+g \otimes w &amp;\mapsto f_g s_g \otimes (h_g \cdot w)
 \end{aligned}
 \]</span> 这里是设上式中的 <span class="math inline">\(g \in G\)</span> 有 <span class="math inline">\(F \backslash G / H\)</span>-分解 <span class="math inline">\(g=f_g s_g h_g\)</span>．剩下的事情是证明 <span class="math inline">\(F\)</span>-表示同构 <span class="math display">\[
-\left( {k}[{F}] \cdot e_s \cdot {k}[{H}] \right) \otimes_{{k}[{H}]} W \cong \left\uparrow \!_{sHs^{-1} \cap F}^{F} {\left( \left\downarrow \!^{sHs^{-1}}_{sHs^{-1} \cap F} {(s \otimes W)} \right.\right)} \right.
+{k}[{FsH}] \otimes_{{k}[{H}]} W \cong \left\uparrow \!_{sHs^{-1} \cap F}^{F} {\left( \left\downarrow \!^{sHs^{-1}}_{sHs^{-1} \cap F} {(s \otimes W)} \right.\right)} \right.
 \]</span> 先构造一侧的 <span class="math inline">\(F\)</span>-同态 <span class="math display">\[
 \begin{aligned}
-{k}[{F}] \otimes_{{k}[{sHs^{-1} \cap F}]} \left\downarrow \!^{sHs^{-1}}_{sHs^{-1} \cap F} {(s \otimes W)} \right. &amp;\to \left( {k}[{F}] \cdot e_s \cdot {k}[{H}] \right) \otimes_{{k}[{H}]} W \\
-e_f \otimes (s \otimes w) &amp;\mapsto (e_f \cdot e_s) \otimes w
+{k}[{F}] \otimes_{{k}[{sHs^{-1} \cap F}]} \left\downarrow \!^{sHs^{-1}}_{sHs^{-1} \cap F} {(s \otimes W)} \right. &amp;\to {k}[{FsH}] \otimes_{{k}[{H}]} W \\
+f \otimes (s \otimes w) &amp;\mapsto fs \otimes w
 \end{aligned}
 \]</span> 其良定性需要我们验证一下映射和左侧 <span class="math inline">\(\otimes_{{k}[{sHs^{-1} \cap F}]}\)</span> 平衡关系相容： <span class="math display">\[
 \begin{aligned}
-(e_f \cdot shs^{-1}) \otimes (s \otimes w)
-= e_{fshs^{-1}} \otimes (s \otimes w)
-&amp;\mapsto e_{fshs^{-1}} \cdot e_s \otimes w
-= e_{fsh} \otimes w \\
-e_f \otimes \left( shs^{-1} \cdot (s \otimes w) \right)
-= e_f \otimes (s \otimes (h \cdot w))
-&amp;\mapsto (e_f \cdot e_s) \otimes (h \cdot w)
-= (e_f \cdot e_s \cdot h) \otimes w
-= e_{fsh} \otimes w
+(fshs^{-1}) \otimes (s \otimes w)
+&amp;\mapsto fsh \otimes w \\
+f \otimes \left( shs^{-1} \cdot (s \otimes w) \right)
+= f \otimes (s \otimes (h \cdot w))
+&amp;\mapsto fs \otimes (h \cdot w)
+= fsh \otimes w
 \end{aligned}
 \]</span> 再构造另一侧 <span class="math inline">\(F\)</span>-同态 <span class="math display">\[
 \begin{aligned}
-\left( {k}[{F}] \cdot e_s \cdot {k}[{H}] \right) \otimes_{{k}[{H}]} W
+{k}[{FsH}] \otimes_{{k}[{H}]} W
 &amp;\to {k}[{F}] \otimes_{{k}[{sHs^{-1} \cap F}]} \left\downarrow \!^{sHs^{-1}}_{sHs^{-1} \cap F} {(s \otimes W)} \right. \\
-(e_f \cdot e_s \cdot e_h) \otimes w &amp;\mapsto e_f \otimes (s \otimes (h \cdot w))
+fsh \otimes w &amp;\mapsto f \otimes (s \otimes (h \cdot w))
 \end{aligned}
 \]</span> 继续验证良定义，首先是无关 <span class="math inline">\(f\)</span>, <span class="math inline">\(h\)</span> 选取：设另有 <span class="math inline">\(f'\)</span>, <span class="math inline">\(h'\)</span> 使得 <span class="math inline">\(f' s h' = fsh\)</span>，则 <span class="math display">\[
 f^{-1}f' = shh'^{-1}s^{-1} \in F \cap sHs^{-1}
 \]</span> 因此 <span class="math display">\[
 \begin{aligned}
-(e_{f'} \cdot e_s \cdot e_{h'}) \otimes w
-&amp;\mapsto e_{f'} \otimes (s \otimes (h' \cdot w)) \\
-&amp;= (e_f \cdot f^{-1}f) \otimes (s \otimes (h' \cdot w)) \\
-&amp;= e_f \otimes \left(f^{-1}f' \cdot (s \otimes (h' \cdot w))\right) \\
-&amp;= e_f \otimes \left(shh'^{-1}s^{-1} \cdot (s \otimes (h' \cdot w))\right) \\
-&amp;= e_f \otimes \left(s \otimes (hh'^{-1}h' \cdot w)\right) \\
-&amp;= e_f \otimes (s \otimes (h \cdot w)) \\
-&amp;\leftarrow \! |(e_f \cdot e_s \cdot e_h) \otimes w
+f'sh' \otimes w
+&amp;\mapsto f' \otimes (s \otimes (h' \cdot w)) \\
+&amp;= f(f^{-1}f') \otimes (s \otimes (h' \cdot w)) \\
+&amp;= f \otimes \left(f^{-1}f' \cdot (s \otimes (h' \cdot w))\right) \\
+&amp;= f \otimes \left(shh'^{-1}s^{-1} \cdot (s \otimes (h' \cdot w))\right) \\
+&amp;= f \otimes \left(s \otimes (hh'^{-1}h' \cdot w)\right) \\
+&amp;= f \otimes (s \otimes (h \cdot w)) \\
+&amp;\leftarrow \! |fsh \otimes w
 \end{aligned}
 \]</span> 其次验证它与左侧张量积的 <span class="math inline">\({k}[{H}]\)</span>-平衡关系相容．任取 <span class="math inline">\(h' \in H\)</span>，关系两侧分别被映为 <span class="math display">\[
 \begin{aligned}
-\left((e_f \cdot e_s \cdot e_h) \cdot h' \right) \otimes w
-&amp;= (e_f \cdot e_s \cdot e_{h h'}) \otimes w
-\mapsto e_f \otimes \left(s \otimes (hh' \cdot w)\right) \\
-(e_f \cdot e_s \cdot e_h) \otimes (h' \cdot w)
-&amp;\mapsto e_f \otimes \left(s \otimes (h \cdot (h' \cdot w))\right) = e_f \otimes \left(s \otimes (hh' \cdot w)\right)
+(fsh)h' \otimes w
+= fshh' \otimes w
+&amp;\mapsto f \otimes \left(s \otimes (hh' \cdot w)\right) \\
+fsh \otimes (h' \cdot w)
+&amp;\mapsto f \otimes \left(s \otimes (h \cdot (h' \cdot w))\right) = f \otimes \left(s \otimes (hh' \cdot w)\right)
 \end{aligned}
 \]</span> 所以该 <span class="math inline">\(F\)</span>-同态良定．</p>
 <p>最后，两同态在生成元上的复合分别为 <span class="math display">\[
 \begin{aligned}
-e_f \otimes (s \otimes w)
-&amp;\mapsto (e_f \cdot e_s) \otimes w
-\mapsto e_f \otimes (s \otimes w) \\
-(e_f \cdot e_s \cdot e_h) \otimes w
-&amp;\mapsto e_f \otimes (s \otimes (h \cdot w))
-\mapsto (e_f \cdot e_s) \otimes (h \cdot w) = (e_f \cdot e_s \cdot e_h) \otimes w
+f \otimes (s \otimes w)
+&amp;\mapsto fs \otimes w
+\mapsto f \otimes (s \otimes w) \\
+fsh \otimes w
+&amp;\mapsto f \otimes (s \otimes (h \cdot w))
+\mapsto fs \otimes (h \cdot w) = fsh \otimes w
 \end{aligned}
 \]</span> 因此它们互为逆映射，所需的 <span class="math inline">\(F\)</span>-表示同构得证．</p>
 </div>
