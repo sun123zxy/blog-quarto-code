@@ -38,13 +38,13 @@ format:
 
 ## 具体记号
 
-张量积的写法相对抽象，这里给出一种更具体的写法．固定一组 $G/H$ 的陪集代表元 $(s)_{[s] \in G/H}$，首先注意作为 $(k, \galg H)$-双模 $\galg G = \bigoplus_{[s] \in G/H} e_s \cdot \galg H$，于是作为 $k$-线性空间
+张量积的写法相对抽象，这里给出一种更具体的写法．固定一组 $G/H$ 的陪集代表元 $(s)_{[s] \in G/H}$，首先注意作为 $(k, \galg H)$-双模 $\galg G = \bigoplus_{[s] \in G/H} \galg{sH}$，于是作为 $k$-线性空间
 $$
 \begin{matrix}
 \galg G \otimes_{\galg H} W
-&=& \left(\bigoplus_{[s] \in G/H} e_s \cdot \galg H \right) \otimes_{\galg H} W
-&\cong& \bigoplus_{[s] \in G/H} (e_s \cdot \galg H) \otimes_{\galg H} W &=:& \bigoplus_{[s] \in G/H} s \otimes W \\
-e_g \otimes w &=& e_{s_g} e_{h_g} \otimes w &\mapsto& e_{s_g} e_{h_g} \otimes w &=:& s_g \otimes (h_g \cdot w)
+&=& \left(\bigoplus_{[s] \in G/H} \galg{sH} \right) \otimes_{\galg H} W
+&\cong& \bigoplus_{[s] \in G/H} \galg{sH} \otimes_{\galg H} W &=:& \bigoplus_{[s] \in G/H} s \otimes W \\
+g \otimes w &=& s_g h_g \otimes w &\mapsto& s_g h_g \otimes w &=:& s_g \otimes (h_g \cdot w)
 \end{matrix}
 $$
 这里映射中我们设 $g$ 有 $G/H$-分解 $g=s_g h_g$．注意最后一项的每个直和项 $s \otimes W$ 是我们方便起见新定义的记号．平凡可见作为线性空间 $s \otimes W \cong W$．作为同构的副产品，我们顺路得到诱导表示的维数
@@ -52,7 +52,7 @@ $$
 \dim \Ind H G W = [G : H] \dim W
 $$
 
-上述同构只是个线性空间同构，我们还需要明确 $G$ 应如何作用在具体记号上——方法是通过上述同构传递定义．对任意 $g \in G$，$[s] \in G/H$，张量积定义侧有 $g \cdot (e_s \otimes w) = e_{gs} \otimes w$，故如设 $gs$ 有 $G/H$-分解 $gs = s_{gs} h_{gs}$，则上式在具体记号侧的表现就是我们定义 $G$-作用的方法：
+上述同构只是个线性空间同构，我们还需要明确 $G$ 应如何作用在具体记号上——方法是通过上述同构传递定义．对任意 $g \in G$，$[s] \in G/H$，张量积定义侧有 $g \cdot (s \otimes w) = gs \otimes w$，故如设 $gs$ 有 $G/H$-分解 $gs = s_{gs} h_{gs}$，则上式在具体记号侧的表现就是我们定义 $G$-作用的方法：
 $$
 g \cdot (s \otimes w) := s_{gs} \otimes (h_{gs} \cdot w)
 $$
@@ -169,49 +169,46 @@ $$
 
 回忆我们建立诱导表示具体记号的步骤，这里要做的无非是更细的根据双边陪集 $F \backslash G / H$ 拆解．首先注意 $(\galg F, \galg H)$-双模分解
 $$
-\galg G = \bigoplus_{[s] \in F \backslash G / H} \galg F \cdot e_s \cdot \galg H
+\galg G = \bigoplus_{[s] \in F \backslash G / H} \galg{FsH}
 $$
 继续照抄，有 $(\galg F, k)$-双模同构
 $$
 \begin{aligned}
 \Res G F {\Ind H G W}
 &= \Res G F {\left( \galg G \otimes_{\galg H} W \right)} \\
-&= \left( \bigoplus_{[s] \in F \backslash G / H} \galg F \cdot e_s \cdot \galg H \right) \otimes_{\galg H} W \\
-&\cong \bigoplus_{[s] \in F \backslash G / H} \left( \galg F \cdot e_s \cdot \galg H \right) \otimes_{\galg H} W \\
-e_g \otimes w &\mapsto (e_{f_g} \cdot e_{s_g}) \otimes (h_g \cdot w) 
+&= \left( \bigoplus_{[s] \in F \backslash G / H} \galg{FsH} \right) \otimes_{\galg H} W \\
+&\cong \bigoplus_{[s] \in F \backslash G / H} \galg{FsH} \otimes_{\galg H} W \\
+g \otimes w &\mapsto f_g s_g \otimes (h_g \cdot w)
 \end{aligned}
 $$
 这里是设上式中的 $g \in G$ 有 $F \backslash G / H$-分解 $g=f_g s_g h_g$．剩下的事情是证明 $F$-表示同构
 $$
-\left( \galg F \cdot e_s \cdot \galg H \right) \otimes_{\galg H} W \cong \Ind{sHs^{-1} \cap F}{F} {\left( \Res{sHs^{-1}}{sHs^{-1} \cap F} {(s \otimes W)}\right)}
+\galg{FsH} \otimes_{\galg H} W \cong \Ind{sHs^{-1} \cap F}{F} {\left( \Res{sHs^{-1}}{sHs^{-1} \cap F} {(s \otimes W)}\right)}
 $$
 先构造一侧的 $F$-同态
 $$
 \begin{aligned}
-\galg F \otimes_{\galg{sHs^{-1} \cap F}} \Res{sHs^{-1}}{sHs^{-1} \cap F} {(s \otimes W)} &\to \left( \galg F \cdot e_s \cdot \galg H \right) \otimes_{\galg H} W \\
-e_f \otimes (s \otimes w) &\mapsto (e_f \cdot e_s) \otimes w
+\galg F \otimes_{\galg{sHs^{-1} \cap F}} \Res{sHs^{-1}}{sHs^{-1} \cap F} {(s \otimes W)} &\to \galg{FsH} \otimes_{\galg H} W \\
+f \otimes (s \otimes w) &\mapsto fs \otimes w
 \end{aligned}
 $$
 其良定性需要我们验证一下映射和左侧 $\otimes_{\galg{sHs^{-1} \cap F}}$ 平衡关系相容：
 $$
 \begin{aligned}
-(e_f \cdot shs^{-1}) \otimes (s \otimes w)
-= e_{fshs^{-1}} \otimes (s \otimes w)
-&\mapsto e_{fshs^{-1}} \cdot e_s \otimes w
-= e_{fsh} \otimes w \\
-e_f \otimes \left( shs^{-1} \cdot (s \otimes w) \right)
-= e_f \otimes (s \otimes (h \cdot w))
-&\mapsto (e_f \cdot e_s) \otimes (h \cdot w)
-= (e_f \cdot e_s \cdot h) \otimes w
-= e_{fsh} \otimes w
+(fshs^{-1}) \otimes (s \otimes w)
+&\mapsto fsh \otimes w \\
+f \otimes \left( shs^{-1} \cdot (s \otimes w) \right)
+= f \otimes (s \otimes (h \cdot w))
+&\mapsto fs \otimes (h \cdot w)
+= fsh \otimes w
 \end{aligned}
 $$
 再构造另一侧 $F$-同态
 $$
 \begin{aligned}
-\left( \galg F \cdot e_s \cdot \galg H \right) \otimes_{\galg H} W
+\galg{FsH} \otimes_{\galg H} W
 &\to \galg F \otimes_{\galg{sHs^{-1} \cap F}} \Res{sHs^{-1}}{sHs^{-1} \cap F} {(s \otimes W)} \\
-(e_f \cdot e_s \cdot e_h) \otimes w &\mapsto e_f \otimes (s \otimes (h \cdot w))
+fsh \otimes w &\mapsto f \otimes (s \otimes (h \cdot w))
 \end{aligned}
 $$
 继续验证良定义，首先是无关 $f$, $h$ 选取：设另有 $f'$, $h'$ 使得 $f' s h' = fsh$，则
@@ -221,24 +218,24 @@ $$
 因此
 $$
 \begin{aligned}
-(e_{f'} \cdot e_s \cdot e_{h'}) \otimes w
-&\mapsto e_{f'} \otimes (s \otimes (h' \cdot w)) \\
-&= (e_f \cdot f^{-1}f) \otimes (s \otimes (h' \cdot w)) \\
-&= e_f \otimes \left(f^{-1}f' \cdot (s \otimes (h' \cdot w))\right) \\
-&= e_f \otimes \left(shh'^{-1}s^{-1} \cdot (s \otimes (h' \cdot w))\right) \\
-&= e_f \otimes \left(s \otimes (hh'^{-1}h' \cdot w)\right) \\
-&= e_f \otimes (s \otimes (h \cdot w)) \\
-&\mapsfrom (e_f \cdot e_s \cdot e_h) \otimes w
+f'sh' \otimes w
+&\mapsto f' \otimes (s \otimes (h' \cdot w)) \\
+&= f(f^{-1}f') \otimes (s \otimes (h' \cdot w)) \\
+&= f \otimes \left(f^{-1}f' \cdot (s \otimes (h' \cdot w))\right) \\
+&= f \otimes \left(shh'^{-1}s^{-1} \cdot (s \otimes (h' \cdot w))\right) \\
+&= f \otimes \left(s \otimes (hh'^{-1}h' \cdot w)\right) \\
+&= f \otimes (s \otimes (h \cdot w)) \\
+&\mapsfrom fsh \otimes w
 \end{aligned}
 $$
 其次验证它与左侧张量积的 $\galg H$-平衡关系相容．任取 $h' \in H$，关系两侧分别被映为
 $$
 \begin{aligned}
-\left((e_f \cdot e_s \cdot e_h) \cdot h' \right) \otimes w
-&= (e_f \cdot e_s \cdot e_{h h'}) \otimes w
-\mapsto e_f \otimes \left(s \otimes (hh' \cdot w)\right) \\
-(e_f \cdot e_s \cdot e_h) \otimes (h' \cdot w)
-&\mapsto e_f \otimes \left(s \otimes (h \cdot (h' \cdot w))\right) = e_f \otimes \left(s \otimes (hh' \cdot w)\right)
+(fsh)h' \otimes w
+= fshh' \otimes w
+&\mapsto f \otimes \left(s \otimes (hh' \cdot w)\right) \\
+fsh \otimes (h' \cdot w)
+&\mapsto f \otimes \left(s \otimes (h \cdot (h' \cdot w))\right) = f \otimes \left(s \otimes (hh' \cdot w)\right)
 \end{aligned}
 $$
 所以该 $F$-同态良定．
@@ -246,12 +243,12 @@ $$
 最后，两同态在生成元上的复合分别为
 $$
 \begin{aligned}
-e_f \otimes (s \otimes w)
-&\mapsto (e_f \cdot e_s) \otimes w
-\mapsto e_f \otimes (s \otimes w) \\
-(e_f \cdot e_s \cdot e_h) \otimes w
-&\mapsto e_f \otimes (s \otimes (h \cdot w))
-\mapsto (e_f \cdot e_s) \otimes (h \cdot w) = (e_f \cdot e_s \cdot e_h) \otimes w
+f \otimes (s \otimes w)
+&\mapsto fs \otimes w
+\mapsto f \otimes (s \otimes w) \\
+fsh \otimes w
+&\mapsto f \otimes (s \otimes (h \cdot w))
+\mapsto fs \otimes (h \cdot w) = fsh \otimes w
 \end{aligned}
 $$
 因此它们互为逆映射，所需的 $F$-表示同构得证．
