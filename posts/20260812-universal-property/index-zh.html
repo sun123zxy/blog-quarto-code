@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="sun123zxy">
+
+<title>代数闭包为何不具备普遍性质 – sun123zxy’s blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f81f3c79f694eaf6f88ebcce70241f9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-af64962de9348b804daa6381b125c604.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-6657e1bb1dcc81431156cd102d4ef94c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-1f77b903011450794daa57c3bd3a7161.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+<script>
+MathJax = {
+  tex: {
+    macros: {
+        SunQuarTeX: String.raw`\mathrm{\mathbf S \;\!\! {\scriptstyle \mathbf U \;\!\! \mathbb N} \mathbb Q \;\!\! {\scriptstyle \mathbf U \;\!\! \;\!\! \mathbf A \;\!\! \mathbb R} \;\!\! \;\!\! \mathbf{\TeX}}`
+    }
+  }
+};
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">sun123zxy’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../listings/overview.html"> 
+<span class="menu-text">Overview</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../listings/projects/index.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/sun123zxy/blog-quarto-code/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-bi-rss" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-bi-rss">    
+        <li>
+    <a class="dropdown-item" href="../../listings/all/index.xml">
+ <span class="dropdown-text">All Posts</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../listings/math/index.xml">
+ <span class="dropdown-text">Math</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#一句神秘的评语" id="toc-一句神秘的评语" class="nav-link active" data-scroll-target="#一句神秘的评语"><span class="header-section-number">1</span> 一句神秘的评语</a></li>
+  <li><a href="#两种抽象机制" id="toc-两种抽象机制" class="nav-link" data-scroll-target="#两种抽象机制"><span class="header-section-number">2</span> 两种抽象机制</a>
+  <ul class="collapse">
+  <li><a href="#sec-universal-property" id="toc-sec-universal-property" class="nav-link" data-scroll-target="#sec-universal-property"><span class="header-section-number">2.1</span> 普遍性质：保结构映射唯一</a></li>
+  <li><a href="#sec-weak-universal-property" id="toc-sec-weak-universal-property" class="nav-link" data-scroll-target="#sec-weak-universal-property"><span class="header-section-number">2.2</span> 较弱的机制：保结构自同态均可逆</a></li>
+  </ul></li>
+  <li><a href="#例代数闭包" id="toc-例代数闭包" class="nav-link" data-scroll-target="#例代数闭包"><span class="header-section-number">3</span> 例：代数闭包</a></li>
+  <li><a href="#例投射覆盖" id="toc-例投射覆盖" class="nav-link" data-scroll-target="#例投射覆盖"><span class="header-section-number">4</span> 例：投射覆盖</a></li>
+  <li><a href="#最后的范畴论废话" id="toc-最后的范畴论废话" class="nav-link" data-scroll-target="#最后的范畴论废话"><span class="header-section-number">5</span> 最后的范畴论废话</a>
+  <ul class="collapse">
+  <li><a href="#普遍对象构成可缩群胚" id="toc-普遍对象构成可缩群胚" class="nav-link" data-scroll-target="#普遍对象构成可缩群胚"><span class="header-section-number">5.1</span> 普遍对象构成可缩群胚</a></li>
+  <li><a href="#弱终对象与极小解" id="toc-弱终对象与极小解" class="nav-link" data-scroll-target="#弱终对象与极小解"><span class="header-section-number">5.2</span> 弱终对象与极小解</a></li>
+  </ul></li>
+  
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">代数闭包为何不具备普遍性质</h1>
+<p class="subtitle lead">在同构意义下唯一 vs.&nbsp;在唯一同构意义下唯一</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">作者</div>
+    <div class="quarto-title-meta-contents">
+             <p>sun123zxy </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p>机翻版本，不保证更新和翻译准确，请主要参考原英文版．</p>
+</blockquote>
+<section id="一句神秘的评语" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="一句神秘的评语"><span class="header-section-number">1</span> 一句神秘的评语</h2>
+<p>关于代数闭包，有一句广为流传的评语：“代数闭包不具备真正的普遍性质．” 真正理解这句话含义的人却不多．乍看之下，这颇令人困惑：代数闭包在同构意义下唯一，而自由对象、张量积、直积等熟悉的普遍构造也都在同构意义下唯一．既然如此，为什么代数闭包受到的待遇不一样？</p>
+<p>这两个断言的强弱其实不同．普遍构造在<strong>唯一同构意义下唯一</strong>，代数闭包一般却只在同构意义下唯一．后者仅断言同构存在；前者还断言该同构本身唯一．惯用语 “在同构意义下唯一” 抹去了这多出来的一层唯一性．</p>
+<p>代数闭包所欠缺的，恰恰是保结构同构的唯一性．</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="exm-complex-conjugation" class="theorem example">
+<p><span class="theorem-title"><strong>例 1</strong></span> 考虑 <span class="math display">\[
+K=\mathbb R,
+\qquad
+\overline K=\mathbb C.
+\]</span> 除了恒等映射外，<span class="math inline">\(\mathbb C\)</span> 还有复共轭这个 <span class="math inline">\(\mathbb R\)</span>-自同构： <span class="math display">\[
+\operatorname{id}_{\mathbb C}:z\longmapsto z,
+\qquad
+c:z\longmapsto\overline z.
+\]</span> 二者并不相同，因为 <span class="math display">\[
+\operatorname{id}_{\mathbb C}(i)=i,
+\qquad
+c(i)=-i.
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<p>因此，即使代数闭包 <span class="math inline">\(\mathbb R\hookrightarrow\mathbb C\)</span> 已经选定，仍然有不止一个 <span class="math inline">\(\mathbb R\)</span>-自同构．代数闭包的结构足以确定一个同构类，却不足以确定那个同构本身．</p>
+</section>
+<section id="两种抽象机制" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="两种抽象机制"><span class="header-section-number">2</span> 两种抽象机制</h2>
+<p>下面稍加考察这两种抽象机制．它们的区别在于：同构究竟是怎样得到的？</p>
+<section id="sec-universal-property" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="sec-universal-property"><span class="header-section-number">2.1</span> 普遍性质：保结构映射唯一</h3>
+<p>设 <span class="math inline">\(X\)</span> 和 <span class="math inline">\(Y\)</span> 是满足同一普遍性质的两个普遍对象．分别沿两个方向应用普遍性质，得到唯一的保结构映射 <span class="math display">\[
+f:X\longrightarrow Y,
+\qquad
+g:Y\longrightarrow X.
+\]</span> 复合 <span class="math inline">\(gf\)</span> 是 <span class="math inline">\(X\)</span> 的保结构自同态，而 <span class="math inline">\(X\)</span> 的恒等映射也是一个这样的自同态．由唯一性， <span class="math display">\[
+gf=\operatorname{id}_X.
+\]</span> 同理， <span class="math display">\[
+fg=\operatorname{id}_Y.
+\]</span> 因此 <span class="math inline">\(f\)</span> 和 <span class="math inline">\(g\)</span> 互为逆同构．但这个论证得到的不只是 <span class="math inline">\(X\)</span> 和 <span class="math inline">\(Y\)</span> 之间的一个同构：普遍性质早已告诉我们，<span class="math inline">\(f\)</span> 是从 <span class="math inline">\(X\)</span> 到 <span class="math inline">\(Y\)</span> 唯一的保结构映射．因此，这个同构本身也是唯一的．</p>
+</section>
+<section id="sec-weak-universal-property" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="sec-weak-universal-property"><span class="header-section-number">2.2</span> 较弱的机制：保结构自同态均可逆</h3>
+<p>现在去掉唯一性要求．我们仍然保证保结构映射存在，但改为要求候选对象的每个保结构自同态都是自同构．若 <span class="math inline">\(X\)</span> 和 <span class="math inline">\(Y\)</span> 都满足此性质，则可任选映射 <span class="math display">\[
+f:X\longrightarrow Y,
+\qquad
+g:Y\longrightarrow X.
+\]</span> 复合 <span class="math inline">\(gf\)</span> 和 <span class="math inline">\(fg\)</span> 分别是 <span class="math inline">\(X\)</span> 和 <span class="math inline">\(Y\)</span> 的保结构自同态，故二者都是自同构．由于 <span class="math inline">\(gf\)</span> 可逆， <span class="math display">\[
+(gf)^{-1}g
+\]</span> 是 <span class="math inline">\(f\)</span> 的左逆；由于 <span class="math inline">\(fg\)</span> 可逆， <span class="math display">\[
+g(fg)^{-1}
+\]</span> 是 <span class="math inline">\(f\)</span> 的右逆．左逆与右逆必然相同，所以 <span class="math inline">\(f\)</span> 是同构．</p>
+<p>这个论证仍然证明了 <span class="math inline">\(X\)</span> 和 <span class="math inline">\(Y\)</span> 同构，却没有证明同构唯一．<span class="math inline">\(f\)</span> 可能有多种选择，没有任何条件迫使它们相等．两种机制都会确定唯一的对象同构类；只有普遍性质进一步保证保结构同构唯一．</p>
+</section>
+</section>
+<section id="例代数闭包" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="例代数闭包"><span class="header-section-number">3</span> 例：代数闭包</h2>
+<p>现在回到代数闭包．<span class="math inline">\(K\)</span> 的代数闭包 <span class="math inline">\(\overline K\)</span> 可由如下映射性质描述：若 <span class="math inline">\(L\)</span> 是 <span class="math inline">\(K\)</span> 的代数闭扩张，则 <span class="math inline">\(K\)</span> 到 <span class="math inline">\(L\)</span> 的嵌入可以延拓为嵌入 <span class="math display">\[
+\overline K\hookrightarrow L.
+\]</span> 换言之，图中的虚线总能由一个嵌入补全：</p>
+<div id="fig-algebraic-closure-extension" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-algebraic-closure-extension-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.6 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="85.56pt" height="72.21pt" viewbox="0 0 57.04 48.14">
+<style type="text/css">
+@font-face{font-family:TUELZZ-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAALgAAoAAAAABPgAAAKXAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqDJIJTCwgAATYCJAMMBCAFgmIHIBvuA0CuBmyXG0MshnbZ8zCIURznlOM3VNYQD/T74zv3PvwVlEQlKYFKQoKn/7xw3yS13TcwTgcqnc6TfKhBjne1Elz63eAUIk29iIPAAl3oGnjMpMr6goIduhkf5xvbIDlFYwygwAOOQgjH/N80TaIHfSB93aZG0RMxkFLt6JGOZkji/TAjI56Pr/9rmJ5G+MGBUBY4Bwl8lcVrO2IAmFHUiQKJYNVZFCAiQY16bw0QTQCkUgGjiwKjiqJ4KAA5kSDvjtiOi4C0fCIIkzq3Olb30NScPEmzmmlLtXrPbJ2waTPNZsbig5ez26dQn27X9y1br6wvUy225dWFgucbdeyx5QP6eisDaZlPW6T0nESNvZo8mZJyMygny1veTjpDf5h2gbpYw7zg4WKuhEl6UQ2toC7W7On/Y+wxYvOY7vxXo2cLylZ802URaGNcNQBeubTquZqobR2WN3Q6a44ZsgPzPH8HqDf29i9T+eMzvxhzsAk/ML6osPE7QH3xtu7fJv0fe06QT9WELrmQ78tiS8evAg2Pd8pgH+Y0LGnN89mzgM1LR4uqs7KVNmiNU59uXFGE0dm7MvzU65QPafgX+KcQG0y4L9/xe0DLcWZAmUp/DKkDACAgMGde8f+8yr0vI4VNxT/jJcqIIHC9wiUKiyMBwk2inoiPtSETkwBrAuTlbGZQWVzRqYoq05nyGtC5ilp3l1NHHbCQlhU0oiY6VU+SztQyQOfqWSvL6eIweRD/Bms3WyRqp7NcpNEoqquS8mZ1py6aylPrI8IdidaOWEZQ26krkZyMvHZtIloIaOSE+bosMwsJNSenciIaGgrVqlht9toqISdLoFqFKg8gk7Nx5cBZIBwGdUt+WIeE1p3HZAjUqtAADA==) format('woff2');}
+
+</style>
+<g id="page1">
+<path d="M4.293999 4.247H13.467999" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="-34.58997" y="-79.94913" transform="matrix(1.000261 0 0 1.000261 38.892999 92.42)">K</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="5.874467" y="-79.94913" transform="matrix(1.000261 0 0 1.000261 40.09 92.42)">L</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="-34.58997" y="-47.917491" transform="matrix(1.000261 0 0 1.000261 38.892999 92.42)">K</text>
+<path d="M19.39552 9.95931H41.0743" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-dasharray="2.7894 1.59395"></path>
+<path d="M19.39552 8.00675C18.71327 8.00675 18.16022 8.44385 18.16022 8.98302C18.16022 9.52221 18.71327 9.95931 19.39552 9.95931" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linecap="round"></path>
+<path d="M39.20143 7.56841C39.58 9.00298 40.42358 9.68036 41.27354 9.95931C40.42358 10.23826 39.58 10.91564 39.20143 12.35021" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M8.88089 32.39883V16.69752" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M6.92833 32.39883C6.92833 33.08108 7.36543 33.63413 7.9046 33.63413C8.44379 33.63413 8.88089 33.08108 8.88089 32.39883" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linecap="round"></path>
+<path d="M6.48999 18.57039C7.92456 18.19182 8.60194 17.34824 8.88089 16.49828C9.15984 17.34824 9.83722 18.19182 11.27179 18.57039" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M19.08567 33.9224L41.16038 16.44645" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M17.873775 32.391563C17.338884 32.815016 17.176582 33.500968 17.511229 33.923683C17.845888 34.346413 18.550779 34.345842 19.08567 33.92239" stroke="#000" fill="none" stroke-width=".398481" stroke-miterlimit="10" stroke-linecap="round"></path>
+<path d="M38.208075 15.734407C39.395272 16.624157 40.477077 16.631645 41.31659 16.3228C40.823349 17.069044 40.582403 18.123702 41.175995 19.483386" stroke="#000" fill="none" stroke-width=".398481" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-algebraic-closure-extension-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;1: 将嵌入延拓到代数闭包．
+</figcaption>
+</figure>
+</div>
+<p>这正是上一节较弱普遍性质的一个例子：<span class="math inline">\(\overline K\)</span> 可以在 <span class="math inline">\(K\)</span> 上嵌入 <span class="math inline">\(K\)</span> 的任意代数闭扩张，而 <span class="math inline">\(\overline K\)</span> 到自身的每个 <span class="math inline">\(K\)</span>-嵌入都是自同构．</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span>设 <span class="math display">\[
+\sigma:\overline K\longrightarrow\overline K
+\]</span> 是一个 <span class="math inline">\(K\)</span>-嵌入．它必然满射：其像 <span class="math inline">\(\sigma(\overline K)\)</span> 同构于 <span class="math inline">\(\overline K\)</span>，因而是代数闭域；另一方面，<span class="math inline">\(\overline K\)</span> 在 <span class="math inline">\(K\)</span> 上代数，且 <span class="math inline">\(\sigma\)</span> 固定 <span class="math inline">\(K\)</span>，故 <span class="math inline">\(\overline K\)</span> 在 <span class="math inline">\(\sigma(\overline K)\)</span> 上代数．代数闭域不存在真代数扩张，所以 <span class="math display">\[
+\sigma(\overline K)=\overline K.
+\]</span> 因此，<span class="math inline">\(\overline K\)</span> 到自身的每个 <span class="math inline">\(K\)</span>-嵌入都是自同构．</p>
+</div>
+</div>
+</div>
+</div>
+<p>于是 <a href="#sec-weak-universal-property" class="quarto-xref">小节&nbsp;2.2</a> 的较弱论证表明，<span class="math inline">\(K\)</span> 的任意两个代数闭包都在 <span class="math inline">\(K\)</span> 上同构．所需的嵌入总是存在，却没有任何条件保证它们唯一．</p>
+</section>
+<section id="例投射覆盖" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="例投射覆盖"><span class="header-section-number">4</span> 例：投射覆盖</h2>
+<p>模论中也有一个这样的较弱普遍性质．每个模 <span class="math inline">\(M\)</span> 都是某个投射模的商，但随意选取的 <span class="math inline">\(P\twoheadrightarrow M\)</span> 往往含有多余的投射成分．投射覆盖是某种意义下最小的投射满射．</p>
+<p>和刚才一样，我们自然想用映射性质表达这种最小性．设 <span class="math inline">\(p:P\twoheadrightarrow M\)</span> 是一个投射覆盖．给定另一个投射模 <span class="math inline">\(Q\)</span> 以及满射 <span class="math inline">\(f:Q\twoheadrightarrow M\)</span>，我们希望存在满射 <span class="math inline">\(\widetilde f:Q\twoheadrightarrow P\)</span> 使下图交换：</p>
+<div id="fig-projective-cover-lift" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-projective-cover-lift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.6 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="90.96pt" height="76.2pt" viewbox="0 0 60.64 50.8">
+<style type="text/css">
+@font-face{font-family:NQUDBD-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAL4AAoAAAAABRQAAAKvAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqDQIJxCwgAATYCJAMMBCAFglwHIBsOBACO1FaxTZLcZFCbNuwmNCVSJRUz+52Y2fNAGN6qlLJEL3o90Sdupq3hBTQBbNrGNW2dZ11CYQbhBg0oSyB6Qnxbp4oNF64vi8EZXABNN2YGxEA+ufpfG9O7y3ypIniEKsCwwDLwU6i83TVgVWstCACKwa0KAgAgAArQzrJIRWwBbMAgUTS0xjNhsTArDg2Ksu10ADutoCgAQO/YII2a3EzdFa4L7kROuma8+LB0r9HcJZZzeX7/fYOcnBxuzbL1vPT+fYPt96WTrxotOMDtM5633Gae0nrNhiWGmdL1S9coswoMxhZZrzlhuGCOUjlv3n2DxYdt1t812nzf5/zdrDuZC2xHb981/fJ43TmYy3tNnovROVx25hz9sfX85PUFmXOctkbtv++y/T6z6hi37s6K2X4BanGuwuyJ0HBiO5fIQ/g0C/G7Tx9evvAwjbc0nO/0R5GdeEvD+kWaIls791F2mJWF3R4qd1FCiX+P/obq6g/mDupNLbmtYfMCia/zljP/2fSGydaI+hkr09T48M97W26Mhhp9yk5w/tlalE5ySW1o8m/1+PAsclN3VDNcM7MhiJW8VOd+c4oLKg00h64wVWNXGKmdeeT1RGqZYdkaGWA9YthvQbcZj8ZZAQDAABgQBp+rlagF/pVQERQgLLqQenITgAThqR8DjxyBgxukvg2pTxMAGSSgNE6p5AgjUnGGccpQw7UiMmprTkzKgGPJWK9zdLmjmFYFw1h84kR01XJiSqMcS9e8juNq2yVD/0NsMTktKzI80ikiKSnO5+4+cXN2NQ0eZO+o7K7r6K5pMvVw9kaEFk1adelUpZ2pJC0q6UyzZGmyRAoXyUmEJF3H8ZGN+VqHOi2amXLjzNUDjDGaoxplO4GVfrm+mbRStzodH6/RxJQHZ94oBQ==) format('woff2');}
+@font-face{font-family:OYFEXR-CMEX7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHwAAoAAAAAA5wAAAGoAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANApUZQsGAAE2AiQDCAQgBYJcByAb9gJAHoVx41PinC3LWgt6HMJDcYmH78d+nfswtVAsSbXoWTxBEq/aOjSoTCdUiLt/6HL3LY/G5l+TGmvTr/awNIpKMC8voAUSRsEGHAS64SCw+rrp/ruLv8HbMs74aVsSBYG1tiRNMMIs4AosoITvwE7PvHU7o89kpDZSRPo1ISstRuSQ3tLnfzlWGz9TTEUB2lzG7QDbh+sOMGSOBP1OAnak6AsBQCYDErJQTSuo6rQDshNB5l8myZG7AQlkI1AH6ABANiDqTp8rfCzcPgqfS/Dnu+g+f30v+qyeLjpNtGjmeyZ7rHlQmTMFiCbF/HcOMZt+cfYABIKhWx7XyvyXTzbfSJfpB/kSCBbcSU/KGdNlobgk/giEpA4EgodC5yJl7CFbsTLkKNKEXMV6NwrVo2lFdoHQKgnIVq+LHLX2yFXvHAuNuxwlfpS5zDWikXoRC2VaI9xQGwonA9Wz4wll3VusOyM3g/MgZGJkamVJNeeWMaFwZSynISqirggTkoEXVDPettAzMeZGwZH5EsvHVHPiPKL8A8mOm2KtZ2GtY8SNgeNpAXYfAA==) format('woff2');}
+@font-face{font-family:TUELZZ-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAN4AAoAAAAABfgAAAMuAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqFFIQPCwoAATYCJAMQBCAFgmIHIBu2BAiO0tRwyiTJy28qHuov9nb/3p+bk5NMsmZOkkSawAoowRATCzSQ/fk67c0vpEnFSQFPmaS2TuAJUG4rX7vH3f+5pt63C2+KBDnmimXQ9rxKBzw6wAGP2hrwJjjQoxHqLE+JZ0JOBDnv07Vj03TtG0Z+wzqBDeQH3fwThY5axv5kDRgEFwA5ARXgpzye+QnAjuQ74D8GjL3ZDZDAAE5iBj0rdWB2McjIUfRufBoSG71mRShYYe5+AWIncny6LFdlAXVpvpJQSdG+zbPBXnEGTbxfvGpA7GRFJiKxV7kfCw/thcElI7E+6KWi3oSe7XUGGLODdZ6FPqmwlIEBFdljqFf1dDGBJnnO3Rnne3mBZ5o6phkcyLPJtFlhYtOv3NzzszFTqyZzTIOBhSFiVHufdiovPi4TcG78+spgBoi5j9DDwbge2S898WRy8iI1668rMRU5bfMz7fmZUvk92xYDAxjTcWNfcmjTwj6tgUJl53Wq4T21rUDlqMuWU+Btv/OR7HIfawxj+SQWWNSsY8WFFif3fbn4XolEFI/2ZU6Jw92IOhkBe/Qo9/ahFd8C7yPXpexFsGGa55tg5DEYHdb/Kea6yBpUhaqwr/eNVlPtn8UjFosNtkK+7taRvqaJWAzhJN6F+4v5vJOPw1nddGxjPujCPlviPb7vrG0kRYg4fv8Wa8uydqIyJ8PitZ+ZAd0dqBI1eucaeLoapftVoBysvRcrRU1k5jFGT6IqUXS5bjpjcA/5GAv9WOZf2Xh+SLhnkGD2djUlzeh6OxwuJilFSvdZWcY8EPQX/CCgwAsAAQS4vFpTIgQs3zhZWAGu9plVBz0CWKHi3VTjDzS6rXQA86BeSbW1s4vkhgboi8Uby5YAg005jAIBdyQXPgLygoesPPFRu72RZIgFVlyAkefpZFbSkmU24mpldtKGh9wIG08h96ezyzS6k2dwsI4DSbpRiTdGkqpLrDc+jj8Rm5+Uk5+QhhvoGoODDGky5ckVJxuOlCHWH0pHQ+fEU3DD63BAzrqhIjDIrOZIkiEdjkoXoQOXXLp5LupCiO1EK+r0sfIlycl4gjQ4A7qMsQAA) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="-32.975392" y="-81.913617" transform="matrix(1.000261 0 0 1.000261 38.204999 92.396999)">Q</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="-32.975392" y="-47.945484" transform="matrix(1.000261 0 0 1.000261 38.253 92.396999)">P</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="8.825696" y="-47.945484" transform="matrix(1.000261 0 0 1.000261 36.767 92.396999)">M</text>
+<path d="M9.15929 16.247428V33.383268" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-dasharray="2.7894 1.59395"></path>
+<path d="M11.55019 30.075848C10.11562 30.454418 9.43824 31.297998 9.15929 32.147958C8.88034 31.297998 8.20296 30.454418 6.76839 30.075848" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M11.55019 31.510388C10.11562 31.888958 9.43824 32.732538 9.15929 33.582498C8.88034 32.732538 8.20296 31.888958 6.76839 31.510388" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMEX7" font-size="6.97" x="-39.829285" y="-49.770865" transform="matrix(1.000545 0 0 1.000545 43.363 75.733)">�</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="-41.193547" y="-47.931868" transform="matrix(1.000545 0 0 1.000545 43.363 75.733)">f</text>
+<path d="M17.59044 14.822628L40.79303 33.679898" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M39.734308 29.738673C39.123352 31.090648 39.350774 32.148307 39.83442 32.900808C38.998928 32.581237 37.917114 32.574872 36.718618 33.44935" stroke="#000" fill="none" stroke-width=".398482" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M40.847508 30.643363C40.236552 31.995338 40.463974 33.052997 40.94762 33.805498C40.112128 33.485927 39.030314 33.479562 37.831818 34.35404" stroke="#000" fill="none" stroke-width=".398482" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="-41.193542" y="-47.931868" transform="matrix(1.000545 0 0 1.000545 72.909 68.632999)">f</text>
+<path d="M17.54236 41.947928H40.70377" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M37.39635 39.55703C37.77492 40.9916 38.6185 41.66898 39.46846 41.94793C38.6185 42.22688 37.77492 42.90426 37.39635 44.33883" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M38.83089 39.55703C39.20946 40.9916 40.05304 41.66898 40.903 41.94793C40.05304 42.22688 39.20946 42.90426 38.83089 44.33883" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="-41.193542" y="-47.931868" transform="matrix(1.000545 0 0 1.000545 68.485 95.255)">p</text>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-projective-cover-lift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;2: 将映射提升到投射覆盖．
+</figcaption>
+</figure>
+</div>
+<p>若不要求提升满射，这件事便是自动的：<span class="math inline">\(Q\)</span> 的投射性直接给出映射 <span class="math inline">\(Q\to P\)</span>．所以真正刻画最小性的是提升的满射性．下面的定理说明，这又是前述较弱普遍性质的一个例子．</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-projective-cover-characterizations" class="theorem">
+<p><span class="theorem-title"><strong>定理 1 (投射覆盖的刻画)</strong></span> 设 <span class="math inline">\(p:P\twoheadrightarrow M\)</span> 是满同态，且 <span class="math inline">\(P\)</span> 投射．下列条件等价：</p>
+<ol type="1">
+<li><p>（映射性质）对任意投射模 <span class="math inline">\(Q\)</span>、任意满射 <span class="math inline">\(q:Q\twoheadrightarrow M\)</span> 以及任意满足 <span class="math inline">\(ph=q\)</span> 的映射 <span class="math inline">\(h:Q\to P\)</span>，映射 <span class="math inline">\(h\)</span> 必为满射．</p>
+<ul>
+<li>因为 <span class="math inline">\(P\)</span> 投射，每个这样的 <span class="math inline">\(h\)</span> 都分裂，从而将 <span class="math inline">\(P\)</span> 实现为 <span class="math inline">\(Q\)</span> 的直和项．</li>
+</ul></li>
+<li><p>（较弱的普遍性质）每个满足 <span class="math inline">\(pu=p\)</span> 的自同态 <span class="math inline">\(u:P\to P\)</span> 都是自同构．</p></li>
+<li><p>核 <span class="math inline">\(\ker p\)</span> 是 <span class="math inline">\(P\)</span> 的<strong>小子模</strong>（superfluous submodule）：对任意子模 <span class="math inline">\(N\subseteq P\)</span>，若 <span class="math inline">\(N+\ker p=P\)</span>，则 <span class="math inline">\(N=P\)</span>．</p></li>
+<li><p><span class="math inline">\(P\)</span> 的任何真子模在 <span class="math inline">\(p\)</span> 下都不能映满 <span class="math inline">\(M\)</span>．</p></li>
+</ol>
+<p>满足这些条件时，<span class="math inline">\(p:P\twoheadrightarrow M\)</span> 称为 <span class="math inline">\(M\)</span> 的<strong>投射覆盖</strong>．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">注记</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>证明</em>. </span><strong>(3) &lt;=&gt; (4).</strong> 对任意子模 <span class="math inline">\(N\subseteq P\)</span>，有 <span class="math display">\[
+p(N)=M
+\iff
+N+\ker p=P.
+\]</span></p>
+<p><strong>(4) =&gt; (1).</strong> 设 <span class="math inline">\(h:Q\to P\)</span> 满足 <span class="math inline">\(ph=q\)</span>，其中 <span class="math inline">\(q:Q\twoheadrightarrow M\)</span> 是满射．于是 <span class="math display">\[
+p(\operatorname{im}h)=M.
+\]</span> 由条件 (4)，<span class="math inline">\(\operatorname{im}h\)</span> 不可能是 <span class="math inline">\(P\)</span> 的真子模，故 <span class="math inline">\(h\)</span> 是满射．</p>
+<p><strong>(1) =&gt; (4).</strong> 设 <span class="math inline">\(N\subseteq P\)</span> 映满 <span class="math inline">\(M\)</span>．选取投射模 <span class="math inline">\(Q\)</span> 以及满射 <span class="math inline">\(r:Q\twoheadrightarrow N\)</span>．</p>
+<div id="fig-projective-cover-submodule" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-projective-cover-submodule-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.6 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="151.815pt" height="76.575pt" viewbox="0 0 101.21 51.05">
+<style type="text/css">
+@font-face{font-family:OYFEXR-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAP0AAoAAAAABpgAAAOqAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqGOIR7CwwAATYCJAMUBCAFglwHIBsgBVGUDE4B4keC6eYe6YibVRISTYRbRxpdvTji303wPH/vzn1/rObGPTUuobE8DDhMoVC7A3la0oxC6wnlYLb3kqotN9knARF262WhVgSJZhYEYk3d1F/2XkC/AKxlGwfoOs+6hMIMyjZoYAl2UWIFgmXbJM2gJeKl02p7hjZgJZA3B+bm9885lyJ5EyVmRRA0F7rgVhxPQSLA5yanUsAisFFVAAywQM4bovJoA3BTYYzYYMOBrI5+9KIZigND4CnSQFYBYLNriq+SPp3pQXbz+EzrtHaC14DnTnWEUSgwyNA5uU9kCsmx5RjWsPEcYeRAlStDJHarcK/onjqyhoVlWVUmXINp7OihGkwKVWZU6zXPq3CZcnJs9nVleEq/7apq13X7taukK0SuwRXi6K7SFaICE2DJ2p5iAXSmEJnIVGK0yZ5qCyUyTXtwY9fN+66DjbNCrVdyw2RkkKTl6WyYIzvSpU7Rbr5ic+0a+ToFNr5OWTlQ7JqTZwF0KoVj1otvvYLsvqLSMLN23ZwjTyEqMJtPtiqpU9TVYXBtxDi+TjpV/z53XGhUjdGnz5bTGx6XaZ+X0fCu5AWyLPDivBrGDvsy7s2KqGAJ/WNqk9IoccmGQAGxrBYe0yv1KAjwV0AqIOVf/g+2X73XRFKSEcgX2SprulSP5JEHfMryDs1kX2vsq/dgUs43BIrLol+PZO7TkaqvyN5mH7PCgxBURBLS77OEF5qEOFCgS6GliKmufAIPJYQ+C4mt86dCFKheQ5yvXlV8+ZbtHWGdYJ0srLNepUqJNtSrRvfUBQRajuu46wDoqDf406AU6KHIN/r8xSKF6EFxjO4AGiCHAd5QnFvAI01PHA0BIqMUX9AXRAVgY6ttIRusdjRO30hLs1KEb2Yepff4pB7wYVfvckVFuZI7UGXUO9dDltgEVe17WTEZtNho2jwSo/IH7eULGiK15MX9pAO1xS2O//iUDTALLhHkX4gBgADB151zMzI5vm/ZZKBD6zilFfiM4mkWBcxWJZ4tkKpOAHnGoFlT4hZ1FkDgOBhqkCL0AgJg0ukyW0ySOSJV5oppjodKrECkBYgGL2K2kiTmKKAzVwm7DI31nrqcT9V6/Wl4HDXIdLf39bS/zLQmw/FI7YV6j+MzObcgMV1jNlyCkSldlnx54uXQ4CtTHK/J4I8GD4cqiCkMX8k82SOHq+VKlimDBktmLBQgwc0w6kZPBOOSGMUNNU6BZLkXT5ROgzUzdiAZAA==) format('woff2');}
+@font-face{font-family:TUELZZ-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAP0AAoAAAAABsgAAAOrAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqGYIUbCwwAATYCJAMUBCAFgmIHIBtGBVGUC0oO8CMhc1OjvYQodXIxxBatTBHDEO/8Fg/Q4e/d/Gs2pg5LAxuLiwPLI0g4lEDXvOHfS19ypZJCucK55QqQx5Jfk7Na+Rv4O39u9cE+dDn9sx/+z2MC2G6sgWNMwTAOLNvUpucSDfApjEyzuSZTfFFjIQfyaasePSHF9zCsEB/iyf8SDJ2+UATMgih4hQh8ldu7yiwg5EJIAg1JwF1sDUQkLIfUxQL2AbU1iC6FoGMXgmmlPbb7eTAF9KGOKHQJNxXI5AzHi9Oxo460weebknXxSgrsh3s8FhoZjnLQFi6ys6GalM3S4UCJ8SzAW7NA2ICFsLMmvPc6zo1ctPrFV9jKCXlcru44w2fp7a7WxbNYYiyVRJVAyaFIqhflcpKjZ9l3cNlIQpzixLoly+uLiFryISxzzfaLrHClQrTNDEve3IDrcIPr8Nho8YeU0wYFzd+KiS0vps3dtVqizLj8BDFpQobvaqDTqlH7lre3kVSUlkKhCBuP+5M5KjNXVjs3ysv5+9qUFkbYex1+fU1v/uDHdlwuRLk/IJX4D+1cC7roTCEJjzaJXecmuBEecRaR/kMOXwaM+E51J9A+ItE1vbiDKLw6S4aISt4S2XAmTKruEptPkzpUpV3hS/U/7/uxRyDIrdyr4Uama178q0zyNiBSgwdtcC/R+Yp/cS2dagGigD9HF09RkBCTWnZmQ906lm+ITbXb7z3fl+M/oOWXYuDZ7Edc8pFzFqxjzfKINUrc2wcWbo7/6UWKktvgFrgF+XIe7rcu4c/ilw6lxzrAIb6OySHW2VAa4YGOYGFI8FuNDEzAB3dOe88ApGD2OUZ6mlgoE/Lu376mO9Pu7eguqdICyeIiMDoEN8PdQeVm/t4WhaFNcBk0yILq4Z6A4m0oIoepTWeIngynYX4aaXam6dRftUwpkJVaFABsWr2tA2wi7jwR9rLKq9E+LymxFFcFrp9l3ksbAhAQ+EK8+EnS9m9dWqZOtqOMx0tAV4zUb5jNnhi0gYyDKFQi4pdNkiWDOOIgGTIFobhCA5mEvnsQgYlms9nIhC0GttlqZO9y3zpzNCH3BLv8G5ttymWLVe1stWm82nfowWOZ9te14+ERHv6xsbhbQIAPk3jdWWYyCN/CR+x3pFfmlFVmFWBmDEvgpkiBYhXKZSiFCVAknbYVChfBg79YTeLcBLT6YCJEosxaJkeRQhgmBiIGeDkLMztTdgPp8VQ1V+J0lXKUmTxLAYwZBks0Cg==) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="-12.554723" y="-81.913617" transform="matrix(1.000261 0 0 1.000261 17.459 92.391)">Q</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="-12.554723" y="-47.945484" transform="matrix(1.000261 0 0 1.000261 16.852 92.391)">N</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="28.368595" y="-47.945484" transform="matrix(1.000261 0 0 1.000261 17.507 92.391)">P</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="70.120695" y="-47.945484" transform="matrix(1.000261 0 0 1.000261 16.020997 92.391)">M</text>
+<path d="M8.83933 16.24143V33.37727" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M11.230229 30.06985C9.795659 30.44842 9.118279 31.292 8.839329 32.14196C8.560379 31.292 7.882999 30.44842 6.448429 30.06985" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M11.230229 31.50439C9.795659 31.88296 9.118279 32.72654 8.839329 33.5765C8.560379 32.72654 7.882999 31.88296 6.448429 31.50439" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="-21.385341" y="-47.931868" transform="matrix(1.000545 0 0 1.000545 23.977002 74.468)">r</text>
+<path d="M17.27048 11.42686L81.29909 37.73853" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M79.148775 34.27013C78.953677 35.740847 79.476453 36.687975 80.15656 37.26902C79.264411 37.203977 78.226733 37.509866 77.331356 38.692817" stroke="#000" fill="none" stroke-width=".398479" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M80.475555 34.81534C80.280457 36.286057 80.803233 37.233185 81.48334 37.81423C80.591191 37.749187 79.553513 38.055076 78.658136 39.238027" stroke="#000" fill="none" stroke-width=".398479" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="-21.385341" y="-47.931868" transform="matrix(1.000545 0 0 1.000545 73.212 68.914)">q</text>
+<path d="M19.31244 41.94193H40.99123" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M19.31244 39.989374C18.63019 39.989374 18.07714 40.426474 18.07714 40.965644C18.07714 41.504834 18.63019 41.941934 19.31244 41.941934" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linecap="round"></path>
+<path d="M39.11835 39.551034C39.49692 40.985604 40.3405 41.662984 41.19046 41.941934C40.3405 42.220884 39.49692 42.898264 39.11835 44.332834" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="-21.385341" y="-47.931868" transform="matrix(1.000545 0 0 1.000545 49.621004 96.861)">i</text>
+<path d="M58.15584 41.94193H81.26915" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M77.96175 39.551034C78.34032 40.985604 79.1839 41.662984 80.03386 41.941934C79.1839 42.220884 78.34032 42.898264 77.96175 44.332834" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M79.39628 39.551034C79.77485 40.985604 80.61843 41.662984 81.46839 41.941934C80.61843 42.220884 79.77485 42.898264 79.39628 44.332834" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="-21.385341" y="-47.931868" transform="matrix(1.000545 0 0 1.000545 89.255 95.249)">p</text>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-projective-cover-submodule-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;3: 让一个投射表示经由 <span class="math inline">\(N\)</span> 分解．
+</figcaption>
+</figure>
+</div>
+<p>记 <span class="math inline">\(i:N\hookrightarrow P\)</span> 为包含映射，并令 <span class="math inline">\(h=ir\)</span>．条件 (1) 表明 <span class="math inline">\(h\)</span> 是满射．又因为 <span class="math inline">\(\operatorname{im}h=N\)</span>，故 <span class="math inline">\(N=P\)</span>．</p>
+<p><strong>(4) =&gt; (2).</strong> 设 <span class="math inline">\(u:P\to P\)</span> 满足 <span class="math inline">\(pu=p\)</span>．于是 <span class="math display">\[
+p(\operatorname{im}u)=M,
+\]</span> 故条件 (4) 表明 <span class="math inline">\(u\)</span> 是满射．由于 <span class="math inline">\(P\)</span> 投射，<span class="math inline">\(u\)</span> 分裂，因而 <span class="math inline">\(\ker u\)</span> 是 <span class="math inline">\(P\)</span> 的直和项．此外， <span class="math display">\[
+\ker u\subseteq\ker p.
+\]</span> 由条件 (3)，<span class="math inline">\(\ker p\)</span> 是小子模，因此不含非零直和项．所以 <span class="math inline">\(\ker u=0\)</span>，从而 <span class="math inline">\(u\)</span> 是自同构．</p>
+<p><strong>(2) =&gt; (4).</strong> 设 <span class="math inline">\(N\subseteq P\)</span> 映满 <span class="math inline">\(M\)</span>．由于 <span class="math inline">\(P\)</span> 投射，映射 <span class="math inline">\(p\)</span> 可以沿限制 <span class="math inline">\(p|_N:N\twoheadrightarrow M\)</span> 提升：</p>
+<div id="fig-projective-cover-minimality-lift" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-projective-cover-minimality-lift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.6 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="91.875pt" height="70.545pt" viewbox="0 0 61.25 47.03">
+<style type="text/css">
+@font-face{font-family:XDTRFF-CMMI5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJEAAoAAAAABCAAAAH5AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBWIE/CwYAATYCJAMIBCAFglwHIBtQAyAehXHjU0KUS7T2VMvuiUc8VIfv27tNqZWD4T/RClbHGzbhTDCg1SwCTf8drbXZ2zcx1JKIeHJrNDLNKnQq+cn7+7+3+L+Bb0AXTnjIs63j4oAaeIJFmIfX5QEmGFCeWPDvrr3abdIvGpyU3MxQ626sQA/lhXjviizXMP6KwCfo4F5IILu666oGiqNmFRqqGNbZGiiomPY100jWgZQCR601XHsTZAqQtwp0gBMAEhCd+4KNDcbGlqSuQHaQub0p3rFERWVsSfbPxN8ri08tjONTNHomZp5timvzlduXURv5PxIZmb25Cc/Hko/CDNFzTo89TsvHQHHBMArYjkUj/0Oa08P7Dvy7iulnB0Tf7qTYu0ShM7NF+z94L/XenKYvvWYarv9ZuP/k9b4dr9STiMWzcNwPIBB858hbMTf0n4aTTrdu5pdXoF8BQdWQh3raT9RAyErhGQhFBwKBfNATMIaiSMPGurTHkCXaa9hu96B53rDIAWFVnNE0r4b2mDVCe83bcoP23J5S/Qfn1pyIjLSoKLfwxMRYv8tvxcvdM1N60byioqu2vau6Uefj7g/hmjVq0alDpTY6iZpV8PWa5IiQIU2UKG7CJUoUy0+WSm3a1WrWRMeLO88JEG2aFjWlG0HFS2V66VToUqtdl2qNdHy484dJFQAAAA==) format('woff2');}
+@font-face{font-family:NQUDBD-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHAAAoAAAAAA3wAAAF2AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAo0RwsGAAE2AiQDCAQgBYJcByAb2AIArgrshvMbAiHK3r84r5OYbap1FM9/P9bOfSuGiGdapxIadYeGR9GUCIWhJv7/vz/voLRQ306nEqD0zakti6VtmWDpnImQzQl7zZ4D9fyWO36RArotfNTEfx5YC6S1PVCCjxBIiyzCMAy0bypOkhIStVr7NqGTX9Kjvur/FTdNWQLJAK6PD9zl1YYDr2nTCZ0AYi1vrjVQ6GCFSxBzOwC6dDBtDTdp7UYAFOgimMEcoAvIDNb/fDx+rfv6fvr8zYzj4wTOAYLwszirYcFSfm4wSy0F1TBUIAxVimeO/zi4oArIhZegzAgIzGPXGTQvPrpmzKNnYht9M84WxjYkuKQbgNjTBujawKNnzQF9G7517Nz/uMhnmIf90axaroYrvckqews18Ugs1D0t/jp6I1gbTkHJSAYqNArdmo1hQno0NIZJ1TcyU1VWFVbRM7GSNccwWQQaFRIXEaughlYxTEQnoh9N2kNoGwLLBkeBJEVkuADsHwAAAA==) format('woff2');}
+@font-face{font-family:OYFEXR-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAMYAAoAAAAABTAAAALPAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqDXIMGCwgAATYCJAMMBCAFglwHIBsjBAAehXGz00Wlie/ivbOrgzb1gJSaus7EvgvP/++8vSJIMIHMOtlINuAB+C/J/4lz6ZJmzRUAOsugtiiw3Qs9vsHwE/RFXmA0UnybV8R8aGTqfJuHDwCLK1IHJAD90Gv/maBWPORrV4BiIwegccAg4FQQdFJCARcmrgMRwCB2d4kFAKAAMABMhWVCILbGESBQlLai39TbwABDcbYDADZZAAACDgA/t7XpI91mH5jeu9bP1CXHNMfW1QVdwpV3FDspmZvbpdrEtowqrvPks3L2uj4Q7FxQObor1cbk5MTF1jREMTKBcPq2trZQVLSwtLZSuq4uMzl7cuZ3iAztcbU1sbC0tDzg7NwUHb3HPflA9fSe812nNrE1W7nOUf832ZqgmVm5shnymihcnJo48keZK0c9nZqkp41XH8jOPkAGdihG7uqNWqvN2SvkGRN0Fqm4NZklNvbq6PnneXe46Onr7fHYERLpO2I5ZFQSN+4w6zMb0DHZxc/bGqS+s2Aw580uzuiJIKdDqY1rDbV4PgmR/yGneUBqiC8aUILVk3RbhvkL303eacOIun57WmaDL8uxN/P0uD+7WMr8ivN2QN3QMD2bP3QWBs7oLbY8BgMGp0htnOwVHcUfCpoz0kjMFevjo8X7uGmPHis/pRRyFIoz0hTJ5coQxGZ48syFAQAAEAAIkLzUL3xptf6RYQQQgLi3komeAgAZ1PMEgCEC6E9sJhMQFGKx0IF1PIgLjA3CBR4o5EAySGvsRQIqtCIJSpwijorIfQpsFGCQQQ4IHhYkErAJE0mwyBNxbFpGCnJmIg/jY7FdW3cTYzcHaUNra3PVgP5KXkbuaPNK+42glPDElNBoPkUZFTAUK1qcZEmCJeBjLVZQeieGLXcmjLlxIM2QNXfmVLm0oyUKFysGH3ky5DxAUzMG1fS/CQzKA6Rr6iApwiUePFQ0PopkqMBM) format('woff2');}
+@font-face{font-family:TUELZZ-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAM0AAoAAAAABcQAAALqAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqEYINVCwoAATYCJAMQBCAFgmIHIBt8BFGUC0ZE8JFQ3dajiTFBTVRcDnWKicP8xYt4+H6/du6Tv7u4VfHpTMdLgpC0kQIli7VEY+hEePPl5U9mSyWFsoWTNylAzta81R/yDTzB1//n/3L87YZvniDHvGZz8x7USygMA86WtWlZiQZ4lGiL2+4Js/kjUSs3yOknRlXSY3rwr2SkC8eXhscixME68OCnXF5X5wAR50KzhiygR1sDCRkzSYpCIRuArjskF0IJzrlfak/tQApVAv129R3fgPcTwgPo66wn25CooiQ4ujWNqehIapJqmyJv7Kmn5GK9SSI5EYPpHStSADDIxgW6dSkzFb0eRyW3BKpJBVNT+unADDa4ud2QiLEEVktWQ0ubSpPvp6ZybtLAOm6YEpBJCcpzu9YYEI6KWV6HxJi6fj4nUqUaTbFV+sULzyONht8dHyt59Mpl7xWx+lJCYnPdwb2oh8+JSHl1SN10bYHNcMxVTPbv5dGnQWP+C71JvPdkbF0/4yQOt5cvh4lLv0S5MBteVr+Jrp5J6VKXdYdPNf++HaSPQYhHpU/TC7meVcnPcqnXAUoPHbZjfMRXq/4ltHVrBImDmRW+JE9ZSkJm0zXf1atnfQVd1Xj5o+/HZuI7qvKpBDi7/J6RPnbNgaN0qyK5Mo32bwMrD+f//EoFqR2wDbbBnx4nBm3r+CsBmURmvBMM83dODbPNJTKQFzUmiI4gQ19rXdFCfoxrxlsWgEBwv/vzM2X88LfPKwZ7219h0kX0JXLAeRN/MWpDhUGgxEsCpc2yNZBOYzZLxZHQnEF9yAMignFtjSlGjTPVsBWmM2r9+JAFlniiDIQ1gY4pluQz1ZxOprNktjHkwOGFRvuvbH9klFdgfDzjERTkx6GHwiLHov2Z799PZFbnVVTnFNEWrDXwUKJIqSqVspSjBSmR6V8rFimKl0Dx4jE8BAnih4NEA/1aIU+JYjQOC9GAj1ss7qYZgsxMurqZMFO1PBU+z1GEZoFljWcAAA==) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="-32.37055" y="-80.061101" transform="matrix(1.000261 0 0 1.000261 37.646 91.422)">P</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="10.03838" y="-80.061101" transform="matrix(1.000261 0 0 1.000261 36.16 91.422)">M</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="-32.37055" y="-48.028462" transform="matrix(1.000261 0 0 1.000261 36.990999 91.422)">N</text>
+<path d="M17.540362 8.85011H41.309192" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M38.001794 6.459211C38.380364 7.893781 39.223944 8.571161 40.073904 8.850111C39.223944 9.129061 38.380364 9.806441 38.001794 11.241011" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M39.43632 6.459211C39.81489 7.893781 40.65847 8.571161 41.50843 8.850111C40.65847 9.129061 39.81489 9.806441 39.43632 11.241011" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="-41.19554" y="-48.014823" transform="matrix(1.000545 0 0 1.000545 68.789 53.189004)">p</text>
+<path d="M9.157292 15.18985V32.32568" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-dasharray="2.7894 1.59395"></path>
+<path d="M11.548191 30.45281C10.113621 30.83138 9.436241 31.67496 9.157291 32.52492C8.878341 31.67496 8.200961 30.83138 6.766391 30.45281" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="-41.19554" y="-48.014823" transform="matrix(1.000545 0 0 1.000545 43.364999 74.419)">h</text>
+<path d="M18.195882 34.06645L42.868472 15.43" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M38.788341 15.515691C39.955057 16.432206 41.036446 16.464265 41.882783 16.17456C41.372703 16.90943 41.107856 17.958375 41.670428 19.331233" stroke="#000" fill="none" stroke-width=".398493" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M39.933002 14.651082C41.099718 15.567597 42.181107 15.599656 43.027444 15.309951C42.517364 16.044821 42.252517 17.093766 42.815089 18.466624" stroke="#000" fill="none" stroke-width=".398493" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="-41.19554" y="-48.014823" transform="matrix(1.000545 0 0 1.000545 74.255 80.246)">p</text>
+<text font-family="NQUDBD-CMSY7" font-size="6.97" x="-37.090778" y="-48.014823" transform="matrix(1.000545 0 0 1.000545 74.255 80.246)">|</text>
+<text font-family="XDTRFF-CMMI5" font-size="4.98" x="-34.735932" y="-47.027724" transform="matrix(1.000261 0 0 1.000261 74.255 80.246)">N</text>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-projective-cover-minimality-lift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;4: 将 <span class="math inline">\(p\)</span> 沿其在 <span class="math inline">\(N\)</span> 上的限制提升．
+</figcaption>
+</figure>
+</div>
+<p>记 <span class="math inline">\(i:N\hookrightarrow P\)</span> 为包含映射．交换三角形给出 <span class="math inline">\(pih=p\)</span>，故条件 (2) 表明 <span class="math inline">\(ih\)</span> 是自同构．它的像包含在 <span class="math inline">\(N\)</span> 中，但作为自同构，其像又是整个 <span class="math inline">\(P\)</span>．因此 <span class="math inline">\(N=P\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark (补充说明)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em> (补充说明). </span></p>
+<ul>
+<li><p>条件 (3) 和 (4) 是经典定义．例如可参见 <span class="citation" data-cites="rotman_introduction_2009"><a href="#ref-rotman_introduction_2009" role="doc-biblioref">[1, section 4.6]</a></span>．</p></li>
+<li><p>稍微改写条件 (1)，便得到 “<span class="math inline">\(p\)</span> 是本质满态射”（essential epimorphism）：对任意 <span class="math inline">\(\varphi\)</span>，若 <span class="math inline">\(p\varphi\)</span> 是满态射，则 <span class="math inline">\(\varphi\)</span> 也是满态射．</p></li>
+<li><p>条件 (2) 在文献中有时表述为 “<span class="math inline">\(p\)</span> 是右极小的”（right minimal）．</p></li>
+<li><p>条件 (1) 与 (2) 的等价性有一个范畴论证明．例如可参见 <span class="citation" data-cites="krause_krull-schmidt_2014"><a href="#ref-krause_krull-schmidt_2014" role="doc-biblioref">[2, lemma 3.4]</a></span>．</p></li>
+<li><p>条件 (1) 与 (2) 的等价性也可借助代数闭包来理解．我们没有找到解释这一类比的文献；欢迎补充参考资料与讨论．</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<p>至此，较弱机制的两个要素都已出现：投射性保证保结构映射存在，而 <a href="#thm-projective-cover-characterizations" class="quarto-xref">定理&nbsp;1</a> 保证自同态是自同构．因此，<a href="#sec-weak-universal-property" class="quarto-xref">小节&nbsp;2.2</a> 的论证表明，<span class="math inline">\(M\)</span> 的任意两个投射覆盖都同构．</p>
+<p>同样，保结构同构不必唯一，所以投射覆盖不被视为普遍对象．</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="exm-projective-cover-automorphism" class="theorem example">
+<p><span class="theorem-title"><strong>例 2</strong></span> 令 <span class="math display">\[
+R=k[\varepsilon]/(\varepsilon^2),
+\qquad
+M=R/(\varepsilon),
+\]</span> 并令 <span class="math inline">\(p:R\twoheadrightarrow M\)</span> 为商映射．模 <span class="math inline">\(R\)</span> 是自由的，而 <span class="math inline">\((\varepsilon)\)</span> 是小子模：若 <span class="math inline">\(N+(\varepsilon)=R\)</span>，则 <span class="math inline">\(N\)</span> 包含形如 <span class="math inline">\(1+a\varepsilon\)</span> 的元素，而该元素是单位．因此 <span class="math inline">\(N=R\)</span>，故 <span class="math inline">\(p\)</span> 是投射覆盖．</p>
+<p>由于 <span class="math inline">\(1+\varepsilon\)</span> 是单位，乘以 <span class="math inline">\(1+\varepsilon\)</span> 定义了一个 <span class="math inline">\(R\)</span>-模自同构 <span class="math inline">\(u:R\longrightarrow R\)</span>．虽然 <span class="math inline">\(u\)</span> 不是恒等映射，但模去 <span class="math inline">\(\varepsilon\)</span> 后便成为恒等映射．所以 <span class="math inline">\(pu=p\)</span>．</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="最后的范畴论废话" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="最后的范畴论废话"><span class="header-section-number">5</span> 最后的范畴论废话</h2>
+<p>到目前为止，我们已经借助几个例子，用初等语言说明了两种机制的区别．现在来升级语言：范畴论将同一批保结构映射打包，使两种唯一性的差异一目了然．</p>
+<p>设 <span class="math inline">\(F:J\to\mathcal C\)</span> 是一个图．对任意对象 <span class="math inline">\(L\in\mathcal C\)</span>，记 <span class="math inline">\(\Delta L:J\to\mathcal C\)</span> 为常值函子：它把 <span class="math inline">\(J\)</span> 的每个对象都送到 <span class="math inline">\(L\)</span>，把每个态射都送到 <span class="math inline">\(\operatorname{id}_L\)</span>．以 <span class="math inline">\(L\)</span> 为顶点、在 <span class="math inline">\(F\)</span> 上的一个<strong>锥</strong>（cone）是自然变换 <span class="math display">\[
+\lambda:\Delta L\Longrightarrow F.
+\]</span> 按分量展开，锥由每个 <span class="math inline">\(j\in J\)</span> 所对应的映射 <span class="math inline">\(\lambda_j:L\to F(j)\)</span> 组成．自然性说明，对 <span class="math inline">\(J\)</span> 中每个态射 <span class="math inline">\(a:j\to k\)</span>，都有 <span class="math display">\[
+F(a)\lambda_j=\lambda_k.
+\]</span> 换言之，由图中映射构成的所有三角形都交换．</p>
+<p>范畴 <span class="math inline">\(\operatorname{Cone}(F)\)</span> 的对象是这些锥 <span class="math inline">\((L,\lambda)\)</span>．其态射 <span class="math display">\[
+f:(L,\lambda)\longrightarrow(L',\lambda')
+\]</span> 是满足 <span class="math display">\[
+\lambda'_j f=\lambda_j
+\]</span> 的映射 <span class="math inline">\(f:L\to L'\)</span>；这里要求等式对每个 <span class="math inline">\(j\in J\)</span> 成立．等价地， <span class="math display">\[
+\lambda'\circ\Delta f=\lambda.
+\]</span> 这些恰是锥之间的保结构映射．<span class="math inline">\(F\)</span> 的极限就是 <span class="math inline">\(\operatorname{Cone}(F)\)</span> 的终对象．这是普遍性质的终对象形式；将所有箭头反向便得到始对象形式．若不想区分二者，始对象与终对象合称普遍对象．</p>
+<section id="普遍对象构成可缩群胚" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="普遍对象构成可缩群胚"><span class="header-section-number">5.1</span> 普遍对象构成可缩群胚</h3>
+<p>设 <span class="math inline">\(F\)</span> 有极限，并令 <span class="math inline">\(\mathcal U\)</span> 为 <span class="math inline">\(\operatorname{Cone}(F)\)</span> 中由所有极限锥组成的全子范畴．若 <span class="math inline">\(L,L'\in\mathcal U\)</span>，终性给出唯一态射 <span class="math display">\[
+L\longrightarrow L'.
+\]</span> 由 <a href="#sec-universal-property" class="quarto-xref">小节&nbsp;2.1</a> 的论证，两个方向上的唯一映射互为逆．因此 <span class="math inline">\(\mathcal U\)</span> 中每个态射都是同构，并且 <span class="math display">\[
+\#\operatorname{Hom}_{\mathcal U}(L,L')=1.
+\]</span> 所以 <span class="math inline">\(\mathcal U\)</span> 是一个群胚，任意两个对象之间恰有一个态射．</p>
+<p>到这里还只是每个研究生都熟悉的标准抽象废话．下一句话也许没那么常见：上述 <span class="math inline">\(\mathcal U\)</span> 的全部性质可以压缩成一句口号：</p>
+<ul>
+<li>普遍对象的群胚是<strong>可缩的</strong>（contractible）．</li>
+</ul>
+<p>若一个范畴等价于 <span class="math inline">\(*\)</span>，即仅含一个对象及其恒等态射的终范畴，我们就称它<strong>可缩</strong>．这个术语借自同伦论，倒也十分贴切：范畴等价在这里扮演同伦等价的角色．要看出这句口号是无损压缩，只需用 “全忠实 + 本质满” 的经典刻画展开范畴等价．确实，唯一函子 <span class="math display">\[
+\mathcal U\longrightarrow *
+\]</span> 是本质满的，因为 <span class="math inline">\(\mathcal U\)</span> 非空；它也是全忠实的，因为两边的每个态射集都是单点集．因此 <span class="math display">\[
+\mathcal U\simeq *.
+\]</span></p>
+<p>这漂亮的一行式子容纳了 “在唯一同构意义下唯一” 的全部含义．普遍对象可以有不同构造，但任意两个构造之间恰有一个保结构同构．这也解释了为什么我们会自然地说<strong>这个</strong>张量积、<strong>这个</strong>自由对象或<strong>这个</strong>极限：普遍性质以唯一的一种方式识别了它们的所有构造．</p>
+</section>
+<section id="弱终对象与极小解" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="弱终对象与极小解"><span class="header-section-number">5.2</span> 弱终对象与极小解</h3>
+<p><a href="#sec-weak-universal-property" class="quarto-xref">小节&nbsp;2.2</a> 的较弱机制也有范畴论版本．若范畴 <span class="math inline">\(\mathcal D\)</span> 中每个对象 <span class="math inline">\(X\in\mathcal D\)</span> 都至少有一个到 <span class="math inline">\(L\)</span> 的态射，即 <span class="math display">\[
+\operatorname{Hom}_{\mathcal D}(X,L)\ne\varnothing,
+\]</span> 则称对象 <span class="math inline">\(L\)</span> 是<strong>弱终对象</strong>（weakly terminal object）．在本文中，若弱终对象 <span class="math inline">\(L\)</span> 的每个自同态都是自同构，就称 <span class="math inline">\(L\)</span> 是<strong>极小的</strong>．这个形容词是我们在对象层面对投射覆盖之右极小条件所作的简写．</p>
+<p>令 <span class="math inline">\(\mathcal M\)</span> 为所有这种极小弱终对象组成的全子范畴．给定 <span class="math inline">\(L,L'\in\mathcal M\)</span>，弱终性给出映射 <span class="math display">\[
+f:L\longrightarrow L',
+\qquad
+g:L'\longrightarrow L.
+\]</span> 自同态 <span class="math inline">\(gf\)</span> 和 <span class="math inline">\(fg\)</span> 都是自同构，所以 <a href="#sec-weak-universal-property" class="quarto-xref">小节&nbsp;2.2</a> 的较弱论证表明 <span class="math inline">\(f\)</span> 是同构．这对每个态射 <span class="math inline">\(L\to L'\)</span> 都成立，因此 <span class="math inline">\(\mathcal M\)</span> 是群胚．它还是连通的：任意两个对象之间至少有一个同构．</p>
+<p>然而，与 <span class="math inline">\(\mathcal U\)</span> 不同，<span class="math inline">\(\mathcal M\)</span> 的态射集未必是单点集．任选 <span class="math inline">\(L\in\mathcal M\)</span> 后，整个群胚在等价意义下由 <span class="math inline">\(L\)</span> 的自同构群决定： <span class="math display">\[
+\mathcal M\simeq B\operatorname{Aut}(L).
+\]</span> 这里 <span class="math inline">\(B\operatorname{Aut}(L)\)</span> 是只有一个对象、以 <span class="math inline">\(\operatorname{Aut}(L)\)</span> 中元素为态射的群胚．它等价于 <span class="math inline">\(*\)</span> 当且仅当 <span class="math display">\[
+\operatorname{Aut}(L)=1.
+\]</span></p>
+<p>将所有箭头反向便得到始对象版本．在通常的域嵌入方向下，代数闭包是 <span class="math inline">\(K\)</span> 的所有代数闭扩张中的极小弱始对象：从它出发的映射存在，且它在 <span class="math inline">\(K\)</span> 上的全部自同态都是自同构．另一方面，按本文采用的术语，投射覆盖是映到 <span class="math inline">\(M\)</span> 的投射模中的极小弱终对象．</p>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="致谢" class="level2 appendix unnumbered"><h2 class="anchored quarto-appendix-heading">致谢</h2><div class="quarto-appendix-contents">
+
+<p>本文源于与 GPT-5.6 Sol 的一系列讨论，并由它在令人备受折磨的严密监督下执笔．作者提供了数学提纲、作出了全部编辑决定，并对所有漫无边际的行文和残留的语法错误负责．Codex 中的 GPT-5.6 Sol 则负责神秘地比住在浏览器里的同类更不聪明．</p>
+
+
+
+</div></section><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-rotman_introduction_2009" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">J. J. Rotman, <em>An Introduction to Homological Algebra</em>. New York, <span>NY</span>: Springer, 2009. doi: <a href="https://doi.org/10.1007/b98977">10.1007/b98977</a>.</div>
+</div>
+<div id="ref-krause_krull-schmidt_2014" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">H. Krause, <span>《Krull-Schmidt categories and projective covers》</span>. <span>arXiv</span>, 2014年10月10日. doi: <a href="https://doi.org/10.48550/arXiv.1410.2822">10.48550/arXiv.1410.2822</a>.</div>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
+<input type="hidden" id="giscus-alt-theme" value="light">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "sun123zxy/blog-quarto-code";
+    script.dataset.repoId = "R_kgDOIrPs5w";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOIrPs584CV4gd";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Proudly powered by <a href="https://quarto.org/">Quarto</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>sun123zxy’s blog</p>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="../../thanks.html">
+<p>Thanks</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

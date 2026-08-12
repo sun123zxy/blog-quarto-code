@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="sun123zxy">
+<meta name="dcterms.date" content="2026-08-12">
+
+<title>Why Algebraic Closures Possess NO Universal Property – sun123zxy’s blog</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f81f3c79f694eaf6f88ebcce70241f9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-af64962de9348b804daa6381b125c604.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-6657e1bb1dcc81431156cd102d4ef94c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-1f77b903011450794daa57c3bd3a7161.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script>
+MathJax = {
+  tex: {
+    macros: {
+        SunQuarTeX: String.raw`\mathrm{\mathbf S \;\!\! {\scriptstyle \mathbf U \;\!\! \mathbb N} \mathbb Q \;\!\! {\scriptstyle \mathbf U \;\!\! \;\!\! \mathbf A \;\!\! \mathbb R} \;\!\! \;\!\! \mathbf{\TeX}}`
+    }
+  }
+};
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">sun123zxy’s blog</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../listings/overview.html"> 
+<span class="menu-text">Overview</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../listings/projects/index.html"> 
+<span class="menu-text">Projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/sun123zxy/blog-quarto-code/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-bi-rss" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-rss" role="img">
+</i> 
+ <span class="menu-text"></span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-bi-rss">    
+        <li>
+    <a class="dropdown-item" href="../../listings/all/index.xml">
+ <span class="dropdown-text">All Posts</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../listings/math/index.xml">
+ <span class="dropdown-text">Math</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-mysterious-remark" id="toc-the-mysterious-remark" class="nav-link active" data-scroll-target="#the-mysterious-remark"><span class="header-section-number">1</span> The mysterious remark</a></li>
+  <li><a href="#two-abstract-mechanisms" id="toc-two-abstract-mechanisms" class="nav-link" data-scroll-target="#two-abstract-mechanisms"><span class="header-section-number">2</span> Two abstract mechanisms</a>
+  <ul class="collapse">
+  <li><a href="#sec-universal-property" id="toc-sec-universal-property" class="nav-link" data-scroll-target="#sec-universal-property"><span class="header-section-number">2.1</span> Universal properties: structure-preserving maps are unique</a></li>
+  <li><a href="#sec-weak-universal-property" id="toc-sec-weak-universal-property" class="nav-link" data-scroll-target="#sec-weak-universal-property"><span class="header-section-number">2.2</span> A weaker mechanism: structure-preserving endomorphisms are invertible</a></li>
+  </ul></li>
+  <li><a href="#example-algebraic-closures" id="toc-example-algebraic-closures" class="nav-link" data-scroll-target="#example-algebraic-closures"><span class="header-section-number">3</span> Example: Algebraic closures</a></li>
+  <li><a href="#example-projective-covers" id="toc-example-projective-covers" class="nav-link" data-scroll-target="#example-projective-covers"><span class="header-section-number">4</span> Example: Projective covers</a></li>
+  <li><a href="#categorical-nonsense-finally" id="toc-categorical-nonsense-finally" class="nav-link" data-scroll-target="#categorical-nonsense-finally"><span class="header-section-number">5</span> Categorical nonsense, finally</a>
+  <ul class="collapse">
+  <li><a href="#universal-objects-form-a-contractible-groupoid" id="toc-universal-objects-form-a-contractible-groupoid" class="nav-link" data-scroll-target="#universal-objects-form-a-contractible-groupoid"><span class="header-section-number">5.1</span> Universal objects form a contractible groupoid</a></li>
+  <li><a href="#weakly-terminal-and-minimal-solutions" id="toc-weakly-terminal-and-minimal-solutions" class="nav-link" data-scroll-target="#weakly-terminal-and-minimal-solutions"><span class="header-section-number">5.2</span> Weakly terminal and minimal solutions</a></li>
+  </ul></li>
+  
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Why Algebraic Closures Possess NO Universal Property</h1>
+<p class="subtitle lead">Unique up to Isomorphism vs.&nbsp;Unique up to Unique Isomorphism</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">math</div>
+    <div class="quarto-category">algebra</div>
+    <div class="quarto-category">category-theory</div>
+    <div class="quarto-category">rep-theory</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>sun123zxy </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 12, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="the-mysterious-remark" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="the-mysterious-remark"><span class="header-section-number">1</span> The mysterious remark</h2>
+<p>A well-known remark on algebraic closures reads: “Algebraic closures do not possess a genuine universal property.” Few understand its actual meaning. At first sight, this is puzzling. Algebraic closures are unique up to isomorphism. The same is true of familiar universal constructions such as free objects, tensor products, and direct products. Why, then, is algebraic closure treated differently?</p>
+<p>The two assertions are not equally strong. A universal construction is unique up to a <strong>unique isomorphism</strong>, whereas an algebraic closure is in general only unique up to isomorphism. In the latter statement, an isomorphism exists; in the former, that isomorphism is itself unique. The usual phrase “unique up to isomorphism” hides this extra layer of uniqueness.</p>
+<p>It turns out that algebraic closures fail to meet this uniqueness requirement for structure-preserving isomorphisms.</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="exm-complex-conjugation" class="theorem example">
+<p><span class="theorem-title"><strong>Example 1</strong></span> Consider <span class="math display">\[
+K=\mathbb R,
+\qquad
+\overline K=\mathbb C.
+\]</span> Besides the identity, <span class="math inline">\(\mathbb C\)</span> has complex conjugation as an <span class="math inline">\(\mathbb R\)</span>-automorphism: <span class="math display">\[
+\operatorname{id}_{\mathbb C}:z\longmapsto z,
+\qquad
+c:z\longmapsto\overline z.
+\]</span> They are distinct, since <span class="math display">\[
+\operatorname{id}_{\mathbb C}(i)=i,
+\qquad
+c(i)=-i.
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+<p>So even after the algebraic closure <span class="math inline">\(\mathbb R\hookrightarrow\mathbb C\)</span> has been fixed, there remains more than one automorphism over <span class="math inline">\(\mathbb R\)</span>. Algebraic closure therefore has enough structure to determine an isomorphism class, but not enough to determine the isomorphism itself.</p>
+</section>
+<section id="two-abstract-mechanisms" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="two-abstract-mechanisms"><span class="header-section-number">2</span> Two abstract mechanisms</h2>
+<p>Let us examine these two abstract mechanisms a little more closely. The difference lies in how the isomorphism is obtained.</p>
+<section id="sec-universal-property" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="sec-universal-property"><span class="header-section-number">2.1</span> Universal properties: structure-preserving maps are unique</h3>
+<p>Suppose <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are two universal objects satisfying the same universal property. Applying the property in both directions gives unique structure-preserving maps <span class="math display">\[
+f:X\longrightarrow Y,
+\qquad
+g:Y\longrightarrow X.
+\]</span> The composite <span class="math inline">\(gf\)</span> is a structure-preserving endomorphism of <span class="math inline">\(X\)</span>. But the identity of <span class="math inline">\(X\)</span> is another such endomorphism, hence by uniqueness, <span class="math display">\[
+gf=\operatorname{id}_X.
+\]</span> Similarly, <span class="math display">\[
+fg=\operatorname{id}_Y.
+\]</span> Hence <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are inverse isomorphisms. But the argument gives more than an isomorphism between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>: the universal property already says that <span class="math inline">\(f\)</span> is the only structure-preserving map from <span class="math inline">\(X\)</span> to <span class="math inline">\(Y\)</span>. The isomorphism is therefore unique.</p>
+</section>
+<section id="sec-weak-universal-property" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="sec-weak-universal-property"><span class="header-section-number">2.2</span> A weaker mechanism: structure-preserving endomorphisms are invertible</h3>
+<p>Now remove the uniqueness requirement. We still guarantee the existence of structure-preserving maps, but require instead that every structure-preserving endomorphism of a candidate object be an automorphism. If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> both satisfy the property, we may choose maps <span class="math display">\[
+f:X\longrightarrow Y,
+\qquad
+g:Y\longrightarrow X.
+\]</span> The composites <span class="math inline">\(gf\)</span> and <span class="math inline">\(fg\)</span> are structure-preserving endomorphisms of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>, respectively, so both are automorphisms. Since <span class="math inline">\(gf\)</span> is invertible, <span class="math display">\[
+(gf)^{-1}g
+\]</span> is a left inverse of <span class="math inline">\(f\)</span>. Since <span class="math inline">\(fg\)</span> is invertible, <span class="math display">\[
+g(fg)^{-1}
+\]</span> is a right inverse. The two inverses agree, so <span class="math inline">\(f\)</span> is an isomorphism.</p>
+<p>This argument still proves that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are isomorphic, but it does not prove that the isomorphism is unique. There may have been several choices for <span class="math inline">\(f\)</span>, and nothing forces them to agree. Both mechanisms produce a single isomorphism class of objects; only the universal property makes the structure-preserving isomorphism unique.</p>
+</section>
+</section>
+<section id="example-algebraic-closures" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="example-algebraic-closures"><span class="header-section-number">3</span> Example: Algebraic closures</h2>
+<p>We now return to algebraic closure. The defining property of an algebraic closure <span class="math inline">\(\overline K\)</span> of <span class="math inline">\(K\)</span> can be described as the follow mapping property: if <span class="math inline">\(L\)</span> is an algebraically closed extension of <span class="math inline">\(K\)</span>, then the embedding of <span class="math inline">\(K\)</span> into <span class="math inline">\(L\)</span> extends to an embedding <span class="math display">\[
+\overline K\hookrightarrow L.
+\]</span> In other words, the dashed arrow can always be filled with an embedding:</p>
+<div id="fig-algebraic-closure-extension" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-algebraic-closure-extension-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.6 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="85.56pt" height="72.21pt" viewbox="0 0 57.04 48.14">
+<style type="text/css">
+@font-face{font-family:TUELZZ-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAALgAAoAAAAABPgAAAKXAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqDJIJTCwgAATYCJAMMBCAFgmIHIBvuA0CuBmyXG0MshnbZ8zCIURznlOM3VNYQD/T74zv3PvwVlEQlKYFKQoKn/7xw3yS13TcwTgcqnc6TfKhBjne1Elz63eAUIk29iIPAAl3oGnjMpMr6goIduhkf5xvbIDlFYwygwAOOQgjH/N80TaIHfSB93aZG0RMxkFLt6JGOZkji/TAjI56Pr/9rmJ5G+MGBUBY4Bwl8lcVrO2IAmFHUiQKJYNVZFCAiQY16bw0QTQCkUgGjiwKjiqJ4KAA5kSDvjtiOi4C0fCIIkzq3Olb30NScPEmzmmlLtXrPbJ2waTPNZsbig5ez26dQn27X9y1br6wvUy225dWFgucbdeyx5QP6eisDaZlPW6T0nESNvZo8mZJyMygny1veTjpDf5h2gbpYw7zg4WKuhEl6UQ2toC7W7On/Y+wxYvOY7vxXo2cLylZ802URaGNcNQBeubTquZqobR2WN3Q6a44ZsgPzPH8HqDf29i9T+eMzvxhzsAk/ML6osPE7QH3xtu7fJv0fe06QT9WELrmQ78tiS8evAg2Pd8pgH+Y0LGnN89mzgM1LR4uqs7KVNmiNU59uXFGE0dm7MvzU65QPafgX+KcQG0y4L9/xe0DLcWZAmUp/DKkDACAgMGde8f+8yr0vI4VNxT/jJcqIIHC9wiUKiyMBwk2inoiPtSETkwBrAuTlbGZQWVzRqYoq05nyGtC5ilp3l1NHHbCQlhU0oiY6VU+SztQyQOfqWSvL6eIweRD/Bms3WyRqp7NcpNEoqquS8mZ1py6aylPrI8IdidaOWEZQ26krkZyMvHZtIloIaOSE+bosMwsJNSenciIaGgrVqlht9toqISdLoFqFKg8gk7Nx5cBZIBwGdUt+WIeE1p3HZAjUqtAADA==) format('woff2');}
+
+</style>
+<g id="page1">
+<path d="M4.293999 4.247H13.467999" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="-34.58997" y="-79.94913" transform="matrix(1.000261 0 0 1.000261 38.892999 92.42)">K</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="5.874467" y="-79.94913" transform="matrix(1.000261 0 0 1.000261 40.09 92.42)">L</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="-34.58997" y="-47.917491" transform="matrix(1.000261 0 0 1.000261 38.892999 92.42)">K</text>
+<path d="M19.39552 9.95931H41.0743" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-dasharray="2.7894 1.59395"></path>
+<path d="M19.39552 8.00675C18.71327 8.00675 18.16022 8.44385 18.16022 8.98302C18.16022 9.52221 18.71327 9.95931 19.39552 9.95931" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linecap="round"></path>
+<path d="M39.20143 7.56841C39.58 9.00298 40.42358 9.68036 41.27354 9.95931C40.42358 10.23826 39.58 10.91564 39.20143 12.35021" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M8.88089 32.39883V16.69752" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M6.92833 32.39883C6.92833 33.08108 7.36543 33.63413 7.9046 33.63413C8.44379 33.63413 8.88089 33.08108 8.88089 32.39883" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linecap="round"></path>
+<path d="M6.48999 18.57039C7.92456 18.19182 8.60194 17.34824 8.88089 16.49828C9.15984 17.34824 9.83722 18.19182 11.27179 18.57039" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M19.08567 33.9224L41.16038 16.44645" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M17.873775 32.391563C17.338884 32.815016 17.176582 33.500968 17.511229 33.923683C17.845888 34.346413 18.550779 34.345842 19.08567 33.92239" stroke="#000" fill="none" stroke-width=".398481" stroke-miterlimit="10" stroke-linecap="round"></path>
+<path d="M38.208075 15.734407C39.395272 16.624157 40.477077 16.631645 41.31659 16.3228C40.823349 17.069044 40.582403 18.123702 41.175995 19.483386" stroke="#000" fill="none" stroke-width=".398481" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-algebraic-closure-extension-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Extension of an embedding to an algebraic closure.
+</figcaption>
+</figure>
+</div>
+<p>This characterization turns out to be an example of the weaker universal property from the previous section: <span class="math inline">\(\overline K\)</span> <span class="math inline">\(K\)</span>-embeds into every algebraically closed extension of <span class="math inline">\(K\)</span>, and every <span class="math inline">\(K\)</span>-embedding from <span class="math inline">\(\overline K\)</span> to itself is an automorphism.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>Let <span class="math display">\[
+\sigma:\overline K\longrightarrow\overline K
+\]</span> be a <span class="math inline">\(K\)</span>-embedding. It is automatically surjective: indeed, its image <span class="math inline">\(\sigma(\overline K)\)</span> is algebraically closed, since it is isomorphic to <span class="math inline">\(\overline K\)</span>. On the other hand, <span class="math inline">\(\overline K\)</span> is algebraic over <span class="math inline">\(\sigma(\overline K)\)</span>, because <span class="math inline">\(\overline K\)</span> is algebraic over <span class="math inline">\(K\)</span> and <span class="math inline">\(\sigma\)</span> fixes <span class="math inline">\(K\)</span>. An algebraically closed field has no proper algebraic extension; therefore</p>
+<p><span class="math display">\[
+\sigma(\overline K)=\overline K.
+\]</span></p>
+<p>Thus every <span class="math inline">\(K\)</span>-embedding from <span class="math inline">\(\overline K\)</span> to itself is an automorphism.</p>
+</div>
+</div>
+</div>
+</div>
+<p>The weaker argument from <a href="#sec-weak-universal-property" class="quarto-xref">Section&nbsp;2.2</a> now shows that any two algebraic closures of <span class="math inline">\(K\)</span> are <span class="math inline">\(K\)</span>-isomorphic. The required embeddings exist, but nothing makes them unique.</p>
+</section>
+<section id="example-projective-covers" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="example-projective-covers"><span class="header-section-number">4</span> Example: Projective covers</h2>
+<p>Another example of such a weakened universal property lies in module theory. Every module <span class="math inline">\(M\)</span> is a quotient of a projective module, but a random candidate <span class="math inline">\(P\twoheadrightarrow M\)</span> usually contains more projective material than is needed. A projective cover is a projective surjection that is, in some sense, minimal among those of its kind.</p>
+<p>As before, it is tempting to express this minimality requirement through a mapping property. Let <span class="math inline">\(p:P\twoheadrightarrow M\)</span> be a projective cover. Given another projective module <span class="math inline">\(Q\)</span> and a surjection <span class="math inline">\(f:Q\twoheadrightarrow M\)</span>, we would like there to be a surjection <span class="math inline">\(\widetilde f:Q\twoheadrightarrow P\)</span> such that the following diagram commutes:</p>
+<div id="fig-projective-cover-lift" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-projective-cover-lift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.6 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="90.96pt" height="76.2pt" viewbox="0 0 60.64 50.8">
+<style type="text/css">
+@font-face{font-family:NQUDBD-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAL4AAoAAAAABRQAAAKvAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqDQIJxCwgAATYCJAMMBCAFglwHIBsOBACO1FaxTZLcZFCbNuwmNCVSJRUz+52Y2fNAGN6qlLJEL3o90Sdupq3hBTQBbNrGNW2dZ11CYQbhBg0oSyB6Qnxbp4oNF64vi8EZXABNN2YGxEA+ufpfG9O7y3ypIniEKsCwwDLwU6i83TVgVWstCACKwa0KAgAgAArQzrJIRWwBbMAgUTS0xjNhsTArDg2Ksu10ADutoCgAQO/YII2a3EzdFa4L7kROuma8+LB0r9HcJZZzeX7/fYOcnBxuzbL1vPT+fYPt96WTrxotOMDtM5633Gae0nrNhiWGmdL1S9coswoMxhZZrzlhuGCOUjlv3n2DxYdt1t812nzf5/zdrDuZC2xHb981/fJ43TmYy3tNnovROVx25hz9sfX85PUFmXOctkbtv++y/T6z6hi37s6K2X4BanGuwuyJ0HBiO5fIQ/g0C/G7Tx9evvAwjbc0nO/0R5GdeEvD+kWaIls791F2mJWF3R4qd1FCiX+P/obq6g/mDupNLbmtYfMCia/zljP/2fSGydaI+hkr09T48M97W26Mhhp9yk5w/tlalE5ySW1o8m/1+PAsclN3VDNcM7MhiJW8VOd+c4oLKg00h64wVWNXGKmdeeT1RGqZYdkaGWA9YthvQbcZj8ZZAQDAABgQBp+rlagF/pVQERQgLLqQenITgAThqR8DjxyBgxukvg2pTxMAGSSgNE6p5AgjUnGGccpQw7UiMmprTkzKgGPJWK9zdLmjmFYFw1h84kR01XJiSqMcS9e8juNq2yVD/0NsMTktKzI80ikiKSnO5+4+cXN2NQ0eZO+o7K7r6K5pMvVw9kaEFk1adelUpZ2pJC0q6UyzZGmyRAoXyUmEJF3H8ZGN+VqHOi2amXLjzNUDjDGaoxplO4GVfrm+mbRStzodH6/RxJQHZ94oBQ==) format('woff2');}
+@font-face{font-family:OYFEXR-CMEX7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHwAAoAAAAAA5wAAAGoAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANApUZQsGAAE2AiQDCAQgBYJcByAb9gJAHoVx41PinC3LWgt6HMJDcYmH78d+nfswtVAsSbXoWTxBEq/aOjSoTCdUiLt/6HL3LY/G5l+TGmvTr/awNIpKMC8voAUSRsEGHAS64SCw+rrp/ruLv8HbMs74aVsSBYG1tiRNMMIs4AosoITvwE7PvHU7o89kpDZSRPo1ISstRuSQ3tLnfzlWGz9TTEUB2lzG7QDbh+sOMGSOBP1OAnak6AsBQCYDErJQTSuo6rQDshNB5l8myZG7AQlkI1AH6ABANiDqTp8rfCzcPgqfS/Dnu+g+f30v+qyeLjpNtGjmeyZ7rHlQmTMFiCbF/HcOMZt+cfYABIKhWx7XyvyXTzbfSJfpB/kSCBbcSU/KGdNlobgk/giEpA4EgodC5yJl7CFbsTLkKNKEXMV6NwrVo2lFdoHQKgnIVq+LHLX2yFXvHAuNuxwlfpS5zDWikXoRC2VaI9xQGwonA9Wz4wll3VusOyM3g/MgZGJkamVJNeeWMaFwZSynISqirggTkoEXVDPettAzMeZGwZH5EsvHVHPiPKL8A8mOm2KtZ2GtY8SNgeNpAXYfAA==) format('woff2');}
+@font-face{font-family:TUELZZ-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAN4AAoAAAAABfgAAAMuAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqFFIQPCwoAATYCJAMQBCAFgmIHIBu2BAiO0tRwyiTJy28qHuov9nb/3p+bk5NMsmZOkkSawAoowRATCzSQ/fk67c0vpEnFSQFPmaS2TuAJUG4rX7vH3f+5pt63C2+KBDnmimXQ9rxKBzw6wAGP2hrwJjjQoxHqLE+JZ0JOBDnv07Vj03TtG0Z+wzqBDeQH3fwThY5axv5kDRgEFwA5ARXgpzye+QnAjuQ74D8GjL3ZDZDAAE5iBj0rdWB2McjIUfRufBoSG71mRShYYe5+AWIncny6LFdlAXVpvpJQSdG+zbPBXnEGTbxfvGpA7GRFJiKxV7kfCw/thcElI7E+6KWi3oSe7XUGGLODdZ6FPqmwlIEBFdljqFf1dDGBJnnO3Rnne3mBZ5o6phkcyLPJtFlhYtOv3NzzszFTqyZzTIOBhSFiVHufdiovPi4TcG78+spgBoi5j9DDwbge2S898WRy8iI1668rMRU5bfMz7fmZUvk92xYDAxjTcWNfcmjTwj6tgUJl53Wq4T21rUDlqMuWU+Btv/OR7HIfawxj+SQWWNSsY8WFFif3fbn4XolEFI/2ZU6Jw92IOhkBe/Qo9/ahFd8C7yPXpexFsGGa55tg5DEYHdb/Kea6yBpUhaqwr/eNVlPtn8UjFosNtkK+7taRvqaJWAzhJN6F+4v5vJOPw1nddGxjPujCPlviPb7vrG0kRYg4fv8Wa8uydqIyJ8PitZ+ZAd0dqBI1eucaeLoapftVoBysvRcrRU1k5jFGT6IqUXS5bjpjcA/5GAv9WOZf2Xh+SLhnkGD2djUlzeh6OxwuJilFSvdZWcY8EPQX/CCgwAsAAQS4vFpTIgQs3zhZWAGu9plVBz0CWKHi3VTjDzS6rXQA86BeSbW1s4vkhgboi8Uby5YAg005jAIBdyQXPgLygoesPPFRu72RZIgFVlyAkefpZFbSkmU24mpldtKGh9wIG08h96ezyzS6k2dwsI4DSbpRiTdGkqpLrDc+jj8Rm5+Uk5+QhhvoGoODDGky5ckVJxuOlCHWH0pHQ+fEU3DD63BAzrqhIjDIrOZIkiEdjkoXoQOXXLp5LupCiO1EK+r0sfIlycl4gjQ4A7qMsQAA) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="-32.975392" y="-81.913617" transform="matrix(1.000261 0 0 1.000261 38.204999 92.396999)">Q</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="-32.975392" y="-47.945484" transform="matrix(1.000261 0 0 1.000261 38.253 92.396999)">P</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="8.825696" y="-47.945484" transform="matrix(1.000261 0 0 1.000261 36.767 92.396999)">M</text>
+<path d="M9.15929 16.247428V33.383268" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-dasharray="2.7894 1.59395"></path>
+<path d="M11.55019 30.075848C10.11562 30.454418 9.43824 31.297998 9.15929 32.147958C8.88034 31.297998 8.20296 30.454418 6.76839 30.075848" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M11.55019 31.510388C10.11562 31.888958 9.43824 32.732538 9.15929 33.582498C8.88034 32.732538 8.20296 31.888958 6.76839 31.510388" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMEX7" font-size="6.97" x="-39.829285" y="-49.770865" transform="matrix(1.000545 0 0 1.000545 43.363 75.733)">�</text>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="-41.193547" y="-47.931868" transform="matrix(1.000545 0 0 1.000545 43.363 75.733)">f</text>
+<path d="M17.59044 14.822628L40.79303 33.679898" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M39.734308 29.738673C39.123352 31.090648 39.350774 32.148307 39.83442 32.900808C38.998928 32.581237 37.917114 32.574872 36.718618 33.44935" stroke="#000" fill="none" stroke-width=".398482" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M40.847508 30.643363C40.236552 31.995338 40.463974 33.052997 40.94762 33.805498C40.112128 33.485927 39.030314 33.479562 37.831818 34.35404" stroke="#000" fill="none" stroke-width=".398482" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="-41.193542" y="-47.931868" transform="matrix(1.000545 0 0 1.000545 72.909 68.632999)">f</text>
+<path d="M17.54236 41.947928H40.70377" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M37.39635 39.55703C37.77492 40.9916 38.6185 41.66898 39.46846 41.94793C38.6185 42.22688 37.77492 42.90426 37.39635 44.33883" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M38.83089 39.55703C39.20946 40.9916 40.05304 41.66898 40.903 41.94793C40.05304 42.22688 39.20946 42.90426 38.83089 44.33883" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="NQUDBD-CMMI7" font-size="6.97" x="-41.193542" y="-47.931868" transform="matrix(1.000545 0 0 1.000545 68.485 95.255)">p</text>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-projective-cover-lift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Lifting a map through a projective cover.
+</figcaption>
+</figure>
+</div>
+<p>Without the surjectivity requirement, this would be automatic: projectivity of <span class="math inline">\(Q\)</span> gives a map <span class="math inline">\(Q\to P\)</span>. Thus it is the surjectivity of the lift that actually characterizes minimality. The following theorem shows that this is again an example of the weak universal property stated above:</p>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="thm-projective-cover-characterizations" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (Characterizations of a projective cover)</strong></span> Let <span class="math inline">\(p:P\twoheadrightarrow M\)</span> be a surjective homomorphism with <span class="math inline">\(P\)</span> projective. The following conditions are equivalent:</p>
+<ol type="1">
+<li><p>(The mapping property) For every projective module <span class="math inline">\(Q\)</span>, every surjection <span class="math inline">\(q:Q\twoheadrightarrow M\)</span>, and every map <span class="math inline">\(h:Q\to P\)</span> satisfying <span class="math inline">\(ph=q\)</span>, the map <span class="math inline">\(h\)</span> must be surjective.</p>
+<ul>
+<li>Since <span class="math inline">\(P\)</span> is projective, every such <span class="math inline">\(h\)</span> splits, exhibiting <span class="math inline">\(P\)</span> as a direct summand of <span class="math inline">\(Q\)</span>.</li>
+</ul></li>
+<li><p>(The weak universal property) Every endomorphism <span class="math inline">\(u:P\to P\)</span> satisfying <span class="math inline">\(pu=p\)</span> is an automorphism.</p></li>
+<li><p>The kernel <span class="math inline">\(\ker p\)</span> is <strong>superfluous</strong> in <span class="math inline">\(P\)</span>: for every submodule <span class="math inline">\(N\subseteq P\)</span>, <span class="math inline">\(N+\ker p=P\)</span> implies <span class="math inline">\(N=P\)</span>.</p></li>
+<li><p>No proper submodule of <span class="math inline">\(P\)</span> maps onto <span class="math inline">\(M\)</span> under <span class="math inline">\(p\)</span>.</p></li>
+</ol>
+<p>When these conditions hold, <span class="math inline">\(p:P\twoheadrightarrow M\)</span> is called a <strong>projective cover</strong> of <span class="math inline">\(M\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Proof
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span><strong>(3) &lt;=&gt; (4).</strong> For every submodule <span class="math inline">\(N\subseteq P\)</span>, we have <span class="math display">\[
+p(N)=M
+\iff
+N+\ker p=P.
+\]</span></p>
+<p><strong>(4) =&gt; (1).</strong> Suppose <span class="math inline">\(h:Q\to P\)</span> satisfies <span class="math inline">\(ph=q\)</span> for a surjection <span class="math inline">\(q:Q\twoheadrightarrow M\)</span>. Then <span class="math display">\[
+p(\operatorname{im}h)=M.
+\]</span> By condition 4, <span class="math inline">\(\operatorname{im}h\)</span> cannot be a proper submodule of <span class="math inline">\(P\)</span>, so <span class="math inline">\(h\)</span> is surjective.</p>
+<p><strong>(1) =&gt; (4).</strong> Let <span class="math inline">\(N\subseteq P\)</span> map onto <span class="math inline">\(M\)</span>. Choose a projective module <span class="math inline">\(Q\)</span> together with a surjection <span class="math inline">\(r:Q\twoheadrightarrow N\)</span>.</p>
+<div id="fig-projective-cover-submodule" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-projective-cover-submodule-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.6 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="151.815pt" height="76.575pt" viewbox="0 0 101.21 51.05">
+<style type="text/css">
+@font-face{font-family:OYFEXR-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAP0AAoAAAAABpgAAAOqAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqGOIR7CwwAATYCJAMUBCAFglwHIBsgBVGUDE4B4keC6eYe6YibVRISTYRbRxpdvTji303wPH/vzn1/rObGPTUuobE8DDhMoVC7A3la0oxC6wnlYLb3kqotN9knARF262WhVgSJZhYEYk3d1F/2XkC/AKxlGwfoOs+6hMIMyjZoYAl2UWIFgmXbJM2gJeKl02p7hjZgJZA3B+bm9885lyJ5EyVmRRA0F7rgVhxPQSLA5yanUsAisFFVAAywQM4bovJoA3BTYYzYYMOBrI5+9KIZigND4CnSQFYBYLNriq+SPp3pQXbz+EzrtHaC14DnTnWEUSgwyNA5uU9kCsmx5RjWsPEcYeRAlStDJHarcK/onjqyhoVlWVUmXINp7OihGkwKVWZU6zXPq3CZcnJs9nVleEq/7apq13X7taukK0SuwRXi6K7SFaICE2DJ2p5iAXSmEJnIVGK0yZ5qCyUyTXtwY9fN+66DjbNCrVdyw2RkkKTl6WyYIzvSpU7Rbr5ic+0a+ToFNr5OWTlQ7JqTZwF0KoVj1otvvYLsvqLSMLN23ZwjTyEqMJtPtiqpU9TVYXBtxDi+TjpV/z53XGhUjdGnz5bTGx6XaZ+X0fCu5AWyLPDivBrGDvsy7s2KqGAJ/WNqk9IoccmGQAGxrBYe0yv1KAjwV0AqIOVf/g+2X73XRFKSEcgX2SprulSP5JEHfMryDs1kX2vsq/dgUs43BIrLol+PZO7TkaqvyN5mH7PCgxBURBLS77OEF5qEOFCgS6GliKmufAIPJYQ+C4mt86dCFKheQ5yvXlV8+ZbtHWGdYJ0srLNepUqJNtSrRvfUBQRajuu46wDoqDf406AU6KHIN/r8xSKF6EFxjO4AGiCHAd5QnFvAI01PHA0BIqMUX9AXRAVgY6ttIRusdjRO30hLs1KEb2Yepff4pB7wYVfvckVFuZI7UGXUO9dDltgEVe17WTEZtNho2jwSo/IH7eULGiK15MX9pAO1xS2O//iUDTALLhHkX4gBgADB151zMzI5vm/ZZKBD6zilFfiM4mkWBcxWJZ4tkKpOAHnGoFlT4hZ1FkDgOBhqkCL0AgJg0ukyW0ySOSJV5oppjodKrECkBYgGL2K2kiTmKKAzVwm7DI31nrqcT9V6/Wl4HDXIdLf39bS/zLQmw/FI7YV6j+MzObcgMV1jNlyCkSldlnx54uXQ4CtTHK/J4I8GD4cqiCkMX8k82SOHq+VKlimDBktmLBQgwc0w6kZPBOOSGMUNNU6BZLkXT5ROgzUzdiAZAA==) format('woff2');}
+@font-face{font-family:TUELZZ-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAP0AAoAAAAABsgAAAOrAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqGYIUbCwwAATYCJAMUBCAFgmIHIBtGBVGUC0oO8CMhc1OjvYQodXIxxBatTBHDEO/8Fg/Q4e/d/Gs2pg5LAxuLiwPLI0g4lEDXvOHfS19ypZJCucK55QqQx5Jfk7Na+Rv4O39u9cE+dDn9sx/+z2MC2G6sgWNMwTAOLNvUpucSDfApjEyzuSZTfFFjIQfyaasePSHF9zCsEB/iyf8SDJ2+UATMgih4hQh8ldu7yiwg5EJIAg1JwF1sDUQkLIfUxQL2AbU1iC6FoGMXgmmlPbb7eTAF9KGOKHQJNxXI5AzHi9Oxo460weebknXxSgrsh3s8FhoZjnLQFi6ys6GalM3S4UCJ8SzAW7NA2ICFsLMmvPc6zo1ctPrFV9jKCXlcru44w2fp7a7WxbNYYiyVRJVAyaFIqhflcpKjZ9l3cNlIQpzixLoly+uLiFryISxzzfaLrHClQrTNDEve3IDrcIPr8Nho8YeU0wYFzd+KiS0vps3dtVqizLj8BDFpQobvaqDTqlH7lre3kVSUlkKhCBuP+5M5KjNXVjs3ysv5+9qUFkbYex1+fU1v/uDHdlwuRLk/IJX4D+1cC7roTCEJjzaJXecmuBEecRaR/kMOXwaM+E51J9A+ItE1vbiDKLw6S4aISt4S2XAmTKruEptPkzpUpV3hS/U/7/uxRyDIrdyr4Uama178q0zyNiBSgwdtcC/R+Yp/cS2dagGigD9HF09RkBCTWnZmQ906lm+ITbXb7z3fl+M/oOWXYuDZ7Edc8pFzFqxjzfKINUrc2wcWbo7/6UWKktvgFrgF+XIe7rcu4c/ilw6lxzrAIb6OySHW2VAa4YGOYGFI8FuNDEzAB3dOe88ApGD2OUZ6mlgoE/Lu376mO9Pu7eguqdICyeIiMDoEN8PdQeVm/t4WhaFNcBk0yILq4Z6A4m0oIoepTWeIngynYX4aaXam6dRftUwpkJVaFABsWr2tA2wi7jwR9rLKq9E+LymxFFcFrp9l3ksbAhAQ+EK8+EnS9m9dWqZOtqOMx0tAV4zUb5jNnhi0gYyDKFQi4pdNkiWDOOIgGTIFobhCA5mEvnsQgYlms9nIhC0GttlqZO9y3zpzNCH3BLv8G5ttymWLVe1stWm82nfowWOZ9te14+ERHv6xsbhbQIAPk3jdWWYyCN/CR+x3pFfmlFVmFWBmDEvgpkiBYhXKZSiFCVAknbYVChfBg79YTeLcBLT6YCJEosxaJkeRQhgmBiIGeDkLMztTdgPp8VQ1V+J0lXKUmTxLAYwZBks0Cg==) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="-12.554723" y="-81.913617" transform="matrix(1.000261 0 0 1.000261 17.459 92.391)">Q</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="-12.554723" y="-47.945484" transform="matrix(1.000261 0 0 1.000261 16.852 92.391)">N</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="28.368595" y="-47.945484" transform="matrix(1.000261 0 0 1.000261 17.507 92.391)">P</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="70.120695" y="-47.945484" transform="matrix(1.000261 0 0 1.000261 16.020997 92.391)">M</text>
+<path d="M8.83933 16.24143V33.37727" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M11.230229 30.06985C9.795659 30.44842 9.118279 31.292 8.839329 32.14196C8.560379 31.292 7.882999 30.44842 6.448429 30.06985" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M11.230229 31.50439C9.795659 31.88296 9.118279 32.72654 8.839329 33.5765C8.560379 32.72654 7.882999 31.88296 6.448429 31.50439" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="-21.385341" y="-47.931868" transform="matrix(1.000545 0 0 1.000545 23.977002 74.468)">r</text>
+<path d="M17.27048 11.42686L81.29909 37.73853" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M79.148775 34.27013C78.953677 35.740847 79.476453 36.687975 80.15656 37.26902C79.264411 37.203977 78.226733 37.509866 77.331356 38.692817" stroke="#000" fill="none" stroke-width=".398479" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M80.475555 34.81534C80.280457 36.286057 80.803233 37.233185 81.48334 37.81423C80.591191 37.749187 79.553513 38.055076 78.658136 39.238027" stroke="#000" fill="none" stroke-width=".398479" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="-21.385341" y="-47.931868" transform="matrix(1.000545 0 0 1.000545 73.212 68.914)">q</text>
+<path d="M19.31244 41.94193H40.99123" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M19.31244 39.989374C18.63019 39.989374 18.07714 40.426474 18.07714 40.965644C18.07714 41.504834 18.63019 41.941934 19.31244 41.941934" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linecap="round"></path>
+<path d="M39.11835 39.551034C39.49692 40.985604 40.3405 41.662984 41.19046 41.941934C40.3405 42.220884 39.49692 42.898264 39.11835 44.332834" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="-21.385341" y="-47.931868" transform="matrix(1.000545 0 0 1.000545 49.621004 96.861)">i</text>
+<path d="M58.15584 41.94193H81.26915" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M77.96175 39.551034C78.34032 40.985604 79.1839 41.662984 80.03386 41.941934C79.1839 42.220884 78.34032 42.898264 77.96175 44.332834" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M79.39628 39.551034C79.77485 40.985604 80.61843 41.662984 81.46839 41.941934C80.61843 42.220884 79.77485 42.898264 79.39628 44.332834" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="-21.385341" y="-47.931868" transform="matrix(1.000545 0 0 1.000545 89.255 95.249)">p</text>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-projective-cover-submodule-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Factoring a projective presentation through <span class="math inline">\(N\)</span>.
+</figcaption>
+</figure>
+</div>
+<p>If <span class="math inline">\(i:N\hookrightarrow P\)</span> is the inclusion, set <span class="math inline">\(h=ir\)</span>. Condition 1 makes <span class="math inline">\(h\)</span> surjective. Since <span class="math inline">\(\operatorname{im}h=N\)</span>, we obtain <span class="math inline">\(N=P\)</span>.</p>
+<p><strong>(4) =&gt; (2).</strong> Let <span class="math inline">\(u:P\to P\)</span> satisfy <span class="math inline">\(pu=p\)</span>. Then <span class="math display">\[
+p(\operatorname{im}u)=M,
+\]</span> so condition 4 makes <span class="math inline">\(u\)</span> surjective. Since <span class="math inline">\(P\)</span> is projective, <span class="math inline">\(u\)</span> splits and <span class="math inline">\(\ker u\)</span> is a direct summand of <span class="math inline">\(P\)</span>. Moreover, <span class="math display">\[
+\ker u\subseteq\ker p.
+\]</span> By condition 3, <span class="math inline">\(\ker p\)</span> is superfluous and therefore contains no nonzero direct summand. Hence <span class="math inline">\(\ker u=0\)</span>, so <span class="math inline">\(u\)</span> is an automorphism.</p>
+<p><strong>(2) =&gt; (4).</strong> Let <span class="math inline">\(N\subseteq P\)</span> map onto <span class="math inline">\(M\)</span>. Since <span class="math inline">\(P\)</span> is projective, the map <span class="math inline">\(p\)</span> lifts through the restriction <span class="math inline">\(p|_N:N\twoheadrightarrow M\)</span>:</p>
+<div id="fig-projective-cover-minimality-lift" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-projective-cover-minimality-lift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="tikz">
+<!--?xml version='1.0' encoding='UTF-8'?-->
+<!-- This file was generated by dvisvgm 3.6 -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="91.875pt" height="70.545pt" viewbox="0 0 61.25 47.03">
+<style type="text/css">
+@font-face{font-family:XDTRFF-CMMI5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJEAAoAAAAABCAAAAH5AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBWIE/CwYAATYCJAMIBCAFglwHIBtQAyAehXHjU0KUS7T2VMvuiUc8VIfv27tNqZWD4T/RClbHGzbhTDCg1SwCTf8drbXZ2zcx1JKIeHJrNDLNKnQq+cn7+7+3+L+Bb0AXTnjIs63j4oAaeIJFmIfX5QEmGFCeWPDvrr3abdIvGpyU3MxQ626sQA/lhXjviizXMP6KwCfo4F5IILu666oGiqNmFRqqGNbZGiiomPY100jWgZQCR601XHsTZAqQtwp0gBMAEhCd+4KNDcbGlqSuQHaQub0p3rFERWVsSfbPxN8ri08tjONTNHomZp5timvzlduXURv5PxIZmb25Cc/Hko/CDNFzTo89TsvHQHHBMArYjkUj/0Oa08P7Dvy7iulnB0Tf7qTYu0ShM7NF+z94L/XenKYvvWYarv9ZuP/k9b4dr9STiMWzcNwPIBB858hbMTf0n4aTTrdu5pdXoF8BQdWQh3raT9RAyErhGQhFBwKBfNATMIaiSMPGurTHkCXaa9hu96B53rDIAWFVnNE0r4b2mDVCe83bcoP23J5S/Qfn1pyIjLSoKLfwxMRYv8tvxcvdM1N60byioqu2vau6Uefj7g/hmjVq0alDpTY6iZpV8PWa5IiQIU2UKG7CJUoUy0+WSm3a1WrWRMeLO88JEG2aFjWlG0HFS2V66VToUqtdl2qNdHy484dJFQAAAA==) format('woff2');}
+@font-face{font-family:NQUDBD-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHAAAoAAAAAA3wAAAF2AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAo0RwsGAAE2AiQDCAQgBYJcByAb2AIArgrshvMbAiHK3r84r5OYbap1FM9/P9bOfSuGiGdapxIadYeGR9GUCIWhJv7/vz/voLRQ306nEqD0zakti6VtmWDpnImQzQl7zZ4D9fyWO36RArotfNTEfx5YC6S1PVCCjxBIiyzCMAy0bypOkhIStVr7NqGTX9Kjvur/FTdNWQLJAK6PD9zl1YYDr2nTCZ0AYi1vrjVQ6GCFSxBzOwC6dDBtDTdp7UYAFOgimMEcoAvIDNb/fDx+rfv6fvr8zYzj4wTOAYLwszirYcFSfm4wSy0F1TBUIAxVimeO/zi4oArIhZegzAgIzGPXGTQvPrpmzKNnYht9M84WxjYkuKQbgNjTBujawKNnzQF9G7517Nz/uMhnmIf90axaroYrvckqews18Ugs1D0t/jp6I1gbTkHJSAYqNArdmo1hQno0NIZJ1TcyU1VWFVbRM7GSNccwWQQaFRIXEaughlYxTEQnoh9N2kNoGwLLBkeBJEVkuADsHwAAAA==) format('woff2');}
+@font-face{font-family:OYFEXR-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAMYAAoAAAAABTAAAALPAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqDXIMGCwgAATYCJAMMBCAFglwHIBsjBAAehXGz00Wlie/ivbOrgzb1gJSaus7EvgvP/++8vSJIMIHMOtlINuAB+C/J/4lz6ZJmzRUAOsugtiiw3Qs9vsHwE/RFXmA0UnybV8R8aGTqfJuHDwCLK1IHJAD90Gv/maBWPORrV4BiIwegccAg4FQQdFJCARcmrgMRwCB2d4kFAKAAMABMhWVCILbGESBQlLai39TbwABDcbYDADZZAAACDgA/t7XpI91mH5jeu9bP1CXHNMfW1QVdwpV3FDspmZvbpdrEtowqrvPks3L2uj4Q7FxQObor1cbk5MTF1jREMTKBcPq2trZQVLSwtLZSuq4uMzl7cuZ3iAztcbU1sbC0tDzg7NwUHb3HPflA9fSe812nNrE1W7nOUf832ZqgmVm5shnymihcnJo48keZK0c9nZqkp41XH8jOPkAGdihG7uqNWqvN2SvkGRN0Fqm4NZklNvbq6PnneXe46Onr7fHYERLpO2I5ZFQSN+4w6zMb0DHZxc/bGqS+s2Aw580uzuiJIKdDqY1rDbV4PgmR/yGneUBqiC8aUILVk3RbhvkL303eacOIun57WmaDL8uxN/P0uD+7WMr8ivN2QN3QMD2bP3QWBs7oLbY8BgMGp0htnOwVHcUfCpoz0kjMFevjo8X7uGmPHis/pRRyFIoz0hTJ5coQxGZ48syFAQAAEAAIkLzUL3xptf6RYQQQgLi3komeAgAZ1PMEgCEC6E9sJhMQFGKx0IF1PIgLjA3CBR4o5EAySGvsRQIqtCIJSpwijorIfQpsFGCQQQ4IHhYkErAJE0mwyBNxbFpGCnJmIg/jY7FdW3cTYzcHaUNra3PVgP5KXkbuaPNK+42glPDElNBoPkUZFTAUK1qcZEmCJeBjLVZQeieGLXcmjLlxIM2QNXfmVLm0oyUKFysGH3ky5DxAUzMG1fS/CQzKA6Rr6iApwiUePFQ0PopkqMBM) format('woff2');}
+@font-face{font-family:TUELZZ-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAM0AAoAAAAABcQAAALqAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqEYINVCwoAATYCJAMQBCAFgmIHIBt8BFGUC0ZE8JFQ3dajiTFBTVRcDnWKicP8xYt4+H6/du6Tv7u4VfHpTMdLgpC0kQIli7VEY+hEePPl5U9mSyWFsoWTNylAzta81R/yDTzB1//n/3L87YZvniDHvGZz8x7USygMA86WtWlZiQZ4lGiL2+4Js/kjUSs3yOknRlXSY3rwr2SkC8eXhscixME68OCnXF5X5wAR50KzhiygR1sDCRkzSYpCIRuArjskF0IJzrlfak/tQApVAv129R3fgPcTwgPo66wn25CooiQ4ujWNqehIapJqmyJv7Kmn5GK9SSI5EYPpHStSADDIxgW6dSkzFb0eRyW3BKpJBVNT+unADDa4ud2QiLEEVktWQ0ubSpPvp6ZybtLAOm6YEpBJCcpzu9YYEI6KWV6HxJi6fj4nUqUaTbFV+sULzyONht8dHyt59Mpl7xWx+lJCYnPdwb2oh8+JSHl1SN10bYHNcMxVTPbv5dGnQWP+C71JvPdkbF0/4yQOt5cvh4lLv0S5MBteVr+Jrp5J6VKXdYdPNf++HaSPQYhHpU/TC7meVcnPcqnXAUoPHbZjfMRXq/4ltHVrBImDmRW+JE9ZSkJm0zXf1atnfQVd1Xj5o+/HZuI7qvKpBDi7/J6RPnbNgaN0qyK5Mo32bwMrD+f//EoFqR2wDbbBnx4nBm3r+CsBmURmvBMM83dODbPNJTKQFzUmiI4gQ19rXdFCfoxrxlsWgEBwv/vzM2X88LfPKwZ7219h0kX0JXLAeRN/MWpDhUGgxEsCpc2yNZBOYzZLxZHQnEF9yAMignFtjSlGjTPVsBWmM2r9+JAFlniiDIQ1gY4pluQz1ZxOprNktjHkwOGFRvuvbH9klFdgfDzjERTkx6GHwiLHov2Z799PZFbnVVTnFNEWrDXwUKJIqSqVspSjBSmR6V8rFimKl0Dx4jE8BAnih4NEA/1aIU+JYjQOC9GAj1ss7qYZgsxMurqZMFO1PBU+z1GEZoFljWcAAA==) format('woff2');}
+
+</style>
+<g id="page1">
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="-32.37055" y="-80.061101" transform="matrix(1.000261 0 0 1.000261 37.646 91.422)">P</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="10.03838" y="-80.061101" transform="matrix(1.000261 0 0 1.000261 36.16 91.422)">M</text>
+<text font-family="TUELZZ-CMMI10" font-size="9.96" x="-32.37055" y="-48.028462" transform="matrix(1.000261 0 0 1.000261 36.990999 91.422)">N</text>
+<path d="M17.540362 8.85011H41.309192" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M38.001794 6.459211C38.380364 7.893781 39.223944 8.571161 40.073904 8.850111C39.223944 9.129061 38.380364 9.806441 38.001794 11.241011" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M39.43632 6.459211C39.81489 7.893781 40.65847 8.571161 41.50843 8.850111C40.65847 9.129061 39.81489 9.806441 39.43632 11.241011" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="-41.19554" y="-48.014823" transform="matrix(1.000545 0 0 1.000545 68.789 53.189004)">p</text>
+<path d="M9.157292 15.18985V32.32568" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-dasharray="2.7894 1.59395"></path>
+<path d="M11.548191 30.45281C10.113621 30.83138 9.436241 31.67496 9.157291 32.52492C8.878341 31.67496 8.200961 30.83138 6.766391 30.45281" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="-41.19554" y="-48.014823" transform="matrix(1.000545 0 0 1.000545 43.364999 74.419)">h</text>
+<path d="M18.195882 34.06645L42.868472 15.43" stroke="#000" fill="none" stroke-width=".3985" stroke-miterlimit="10"></path>
+<path d="M38.788341 15.515691C39.955057 16.432206 41.036446 16.464265 41.882783 16.17456C41.372703 16.90943 41.107856 17.958375 41.670428 19.331233" stroke="#000" fill="none" stroke-width=".398493" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<path d="M39.933002 14.651082C41.099718 15.567597 42.181107 15.599656 43.027444 15.309951C42.517364 16.044821 42.252517 17.093766 42.815089 18.466624" stroke="#000" fill="none" stroke-width=".398493" stroke-miterlimit="10" stroke-linejoin="round" stroke-linecap="round"></path>
+<text font-family="OYFEXR-CMMI7" font-size="6.97" x="-41.19554" y="-48.014823" transform="matrix(1.000545 0 0 1.000545 74.255 80.246)">p</text>
+<text font-family="NQUDBD-CMSY7" font-size="6.97" x="-37.090778" y="-48.014823" transform="matrix(1.000545 0 0 1.000545 74.255 80.246)">|</text>
+<text font-family="XDTRFF-CMMI5" font-size="4.98" x="-34.735932" y="-47.027724" transform="matrix(1.000261 0 0 1.000261 74.255 80.246)">N</text>
+</g>
+</svg>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-projective-cover-minimality-lift-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Lifting <span class="math inline">\(p\)</span> through its restriction to <span class="math inline">\(N\)</span>.
+</figcaption>
+</figure>
+</div>
+<p>Writing <span class="math inline">\(i:N\hookrightarrow P\)</span> for the inclusion, the commutative triangle gives <span class="math inline">\(pih=p\)</span>. Condition 2 makes <span class="math inline">\(ih\)</span> an automorphism. Its image is contained in <span class="math inline">\(N\)</span>, but as an automorphism its image is all of <span class="math inline">\(P\)</span>. Therefore <span class="math inline">\(N=P\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Remark (FYI)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>Remark</em> (FYI). </span></p>
+<ul>
+<li><p>Conditions (3) and (4) are the classical choices. See, for example, <span class="citation" data-cites="rotman_introduction_2009"><a href="#ref-rotman_introduction_2009" role="doc-biblioref">[1, Sec. 4.6]</a></span>.</p></li>
+<li><p>A slight paraphrase of (1) says that <span class="math inline">\(p\)</span> is an essential epimorphism: for every <span class="math inline">\(\varphi\)</span>, if <span class="math inline">\(p\varphi\)</span> is an epimorphism, then <span class="math inline">\(\varphi\)</span> is an epimorphism.</p></li>
+<li><p>Condition (2) is sometimes referred to as “<span class="math inline">\(p\)</span> is right minimal” in the literature.</p></li>
+<li><p>The equivalence between (1) and (2) has a categorical proof. See, for example, <span class="citation" data-cites="krause_krull-schmidt_2014"><a href="#ref-krause_krull-schmidt_2014" role="doc-biblioref">[2, lemma 3.4]</a></span>.</p></li>
+<li><p>The equivalence of (1) and (2) can also be understood through algebraic closures. We could not find a reference explaining this analogy. TODO: References and discussion are welcome.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<p>We have therefore recovered the two ingredients of the weaker mechanism: the existence of a structure-preserving map follows from projectivity, and the automorphism property follows from <a href="#thm-projective-cover-characterizations" class="quarto-xref">Theorem&nbsp;1</a>. The argument from <a href="#sec-weak-universal-property" class="quarto-xref">Section&nbsp;2.2</a> then shows that any two projective covers of <span class="math inline">\(M\)</span> are isomorphic.</p>
+<p>Once again, the structure-preserving isomorphism need not be unique; hence a projective cover is not considered a universal object.</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<div id="exm-projective-cover-automorphism" class="theorem example">
+<p><span class="theorem-title"><strong>Example 2</strong></span> Let <span class="math display">\[
+R=k[\varepsilon]/(\varepsilon^2),
+\qquad
+M=R/(\varepsilon),
+\]</span> and let <span class="math inline">\(p:R\twoheadrightarrow M\)</span> be the quotient map. The module <span class="math inline">\(R\)</span> is free, and <span class="math inline">\((\varepsilon)\)</span> is superfluous: if <span class="math inline">\(N+(\varepsilon)=R\)</span>, then <span class="math inline">\(N\)</span> contains an element of the form <span class="math inline">\(1+a\varepsilon\)</span>, which is a unit. Hence <span class="math inline">\(N=R\)</span>, and <span class="math inline">\(p\)</span> is a projective cover.</p>
+<p>Multiplication by <span class="math inline">\(1+\varepsilon\)</span> defines an <span class="math inline">\(R\)</span>-module automorphism <span class="math inline">\(u:R\longrightarrow R\)</span>, since <span class="math inline">\(1+\varepsilon\)</span> is a unit. Although <span class="math inline">\(u\)</span> is not the identity, it becomes the identity modulo <span class="math inline">\(\varepsilon\)</span>. Therefore <span class="math inline">\(pu=p\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="categorical-nonsense-finally" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="categorical-nonsense-finally"><span class="header-section-number">5</span> Categorical nonsense, finally</h2>
+<p>So far, we have illustrated the distinction between the two mechanisms in elementary terms through several examples. Let us now upgrade the language: category theory packages the same structure-preserving maps into a form in which the two kinds of uniqueness become self-evident.</p>
+<p>Let <span class="math inline">\(F:J\to\mathcal C\)</span> be a diagram. For an object <span class="math inline">\(L\in\mathcal C\)</span>, write <span class="math inline">\(\Delta L:J\to\mathcal C\)</span> for the constant functor that sends every object of <span class="math inline">\(J\)</span> to <span class="math inline">\(L\)</span> and every morphism to <span class="math inline">\(\operatorname{id}_L\)</span>. A <strong>cone</strong> over <span class="math inline">\(F\)</span> with vertex <span class="math inline">\(L\)</span> is a natural transformation <span class="math display">\[
+\lambda:\Delta L\Longrightarrow F.
+\]</span> In components, the cone consists of a map <span class="math inline">\(\lambda_j:L\to F(j)\)</span> for every <span class="math inline">\(j\in J\)</span>. Naturality says that for every morphism <span class="math inline">\(a:j\to k\)</span> in <span class="math inline">\(J\)</span>, <span class="math display">\[
+F(a)\lambda_j=\lambda_k.
+\]</span> Thus all the triangles formed by the maps of the diagram commute.</p>
+<p>The category <span class="math inline">\(\operatorname{Cone}(F)\)</span> has these cones <span class="math inline">\((L,\lambda)\)</span> as its objects. A morphism <span class="math display">\[
+f:(L,\lambda)\longrightarrow(L',\lambda')
+\]</span> is a map <span class="math inline">\(f:L\to L'\)</span> satisfying <span class="math display">\[
+\lambda'_j f=\lambda_j
+\]</span> for every <span class="math inline">\(j\in J\)</span>, or equivalently <span class="math display">\[
+\lambda'\circ\Delta f=\lambda.
+\]</span> These are precisely the structure-preserving maps between cones. A limit of <span class="math inline">\(F\)</span> is a terminal object of <span class="math inline">\(\operatorname{Cone}(F)\)</span>. This is the terminal form of a universal property; the initial form is obtained by reversing all arrows. Terminal objects and initial objects are in conjunction called universal objects if one does not want to distinguish between them.</p>
+<section id="universal-objects-form-a-contractible-groupoid" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="universal-objects-form-a-contractible-groupoid"><span class="header-section-number">5.1</span> Universal objects form a contractible groupoid</h3>
+<p>Assume that <span class="math inline">\(F\)</span> has a limit, and let <span class="math inline">\(\mathcal U\)</span> be the full subcategory of <span class="math inline">\(\operatorname{Cone}(F)\)</span> consisting of all limiting cones. If <span class="math inline">\(L,L'\in\mathcal U\)</span>, terminality gives exactly one morphism <span class="math display">\[
+L\longrightarrow L'.
+\]</span> The unique maps in the two directions are inverse by the argument of <a href="#sec-universal-property" class="quarto-xref">Section&nbsp;2.1</a>. Hence every morphism in <span class="math inline">\(\mathcal U\)</span> is an isomorphism, and <span class="math display">\[
+\#\operatorname{Hom}_{\mathcal U}(L,L')=1.
+\]</span> Thus <span class="math inline">\(\mathcal U\)</span> is a groupoid with exactly one morphism between every two objects.</p>
+<p>So far, this is just the standard abstract nonsense familiar to every graduate student. The next statement may be less familiar: the properties above can be compressed into a single slogan:</p>
+<ul>
+<li>The groupoid of universal objects is <strong>contractible</strong>.</li>
+</ul>
+<p>We say that a category is <strong>contractible</strong> if it is equivalent to <span class="math inline">\(*\)</span>, the terminal category with a single object and its identity morphism. The term is borrowed from homotopy theory, appropriately enough: categorical equivalence plays the role of homotopy equivalence here. To see why this slogan is a lossless compression, recall the usual “fully faithful plus essentially surjective” characterization of categorical equivalence. Indeed, the unique functor <span class="math display">\[
+\mathcal U\longrightarrow *
+\]</span> is essentially surjective because <span class="math inline">\(\mathcal U\)</span> is nonempty, and it is fully faithful because every hom-set on either side is a singleton. Therefore <span class="math display">\[
+\mathcal U\simeq *.
+\]</span></p>
+<p>This beautiful one-liner captures the full meaning of the slogan “unique up to unique isomorphism.” Universal objects may be constructed differently, but there is exactly one structure-preserving isomorphism between any two constructions. This is why we comfortably speak of THE tensor product, THE free object, or THE limit: the universal property identifies all their constructions in one and only one way.</p>
+</section>
+<section id="weakly-terminal-and-minimal-solutions" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="weakly-terminal-and-minimal-solutions"><span class="header-section-number">5.2</span> Weakly terminal and minimal solutions</h3>
+<p>The weaker mechanism from <a href="#sec-weak-universal-property" class="quarto-xref">Section&nbsp;2.2</a> also has a categorical form. An object <span class="math inline">\(L\)</span> of a category <span class="math inline">\(\mathcal D\)</span> is <strong>weakly terminal</strong> if every object <span class="math inline">\(X\in\mathcal D\)</span> admits at least one morphism to <span class="math inline">\(L\)</span>: <span class="math display">\[
+\operatorname{Hom}_{\mathcal D}(X,L)\ne\varnothing.
+\]</span> For this discussion, call a weakly terminal object <span class="math inline">\(L\)</span> <strong>minimal</strong> if every endomorphism of <span class="math inline">\(L\)</span> is an automorphism. The adjective is our object-level shorthand for the right-minimal condition encountered for projective covers.</p>
+<p>Let <span class="math inline">\(\mathcal M\)</span> be the full subcategory of weakly terminal objects that are minimal in this sense. Given <span class="math inline">\(L,L'\in\mathcal M\)</span>, weak terminality supplies maps <span class="math display">\[
+f:L\longrightarrow L',
+\qquad
+g:L'\longrightarrow L.
+\]</span> The endomorphisms <span class="math inline">\(gf\)</span> and <span class="math inline">\(fg\)</span> are automorphisms, so the weaker argument from <a href="#sec-weak-universal-property" class="quarto-xref">Section&nbsp;2.2</a> makes <span class="math inline">\(f\)</span> an isomorphism. Since this applies to every morphism <span class="math inline">\(L\to L'\)</span>, the category <span class="math inline">\(\mathcal M\)</span> is a groupoid. It is also connected: between any two objects there is at least one isomorphism.</p>
+<p>Unlike <span class="math inline">\(\mathcal U\)</span>, however, its hom-sets need not be singletons. After choosing one object <span class="math inline">\(L\in\mathcal M\)</span>, the entire groupoid is determined up to equivalence by the automorphism group of <span class="math inline">\(L\)</span>: <span class="math display">\[
+\mathcal M\simeq B\operatorname{Aut}(L).
+\]</span> Here <span class="math inline">\(B\operatorname{Aut}(L)\)</span> is the one-object groupoid whose morphisms are the elements of <span class="math inline">\(\operatorname{Aut}(L)\)</span>. It is equivalent to <span class="math inline">\(*\)</span> exactly when <span class="math display">\[
+\operatorname{Aut}(L)=1.
+\]</span></p>
+<p>The initial version is obtained by reversing all arrows. With the usual direction of field embeddings, an algebraic closure is a minimal weakly initial object among algebraically closed extensions of <span class="math inline">\(K\)</span>: maps from it exist, and all its endomorphisms over <span class="math inline">\(K\)</span> are automorphisms. A projective cover, on the other hand, is a minimal weakly terminal object among projective modules mapping onto <span class="math inline">\(M\)</span>, in the terminology adopted here.</p>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="acknowledgement" class="level2 appendix unnumbered"><h2 class="anchored quarto-appendix-heading">Acknowledgement</h2><div class="quarto-appendix-contents">
+
+<p>This post grew out of a series of discussions with GPT 5.6 Sol and was written by it under torturously close supervision. The author supplied the mathematical outline, made the editorial decisions, and takes responsibility for all rambling prose and any remaining grammatical errors. GPT-5.6 Sol in Codex takes responsibility for being mysteriously less intelligent than its browser-dwelling counterpart.</p>
+
+
+
+</div></section><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-rotman_introduction_2009" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">J. J. Rotman, <em>An introduction to homological algebra</em>. New York, <span>NY</span>: Springer, 2009. doi: <a href="https://doi.org/10.1007/b98977">10.1007/b98977</a>.</div>
+</div>
+<div id="ref-krause_krull-schmidt_2014" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">H. Krause, <span>“Krull-schmidt categories and projective covers.”</span> <span>arXiv</span>, Oct. 10, 2014. doi: <a href="https://doi.org/10.48550/arXiv.1410.2822">10.48550/arXiv.1410.2822</a>.</div>
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
+<input type="hidden" id="giscus-alt-theme" value="light">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "sun123zxy/blog-quarto-code";
+    script.dataset.repoId = "R_kgDOIrPs5w";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDOIrPs584CV4gd";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Proudly powered by <a href="https://quarto.org/">Quarto</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>sun123zxy’s blog</p>
+</div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="../../thanks.html">
+<p>Thanks</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
