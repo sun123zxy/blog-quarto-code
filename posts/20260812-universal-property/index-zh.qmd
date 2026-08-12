@@ -1,0 +1,347 @@
+---
+title: 代数闭包为何不具备普遍性质
+subtitle: 在同构意义下唯一 vs. 在唯一同构意义下唯一
+author: sun123zxy
+lang: zh
+
+bibliography: index.bib
+
+number-sections: true
+
+format:
+  html: default
+---
+
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\Cone}{\operatorname{Cone}}
+
+> 机翻版本，不保证更新和翻译准确，请主要参考原英文版．
+
+## 一句神秘的评语
+
+关于代数闭包，有一句广为流传的评语："代数闭包不具备真正的普遍性质．" 真正理解这句话含义的人却不多．乍看之下，这颇令人困惑：代数闭包在同构意义下唯一，而自由对象、张量积、直积等熟悉的普遍构造也都在同构意义下唯一．既然如此，为什么代数闭包受到的待遇不一样？
+
+这两个断言的强弱其实不同．普遍构造在**唯一同构意义下唯一**，代数闭包一般却只在同构意义下唯一．后者仅断言同构存在；前者还断言该同构本身唯一．惯用语 "在同构意义下唯一" 抹去了这多出来的一层唯一性．
+
+代数闭包所欠缺的，恰恰是保结构同构的唯一性．
+
+:::{#exm-complex-conjugation}
+
+考虑
+$$
+K=\mathbb R,
+\qquad
+\overline K=\mathbb C.
+$$
+除了恒等映射外，$\mathbb C$ 还有复共轭这个 $\mathbb R$-自同构：
+$$
+\id_{\mathbb C}:z\longmapsto z,
+\qquad
+c:z\longmapsto\overline z.
+$$
+二者并不相同，因为
+$$
+\id_{\mathbb C}(i)=i,
+\qquad
+c(i)=-i.
+$$
+:::
+
+因此，即使代数闭包 $\mathbb R\hookrightarrow\mathbb C$ 已经选定，仍然有不止一个 $\mathbb R$-自同构．代数闭包的结构足以确定一个同构类，却不足以确定那个同构本身．
+
+## 两种抽象机制
+
+下面稍加考察这两种抽象机制．它们的区别在于：同构究竟是怎样得到的？
+
+### 普遍性质：保结构映射唯一 {#sec-universal-property}
+
+设 $X$ 和 $Y$ 是满足同一普遍性质的两个普遍对象．分别沿两个方向应用普遍性质，得到唯一的保结构映射
+$$
+f:X\longrightarrow Y,
+\qquad
+g:Y\longrightarrow X.
+$$
+复合 $gf$ 是 $X$ 的保结构自同态，而 $X$ 的恒等映射也是一个这样的自同态．由唯一性，
+$$
+gf=\id_X.
+$$
+同理，
+$$
+fg=\id_Y.
+$$
+因此 $f$ 和 $g$ 互为逆同构．但这个论证得到的不只是 $X$ 和 $Y$ 之间的一个同构：普遍性质早已告诉我们，$f$ 是从 $X$ 到 $Y$ 唯一的保结构映射．因此，这个同构本身也是唯一的．
+
+### 较弱的机制：保结构自同态均可逆 {#sec-weak-universal-property}
+
+现在去掉唯一性要求．我们仍然保证保结构映射存在，但改为要求候选对象的每个保结构自同态都是自同构．若 $X$ 和 $Y$ 都满足此性质，则可任选映射
+$$
+f:X\longrightarrow Y,
+\qquad
+g:Y\longrightarrow X.
+$$
+复合 $gf$ 和 $fg$ 分别是 $X$ 和 $Y$ 的保结构自同态，故二者都是自同构．由于 $gf$ 可逆，
+$$
+(gf)^{-1}g
+$$
+是 $f$ 的左逆；由于 $fg$ 可逆，
+$$
+g(fg)^{-1}
+$$
+是 $f$ 的右逆．左逆与右逆必然相同，所以 $f$ 是同构．
+
+这个论证仍然证明了 $X$ 和 $Y$ 同构，却没有证明同构唯一．$f$ 可能有多种选择，没有任何条件迫使它们相等．两种机制都会确定唯一的对象同构类；只有普遍性质进一步保证保结构同构唯一．
+
+## 例：代数闭包
+
+现在回到代数闭包．$K$ 的代数闭包 $\overline K$ 可由如下映射性质描述：若 $L$ 是 $K$ 的代数闭扩张，则 $K$ 到 $L$ 的嵌入可以延拓为嵌入
+$$
+\overline K\hookrightarrow L.
+$$
+换言之，图中的虚线总能由一个嵌入补全：
+
+:::{#fig-algebraic-closure-extension}
+
+```{tikz}
+\begin{tikzcd}
+	\overline K \arrow[r, dashed, hook] & L \\
+	K \arrow[u, hook] \arrow[ru, hook] &
+\end{tikzcd}
+```
+
+将嵌入延拓到代数闭包．
+:::
+
+这正是上一节较弱普遍性质的一个例子：$\overline K$ 可以在 $K$ 上嵌入 $K$ 的任意代数闭扩张，而 $\overline K$ 到自身的每个 $K$-嵌入都是自同构．
+
+:::{.proof}
+
+设
+$$
+\sigma:\overline K\longrightarrow\overline K
+$$
+是一个 $K$-嵌入．它必然满射：其像 $\sigma(\overline K)$ 同构于 $\overline K$，因而是代数闭域；另一方面，$\overline K$ 在 $K$ 上代数，且 $\sigma$ 固定 $K$，故 $\overline K$ 在 $\sigma(\overline K)$ 上代数．代数闭域不存在真代数扩张，所以
+$$
+\sigma(\overline K)=\overline K.
+$$
+因此，$\overline K$ 到自身的每个 $K$-嵌入都是自同构．
+:::
+
+于是 @sec-weak-universal-property 的较弱论证表明，$K$ 的任意两个代数闭包都在 $K$ 上同构．所需的嵌入总是存在，却没有任何条件保证它们唯一．
+
+## 例：投射覆盖
+
+模论中也有一个这样的较弱普遍性质．每个模 $M$ 都是某个投射模的商，但随意选取的 $P\twoheadrightarrow M$ 往往含有多余的投射成分．投射覆盖是某种意义下最小的投射满射．
+
+和刚才一样，我们自然想用映射性质表达这种最小性．设 $p:P\twoheadrightarrow M$ 是一个投射覆盖．给定另一个投射模 $Q$ 以及满射 $f:Q\twoheadrightarrow M$，我们希望存在满射 $\widetilde f:Q\twoheadrightarrow P$ 使下图交换：
+
+:::{#fig-projective-cover-lift}
+
+```{tikz}
+\begin{tikzcd}
+	Q \arrow[d, two heads, dashed, "\widetilde f"'] \arrow[rd, two heads, "f"] & \\
+	P \arrow[r, two heads, "p"'] & M
+\end{tikzcd}
+```
+
+将映射提升到投射覆盖．
+:::
+
+若不要求提升满射，这件事便是自动的：$Q$ 的投射性直接给出映射 $Q\to P$．所以真正刻画最小性的是提升的满射性．下面的定理说明，这又是前述较弱普遍性质的一个例子．
+
+:::{#thm-projective-cover-characterizations}
+
+## 投射覆盖的刻画
+
+设 $p:P\twoheadrightarrow M$ 是满同态，且 $P$ 投射．下列条件等价：
+
+1. （映射性质）对任意投射模 $Q$、任意满射 $q:Q\twoheadrightarrow M$ 以及任意满足 $ph=q$ 的映射 $h:Q\to P$，映射 $h$ 必为满射．
+
+   - 因为 $P$ 投射，每个这样的 $h$ 都分裂，从而将 $P$ 实现为 $Q$ 的直和项．
+
+2. （较弱的普遍性质）每个满足 $pu=p$ 的自同态 $u:P\to P$ 都是自同构．
+
+3. 核 $\ker p$ 是 $P$ 的**小子模**（superfluous submodule）：对任意子模 $N\subseteq P$，若 $N+\ker p=P$，则 $N=P$．
+
+4. $P$ 的任何真子模在 $p$ 下都不能映满 $M$．
+
+满足这些条件时，$p:P\twoheadrightarrow M$ 称为 $M$ 的**投射覆盖**．
+:::
+
+::::{.proof}
+
+**(3) <=> (4).** 对任意子模 $N\subseteq P$，有
+$$
+p(N)=M
+\iff
+N+\ker p=P.
+$$
+
+**(4) => (1).** 设 $h:Q\to P$ 满足 $ph=q$，其中 $q:Q\twoheadrightarrow M$ 是满射．于是
+$$
+p(\im h)=M.
+$$
+由条件 (4)，$\im h$ 不可能是 $P$ 的真子模，故 $h$ 是满射．
+
+**(1) => (4).** 设 $N\subseteq P$ 映满 $M$．选取投射模 $Q$ 以及满射 $r:Q\twoheadrightarrow N$．
+
+:::{#fig-projective-cover-submodule}
+
+```{tikz}
+\begin{tikzcd}
+	Q \arrow[d, two heads, "r"'] \arrow[rrd, two heads, "q"] & & \\
+	N \arrow[r, hook, "i"'] & P \arrow[r, two heads, "p"'] & M
+\end{tikzcd}
+```
+
+让一个投射表示经由 $N$ 分解．
+:::
+
+记 $i:N\hookrightarrow P$ 为包含映射，并令 $h=ir$．条件 (1) 表明 $h$ 是满射．又因为 $\im h=N$，故 $N=P$．
+
+**(4) => (2).** 设 $u:P\to P$ 满足 $pu=p$．于是
+$$
+p(\im u)=M,
+$$
+故条件 (4) 表明 $u$ 是满射．由于 $P$ 投射，$u$ 分裂，因而 $\ker u$ 是 $P$ 的直和项．此外，
+$$
+\ker u\subseteq\ker p.
+$$
+由条件 (3)，$\ker p$ 是小子模，因此不含非零直和项．所以 $\ker u=0$，从而 $u$ 是自同构．
+
+**(2) => (4).** 设 $N\subseteq P$ 映满 $M$．由于 $P$ 投射，映射 $p$ 可以沿限制 $p|_N:N\twoheadrightarrow M$ 提升：
+
+:::{#fig-projective-cover-minimality-lift}
+
+```{tikz}
+\begin{tikzcd}
+	P \arrow[r, two heads, "p"] \arrow[d, dashed, "h"'] & M \\
+	N \arrow[ru, two heads, "p|_N"'] &
+\end{tikzcd}
+```
+
+将 $p$ 沿其在 $N$ 上的限制提升．
+:::
+
+记 $i:N\hookrightarrow P$ 为包含映射．交换三角形给出 $pih=p$，故条件 (2) 表明 $ih$ 是自同构．它的像包含在 $N$ 中，但作为自同构，其像又是整个 $P$．因此 $N=P$．
+::::
+
+:::{.remark}
+
+## 补充说明
+
+- 条件 (3) 和 (4) 是经典定义．例如可参见 [@rotman_introduction_2009, {section 4.6}]．
+
+- 稍微改写条件 (1)，便得到 "$p$ 是本质满态射"（essential epimorphism）：对任意 $\varphi$，若 $p\varphi$ 是满态射，则 $\varphi$ 也是满态射．
+
+- 条件 (2) 在文献中有时表述为 "$p$ 是右极小的"（right minimal）．
+
+- 条件 (1) 与 (2) 的等价性有一个范畴论证明．例如可参见 [@krause_krull-schmidt_2014, {lemma 3.4}]．
+
+- 条件 (1) 与 (2) 的等价性也可借助代数闭包来理解．我们没有找到解释这一类比的文献；欢迎补充参考资料与讨论．
+:::
+
+至此，较弱机制的两个要素都已出现：投射性保证保结构映射存在，而 @thm-projective-cover-characterizations 保证自同态是自同构．因此，@sec-weak-universal-property 的论证表明，$M$ 的任意两个投射覆盖都同构．
+
+同样，保结构同构不必唯一，所以投射覆盖不被视为普遍对象．
+
+:::{#exm-projective-cover-automorphism}
+
+令
+$$
+R=k[\varepsilon]/(\varepsilon^2),
+\qquad
+M=R/(\varepsilon),
+$$
+并令 $p:R\twoheadrightarrow M$ 为商映射．模 $R$ 是自由的，而 $(\varepsilon)$ 是小子模：若 $N+(\varepsilon)=R$，则 $N$ 包含形如 $1+a\varepsilon$ 的元素，而该元素是单位．因此 $N=R$，故 $p$ 是投射覆盖．
+
+由于 $1+\varepsilon$ 是单位，乘以 $1+\varepsilon$ 定义了一个 $R$-模自同构 $u:R\longrightarrow R$．虽然 $u$ 不是恒等映射，但模去 $\varepsilon$ 后便成为恒等映射．所以 $pu=p$．
+:::
+
+## 最后的范畴论废话
+
+到目前为止，我们已经借助几个例子，用初等语言说明了两种机制的区别．现在来升级语言：范畴论将同一批保结构映射打包，使两种唯一性的差异一目了然．
+
+设 $F:J\to\mathcal C$ 是一个图．对任意对象 $L\in\mathcal C$，记 $\Delta L:J\to\mathcal C$ 为常值函子：它把 $J$ 的每个对象都送到 $L$，把每个态射都送到 $\id_L$．以 $L$ 为顶点、在 $F$ 上的一个**锥**（cone）是自然变换
+$$
+\lambda:\Delta L\Longrightarrow F.
+$$
+按分量展开，锥由每个 $j\in J$ 所对应的映射 $\lambda_j:L\to F(j)$ 组成．自然性说明，对 $J$ 中每个态射 $a:j\to k$，都有
+$$
+F(a)\lambda_j=\lambda_k.
+$$
+换言之，由图中映射构成的所有三角形都交换．
+
+范畴 $\Cone(F)$ 的对象是这些锥 $(L,\lambda)$．其态射
+$$
+f:(L,\lambda)\longrightarrow(L',\lambda')
+$$
+是满足
+$$
+\lambda'_j f=\lambda_j
+$$
+的映射 $f:L\to L'$；这里要求等式对每个 $j\in J$ 成立．等价地，
+$$
+\lambda'\circ\Delta f=\lambda.
+$$
+这些恰是锥之间的保结构映射．$F$ 的极限就是 $\Cone(F)$ 的终对象．这是普遍性质的终对象形式；将所有箭头反向便得到始对象形式．若不想区分二者，始对象与终对象合称普遍对象．
+
+### 普遍对象构成可缩群胚
+
+设 $F$ 有极限，并令 $\mathcal U$ 为 $\Cone(F)$ 中由所有极限锥组成的全子范畴．若 $L,L'\in\mathcal U$，终性给出唯一态射
+$$
+L\longrightarrow L'.
+$$
+由 @sec-universal-property 的论证，两个方向上的唯一映射互为逆．因此 $\mathcal U$ 中每个态射都是同构，并且
+$$
+\#\Hom_{\mathcal U}(L,L')=1.
+$$
+所以 $\mathcal U$ 是一个群胚，任意两个对象之间恰有一个态射．
+
+到这里还只是每个研究生都熟悉的标准抽象废话．下一句话也许没那么常见：上述 $\mathcal U$ 的全部性质可以压缩成一句口号：
+
+- 普遍对象的群胚是**可缩的**（contractible）．
+
+若一个范畴等价于 $*$，即仅含一个对象及其恒等态射的终范畴，我们就称它**可缩**．这个术语借自同伦论，倒也十分贴切：范畴等价在这里扮演同伦等价的角色．要看出这句口号是无损压缩，只需用 "全忠实 + 本质满" 的经典刻画展开范畴等价．确实，唯一函子
+$$
+\mathcal U\longrightarrow *
+$$
+是本质满的，因为 $\mathcal U$ 非空；它也是全忠实的，因为两边的每个态射集都是单点集．因此
+$$
+\mathcal U\simeq *.
+$$
+
+这漂亮的一行式子容纳了 "在唯一同构意义下唯一" 的全部含义．普遍对象可以有不同构造，但任意两个构造之间恰有一个保结构同构．这也解释了为什么我们会自然地说**这个**张量积、**这个**自由对象或**这个**极限：普遍性质以唯一的一种方式识别了它们的所有构造．
+
+### 弱终对象与极小解
+
+@sec-weak-universal-property 的较弱机制也有范畴论版本．若范畴 $\mathcal D$ 中每个对象 $X\in\mathcal D$ 都至少有一个到 $L$ 的态射，即
+$$
+\Hom_{\mathcal D}(X,L)\ne\varnothing,
+$$
+则称对象 $L$ 是**弱终对象**（weakly terminal object）．在本文中，若弱终对象 $L$ 的每个自同态都是自同构，就称 $L$ 是**极小的**．这个形容词是我们在对象层面对投射覆盖之右极小条件所作的简写．
+
+令 $\mathcal M$ 为所有这种极小弱终对象组成的全子范畴．给定 $L,L'\in\mathcal M$，弱终性给出映射
+$$
+f:L\longrightarrow L',
+\qquad
+g:L'\longrightarrow L.
+$$
+自同态 $gf$ 和 $fg$ 都是自同构，所以 @sec-weak-universal-property 的较弱论证表明 $f$ 是同构．这对每个态射 $L\to L'$ 都成立，因此 $\mathcal M$ 是群胚．它还是连通的：任意两个对象之间至少有一个同构．
+
+然而，与 $\mathcal U$ 不同，$\mathcal M$ 的态射集未必是单点集．任选 $L\in\mathcal M$ 后，整个群胚在等价意义下由 $L$ 的自同构群决定：
+$$
+\mathcal M\simeq B\Aut(L).
+$$
+这里 $B\Aut(L)$ 是只有一个对象、以 $\Aut(L)$ 中元素为态射的群胚．它等价于 $*$ 当且仅当
+$$
+\Aut(L)=1.
+$$
+
+将所有箭头反向便得到始对象版本．在通常的域嵌入方向下，代数闭包是 $K$ 的所有代数闭扩张中的极小弱始对象：从它出发的映射存在，且它在 $K$ 上的全部自同态都是自同构．另一方面，按本文采用的术语，投射覆盖是映到 $M$ 的投射模中的极小弱终对象．
+
+## 致谢 {.appendix .unnumbered}
+
+本文源于与 GPT-5.6 Sol 的一系列讨论，并由它在令人备受折磨的严密监督下执笔．作者提供了数学提纲、作出了全部编辑决定，并对所有漫无边际的行文和残留的语法错误负责．Codex 中的 GPT-5.6 Sol 则负责神秘地比住在浏览器里的同类更不聪明．
