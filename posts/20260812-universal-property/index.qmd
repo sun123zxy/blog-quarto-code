@@ -1,0 +1,495 @@
+---
+title: Why Algebraic Closures Possess NO Universal Property
+subtitle: Unique up to Isomorphism vs. Unique up to Unique Isomorphism
+author: sun123zxy
+date: 2026-08-12
+lang: en
+
+bibliography: index.bib
+
+categories:
+  - math
+  - algebra
+  - category-theory
+  - rep-theory
+
+number-sections: true
+
+format:
+  html: default
+---
+
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\Cone}{\operatorname{Cone}}
+
+## The mysterious remark
+
+A well-known remark on algebraic closures reads: "Algebraic closures do not possess a genuine universal property." Few understand its actual meaning.
+At first sight, this is puzzling. Algebraic closures
+are unique up to isomorphism. The same is true of familiar universal
+constructions such as free objects, tensor products, and direct products.
+Why, then, is algebraic closure treated differently?
+
+The two assertions are not equally strong. A universal construction is
+unique up to a **unique isomorphism**, whereas an algebraic closure is in
+general only unique up to isomorphism. In the latter statement, an
+isomorphism exists; in the former, that isomorphism is itself unique. The
+usual phrase "unique up to isomorphism" hides this extra layer of
+uniqueness.
+
+It turns out that algebraic closures fail to meet this
+uniqueness requirement for structure-preserving isomorphisms.
+
+:::{#exm-complex-conjugation}
+
+Consider
+$$
+K=\mathbb R,
+\qquad
+\overline K=\mathbb C.
+$$
+Besides the identity, $\mathbb C$ has complex conjugation as an
+$\mathbb R$-automorphism:
+$$
+\id_{\mathbb C}:z\longmapsto z,
+\qquad
+c:z\longmapsto\overline z.
+$$
+They are distinct, since
+$$
+\id_{\mathbb C}(i)=i,
+\qquad
+c(i)=-i.
+$$
+:::
+
+So even after the algebraic closure $\mathbb R\hookrightarrow\mathbb C$ has
+been fixed, there remains more than one automorphism over $\mathbb R$.
+Algebraic closure therefore has enough structure to determine an
+isomorphism class, but not enough to determine the isomorphism itself.
+
+## Two abstract mechanisms
+
+Let us examine these two abstract mechanisms a little more closely. The
+difference lies in how the isomorphism is obtained.
+
+### Universal properties: structure-preserving maps are unique {#sec-universal-property}
+
+Suppose $X$ and $Y$ are two universal objects satisfying the same
+universal property. Applying the property in both directions gives unique
+structure-preserving maps
+$$
+f:X\longrightarrow Y,
+\qquad
+g:Y\longrightarrow X.
+$$
+The composite $gf$ is a structure-preserving endomorphism of $X$. But the
+identity of $X$ is another such endomorphism, hence by uniqueness,
+$$
+gf=\id_X.
+$$
+Similarly,
+$$
+fg=\id_Y.
+$$
+Hence $f$ and $g$ are inverse isomorphisms. But the argument gives more
+than an isomorphism between $X$ and $Y$: the universal property already
+says that $f$ is the only structure-preserving map from $X$ to $Y$. The
+isomorphism is therefore unique.
+
+### A weaker mechanism: structure-preserving endomorphisms are invertible {#sec-weak-universal-property}
+
+Now remove the uniqueness requirement. We still guarantee the existence of
+structure-preserving maps, but require instead that every structure-preserving
+endomorphism of a candidate object be an automorphism. If
+$X$ and $Y$ both satisfy the property, we may choose maps
+$$
+f:X\longrightarrow Y,
+\qquad
+g:Y\longrightarrow X.
+$$
+The composites $gf$ and $fg$ are structure-preserving endomorphisms of
+$X$ and $Y$, respectively, so both are automorphisms. Since $gf$ is
+invertible,
+$$
+(gf)^{-1}g
+$$
+is a left inverse of $f$. Since $fg$ is invertible,
+$$
+g(fg)^{-1}
+$$
+is a right inverse. The two inverses agree, so $f$ is an isomorphism.
+
+This argument still proves that $X$ and $Y$ are isomorphic, but it does
+not prove that the isomorphism is unique. There may have been several choices for
+$f$, and nothing forces them to agree. Both mechanisms produce a single
+isomorphism class of objects; only the universal property makes the
+structure-preserving isomorphism unique.
+
+## Example: Algebraic closures
+
+We now return to algebraic closure. The defining property of an algebraic
+closure $\overline K$ of $K$ can be described as the follow mapping property: if $L$ is an
+algebraically closed extension of $K$, then the embedding of $K$ into $L$
+extends to an embedding
+$$
+\overline K\hookrightarrow L.
+$$
+In other words, the dashed arrow can always be filled with an embedding:
+
+:::{#fig-algebraic-closure-extension}
+
+```{tikz}
+\begin{tikzcd}
+	\overline K \arrow[r, dashed, hook] & L \\
+	K \arrow[u, hook] \arrow[ru, hook] &
+\end{tikzcd}
+```
+
+Extension of an embedding to an algebraic closure.
+:::
+
+This characterization turns out to be an example of the weaker universal
+property from the previous section: $\overline K$ $K$-embeds into
+every algebraically closed extension of $K$, and every $K$-embedding from
+$\overline K$ to itself is an automorphism.
+
+:::{.proof}
+
+Let
+$$
+\sigma:\overline K\longrightarrow\overline K
+$$
+be a $K$-embedding. It is automatically surjective: indeed, its image
+$\sigma(\overline K)$ is algebraically closed, since it is isomorphic to
+$\overline K$. On the
+other hand, $\overline K$ is algebraic over $\sigma(\overline K)$, because
+$\overline K$ is algebraic over $K$ and $\sigma$ fixes $K$. An
+algebraically closed field has no proper algebraic extension; therefore
+
+$$
+\sigma(\overline K)=\overline K.
+$$
+
+Thus every $K$-embedding from $\overline K$ to itself is an automorphism.
+:::
+
+The weaker argument from @sec-weak-universal-property now shows that any two
+algebraic closures of $K$ are $K$-isomorphic. The required embeddings
+exist, but nothing makes them unique.
+
+## Example: Projective covers
+
+Another example of such a weakened universal property lies in module
+theory. Every module $M$ is a quotient of a projective module, but
+a random candidate $P\twoheadrightarrow M$ usually contains more
+projective material than is needed. A projective cover is a projective
+surjection that is, in some sense, minimal among those of its kind.
+
+As before, it is tempting to express this minimality requirement through
+a mapping property. Let $p:P\twoheadrightarrow M$
+be a projective cover. Given another projective module $Q$ and a
+surjection $f:Q\twoheadrightarrow M$, we would like there to be a
+surjection $\widetilde f:Q\twoheadrightarrow P$ such that the following
+diagram commutes:
+
+:::{#fig-projective-cover-lift}
+
+```{tikz}
+\begin{tikzcd}
+	Q \arrow[d, two heads, dashed, "\widetilde f"'] \arrow[rd, two heads, "f"] & \\
+	P \arrow[r, two heads, "p"'] & M
+\end{tikzcd}
+```
+
+Lifting a map through a projective cover.
+:::
+
+Without the surjectivity requirement, this would be automatic:
+projectivity of $Q$ gives a map $Q\to P$. Thus it is the surjectivity of
+the lift that actually characterizes minimality. The following theorem
+shows that this is again an example of the weak universal property stated
+above:
+
+:::{#thm-projective-cover-characterizations}
+
+## Characterizations of a projective cover
+
+Let $p:P\twoheadrightarrow M$ be a surjective homomorphism with $P$
+projective. The following conditions are equivalent:
+
+1. (The mapping property) For every projective module $Q$, every surjection
+   $q:Q\twoheadrightarrow M$, and every map $h:Q\to P$ satisfying $ph=q$,
+   the map $h$ must be surjective.
+
+   - Since $P$ is projective, every such $h$ splits, exhibiting $P$ as a direct summand of $Q$.
+
+2. (The weak universal property) Every endomorphism $u:P\to P$ satisfying
+   $pu=p$ is an automorphism.
+
+3. The kernel $\ker p$ is **superfluous** in $P$: for every submodule
+   $N\subseteq P$, $N+\ker p=P$ implies $N=P$.
+
+4. No proper submodule of $P$ maps onto $M$ under $p$.
+
+When these conditions hold, $p:P\twoheadrightarrow M$ is called a
+**projective cover** of $M$.
+:::
+
+::::{.proof}
+
+**(3) <=> (4).** For every submodule
+$N\subseteq P$, we have
+$$
+p(N)=M
+\iff
+N+\ker p=P.
+$$
+
+**(4) => (1).** Suppose $h:Q\to P$ satisfies
+$ph=q$ for a surjection $q:Q\twoheadrightarrow M$. Then
+$$
+p(\im h)=M.
+$$
+By condition 4, $\im h$ cannot be a proper submodule of $P$, so $h$ is
+surjective.
+
+**(1) => (4).** Let $N\subseteq P$ map onto $M$. Choose a projective
+module $Q$ together with a surjection $r:Q\twoheadrightarrow N$.
+
+:::{#fig-projective-cover-submodule}
+
+```{tikz}
+\begin{tikzcd}
+	Q \arrow[d, two heads, "r"'] \arrow[rrd, two heads, "q"] & & \\
+	N \arrow[r, hook, "i"'] & P \arrow[r, two heads, "p"'] & M
+\end{tikzcd}
+```
+
+Factoring a projective presentation through $N$.
+:::
+
+If $i:N\hookrightarrow P$ is the inclusion, set $h=ir$. Condition 1 makes
+$h$ surjective. Since $\im h=N$, we obtain $N=P$.
+
+**(4) => (2).** Let $u:P\to P$ satisfy $pu=p$.
+Then
+$$
+p(\im u)=M,
+$$
+so condition 4 makes $u$ surjective. Since $P$ is projective, $u$ splits
+and $\ker u$ is a direct summand of $P$. Moreover,
+$$
+\ker u\subseteq\ker p.
+$$
+By condition 3, $\ker p$ is superfluous and therefore contains no nonzero
+direct summand. Hence $\ker u=0$, so $u$ is an automorphism.
+
+**(2) => (4).** Let $N\subseteq P$ map onto $M$. Since $P$ is projective,
+the map $p$ lifts through the restriction $p|_N:N\twoheadrightarrow M$:
+
+:::{#fig-projective-cover-minimality-lift}
+
+```{tikz}
+\begin{tikzcd}
+	P \arrow[r, two heads, "p"] \arrow[d, dashed, "h"'] & M \\
+	N \arrow[ru, two heads, "p|_N"'] &
+\end{tikzcd}
+```
+
+Lifting $p$ through its restriction to $N$.
+:::
+
+Writing $i:N\hookrightarrow P$ for the inclusion, the commutative triangle
+gives $pih=p$. Condition 2 makes $ih$ an automorphism. Its image is
+contained in $N$, but as an automorphism its image is all of $P$.
+Therefore $N=P$.
+::::
+
+:::{.remark}
+
+## FYI
+
+- Conditions (3) and (4) are the classical choices. See, for example, [@rotman_introduction_2009, {section 4.6}].
+
+- A slight paraphrase of (1) says that $p$ is an essential epimorphism:
+  for every $\varphi$, if $p\varphi$ is an epimorphism, then $\varphi$ is
+  an epimorphism.
+
+- Condition (2) is sometimes referred to as "$p$ is right minimal" in the literature.
+
+- The equivalence between (1) and (2) has a categorical proof. See, for example, [@krause_krull-schmidt_2014, {lemma 3.4}].
+
+- The equivalence of (1) and (2) can also be understood through algebraic closures. We could not find a reference explaining this analogy. TODO: References and discussion are welcome.
+:::
+
+We have therefore recovered the two ingredients of the weaker mechanism:
+the existence of a structure-preserving map follows from projectivity, and
+the automorphism property follows from
+@thm-projective-cover-characterizations. The argument from
+@sec-weak-universal-property then shows that any two projective covers of
+$M$ are isomorphic.
+
+Once again, the structure-preserving isomorphism need not be unique; hence
+a projective cover is not considered a universal object.
+
+:::{#exm-projective-cover-automorphism}
+
+Let
+$$
+R=k[\varepsilon]/(\varepsilon^2),
+\qquad
+M=R/(\varepsilon),
+$$
+and let $p:R\twoheadrightarrow M$ be the quotient map. The module $R$ is
+free, and $(\varepsilon)$ is superfluous: if
+$N+(\varepsilon)=R$, then $N$ contains an element of the form
+$1+a\varepsilon$, which is a unit. Hence $N=R$, and $p$ is a projective
+cover.
+
+Multiplication by $1+\varepsilon$ defines an $R$-module automorphism
+$u:R\longrightarrow R$, since $1+\varepsilon$ is a unit. Although $u$ is
+not the identity, it becomes the identity modulo $\varepsilon$. Therefore
+$pu=p$.
+:::
+
+## Categorical nonsense, finally
+
+So far, we have illustrated the distinction between the two mechanisms in
+elementary terms through several examples. Let us now
+upgrade the language: category theory packages the same
+structure-preserving maps into a form in which the two kinds of uniqueness
+become self-evident.
+
+Let $F:J\to\mathcal C$ be a diagram. For an object $L\in\mathcal C$,
+write $\Delta L:J\to\mathcal C$ for the constant functor that sends every
+object of $J$ to $L$ and every morphism to $\id_L$. A **cone** over $F$
+with vertex $L$ is a natural transformation
+$$
+\lambda:\Delta L\Longrightarrow F.
+$$
+In components, the cone consists of a map $\lambda_j:L\to F(j)$ for every
+$j\in J$. Naturality says that for every morphism $a:j\to k$ in $J$,
+$$
+F(a)\lambda_j=\lambda_k.
+$$
+Thus all the triangles formed by the maps of the diagram commute.
+
+The category $\Cone(F)$ has these cones $(L,\lambda)$ as its objects. A
+morphism
+$$
+f:(L,\lambda)\longrightarrow(L',\lambda')
+$$
+is a map $f:L\to L'$ satisfying
+$$
+\lambda'_j f=\lambda_j
+$$
+for every $j\in J$, or equivalently
+$$
+\lambda'\circ\Delta f=\lambda.
+$$
+These are precisely the structure-preserving maps between cones. A limit
+of $F$ is a terminal object of $\Cone(F)$. This is the terminal
+form of a universal property; the initial form is obtained by
+reversing all arrows. Terminal objects and initial objects are in conjunction called
+universal objects if one does not want to distinguish between them.
+
+### Universal objects form a contractible groupoid
+
+Assume that $F$ has a limit, and let $\mathcal U$ be the full subcategory
+of $\Cone(F)$ consisting of all limiting cones. If
+$L,L'\in\mathcal U$, terminality gives exactly one morphism
+$$
+L\longrightarrow L'.
+$$
+The unique maps in the two directions are inverse by the argument of
+[@sec-universal-property]. Hence every morphism in $\mathcal U$ is an isomorphism, and
+$$
+\#\Hom_{\mathcal U}(L,L')=1.
+$$
+Thus $\mathcal U$ is a groupoid with exactly one morphism between every
+two objects.
+
+So far, this is just the standard abstract nonsense familiar to every
+graduate student. The next statement may be less familiar: the properties above
+can be compressed into a single slogan:
+
+- The groupoid of universal objects is **contractible**.
+
+We say that a category is **contractible** if it is equivalent to $*$, the
+terminal category with a single object and its identity morphism. The term
+is borrowed from homotopy theory, appropriately enough: categorical
+equivalence plays the role of homotopy equivalence here. To see why this
+slogan is a lossless compression, recall the usual "fully faithful plus
+essentially surjective" characterization of categorical equivalence.
+Indeed, the unique functor
+$$
+\mathcal U\longrightarrow *
+$$
+is essentially surjective because $\mathcal U$ is nonempty, and it is
+fully faithful because every hom-set on either side is a singleton.
+Therefore
+$$
+\mathcal U\simeq *.
+$$
+
+This beautiful one-liner captures the full meaning of the slogan "unique
+up to unique isomorphism." Universal objects may be constructed
+differently, but there is exactly one structure-preserving isomorphism
+between any two constructions. This is why we comfortably speak of THE
+tensor product, THE free object, or THE limit: the universal property
+identifies all their constructions in one and only one way.
+
+### Weakly terminal and minimal solutions
+
+The weaker mechanism from [@sec-weak-universal-property] also has a
+categorical form. An object $L$ of a category $\mathcal D$ is **weakly
+terminal** if every object $X\in\mathcal D$ admits at least one morphism
+to $L$:
+$$
+\Hom_{\mathcal D}(X,L)\ne\varnothing.
+$$
+For this discussion, call a weakly terminal object $L$ **minimal** if
+every endomorphism of $L$ is an automorphism. The adjective is our
+object-level shorthand for the right-minimal condition encountered for
+projective covers.
+
+Let $\mathcal M$ be the full subcategory of weakly terminal objects that
+are minimal in this sense. Given $L,L'\in\mathcal M$, weak terminality
+supplies maps
+$$
+f:L\longrightarrow L',
+\qquad
+g:L'\longrightarrow L.
+$$
+The endomorphisms $gf$ and $fg$ are automorphisms, so the weaker argument
+from [@sec-weak-universal-property] makes $f$ an isomorphism. Since this
+applies to every morphism $L\to L'$, the category $\mathcal M$ is a
+groupoid. It is also connected: between any two objects there is at least
+one isomorphism.
+
+Unlike $\mathcal U$, however, its hom-sets need not be singletons. After
+choosing one object $L\in\mathcal M$, the entire groupoid is determined up
+to equivalence by the automorphism group of $L$:
+$$
+\mathcal M\simeq B\Aut(L).
+$$
+Here $B\Aut(L)$ is the one-object groupoid whose morphisms are the
+elements of $\Aut(L)$. It is equivalent to $*$ exactly when
+$$
+\Aut(L)=1.
+$$
+
+The initial version is obtained by reversing all arrows. With the usual
+direction of field embeddings, an algebraic closure is a minimal weakly
+initial object among algebraically closed extensions of $K$: maps from it
+exist, and all its endomorphisms over $K$ are automorphisms. A projective cover,
+on the other hand, is a minimal weakly terminal object among projective
+modules mapping onto $M$, in the terminology adopted here.
+
+## Acknowledgement {.appendix .unnumbered}
+
+This post grew out of a series of discussions with GPT 5.6 Sol and was written by it under torturously close supervision. The author supplied the mathematical outline, made the editorial decisions, and takes responsibility for all rambling prose and any remaining grammatical errors. GPT-5.6 Sol in Codex takes responsibility for being mysteriously less intelligent than its browser-dwelling counterpart.
