@@ -139,7 +139,6 @@ MathJax = {
   }
 };
 </script>
-<meta name="quarto:status" content="draft">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -336,7 +335,7 @@ window.Quarto = {
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -405,6 +404,10 @@ window.Quarto = {
   <ul>
   <li><a href="#a-dense-curve-on-the-torus" id="toc-a-dense-curve-on-the-torus" class="nav-link active" data-scroll-target="#a-dense-curve-on-the-torus">A dense curve on the torus</a></li>
   <li><a href="#hopf-fibration" id="toc-hopf-fibration" class="nav-link" data-scroll-target="#hopf-fibration">Hopf fibration</a></li>
+  <li><a href="#algebraic-description" id="toc-algebraic-description" class="nav-link" data-scroll-target="#algebraic-description">Algebraic description</a>
+  <ul class="collapse">
+  <li><a href="#geometric-description" id="toc-geometric-description" class="nav-link" data-scroll-target="#geometric-description">Geometric description</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -448,7 +451,7 @@ window.Quarto = {
 </header>
 
 
-<div id="dcdb3a97" class="cell" data-execution_count="1">
+<div id="ebd3fa42" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -507,11 +510,11 @@ window.Quarto = {
 <div id="fig-dense-curve-on-torus" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-dense-curve-on-torus-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="86e2040f" class="cell" data-execution_count="2">
+<div id="ede00462" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/cell-3-output-1.png" width="485" height="480" class="figure-img"></p>
+<p><img src="index_files/figure-html/cell-3-output-1.png" width="507" height="480" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -530,17 +533,88 @@ Figure&nbsp;1: a dense curve on the torus
 <li><a href="https://zhuanlan.zhihu.com/p/112985074">Hopf纤维化</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/51684298">MP69：典型群(3)：三维空间的旋转，Pauli矩阵、四元数、SO(3)~RP3、SU(2)~S3</a></li>
 </ul>
+</section>
+<section id="algebraic-description" class="level2">
+<h2 class="anchored" data-anchor-id="algebraic-description">Algebraic description</h2>
 <p>Recall the three equivalent descriptions of <span class="math inline">\(\mathrm{SU}(2)\)</span>: <span class="math display">\[
 \begin{matrix}
-\mathbb T^3           &amp; \to &amp; \mathbb S^3 \subset \mathbb H &amp; \to   &amp; \mathrm{SU}(2) \\
-(\theta,\varphi,\psi) &amp; \substack{ a = \cos \theta \cos \varphi \\ b = \cos \theta \sin \varphi \\ c = \sin \theta \cos \psi \\ d = \sin \theta \sin \psi}  &amp; a \boldsymbol 1 + b \boldsymbol i + c \boldsymbol j + d \boldsymbol k &amp;              \substack{z=a+bi \\ w=c+di}  &amp; \begin{bmatrix}z &amp; w \\ -\bar w &amp; \bar z\end{bmatrix} \\
-                      &amp;     &amp;  a^2+b^2+c^2+d^2 = 1  &amp;       &amp; |z|^2 + |w|^2 = 1 \\
+\mathbb T^3           &amp;  &amp; \mathbb S^3 \subset \mathbb H &amp;  &amp; \mathrm{SU}(2) \\
+(\theta,\varphi,\psi) &amp; \xrightarrow{\substack{ a = \cos \theta \cos \varphi \\ b = \cos \theta \sin \varphi \\ c = \sin \theta \cos \psi \\ d = \sin \theta \sin \psi}} &amp; a \boldsymbol 1 + b \boldsymbol i + c \boldsymbol j + d \boldsymbol k &amp; \xrightarrow{\substack{z=a+b \boldsymbol i \\ w=c+d \boldsymbol i}} &amp; \begin{bmatrix}z &amp; w \\ -\overline w &amp; \overline z\end{bmatrix} \\
+                      &amp;     &amp;  a^2+b^2+c^2+d^2 = 1  &amp;     \xleftarrow{z + w \boldsymbol j}  &amp; |z|^2 + |w|^2 = 1 \\
 \end{matrix}
-\]</span> More of these relationships can be found in <span class="citation" data-cites="stillwell_naive_2008"><a href="#ref-stillwell_naive_2008" role="doc-biblioref">[2, Ch. 1–2]</a></span>. A nice figure of the Hopf fibration can be found in <span class="citation" data-cites="stillwell_naive_2008"><a href="#ref-stillwell_naive_2008" role="doc-biblioref">[2, Secs. 2.2, figure 2.2]</a></span>. The circle decomposition of <span class="math inline">\(\mathbb S^3\)</span> is just the coset partition of <span class="math inline">\(\mathbb S^3 \subset \mathbb H\)</span> by the subgroup <span class="math inline">\(\langle a + b \boldsymbol i : a^2+b^2=1 \rangle\)</span>.</p>
-<p>Fibre bundle description: TODO</p>
+\]</span> Note that the second map preserves the multiplication structure. The latter two structures equip <span class="math inline">\(\mathbb S^3\)</span> with a group structure.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>Remark</em>. </span>More of these relationships can be found in <span class="citation" data-cites="stillwell_naive_2008"><a href="#ref-stillwell_naive_2008" role="doc-biblioref">[2, Ch. 1–2]</a></span>. A nice figure of the Hopf fibration can be found in <span class="citation" data-cites="stillwell_naive_2008"><a href="#ref-stillwell_naive_2008" role="doc-biblioref">[2, Secs. 2.2, figure 2.2]</a></span>.</p>
+</div>
+</div>
+</div>
+</div>
+<p>The so-called Hopf map is <span class="math display">\[
+\begin{aligned}
+\pi : \mathbb S^3 &amp;\to \mathbb S^2 \subseteq \mathbb C \times \mathbb R \\
+\quad (z,w) &amp;\mapsto (2 z \overline w, |z|^2 - |w|^2)
+\end{aligned}
+\]</span></p>
+<ul>
+<li><p>It’s well-defined: computing the RHS’s L2 norm, one verifies that <span class="math display">\[
+|2z\overline w|^2 + (|z|^2 - |w|^2)^2 = (|z|^2 + |w|^2)^2 = 1
+\]</span> hence the image is indeed in <span class="math inline">\(\mathbb S^2\)</span>.</p></li>
+<li><p>It’s surjective: write <span class="math inline">\(z = r e^{\boldsymbol i \theta}\)</span> and <span class="math inline">\(w = s e^{\boldsymbol i \phi}\)</span>, then <span class="math display">\[
+\pi(z,w) = (2 r s e^{\boldsymbol i (\theta - \phi)}, r^2 - s^2) =: (u, v)
+\]</span> note that the modulus <span class="math inline">\(r\)</span>, <span class="math inline">\(s\)</span> can be solved <span class="math display">\[
+\begin{cases}
+u = 2rs \\
+v = r^2 - s^2
+\end{cases}
+\iff
+\begin{cases}
+r^2 = \frac{1}{2} (v + \sqrt{u^2 + v^2}) \\
+s^2 = \frac{1}{2} (-v + \sqrt{u^2 + v^2})
+\end{cases}
+\]</span> hence a preimage of <span class="math inline">\((u,v)\)</span> is always found.</p></li>
+</ul>
+<p>One note that <span class="math inline">\((e^{\boldsymbol i \theta} z, e^{\boldsymbol i \theta} w)\)</span> and <span class="math inline">\((z,w)\)</span> are in the same fiber of <span class="math inline">\(\pi\)</span> for any <span class="math inline">\(\theta \in \mathbb R\)</span>. If appreciated in <span class="math inline">\(\mathbb H\)</span>, the action is simply left multiplication by <span class="math inline">\(e^{\boldsymbol i \theta}\)</span>. Denote <span class="math display">\[
+\mathbb S^1 := \{ e^{\boldsymbol i \theta} : \theta \in \mathbb R \}
+\]</span> So <span class="math inline">\(\mathbb S^1\)</span> acts on <span class="math inline">\(\mathbb S^3 \subseteq \mathbb H\)</span> by left multiplication, and the fibers of the Hopf map are at least a coarser partition of right cosets of <span class="math inline">\(\mathbb S^1 \operatorname{\backslash} \mathbb S^3\)</span>.</p>
+<p>In fact, we can show that the fibers are exactly the right cosets. To show this, we are to conversely give out this rotation for each two points <span class="math inline">\((z,w)\)</span> and <span class="math inline">\((z',w')\)</span> in the same fiber. Say <span class="math inline">\(\pi(z,w)=\pi(z',w')\)</span>, then <span class="math display">\[
+\begin{cases}
+2z\overline w=2z'\overline{w'} \\
+|z|^2-|w|^2=|z'|^2-|w'|^2 \\
+|z|^2+|w|^2=|z'|^2+|w'|^2=1
+\end{cases}
+\implies
+\begin{cases}
+z \overline w = z' \overline{w'} \\
+|z|=|z'| \\
+|w|=|w'|
+\end{cases}
+\]</span> Note that the first equation fixes the relative phase of <span class="math inline">\(z\)</span> and <span class="math inline">\(w\)</span>, while the last two equations fix their absolute values. So a joint rotation of <span class="math inline">\(z\)</span> and <span class="math inline">\(w\)</span> is the only freedom left and we are done. Therefore <span class="math display">\[
+\pi(z,w)=\pi(z',w')
+\iff
+(z',w')=(e^{\boldsymbol i \theta}z,e^{\boldsymbol i \theta}w)
+\quad\text{for some }\theta\in\mathbb R
+\]</span> So the fibers of the Hopf map are exactly the right cosets of the above copy of <span class="math inline">\(\mathbb S^1\)</span> in <span class="math inline">\(\mathbb S^3\)</span>. And the Hopf map identifies <span class="math inline">\(\mathbb S^2\)</span> with each of these cosets: <span class="math display">\[
+\mathbb S^2 \cong \mathbb S^1 \operatorname{\backslash} \mathbb S^3
+\]</span></p>
+<section id="geometric-description" class="level3">
+<h3 class="anchored" data-anchor-id="geometric-description">Geometric description</h3>
+<p>We haven’t yet touched the topological / manifold / bundle structure of the Hopf fibration. TODO</p>
 
 
 
+</section>
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
