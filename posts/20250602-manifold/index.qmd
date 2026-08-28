@@ -1,10 +1,10 @@
 ---
-title: "神奇流形在哪里"
-subtitle: "Fantastic Manifolds and Where to Find Them"
-author: "sun123zxy"
-date: "2025/06/02"
+title: 神奇流形在哪里
+subtitle: Fantastic Manifolds and Where to Find Them
+author: sun123zxy
+date: 2025-06-02
+date-updadted: 2026-08-28
 bibliography: index.bib
-draft: true
 
 categories:
   - math
@@ -87,14 +87,87 @@ Recommended online meterials:
 - [Hopf纤维化](https://zhuanlan.zhihu.com/p/112985074)
 - [MP69：典型群(3)：三维空间的旋转，Pauli矩阵、四元数、SO(3)\~RP3、SU(2)\~S3](https://zhuanlan.zhihu.com/p/51684298)
 
+## Algebraic description
+
 Recall the three equivalent descriptions of $\mathrm{SU}(2)$:
 $$
 \begin{matrix}
-\mathbb T^3           & \to & \mathbb S^3 \subset \mathbb H & \to   & \mathrm{SU}(2) \\
-(\theta,\varphi,\psi) & \substack{ a = \cos \theta \cos \varphi \\ b = \cos \theta \sin \varphi \\ c = \sin \theta \cos \psi \\ d = \sin \theta \sin \psi}  & a \vec 1 + b \vec i + c \vec j + d \vec k &              \substack{z=a+bi \\ w=c+di}  & \begin{bmatrix}z & w \\ -\bar w & \bar z\end{bmatrix} \\
-                      &     &  a^2+b^2+c^2+d^2 = 1  &       & |z|^2 + |w|^2 = 1 \\
+\mathbb T^3           &  & \mathbb S^3 \subset \mathbb H &  & \mathrm{SU}(2) \\
+(\theta,\varphi,\psi) & \xrightarrow{\substack{ a = \cos \theta \cos \varphi \\ b = \cos \theta \sin \varphi \\ c = \sin \theta \cos \psi \\ d = \sin \theta \sin \psi}} & a \vec 1 + b \vec i + c \vec j + d \vec k & \xrightarrow{\substack{z=a+b \vec i \\ w=c+d \vec i}} & \begin{bmatrix}z & w \\ -\overline w & \overline z\end{bmatrix} \\
+                      &     &  a^2+b^2+c^2+d^2 = 1  &     \xleftarrow{z + w \vec j}  & |z|^2 + |w|^2 = 1 \\
 \end{matrix}
 $$
-More of these relationships can be found in [@stillwell_naive_2008, {chapter 1--2}]. A nice figure of the Hopf fibration can be found in [@stillwell_naive_2008, {section 2.2, figure 2.2}]. The circle decomposition of $\mathbb S^3$ is just the coset partition of $\mathbb S^3 \subset \mathbb H$ by the subgroup $\langle a + b \vec i : a^2+b^2=1 \rangle$.
+Note that the second map preserves the multiplication structure. The latter two structures equip $\mathbb S^3$ with a group structure.
 
-Fibre bundle description: TODO
+:::{.remark}
+
+More of these relationships can be found in [@stillwell_naive_2008, {chapter 1--2}]. A nice figure of the Hopf fibration can be found in [@stillwell_naive_2008, {section 2.2, figure 2.2}].
+:::
+
+The so-called Hopf map is
+$$
+\begin{aligned}
+\pi : \mathbb S^3 &\to \mathbb S^2 \subseteq \mathbb C \times \mathbb R \\
+\quad (z,w) &\mapsto (2 z \overline w, |z|^2 - |w|^2)
+\end{aligned}
+$$
+
+- It's well-defined: computing the RHS's L2 norm, one verifies that
+  $$
+  |2z\overline w|^2 + (|z|^2 - |w|^2)^2 = (|z|^2 + |w|^2)^2 = 1
+  $$
+  hence the image is indeed in $\mathbb S^2$. 
+
+- It's surjective: write $z = r e^{\vec i \theta}$ and $w = s e^{\vec i \phi}$, then
+  $$
+  \pi(z,w) = (2 r s e^{\vec i (\theta - \phi)}, r^2 - s^2) =: (u, v)
+  $$
+  note that the modulus $r$, $s$ can be solved
+  $$
+  \begin{cases}
+  u = 2rs \\
+  v = r^2 - s^2
+  \end{cases}
+  \iff
+  \begin{cases}
+  r^2 = \frac{1}{2} (v + \sqrt{u^2 + v^2}) \\
+  s^2 = \frac{1}{2} (-v + \sqrt{u^2 + v^2})
+  \end{cases}
+  $$
+  hence a preimage of $(u,v)$ is always found.
+
+One note that $(e^{\vec i \theta} z, e^{\vec i \theta} w)$ and $(z,w)$ are in the same fiber of $\pi$ for any $\theta \in \mathbb R$. If appreciated in $\mathbb H$, the action is simply left multiplication by $e^{\vec i \theta}$. Denote
+$$
+\mathbb S^1 := \{ e^{\vec i \theta} : \theta \in \mathbb R \}
+$$
+So $\mathbb S^1$ acts on $\mathbb S^3 \subseteq \mathbb H$ by left multiplication, and the fibers of the Hopf map are at least a coarser partition of right cosets of $\mathbb S^1 \operatorname{\backslash} \mathbb S^3$.
+
+In fact, we can show that the fibers are exactly the right cosets. To show this, we are to conversely give out this rotation for each two points $(z,w)$ and $(z',w')$ in the same fiber. Say $\pi(z,w)=\pi(z',w')$, then
+$$
+\begin{cases}
+2z\overline w=2z'\overline{w'} \\
+|z|^2-|w|^2=|z'|^2-|w'|^2 \\
+|z|^2+|w|^2=|z'|^2+|w'|^2=1
+\end{cases}
+\implies
+\begin{cases}
+z \overline w = z' \overline{w'} \\
+|z|=|z'| \\
+|w|=|w'|
+\end{cases}
+$$
+Note that the first equation fixes the relative phase of $z$ and $w$, while the last two equations fix their absolute values. So a joint rotation of $z$ and $w$ is the only freedom left and we are done. Therefore
+$$
+\pi(z,w)=\pi(z',w')
+\iff
+(z',w')=(e^{\vec i \theta}z,e^{\vec i \theta}w)
+\quad\text{for some }\theta\in\mathbb R
+$$
+So the fibers of the Hopf map are exactly the right cosets of the above copy of $\mathbb S^1$ in $\mathbb S^3$. And the Hopf map identifies $\mathbb S^2$ with each of these cosets:
+$$
+\mathbb S^2 \cong \mathbb S^1 \operatorname{\backslash} \mathbb S^3
+$$
+
+### Geometric description
+
+We haven't yet touched the topological / manifold / bundle structure of the Hopf fibration. TODO
