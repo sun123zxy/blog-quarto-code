@@ -1,0 +1,358 @@
+---
+title: A Tour of Reflections Groups, Upside Down
+author: sun123zxy
+date: 2026-09-27
+lang: en
+
+bibliography: index.bib
+
+categories:
+  - math
+  - algebra
+  - lie
+
+draft: true
+
+number-sections: true
+
+format:
+  html: default
+---
+
+## Upside Down?
+
+Open virtually any standard textbook on Lie algebras or representation theory (e.g. [@humphreys_reflection_1990], [@humphreys_introduction_1972]), and you will encounter an exposition that looks something like this:
+
+- Fix a Euclidean space $E = \mathbb{R}^n$ equipped with the standard positive-definite inner product $(-,-)$.
+- Define a root system $\Phi \subseteq E$ as a finite set of vectors satisfying geometric reflection symmetries.
+- Define the **coroot** $\alpha^\vee$ by pulling a formula out of a hat:
+   $$\alpha^\vee := \frac{2\alpha}{\|\alpha\|^2}$$
+- Demand the "integrality condition": $\langle \beta, \alpha^\vee \rangle = \frac{2(\beta, \alpha)}{(\alpha, \alpha)} \in \mathbb{Z}$.
+- Construct the Weyl group $W$, classify root systems, observe that some roots are longer than others, and finally—often as an afterthought—abstract away the ambient space to introduce Coxeter groups and Tits' geometric representation.
+
+If the book is about the geometric representation of Coxeter groups (e.g. [@anders_bjorner_combinatorics_2005]), the approach might looks like:
+
+- Start with a given Coxeter matrix $(m_{ij})$.
+- Make a vector space $V$ equipped with a symmetric bilinear form $B$ defined on the standard basis $(e_i)_{1 \leq i \leq n}$ via $B(e_i, e_j) = -\cos(\pi/m_{ij})$.
+- Claim that the reflections $s_i(v) = v - 2B(v, e_i)e_i$ gives a representation of the Coxeter group.
+
+This article concerns the following problems arising from the above expositions:
+
+- For the first exposition, one starts with a fully formed Euclidean space, with notions of metrics, lengths, and angles. However, it turns out that in the end we dislike the ambient metric and want to abstract it away: all computational tricks suggest that instead of a pure inner product $(v, \alpha)$, we should prefer vectors paired with those $\vee$-ed vectors like $\langle v, \alpha^\vee \rangle$, where a mysterious normalization $\alpha^\vee = \frac{2\alpha}{(\alpha, \alpha)}$ is introduced to make computation smooth. **No underlying reason for this computational trick is ever explained.**
+
+- The above two expositions are both **problem-oriented**: Root systems arise in the context of Lie algebras and is of its independent intrest; expressing the Coxeter group as a reflection group does not require prior knowledge of root systems and is often presented independently. Despite their similarities being the elephant in the room, **little effort is made to unify them in the literature.**
+
+- Deeper study of algebraic groups requires a more general notion of root systems, i.e. the so-called *root-datum*. Few expositions explain how to connect the dots between root systems and root data, and how to generalize the former to the latter. (Unfortunately there are historical reasons: the axiomization of root systems was done almost the same time as the development of algebraic groups.)
+
+To address these problems, we must turn the exposition upside down. We instead adopt a **structure-oriented approach: Never introduce any additional structure until you are backed into a corner and forced to do so.** No ambient metric. No lengths. No angles. We start with nothing but a blank vector space and linear duality, and we will watch both Coxeter groups and root systems construct themselves canonically.
+
+## Reflections
+
+Let $V$ be a finite-dimensional real vector space. Let $V^* = \operatorname{Hom}_{\mathbb{R}}(V, \mathbb{R})$ be its dual space. The only canonical operation we possess is the natural pairing between a vector and a functional:
+$$\langle v, f \rangle := f(v) \quad (v \in V, \, f \in V^*)$$
+
+We want to define a linear reflection $s: V \to V$ without reference to "perpendicularity" or "distance". The following observation captures the required essence: a reflection fix a hyperplane (a mirror) and invert a direction transverse to it.
+
+- **The Mirror:** The zero-set of a linear functional $\alpha^\vee \in V^*$:
+   $$H = \ker(\alpha^\vee) = \{v \in V \mid \langle v, \alpha^\vee \rangle = 0\}$$
+- **The Reflection Line:** Spanned by a non-zero vector $\alpha \in V$.
+
+Note that $\alpha$ and $\alpha^\vee$ are currently completely unrelated. A reflection given by the pair $(\alpha, \alpha^\vee)$ is a linear map $s: V \to V$ that
+
+- fixes $H$ pointwise: $s(v) = v$ for all $v \in H$,
+- inverts $\alpha$: $s(\alpha) = -\alpha$.
+
+**If $\alpha \in H$, or equivalently $\langle \alpha, \alpha^\vee \rangle = 0$, then $\alpha$ is forced to be zero, so let's rule that out.** As long as $\alpha \notin H$, above conditions uniquely determine the reflection $s$ by the pair $(\alpha, \alpha^\vee)$.
+
+You must want a explicit formula for $s$. So let's say $v \in V$ is arbitrary with decomposition $v = h + c\alpha$ for some $h \in H$ and $c \in \mathbb{R}$. Then:
+$$
+s(v) = s(h + c\alpha) = h - c\alpha = v - 2c\alpha
+$$
+This $c$ can be extracted from the pairing with $\alpha^\vee$:
+$$
+\langle v, \alpha^\vee \rangle = \langle h + c\alpha, \alpha^\vee \rangle = c\langle \alpha, \alpha^\vee \rangle
+$$
+Hence the explict reflection formula:
+$$
+s(v) = v - 2\frac{\langle v, \alpha^\vee \rangle}{\langle \alpha, \alpha^\vee \rangle} \alpha
+$$
+
+It's annoying to carry around the denominator $\langle \alpha, \alpha^\vee \rangle$. As reflections doesn't really care about the scale of $\alpha$ or $\alpha^\vee$, let's just require that $\langle \alpha, \alpha^\vee \rangle = 2$ to make the life easier. Then the reflection formula simplifies to:
+$$
+s(v) = v - \langle v, \alpha^\vee \rangle \alpha
+$$
+
+We call $\alpha$ a *root* and $\alpha^\vee$ a *coroot*.
+
+### Inner Product
+
+To link back to the traditional definition of a root system, we need to introduce an inner product, though it is completely unnecessary for the most part of the theory. How to characterize a "well-behaved" inner product? The following gives a good answer:
+
+:::{#prp-well-behaved-inner-product}
+
+## well-behaveness of an inner product
+
+Let $V$ be a vector space with an inner product $(\cdot, \cdot)$ (in fact, a symmetric bilinear form with $(\alpha,\alpha)\ne 0$ suffices). For a given reflection $s$ defined by $(\alpha, \alpha^\vee)$ with $\langle \alpha, \alpha^\vee \rangle = 2$, TFAE:
+
+1.  the hyperplane $H = \ker(\alpha^\vee)$ is indeed perpendicular to $\alpha$ with respect to $B$, i.e. for all $v \in V$:
+    $$
+    \langle v, \alpha^\vee \rangle = 0 \implies (v, \alpha) = 0
+    $$
+
+2.  the reflection $s$ given by $(\alpha, \alpha^\vee)$ is an isometry with respect to $B$, i.e. for all $v, w \in V$:
+    $$
+    (s(v), s(w)) = (v, w)
+    $$
+
+3.  The abstact pairing $\langle -, - \rangle$ and the concrete inner product $(\cdot, \cdot)$ admit the following compatibility:
+    $$
+    \langle v, \alpha^\vee \rangle = \frac{2 (v, \alpha)}{(\alpha, \alpha)}
+    $$
+:::
+
+:::{.proof}
+
+First let's note a direct computation: for any $v, w \in V$,
+$$
+\begin{aligned}
+(s(v), s(w)) &= (v - \langle v, \alpha^\vee \rangle \alpha, w - \langle w, \alpha^\vee \rangle \alpha) \\
+&= (v, w) - \langle w, \alpha^\vee \rangle (v, \alpha) - \langle v, \alpha^\vee \rangle (\alpha, w) + \langle v, \alpha^\vee \rangle \langle w, \alpha^\vee \rangle (\alpha, \alpha)
+\end{aligned}
+$${#eq-s-isometry}
+
+**(1) $\implies$ (2):** If $H$ is perpendicular to $\alpha$, then for any $v \in V$ with $\langle v, \alpha^\vee \rangle = 0$, we have $(v, \alpha) = 0$. Thus by @eq-s-isometry, $(s(v), s(w)) = (v, w)$ for any $w \in V$. As $\alpha \notin H = \ker (\alpha^\vee)$, by symmetry of $B$, it remains to check $(s(\alpha), s(\alpha)) = (\alpha, \alpha)$, which is trivial.
+
+**(2) $\implies$ (3):** If $s$ is an isometry, then by @eq-s-isometry, we have
+$$
+\langle v, \alpha^\vee \rangle \langle w, \alpha^\vee \rangle (\alpha, \alpha) = \langle w, \alpha^\vee \rangle (v, \alpha) + \langle v, \alpha^\vee \rangle (\alpha, w)
+$$
+take $w = \alpha$ and recall that $\langle \alpha, \alpha^\vee \rangle = 2$, we have
+$$
+2 \langle v, \alpha^\vee \rangle (\alpha, \alpha) = 2 (v, \alpha) + \langle v, \alpha^\vee \rangle (\alpha, \alpha)
+$$
+or equivalently
+$$
+\langle v, \alpha^\vee \rangle = \frac{2 (v, \alpha)}{(\alpha, \alpha)}
+$$
+
+**(3) $\implies$ (1):** Clearly with the above equation, $(v, \alpha) = 0$ iff $\langle v, \alpha^\vee \rangle = 0$, which is exactly the perpendicularity condition.
+:::
+
+So any inner product $(\cdot, \cdot)$ satisfying the above equivalent conditions is considered "well-behaved". We pose extra emphasis on the last identity
+$$
+\langle v, \alpha^\vee \rangle = \frac{2 (v, \alpha)}{(\alpha, \alpha)} = \left( v, \frac{2}{(\alpha, \alpha)} \cdot \alpha \right)
+$$
+
+Traditionally, the notation $\alpha \mapsto \alpha^\vee$ is viewed as a "normalization" with respect to the inner product $(\cdot, \cdot)$ to make the abstract pairing $\langle v, \alpha^\vee \rangle$ may be interpreted directly as the inner product $(v, \alpha^\vee)$ in $V$. The above identity validates this interpretation: define a "virtual" $\alpha^\vee \in V$ by
+$$
+\alpha^\vee := \frac{2}{(\alpha, \alpha)} \cdot \alpha
+$$
+does the job.
+
+### Root Length Ratio
+
+With an inner product $(\cdot, \cdot)$, we may define the length of a root $\alpha$. As it relies on a choosen inner product, it should not be considered a canonical invariant of a root system. However, the length ratios between the roots is an intrinsic property. To see this, recall the well-behaveness condition of the inner product $(\cdot, \cdot)$ from @prp-well-behaved-inner-product. Applying it to two different roots $\alpha_i$ and $\alpha_j$, we have
+$$
+a_{ij} = \langle \alpha_j, \alpha_i^\vee \rangle = \frac{2 (\alpha_j, \alpha_i)}{(\alpha_i, \alpha_i)} \qquad a_{ji} = \langle \alpha_i, \alpha_j^\vee \rangle = \frac{2 (\alpha_i, \alpha_j)}{(\alpha_j, \alpha_j)}
+$$
+hence
+$$
+a_{ji} : a_{ij} = (\alpha_i, \alpha_i) : (\alpha_j, \alpha_j)
+$$
+So if we exclude the orthogonal $\theta = \pi/2$ case, the ratio of the lengths of two roots is completely determined by the Cartan matrix, without ever introducing a metric.
+
+## More Reflections
+
+Now let us consider a set of $n$ mirrors, indexed by $I = \{1, \dots, n\}$:
+
+- *Simple roots*: $\Delta := (\alpha_i)_{i \in I} \subseteq V$
+- *Simple coroots*: $\Delta^\vee := (\alpha_i^\vee)_{i \in I} \subseteq V^*$
+- the normalization condition: $\langle \alpha_i, \alpha_i^\vee \rangle = 2$ for all $i$.
+
+Each pair defines a *simple reflection*:
+$$
+s_i(v) = v - \langle v, \alpha_i^\vee \rangle \alpha_i
+$$
+How do two different reflections $s_i$ and $s_j$ interact? We define the **Cartan matrix** $A = (a_{ij})_{i,j \in I}$ by the mutual evaluations $a_{ij} := \langle \alpha_j, \alpha_i^\vee \rangle$.
+
+- Its diagonal entries are already fixed: $a_{ii} = 2$.
+- The off-diagonal entries dictate the action of the mirrors on each other's direction vectors: $s_i(\alpha_j) = \alpha_j - a_{ij}\alpha_i$.
+
+:::{.remark}
+
+Recall that the natural pairing $\langle -, - \rangle$ is an application of a functional to a vector. So if you are suffering from the seemingly "reversed" indices in $a_{ij} = \langle \alpha_j, \alpha_i^\vee \rangle$, just write $a_{ij} = \alpha_i^\vee(\alpha_j)$: this is the right direction.
+:::
+
+### Cartan Matrix as a Bilinear Form
+
+Note that **if $\Delta$ is a basis of $V$**, then $\Delta^\vee$ is determined by $\Delta$ and the Cartan matrix $A$ by $\alpha_i^\vee(v) = \sum_{j \in I} a_{ij} \alpha_j^*(v)$, where $(\alpha_i^*)_{i \in I}$ is the dual basis of $\Delta$. Thus usually we only need to specify a linearly independent collection $\Delta$ and the Cartan matrix $A$. To summarize, the Cartan matrix $A$ should be viewed as a bilinear form $A: V \times V \to \mathbb{R}$ by
+$$
+\begin{aligned}
+A(\alpha_i, \alpha_j) &:= a_{ij} = \langle \alpha_j, \alpha_i^\vee \rangle \\
+A(\alpha_i, \cdot) &:= \alpha_i^\vee \in V^* \\
+A(v, w) &:= \sum_{i,j \in I} a_{ij} \alpha_i^*(v) \alpha_j^*(w)
+\end{aligned}
+$$
+
+### Root Systems and Reflection Groups
+
+The *reflection group* $W$ generated by $\Delta$ is defined as the subgroup of $\operatorname{GL}(V)$ generated by the simple reflections $(s_i)_{i \in I}$. The *root system* $\Phi$ generated by $\Delta$ is defined as the orbit of $\Delta$ under the action of the reflection group $W$. Elements of $\Phi$ are called *roots*.
+
+Completely analogously, we may define the *coroot system* $\Phi^\vee$ generated by $\Delta^\vee$ as the orbit of $\Delta^\vee$ under the action of $W$, where $W$ acts on $V^*$ via the natural contragradient representation $w \cdot f := f \circ w^{-1}$ for $w \in W$ and $f \in V^*$. Elements of $\Phi^\vee$ are called *coroots*.
+
+When $\Delta$ is a basis of $V$, as the simple coroots are completely determined by the simple roots, we may just focus on the root system $\Phi$.
+
+:::{.remark}
+
+**Note that our definition of root systems and coroot systems is very general. Indeed, contains just merely enough information to recover a reflection group with fixed simple reflections.** There are at least four layers of generality:
+
+- $\Delta$ is not required to be a basis of $V$.
+- The reflection group may not be a Coxeter group.
+- The root system $\Phi$ could well be infinite.
+- No crystallographic restriction is imposed.
+
+**TODO: Of course we shall reconnect this to the traditional axiomatic definition of a root system, i.e. the Humphreys one.** This will be done later.
+
+- A reference on systematic axiomization of general root systems: [@geneste_root_2018]
+:::
+
+## Interaction Between Reflections
+
+We now start considering the group-theoretic structure generated by these simple reflections, i.e. the reflection group $W$. By definition of a reflection, $s_i^2 = \operatorname{id}$ for all $i$. The next question is: what is the product $s_i s_j$, and what is its order?
+
+The intuition is that $s_i s_j$ is a rotation in the plane spanned by $\alpha_i$ and $\alpha_j$. But how to interpret this intuition without a metric? The key is the eigenvalues: it's the only canonical invariant of a linear map that does not require any additional structure. Let's compute $s_i s_j$ acting on a random vector $v$ first:
+$$
+\begin{aligned}
+s_i s_j(v) &= s_i(v - \langle v, \alpha_j^\vee \rangle \alpha_j) \\
+&= v - \langle v, \alpha_i^\vee \rangle \alpha_i - \langle v, \alpha_j^\vee \rangle s_i(\alpha_j) \\
+&= v - \langle v, \alpha_i^\vee \rangle \alpha_i - \langle v, \alpha_j^\vee \rangle \left( \alpha_j - a_{ij} \alpha_i \right) \\
+&= v + \left( a_{ij} \langle v, \alpha_j^\vee \rangle - \langle v, \alpha_i^\vee \rangle \right) \alpha_i - \langle v, \alpha_j^\vee \rangle \alpha_j
+\end{aligned}
+$${#eq-sisj-random}
+In paticular, $s_i s_j$ is stable on the plane $U := \operatorname{span}(\alpha_i, \alpha_j)$, with matrix representation
+$$
+\begin{aligned}
+(s_i s_j) (\alpha_i, \alpha_j)
+&= (\alpha_i, \alpha_j) \begin{pmatrix} -1 & -a_{ij} \\ 0 & 1 \end{pmatrix} \begin{pmatrix} 1 & 0 \\ - a_{ji} & -1 \end{pmatrix} \\
+&= (\alpha_i, \alpha_j) \begin{pmatrix} a_{ij}a_{ji}-1 & a_{ij} \\ -a_{ji} & -1 \end{pmatrix}
+\end{aligned}
+$${#eq-sisj-matrix}
+
+Following the intuition, composing two reflections should give a "rotation" in the plane $U$. We formalize this via eigenvalues. Note that by elementary block-triangular interpretation of invariant subspaces applied to characteristic polynomials, the eigenvalues of $s_i s_j$ are exactly the disjoint union of:
+
+- eigenvalues of $s_i s_j$ on the quotient space $V/U$;
+- eigenvalues of $s_i s_j$ restricted to $U$.
+
+For the first part, by @eq-sisj-random, $s_i s_j$ acts as the identity on $V/U$, so all eigenvalues are $1$. The second part given by @eq-sisj-matrix is more interesting. Intuitively, if the angle between $\alpha_i$ and $\alpha_j$ is $\theta$, then we expect a $2$-dimensional rotation matrix of the form:
+$$
+\begin{pmatrix} \cos 2\theta & -\sin 2\theta \\ \sin 2\theta & \cos 2\theta \end{pmatrix}
+$$
+But as $\alpha_i$ and $\alpha_j$ are not "orthogonal" in any sense, we cannot directly read off the rotaion angle $2\theta$ from the matrix entries. Even $\theta$ itself is not well-defined, as we have not yet introduced a metric whatsoever. So, what is $\theta$?
+
+It lies in the argument of the eigenvalues of $s_i s_j$ restricted to $U$. Let's compute them. Via @eq-sisj-matrix, **if $\alpha_i$ and $\alpha_j$ are linearly independent**, the characteristic polynomial of $s_i s_j$ restricted to $U$ is given by
+$$
+\lambda^2 - (a_{ij}a_{ji}-2)\lambda + 1
+$$
+so the eigenvalues, $\lambda$ and $\overline{\lambda}$, are of norm $1$ and of real part $\frac 1 2 (a_{ij}a_{ji}-2)$. Let $\lambda := e^{i \cdot 2\theta}$, then we have $\cos 2\theta = \frac 1 2 (a_{ij}a_{ji}-2)$. Cleaning up the equation a little by the standard trigonometric identity $\cos 2\theta = 2\cos^2 \theta - 1$ gives the well-known identity:
+$$
+a_{ij} a_{ji} = 4 \cos^2 \theta
+$${#eq-aij-aji-theta}
+So the eigenvalues of $s_i s_j$ are exactly $e^{\pm i \cdot 2\theta}$, and the order of $s_i s_j$ is finite if and only if $\frac{\theta}{\pi} \in \mathbb{Q}$. In that case, the order $m_{ij}$ of $s_i s_j$ is the reduced denominator of $\frac{\theta}{\pi}$. If $\frac{\theta}{\pi} \notin \mathbb{Q}$, then $s_i s_j$ has infinite order, and we set $m_{ij} = 0$ (or $\infty$, depending on your taste).
+
+:::{.remark}
+
+Despite being informal under our treatment, the identity $a_{ij} a_{ji} = 4 \cos^2 \theta$ may be obtained by comparing the trace of the rotation matrix
+$$
+\operatorname{tr}\begin{pmatrix} \cos 2\theta & -\sin 2\theta \\ \sin 2\theta & \cos 2\theta \end{pmatrix} = 2\cos 2\theta
+$$
+with the trace of the matrix in @eq-sisj-matrix.
+:::
+
+Finally, we consider a corner case: $\theta = 0$, or equivalently $a_{ij} a_{ji} = 4$. It makes the two mirrors "parallel". Precisely speaking, the eigenvalues of $s_i s_j$ restrict to the plane spanned by $\alpha_i$ and $\alpha_j$ are both $1$. Looking at @eq-sisj-matrix, it's a contradiction: the matrix can't be the identity matrix. So the only possibility is that the assumption we made to compute the eigenvalues via @eq-sisj-matrix, namely $\alpha_i$ and $\alpha_j$ are linearly independent, is false. In that case, $s_i s_j = \operatorname{id}$. **If we require $\Delta$ being a basis from the beginning, this corner case is automatically ruled out.**
+
+To summarize, we have already shown that the reflection group $W$ generated by $s_i$ is a quotient of the abstract Coxeter group defined by the presentation:
+$$
+\langle s_1, \dots, s_n \mid s_i^2 = 1, \, (s_i s_j)^{m_{ij}} = 1 \rangle
+$$
+where the order $m_{ij}$ of $s_i s_j$ is solely determined by the product $a_{ij} a_{ji}$. As we said before, our definition of a root system is very general, whose reflection group may not be a Coxeter group. Nevertheless, the above shows that it is at least its quotient. **TODO: Analysis on when this quotient gives an isomorphism requires more work.** 
+
+## The Divergence: Symmetric vs. Crystallographic
+
+As we see from @eq-aij-aji-theta, the product $a_{ij} a_{ji}$ is the only quantity that matters in determining the angle between the two mirrors, and hence the order $m_{ij}$ of $s_i s_j$. So fixing $m_{ij}$, we have the freedom to choose any pair $(a_{ij}, a_{ji})$ that satisfies $a_{ij} a_{ji} = 4 \cos^2(\pi/m_{ij})$. This freedom now diverges into two different directions, depending on what context we are in.
+
+### Geometric Representation: The Symmetric Choice
+
+Suppose our goal is purely group-theoretic. We play with the reflections $s_i$ on $V$ because we want to construct an abstract group representation of the Coxeter group defined by the Coxeter matrix $(m_{ij})$. The most canonical, unbiased choice is to do it symmetrically:
+$$
+a_{ij} = a_{ji} := -2\cos\left(\frac{\pi}{m_{ij}}\right)
+$$
+where the negative sign is chosen so that reflections act as opposing walls of a convex chamber, a purely conventional choice. This is the *Geometric Representation of a Coxeter Group*. Once $\Delta$ is chosen to be a basis of $V$, it makes the Cartan bilinear form $A$ symmetric.
+
+**TODO: We have not yet shown that this construction indeed gives a Coxeter group. This requires more work.**
+
+Recall @prp-well-behaved-inner-product. **After symmetrization, the Cartan bilinear form $A$ itself is a "well-behaved" symmetric bilinear form**: the last identity in @prp-well-behaved-inner-product may be verified:
+$$
+\langle v, \alpha_i^\vee \rangle = A(v, \alpha_i) =\frac{2 A(v, \alpha_i)}{A(\alpha_i, \alpha_i)}
+$$
+It is now natural to further question whether $A$ is positive-definite, so that $V$ obtains a bona fide Euclidean structure canonically from the Coxeter matrix $(m_{ij})$. But before that, we introduce a shift of notation.
+
+:::{.remark}
+
+Traditionally the common practice is to set $\alpha_i$ to be unit vectors, and define a bilinear form $B$ by $B(\alpha_i, \alpha_j) := -\cos(\pi/m_{ij})$ and with the reflections
+$$
+s_i(v) = v - 2 B(v, \alpha_i) \alpha_i
+$$
+This is equivalent to the previous treatment via a direct rescaling of $A = 2B$. The reason for this choice may be the following:
+
+- $B(\alpha_i, \alpha_i) = 1$, making the roots $\Phi := W \cdot \Delta$ all of unit length. As $B(\alpha_i, \alpha_i) = 1$ and $B$ is invariant under reflections, all roots are on the unit sphere.
+
+- In the crystallographic case we shall study later, we would like to reserve $A$ for the Cartan matrix, which is an integer matrix. However, results in this subsection are still useful as sometimes a handy canonical choice of inner product is still desired. $B$ is then used to denote the symmetrized version of $A$, solely for the purpose of equipping $V$ with a canonical Euclidean structure.
+
+For these reasons, We shall switch to above convention afterwards.
+:::
+
+:::{#prp-cartan-positive-definite}
+
+The symmetric bilinear form $B$ is positive-definite if and only if the Coxeter group is finite.
+:::
+
+**TODO: The proof of this proposition is beautiful, but it requires more work on root systems.**
+
+### Crystallographic Root System: The Integral Choice
+
+Recall that we let $a_{ij} = a_{ji}$ in $a_{ij} a_{ji} = 4 \cos^2(\pi/m_{ij})$ in the previous treatment that finally gave us a the geometric representation of a Coxeter group. However, this is not the only choice. Another idea is the so-called *crystallographic restriction*: to force $a_{ij}$ and $a_{ji}$ to be integers, i.e. $A$ is an integer matrix. Such a requirement is intresting because of the following TFAE characterization:
+
+:::{#prp-crystallographic}
+
+TFAE for a root system $\Phi$ generated by a basis $\Delta$, where $\Delta$ is a basis of $V$:
+
+- The Cartan matrix $A$ consists of integers only.
+- The lattice $\mathbb Z \Delta$ is stable under the action of the reflection group $W$.
+- $\mathbb Z \Delta = \mathbb Z \Phi$.
+:::
+
+:::{.proof}
+
+Trivial.
+:::
+
+There aren't many choices for $a_{ij}$ and $a_{ji}$ actually. If $\theta \neq \pi / 2$, with the restriction $0 < a_{ij} a_{ji} = 4 \cos^2 \theta < 4$, the only possible configurations are, respectively,
+
+- The product $a_{ij} a_{ji}$: $1, 2, 3$,  
+- $\{|a_{ij}|, |a_{ji}|\}$: $\{1, 1\}, \{1, 2\}, \{1, 3\}$
+- The root length ratios: $1:1, 1:\sqrt{2}, 1:\sqrt{3}$,
+- The angle $\theta$: $2 \pi/3, 3 \pi/4, 5 \pi/6$ (if adopting all off-diagonal $a_{ij}$ to be negative).
+
+So in the crystallographic case, above four quantities are all determined by each other. Do note that this does not applies to $\theta = \pi / 2$, where any root length ratio is possible.
+
+## Root Systems, Revisited
+
+## TODO
+
+It seems that sign coherence gives a Coxeter group. So to show the soundness of the geometric representation construction, we need to show that sign coherence is satisfied.
+
+Severe problem: In the reflection interaction section, it's possible that $0 \leq a_{ij} a_{ji} \leq 4$ does not hold. In which case the solutions of the characteristic polynomial are REAL, hence being not a rotation. And, it's also invalid to say a matrix is identity if it has eigenvalue $1$ with multiplicity $2$.
+
+Turns out that being able to admit a well-behaved inner product is equivalent to the condition $0 \leq a_{ij} a_{ji} \leq 4$. Meanwhile off-diagonal $a_{ij}$ should be required to be non-positive, which is a must if we want $\Phi^+ \sqcup \Phi^- = \Phi$.
+
+Kac-Moody root system seems to be relevant.
