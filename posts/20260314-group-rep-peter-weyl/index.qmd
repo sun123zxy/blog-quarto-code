@@ -294,27 +294,63 @@ $$
 
 关于 $\iota$，还有泛函分析风格的解读：
 
-- 固定 $V_i$ 一组基 $(e_i^k)$ 并生成 $V_i^*$ 上的对偶基 $(f_i^j)$，则此映射有矩阵风格的解读：将 $g \in G$ 映射到 $\rho_{V_i}(g^{-1})$ 的第 $j$ 行第 $k$ 列元素取出得到一 $L^2(G)$ 内函数
+- 固定 $V_i$ 一组基 $(e_i^j)$ 并生成 $V_i^*$ 上的对偶基 $(f_i^k)$，则此映射有矩阵风格的解读：将 $g \in G$ 映射到 $\rho_{V_i}(g^{-1})$ 的第 $k$ 行第 $j$ 列元素取出得到一 $L^2(G)$ 内函数
   $$
-  \rho_{V_i}^{j, k}(g) := f_i^j(\rho_{V_i}(g^{-1}) \cdot e_i^k)
+  \rho_{V_i}^{k, j}(g) := f_i^k(\rho_{V_i}(g^{-1}) \cdot e_i^j)
   $$
   再等价地看作 $\mathbb C[G]$ 的元素，最后适当归一化．
 
 - $\iota_i$ 是单射有基于正交性的证明：
 
-  $L^2(G)$ 上有函数空间的标准内积．考虑 $e_{i_2}^{k_2} \otimes f_{i_1}^{j_1} \in V_{i_2} \otimes_{\mathbb C} V_{i_1}^* \cong \Hom_{\mathbb C}(V_{i_1}, V_{i_2})$，对其平均化得
+  考虑 $e_{i_2}^{j_2} \otimes f_{i_1}^{j_1} \in V_{i_2} \otimes_{\mathbb C} V_{i_1}^* \cong \Hom_{\mathbb C}(V_{i_1}, V_{i_2})$，对其平均化得
   $$
-  \frac 1 {|G|} \sum_{g \in G} \rho_{V_{i_2}}(g) \circ \left( e_{i_2}^{k_2} \otimes f_{i_1}^{j_1} \right) \circ \rho_{V_{i_1}}(g^{-1}) \in \Hom_G(V_{i_1}, V_{i_2})
+  \frac 1 {|G|} \sum_{g \in G} \rho_{V_{i_2}}(g) \circ \left( e_{i_2}^{j_2} \otimes f_{i_1}^{j_1} \right) \circ \rho_{V_{i_1}}(g^{-1}) \in \Hom_G(V_{i_1}, V_{i_2})
   $$
-  再对此 $\Hom_G(V_{i_1}, V_{i_2})$ 中映射取第 $j_2$ 行第 $k_1$ 列元素得
+  再对此 $\Hom_G(V_{i_1}, V_{i_2})$ 中映射取第 $k_2$ 行第 $k_1$ 列元素得
   $$
   \begin{aligned}
-  &\phantom{=} \frac 1 {|G|} \sum_{g \in G} f_{i_2}^{j_2} \left( \rho_{V_{i_2}}(g) \circ \left( e_{i_2}^{k_2} \otimes f_{i_1}^{j_1} \right) \circ \rho_{V_{i_1}}(g^{-1}) \cdot e_{i_1}^{k_1} \right) \\
-  &= \frac 1 {|G|} \sum_{g \in G} \rho_{V_{i_2}}^{j_2, k_2}(g) \cdot \rho_{V_{i_1}}^{j_1, k_1}(g^{-1}) \\
-  &= \langle \rho_{V_{i_2}}^{j_2, k_2}, \rho_{V_{i_1}}^{j_1, k_1} \rangle
+  &\phantom{=} \frac 1 {|G|} \sum_{g \in G} f_{i_2}^{k_2} \left( \rho_{V_{i_2}}(g) \circ \left( e_{i_2}^{j_2} \otimes f_{i_1}^{j_1} \right) \circ \rho_{V_{i_1}}(g^{-1}) \cdot e_{i_1}^{k_1} \right) \\
+  &= \frac 1 {|G|} \sum_{g \in G} \rho_{V_{i_2}}^{k_2, j_2}(g^{-1}) \cdot \rho_{V_{i_1}}^{j_1, k_1}(g)
   \end{aligned}
   $$
-  回忆 Schur 引理对 $\Hom_G (V_{i_1}, V_{i_2})$ 的刻画，这恰是在说此内积非零当且仅当 $i_1 = i_2$ 且 $j_1 = j_2$ 且 $k_1 = k_2$．因此 $\rho_{V_{i}}^{j, k}$ 两两正交．当 $i=i_1=i_2$, $j=j_1=j_2=k=k_1=k_2$ 时，$e_i^j \otimes f_i^j \in \End_{\mathbb C}(V_i)$ 的迹为 $1$，而平均化不改变迹并将其变为 $V_i$ 上的数乘，因此 $\langle \rho_{V_i}^{j, k}, \rho_{V_i}^{j, k} \rangle = 1 / \dim V_i$．因此 $\iota_i$ 是单射，且每个 $\iota_i$ 的像之间两两正交．
+  这描述了 $e_{i_2}^{j_2} \otimes f_{i_2}^{j_1} \in \End_{\mathbb C}(V_i)$ 平均化后每个矩阵元素的情况．
+  
+  - 回忆 Schur 引理对 $\Hom_G (V_{i_1}, V_{i_2})$ 的刻画，$e_i^{j_2} \otimes f_i^{j_1}$ 非零时必有 $i := i_1 = i_2$；
+  
+  - 此时平均化结果是数乘，只有矩阵对角有值，故上式非零时必有 $k := k_1 = k_2$；
+  
+  - 平均化前后的迹相等，故为使得数乘倍率非零，必有 $j := j_1 = j_2$，此时数乘倍率为 $1 / \dim V_i$．
+  
+  综上各 $\rho_{V_i}^{k, j}$ 线性无关，构成 $L^2(G)$ 的一组正交基．
+  
+  $\iota_i$ 是单射，且每个 $\iota_i$ 的像之和是直和．
+
+:::{.remark}
+
+## Schur 正交性
+
+$$
+\frac 1 {|G|} \sum_{g \in G} \rho_{V_{i_2}}^{k_2, j_2}(g^{-1}) \cdot \rho_{V_{i_1}}^{j_1, k_1}(g) = \frac 1 {\dim V_{i_1}} \cdot \delta_{i_1, i_2} \delta_{k_1, k_2} \delta_{j_1, j_2}
+$$
+is the Schur orthogonality, the one orthogonality to rule them all．特征标表的第一和第二正交性均可由此推得：
+
+- 取 $a := k_1 = j_1$, $b := k_2 = j_2$，则
+  $$
+  \frac 1 {\dim V_{i_1}} \cdot \delta_{i_1, i_2} \delta_{a, b} = \frac 1 {|G|} \sum_{g \in G} \rho_{V_{i_2}}^{b,b}(g^{-1}) \cdot \rho_{V_{i_1}}^{a,a}(g)
+  $$
+  对 $1 \leq a \leq \dim V_{i_1}$ 和 $1 \leq b \leq \dim V_{i_2}$ 求和立得
+  $$
+  \delta_{i_1, i_2} = \frac 1 {|G|} \sum_{g \in G} \chi_{V_{i_2}}(g) \cdot \chi_{V_{i_1}}(g^{-1})
+  $$
+
+- 回忆第二正交性是说，对任意 $g,h \in G$
+  $$
+  \sum_i \chi_{V_i}(h) \cdot \chi_{V_i}(g^{-1}) = \delta_{g \text{ is conjugate to } h} \cdot \frac{|G|}{|C_G(h)|}
+  $$
+  这里 $C_G(g) := \{x \in G : xg = gx\}$ 是 $g$ 的中心化子．
+
+  TODO
+:::
 
 ## 附录：绕过特征标的 Artin--Wedderburn 分解速证
 
