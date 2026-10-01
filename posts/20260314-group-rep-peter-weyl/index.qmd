@@ -292,38 +292,38 @@ $$
 
 ### 正交性与泛函分析
 
-关于 $\iota$，还有泛函分析风格的解读：
+$\iota$ 还有泛函分析风格的解读．【TODO：这一部分目前有 bug】
 
-- 固定 $V_i$ 一组基 $(e_i^j)$ 并生成 $V_i^*$ 上的对偶基 $(f_i^k)$，则此映射有矩阵风格的解读：将 $g \in G$ 映射到 $\rho_{V_i}(g^{-1})$ 的第 $k$ 行第 $j$ 列元素取出得到一 $L^2(G)$ 内函数
-  $$
-  \rho_{V_i}^{k, j}(g) := f_i^k(\rho_{V_i}(g^{-1}) \cdot e_i^j)
-  $$
-  再等价地看作 $\mathbb C[G]$ 的元素，最后适当归一化．
+固定 $V_i$ 一组基 $(e_i^j)$ 并生成 $V_i^*$ 上的对偶基 $(f_i^k)$，并将 $\mathbb C[G]$ 视为 $L^2(G)$，则 $\iota$ 有如下矩阵风格的解读：考虑将 $g \in G$ 映射到 $\rho_{V_i}(g^{-1})$ 的第 $k$ 行第 $j$ 列元素取出得到一 $L^2(G)$ 内函数
+$$
+\rho_{V_i}^{k, j}(g) := f_i^k(\rho_{V_i}(g^{-1}) \cdot e_i^j)
+$$
+回忆之前给出的 $\iota_i$ 的定义，这和 $\iota_i$ 把这些基底映射到 $L^2(G)$ 的方式只差一个常数：
+$$
+\iota_i(e_i^j \otimes f_i^k) = \frac{\dim V_i}{|G|} \rho_{V_i}^{k, j}
+$$
+故为证明 $\iota$ 是单射，可以往证 $\rho_{V_i}^{k, j}$ 正交．
 
-- $\iota_i$ 是单射有基于正交性的证明：
+考虑 $e_{i_2}^{j_2} \otimes f_{i_1}^{j_1} \in V_{i_2} \otimes_{\mathbb C} V_{i_1}^* \cong \Hom_{\mathbb C}(V_{i_1}, V_{i_2})$，对其平均化得
+$$
+\frac 1 {|G|} \sum_{g \in G} \rho_{V_{i_2}}(g) \circ \left( e_{i_2}^{j_2} \otimes f_{i_1}^{j_1} \right) \circ \rho_{V_{i_1}}(g^{-1}) \in \Hom_G(V_{i_1}, V_{i_2})
+$$
+再对此 $\Hom_G(V_{i_1}, V_{i_2})$ 中映射取第 $k_2$ 行第 $k_1$ 列元素得
+$$
+\begin{aligned}
+&\phantom{=} \frac 1 {|G|} \sum_{g \in G} f_{i_2}^{k_2} \left( \rho_{V_{i_2}}(g) \circ \left( e_{i_2}^{j_2} \otimes f_{i_1}^{j_1} \right) \circ \rho_{V_{i_1}}(g^{-1}) \cdot e_{i_1}^{k_1} \right) \\
+&= \frac 1 {|G|} \sum_{g \in G} \rho_{V_{i_2}}^{k_2, j_2}(g^{-1}) \cdot \rho_{V_{i_1}}^{j_1, k_1}(g)
+\end{aligned}
+$$
+这配对描述了 $e_{i_2}^{j_2} \otimes f_{i_2}^{j_1} \in \End_{\mathbb C}(V_i)$ 平均化后每个矩阵元素的情况．
 
-  考虑 $e_{i_2}^{j_2} \otimes f_{i_1}^{j_1} \in V_{i_2} \otimes_{\mathbb C} V_{i_1}^* \cong \Hom_{\mathbb C}(V_{i_1}, V_{i_2})$，对其平均化得
-  $$
-  \frac 1 {|G|} \sum_{g \in G} \rho_{V_{i_2}}(g) \circ \left( e_{i_2}^{j_2} \otimes f_{i_1}^{j_1} \right) \circ \rho_{V_{i_1}}(g^{-1}) \in \Hom_G(V_{i_1}, V_{i_2})
-  $$
-  再对此 $\Hom_G(V_{i_1}, V_{i_2})$ 中映射取第 $k_2$ 行第 $k_1$ 列元素得
-  $$
-  \begin{aligned}
-  &\phantom{=} \frac 1 {|G|} \sum_{g \in G} f_{i_2}^{k_2} \left( \rho_{V_{i_2}}(g) \circ \left( e_{i_2}^{j_2} \otimes f_{i_1}^{j_1} \right) \circ \rho_{V_{i_1}}(g^{-1}) \cdot e_{i_1}^{k_1} \right) \\
-  &= \frac 1 {|G|} \sum_{g \in G} \rho_{V_{i_2}}^{k_2, j_2}(g^{-1}) \cdot \rho_{V_{i_1}}^{j_1, k_1}(g)
-  \end{aligned}
-  $$
-  这描述了 $e_{i_2}^{j_2} \otimes f_{i_2}^{j_1} \in \End_{\mathbb C}(V_i)$ 平均化后每个矩阵元素的情况．
-  
-  - 回忆 Schur 引理对 $\Hom_G (V_{i_1}, V_{i_2})$ 的刻画，$e_i^{j_2} \otimes f_i^{j_1}$ 非零时必有 $i := i_1 = i_2$；
-  
-  - 此时平均化结果是数乘，只有矩阵对角有值，故上式非零时必有 $k := k_1 = k_2$；
-  
-  - 平均化前后的迹相等，故为使得数乘倍率非零，必有 $j := j_1 = j_2$，此时数乘倍率为 $1 / \dim V_i$．
-  
-  综上各 $\rho_{V_i}^{k, j}$ 线性无关，构成 $L^2(G)$ 的一组正交基．
-  
-  $\iota_i$ 是单射，且每个 $\iota_i$ 的像之和是直和．
+- 回忆 Schur 引理对 $\Hom_G (V_{i_1}, V_{i_2})$ 的刻画，$e_i^{j_2} \otimes f_i^{j_1}$ 非零时必有 $i := i_1 = i_2$；
+
+- 此时平均化结果是数乘，只有矩阵对角有值，故上式非零时必有 $k := k_1 = k_2$；
+
+- 平均化前后的迹相等，故为使得数乘倍率非零，必有 $j := j_1 = j_2$，此时数乘倍率为 $1 / \dim V_i$．
+
+综上各 $\rho_{V_i}^{k, j}$ 正交，构成 $L^2(G)$ 的一组正交基．
 
 :::{.remark}
 
