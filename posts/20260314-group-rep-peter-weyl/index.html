@@ -710,22 +710,57 @@ v \otimes f \mapsto \frac{\dim V_i}{|G|} \sum_{g \in G} f(g^{-1} \cdot v) g
 </section>
 <section id="正交性与泛函分析" class="level3" data-number="3.4">
 <h3 data-number="3.4" class="anchored" data-anchor-id="正交性与泛函分析"><span class="header-section-number">3.4</span> 正交性与泛函分析</h3>
-<p>关于 <span class="math inline">\(\iota\)</span>，还有泛函分析风格的解读：</p>
-<ul>
-<li><p>固定 <span class="math inline">\(V_i\)</span> 一组基 <span class="math inline">\((e_i^k)\)</span> 并生成 <span class="math inline">\(V_i^*\)</span> 上的对偶基 <span class="math inline">\((f_i^j)\)</span>，则此映射有矩阵风格的解读：将 <span class="math inline">\(g \in G\)</span> 映射到 <span class="math inline">\(\rho_{V_i}(g^{-1})\)</span> 的第 <span class="math inline">\(j\)</span> 行第 <span class="math inline">\(k\)</span> 列元素取出得到一 <span class="math inline">\(L^2(G)\)</span> 内函数 <span class="math display">\[
-\rho_{V_i}^{j, k}(g) := f_i^j(\rho_{V_i}(g^{-1}) \cdot e_i^k)
-\]</span> 再等价地看作 <span class="math inline">\(\mathbb C[G]\)</span> 的元素，最后适当归一化．</p></li>
-<li><p><span class="math inline">\(\iota_i\)</span> 是单射有基于正交性的证明：</p>
-<p><span class="math inline">\(L^2(G)\)</span> 上有函数空间的标准内积．考虑 <span class="math inline">\(e_{i_2}^{k_2} \otimes f_{i_1}^{j_1} \in V_{i_2} \otimes_{\mathbb C} V_{i_1}^* \cong \operatorname{Hom}_{\mathbb C}(V_{i_1}, V_{i_2})\)</span>，对其平均化得 <span class="math display">\[
-\frac 1 {|G|} \sum_{g \in G} \rho_{V_{i_2}}(g) \circ \left( e_{i_2}^{k_2} \otimes f_{i_1}^{j_1} \right) \circ \rho_{V_{i_1}}(g^{-1}) \in \operatorname{Hom}_G(V_{i_1}, V_{i_2})
-\]</span> 再对此 <span class="math inline">\(\operatorname{Hom}_G(V_{i_1}, V_{i_2})\)</span> 中映射取第 <span class="math inline">\(j_2\)</span> 行第 <span class="math inline">\(k_1\)</span> 列元素得 <span class="math display">\[
+<p><span class="math inline">\(\iota\)</span> 还有泛函分析风格的解读．【TODO：这一部分目前有 bug】</p>
+<p>固定 <span class="math inline">\(V_i\)</span> 一组基 <span class="math inline">\((e_i^j)\)</span> 并生成 <span class="math inline">\(V_i^*\)</span> 上的对偶基 <span class="math inline">\((f_i^k)\)</span>，并将 <span class="math inline">\(\mathbb C[G]\)</span> 视为 <span class="math inline">\(L^2(G)\)</span>，则 <span class="math inline">\(\iota\)</span> 有如下矩阵风格的解读：考虑将 <span class="math inline">\(g \in G\)</span> 映射到 <span class="math inline">\(\rho_{V_i}(g^{-1})\)</span> 的第 <span class="math inline">\(k\)</span> 行第 <span class="math inline">\(j\)</span> 列元素取出得到一 <span class="math inline">\(L^2(G)\)</span> 内函数 <span class="math display">\[
+\rho_{V_i}^{k, j}(g) := f_i^k(\rho_{V_i}(g^{-1}) \cdot e_i^j)
+\]</span> 回忆之前给出的 <span class="math inline">\(\iota_i\)</span> 的定义，这和 <span class="math inline">\(\iota_i\)</span> 把这些基底映射到 <span class="math inline">\(L^2(G)\)</span> 的方式只差一个常数： <span class="math display">\[
+\iota_i(e_i^j \otimes f_i^k) = \frac{\dim V_i}{|G|} \rho_{V_i}^{k, j}
+\]</span> 故为证明 <span class="math inline">\(\iota\)</span> 是单射，可以往证 <span class="math inline">\(\rho_{V_i}^{k, j}\)</span> 正交．</p>
+<p>考虑 <span class="math inline">\(e_{i_2}^{j_2} \otimes f_{i_1}^{j_1} \in V_{i_2} \otimes_{\mathbb C} V_{i_1}^* \cong \operatorname{Hom}_{\mathbb C}(V_{i_1}, V_{i_2})\)</span>，对其平均化得 <span class="math display">\[
+\frac 1 {|G|} \sum_{g \in G} \rho_{V_{i_2}}(g) \circ \left( e_{i_2}^{j_2} \otimes f_{i_1}^{j_1} \right) \circ \rho_{V_{i_1}}(g^{-1}) \in \operatorname{Hom}_G(V_{i_1}, V_{i_2})
+\]</span> 再对此 <span class="math inline">\(\operatorname{Hom}_G(V_{i_1}, V_{i_2})\)</span> 中映射取第 <span class="math inline">\(k_2\)</span> 行第 <span class="math inline">\(k_1\)</span> 列元素得 <span class="math display">\[
 \begin{aligned}
-&amp;\phantom{=} \frac 1 {|G|} \sum_{g \in G} f_{i_2}^{j_2} \left( \rho_{V_{i_2}}(g) \circ \left( e_{i_2}^{k_2} \otimes f_{i_1}^{j_1} \right) \circ \rho_{V_{i_1}}(g^{-1}) \cdot e_{i_1}^{k_1} \right) \\
-&amp;= \frac 1 {|G|} \sum_{g \in G} \rho_{V_{i_2}}^{j_2, k_2}(g) \cdot \rho_{V_{i_1}}^{j_1, k_1}(g^{-1}) \\
-&amp;= \langle \rho_{V_{i_2}}^{j_2, k_2}, \rho_{V_{i_1}}^{j_1, k_1} \rangle
+&amp;\phantom{=} \frac 1 {|G|} \sum_{g \in G} f_{i_2}^{k_2} \left( \rho_{V_{i_2}}(g) \circ \left( e_{i_2}^{j_2} \otimes f_{i_1}^{j_1} \right) \circ \rho_{V_{i_1}}(g^{-1}) \cdot e_{i_1}^{k_1} \right) \\
+&amp;= \frac 1 {|G|} \sum_{g \in G} \rho_{V_{i_2}}^{k_2, j_2}(g^{-1}) \cdot \rho_{V_{i_1}}^{j_1, k_1}(g)
 \end{aligned}
-\]</span> 回忆 Schur 引理对 <span class="math inline">\(\operatorname{Hom}_G (V_{i_1}, V_{i_2})\)</span> 的刻画，这恰是在说此内积非零当且仅当 <span class="math inline">\(i_1 = i_2\)</span> 且 <span class="math inline">\(j_1 = j_2\)</span> 且 <span class="math inline">\(k_1 = k_2\)</span>．因此 <span class="math inline">\(\rho_{V_{i}}^{j, k}\)</span> 两两正交．当 <span class="math inline">\(i=i_1=i_2\)</span>, <span class="math inline">\(j=j_1=j_2=k=k_1=k_2\)</span> 时，<span class="math inline">\(e_i^j \otimes f_i^j \in \operatorname{End}_{\mathbb C}(V_i)\)</span> 的迹为 <span class="math inline">\(1\)</span>，而平均化不改变迹并将其变为 <span class="math inline">\(V_i\)</span> 上的数乘，因此 <span class="math inline">\(\langle \rho_{V_i}^{j, k}, \rho_{V_i}^{j, k} \rangle = 1 / \dim V_i\)</span>．因此 <span class="math inline">\(\iota_i\)</span> 是单射，且每个 <span class="math inline">\(\iota_i\)</span> 的像之间两两正交．</p></li>
+\]</span> 这配对描述了 <span class="math inline">\(e_{i_2}^{j_2} \otimes f_{i_2}^{j_1} \in \operatorname{End}_{\mathbb C}(V_i)\)</span> 平均化后每个矩阵元素的情况．</p>
+<ul>
+<li><p>回忆 Schur 引理对 <span class="math inline">\(\operatorname{Hom}_G (V_{i_1}, V_{i_2})\)</span> 的刻画，<span class="math inline">\(e_i^{j_2} \otimes f_i^{j_1}\)</span> 非零时必有 <span class="math inline">\(i := i_1 = i_2\)</span>；</p></li>
+<li><p>此时平均化结果是数乘，只有矩阵对角有值，故上式非零时必有 <span class="math inline">\(k := k_1 = k_2\)</span>；</p></li>
+<li><p>平均化前后的迹相等，故为使得数乘倍率非零，必有 <span class="math inline">\(j := j_1 = j_2\)</span>，此时数乘倍率为 <span class="math inline">\(1 / \dim V_i\)</span>．</p></li>
 </ul>
+<p>综上各 <span class="math inline">\(\rho_{V_i}^{k, j}\)</span> 正交，构成 <span class="math inline">\(L^2(G)\)</span> 的一组正交基．</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">提示</span>Remark (Schur 正交性)
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>注记</em> (Schur 正交性). </span><span class="math display">\[
+\frac 1 {|G|} \sum_{g \in G} \rho_{V_{i_2}}^{k_2, j_2}(g^{-1}) \cdot \rho_{V_{i_1}}^{j_1, k_1}(g) = \frac 1 {\dim V_{i_1}} \cdot \delta_{i_1, i_2} \delta_{k_1, k_2} \delta_{j_1, j_2}
+\]</span> is the Schur orthogonality, the one orthogonality to rule them all．特征标表的第一和第二正交性均可由此推得：</p>
+<ul>
+<li><p>取 <span class="math inline">\(a := k_1 = j_1\)</span>, <span class="math inline">\(b := k_2 = j_2\)</span>，则 <span class="math display">\[
+\frac 1 {\dim V_{i_1}} \cdot \delta_{i_1, i_2} \delta_{a, b} = \frac 1 {|G|} \sum_{g \in G} \rho_{V_{i_2}}^{b,b}(g^{-1}) \cdot \rho_{V_{i_1}}^{a,a}(g)
+\]</span> 对 <span class="math inline">\(1 \leq a \leq \dim V_{i_1}\)</span> 和 <span class="math inline">\(1 \leq b \leq \dim V_{i_2}\)</span> 求和立得 <span class="math display">\[
+\delta_{i_1, i_2} = \frac 1 {|G|} \sum_{g \in G} \chi_{V_{i_2}}(g) \cdot \chi_{V_{i_1}}(g^{-1})
+\]</span></p></li>
+<li><p>回忆第二正交性是说，对任意 <span class="math inline">\(g,h \in G\)</span> <span class="math display">\[
+\sum_i \chi_{V_i}(h) \cdot \chi_{V_i}(g^{-1}) = \delta_{g \text{ is conjugate to } h} \cdot \frac{|G|}{|C_G(h)|}
+\]</span> 这里 <span class="math inline">\(C_G(g) := \{x \in G : xg = gx\}\)</span> 是 <span class="math inline">\(g\)</span> 的中心化子．</p>
+<p>TODO</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="附录绕过特征标的-artinwedderburn-分解速证" class="level2" data-number="4">
@@ -744,7 +779,7 @@ v \otimes f \mapsto \frac{\dim V_i}{|G|} \sum_{g \in G} f(g^{-1} \cdot v) g
 \end{aligned}
 \]</span></p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -753,7 +788,7 @@ v \otimes f \mapsto \frac{\dim V_i}{|G|} \sum_{g \in G} f(g^{-1} \cdot v) g
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>注记</em>. </span>上面我们在右模侧使用了 Schur 引理——这并不需要证明第二遍，因为左 <span class="math inline">\(G^{\operatorname{op}}\)</span>-模和右 <span class="math inline">\(G\)</span>-模范畴等价．</p>
