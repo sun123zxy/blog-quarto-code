@@ -456,10 +456,10 @@ window.Quarto = {
 </section>
 <section id="reflections" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="reflections"><span class="header-section-number">2</span> Reflections</h2>
-<p>Let <span class="math inline">\(V\)</span> be a finite-dimensional real vector space. Let <span class="math inline">\(V^* = \operatorname{Hom}_{\mathbb{R}}(V, \mathbb{R})\)</span> be its dual space. The only canonical operation we possess is the natural pairing between a vector and a functional: <span class="math display">\[\langle v, f \rangle := f(v) \quad (v \in V, \, f \in V^*)\]</span></p>
+<p>Let <span class="math inline">\(V\)</span> be a finite-dimensional real vector space. Let <span class="math inline">\(V^\vee = \operatorname{Hom}_{\mathbb{R}}(V, \mathbb{R})\)</span> be its dual space. The only canonical operation we possess is the natural pairing between a vector and a functional: <span class="math display">\[\langle v, f \rangle := f(v) \quad (v \in V, \, f \in V^\vee)\]</span></p>
 <p>We want to define a linear reflection <span class="math inline">\(s: V \to V\)</span> without reference to “perpendicularity” or “distance”. The following observation captures the required essence: a reflection fix a hyperplane (a mirror) and invert a direction transverse to it.</p>
 <ul>
-<li><strong>The Mirror:</strong> The zero-set of a linear functional <span class="math inline">\(\alpha^\vee \in V^*\)</span>: <span class="math display">\[H = \ker(\alpha^\vee) = \{v \in V \mid \langle v, \alpha^\vee \rangle = 0\}\]</span></li>
+<li><strong>The Mirror:</strong> The zero-set of a linear functional <span class="math inline">\(\alpha^\vee \in V^\vee\)</span>: <span class="math display">\[H = \ker(\alpha^\vee) = \{v \in V \mid \langle v, \alpha^\vee \rangle = 0\}\]</span></li>
 <li><strong>The Reflection Line:</strong> Spanned by a non-zero vector <span class="math inline">\(\alpha \in V\)</span>.</li>
 </ul>
 <p>Note that <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\alpha^\vee\)</span> are currently completely unrelated. A reflection given by the pair <span class="math inline">\((\alpha, \alpha^\vee)\)</span> is a linear map <span class="math inline">\(s: V \to V\)</span> that</p>
@@ -558,7 +558,7 @@ a_{ji} : a_{ij} = (\alpha_i, \alpha_i) : (\alpha_j, \alpha_j)
 <p>Now let us consider a set of <span class="math inline">\(n\)</span> mirrors, indexed by <span class="math inline">\(I = \{1, \dots, n\}\)</span>:</p>
 <ul>
 <li><em>Simple roots</em>: <span class="math inline">\(\Delta := (\alpha_i)_{i \in I} \subseteq V\)</span></li>
-<li><em>Simple coroots</em>: <span class="math inline">\(\Delta^\vee := (\alpha_i^\vee)_{i \in I} \subseteq V^*\)</span></li>
+<li><em>Simple coroots</em>: <span class="math inline">\(\Delta^\vee := (\alpha_i^\vee)_{i \in I} \subseteq V^\vee\)</span></li>
 <li>the normalization condition: <span class="math inline">\(\langle \alpha_i, \alpha_i^\vee \rangle = 2\)</span> for all <span class="math inline">\(i\)</span>.</li>
 </ul>
 <p>Each pair defines a <em>simple reflection</em>: <span class="math display">\[
@@ -588,19 +588,15 @@ s_i(v) = v - \langle v, \alpha_i^\vee \rangle \alpha_i
 </div>
 <section id="cartan-matrix-as-a-bilinear-form" class="level3" data-number="3.1">
 <h3 data-number="3.1" class="anchored" data-anchor-id="cartan-matrix-as-a-bilinear-form"><span class="header-section-number">3.1</span> Cartan Matrix as a Bilinear Form</h3>
-<p>Note that <strong>if <span class="math inline">\(\Delta\)</span> is a basis of <span class="math inline">\(V\)</span></strong>, then <span class="math inline">\(\Delta^\vee\)</span> is determined by <span class="math inline">\(\Delta\)</span> and the Cartan matrix <span class="math inline">\(A\)</span> by <span class="math inline">\(\alpha_i^\vee(v) = \sum_{j \in I} a_{ij} \alpha_j^*(v)\)</span>, where <span class="math inline">\((\alpha_i^*)_{i \in I}\)</span> is the dual basis of <span class="math inline">\(\Delta\)</span>. Thus usually we only need to specify a linearly independent collection <span class="math inline">\(\Delta\)</span> and the Cartan matrix <span class="math inline">\(A\)</span>. To summarize, the Cartan matrix <span class="math inline">\(A\)</span> should be viewed as a bilinear form <span class="math inline">\(A: V \times V \to \mathbb{R}\)</span> by <span class="math display">\[
+<p>Note that <strong>if <span class="math inline">\(\Delta\)</span> is a basis of <span class="math inline">\(V\)</span></strong>, then <span class="math inline">\(\Delta^\vee\)</span> is determined by <span class="math inline">\(\Delta\)</span> and the Cartan matrix <span class="math inline">\(A\)</span> by <span class="math display">\[
+\alpha_i^\vee = \sum_{j \in I} a_{ij} \varpi_j^\vee
+\]</span> where <span class="math inline">\((\varpi_i^\vee)_{i \in I}\)</span> is the dual basis of <span class="math inline">\(\Delta\)</span>, called the <em>fundamental coweights</em>. Thus usually we only need to specify a linearly independent collection <span class="math inline">\(\Delta\)</span> and the Cartan matrix <span class="math inline">\(A\)</span>. To summarize, the Cartan matrix <span class="math inline">\(A\)</span>, though in its pure state comes from the natural pairing <span class="math inline">\(\langle -, - \rangle : V \times V^* \to \mathbb{R}\)</span>, may also serve as a bilinear form <span class="math inline">\(A: V \times V \to \mathbb{R}\)</span> by <span class="math display">\[
 \begin{aligned}
 A(\alpha_i, \alpha_j) &amp;:= a_{ij} = \langle \alpha_j, \alpha_i^\vee \rangle \\
-A(\alpha_i, \cdot) &amp;:= \alpha_i^\vee \in V^* \\
-A(v, w) &amp;:= \sum_{i,j \in I} a_{ij} \alpha_i^*(v) \alpha_j^*(w)
+A(\alpha_i, \cdot) &amp;:= \alpha_i^\vee \in V^\vee \\
+A(v, w) &amp;:= \sum_{i,j \in I} a_{ij} \varpi_i^\vee(v) \varpi_j^\vee(w)
 \end{aligned}
-\]</span></p>
-</section>
-<section id="root-systems-and-reflection-groups" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="root-systems-and-reflection-groups"><span class="header-section-number">3.2</span> Root Systems and Reflection Groups</h3>
-<p>The <em>reflection group</em> <span class="math inline">\(W\)</span> generated by <span class="math inline">\(\Delta\)</span> is defined as the subgroup of <span class="math inline">\(\operatorname{GL}(V)\)</span> generated by the simple reflections <span class="math inline">\((s_i)_{i \in I}\)</span>. The <em>root system</em> <span class="math inline">\(\Phi\)</span> generated by <span class="math inline">\(\Delta\)</span> is defined as the orbit of <span class="math inline">\(\Delta\)</span> under the action of the reflection group <span class="math inline">\(W\)</span>. Elements of <span class="math inline">\(\Phi\)</span> are called <em>roots</em>.</p>
-<p>Completely analogously, we may define the <em>coroot system</em> <span class="math inline">\(\Phi^\vee\)</span> generated by <span class="math inline">\(\Delta^\vee\)</span> as the orbit of <span class="math inline">\(\Delta^\vee\)</span> under the action of <span class="math inline">\(W\)</span>, where <span class="math inline">\(W\)</span> acts on <span class="math inline">\(V^*\)</span> via the natural contragradient representation <span class="math inline">\(w \cdot f := f \circ w^{-1}\)</span> for <span class="math inline">\(w \in W\)</span> and <span class="math inline">\(f \in V^*\)</span>. Elements of <span class="math inline">\(\Phi^\vee\)</span> are called <em>coroots</em>.</p>
-<p>When <span class="math inline">\(\Delta\)</span> is a basis of <span class="math inline">\(V\)</span>, as the simple coroots are completely determined by the simple roots, we may just focus on the root system <span class="math inline">\(\Phi\)</span>.</p>
+\]</span> To be 100% precise, upon choosing a basis <span class="math inline">\(\Delta\)</span> of <span class="math inline">\(V\)</span>, a linear isomorphism <span class="math inline">\(\mathbb R^n \cong V\)</span> is given, and the natural bilinear form over <span class="math inline">\(\mathbb R^n\)</span> is transported to <span class="math inline">\(V\)</span> via this isomorphism. This bilinear form gives a linear isomorphism <span class="math inline">\(V \to V^\vee\)</span>, which inverts the natural pairing <span class="math inline">\(\langle -, - \rangle : V \times V^\vee \to \mathbb{R}\)</span> to a bilinear form <span class="math inline">\(V \times V \to \mathbb{R}\)</span>, which is the above <span class="math inline">\(A\)</span>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -612,6 +608,30 @@ A(v, w) &amp;:= \sum_{i,j \in I} a_{ij} \alpha_i^*(v) \alpha_j^*(w)
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<div class="proof remark">
+<p><span class="proof-title"><em>Remark</em>. </span>TODO: It’s better to just not mention this, instead regard the Cartan matrix as an observation of a natural pairing under a basis, since a bilinear form is often given by elsewhere. Nevertheless, coweights are commonly used in the literature.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="root-systems-and-reflection-groups" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="root-systems-and-reflection-groups"><span class="header-section-number">3.2</span> Root Systems and Reflection Groups</h3>
+<p>The <em>reflection group</em> <span class="math inline">\(W\)</span> generated by <span class="math inline">\(\Delta\)</span> is defined as the subgroup of <span class="math inline">\(\operatorname{GL}(V)\)</span> generated by the simple reflections <span class="math inline">\((s_i)_{i \in I}\)</span>. The <em>root system</em> <span class="math inline">\(\Phi\)</span> generated by <span class="math inline">\(\Delta\)</span> is defined as the orbit of <span class="math inline">\(\Delta\)</span> under the action of the reflection group <span class="math inline">\(W\)</span>. Elements of <span class="math inline">\(\Phi\)</span> are called <em>roots</em>.</p>
+<p>Completely analogously, we may define the <em>coroot system</em> <span class="math inline">\(\Phi^\vee\)</span> generated by <span class="math inline">\(\Delta^\vee\)</span> as the orbit of <span class="math inline">\(\Delta^\vee\)</span> under the action of <span class="math inline">\(W\)</span>, where <span class="math inline">\(W\)</span> acts on <span class="math inline">\(V^\vee\)</span> via the natural contragradient representation <span class="math inline">\(w \cdot f := f \circ w^{-1}\)</span> for <span class="math inline">\(w \in W\)</span> and <span class="math inline">\(f \in V^\vee\)</span>. Elements of <span class="math inline">\(\Phi^\vee\)</span> are called <em>coroots</em>.</p>
+<p>When <span class="math inline">\(\Delta\)</span> is a basis of <span class="math inline">\(V\)</span>, as the simple coroots are completely determined by the simple roots, we may just focus on the root system <span class="math inline">\(\Phi\)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Remark
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>Remark</em>. </span><strong>Note that our definition of root systems and coroot systems is very general. Indeed, contains just merely enough information to recover a reflection group with fixed simple reflections.</strong> There are at least four layers of generality:</p>
@@ -662,7 +682,7 @@ s_i s_j(v) &amp;= s_i(v - \langle v, \alpha_j^\vee \rangle \alpha_j) \\
 a_{ij} a_{ji} = 4 \cos^2 \theta
 \tag{4}\]</span></span> So the eigenvalues of <span class="math inline">\(s_i s_j\)</span> are exactly <span class="math inline">\(e^{\pm i \cdot 2\theta}\)</span>【TODO: if <span class="math inline">\(0 &lt; a_{ij} a_{ji} &lt; 4\)</span>. We should be more careful here.】, and the order of <span class="math inline">\(s_i s_j\)</span> is finite if and only if <span class="math inline">\(\frac{\theta}{\pi} \in \mathbb{Q}\)</span>. In that case, the order <span class="math inline">\(m_{ij}\)</span> of <span class="math inline">\(s_i s_j\)</span> is the reduced denominator of <span class="math inline">\(\frac{\theta}{\pi}\)</span>. If <span class="math inline">\(\frac{\theta}{\pi} \notin \mathbb{Q}\)</span>, then <span class="math inline">\(s_i s_j\)</span> has infinite order, and we set <span class="math inline">\(m_{ij} = 0\)</span> (or <span class="math inline">\(\infty\)</span>, depending on your taste).</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -671,7 +691,7 @@ a_{ij} a_{ji} = 4 \cos^2 \theta
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>Remark</em>. </span>Despite being informal under our treatment, the identity <span class="math inline">\(a_{ij} a_{ji} = 4 \cos^2 \theta\)</span> may be obtained by comparing the trace of the rotation matrix <span class="math display">\[
@@ -699,7 +719,7 @@ a_{ij} = a_{ji} := -2\cos\left(\frac{\pi}{m_{ij}}\right)
 \langle v, \alpha_i^\vee \rangle = A(v, \alpha_i) =\frac{2 A(v, \alpha_i)}{A(\alpha_i, \alpha_i)}
 \]</span> It is now natural to further question whether <span class="math inline">\(A\)</span> is positive-definite, so that <span class="math inline">\(V\)</span> obtains a bona fide Euclidean structure canonically from the Coxeter matrix <span class="math inline">\((m_{ij})\)</span>. But before that, we introduce a shift of notation.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -708,7 +728,7 @@ a_{ij} = a_{ji} := -2\cos\left(\frac{\pi}{m_{ij}}\right)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <div class="proof remark">
 <p><span class="proof-title"><em>Remark</em>. </span>Traditionally the common practice is to set <span class="math inline">\(\alpha_i\)</span> to be unit vectors, and define a bilinear form <span class="math inline">\(B\)</span> by <span class="math inline">\(B(\alpha_i, \alpha_j) := -\cos(\pi/m_{ij})\)</span> and with the reflections <span class="math display">\[
@@ -758,7 +778,7 @@ s_i(v) = v - 2 B(v, \alpha_i) \alpha_i
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -767,7 +787,7 @@ s_i(v) = v - 2 B(v, \alpha_i) \alpha_i
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="proof">
 <p><span class="proof-title"><em>Proof</em>. </span>Trivial.</p>
