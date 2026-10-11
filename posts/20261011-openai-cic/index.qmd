@@ -1,0 +1,257 @@
+---
+title: "OpenAI 数学手稿 Lean 4 形式化现状一瞥：#168 Combinatorial Invariance Conjecture"
+subtitle: A Perspective of Reliability and Taste
+author: sun123zxy
+date: 2026-10-11
+lang: zh
+
+bibliography: index.bib
+
+categories:
+  - math
+  - algebra
+  - lie
+  - formalization
+
+draft: true
+
+number-sections: true
+
+format:
+  html: default
+---
+
+> OpenAI 于 2026 年 10 月 7 日发布了多达 722 篇内部模型生成的数学手稿，其中不少声称已在 Lean 4 中完成形式化验证，相关代码和文档在 [Github](https://github.com/openai/math) 发布．
+
+这次核爆波及范围之广，相信不管是降临派还是人工队的专家同学们都已经严肃瘫坐眩晕过了．不管怎么说，瘫完了还是得消化．Lean 4 形式化是 LLM 全自动生产数学的核心环节之一，近几年借 AI 自动形式化之东风吸引大批拥趸，但各细分领域下有能力参与代码审查的数学家仍是少数．这里我们以一个比较冷门的组合 / 几何表示论领域猜想 #168 Combinatorial Invariance Conjecture (CIC) 为例，带大家快速一瞥 OpenAI 在形式化方面的实现情况．TL;DR：**根据对 #168 CIC 的抽样调查，OpenAI 此次声称已形式化的猜想如无意外基本可以认为成立，但现阶段没有人工审查参与的全自动 Lean 4 生成情况做不到信达雅；大部分形式化可信度方面的问题在人工队介入后均可 vibe coding 快速修复优化；Mathlib 前沿数学建设进展缓慢一定程度上影响了 AI 的形式化质量．**
+
+OpenAI 这次采用的形式化方法是整一个大的 monorepo 同时建设基础设施和猜想证明，再为每个猜想独立编写 [Comparator](https://github.com/leanprover/comparator) challenge 和库里的版本做对照．什么意思呢？除了大家熟悉的排除 `sorry` 和额外 `axiom` 之外，还需要保证别人验证的命题和你认为的命题是同一个东西．比如说你手头上有一个 Fermat 大定理的命题想要别人证明：
+
+```lean
+import Mathlib
+
+def FLT : Prop := ∀ n a b c : ℕ, n > 2 → a ≠ 0 → b ≠ 0 → c ≠ 0 → a^n + b^n ≠ c^n
+
+theorem FLT_is_true : FLT := by
+  sorry
+```
+
+当别人声称他已经证明了 FLT 并排出几十个 Lean 4 文件时，你需要确认他有没有有意或无意地把命题改成了别的东西，比如：
+
+```lean
+def FLT : Prop := 1 + 1 = 2
+theorem FLT_is_true : FLT := by rfl
+```
+
+Comparator 就是用来“比较”两个命题是否相同、确认证明可信的官方标准工具．你自己确认过命题带 `sorry` 的版本叫做 challenge module，别人写好证明等待验证的版本叫做 solution module．总之，这次 OpenAI 给到了行业标准做法，配置方法也在 README 里面写清楚了，大家可以直接 clone 下来验证．（应该比较吃 RAM，我内存小还没跑过）
+
+仅从可信度角度来说，通过 Comparator challenge 的 Lean 4 代码除非突破沙箱限制黑了你电脑，或者恶意利用了 Lean 4 内核漏洞（这种可能性并不是没有，[而且最近发现的几个 soundness bug 都是 OpenAI 内部模型发现的](https://zhuanlan.zhihu.com/p/2084655794042283523)），在证明正确性方面基本不必担心．唯一需要人工检查的是 challenge module 本身的翻译准确性．在有 Comparator 的情况下，看一遍 challenge module 里面写的东西就够了．需要注意的是 challenge module 信任的内容是整个 challenge 的 import 闭包，如果有除 Mathlib 以外的其它 import 的话也需要一并检查．这次 OpenAI 似乎注意了这个问题，首次 commit `adc7f12` 中所有 challenge 都只 import 了 Mathlib，但是后续 commit 增加了两个部分结果涉及额外 import：
+
+- [CartierChartCompactnessSupport.lean](https://github.com/openai/math/blob/fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb/lean/ComparatorChallenges/CartierChartCompactnessSupport.lean)
+- [CharacterVarietiesAllSeamsSupport.lean](https://github.com/openai/math/blob/fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb/lean/ComparatorChallenges/CharacterVarietiesAllSeamsSupport.lean)
+
+这倒也不能直接说 O/ 搞的东西立马就不可信了，现阶段作为公共信任基础的 Mathlib 覆盖的范围确实不够 AI 大人用，如果命题里的定义 Mathlib 里没有的太多，AI 就只能自己搓了．（反过来说，即使人工队的 Mathlib 也不是没有写错形式化的先例……）
+
+我们要核对的文件是 [`lean/ComparatorChallenges/KLInvariance.lean`](https://github.com/openai/math/blob/fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb/lean/ComparatorChallenges/KLInvariance.lean)，本文写作时对照的 commit id 为 `fd4aeeb`．幸运的是 CIC 的命题描述是纯组合的，challenge module 只有不到 100 行．首先 recall 一下 CIC 本体：
+
+:::{#cnj-cic}
+
+## Combinatorial Invariance Conjecture
+
+设 $(W_1,S_1)$ 和 $(W_2, S_2)$ 是两个 Coxeter system．对任意 $u_1, v_1 \in W_1$ 和 $u_2, v_2 \in W_2$，在各自的 Bruhat 序意义下，如果区间 $[u_1, v_1]$ 和 $[u_2, v_2]$ 作为偏序集同构，则有 $P_{u_1, v_1}(q) = P_{u_2, v_2}(q)$，其中 $P_{u, v}(q)$ 是 Kazhdan-Lusztig 多项式（以下简称 KL 多项式）．
+:::
+
+> 不兑！什么是 Bruhat 序？什么是 KL 多项式？
+
+如果只是不知道这两个词请放心继续阅读——Lean 4 形式化的好处之一就是完全透明的定义——虽然坦率来说本文确未奢望顺路完成此领域的入门教程．研究 KL 多项式的主要动机是，Kazhdan 和 Lusztig 在 1979 年的开山文献 [@kazhdan_representations_1979] 中发现作为 Hecke 代数典范基和自然基转移系数的 KL 多项式与各种表示论特征标和几何对象上同调有着惊人的联系，解锁了了组合、几何和表示论的一大波交叉研究．席南华院士就此写过一篇适合阅读的综述 [@kazhdan-lusztig_2017]．想要传统的 textbook，标准的参考是 [@anders_bjorner_combinatorics_2005] 或 [@humphreys_reflection_1990]（FYI only，个人观点吭哧吭哧看这俩还不如 ask AI），这里还有一篇 [@humphreys_reflection_1990, {chapter 7}] 的[中文翻译 / 导读](https://zhuanlan.zhihu.com/p/2051526310439155643)值得推荐．[@cnj-cic] 作为猜想的意义是，它表明 KL 多项式的定义中涉及到的 Bruhat graph 边上标记的反射元 label 是多余的——KL 多项式只依赖于 Bruhat 序本身，而不依赖于 Coxeter system 的具体 presentation．
+
+Mathlib 已有 Coxeter system 的基本定义，但是 Bruhat 序、Hecke 代数和 KL 多项式都还是空白．OpenAI 给的 challenge 里包含它们的定义，这也是我们要检查的内容．我们逐行步进：
+
+```lean
+import Mathlib
+
+namespace OAI
+
+namespace KLInvariance
+
+open Polynomial
+
+universe u v u' v'
+
+variable {B : Type u} {W : Type v} [Group W] {M : CoxeterMatrix B}
+
+/-- An upward edge in the *strong* Bruhat graph, with left reflection labels. -/
+def BruhatStep (cs : CoxeterSystem M W) (x y : W) : Prop :=
+  cs.length x < cs.length y ∧ ∃ t : W, cs.IsReflection t ∧ y = t * x
+
+/-- The actual strong Bruhat order, not the weak order. -/
+def BruhatLE (cs : CoxeterSystem M W) : W → W → Prop :=
+  Relation.ReflTransGen (BruhatStep cs)
+```
+
+这里定义了 Coxeter system 上的 Bruhat 序关系．
+
+首先澄清一下 Mathlib 中 Coxeter system 的定义：它一般不写作 Weyl 群和单反射 $(W,S)$，而是写作一个通过 Coxeter 矩阵 $M$ 给出的标准 Coxeter presentation 到给定 Weyl 群 $W$ 上的同构，这样标准 Coxeter presentation 的生成元经过同构映射到 $W$ 上的像就还原了单反射集合 $S$．
+
+对 Coxeter 矩阵为 $M$ 的 Coxeter system $(S,W)$ `cs` 先定义 $W$ 上的 Bruhat 图：$x, y \in W$ 间有一条有向边 $x \to y$ `BruhatStep cs x y` 当且仅当存在反射 $t \in W$ 使得 $y=tx$，且长度满足 $\ell(x) < \ell(y)$，然后定义 Bruhat 序 `BruhatLE` 为 Bruhat 图的传递闭包．和常见的版本的区别是这里选取的 convention 是在左侧乘反射，而不是右侧乘——没问题，因为无论左右得到的偏序是一样的：
+$$
+x (x^{-1} t x) = t x
+$$
+使得每个左乘反射也都可以由右乘反射实现，反之亦然．
+
+```lean
+/-- The unlabelled interval, including both endpoints. -/
+def Interval (cs : CoxeterSystem M W) (u b : W) :=
+  {x : W // BruhatLE cs u x ∧ BruhatLE cs x b}
+```
+
+这是定义 Bruhat 序下的区间 $[u, b]$，即所有满足 $u \le x \le b$ 的元素 $x$ 的集合．这里是直接写成了 subtype．Mathlib 其实有提供 `Set W` 作为统一处理某个集合下的所有子集的类型，为其注册了 coercion 类型转换到 subtype，写成 `Set` 可能更 Mathlib-idiomatic 一点，虽然无关紧要．
+
+```lean
+instance intervalOrder (cs : CoxeterSystem M W) (u b : W) :
+    PartialOrder (Interval cs u b) where
+  le left right := BruhatLE cs left.val right.val
+  le_refl _ := Relation.ReflTransGen.refl
+  le_trans _ _ _ forward backward := forward.trans backward
+  le_antisymm left right forward backward := by
+    apply Subtype.ext
+    have length_mono : ∀ {lower upper : W}, BruhatLE cs lower upper →
+        cs.length lower ≤ cs.length upper := by
+      intro lower upper relation
+      induction relation using Relation.ReflTransGen.head_induction_on with
+      | refl => exact le_rfl
+      | head step _ rest => exact le_trans step.1.le rest
+    by_contra distinct
+    rcases forward.cases_head with same | ⟨middle, step, rest⟩
+    · exact distinct same
+    · exact (not_lt_of_ge (length_mono backward))
+        (lt_of_lt_of_le step.1 (length_mono rest))
+```
+
+在 Bruhat 区间上注册刚刚定义的偏序．这里就可以看到第一处 AI 翻译不够“达”和“雅”的地方了：Bruhat 序应该在 $W$ 上面注册，然后让 Bruhat 区间 $[u, b]$ 直接继承 $W$ 上的偏序，而不是在每个区间上单独注册．实践中其实也不是直接在 $W$ 上面写 instance，因为这个序关系依赖于 Coxeter system `cs`，对于 $W$ 本身来说并不典范．一种做法是单独定义一个依赖 `cs` 的与 $W$ defeq 的类型 `CoxeterSystem.WeylGroup cs`，然后在这个类型上注册偏序关系：
+
+```lean
+-- possible approach
+def CoxeterSystem.WeylGroup (cs : CoxeterSystem M W) : Type* := W
+
+instance BruhatOrder : PartialOrder cs.WeylGroup where
+  le left right := BruhatLE cs left right
+  -- ...
+```
+
+Nevertheless，至少正确性上没有问题．我们继续看下去：
+
+```lean
+/-- `d(x,y)` in the manuscript, used only for comparable endpoints. -/
+noncomputable def rankDifference (cs : CoxeterSystem M W) (x y : W) : ℕ :=
+  cs.length y - cs.length x
+```
+
+就是一个简写，和平时文献中有时见到的记号 $\ell(x,y) := \ell(y) - \ell(x)$ 吻合．如果是我可能会倾向于给一个 `abbrev` 而不是 `def`，方便下游 tactic 直接展开．标记 `noncomputable` 是因为 Mathlib 中 `CoxeterSystem.length` 是在没有 `Decidable` instance 的情况下强行使用经典逻辑取最小值 `Nat.find` 出来的．这是 Mathlib 的设计哲学之一：尽量贴合数学定义，而不是强行要求所有东西都可计算．算法方面的考虑可以让下游再单独写一个 computable 的版本后证明它和非计算版本等价．总之这里没问题．
+
+```lean
+abbrev PolynomialFamilies (W : Type v) := (W → W → ℤ[X]) × (W → W → ℤ[X])
+
+/-- Exact equal-parameter normalization in the introduction.
+The first family is R and the second is P.  `reflect d p` is `q^d p(q⁻¹)`
+when `p.natDegree ≤ d`, which follows here from the degree bound (or the
+diagonal normalization). The sum is over the real Bruhat interval;
+its finiteness is a separate theorem, not a different definition of order. -/
+structure NormalizedKL (cs : CoxeterSystem M W) (RP : PolynomialFamilies W) : Prop where
+  R_diagonal : ∀ x, RP.1 x x = 1
+  R_zero : ∀ x y, ¬ BruhatLE cs x y → RP.1 x y = 0
+  R_recursion : ∀ x y i, cs.length (cs.simple i * y) < cs.length y →
+    RP.1 x y =
+      if cs.length (cs.simple i * x) < cs.length x then
+        RP.1 (cs.simple i * x) (cs.simple i * y)
+      else
+        (X - 1) * RP.1 x (cs.simple i * y) +
+          X * RP.1 (cs.simple i * x) (cs.simple i * y)
+  P_diagonal : ∀ x, RP.2 x x = 1
+  P_zero : ∀ x y, ¬ BruhatLE cs x y → RP.2 x y = 0
+  P_degree : ∀ x y, BruhatLE cs x y → x ≠ y →
+    2 * (RP.2 x y).natDegree < rankDifference cs x y
+  reciprocity : ∀ x y, BruhatLE cs x y →
+    reflect (rankDifference cs x y) (RP.2 x y) =
+      ∑ᶠ z : Interval cs x y, RP.1 x z.val * RP.2 z.val y
+```
+
+开始巨大一坨大把问号了．我们知道 R 多项式来自 Hecke 代数自然基求逆的系数，而 KL 多项式来自 Hecke 代数的标准基和典范基之间的转换矩阵．当然，典范基的定义本身就和 KL 多项式的定义纠缠不清，这一特性很大程度上系由本学科的开山文献一手造成．为了把话说的更加明白，后续纯组合研究中常见的做法是递归的定义 R 多项式和 KL 多项式．但是这里又有很多 subtlety：对于 R 多项式，它满足对任意 $x, y \in W$，
+$$
+R_{x,y}(q) = \left\{\begin{matrix}
+1, & x=y & \mathtt{R_diagonal} \\
+0, & x > y & \mathtt{R_zero} \\
+R_{sx,sy}(q), & x < y,\, s \in D_L(y),\, \ell(sx) < \ell(x) & \mathtt{R_recursion} \\
+(q-1) R_{x,sy}(q) + q R_{sx,sy}(q), & x < y,\, s \in D_L(y),\, \ell(sx) > \ell(x) & \mathtt{R_recursion}
+\end{matrix}\right.
+$$
+这里 $D_L(y)$ 是 $y$ 的左下降集，i.e. $D_L(y) := \{ s \in S : \ell(sy) < \ell(y) \}$．注意递归过程中 $y \mapsto sy$ 长度严格下降，故终止性没有问题．没有解释的是最后两行的定义和 $s \in D_L(y)$ 的选择无关——但是市面上似乎还没有不依赖 Hecke 代数的证明，纯组合了半天最后还是得先定义 Hecke 代数．那么 O/ 家 AI 是怎么解决的呢？请先留此疑问继续往下看．
+
+在定义好 R 多项式之后，我们心目中的 KL 多项式应该是满足如下条件：对任意 $x, y \in W$，
+$$
+\left\{\begin{matrix}
+P_{x,y}(q) = 1, & x=y & \mathtt{P_diagonal} \\
+P_{x,y}(q) = 0, & x > y & \mathtt{P_zero} \\
+q^{\ell(y)-\ell(x)} P_{x,y}(q^{-1}) = \sum_{x \le z \le y} R_{x,z}(q) P_{z,y}(q), & x < y & \mathtt{reciprocity}
+\end{matrix}\right.
+$$
+注意看最后一行，写出这个求和号就首先需要确认 $[x,y]$ 是有限集．这是 Bruhat 序 subword property 的一个直接推论：
+
+:::{#thm-bruhat-subword}
+
+设 $(W,S)$ 是 Coxeter system，$x, y \in W$ 且 $x \leq y$，则对任意一个 $x$ 的 reduced word 表示，总存在一个 $y$ 的 reduced word 表示，使得它可由上述 $x$ 的 reduced word 表示删去若干个字母得到．
+:::
+
+不知道 solution module 里面是否含有相关证明，反正在 challenge module 里 O/ 家的 AI 是懒完了，直接在 $\mathtt{reciprocity}$ 里写 `∑ᶠ` 逃课——这个符号在 Mathlib 里意为“如果集合有限，则求和，否则为 0”．不算错，但是非常不雅．
+
+回到 $\mathtt{reciprocity}$ 一行．注意左式是多项式系数翻转，右式是某种长得像上三角矩阵乘法的东西．对组合足够敏感会立刻想到这就是 incidence algebra 上的卷积，如果我们把翻转操作记作 $\overline{P}$、卷积记作 $*$ 的话上式立刻写作整洁的卷积方程
+$$
+\overline{P} = R * P
+$$
+在需要递归定义的时候，把右侧求和 $z=x$ 一项移到左侧并注意 $R_{x,x}(q) = 1$ 得到
+$$
+\overline{P_{x,y}}(q) - P_{x,y}(q) = \sum_{x < z \le y} R_{x,z}(q) P_{z,y}(q)
+$$
+右侧 $P_{z,y}(q)$ 中 $\ell(y) - \ell(z) < \ell(y) - \ell(x)$ 递归进入子问题．注意左侧整个多项式在指数区间 $[0, \ell(y)-\ell(x)]$ 反对称，如果我们要求 KL 多项式的 degree 严格小于 $\frac{1}{2}\left(\ell(y)-\ell(x)\right)$（$\mathtt{P_degree}$），那么 $P_{x,y}(q)$ 就唯一确定了．从 R 多项式到 KL 多项式不需要 Hecke 代数，这倒算是个喜报．
+
+到此为止上述讨论给出了 R 多项式和 KL 多项式应当满足的性质，同时给出了递归定义的方式．O/ 家的 AI 好像也知道这些性质很好，直接定义了一个谓词 `NormalizedKL cs RP` 来规定出那些好的 $\mathbb Z$-系数多项式族 $(x,y) \mapsto (R_{x,y}(q), P_{x,y}(q))$．但是你由何必把这两个条件绑在一起写在一个 structure 里呢？我们完全可以低耦合地分两步先定义 R 多项式的性质，证明存在唯一性，然后再定义 KL 多项式的性质并证明其存在唯一性．把大象和长颈鹿装进同一台冰箱，除了故意增大 cognitive load 之外看不出任何好处．更离谱的是，O/ 家的 AI 定义 `NormalizedKL` 之后直接甩出如下答辩：
+
+```lean
+/-- The polynomial families selected by their equal-parameter normalization. -/
+noncomputable def klFamilies (cs : CoxeterSystem M W) : PolynomialFamilies W :=
+  Classical.epsilon (NormalizedKL cs)
+
+noncomputable def klPolynomial (cs : CoxeterSystem M W) (x y : W) : ℤ[X] :=
+  (klFamilies cs).2 x y
+
+end KLInvariance
+```
+
+这家伙根本没证唯一性！它甚至存在性都没证，直接装鸵鸟用 [Hilbert's epsilon function](https://en.wikipedia.org/wiki/Epsilon_calculus) `Classical.epsilon` 选择公理嗯选了一个出来——要知道如果不证明非空性，`Classical.epsilon` 完全可能选出不满足 `NormalizedKL` 的元素，报销前面的所有论证．虽然根据刚刚关于 R 多项式递归定义的讨论，我们心里知道存在唯一只要把 Hecke 代数搭好就能证明，不涉及 CIC 的真正堵点，但 O/ 家的全自动 AI 确实没自己意识到这一点．Challenge module 就写得如此飞扬跋扈，solution 里面怎么证明的我不敢想．总的来说，虽然历史上某些人类数学家不太整洁的处理或许对 AI 起到了一定误导作用，但未来形式化 agent 若想真正做到全自动人类免费，还需在“信”方面下更大功夫．
+
+其它值得考虑的改进包括考虑将整套 KL 理论搭在 incidence algebra 上，获得更干净卫生的卷积记号——后者已经在 Mathlib 里有了．使用这种看法得到的更广泛框架是 Kazhdan-Lusztig-Stanley 多项式，感兴趣的读者可以参考 [@proudfoot_algebraic_2017]．总之，我们在这一部分的结论是：R 多项式的存在唯一性依赖 Hecke 代数，O/ 家的 AI 动机不明的完全 skip 了这一部分，导致其证明可信度出现可修复的瑕疵．
+
+最后来看收尾命题：
+
+```lean
+namespace KLInvariance
+
+universe u v u' v'
+
+variable {B : Type u} {W : Type v} [Group W] {M : CoxeterMatrix B}
+
+theorem combinatorial_invariance
+    {B' : Type u'} {W' : Type v'} [Group W'] {M' : CoxeterMatrix B'}
+    (cs : CoxeterSystem M W) (cs' : CoxeterSystem M' W')
+    {u b : W} {u' b' : W'}
+    (hub : BruhatLE cs u b) (hub' : BruhatLE cs' u' b')
+    (ι : Interval cs u b ≃o Interval cs' u' b') :
+    klPolynomial cs u b = klPolynomial cs' u' b' := by
+  sorry
+
+end KLInvariance
+
+end OAI
+```
+
+和 [@cnj-cic] 的原始表述一致，没有问题．
