@@ -564,19 +564,19 @@ x (x^{-1} t x) = t x
 <span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    reflect (rankDifference cs x y) (RP<span class="fl">.2</span> x y) =</span>
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>      ∑ᶠ z : Interval cs x y, RP<span class="fl">.1</span> x z.val * RP<span class="fl">.2</span> z.val y</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <p>开始巨大一坨大把问号了．我们知道 R 多项式来自 Hecke 代数自然基求逆的系数，而 KL 多项式来自 Hecke 代数的标准基和典范基之间的转换矩阵．当然，典范基的定义本身就和 KL 多项式的定义纠缠不清，这一特性很大程度上系由本学科的开山文献一手造成．为了把话说的更加明白，后续纯组合研究中常见的做法是递归的定义 R 多项式和 KL 多项式．但是这里又有很多 subtlety：对于 R 多项式，它满足对任意 <span class="math inline">\(x, y \in W\)</span>， <span class="math display">\[
-R_{x,y}(q) = \begin{cases}
+R_{x,y}(q) = \left\{\begin{matrix}
 1, &amp; x=y &amp; \mathtt{R_diagonal} \\
 0, &amp; x &gt; y &amp; \mathtt{R_zero} \\
 R_{sx,sy}(q), &amp; x &lt; y,\, s \in D_L(y),\, \ell(sx) &lt; \ell(x) &amp; \mathtt{R_recursion} \\
 (q-1) R_{x,sy}(q) + q R_{sx,sy}(q), &amp; x &lt; y,\, s \in D_L(y),\, \ell(sx) &gt; \ell(x) &amp; \mathtt{R_recursion}
-\end{cases}
+\end{matrix}\right.
 \]</span> 这里 <span class="math inline">\(D_L(y)\)</span> 是 <span class="math inline">\(y\)</span> 的左下降集，i.e.&nbsp;<span class="math inline">\(D_L(y) := \{ s \in S : \ell(sy) &lt; \ell(y) \}\)</span>．注意递归过程中 <span class="math inline">\(y \mapsto sy\)</span> 长度严格下降，故终止性没有问题．没有解释的是最后两行的定义和 <span class="math inline">\(s \in D_L(y)\)</span> 的选择无关——但是市面上似乎还没有不依赖 Hecke 代数的证明，纯组合了半天最后还是得先定义 Hecke 代数．那么 O/ 家 AI 是怎么解决的呢？请先留此疑问继续往下看．</p>
 <p>在定义好 R 多项式之后，我们心目中的 KL 多项式应该是满足如下条件：对任意 <span class="math inline">\(x, y \in W\)</span>， <span class="math display">\[
-\begin{cases}
+\left\{\begin{matrix}
 P_{x,y}(q) = 1, &amp; x=y &amp; \mathtt{P_diagonal} \\
 P_{x,y}(q) = 0, &amp; x &gt; y &amp; \mathtt{P_zero} \\
 q^{\ell(y)-\ell(x)} P_{x,y}(q^{-1}) = \sum_{x \le z \le y} R_{x,z}(q) P_{z,y}(q), &amp; x &lt; y &amp; \mathtt{reciprocity}
-\end{cases}
+\end{matrix}\right.
 \]</span> 注意看最后一行，写出这个求和号就首先需要确认 <span class="math inline">\([x,y]\)</span> 是有限集．这是 Bruhat 序 subword property 的一个直接推论：</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
