@@ -13,19 +13,21 @@ categories:
   - lie
   - formalization
 
-draft: true
-
 number-sections: true
 
 format:
-  html: default
+  html:
+    other-links:
+      - text: "在知乎上阅读"
+        icon: "question-circle"
+        href: "https://zhuanlan.zhihu.com/p/2093015018585573299/"
 ---
 
 > OpenAI 于 2026 年 10 月 7 日发布了多达 722 篇内部模型生成的数学手稿，其中不少声称已在 Lean 4 中完成形式化验证，相关代码和文档在 [Github](https://github.com/openai/math) 发布．
 
-这次核爆波及范围之广，相信不管是降临派还是人工队的专家同学们都已经严肃瘫坐眩晕过了．不管怎么说，瘫完了还是得消化．Lean 4 形式化是 LLM 全自动生产数学的核心环节之一，近几年借 AI 自动形式化之东风吸引大批拥趸，但各细分领域下有能力参与代码审查的数学家仍是少数．这里我们以一个比较冷门的组合 / 几何表示论领域猜想 #168 Combinatorial Invariance Conjecture (CIC) 为例，带大家快速一瞥 OpenAI 在形式化方面的实现情况．TL;DR：**根据对 #168 CIC 的抽样调查，OpenAI 此次声称已形式化的猜想如无意外基本可以认为成立，但现阶段没有人工审查参与的全自动 Lean 4 生成情况做不到信达雅；大部分形式化可信度方面的问题在人工队介入后均可 vibe coding 快速修复优化；Mathlib 前沿数学建设进展缓慢一定程度上影响了 AI 的形式化质量．**
+这次核爆波及范围之广，相信不管是降临派还是人工队的专家同学们都已经严肃瘫坐眩晕过了．不管怎么说，瘫完了还是得消化．Lean 4 形式化是 LLM 全自动生产数学的核心环节之一，近几年借 AI 自动形式化之东风吸引大批拥趸，但各细分领域下有能力参与代码审查的数学家仍是少数．这里我们以一个比较冷门的组合 / 几何表示论领域猜想 #168 Combinatorial Invariance Conjecture (CIC) 为例，带大家快速一瞥 OpenAI 在形式化方面的实现情况．TL;DR：**根据对 #168 CIC Comparator challenge 的抽样调查，OpenAI 此次声称已形式化的猜想如无意外基本可以认为成立，但现阶段没有人工审查参与的全自动 Lean 4 生成情况做不到信达雅；大部分形式化可信度方面的问题在人工队介入后均可 vibe coding 快速修复优化；Mathlib 前沿数学建设进展缓慢一定程度上影响了 AI 的形式化质量．**
 
-OpenAI 这次采用的形式化方法是整一个大的 monorepo 同时建设基础设施和猜想证明，再为每个猜想独立编写 [Comparator](https://github.com/leanprover/comparator) challenge 和库里的版本做对照．什么意思呢？除了大家熟悉的排除 `sorry` 和额外 `axiom` 之外，还需要保证别人验证的命题和你认为的命题是同一个东西．比如说你手头上有一个 Fermat 大定理的命题想要别人证明：
+OpenAI 这次采用的形式化方法是整一个大的 monorepo 同时建设基础设施和猜想证明，再为每个猜想独立编写 [Comparator](https://github.com/leanprover/comparator) challenge 和库里的版本做对照．什么意思呢？除了大家熟悉的排除 `sorry` 和额外 `axiom` 之外，还需要保证别人验证的命题和你认为的命题是同一件事情．比如说你手头上有一个 Fermat 大定理的命题想要别人证明，并已相信如下叙述是对 Fermat 大定理的正确表述：
 
 ```lean
 import Mathlib
@@ -45,7 +47,9 @@ theorem FLT_is_true : FLT := by rfl
 
 Comparator 就是用来“比较”两个命题是否相同、确认证明可信的官方标准工具．你自己确认过命题带 `sorry` 的版本叫做 challenge module，别人写好证明等待验证的版本叫做 solution module．总之，这次 OpenAI 给到了行业标准做法，配置方法也在 README 里面写清楚了，大家可以直接 clone 下来验证．（应该比较吃 RAM，我内存小还没跑过）
 
-仅从可信度角度来说，通过 Comparator challenge 的 Lean 4 代码除非突破沙箱限制黑了你电脑，或者恶意利用了 Lean 4 内核漏洞（这种可能性并不是没有，[而且最近发现的几个 soundness bug 都是 OpenAI 内部模型发现的](https://zhuanlan.zhihu.com/p/2084655794042283523)），在证明正确性方面基本不必担心．唯一需要人工检查的是 challenge module 本身的翻译准确性．在有 Comparator 的情况下，看一遍 challenge module 里面写的东西就够了．需要注意的是 challenge module 信任的内容是整个 challenge 的 import 闭包，如果有除 Mathlib 以外的其它 import 的话也需要一并检查．这次 OpenAI 似乎注意了这个问题，首次 commit `adc7f12` 中所有 challenge 都只 import 了 Mathlib，但是后续 commit 增加了两个部分结果涉及额外 import：
+仅从可信度角度来说，通过 Comparator challenge 的 Lean 4 代码除非突破沙箱限制黑了你电脑，或者恶意利用了 Lean 4 内核漏洞（这种可能性并不是没有，[而且最近发现的几个 soundness bug 都是 OpenAI 内部模型发现的](https://zhuanlan.zhihu.com/p/2084655794042283523)），在证明正确性方面基本不必担心．唯一需要人工检查的是 challenge module 本身的翻译准确性．在有 Comparator 的情况下，看一遍 challenge module 里面写的东西就够了．
+
+需要注意的是 challenge module 信任的内容是整个 challenge 的 import 闭包，如果有除 Mathlib 以外的其它 import 的话也需要一并检查．这次 OpenAI 似乎注意了这个问题，首次 commit `adc7f12` 中所有 challenge 都只 import 了 Mathlib，但是后续 commit 增加了两个部分结果涉及额外 import：
 
 - [CartierChartCompactnessSupport.lean](https://github.com/openai/math/blob/fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb/lean/ComparatorChallenges/CartierChartCompactnessSupport.lean)
 - [CharacterVarietiesAllSeamsSupport.lean](https://github.com/openai/math/blob/fd4aeeb2ee4fc729c18d98444fed42fd0529eeeb/lean/ComparatorChallenges/CharacterVarietiesAllSeamsSupport.lean)
@@ -179,10 +183,10 @@ structure NormalizedKL (cs : CoxeterSystem M W) (RP : PolynomialFamilies W) : Pr
 开始巨大一坨大把问号了．我们知道 R 多项式来自 Hecke 代数自然基求逆的系数，而 KL 多项式来自 Hecke 代数的标准基和典范基之间的转换矩阵．当然，典范基的定义本身就和 KL 多项式的定义纠缠不清，这一特性很大程度上系由本学科的开山文献一手造成．为了把话说的更加明白，后续纯组合研究中常见的做法是递归的定义 R 多项式和 KL 多项式．但是这里又有很多 subtlety：对于 R 多项式，它满足对任意 $x, y \in W$，
 $$
 R_{x,y}(q) = \left\{\begin{matrix}
-1, & x=y & \mathtt{R_diagonal} \\
-0, & x > y & \mathtt{R_zero} \\
-R_{sx,sy}(q), & x < y,\, s \in D_L(y),\, \ell(sx) < \ell(x) & \mathtt{R_recursion} \\
-(q-1) R_{x,sy}(q) + q R_{sx,sy}(q), & x < y,\, s \in D_L(y),\, \ell(sx) > \ell(x) & \mathtt{R_recursion}
+1, & x=y & \mathtt{R_{diagonal}} \\
+0, & x > y & \mathtt{R_{zero}} \\
+R_{sx,sy}(q), & x < y,\, s \in D_L(y),\, \ell(sx) < \ell(x) & \mathtt{R_{recursion}} \\
+(q-1) R_{x,sy}(q) + q R_{sx,sy}(q), & x < y,\, s \in D_L(y),\, \ell(sx) > \ell(x) & \mathtt{R_{recursion}}
 \end{matrix}\right.
 $$
 这里 $D_L(y)$ 是 $y$ 的左下降集，i.e. $D_L(y) := \{ s \in S : \ell(sy) < \ell(y) \}$．注意递归过程中 $y \mapsto sy$ 长度严格下降，故终止性没有问题．没有解释的是最后两行的定义和 $s \in D_L(y)$ 的选择无关——但是市面上似乎还没有不依赖 Hecke 代数的证明，纯组合了半天最后还是得先定义 Hecke 代数．那么 O/ 家 AI 是怎么解决的呢？请先留此疑问继续往下看．
@@ -190,8 +194,8 @@ $$
 在定义好 R 多项式之后，我们心目中的 KL 多项式应该是满足如下条件：对任意 $x, y \in W$，
 $$
 \left\{\begin{matrix}
-P_{x,y}(q) = 1, & x=y & \mathtt{P_diagonal} \\
-P_{x,y}(q) = 0, & x > y & \mathtt{P_zero} \\
+P_{x,y}(q) = 1, & x=y & \mathtt{P_{diagonal}} \\
+P_{x,y}(q) = 0, & x > y & \mathtt{P_{zero}} \\
 q^{\ell(y)-\ell(x)} P_{x,y}(q^{-1}) = \sum_{x \le z \le y} R_{x,z}(q) P_{z,y}(q), & x < y & \mathtt{reciprocity}
 \end{matrix}\right.
 $$
@@ -202,7 +206,7 @@ $$
 设 $(W,S)$ 是 Coxeter system，$x, y \in W$ 且 $x \leq y$，则对任意一个 $x$ 的 reduced word 表示，总存在一个 $y$ 的 reduced word 表示，使得它可由上述 $x$ 的 reduced word 表示删去若干个字母得到．
 :::
 
-不知道 solution module 里面是否含有相关证明，反正在 challenge module 里 O/ 家的 AI 是懒完了，直接在 $\mathtt{reciprocity}$ 里写 `∑ᶠ` 逃课——这个符号在 Mathlib 里意为“如果集合有限，则求和，否则为 0”．不算错，但是非常不雅．
+不知道 solution module 里面是否含有相关证明，反正在 challenge module 里 O/ 家 AI 是懒完了，直接在 $\mathtt{reciprocity}$ 里写 `∑ᶠ` 逃课——这个符号在 Mathlib 里意为“如果集合有限，则求和，否则为 0”．不算错，但是非常不雅．
 
 回到 $\mathtt{reciprocity}$ 一行．注意左式是多项式系数翻转，右式是某种长得像上三角矩阵乘法的东西．对组合足够敏感会立刻想到这就是 incidence algebra 上的卷积，如果我们把翻转操作记作 $\overline{P}$、卷积记作 $*$ 的话上式立刻写作整洁的卷积方程
 $$
@@ -212,9 +216,9 @@ $$
 $$
 \overline{P_{x,y}}(q) - P_{x,y}(q) = \sum_{x < z \le y} R_{x,z}(q) P_{z,y}(q)
 $$
-右侧 $P_{z,y}(q)$ 中 $\ell(y) - \ell(z) < \ell(y) - \ell(x)$ 递归进入子问题．注意左侧整个多项式在指数区间 $[0, \ell(y)-\ell(x)]$ 反对称，如果我们要求 KL 多项式的 degree 严格小于 $\frac{1}{2}\left(\ell(y)-\ell(x)\right)$（$\mathtt{P_degree}$），那么 $P_{x,y}(q)$ 就唯一确定了．从 R 多项式到 KL 多项式不需要 Hecke 代数，这倒算是个喜报．
+右侧 $P_{z,y}(q)$ 中 $\ell(y) - \ell(z) < \ell(y) - \ell(x)$ 递归进入子问题．注意左侧整个多项式在指数区间 $[0, \ell(y)-\ell(x)]$ 反对称，如果我们要求 KL 多项式的 degree 严格小于 $\frac{1}{2}\left(\ell(y)-\ell(x)\right)$（$\mathtt{P_{degree}}$），那么 $P_{x,y}(q)$ 就唯一确定了．从 R 多项式到 KL 多项式不需要 Hecke 代数，这倒算是个喜报．
 
-到此为止上述讨论给出了 R 多项式和 KL 多项式应当满足的性质，同时给出了递归定义的方式．O/ 家的 AI 好像也知道这些性质很好，直接定义了一个谓词 `NormalizedKL cs RP` 来规定出那些好的 $\mathbb Z$-系数多项式族 $(x,y) \mapsto (R_{x,y}(q), P_{x,y}(q))$．但是你由何必把这两个条件绑在一起写在一个 structure 里呢？我们完全可以低耦合地分两步先定义 R 多项式的性质，证明存在唯一性，然后再定义 KL 多项式的性质并证明其存在唯一性．把大象和长颈鹿装进同一台冰箱，除了故意增大 cognitive load 之外看不出任何好处．更离谱的是，O/ 家的 AI 定义 `NormalizedKL` 之后直接甩出如下答辩：
+到此为止上述讨论给出了 R 多项式和 KL 多项式应当满足的性质，同时给出了递归定义的方式．O/ 家 AI 好像也知道这些性质很好，直接定义了一个谓词 `NormalizedKL cs RP` 来规定出那些好的 $\mathbb Z$-系数多项式族 $(x,y) \mapsto (R_{x,y}(q), P_{x,y}(q))$．但是你由何必把这两个条件绑在一起写在一个 structure 里呢？我们完全可以低耦合地分两步先定义 R 多项式的性质，证明存在唯一性，然后再定义 KL 多项式的性质并证明其存在唯一性．把大象和长颈鹿装进同一台冰箱，除了故意增大 cognitive load 之外看不出任何好处．更离谱的是，O/ 家 AI 定义 `NormalizedKL` 之后直接甩出如下答辩：
 
 ```lean
 /-- The polynomial families selected by their equal-parameter normalization. -/
@@ -229,7 +233,7 @@ end KLInvariance
 
 这家伙根本没证唯一性！它甚至存在性都没证，直接装鸵鸟用 [Hilbert's epsilon function](https://en.wikipedia.org/wiki/Epsilon_calculus) `Classical.epsilon` 选择公理嗯选了一个出来——要知道如果不证明非空性，`Classical.epsilon` 完全可能选出不满足 `NormalizedKL` 的元素，报销前面的所有论证．虽然根据刚刚关于 R 多项式递归定义的讨论，我们心里知道存在唯一只要把 Hecke 代数搭好就能证明，不涉及 CIC 的真正堵点，但 O/ 家的全自动 AI 确实没自己意识到这一点．Challenge module 就写得如此飞扬跋扈，solution 里面怎么证明的我不敢想．总的来说，虽然历史上某些人类数学家不太整洁的处理或许对 AI 起到了一定误导作用，但未来形式化 agent 若想真正做到全自动人类免费，还需在“信”方面下更大功夫．
 
-其它值得考虑的改进包括考虑将整套 KL 理论搭在 incidence algebra 上，获得更干净卫生的卷积记号——后者已经在 Mathlib 里有了．使用这种看法得到的更广泛框架是 Kazhdan-Lusztig-Stanley 多项式，感兴趣的读者可以参考 [@proudfoot_algebraic_2017]．总之，我们在这一部分的结论是：R 多项式的存在唯一性依赖 Hecke 代数，O/ 家的 AI 动机不明的完全 skip 了这一部分，导致其证明可信度出现可修复的瑕疵．
+其它值得考虑的改进包括考虑将整套 KL 理论搭在 incidence algebra 上，获得更干净卫生的卷积记号——后者已经在 Mathlib 里有了．使用这种看法得到的更广泛框架是 Kazhdan-Lusztig-Stanley 多项式，感兴趣的读者可以参考 [@proudfoot_algebraic_2017]．总之，我们在这一部分的结论是：R 多项式的存在唯一性依赖 Hecke 代数，O/ 家 AI 动机不明的完全 skip 了这一部分，导致其证明可信度出现可修复的瑕疵．
 
 最后来看收尾命题：
 
