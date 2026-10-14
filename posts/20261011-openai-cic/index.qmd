@@ -27,6 +27,15 @@ format:
 
 这次核爆波及范围之广，相信不管是降临派还是人工队的专家同学们都已经严肃瘫坐眩晕过了．不管怎么说，瘫完了还是得消化．Lean 4 形式化是 LLM 全自动生产数学的核心环节之一，近几年借 AI 自动形式化之东风吸引大批拥趸，但各细分领域下有能力参与代码审查的数学家仍是少数．这里我们以一个比较冷门的组合 / 几何表示论领域猜想 #168 Combinatorial Invariance Conjecture (CIC) 为例，带大家快速一瞥 OpenAI 在形式化方面的实现情况．TL;DR：**根据对 #168 CIC Comparator challenge 的抽样调查，OpenAI 此次声称已形式化的猜想如无意外基本可以认为成立，但现阶段没有人工审查参与的全自动 Lean 4 生成情况做不到信达雅；大部分形式化可信度方面的问题在人工队介入后均可 vibe coding 快速修复优化；Mathlib 前沿数学建设进展缓慢一定程度上影响了 AI 的形式化质量．**
 
+> 只想看结论的朋友现在就可以撤退了，后续内容均为上述结论的 elaboration，具体包括：
+>
+> - OpenAI 是如何使用 Comparator 验证证明的
+> - Comparator 的信任边界
+> - Combinatorial Invariance Conjecture 的数学背景
+> - OpenAI #168 CIC challenge module 实现情况锐评
+>
+> 顺利阅读需要本科抽象代数和 Lean 4 / Mathlib 生态的基本常识。
+
 OpenAI 这次采用的形式化方法是整一个大的 monorepo 同时建设基础设施和猜想证明，再为每个猜想独立编写 [Comparator](https://github.com/leanprover/comparator) challenge 和库里的版本做对照．什么意思呢？除了大家熟悉的排除 `sorry` 和额外 `axiom` 之外，还需要保证别人验证的命题和你认为的命题是同一件事情．比如说你手头上有一个 Fermat 大定理的命题想要别人证明，并已相信如下叙述是对 Fermat 大定理的正确表述：
 
 ```lean
