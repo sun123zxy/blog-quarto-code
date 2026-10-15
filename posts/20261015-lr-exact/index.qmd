@@ -1,5 +1,5 @@
 ---
-title: Characterizations of Left and Right Exactness in Abelian Categories
+title: Adjoints, Exactness, and (Co)limits in Abelian Categories
 author: sun123zxy
 date: 2026-10-15
 lang: en
@@ -7,9 +7,6 @@ lang: en
 categories:
   - math
   - category-theory
-
-collections:
-  - short
 
 number-sections: true
 
@@ -49,3 +46,96 @@ format:
 \end{tikzcd}
 ```
 :::
+
+The rest of this post is devoted to
+
+- elaborating the diagram above
+- record examples of usage in practice
+
+The post is designed to be a quick review and a reference of reformulation. It is not designed to be a friendly introduction.
+
+## Limits and colimits
+
+We develop limits only, as colimits are dual. Recall the following definitions:
+
+- Categories, functors, and natural transformation. Let $\mathcal C, \mathcal D$ be categories and $F, G: \mathcal C \to \mathcal D$ be functors. For notational simplicity sometimes we write $F(C) = F_c$ interchangeably. A natural transformation between two functors $F, G: \mathcal C \to \mathcal D$ is a family of morphisms $\eta_C: F(C) \to G(C)$ in $\mathcal D$ for each object $C \in \mathcal C$, such that for any morphism $f: C \to C'$ in $\mathcal C$, the following diagram commutes:
+
+  :::{#fig-natural-transformation}
+  ```{tikz}
+  \begin{tikzcd}
+	F(C) && F(C') \\
+	\\
+	G(C) && G(C')
+	\arrow["{F(f)}", from=1-1, to=1-3]
+	\arrow["{\eta_C}"', from=1-1, to=3-1]
+	\arrow["{\eta_{C'}}", from=1-3, to=3-3]
+	\arrow["{G(f)}"', from=3-1, to=3-3]
+  \end{tikzcd}
+  ```
+  :::
+
+- Let $\mathcal J$ be a small category and $\mathcal C$ be a category. A diagram $D: \mathcal J \to \mathcal C$ is a functor from $\mathcal J$ to $\mathcal C$. $\mathcal J$ is called the shape of the diagram.
+
+- The constant diagram functor $\Delta: \mathcal C \to (\mathcal J \to \mathcal C)$ eats an object $C \in \mathcal C$ and produces a constant diagram $\Delta_C: \mathcal J \to \mathcal C$ that sends every object in $\mathcal J$ to $C$ and every morphism to $\operatorname{id}_C$; if a morphism $f: C \to C'$ is consumed, it produces a natural transformation $\Delta_f: \Delta_C \to \Delta_{C'}$ by $\Delta_{f,j} = f$ for each $j \in \mathcal J$.
+
+- A cone of a diagram $D: \mathcal J \to \mathcal C$ is a pair $(L \in \mathcal C,\; \varphi : \Delta_L \to D)$ where $L$ is an object in $\mathcal C$ and $\varphi$ is a natural transformation $\Delta_L \to D$. Note that componentwise $\varphi_j : L \to D(j)$. Define a morphism of cones $(L, \varphi) \to (L', \varphi')$ to be a morphism $f: L \to L'$ in $\mathcal C$ such that $\varphi = \varphi' \circ \Delta_f$. Unbundling this equation of natural transformations, we have $\varphi_j = \varphi_j' \circ f$ for each $j \in \mathcal J$, exactly the compatibility conditions. Anyway, now we have a category of cones over $D$, denoted by $\mathcal{Cone}(D)$.
+
+- A limit of $D$ is the terminal object in the category of cones over $D$. 
+
+If a limit exists, it is unique up to a unique isomorphism, i.e. the full subcategory of $\mathcal{Cone}(D)$ formed by the terminal objects is a contractible groupoid. **Now suppose $\mathcal C$ admits all limits of shape $\mathcal J$.** We may designate for each diagram $D: \mathcal J \to \mathcal C$ a fixed convenient limit. Notationally, we denote this limit by $\lim D$. By abuse of notation, we often view $\lim D \in \mathcal C$, discarding the natural transformation part as implicit. We also write $\lim_{j \in \mathcal J} D(j)$, where the diagram $D$ is implicit. To avoid ambiguity, sometimes a modified notation of $\lim$ is used, e.g. $\prod$, $\varprojlim$, ... so that one can infer $D$ from the notation.
+
+Taking the limit object of a diagram is a functor $\lim: (\mathcal J \to \mathcal C) \to \mathcal C$, where a natural transformation $\eta: D \to D'$ between two diagrams is sent to a morphism $\lim D \to \lim D'$ in $\mathcal C$ via synthesizing the following compatible morphisms in $\mathcal C$
+$$
+\lim D \to D(j) \xrightarrow{\eta_j} D'(j)
+$$
+by the universal property of $\lim D'$. Compatibility follows from the naturality of $\eta$.
+
+Note that we choose the limits arbitrarily and that freedom may need further justification. Indeed, one can show that any two choices of limit functors are canonically isomorphic (as functors from $(\mathcal J \to \mathcal C)$ to $\mathcal C$). By "canonical" we mean the choice of isomorphism is unique.
+
+Another way of stating the universal property of the limit is via adjunction: the limit functor $\lim: (\mathcal J \to \mathcal C) \to \mathcal C$ is a right adjoint to the constant diagram functor $\Delta: \mathcal C \to (\mathcal J \to \mathcal C)$, i.e. an isomorphism of hom-sets
+$$
+\operatorname{Hom}_{\mathcal C}(C, \lim D) \cong \operatorname{Hom}_{(\mathcal J \to \mathcal C)}(\Delta_C, D)
+$$
+natural in both $C \in \mathcal C$ and $D: \mathcal J \to \mathcal C$. Indeed, they are both naturally isomorphic to
+$$
+\lim_j \operatorname{Hom}_{\mathcal C}(C, D(j))
+$$
+where the the hom-set limit is understood in $\mathsf{Set}$.
+
+Above explains the slogan $\operatorname{colim} \dashv \Delta \dashv \operatorname{lim}$ in the diagram above.
+
+### Presevation of (co)limits
+
+Say we have a functor $F: \mathcal C \to \mathcal D$ and a diagram $D: \mathcal J \to \mathcal C$ over $\mathcal C$. The diagram can be pushed forward to a diagram $F \circ D: \mathcal J \to \mathcal D$ over $\mathcal D$. The cones can also be pushed forward:
+$$
+\begin{aligned}
+F: \mathcal{Cone}(D) &\to \mathcal{Cone}(F \circ D) \\
+(L, \varphi) &\mapsto (F(L), (j \mapsto F(\varphi_j)))
+\end{aligned}
+$$
+and we can talk about whether the following two cones in $\mathcal D$ are "the same":
+$$
+F(\lim D) \cong \lim (F \circ D)
+$$
+More precisely, we are trying to say that $F(\lim D)$ is a limit of the diagram $F \circ D$ in $\mathcal D$. In that case, we say that $F$ preserves the limit of shape $\mathcal J$. By abuse of notation, we may suppress the presence of $D$ and speaking of the objects only, so the following is also understood in practice:
+$$
+F \left( \lim_{j \in \mathcal J} D(j) \right) \cong \lim_{j \in \mathcal J} F(D(j))
+$$
+
+## Examples
+
+### Sheaf condition
+
+The sheaf condition for a presheaf $F: \mathcal{Open}(X)^{\operatorname{op}} \to \mathcal{A}$ says that for each open cover $\mathcal{U} := \{U_i\}$ of an open set $U$,
+$$
+F(U) \to \prod_{i} F(U_i) \rightrightarrows \prod_{i,j} F(U_i \cap U_j)
+$$
+is a limit cone in the category $\mathcal{A}$, with $F(U)$ being the limit on the left. Precisely speaking, $F(U)$ is the equalizer of the two-arrow diagram on the right. Denote the equalizer by $\operatorname{Eq}_{U, \mathcal U}(F)$. Fixing $U$ and $\mathcal U$, it is a right adjoint functor $\mathsf{PSh}(X, \mathcal{A}) \to \mathcal{A}$. As a result,
+
+- as a limit over $\mathcal{A}$, $\operatorname{Eq}_{U, \mathcal U}(F)$ is preserved by any right adjoint functor $\mathcal{A} \to \mathcal{B}$.
+
+- $\operatorname{Eq}_{U, \mathcal U}$ preserves any limit $\lim_{j \in J}$ over $\mathsf{PSh}(X, \mathcal{A})$. When this functor is lifted to $\mathsf{Sh}(X, \mathcal{A}) \to \mathcal{A}$ (via the forgetful functor), it maps $F \in \mathsf{Sh}(X, \mathcal{A})$ to the equalizer $F(U) \in \mathcal A$, with the limit-preserving property pronounced as
+$$
+\lim_{j \in \mathcal J} F_j(U) \cong \lim_{j \in \mathcal J} \operatorname{Eq}_{U, \mathcal U}(F_j) \cong \operatorname{Eq}_{U, \mathcal{U}}(\lim_{j \in J} F_j) \cong \left(\lim_{j \in J} F_j \right) (U)
+$$
+In short, **taking limits over sheaves can be done sectionwise. In particular, taking kernels, products, or finite directed sums of sheaves does not require any sheafification.**
