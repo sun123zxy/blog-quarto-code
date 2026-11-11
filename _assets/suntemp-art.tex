@@ -131,41 +131,66 @@ $endif$
 \floatplacement{table}{H}
 
 % --- titling ---
+
+\usepackage{orcidlink}
+
+\usepackage{titling}
 \ifzh
     % title
-    \usepackage{titling}
     \pretitle{\begin{center} \zihao{-2} \bfseries}
     \posttitle{\par\end{center}\vskip 0.5em}
-    
-    \makeatletter
-    \providecommand{\subtitle}[1]{
-        \apptocmd{\@title}{\vskip 0.5em \par {\zihao{4} \kaishu #1 \par}}{}{}
-    }
-    \makeatother
-    % author
+\fi
+
+\makeatletter
+\providecommand{\subtitle}[1]{
+    \apptocmd{\@title}{\vskip 0.5em \par {\ifzh \zihao{4} \kaishu \else \large \fi #1 \par}}{}{}
+}
+\makeatother
+
+% author
+\ifzh
     \preauthor{\begin{center}\zihao{-4}\kaishu % \kaishu for Chinese only
         \lineskip 0.5em%
         \begin{tabular}[t]{c}}
-    \postauthor{\end{tabular}\par\end{center}}
-    % date
-    \predate{\begin{center} \zihao{-4} \kaishu}
-    \postdate{\par\end{center}}
 \else
-    \makeatletter
-    \providecommand{\subtitle}[1]{
-        \apptocmd{\@title}{\vskip 0.5em \par {\large #1 \par}}{}{}
-    }
-\makeatother
+    \preauthor{\begin{center}\begin{tabular}[t]{c}}
+\fi
+
+\postauthor{
+    \end{tabular}\par\end{center}
+    $if(by-affiliation)$
+        \begin{center}\small
+        $for(by-affiliation)$
+            \textsuperscript{$it.number$}~%
+            $it.name$%
+            $if(it.department)$, $it.department$$endif$%
+            $if(it.group)$, $it.group$$endif$%
+            $if(it.address)$, $it.address$$endif$%
+            $if(it.city)$, $it.city$$endif$%
+            $if(it.region)$, $it.region$$endif$ $if(it.postal-code)$ $it.postal-code$$endif$%
+            $if(it.country)$, $it.country$$endif$\par%
+        $endfor$
+            \end{center}
+    $endif$
+}
+
+% date
+\ifzh
+    \predate{$if(date)$\begin{center} \zihao{-4} \kaishu$endif$}
+    \postdate{$if(date)$\par\end{center}$endif$}
+\else
+    \predate{$if(date)$\begin{center}$endif$}
+    \postdate{$if(date)$\par\end{center}$endif$}
 \fi
 
 % --- abstract ---
 
 \ifzh
-
-  \ifcsdef{myenvironment}{%
-    \renewenvironment{abstract}{\subparagraph{摘要}\kaishu}{}
-  }{}
-
+  %\ifcsdef{myenvironment}{%
+    \renewenvironment{abstract}{\zihao{-5} \textbf{摘要} \kaishu}{}
+  %}{}
+\else
+  \renewenvironment{abstract}{\noindent \small \textbf{Abstract.}}{}
 \fi
 
 % -- math --
@@ -174,18 +199,6 @@ $endif$
 \usepackage{amssymb} % better symbols like \varnothing. amsfonts inside (which support \mathbb etc.)
 
 % -- tikz --
-
-% workaround for spath3 incompatibility with latest l3kernel. See https://tex.stackexchange.com/questions/762952/l3kernel-latest-update-introduce-an-incompatibility-with-tikz-library-spath3
-\ExplSyntaxOn
-\msg_redirect_name:nnn { kernel } { variant-same-as-base } { info }
-\ExplSyntaxOff
-
-\usepackage{spath3}
-
-\ExplSyntaxOn
-\msg_redirect_name:nnn { kernel } { variant-same-as-base } { error }
-\ExplSyntaxOff
-% workaround end
 
 \usepackage{tikz}
 \usepackage{tikz-cd}
@@ -222,6 +235,8 @@ $endif$
 \mynewthm{exercise}{习题}
 \newtheorem*{solution}{解}
 \newtheorem*{remark}{注记}
+\mynewthm{refsolution}{解}
+\mynewthm{refremark}{注记}
 
 % proof hack begin
 \makeatletter
@@ -264,6 +279,8 @@ $endif$
 \theoremstyle{remark}
 \newtheorem*{solution}{Solution}
 \newtheorem*{remark}{Remark}
+\mynewthm{refsolution}{Solution}
+\mynewthm{refremark}{Remark}
 
 \fi % endthm
 
@@ -275,6 +292,8 @@ $if(sunquartex-logo)$
 $sunquartex-logo$ % inject SunQuarTeX logo, metadata given by the Lua filter
 $endif$
 
+\usepackage{qrcode} % https://github.com/jmbuhr/quarto-qrcode
+
 % --- main ---
 
 \title{$title$}
@@ -283,9 +302,21 @@ $if(subtitle)$
 \subtitle{$subtitle$}
 $endif$
 
-\author{$for(author)$$author$$sep$ \and $endfor$}
+\author{
+$if(by-author)$%
+$for(by-author)$%
+$it.name.literal$%
+$if(it.affiliations)$\textsuperscript{$for(it.affiliations)$$it.number$$sep$,$endfor$}$endif$%
+$if(it.orcid)$\,\orcidlink{$it.orcid$}$endif$%
+$if(it.email)$\\ \texttt{$it.email$}$endif$%
+$sep$ \and%
+$endfor$%
+$else$%
+$for(author)$$author$$sep$ \and $endfor$%
+$endif$%
+}
 
-\date{$date$$if(date-modified)$\thanks{\transmodified \space $date-modified$.}$endif$}
+\date{$if(date)$$date$$if(date-modified)$\thanks{\transmodified \space $date-modified$.}$endif$$endif$}
 
 \begin{document}
 

@@ -56,19 +56,6 @@ $endif$
 
 % -- tikz --
 
-
-% workaround for spath3 incompatibility with latest l3kernel. See https://tex.stackexchange.com/questions/762952/l3kernel-latest-update-introduce-an-incompatibility-with-tikz-library-spath3
-\ExplSyntaxOn
-\msg_redirect_name:nnn { kernel } { variant-same-as-base } { info }
-\ExplSyntaxOff
-
-\usepackage{spath3}
-
-\ExplSyntaxOn
-\msg_redirect_name:nnn { kernel } { variant-same-as-base } { error }
-\ExplSyntaxOff
-% workaround end
-
 \usepackage{tikz}
 \usepackage{tikz-cd}
 \usepackage{quiver}
@@ -109,6 +96,8 @@ $endif$
 \newtheorem*{myproof}{证明}
 \newtheorem*{solution}{解}
 \newtheorem*{remark}{注记}
+\mynewthm{refsolution}{解}
+\mynewthm{refremark}{注记}
 
 \renewenvironment{proof}{\begin{myproof}}{\qed \end{myproof}}
 
@@ -129,6 +118,8 @@ $endif$
 \theoremstyle{remark}
 \newtheorem*{solution}{Solution}
 \newtheorem*{remark}{Remark}
+\mynewthm{refsolution}{Solution}
+\mynewthm{refremark}{Remark}
 
 \fi % endthm
 
@@ -211,6 +202,8 @@ $endif$
 $if(sunquartex-logo)$
 $sunquartex-logo$
 $endif$
+
+\usepackage{qrcode} % https://github.com/jmbuhr/quarto-qrcode
 
 % --- main ---
 
