@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -14,10 +14,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -58,16 +61,19 @@ div.csl-indent {
 <link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f81f3c79f694eaf6f88ebcce70241f9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-af64962de9348b804daa6381b125c604.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e87cd3d65a65f768c7a1700db1c28216.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9b2404ec78ff68ca4c9b2f4303203b01.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-39330638802da02b364dd7ec4e29bc31.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7dd074d930de47cb4e38ad128cc73662.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -106,7 +112,7 @@ MathJax = {
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -137,7 +143,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -160,6 +166,7 @@ window.Quarto = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -189,13 +196,19 @@ window.Quarto = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -279,14 +292,17 @@ window.Quarto = {
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -301,15 +317,14 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -353,8 +368,9 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -363,7 +379,7 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -386,7 +402,7 @@ window.Quarto = {
 <div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://zhuanlan.zhihu.com/p/2073894914920813133"><i class="bi bi-question-circle"></i>在知乎上阅读</a></li><li><a href="index-zh.html"><i class="bi bi-translate"></i>中译版</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -427,8 +443,8 @@ window.Quarto = {
 </header>
 
 
-<section id="the-mysterious-remark" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="the-mysterious-remark"><span class="header-section-number">1</span> The mysterious remark</h2>
+<section id="the-mysterious-remark" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> The mysterious remark</h1>
 <p>A well-known remark on algebraic closures reads: “Algebraic closures do not possess a genuine universal property.” Few understand its actual meaning. At first sight, this is puzzling. Algebraic closures are unique up to isomorphism. The same is true of familiar universal constructions such as free objects, tensor products, and direct products. Why, then, is algebraic closure treated differently?</p>
 <p>The two assertions are not equally strong. A universal construction is unique up to a <strong>unique isomorphism</strong>, whereas an algebraic closure is in general only unique up to isomorphism. In the latter statement, an isomorphism exists; in the former, that isomorphism is itself unique. The usual phrase “unique up to isomorphism” hides this extra layer of uniqueness.</p>
 <p>It turns out that algebraic closures fail to meet this uniqueness requirement for structure-preserving isomorphisms.</p>
@@ -458,11 +474,11 @@ c(i)=-i.
 </div>
 <p>So even after the algebraic closure <span class="math inline">\(\mathbb R\hookrightarrow\mathbb C\)</span> has been fixed, there remains more than one automorphism over <span class="math inline">\(\mathbb R\)</span>. Algebraic closure therefore has enough structure to determine an isomorphism class, but not enough to determine the isomorphism itself.</p>
 </section>
-<section id="two-abstract-mechanisms" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="two-abstract-mechanisms"><span class="header-section-number">2</span> Two abstract mechanisms</h2>
+<section id="two-abstract-mechanisms" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Two abstract mechanisms</h1>
 <p>Let us examine these two abstract mechanisms a little more closely. The difference lies in how the isomorphism is obtained.</p>
-<section id="sec-universal-property" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="sec-universal-property"><span class="header-section-number">2.1</span> Universal properties: structure-preserving maps are unique</h3>
+<section id="sec-universal-property" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="sec-universal-property"><span class="header-section-number">2.1</span> Universal properties: structure-preserving maps are unique</h2>
 <p>Suppose <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are two universal objects satisfying the same universal property. Applying the property in both directions gives unique structure-preserving maps <span class="math display">\[
 f:X\longrightarrow Y,
 \qquad
@@ -473,8 +489,8 @@ gf=\operatorname{id}_X.
 fg=\operatorname{id}_Y.
 \]</span> Hence <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are inverse isomorphisms. But the argument gives more than an isomorphism between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>: the universal property already says that <span class="math inline">\(f\)</span> is the only structure-preserving map from <span class="math inline">\(X\)</span> to <span class="math inline">\(Y\)</span>. The isomorphism is therefore unique.</p>
 </section>
-<section id="sec-weak-universal-property" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="sec-weak-universal-property"><span class="header-section-number">2.2</span> A weaker mechanism: structure-preserving endomorphisms are invertible</h3>
+<section id="sec-weak-universal-property" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sec-weak-universal-property"><span class="header-section-number">2.2</span> A weaker mechanism: structure-preserving endomorphisms are invertible</h2>
 <p>Now remove the uniqueness requirement. We still guarantee the existence of structure-preserving maps, but require instead that every structure-preserving endomorphism of a candidate object be an automorphism. If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> both satisfy the property, we may choose maps <span class="math display">\[
 f:X\longrightarrow Y,
 \qquad
@@ -487,8 +503,8 @@ g(fg)^{-1}
 <p>This argument still proves that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are isomorphic, but it does not prove that the isomorphism is unique. There may have been several choices for <span class="math inline">\(f\)</span>, and nothing forces them to agree. Both mechanisms produce a single isomorphism class of objects; only the universal property makes the structure-preserving isomorphism unique.</p>
 </section>
 </section>
-<section id="example-algebraic-closures" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="example-algebraic-closures"><span class="header-section-number">3</span> Example: Algebraic closures</h2>
+<section id="example-algebraic-closures" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Example: Algebraic closures</h1>
 <p>We now return to algebraic closure. The defining property of an algebraic closure <span class="math inline">\(\overline K\)</span> of <span class="math inline">\(K\)</span> can be described as the follow mapping property: if <span class="math inline">\(L\)</span> is an algebraically closed extension of <span class="math inline">\(K\)</span>, then the embedding of <span class="math inline">\(K\)</span> into <span class="math inline">\(L\)</span> extends to an embedding <span class="math display">\[
 \overline K\hookrightarrow L.
 \]</span> In other words, the dashed arrow can always be filled with an embedding:</p>
@@ -553,8 +569,8 @@ Figure&nbsp;1: Extension of an embedding to an algebraic closure.
 </div>
 <p>The weaker argument from <a href="#sec-weak-universal-property" class="quarto-xref">Section&nbsp;2.2</a> now shows that any two algebraic closures of <span class="math inline">\(K\)</span> are <span class="math inline">\(K\)</span>-isomorphic. The required embeddings exist, but nothing makes them unique.</p>
 </section>
-<section id="example-projective-covers" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="example-projective-covers"><span class="header-section-number">4</span> Example: Projective covers</h2>
+<section id="example-projective-covers" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Example: Projective covers</h1>
 <p>Another example of such a weakened universal property lies in module theory. Every module <span class="math inline">\(M\)</span> is a quotient of a projective module, but a random candidate <span class="math inline">\(P\twoheadrightarrow M\)</span> usually contains more projective material than is needed. A projective cover is a projective surjection that is, in some sense, minimal among those of its kind.</p>
 <p>As before, it is tempting to express this minimality requirement through a mapping property. Let <span class="math inline">\(p:P\twoheadrightarrow M\)</span> be a projective cover. Given another projective module <span class="math inline">\(Q\)</span> and a surjection <span class="math inline">\(f:Q\twoheadrightarrow M\)</span>, we would like there to be a surjection <span class="math inline">\(\widetilde f:Q\twoheadrightarrow P\)</span> such that the following diagram commutes:</p>
 <div id="fig-projective-cover-lift" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -698,9 +714,9 @@ p(\operatorname{im}u)=M,
 <!-- This file was generated by dvisvgm 3.6 -->
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="91.875pt" height="70.545pt" viewbox="0 0 61.25 47.03">
 <style type="text/css">
-@font-face{font-family:XDTRFF-CMMI5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJEAAoAAAAABCAAAAH5AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBWIE/CwYAATYCJAMIBCAFglwHIBtQAyAehXHjU0KUS7T2VMvuiUc8VIfv27tNqZWD4T/RClbHGzbhTDCg1SwCTf8drbXZ2zcx1JKIeHJrNDLNKnQq+cn7+7+3+L+Bb0AXTnjIs63j4oAaeIJFmIfX5QEmGFCeWPDvrr3abdIvGpyU3MxQ626sQA/lhXjviizXMP6KwCfo4F5IILu666oGiqNmFRqqGNbZGiiomPY100jWgZQCR601XHsTZAqQtwp0gBMAEhCd+4KNDcbGlqSuQHaQub0p3rFERWVsSfbPxN8ri08tjONTNHomZp5timvzlduXURv5PxIZmb25Cc/Hko/CDNFzTo89TsvHQHHBMArYjkUj/0Oa08P7Dvy7iulnB0Tf7qTYu0ShM7NF+z94L/XenKYvvWYarv9ZuP/k9b4dr9STiMWzcNwPIBB858hbMTf0n4aTTrdu5pdXoF8BQdWQh3raT9RAyErhGQhFBwKBfNATMIaiSMPGurTHkCXaa9hu96B53rDIAWFVnNE0r4b2mDVCe83bcoP23J5S/Qfn1pyIjLSoKLfwxMRYv8tvxcvdM1N60byioqu2vau6Uefj7g/hmjVq0alDpTY6iZpV8PWa5IiQIU2UKG7CJUoUy0+WSm3a1WrWRMeLO88JEG2aFjWlG0HFS2V66VToUqtdl2qNdHy484dJFQAAAA==) format('woff2');}
 @font-face{font-family:NQUDBD-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHAAAoAAAAAA3wAAAF2AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAo0RwsGAAE2AiQDCAQgBYJcByAb2AIArgrshvMbAiHK3r84r5OYbap1FM9/P9bOfSuGiGdapxIadYeGR9GUCIWhJv7/vz/voLRQ306nEqD0zakti6VtmWDpnImQzQl7zZ4D9fyWO36RArotfNTEfx5YC6S1PVCCjxBIiyzCMAy0bypOkhIStVr7NqGTX9Kjvur/FTdNWQLJAK6PD9zl1YYDr2nTCZ0AYi1vrjVQ6GCFSxBzOwC6dDBtDTdp7UYAFOgimMEcoAvIDNb/fDx+rfv6fvr8zYzj4wTOAYLwszirYcFSfm4wSy0F1TBUIAxVimeO/zi4oArIhZegzAgIzGPXGTQvPrpmzKNnYht9M84WxjYkuKQbgNjTBujawKNnzQF9G7517Nz/uMhnmIf90axaroYrvckqews18Ugs1D0t/jp6I1gbTkHJSAYqNArdmo1hQno0NIZJ1TcyU1VWFVbRM7GSNccwWQQaFRIXEaughlYxTEQnoh9N2kNoGwLLBkeBJEVkuADsHwAAAA==) format('woff2');}
 @font-face{font-family:OYFEXR-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAMYAAoAAAAABTAAAALPAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqDXIMGCwgAATYCJAMMBCAFglwHIBsjBAAehXGz00Wlie/ivbOrgzb1gJSaus7EvgvP/++8vSJIMIHMOtlINuAB+C/J/4lz6ZJmzRUAOsugtiiw3Qs9vsHwE/RFXmA0UnybV8R8aGTqfJuHDwCLK1IHJAD90Gv/maBWPORrV4BiIwegccAg4FQQdFJCARcmrgMRwCB2d4kFAKAAMABMhWVCILbGESBQlLai39TbwABDcbYDADZZAAACDgA/t7XpI91mH5jeu9bP1CXHNMfW1QVdwpV3FDspmZvbpdrEtowqrvPks3L2uj4Q7FxQObor1cbk5MTF1jREMTKBcPq2trZQVLSwtLZSuq4uMzl7cuZ3iAztcbU1sbC0tDzg7NwUHb3HPflA9fSe812nNrE1W7nOUf832ZqgmVm5shnymihcnJo48keZK0c9nZqkp41XH8jOPkAGdihG7uqNWqvN2SvkGRN0Fqm4NZklNvbq6PnneXe46Onr7fHYERLpO2I5ZFQSN+4w6zMb0DHZxc/bGqS+s2Aw580uzuiJIKdDqY1rDbV4PgmR/yGneUBqiC8aUILVk3RbhvkL303eacOIun57WmaDL8uxN/P0uD+7WMr8ivN2QN3QMD2bP3QWBs7oLbY8BgMGp0htnOwVHcUfCpoz0kjMFevjo8X7uGmPHis/pRRyFIoz0hTJ5coQxGZ48syFAQAAEAAIkLzUL3xptf6RYQQQgLi3komeAgAZ1PMEgCEC6E9sJhMQFGKx0IF1PIgLjA3CBR4o5EAySGvsRQIqtCIJSpwijorIfQpsFGCQQQ4IHhYkErAJE0mwyBNxbFpGCnJmIg/jY7FdW3cTYzcHaUNra3PVgP5KXkbuaPNK+42glPDElNBoPkUZFTAUK1qcZEmCJeBjLVZQeieGLXcmjLlxIM2QNXfmVLm0oyUKFysGH3ky5DxAUzMG1fS/CQzKA6Rr6iApwiUePFQ0PopkqMBM) format('woff2');}
+@font-face{font-family:XDTRFF-CMMI5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJEAAoAAAAABCAAAAH5AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBWIE/CwYAATYCJAMIBCAFglwHIBtQAyAehXHjU0KUS7T2VMvuiUc8VIfv27tNqZWD4T/RClbHGzbhTDCg1SwCTf8drbXZ2zcx1JKIeHJrNDLNKnQq+cn7+7+3+L+Bb0AXTnjIs63j4oAaeIJFmIfX5QEmGFCeWPDvrr3abdIvGpyU3MxQ626sQA/lhXjviizXMP6KwCfo4F5IILu666oGiqNmFRqqGNbZGiiomPY100jWgZQCR601XHsTZAqQtwp0gBMAEhCd+4KNDcbGlqSuQHaQub0p3rFERWVsSfbPxN8ri08tjONTNHomZp5timvzlduXURv5PxIZmb25Cc/Hko/CDNFzTo89TsvHQHHBMArYjkUj/0Oa08P7Dvy7iulnB0Tf7qTYu0ShM7NF+z94L/XenKYvvWYarv9ZuP/k9b4dr9STiMWzcNwPIBB858hbMTf0n4aTTrdu5pdXoF8BQdWQh3raT9RAyErhGQhFBwKBfNATMIaiSMPGurTHkCXaa9hu96B53rDIAWFVnNE0r4b2mDVCe83bcoP23J5S/Qfn1pyIjLSoKLfwxMRYv8tvxcvdM1N60byioqu2vau6Uefj7g/hmjVq0alDpTY6iZpV8PWa5IiQIU2UKG7CJUoUy0+WSm3a1WrWRMeLO88JEG2aFjWlG0HFS2V66VToUqtdl2qNdHy484dJFQAAAA==) format('woff2');}
 @font-face{font-family:TUELZZ-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAM0AAoAAAAABcQAAALqAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqEYINVCwoAATYCJAMQBCAFgmIHIBt8BFGUC0ZE8JFQ3dajiTFBTVRcDnWKicP8xYt4+H6/du6Tv7u4VfHpTMdLgpC0kQIli7VEY+hEePPl5U9mSyWFsoWTNylAzta81R/yDTzB1//n/3L87YZvniDHvGZz8x7USygMA86WtWlZiQZ4lGiL2+4Js/kjUSs3yOknRlXSY3rwr2SkC8eXhscixME68OCnXF5X5wAR50KzhiygR1sDCRkzSYpCIRuArjskF0IJzrlfak/tQApVAv129R3fgPcTwgPo66wn25CooiQ4ujWNqehIapJqmyJv7Kmn5GK9SSI5EYPpHStSADDIxgW6dSkzFb0eRyW3BKpJBVNT+unADDa4ud2QiLEEVktWQ0ubSpPvp6ZybtLAOm6YEpBJCcpzu9YYEI6KWV6HxJi6fj4nUqUaTbFV+sULzyONht8dHyt59Mpl7xWx+lJCYnPdwb2oh8+JSHl1SN10bYHNcMxVTPbv5dGnQWP+C71JvPdkbF0/4yQOt5cvh4lLv0S5MBteVr+Jrp5J6VKXdYdPNf++HaSPQYhHpU/TC7meVcnPcqnXAUoPHbZjfMRXq/4ltHVrBImDmRW+JE9ZSkJm0zXf1atnfQVd1Xj5o+/HZuI7qvKpBDi7/J6RPnbNgaN0qyK5Mo32bwMrD+f//EoFqR2wDbbBnx4nBm3r+CsBmURmvBMM83dODbPNJTKQFzUmiI4gQ19rXdFCfoxrxlsWgEBwv/vzM2X88LfPKwZ7219h0kX0JXLAeRN/MWpDhUGgxEsCpc2yNZBOYzZLxZHQnEF9yAMignFtjSlGjTPVsBWmM2r9+JAFlniiDIQ1gY4pluQz1ZxOprNktjHkwOGFRvuvbH9klFdgfDzjERTkx6GHwiLHov2Z799PZFbnVVTnFNEWrDXwUKJIqSqVspSjBSmR6V8rFimKl0Dx4jE8BAnih4NEA/1aIU+JYjQOC9GAj1ss7qYZgsxMurqZMFO1PBU+z1GEZoFljWcAAA==) format('woff2');}
 
 </style>
@@ -785,8 +801,8 @@ M=R/(\varepsilon),
 </div>
 </div>
 </section>
-<section id="categorical-nonsense-finally" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="categorical-nonsense-finally"><span class="header-section-number">5</span> Categorical nonsense, finally</h2>
+<section id="categorical-nonsense-finally" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Categorical nonsense, finally</h1>
 <p>So far, we have illustrated the distinction between the two mechanisms in elementary terms through several examples. Let us now upgrade the language: category theory packages the same structure-preserving maps into a form in which the two kinds of uniqueness become self-evident.</p>
 <p>Let <span class="math inline">\(F:J\to\mathcal C\)</span> be a diagram. For an object <span class="math inline">\(L\in\mathcal C\)</span>, write <span class="math inline">\(\Delta L:J\to\mathcal C\)</span> for the constant functor that sends every object of <span class="math inline">\(J\)</span> to <span class="math inline">\(L\)</span> and every morphism to <span class="math inline">\(\operatorname{id}_L\)</span>. A <strong>cone</strong> over <span class="math inline">\(F\)</span> with vertex <span class="math inline">\(L\)</span> is a natural transformation <span class="math display">\[
 \lambda:\Delta L\Longrightarrow F.
@@ -800,8 +816,8 @@ f:(L,\lambda)\longrightarrow(L',\lambda')
 \]</span> for every <span class="math inline">\(j\in J\)</span>, or equivalently <span class="math display">\[
 \lambda'\circ\Delta f=\lambda.
 \]</span> These are precisely the structure-preserving maps between cones. A limit of <span class="math inline">\(F\)</span> is a terminal object of <span class="math inline">\(\operatorname{Cone}(F)\)</span>. This is the terminal form of a universal property; the initial form is obtained by reversing all arrows. Terminal objects and initial objects are in conjunction called universal objects if one does not want to distinguish between them.</p>
-<section id="universal-objects-form-a-contractible-groupoid" class="level3" data-number="5.1">
-<h3 data-number="5.1" class="anchored" data-anchor-id="universal-objects-form-a-contractible-groupoid"><span class="header-section-number">5.1</span> Universal objects form a contractible groupoid</h3>
+<section id="universal-objects-form-a-contractible-groupoid" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="universal-objects-form-a-contractible-groupoid"><span class="header-section-number">5.1</span> Universal objects form a contractible groupoid</h2>
 <p>Assume that <span class="math inline">\(F\)</span> has a limit, and let <span class="math inline">\(\mathcal U\)</span> be the full subcategory of <span class="math inline">\(\operatorname{Cone}(F)\)</span> consisting of all limiting cones. If <span class="math inline">\(L,L'\in\mathcal U\)</span>, terminality gives exactly one morphism <span class="math display">\[
 L\longrightarrow L'.
 \]</span> The unique maps in the two directions are inverse by the argument of <a href="#sec-universal-property" class="quarto-xref">Section&nbsp;2.1</a>. Hence every morphism in <span class="math inline">\(\mathcal U\)</span> is an isomorphism, and <span class="math display">\[
@@ -818,8 +834,8 @@ L\longrightarrow L'.
 \]</span></p>
 <p>This beautiful one-liner captures the full meaning of the slogan “unique up to unique isomorphism.” Universal objects may be constructed differently, but there is exactly one structure-preserving isomorphism between any two constructions. This is why we comfortably speak of THE tensor product, THE free object, or THE limit: the universal property identifies all their constructions in one and only one way.</p>
 </section>
-<section id="weakly-terminal-and-minimal-solutions" class="level3" data-number="5.2">
-<h3 data-number="5.2" class="anchored" data-anchor-id="weakly-terminal-and-minimal-solutions"><span class="header-section-number">5.2</span> Weakly terminal and minimal solutions</h3>
+<section id="weakly-terminal-and-minimal-solutions" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="weakly-terminal-and-minimal-solutions"><span class="header-section-number">5.2</span> Weakly terminal and minimal solutions</h2>
 <p>The weaker mechanism from <a href="#sec-weak-universal-property" class="quarto-xref">Section&nbsp;2.2</a> also has a categorical form. An object <span class="math inline">\(L\)</span> of a category <span class="math inline">\(\mathcal D\)</span> is <strong>weakly terminal</strong> if every object <span class="math inline">\(X\in\mathcal D\)</span> admits at least one morphism to <span class="math inline">\(L\)</span>: <span class="math display">\[
 \operatorname{Hom}_{\mathcal D}(X,L)\ne\varnothing.
 \]</span> For this discussion, call a weakly terminal object <span class="math inline">\(L\)</span> <strong>minimal</strong> if every endomorphism of <span class="math inline">\(L\)</span> is an automorphism. The adjective is our object-level shorthand for the right-minimal condition encountered for projective covers.</p>
@@ -834,8 +850,8 @@ g:L'\longrightarrow L.
 <p>Dually, the initial version is obtained by reversing all arrows. With the usual direction of field embeddings, an algebraic closure is a minimal weakly initial object among algebraically closed extensions of <span class="math inline">\(K\)</span>: maps from it exist, and all its endomorphisms over <span class="math inline">\(K\)</span> are automorphisms. A projective cover, on the other hand, is a minimal weakly terminal object among projective modules mapping onto <span class="math inline">\(M\)</span>, in the terminology adopted here.</p>
 </section>
 </section>
-<section id="epilogue" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="epilogue"><span class="header-section-number">6</span> Epilogue</h2>
+<section id="epilogue" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Epilogue</h1>
 <p>There is one last turn in the story. For an algebraic closure <span class="math inline">\(\overline K\)</span>, the symmetry left behind by the failure of uniqueness is not an unnamed obstruction. Restriction to a separable closure identifies it with <span class="math display">\[
 \operatorname{Aut}_K(\overline K)\cong \operatorname{Gal}(K^{\mathrm{sep}}/K)=G_K,
 \]</span> the <strong>absolute Galois group</strong> of <span class="math inline">\(K\)</span>.</p>
@@ -845,7 +861,7 @@ g:L'\longrightarrow L.
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="acknowledgement" class="level2 appendix unnumbered"><h2 class="anchored quarto-appendix-heading">Acknowledgement</h2><div class="quarto-appendix-contents">
+<div id="quarto-appendix" class="default"><section id="acknowledgement" class="level1 appendix unnumbered"><h2 class="anchored quarto-appendix-heading">Acknowledgement</h2><div class="quarto-appendix-contents">
 
 <p>This post grew out of a series of discussions with GPT 5.6 Sol and was written by it under torturously close supervision. The author supplied the mathematical outline, made the editorial decisions, and takes responsibility for all rambling prose and any remaining grammatical errors. GPT-5.6 Sol in Codex takes responsibility for being mysteriously less intelligent than its browser-dwelling counterpart.</p>
 
@@ -866,15 +882,50 @@ g:L'\longrightarrow L.
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -949,11 +1000,30 @@ g:L'\longrightarrow L.
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -967,10 +1037,72 @@ g:L'\longrightarrow L.
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
             // default icon
             link.classList.add("external");
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -984,6 +1116,7 @@ g:L'\longrightarrow L.
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1146,44 +1279,54 @@ g:L'\longrightarrow L.
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1282,8 +1425,11 @@ g:L'\longrightarrow L.
     }
   });
   </script>
-<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
-<input type="hidden" id="giscus-alt-theme" value="light">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark_dimmed">
 <script>
   function loadGiscus() {
     // Function to get the theme based on body class

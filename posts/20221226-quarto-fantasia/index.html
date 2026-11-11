@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -14,10 +14,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -38,16 +41,19 @@ ul.task-list li input[type="checkbox"] {
 <link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f81f3c79f694eaf6f88ebcce70241f9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-af64962de9348b804daa6381b125c604.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e87cd3d65a65f768c7a1700db1c28216.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9b2404ec78ff68ca4c9b2f4303203b01.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-39330638802da02b364dd7ec4e29bc31.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7dd074d930de47cb4e38ad128cc73662.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -88,7 +94,7 @@ MathJax = {
 
 </head>
 
-<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -111,6 +117,7 @@ MathJax = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -140,13 +147,19 @@ MathJax = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -230,14 +243,17 @@ MathJax = {
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -252,15 +268,14 @@ MathJax = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -304,8 +319,9 @@ MathJax = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -314,7 +330,7 @@ MathJax = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -333,7 +349,7 @@ MathJax = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -387,8 +403,8 @@ MathJax = {
 </header>
 
 
-<section id="旅程继续" class="level2">
-<h2 class="anchored" data-anchor-id="旅程继续">旅程继续</h2>
+<section id="旅程继续" class="level1">
+<h1>旅程继续</h1>
 <p><a href="../../posts/20210817-aboutblog">上回说到</a>，sun123zxy 同学完成了手撸 Jekyll 的伟大壮举，然后悠哉游哉地度过了他的高三生活。现在，静态博客的大厦已经基本落成，剩下的只是一些装修工作。然而，几朵不大不小的乌云却总让他感到不安。</p>
 <p>sun123zxy 曾写过一篇相对严谨的学习笔记<a href="../../posts/20200321-burnside">等价类计数：Burnside引理 &amp; Polya定理</a>，还有一篇关于行列式与生成树计数的笔记尚未发布。这些笔记里包含大量章节标号、定理与交叉引用。关于交叉引用，原生 Markdown 只支持在链接处以 section 的标题作为标签完成引用，显然对中文文档不大友好。不少人选择使用内嵌 HTML 解决问题，但死脑筋的 sun123zxy 认为这种方式背离了 Markdown 简化格式的初衷。后来他发现，<a href="https://michelf.ca/projects/php-markdown/extra/">PHP Markdown Extra</a> 格式的 Special Attributes 能解决部分交叉引用的问题，更惊喜的是 Pandoc 竟然兼容这种语法（当时 sun123zxy 对 Pandoc 还没有做深入了解，只局限于使用 jekyll-pandoc 渲染而已）。至于处理章节标号，只需对已经写好的目录系统脚本做一点改动即可，而且当时 sun123zxy 也并没有那么多篇严谨的学术向写作。总之，问题暂时得到解决。</p>
 <p>另一朵乌云来自 LaTeX。众所周知，Markdown 的内嵌数学公式是 LaTeX Math Mode 的某个子集。sun123zxy 发现，自己在 LaTeX 上的不求甚解开始给他带来各种麻烦。比如，他无法解释为什么只有 <code>aligned</code> 环境能被正确渲染，而不少教程中提到的 <code>align*</code> 和支持标号的 <code>align</code> 却总是报错；再比如，由于使用了重视速度的 <a href="https://katex.org/">KaTeX</a> 而不是更加完备的 <a href="https://www.mathjax.org/">MathJax</a> 作为渲染引擎，他发现自己无法使用诸如 <code>\newcommand</code>、<code>\DeclareMathOperator</code> 的宏定义。而且，一些教程中提到的 <code>physics</code> 等需要自行导入的“宏包”也让他摸不着头脑。</p>
@@ -415,8 +431,8 @@ MathJax = {
 <p>Quarto 是构建在 Pandoc 上的文档发布系统，对 Pandoc’s Markdown 做了进一步扩展以适应学术写作，其中就包含了 pandoc-xnos 的语法和——用 Pandoc’s Markdown 的 fenced syntax 实现的定理系统！此外，Quarto 甚至还支持 Jupyter Notebook 的动态计算，附上 Matplotlib 代码就可动态生成统计图表——而且同样也可以被交叉引用！更让人欣喜的是，除了直接输出 HTML 和 PDF/LaTeX，Quarto 还提供了类似 Jekyll 的生成静态网站的功能！</p>
 <p>于是，长达数月的探索终于落下帷幕，语法学习、环境配置与博客迁移被提上日程。又是近一个月的辛勤劳动，sun123zxy 终于完成了写作流程的构建和博客的搭建工作。盯着桌前已经冷透了的保温杯，他陷入了沉思……</p>
 </section>
-<section id="主要成果" class="level2">
-<h2 class="anchored" data-anchor-id="主要成果">主要成果</h2>
+<section id="主要成果" class="level1">
+<h1>主要成果</h1>
 <ul>
 <li>基于 Quarto 的 <a href="https://github.com/sun123zxy/sunquartex">SunQuarTeX</a> 多格式中文学术写作出版流程，内含适用于常见中文论文写作的 LaTeX 文档类及其示例文档。</li>
 <li>Quarto 驱动的适应学术写作要求的<a href="https://blog.sun123zxy.top">新版博客</a>（<a href="https://github.com/sun123zxy/blog-quarto-code">sun123zxy/blog-quarto-code</a>）。</li>
@@ -424,8 +440,8 @@ MathJax = {
 <p>上一个 Jekyll 博客，一砖一瓦都是自己搭出来的，有感情了（笑）。所以也没下线，放在 <a href="https://blog-jekyll.sun123zxy.top">blog-jekyll.sun123zxy.top</a> 上了。如果你也和我一样怀旧，可以去看看~</p>
 <p>那么，依照惯例，聊聊学习与折腾中的一点心得体会。</p>
 </section>
-<section id="关于-latex" class="level2">
-<h2 class="anchored" data-anchor-id="关于-latex">关于 LaTeX</h2>
+<section id="关于-latex" class="level1">
+<h1>关于 LaTeX</h1>
 <p>很多人说 LaTeX 不好学——的确。即使是 OIer 群体，对 LaTeX 的认知也大多停留在数学公式水平。然而比起客观的困难，更应该问的问题是——Why LaTeX? 不同人的答案或许有所不同，但应有以下几点：</p>
 <ul>
 <li>有学术写作或打印文档的需求（否则可直接使用 Markdown/HTML）</li>
@@ -438,8 +454,8 @@ MathJax = {
 <p>学习 LaTeX 需要了解它的历史，理解它的开发理念，理清 TeX/LaTeX 的历史进程，弄清 pdfLaTeX、XeLaTeX、LuaLaTeX 各自的特点，在 MikeTeX、TeXLive 两个发行版中做出选择，学习 BibTeX 引用管理格式，还有对排版知识的初步了解——知识体系可谓庞大。此外，不少 LaTeX 教学文档、各种宏包的手册本身就是由 LaTeX 生成的，这意味它们都是 PDF 格式，无法在互联网上得到很好的传播。但请不要忘记，它们是学习 LaTeX 的第一手资料。例如，<a href="https://www.ctan.org/">CTAN</a> 上的手册是学习各类宏包的第一途径，<a href="https://www.latex-project.org/help/documentation/">LaTeX 官网</a>也提供了不少相对系统的 PDF 教程。当然，近年来网页渲染工具 <a href="https://www.overleaf.com/">Overleaf</a> 的出现降低了环境配置的难度，<a href="https://www.overleaf.com/learn">Overleaf 的 LaTeX 教学文档</a>也非常优秀。我还强烈推荐 <a href="https://liam.page/2014/09/08/latex-introduction/">一份其实很短的 LaTeX 入门文档 | 始终</a> 这篇文章作为入门，作者是一位参与维护 CTeX 宏集的大佬，之前提到的 markdown 宏包他也写过一篇详细的介绍，详见上文引用中的链接。</p>
 <p>在互联网上碎片化的学习 LaTeX，一定要经常问自己——这功能是哪个宏包定义的？例如，关于交叉引用，<code>\label</code>、<code>\ref</code>、<code>\pageref</code> 均为原生自带，<code>\eqref</code> 是 <code>amsmath</code> 宏包定义的，而 <code>\autoref</code> <code>\href</code> <code>\url</code> 均为 <code>hyperref</code> 宏包的命令，引入 <code>hyperref</code> 的目的主要是让文章里的交叉引用都变成 PDF 里可点击跳转的超链接；再例如，定理系统是 LaTeX 原生支持的，但 <code>amsthm</code> 提供了无标号版本的定理、设置 <code>\theoremstyle</code> 的方式和自动添加 QED symbol 的 <code>proof</code> 环境。再次强调，不要错过宏包的 PDF 手册！阅读手册是整合碎片知识、查漏补缺的最佳途径。</p>
 </section>
-<section id="关于-ctex" class="level2">
-<h2 class="anchored" data-anchor-id="关于-ctex">关于 CTeX</h2>
+<section id="关于-ctex" class="level1">
+<h1>关于 CTeX</h1>
 <p>此外，有必要对中文排版基础宏包 <a href="https://ctan.org/pkg/ctex">CTeX</a> 做进一步说明。</p>
 <blockquote class="blockquote">
 <p>最初，Knuth 在设计开发 TeX 的时候没有考虑到多国文字支持，特别是对多字节的中日韩表意文字的支持。这使得 TeX 以至后来的 LaTeX 对中文的支持一直不是很好。即使在 CJK 宏包解决了中文字符处理的问题以后，中文用户使用 LaTeX 仍然要面对许多困难。这些困难里，以章节标题的中文化为最。由于中文和西文书写习惯的差异，用户很难使用标准文档类中的代码结构来表达中文标题。于是，用户不得不对标准文档类做较大的修改。除此之外，日期格式、首行缩进、中文字号和字距等细节问题，也需要精细的调校。我们设计 CTeX 宏集的目的之一就是解决这些 LaTeX 文档的汉化难题。</p>
@@ -448,17 +464,17 @@ MathJax = {
 </blockquote>
 <p>CTeX 的基础使用，我仍然推荐上面始终的入门文档。<a href="https://zhuanlan.zhihu.com/p/538459335">LaTeX 中文字体配置基础指南 - 知乎</a>对我的帮助也很大。如果打算进一步自定义样式建立自己的文档类，还得沉下心来研读手册。</p>
 </section>
-<section id="关于-pandoc" class="level2">
-<h2 class="anchored" data-anchor-id="关于-pandoc">关于 Pandoc</h2>
+<section id="关于-pandoc" class="level1">
+<h1>关于 Pandoc</h1>
 <p>Pandoc 其实一直致力于扩展 Markdown 的语法使其适合学术写作。<a href="https://www.youtube.com/watch?v=T9uZJFO54iM">TUG 2020 — John MacFarlane — Pandoc for TeXnicians</a> 的演讲几乎涵盖了所有值得关心的问题。</p>
 <p>我认为 Pandoc 已有能力成为下一代学术写作的终极解决方案。语法上，Markdown 简洁易读，语法天然与格式解耦（反例是 LaTeX），而 Pandoc’s Markdown 是 Markdown 方言的集大成者，交叉引用、文献引用、图表等 Markdown 原生痛点都有很好的支持，fenced syntax 甚至可以视为 LaTeX environment 的平替；技术上，Pandoc 已经是非常成熟的格式转换工具，而 Pandoc filter 好比 LaTeX 中的 documentclass 和 style 文件，事实上实现了 Markdown 中的“宏定义”。如社区进一步发展，大部分常用 filter 能像在 LaTeX 中引用 documentclass 一样轻松获取，我们就能真正告别格式的困扰，拥抱 Pandoc’s Markdown 治下的多格式学术写作。</p>
 <p>从这角度来看，Quarto 似乎更像是 Jupyter、Jekyll 和一堆 Pandoc filter 的混合物（笑）</p>
 </section>
-<section id="关于-quarto" class="level2">
-<h2 class="anchored" data-anchor-id="关于-quarto">关于 Quarto</h2>
+<section id="关于-quarto" class="level1">
+<h1>关于 Quarto</h1>
 <p>Quarto 首个 Release 距今不到 2 年，是相当年轻的项目。开发 Quarto 的团队之前主要维护 R Markdown，Quarto 是他们跳出 R 语言生态圈，将成果扩展至更广阔生态圈（如 Python）的尝试，这也意味着项目尚存不尽人意之处。把它调理成满意的模样，还真得花不少功夫。<del>甚至让笔者开了人生首个正经 issue</del></p>
-<section id="sunquartex" class="level3">
-<h3 class="anchored" data-anchor-id="sunquartex">SunQuarTeX</h3>
+<section id="sunquartex" class="level2">
+<h2 class="anchored" data-anchor-id="sunquartex">SunQuarTeX</h2>
 <p>使用 Quarto，我主要有两大需求——论文多格式输出和静态博客生成。两个需求相对独立，因此有必要将离线论文输出的功能单独抽象出来。折腾的结果就是 <a href="https://github.com/sun123zxy/sunquartex">SunQuarTeX</a>。Quarto 原生的 HTML 输出还不错，自带目录高亮还有引用提示，稍微改改就能用了。关于自定义，Quarto 使用 SCSS 作为 CSS 生成器，意味着可以直接通过修改变量或 <code>@extend</code> 完成大部分工作。参考以下文档：</p>
 <ul>
 <li><a href="https://quarto.org/docs/output-formats/html-themes.html">Quarto - HTML Theming</a></li>
@@ -473,8 +489,8 @@ MathJax = {
 </ul>
 <p>当然，这得在已有成熟 LaTeX 模板的前提下才能进行，所以还是得会 LaTeX（笑）。使用过程中笔者也发现生成的 LaTeX 的某些细节不太合理（如 <a href="https://github.com/quarto-dev/quarto-cli/issues/3736">Issue #3736</a>，详见 SunQuarTeX 仓库 README），当然也无伤大雅，且等开发团队慢慢完善吧。</p>
 </section>
-<section id="blog" class="level3">
-<h3 class="anchored" data-anchor-id="blog">Blog</h3>
+<section id="blog" class="level2">
+<h2 class="anchored" data-anchor-id="blog">Blog</h2>
 <p>有了前面的基础，再搭博客也就容易了。以笔者一贯的风格，博客样式都是要操刀大改的（上一个甚至直接从零手撸了 XD），这次工作却意外的少。一方面考虑到毕竟不在 CS 专业，写那么多祖传代码之后维护也是麻烦事；另一方面嘛……</p>
 <blockquote class="blockquote">
 <p>这，谁写的这 <code>darkly</code> 这主题，绿不拉几的</p>
@@ -498,8 +514,8 @@ MathJax = {
 </ul>
 </section>
 </section>
-<section id="画廊" class="level2">
-<h2 class="anchored" data-anchor-id="画廊">画廊</h2>
+<section id="画廊" class="level1">
+<h1>画廊</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="quarto-begin.jpg" class="img-fluid figure-img"></p>
@@ -515,15 +531,50 @@ MathJax = {
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -598,11 +649,30 @@ MathJax = {
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -616,10 +686,72 @@ MathJax = {
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
             // default icon
             link.classList.add("external");
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -633,6 +765,7 @@ MathJax = {
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -795,44 +928,54 @@ MathJax = {
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -931,8 +1074,11 @@ MathJax = {
     }
   });
   </script>
-<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
-<input type="hidden" id="giscus-alt-theme" value="light">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark_dimmed">
 <script>
   function loadGiscus() {
     // Function to get the theme based on body class

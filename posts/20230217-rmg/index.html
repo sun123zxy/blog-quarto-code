@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -14,10 +14,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -38,16 +41,19 @@ ul.task-list li input[type="checkbox"] {
 <link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f81f3c79f694eaf6f88ebcce70241f9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-af64962de9348b804daa6381b125c604.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e87cd3d65a65f768c7a1700db1c28216.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9b2404ec78ff68ca4c9b2f4303203b01.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-39330638802da02b364dd7ec4e29bc31.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7dd074d930de47cb4e38ad128cc73662.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -88,7 +94,7 @@ MathJax = {
 
 </head>
 
-<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -111,6 +117,7 @@ MathJax = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -140,13 +147,19 @@ MathJax = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -230,14 +243,17 @@ MathJax = {
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -252,15 +268,14 @@ MathJax = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -304,8 +319,9 @@ MathJax = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -314,14 +330,18 @@ MathJax = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#一点随想" id="toc-一点随想" class="nav-link active" data-scroll-target="#一点随想">一点随想</a></li>
   <li><a href="#mc-指令相关" id="toc-mc-指令相关" class="nav-link" data-scroll-target="#mc-指令相关">MC 指令相关</a>
   <ul class="collapse">
-  <li><a href="#setblock-datavalue-block-state-and-data-tag-nbt" id="toc-setblock-datavalue-block-state-and-data-tag-nbt" class="nav-link" data-scroll-target="#setblock-datavalue-block-state-and-data-tag-nbt">setblock, dataValue, block state and data tag (nbt)</a></li>
+  <li><a href="#setblock-datavalue-block-state-and-data-tag-nbt" id="toc-setblock-datavalue-block-state-and-data-tag-nbt" class="nav-link" data-scroll-target="#setblock-datavalue-block-state-and-data-tag-nbt">setblock, dataValue, block state and data tag (nbt)</a>
+  <ul class="collapse">
+  <li><a href="#扁平化前1.12-及以前" id="toc-扁平化前1.12-及以前" class="nav-link" data-scroll-target="#扁平化前1.12-及以前">扁平化前（1.12 及以前）</a></li>
+  <li><a href="#扁平化后1.13-及以后" id="toc-扁平化后1.13-及以后" class="nav-link" data-scroll-target="#扁平化后1.13-及以后">扁平化后（1.13 及以后）</a></li>
+  </ul></li>
   <li><a href="#fallingsand-or-falling_block" id="toc-fallingsand-or-falling_block" class="nav-link" data-scroll-target="#fallingsand-or-falling_block">FallingSand or falling_block</a></li>
   <li><a href="#解决指令引号嵌套无法识别问题" id="toc-解决指令引号嵌套无法识别问题" class="nav-link" data-scroll-target="#解决指令引号嵌套无法识别问题">解决指令引号嵌套无法识别问题</a></li>
   </ul></li>
@@ -350,7 +370,7 @@ MathJax = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -411,8 +431,8 @@ MathJax = {
 <p>——如同小小的光芒。</p>
 <p>——<a href="https://www.bilibili.com/read/cv11907285">东方莳梦原～Champaign of Unfinished Dreams</a> by 秋ノ宮飛鳥</p>
 </blockquote>
-<section id="一点随想" class="level2">
-<h2 class="anchored" data-anchor-id="一点随想">一点随想</h2>
+<section id="一点随想" class="level1">
+<h1>一点随想</h1>
 <p>2022 年 8 月 17 日夜，Ancient Temple 完成过半，月色入户，欣然开摆。</p>
 <p>对，今天又是 8 月 17 日，是妖妖梦、风神录的发售日，<del>也是某个枪毙节</del>，还是某个新博客启用的周年纪念日——我又来写随想了。</p>
 <p>18 年华灯宴 1U_s 大佬一曲<a href="https://b23.tv/FwrlLWL">十七岁</a>把我拉入红石音乐的大坑，到现在也有 4 年多了。随便聊聊感想，谈谈技术和非技术的各种话题。</p>
@@ -450,12 +470,12 @@ MathJax = {
 <p>或许每个人心中的红乐标准都有所不同……或许我们只能求同存异，力求百花齐放，不要走火入魔。但最近粒子特效红石音乐的发展又让我感到困惑——一点红石、音符盒甚至命令方块都不出现，真的算红乐吗？那些炫酷的粒子特效，真的属于 Minecraft 吗？</p>
 <p>只能交给时间回答了。我想，我能保证的，只是一颗全心投入、宁缺毋滥的创作心态；而我应该做的，是继续完成手头的作品。</p>
 </section>
-<section id="mc-指令相关" class="level2">
-<h2 class="anchored" data-anchor-id="mc-指令相关">MC 指令相关</h2>
-<section id="setblock-datavalue-block-state-and-data-tag-nbt" class="level3">
-<h3 class="anchored" data-anchor-id="setblock-datavalue-block-state-and-data-tag-nbt">setblock, dataValue, block state and data tag (nbt)</h3>
-<section id="扁平化前1.12-及以前" class="level4">
-<h4 class="anchored" data-anchor-id="扁平化前1.12-及以前">扁平化前（1.12 及以前）</h4>
+<section id="mc-指令相关" class="level1">
+<h1>MC 指令相关</h1>
+<section id="setblock-datavalue-block-state-and-data-tag-nbt" class="level2">
+<h2 class="anchored" data-anchor-id="setblock-datavalue-block-state-and-data-tag-nbt">setblock, dataValue, block state and data tag (nbt)</h2>
+<section id="扁平化前1.12-及以前" class="level3">
+<h3 class="anchored" data-anchor-id="扁平化前1.12-及以前">扁平化前（1.12 及以前）</h3>
 <p><code>setblock &lt;x&gt; &lt;y&gt; &lt;z&gt; &lt;block&gt; [dataValue|state] [oldBlockHandling] [dataTag]</code></p>
 <p><code>dataValue</code> 和 <code>blockstate</code> 在扁平化之前是方块状态的两种不同描述方式，<code>dataValue</code> 是实际存储时使用的 4 bit 数据。通常，<code>blockstate</code> 或 <code>dataValue</code> 用来描述方块的一些基本性质，比如朝向 <code>facing</code>、羊毛的颜色 <code>color</code>、中继器的延迟刻数 <code>delay</code>。</p>
 <p>具体写法例如：<code>/setblock ~ ~ ~1 minecraft:unpowered_repeater delay=4,facing=east</code> 设置一个延迟为 4 rt，面朝“东方”的红石中继器。（这里打上了引号，因为事实上<strong>红石中继器的 facing 代表的方向与信号传导的方向是相反的</strong>）</p>
@@ -464,15 +484,15 @@ MathJax = {
 <p>中间的 <code>0</code> 是用来占位的。</p>
 <p>查找某方块的 <code>dataValue</code> 和 <code>blockstate</code> 时可以翻阅 Minecraft Wiki 1.13 以前的历史版本（1.13 于 2018 年 6 月 18 日发布）</p>
 </section>
-<section id="扁平化后1.13-及以后" class="level4">
-<h4 class="anchored" data-anchor-id="扁平化后1.13-及以后">扁平化后（1.13 及以后）</h4>
+<section id="扁平化后1.13-及以后" class="level3">
+<h3 class="anchored" data-anchor-id="扁平化后1.13-及以后">扁平化后（1.13 及以后）</h3>
 <p><code>setblock &lt;pos&gt; &lt;block&gt; [destroy|keep|replace]</code></p>
 <p>其中 <code>&lt;block&gt;</code> 是 <code>block_state</code>， 具体的写法是 <code>namespaced_ID[block_states=value]{data_tags:value}</code></p>
 <p>也就是说，原先的 <code>block</code>、<code>block_state</code> 和 <code>dataTag</code> 现在被统一整合入 <code>block_state</code> 里面，显然这更方便使用了。（然而作为考古学家，这好像也没法用上…）</p>
 </section>
 </section>
-<section id="fallingsand-or-falling_block" class="level3">
-<h3 class="anchored" data-anchor-id="fallingsand-or-falling_block">FallingSand or falling_block</h3>
+<section id="fallingsand-or-falling_block" class="level2">
+<h2 class="anchored" data-anchor-id="fallingsand-or-falling_block">FallingSand or falling_block</h2>
 <p>掉落方块实体。1.11 前它叫 <code>FallingSand</code>，1.11 及以后它叫 <code>falling_block</code>。</p>
 <p>1.12 及以前可用 <code>/summon falling_block ~ ~ ~ {Block:minecraft:redstone_block,Time: 1}</code> 召唤掉落的红石块。Time 参数设置最长掉落时间，实际上会与 30 秒取最大值，但如果留空则会马上消失。</p>
 <p>而 <code>/summon falling_block ~ ~ ~ {Block:"minecraft:wool", Data: 14, Time:1}</code> 可召唤掉落的红色羊毛。<code>Data</code> 标签自然与颜色对应了。</p>
@@ -484,16 +504,16 @@ MathJax = {
 <li><p><a href="https://minecraft.fandom.com/wiki/Tutorials/Command_NBT_tags#Entities">Tutorials/Command NBT tags – Minecraft Wiki</a></p></li>
 </ul>
 </section>
-<section id="解决指令引号嵌套无法识别问题" class="level3">
-<h3 class="anchored" data-anchor-id="解决指令引号嵌套无法识别问题">解决指令引号嵌套无法识别问题</h3>
+<section id="解决指令引号嵌套无法识别问题" class="level2">
+<h2 class="anchored" data-anchor-id="解决指令引号嵌套无法识别问题">解决指令引号嵌套无法识别问题</h2>
 <p>见 <a href="https://gaming.stackexchange.com/questions/246064/why-are-my-quotation-marks-causing-an-unexpected-token-error-with-this-command">minecraft java edition - Why are my quotation marks causing an “unexpected token” error with this command? - Arqade</a>，用 <code>\</code> 转义即可。</p>
 </section>
 </section>
-<section id="mod资源包" class="level2">
-<h2 class="anchored" data-anchor-id="mod资源包">mod、资源包</h2>
+<section id="mod资源包" class="level1">
+<h1>mod、资源包</h1>
 <p>注意此处提到的 mod 和资源包均只在其 1.12.2 对应版本下测试，不少功能在新版已经不需要 mod 了。</p>
-<section id="worldedit" class="level3">
-<h3 class="anchored" data-anchor-id="worldedit">WorldEdit</h3>
+<section id="worldedit" class="level2">
+<h2 class="anchored" data-anchor-id="worldedit">WorldEdit</h2>
 <p>建筑党老相识了，不细讲了，Google 一下你就知道。</p>
 <ul>
 <li><a href="https://worldedit.enginehub.org/en/latest/">WorldEdit Documentation</a></li>
@@ -501,40 +521,40 @@ MathJax = {
 <p>用的多的命令 <code>copy</code>、<code>flip</code>、<code>rotate</code>、<code>paste</code>、<code>stack</code>、<code>set</code>、<code>replace</code>。当然还有最要命的 <code>undo</code> 啦（</p>
 <p><code>schematic</code> 系列指令也很好用（用来偷建筑）（逃）</p>
 </section>
-<section id="voxelmap" class="level3">
-<h3 class="anchored" data-anchor-id="voxelmap">VoxelMap</h3>
+<section id="voxelmap" class="level2">
+<h2 class="anchored" data-anchor-id="voxelmap">VoxelMap</h2>
 <p>常见的小地图，用来传送挺方便的。也不细讲了。</p>
 </section>
-<section id="tickratechanger" class="level3">
-<h3 class="anchored" data-anchor-id="tickratechanger">TickrateChanger</h3>
+<section id="tickratechanger" class="level2">
+<h2 class="anchored" data-anchor-id="tickratechanger">TickrateChanger</h2>
 <p><a href="https://www.curseforge.com/minecraft/mc-mods/tickratechanger">TickrateChanger - Mods - Minecraft - CurseForge</a></p>
 <p>tickrate changer，就是字面意思嘛。改 tickrate 可以使游戏变快或变慢，从而实现精确调节 BPM。正常值 20。</p>
 <p>但是有个挺烦的问题是调了过后声音的频率也随之改变了，这样音高就发生变化了…有大佬知道怎么办吗？</p>
 </section>
-<section id="colored-redstone" class="level3">
-<h3 class="anchored" data-anchor-id="colored-redstone">Colored Redstone</h3>
+<section id="colored-redstone" class="level2">
+<h2 class="anchored" data-anchor-id="colored-redstone">Colored Redstone</h2>
 <p><a href="https://www.curseforge.com/minecraft/mc-mods/colored-redstone">Colored Redstone - Mods - Minecraft - CurseForge</a></p>
 <p>材质包编辑红石颜色失败后的替代品。具体细节有点忘了，只记得生成时 namespace 好像是 <code>coloredredstone:colored_redstone_block</code>，用 datavalue 来调颜色。（也忘了自己是怎么知道的了……好像是拆 jar 看的？）</p>
 <p>顺序大概是这样：</p>
 <p><img src="colorful-redstone.jpg" class="img-fluid"></p>
 </section>
-<section id="invisiblights" class="level3">
-<h3 class="anchored" data-anchor-id="invisiblights">InvisibLights</h3>
+<section id="invisiblights" class="level2">
+<h2 class="anchored" data-anchor-id="invisiblights">InvisibLights</h2>
 <p><a href="https://www.curseforge.com/minecraft/mc-mods/invisiblights">InvisibLights - Mods - Minecraft - CurseForge</a></p>
 <p>材质包编辑发光材质失败后的替代品。字面义，作为隐形光源使用。</p>
 </section>
-<section id="realpiano-资源包" class="level3">
-<h3 class="anchored" data-anchor-id="realpiano-资源包">realpiano 资源包</h3>
+<section id="realpiano-资源包" class="level2">
+<h2 class="anchored" data-anchor-id="realpiano-资源包">realpiano 资源包</h2>
 <p><a href="http://lkrb.net/blog/54.html">原出处</a>已挂，有个<a href="https://www.cr173.com/soft/277354.html">下载站</a>还有资源。</p>
 <p>发声命令 <code>/execute @p ~ ~ ~ playsound lkrb.piano.p60fff voice @p ~ ~ ~"</code>，<code>C5 = 60</code>，音高 21 至 108，力度可选 <code>ppp,pp,p,mp,mf,f,ff,fff</code>。</p>
 </section>
-<section id="soma-资源包" class="level3">
-<h3 class="anchored" data-anchor-id="soma-资源包">soma 资源包</h3>
+<section id="soma-资源包" class="level2">
+<h2 class="anchored" data-anchor-id="soma-资源包">soma 资源包</h2>
 <p>这个老强了，按 MIDI 音源标准制作的全套音色，长短音都有。</p>
 <p>因为没怎么用就不细讲了。</p>
 </section>
-<section id="材质包编辑" class="level3">
-<h3 class="anchored" data-anchor-id="材质包编辑">材质包编辑</h3>
+<section id="材质包编辑" class="level2">
+<h2 class="anchored" data-anchor-id="材质包编辑">材质包编辑</h2>
 <p>一开始是因为 SEUS v11.0 太黑看不清红石块，想找个方法让红石块自发光 。找了半天没找到的现成的，只好现学现做。</p>
 <p>关于如何获取作为参考的 Default 材质包，参考 <a href="https://www.reddit.com/r/Minecraft/comments/47sycp/where_can_i_find_the_default_texture_pack_to_edit/">Where can I find the default texture pack to edit? : Minecraft</a>，直接把 <code>1.12.2.jar</code> 解压后里面的 <code>assets</code> 文件夹提到资源包里就可以用了，意外的方便啊（</p>
 <p>（其实 mod 的 jar 里面也有这个文件夹！）</p>
@@ -547,16 +567,16 @@ MathJax = {
 <p>此外，发现同一地点方块贴图始终一致，这说明随机种子由位置决定。但作为 Falling_block 生成时，全都只会用第一个贴图。</p>
 </section>
 </section>
-<section id="mcpi-和-raspberryjammod-相关" class="level2">
-<h2 class="anchored" data-anchor-id="mcpi-和-raspberryjammod-相关">MCPI 和 RaspberryJamMod 相关</h2>
+<section id="mcpi-和-raspberryjammod-相关" class="level1">
+<h1>MCPI 和 RaspberryJamMod 相关</h1>
 <p>RaspberryJamMod：把 <a href="https://www.minecraft.net/en-us/edition/pi">Minecraft: Pi Edition</a> 的 Python API 移植到 Java 版的一款 mod。</p>
 <ul>
 <li>Github 库：<a href="https://github.com/arpruss/raspberryjammod">GitHub - arpruss/raspberryjammod: Raspberry Jam Mod - a Mod Forge Minecraft mod implementing most of Raspberry Juice/Pi API</a></li>
 <li>官方指南：<a href="https://www.instructables.com/Python-coding-for-Minecraft/">Python Coding for Minecraft : 18 Steps (with Pictures) - Instructables</a></li>
 <li>Minecraft: Pi Edition 的 API：<a href="https://www.stuffaboutcode.com/p/minecraft-api-reference.html">Minecraft: Pi Edition API</a></li>
 </ul>
-<section id="mcpi-block-类在-setblock-setblockwithnbt-中的使用" class="level3">
-<h3 class="anchored" data-anchor-id="mcpi-block-类在-setblock-setblockwithnbt-中的使用">MCPI Block 类在 setBlock &amp; setBlockWithNBT 中的使用</h3>
+<section id="mcpi-block-类在-setblock-setblockwithnbt-中的使用" class="level2">
+<h2 class="anchored" data-anchor-id="mcpi-block-类在-setblock-setblockwithnbt-中的使用">MCPI Block 类在 setBlock &amp; setBlockWithNBT 中的使用</h2>
 <p><code>Block</code> 类被封装成了包含三个元素 <code>id:int</code>, <code>data:int</code>, <code>nbt:str</code> 的“数组”，在 <code>setBlock</code> 和 <code>setBlockWithNBT</code> 中直接使用 <code>Block</code> 类会被 <code>flatten()</code> 或 <code>floorFlatten()</code> 函数“拍扁”成分散的参数。一个 <code>Block</code> 对象只可能被拍扁成 <code>data, id</code> 或 <code>id, data, nbt</code>，取决于该对象是否设置了 <code>nbt</code> （用 <code>None</code> 判断）。</p>
 <p>因此，需要自定义 <code>data</code> 时，不能使用 <code>block</code> 模块的预设方块。</p>
 <p><code>Vec3</code> 类也可被拍扁。</p>
@@ -567,8 +587,8 @@ MathJax = {
 </ul>
 <p>需要注意的是， <code>setBlock()</code> 不能接受 <code>nbt</code> 参数或带 <code>nbt</code> 的 <code>Block</code> 对象，否则会报错。而 <code>setBlockWithNBT()</code> 则有无 <code>nbt</code> 皆可。</p>
 </section>
-<section id="关于-mcpi-与游戏内的坐标差" class="level3">
-<h3 class="anchored" data-anchor-id="关于-mcpi-与游戏内的坐标差">关于 MCPI 与游戏内的坐标差</h3>
+<section id="关于-mcpi-与游戏内的坐标差" class="level2">
+<h2 class="anchored" data-anchor-id="关于-mcpi-与游戏内的坐标差">关于 MCPI 与游戏内的坐标差</h2>
 <p>见 <a href="https://stackoverflow.com/questions/70747581/python-minecraft-coordinates-trouble">Python + Minecraft Coordinates Trouble - Stack Overflow</a>：</p>
 <blockquote class="blockquote">
 <p>getPos, getTilePos, setPos and setTilePos all appear to be relative to the player’s spawn point at least in a single player world. I am going through trying to teleport my character but the coordinates I end up on are not the world’s coordinates but a coordinate relative to where my character would spawn.</p>
@@ -578,10 +598,10 @@ MathJax = {
 </blockquote>
 </section>
 </section>
-<section id="自制轮子" class="level2">
-<h2 class="anchored" data-anchor-id="自制轮子">自制轮子</h2>
-<section id="redstone-music-generator旧版" class="level3">
-<h3 class="anchored" data-anchor-id="redstone-music-generator旧版">redstone-music-generator（旧版）</h3>
+<section id="自制轮子" class="level1">
+<h1>自制轮子</h1>
+<section id="redstone-music-generator旧版" class="level2">
+<h2 class="anchored" data-anchor-id="redstone-music-generator旧版">redstone-music-generator（旧版）</h2>
 <p>（这是重构旧版前再次阅读代码后的小报告）</p>
 <p>大概使用了 observer 的设计模式，写了类似 C# 中的 Event，Delegate 暂时还没有封装，稍微有点混乱。</p>
 <p>自己写了一些工具类，然后弄了个 <code>MIDIHandler</code> 预处理 MIDI 文件。</p>
@@ -590,8 +610,8 @@ MathJax = {
 <p>现在有一个问题就是 PosGen 和 BlockGen 分开了，有 Issue 提到想要自定义每个 Note 下放的 partBlock，像这样搞就很麻烦。</p>
 <p>应该有一个把 PosGen 和 BlockGen 合起来的方案，最好是能独立表示多个方块及其位置信息的一个整体。</p>
 </section>
-<section id="redstone-music-generator新版" class="level3">
-<h3 class="anchored" data-anchor-id="redstone-music-generator新版">redstone-music-generator（新版）</h3>
+<section id="redstone-music-generator新版" class="level2">
+<h2 class="anchored" data-anchor-id="redstone-music-generator新版">redstone-music-generator（新版）</h2>
 <p>TODO（咕咕咕）</p>
 <p>temp: <code>/execute @p ~ ~ ~ playsound block.note.guitar voice @p ~ ~ ~</code></p>
 
@@ -604,15 +624,50 @@ MathJax = {
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -687,11 +742,30 @@ MathJax = {
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -705,10 +779,72 @@ MathJax = {
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
             // default icon
             link.classList.add("external");
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -722,6 +858,7 @@ MathJax = {
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -884,44 +1021,54 @@ MathJax = {
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1020,8 +1167,11 @@ MathJax = {
     }
   });
   </script>
-<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
-<input type="hidden" id="giscus-alt-theme" value="light">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark_dimmed">
 <script>
   function loadGiscus() {
     // Function to get the theme based on body class

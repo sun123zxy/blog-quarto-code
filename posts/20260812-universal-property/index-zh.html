@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,10 +13,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -57,16 +60,19 @@ div.csl-indent {
 <link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f81f3c79f694eaf6f88ebcce70241f9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-af64962de9348b804daa6381b125c604.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e87cd3d65a65f768c7a1700db1c28216.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9b2404ec78ff68ca4c9b2f4303203b01.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-39330638802da02b364dd7ec4e29bc31.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7dd074d930de47cb4e38ad128cc73662.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -105,7 +111,7 @@ MathJax = {
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -136,7 +142,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">跳至主要内容</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -159,6 +165,7 @@ window.Quarto = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -188,13 +195,19 @@ window.Quarto = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -278,14 +291,17 @@ window.Quarto = {
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -300,15 +316,14 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="网站">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="搜索"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -352,8 +367,9 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式" aria-label="切换深色模式"><i class="bi"></i></button>
 </div>
+            <div id="quarto-search" class="" title="搜索"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -362,7 +378,7 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">该页面内容</h2>
    
   <ul>
@@ -385,7 +401,7 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -426,8 +442,8 @@ window.Quarto = {
 </header>
 
 
-<section id="谜之锐评" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="谜之锐评"><span class="header-section-number">1</span> 谜之锐评</h2>
+<section id="谜之锐评" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 谜之锐评</h1>
 <p>关于代数闭包（algebraic closure），如下评述常见于课堂内外：“代数闭包没有真正意义上的泛性质（universal property）．”鲜有人理解它的真实含义．乍一看，这令人费解：代数闭包当然在同构意义下唯一（unique up to isomorphism）．常见的各种泛性质构造，如自由对象（free object）、张量积（tensor product）、直积（direct product），也是如此．那么，为什么代数闭包会得到不同的待遇？</p>
 <p>这是因为不是所有唯一性论述都具有同等的强度．我们常说的泛性质的标准 slogan 是“在唯一同构意义下唯一”（unique up to a unique isomorphism），而代数闭包是“在同构意义下唯一”．在后一陈述中，同构只是存在而已；而在前一陈述中，这个同构本身也是唯一的．不区分“唯一”一词出现的次数会掩盖了这额外的一层．</p>
 <p>事实证明，就保结构的（structure-preserving）同构而言，代数闭包并不满足这一唯一性要求．</p>
@@ -463,11 +479,11 @@ c(i)=-i.
 <p>鸟是形容词．没有怪鸟在本文撰写过程中受到伤害．</p>
 </blockquote>
 </section>
-<section id="两种机制" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="两种机制"><span class="header-section-number">2</span> 两种机制</h2>
+<section id="两种机制" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 两种机制</h1>
 <p>让我们更仔细地考察这两种抽象机制．区别在于同构是如何获得的．</p>
-<section id="sec-universal-property" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="sec-universal-property"><span class="header-section-number">2.1</span> 泛性质：唯一的保结构映射</h3>
+<section id="sec-universal-property" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="sec-universal-property"><span class="header-section-number">2.1</span> 泛性质：唯一的保结构映射</h2>
 <p>设 <span class="math inline">\(X\)</span> 与 <span class="math inline">\(Y\)</span> 是满足同一泛性质的两个泛对象（universal object）．在两个方向上应用该性质，得到唯一的保结构映射 <span class="math display">\[
 f:X\longrightarrow Y,
 \qquad
@@ -478,8 +494,8 @@ gf=\operatorname{id}_X.
 fg=\operatorname{id}_Y.
 \]</span> 于是 <span class="math inline">\(f\)</span> 与 <span class="math inline">\(g\)</span> 互为逆同构．但这个论证给出的不止是 <span class="math inline">\(X\)</span> 与 <span class="math inline">\(Y\)</span> 之间的一个同构：泛性质已经表明 <span class="math inline">\(f\)</span> 是从 <span class="math inline">\(X\)</span> 到 <span class="math inline">\(Y\)</span> 唯一的保结构映射．因此该同构是唯一的．</p>
 </section>
-<section id="sec-weak-universal-property" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="sec-weak-universal-property"><span class="header-section-number">2.2</span> 一套更弱的机制：保结构自同态可逆</h3>
+<section id="sec-weak-universal-property" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sec-weak-universal-property"><span class="header-section-number">2.2</span> 一套更弱的机制：保结构自同态可逆</h2>
 <p>现在去掉唯一性要求．我们仍保证保结构映射的存在性，但改为要求候选对象的每个保结构自同态都是自同构．若 <span class="math inline">\(X\)</span> 与 <span class="math inline">\(Y\)</span> 都满足该性质，我们可以选取映射 <span class="math display">\[
 f:X\longrightarrow Y,
 \qquad
@@ -492,8 +508,8 @@ g(fg)^{-1}
 <p>这个论证仍然证明了 <span class="math inline">\(X\)</span> 与 <span class="math inline">\(Y\)</span> 同构，却没有证明同构是唯一的．<span class="math inline">\(f\)</span> 的选取可能有多种，而没有任何条件迫使它们一致．两种机制都得到的同构类都唯一，但只有泛性质才能使同构类内部保结构的同构也唯一．</p>
 </section>
 </section>
-<section id="例代数闭包" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="例代数闭包"><span class="header-section-number">3</span> 例：代数闭包</h2>
+<section id="例代数闭包" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 例：代数闭包</h1>
 <p>现在我们回到代数闭包．代数闭包 <span class="math inline">\(\overline K\)</span> 的定义性质可以描述为如下基于映射的表述：若 <span class="math inline">\(L\)</span> 是 <span class="math inline">\(K\)</span> 的代数闭扩张，则嵌入把 <span class="math inline">\(K \hookrightarrow L\)</span> 可扩张为嵌入 <span class="math display">\[
 \overline K\hookrightarrow L.
 \]</span> 换言之，虚线箭头总可以用一个嵌入来填补：</p>
@@ -557,8 +573,8 @@ g(fg)^{-1}
 </div>
 <p><a href="#sec-weak-universal-property" class="quarto-xref">小节&nbsp;2.2</a> 中的较弱论证现在表明，<span class="math inline">\(K\)</span> 的任意两个代数闭包都是 <span class="math inline">\(K\)</span>-同构的．所需的嵌入存在，但没有任何条件使它们唯一．</p>
 </section>
-<section id="例投射覆盖" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="例投射覆盖"><span class="header-section-number">4</span> 例：投射覆盖</h2>
+<section id="例投射覆盖" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 例：投射覆盖</h1>
 <p>这种弱化版泛性质的另一个例子出现在模论中．每个模 <span class="math inline">\(M\)</span> 都是某个投射模（projective module）的商模，但一个随便选取的 <span class="math inline">\(P\twoheadrightarrow M\)</span> 通常含有超出所需的投射成分．投射覆盖（projective cover）则投射满同态其中“极小”的一个．</p>
 <p>与前面一样，我们很自然想用一个基于映射的性质来表达这一极小性要求．设 <span class="math inline">\(p:P\twoheadrightarrow M\)</span> 是投射覆盖．给定另一个投射模 <span class="math inline">\(Q\)</span> 与一个满同态 <span class="math inline">\(f:Q\twoheadrightarrow M\)</span>，我们希望存在满同态 <span class="math inline">\(\widetilde f:Q\twoheadrightarrow P\)</span> 使下图交换：</p>
 <div id="fig-projective-cover-lift" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -702,9 +718,9 @@ p(\operatorname{im}u)=M,
 <!-- This file was generated by dvisvgm 3.6 -->
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="91.875pt" height="70.545pt" viewbox="0 0 61.25 47.03">
 <style type="text/css">
-@font-face{font-family:XDTRFF-CMMI5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJEAAoAAAAABCAAAAH5AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBWIE/CwYAATYCJAMIBCAFglwHIBtQAyAehXHjU0KUS7T2VMvuiUc8VIfv27tNqZWD4T/RClbHGzbhTDCg1SwCTf8drbXZ2zcx1JKIeHJrNDLNKnQq+cn7+7+3+L+Bb0AXTnjIs63j4oAaeIJFmIfX5QEmGFCeWPDvrr3abdIvGpyU3MxQ626sQA/lhXjviizXMP6KwCfo4F5IILu666oGiqNmFRqqGNbZGiiomPY100jWgZQCR601XHsTZAqQtwp0gBMAEhCd+4KNDcbGlqSuQHaQub0p3rFERWVsSfbPxN8ri08tjONTNHomZp5timvzlduXURv5PxIZmb25Cc/Hko/CDNFzTo89TsvHQHHBMArYjkUj/0Oa08P7Dvy7iulnB0Tf7qTYu0ShM7NF+z94L/XenKYvvWYarv9ZuP/k9b4dr9STiMWzcNwPIBB858hbMTf0n4aTTrdu5pdXoF8BQdWQh3raT9RAyErhGQhFBwKBfNATMIaiSMPGurTHkCXaa9hu96B53rDIAWFVnNE0r4b2mDVCe83bcoP23J5S/Qfn1pyIjLSoKLfwxMRYv8tvxcvdM1N60byioqu2vau6Uefj7g/hmjVq0alDpTY6iZpV8PWa5IiQIU2UKG7CJUoUy0+WSm3a1WrWRMeLO88JEG2aFjWlG0HFS2V66VToUqtdl2qNdHy484dJFQAAAA==) format('woff2');}
 @font-face{font-family:NQUDBD-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHAAAoAAAAAA3wAAAF2AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAo0RwsGAAE2AiQDCAQgBYJcByAb2AIArgrshvMbAiHK3r84r5OYbap1FM9/P9bOfSuGiGdapxIadYeGR9GUCIWhJv7/vz/voLRQ306nEqD0zakti6VtmWDpnImQzQl7zZ4D9fyWO36RArotfNTEfx5YC6S1PVCCjxBIiyzCMAy0bypOkhIStVr7NqGTX9Kjvur/FTdNWQLJAK6PD9zl1YYDr2nTCZ0AYi1vrjVQ6GCFSxBzOwC6dDBtDTdp7UYAFOgimMEcoAvIDNb/fDx+rfv6fvr8zYzj4wTOAYLwszirYcFSfm4wSy0F1TBUIAxVimeO/zi4oArIhZegzAgIzGPXGTQvPrpmzKNnYht9M84WxjYkuKQbgNjTBujawKNnzQF9G7517Nz/uMhnmIf90axaroYrvckqews18Ugs1D0t/jp6I1gbTkHJSAYqNArdmo1hQno0NIZJ1TcyU1VWFVbRM7GSNccwWQQaFRIXEaughlYxTEQnoh9N2kNoGwLLBkeBJEVkuADsHwAAAA==) format('woff2');}
 @font-face{font-family:OYFEXR-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAMYAAoAAAAABTAAAALPAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqDXIMGCwgAATYCJAMMBCAFglwHIBsjBAAehXGz00Wlie/ivbOrgzb1gJSaus7EvgvP/++8vSJIMIHMOtlINuAB+C/J/4lz6ZJmzRUAOsugtiiw3Qs9vsHwE/RFXmA0UnybV8R8aGTqfJuHDwCLK1IHJAD90Gv/maBWPORrV4BiIwegccAg4FQQdFJCARcmrgMRwCB2d4kFAKAAMABMhWVCILbGESBQlLai39TbwABDcbYDADZZAAACDgA/t7XpI91mH5jeu9bP1CXHNMfW1QVdwpV3FDspmZvbpdrEtowqrvPks3L2uj4Q7FxQObor1cbk5MTF1jREMTKBcPq2trZQVLSwtLZSuq4uMzl7cuZ3iAztcbU1sbC0tDzg7NwUHb3HPflA9fSe812nNrE1W7nOUf832ZqgmVm5shnymihcnJo48keZK0c9nZqkp41XH8jOPkAGdihG7uqNWqvN2SvkGRN0Fqm4NZklNvbq6PnneXe46Onr7fHYERLpO2I5ZFQSN+4w6zMb0DHZxc/bGqS+s2Aw580uzuiJIKdDqY1rDbV4PgmR/yGneUBqiC8aUILVk3RbhvkL303eacOIun57WmaDL8uxN/P0uD+7WMr8ivN2QN3QMD2bP3QWBs7oLbY8BgMGp0htnOwVHcUfCpoz0kjMFevjo8X7uGmPHis/pRRyFIoz0hTJ5coQxGZ48syFAQAAEAAIkLzUL3xptf6RYQQQgLi3komeAgAZ1PMEgCEC6E9sJhMQFGKx0IF1PIgLjA3CBR4o5EAySGvsRQIqtCIJSpwijorIfQpsFGCQQQ4IHhYkErAJE0mwyBNxbFpGCnJmIg/jY7FdW3cTYzcHaUNra3PVgP5KXkbuaPNK+42glPDElNBoPkUZFTAUK1qcZEmCJeBjLVZQeieGLXcmjLlxIM2QNXfmVLm0oyUKFysGH3ky5DxAUzMG1fS/CQzKA6Rr6iApwiUePFQ0PopkqMBM) format('woff2');}
+@font-face{font-family:XDTRFF-CMMI5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJEAAoAAAAABCAAAAH5AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBWIE/CwYAATYCJAMIBCAFglwHIBtQAyAehXHjU0KUS7T2VMvuiUc8VIfv27tNqZWD4T/RClbHGzbhTDCg1SwCTf8drbXZ2zcx1JKIeHJrNDLNKnQq+cn7+7+3+L+Bb0AXTnjIs63j4oAaeIJFmIfX5QEmGFCeWPDvrr3abdIvGpyU3MxQ626sQA/lhXjviizXMP6KwCfo4F5IILu666oGiqNmFRqqGNbZGiiomPY100jWgZQCR601XHsTZAqQtwp0gBMAEhCd+4KNDcbGlqSuQHaQub0p3rFERWVsSfbPxN8ri08tjONTNHomZp5timvzlduXURv5PxIZmb25Cc/Hko/CDNFzTo89TsvHQHHBMArYjkUj/0Oa08P7Dvy7iulnB0Tf7qTYu0ShM7NF+z94L/XenKYvvWYarv9ZuP/k9b4dr9STiMWzcNwPIBB858hbMTf0n4aTTrdu5pdXoF8BQdWQh3raT9RAyErhGQhFBwKBfNATMIaiSMPGurTHkCXaa9hu96B53rDIAWFVnNE0r4b2mDVCe83bcoP23J5S/Qfn1pyIjLSoKLfwxMRYv8tvxcvdM1N60byioqu2vau6Uefj7g/hmjVq0alDpTY6iZpV8PWa5IiQIU2UKG7CJUoUy0+WSm3a1WrWRMeLO88JEG2aFjWlG0HFS2V66VToUqtdl2qNdHy484dJFQAAAA==) format('woff2');}
 @font-face{font-family:TUELZZ-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAM0AAoAAAAABcQAAALqAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqEYINVCwoAATYCJAMQBCAFgmIHIBt8BFGUC0ZE8JFQ3dajiTFBTVRcDnWKicP8xYt4+H6/du6Tv7u4VfHpTMdLgpC0kQIli7VEY+hEePPl5U9mSyWFsoWTNylAzta81R/yDTzB1//n/3L87YZvniDHvGZz8x7USygMA86WtWlZiQZ4lGiL2+4Js/kjUSs3yOknRlXSY3rwr2SkC8eXhscixME68OCnXF5X5wAR50KzhiygR1sDCRkzSYpCIRuArjskF0IJzrlfak/tQApVAv129R3fgPcTwgPo66wn25CooiQ4ujWNqehIapJqmyJv7Kmn5GK9SSI5EYPpHStSADDIxgW6dSkzFb0eRyW3BKpJBVNT+unADDa4ud2QiLEEVktWQ0ubSpPvp6ZybtLAOm6YEpBJCcpzu9YYEI6KWV6HxJi6fj4nUqUaTbFV+sULzyONht8dHyt59Mpl7xWx+lJCYnPdwb2oh8+JSHl1SN10bYHNcMxVTPbv5dGnQWP+C71JvPdkbF0/4yQOt5cvh4lLv0S5MBteVr+Jrp5J6VKXdYdPNf++HaSPQYhHpU/TC7meVcnPcqnXAUoPHbZjfMRXq/4ltHVrBImDmRW+JE9ZSkJm0zXf1atnfQVd1Xj5o+/HZuI7qvKpBDi7/J6RPnbNgaN0qyK5Mo32bwMrD+f//EoFqR2wDbbBnx4nBm3r+CsBmURmvBMM83dODbPNJTKQFzUmiI4gQ19rXdFCfoxrxlsWgEBwv/vzM2X88LfPKwZ7219h0kX0JXLAeRN/MWpDhUGgxEsCpc2yNZBOYzZLxZHQnEF9yAMignFtjSlGjTPVsBWmM2r9+JAFlniiDIQ1gY4pluQz1ZxOprNktjHkwOGFRvuvbH9klFdgfDzjERTkx6GHwiLHov2Z799PZFbnVVTnFNEWrDXwUKJIqSqVspSjBSmR6V8rFimKl0Dx4jE8BAnih4NEA/1aIU+JYjQOC9GAj1ss7qYZgsxMurqZMFO1PBU+z1GEZoFljWcAAA==) format('woff2');}
 
 </style>
@@ -784,8 +800,8 @@ M=R/(\varepsilon),
 </div>
 </div>
 </section>
-<section id="最后的范畴废话" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="最后的范畴废话"><span class="header-section-number">5</span> 最后的范畴废话</h2>
+<section id="最后的范畴废话" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 最后的范畴废话</h1>
 <p>到目前为止，我们已通过几个例子用初等语言阐明了这两种机制的区别．现在让我们升级语言：用范畴论使两类唯一性不言自明．</p>
 <p>设 <span class="math inline">\(F:J\to\mathcal C\)</span> 是一个图表（diagram）．对对象 <span class="math inline">\(L\in\mathcal C\)</span>，记 <span class="math inline">\(\Delta L:J\to\mathcal C\)</span> 为把 <span class="math inline">\(J\)</span> 的每个对象送到 <span class="math inline">\(L\)</span>、每个态射送到 <span class="math inline">\(\operatorname{id}_L\)</span> 的常函子（constant functor）．以 <span class="math inline">\(L\)</span> 为顶点的 <span class="math inline">\(F\)</span> 上的<strong>锥（cone）</strong>是自然变换（natural transformation） <span class="math display">\[
 \lambda:\Delta L\Longrightarrow F.
@@ -799,8 +815,8 @@ f:(L,\lambda)\longrightarrow(L',\lambda')
 \]</span> （对每个 <span class="math inline">\(j\in J\)</span>）的映射 <span class="math inline">\(f:L\to L'\)</span>，等价地 <span class="math display">\[
 \lambda'\circ\Delta f=\lambda.
 \]</span> 这些正是锥之间的保结构映射．<span class="math inline">\(F\)</span> 的极限（limit）是 <span class="math inline">\(\operatorname{Cone}(F)\)</span> 的终对象（terminal object）．这是泛性质的终端形式；始端形式通过反转所有箭头得到．若不想区分二者，终对象与始对象（initial object）合称为泛对象．</p>
-<section id="泛对象构成可缩群胚" class="level3" data-number="5.1">
-<h3 data-number="5.1" class="anchored" data-anchor-id="泛对象构成可缩群胚"><span class="header-section-number">5.1</span> 泛对象构成可缩群胚</h3>
+<section id="泛对象构成可缩群胚" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="泛对象构成可缩群胚"><span class="header-section-number">5.1</span> 泛对象构成可缩群胚</h2>
 <p>假设 <span class="math inline">\(F\)</span> 有极限，并设 <span class="math inline">\(\mathcal U\)</span> 为 <span class="math inline">\(\operatorname{Cone}(F)\)</span> 中由所有极限锥组成的全子范畴（full subcategory）．若 <span class="math inline">\(L,L'\in\mathcal U\)</span>，终对象性质给出唯一态射 <span class="math display">\[
 L\longrightarrow L'.
 \]</span> 由 <a href="#sec-universal-property" class="quarto-xref">小节&nbsp;2.1</a> 的论证，两个方向上的唯一映射互为逆．因此 <span class="math inline">\(\mathcal U\)</span> 中每个态射都是同构，且 <span class="math display">\[
@@ -815,8 +831,8 @@ L\longrightarrow L'.
 \]</span></p>
 <p>这便是“在唯一同构意义下唯一”的全部含义．泛对象可能有不同的构造方式，但任意两个构造之间恰好有一个保结构同构．这就是为什么我们能安然写下记号 <span class="math inline">\(\bigoplus\)</span>、<span class="math inline">\(\prod\)</span>、<span class="math inline">\(\varprojlim\)</span>，仿佛它们生来只有一个的原因：泛性质以独一无二的方式将它们全部等同起来．</p>
 </section>
-<section id="弱终对象与极小对象" class="level3" data-number="5.2">
-<h3 data-number="5.2" class="anchored" data-anchor-id="弱终对象与极小对象"><span class="header-section-number">5.2</span> 弱终对象与极小对象</h3>
+<section id="弱终对象与极小对象" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="弱终对象与极小对象"><span class="header-section-number">5.2</span> 弱终对象与极小对象</h2>
 <p><a href="#sec-weak-universal-property" class="quarto-xref">小节&nbsp;2.2</a> 中的较弱机制也有范畴形式．范畴 <span class="math inline">\(\mathcal D\)</span> 的对象 <span class="math inline">\(L\)</span> 称为<strong>具有弱终对象性质（weakly terminal）</strong>，若每个对象 <span class="math inline">\(X\in\mathcal D\)</span> 都至少有一个到 <span class="math inline">\(L\)</span> 的态射： <span class="math display">\[
 \operatorname{Hom}_{\mathcal D}(X,L)\ne\varnothing.
 \]</span> 在本篇中，若弱终对象 <span class="math inline">\(L\)</span> 的每个自同态都是自同构，则称 <span class="math inline">\(L\)</span> 是<strong>极小的（minimal）</strong>．这个形容词来自我们为投射覆盖中遇到的右极小条件准备的对象层面的简写．</p>
@@ -831,8 +847,8 @@ g:L'\longrightarrow L.
 <p>对偶地，始端版本通过反转所有箭头得到．按域嵌入的通常方向，代数闭包是 <span class="math inline">\(K\)</span> 的全体代数闭扩张中的极小弱始对象（weakly initial）：总存在从它出发到其它任何对象的态射，且它在 <span class="math inline">\(K\)</span> 上的所有自同态都是自同构．（“弱始对象”是本文私自定义的说法，并非通用的做法．）另一方面，按此处采用的术语，投射覆盖是映满 <span class="math inline">\(M\)</span> 的投射模中的极小弱终对象．</p>
 </section>
 </section>
-<section id="尾声" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="尾声"><span class="header-section-number">6</span> 尾声</h2>
+<section id="尾声" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> 尾声</h1>
 <p>我们的旅程还有最后一页．对代数闭包 <span class="math inline">\(\overline K\)</span> 来说，唯一性缺失所遗留下的对称性并非无人问津．限制到可分闭包（separable closure）上，可将它等同于 <span class="math display">\[
 \operatorname{Aut}_K(\overline K)\cong \operatorname{Gal}(K^{\mathrm{sep}}/K)=G_K,
 \]</span> 即 <span class="math inline">\(K\)</span> 的<strong>绝对伽罗瓦群（absolute Galois group）</strong>．</p>
@@ -842,7 +858,7 @@ g:L'\longrightarrow L.
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="致谢" class="level2 appendix unnumbered"><h2 class="anchored quarto-appendix-heading">致谢</h2><div class="quarto-appendix-contents">
+<div id="quarto-appendix" class="default"><section id="致谢" class="level1 appendix unnumbered"><h2 class="anchored quarto-appendix-heading">致谢</h2><div class="quarto-appendix-contents">
 
 <p>本文缘起于与 GPT 5.6 Sol 的一系列讨论，并由其在本人的高压监督下完成．大体框架和编辑决定均为我拍版，跑题废话和语法错误一概归本人负责．至于 GPT-5.6 Sol，它得为在 Codex 里比浏览器版本莫名笨上一截负责．本文的中文翻译版由 DeepSeek v4 Flash 在轻量人工审校下完成．大肥鱼为它近日高攀不起的价格、绕口的译名和道尽一切负责．</p>
 
@@ -860,15 +876,50 @@ g:L'\longrightarrow L.
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "切换深色模式");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "切换深色模式");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -943,11 +994,30 @@ g:L'\longrightarrow L.
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -961,10 +1031,72 @@ g:L'\longrightarrow L.
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
             // default icon
             link.classList.add("external");
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -978,6 +1110,7 @@ g:L'\longrightarrow L.
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1140,44 +1273,54 @@ g:L'\longrightarrow L.
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1276,8 +1419,11 @@ g:L'\longrightarrow L.
     }
   });
   </script>
-<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
-<input type="hidden" id="giscus-alt-theme" value="light">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"可滚动的代码","output":"可滚动的输出"};
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark_dimmed">
 <script>
   function loadGiscus() {
     // Function to get the theme based on body class

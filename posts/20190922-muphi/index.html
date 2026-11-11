@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,10 +13,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -72,16 +75,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f81f3c79f694eaf6f88ebcce70241f9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-af64962de9348b804daa6381b125c604.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e87cd3d65a65f768c7a1700db1c28216.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9b2404ec78ff68ca4c9b2f4303203b01.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-39330638802da02b364dd7ec4e29bc31.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7dd074d930de47cb4e38ad128cc73662.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -120,7 +126,7 @@ MathJax = {
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -151,7 +157,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -174,6 +180,7 @@ window.Quarto = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -203,13 +210,19 @@ window.Quarto = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -293,14 +306,17 @@ window.Quarto = {
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -315,15 +331,14 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -367,8 +382,9 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -377,14 +393,22 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#本题题解" id="toc-本题题解" class="nav-link active" data-scroll-target="#本题题解">本题题解</a>
   <ul class="collapse">
-  <li><a href="#第一步" id="toc-第一步" class="nav-link" data-scroll-target="#第一步">第一步</a></li>
-  <li><a href="#第二步" id="toc-第二步" class="nav-link" data-scroll-target="#第二步">第二步</a></li>
+  <li><a href="#第一步" id="toc-第一步" class="nav-link" data-scroll-target="#第一步">第一步</a>
+  <ul class="collapse">
+  <li><a href="#法一" id="toc-法一" class="nav-link" data-scroll-target="#法一">法一</a></li>
+  <li><a href="#法二" id="toc-法二" class="nav-link" data-scroll-target="#法二">法二</a></li>
+  </ul></li>
+  <li><a href="#第二步" id="toc-第二步" class="nav-link" data-scroll-target="#第二步">第二步</a>
+  <ul class="collapse">
+  <li><a href="#求varphipc" id="toc-求varphipc" class="nav-link" data-scroll-target="#求varphipc">求<span class="math inline">\(\varphi(p^c)\)</span></a></li>
+  <li><a href="#求gpc" id="toc-求gpc" class="nav-link" data-scroll-target="#求gpc">求<span class="math inline">\(g(p^c)\)</span></a></li>
+  </ul></li>
   <li><a href="#代码" id="toc-代码" class="nav-link" data-scroll-target="#代码">代码</a></li>
   </ul></li>
   <li><a href="#更多思考" id="toc-更多思考" class="nav-link" data-scroll-target="#更多思考">更多思考</a>
@@ -398,7 +422,7 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -438,8 +462,8 @@ window.Quarto = {
 </header>
 
 
-<section id="本题题解" class="level2">
-<h2 class="anchored" data-anchor-id="本题题解">本题题解</h2>
+<section id="本题题解" class="level1">
+<h1>本题题解</h1>
 <p>题目传送门：<a href="https://www.luogu.org/problem/P2303">https://www.luogu.org/problem/P2303</a></p>
 <blockquote class="blockquote">
 <p>给定一个整数<span class="math inline">\(n\)</span>，求</p>
@@ -449,14 +473,14 @@ window.Quarto = {
 </blockquote>
 <p>蒟蒻随便yy了一下搞出来个<span class="math inline">\(O(\sqrt{n})\)</span>的算法 <del>这题数据怎么这么水</del></p>
 <p>首先看到gcd我们就下意识的对它反演一波对吧</p>
-<section id="第一步" class="level3">
-<h3 class="anchored" data-anchor-id="第一步">第一步</h3>
+<section id="第一步" class="level2">
+<h2 class="anchored" data-anchor-id="第一步">第一步</h2>
 <p><span class="math display">\[
 \sum_{i=1}^n \gcd(n,i) = \sum_{d|n} \varphi(d) \frac{n}{d}
 \]</span></p>
 <p>这里提供两种化法，得到的结果都是这个。</p>
-<section id="法一" class="level4">
-<h4 class="anchored" data-anchor-id="法一">法一</h4>
+<section id="法一" class="level3">
+<h3 class="anchored" data-anchor-id="法一">法一</h3>
 <p>根据欧拉函数和式</p>
 <p><span class="math display">\[
 n = \sum_{d|n} \varphi(d)
@@ -470,8 +494,8 @@ n = \sum_{d|n} \varphi(d)
 \end{aligned}
 \]</span></p>
 </section>
-<section id="法二" class="level4">
-<h4 class="anchored" data-anchor-id="法二">法二</h4>
+<section id="法二" class="level3">
+<h3 class="anchored" data-anchor-id="法二">法二</h3>
 <p>根据欧拉函数的定义式</p>
 <p><span class="math display">\[
 \varphi(n) = \sum_{i=1}^n [\gcd(n,i) = 1]
@@ -489,8 +513,8 @@ n = \sum_{d|n} \varphi(d)
 <p>这一步还是比较简单的。<del>稍有基础的同学大概都会吧</del></p>
 </section>
 </section>
-<section id="第二步" class="level3">
-<h3 class="anchored" data-anchor-id="第二步">第二步</h3>
+<section id="第二步" class="level2">
+<h2 class="anchored" data-anchor-id="第二步">第二步</h2>
 <p>令</p>
 <p><span class="math display">\[
 g(n) = \sum_{i=1}^n \gcd(n,i) = \sum_{d|n} \varphi(d) \frac{n}{d}
@@ -509,8 +533,8 @@ g(p^c) &amp;= \sum_{i=0}^{c} \varphi(p^i) \frac{p^c}{p^i} \\
 &amp;= \sum_{i=0}^{c} \varphi(p^i) p^{c-i}
 \end{aligned}
 \]</span></p>
-<section id="求varphipc" class="level4">
-<h4 class="anchored" data-anchor-id="求varphipc">求<span class="math inline">\(\varphi(p^c)\)</span></h4>
+<section id="求varphipc" class="level3">
+<h3 class="anchored" data-anchor-id="求varphipc">求<span class="math inline">\(\varphi(p^c)\)</span></h3>
 <p>考虑先弄出上式中<span class="math inline">\(\varphi(p^i)\)</span>的封闭形式，再带回原式看看</p>
 <p>根据欧拉函数通式</p>
 <p><span class="math display">\[
@@ -526,8 +550,8 @@ g(p^c) &amp;= \sum_{i=0}^{c} \varphi(p^i) \frac{p^c}{p^i} \\
 \]</span></p>
 <p>注意这个式子需要在<span class="math inline">\(c=0\)</span>时特判，因为<span class="math inline">\(\varphi(1) = 1\)</span>（<span class="math inline">\(1\)</span>可以视作分解不出任何质因数）</p>
 </section>
-<section id="求gpc" class="level4">
-<h4 class="anchored" data-anchor-id="求gpc">求<span class="math inline">\(g(p^c)\)</span></h4>
+<section id="求gpc" class="level3">
+<h3 class="anchored" data-anchor-id="求gpc">求<span class="math inline">\(g(p^c)\)</span></h3>
 <p>得到了<span class="math inline">\(\varphi(p^c)\)</span>，带回之前未推完的<span class="math inline">\(g(p^c)\)</span>的式子，得</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -543,8 +567,8 @@ g(p^c) &amp;= \sum_{i=0}^{c} \varphi(p^i) p^{c-i} \\
 <p>冷静分析一波时间复杂度。质因数分解消耗<span class="math inline">\(O(\sqrt n)\)</span>的时间复杂度，分解出不超过<span class="math inline">\(O(log_2 n)\)</span>个<span class="math inline">\(p^c\)</span>，每个<span class="math inline">\(g(p^c)\)</span>的计算是<span class="math inline">\(O(1)\)</span>的。所以总时间复杂度为<span class="math inline">\(O(\sqrt n)\)</span></p>
 </section>
 </section>
-<section id="代码" class="level3">
-<h3 class="anchored" data-anchor-id="代码">代码</h3>
+<section id="代码" class="level2">
+<h2 class="anchored" data-anchor-id="代码">代码</h2>
 <p>非常简单的代码</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;cstdio&gt;</span></span>
@@ -581,11 +605,11 @@ g(p^c) &amp;= \sum_{i=0}^{c} \varphi(p^i) p^{c-i} \\
 <p><del>这式子长得跟<a href="https://www.luogu.org/blog/PinkRabbit/solution-p2303">小粉兔菊苣的题解</a>很像？</del></p>
 </section>
 </section>
-<section id="更多思考" class="level2">
-<h2 class="anchored" data-anchor-id="更多思考">更多思考</h2>
+<section id="更多思考" class="level1">
+<h1>更多思考</h1>
 <p><del>坐车时无聊在草稿纸上瞎搞出来的</del></p>
-<section id="拓展到莫比乌斯函数" class="level3">
-<h3 class="anchored" data-anchor-id="拓展到莫比乌斯函数">拓展到莫比乌斯函数</h3>
+<section id="拓展到莫比乌斯函数" class="level2">
+<h2 class="anchored" data-anchor-id="拓展到莫比乌斯函数">拓展到莫比乌斯函数</h2>
 <p>第一步化完后，我们得到这样一个函数</p>
 <p><span class="math display">\[
 g(n) = \sum_{d|n} \varphi(d) \frac{n}{d}
@@ -612,15 +636,15 @@ g(p^c) &amp;= \sum_{i=0}^{c} \mu(p^i) p^{c-i} \\
 <p>（该式同样不适用于<span class="math inline">\(c=0\)</span>的情况）</p>
 <p>挺简洁的对吧（</p>
 </section>
-<section id="小小的总结" class="level3">
-<h3 class="anchored" data-anchor-id="小小的总结">小小的总结</h3>
+<section id="小小的总结" class="level2">
+<h2 class="anchored" data-anchor-id="小小的总结">小小的总结</h2>
 <p>总结一下，首先我们发现要求的<span class="math inline">\(g(n) = \sum_{d|n} f(d) \frac{n}{d}\)</span>是积性函数，所以考虑分解质因数，简化枚举因数的过程为<span class="math inline">\(g(p^c) = \sum_{i=0}^{c} f(p^i) p^{c-i}\)</span>。我们分别根据<span class="math inline">\(\varphi\)</span>和<span class="math inline">\(\mu\)</span>的特殊性质，化出了它们在<span class="math inline">\(p^c\)</span>的函数值，然后代回化简得出<span class="math inline">\(g(p^c)\)</span>的封闭形式，最后用积性合并起来，就得到了<span class="math inline">\(g(n)\)</span></p>
 <p>仔细思考一下<span class="math inline">\(\varphi\)</span>和<span class="math inline">\(\mu\)</span>的特殊性质。</p>
 <p><span class="math inline">\(\varphi(p^i) = p^i - p^{i-1}\)</span>，而带回后与<span class="math inline">\(p^{c-i}\)</span>刚好抵消掉了枚举的变量<span class="math inline">\(i\)</span>，从而得出封闭形式。也就是说，<span class="math inline">\(\varphi\)</span>可以这么化是因为待求函数<span class="math inline">\(g\)</span>比较特殊，它卷了个<span class="math inline">\(Id\)</span>，<span class="math inline">\(\frac n d\)</span>发挥了抵消作用。</p>
 <p><span class="math inline">\(\mu(p^c) = [c=1]\)</span>，只有在<span class="math inline">\(c=0\)</span>或<span class="math inline">\(c=1\)</span>时函数非<span class="math inline">\(0\)</span>，而这也就把和式简化为仅将<span class="math inline">\(i=0\)</span>和<span class="math inline">\(i=1\)</span>两项相加。可见<span class="math inline">\(\mu\)</span>并没有用到<span class="math inline">\(\frac n d\)</span>的特殊性质，对于狄利克雷卷积是通用的，常用于分解质因数后的处理。比如这道题：<a href="https://www.luogu.org/problem/P4464">洛谷P4464 [国家集训队]JZPKIL</a></p>
 </section>
-<section id="莫比乌斯函数与欧拉函数的相互关系" class="level3">
-<h3 class="anchored" data-anchor-id="莫比乌斯函数与欧拉函数的相互关系">莫比乌斯函数与欧拉函数的相互关系</h3>
+<section id="莫比乌斯函数与欧拉函数的相互关系" class="level2">
+<h2 class="anchored" data-anchor-id="莫比乌斯函数与欧拉函数的相互关系">莫比乌斯函数与欧拉函数的相互关系</h2>
 <p>第一步我们在做什么？</p>
 <p><span class="math display">\[
 \sum_{i=1}^n \gcd(n,i) = \sum_{d|n} \varphi(d) \frac{n}{d}
@@ -652,8 +676,8 @@ g(p^c) &amp;= \sum_{i=0}^{c} \mu(p^i) p^{c-i} \\
 \]</span></p>
 <p>额，不过这式子好像也没啥用，<del>至少我没见过要用这个的题</del></p>
 </section>
-<section id="upd-20191104-用狄利克雷卷积证明" class="level3">
-<h3 class="anchored" data-anchor-id="upd-20191104-用狄利克雷卷积证明">upd 2019/11/04 用狄利克雷卷积证明</h3>
+<section id="upd-20191104-用狄利克雷卷积证明" class="level2">
+<h2 class="anchored" data-anchor-id="upd-20191104-用狄利克雷卷积证明">upd 2019/11/04 用狄利克雷卷积证明</h2>
 <p>突然发现上式可以用狄利克雷卷积非常容易的证明</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -673,15 +697,50 @@ Id * \mu &amp;= \varphi * I * \mu \\
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -756,11 +815,30 @@ Id * \mu &amp;= \varphi * I * \mu \\
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -774,10 +852,72 @@ Id * \mu &amp;= \varphi * I * \mu \\
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
             // default icon
             link.classList.add("external");
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -791,6 +931,7 @@ Id * \mu &amp;= \varphi * I * \mu \\
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -953,44 +1094,54 @@ Id * \mu &amp;= \varphi * I * \mu \\
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1089,8 +1240,11 @@ Id * \mu &amp;= \varphi * I * \mu \\
     }
   });
   </script>
-<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
-<input type="hidden" id="giscus-alt-theme" value="light">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark_dimmed">
 <script>
   function loadGiscus() {
     // Function to get the theme based on body class

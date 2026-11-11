@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,10 +13,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -72,16 +75,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f81f3c79f694eaf6f88ebcce70241f9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-af64962de9348b804daa6381b125c604.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e87cd3d65a65f768c7a1700db1c28216.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9b2404ec78ff68ca4c9b2f4303203b01.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-39330638802da02b364dd7ec4e29bc31.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7dd074d930de47cb4e38ad128cc73662.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -120,7 +126,7 @@ MathJax = {
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -151,7 +157,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -174,6 +180,7 @@ window.Quarto = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -203,13 +210,19 @@ window.Quarto = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -293,14 +306,17 @@ window.Quarto = {
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -315,15 +331,14 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -367,8 +382,9 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -377,7 +393,7 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -386,7 +402,11 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#技术-功能" id="toc-技术-功能" class="nav-link" data-scroll-target="#技术-功能">技术 &amp; 功能</a></li>
   <li><a href="#环境配置" id="toc-环境配置" class="nav-link" data-scroll-target="#环境配置">环境配置</a></li>
-  <li><a href="#数学公式jekyll-pandoc-和-inlinemathspacekiller" id="toc-数学公式jekyll-pandoc-和-inlinemathspacekiller" class="nav-link" data-scroll-target="#数学公式jekyll-pandoc-和-inlinemathspacekiller">数学公式、jekyll-pandoc 和 InlineMathSpaceKiller</a></li>
+  <li><a href="#数学公式jekyll-pandoc-和-inlinemathspacekiller" id="toc-数学公式jekyll-pandoc-和-inlinemathspacekiller" class="nav-link" data-scroll-target="#数学公式jekyll-pandoc-和-inlinemathspacekiller">数学公式、jekyll-pandoc 和 InlineMathSpaceKiller</a>
+  <ul class="collapse">
+  <li><a href="#jekyll-pandoc-的具体参数配置" id="toc-jekyll-pandoc-的具体参数配置" class="nav-link" data-scroll-target="#jekyll-pandoc-的具体参数配置">jekyll-pandoc 的具体参数配置</a></li>
+  <li><a href="#spacekiller" id="toc-spacekiller" class="nav-link" data-scroll-target="#spacekiller">SpaceKiller</a></li>
+  </ul></li>
   <li><a href="#文章存储结构" id="toc-文章存储结构" class="nav-link" data-scroll-target="#文章存储结构">文章存储结构</a></li>
   <li><a href="#页面设计" id="toc-页面设计" class="nav-link" data-scroll-target="#页面设计">页面设计</a></li>
   <li><a href="#图片预加载与缓存" id="toc-图片预加载与缓存" class="nav-link" data-scroll-target="#图片预加载与缓存">图片预加载与缓存</a></li>
@@ -399,7 +419,7 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -446,8 +466,8 @@ window.Quarto = {
 </header>
 
 
-<section id="旅程开始" class="level2">
-<h2 class="anchored" data-anchor-id="旅程开始">旅程开始</h2>
+<section id="旅程开始" class="level1">
+<h1>旅程开始</h1>
 <p>很早就在考虑自建博客的事情了。</p>
 <p>大概是 18 年吧，根据 OIer 传统，打算开个博客存点模板和学习笔记。博客园广告少，dalao 多，还能自定义 css/js 美化博客，<del>比隔壁 CSDN 不知道高到哪里去了</del>，虽然不是很懂前端，但一看就来劲了，开始折腾。于是一个暑假 OI 没啥进步，倒是写了一车 css/js 修改自带皮肤，整出来一套多主题切换系统。之后又经过了数次大改重构，适配了 markdown 编辑器，功能日趋完善。</p>
 <p>然而改版越来越多，代码越来越乱，寄人篱下也总有这样那样的不方便之处。想来想去，改别人的东西总是有极限的，与其无数次推倒重构，还不如自己去搭个新的。</p>
@@ -460,12 +480,12 @@ window.Quarto = {
 <p><del>是妖妖梦、风神录正式版发售时间</del></p>
 <p><del>给国家省点子弹吧（</del></p>
 </section>
-<section id="杂谈" class="level2">
-<h2 class="anchored" data-anchor-id="杂谈">杂谈</h2>
+<section id="杂谈" class="level1">
+<h1>杂谈</h1>
 <p>聊聊搭建过程中的一点心得。</p>
 <p><a href="https://github.com/sun123zxy/blog-jekyll-code">博客源码</a></p>
-<section id="技术-功能" class="level3">
-<h3 class="anchored" data-anchor-id="技术-功能">技术 &amp; 功能</h3>
+<section id="技术-功能" class="level2">
+<h2 class="anchored" data-anchor-id="技术-功能">技术 &amp; 功能</h2>
 <ul>
 <li>基于 <a href="https://jekyllrb.com/">Jekyll</a> 和 <a href="https://github.com/mfenner/jekyll-pandoc">jekyll-pandoc</a> 插件，配合自制小工具 <a href="https://github.com/sun123zxy/InlineMathSpaceKiller">InlineMathSpaceKiller</a> 的静态 markdown 博客。</li>
 <li>全站 js 和主题切换动画效果使用 <a href="https://jquery.com/">JQuery</a>。</li>
@@ -475,12 +495,12 @@ window.Quarto = {
 <li>评论系统使用 <a href="https://github.com/giscus/giscus">Giscus</a>，基于 Github Discussions 的静态博客评论系统。</li>
 </ul>
 </section>
-<section id="环境配置" class="level3">
-<h3 class="anchored" data-anchor-id="环境配置">环境配置</h3>
+<section id="环境配置" class="level2">
+<h2 class="anchored" data-anchor-id="环境配置">环境配置</h2>
 <p>看仓库的 <code>README.md</code> 吧，Jekyll 的官方文档也可以（其实是我有点忘了 :p）</p>
 </section>
-<section id="数学公式jekyll-pandoc-和-inlinemathspacekiller" class="level3">
-<h3 class="anchored" data-anchor-id="数学公式jekyll-pandoc-和-inlinemathspacekiller">数学公式、jekyll-pandoc 和 InlineMathSpaceKiller</h3>
+<section id="数学公式jekyll-pandoc-和-inlinemathspacekiller" class="level2">
+<h2 class="anchored" data-anchor-id="数学公式jekyll-pandoc-和-inlinemathspacekiller">数学公式、jekyll-pandoc 和 InlineMathSpaceKiller</h2>
 <p><del>用插件干啥啊好好用原生 Jekyll Github 自动帮你编译它不香吗</del></p>
 <p><del>本地我用 Typora 编写 markdown</del>（最近 Typora 转付费了，现在用 MarkText），希望能在上传过程中尽可能少地改动源文件，这包括内嵌的 <span class="math inline">\(\LaTeX\)</span> 数学公式。但 Jekyll 自带的 markdown 解析器老是不好使，比如公式里的 <code>|</code> 被解析成表格了之类各种怪七怪八的问题…</p>
 <p>于是想到了文档转换界的瑞士军刀——</p>
@@ -488,8 +508,8 @@ window.Quarto = {
 <p>If you need to convert files from one markup format into another, pandoc is your swiss-army knife.</p>
 </blockquote>
 <p>Google 了一圈找到了 <a href="https://github.com/mfenner/jekyll-pandoc">jekyll-pandoc</a>，可以改用 <a href="https://www.pandoc.org/">Pandoc</a> 的文档解析来渲染 Markdown。</p>
-<section id="jekyll-pandoc-的具体参数配置" class="level4">
-<h4 class="anchored" data-anchor-id="jekyll-pandoc-的具体参数配置">jekyll-pandoc 的具体参数配置</h4>
+<section id="jekyll-pandoc-的具体参数配置" class="level3">
+<h3 class="anchored" data-anchor-id="jekyll-pandoc-的具体参数配置">jekyll-pandoc 的具体参数配置</h3>
 <p>安装流程照着 README 里给的方法走就好了。这里主要谈一谈参数的配置。</p>
 <p>jekyll-pandoc 文档里对 <code>_config.yml</code> 里面的参数设置给出了一个例子（已经过时了）——</p>
 <blockquote class="blockquote">
@@ -519,23 +539,23 @@ window.Quarto = {
 <li><p>Pandoc 在转换 Markdown 时默认开启智能标点功能（参见 <a href="https://pandoc.org/MANUAL.html#typography">Pandoc 文档 - Extensions - Typography</a>），会把 <code>""</code>、<code>''</code> 自动替换成 <code>“”</code>、<code>‘’</code>，所以用 <code>-smart</code> 关闭这个插件。</p></li>
 </ul>
 </section>
-<section id="spacekiller" class="level4">
-<h4 class="anchored" data-anchor-id="spacekiller">SpaceKiller</h4>
+<section id="spacekiller" class="level3">
+<h3 class="anchored" data-anchor-id="spacekiller">SpaceKiller</h3>
 <p>还有一个小问题——Typora （MarkText 好像有这个问题）允许存在形如 <code>$ \gcd(a,b) $</code> 这样 <code>$</code> 旁边紧跟着空格的行内公式，但 Pandoc 解析不了。后来翻到这个 <a href="https://github.com/jgm/pandoc/issues/5672">issue</a>，官方似乎不打算修复这个问题，就写了个预处理工具删空格，新文章上传前 <code>spacekiller</code> 一下就可以了。</p>
 </section>
 </section>
-<section id="文章存储结构" class="level3">
-<h3 class="anchored" data-anchor-id="文章存储结构">文章存储结构</h3>
+<section id="文章存储结构" class="level2">
+<h2 class="anchored" data-anchor-id="文章存储结构">文章存储结构</h2>
 <p>没有使用 Jekyll 自带的 posts。</p>
 <p>我不喜欢这种图文分离的组织格式。文本和图片本来就同属一篇文章，强行把图片拆开放到 <code>/assets/images/.../</code> 里面既不合逻辑，又丧失了可移植性，匪夷所思。</p>
 <p>最后使用了打开 output 选项的 collection 来实现，每篇文章都有一个独立的文件夹，包含 <code>index.md</code> （文本）和所需图片、文件等所有内容。<code>index.md</code> 里面直接使用相对引用插入图片，和无博客状态下写作体验完全一致。</p>
 </section>
-<section id="页面设计" class="level3">
-<h3 class="anchored" data-anchor-id="页面设计">页面设计</h3>
+<section id="页面设计" class="level2">
+<h2 class="anchored" data-anchor-id="页面设计">页面设计</h2>
 <p>白模写好后就开肝 css，一开始完全参考之前魔改的博客园 iMetro 主题整出来个高仿，后来有了一些更好的想法，比如把侧边栏做成 panel 样式之类的，就成现在这个样子了。</p>
 </section>
-<section id="图片预加载与缓存" class="level3">
-<h3 class="anchored" data-anchor-id="图片预加载与缓存">图片预加载与缓存</h3>
+<section id="图片预加载与缓存" class="level2">
+<h2 class="anchored" data-anchor-id="图片预加载与缓存">图片预加载与缓存</h2>
 <p>国内访问 github.io 很不稳定，背景图片加载特别慢，这几天在想怎么优化这个问题。</p>
 <p>最终的方案是在切换主题时等背景图片加载完毕后再向页面引入主题 css 文件。这样在图片加载过程中，页面显示的 css 尚处于无主题的默认状态，避免了背景白屏的现象出现。</p>
 <p>于是去学了波预加载技术，最开始用 Ajax 来做，结果写完发现 Firefox 和 Chrome 都好像没看到 Ajax 的缓存一样，又在加载主题 css 时重新请求了一次图片…</p>
@@ -545,8 +565,8 @@ window.Quarto = {
 <p>其实就是个 HTTP Cache 的问题吧，看来理解还不够深刻…</p>
 <p>PS：Chrome 或 Firefox DevTool 的节流（throttling）功能可以方便的模拟真实网络的限速和延迟，本地测试时非常方便。</p>
 </section>
-<section id="背景的视差parallax效果" class="level3">
-<h3 class="anchored" data-anchor-id="背景的视差parallax效果">背景的视差（Parallax）效果</h3>
+<section id="背景的视差parallax效果" class="level2">
+<h2 class="anchored" data-anchor-id="背景的视差parallax效果">背景的视差（Parallax）效果</h2>
 <p>这个效果很早就做出来了，但现在才开始深入了解。</p>
 <p>用 js 监听 <code>scroll</code> 事件动态更新背景图片的 <code>background-position</code>，以前只有 Firefox 可以实现平滑的滚动，而 Chrome 则会在滚动时白屏——这个问题在最近的版本才消失——总之，当时偷懒，把 Chrome 的这个效果给关了。<del>所以根本没人发现有这个效果对吧</del></p>
 <p>监听 <code>scroll</code> 确实不是个好方法。Firefox 的 Console 在该效果启用时会弹出警告，文档里说会与异步平移有冲突：</p>
@@ -557,15 +577,15 @@ window.Quarto = {
 <p>——异步平移冲突的情况我没碰到，但不论是 Firefox 和 Chrome 偶尔都会白屏倒是真的。第二篇文章里提到一种纯 CSS 实现 Parallax 的方法，网上也有人说可以用 CSS 3D。</p>
 <p>以后再研究吧…</p>
 </section>
-<section id="评论系统" class="level3">
-<h3 class="anchored" data-anchor-id="评论系统">评论系统</h3>
+<section id="评论系统" class="level2">
+<h2 class="anchored" data-anchor-id="评论系统">评论系统</h2>
 <p>静态博客的评论要托管，之前感觉有点麻烦就没搞。后来想用基于 Github Issue 的现成轮子来做，但是不论是 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 还是 <a href="https://github.com/imsun/gitment">Gitment</a> 都得把 OAuth 的 Client Secret 写在前端，太不安全；后来发现有个叫 <a href="https://github.com/utterance/utterances">Utterances</a> 的基于 Github Apps 的小众项目好像还行，然后就咕咕咕了半年（</p>
 <p>再后来就发现了 <a href="https://github.com/giscus/giscus">Giscus</a>，同样是基于 Github Apps，但和 Utterances 的不同之处在于其使用 Discussions 而不是 Issues 来存储数据。个人认为 Discussions 的设计更适合拿来做评论，总之就花了一个晚上实装了。</p>
 <p>但是适配动态切换的主题成了大麻烦。后来找到 <a href="https://github.com/giscus/giscus/issues/336">Issue #336</a> 发现可以向 iframe 里 <code>postMessage</code> 改变参数。但需要注意的是 <code>postMessage</code> 之前需先保证 iframe 加载完毕，试图用<code>onload</code> 事件，但测试发现开新界面时还是有概率失败。然后又 Google 了一波发现正确的做法似乎是 iframe 自己发消息表明可以接受 <code>postMessage</code>，于是就修好了。</p>
 </section>
 </section>
-<section id="画廊" class="level2">
-<h2 class="anchored" data-anchor-id="画廊">画廊</h2>
+<section id="画廊" class="level1">
+<h1>画廊</h1>
 <p>（最早的版本没截图找不到了）</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -604,8 +624,8 @@ window.Quarto = {
 </figure>
 </div>
 </section>
-<section id="尾声" class="level2">
-<h2 class="anchored" data-anchor-id="尾声">尾声</h2>
+<section id="尾声" class="level1">
+<h1>尾声</h1>
 <p>当年的 sun123zxy 还真是对多主题系统有着莫名的执念。最开始的他只是想给博客换个背景，现在似乎已经走的很远了。</p>
 <p>博客上线后的 sun123zxy 迎来了充实的高三生活，学业紧张的他却从没有忘记劳逸结合，不停的做着小修小补，甚至在高考倒计时两只手就能数过来的时候他还在……</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>commit 7a2791ebdcc91415982add697a5b40c62044dabc</span>
@@ -630,15 +650,50 @@ window.Quarto = {
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -713,11 +768,30 @@ window.Quarto = {
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -731,10 +805,72 @@ window.Quarto = {
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
             // default icon
             link.classList.add("external");
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -748,6 +884,7 @@ window.Quarto = {
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -910,44 +1047,54 @@ window.Quarto = {
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1046,8 +1193,11 @@ window.Quarto = {
     }
   });
   </script>
-<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
-<input type="hidden" id="giscus-alt-theme" value="light">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark_dimmed">
 <script>
   function loadGiscus() {
     // Function to get the theme based on body class

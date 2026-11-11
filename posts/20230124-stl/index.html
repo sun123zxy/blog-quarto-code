@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -14,10 +14,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -73,16 +76,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f81f3c79f694eaf6f88ebcce70241f9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-af64962de9348b804daa6381b125c604.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e87cd3d65a65f768c7a1700db1c28216.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9b2404ec78ff68ca4c9b2f4303203b01.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-39330638802da02b364dd7ec4e29bc31.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7dd074d930de47cb4e38ad128cc73662.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -121,7 +127,7 @@ MathJax = {
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -152,7 +158,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -175,6 +181,7 @@ window.Quarto = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -204,13 +211,19 @@ window.Quarto = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -294,14 +307,17 @@ window.Quarto = {
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -316,15 +332,14 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -368,8 +383,9 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -378,7 +394,7 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -398,7 +414,12 @@ window.Quarto = {
   <li><a href="#序列式容器或容器适配器" id="toc-序列式容器或容器适配器" class="nav-link" data-scroll-target="#序列式容器或容器适配器"><span class="header-section-number">4</span> 序列式容器或容器适配器</a>
   <ul class="collapse">
   <li><a href="#vector" id="toc-vector" class="nav-link" data-scroll-target="#vector"><span class="header-section-number">4.1</span> vector</a></li>
-  <li><a href="#deque" id="toc-deque" class="nav-link" data-scroll-target="#deque"><span class="header-section-number">4.2</span> deque</a></li>
+  <li><a href="#deque" id="toc-deque" class="nav-link" data-scroll-target="#deque"><span class="header-section-number">4.2</span> deque</a>
+  <ul class="collapse">
+  <li><a href="#stack" id="toc-stack" class="nav-link" data-scroll-target="#stack">stack</a></li>
+  <li><a href="#queue" id="toc-queue" class="nav-link" data-scroll-target="#queue">queue</a></li>
+  <li><a href="#priority_queue" id="toc-priority_queue" class="nav-link" data-scroll-target="#priority_queue">priority_queue</a></li>
+  </ul></li>
   <li><a href="#list" id="toc-list" class="nav-link" data-scroll-target="#list"><span class="header-section-number">4.3</span> list</a></li>
   </ul></li>
   <li><a href="#关联式容器" id="toc-关联式容器" class="nav-link" data-scroll-target="#关联式容器"><span class="header-section-number">5</span> 关联式容器</a>
@@ -411,7 +432,7 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -463,8 +484,8 @@ window.Quarto = {
 <li><a href="https://oi-wiki.org/lang/csl/">C++ 标准库简介 - OI Wiki</a></li>
 </ul>
 <p>如有能力，阅读原文可获得更深入的了解。</p>
-<section id="stl-算法" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="stl-算法"><span class="header-section-number">1</span> STL 算法</h2>
+<section id="stl-算法" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> STL 算法</h1>
 <p>均在 <code>#include&lt;algorithm&gt;</code> 定义。</p>
 <ul>
 <li><p><code>std::sort(first,last,cmp)</code></p>
@@ -485,8 +506,8 @@ window.Quarto = {
 <p>线性时间复杂度。</p></li>
 </ul>
 </section>
-<section id="基本或特殊容器" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="基本或特殊容器"><span class="header-section-number">2</span> 基本或特殊容器</h2>
+<section id="基本或特殊容器" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 基本或特殊容器</h1>
 <p>注：C++11 新引入的容器，大部分头文件名与容器名一致。</p>
 <ul>
 <li><code>pair</code> <code>#include&lt;utility&gt;</code> ：元素对。</li>
@@ -494,8 +515,8 @@ window.Quarto = {
 <li><code>bitset</code> <code>#include&lt;bitset&gt;</code> ：定长压缩 01 串，可在 <span class="math inline">\(O(\frac N K)\)</span> 的时空复杂度内完成常见运算，<span class="math inline">\(K\)</span> 对应操作系统位数。</li>
 <li><code>string</code> <code>#include&lt;string&gt;</code> ：字符串。</li>
 </ul>
-<section id="pair" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="pair"><span class="header-section-number">2.1</span> pair</h3>
+<section id="pair" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="pair"><span class="header-section-number">2.1</span> pair</h2>
 <ul>
 <li><code>operator=</code> ：重载了赋值运算符用于拷贝。</li>
 <li><code>first</code> / <code>second</code> ：访问第一项或第二项。</li>
@@ -503,8 +524,8 @@ window.Quarto = {
 <li><code>operator&lt;=&gt;</code> ：重载了各种比较运算符，按第一关键字、第二关键字顺序比较。</li>
 </ul>
 </section>
-<section id="tuple" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="tuple"><span class="header-section-number">2.2</span> tuple</h3>
+<section id="tuple" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="tuple"><span class="header-section-number">2.2</span> tuple</h2>
 <ul>
 <li><code>operator=</code> ：重载了赋值运算符用于拷贝。</li>
 <li><code>std::get&lt;i&gt;(tp)</code> ：获取元组的第 i 项。</li>
@@ -530,8 +551,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="string" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="string"><span class="header-section-number">2.3</span> string</h3>
+<section id="string" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="string"><span class="header-section-number">2.3</span> string</h2>
 <p>与 <code>vector</code> 类似。其余重要特性如下：</p>
 <ul>
 <li><code>c_str()</code> ：生成一个 C 风格字符串（尾部置 0）并返回其头部指针。</li>
@@ -546,8 +567,8 @@ window.Quarto = {
 <li><code>find(str)</code> / <code>rfind(str)</code> / <code>find_first_of(c)</code> / <code>find_first_not_of(c)</code> / <code>find_last_of(c)</code> / <code>find_last_not_of(c)</code>：找字符串或字符，返回位置。若无，返回 <code>npos=-1</code>。<strong>无时间复杂度保证</strong>，不建议使用。</li>
 </ul>
 </section>
-<section id="bitset" class="level3" data-number="2.4">
-<h3 data-number="2.4" class="anchored" data-anchor-id="bitset"><span class="header-section-number">2.4</span> bitset</h3>
+<section id="bitset" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="bitset"><span class="header-section-number">2.4</span> bitset</h2>
 <p><code>bitset&lt;N&gt; bs(val / str)</code>：声明一个长度为 N 的 <code>bitset</code> 并设定初值。</p>
 <ul>
 <li><code>&amp; / ! / ^ / ~ / &gt;&gt; / &lt;&lt;</code> ：支持 AND / OR / XOR / NOT / 右移 / 左移等位运算系列。</li>
@@ -562,11 +583,11 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="stl-容器概览" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="stl-容器概览"><span class="header-section-number">3</span> STL 容器概览</h2>
+<section id="stl-容器概览" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> STL 容器概览</h1>
 <p>以下部分均为 STL 容器相关内容。</p>
-<section id="迭代器" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="迭代器"><span class="header-section-number">3.1</span> 迭代器</h3>
+<section id="迭代器" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="迭代器"><span class="header-section-number">3.1</span> 迭代器</h2>
 <p>声明：形如 <code>vector&lt;int&gt;::iterator iter = xxx.begin()</code>。C++11 后可用 <code>auto</code> 代替类型声明。</p>
 <p><code>*iter</code> 取值，<code>iter++</code> 后继。</p>
 <p>双向迭代器可 <code>iter--</code>，随机访问迭代器支持加减、比较运算。</p>
@@ -577,8 +598,8 @@ window.Quarto = {
 <li><code>crbegin()</code>, <code>crend()</code> ：部分容器支持，返回只读反向迭代器。</li>
 </ul>
 </section>
-<section id="公共性质" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="公共性质"><span class="header-section-number">3.2</span> 公共性质</h3>
+<section id="公共性质" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="公共性质"><span class="header-section-number">3.2</span> 公共性质</h2>
 <ul>
 <li><code>[first, last)</code> 式迭代器构造，拷贝构造等。</li>
 <li><code>operator=</code> ：重载了赋值运算符用于拷贝。</li>
@@ -588,8 +609,8 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="序列式容器或容器适配器" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="序列式容器或容器适配器"><span class="header-section-number">4</span> 序列式容器或容器适配器</h2>
+<section id="序列式容器或容器适配器" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 序列式容器或容器适配器</h1>
 <p>序列式容器：</p>
 <ul>
 <li><code>array</code> (C++11) ：定长顺序表，常数随机访问。</li>
@@ -606,8 +627,8 @@ window.Quarto = {
 <li><code>stack</code> <code>#include&lt;stack&gt;</code>：栈（LIFO）。适配变长序列式容器，即 <code>deque</code>（默认）、<code>vector</code>或 <code>list</code>。</li>
 <li><code>priority_queue</code> <code>#include&lt;queue&gt;</code>：大根堆。适配随机访问变长序列式容器，即 <code>vector</code>（默认）或 <code>deque</code>。</li>
 </ul>
-<section id="vector" class="level3" data-number="4.1">
-<h3 data-number="4.1" class="anchored" data-anchor-id="vector"><span class="header-section-number">4.1</span> vector</h3>
+<section id="vector" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="vector"><span class="header-section-number">4.1</span> vector</h2>
 <p>Construct:</p>
 <ul>
 <li><code>vector&lt;T&gt;(count,value)</code> ：初始化时放 <code>count</code> 个 <code>value</code> 的拷贝在里面。</li>
@@ -640,30 +661,30 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="deque" class="level3" data-number="4.2">
-<h3 data-number="4.2" class="anchored" data-anchor-id="deque"><span class="header-section-number">4.2</span> deque</h3>
+<section id="deque" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="deque"><span class="header-section-number">4.2</span> deque</h2>
 <ul>
 <li><code>push_front(x)</code>, <code>pop_front()</code></li>
 </ul>
 <p>其余与 <code>vector</code> 类似。</p>
-<section id="stack" class="level4">
-<h4 class="anchored" data-anchor-id="stack">stack</h4>
+<section id="stack" class="level3">
+<h3 class="anchored" data-anchor-id="stack">stack</h3>
 <ul>
 <li><code>top()</code></li>
 <li><code>push(x)</code></li>
 <li><code>pop()</code></li>
 </ul>
 </section>
-<section id="queue" class="level4">
-<h4 class="anchored" data-anchor-id="queue">queue</h4>
+<section id="queue" class="level3">
+<h3 class="anchored" data-anchor-id="queue">queue</h3>
 <ul>
 <li><code>front()</code></li>
 <li><code>push(x)</code></li>
 <li><code>pop()</code></li>
 </ul>
 </section>
-<section id="priority_queue" class="level4">
-<h4 class="anchored" data-anchor-id="priority_queue">priority_queue</h4>
+<section id="priority_queue" class="level3">
+<h3 class="anchored" data-anchor-id="priority_queue">priority_queue</h3>
 <ul>
 <li><code>std::priority_queue&lt;TypeName&gt;</code> ：<code>Compare</code> 默认使用 <code>std::less&lt;T&gt;</code>，即以 <code>operator &lt;</code> 作为大根堆的比较依据。</li>
 <li><code>std::priority_queue&lt;TypeName, Container, Compare&gt;</code> ：亦可自行指定底层容器和比较函数对象。</li>
@@ -705,8 +726,8 @@ window.Quarto = {
 <p>用法基本同 <code>queue</code>，但 <code>push() / pop()</code> 为对数时间复杂度。</p>
 </section>
 </section>
-<section id="list" class="level3" data-number="4.3">
-<h3 data-number="4.3" class="anchored" data-anchor-id="list"><span class="header-section-number">4.3</span> list</h3>
+<section id="list" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="list"><span class="header-section-number">4.3</span> list</h2>
 <ul>
 <li>无随机访问接口。</li>
 <li><code>insert(iter, val)</code> / <code>erase(iter)</code> ：插入与删除变为常数时间复杂度，参见 <code>vector</code>。</li>
@@ -715,15 +736,15 @@ window.Quarto = {
 <p>其余与 <code>deque</code> 类似。</p>
 </section>
 </section>
-<section id="关联式容器" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="关联式容器"><span class="header-section-number">5</span> 关联式容器</h2>
+<section id="关联式容器" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 关联式容器</h1>
 <p>不支持随机访问，双向迭代器，大部分操作为对数时间复杂度，红黑树实现。</p>
 <ul>
 <li><code>set</code> / <code>multiset</code> <code>#include&lt;set&gt;</code>：元素有序。后者支持同值多元素。</li>
 <li><code>map</code> / <code>multimap</code> <code>#include&lt;map&gt;</code>：键有序。后者支持同键值多元素。</li>
 </ul>
-<section id="set-multiset" class="level3" data-number="5.1">
-<h3 data-number="5.1" class="anchored" data-anchor-id="set-multiset"><span class="header-section-number">5.1</span> set / multiset</h3>
+<section id="set-multiset" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="set-multiset"><span class="header-section-number">5.1</span> set / multiset</h2>
 <ul>
 <li><code>set&lt;Key&gt;</code>：默认使用 <code>operator &lt;</code> 比较（升序）。</li>
 <li><code>set&lt;Key, Compare&gt;</code>：也可使用类似 <code>priority_queue</code> 的方法自定义比较函数对象 <code>Compare</code>。</li>
@@ -762,8 +783,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="map-multimap" class="level3" data-number="5.2">
-<h3 data-number="5.2" class="anchored" data-anchor-id="map-multimap"><span class="header-section-number">5.2</span> map / multimap</h3>
+<section id="map-multimap" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="map-multimap"><span class="header-section-number">5.2</span> map / multimap</h2>
 <p><code>map&lt;Key, T, Compare&gt;</code>：可自定义比较方式。</p>
 <ul>
 <li>对迭代器解引用得到 <code>pair&lt;Key, T&gt;</code>。</li>
@@ -773,8 +794,8 @@ window.Quarto = {
 <p>其余与 <code>set</code> 类似。</p>
 </section>
 </section>
-<section id="无序关联式容器-c11" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="无序关联式容器-c11"><span class="header-section-number">6</span> 无序关联式容器 (C++11)</h2>
+<section id="无序关联式容器-c11" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> 无序关联式容器 (C++11)</h1>
 <p>单向迭代器，平均常数时间复杂度，Hash 实现。</p>
 <p>若不支持 c++11，使用时需引入 TR1 扩展。例如，使用 <code>unordered_map</code> 需引入 <code>#include&lt;tr1/unordered_map&gt;</code> 头文件，使用时需写为 <code>std::tr1::unordered_map</code>。</p>
 <ul>
@@ -830,15 +851,50 @@ window.Quarto = {
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -913,11 +969,30 @@ window.Quarto = {
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -931,10 +1006,72 @@ window.Quarto = {
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
             // default icon
             link.classList.add("external");
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -948,6 +1085,7 @@ window.Quarto = {
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1110,44 +1248,54 @@ window.Quarto = {
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1246,8 +1394,11 @@ window.Quarto = {
     }
   });
   </script>
-<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
-<input type="hidden" id="giscus-alt-theme" value="light">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark_dimmed">
 <script>
   function loadGiscus() {
     // Function to get the theme based on body class

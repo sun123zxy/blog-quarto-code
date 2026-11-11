@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -14,10 +14,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -58,16 +61,19 @@ div.csl-indent {
 <link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f81f3c79f694eaf6f88ebcce70241f9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-af64962de9348b804daa6381b125c604.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e87cd3d65a65f768c7a1700db1c28216.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9b2404ec78ff68ca4c9b2f4303203b01.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-39330638802da02b364dd7ec4e29bc31.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7dd074d930de47cb4e38ad128cc73662.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -106,7 +112,7 @@ MathJax = {
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -137,7 +143,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -160,6 +166,7 @@ window.Quarto = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -189,13 +196,19 @@ window.Quarto = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -279,14 +292,17 @@ window.Quarto = {
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -301,15 +317,14 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -353,8 +368,9 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -363,15 +379,30 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#first-attempts-and-general-approaches" id="toc-first-attempts-and-general-approaches" class="nav-link active" data-scroll-target="#first-attempts-and-general-approaches"><span class="header-section-number">1</span> First Attempts and General Approaches</a>
   <ul class="collapse">
-  <li><a href="#example-quadratic-forms-over-mathbb-r-and-mathbb-f_q" id="toc-example-quadratic-forms-over-mathbb-r-and-mathbb-f_q" class="nav-link" data-scroll-target="#example-quadratic-forms-over-mathbb-r-and-mathbb-f_q"><span class="header-section-number">1.1</span> Example: Quadratic Forms over <span class="math inline">\(\mathbb R\)</span> and <span class="math inline">\(\mathbb F_q\)</span></a></li>
-  <li><a href="#quadratic-spaces" id="toc-quadratic-spaces" class="nav-link" data-scroll-target="#quadratic-spaces"><span class="header-section-number">1.2</span> Quadratic Spaces</a></li>
-  <li><a href="#the-common-represented-element-method" id="toc-the-common-represented-element-method" class="nav-link" data-scroll-target="#the-common-represented-element-method"><span class="header-section-number">1.3</span> The Common Represented Element Method</a></li>
+  <li><a href="#foreword" id="toc-foreword" class="nav-link" data-scroll-target="#foreword">Foreword</a></li>
+  <li><a href="#notations" id="toc-notations" class="nav-link" data-scroll-target="#notations">Notations</a></li>
+  <li><a href="#example-quadratic-forms-over-mathbb-r-and-mathbb-f_q" id="toc-example-quadratic-forms-over-mathbb-r-and-mathbb-f_q" class="nav-link" data-scroll-target="#example-quadratic-forms-over-mathbb-r-and-mathbb-f_q"><span class="header-section-number">1.1</span> Example: Quadratic Forms over <span class="math inline">\(\mathbb R\)</span> and <span class="math inline">\(\mathbb F_q\)</span></a>
+  <ul class="collapse">
+  <li><a href="#review-quadratic-forms-over-mathbb-r" id="toc-review-quadratic-forms-over-mathbb-r" class="nav-link" data-scroll-target="#review-quadratic-forms-over-mathbb-r">Review: Quadratic Forms over <span class="math inline">\(\mathbb R\)</span></a></li>
+  <li><a href="#some-refinement" id="toc-some-refinement" class="nav-link" data-scroll-target="#some-refinement">Some Refinement</a></li>
+  <li><a href="#another-example-quadratic-forms-over-mathbb-f_q" id="toc-another-example-quadratic-forms-over-mathbb-f_q" class="nav-link" data-scroll-target="#another-example-quadratic-forms-over-mathbb-f_q">Another Example: Quadratic Forms over <span class="math inline">\(\mathbb F_q\)</span></a></li>
+  </ul></li>
+  <li><a href="#quadratic-spaces" id="toc-quadratic-spaces" class="nav-link" data-scroll-target="#quadratic-spaces"><span class="header-section-number">1.2</span> Quadratic Spaces</a>
+  <ul class="collapse">
+  <li><a href="#quadratic-spaces-1" id="toc-quadratic-spaces-1" class="nav-link" data-scroll-target="#quadratic-spaces-1">Quadratic Spaces</a></li>
+  <li><a href="#structure-of-quadratic-spaces" id="toc-structure-of-quadratic-spaces" class="nav-link" data-scroll-target="#structure-of-quadratic-spaces">Structure of Quadratic Spaces</a></li>
+  </ul></li>
+  <li><a href="#the-common-represented-element-method" id="toc-the-common-represented-element-method" class="nav-link" data-scroll-target="#the-common-represented-element-method"><span class="header-section-number">1.3</span> The Common Represented Element Method</a>
+  <ul class="collapse">
+  <li><a href="#another-invariant-the-range" id="toc-another-invariant-the-range" class="nav-link" data-scroll-target="#another-invariant-the-range">Another Invariant: The Range</a></li>
+  <li><a href="#insights-from-the-range" id="toc-insights-from-the-range" class="nav-link" data-scroll-target="#insights-from-the-range">Insights from the Range</a></li>
+  </ul></li>
   <li><a href="#insights-from-the-range-1" id="toc-insights-from-the-range-1" class="nav-link" data-scroll-target="#insights-from-the-range-1"><span class="header-section-number">1.4</span> Insights from the Range</a></li>
   </ul></li>
   <li><a href="#global-and-local-equivalence" id="toc-global-and-local-equivalence" class="nav-link" data-scroll-target="#global-and-local-equivalence"><span class="header-section-number">2</span> Global and Local Equivalence</a>
@@ -380,16 +411,36 @@ window.Quarto = {
   </ul></li>
   <li><a href="#quadratic-forms-over-mathbb-q_p-and-mathbb-q" id="toc-quadratic-forms-over-mathbb-q_p-and-mathbb-q" class="nav-link" data-scroll-target="#quadratic-forms-over-mathbb-q_p-and-mathbb-q"><span class="header-section-number">3</span> Quadratic Forms over <span class="math inline">\(\mathbb Q_p\)</span> and <span class="math inline">\(\mathbb Q\)</span></a>
   <ul class="collapse">
-  <li><a href="#structure-of-mathbb-q_ptimes-mathbb-q_ptimes2" id="toc-structure-of-mathbb-q_ptimes-mathbb-q_ptimes2" class="nav-link" data-scroll-target="#structure-of-mathbb-q_ptimes-mathbb-q_ptimes2"><span class="header-section-number">3.1</span> Structure of <span class="math inline">\(\mathbb Q_p^\times / (\mathbb Q_p^\times)^2\)</span></a></li>
-  <li><a href="#the-hilbert-symbol" id="toc-the-hilbert-symbol" class="nav-link" data-scroll-target="#the-hilbert-symbol"><span class="header-section-number">3.2</span> The Hilbert Symbol</a></li>
-  <li><a href="#invariants-that-determine-the-range" id="toc-invariants-that-determine-the-range" class="nav-link" data-scroll-target="#invariants-that-determine-the-range"><span class="header-section-number">3.3</span> Invariants that Determine the Range</a></li>
-  <li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification"><span class="header-section-number">3.4</span> Classification</a></li>
+  <li><a href="#structure-of-mathbb-q_ptimes-mathbb-q_ptimes2" id="toc-structure-of-mathbb-q_ptimes-mathbb-q_ptimes2" class="nav-link" data-scroll-target="#structure-of-mathbb-q_ptimes-mathbb-q_ptimes2"><span class="header-section-number">3.1</span> Structure of <span class="math inline">\(\mathbb Q_p^\times / (\mathbb Q_p^\times)^2\)</span></a>
+  <ul class="collapse">
+  <li><a href="#structure-of-mathbb-q_ptimes" id="toc-structure-of-mathbb-q_ptimes" class="nav-link" data-scroll-target="#structure-of-mathbb-q_ptimes">Structure of <span class="math inline">\(\mathbb Q_p^\times\)</span></a></li>
+  <li><a href="#structure-of-1-p-mathbb-z_p-and-the-log-exp-map" id="toc-structure-of-1-p-mathbb-z_p-and-the-log-exp-map" class="nav-link" data-scroll-target="#structure-of-1-p-mathbb-z_p-and-the-log-exp-map">Structure of <span class="math inline">\(1 + p \mathbb Z_p\)</span> and the log / exp map</a></li>
+  <li><a href="#quadratic-residues-of-mathbb-q_p" id="toc-quadratic-residues-of-mathbb-q_p" class="nav-link" data-scroll-target="#quadratic-residues-of-mathbb-q_p">Quadratic residues of <span class="math inline">\(\mathbb Q_p\)</span></a></li>
+  </ul></li>
+  <li><a href="#the-hilbert-symbol" id="toc-the-hilbert-symbol" class="nav-link" data-scroll-target="#the-hilbert-symbol"><span class="header-section-number">3.2</span> The Hilbert Symbol</a>
+  <ul class="collapse">
+  <li><a href="#the-hilbert-symbol-1" id="toc-the-hilbert-symbol-1" class="nav-link" data-scroll-target="#the-hilbert-symbol-1">The Hilbert Symbol</a></li>
+  <li><a href="#properties-of-the-hilbert-symbol" id="toc-properties-of-the-hilbert-symbol" class="nav-link" data-scroll-target="#properties-of-the-hilbert-symbol">Properties of the Hilbert Symbol</a></li>
+  <li><a href="#the-explicit-formula-of-the-hilbert-symbol" id="toc-the-explicit-formula-of-the-hilbert-symbol" class="nav-link" data-scroll-target="#the-explicit-formula-of-the-hilbert-symbol">The Explicit Formula of the Hilbert Symbol</a></li>
+  </ul></li>
+  <li><a href="#invariants-that-determine-the-range" id="toc-invariants-that-determine-the-range" class="nav-link" data-scroll-target="#invariants-that-determine-the-range"><span class="header-section-number">3.3</span> Invariants that Determine the Range</a>
+  <ul class="collapse">
+  <li><a href="#prelude-classifying-binary-quadratic-forms-over-mathbb-q_p" id="toc-prelude-classifying-binary-quadratic-forms-over-mathbb-q_p" class="nav-link" data-scroll-target="#prelude-classifying-binary-quadratic-forms-over-mathbb-q_p">Prelude: Classifying Binary Quadratic Forms over <span class="math inline">\(\mathbb Q_p\)</span></a></li>
+  <li><a href="#the-hasse-invariant" id="toc-the-hasse-invariant" class="nav-link" data-scroll-target="#the-hasse-invariant">The Hasse Invariant</a></li>
+  <li><a href="#d-and-varepsilon-determine-the-range" id="toc-d-and-varepsilon-determine-the-range" class="nav-link" data-scroll-target="#d-and-varepsilon-determine-the-range"><span class="math inline">\(d\)</span> and <span class="math inline">\(\varepsilon\)</span> Determine the Range</a></li>
+  </ul></li>
+  <li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification"><span class="header-section-number">3.4</span> Classification</a>
+  <ul class="collapse">
+  <li><a href="#classification-of-quadratic-forms-over-mathbb-q_p" id="toc-classification-of-quadratic-forms-over-mathbb-q_p" class="nav-link" data-scroll-target="#classification-of-quadratic-forms-over-mathbb-q_p">Classification of Quadratic Forms over <span class="math inline">\(\mathbb Q_p\)</span></a></li>
+  <li><a href="#classification-of-quadratic-forms-over-mathbb-q" id="toc-classification-of-quadratic-forms-over-mathbb-q" class="nav-link" data-scroll-target="#classification-of-quadratic-forms-over-mathbb-q">Classification of Quadratic Forms over <span class="math inline">\(\mathbb Q\)</span></a></li>
+  <li><a href="#problem-remains" id="toc-problem-remains" class="nav-link" data-scroll-target="#problem-remains">Problem Remains</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>Beamer</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content" tabindex="-1">
 
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -441,10 +492,10 @@ window.Quarto = {
 </header>
 
 
-<section id="first-attempts-and-general-approaches" class="level2 page-columns page-full" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="first-attempts-and-general-approaches"><span class="header-section-number">1</span> First Attempts and General Approaches</h2>
-<section id="foreword" class="level4">
-<h4 class="anchored" data-anchor-id="foreword">Foreword</h4>
+<section id="first-attempts-and-general-approaches" class="level1 page-columns page-full" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> First Attempts and General Approaches</h1>
+<section id="foreword" class="level3">
+<h3 class="anchored" data-anchor-id="foreword">Foreword</h3>
 <ul>
 <li><p>References relied on heavily:</p>
 <ul>
@@ -458,8 +509,8 @@ window.Quarto = {
 <li><p>Apology in advance for potential mistakes</p></li>
 </ul>
 </section>
-<section id="notations" class="level4">
-<h4 class="anchored" data-anchor-id="notations">Notations</h4>
+<section id="notations" class="level3">
+<h3 class="anchored" data-anchor-id="notations">Notations</h3>
 <ul>
 <li><p>We denote by <span class="math inline">\(K\)</span> an arbitrary field. <strong>All fields are assumed to be of characteristic <span class="math inline">\(\neq 2\)</span></strong>.</p></li>
 <li><p><span class="math inline">\(\nu_p : \mathbb Q_p \to \mathbb Z\)</span> being the <span class="math inline">\(p\)</span>-adic valuation.</p></li>
@@ -467,10 +518,10 @@ window.Quarto = {
 <li><p>Let <span class="math inline">\(f \oplus g\)</span> denote the direct sum of two quadratic forms <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span>.</p></li>
 </ul>
 </section>
-<section id="example-quadratic-forms-over-mathbb-r-and-mathbb-f_q" class="level3 page-columns page-full" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="example-quadratic-forms-over-mathbb-r-and-mathbb-f_q"><span class="header-section-number">1.1</span> Example: Quadratic Forms over <span class="math inline">\(\mathbb R\)</span> and <span class="math inline">\(\mathbb F_q\)</span></h3>
-<section id="review-quadratic-forms-over-mathbb-r" class="level4">
-<h4 class="anchored" data-anchor-id="review-quadratic-forms-over-mathbb-r">Review: Quadratic Forms over <span class="math inline">\(\mathbb R\)</span></h4>
+<section id="example-quadratic-forms-over-mathbb-r-and-mathbb-f_q" class="level2 page-columns page-full" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="example-quadratic-forms-over-mathbb-r-and-mathbb-f_q"><span class="header-section-number">1.1</span> Example: Quadratic Forms over <span class="math inline">\(\mathbb R\)</span> and <span class="math inline">\(\mathbb F_q\)</span></h2>
+<section id="review-quadratic-forms-over-mathbb-r" class="level3">
+<h3 class="anchored" data-anchor-id="review-quadratic-forms-over-mathbb-r">Review: Quadratic Forms over <span class="math inline">\(\mathbb R\)</span></h3>
 <ul>
 <li><p>A quadratic form <span class="math inline">\(f: V \to K\)</span> may be identified by a symmetric matrix <span class="math inline">\(A \in M_n(K)\)</span> by <span class="math inline">\(f(v) = v^\mathrm{T}A v\)</span>.</p>
 <p>Their equivalence is defined by <em>congruence</em>: <span class="math inline">\(A \sim B \iff A = Q^\mathrm{T}B Q\)</span>.</p></li>
@@ -484,8 +535,8 @@ window.Quarto = {
 <li><p>Sylvester’s law of inertia: signature is also an invariant.</p></li>
 </ul>
 </section>
-<section id="some-refinement" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="some-refinement">Some Refinement</h4>
+<section id="some-refinement" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="some-refinement">Some Refinement</h3>
 <p>On an arbitrary field <span class="math inline">\(K\)</span>:</p>
 <ul>
 <li><p>All symmetric matrix is equivalent to a diagonal one.</p>
@@ -502,8 +553,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 <div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Though working in the refined structure <span class="math inline">\(\{0\} \cup K^\times / (K^\times)^2\)</span> is probably a better idea if one wishes to deal with the degenerate case in a uniform manner.</p></div></div></section>
-<section id="another-example-quadratic-forms-over-mathbb-f_q" class="level4">
-<h4 class="anchored" data-anchor-id="another-example-quadratic-forms-over-mathbb-f_q">Another Example: Quadratic Forms over <span class="math inline">\(\mathbb F_q\)</span></h4>
+<section id="another-example-quadratic-forms-over-mathbb-f_q" class="level3">
+<h3 class="anchored" data-anchor-id="another-example-quadratic-forms-over-mathbb-f_q">Another Example: Quadratic Forms over <span class="math inline">\(\mathbb F_q\)</span></h3>
 <p>We classify the non-degenerate quadratic forms of rank <span class="math inline">\(n\)</span>.</p>
 <ul>
 <li><p>Refined signature: counting nonzero quadratic residues and nonresidues. It may serve as a sufficient criterion for equivalence.</p></li>
@@ -517,10 +568,10 @@ window.Quarto = {
 <p>Insight: Existence of nonzero solutions to the equation <span class="math inline">\(a X^2 + b Y^2 = Z^2\)</span> in <span class="math inline">\(K\)</span> seems to be of great importance.</p>
 </section>
 </section>
-<section id="quadratic-spaces" class="level3" data-number="1.2">
-<h3 data-number="1.2" class="anchored" data-anchor-id="quadratic-spaces"><span class="header-section-number">1.2</span> Quadratic Spaces</h3>
-<section id="quadratic-spaces-1" class="level4">
-<h4 class="anchored" data-anchor-id="quadratic-spaces-1">Quadratic Spaces</h4>
+<section id="quadratic-spaces" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="quadratic-spaces"><span class="header-section-number">1.2</span> Quadratic Spaces</h2>
+<section id="quadratic-spaces-1" class="level3">
+<h3 class="anchored" data-anchor-id="quadratic-spaces-1">Quadratic Spaces</h3>
 <p>The structure of a quadratic space, i.e.&nbsp;vector space equipped with a symmetric bilinear form, is much more subtle than its positive-definite counterpart over <span class="math inline">\(\mathbb R\)</span> or <span class="math inline">\(\mathbb C\)</span>. For example, for a non-degenerate quadratic space <span class="math inline">\(V\)</span> and a subspace <span class="math inline">\(U\)</span> of <span class="math inline">\(V\)</span> (<span class="citation" data-cites="serre_course_1973"><a href="#ref-serre_course_1973" role="doc-biblioref">[1]</a></span> p.&nbsp;28, chap.&nbsp;4, sec.&nbsp;1.2):</p>
 <ul>
 <li><p><span class="math inline">\(U \cap U^\perp = \operatorname{rad}(U)\)</span>, <span class="math inline">\(\dim U + \dim U^\perp = \dim V\)</span>, <span class="math inline">\((U^\perp)^\perp = U\)</span></p></li>
@@ -528,8 +579,8 @@ window.Quarto = {
 <li><p>It’s much harder to show that an orthogonal basis of <span class="math inline">\(U\)</span> expands to an orthogonal basis of <span class="math inline">\(V\)</span>.</p></li>
 </ul>
 </section>
-<section id="structure-of-quadratic-spaces" class="level4">
-<h4 class="anchored" data-anchor-id="structure-of-quadratic-spaces">Structure of Quadratic Spaces</h4>
+<section id="structure-of-quadratic-spaces" class="level3">
+<h3 class="anchored" data-anchor-id="structure-of-quadratic-spaces">Structure of Quadratic Spaces</h3>
 <p>We mention some results here without details.</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
@@ -569,10 +620,10 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="the-common-represented-element-method" class="level3" data-number="1.3">
-<h3 data-number="1.3" class="anchored" data-anchor-id="the-common-represented-element-method"><span class="header-section-number">1.3</span> The Common Represented Element Method</h3>
-<section id="another-invariant-the-range" class="level4">
-<h4 class="anchored" data-anchor-id="another-invariant-the-range">Another Invariant: The Range</h4>
+<section id="the-common-represented-element-method" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="the-common-represented-element-method"><span class="header-section-number">1.3</span> The Common Represented Element Method</h2>
+<section id="another-invariant-the-range" class="level3">
+<h3 class="anchored" data-anchor-id="another-invariant-the-range">Another Invariant: The Range</h3>
 <p>On an arbitrary field <span class="math inline">\(K\)</span>, we say that a quadratic form <span class="math inline">\(f\)</span> <em>represent</em>s <span class="math inline">\(a \in K\)</span> if there exists a nonzero <span class="math inline">\(v \in V\)</span> such that <span class="math inline">\(f(v) = a\)</span>.</p>
 <ul>
 <li><p>The range of <span class="math inline">\(f\)</span>, <span class="math inline">\(\operatorname{Im}f\)</span>, is an invariant.</p></li>
@@ -580,8 +631,8 @@ window.Quarto = {
 <li><p>Is it complete?</p></li>
 </ul>
 </section>
-<section id="insights-from-the-range" class="level4">
-<h4 class="anchored" data-anchor-id="insights-from-the-range">Insights from the Range</h4>
+<section id="insights-from-the-range" class="level3">
+<h3 class="anchored" data-anchor-id="insights-from-the-range">Insights from the Range</h3>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -605,8 +656,8 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="insights-from-the-range-1" class="level3" data-number="1.4">
-<h3 data-number="1.4" class="anchored" data-anchor-id="insights-from-the-range-1"><span class="header-section-number">1.4</span> Insights from the Range</h3>
+<section id="insights-from-the-range-1" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="insights-from-the-range-1"><span class="header-section-number">1.4</span> Insights from the Range</h2>
 <ul>
 <li><p>Sadly, the range is not always a complete invariant.</p>
 <ul>
@@ -617,10 +668,10 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="global-and-local-equivalence" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="global-and-local-equivalence"><span class="header-section-number">2</span> Global and Local Equivalence</h2>
-<section id="global-and-local-equivalence-1" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="global-and-local-equivalence-1"><span class="header-section-number">2.1</span> Global and Local Equivalence</h3>
+<section id="global-and-local-equivalence" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Global and Local Equivalence</h1>
+<section id="global-and-local-equivalence-1" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="global-and-local-equivalence-1"><span class="header-section-number">2.1</span> Global and Local Equivalence</h2>
 <ul>
 <li><p>Fact: Field extensions preserve the equivalence of quadratic forms.</p>
 <ul>
@@ -646,12 +697,12 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="quadratic-forms-over-mathbb-q_p-and-mathbb-q" class="level2 page-columns page-full" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="quadratic-forms-over-mathbb-q_p-and-mathbb-q"><span class="header-section-number">3</span> Quadratic Forms over <span class="math inline">\(\mathbb Q_p\)</span> and <span class="math inline">\(\mathbb Q\)</span></h2>
-<section id="structure-of-mathbb-q_ptimes-mathbb-q_ptimes2" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="structure-of-mathbb-q_ptimes-mathbb-q_ptimes2"><span class="header-section-number">3.1</span> Structure of <span class="math inline">\(\mathbb Q_p^\times / (\mathbb Q_p^\times)^2\)</span></h3>
-<section id="structure-of-mathbb-q_ptimes" class="level4">
-<h4 class="anchored" data-anchor-id="structure-of-mathbb-q_ptimes">Structure of <span class="math inline">\(\mathbb Q_p^\times\)</span></h4>
+<section id="quadratic-forms-over-mathbb-q_p-and-mathbb-q" class="level1 page-columns page-full" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Quadratic Forms over <span class="math inline">\(\mathbb Q_p\)</span> and <span class="math inline">\(\mathbb Q\)</span></h1>
+<section id="structure-of-mathbb-q_ptimes-mathbb-q_ptimes2" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="structure-of-mathbb-q_ptimes-mathbb-q_ptimes2"><span class="header-section-number">3.1</span> Structure of <span class="math inline">\(\mathbb Q_p^\times / (\mathbb Q_p^\times)^2\)</span></h2>
+<section id="structure-of-mathbb-q_ptimes" class="level3">
+<h3 class="anchored" data-anchor-id="structure-of-mathbb-q_ptimes">Structure of <span class="math inline">\(\mathbb Q_p^\times\)</span></h3>
 <ul>
 <li><p><span class="math inline">\(\mathbb Q_p^\times \cong \mathbb Z \times \mathbb Z_p^\times\)</span> by collecting common powers of <span class="math inline">\(p\)</span></p></li>
 <li><p><span class="math inline">\(\mathbb Z_p^\times \cong \mathbb F_p^\times \times (1 + p \mathbb Z_p)\)</span> by <span class="math inline">\(a \mapsto a \bmod p\)</span></p>
@@ -660,8 +711,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="structure-of-1-p-mathbb-z_p-and-the-log-exp-map" class="level4">
-<h4 class="anchored" data-anchor-id="structure-of-1-p-mathbb-z_p-and-the-log-exp-map">Structure of <span class="math inline">\(1 + p \mathbb Z_p\)</span> and the log / exp map</h4>
+<section id="structure-of-1-p-mathbb-z_p-and-the-log-exp-map" class="level3">
+<h3 class="anchored" data-anchor-id="structure-of-1-p-mathbb-z_p-and-the-log-exp-map">Structure of <span class="math inline">\(1 + p \mathbb Z_p\)</span> and the log / exp map</h3>
 <p>For <span class="math inline">\(p \neq 2,\, \alpha \geq 1\)</span> or <span class="math inline">\(p = 2,\, \alpha \geq 2\)</span>: <span class="math display">\[
 \begin{aligned}
 1 + p^\alpha \mathbb Z_p &amp;\cong (p^\alpha \mathbb Z_p, +) \cong (\mathbb Z_p, +) \\
@@ -683,8 +734,8 @@ window.Quarto = {
 \]</span></p></li>
 </ul>
 </section>
-<section id="quadratic-residues-of-mathbb-q_p" class="level4">
-<h4 class="anchored" data-anchor-id="quadratic-residues-of-mathbb-q_p">Quadratic residues of <span class="math inline">\(\mathbb Q_p\)</span></h4>
+<section id="quadratic-residues-of-mathbb-q_p" class="level3">
+<h3 class="anchored" data-anchor-id="quadratic-residues-of-mathbb-q_p">Quadratic residues of <span class="math inline">\(\mathbb Q_p\)</span></h3>
 <p>For <span class="math inline">\(p \neq 2\)</span>:</p>
 <ul>
 <li><p><span class="math inline">\(\mathbb Q_p^\times \cong \mathbb Z \times \mathbb F_p^\times \times (\mathbb Z_p, +)\)</span></p></li>
@@ -700,10 +751,10 @@ window.Quarto = {
 </ul>
 </section>
 </section>
-<section id="the-hilbert-symbol" class="level3 page-columns page-full" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="the-hilbert-symbol"><span class="header-section-number">3.2</span> The Hilbert Symbol</h3>
-<section id="the-hilbert-symbol-1" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="the-hilbert-symbol-1">The Hilbert Symbol</h4>
+<section id="the-hilbert-symbol" class="level2 page-columns page-full" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="the-hilbert-symbol"><span class="header-section-number">3.2</span> The Hilbert Symbol</h2>
+<section id="the-hilbert-symbol-1" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="the-hilbert-symbol-1">The Hilbert Symbol</h3>
 <p>The Hilbert symbol over <span class="math inline">\(\mathbb Q_p\)</span> is defined as: <span class="math display">\[
 \langle a, b \rangle := \begin{cases}
   1 &amp; \text{if } a X^2 + b Y^2 = Z^2 \text{ has a nonzero solution in } \mathbb Q_p \\
@@ -711,8 +762,8 @@ window.Quarto = {
 \end{cases}
 \]</span> The symbol may also be viewed in <span class="math inline">\(\{0\} \cup \mathbb Q_p^\times / (\mathbb Q_p^\times)^2\)</span> or even more simply in <span class="math inline">\(\mathbb Q_p^\times / (\mathbb Q_p^\times)^2\)</span> when working with non-degenerate forms.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Lots of the resources, even <span class="citation" data-cites="serre_course_1973"><a href="#ref-serre_course_1973" role="doc-biblioref">[1]</a></span>, switch between these three views without enough warning. Sadly we shall also commit this usual mild sin (and have already done to other innocent invariants such as the discriminant…)</p></div></div></section>
-<section id="properties-of-the-hilbert-symbol" class="level4">
-<h4 class="anchored" data-anchor-id="properties-of-the-hilbert-symbol">Properties of the Hilbert Symbol</h4>
+<section id="properties-of-the-hilbert-symbol" class="level3">
+<h3 class="anchored" data-anchor-id="properties-of-the-hilbert-symbol">Properties of the Hilbert Symbol</h3>
 <ul>
 <li><p><span class="math inline">\(\langle a, -a \rangle = 1\)</span></p></li>
 <li><p><span class="math inline">\(\langle a, b \rangle = \langle b, a \rangle\)</span> (symmetric)</p></li>
@@ -728,8 +779,8 @@ window.Quarto = {
 </ul></li>
 </ul>
 </section>
-<section id="the-explicit-formula-of-the-hilbert-symbol" class="level4">
-<h4 class="anchored" data-anchor-id="the-explicit-formula-of-the-hilbert-symbol">The Explicit Formula of the Hilbert Symbol</h4>
+<section id="the-explicit-formula-of-the-hilbert-symbol" class="level3">
+<h3 class="anchored" data-anchor-id="the-explicit-formula-of-the-hilbert-symbol">The Explicit Formula of the Hilbert Symbol</h3>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -788,10 +839,10 @@ window.Quarto = {
 </table>
 </section>
 </section>
-<section id="invariants-that-determine-the-range" class="level3" data-number="3.3">
-<h3 data-number="3.3" class="anchored" data-anchor-id="invariants-that-determine-the-range"><span class="header-section-number">3.3</span> Invariants that Determine the Range</h3>
-<section id="prelude-classifying-binary-quadratic-forms-over-mathbb-q_p" class="level4">
-<h4 class="anchored" data-anchor-id="prelude-classifying-binary-quadratic-forms-over-mathbb-q_p">Prelude: Classifying Binary Quadratic Forms over <span class="math inline">\(\mathbb Q_p\)</span></h4>
+<section id="invariants-that-determine-the-range" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="invariants-that-determine-the-range"><span class="header-section-number">3.3</span> Invariants that Determine the Range</h2>
+<section id="prelude-classifying-binary-quadratic-forms-over-mathbb-q_p" class="level3">
+<h3 class="anchored" data-anchor-id="prelude-classifying-binary-quadratic-forms-over-mathbb-q_p">Prelude: Classifying Binary Quadratic Forms over <span class="math inline">\(\mathbb Q_p\)</span></h3>
 <p>In the following table:</p>
 <ul>
 <li>Entry: the discriminant of <span class="math inline">\(\alpha X^2+\beta Y^2\)</span></li>
@@ -908,8 +959,8 @@ Table&nbsp;2: <span class="math inline">\(p \equiv 3 \pmod 4\)</span>
 </div>
 <p>Classification of nondegenerate binary quadratic forms over <span class="math inline">\(\mathbb Q_p\)</span>, <span class="math inline">\(p \neq 2\)</span></p>
 </section>
-<section id="the-hasse-invariant" class="level4">
-<h4 class="anchored" data-anchor-id="the-hasse-invariant">The Hasse Invariant</h4>
+<section id="the-hasse-invariant" class="level3">
+<h3 class="anchored" data-anchor-id="the-hasse-invariant">The Hasse Invariant</h3>
 <p>Recall that we have reduced to work with non-degenerate diagonalized quadratic forms of rank <span class="math inline">\(n\)</span>. Recall that the discriminant <span class="math display">\[
 d(f) = a_1 a_2 \dots a_n \in \mathbb Q_p^\times / (\mathbb Q_p^\times)^2
 \]</span> is an invariant.</p>
@@ -923,8 +974,8 @@ d(f) = a_1 a_2 \dots a_n \in \mathbb Q_p^\times / (\mathbb Q_p^\times)^2
 </ul></li>
 </ul>
 </section>
-<section id="d-and-varepsilon-determine-the-range" class="level4">
-<h4 class="anchored" data-anchor-id="d-and-varepsilon-determine-the-range"><span class="math inline">\(d\)</span> and <span class="math inline">\(\varepsilon\)</span> Determine the Range</h4>
+<section id="d-and-varepsilon-determine-the-range" class="level3">
+<h3 class="anchored" data-anchor-id="d-and-varepsilon-determine-the-range"><span class="math inline">\(d\)</span> and <span class="math inline">\(\varepsilon\)</span> Determine the Range</h3>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -947,10 +998,10 @@ d(f) = a_1 a_2 \dots a_n \in \mathbb Q_p^\times / (\mathbb Q_p^\times)^2
 <p>Recall that <span class="math inline">\(f\)</span> represents <span class="math inline">\(a \in \mathbb Q_p^\times / (\mathbb Q_p^\times)^2\)</span> iff <span class="math inline">\(f \oplus (Z \mapsto -a Z^2)\)</span> represents <span class="math inline">\(0\)</span>, thus above fully characterizes the range.</p>
 </section>
 </section>
-<section id="classification" class="level3" data-number="3.4">
-<h3 data-number="3.4" class="anchored" data-anchor-id="classification"><span class="header-section-number">3.4</span> Classification</h3>
-<section id="classification-of-quadratic-forms-over-mathbb-q_p" class="level4">
-<h4 class="anchored" data-anchor-id="classification-of-quadratic-forms-over-mathbb-q_p">Classification of Quadratic Forms over <span class="math inline">\(\mathbb Q_p\)</span></h4>
+<section id="classification" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="classification"><span class="header-section-number">3.4</span> Classification</h2>
+<section id="classification-of-quadratic-forms-over-mathbb-q_p" class="level3">
+<h3 class="anchored" data-anchor-id="classification-of-quadratic-forms-over-mathbb-q_p">Classification of Quadratic Forms over <span class="math inline">\(\mathbb Q_p\)</span></h3>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -974,8 +1025,8 @@ d(f) = a_1 a_2 \dots a_n \in \mathbb Q_p^\times / (\mathbb Q_p^\times)^2
 <li><p>The same for <span class="math inline">\(g\)</span>. Thus <span class="math inline">\(f_1, g_1\)</span> share the same <span class="math inline">\(d\)</span> and <span class="math inline">\(\varepsilon\)</span> (thus also their range). QED by induction.</p></li>
 </ul>
 </section>
-<section id="classification-of-quadratic-forms-over-mathbb-q" class="level4">
-<h4 class="anchored" data-anchor-id="classification-of-quadratic-forms-over-mathbb-q">Classification of Quadratic Forms over <span class="math inline">\(\mathbb Q\)</span></h4>
+<section id="classification-of-quadratic-forms-over-mathbb-q" class="level3">
+<h3 class="anchored" data-anchor-id="classification-of-quadratic-forms-over-mathbb-q">Classification of Quadratic Forms over <span class="math inline">\(\mathbb Q\)</span></h3>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -995,8 +1046,8 @@ d(f) = a_1 a_2 \dots a_n \in \mathbb Q_p^\times / (\mathbb Q_p^\times)^2
 <li><p><span class="math inline">\(f_1 \sim g_1\)</span> locally by Witt’s cancellation theorem. QED by induction.</p></li>
 </ul>
 </section>
-<section id="problem-remains" class="level4">
-<h4 class="anchored" data-anchor-id="problem-remains">Problem Remains</h4>
+<section id="problem-remains" class="level3">
+<h3 class="anchored" data-anchor-id="problem-remains">Problem Remains</h3>
 <ul>
 <li><p>Proof of the Hasse-Minkowski theorem</p>
 <ul>
@@ -1026,15 +1077,50 @@ d(f) = a_1 a_2 \dots a_n \in \mathbb Q_p^\times / (\mathbb Q_p^\times)^2
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -1109,11 +1195,30 @@ d(f) = a_1 a_2 \dots a_n \in \mathbb Q_p^\times / (\mathbb Q_p^\times)^2
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1127,10 +1232,72 @@ d(f) = a_1 a_2 \dots a_n \in \mathbb Q_p^\times / (\mathbb Q_p^\times)^2
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
             // default icon
             link.classList.add("external");
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1144,6 +1311,7 @@ d(f) = a_1 a_2 \dots a_n \in \mathbb Q_p^\times / (\mathbb Q_p^\times)^2
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1306,44 +1474,54 @@ d(f) = a_1 a_2 \dots a_n \in \mathbb Q_p^\times / (\mathbb Q_p^\times)^2
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1442,8 +1620,11 @@ d(f) = a_1 a_2 \dots a_n \in \mathbb Q_p^\times / (\mathbb Q_p^\times)^2
     }
   });
   </script>
-<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
-<input type="hidden" id="giscus-alt-theme" value="light">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark_dimmed">
 <script>
   function loadGiscus() {
     // Function to get the theme based on body class

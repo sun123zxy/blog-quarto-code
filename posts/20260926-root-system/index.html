@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -14,10 +14,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -58,16 +61,19 @@ div.csl-indent {
 <link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f81f3c79f694eaf6f88ebcce70241f9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-af64962de9348b804daa6381b125c604.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e87cd3d65a65f768c7a1700db1c28216.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9b2404ec78ff68ca4c9b2f4303203b01.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-39330638802da02b364dd7ec4e29bc31.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7dd074d930de47cb4e38ad128cc73662.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -107,7 +113,7 @@ MathJax = {
 <meta name="quarto:status" content="draft">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -138,7 +144,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -161,6 +167,7 @@ window.Quarto = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -190,13 +197,19 @@ window.Quarto = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -280,14 +293,17 @@ window.Quarto = {
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -302,15 +318,14 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Draft</div>
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -354,8 +369,9 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -364,7 +380,7 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -391,7 +407,7 @@ window.Quarto = {
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -430,8 +446,8 @@ window.Quarto = {
 </header>
 
 
-<section id="upside-down" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="upside-down"><span class="header-section-number">1</span> Upside Down?</h2>
+<section id="upside-down" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Upside Down?</h1>
 <p>Open virtually any standard textbook on Lie algebras or representation theory (e.g. <span class="citation" data-cites="humphreys_reflection_1990"><a href="#ref-humphreys_reflection_1990" role="doc-biblioref">[1]</a></span>, <span class="citation" data-cites="humphreys_introduction_1972"><a href="#ref-humphreys_introduction_1972" role="doc-biblioref">[2]</a></span>), and you will encounter an exposition that looks something like this:</p>
 <ul>
 <li>Fix a Euclidean space <span class="math inline">\(E = \mathbb{R}^n\)</span> equipped with the standard positive-definite inner product <span class="math inline">\((-,-)\)</span>.</li>
@@ -454,8 +470,8 @@ window.Quarto = {
 </ul>
 <p>To address these problems, we must turn the exposition upside down. We instead adopt a <strong>structure-oriented approach: Never introduce any additional structure until you are backed into a corner and forced to do so.</strong> No ambient metric. No lengths. No angles. We start with nothing but a blank vector space and linear duality, and we will watch both Coxeter groups and root systems construct themselves canonically.</p>
 </section>
-<section id="reflections" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="reflections"><span class="header-section-number">2</span> Reflections</h2>
+<section id="reflections" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Reflections</h1>
 <p>Let <span class="math inline">\(V\)</span> be a finite-dimensional real vector space. Let <span class="math inline">\(V^\vee = \operatorname{Hom}_{\mathbb{R}}(V, \mathbb{R})\)</span> be its dual space. The only canonical operation we possess is the natural pairing between a vector and a functional: <span class="math display">\[\langle v, f \rangle := f(v) \quad (v \in V, \, f \in V^\vee)\]</span></p>
 <p>We want to define a linear reflection <span class="math inline">\(s: V \to V\)</span> without reference to “perpendicularity” or “distance”. The following observation captures the required essence: a reflection fix a hyperplane (a mirror) and invert a direction transverse to it.</p>
 <ul>
@@ -479,8 +495,8 @@ s(v) = v - 2\frac{\langle v, \alpha^\vee \rangle}{\langle \alpha, \alpha^\vee \r
 s(v) = v - \langle v, \alpha^\vee \rangle \alpha
 \]</span></p>
 <p>We call <span class="math inline">\(\alpha\)</span> a <em>root</em> and <span class="math inline">\(\alpha^\vee\)</span> a <em>coroot</em>.</p>
-<section id="inner-product" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="inner-product"><span class="header-section-number">2.1</span> Inner Product</h3>
+<section id="inner-product" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="inner-product"><span class="header-section-number">2.1</span> Inner Product</h2>
 <p>To link back to the traditional definition of a root system, we need to introduce an inner product, though it is completely unnecessary for the most part of the theory. How to characterize a “well-behaved” inner product? The following gives a good answer:</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
@@ -544,8 +560,8 @@ s(v) = v - \langle v, \alpha^\vee \rangle \alpha
 \alpha^\vee := \frac{2}{(\alpha, \alpha)} \cdot \alpha
 \]</span> does the job.</p>
 </section>
-<section id="root-length-ratio" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="root-length-ratio"><span class="header-section-number">2.2</span> Root Length Ratio</h3>
+<section id="root-length-ratio" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="root-length-ratio"><span class="header-section-number">2.2</span> Root Length Ratio</h2>
 <p>With an inner product <span class="math inline">\((\cdot, \cdot)\)</span>, we may define the length of a root <span class="math inline">\(\alpha\)</span>. As it relies on a choosen inner product, it should not be considered a canonical invariant of a root system. However, the length ratios between the roots is an intrinsic property. To see this, recall the well-behaveness condition of the inner product <span class="math inline">\((\cdot, \cdot)\)</span> from <a href="#prp-well-behaved-inner-product" class="quarto-xref">Proposition&nbsp;1</a>. Applying it to two different roots <span class="math inline">\(\alpha_i\)</span> and <span class="math inline">\(\alpha_j\)</span>, we have <span class="math display">\[
 a_{ij} = \langle \alpha_j, \alpha_i^\vee \rangle = \frac{2 (\alpha_j, \alpha_i)}{(\alpha_i, \alpha_i)} \qquad a_{ji} = \langle \alpha_i, \alpha_j^\vee \rangle = \frac{2 (\alpha_i, \alpha_j)}{(\alpha_j, \alpha_j)}
 \]</span> hence <span class="math display">\[
@@ -553,8 +569,8 @@ a_{ji} : a_{ij} = (\alpha_i, \alpha_i) : (\alpha_j, \alpha_j)
 \]</span> So if we exclude the orthogonal <span class="math inline">\(\theta = \pi/2\)</span> case, the ratio of the lengths of two roots is completely determined by the Cartan matrix, without ever introducing a metric.</p>
 </section>
 </section>
-<section id="more-reflections" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="more-reflections"><span class="header-section-number">3</span> More Reflections</h2>
+<section id="more-reflections" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> More Reflections</h1>
 <p>Now let us consider a set of <span class="math inline">\(n\)</span> mirrors, indexed by <span class="math inline">\(I = \{1, \dots, n\}\)</span>:</p>
 <ul>
 <li><em>Simple roots</em>: <span class="math inline">\(\Delta := (\alpha_i)_{i \in I} \subseteq V\)</span></li>
@@ -586,8 +602,8 @@ s_i(v) = v - \langle v, \alpha_i^\vee \rangle \alpha_i
 </div>
 </div>
 </div>
-<section id="cartan-matrix-as-a-bilinear-form" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="cartan-matrix-as-a-bilinear-form"><span class="header-section-number">3.1</span> Cartan Matrix as a Bilinear Form</h3>
+<section id="cartan-matrix-as-a-bilinear-form" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="cartan-matrix-as-a-bilinear-form"><span class="header-section-number">3.1</span> Cartan Matrix as a Bilinear Form</h2>
 <p>Note that <strong>if <span class="math inline">\(\Delta\)</span> is a basis of <span class="math inline">\(V\)</span></strong>, then <span class="math inline">\(\Delta^\vee\)</span> is determined by <span class="math inline">\(\Delta\)</span> and the Cartan matrix <span class="math inline">\(A\)</span> by <span class="math display">\[
 \alpha_i^\vee = \sum_{j \in I} a_{ij} \varpi_j^\vee
 \]</span> where <span class="math inline">\((\varpi_i^\vee)_{i \in I}\)</span> is the dual basis of <span class="math inline">\(\Delta\)</span>, called the <em>fundamental coweights</em>. Thus usually we only need to specify a linearly independent collection <span class="math inline">\(\Delta\)</span> and the Cartan matrix <span class="math inline">\(A\)</span>. To summarize, the Cartan matrix <span class="math inline">\(A\)</span>, though in its pure state comes from the natural pairing <span class="math inline">\(\langle -, - \rangle : V \times V^* \to \mathbb{R}\)</span>, may also serve as a bilinear form <span class="math inline">\(A: V \times V \to \mathbb{R}\)</span> by <span class="math display">\[
@@ -616,8 +632,8 @@ A(v, w) &amp;:= \sum_{i,j \in I} a_{ij} \varpi_i^\vee(v) \varpi_j^\vee(w)
 </div>
 </div>
 </section>
-<section id="root-systems-and-reflection-groups" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="root-systems-and-reflection-groups"><span class="header-section-number">3.2</span> Root Systems and Reflection Groups</h3>
+<section id="root-systems-and-reflection-groups" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="root-systems-and-reflection-groups"><span class="header-section-number">3.2</span> Root Systems and Reflection Groups</h2>
 <p>The <em>reflection group</em> <span class="math inline">\(W\)</span> generated by <span class="math inline">\(\Delta\)</span> is defined as the subgroup of <span class="math inline">\(\operatorname{GL}(V)\)</span> generated by the simple reflections <span class="math inline">\((s_i)_{i \in I}\)</span>. The <em>root system</em> <span class="math inline">\(\Phi\)</span> generated by <span class="math inline">\(\Delta\)</span> is defined as the orbit of <span class="math inline">\(\Delta\)</span> under the action of the reflection group <span class="math inline">\(W\)</span>. Elements of <span class="math inline">\(\Phi\)</span> are called <em>roots</em>.</p>
 <p>Completely analogously, we may define the <em>coroot system</em> <span class="math inline">\(\Phi^\vee\)</span> generated by <span class="math inline">\(\Delta^\vee\)</span> as the orbit of <span class="math inline">\(\Delta^\vee\)</span> under the action of <span class="math inline">\(W\)</span>, where <span class="math inline">\(W\)</span> acts on <span class="math inline">\(V^\vee\)</span> via the natural contragradient representation <span class="math inline">\(w \cdot f := f \circ w^{-1}\)</span> for <span class="math inline">\(w \in W\)</span> and <span class="math inline">\(f \in V^\vee\)</span>. Elements of <span class="math inline">\(\Phi^\vee\)</span> are called <em>coroots</em>.</p>
 <p>When <span class="math inline">\(\Delta\)</span> is a basis of <span class="math inline">\(V\)</span>, as the simple coroots are completely determined by the simple roots, we may just focus on the root system <span class="math inline">\(\Phi\)</span>.</p>
@@ -651,8 +667,8 @@ A(v, w) &amp;:= \sum_{i,j \in I} a_{ij} \varpi_i^\vee(v) \varpi_j^\vee(w)
 </div>
 </section>
 </section>
-<section id="interaction-between-reflections" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="interaction-between-reflections"><span class="header-section-number">4</span> Interaction Between Reflections</h2>
+<section id="interaction-between-reflections" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Interaction Between Reflections</h1>
 <p>We now start considering the group-theoretic structure generated by these simple reflections, i.e.&nbsp;the reflection group <span class="math inline">\(W\)</span>. By definition of a reflection, <span class="math inline">\(s_i^2 = \operatorname{id}\)</span> for all <span class="math inline">\(i\)</span>. The next question is: what is the product <span class="math inline">\(s_i s_j\)</span>, and what is its order?</p>
 <p>The intuition is that <span class="math inline">\(s_i s_j\)</span> is a rotation in the plane spanned by <span class="math inline">\(\alpha_i\)</span> and <span class="math inline">\(\alpha_j\)</span>. But how to interpret this intuition without a metric? The key is the eigenvalues: it’s the only canonical invariant of a linear map that does not require any additional structure. Let’s compute <span class="math inline">\(s_i s_j\)</span> acting on a random vector <span class="math inline">\(v\)</span> first: <span id="eq-sisj-random"><span class="math display">\[
 \begin{aligned}
@@ -706,11 +722,11 @@ a_{ij} a_{ji} = 4 \cos^2 \theta
 \langle s_1, \dots, s_n \mid s_i^2 = 1, \, (s_i s_j)^{m_{ij}} = 1 \rangle
 \]</span> where the order <span class="math inline">\(m_{ij}\)</span> of <span class="math inline">\(s_i s_j\)</span> is solely determined by the product <span class="math inline">\(a_{ij} a_{ji}\)</span>. As we said before, our definition of a root system is very general, whose reflection group may not be a Coxeter group. Nevertheless, the above shows that it is at least its quotient. <strong>TODO: Analysis on when this quotient gives an isomorphism requires more work.</strong></p>
 </section>
-<section id="the-divergence-symmetric-vs.-crystallographic" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="the-divergence-symmetric-vs.-crystallographic"><span class="header-section-number">5</span> The Divergence: Symmetric vs.&nbsp;Crystallographic</h2>
+<section id="the-divergence-symmetric-vs.-crystallographic" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> The Divergence: Symmetric vs.&nbsp;Crystallographic</h1>
 <p>As we see from <a href="#eq-aij-aji-theta" class="quarto-xref">Equation&nbsp;4</a>, the product <span class="math inline">\(a_{ij} a_{ji}\)</span> is the only quantity that matters in determining the angle between the two mirrors, and hence the order <span class="math inline">\(m_{ij}\)</span> of <span class="math inline">\(s_i s_j\)</span>. So fixing <span class="math inline">\(m_{ij}\)</span>, we have the freedom to choose any pair <span class="math inline">\((a_{ij}, a_{ji})\)</span> that satisfies <span class="math inline">\(a_{ij} a_{ji} = 4 \cos^2(\pi/m_{ij})\)</span>. This freedom now diverges into two different directions, depending on what context we are in.</p>
-<section id="geometric-representation-the-symmetric-choice" class="level3" data-number="5.1">
-<h3 data-number="5.1" class="anchored" data-anchor-id="geometric-representation-the-symmetric-choice"><span class="header-section-number">5.1</span> Geometric Representation: The Symmetric Choice</h3>
+<section id="geometric-representation-the-symmetric-choice" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="geometric-representation-the-symmetric-choice"><span class="header-section-number">5.1</span> Geometric Representation: The Symmetric Choice</h2>
 <p>Suppose our goal is purely group-theoretic. We play with the reflections <span class="math inline">\(s_i\)</span> on <span class="math inline">\(V\)</span> because we want to construct an abstract group representation of the Coxeter group defined by the Coxeter matrix <span class="math inline">\((m_{ij})\)</span>. The most canonical, unbiased choice is to do it symmetrically: <span class="math display">\[
 a_{ij} = a_{ji} := -2\cos\left(\frac{\pi}{m_{ij}}\right)
 \]</span> where the negative sign is chosen so that reflections act as opposing walls of a convex chamber, a purely conventional choice. This is the <em>Geometric Representation of a Coxeter Group</em>. Once <span class="math inline">\(\Delta\)</span> is chosen to be a basis of <span class="math inline">\(V\)</span>, it makes the Cartan bilinear form <span class="math inline">\(A\)</span> symmetric.</p>
@@ -757,8 +773,8 @@ s_i(v) = v - 2 B(v, \alpha_i) \alpha_i
 </div>
 <p><strong>TODO: The proof of this proposition is beautiful, but it requires more work on root systems.</strong></p>
 </section>
-<section id="crystallographic-root-system-the-integral-choice" class="level3" data-number="5.2">
-<h3 data-number="5.2" class="anchored" data-anchor-id="crystallographic-root-system-the-integral-choice"><span class="header-section-number">5.2</span> Crystallographic Root System: The Integral Choice</h3>
+<section id="crystallographic-root-system-the-integral-choice" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="crystallographic-root-system-the-integral-choice"><span class="header-section-number">5.2</span> Crystallographic Root System: The Integral Choice</h2>
 <p>Recall that we let <span class="math inline">\(a_{ij} = a_{ji}\)</span> in <span class="math inline">\(a_{ij} a_{ji} = 4 \cos^2(\pi/m_{ij})\)</span> in the previous treatment that finally gave us a the geometric representation of a Coxeter group. However, this is not the only choice. Another idea is the so-called <em>crystallographic restriction</em>: to force <span class="math inline">\(a_{ij}\)</span> and <span class="math inline">\(a_{ji}\)</span> to be integers, i.e.&nbsp;<span class="math inline">\(A\)</span> is an integer matrix. Such a requirement is intresting because of the following TFAE characterization:</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
@@ -806,11 +822,11 @@ s_i(v) = v - 2 B(v, \alpha_i) \alpha_i
 <p>So in the crystallographic case, above four quantities are all determined by each other. Do note that this does not applies to <span class="math inline">\(\theta = \pi / 2\)</span>, where any root length ratio is possible.</p>
 </section>
 </section>
-<section id="root-systems-revisited" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="root-systems-revisited"><span class="header-section-number">6</span> Root Systems, Revisited</h2>
+<section id="root-systems-revisited" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Root Systems, Revisited</h1>
 </section>
-<section id="todo" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="todo"><span class="header-section-number">7</span> TODO</h2>
+<section id="todo" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> TODO</h1>
 <p>Severe problem: In the reflection interaction section, it’s possible that <span class="math inline">\(0 \leq a_{ij} a_{ji} \leq 4\)</span> does not hold. In which case the solutions of the characteristic polynomial are REAL, hence being not a rotation. Turns out that being able to admit a well-behaved inner product is equivalent to the condition <span class="math inline">\(0 \leq a_{ij} a_{ji} \leq 4\)</span>.</p>
 <p>Meanwhile off-diagonal <span class="math inline">\(a_{ij}\)</span> should be required to be non-positive, which is a must if we want <span class="math inline">\(\Phi^+ \sqcup \Phi^- = \Phi\)</span> (sign coherence). It is also said that sign coherence gives a Coxeter group. So to show that the geometric representation construction indeed gives a Coxeter group, we need to show that sign coherence is satisfied.</p>
 <p>We should really try to explain the way to naturally land on the generalized Cartan matrix. A generalized Cartan matrix is a matrix <span class="math inline">\(A = (a_{ij})\)</span> satisfying:</p>
@@ -847,15 +863,50 @@ s_i(v) = v - 2 B(v, \alpha_i) \alpha_i
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -930,11 +981,30 @@ s_i(v) = v - 2 B(v, \alpha_i) \alpha_i
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -948,10 +1018,72 @@ s_i(v) = v - 2 B(v, \alpha_i) \alpha_i
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
             // default icon
             link.classList.add("external");
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -965,6 +1097,7 @@ s_i(v) = v - 2 B(v, \alpha_i) \alpha_i
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1127,44 +1260,54 @@ s_i(v) = v - 2 B(v, \alpha_i) \alpha_i
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1263,8 +1406,11 @@ s_i(v) = v - 2 B(v, \alpha_i) \alpha_i
     }
   });
   </script>
-<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
-<input type="hidden" id="giscus-alt-theme" value="light">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark_dimmed">
 <script>
   function loadGiscus() {
     // Function to get the theme based on body class

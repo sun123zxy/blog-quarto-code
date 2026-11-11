@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,10 +13,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -72,16 +75,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f81f3c79f694eaf6f88ebcce70241f9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-af64962de9348b804daa6381b125c604.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e87cd3d65a65f768c7a1700db1c28216.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9b2404ec78ff68ca4c9b2f4303203b01.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-39330638802da02b364dd7ec4e29bc31.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7dd074d930de47cb4e38ad128cc73662.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -120,7 +126,7 @@ MathJax = {
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -151,7 +157,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -174,6 +180,7 @@ window.Quarto = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -203,13 +210,19 @@ window.Quarto = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -293,14 +306,17 @@ window.Quarto = {
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -315,15 +331,14 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -367,8 +382,9 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -377,7 +393,7 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -387,7 +403,11 @@ window.Quarto = {
   <li><a href="#s-1.2" id="toc-s-1.2" class="nav-link" data-scroll-target="#s-1.2">1.2 容斥/二项式反演</a></li>
   <li><a href="#s-1.3" id="toc-s-1.3" class="nav-link" data-scroll-target="#s-1.3">1.3 回到答案式</a></li>
   <li><a href="#s-1.4" id="toc-s-1.4" class="nav-link" data-scroll-target="#s-1.4">1.4 树形dp</a></li>
-  <li><a href="#s-1.5" id="toc-s-1.5" class="nav-link" data-scroll-target="#s-1.5">1.5 时间复杂度</a></li>
+  <li><a href="#s-1.5" id="toc-s-1.5" class="nav-link" data-scroll-target="#s-1.5">1.5 时间复杂度</a>
+  <ul class="collapse">
+  <li><a href="#s-1.5.1" id="toc-s-1.5.1" class="nav-link" data-scroll-target="#s-1.5.1">1.5.1 答案式</a></li>
+  <li><a href="#s-1.5.2" id="toc-s-1.5.2" class="nav-link" data-scroll-target="#s-1.5.2">1.5.2 树形dp</a></li>
+  </ul></li>
   <li><a href="#s-1.6" id="toc-s-1.6" class="nav-link" data-scroll-target="#s-1.6">1.6 总结</a></li>
   <li><a href="#s-1.7" id="toc-s-1.7" class="nav-link" data-scroll-target="#s-1.7">1.7 Code</a></li>
   </ul></li>
@@ -395,7 +415,11 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#s-2.1" id="toc-s-2.1" class="nav-link" data-scroll-target="#s-2.1">2.1 minmax容斥</a></li>
   <li><a href="#s-2.2" id="toc-s-2.2" class="nav-link" data-scroll-target="#s-2.2">2.2 处理 <span class="math inline">\(E(\min(T))\)</span></a></li>
-  <li><a href="#s-2.3" id="toc-s-2.3" class="nav-link" data-scroll-target="#s-2.3">2.3 树形dp</a></li>
+  <li><a href="#s-2.3" id="toc-s-2.3" class="nav-link" data-scroll-target="#s-2.3">2.3 树形dp</a>
+  <ul class="collapse">
+  <li><a href="#s-2.3.1" id="toc-s-2.3.1" class="nav-link" data-scroll-target="#s-2.3.1">2.3.1 状态压缩</a></li>
+  <li><a href="#s-2.3.2" id="toc-s-2.3.2" class="nav-link" data-scroll-target="#s-2.3.2">2.3.2 设置状态并处理转移</a></li>
+  </ul></li>
   <li><a href="#s-2.4" id="toc-s-2.4" class="nav-link" data-scroll-target="#s-2.4">2.4 时间复杂度</a></li>
   <li><a href="#s-2.5" id="toc-s-2.5" class="nav-link" data-scroll-target="#s-2.5">2.5 总结</a></li>
   <li><a href="#s-2.6" id="toc-s-2.6" class="nav-link" data-scroll-target="#s-2.6">2.6 Code</a></li>
@@ -405,7 +429,7 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -463,10 +487,10 @@ window.Quarto = {
 </blockquote>
 <p>题意简述：给一颗树，一次操作定义为随机选择一个点，染掉该点和它周围一圈的点，问期望多少次染黑所有点。</p>
 <p>这是道好题啊！全面考察了容斥、反演、期望和dp，有许多值得注意的细节。</p>
-<section id="s-1" class="level2">
-<h2 class="anchored" data-anchor-id="s-1">一、做法1（容斥/二项式反演+dp）</h2>
-<section id="s-1.1" class="level3">
-<h3 class="anchored" data-anchor-id="s-1.1">1.1 化式子</h3>
+<section id="s-1" class="level1">
+<h1>一、做法1（容斥/二项式反演+dp）</h1>
+<section id="s-1.1" class="level2">
+<h2 class="anchored" data-anchor-id="s-1.1">1.1 化式子</h2>
 <p>首先肯定第一个想到的式子就是</p>
 <p><span class="math display">\[
 Ans = \sum_{i=1}^{\infty} i *  P(在染第i次时刚好黑完)
@@ -493,8 +517,8 @@ Ans = \sum_{i=0}^{\infty} \sum_{k=0}^{n} P(选i次恰好选中某k个点) * N(k�
 <p>将所有可能钦定的情况合起来就是<span class="math inline">\(N\)</span>，而选择的概率实际上和树形结构无关，选中任意<span class="math inline">\(k\)</span>个点的概率都是一样的，所以直接乘起来即可。</p>
 <p>好，理解了上式，我们来仔细研究<span class="math inline">\(P\)</span>和<span class="math inline">\(N\)</span>到底是什么。</p>
 </section>
-<section id="s-1.2" class="level3">
-<h3 class="anchored" data-anchor-id="s-1.2">1.2 容斥/二项式反演</h3>
+<section id="s-1.2" class="level2">
+<h2 class="anchored" data-anchor-id="s-1.2">1.2 容斥/二项式反演</h2>
 <p>首先研究<span class="math inline">\(P\)</span>。首先如果恰好选中某<span class="math inline">\(k\)</span>个点，那么必然先得保证这<span class="math inline">\(i\)</span>次都不能选中其他的点。概率是 <span class="math display">\[
 (\frac{k}{n})^i
 \]</span></p>
@@ -517,8 +541,8 @@ f_i(k) = (\frac{k}{n})^i
 <p>这样就好懂多了，，</p>
 <p>不管怎么说，我们终于搞到了<span class="math inline">\(P\)</span>表达式，而且这个表达式里<span class="math inline">\(i\)</span>是指数！带回原式说不定可以用等比级数干掉它。</p>
 </section>
-<section id="s-1.3" class="level3">
-<h3 class="anchored" data-anchor-id="s-1.3">1.3 回到答案式</h3>
+<section id="s-1.3" class="level2">
+<h2 class="anchored" data-anchor-id="s-1.3">1.3 回到答案式</h2>
 <p>为方便书写，令<span class="math inline">\(a_k = N(k个点未黑完整棵树)\)</span> <span class="math display">\[
 \begin{aligned}
 Ans &amp;= \sum_{i=0}^{\infty} \sum_{k=0}^{n} a_k \sum_{p=0}^k C_k^p (-1)^p (\frac{k-p}{n})^i \\
@@ -537,8 +561,8 @@ Ans = \sum_{k=0}^{n} a_k \sum_{p=0}^k C_k^p (-1)^{k-p} \frac{n}{n-p}
 <p>（当<span class="math inline">\(k=p=n\)</span>时，由于上一步转化要求<span class="math inline">\(|q|&lt;1\)</span>，而此时<span class="math inline">\(|q|=1\)</span>，会出现级数发散的情况。但发现<span class="math inline">\(a_n\)</span>显然一定等于<span class="math inline">\(0\)</span>，所以直接不算<span class="math inline">\(k=n\)</span>的情况即可）</p>
 <p>直接枚举是<span class="math inline">\(O(n^2)\)</span>的，现在我们只需要求出每一个<span class="math inline">\(a_k = N(k个点未黑完整棵树)\)</span></p>
 </section>
-<section id="s-1.4" class="level3">
-<h3 class="anchored" data-anchor-id="s-1.4">1.4 树形dp</h3>
+<section id="s-1.4" class="level2">
+<h2 class="anchored" data-anchor-id="s-1.4">1.4 树形dp</h2>
 <p>首先可以做一步简单容斥简化问题</p>
 <p><span class="math display">\[
 N(k个点未黑完整棵树) = C_n^k - N(k个点黑完整棵树)
@@ -566,14 +590,14 @@ N(k个点黑完整棵树) = f[root][0][0][k]+f[root][0][1][k]
 \]</span></p>
 <p>顺着之前倒着带回去行了。</p>
 </section>
-<section id="s-1.5" class="level3">
-<h3 class="anchored" data-anchor-id="s-1.5">1.5 时间复杂度</h3>
-<section id="s-1.5.1" class="level4">
-<h4 class="anchored" data-anchor-id="s-1.5.1">1.5.1 答案式</h4>
+<section id="s-1.5" class="level2">
+<h2 class="anchored" data-anchor-id="s-1.5">1.5 时间复杂度</h2>
+<section id="s-1.5.1" class="level3">
+<h3 class="anchored" data-anchor-id="s-1.5.1">1.5.1 答案式</h3>
 <p>显然是<span class="math inline">\(O(n^2)\)</span>的。</p>
 </section>
-<section id="s-1.5.2" class="level4">
-<h4 class="anchored" data-anchor-id="s-1.5.2">1.5.2 树形dp</h4>
+<section id="s-1.5.2" class="level3">
+<h3 class="anchored" data-anchor-id="s-1.5.2">1.5.2 树形dp</h3>
 <p>一次卷积<span class="math inline">\(O(n ^ 2)\)</span>，会向上合并<span class="math inline">\(O(n)\)</span>次…</p>
 <p>诶？这不是<span class="math inline">\(O(n^3)\)</span>的吗？</p>
 <p>实则不然。</p>
@@ -588,15 +612,15 @@ N(k个点黑完整棵树) = f[root][0][0][k]+f[root][0][1][k]
 <p>还要优化的话，可以用NTT来做卷积，还可以用堆来实现从小到大合并减少浪费的时间，类似分治NTT。但都只是常数级优化。</p>
 </section>
 </section>
-<section id="s-1.6" class="level3">
-<h3 class="anchored" data-anchor-id="s-1.6">1.6 总结</h3>
+<section id="s-1.6" class="level2">
+<h2 class="anchored" data-anchor-id="s-1.6">1.6 总结</h2>
 <p>爆拆期望得无穷级数，尝试去掉无穷，套路化法将<span class="math inline">\(i\)</span>化入<span class="math inline">\(P\)</span>。</p>
 <p>拆掉<span class="math inline">\(P\)</span>在无穷与有限间建立联系，分别处理<span class="math inline">\(P\)</span>和<span class="math inline">\(N\)</span>。</p>
 <p><span class="math inline">\(P\)</span>可容斥得出，带回原式用等比级数干掉无穷的<span class="math inline">\(i\)</span></p>
 <p><span class="math inline">\(N\)</span>用树上背包可解，仔细推转移即可</p>
 </section>
-<section id="s-1.7" class="level3">
-<h3 class="anchored" data-anchor-id="s-1.7">1.7 Code</h3>
+<section id="s-1.7" class="level2">
+<h2 class="anchored" data-anchor-id="s-1.7">1.7 Code</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;cstdio&gt;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;cmath&gt;</span></span>
@@ -745,10 +769,10 @@ N(k个点黑完整棵树) = f[root][0][0][k]+f[root][0][1][k]
 <span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="s-2" class="level2">
-<h2 class="anchored" data-anchor-id="s-2">二、做法2（minmax容斥+dp）</h2>
-<section id="s-2.1" class="level3">
-<h3 class="anchored" data-anchor-id="s-2.1">2.1 minmax容斥</h3>
+<section id="s-2" class="level1">
+<h1>二、做法2（minmax容斥+dp）</h1>
+<section id="s-2.1" class="level2">
+<h2 class="anchored" data-anchor-id="s-2.1">2.1 minmax容斥</h2>
 <p>minmax容斥标准式： <span class="math display">\[
 \max(S) = \sum_{T \subseteq S \\ T \not= \varnothing} (-1)^{|T|-1} \min(T)
 \]</span></p>
@@ -760,8 +784,8 @@ E(\max(S)) = \sum_{T \subseteq S \\ T \not= \varnothing} (-1)^{|T|-1} E(\min(T))
 <p>套上期望后：<span class="math inline">\(E(\max(S))\)</span>表示染黑集合中所有点的期望耗时，也就是本题所要求的答案；<span class="math inline">\(E(\min(T))\)</span>表示至少染黑集合中的某一个点的期望耗时。</p>
 <p>捋一下思路，由于期望不满足<span class="math inline">\(E(\max(S)) = \max_{x \in S} E(x)\)</span>，无法直接遍历求<span class="math inline">\(\max\)</span>。但是因为期望具有线性性，可以借助minmax容斥来达到目的。 （这是一类套路题型）</p>
 </section>
-<section id="s-2.2" class="level3">
-<h3 class="anchored" data-anchor-id="s-2.2">2.2 处理 <span class="math inline">\(E(\min(T))\)</span></h3>
+<section id="s-2.2" class="level2">
+<h2 class="anchored" data-anchor-id="s-2.2">2.2 处理 <span class="math inline">\(E(\min(T))\)</span></h2>
 <p>于是思考<span class="math inline">\(E(\min(T))\)</span>是否容易求得。容易列出： <span class="math display">\[
 E(\min(T)) = \frac{|U_T|}{n} + (1 - \frac{|U_T|}{n})(1 + E(\min(T)))
 \]</span></p>
@@ -784,19 +808,19 @@ E(\max(S)) = \sum_{u=1}^n \frac{n}{u} \sum_{T \subseteq S \\ T \not= \varnothing
 <p>思考这式子的意义。其实它就是一个带上了容斥系数的所有<span class="math inline">\(T\)</span>的方案数之和，也就是<span class="math inline">\(|T|\)</span>为奇的方案数减去<span class="math inline">\(|T|\)</span>为偶的方案数。</p>
 <p>尝试通过树形dp解决</p>
 </section>
-<section id="s-2.3" class="level3">
-<h3 class="anchored" data-anchor-id="s-2.3">2.3 树形dp</h3>
+<section id="s-2.3" class="level2">
+<h2 class="anchored" data-anchor-id="s-2.3">2.3 树形dp</h2>
 <p>首先简单考虑一下所需的状态。考虑以某个点为根的子树，我们需要记录<span class="math inline">\(|U_T|\)</span>，这是我们上面枚举的基础；<span class="math inline">\(|T|\)</span>是容斥系数，我们需要记录它的奇偶性。</p>
 <p>可以想到转移大概的形式是在<span class="math inline">\(U_T\)</span>上的卷积。</p>
-<section id="s-2.3.1" class="level4">
-<h4 class="anchored" data-anchor-id="s-2.3.1">2.3.1 状态压缩</h4>
+<section id="s-2.3.1" class="level3">
+<h3 class="anchored" data-anchor-id="s-2.3.1">2.3.1 状态压缩</h3>
 <p>首先有一个小Trick，可以压掉记录<span class="math inline">\(|T|\)</span>奇偶性这一维 <span class="math display">\[
 \sum_{T \subseteq S \\ T \not= \varnothing \\ |U_T|=u} (-1)^{|T|-1} = - \sum_{T \subseteq S \\ T \not= \varnothing \\ |U_T|=u} (-1)^{|T|}
 \]</span></p>
 <p>根据上式，我们在dp时求<span class="math inline">\(|T|\)</span>为偶的方案数减去<span class="math inline">\(|T|\)</span>为奇的方案数，最后计算答案时乘上个<span class="math inline">\(-1\)</span>即可。</p>
 <p>这么做的原因是可以压缩掉记录<span class="math inline">\(|T|\)</span>奇偶性这一维。</p>
-<section id="s-2.3.1.1" class="level5">
-<h5 class="anchored" data-anchor-id="s-2.3.1.1">2.3.1.1 对于转移</h5>
+<section id="s-2.3.1.1" class="level4">
+<h4 class="anchored" data-anchor-id="s-2.3.1.1">2.3.1.1 对于转移</h4>
 <p>比如有两个对象<span class="math inline">\(A=(x_1,y_1)\)</span>，<span class="math inline">\(B(x_2,y_2)\)</span>需要合并为<span class="math inline">\(C\)</span>（第1个参数表示<span class="math inline">\(|T|\)</span>为偶的方案数，第2个参数表示<span class="math inline">\(|T|\)</span>为奇的方案数） <span class="math display">\[
 C = (x_1 x_2 + y_1 y_2, x_1 y_2 + x_2 y_1)
 \]</span></p>
@@ -810,15 +834,15 @@ C &amp;= x_1 x_2 + y_1 y_2 - (x_1 y_2 + x_2 y_1) \\
 <p>而对象的值就是我们所求的（考虑容斥系数的方案数）。成功压缩。</p>
 <p>如果不做上面那一个Trick的转化，压缩状态需要 正*正=负 和 负*负=正，而这显然是不成立的。</p>
 </section>
-<section id="s-2.3.1.2" class="level5">
-<h5 class="anchored" data-anchor-id="s-2.3.1.2">2.3.1.2 对于新增</h5>
+<section id="s-2.3.1.2" class="level4">
+<h4 class="anchored" data-anchor-id="s-2.3.1.2">2.3.1.2 对于新增</h4>
 <p>如果所有情况的<span class="math inline">\(T\)</span>内新增一个节点，原来<span class="math inline">\(|T|\)</span>为奇的变为偶，原来为偶的变为奇。</p>
 <p>如果不压缩，操作应该是交换<span class="math inline">\(x\)</span>和<span class="math inline">\(y\)</span></p>
 <p>如果压缩，只需对dp值乘上<span class="math inline">\(-1\)</span>即可</p>
 </section>
 </section>
-<section id="s-2.3.2" class="level4">
-<h4 class="anchored" data-anchor-id="s-2.3.2">2.3.2 设置状态并处理转移</h4>
+<section id="s-2.3.2" class="level3">
+<h3 class="anchored" data-anchor-id="s-2.3.2">2.3.2 设置状态并处理转移</h3>
 <p>我们的dp实际上是用背包分配<span class="math inline">\(|U_T|\)</span>。</p>
 <p>状态压缩后，剩下的主要问题在于合并时<span class="math inline">\(|U_T|\)</span>、<span class="math inline">\(|T|\)</span>发生的变化对dp值造成的影响，而这变化与当前点<span class="math inline">\(u\)</span>到底属于哪个集合密切相关。</p>
 <p>由于转移情况复杂，而背包的本质是卷积，所以用封装性良好的卷积实现。</p>
@@ -843,19 +867,19 @@ f[u][2] = - \left( I * \prod_v \left( f[v][0] * I + f[v][1] + f[v][2] \right) \r
 <p>最后算答案，参考早前化出的答案式即可。</p>
 </section>
 </section>
-<section id="s-2.4" class="level3">
-<h3 class="anchored" data-anchor-id="s-2.4">2.4 时间复杂度</h3>
+<section id="s-2.4" class="level2">
+<h2 class="anchored" data-anchor-id="s-2.4">2.4 时间复杂度</h2>
 <p>答案式部分显然<span class="math inline">\(O(n)\)</span></p>
 <p>树形dp卷积的时间复杂度为<span class="math inline">\(O(n^2)\)</span>，见做法1对dp的时间复杂度证明。</p>
 </section>
-<section id="s-2.5" class="level3">
-<h3 class="anchored" data-anchor-id="s-2.5">2.5 总结</h3>
+<section id="s-2.5" class="level2">
+<h2 class="anchored" data-anchor-id="s-2.5">2.5 总结</h2>
 <p>首先我们发现这道题适用于minmax容斥的套路，于是将难求的<span class="math inline">\(E(max(S))\)</span>转化到容易求的<span class="math inline">\(E(min(T))\)</span>。</p>
 <p>然后我们再想办法优化枚举子集，发现<span class="math inline">\(U_T\)</span>是一个关键的变量，于是将其提出来单独枚举，问题转化为求带有容斥系数的方案数。</p>
 <p>回头观察题面发现是树状结构，必然有其特殊性质，于是猜想用树形dp解决。讨论合并时<span class="math inline">\(U_T\)</span>和<span class="math inline">\(T\)</span>是如何变化的，能够列出转移方程式。在中间想到了压缩状态，简化了dp。</p>
 </section>
-<section id="s-2.6" class="level3">
-<h3 class="anchored" data-anchor-id="s-2.6">2.6 Code</h3>
+<section id="s-2.6" class="level2">
+<h2 class="anchored" data-anchor-id="s-2.6">2.6 Code</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;cstdio&gt;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;cstring&gt;</span></span>
@@ -987,8 +1011,8 @@ f[u][2] = - \left( I * \prod_v \left( f[v][0] * I + f[v][1] + f[v][2] \right) \r
 <span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="s-3" class="level2">
-<h2 class="anchored" data-anchor-id="s-3">三、总结</h2>
+<section id="s-3" class="level1">
+<h1>三、总结</h1>
 <p>这道题简直人类智慧（</p>
 <p>解题思路很具有参考价值，实为一道期望好题！</p>
 <p>上周末看到这道题，因为全网都找不到出处也没题解，硬是对着一张题解截图（解法1）和先比我写出来的Waper爷的代码（解法2）杠出来了</p>
@@ -1002,15 +1026,50 @@ f[u][2] = - \left( I * \prod_v \left( f[v][0] * I + f[v][1] + f[v][2] \right) \r
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -1085,11 +1144,30 @@ f[u][2] = - \left( I * \prod_v \left( f[v][0] * I + f[v][1] + f[v][2] \right) \r
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1103,10 +1181,72 @@ f[u][2] = - \left( I * \prod_v \left( f[v][0] * I + f[v][1] + f[v][2] \right) \r
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
             // default icon
             link.classList.add("external");
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1120,6 +1260,7 @@ f[u][2] = - \left( I * \prod_v \left( f[v][0] * I + f[v][1] + f[v][2] \right) \r
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1282,44 +1423,54 @@ f[u][2] = - \left( I * \prod_v \left( f[v][0] * I + f[v][1] + f[v][2] \right) \r
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1418,8 +1569,11 @@ f[u][2] = - \left( I * \prod_v \left( f[v][0] * I + f[v][1] + f[v][2] \right) \r
     }
   });
   </script>
-<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
-<input type="hidden" id="giscus-alt-theme" value="light">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark_dimmed">
 <script>
   function loadGiscus() {
     // Function to get the theme based on body class

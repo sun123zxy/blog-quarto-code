@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -13,10 +13,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -72,16 +75,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f81f3c79f694eaf6f88ebcce70241f9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-af64962de9348b804daa6381b125c604.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e87cd3d65a65f768c7a1700db1c28216.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9b2404ec78ff68ca4c9b2f4303203b01.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-39330638802da02b364dd7ec4e29bc31.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7dd074d930de47cb4e38ad128cc73662.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -120,7 +126,7 @@ MathJax = {
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -151,7 +157,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">跳至主要内容</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -174,6 +180,7 @@ window.Quarto = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -203,13 +210,19 @@ window.Quarto = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -293,14 +306,17 @@ window.Quarto = {
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -315,15 +331,14 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="网站">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="搜索"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -367,8 +382,9 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式" aria-label="切换深色模式"><i class="bi"></i></button>
 </div>
+            <div id="quarto-search" class="" title="搜索"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -377,14 +393,17 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">该页面内容</h2>
    
   <ul>
   <li><a href="#数论" id="toc-数论" class="nav-link active" data-scroll-target="#数论"><span class="header-section-number">1</span> 数论</a>
   <ul class="collapse">
   <li><a href="#exgcd" id="toc-exgcd" class="nav-link" data-scroll-target="#exgcd"><span class="header-section-number">1.1</span> ExGCD</a></li>
-  <li><a href="#crt" id="toc-crt" class="nav-link" data-scroll-target="#crt"><span class="header-section-number">1.2</span> CRT</a></li>
+  <li><a href="#crt" id="toc-crt" class="nav-link" data-scroll-target="#crt"><span class="header-section-number">1.2</span> CRT</a>
+  <ul class="collapse">
+  <li><a href="#excrt" id="toc-excrt" class="nav-link" data-scroll-target="#excrt">ExCRT</a></li>
+  </ul></li>
   <li><a href="#bsgs" id="toc-bsgs" class="nav-link" data-scroll-target="#bsgs"><span class="header-section-number">1.3</span> BSGS</a></li>
   <li><a href="#miller-rabintodo" id="toc-miller-rabintodo" class="nav-link" data-scroll-target="#miller-rabintodo"><span class="header-section-number">1.4</span> Miller-Rabin【TODO】</a></li>
   <li><a href="#pollard-rhotodo" id="toc-pollard-rhotodo" class="nav-link" data-scroll-target="#pollard-rhotodo"><span class="header-section-number">1.5</span> Pollard-Rho【TODO】</a></li>
@@ -394,33 +413,84 @@ window.Quarto = {
   <li><a href="#扩展-euler-定理" id="toc-扩展-euler-定理" class="nav-link" data-scroll-target="#扩展-euler-定理"><span class="header-section-number">1.9</span> 扩展 Euler 定理</a></li>
   <li><a href="#lagrange-定理" id="toc-lagrange-定理" class="nav-link" data-scroll-target="#lagrange-定理"><span class="header-section-number">1.10</span> Lagrange 定理</a></li>
   <li><a href="#wilson-定理" id="toc-wilson-定理" class="nav-link" data-scroll-target="#wilson-定理"><span class="header-section-number">1.11</span> Wilson 定理</a></li>
-  <li><a href="#线性预处理" id="toc-线性预处理" class="nav-link" data-scroll-target="#线性预处理"><span class="header-section-number">1.12</span> 线性预处理</a></li>
+  <li><a href="#线性预处理" id="toc-线性预处理" class="nav-link" data-scroll-target="#线性预处理"><span class="header-section-number">1.12</span> 线性预处理</a>
+  <ul class="collapse">
+  <li><a href="#线性求逆元" id="toc-线性求逆元" class="nav-link" data-scroll-target="#线性求逆元">线性求逆元</a></li>
+  <li><a href="#线性阶乘逆" id="toc-线性阶乘逆" class="nav-link" data-scroll-target="#线性阶乘逆">线性阶乘逆</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#积性函数" id="toc-积性函数" class="nav-link" data-scroll-target="#积性函数"><span class="header-section-number">2</span> 积性函数</a>
   <ul class="collapse">
-  <li><a href="#整除分块" id="toc-整除分块" class="nav-link" data-scroll-target="#整除分块"><span class="header-section-number">2.1</span> 整除分块</a></li>
+  <li><a href="#整除分块" id="toc-整除分块" class="nav-link" data-scroll-target="#整除分块"><span class="header-section-number">2.1</span> 整除分块</a>
+  <ul class="collapse">
+  <li><a href="#上取整整除分块" id="toc-上取整整除分块" class="nav-link" data-scroll-target="#上取整整除分块">上取整整除分块</a></li>
+  </ul></li>
   <li><a href="#杜教筛" id="toc-杜教筛" class="nav-link" data-scroll-target="#杜教筛"><span class="header-section-number">2.2</span> 杜教筛</a></li>
   <li><a href="#杂式" id="toc-杂式" class="nav-link" data-scroll-target="#杂式"><span class="header-section-number">2.3</span> 杂式</a></li>
   </ul></li>
   <li><a href="#组合" id="toc-组合" class="nav-link" data-scroll-target="#组合"><span class="header-section-number">3</span> 组合</a>
   <ul class="collapse">
-  <li><a href="#容斥-二项式反演" id="toc-容斥-二项式反演" class="nav-link" data-scroll-target="#容斥-二项式反演"><span class="header-section-number">3.1</span> 容斥 / 二项式反演</a></li>
-  <li><a href="#球盒问题" id="toc-球盒问题" class="nav-link" data-scroll-target="#球盒问题"><span class="header-section-number">3.2</span> 球盒问题</a></li>
-  <li><a href="#第二类-stirling-数" id="toc-第二类-stirling-数" class="nav-link" data-scroll-target="#第二类-stirling-数"><span class="header-section-number">3.3</span> 第二类 Stirling 数</a></li>
+  <li><a href="#容斥-二项式反演" id="toc-容斥-二项式反演" class="nav-link" data-scroll-target="#容斥-二项式反演"><span class="header-section-number">3.1</span> 容斥 / 二项式反演</a>
+  <ul class="collapse">
+  <li><a href="#形式一" id="toc-形式一" class="nav-link" data-scroll-target="#形式一">形式一</a></li>
+  <li><a href="#形式二" id="toc-形式二" class="nav-link" data-scroll-target="#形式二">形式二</a></li>
+  <li><a href="#应用" id="toc-应用" class="nav-link" data-scroll-target="#应用">应用</a></li>
+  </ul></li>
+  <li><a href="#球盒问题" id="toc-球盒问题" class="nav-link" data-scroll-target="#球盒问题"><span class="header-section-number">3.2</span> 球盒问题</a>
+  <ul class="collapse">
+  <li><a href="#通用性质" id="toc-通用性质" class="nav-link" data-scroll-target="#通用性质">通用性质</a></li>
+  </ul></li>
+  <li><a href="#第二类-stirling-数" id="toc-第二类-stirling-数" class="nav-link" data-scroll-target="#第二类-stirling-数"><span class="header-section-number">3.3</span> 第二类 Stirling 数</a>
+  <ul class="collapse">
+  <li><a href="#递推" id="toc-递推" class="nav-link" data-scroll-target="#递推">递推</a></li>
+  <li><a href="#第二类-striling-数同行计算mathrmogf_n101x-或-mathrmegf_n111x" id="toc-第二类-striling-数同行计算mathrmogf_n101x-或-mathrmegf_n111x" class="nav-link" data-scroll-target="#第二类-striling-数同行计算mathrmogf_n101x-或-mathrmegf_n111x">第二类 Striling 数同行计算：<span class="math inline">\(\mathrm{OGF}_n^{1,0,1}(x)\)</span> 或 <span class="math inline">\(\mathrm{EGF}_n^{1,1,1}(x)\)</span></a></li>
+  <li><a href="#第二类-striling-数同列计算mathrmegf_r101xmathrmegf_r110x-与-mathrmegf10sigma1x" id="toc-第二类-striling-数同列计算mathrmegf_r101xmathrmegf_r110x-与-mathrmegf10sigma1x" class="nav-link" data-scroll-target="#第二类-striling-数同列计算mathrmegf_r101xmathrmegf_r110x-与-mathrmegf10sigma1x">第二类 Striling 数同列计算：<span class="math inline">\(\mathrm{EGF}_r^{1,0,1}(x)\)</span>，<span class="math inline">\(\mathrm{EGF}_r^{1,1,0}(x)\)</span> 与 <span class="math inline">\(\mathrm{EGF}^{1,0/\Sigma,1}(x)\)</span></a></li>
+  <li><a href="#bell-数" id="toc-bell-数" class="nav-link" data-scroll-target="#bell-数">Bell 数</a></li>
+  <li><a href="#第一类-stirling-数stirling-数与阶乘幂todo" id="toc-第一类-stirling-数stirling-数与阶乘幂todo" class="nav-link" data-scroll-target="#第一类-stirling-数stirling-数与阶乘幂todo">第一类 Stirling 数、Stirling 数与阶乘幂【TODO】</a></li>
+  </ul></li>
   <li><a href="#分拆数todo" id="toc-分拆数todo" class="nav-link" data-scroll-target="#分拆数todo"><span class="header-section-number">3.4</span> 分拆数【TODO】</a></li>
   <li><a href="#背包计数" id="toc-背包计数" class="nav-link" data-scroll-target="#背包计数"><span class="header-section-number">3.5</span> 背包计数</a></li>
-  <li><a href="#各种图计数" id="toc-各种图计数" class="nav-link" data-scroll-target="#各种图计数"><span class="header-section-number">3.6</span> 各种图计数</a></li>
-  <li><a href="#矩阵树定理" id="toc-矩阵树定理" class="nav-link" data-scroll-target="#矩阵树定理"><span class="header-section-number">3.7</span> 矩阵树定理</a></li>
+  <li><a href="#各种图计数" id="toc-各种图计数" class="nav-link" data-scroll-target="#各种图计数"><span class="header-section-number">3.6</span> 各种图计数</a>
+  <ul class="collapse">
+  <li><a href="#有无标号有无根树计数todo" id="toc-有无标号有无根树计数todo" class="nav-link" data-scroll-target="#有无标号有无根树计数todo">有（无）标号有（无）根树计数【TODO】</a></li>
+  <li><a href="#有标号-dag-计数" id="toc-有标号-dag-计数" class="nav-link" data-scroll-target="#有标号-dag-计数">有标号 DAG 计数</a></li>
+  <li><a href="#有标号偏序图计数" id="toc-有标号偏序图计数" class="nav-link" data-scroll-target="#有标号偏序图计数">有标号偏序图计数</a></li>
+  <li><a href="#有标号连通图计数" id="toc-有标号连通图计数" class="nav-link" data-scroll-target="#有标号连通图计数">有标号连通图计数</a></li>
+  <li><a href="#竞赛图" id="toc-竞赛图" class="nav-link" data-scroll-target="#竞赛图">竞赛图</a></li>
+  <li><a href="#有标号划分为-k-个全序图" id="toc-有标号划分为-k-个全序图" class="nav-link" data-scroll-target="#有标号划分为-k-个全序图">有标号划分为 <span class="math inline">\(k\)</span> 个全序图</a></li>
+  <li><a href="#特殊-dag-的拓扑序计数有根树-young-tableaux" id="toc-特殊-dag-的拓扑序计数有根树-young-tableaux" class="nav-link" data-scroll-target="#特殊-dag-的拓扑序计数有根树-young-tableaux">特殊 DAG 的拓扑序计数（有根树 / Young Tableaux）</a></li>
+  <li><a href="#无向图的色多项式chromatic-polynomial和无环定向acyclic-orientations" id="toc-无向图的色多项式chromatic-polynomial和无环定向acyclic-orientations" class="nav-link" data-scroll-target="#无向图的色多项式chromatic-polynomial和无环定向acyclic-orientations">无向图的色多项式（chromatic polynomial）和无环定向（acyclic orientations）</a></li>
+  </ul></li>
+  <li><a href="#矩阵树定理" id="toc-矩阵树定理" class="nav-link" data-scroll-target="#矩阵树定理"><span class="header-section-number">3.7</span> 矩阵树定理</a>
+  <ul class="collapse">
+  <li><a href="#无向图的情形" id="toc-无向图的情形" class="nav-link" data-scroll-target="#无向图的情形">无向图的情形</a></li>
+  <li><a href="#有向图的情形" id="toc-有向图的情形" class="nav-link" data-scroll-target="#有向图的情形">有向图的情形</a></li>
+  </ul></li>
   <li><a href="#polya-计数" id="toc-polya-计数" class="nav-link" data-scroll-target="#polya-计数"><span class="header-section-number">3.8</span> Polya 计数</a></li>
-  <li><a href="#杂数选提" id="toc-杂数选提" class="nav-link" data-scroll-target="#杂数选提"><span class="header-section-number">3.9</span> 杂数选提</a></li>
-  <li><a href="#代数组合todo" id="toc-代数组合todo" class="nav-link" data-scroll-target="#代数组合todo"><span class="header-section-number">3.10</span> 代数组合【TODO】</a></li>
+  <li><a href="#杂数选提" id="toc-杂数选提" class="nav-link" data-scroll-target="#杂数选提"><span class="header-section-number">3.9</span> 杂数选提</a>
+  <ul class="collapse">
+  <li><a href="#catalan-数" id="toc-catalan-数" class="nav-link" data-scroll-target="#catalan-数">Catalan 数</a></li>
+  </ul></li>
+  <li><a href="#代数组合todo" id="toc-代数组合todo" class="nav-link" data-scroll-target="#代数组合todo"><span class="header-section-number">3.10</span> 代数组合【TODO】</a>
+  <ul class="collapse">
+  <li><a href="#q-analog" id="toc-q-analog" class="nav-link" data-scroll-target="#q-analog"><span class="math inline">\(q\)</span>-analog</a></li>
+  <li><a href="#有限域上的线性空间" id="toc-有限域上的线性空间" class="nav-link" data-scroll-target="#有限域上的线性空间">有限域上的线性空间</a></li>
+  <li><a href="#有限群构型计数" id="toc-有限群构型计数" class="nav-link" data-scroll-target="#有限群构型计数">有限群构型计数</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#多项式" id="toc-多项式" class="nav-link" data-scroll-target="#多项式"><span class="header-section-number">4</span> 多项式</a>
   <ul class="collapse">
   <li><a href="#通用" id="toc-通用" class="nav-link" data-scroll-target="#通用"><span class="header-section-number">4.1</span> 通用</a></li>
-  <li><a href="#fft-fntt-卷积" id="toc-fft-fntt-卷积" class="nav-link" data-scroll-target="#fft-fntt-卷积"><span class="header-section-number">4.2</span> FFT / FNTT / 卷积</a></li>
+  <li><a href="#fft-fntt-卷积" id="toc-fft-fntt-卷积" class="nav-link" data-scroll-target="#fft-fntt-卷积"><span class="header-section-number">4.2</span> FFT / FNTT / 卷积</a>
+  <ul class="collapse">
+  <li><a href="#蝶形运算与迭代算法" id="toc-蝶形运算与迭代算法" class="nav-link" data-scroll-target="#蝶形运算与迭代算法">蝶形运算与迭代算法</a></li>
+  </ul></li>
   <li><a href="#多项式方程求解newton-迭代法todo" id="toc-多项式方程求解newton-迭代法todo" class="nav-link" data-scroll-target="#多项式方程求解newton-迭代法todo"><span class="header-section-number">4.3</span> 多项式方程求解（Newton 迭代法）【TODO】</a></li>
-  <li><a href="#多项式求逆" id="toc-多项式求逆" class="nav-link" data-scroll-target="#多项式求逆"><span class="header-section-number">4.4</span> 多项式求逆</a></li>
+  <li><a href="#多项式求逆" id="toc-多项式求逆" class="nav-link" data-scroll-target="#多项式求逆"><span class="header-section-number">4.4</span> 多项式求逆</a>
+  <ul class="collapse">
+  <li><a href="#倍增法一原创" id="toc-倍增法一原创" class="nav-link" data-scroll-target="#倍增法一原创">倍增法一（原创）</a></li>
+  <li><a href="#倍增法二" id="toc-倍增法二" class="nav-link" data-scroll-target="#倍增法二">倍增法二</a></li>
+  </ul></li>
   <li><a href="#多项式开方todo" id="toc-多项式开方todo" class="nav-link" data-scroll-target="#多项式开方todo"><span class="header-section-number">4.5</span> 多项式开方【TODO】</a></li>
   <li><a href="#多项式-ln" id="toc-多项式-ln" class="nav-link" data-scroll-target="#多项式-ln"><span class="header-section-number">4.6</span> 多项式 <span class="math inline">\(\ln\)</span></a></li>
   <li><a href="#多项式-exptodo" id="toc-多项式-exptodo" class="nav-link" data-scroll-target="#多项式-exptodo"><span class="header-section-number">4.7</span> 多项式 <span class="math inline">\(\exp\)</span>【TODO】</a></li>
@@ -442,15 +512,27 @@ window.Quarto = {
   </ul></li>
   <li><a href="#杂项" id="toc-杂项" class="nav-link" data-scroll-target="#杂项"><span class="header-section-number">9</span> 杂项</a>
   <ul class="collapse">
-  <li><a href="#表" id="toc-表" class="nav-link" data-scroll-target="#表"><span class="header-section-number">9.1</span> 表</a></li>
-  <li><a href="#对拍" id="toc-对拍" class="nav-link" data-scroll-target="#对拍"><span class="header-section-number">9.2</span> 对拍</a></li>
-  <li><a href="#模板" id="toc-模板" class="nav-link" data-scroll-target="#模板"><span class="header-section-number">9.3</span> 模板</a></li>
+  <li><a href="#表" id="toc-表" class="nav-link" data-scroll-target="#表"><span class="header-section-number">9.1</span> 表</a>
+  <ul class="collapse">
+  <li><a href="#质数表" id="toc-质数表" class="nav-link" data-scroll-target="#质数表">质数表</a></li>
+  <li><a href="#典列" id="toc-典列" class="nav-link" data-scroll-target="#典列">典列</a></li>
+  </ul></li>
+  <li><a href="#对拍" id="toc-对拍" class="nav-link" data-scroll-target="#对拍"><span class="header-section-number">9.2</span> 对拍</a>
+  <ul class="collapse">
+  <li><a href="#windows-batch" id="toc-windows-batch" class="nav-link" data-scroll-target="#windows-batch">Windows Batch</a></li>
+  <li><a href="#linux-shell" id="toc-linux-shell" class="nav-link" data-scroll-target="#linux-shell">Linux Shell</a></li>
+  </ul></li>
+  <li><a href="#模板" id="toc-模板" class="nav-link" data-scroll-target="#模板"><span class="header-section-number">9.3</span> 模板</a>
+  <ul class="collapse">
+  <li><a href="#model.cpp" id="toc-model.cpp" class="nav-link" data-scroll-target="#model.cpp">model.cpp</a></li>
+  <li><a href="#model_temp.cpp" id="toc-model_temp.cpp" class="nav-link" data-scroll-target="#model_temp.cpp">model_temp.cpp</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>其他格式</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content" tabindex="-1">
 
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -502,10 +584,10 @@ window.Quarto = {
 
 
 <p>前半部分主要为公式、推导、证明等速成提纲，大部分实现、模板、表格放在文末．</p>
-<section id="数论" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="数论"><span class="header-section-number">1</span> 数论</h2>
-<section id="exgcd" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="exgcd"><span class="header-section-number">1.1</span> ExGCD</h3>
+<section id="数论" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 数论</h1>
+<section id="exgcd" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="exgcd"><span class="header-section-number">1.1</span> ExGCD</h2>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -521,8 +603,8 @@ a y_1 + b \left( x_1 - \left\lfloor \frac a b \right\rfloor y_1 \right) = \gcd(b
 </div>
 </div>
 </section>
-<section id="crt" class="level3" data-number="1.2">
-<h3 data-number="1.2" class="anchored" data-anchor-id="crt"><span class="header-section-number">1.2</span> CRT</h3>
+<section id="crt" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="crt"><span class="header-section-number">1.2</span> CRT</h2>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -560,8 +642,8 @@ M_i \operatorname{inv}_{m_i}(M_i) \mod m_j = [i = j]
 </div>
 </div>
 </div>
-<section id="excrt" class="level4">
-<h4 class="anchored" data-anchor-id="excrt">ExCRT</h4>
+<section id="excrt" class="level3">
+<h3 class="anchored" data-anchor-id="excrt">ExCRT</h3>
 <p>对一般的情况，考虑合并两个同余方程．给定 <span class="math inline">\(2\)</span> 个同余方程 <span class="math display">\[
 \left\{
 \begin{aligned}
@@ -601,23 +683,23 @@ x \equiv k_1 m_1 + a_1 \pmod{\operatorname{lcm}(m_1, m_2)}
 </div>
 </section>
 </section>
-<section id="bsgs" class="level3" data-number="1.3">
-<h3 data-number="1.3" class="anchored" data-anchor-id="bsgs"><span class="header-section-number">1.3</span> BSGS</h3>
+<section id="bsgs" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="bsgs"><span class="header-section-number">1.3</span> BSGS</h2>
 <p>求 <span class="math inline">\(a^x \equiv b \pmod{m}\)</span> 的一个特解，其中 <span class="math inline">\(\gcd(a,m) = 1\)</span>．</p>
 <p>实质是非常暴力的根号分治．根据 Euler 定理，只需检测连续 <span class="math inline">\(\varphi(m)\)</span> 个 <span class="math inline">\(x\)</span> 就可判定是否有解．令 <span class="math inline">\(x = q \left\lceil \sqrt m \right\rceil -r\)</span>，其中 <span class="math inline">\(q,r \in [1,\left\lceil \sqrt m \right\rceil]\)</span>，于是 <span class="math inline">\(x \in [0,\left\lceil \sqrt m \right\rceil^2)\)</span>．代入原方程移项即得 <span class="math inline">\(a^{q \left\lceil \sqrt m \right\rceil} \equiv b a^r \pmod{m}\)</span>，右边使用 <code>map</code> 提前存下即可．时间复杂度 <span class="math inline">\(O(\sqrt m)\)</span>．</p>
 </section>
-<section id="miller-rabintodo" class="level3" data-number="1.4">
-<h3 data-number="1.4" class="anchored" data-anchor-id="miller-rabintodo"><span class="header-section-number">1.4</span> Miller-Rabin【TODO】</h3>
+<section id="miller-rabintodo" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="miller-rabintodo"><span class="header-section-number">1.4</span> Miller-Rabin【TODO】</h2>
 </section>
-<section id="pollard-rhotodo" class="level3" data-number="1.5">
-<h3 data-number="1.5" class="anchored" data-anchor-id="pollard-rhotodo"><span class="header-section-number">1.5</span> Pollard-Rho【TODO】</h3>
+<section id="pollard-rhotodo" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="pollard-rhotodo"><span class="header-section-number">1.5</span> Pollard-Rho【TODO】</h2>
 </section>
-<section id="原根euler-定理等" class="level3" data-number="1.6">
-<h3 data-number="1.6" class="anchored" data-anchor-id="原根euler-定理等"><span class="header-section-number">1.6</span> 原根、Euler 定理等</h3>
+<section id="原根euler-定理等" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="原根euler-定理等"><span class="header-section-number">1.6</span> 原根、Euler 定理等</h2>
 <p>见 <a href="../../posts/20230928-dft/">FFT/NTT 讲稿</a>．</p>
 </section>
-<section id="lucas-定理" class="level3" data-number="1.7">
-<h3 data-number="1.7" class="anchored" data-anchor-id="lucas-定理"><span class="header-section-number">1.7</span> Lucas 定理</h3>
+<section id="lucas-定理" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="lucas-定理"><span class="header-section-number">1.7</span> Lucas 定理</h2>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -640,8 +722,8 @@ x \equiv k_1 m_1 + a_1 \pmod{\operatorname{lcm}(m_1, m_2)}
 <li><a href="https://oi-wiki.org/math/number-theory/lucas/">卢卡斯定理 - OI Wiki</a></li>
 </ul>
 </section>
-<section id="legendre-公式和-kummer-定理" class="level3" data-number="1.8">
-<h3 data-number="1.8" class="anchored" data-anchor-id="legendre-公式和-kummer-定理"><span class="header-section-number">1.8</span> Legendre 公式和 Kummer 定理</h3>
+<section id="legendre-公式和-kummer-定理" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="legendre-公式和-kummer-定理"><span class="header-section-number">1.8</span> Legendre 公式和 Kummer 定理</h2>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -702,15 +784,15 @@ p &amp; n = p^m \\
 <li><a href="https://en.wiokipedia.org/wiki/Kummer%27s_theorem">Kummer’s theorem - Wikipedia</a></li>
 </ul>
 </section>
-<section id="扩展-euler-定理" class="level3" data-number="1.9">
-<h3 data-number="1.9" class="anchored" data-anchor-id="扩展-euler-定理"><span class="header-section-number">1.9</span> 扩展 Euler 定理</h3>
+<section id="扩展-euler-定理" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="扩展-euler-定理"><span class="header-section-number">1.9</span> 扩展 Euler 定理</h2>
 <p><span class="math display">\[
 a^b \equiv a^{b \bmod \varphi(m) + \varphi(m)} \pmod{m}
 \]</span></p>
 <p>进入循环所需步骤其实很少，一定小于 <span class="math inline">\(\varphi(m)\)</span>．（疑似量级在 <span class="math inline">\(\log m\)</span> 以下，存疑，见 FFT 讲稿）</p>
 </section>
-<section id="lagrange-定理" class="level3" data-number="1.10">
-<h3 data-number="1.10" class="anchored" data-anchor-id="lagrange-定理"><span class="header-section-number">1.10</span> Lagrange 定理</h3>
+<section id="lagrange-定理" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="lagrange-定理"><span class="header-section-number">1.10</span> Lagrange 定理</h2>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -725,8 +807,8 @@ a^b \equiv a^{b \bmod \varphi(m) + \varphi(m)} \pmod{m}
 </div>
 <p>这是域上的多项式理论在模 <span class="math inline">\(p\)</span> 整数域上的应用．</p>
 </section>
-<section id="wilson-定理" class="level3" data-number="1.11">
-<h3 data-number="1.11" class="anchored" data-anchor-id="wilson-定理"><span class="header-section-number">1.11</span> Wilson 定理</h3>
+<section id="wilson-定理" class="level2" data-number="1.11">
+<h2 data-number="1.11" class="anchored" data-anchor-id="wilson-定理"><span class="header-section-number">1.11</span> Wilson 定理</h2>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -746,26 +828,26 @@ a^b \equiv a^{b \bmod \varphi(m) + \varphi(m)} \pmod{m}
 <p>另一种证法注意到 <span class="math inline">\(x^{p-1} - 1 = \prod_{k=1}^{p-1} (x-k)\)</span>．这是因为 Fermat 小定理指出 <span class="math inline">\(1\)</span> 至 <span class="math inline">\(p-1\)</span> 的所有数的 <span class="math inline">\(p-1\)</span> 次幂均为 <span class="math inline">\(1\)</span>，而 Lagrange 定理又保证了多项式点值到系数映射的唯一性．随后代入 <span class="math inline">\(x=0\)</span> 立得结论．</p>
 <p>参见 <a href="https://en.wikipedia.org/wiki/Wilson%27s_theorem">Wilson’s theorem - Wikipedia</a>．</p>
 </section>
-<section id="线性预处理" class="level3" data-number="1.12">
-<h3 data-number="1.12" class="anchored" data-anchor-id="线性预处理"><span class="header-section-number">1.12</span> 线性预处理</h3>
-<section id="线性求逆元" class="level4">
-<h4 class="anchored" data-anchor-id="线性求逆元">线性求逆元</h4>
+<section id="线性预处理" class="level2" data-number="1.12">
+<h2 data-number="1.12" class="anchored" data-anchor-id="线性预处理"><span class="header-section-number">1.12</span> 线性预处理</h2>
+<section id="线性求逆元" class="level3">
+<h3 class="anchored" data-anchor-id="线性求逆元">线性求逆元</h3>
 <p>现欲求出 <span class="math inline">\(a\)</span> 模质数 <span class="math inline">\(p\)</span> 意义下的逆元 <span class="math inline">\(a^{-1}\)</span>．用 <span class="math inline">\(a\)</span> 对 <span class="math inline">\(p\)</span> 做带余除法，<span class="math inline">\(p=qa+r\)</span>，于是 <span class="math inline">\(-qa \equiv r \pmod p\)</span>．两侧同时乘 <span class="math inline">\(r\)</span> 的逆元 <span class="math inline">\(r^{-1}\)</span> 得 <span class="math inline">\(-q r^{-1} a \equiv 1 \pmod p\)</span>，故 <span class="math display">\[
 a^{-1} = - q r^{-1} = - \left\lfloor \frac p a \right\rfloor \cdot (p \bmod a)^{-1}
 \]</span></p>
 </section>
-<section id="线性阶乘逆" class="level4">
-<h4 class="anchored" data-anchor-id="线性阶乘逆">线性阶乘逆</h4>
+<section id="线性阶乘逆" class="level3">
+<h3 class="anchored" data-anchor-id="线性阶乘逆">线性阶乘逆</h3>
 <p><span class="math display">\[
 \frac 1 {n!} = (n+1) \cdot \frac 1 {(n+1)!}
 \]</span></p>
 </section>
 </section>
 </section>
-<section id="积性函数" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="积性函数"><span class="header-section-number">2</span> 积性函数</h2>
-<section id="整除分块" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="整除分块"><span class="header-section-number">2.1</span> 整除分块</h3>
+<section id="积性函数" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 积性函数</h1>
+<section id="整除分块" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="整除分块"><span class="header-section-number">2.1</span> 整除分块</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ll ans<span class="op">=</span><span class="dv">0</span><span class="op">;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span>ll l<span class="op">=</span><span class="dv">1</span><span class="op">,</span>r<span class="op">,</span>d<span class="op">;</span>l<span class="op">&lt;=</span>N<span class="op">;</span>l<span class="op">=</span>r<span class="op">+</span><span class="dv">1</span><span class="op">){</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    d<span class="op">=</span>N<span class="op">/</span>l<span class="op">,</span> r<span class="op">=</span>N<span class="op">/</span>d<span class="op">;</span></span>
@@ -778,8 +860,8 @@ a^{-1} = - q r^{-1} = - \left\lfloor \frac p a \right\rfloor \cdot (p \bmod a)^{
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    d<span class="op">=</span>N<span class="op">/(</span>l<span class="op">*</span>l<span class="op">),</span>r<span class="op">=</span>sqrt<span class="op">(</span>N<span class="op">/</span>d<span class="op">);</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    ans<span class="op">+=(</span>S_mu<span class="op">(</span>r<span class="op">)-</span>S_mu<span class="op">(</span>l<span class="op">-</span><span class="dv">1</span><span class="op">))*</span>d<span class="op">;</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
-<section id="上取整整除分块" class="level4">
-<h4 class="anchored" data-anchor-id="上取整整除分块">上取整整除分块</h4>
+<section id="上取整整除分块" class="level3">
+<h3 class="anchored" data-anchor-id="上取整整除分块">上取整整除分块</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ll cdiv<span class="op">(</span>ll a<span class="op">,</span>ll b<span class="op">){</span> <span class="co">//ceil(a/b)</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">(</span>a<span class="op">&lt;</span><span class="dv">0</span><span class="op">||</span>a<span class="op">%</span>b<span class="op">==</span><span class="dv">0</span><span class="op">)?</span>a<span class="op">/</span>b<span class="op">:</span>a<span class="op">/</span>b<span class="op">+</span><span class="dv">1</span><span class="op">;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
@@ -790,8 +872,8 @@ a^{-1} = - q r^{-1} = - \left\lfloor \frac p a \right\rfloor \cdot (p \bmod a)^{
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="杜教筛" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="杜教筛"><span class="header-section-number">2.2</span> 杜教筛</h3>
+<section id="杜教筛" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="杜教筛"><span class="header-section-number">2.2</span> 杜教筛</h2>
 <p>设 <span class="math inline">\(f\)</span> 为一数论函数，我们希望快速求得其前缀和 <span class="math inline">\(\hat f (n) = \sum_{i=1}^n f(i)\)</span>. 考虑数论函数 <span class="math inline">\(g\)</span> 和 <span class="math inline">\(h = g * f\)</span>， <span class="math display">\[
 h(n) = \sum_{d \mid n} g(d) f(\frac n d)
 \]</span> 两端做前缀和得 <span class="math display">\[
@@ -851,8 +933,8 @@ f = \operatorname{id}^k \varphi, g = \operatorname{id}^k, h = \operatorname{id}^
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">s_mu</span><span class="op">[</span>n<span class="op">]=</span><span class="dv">1</span><span class="op">-</span>ans<span class="op">;</span></span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="杂式" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="杂式"><span class="header-section-number">2.3</span> 杂式</h3>
+<section id="杂式" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="杂式"><span class="header-section-number">2.3</span> 杂式</h2>
 <p>无平方因子数计数： <span class="math display">\[
 \sum_{i=1}^n \mu^2(i) = \sum_{i=1}^{\left\lfloor \sqrt n \right\rfloor} \mu(i) \left\lfloor \frac n {i^2} \right\rfloor
 \]</span></p>
@@ -872,12 +954,12 @@ d(abc) = \sum_{x|a} \sum_{y|b} \sum_{z|c} [\gcd (x,y) = 1] [\gcd (y,z) = 1] [\gc
 \]</span></p>
 </section>
 </section>
-<section id="组合" class="level2 page-columns page-full" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="组合"><span class="header-section-number">3</span> 组合</h2>
-<section id="容斥-二项式反演" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="容斥-二项式反演"><span class="header-section-number">3.1</span> 容斥 / 二项式反演</h3>
-<section id="形式一" class="level4">
-<h4 class="anchored" data-anchor-id="形式一">形式一</h4>
+<section id="组合" class="level1 page-columns page-full" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 组合</h1>
+<section id="容斥-二项式反演" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="容斥-二项式反演"><span class="header-section-number">3.1</span> 容斥 / 二项式反演</h2>
+<section id="形式一" class="level3">
+<h3 class="anchored" data-anchor-id="形式一">形式一</h3>
 <p>容斥原理的第一种形式给出了“子集和变换”的逆变换．</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
@@ -914,8 +996,8 @@ G(x) = e^x F(x) \iff F(x) = e^{-x} G(x)
 </div>
 <p>生成函数的形式使我们可在 <span class="math inline">\(O(n \log n)\)</span> 的优秀时间复杂度之内在 <span class="math inline">\(f(n)\)</span> 和 <span class="math inline">\(g(n)\)</span> 间做出变换．</p>
 </section>
-<section id="形式二" class="level4">
-<h4 class="anchored" data-anchor-id="形式二">形式二</h4>
+<section id="形式二" class="level3">
+<h3 class="anchored" data-anchor-id="形式二">形式二</h3>
 <p>形式一的补集形式，给出了全集 <span class="math inline">\(U\)</span> 下“超集和变换”的逆变换．</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
@@ -946,8 +1028,8 @@ g(n) = \sum_{k=0}^{N-n} \binom {N-n} k f(n+k) \iff f(n) = \sum_{k=0}^{N-n} (-1)^
 </div>
 </div>
 </section>
-<section id="应用" class="level4">
-<h4 class="anchored" data-anchor-id="应用">应用</h4>
+<section id="应用" class="level3">
+<h3 class="anchored" data-anchor-id="应用">应用</h3>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -1120,8 +1202,8 @@ g(S) := \operatorname{card}\left( A \cap \bigcap_{i \in S} A_i \right)
 </div>
 </section>
 </section>
-<section id="球盒问题" class="level3 page-columns page-full" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="球盒问题"><span class="header-section-number">3.2</span> 球盒问题</h3>
+<section id="球盒问题" class="level2 page-columns page-full" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="球盒问题"><span class="header-section-number">3.2</span> 球盒问题</h2>
 <p>组合数学的万恶之源．</p>
 <div class="column-screen-inset">
 <table class="table">
@@ -1265,8 +1347,8 @@ g(S) := \operatorname{card}\left( A \cap \bigcap_{i \in S} A_i \right)
 <li>普通生成函数 <span class="math inline">\(\mathrm{OGF}_r^{1,1,0}(x)\)</span> 同理．</li>
 </ul>
 <p>在不至混淆的情况下，也可省略下标或上标上的代号．</p>
-<section id="通用性质" class="level4">
-<h4 class="anchored" data-anchor-id="通用性质">通用性质</h4>
+<section id="通用性质" class="level3">
+<h3 class="anchored" data-anchor-id="通用性质">通用性质</h3>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -1322,19 +1404,19 @@ g(S) := \operatorname{card}\left( A \cap \bigcap_{i \in S} A_i \right)
 <p>对无标号盒，直接求和即可．</p>
 </section>
 </section>
-<section id="第二类-stirling-数" class="level3" data-number="3.3">
-<h3 data-number="3.3" class="anchored" data-anchor-id="第二类-stirling-数"><span class="header-section-number">3.3</span> 第二类 Stirling 数</h3>
+<section id="第二类-stirling-数" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="第二类-stirling-数"><span class="header-section-number">3.3</span> 第二类 Stirling 数</h2>
 <p>第二类 Stirling 数的组合定义即 <span class="math inline">\(1,0,1\)</span>-球盒问题的方案数 <span class="math inline">\(\mathrm{BB}_{1,0,1}(n,r) = {n \brace r}\)</span>，亦作将 <span class="math inline">\(n\)</span> 个元素划分入 <span class="math inline">\(r\)</span> 个集合的方案数．</p>
-<section id="递推" class="level4">
-<h4 class="anchored" data-anchor-id="递推">递推</h4>
+<section id="递推" class="level3">
+<h3 class="anchored" data-anchor-id="递推">递推</h3>
 <p>由组合意义，考虑在已有 <span class="math inline">\(n\)</span> 个球时加入新球，此时面临将其放入原有的 <span class="math inline">\(r\)</span> 个集合或新开辟一个集合的两种选择，由此得递推式 <span class="math display">\[
 {n+1 \brace r} = r {n \brace r} + {n \brace r-1}
 \]</span> 边界在 <span class="math display">\[
 {n \brace 0} = [n = 0],\quad {n \brace n} = 1
 \]</span></p>
 </section>
-<section id="第二类-striling-数同行计算mathrmogf_n101x-或-mathrmegf_n111x" class="level4">
-<h4 class="anchored" data-anchor-id="第二类-striling-数同行计算mathrmogf_n101x-或-mathrmegf_n111x">第二类 Striling 数同行计算：<span class="math inline">\(\mathrm{OGF}_n^{1,0,1}(x)\)</span> 或 <span class="math inline">\(\mathrm{EGF}_n^{1,1,1}(x)\)</span></h4>
+<section id="第二类-striling-数同行计算mathrmogf_n101x-或-mathrmegf_n111x" class="level3">
+<h3 class="anchored" data-anchor-id="第二类-striling-数同行计算mathrmogf_n101x-或-mathrmegf_n111x">第二类 Striling 数同行计算：<span class="math inline">\(\mathrm{OGF}_n^{1,0,1}(x)\)</span> 或 <span class="math inline">\(\mathrm{EGF}_n^{1,1,1}(x)\)</span></h3>
 <p>来考虑用两种方法得到 <span class="math inline">\(1,1,1\)</span>-球盒问题的方案数．</p>
 <p>我们的第一种方法注意到，上述问题的方案数恰好是 <span class="math inline">\(1,0,1\)</span>-球盒问题方案数 <span class="math inline">\(r!\)</span> 倍——这是对后者的盒进行标号的结果．我们得到 <span class="math display">\[
 \mathrm{BB}_{1,1,1}(n,r) = r! \mathrm{BB}_{1,0,1}(n,r) = r! {n \brace r}
@@ -1351,8 +1433,8 @@ r! {n \brace r} = \sum_{k=0}^r (-1)^{r-k} \binom r k k^n
 \mathrm{OGF}_n^{1,0,1}(x) = \mathrm{EGF}_n^{1,1,1}(x) = e^{-x} \mathrm{EGF}_n^{1,1,0}(x) = e^{-x} \sum_{k=0}^{+\infty} k^n \frac{x^k}{k!}
 \]</span></p>
 </section>
-<section id="第二类-striling-数同列计算mathrmegf_r101xmathrmegf_r110x-与-mathrmegf10sigma1x" class="level4">
-<h4 class="anchored" data-anchor-id="第二类-striling-数同列计算mathrmegf_r101xmathrmegf_r110x-与-mathrmegf10sigma1x">第二类 Striling 数同列计算：<span class="math inline">\(\mathrm{EGF}_r^{1,0,1}(x)\)</span>，<span class="math inline">\(\mathrm{EGF}_r^{1,1,0}(x)\)</span> 与 <span class="math inline">\(\mathrm{EGF}^{1,0/\Sigma,1}(x)\)</span></h4>
+<section id="第二类-striling-数同列计算mathrmegf_r101xmathrmegf_r110x-与-mathrmegf10sigma1x" class="level3">
+<h3 class="anchored" data-anchor-id="第二类-striling-数同列计算mathrmegf_r101xmathrmegf_r110x-与-mathrmegf10sigma1x">第二类 Striling 数同列计算：<span class="math inline">\(\mathrm{EGF}_r^{1,0,1}(x)\)</span>，<span class="math inline">\(\mathrm{EGF}_r^{1,1,0}(x)\)</span> 与 <span class="math inline">\(\mathrm{EGF}^{1,0/\Sigma,1}(x)\)</span></h3>
 <p>为快速计算同一列的第二类 Stirling 数，考虑用生成函数的思路构造 <span class="math inline">\(1,1,0\)</span>-球盒问题和 <span class="math inline">\(1,0,1\)</span>-球盒问题的方案数．前者将大小为 <span class="math inline">\(n\)</span> 的有标号集合划分为 <span class="math inline">\(r\)</span> 个有标号等价类，这相当于有序拼接 <span class="math inline">\(r\)</span> 个非空有标号集合；后者则是前者除掉 <span class="math inline">\(r!\)</span> 消序的版本．写成生成函数即 <span id="eq-egf-110-101"><span class="math display">\[
 \begin{aligned}
 \mathrm{EGF}_r^{1,1,0}(x) &amp;= (e^x - 1)^r \\
@@ -1360,8 +1442,8 @@ r! {n \brace r} = \sum_{k=0}^r (-1)^{r-k} \binom r k k^n
 \end{aligned}
 \tag{1}\]</span></span></p>
 </section>
-<section id="bell-数" class="level4">
-<h4 class="anchored" data-anchor-id="bell-数">Bell 数</h4>
+<section id="bell-数" class="level3">
+<h3 class="anchored" data-anchor-id="bell-数">Bell 数</h3>
 <p>Bell 数 <span class="math inline">\(B(n)\)</span> 的组合定义即 <span class="math inline">\(1,0/\Sigma,1\)</span>-球盒问题的方案数 <span class="math inline">\(\mathrm{BB}_{1,0/\Sigma,1}\)</span>，亦可描述为 <span class="math inline">\(n\)</span> 元集合上等价关系（划分）的数量．</p>
 <p>注意到 <span class="math inline">\(1,0,1\)</span>-球盒问题和 <span class="math inline">\(1,0/\Sigma,1\)</span>-球盒问题的关系 <span class="math display">\[
 \mathrm{BB}_{1,0/\Sigma,1}(n) = \sum_{r=0}^{n} \mathrm{BB}_{1,0,1}(n,r) = \sum_{r=0}^{+\infty} \mathrm{BB}_{1,0,1}(n,r)
@@ -1392,8 +1474,8 @@ B(n) = \sum_{r=0}^n {n \brace r}
 B(n+1) = \sum_{k=0}^n \binom n k B(k)
 \]</span> 边界 <span class="math inline">\(B(0)=1\)</span>．组合的解释是，枚举第 <span class="math inline">\(n+1\)</span> 个元素被放入的集合的大小，再对除该集合之外的元素进行划分．从指数生成函数的角度来看，设 <span class="math inline">\(B(n)\)</span> 的 EGF 为 <span class="math inline">\(F(x)\)</span>，由 EGF 的移位性质和二项式反演的 EGF 形式，上式等价于 <span class="math inline">\(F'(x) = e^x F(x)\)</span>，解此微分方程也能得到 Bell 数的生成函数．</p>
 </section>
-<section id="第一类-stirling-数stirling-数与阶乘幂todo" class="level4">
-<h4 class="anchored" data-anchor-id="第一类-stirling-数stirling-数与阶乘幂todo">第一类 Stirling 数、Stirling 数与阶乘幂【TODO】</h4>
+<section id="第一类-stirling-数stirling-数与阶乘幂todo" class="level3">
+<h3 class="anchored" data-anchor-id="第一类-stirling-数stirling-数与阶乘幂todo">第一类 Stirling 数、Stirling 数与阶乘幂【TODO】</h3>
 <p>更多参考：</p>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Stirling_number">Stirling number - Wikipedia</a></li>
@@ -1401,8 +1483,8 @@ B(n+1) = \sum_{k=0}^n \binom n k B(k)
 </ul>
 </section>
 </section>
-<section id="分拆数todo" class="level3" data-number="3.4">
-<h3 data-number="3.4" class="anchored" data-anchor-id="分拆数todo"><span class="header-section-number">3.4</span> 分拆数【TODO】</h3>
+<section id="分拆数todo" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="分拆数todo"><span class="header-section-number">3.4</span> 分拆数【TODO】</h2>
 <p>关于 <span class="math inline">\(k\)</span> 部分拆数，</p>
 <blockquote class="blockquote">
 <p>By taking conjugates, the number <span class="math inline">\(p_k(n)\)</span> of partitions of <span class="math inline">\(n\)</span> into exactly <span class="math inline">\(k\)</span> parts is equal to the number of partitions of <span class="math inline">\(n\)</span> in which the largest part has size <span class="math inline">\(k\)</span>.</p>
@@ -1413,8 +1495,8 @@ B(n+1) = \sum_{k=0}^n \binom n k B(k)
 <li><a href="https://zhuanlan.zhihu.com/p/530925142">组合数学（2）分拆数 - 知乎</a></li>
 </ul>
 </section>
-<section id="背包计数" class="level3" data-number="3.5">
-<h3 data-number="3.5" class="anchored" data-anchor-id="背包计数"><span class="header-section-number">3.5</span> 背包计数</h3>
+<section id="背包计数" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="背包计数"><span class="header-section-number">3.5</span> 背包计数</h2>
 <p>通式： <span class="math display">\[
 \prod_{i=1}^n (1+ s_i x^{v_i})^{m_i} = \exp \sum_{i=1}^n m_i \ln (1 + s_i x^{v_i}) = \exp \sum_{i=1}^n m_i \sum_{k=1}^{+\infty} (-1)^{k-1} \frac {s_i^k}{k} x^{k v_i}
 \]</span> 其中 <span class="math inline">\(v_i\)</span> 互不相同（相同者体现在 <span class="math inline">\(m_i\)</span> 上）．后者可以埃筛调和级数计算贡献 + 多项式 <span class="math inline">\(\exp\)</span> 地在 <span class="math inline">\(O(t \log t)\)</span>（这里的 <span class="math inline">\(t\)</span> 指我们所关心的体积上限）内快速计算．</p>
@@ -1428,13 +1510,13 @@ B(n+1) = \sum_{k=0}^n \binom n k B(k)
 \]</span></p>
 <p>ex：普通的最优化背包也有卷积视角的理解，见 <a href="https://codeforces.com/blog/entry/98663">Knapsack, Subset Sum and the (max,+) Convolution - Codeforces</a>．</p>
 </section>
-<section id="各种图计数" class="level3" data-number="3.6">
-<h3 data-number="3.6" class="anchored" data-anchor-id="各种图计数"><span class="header-section-number">3.6</span> 各种图计数</h3>
-<section id="有无标号有无根树计数todo" class="level4">
-<h4 class="anchored" data-anchor-id="有无标号有无根树计数todo">有（无）标号有（无）根树计数【TODO】</h4>
+<section id="各种图计数" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="各种图计数"><span class="header-section-number">3.6</span> 各种图计数</h2>
+<section id="有无标号有无根树计数todo" class="level3">
+<h3 class="anchored" data-anchor-id="有无标号有无根树计数todo">有（无）标号有（无）根树计数【TODO】</h3>
 </section>
-<section id="有标号-dag-计数" class="level4">
-<h4 class="anchored" data-anchor-id="有标号-dag-计数">有标号 DAG 计数</h4>
+<section id="有标号-dag-计数" class="level3">
+<h3 class="anchored" data-anchor-id="有标号-dag-计数">有标号 DAG 计数</h3>
 <p><span class="math display">\[
 f_n=\sum_{i=1}^n(-1)^{i+1}\binom{n}{i}2^{i(n-i)}f_{n-i}
 \]</span> 思路是对 DAG 的入度为零的点做容斥．进一步推导可拆出卷积形式，再用类似分治 FFT 的生成函数方法可得封闭形式．</p>
@@ -1445,8 +1527,8 @@ f_n=\sum_{i=1}^n(-1)^{i+1}\binom{n}{i}2^{i(n-i)}f_{n-i}
 <li><a href="https://www.cnblogs.com/cjyyb/p/10134575.html">cjyyb 题解</a></li>
 </ul>
 </section>
-<section id="有标号偏序图计数" class="level4">
-<h4 class="anchored" data-anchor-id="有标号偏序图计数">有标号偏序图计数</h4>
+<section id="有标号偏序图计数" class="level3">
+<h3 class="anchored" data-anchor-id="有标号偏序图计数">有标号偏序图计数</h3>
 <p>问得好，但这是个著名的 open problem．各种类型的偏序图计数参考 <a href="https://en.wikipedia.org/wiki/Partially_ordered_set#Number_of_partial_orders">Partially ordered set - Wikipedia # Number of partial orders</a>．</p>
 <ul>
 <li><a href="https://math.stackexchange.com/questions/2677986/how-many-partial-orders-can-be-defined-on-varnothing-and-a-finite-set">Stack Exchange</a></li>
@@ -1454,16 +1536,16 @@ f_n=\sum_{i=1}^n(-1)^{i+1}\binom{n}{i}2^{i(n-i)}f_{n-i}
 <li><a href="https://doi.org/10.1007/BF00383446">Erné, M., Stege, K. Counting finite posets and topologies. Order 8, 247–265 (1991)</a>（内有研究历史综述）</li>
 </ul>
 </section>
-<section id="有标号连通图计数" class="level4">
-<h4 class="anchored" data-anchor-id="有标号连通图计数">有标号连通图计数</h4>
+<section id="有标号连通图计数" class="level3">
+<h3 class="anchored" data-anchor-id="有标号连通图计数">有标号连通图计数</h3>
 <p>标准的有标号无序划分．EGF 是有标号一般图计数 EGF 的 <span class="math inline">\(\ln\)</span>．</p>
 </section>
-<section id="竞赛图" class="level4">
-<h4 class="anchored" data-anchor-id="竞赛图">竞赛图</h4>
+<section id="竞赛图" class="level3">
+<h3 class="anchored" data-anchor-id="竞赛图">竞赛图</h3>
 <p>强连通的竞赛图一定存在 Hamilton 回路（归纳证明）；无环的竞赛图是全序图．两者结合可推出竞赛图一定存在 Hamilton 路径．同时，强连通竞赛图中存在所有大小的环路．</p>
 </section>
-<section id="有标号划分为-k-个全序图" class="level4">
-<h4 class="anchored" data-anchor-id="有标号划分为-k-个全序图">有标号划分为 <span class="math inline">\(k\)</span> 个全序图</h4>
+<section id="有标号划分为-k-个全序图" class="level3">
+<h3 class="anchored" data-anchor-id="有标号划分为-k-个全序图">有标号划分为 <span class="math inline">\(k\)</span> 个全序图</h3>
 <p>Lah 数 <span class="math display">\[
 L(n,k) = \frac{n!}{k!} \binom{n-1}{k-1}
 \]</span> 思路是先 <span class="math inline">\(n!\)</span> 排个大序，再无标号球入非空有标号桶，再除 <span class="math inline">\(k!\)</span> 给桶消序．</p>
@@ -1472,8 +1554,8 @@ L(n,k) = \frac{n!}{k!} \binom{n-1}{k-1}
 \]</span></p>
 <p>更多信息参考 Wikipedia．</p>
 </section>
-<section id="特殊-dag-的拓扑序计数有根树-young-tableaux" class="level4">
-<h4 class="anchored" data-anchor-id="特殊-dag-的拓扑序计数有根树-young-tableaux">特殊 DAG 的拓扑序计数（有根树 / Young Tableaux）</h4>
+<section id="特殊-dag-的拓扑序计数有根树-young-tableaux" class="level3">
+<h3 class="anchored" data-anchor-id="特殊-dag-的拓扑序计数有根树-young-tableaux">特殊 DAG 的拓扑序计数（有根树 / Young Tableaux）</h3>
 <p>对一般 DAG 上拓扑序计数，其本质上是偏序上线性扩张的计数问题，这被证明是 #P-complete 的问题（总之就是很困难）．</p>
 <ul>
 <li><a href="https://math.stackexchange.com/questions/814177/how-many-topological-orderings-exist-for-a-graph">How many topological orderings exist for a graph? - Mathematics Stack Exchange</a></li>
@@ -1481,8 +1563,8 @@ L(n,k) = \frac{n!}{k!} \binom{n-1}{k-1}
 <li><a href="https://en.wikipedia.org/wiki/Linear_extension">Linear extension - Wikipedia</a></li>
 </ul>
 <p>一些具有较好性质的 DAG 的拓扑序计数问题具有较好的封闭形式．</p>
-<section id="有根树" class="level5">
-<h5 class="anchored" data-anchor-id="有根树">有根树</h5>
+<section id="有根树" class="level4">
+<h4 class="anchored" data-anchor-id="有根树">有根树</h4>
 <p>对于外向树： <span class="math display">\[
 \frac{n!}{\prod_{u \in V} \operatorname{size}(u)}
 \]</span> 其中 <span class="math inline">\(V\)</span> 是所有节点的集合，<span class="math inline">\(n\)</span> 是树大小，<span class="math inline">\(\operatorname{size}(u)\)</span> 是以 <span class="math inline">\(u\)</span> 为根的子树大小．</p>
@@ -1496,8 +1578,8 @@ L(n,k) = \frac{n!}{k!} \binom{n-1}{k-1}
 <p>题目常见要求对每个节点作为根节点求出方案数，换根 DP 即可．</p>
 <p>注意到每个合法的外向树拓扑序 reverse 后立刻与内向树拓扑序形成一一对应，故内向树拓扑序计数与外向树相同．</p>
 </section>
-<section id="young-tableaux" class="level5">
-<h5 class="anchored" data-anchor-id="young-tableaux">Young tableaux</h5>
+<section id="young-tableaux" class="level4">
+<h4 class="anchored" data-anchor-id="young-tableaux">Young tableaux</h4>
 <p>特定形状 Young tableau 的计数问题也是 DAG 拓扑序计数的一个特例．对形状为 <span class="math inline">\(\lambda\)</span>（一个整数分拆）的全体 Young tableau 计数，我们有著名的钩长公式（hook length formula）： <span class="math display">\[
 \frac{n!}{\prod_{(i,j) \in \lambda} h_\lambda (i,j)}
 \]</span> 简单而并不平凡，且与有根树拓扑序计数相似的公式似乎意味着类似的组合解释——其被称为 <a href="https://en.wikipedia.org/wiki/Hook_length_formula#Knuth's_heuristic_argument">Knuth’s heuristic argument</a>．可惜在 Young tableau 中，相对顺序的确定并不相互独立，故更严谨的论证还需多费些口舌（详见 Wikipedia）．</p>
@@ -1560,8 +1642,8 @@ L(n,k) = \frac{n!}{k!} \binom{n-1}{k-1}
 </div>
 </section>
 </section>
-<section id="无向图的色多项式chromatic-polynomial和无环定向acyclic-orientations" class="level4">
-<h4 class="anchored" data-anchor-id="无向图的色多项式chromatic-polynomial和无环定向acyclic-orientations">无向图的色多项式（chromatic polynomial）和无环定向（acyclic orientations）</h4>
+<section id="无向图的色多项式chromatic-polynomial和无环定向acyclic-orientations" class="level3">
+<h3 class="anchored" data-anchor-id="无向图的色多项式chromatic-polynomial和无环定向acyclic-orientations">无向图的色多项式（chromatic polynomial）和无环定向（acyclic orientations）</h3>
 <p>色多项式是对图的 <span class="math inline">\(k\)</span>-colorings 的数量在 <span class="math inline">\(k=0,1,\dots,n\)</span> 进行 Lagrange 插值后得到的多项式．<span class="math inline">\(k&gt;n\)</span> 的 <span class="math inline">\(k\)</span>-colorings 的数量也可通过在色多项式的 <span class="math inline">\(x=k\)</span> 处求值得到．这一证明主要依赖所谓的 deletion–contraction 递推关系式．</p>
 <p>对一般的图而言，色多项式的大部分系数和求值问题都是 “NP” 相关的，但在一些特殊的图上有好的形式：</p>
 <ul>
@@ -1580,10 +1662,10 @@ L(n,k) = \frac{n!}{k!} \binom{n-1}{k-1}
 </ul>
 </section>
 </section>
-<section id="矩阵树定理" class="level3" data-number="3.7">
-<h3 data-number="3.7" class="anchored" data-anchor-id="矩阵树定理"><span class="header-section-number">3.7</span> 矩阵树定理</h3>
-<section id="无向图的情形" class="level4">
-<h4 class="anchored" data-anchor-id="无向图的情形">无向图的情形</h4>
+<section id="矩阵树定理" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="矩阵树定理"><span class="header-section-number">3.7</span> 矩阵树定理</h2>
+<section id="无向图的情形" class="level3">
+<h3 class="anchored" data-anchor-id="无向图的情形">无向图的情形</h3>
 <p>对无向图，度数矩阵 <span class="math inline">\(D = \operatorname{diag} \{ \operatorname{deg}(i) \}\)</span>，邻接矩阵 <span class="math inline">\(A\)</span> 定义为 <span class="math display">\[
 A_{i,j} = \begin{cases}
 0 &amp; i=j \\
@@ -1615,8 +1697,8 @@ B_{i,j} = \begin{cases}
 <p>证明的要点在于对 <span class="math inline">\(L = B B^T\)</span> 的某个主子式（一般选择去掉第一行第一列）应用 Cauchy-Binet 公式，随后说明行列式的组合意义中，环的情况一定相互抵消．关于特征值的结论可从特征多项式、各 <span class="math inline">\(n-1\)</span> 阶主子式与韦达定理的关系中得到（依此方法能进一步得到有关 <span class="math inline">\(k\)</span> - 生成森林的一些结论）．</p>
 <p>事实上，去掉第 <span class="math inline">\(i\)</span> 行第 <span class="math inline">\(i\)</span> 列，即是统计以 <span class="math inline">\(i\)</span> 为根的根向生成树的数量．先前定义关联矩阵 <span class="math inline">\(B\)</span> 时“手动定向”，是为了使换向过程中环的情况相互抵消，只留下树的唯一一种情况．当然，因为是无向图，这里树的朝向和根的具体位置并不重要．</p>
 </section>
-<section id="有向图的情形" class="level4">
-<h4 class="anchored" data-anchor-id="有向图的情形">有向图的情形</h4>
+<section id="有向图的情形" class="level3">
+<h3 class="anchored" data-anchor-id="有向图的情形">有向图的情形</h3>
 <p>对有向图，我们明确统计的对象为根向（或叶向）生成树的数量．根向树形图与出度 Laplace 矩阵相关，<span class="math inline">\(L^{out} = D^{out} - A\)</span>，其中 <span class="math inline">\(D^{out}\)</span> 是出度矩阵．</p>
 <p>为体现有向图的要求，出度 Laplace 矩阵对应的关联矩阵需要一些修改．令矩阵 <span class="math inline">\(B\)</span> 满足 <span class="math display">\[
 B_{i,j} = \begin{cases}
@@ -1665,8 +1747,8 @@ C_{i,j} = \begin{cases}
 </ul>
 </section>
 </section>
-<section id="polya-计数" class="level3" data-number="3.8">
-<h3 data-number="3.8" class="anchored" data-anchor-id="polya-计数"><span class="header-section-number">3.8</span> Polya 计数</h3>
+<section id="polya-计数" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="polya-计数"><span class="header-section-number">3.8</span> Polya 计数</h2>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -1684,10 +1766,10 @@ C_{i,j} = \begin{cases}
 </div>
 </div>
 </section>
-<section id="杂数选提" class="level3" data-number="3.9">
-<h3 data-number="3.9" class="anchored" data-anchor-id="杂数选提"><span class="header-section-number">3.9</span> 杂数选提</h3>
-<section id="catalan-数" class="level4">
-<h4 class="anchored" data-anchor-id="catalan-数">Catalan 数</h4>
+<section id="杂数选提" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="杂数选提"><span class="header-section-number">3.9</span> 杂数选提</h2>
+<section id="catalan-数" class="level3">
+<h3 class="anchored" data-anchor-id="catalan-数">Catalan 数</h3>
 <p><span class="math display">\[
 C_n = \binom{2n}{n} - \binom{2n}{n+1} = \frac 1 {n+1} \binom{2n}{n} = \prod_{k=2}^n \frac{n+k}{k}
 \]</span></p>
@@ -1713,27 +1795,27 @@ A(z) = 1 + z A^2(z) \implies A(z) = \frac{1-\sqrt{1-4z}}{2z}
 <p>Catalan 数的组合意义并不止如此几种．cf.&nbsp;<a href="https://en.wikipedia.org/wiki/Catalan_number">Wikipedia</a></p>
 </section>
 </section>
-<section id="代数组合todo" class="level3" data-number="3.10">
-<h3 data-number="3.10" class="anchored" data-anchor-id="代数组合todo"><span class="header-section-number">3.10</span> 代数组合【TODO】</h3>
-<section id="q-analog" class="level4">
-<h4 class="anchored" data-anchor-id="q-analog"><span class="math inline">\(q\)</span>-analog</h4>
+<section id="代数组合todo" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="代数组合todo"><span class="header-section-number">3.10</span> 代数组合【TODO】</h2>
+<section id="q-analog" class="level3">
+<h3 class="anchored" data-anchor-id="q-analog"><span class="math inline">\(q\)</span>-analog</h3>
 </section>
-<section id="有限域上的线性空间" class="level4">
-<h4 class="anchored" data-anchor-id="有限域上的线性空间">有限域上的线性空间</h4>
+<section id="有限域上的线性空间" class="level3">
+<h3 class="anchored" data-anchor-id="有限域上的线性空间">有限域上的线性空间</h3>
 </section>
-<section id="有限群构型计数" class="level4">
-<h4 class="anchored" data-anchor-id="有限群构型计数">有限群构型计数</h4>
+<section id="有限群构型计数" class="level3">
+<h3 class="anchored" data-anchor-id="有限群构型计数">有限群构型计数</h3>
 </section>
 </section>
 </section>
-<section id="多项式" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="多项式"><span class="header-section-number">4</span> 多项式</h2>
+<section id="多项式" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> 多项式</h1>
 <p>此部分详细介绍请移步 <a href="../../posts/20230928-dft/">FFT/NTT 讲稿</a>．</p>
-<section id="通用" class="level3" data-number="4.1">
-<h3 data-number="4.1" class="anchored" data-anchor-id="通用"><span class="header-section-number">4.1</span> 通用</h3>
+<section id="通用" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="通用"><span class="header-section-number">4.1</span> 通用</h2>
 </section>
-<section id="fft-fntt-卷积" class="level3" data-number="4.2">
-<h3 data-number="4.2" class="anchored" data-anchor-id="fft-fntt-卷积"><span class="header-section-number">4.2</span> FFT / FNTT / 卷积</h3>
+<section id="fft-fntt-卷积" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="fft-fntt-卷积"><span class="header-section-number">4.2</span> FFT / FNTT / 卷积</h2>
 <ul>
 <li><p>DFT：（本原）单位根构造 <span class="math inline">\(\omega_n = e^{\frac {2 \pi}{n}i}\)</span>．</p></li>
 <li><p>NTT：<span class="math inline">\(P=998244353 = 7 \times 17 \times 2^{23} + 1\)</span>，<span class="math inline">\(\mathrm{PR} = 3\)</span> 是它的一个原根．（本原）单位根构造 <span class="math inline">\(\omega_{n} = \mathrm{PR}^{\frac{P-1}{n}} \bmod P\)</span>．</p></li>
@@ -1760,14 +1842,14 @@ A(\omega_{2n}^{n+k}) &amp;= A_0 (\omega_n^k) - \omega_{2n}^k A_1(\omega_n^k)
 \]</span> 即得 FFT/FNTT 递归算法．用单位根求和性质 <span class="math display">\[
 \frac 1 n \sum_{k=0}^{n-1} \omega^{ik} = [i \mid n]
 \]</span> 可知 DFT/NTT 变换矩阵 <span class="math inline">\(F = \begin{pmatrix}\omega_{n}^{ij}\end{pmatrix}_{(i,j) \in n \times n}\)</span> 满足 <span class="math inline">\(F F^H = F^H F = n I_n\)</span>，故 <span class="math inline">\(F^{-1} = \frac 1 n F^H = \begin{pmatrix} \frac 1 n \omega_{n}^{-ij}\end{pmatrix}_{(i,j) \in n \times n}\)</span>，此即 DFT/NTT 逆变换矩阵．</p>
-<section id="蝶形运算与迭代算法" class="level4">
-<h4 class="anchored" data-anchor-id="蝶形运算与迭代算法">蝶形运算与迭代算法</h4>
+<section id="蝶形运算与迭代算法" class="level3">
+<h3 class="anchored" data-anchor-id="蝶形运算与迭代算法">蝶形运算与迭代算法</h3>
 <p>为使用迭代算法，需要快速得到递归算法向下深入过程中 <span class="math inline">\(\{ a_n \}\)</span> 置换后的最终结果．观察知该置换是位逆序置换，可按如下方法线性求出．</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>rev<span class="op">[</span><span class="dv">0</span><span class="op">]=</span><span class="dv">0</span><span class="op">;</span> <span class="cf">for</span><span class="op">(</span>ll i<span class="op">=</span><span class="dv">1</span><span class="op">;</span>i<span class="op">&lt;(</span><span class="dv">1</span><span class="op">&lt;&lt;</span>n<span class="op">);</span>i<span class="op">++)</span> rev<span class="op">[</span>i<span class="op">]=(</span>rev<span class="op">[</span>i<span class="op">&gt;&gt;</span><span class="dv">1</span><span class="op">]&gt;&gt;</span><span class="dv">1</span><span class="op">)+((</span>i<span class="op">&amp;</span><span class="dv">1</span><span class="op">)&lt;&lt;(</span>n<span class="op">-</span><span class="dv">1</span><span class="op">));</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="多项式方程求解newton-迭代法todo" class="level3" data-number="4.3">
-<h3 data-number="4.3" class="anchored" data-anchor-id="多项式方程求解newton-迭代法todo"><span class="header-section-number">4.3</span> 多项式方程求解（Newton 迭代法）【TODO】</h3>
+<section id="多项式方程求解newton-迭代法todo" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="多项式方程求解newton-迭代法todo"><span class="header-section-number">4.3</span> 多项式方程求解（Newton 迭代法）【TODO】</h2>
 <p>给定一多项式 <span class="math inline">\(A(x)\)</span>，求解满足 <span class="math inline">\(A(B(x)) = 0 \pmod{x^n}\)</span> 的多项式 <span class="math inline">\(B(x)\)</span>．</p>
 <p>显然 <span class="math inline">\(B(x)\)</span> 只有前 <span class="math inline">\(n\)</span> 项有效．目前我们尚不清楚解的存在性、唯一性等性质，但注意到 <span class="math display">\[
 A(B(x)) = 0 \pmod{x^{2n}} \implies A(B(x)) = 0 \pmod{x^n}
@@ -1789,8 +1871,8 @@ B(x) =  B_0(x) - \frac{A(B_0(x))}{A'(B_0(x))} \pmod{x^{2n}}
 \]</span> 注意到 <span class="math inline">\(B(x) - B_0(x) = -\frac{A(B_0(x))}{A'(B_0(x))} = 0 \pmod{x^{n}}\)</span>，故满足上述“假若”的解存在且唯一．然而，若不要求这一“假若”成立，则每步迭代解的唯一性无法得到保证．考虑到边界条件 <span class="math inline">\(b_0\)</span> 的解亦不一定唯一，故一般的 Newton 迭代法解唯一性的讨论较为复杂．当然，上述推导至少为我们提供了一种寻找特解的方法．</p>
 <p>Newton 迭代法作为通用求解框架，可涵盖几乎所有多项式初等运算．【TODO】</p>
 </section>
-<section id="多项式求逆" class="level3" data-number="4.4">
-<h3 data-number="4.4" class="anchored" data-anchor-id="多项式求逆"><span class="header-section-number">4.4</span> 多项式求逆</h3>
+<section id="多项式求逆" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="多项式求逆"><span class="header-section-number">4.4</span> 多项式求逆</h2>
 <p>给定一多项式 <span class="math inline">\(A(x)\)</span>，求解满足 <span class="math inline">\(A(x) B(x) = 1 \pmod{x^{n}}\)</span> 的多项式 <span class="math inline">\(B(x)\)</span>．</p>
 <p>多项式逆元存在的充分必要条件是其常数项非零（这是因为边界条件 <span class="math inline">\(b_0 = \frac 1 {a_0}\)</span>），若存在则在模意义下一定唯一．这结论可直接由下述求解方法得到．不失一般性，我们只研究 <span class="math inline">\(A(x)\)</span> 的次数为奇数 <span class="math inline">\(2n-1\)</span> 的情况．设 <span class="math display">\[
 \begin{aligned}
@@ -1803,8 +1885,8 @@ A(x) B_0(x) = A_0(x) B_0(x) = 1 \pmod{x^n}
 T(n) = T(\frac n 2) + O(n \log n) = O(n \log n)
 \]</span></p>
 <p>以下简记 <span class="math inline">\(A(x)\)</span> 为 <span class="math inline">\(A\)</span>，其它多项式同理．</p>
-<section id="倍增法一原创" class="level4">
-<h4 class="anchored" data-anchor-id="倍增法一原创">倍增法一（原创）</h4>
+<section id="倍增法一原创" class="level3">
+<h3 class="anchored" data-anchor-id="倍增法一原创">倍增法一（原创）</h3>
 <p><span class="math display">\[
 \begin{aligned}
 &amp; A B = 1 \pmod{x^{2n}} \\
@@ -1817,8 +1899,8 @@ T(n) = T(\frac n 2) + O(n \log n) = O(n \log n)
 \]</span></p>
 <p>常数偏大，这里就不放代码了．</p>
 </section>
-<section id="倍增法二" class="level4">
-<h4 class="anchored" data-anchor-id="倍增法二">倍增法二</h4>
+<section id="倍增法二" class="level3">
+<h3 class="anchored" data-anchor-id="倍增法二">倍增法二</h3>
 <p>注意到 <span class="math display">\[
 \begin{cases}
 A B_0 = 1 \pmod{x^n} \\
@@ -1834,15 +1916,15 @@ B = 2 B_0 - A B_0^2 \pmod{x^{2n}}
 \]</span></p>
 </section>
 </section>
-<section id="多项式开方todo" class="level3" data-number="4.5">
-<h3 data-number="4.5" class="anchored" data-anchor-id="多项式开方todo"><span class="header-section-number">4.5</span> 多项式开方【TODO】</h3>
+<section id="多项式开方todo" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="多项式开方todo"><span class="header-section-number">4.5</span> 多项式开方【TODO】</h2>
 <p>和多项式求逆类似的推导可得递推方程 <span class="math display">\[
 B = \frac 1 2 \left(\frac A {B_0} + B_0 \right) \pmod{x^{2n}}
 \]</span> 有一些和 Newton 法一样麻烦的边界条件讨论，也会出现复杂的多解情况．<span class="math inline">\(a_0 = 1\)</span> 时 <span class="math inline">\(b_0 = \pm 1\)</span>，按 <span class="math inline">\(b_0 = 1\)</span> 的实现如下．</p>
 <p>亦可 <span class="math inline">\(\sqrt A = \exp \left( \frac 1 2 \ln A \right)\)</span>，此法可处理多项式任意幂指数运算．</p>
 </section>
-<section id="多项式-ln" class="level3" data-number="4.6">
-<h3 data-number="4.6" class="anchored" data-anchor-id="多项式-ln"><span class="header-section-number">4.6</span> 多项式 <span class="math inline">\(\ln\)</span></h3>
+<section id="多项式-ln" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="多项式-ln"><span class="header-section-number">4.6</span> 多项式 <span class="math inline">\(\ln\)</span></h2>
 <p>给定一多项式 <span class="math inline">\(A(x)\)</span>，求解满足 <span class="math inline">\(B(x) = \ln A(x) \pmod{x^{n}}\)</span> 的多项式 <span class="math inline">\(B(x)\)</span>．</p>
 <p>次数为 <span class="math inline">\(+\infty\)</span> 的多项式 <span class="math inline">\(\ln\)</span> 存在的充分必要条件为其常数项非零（这是因为边界条件 <span class="math inline">\(b_0 = \ln a_0\)</span>），同样一旦存在则唯一．注意到仅整数 <span class="math inline">\(a_0=1\)</span> 时，<span class="math inline">\(\ln a_0\)</span> 可取得整数，故合理的 <span class="math inline">\(a_0\)</span> 只能是 <span class="math inline">\(1\)</span>．另一种解释参见<a href="https://oi-wiki.org/math/poly/elementary-func/#%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%AF%B9%E6%95%B0%E5%87%BD%E6%95%B0--%E6%8C%87%E6%95%B0%E5%87%BD%E6%95%B0">多项式初等函数 - OI Wiki # 多项式对数函数 &amp; 指数函数</a>．</p>
 <p>推导是容易的．方程两侧同时求导得 <span class="math display">\[
@@ -1851,8 +1933,8 @@ B'(x) = \frac{A'(x)}{A(x)} \pmod{x^{n-1}}
 B(x) = \int \frac{A'(x)}{A(x)} \operatorname{d}\!x + C \pmod{x^{n}}
 \]</span> 其中 <span class="math inline">\(C= \ln a_0\)</span>．多项式求逆、求导、积分即可．时间复杂度 <span class="math inline">\(O(n \log n)\)</span>．</p>
 </section>
-<section id="多项式-exptodo" class="level3" data-number="4.7">
-<h3 data-number="4.7" class="anchored" data-anchor-id="多项式-exptodo"><span class="header-section-number">4.7</span> 多项式 <span class="math inline">\(\exp\)</span>【TODO】</h3>
+<section id="多项式-exptodo" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="多项式-exptodo"><span class="header-section-number">4.7</span> 多项式 <span class="math inline">\(\exp\)</span>【TODO】</h2>
 <p>Newton 迭代法可推出 <span class="math display">\[
 B = B(1 - \ln B_0 + A) \pmod{x^{2n}}
 \]</span> 时间复杂度 <span class="math display">\[
@@ -1860,8 +1942,8 @@ T(n) = T(\frac n 2) + O(n \log n) = O(n \log n)
 \]</span></p>
 <p>存在的充要条件是 <span class="math inline">\(a_0=0\)</span>．唯一性证明暂不明确．</p>
 </section>
-<section id="多项式快速幂" class="level3" data-number="4.8">
-<h3 data-number="4.8" class="anchored" data-anchor-id="多项式快速幂"><span class="header-section-number">4.8</span> 多项式快速幂</h3>
+<section id="多项式快速幂" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="多项式快速幂"><span class="header-section-number">4.8</span> 多项式快速幂</h2>
 <p>普通的多项式快速幂实现当然是 <span class="math inline">\(O(n \log n \log k)\)</span> 的．下面介绍基于指对数性质的 <span class="math inline">\(O(n \log n)\)</span> 求法．</p>
 <p>对常数项 <span class="math inline">\(a_0=1\)</span> 的 <span class="math inline">\(n-1\)</span> 次多项式 <span class="math inline">\(A(x)\)</span>， <span class="math display">\[
 A^k(x) = e^{k \ln A(x)}
@@ -1879,48 +1961,48 @@ A^k(x) = (a_t x^t)^k \left( \frac{A(x)}{a_t x^t} \right)^k
 <p>关于多项式，更代数的内容参考 <a href="https://en.wikipedia.org/wiki/Formal_power_series">Formal power series - Wikipedia</a></p>
 </section>
 </section>
-<section id="集合幂级数todo" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="集合幂级数todo"><span class="header-section-number">5</span> 集合幂级数【TODO】</h2>
+<section id="集合幂级数todo" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 集合幂级数【TODO】</h1>
 </section>
-<section id="矩阵" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="矩阵"><span class="header-section-number">6</span> 矩阵</h2>
-<section id="矩阵乘法" class="level3" data-number="6.1">
-<h3 data-number="6.1" class="anchored" data-anchor-id="矩阵乘法"><span class="header-section-number">6.1</span> 矩阵乘法</h3>
+<section id="矩阵" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> 矩阵</h1>
+<section id="矩阵乘法" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="矩阵乘法"><span class="header-section-number">6.1</span> 矩阵乘法</h2>
 <p>普通的 <span class="math inline">\(O(n^3)\)</span> 实现．</p>
 </section>
-<section id="矩阵快速幂" class="level3" data-number="6.2">
-<h3 data-number="6.2" class="anchored" data-anchor-id="矩阵快速幂"><span class="header-section-number">6.2</span> 矩阵快速幂</h3>
+<section id="矩阵快速幂" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="矩阵快速幂"><span class="header-section-number">6.2</span> 矩阵快速幂</h2>
 <p>普通的 <span class="math inline">\(O(n^3 \log k)\)</span> 实现．</p>
 </section>
-<section id="行列式" class="level3" data-number="6.3">
-<h3 data-number="6.3" class="anchored" data-anchor-id="行列式"><span class="header-section-number">6.3</span> 行列式</h3>
+<section id="行列式" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="行列式"><span class="header-section-number">6.3</span> 行列式</h2>
 <p>普通的实现是使用逆元进行高斯消元，可用于域上的线性空间．若求解逆元的时间复杂度为 <span class="math inline">\(O(\log p)\)</span>，则时间复杂度为 <span class="math inline">\(O(n^3+ n^2 \log p)\)</span>．</p>
 <p>这里给出另一种做法．该做法在消去时使用辗转相除法，可用于任意 Euclid 整环（Euclidean domain，有带余除法的无零因子的交换幺环）上的模（环上的线性空间），且时间复杂度不会增加．一个常见的应用是模 <span class="math inline">\(m\)</span> 整数环 <span class="math inline">\(\mathbb Z_m\)</span> 上的行列式求值，其中 <span class="math inline">\(m\)</span> 不是质数．</p>
 <p>消去各目标行第 <span class="math inline">\(c\)</span> 列元素时，以第 <span class="math inline">\(c\)</span> 行的 <span class="math inline">\(a_{c,c}\)</span> 为除数与目标行的第 <span class="math inline">\(c\)</span> 列元素辗转相除，最终使 <span class="math inline">\(a_{c,c}\)</span> 变为 <span class="math inline">\(0\)</span>，再做一次行交换将其换至目标行，就完成了一次行消去过程．注意到当 <span class="math inline">\(a_{c,c}\)</span> 非零时，一次行消去操作结束后 <span class="math inline">\(a_{c,c}\)</span> 单调不增，且过程中 <span class="math inline">\(a_{c,c}\)</span> 不会从非零变为零，故辗转相除带来的 <span class="math inline">\(\log p\)</span> 次额外操作开销被分摊到整轮对第 <span class="math inline">\(c\)</span> 列的消去过程中，因此时间复杂度仍为 <span class="math inline">\(O(n^3+ n^2 \log p)\)</span>．</p>
 </section>
 </section>
-<section id="字符串-自动机" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="字符串-自动机"><span class="header-section-number">7</span> 字符串 / 自动机</h2>
+<section id="字符串-自动机" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> 字符串 / 自动机</h1>
 <p>基于 DFA 理论，<a href="https://oi-wiki.org/string/automaton/">OI-Wiki</a> 上有对 KMP / AC 自动机，SAM / GSAM 和 PAM 简明扼要的概括．<a href="https://oi-wiki.org/string/sam/">OI-Wiki</a> 的后缀自动机讲解亦值得参考．</p>
 </section>
-<section id="图论todo" class="level2" data-number="8">
-<h2 data-number="8" class="anchored" data-anchor-id="图论todo"><span class="header-section-number">8</span> 图论【TODO】</h2>
-<section id="最短路" class="level3" data-number="8.1">
-<h3 data-number="8.1" class="anchored" data-anchor-id="最短路"><span class="header-section-number">8.1</span> 最短路</h3>
+<section id="图论todo" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> 图论【TODO】</h1>
+<section id="最短路" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="最短路"><span class="header-section-number">8.1</span> 最短路</h2>
 </section>
-<section id="强连通分量" class="level3" data-number="8.2">
-<h3 data-number="8.2" class="anchored" data-anchor-id="强连通分量"><span class="header-section-number">8.2</span> 强连通分量</h3>
+<section id="强连通分量" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="强连通分量"><span class="header-section-number">8.2</span> 强连通分量</h2>
 </section>
-<section id="网络流" class="level3" data-number="8.3">
-<h3 data-number="8.3" class="anchored" data-anchor-id="网络流"><span class="header-section-number">8.3</span> 网络流</h3>
+<section id="网络流" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="网络流"><span class="header-section-number">8.3</span> 网络流</h2>
 </section>
 </section>
-<section id="杂项" class="level2" data-number="9">
-<h2 data-number="9" class="anchored" data-anchor-id="杂项"><span class="header-section-number">9</span> 杂项</h2>
-<section id="表" class="level3" data-number="9.1">
-<h3 data-number="9.1" class="anchored" data-anchor-id="表"><span class="header-section-number">9.1</span> 表</h3>
-<section id="质数表" class="level4">
-<h4 class="anchored" data-anchor-id="质数表">质数表</h4>
+<section id="杂项" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> 杂项</h1>
+<section id="表" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="表"><span class="header-section-number">9.1</span> 表</h2>
+<section id="质数表" class="level3">
+<h3 class="anchored" data-anchor-id="质数表">质数表</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>1e2     1e3     1e4       1e5       1e6</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>101         1009        10007       100003      1000003</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1933,8 +2015,8 @@ A^k(x) = (a_t x^t)^k \left( \frac{A(x)}{a_t x^t} \right)^k
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>1e16              1e17                1e18</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>10000000000000061   100000000000000003  1000000000000000003</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="典列" class="level4">
-<h4 class="anchored" data-anchor-id="典列">典列</h4>
+<section id="典列" class="level3">
+<h3 class="anchored" data-anchor-id="典列">典列</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>index         0   1   2   3   4   5   6   7   8     9     10</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>Catalan       1   1   2   5   14  42  132 429 1430  4862  16796</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>Bell          1   1   2   5   15  52  203 877 4140  21147 115975</span>
@@ -1986,10 +2068,10 @@ A^k(x) = (a_t x^t)^k \left( \frac{A(x)}{a_t x^t} \right)^k
 <span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>5 |     1   2   2   1   1</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="对拍" class="level3" data-number="9.2">
-<h3 data-number="9.2" class="anchored" data-anchor-id="对拍"><span class="header-section-number">9.2</span> 对拍</h3>
-<section id="windows-batch" class="level4">
-<h4 class="anchored" data-anchor-id="windows-batch">Windows Batch</h4>
+<section id="对拍" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="对拍"><span class="header-section-number">9.2</span> 对拍</h2>
+<section id="windows-batch" class="level3">
+<h3 class="anchored" data-anchor-id="windows-batch">Windows Batch</h3>
 <pre class="batch"><code>:loop
     gen.exe&gt;dat.in
     my.exe&lt;dat.in&gt;my.out
@@ -1998,8 +2080,8 @@ A^k(x) = (a_t x^t)^k \left( \frac{A(x)}{a_t x^t} \right)^k
     if not errorlevel 1 goto loop
 pause</code></pre>
 </section>
-<section id="linux-shell" class="level4">
-<h4 class="anchored" data-anchor-id="linux-shell">Linux Shell</h4>
+<section id="linux-shell" class="level3">
+<h3 class="anchored" data-anchor-id="linux-shell">Linux Shell</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="fu">true</span><span class="kw">;</span> <span class="cf">do</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">./gen</span><span class="op">&gt;</span>dat.in</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">./std</span><span class="op">&lt;</span>dat.in<span class="op">&gt;</span>std.out</span>
@@ -2013,11 +2095,11 @@ pause</code></pre>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="模板" class="level3" data-number="9.3">
-<h3 data-number="9.3" class="anchored" data-anchor-id="模板"><span class="header-section-number">9.3</span> 模板</h3>
+<section id="模板" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="模板"><span class="header-section-number">9.3</span> 模板</h2>
 <p>见 <a href="code/model.cpp">model.cpp</a>, <a href="code/model_temp.cpp">model_temp.cpp</a>．</p>
-<section id="model.cpp" class="level4">
-<h4 class="anchored" data-anchor-id="model.cpp">model.cpp</h4>
+<section id="model.cpp" class="level3">
+<h3 class="anchored" data-anchor-id="model.cpp">model.cpp</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="dt">unsigned</span> <span class="dt">int</span> <span class="ex">uint</span><span class="op">;</span></span>
@@ -2494,8 +2576,8 @@ pause</code></pre>
 <span id="cb11-474"><a href="#cb11-474" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
 <span id="cb11-475"><a href="#cb11-475" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="model_temp.cpp" class="level4">
-<h4 class="anchored" data-anchor-id="model_temp.cpp">model_temp.cpp</h4>
+<section id="model_temp.cpp" class="level3">
+<h3 class="anchored" data-anchor-id="model_temp.cpp">model_temp.cpp</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include</span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="dt">long</span> <span class="dt">long</span> ll<span class="op">;</span></span>
@@ -2650,15 +2732,50 @@ pause</code></pre>
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "切换深色模式");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "切换深色模式");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -2733,11 +2850,30 @@ pause</code></pre>
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -2751,10 +2887,72 @@ pause</code></pre>
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
             // default icon
             link.classList.add("external");
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -2768,6 +2966,7 @@ pause</code></pre>
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -2930,44 +3129,54 @@ pause</code></pre>
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -3066,8 +3275,11 @@ pause</code></pre>
     }
   });
   </script>
-<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
-<input type="hidden" id="giscus-alt-theme" value="light">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"可滚动的代码","output":"可滚动的输出"};
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark_dimmed">
 <script>
   function loadGiscus() {
     // Function to get the theme based on body class

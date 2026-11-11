@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -14,10 +14,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -38,16 +41,19 @@ ul.task-list li input[type="checkbox"] {
 <link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f81f3c79f694eaf6f88ebcce70241f9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-af64962de9348b804daa6381b125c604.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e87cd3d65a65f768c7a1700db1c28216.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9b2404ec78ff68ca4c9b2f4303203b01.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-39330638802da02b364dd7ec4e29bc31.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7dd074d930de47cb4e38ad128cc73662.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -86,7 +92,7 @@ MathJax = {
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -117,7 +123,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -140,6 +146,7 @@ window.Quarto = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -169,13 +176,19 @@ window.Quarto = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -259,14 +272,17 @@ window.Quarto = {
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -281,15 +297,14 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -333,8 +348,9 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -343,7 +359,7 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -360,7 +376,7 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -400,8 +416,8 @@ window.Quarto = {
 </header>
 
 
-<section id="the-bicategory-of-bimodules" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="the-bicategory-of-bimodules"><span class="header-section-number">1</span> The bicategory of bimodules</h2>
+<section id="the-bicategory-of-bimodules" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> The bicategory of bimodules</h1>
 <p>The bicategory <span class="math inline">\(\mathsf{Bimod}\)</span> consists of the following data:</p>
 <ul>
 <li><strong>Objects:</strong> unital rings <span class="math inline">\(A,B,C,\ldots\)</span>.</li>
@@ -433,12 +449,12 @@ window.Quarto = {
 <!-- This file was generated by dvisvgm 3.6 -->
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="599.115pt" height="133.815pt" viewbox="0 0 399.41 89.21">
 <style type="text/css">
-@font-face{font-family:HJTYEB-CMR7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHcAAoAAAAAA5wAAAGTAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANApYaQsGAAE2AiQDCAQgBYJWByAb9AIAngU5GW8qIZpLZi2+Y5pSys+e4uH7/dq578siKpUtielWvRG3Mx3PhLZD9FJMStlK5Q+t825iqHOTGB+aGSIc4lb7QlwVpNTpr+WODx60gH4L23L9eWCBJQEFnESchy8t4VQCjcDSHYrOJKUREelrQZYW40pBuk7P/0NOGqMlDmu0Y0ps4DtsLCjAUx/LVMgETq0qkJBhiHeGcMwBcrlAvaq8P1i9gQASyBGYACwAIAfExBHn3ezstL1dq0Hx6c2Epy8dvP8temyfOP/Tq1qSVTSMeGhX0/8dtxttpiXYGNaHvgAEglbqcUfu+xNkOXMiSU20SSDIVEjrRrD4gQCAlBAhRDIBNgKlDseEXok516kXBU2gpGW9wxgTtsjbhRmpmHMjSBS0Q0nX3GHNZ6DkXeZZKlNrxyP6aL7iXFN7s8GUqU6PbwZfMNMF1VdYDQ4QNdQ3MjdDmFDIG8IRJgZSMmra4iL0ovIqnBoIE1OMoQEFMwMTHslygDCBVAF+adSaAm6BMbVA6VOwMnBgA+g8AAA=) format('woff2');}
 @font-face{font-family:ZVJZVP-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJIAAoAAAAABAwAAAH+AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBRIFNCwYAATYCJAMIBCAFglwHIBteAyCuCmxwTU9Ie7Ds8Vgav6HRjVHWKUZv4+HhsL3/b4/m4DGtEwvkgDpsaDRpgUSaSILZ+vn7+eeudO1ry7KMogHtjRqobVZAw4H93wUJT84Kkj0HSMovT//eKENzIcpuDVos2TL9cd5UtFOn8l80OEEWZgvEYjbPx7bE1j4vcKnkPV8bKEYFrnlrWzIxWWodEZF+vaCQnwHke37/hrBqR2M4DFGVQSaANZ1NqkDafOlh/xwAW6UwAoD/f5AoYAgvhCBYB4p5sPkCtaT9agDi3yYoooQzYAoID6E0X+X8itJpCiHldoTWxx/mfNlfJ0fPEiFaa+SJYGw8TOFPb5dYCZ30sGqQAv7+oswslqMrxLKzDDBiZdw6wyiGqzTZ/p+e/5cqP8rZMKpR4MJ7iMZgOhdOBcf/PmJMhBPjY2poaPYPgwgAgeD0o3aWbPiuKvKv/u8YcQGgKkGws/Jn8RSMgGCCBBAipDPELUGauluIQQeKpqipMyRLGpbIsqbd63XzZPCiWBNWOYgsmlcjS8aWZNm8TVu3535mrR85x4mIo136hEZ3MK6+Cu9IRZKZjffNNUqT+nBSbbPkIhUYdbX1jI2UDbC4dZVk2pEQ4egkPkK40C0oTi1CDNXtr4NFSkSiwDrtKBvILwRKScE8MUsm6oa/qGpjkRNRwXOlAAA=) format('woff2');}
-@font-face{font-family:PCPXEO-CMSY5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAI8AAoAAAAABBQAAAHxAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBTIFKCwYAATYCJAMIBCAFglwHIBtbA0CeBXZbRwi9NtbbUKkhKpt+IqDfr+3Tc8U00f5cIwUSQ2kWasf/Z3/v/VDa6a6f8MxGpjlLkUhrD2kl7awJYW4HKIFs7KZkC27OWmWf/3PxB1+BpBXRzNIyBAp0b4CjEe7utJOjDc9Ot6kE7ZEQRJWCnqKjDaS6J6yiEF/8+JvDyrBDoRAHA0EFegSMlzPYBNS1XiCxfg4A8kXSOxAA+P8HiEiYIwmYIzsFsixwfv//6YmfrUAAEEFGQQM8A5ABZej0VvsViRwrGobFrngYHj9Tn4lGL7loZzSOYZZ5JBOP3SARFO2LRO9xHEvEvBXtC7g2CMT/1HVR2ZXZIW7E7hTnCWKsAuN3R////v4tzTiz2zDJTQT/tWg/jBGiELZBCQ3YcNBdy1ctMP/HqH6KCwABgU++tjpfoflup0x3+o8mNALaIgjsakveMGo0oVA5SHk+AVGDUhNo2vWBwGCkenjWN8KLnh1e9V3P71oTIQndERxzEZ6tNePF0ihera1lXQ9Oz2v1O66+AXMgYfVzzd5wUnoNbgh5gkTpbfMS9YMtfYNNHXVingzMunToNqBfg151vLrUc9IpULFhQIKVH5eZV1iSVAwlfVqqe9epjhCPAMCudc6pFdcB9UnJiKXXG9Si7zc06VBHjEeGBLD7AAA=) format('woff2');}
 @font-face{font-family:FBIPCW-CMMI5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAWcAAoAAAAACdgAAAVQAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAARAqMWIlSCxQAATYCJAMkBCAFglwHIBuPB1GUK1IF8TPBGPehLCm/kJDVYYWO4xacwDfyWvZz+7v3GV8YiMhAMJoWVoPZEI3JEPp+es96k2kXYFZCullAPAlfvS+APOTfXncn3lYYWYKBtcACS1P/hFnbDeZVmV23u44W0ks8IZ3MAX6CP76CE4qD/IKKiWOm6/ZIG/hUMywKq7Aai2YTjejzfRUWl77IA8oryO5ywhJPgOYN1AdMkJe48Q+C3qRDbwIPmEyZAFqAcsodz1WS2p7fwEpYStVpnRnW/wokhK6AXUlNZJj0KJLIwRWr/2uCM59mPf5//P8akqOSDRtAAf4A5IEcY5QchUXQP9oW3JRlDlYW7uxdNLbOrnffH/3Q8OwT8B3pW6iUIncivorE3Pp6240d9VB2EFg+E9Bn1ZBKQ5ZoubPupLfMjCJ+NIwbrk2XZwMTdH9CCAMrXBFax3ef/SgKBJZTF0S836ERkiK0Ez5kL33WiSHi9KeCoEkTTrQp5fjL/7DRhqxaTvvMk/3JogG8VPPr0DBcsW/JuWemdtCR2qkpxtzYBc95QfDS8wAyASoZFbKuTzvgrI3jccZcPChtyagAF+7WsjiXCB2BAhrfb9LEJuIRreqVIucbrGfTJyU6axv+DHsOa4TbMEy7oJEDO9lZUZ8DL8tgP3vykl3/vNcW+5dDHClq4Oab+ITCK5fTi5Y2oWfrp6aYwr03Rh9Kls2JqaYni1Zs016dqR2YQfuXC2EIJnSrbJWCG1Foy7ISfXtKtHdPTnIpcfxb/LeFPsGfU3caGzM+ktNmmK+/n3U67jjf4zjzEPjLmqV0+JMNd5Nq/NDyw2IGNAYgx2S3Md0rP2ZoeHKl5sRaQOwL7Y68iLBqIE7cNuNDYY4Wt3bZn80iuuORY7OnnQ86xuY1y7S7kIj64rBPN+VJoV+TEspgf5x3YLalCj6L5xGG8DMnAYnsGET5K3rOoNCUwnET/UiW6jJEboj3qWX7fboTz61SWn0lzOFtow4FK/j0GqpNqovOtvUINm5hzRGJSSmjYnlu7u5HlBgPveE3erShuLMVtgaJfsY1R6XbumtX+vSgSbwLDC1vvdNr11RGt/0mLG3Ya3LRm4X02fUIX2yxxTz7N9iYuOGzoKdQJ85bkr+Q5wEuoSyQoon6FJh3JObxpYXUF8wnEpE5zEZyD1uNL0WT9iC8gQ/XIPiHX6IORJ8s1Z7oA7w+yG51Tf5TwrRU3m5PXwu28RV+GWIjOLMCcTU0YNIUK26Cm8cxVer/hSNFfU/h+bpWUhmdqapJU4sv6JxLlI923aEPka4zXDIaFKl2P54ECwTxDxHGzNV0kvB78L6TmqX1mceF9nxAWSlSdDduxwD/RrfV1RLvTwKz8t1pzdIWql6o7qup4D9wugg/U8CZeeNERX3Nrzn5II4vjBuc17xOuMPEbTXpLmFaOu402C0eHToGEwJ5z6pio2rRoDALu5FxE55mceM4mVXpbPas0IFMY4GdL5QUWiHv48Nc9PXdhbgvk0HIxLngyt0VED+D/4RPfKyg7VcuzIB8+rJiNhP/ABCJHkW72yBfoaQ/dYAElL6jBIYgB2wx1KEqh5dUHqiobijLu1DGmTVFgTJm8sI1KPdlH8S1rTOfqVot2xUnO6ju7VlnDGNxA128Cdt0aWx3qGMH3Yg/m3ZO8kX/8Jvq7uxFu4TquVCUl9m1c52RvmGbtAciN5FUkl5YkppNmuibg4tc2fIUK5KsAImSK4kuzOHOmReai1B6KqIpFC9mQjoxFkrvvHM5SEb0GWqghzJnoMr4EQGTjAnKK/iTlEhX+MtTZSOZ0GcOywEAAAA=) format('woff2');}
 @font-face{font-family:XDTRFF-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAPcAAoAAAAABlQAAAOQAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqFdIRwCwwAATYCJAMUBCAFglwHIBsVBSCOwradc5IwwggnnTLGRzz8/9Xu/29mWmgFinDjOFs23EECyiPsZN5J4+3n87L3kzpTKIWgqaxTu9BxPVgB/3NN/u/o3tE1RwJY5TqwioYHPBqOMLFxw5kesA0Ut5tKQtCjjliztE9hHH1BBIl6gBXkG3bxX093y6M3RQUGiROAqQB7ARhanYpT7Br72MXhPx6Q3RHh39IiYwP0JhHKWhaqQLWOYBxj1zkcwN7/U5+AZTAlNKHOPUGaTKGAKOpbWJ9CMZMidQRCYiSGh0hlroWpZWFuOl2ORgss+UBFDCnqWxfWIwgmM2SaEcy1NCAaKfZDBwYrTvUBLjK8LiLB0NXbaL5tY0SUJkYPooe4DYcJ4cFRdYFmbC8yQ4YB3Ur4hLBNJ3dX7KDWD6LSac8NYXgpJlJ0YJBAXyd/Oi7BFGcwArmWBnLomyKDRxK1hPCgMPWK4cIl/WNa4OLouooO+KCUnN6N4ycIFKUFBk9JzzGcl2iWp2li1KtOi8yzPs0yRmyNH+p4HiPySlECyvYnMAdqUjS/H2eELzty97SV8reqwDr3BdhOU88sO6ykYpUZYNcydPbEJx78He+8F6MRNQPz5rFyc0E33bXY9sDofc4atLeUWT8OSQqEzLLDkXuffbhHqEhIoT6PD4kXOxs46gdCrN1i+XQZvt44fs3kQx/bZqW5drQ+iWqwxpAcExdv/TKfbiwcvxawF+nmfSLuGpy54H9M0Qf9Li7P9qCoCusagPzcGJB1+3aebzOWvS/w7UrPmRdW7dpGbHNkRzRW4/LY2osM6oogPDCUXBodAvUP/tK54mEh8z16R4RAjx+ngPyZ2mtGeyX6LhCWYpKRKx7n5I3b+DokY16QOiU8xIF/ECCR5JPW0+vHIuZElXbtTcdDefTtdELPznjKe6ZIUbkMM2UfFskBQAISuF+qi4rhtfzKESzAl/+v6MOuAajDBDo3weABNv+nQ6KiRCUtn8E9XMDVUXDLP9gIJTv4loRbTdUwJ+FN0wIFryiVCBJShUL5epMofThUcAIizV2UWIhKlViRqBIbUUMzLrq2HrXsP6ldDHUM9Hd21nLw8nIzeYPZ0dPWtSQ+S38jsTitoDglS9ZA2xgc5MiSq0ihJPlkecmRCIeyhXIUyJ/zwGlx4DV2YyLYJW0F0uTIJkuPNt0AcImyF43iNoLERryyiTZRsTQFKU+RRZYBbcZwDAAAAA==) format('woff2');}
+@font-face{font-family:PCPXEO-CMSY5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAI8AAoAAAAABBQAAAHxAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBTIFKCwYAATYCJAMIBCAFglwHIBtbA0CeBXZbRwi9NtbbUKkhKpt+IqDfr+3Tc8U00f5cIwUSQ2kWasf/Z3/v/VDa6a6f8MxGpjlLkUhrD2kl7awJYW4HKIFs7KZkC27OWmWf/3PxB1+BpBXRzNIyBAp0b4CjEe7utJOjDc9Ot6kE7ZEQRJWCnqKjDaS6J6yiEF/8+JvDyrBDoRAHA0EFegSMlzPYBNS1XiCxfg4A8kXSOxAA+P8HiEiYIwmYIzsFsixwfv//6YmfrUAAEEFGQQM8A5ABZej0VvsViRwrGobFrngYHj9Tn4lGL7loZzSOYZZ5JBOP3SARFO2LRO9xHEvEvBXtC7g2CMT/1HVR2ZXZIW7E7hTnCWKsAuN3R////v4tzTiz2zDJTQT/tWg/jBGiELZBCQ3YcNBdy1ctMP/HqH6KCwABgU++tjpfoflup0x3+o8mNALaIgjsakveMGo0oVA5SHk+AVGDUhNo2vWBwGCkenjWN8KLnh1e9V3P71oTIQndERxzEZ6tNePF0ihera1lXQ9Oz2v1O66+AXMgYfVzzd5wUnoNbgh5gkTpbfMS9YMtfYNNHXVingzMunToNqBfg151vLrUc9IpULFhQIKVH5eZV1iSVAwlfVqqe9epjhCPAMCudc6pFdcB9UnJiKXXG9Si7zc06VBHjEeGBLD7AAA=) format('woff2');}
 @font-face{font-family:NQUDBD-CMSY10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJMAAoAAAAABCAAAAIAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBUIFQCwYAATYCJAMIBCAFgmIHIBtnA2COw3T7ImMuxVTcHOLFxENw7H13v2NZWtgC49HnpW9g0yKeasXw+8t3UBqtj4O8rTtJyUxQc/tIc13Iu4tT+TEDA7owWyAW87k9IAs0YItiODHtBqoWqGS9anWbTjxFvNQs6Ck6ukEh72NSiXzOtz9/ExbFnzLsBQdVGeIEYE1u3BrAXH1o0EJ/UgB9Y4FEAPDvAZAoYIgmMES3DCgqClYfPB7qvuvb3QQUP6yEfcAEAEVAadxgVZoXGDTrj0EEkkogJJpGojg8F4CbYZQg4rFm/0d/Lopg0AqugWASXSO4CITjSWRb0EvQ/I8nh09FB5cieIw6nCJoDBJSR3JWv8BoIYYub3BVOPT8jOHVJf1hD0KaZbuK5feC+0y3kDJASTj/d2PRTI8QDLTTz2vHX8ZCDXIq+oksVgIAgeDsK/NO4lX+yi4U8VP/+/mbMACqEgRbK59XrCR/BU6eykIK0j7GSOCy7hYF0NECsqilQ5Y0zJNlLVvHddPy0USxJixqJ7Jolp4sGRsiy2YtV3XbLg5t7U+u/c4euL62PqOuo4+Xk30ZnuZkZhdaT5yvULp1DrfGFJ2XWQjqWJhYuTip2EXrYKHE/2vWqQesXq16Gep06MOTIxtCxc5Bx8IsWo5M2Q3Q5JqndWVLgfJLcoOiKbnpOLhpmETLk6kQjSsFAAAA) format('woff2');}
+@font-face{font-family:HJTYEB-CMR7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHcAAoAAAAAA5wAAAGTAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANApYaQsGAAE2AiQDCAQgBYJWByAb9AIAngU5GW8qIZpLZi2+Y5pSys+e4uH7/dq578siKpUtielWvRG3Mx3PhLZD9FJMStlK5Q+t825iqHOTGB+aGSIc4lb7QlwVpNTpr+WODx60gH4L23L9eWCBJQEFnESchy8t4VQCjcDSHYrOJKUREelrQZYW40pBuk7P/0NOGqMlDmu0Y0ps4DtsLCjAUx/LVMgETq0qkJBhiHeGcMwBcrlAvaq8P1i9gQASyBGYACwAIAfExBHn3ezstL1dq0Hx6c2Epy8dvP8temyfOP/Tq1qSVTSMeGhX0/8dtxttpiXYGNaHvgAEglbqcUfu+xNkOXMiSU20SSDIVEjrRrD4gQCAlBAhRDIBNgKlDseEXok516kXBU2gpGW9wxgTtsjbhRmpmHMjSBS0Q0nX3GHNZ6DkXeZZKlNrxyP6aL7iXFN7s8GUqU6PbwZfMNMF1VdYDQ4QNdQ3MjdDmFDIG8IRJgZSMmra4iL0ovIqnBoIE1OMoQEFMwMTHslygDCBVAF+adSaAm6BMbVA6VOwMnBgA+g8AAA=) format('woff2');}
 @font-face{font-family:OYFEXR-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAPAAAoAAAAABrwAAAN0AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqGXIUCCwwAATYCJAMUBCAFgmIHIBslBVGU60kA8GOhuq0HjDEm9r/Zr4rDoU4x8Yp4gA5/7+ZfozWtrC+QjQk6PQ84jnl7GtYN5WXT2d3KSQFlC5CTin72wBeA52XLQPP/XFPv4+H189wEpxbZGGmZoCMdpjU1JcH0aIA882I/+xG9zN62/UVRoSOk1A8vCvE1/s+v7XCGnyFDK7BAV5jAT7l9yo0DjE64JtCQhLiNrQGISFjuSsao9iFDsJzHOk+amtyuYCls6XOD0CUcY0u2ogT9gZsje9OsgAv75tgwEiCE+3rj3XhFz9SOCB7o7S1Ibt30Oi7ErhZEwnp8Jwd6MB+/nj4kfz0r6B/XsyAwIN+N97T7Sf5yxNr40NubPylYkB+x+Tzx6hG48BvASH5vhOTZJwtFK1h1JYiRWFZKvnG3aOuz3tp4JNvNEBqMQO+cDkQT8ntuTrAgFZVsM6RQSFJPj9xEg6mxKBghViQcKpyodKhHtBHvkUi3vC6v6CGxkCCBgXldBP3PYBhC+OUh81CHW/998bsIFo7HRBQshukWTFzXPH0Ya4VqT676ngy7TRX7dXgVrIAV5sxcb+/a77s063NZwvvsV+5VsBKeCv2TNL809LBv1Yw6FKP+WGXhuHZPh/ZwjZljmxF3ELbVvO7tBaVJDYp0GgtnLsiCvvuDR/yWsR1nzN6fjUjwfF3scelreEQ9ztm23etgD2y3YOb8626jDYwsU+qk6IxQ5MzLYCnsQP+eHtPhOFQfQnmF+Rc0qpmwwNnRU48TmR8PY+GpyDVxvhdWIwL2qWJ/XzRLbgM3q2y7kkfcdeNs77jDLwER6d5qoGbHMp7zP6iiVtSFBfSNSbGVSLOzck6by0n1srpnxLno4x8NP6aDX+LZ91nB/ugrNY5tc/04qIPlS9gsvli/vb7Adzy+HX4Omxj/dsvU2vaXxWN0xUzd/TDbN4W2mmEgS9nL7yjEXYeRrGrSpRgtbjJ0lqJE33OEZUIgn41M5nwxsM1XIweb+9Zpowi5J9jl3PhsUyJfrKrmq039hb6Fzacu7U/VVrsF2Nr4e6pZubg40Im3mWm6OuHr+kb9iOjchKzcuBRJLXVdYCVNinQ5ssXIJMlFmmi6LpWbALZs+POkxooLFw7oCL5RUs2SIE0qSXTqiByws6RWtkSsBtGhSAWWfLRcCbIkHieFJC3qdFEoAAAA) format('woff2');}
 @font-face{font-family:TUELZZ-CMR10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAIkAAoAAAAAA/gAAAHbAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBLIExCwgAATYCJAMKBCAFglwHIBtEAyMR5mouC/CPxNhY2lMzUgjFMIqNogkbKdxdsuaFrWqjGb/E8/9//7+5zj7vy18M37P0YoA/jh5x1sgTLZNM2hNzbcNM3xPtVTVhWiF6arQJYtctkSATfp8hbMcTWUB/FwjsPLDAkoASDCFMgkBCDHRgAUHvjKp3EjmJyH5bUPnJvhXje9z/9/iSlE+O4LND14TwQ+7hmB1Yu7qVRgkEgG4wUDgowcH0gGkKbt24dvcfEECBNQYe8QwAExC5DMSNhU1EhiDTCCpH0a2eHgiSQo/SwRMzDEkgaBPsR1FZEZEtnfafbcFSGBb97vtMRoxuQT582QI8DZ/PSjAmq6WvOa2B/ucjCTL4bv6YBuZbxE5vyxoj8z+VC9EPm9M5Deqtcw8HBOF34p/17Ru/25rUa7ShYGuAUBqDxZI3AQCMgXy6A4ugXAQE5Ld7OZJ2s5latLPSbJi1FnPzvQE41cC5AxrDAmoMcFCrT4E6A05LE4y71bSPNw8lUipHpVolc0VYzMXbYdcwruYZ84Ql5gzH7N4J/BoJIPPzCoiKsAqZwOVnQe/5SEhRcaiorCLjEsHCkLEKCXPy85mAtQaTIfTaxyrE2EksPjBJmmAR4xQWY+c1AW8NSTUAmD8=) format('woff2');}
 
@@ -561,9 +577,9 @@ Figure&nbsp;1: The associator pentagon in <span class="math inline">\(\mathsf{Bi
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="389.835pt" height="76.2pt" viewbox="0 0 259.89 50.8">
 <style type="text/css">
 @font-face{font-family:ZVJZVP-CMR7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAHYAAoAAAAAA5wAAAGPAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANApYaQsGAAE2AiQDCAQgBYJWByAb9AJAjsK25RNjoiIuM5dbhGc8/Hf/v33OzNz3Xp/vx3pCgV2gwPL4BxZIq+WJBxpJ8/PH8v2LFImizgLPFWDZWmRWIMPhzXLHBw9aQG1hW2QZNw+zwJLWPOAk4sBfWmB5SJFZdrPIU5ILymu19tuCkpdoD438xHz8b9lZiD/VSIKMGJCB6el53gCC+VyBjiKm2N5BomBLdrbgnAFVFZj3jn+w/0IAElQEDoALACogDjq4m7tFqnGMRhH14+GgvX9y4uUn8HU5vivuzy4uu44JGIQt2FzX+X7hKTIVstBkm2e8AxAIfh5f/wqr2n9SqfxGym9gKkFQdOSjoUr8QgCAzL6NkA6gTqC04IWw6jNVLVpFowMMdM0v2COEFXUmnHBmqtpRR6MtBjrmBQ9uj5P/LHNMx92hCvIsvrDikjqK+MJ68/B4ojpvTeaNHk3Cl4PFQM/QzFTNGI3PQJXLvrQ4N74niMfCJ0whrmZsomWgj0aETzgNR9lXM1bagWosW6Ghaq5lwmnooZHgk8NycAkAAA==) format('woff2');}
+@font-face{font-family:PCPXEO-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJMAAoAAAAABAwAAAICAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBRIFNCwYAATYCJAMIBCAFglwHIBteAyCuBmzXHLHsuFRErvnSfvRFisjx4XTjRhDt95u9u/cQlSza+KERtX6qRwtNk8VEIjRKpNn/jc1/WEjQ8eZ+iNrhlqgySx6StyUNaSXtUeraxQaSXQ/8lx9OtbrqbUe7GfX4iKplCQRSZp/paiCb/5vxf2k4QRa2BbLM5vPtZXNqwFEIWTcWHtih3DvRM2/dHpOY3KNriYj06w45fUQq0nv6/Rt02ew4GNajDVUN0gCs5tWyBYz5lxrOzxqID+ZPBAD/gYSMQVSBQTSzQFEE8y+F8gsgfDWBggo7QBMgN6EabbX4WtJylfjlBEL5xvnL23+a009aTaTAqc8Mxng9JX9q89eSeCxvqCpXgXq/f8Kqk/QFXibCMWaGUK6SjF7iRZgfnIzx/6VR5NGMNEg4+NsTOHZFK+HD7QRGQ7TE76ZlQ1e/MCUACASXx9aP1mP8blXwpf/BuAXQKoFgZ+XP9oQyBgQTJAlChGQHfSWwaHcHGeiBoig69XTJSocJstZp+XS7UXJUUdqEaT6Qxag2WRm2I2ujrst2K97OrPUj590IjmScYREOxrOaq/BGJpaOLN43/3WNZWe2bA3YCrEasJGBsYU5YootaKSBmBqKwCIynMJEsKC4LI0UYmqmY2SITUZMOgG4u0PEVHUh0PhSzQZbw1LHzFLLAJuCmBoVlQIA) format('woff2');}
 @font-face{font-family:FBIPCW-CMMI5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAOYAAoAAAAABmAAAANOAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAARAqFeIRLCwwAATYCJAMUBCAFglwHIBv4BEAehXFMrItKZaXeJPJ+ei97k0kqZ5utsIUWBZSaPgKfd3+ACHJ3VcDNiyLNNLAEU48w/pL/n7imfhX/cySAV892A2uN5uFoYtOdZ+CwxadPD6jz3fUW7SRWaI9NOfAP/wrApRGNAQWIS9z6pwKjJUFvsgZESRKAFQMcArmCrF2TC2LMhRT4DwBDqIP//wMABAAMQCXxKkj8QxIkEADMeQqJfYCdF+/ZhyFCUUIpl5JXAEBnSJKPLHwFNRMZ6QjPzI28zafbzxgdOgcP3ZmTKjMzM6o7nsSmqqLNPN7Gzah9Cy376FH0w6gplYdRXUSnIDOlO2o4uCVR+smT2PbHMVKbNzJJ9ZY4pjFJZWra0GZ2E8xt5MREbebAz1NPzdvKGZjhpCQxS9Gz0/Qcz9c3qs5e3EI/OaOeaHON9JZpbnLh7BZD6dlNbSqpWery1sakqSmpqTi2YLaTyrhUB52fqD673XdKXfbxiZ2eduOPPzypLCvXdhYLybM6yzY4Nuth0dm0kzJP02xj4G9UN2Mmi/l7dQxlVew/bCiAzgjkjn08za/98Dfyl8iVS40GYoW7HHuR4NBBnLprI0PHudvd2eN6vogYTkfupv4uQejEM2mbQpdLmWgsDQcJWX8W/fLh6EHgyermWlKdCvs+0DIkEzaM+zEhS8fx7e/whh2u1wR+klvVHM7r5toZBKC2r9Ja4RNnq/BzLSxZ5kU08Fp++Ubz6Y+4vxB2eG4NOOULC3cNuUOKYdy0s+DS/QbMrBbkyg41pSa1opWY9XvJNO9KNy1MU9vhOc9WFQ4VCuVKjuhq9ULZl8ESYdiFlXiskCTU0rxwIxwTEH4D7ZNamqnyzl8lMAnS89+BMiVOAhzRvAAggP0HQA2oC5QpIMBgbkEPdpI8aMKJLZWFOpESAU9ApCSlhRoAiDzXSDLkRzJFmrosRgbvsBSGEIaqJCBaAoNMYuTJFI42WQxjpi6Fb/dlyvhX2kJfz4Awr1gLL5YNsHmjTAks+YqRD8+PyKrJr6zJLdYRWdqCl1LFylSrkq2CDlapLLqnhC9PAcJ4iWXBC4sVwEYMImuV8pUqoUPAEh8P+vkla/rpdsCsYob6Vp+lRr7KjOcqpkPEki1MAAA=) format('woff2');}
 @font-face{font-family:XDTRFF-CMR10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAI8AAoAAAAAA/gAAAHzAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBLIExCwgAATYCJAMKBCAFglwHIBtEAyMRFmstwF8ncEPGsQb2hggfgXgGxxghULGLCfnIcVkc/V39tdRlEoe2L4mHr/34nbv7vpnikaHRLJp2T+rRSvDpVJpJClQ2IZvZA8Apx5LFgSaBX+DO3xs45wLXf9vCXgXSTVGFF/j42kZLu8jpb7Dq93jVFQq2OINH+2sLvSBsxxNZQH8XCOw8sMCSgBIMIUyCQEIMdGABQe+MqncSOYnIfluQ40NQQ3qV+t/9TFLMkS3RgNYSgh9y6vyls2rNW8gKsoAAoBSQkNEtC3SrjKNSCSyUgvlSyt8AkEEtEtaxD1ABQvT3hx6/vr+UpPzqyvJ3d/84BBXz5aTCCMJF3+96fi183/NHPxHFfht7Txx31eerQ7dmu4euMwfX26e7BuQjoj934wpB58OZKxE7evTzoVb8H7fvL5miuGjoqXMPCMKn10c/2oZ/9cxcUa9RJBnqJRBkBYlddsXBAACkhHjilF0CWb8AAXKjqyRtZlNp1kaNJkPUajY7b9RvUxZVgzBqL1Dpd44ava5Tq98JXxrX36tpH28e1kKlQiRi36OCe/3i7TZW113NM+aJUzPa7AczesvqdsHFbLnb9tZ0etFF781roVIhErEH0wW3q9Jbb0aLOe12uDIkWs9761Yn6fqgfaK7+9FmP5jRXkcANn8=) format('woff2');}
-@font-face{font-family:PCPXEO-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJMAAoAAAAABAwAAAICAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBRIFNCwYAATYCJAMIBCAFglwHIBteAyCuBmzXHLHsuFRErvnSfvRFisjx4XTjRhDt95u9u/cQlSza+KERtX6qRwtNk8VEIjRKpNn/jc1/WEjQ8eZ+iNrhlqgySx6StyUNaSXtUeraxQaSXQ/8lx9OtbrqbUe7GfX4iKplCQRSZp/paiCb/5vxf2k4QRa2BbLM5vPtZXNqwFEIWTcWHtih3DvRM2/dHpOY3KNriYj06w45fUQq0nv6/Rt02ew4GNajDVUN0gCs5tWyBYz5lxrOzxqID+ZPBAD/gYSMQVSBQTSzQFEE8y+F8gsgfDWBggo7QBMgN6EabbX4WtJylfjlBEL5xvnL23+a009aTaTAqc8Mxng9JX9q89eSeCxvqCpXgXq/f8Kqk/QFXibCMWaGUK6SjF7iRZgfnIzx/6VR5NGMNEg4+NsTOHZFK+HD7QRGQ7TE76ZlQ1e/MCUACASXx9aP1mP8blXwpf/BuAXQKoFgZ+XP9oQyBgQTJAlChGQHfSWwaHcHGeiBoig69XTJSocJstZp+XS7UXJUUdqEaT6Qxag2WRm2I2ujrst2K97OrPUj590IjmScYREOxrOaq/BGJpaOLN43/3WNZWe2bA3YCrEasJGBsYU5YootaKSBmBqKwCIynMJEsKC4LI0UYmqmY2SITUZMOgG4u0PEVHUh0PhSzQZbw1LHzFLLAJuCmBoVlQIA) format('woff2');}
 @font-face{font-family:NQUDBD-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAOwAAoAAAAABhQAAANmAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAATAqFJIQhCwwAATYCJAMUBCAFglwHIBvWBBEVm7MBfiTGxsoesxG5Vq4HXbbYi2T8ks9XZ/2qSnpAqGeWGi3h4O1NVyNEsrv9EowiDDnxPG5onY9ULpSHK4Bub6tlUzf5L6A20C8Af2rjZ+8NkCjBhAMOxwQpsMC6dHqAmuqZzSURKTXm2YHDALAcJyshBProw//aWFED8rYQ8CoFwODAHAemorqrtw6cSHaVQQZgCCBLsGQmGaBZBtDGkCQL+L+hSB5FRbKj7Dy7KpMB3yu7/Dfjb/zfKBCgQGieIkAecB/IBAAAAl2AoQi6lJXdNK0NtPLKjGamdW0Vd2zaraMiFluIRNm9INtaLOXxppv7i5Sk0rzNklzFXZP6xXzb+ZNTbeKDelPnjcaVdKZ0+CfeOx55XhBlSyS50rz9dtI8sThnysRCmjczo6MztTZbX5Sdu8l0myR2lyj4isiAfxqzU1pXPbljxy7D9XZ1hYf26S6eXj+jJH5oUGIw5ZTbKk6ao+ncnCKpPyHKnrVvxa1HutmEH7BenP553k5p1GGp2bZLi0XOe0TZxpMuB6+lLTDz4eZ9nFB9Q3Sf9FSR1kwlGsXXlGpkKBSly5HE5HCTzJAhuuy4JneFv7o7ak89HW5ChLp3bDLb8PJfTFvqzlLCN9FU1ZCEOPIi0YU7BrfLCvK2r/Q4r6S5MkNB0/Lq+DOfY32ecSggZbUknlXEpLKw9KhamoL6AqUkQ2jsLKOatIaVqzIEBjG8afyqRpav6hnhln9tS7Jlcp0Jr+jdbP6qxwIbrZXNNY1WllHOyUV9wMTg20fBDvZFIZWUmP9KmRxe5MmpPdM+cvrJRpME+P7yMZOW6YFURKOwkKTT2ojUzxZJkQXUo7RFv9qoyT96i0oa/tzno619FplN6OjJRNXxTIpeok7BHNXMTAAAiB7SnKbRUKYW/E2eCQAZmQ0roLeBEHSwymFhXObAi1EXBJ6TGR9JpD8RlpNIpqXwQgBCEWAAgIBE0SiIADXGoYAyNSikxAhylNnWK9LniSFDAYSpRA4F9NVDIV085OibThU5pP9hif2FVulHmSqrmOJ5lnAHKVA4aco9LK9Rv8P1dgtgcB5SbBa7x61xAjybmvdZ+SIZlUyFUXgYWQT5nLNdBpsVQMGRK4Bhr17tYidQh6Vfj669BtfJOwuAgeOhAAA=) format('woff2');}
 @font-face{font-family:OYFEXR-CMSY10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJIAAoAAAAABCAAAAH+AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBUIFQCwYAATYCJAMIBCAFgmIHIBtnA2COw7jhK7EshnJVXkQEwZi7/4k5Wi16yeR1LEOIVAstsOHXve9m8vgBbO5OUjIT1NwOaa6ra7o4lR8zMKALswViMZ/bA7JAA7YohhPTbqBqgUrWq1a36cRTxEvNgp6ioxsU8gsaBSXyz+Tp382IRfGlDNdhjaoM8Qiw9u9dcmBxNNMw9fmJBvSNpgwCgMM/gEQBQ6YCQ2a2gKKi4Oj7/5+6z6p2NwHFDyvhBrAHQBFQGttaVprPJDzpRsI0GkOjDBbLYBQy5U7pEIymw8gqt1s3HENJeIGSwwiDLdE4ClNUJFPr+eA5/fGf/TB355SLDJn0m3DhIZhjMpCzugUGCx58eoGr/OD7e5Iqyu72veGY6tcLLV3PKZ9p4kA9ULjur4uMZpo5oKcdpysZfhgLxcgh9ycSLcMBgEDw9EHz+Y5531amRfzUYTs/EwFAVYJga+VLkCU7PwVOnspCCOmG+Ujgsu4TBOhoAVnU0iFLGpZkWcv5cd1UGlNRrAlrdUQWzanIkrE+smxuvqq7cHJoa39y7TcSFeV4S3xpfSuRnHQZniYnJBVaT5yvkHQp27vk2qDUhAxQSk/LoFMHqTZB6ulJ8P/qNCJUKIdrEa9UvVaEZElQUm3aKenpBEmWIKkBKl3dtK5wKZB8SaRXEIkuSu26yGkFSZUggylXCgA=) format('woff2');}
 @font-face{font-family:TUELZZ-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAANYAAoAAAAABdQAAAMMAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAPAqEcINrCwoAATYCJAMQBCAFgmIHIBuSBAiOxHTbg7xlSdZ408+3qe9/JBU3MjKpO1VXIFOV6/wsdmpDEDuvPggCj7zIAs0sHks+He/gcvpnP/yfxwR55j1oFMhcGnAUhglOa9MrPKUBaup04NYdMmSjjSXW4usp4usHQIQELQAF8MHPVvXMbyl6uwTWJWUAkgYUAl8FJbutHGjB4gIUAAiIvatQAADAAAgAelUtcpITALpCcJIRUBeE21PcUJzLIoAEJaAObwDAfyKA9BdRbxqR/un5gyruz6BcX/3dO3j7NkW51tXVa76a9+jekWzVDx/Sd7xPU9m/1ygHjWcY6fGq3TnqnHDuwUbeIC3FQDQIfWCaX8HbiSgvh4eNhzboC8BTHt/QBzdyeVr2uuoBwTi3Wi63N25s4h3uH+zO4XkV3iTP5LC6q/f2lIFcWqKDezkhF/Rzsw23HHbniTQ13U71eesvuHt1T/yMp7Zp4W2z7x8zslFhgjeO6i9L0ohWTuKUUHR40EqsXwtRe9r8/cuF19tDxTzc3IjCCGYGo5GP0sjalJls3NqGOL018RH4dpiZjFLWAJ9RO24to9XChtXuB/bjPrwYqKT59+bCa24xettELvFZP6NzivFTxgd33kxUVn/PVuAyfNP0Pnv7Uv6oqWYwfm3+9+OM1XmIny0Rve+0xnerftcquAvsSpjzYiKUd7euZg+OmXHKsGmXteo5HTUVjf2BUmvCzv0We9vs/Y/JH/tzPhm0vFZxeednRv18YDmeigFdffAT7OmHAAAACAACedf6d76m76dEkLBeV6yQTL4OAEqwsHULlRec/pMkAxEAASllBVeSdQt3TiwpErEFGQYq+iAKNE3Ek9Rp8hRVZjxNneN9FUbWI6CiDIiFWMSTTFTxFAMjPM3E5qEK1tlnjvmL2fWU1LDYrCwmhOOiZOz7YVcmZf2NT+HaJW2VzW3ltVbrpO4Qol6tBq1alGpiheMEJehYnRSpwsTKmmhGCG42igwrjWxqs0r16liRkWJjEBHUpQeFF0JJWaRTyUu0qdTc8HK1rKwj5Y4wAAAAAA==) format('woff2');}
@@ -642,8 +658,8 @@ Figure&nbsp;2: The associator–unitor triangle in <span class="math inline">\(\
 </div>
 </div>
 </div>
-<section id="internal-and-external-hom-constructions" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="internal-and-external-hom-constructions"><span class="header-section-number">1.1</span> Internal and external hom constructions</h3>
+<section id="internal-and-external-hom-constructions" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="internal-and-external-hom-constructions"><span class="header-section-number">1.1</span> Internal and external hom constructions</h2>
 <ul>
 <li><p><span class="math inline">\(\operatorname{Hom}_B(M,N)\)</span> denotes homomorphisms <span class="math inline">\(M\to N\)</span> compatible with the left <span class="math inline">\(B\)</span>-actions. <span class="math inline">\(\operatorname{Hom}_B({}_B M_A,{}_B N_C)\)</span> is an <span class="math inline">\((A,C)\)</span>-bimodule, with <span class="math display">\[
 (a\cdot\varphi\cdot c)(m):=\varphi(m\cdot a)\cdot c.
@@ -677,8 +693,8 @@ Figure&nbsp;2: The associator–unitor triangle in <span class="math inline">\(\
 </div>
 </section>
 </section>
-<section id="tensorhom-adjunction" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="tensorhom-adjunction"><span class="header-section-number">2</span> Tensor–hom adjunction</h2>
+<section id="tensorhom-adjunction" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Tensor–hom adjunction</h1>
 <p>For <span class="math inline">\(M\in(B,A)\textsf{-Mod}\)</span>, <span class="math inline">\(N\in(C,B)\textsf{-Mod}\)</span>, and <span class="math inline">\(P\in(C,A)\textsf{-Mod}\)</span>, there are natural isomorphisms <span class="math display">\[
 \begin{matrix}
 \operatorname{Hom}_B(M, \operatorname{Hom}_C(N,P))_A &amp;\cong&amp; \operatorname{Hom}_C(N \otimes_B M, P)_A &amp;\cong&amp; \operatorname{Hom}_C(N, \operatorname{Hom}(M,P)_A)_B \\
@@ -706,11 +722,11 @@ N\otimes_B-
 <!-- This file was generated by dvisvgm 3.6 -->
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="246.345pt" height="158.94pt" viewbox="0 0 164.23 105.96">
 <style type="text/css">
+@font-face{font-family:PCPXEO-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJMAAoAAAAABAwAAAICAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBRIFNCwYAATYCJAMIBCAFglwHIBteAyCuBmzXHLHsuFRErvnSfvRFisjx4XTjRhDt95u9u/cQlSza+KERtX6qRwtNk8VEIjRKpNn/jc1/WEjQ8eZ+iNrhlqgySx6StyUNaSXtUeraxQaSXQ/8lx9OtbrqbUe7GfX4iKplCQRSZp/paiCb/5vxf2k4QRa2BbLM5vPtZXNqwFEIWTcWHtih3DvRM2/dHpOY3KNriYj06w45fUQq0nv6/Rt02ew4GNajDVUN0gCs5tWyBYz5lxrOzxqID+ZPBAD/gYSMQVSBQTSzQFEE8y+F8gsgfDWBggo7QBMgN6EabbX4WtJylfjlBEL5xvnL23+a009aTaTAqc8Mxng9JX9q89eSeCxvqCpXgXq/f8Kqk/QFXibCMWaGUK6SjF7iRZgfnIzx/6VR5NGMNEg4+NsTOHZFK+HD7QRGQ7TE76ZlQ1e/MCUACASXx9aP1mP8blXwpf/BuAXQKoFgZ+XP9oQyBgQTJAlChGQHfSWwaHcHGeiBoig69XTJSocJstZp+XS7UXJUUdqEaT6Qxag2WRm2I2ujrst2K97OrPUj590IjmScYREOxrOaq/BGJpaOLN43/3WNZWe2bA3YCrEasJGBsYU5YootaKSBmBqKwCIynMJEsKC4LI0UYmqmY2SITUZMOgG4u0PEVHUh0PhSzQZbw1LHzFLLAJuCmBoVlQIA) format('woff2');}
 @font-face{font-family:FBIPCW-CMR7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAIwAAoAAAAABAgAAAHlAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBQIE7CwgAATYCJAMKBCAFglYHIBtIAwCOwrZtE0NFDDGdyVdUPP91iH/u7qb0ZqEARytYxpuHIIIRC2Dmk/93tpaz/6yQCgzoUBiW5QNbkk0duU7e4n2gG9AHAjsfbjSwN6DEQgn7AQN6xaKAszDz1mb7bGbK6oiI9GuGnn+ZRKd9t9v/QhNp8hkKm8xAJ2HhUV4/6wuA4ZpRV+iC66wCDR3rusl1NMfAMAQ3Vbiuqj9AADqYRMMd8ALAAET2FCWiuU4hFts5DI8rUyERvy4nEtxqkBmDl1mT4bGdmCeG7Uu6JAqSTCCI+Hm0sFXyf57FzfO0cSqpcKyk3Bh9+ctLXeRmnfdm2bY+HOm2omxUZdqN2XVBSvVk2dlHJBtuathllmVvsalnLzEhKV+w2a7ePvychhisBwAIwuHPxVkGx/Wb1Yfmb1SaDtMaCF2hcS8onRAAoDXkV61ACN0eBIL8rC8EWELpHuYsCZgwZ7cGk+Sie9Y2S1QZM+JQIPFhUz6YIK1gkkyHWbcOD6n+gnObv3dQpE+CmU9YtMPVt2llbjlTe85cI7e+qKa+oEzTxtwefFQoU6lOrTzVNIWpkMvLy/nzFiSSjwRmfISJ5iBe7lKjSIVymqyYs8SDgGq5PNWyVgG57yBbE0256hWpUa9AGU02zNmjAuw8AAA=) format('woff2');}
-@font-face{font-family:TUELZZ-LMRoman7-Regular;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAALsAAoAAAAABXgAAAKhAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAARAqDZIMhCwoAATYCJAMQBCAFgwkHIBt3BGCOwrblE2OiaqgnPB0iHr7fj3Xufw8RrySGSFJPDNFDo0O3bFYS1J1Nm7budE/rkX+gl5fkVYia+mMlTt7kfArwf86lf8M9356vQaDaRtO6a6oQPZADPGxriiY9K6Hk8zN3bSklwx5i1z48JFlCKp6QGqiguEb33nhVVzu+hEMnmMArIYLf4+AwPwEoFmXk4jccIB+HChCARVCWoEBCO0ygHckoUK1agUVpMsqydCtfy8ayQVAsM6q58w74aNqHEIqxGVb+Fn9fhOV0XDixFpejLCzGV1W0jzEzx+YWMJ+MCGELUjMSWh5OF1kcFo5uBuPUF1oGDbTeqXvMFgnYnCYcNnCpzi3H7YFDxumpLzbwJ4gAfOZM3QzlsX39sk3FiVM6rjSJKxA244RcG9aCyXUb1QtV+lcKPxv2ELRm9hj2C3UI90dUFmTHDQj98P8Qrjfqlm1ltQO/AjTnYc5RK/fziuO9W9wqCYlYRT1fOK5+yhlQJ9iFYTwZCZfyf8HU/p5TrokF9he9je4y3ZWfHbz1Z7wdncDmM8cuGPiERp7Tk5DkqKCjkRF9WpKKphQVJcFBJNbFcYGHdYVvuVoWz3lmp40Ge6FDD9jyYHUGEAg+sPxPRHCY/qOlTCvK/+kCXQLrniDYOxdJ7yhSSs0QSEEMgbTNCEIaFA4U/WzGRQtN1jqCmKFaGNBZFxpdoc4QXamL8uRa3axgItcIzYKIzkYk0RU6NdOVRkzm1xp16er2prHKwNfPzjU4WC0Zar+BCQf/drTUNSENF7vPOzY/KSc/IU1SR10fXLnxliFNlHQGfPmx4ypYMLXwnVTjLU6CPKmiZPMXJ1uOJBnSSdKiTtMJ4qClO+JHyRUn1otW1PFj5UuS8+AJ0kjSoU4fRgEAAA==) format('woff2');}
 @font-face{font-family:XDTRFF-CMMI7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAOQAAoAAAAABkgAAANEAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAARAqFYIQoCwwAATYCJAMUBCAFglwHIBvVBFFULBIAH4np1geZxnIENOGUUdY47/v53PR9fkghtB5SUTNsZn6qyWniN7HbBvFft71/B3ZmkZ5gJE2YemBNlDX+Jq6pX8X/HAmAiyispiyhEQ4Tm380sAHt/OlFB2KzbUZgTRFX0qkODfXDPwG4dtGBDVhXLf2nzY4o+roGHBsXgCUBh4CloGhvKQWSlbgOUgBDvIvSAAAsABgALc/SCHYAODhYAKzEiEs0SvSu3LmR6xCg2EJU6XoN0ARgCAFUP4P1qhrvZSWfSguMTl7sv2R64wls+tGPaREjVt3Y6cxSEwiNnU/1CZiUpCARw/SL+S/OaeaWSYwmNHKyJHzBGWe+kC+h2AQQE68eRTXFumET6vrBU3zeKaF6dqVYbMw7pd53nHl5ujNLIKAmREyFfW1SCBITCQskeXPTcJxfnilGh1IY0eaXyalCiYB5fr80KSEsyRMS6B+S29pK3kwS0PMfzEjj7SQ+2tE4uk1RJwU7CrdO6l1+6/B9zs7bHqcETfm/PWJFJunp5IB/QdmohgtZopj/wfCzXz/2g/eHjRmlv6tzT8znAi92LTrQvOrqUb0grOn5fq2BA5/9KnEFnjNmFF7lXd0b0YecyebvDioYMW8X/W4bFPlNhB7Ytpt6xlJgvuddA+eCqGln61aezFCmRdGAbBLWjFznfqRMlTwZf6wrvxN39FT0mAHpRyBmdRpuRBIqNQ+8eSaBrHcFHIWAL7yjdvyunoUsL89vDi5kCeT/hm9cIS5GASjd8tWsEc1Ufo4B+ba0HDVlgH/Fx/uOnkjz6MK1LsH843WoPkkjl8uOtw1re/sPAAAgAAhEPRmOuQpefziYAJiRbsRsPQIn0CoACGBSgFgQmnPMQqCBlUcLGlm3o/pBofUVwiEAbPGeNkCb0gMxQAWnLhNkKchsPJoySZbJZYoaBxgaXEB0ROgyQU2ZzMbok0lqRB2KnYt3Jeev0M6mBSUlhIRYB0ZHh7s+Qbbsbey2Vr4rv6OopbyxpbRaz9HGBQLVqlanWZNiDfREq1VU9tVIEyRJghDkrQWKboZzlcIxW6NytWrosWfDzgIMDdR4DeRHAotyBdpX+iItyjWavFQ1PY5suMAAAAAA) format('woff2');}
 @font-face{font-family:NQUDBD-CMMI5;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAANsAAoAAAAABbQAAAMiAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqEYIN2CwoAATYCJAMQBCAFglwHIBuPBECOwra1E8yEI0m+/Pv5uvT9mVmjjqRNFVunwt7kVNA8j93e3b+LoK0kiQMM0yyQ1jILTJq6ya+d1/mPynKcNpZlYdvDgKMAE2vb1jDRgLooUs22hVp+gihp4DWe49EBwNONuqAD7MOu/hNCZ7LRm8gB40IDoMmAQeBTEPcWJAKZI+fAfwA4hHL//3c8wADgUAiH+AQFAARAmjPSdvwVn4AARTCoW6gfAg22WwBgcGjDNZkM28Lw4XnG4LxoWMUtwM9vQTy6KOo/vyYggKnSJ/ST9gmH90pE/aKhOXGAi0nLgHhgVHJ+RT91cLC13y+IFRgpQQtqanMLqHpRxJLL/e/49Qnv+MnlCk2X2ceLqq2LoYyVlcDq5QD6wpw0LDcGSUuD+vro4gHxhuXgn7vjd6UQyP3nVeUrgdb+oEjUL4GBcIffAYOEEKPs/zNyueagJFAyyOjvf34yPx/K1ilVBr37kyN4cK5cDqGxI2vAgOnKDTZTMFT2StsdQuUFZ03HMAjqphzc4BaxsAol3QTH8W63a8pvpcPB2Y+9leGvX71Um4Ub7FBQZQktPsymQO2BHHBXJ52LPzzUPaiJ7Eh/wPbNtgdfhFjWYEdvmDJFQQ7m17fbnUrD2qORg5aHrTc6/IBhmmp7NhZ1ReHeRjIPGfrlKlYCu+uMPUk3kfMwms6D4CcjBvG36Ydt3uAxgQKJXGdjvVBflXk4FxRoqpq+8dPNaJpyYfnFIPu3tdoyWMiJJVSJVYWn27j7GzX4TmGxWIKjMMvVze2gIrHDCwAAAAFAwP5emxzJsflKDQEy+f9lnmN3AYAKG/cY7j8AYoZkojwHRHmiAgAxQTIGluUPFECCA7wE0ZSuArIDjtrDBCYOJmFYg8mY1ObppIzgUKMBsp4XYYJUEiYRq8JkUgMZnYFtZxz1C7NR383+Lk4uus4ymafp1aFiqGdgKLwHXxFXkJxbkJiuYKxnBs4ypcuSL0+8HApkMsXxmQy+NvPnwokLXc5kZDyZCkC8LVeyTBkUGNJjgAfuWsacWvQ6IM6LUVzz4xRIlvvyROkUGNNjBqcA) format('woff2');}
-@font-face{font-family:PCPXEO-CMSY7;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAJMAAoAAAAABAwAAAICAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqBRIFNCwYAATYCJAMIBCAFglwHIBteAyCuBmzXHLHsuFRErvnSfvRFisjx4XTjRhDt95u9u/cQlSza+KERtX6qRwtNk8VEIjRKpNn/jc1/WEjQ8eZ+iNrhlqgySx6StyUNaSXtUeraxQaSXQ/8lx9OtbrqbUe7GfX4iKplCQRSZp/paiCb/5vxf2k4QRa2BbLM5vPtZXNqwFEIWTcWHtih3DvRM2/dHpOY3KNriYj06w45fUQq0nv6/Rt02ew4GNajDVUN0gCs5tWyBYz5lxrOzxqID+ZPBAD/gYSMQVSBQTSzQFEE8y+F8gsgfDWBggo7QBMgN6EabbX4WtJylfjlBEL5xvnL23+a009aTaTAqc8Mxng9JX9q89eSeCxvqCpXgXq/f8Kqk/QFXibCMWaGUK6SjF7iRZgfnIzx/6VR5NGMNEg4+NsTOHZFK+HD7QRGQ7TE76ZlQ1e/MCUACASXx9aP1mP8blXwpf/BuAXQKoFgZ+XP9oQyBgQTJAlChGQHfSWwaHcHGeiBoig69XTJSocJstZp+XS7UXJUUdqEaT6Qxag2WRm2I2ujrst2K97OrPUj590IjmScYREOxrOaq/BGJpaOLN43/3WNZWe2bA3YCrEasJGBsYU5YootaKSBmBqKwCIynMJEsKC4LI0UYmqmY2SITUZMOgG4u0PEVHUh0PhSzQZbw1LHzFLLAJuCmBoVlQIA) format('woff2');}
+@font-face{font-family:TUELZZ-LMRoman7-Regular;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAALsAAoAAAAABXgAAAKhAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAARAqDZIMhCwoAATYCJAMQBCAFgwkHIBt3BGCOwrblE2OiaqgnPB0iHr7fj3Xufw8RrySGSFJPDNFDo0O3bFYS1J1Nm7budE/rkX+gl5fkVYia+mMlTt7kfArwf86lf8M9356vQaDaRtO6a6oQPZADPGxriiY9K6Hk8zN3bSklwx5i1z48JFlCKp6QGqiguEb33nhVVzu+hEMnmMArIYLf4+AwPwEoFmXk4jccIB+HChCARVCWoEBCO0ygHckoUK1agUVpMsqydCtfy8ayQVAsM6q58w74aNqHEIqxGVb+Fn9fhOV0XDixFpejLCzGV1W0jzEzx+YWMJ+MCGELUjMSWh5OF1kcFo5uBuPUF1oGDbTeqXvMFgnYnCYcNnCpzi3H7YFDxumpLzbwJ4gAfOZM3QzlsX39sk3FiVM6rjSJKxA244RcG9aCyXUb1QtV+lcKPxv2ELRm9hj2C3UI90dUFmTHDQj98P8Qrjfqlm1ltQO/AjTnYc5RK/fziuO9W9wqCYlYRT1fOK5+yhlQJ9iFYTwZCZfyf8HU/p5TrokF9he9je4y3ZWfHbz1Z7wdncDmM8cuGPiERp7Tk5DkqKCjkRF9WpKKphQVJcFBJNbFcYGHdYVvuVoWz3lmp40Ge6FDD9jyYHUGEAg+sPxPRHCY/qOlTCvK/+kCXQLrniDYOxdJ7yhSSs0QSEEMgbTNCEIaFA4U/WzGRQtN1jqCmKFaGNBZFxpdoc4QXamL8uRa3axgItcIzYKIzkYk0RU6NdOVRkzm1xp16er2prHKwNfPzjU4WC0Zar+BCQf/drTUNSENF7vPOzY/KSc/IU1SR10fXLnxliFNlHQGfPmx4ypYMLXwnVTjLU6CPKmiZPMXJ1uOJBnSSdKiTtMJ4qClO+JHyRUn1otW1PFj5UuS8+AJ0kjSoU4fRgEAAA==) format('woff2');}
 @font-face{font-family:OYFEXR-CMMI10;src:url(data:application/x-font-woff2;base64,d09GMgABAAAAAAM8AAoAAAAABXgAAALxAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAANAqEHINHCwoAATYCJAMQBCAFgmIHIBtmBAiOw3R7I4OZcITjy1Gm+j+d+u8kE1KYFYflFJB5Kq99ndoQye7al3nsmYW5JbT/O5U/YPbzbADbgy4aX6C181IN59YxTUMl1Q7bRrWR0JNpXS8Aos6gJbAAvvjhf7nFLkO/jQJigwPAMgGHwE9BjzOqNzAVKg60AQTku7etAQBgAAQAOdEwQTIDCSgs9s8KW+FXsoQkjNmNwE78t4eV/2UEtAkTX5hJ91/tmr9S0XHKTt7utSuULU3KVcqpqxU7b+taWvhNa1zlWK1YQQ04lnf6Mc1rR3eeyk3bcborePkSXrxoWngW4slZwD86dHN/e97r1/TmVy3cXTvUHbZWptTyFbzxqRUruMpVSpVpqtISeAUcqV8YZJc++Tr5+LWOIcXKlXveBem98ipe05O/kpe5FxX0asXKUyN7NHcOC1LC3MnKToEi/qmC4XgyHlLIEt3aYs52snsySxA1/br9svlqUHCzoBem8RGO6CRH/GzN7V/metieXJAh0XW9pv/6JdUeda3LwpWTezUIqzgNFBtVlRX+q8kdQQw8Znj1ZMmzTSWrOuHhQ1EpESguQjO+BCsGNi1oj0eOQpQ8lCzH10r1EQZHCOF3J58MtHCnFDKNjHbNfWuhxIyiv6W0thOtaM8nRo7vUoGGdLK05vrb01lTuhT6/ANKC2cMiRbB6Fq3Ek/GcxqGxyorY8Pqp+MGYvqIjuW1H9ExAACAACAwj3+1ubMo5w87JJC5bT88/BEA2HB0DJ2lHdT2fhKexaBHLIXAHk/eV+8hxpMyEUOQUc01CfICkbUlkgREIgOPXmQScO3nUosjoMkBxKhmSyRp9RMZlGaITFrrGq6wE1cX62ey+cnWstJUQ6CYoioj4SfBaCQYPh746P1Gj1F9h4/qPdAcC6ZBscEGGmKkEXoaxowyWA943SBJrcqUSmkQUIxCqRQR1uLZ1+H6GmwQs4igcByUh4Oyh10rQo+ym7ELdQ+j9DW8570NZBYTlIYwAgAA) format('woff2');}
 
 </style>
@@ -778,8 +794,8 @@ Figure&nbsp;3: Tensor–Hom adjunction in <span class="math inline">\(\mathsf{Bi
 </figure>
 </div>
 <p>These isomorphisms are the bimodule form of <strong>currying</strong>: a balanced bilinear map <span class="math inline">\((n,m)\mapsto p\)</span> can be curried in either variable, yielding <span class="math inline">\(m\mapsto(n\mapsto p)\)</span> or <span class="math inline">\(n\mapsto(m\mapsto p)\)</span>.</p>
-<section id="the-commutative-case" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="the-commutative-case"><span class="header-section-number">2.1</span> The commutative case</h3>
+<section id="the-commutative-case" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="the-commutative-case"><span class="header-section-number">2.1</span> The commutative case</h2>
 <p>Recall that if <span class="math inline">\(A\)</span> is commutative, every left <span class="math inline">\(A\)</span>-module is canonically an <span class="math inline">\((A,A)\)</span>-bimodule. Setting <span class="math inline">\(B=C=A\)</span> above therefore recovers the familiar Tensor–Hom adjunction in <span class="math inline">\(A\textsf{-Mod}\)</span>: <span class="math display">\[
 \operatorname{Hom}_A\left(M,\operatorname{Hom}_A(N,P)\right)
 \cong \operatorname{Hom}_A\left(N\otimes_A M,P\right)
@@ -787,8 +803,8 @@ Figure&nbsp;3: Tensor–Hom adjunction in <span class="math inline">\(\mathsf{Bi
 \]</span> This is an example of a single-object bicategory being a monoidal category.</p>
 </section>
 </section>
-<section id="frobenius-reciprocity" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="frobenius-reciprocity"><span class="header-section-number">3</span> Frobenius reciprocity</h2>
+<section id="frobenius-reciprocity" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Frobenius reciprocity</h1>
 <p>Let <span class="math inline">\(H\leq G\)</span> be groups, let <span class="math inline">\(k\)</span> be a commutative ring, let <span class="math inline">\(V\)</span> be a left <span class="math inline">\(k[H]\)</span>-module, and let <span class="math inline">\(W\)</span> be a left <span class="math inline">\(k[G]\)</span>-module. For convenience, write <span class="math display">\[
 \operatorname{Hom}_G=\operatorname{Hom}_{k[G]},\qquad \operatorname{Hom}_H=\operatorname{Hom}_{k[H]},\qquad
 \otimes_G=\otimes_{k[G]},\qquad \otimes_H=\otimes_{k[H]}.
@@ -876,15 +892,50 @@ k[G] \cong k[G]^*,\qquad \operatorname{Hom}_G(V,W) \cong V^* \otimes_G W
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -959,11 +1010,30 @@ k[G] \cong k[G]^*,\qquad \operatorname{Hom}_G(V,W) \cong V^* \otimes_G W
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -977,10 +1047,72 @@ k[G] \cong k[G]^*,\qquad \operatorname{Hom}_G(V,W) \cong V^* \otimes_G W
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
             // default icon
             link.classList.add("external");
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -994,6 +1126,7 @@ k[G] \cong k[G]^*,\qquad \operatorname{Hom}_G(V,W) \cong V^* \otimes_G W
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1156,44 +1289,54 @@ k[G] \cong k[G]^*,\qquad \operatorname{Hom}_G(V,W) \cong V^* \otimes_G W
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1292,8 +1435,11 @@ k[G] \cong k[G]^*,\qquad \operatorname{Hom}_G(V,W) \cong V^* \otimes_G W
     }
   });
   </script>
-<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
-<input type="hidden" id="giscus-alt-theme" value="light">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark_dimmed">
 <script>
   function loadGiscus() {
     // Function to get the theme based on body class

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -14,10 +14,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -58,16 +61,19 @@ div.csl-indent {
 <link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f81f3c79f694eaf6f88ebcce70241f9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-af64962de9348b804daa6381b125c604.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e87cd3d65a65f768c7a1700db1c28216.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9b2404ec78ff68ca4c9b2f4303203b01.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-39330638802da02b364dd7ec4e29bc31.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7dd074d930de47cb4e38ad128cc73662.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -106,7 +112,7 @@ MathJax = {
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -137,7 +143,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -160,6 +166,7 @@ window.Quarto = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -189,13 +196,19 @@ window.Quarto = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -279,14 +292,17 @@ window.Quarto = {
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -301,15 +317,14 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -353,8 +368,9 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -363,7 +379,7 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -392,7 +408,7 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -450,8 +466,8 @@ window.Quarto = {
 <li>张颢《概率论》<span class="citation" data-cites="prob"><a href="#ref-prob" role="doc-biblioref">[2]</a></span></li>
 <li>Wikipedia, Math StackExchange, etc.</li>
 </ul>
-<section id="warm-up" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="warm-up"><span class="header-section-number">1</span> Warm up</h2>
+<section id="warm-up" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Warm up</h1>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -524,8 +540,8 @@ window.Quarto = {
 </div>
 <p>上两例有没有更精确的渐进估计？这便是我们马上要研究的问题．</p>
 </section>
-<section id="wallis-公式" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="wallis-公式"><span class="header-section-number">2</span> Wallis 公式</h2>
+<section id="wallis-公式" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Wallis 公式</h1>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -686,8 +702,8 @@ C_n \sim \frac {2^{2n}}{\sqrt{\pi} n^{\frac 3 2}}
 </div>
 </div>
 </section>
-<section id="stirling-公式" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="stirling-公式"><span class="header-section-number">3</span> Stirling 公式</h2>
+<section id="stirling-公式" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Stirling 公式</h1>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -797,8 +813,8 @@ n! \sim \sqrt{2 \pi n} \left( \frac n e \right)^n \pod{n \to \infty}
 </div>
 </div>
 </section>
-<section id="poisson-分布" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="poisson-分布"><span class="header-section-number">4</span> Poisson 分布</h2>
+<section id="poisson-分布" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Poisson 分布</h1>
 <p>描述单位时间平均发生次数恒定的随机事件的概率分布．</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
@@ -814,8 +830,8 @@ P(X = k) = \frac{\lambda^k}{k!}e^{-\lambda}
 </div>
 </div>
 </div>
-<section id="从二项分布的推导" class="level3" data-number="4.1">
-<h3 data-number="4.1" class="anchored" data-anchor-id="从二项分布的推导"><span class="header-section-number">4.1</span> 从二项分布的推导</h3>
+<section id="从二项分布的推导" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="从二项分布的推导"><span class="header-section-number">4.1</span> 从二项分布的推导</h2>
 <p>在 <span class="math inline">\(np = \lambda\)</span> 的条件下，取 <span class="math inline">\(P(X_n = k) = \binom n k p^k (1-p)^{n-k}\)</span> 在 <span class="math inline">\(n \to \infty\)</span> 在 <span class="math inline">\(n \to \infty\)</span> 上的逐点极限．</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -830,15 +846,15 @@ P(X_n = k)
 \end{aligned}
 \]</span></p>
 </section>
-<section id="归一性验证" class="level3" data-number="4.2">
-<h3 data-number="4.2" class="anchored" data-anchor-id="归一性验证"><span class="header-section-number">4.2</span> 归一性验证</h3>
+<section id="归一性验证" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="归一性验证"><span class="header-section-number">4.2</span> 归一性验证</h2>
 <p><span class="math display">\[
 \sum_{k=0}^{+\infty} P(X = k) = \sum_{k=0}^{+\infty} \frac{\lambda^k}{k!}e^{-\lambda} =  e^{-\lambda} \sum_{k=0}^{+\infty} \frac{\lambda^k}{k!} = e^{-\lambda} e^{\lambda} = 1
 \]</span></p>
 </section>
 </section>
-<section id="正态分布" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="正态分布"><span class="header-section-number">5</span> 正态分布</h2>
+<section id="正态分布" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> 正态分布</h1>
 <p>与 Poisson 分布不同，（标准）正态分布是在 <span class="math inline">\(n \to \infty\)</span> 的过程中假定 <span class="math inline">\(p\)</span> 不变的情况下，对归一化（即假定期望和方差不变）后的 <span class="math inline">\(X_n\)</span> 取逐点极限得到的．</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
@@ -857,8 +873,8 @@ f(x) = \frac 1 {\sqrt{2 \pi}} \exp \left(-\frac{1}{2} x^2\right)
 </div>
 </div>
 </div>
-<section id="从二项分布的推导de-moivre-laplace-定理" class="level3" data-number="5.1">
-<h3 data-number="5.1" class="anchored" data-anchor-id="从二项分布的推导de-moivre-laplace-定理"><span class="header-section-number">5.1</span> 从二项分布的推导（de Moivre-Laplace 定理）</h3>
+<section id="从二项分布的推导de-moivre-laplace-定理" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="从二项分布的推导de-moivre-laplace-定理"><span class="header-section-number">5.1</span> 从二项分布的推导（de Moivre-Laplace 定理）</h2>
 <p>设随机变量 <span class="math inline">\(X_n \sim B(n,p)\)</span>．方便起见，令 <span class="math inline">\(q = 1-p\)</span>．众所周知，二项分布的期望与方差满足 <span class="math inline">\(E(X_n) = np\)</span>，<span class="math inline">\(D(X_n) = npq\)</span>．</p>
 <p>对随机变量 <span class="math inline">\(X_n\)</span> 做归一化： <span class="math display">\[
 \bar X_n = \frac{X_n - E(X_n)}{\sqrt{D(X_n)}} = \frac{X_n - np}{\sqrt{npq}}
@@ -946,11 +962,11 @@ f(x) &amp;= \lim_{h \to 0}{\frac{P(x \leq X &lt; x+h)}{h}} \\
 </div>
 </section>
 </section>
-<section id="challenge" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="challenge"><span class="header-section-number">6</span> Challenge</h2>
+<section id="challenge" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Challenge</h1>
 <p>选讲或留作课后讨论．</p>
-<section id="中心极限定理要求下正态分布的唯一性" class="level3" data-number="6.1">
-<h3 data-number="6.1" class="anchored" data-anchor-id="中心极限定理要求下正态分布的唯一性"><span class="header-section-number">6.1</span> 中心极限定理要求下正态分布的唯一性</h3>
+<section id="中心极限定理要求下正态分布的唯一性" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="中心极限定理要求下正态分布的唯一性"><span class="header-section-number">6.1</span> 中心极限定理要求下正态分布的唯一性</h2>
 <p>正态分布概率密度函数 <span class="math inline">\(e^{-x^2}\)</span> 的形式是如何被确定的？怎么说明这形式是满足中心极限定理的独一无二的概率密度函数？</p>
 <p>3Blue1Brown 关于正态分布的系列视频较完整的解答了上述疑问，下面是推导思路的提纲．</p>
 <p>首先需要意识到，随机变量之和的概率分布即原变量概率密度函数的卷积．</p>
@@ -969,8 +985,8 @@ f(x) &amp;= \lim_{h \to 0}{\frac{P(x \leq X &lt; x+h)}{h}} \\
 <p>两个随机变量 <span class="math inline">\(X,Y\)</span> 的和 <span class="math inline">\(X+Y\)</span> 的概率密度函数可被视为这两个随机变量的 Descartes 积 <span class="math inline">\((X,Y)\)</span> 的二元概率密度函数“切片”并按面积（除掉 <span class="math inline">\(\sqrt 2\)</span> 的常数因子后）“投影”至 <span class="math inline">\(y=-x\)</span> 上的结果．</p>
 <p>考虑中心极限定理．两个独立同分布变量相加，这已经满足了二维分布独立性的要求．若考虑要求卷积后形式不变，也有必要要求二维分布的各项同性（这样一来，沿 <span class="math inline">\(y=-x\)</span> 方向的“切片”的形状与坐标轴向的“切片”只有一个常数因子 <span class="math inline">\(\sqrt 2\)</span> 的差别）．因此，中心极限定理某种意义上正好对应了 Herschel-Maxwell derivation 的要求，从而唯一确定了正态分布概率密度函数 <span class="math inline">\(e^{-x^2}\)</span> 的形式．</p>
 </section>
-<section id="正态分布的归一性验证maxwell-速率分布与高维球体表面积" class="level3" data-number="6.2">
-<h3 data-number="6.2" class="anchored" data-anchor-id="正态分布的归一性验证maxwell-速率分布与高维球体表面积"><span class="header-section-number">6.2</span> 正态分布的归一性验证、Maxwell 速率分布与高维球体表面积</h3>
+<section id="正态分布的归一性验证maxwell-速率分布与高维球体表面积" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="正态分布的归一性验证maxwell-速率分布与高维球体表面积"><span class="header-section-number">6.2</span> 正态分布的归一性验证、Maxwell 速率分布与高维球体表面积</h2>
 <p>Guass 积分： <span class="math display">\[
 \int_{-\infty}^{+\infty} e^{-x^2} \operatorname{d}\!x = \sqrt \pi
 \]</span></p>
@@ -979,8 +995,8 @@ f(v) = 4 \pi v^2 \left( \frac{m}{2 \pi kT} \right)^{\frac 3 2} \exp \left( - \fr
 \]</span></p>
 <p>以及它们与高维球体表面积的联系涉及多元积分学的内容．参见 3Blue1Brown 有关 <span class="math inline">\(\pi\)</span> 与正态分布的视频<span class="citation" data-cites="3b1b-pi"><a href="#ref-3b1b-pi" role="doc-biblioref">[4]</a></span>．</p>
 </section>
-<section id="n-的其它估计" class="level3" data-number="6.3">
-<h3 data-number="6.3" class="anchored" data-anchor-id="n-的其它估计"><span class="header-section-number">6.3</span> <span class="math inline">\(n!\)</span> 的其它估计</h3>
+<section id="n-的其它估计" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="n-的其它估计"><span class="header-section-number">6.3</span> <span class="math inline">\(n!\)</span> 的其它估计</h2>
 <p>一种更容易想到的做法是 <span class="math display">\[
 n \ln n - n - 1 = \int_1^n \ln x \operatorname{d}\!x \leq
 \ln n! = \sum_{k=1}^n \ln k
@@ -990,12 +1006,12 @@ n \ln n - n - 1 = \int_1^n \ln x \operatorname{d}\!x \leq
 \]</span> 当然这比 <a href="#thm-stirling-weak" class="quarto-xref">Theorem&nbsp;2</a> 的估计稍差．</p>
 <p>更多估计可参考这篇文章<span class="citation" data-cites="hijjjjq"><a href="#ref-hijjjjq" role="doc-biblioref">[5]</a></span>．</p>
 </section>
-<section id="wallis-公式的其它证明" class="level3" data-number="6.4">
-<h3 data-number="6.4" class="anchored" data-anchor-id="wallis-公式的其它证明"><span class="header-section-number">6.4</span> Wallis 公式的其它证明</h3>
+<section id="wallis-公式的其它证明" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="wallis-公式的其它证明"><span class="header-section-number">6.4</span> Wallis 公式的其它证明</h2>
 <p>3Blue1Brown 频道提供了一个几何风格的证明<span class="citation" data-cites="3b1b-wallis"><a href="#ref-3b1b-wallis" role="doc-biblioref">[6]</a></span>，其与 Bassel 问题的 Euler 解法有着神秘的联系．事实上，Euler 对 <span class="math inline">\(\frac{\sin x}{x}\)</span> 的无穷乘积拆解也可用于证明 Wallis product，参见 Wikipedia<span class="citation" data-cites="wp-wallis"><a href="#ref-wp-wallis" role="doc-biblioref">[7]</a></span>．</p>
 </section>
-<section id="wallis-公式视角下三阶乘与中心三项式系数的渐进估计" class="level3" data-number="6.5">
-<h3 data-number="6.5" class="anchored" data-anchor-id="wallis-公式视角下三阶乘与中心三项式系数的渐进估计"><span class="header-section-number">6.5</span> Wallis 公式视角下三阶乘与中心三项式系数的渐进估计</h3>
+<section id="wallis-公式视角下三阶乘与中心三项式系数的渐进估计" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="wallis-公式视角下三阶乘与中心三项式系数的渐进估计"><span class="header-section-number">6.5</span> Wallis 公式视角下三阶乘与中心三项式系数的渐进估计</h2>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -1045,7 +1061,7 @@ n \ln n - n - 1 = \int_1^n \ln x \operatorname{d}\!x \leq
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="acknowledgments" class="level2 appendix" data-number="7"><h2 class="anchored quarto-appendix-heading"><span class="header-section-number">7</span> Acknowledgments</h2><div class="quarto-appendix-contents">
+<div id="quarto-appendix" class="default"><section id="acknowledgments" class="level1 appendix" data-number="7"><h2 class="anchored quarto-appendix-heading"><span class="header-section-number">7</span> Acknowledgments</h2><div class="quarto-appendix-contents">
 
 <p>感谢吕老师组织<del>我最喜欢的</del>研讨课环节．此外，<a href="#exm-double-factorial" class="quarto-xref">Example&nbsp;1</a> 的放缩技巧由“吸取教训”同学提供，Poisson 分布的二项分布推导是与“抱头蹲防”同学讨论的结果，在此表示感谢．</p>
 
@@ -1078,15 +1094,50 @@ n \ln n - n - 1 = \int_1^n \ln x \operatorname{d}\!x \leq
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -1161,11 +1212,30 @@ n \ln n - n - 1 = \int_1^n \ln x \operatorname{d}\!x \leq
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1179,10 +1249,72 @@ n \ln n - n - 1 = \int_1^n \ln x \operatorname{d}\!x \leq
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
             // default icon
             link.classList.add("external");
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1196,6 +1328,7 @@ n \ln n - n - 1 = \int_1^n \ln x \operatorname{d}\!x \leq
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1358,44 +1491,54 @@ n \ln n - n - 1 = \int_1^n \ln x \operatorname{d}\!x \leq
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1494,8 +1637,11 @@ n \ln n - n - 1 = \int_1^n \ln x \operatorname{d}\!x \leq
     }
   });
   </script>
-<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
-<input type="hidden" id="giscus-alt-theme" value="light">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark_dimmed">
 <script>
   function loadGiscus() {
     // Function to get the theme based on body class

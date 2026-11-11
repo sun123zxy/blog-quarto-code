@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -14,10 +14,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -93,16 +96,19 @@ div.csl-indent {
 <link href="../..//assets/images/avatar.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f81f3c79f694eaf6f88ebcce70241f9e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-af64962de9348b804daa6381b125c604.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-e87cd3d65a65f768c7a1700db1c28216.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-9c3a1e1c6575ec7941e65798f543bd82.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-9b2404ec78ff68ca4c9b2f4303203b01.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-39330638802da02b364dd7ec4e29bc31.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7dd074d930de47cb4e38ad128cc73662.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-291e71699514d02f2fbf223a3818843a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -141,7 +147,7 @@ MathJax = {
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -172,7 +178,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -195,6 +201,7 @@ window.Quarto = {
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -224,13 +231,19 @@ window.Quarto = {
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -314,14 +327,17 @@ window.Quarto = {
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -336,15 +352,14 @@ window.Quarto = {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">sun123zxy’s blog</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -388,8 +403,9 @@ window.Quarto = {
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -398,7 +414,7 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -419,7 +435,7 @@ window.Quarto = {
 <div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://zhuanlan.zhihu.com/p/683831661"><i class="bi bi-question-circle"></i>在知乎上阅读</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -471,10 +487,10 @@ window.Quarto = {
 </header>
 
 
-<section id="预备" class="level2" data-number="">
-<h2 data-number="" class="anchored" data-anchor-id="预备"><span class="header-section-number"></span> 预备</h2>
-<section id="渐进符号" class="level3" data-number="0.1">
-<h3 data-number="0.1" class="anchored" data-anchor-id="渐进符号"><span class="header-section-number">0.1</span> 渐进符号</h3>
+<section id="预备" class="level1" data-number="">
+<h1 data-number=""><span class="header-section-number"></span> 预备</h1>
+<section id="渐进符号" class="level2" data-number="0.1">
+<h2 data-number="0.1" class="anchored" data-anchor-id="渐进符号"><span class="header-section-number">0.1</span> 渐进符号</h2>
 <p>其实不少高等数学 / 数学分析教材在讲解无穷小的比较时已经相当严谨地介绍过大 O、小 O 记号，然而各种历史习惯记法的符号滥用（abuse of notation）<span class="citation" data-cites="wikipedia_abuse"><a href="#ref-wikipedia_abuse" role="doc-biblioref">[1]</a></span> 直到现在都让笔者头疼. These notations seem to be innocent, but can be catastrophic without careful manipulation. 例如</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
@@ -515,14 +531,14 @@ g(x) \in O(f(x)) \implies \sum_{P(n,i)} g(i) \in \sum_{P(n,i)} O(f(i)) \subset O
 \]</span> 第一步是直接由大 O 记号的定义得到的结果.</p>
 <p>Wikipedia <span class="citation" data-cites="asymptotic_wikipedia"><a href="#ref-asymptotic_wikipedia" role="doc-biblioref">[3]</a></span> 中有一张详尽的表格介绍了各种渐进符号的定义，OI Wiki <span class="citation" data-cites="asymptotic_oiwiki"><a href="#ref-asymptotic_oiwiki" role="doc-biblioref">[4]</a></span> 上也有极好的讲解，尚不熟练的读者可以参考. 有兴趣仔细研究的读者可以参考《具体数学》第九章 <span class="citation" data-cites="concretemath_onotation"><a href="#ref-concretemath_onotation" role="doc-biblioref">[2]</a></span>、Wikipedia 及其 reference（个人推荐 Knuth 关于 <span class="math inline">\(O\)</span>、<span class="math inline">\(\Omega\)</span>、<span class="math inline">\(\Theta\)</span> 的短文 <span class="citation" data-cites="knuth_omicron"><a href="#ref-knuth_omicron" role="doc-biblioref">[5]</a></span>）. 本文除用 “<span class="math inline">\(\in\)</span>” 和“<span class="math inline">\(\subset\)</span>”替代 “<span class="math inline">\(=\)</span>” 外，完全使用 Knuth 提议的记号体系.</p>
 </section>
-<section id="调和数-hn-调和级数" class="level3" data-number="0.2">
-<h3 data-number="0.2" class="anchored" data-anchor-id="调和数-hn-调和级数"><span class="header-section-number">0.2</span> 调和数 <span class="math inline">\(H(n)\)</span> / 调和级数</h3>
+<section id="调和数-hn-调和级数" class="level2" data-number="0.2">
+<h2 data-number="0.2" class="anchored" data-anchor-id="调和数-hn-调和级数"><span class="header-section-number">0.2</span> 调和数 <span class="math inline">\(H(n)\)</span> / 调和级数</h2>
 <p>调和级数的部分和 <span class="math inline">\(H(n)\)</span> 定义为 <span class="math display">\[
 H(n) = \sum_{i=1}^n \frac 1 i
 \]</span> 通过一些与 <span class="math inline">\(e\)</span> 有关的数列放缩可以证明 <span class="math inline">\(\lim_{n \to \infty} ( H(n) - \log n ) = c\)</span>，其中 <span class="math inline">\(c \approx 0.577\)</span> 是 Euler 常数. 因此 <span class="math inline">\(H(n) \sim \log n \in \Theta(\log n)\)</span>.</p>
 </section>
-<section id="自然数等幂和-p_pn-p---级数" class="level3" data-number="0.3">
-<h3 data-number="0.3" class="anchored" data-anchor-id="自然数等幂和-p_pn-p---级数"><span class="header-section-number">0.3</span> 自然数等幂和 <span class="math inline">\(P_p(n)\)</span> / <span class="math inline">\(p\)</span> - 级数</h3>
+<section id="自然数等幂和-p_pn-p---级数" class="level2" data-number="0.3">
+<h2 data-number="0.3" class="anchored" data-anchor-id="自然数等幂和-p_pn-p---级数"><span class="header-section-number">0.3</span> 自然数等幂和 <span class="math inline">\(P_p(n)\)</span> / <span class="math inline">\(p\)</span> - 级数</h2>
 <p><span class="math inline">\(p\)</span> - 级数可视为调和级数的推广. 其部分和定义为 <span class="math inline">\(P_p(n) = \sum_{i=1}^n i^{-p}\)</span>．<span class="math inline">\(p\)</span> - 级数具有如下性质：</p>
 <ul>
 <li>当 <span class="math inline">\(p &gt; 1\)</span> 时，<span class="math inline">\(p\)</span> - 级数收敛；</li>
@@ -538,8 +554,8 @@ P_p(n) \in \begin{cases}
 \]</span></p>
 </section>
 </section>
-<section id="约数函数-sigma_zn" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="约数函数-sigma_zn"><span class="header-section-number">1</span> 约数函数 <span class="math inline">\(\sigma_z(n)\)</span></h2>
+<section id="约数函数-sigma_zn" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 约数函数 <span class="math inline">\(\sigma_z(n)\)</span></h1>
 <p>约数函数（Divisor Function，也可称为除数函数、因数函数）是与 <span class="math inline">\(n\)</span> 的因子有关的一类函数，定义为 <span class="math inline">\(\sigma_z(n) = \sum_{d \mid n} d^z\)</span>．当 <span class="math inline">\(z=0\)</span> 时，<span class="math inline">\(\sigma_0(n)\)</span> 被称为约数个数函数（number-of-divisors function），常被记为 <span class="math inline">\(d(n)\)</span> 或 <span class="math inline">\(\tau(n)\)</span>. 当 <span class="math inline">\(z=1\)</span> 时，<span class="math inline">\(\sigma_1(n)\)</span> 被称为约数和函数（sum-of-divisors function），常直接记为 <span class="math inline">\(\sigma(n)\)</span>.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
@@ -716,8 +732,8 @@ O(1) &amp; z &lt; -1
 <p>另外，如果只使用 <a href="#prp-trick1" class="quarto-xref">Proposition&nbsp;1</a> ，<span class="math inline">\(-1&lt;z&lt;1\)</span> 部分的渐进上界将只能估计至 <span class="math inline">\(O(n)\)</span>. 因此 <a href="#prp-trick1ex" class="quarto-xref">Proposition&nbsp;2</a> 是更为优越的.</p>
 <p>约数函数更复杂的上限与渐进估计可参考 Wikipedia <span class="citation" data-cites="wikipedia_divisor"><a href="#ref-wikipedia_divisor" role="doc-biblioref">[7]</a></span>.</p>
 </section>
-<section id="整除分块" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="整除分块"><span class="header-section-number">2</span> 整除分块</h2>
+<section id="整除分块" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 整除分块</h1>
 <p>也被称为数论分块. 求 <span class="math display">\[
 \sum_{i=1}^n f(i) g(\left\lfloor \frac n i \right\rfloor)
 \]</span> 我们按 <span class="math inline">\(d = \left\lfloor \frac n i \right\rfloor\)</span> 分块求和： <span class="math display">\[
@@ -726,8 +742,8 @@ O(1) &amp; z &lt; -1
 T_1(n) = \# \left\{ \left\lfloor \frac n i \right\rfloor \right\}_{i=1}^n \leq 2 \sqrt n \in O(\sqrt n)
 \]</span></p>
 <p>方便起见，后文记 <span class="math inline">\(D(n) = \left\{ \left\lfloor \frac n i \right\rfloor \right\}_{i=1}^n\)</span>.</p>
-<section id="整除分块嵌套" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="整除分块嵌套"><span class="header-section-number">2.1</span> 整除分块嵌套</h3>
+<section id="整除分块嵌套" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="整除分块嵌套"><span class="header-section-number">2.1</span> 整除分块嵌套</h2>
 <p>将 <a href="#prp-trick1ex" class="quarto-xref">Proposition&nbsp;2</a> 加强，我们有如下通用放缩：</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
@@ -789,8 +805,8 @@ T_m(n) \in O(n^{1- 2^{-m}})
 \]</span></p>
 </section>
 </section>
-<section id="杜教筛" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="杜教筛"><span class="header-section-number">3</span> 杜教筛</h2>
+<section id="杜教筛" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 杜教筛</h1>
 <p>杜教筛可以以低于线性的时间复杂度求解某些数论函数的前缀和. 其思路并不复杂. 设 <span class="math inline">\(f\)</span> 为一数论函数，我们希望快速求得其前缀和 <span class="math inline">\(\hat f (n) = \sum_{i=1}^n f(i)\)</span>. 考虑数论函数 <span class="math inline">\(g\)</span> 和 <span class="math inline">\(h = g * f\)</span>， <span class="math display">\[
 h(n) = \sum_{d \mid n} g(d) f(\frac n d)
 \]</span> 两端做前缀和得 <span class="math display">\[
@@ -843,8 +859,8 @@ O(K) + O(n K^{-\frac 1 2})
 \]</span> 为最小化时间复杂度，取 <span class="math inline">\(K = n^{\frac 2 3}\)</span>，即得最优时间复杂度 <span class="math inline">\(O(n^{\frac 2 3})\)</span>.</p>
 <p>这部分的时间复杂度证明主要参考了文章 <span class="citation" data-cites="zhihu_dusieve"><a href="#ref-zhihu_dusieve" role="doc-biblioref">[11]</a></span>.</p>
 </section>
-<section id="challenge" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="challenge"><span class="header-section-number">4</span> Challenge</h2>
+<section id="challenge" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Challenge</h1>
 <div class="callout callout-style-simple callout-tip no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -957,15 +973,50 @@ O(K) + O(n^{\frac 2 3} K^{-\frac 1 2})
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -1040,11 +1091,30 @@ O(K) + O(n^{\frac 2 3} K^{-\frac 1 2})
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
         var filterRegex = new RegExp("https:\/\/blog\.sun123zxy\.top");
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1058,10 +1128,72 @@ O(K) + O(n^{\frac 2 3} K^{-\frac 1 2})
             if (link.getAttribute("rel") === null) {
               link.setAttribute("rel", "noopener");
             }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
             // default icon
             link.classList.add("external");
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1075,6 +1207,7 @@ O(K) + O(n^{\frac 2 3} K^{-\frac 1 2})
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1237,44 +1370,54 @@ O(K) + O(n^{\frac 2 3} K^{-\frac 1 2})
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1373,8 +1516,11 @@ O(K) + O(n^{\frac 2 3} K^{-\frac 1 2})
     }
   });
   </script>
-<input type="hidden" id="giscus-base-theme" value="dark_dimmed">
-<input type="hidden" id="giscus-alt-theme" value="light">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark_dimmed">
 <script>
   function loadGiscus() {
     // Function to get the theme based on body class
